@@ -53,9 +53,9 @@
 
 /obj/item/gun/ballistic/attackby(obj/item/A, mob/user, params)
 	..()
-	if (istype(A, /obj/item/ammo_box/magazine))
+	if(istype(A, /obj/item/ammo_box/magazine))
 		var/obj/item/ammo_box/magazine/AM = A
-		if (!magazine && istype(AM, mag_type))
+		if(!magazine && istype(AM, mag_type))
 			if(user.transferItemToLoc(AM, src))
 				magazine = AM
 				to_chat(user, "<span class='notice'>You load a new [magazine_wording] into \the [src].</span>")
@@ -68,12 +68,13 @@
 					playsound(src, "gun_insert_empty_magazine", 70, 1)
 				A.update_icon()
 				update_icon()
-				return 1
+				return TRUE
 			else
 				to_chat(user, "<span class='warning'>You cannot seem to get \the [src] out of your hands!</span>")
-				return
-		else if (magazine)
+				return FALSE
+		else if(magazine)
 			to_chat(user, "<span class='notice'>There's already a [magazine_wording] in \the [src].</span>")
+			return FALSE
 	if(istype(A, /obj/item/suppressor))
 		var/obj/item/suppressor/S = A
 		if(!can_suppress)
@@ -89,31 +90,17 @@
 			to_chat(user, "<span class='notice'>You screw [S] onto [src].</span>")
 			install_suppressor(A)
 			return
-	return 0
+	return FALSE
 
 /obj/item/gun/ballistic/proc/install_suppressor(obj/item/suppressor/S)
-	// this proc assumes that the suppressor is already inside src
+	// Let's not assume that the suppressor is inside already
+	S.forceMove(src)
 	suppressed = S
 	S.oldsound = fire_sound
 	fire_sound = sound_suppressed
 	w_class += S.w_class //so pistols do not fit in pockets when suppressed
+	suppressed_overlay = mutable_appearance(icon, "[initial(icon_state)]-suppressor")
 	update_icon()
-
-//ATTACK HAND IGNORING PARENT RETURN VALUE
-/obj/item/gun/ballistic/attack_hand(mob/user)
-	if(loc == user)
-		if(suppressed && can_unsuppress)
-			var/obj/item/suppressor/S = suppressed
-			if(!user.is_holding(src))
-				return ..()
-			to_chat(user, "<span class='notice'>You unscrew [suppressed] from [src].</span>")
-			user.put_in_hands(suppressed)
-			fire_sound = S.oldsound
-			w_class -= S.w_class
-			suppressed = null
-			update_icon()
-			return
-	return ..()
 
 /obj/item/gun/ballistic/attack_self(mob/living/user)
 	if(chambered)

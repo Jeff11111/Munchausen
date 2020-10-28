@@ -15,11 +15,11 @@
 
 //USP-Match
 /obj/item/ammo_box/magazine/usp
-	name = "USP magazine (9mm rubber)"
-	desc = "A magazine for the security USP Match. Security systems lock it to be only able to load rubber 9mm rounds."
+	name = "USP magazine (.45)"
+	desc = "A magazine for the security USP Match."
 	icon = 'modular_skyrat/icons/obj/ammo.dmi'
 	icon_state = "uspm-15"
-	ammo_type = /obj/item/ammo_casing/c9mm
+	ammo_type = /obj/item/ammo_casing/c45
 	caliber = "9mm"
 	max_ammo = 15
 

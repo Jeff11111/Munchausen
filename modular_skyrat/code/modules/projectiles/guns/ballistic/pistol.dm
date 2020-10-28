@@ -1,3 +1,16 @@
+//Stechkin v2, base proc changes
+/obj/item/gun/ballistic/automatic/pistol
+	name = "10mm pistol"
+	desc = "The stechkin 10mm pistol - A small, easily concealable 10mm handgun and timeless classic. Has a threaded barrel for suppressors."
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
+	icon_state = "stechkin"
+	fire_sound = 'modular_skyrat/sound/guns/pistol2.ogg'
+	suppressed_pixel_x = 4
+
+/obj/item/gun/ballistic/automatic/pistol/update_icon()
+	..()
+	icon_state = "[initial(icon_state)][chambered ? "" : "-e"][magazine ? "" : "-nomag"][safety ? "-safe" : ""]"
+
 //Pipe pistol
 /obj/item/gun/ballistic/automatic/pistol/makeshift
 	name = "pipe pistol"
@@ -15,11 +28,10 @@
 	..()
 	icon_state = "[initial(icon_state)][chambered ? "" : "-e"]"
 
-//USP pistol - Universal Self Protection pistol
+//USP pistol
 /obj/item/gun/ballistic/automatic/pistol/uspm
-	name = "usp 9mm"
-	desc = "USP - Universal Self Protection. A standard-issue low cost handgun, chambered in 9x19mm and fitted with a smart lock for LTL rounds."
-	icon = 'modular_skyrat/icons/obj/guns/projectile.dmi'
+	name = "tactical .45 pistol"
+	desc = "The USP Match - A black and white .45 handgun to make the wielder a free man."
 	lefthand_file = 'modular_skyrat/icons/mob/inhands/weapons/guns_lefthand.dmi'
 	righthand_file = 'modular_skyrat/icons/mob/inhands/weapons/guns_righthand.dmi'
 	item_state = "usp-m"
@@ -27,30 +39,7 @@
 	fire_sound = 'modular_skyrat/sound/weapons/uspshot.ogg'
 	mag_type = /obj/item/ammo_box/magazine/usp
 	can_suppress = FALSE
-	unique_reskin = list("USP Match" = "usp-m",
-						"Stealth" = "stealth",
-						"P9" = "p9",
-						"M92FS" = "beretta")
 	obj_flags = UNIQUE_RENAME
-	req_access = list(ACCESS_HOS)
-
-/obj/item/gun/ballistic/automatic/pistol/uspm/update_icon()
-	..()
-	if(current_skin)
-		icon_state = "[unique_reskin[current_skin]][chambered ? "" : "-e"]"
-	else
-		icon_state = "[initial(icon_state)][chambered ? "" : "-e"]"
-
-/obj/item/gun/ballistic/automatic/pistol/uspm/emag_act(mob/user)
-	if(magazine)
-		var/obj/item/ammo_box/magazine/M = magazine
-		M.emag_act(user)
-
-/obj/item/gun/ballistic/automatic/pistol/uspm/attackby(obj/item/A, mob/user, params)
-	. = ..()
-	if(check_access(A))
-		if(magazine)
-			magazine.attackby(A, user)
 
 //Seccie pistol
 /obj/item/gun/ballistic/automatic/pistol/nangler
@@ -63,30 +52,6 @@
 	mag_type = /obj/item/ammo_box/magazine/nangler
 	can_suppress = FALSE
 
-/obj/item/gun/ballistic/automatic/pistol/nangler/update_icon()
-	..()
-	icon_state = "[initial(icon_state)][chambered ? "" : "-e"][magazine ? "" : "-nomag"][safety ? "-safe" : ""]"
-
-//Stechkin v2
-/obj/item/gun/ballistic/automatic/pistol
-	name = "10mm pistol"
-	desc = "The stechkin 10mm pistol - A small, easily concealable 10mm handgun and timeless classic. Has a threaded barrel for suppressors."
-	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
-	icon_state = "stechkin"
-	fire_sound = 'modular_skyrat/sound/guns/pistol2.ogg'
-
-/obj/item/gun/ballistic/automatic/pistol/update_icon()
-	..()
-	icon_state = "[initial(icon_state)][chambered ? "" : "-e"][magazine ? "" : "-nomag"][safety ? "-safe" : ""]"
-
-/obj/item/gun/ballistic/automatic/pistol/update_overlays()
-	..()
-	cut_overlays()
-	if(suppressed)
-		var/mutable_appearance/suppressor_appearance = mutable_appearance(src.icon, "[initial(icon_state)]-suppressor")
-		suppressor_appearance.pixel_x = 4
-		add_overlay(suppressor_appearance)
-
 //M1911
 /obj/item/gun/ballistic/automatic/pistol/m1911
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
@@ -95,10 +60,6 @@
 	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/pistol_lefthand.dmi'
 	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/pistol_righthand.dmi'
 	fire_sound = 'modular_skyrat/sound/guns/pistol2.ogg'
-
-/obj/item/gun/ballistic/automatic/pistol/m1911/update_icon()
-	..()
-	icon_state = "[initial(icon_state)][chambered ? "" : "-e"][magazine ? "" : "-nomag"][safety ? "-safe" : ""]"
 
 /obj/item/gun/ballistic/automatic/pistol/m1911/kitchengun
 	icon_state = "pistol45"
@@ -116,7 +77,3 @@
 	fire_delay = 2
 	actions_types = list(/datum/action/item_action/toggle_firemode)
 	fire_sound = 'modular_skyrat/sound/guns/pistol1.ogg'
-
-/obj/item/gun/ballistic/automatic/pistol/APS/glock/update_icon()
-	..()
-	icon_state = "[initial(icon_state)][chambered ? "" : "-e"][magazine ? "" : "-nomag"][safety ? "-safe" : ""]"

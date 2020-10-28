@@ -98,11 +98,10 @@
 /obj/item/gun/ballistic/revolver/doublebarrel/super
 	burst_size = 1
 	actions_types = list(/datum/action/item_action/toggle_hook)
-	icon = 'modular_skyrat/icons/obj/guns/projectile.dmi'
 	icon_state = "heckgun"
+	item_state = "heckgun"
 	lefthand_file = 'modular_skyrat/icons/mob/inhands/weapons/guns_lefthand.dmi'
 	righthand_file = 'modular_skyrat/icons/mob/inhands/weapons/guns_righthand.dmi'
-	item_state = "heckgun"
 	sharpness = SHARP_NONE
 	force = 15
 	inhand_x_dimension = 0

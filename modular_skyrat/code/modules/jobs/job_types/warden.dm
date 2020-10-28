@@ -41,7 +41,7 @@
 	new /obj/item/ammo_box/a357(src)
 
 /obj/item/storage/briefcase/choice/bladerunner/PopulateContents()
-	new /obj/item/gun/ballistic/revolver/bladerunner(src)
+	new /obj/item/gun/ballistic/revolver/mateba/bladerunner(src)
 	new /obj/item/ammo_box/a357(src)
 
 /obj/item/storage/briefcase/choice/modular/PopulateContents()

@@ -24,9 +24,6 @@
 	attack_verb = list("struck", "hit", "bashed")
 
 	var/fire_sound = "gunshot"
-	var/suppressed = null					//whether or not a message is displayed when fired
-	var/can_suppress = FALSE
-	var/can_unsuppress = TRUE
 	var/recoil = 0						//boom boom shake the room
 	var/clumsy_check = TRUE
 	var/obj/item/ammo_casing/chambered = null
@@ -62,28 +59,49 @@
 	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
 
-	var/obj/item/firing_pin/pin = /obj/item/firing_pin //standard firing pin for most guns
+	//Firing pin stuff
+	var/obj/item/firing_pin/pin = /obj/item/firing_pin //reference for the current firing pin, and typepath of the initial firing pin
 	var/no_pin_required = FALSE //whether the gun can be fired without a pin
 
+	// Flashlight stuff
 	var/obj/item/flashlight/gun_light
-	var/can_flashlight = 0
-	var/obj/item/kitchen/knife/bayonet
-	var/mutable_appearance/knife_overlay
-	var/can_bayonet = FALSE
+	var/mutable_appearance/flashlight_overlay
+	var/flight_x_offset = 0
+	var/flight_y_offset = 0
+	var/can_flashlight = FALSE
+	var/can_unflashlight = TRUE
 	var/datum/action/item_action/toggle_gunlight/alight
 	var/custom_light_icon //custom flashlight icon
 	var/custom_light_state //custom flashlight state
 	var/custom_light_color //custom flashlight light color
-	var/mutable_appearance/flashlight_overlay
 
-	var/ammo_x_offset = 0 //used for positioning ammo count overlay on sprite
-	var/ammo_y_offset = 0
-	var/flight_x_offset = 0
-	var/flight_y_offset = 0
+	// Bayonet stuff
+	var/obj/item/kitchen/knife/bayonet
+	var/mutable_appearance/knife_overlay
 	var/knife_x_offset = 0
 	var/knife_y_offset = 0
+	var/can_bayonet = FALSE
+	var/can_unbayonet = TRUE
 
-	//Zooming
+	// Suppressor stuff
+	var/obj/item/suppressor/suppressed //having a suppressor means we dont make funny sound
+	var/mutable_appearance/suppressed_overlay //this ass can fart
+	var/suppressed_pixel_x = 0
+	var/suppressed_pixel_y = 0
+	var/sound_suppressed = 'modular_skyrat/sound/weapons/shot_silenced.ogg' //fire sound when suppressed
+	var/can_suppress = FALSE
+	var/can_unsuppress = TRUE
+
+	// Safety stuff
+	var/safety = TRUE
+	var/mutable_appearance/safety_overlay
+	var/safety_sound = 'modular_skyrat/sound/weapons/safety1.ogg'
+
+	// Used for positioning ammo count overlay on some sprites
+	var/ammo_x_offset = 0
+	var/ammo_y_offset = 0
+
+	// Zooming
 	var/zoomable = FALSE //whether the gun generates a Zoom action on creation
 	var/zoomed = FALSE //Zoom toggle
 	var/zoom_amt = 3 //Distance in TURFs to move the user's screen forward (the "zoom" effect)
@@ -99,13 +117,6 @@
 
 	/// It's less intensive to use a boolean rather than always getting the component when firing
 	var/is_wielded = FALSE
-
-	/// Safety first!
-	var/safety = TRUE
-	var/safety_sound = 'modular_skyrat/sound/weapons/safety1.ogg'
-
-	/// Suppressed sounds
-	var/sound_suppressed = 'modular_skyrat/sound/weapons/shot_silenced.ogg'
 
 /obj/item/gun/Initialize()
 	. = ..()
@@ -466,6 +477,52 @@
 			return ..()
 	attack_delay_done = TRUE //we are firing the gun, not bashing people with its butt.
 
+/obj/item/gun/update_overlays()
+	. = ..()
+	cut_overlays()
+	if(safety_overlay)
+		. += safety_overlay
+	if(suppressed_overlay)
+		. += suppressed_overlay
+	if(flashlight_overlay)
+		. += flashlight_overlay
+	if(knife_overlay)
+		. += knife_overlay
+
+/obj/item/gun/middleclick_attack_self(mob/user)
+	. = ..()
+	if(src in list(user.get_active_held_item(), user.get_inactive_held_item()))
+		if(!user.is_holding(src))
+			return ..()
+		else if(suppressed && can_unsuppress)
+			var/obj/item/suppressor/S = suppressed
+			to_chat(user, "<span class='notice'>You unscrew \the [S] from [src].</span>")
+			user.put_in_hands(S)
+			fire_sound = S.oldsound
+			w_class -= S.w_class
+			suppressed = null
+			suppressed_overlay = null
+			update_overlays()
+			return TRUE
+		else if(gun_light && can_unflashlight)
+			var/obj/item/flashlight/seclite/S = gun_light
+			to_chat(user, "<span class='notice'>You unscrew \the [S] from \the [src].</span>")
+			user.put_in_hands(S)
+			gun_light = null
+			update_gunlight(user)
+			S.update_brightness(user)
+			QDEL_NULL(alight)
+			update_overlays()
+			return TRUE
+		else if(bayonet && can_unbayonet)
+			var/obj/item/kitchen/knife/K = bayonet
+			to_chat(user, "<span class='notice'>You unscrew \the [K] from \the [src].</span>")
+			user.put_in_hands(K)
+			bayonet = null
+			knife_overlay = null
+			update_overlays()
+			return TRUE
+
 /obj/item/gun/attack_obj(obj/O, mob/user)
 	if(user.a_intent == INTENT_HARM)
 		if(bayonet)
@@ -507,22 +564,6 @@
 		knife_overlay.pixel_x = knife_x_offset
 		knife_overlay.pixel_y = knife_y_offset
 		add_overlay(knife_overlay, TRUE)
-	else if(istype(I, /obj/item/screwdriver))
-		if(gun_light)
-			var/obj/item/flashlight/seclite/S = gun_light
-			to_chat(user, "<span class='notice'>You unscrew the seclite from \the [src].</span>")
-			gun_light = null
-			S.forceMove(get_turf(user))
-			update_gunlight(user)
-			S.update_brightness(user)
-			QDEL_NULL(alight)
-		if(bayonet)
-			to_chat(user, "<span class='notice'>You unscrew the bayonet from \the [src].</span>")
-			var/obj/item/kitchen/knife/K = bayonet
-			K.forceMove(get_turf(user))
-			bayonet = null
-			cut_overlay(knife_overlay, TRUE)
-			knife_overlay = null
 	else
 		return ..()
 

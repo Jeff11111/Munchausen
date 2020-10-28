@@ -106,21 +106,20 @@
 	else
 		pump_unload(M)
 	barrel_open = !barrel_open
-	update_icon()	//I.E. fix the desc
+	update_icon()
 	return 1
 
 /obj/item/gun/ballistic/shotgun/improvised/update_icon()
-	if(barrel_open == 1)
-		icon_state = "[initial(icon_state)]["-open"]"
-	else
-		icon_state = "[initial(icon_state)][""]"
+	..()
+	icon_state = "[initial(icon_state)][slung ? "slung" : ""][barrel_open ? "-open" : ""]"
+	item_state = "[initial(item_state)][slung ? "sling" :  ""]"
 
 /obj/item/gun/ballistic/shotgun/improvised/attackby(obj/item/A, mob/user, params)
 	if(!barrel_open)
 		to_chat(user, "<span class='notice'>The barrel is closed!</span>")
 		return
-	. = ..()
-//	//
+	else
+		return ..()
 
 //	//	//	Shotgun sawn-off & sling code block - Because our shotgun is no longer a revolver and now a shotgun and inheriting shotgun code, we're commenting out the entire original shotgun.
 /obj/item/gun/ballistic/shotgun/improvised/attackby(obj/item/A, mob/user, params)
@@ -134,17 +133,11 @@
 		else
 			to_chat(user, "<span class='warning'>You need at least ten lengths of cable if you want to make a sling!</span>")
 
-/obj/item/gun/ballistic/shotgun/improvised/update_icon()
-	..()
-	if(slung)
-		icon_state += "sling"
-		item_state = "ishotgunsling"
-
 /obj/item/gun/ballistic/shotgun/improvised/sawoff(mob/user)
 	. = ..()
 	if(. && slung) //sawing off the gun removes the sling
 		new /obj/item/stack/cable_coil(get_turf(src), 10)
-		slung = 0
+		slung = FALSE
 		update_icon()
 
 /obj/item/gun/ballistic/shotgun/improvised/sawn
@@ -178,10 +171,7 @@
 	can_bayonet = FALSE
 
 /obj/item/gun/ballistic/shotgun/boltaction/improvised/update_icon()
-	if(bolt_open == 1)
-		icon_state = "[initial(icon_state)]["-open"]"
-	else
-		icon_state = "[initial(icon_state)][""]"
+	icon_state = "[initial(icon_state)][chambered ? "" : "-open"]"
 
 /obj/item/gun/ballistic/shotgun
 	fire_sound = 'modular_skyrat/sound/guns/shotgun.ogg'

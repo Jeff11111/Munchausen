@@ -84,17 +84,13 @@
 	name = "Contender"
 	desc = "The Contender G13, a favorite amongst space hunters. An easily modified bluespace barrel and break action loading means it can use any ammo available.\
 	The side has an engraving which reads 'Made by ArcWorks'."
-	icon = 'modular_skyrat/icons/obj/guns/projectile.dmi'
-	icon_state = "contender-s"
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/shotgun.dmi'
+	icon_state = "contender"
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/contender
 	w_class = WEIGHT_CLASS_NORMAL
 	obj_flags = UNIQUE_RENAME
 	unique_reskin = 0
 	fire_delay = 2
-
-/obj/item/gun/ballistic/revolver/doublebarrel/contender/update_icon()
-	..()
-	icon_state = "contender-s"
 
 /obj/item/gun/ballistic/revolver/doublebarrel/contender/sawoff(mob/user)
 	to_chat(user, "<span class='warning'>Why would you mutilate this work of art?</span>")
@@ -122,6 +118,10 @@
 	fire_delay = 5
 	var/explodioprob = 50
 	var/list/blacklist = list("40mm", ".50")
+
+/obj/item/gun/ballistic/revolver/doublebarrel/contender/box_gun/update_icon()
+	..()
+	icon_state = "box_gun"
 
 /obj/item/gun/ballistic/revolver/doublebarrel/contender/box_gun/afterattack(atom/target, mob/living/user, flag, params)
 	. = ..()
@@ -153,7 +153,7 @@
 /obj/item/gun/ballistic/revolver/rifle
 	name = "\improper .38 Revolving Rifle"
 	desc = "A revolving rifle chambered in .38. "
-	icon = 'modular_skyrat/icons/obj/guns/projectile40x32.dmi'
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/40x32.dmi'
 	icon_state = "revolving-rifle"
 	item_state = "revolving"
 	mag_type = /obj/item/ammo_box/magazine/internal/cylinder/rev38	//This is just a detective's revolver but it's too big for bags..
@@ -184,7 +184,6 @@
 	w_class = WEIGHT_CLASS_BULKY
 
 // .45 Cylinder
-
 /obj/item/ammo_box/magazine/internal/cylinder/rev45
 	name = "revolver .45 cylinder"
 	ammo_type = /obj/item/ammo_casing/c45

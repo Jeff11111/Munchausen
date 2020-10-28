@@ -126,7 +126,7 @@
 	var/static/list/hos_gun_list
 	if(!hos_gun_list)
 		hos_gun_list = list()
-		hos_gun_list["Sheriff"] = /obj/item/storage/briefcase/choice/mateba/bladerunner
+		hos_gun_list["Sheriff"] = /obj/item/storage/briefcase/choice/bladerunner
 		hos_gun_list["M1911"] = /obj/item/storage/briefcase/choice/m1911
 		hos_gun_list["Modular Pistol"] = /obj/item/storage/briefcase/choice/modular
 	return hos_gun_list
