@@ -2,11 +2,11 @@
 /obj/item/gun/ballistic/revolver
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/revolver.dmi'
 	icon_state = "cheapo"
-	fire_sound = 'modular_skyrat/sound/weapons/revolver1.ogg'
-	safety_sound = 'modular_skyrat/sound/weapons/safety2.ogg'
+	fire_sound = 'modular_skyrat/sound/guns/revolver1.ogg'
+	safety_sound = 'modular_skyrat/sound/guns/safety2.ogg'
 	safety = FALSE
-	var/open_sound = 'modular_skyrat/sound/weapons/revolver_open.ogg'
-	var/close_sound = 'modular_skyrat/sound/weapons/revolver_close.ogg'
+	var/open_sound = 'modular_skyrat/sound/guns/revolver_open.ogg'
+	var/close_sound = 'modular_skyrat/sound/guns/revolver_close.ogg'
 	var/chamber_open = FALSE
 
 /obj/item/gun/ballistic/revolver/do_fire(atom/target, mob/living/user, message, params, zone_override, bonus_spread, stam_cost)
@@ -222,7 +222,7 @@
 	name = "\improper .357 NT Sheriff"
 	desc = "The NT Sheriff - A high quality revolver chambered in .357 rounds."
 	icon_state = "bladerunner"
-	fire_sound = 'modular_skyrat/sound/weapons/revolver2.ogg'
+	fire_sound = 'modular_skyrat/sound/guns/revolver2.ogg'
 
 //new double barreled shotgun
 //we interpret "chamber_open" as having the shotgun break open or not
@@ -231,7 +231,9 @@
 	desc = "The Bobox double barreled shotgun - Not the classic but, fuck man that's pretty cool."
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/shotgun.dmi'
 	icon_state = "bobox"
-	fire_sound = 'modular_skyrat/sound/weapons/shotgun.ogg'
+	open_sound = 'modular_skyrat/sound/guns/shotgun_break.ogg'
+	close_sound = 'modular_skyrat/sound/guns/shotgun_reload.ogg'
+	fire_sound = 'modular_skyrat/sound/guns/shotgun.ogg'
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/dual
 	sawn_off = TRUE
 	unique_reskin = null

@@ -20,6 +20,30 @@
 	var/static/list/shotties
 	if(!shotties)
 		shotties = list()
-		shotties["M1911"] = /obj/item/gun/ballistic/automatic/pistol/m1911
-		shotties["Lawman-17"] = /obj/item/gun/ballistic/automatic/pistol/APS/glock
+		shotties["M1911"] = /obj/item/storage/briefcase/choice/m1911
+		shotties["Lawman-17"] = /obj/item/storage/briefcase/choice/glock
 	return shotties
+
+/obj/item/storage/briefcase/choice
+	name = "gun briefcase"
+	desc = "Smells like omelette du fromage."
+
+/obj/item/storage/briefcase/choice/m1911/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/m1911(src)
+	new /obj/item/ammo_box/magazine/m45(src)
+
+/obj/item/storage/briefcase/choice/glock/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/APS/glock(src)
+	new /obj/item/ammo_box/magazine/pistolm9mm(src)
+
+/obj/item/storage/briefcase/choice/mateba/PopulateContents()
+	new /obj/item/gun/ballistic/revolver/mateba(src)
+	new /obj/item/ammo_box/a357(src)
+
+/obj/item/storage/briefcase/choice/bladerunner/PopulateContents()
+	new /obj/item/gun/ballistic/revolver/bladerunner(src)
+	new /obj/item/ammo_box/a357(src)
+
+/obj/item/storage/briefcase/choice/modular/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/modular(src)
+	new /obj/item/ammo_box/magazine/m10mm(src)

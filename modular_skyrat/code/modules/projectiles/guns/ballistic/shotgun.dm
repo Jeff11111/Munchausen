@@ -182,3 +182,6 @@
 		icon_state = "[initial(icon_state)]["-open"]"
 	else
 		icon_state = "[initial(icon_state)][""]"
+
+/obj/item/gun/ballistic/shotgun
+	fire_sound = 'modular_skyrat/sound/guns/shotgun.ogg'

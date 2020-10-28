@@ -81,6 +81,7 @@
 /obj/item/gun/ballistic/automatic/ar
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/rifle.dmi'
 	icon_state = "arg"
+	safety_sound = 'modular_skyrat/sound/guns/safety2.ogg'
 
 /obj/item/gun/ballistic/automatic/ar/update_icon()
 	..()

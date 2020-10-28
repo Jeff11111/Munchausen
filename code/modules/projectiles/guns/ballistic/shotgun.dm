@@ -23,7 +23,7 @@
 	var/num_loaded = magazine.attackby(A, user, params, 1)
 	if(num_loaded)
 		to_chat(user, "<span class='notice'>You load [num_loaded] shell\s into \the [src]!</span>")
-		playsound(user, 'sound/weapons/shotguninsert.ogg', 60, 1)
+		playsound(user, 'modular_skyrat/sound/guns/bulletinsert.ogg', 60, 1)
 		A.update_icon()
 		update_icon()
 
@@ -62,7 +62,7 @@
 /obj/item/gun/ballistic/shotgun/proc/pump(mob/M, visible = TRUE)
 	if(visible)
 		M.visible_message("<span class='warning'>[M] racks [src].</span>", "<span class='warning'>You rack [src].</span>")
-	playsound(M, 'sound/weapons/shotgunpump.ogg', 60, 1)
+	playsound(M, 'modular_skyrat/sound/guns/shotgunpump.ogg', 60, 1)
 	pump_unload(M)
 	pump_reload(M)
 	update_icon()	//I.E. fix the desc
@@ -139,10 +139,11 @@
 	var/slung = FALSE
 
 /obj/item/gun/ballistic/shotgun/boltaction/pump(mob/M)
-	playsound(M, 'sound/weapons/shotgunpump.ogg', 60, 1)
 	if(bolt_open)
+		playsound(M, 'modular_skyrat/sound/guns/bolt_in.ogg', 60, 1)
 		pump_reload(M)
 	else
+		playsound(M, 'modular_skyrat/sound/guns/bolt_out.ogg', 60, 1)
 		pump_unload(M)
 	bolt_open = !bolt_open
 	update_icon()	//I.E. fix the desc
