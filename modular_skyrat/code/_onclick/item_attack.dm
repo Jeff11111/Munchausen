@@ -4,7 +4,6 @@
 		return middleafterattack(target, user, TRUE, params)
 	else
 		return TRUE
-	return FALSE
 
 /obj/item/proc/middle_pre_attack(atom/A, mob/living/user, params)
 	return FALSE
