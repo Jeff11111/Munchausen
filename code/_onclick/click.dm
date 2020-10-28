@@ -301,6 +301,38 @@
 	return
 
 /mob/living/carbon/MiddleClickOn(atom/A)
+	var/list/modifiers = params2list(params)
+	if(incapacitated())
+		return
+
+	if(next_move > world.time) // in the year 2000...
+		return
+
+	if(!modifiers["catcher"] && A.IsObscured())
+		return
+	
+	if(ismecha(loc))
+		var/obj/mecha/M = loc
+		return M.click_action(A,src,params)
+
+	if(restrained())
+		changeNext_move(CLICK_CD_HANDCUFFED)   //Doing shit in cuffs shall be vey slow
+		RestrainedClickOn(A)
+		return
+	
+	var/obj/item/W = get_active_held_item()
+	if(W == A)
+		if(!W.middle_attack_self(src))
+			return
+		update_inv_hands()
+		return
+
+	//These are always reachable.
+	//User itself, current loc, and user inventory
+	else if((A in DirectAccess()) && W)
+		if(W.middleclick_melee_attack_chain(src, A, params))
+			return
+	
 	if(!stat && mind && iscarbon(A) && A != src)
 		var/datum/antagonist/changeling/C = mind.has_antag_datum(/datum/antagonist/changeling)
 		if(C && C.chosen_sting)
