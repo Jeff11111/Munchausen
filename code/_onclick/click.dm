@@ -352,7 +352,7 @@
 	
 	var/obj/item/W = get_active_held_item()
 	if(W == A)
-		if(!W.middle_attack_self(src))
+		if(!W.middleclick_attack_self(src))
 			return
 		update_inv_hands()
 		return
