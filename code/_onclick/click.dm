@@ -90,7 +90,7 @@
 		CtrlShiftClickOn(A)
 		return
 	if(modifiers["middle"])
-		MiddleClickOn(A)
+		MiddleClickOn(A, params)
 		return
 	if(modifiers["shift"] && (client && client.show_popup_menus || modifiers["right"])) //CIT CHANGE - makes shift-click examine use right click instead of left click in combat mode
 		ShiftClickOn(A)
@@ -297,10 +297,40 @@
 	Middle click
 	Only used for swapping hands
 */
-/mob/proc/MiddleClickOn(atom/A)
-	return
+/mob/proc/MiddleClickOn(atom/A, params)
+	var/list/modifiers = params2list(params)
+	if(incapacitated())
+		return
 
-/mob/living/carbon/MiddleClickOn(atom/A)
+	if(next_move > world.time) // in the year 2000...
+		return
+
+	if(!modifiers["catcher"] && A.IsObscured())
+		return
+	
+	if(ismecha(loc))
+		var/obj/mecha/M = loc
+		return M.click_action(A,src,params)
+
+	if(restrained())
+		changeNext_move(CLICK_CD_HANDCUFFED)   //Doing shit in cuffs shall be vey slow
+		RestrainedClickOn(A)
+		return
+	
+	var/obj/item/W = get_active_held_item()
+	if(W == A)
+		if(!W.middleclick_attack_self(src))
+			return
+		update_inv_hands()
+		return
+
+	//These are always reachable.
+	//User itself, current loc, and user inventory
+	else if((A in DirectAccess()) && W)
+		if(W.middleclick_melee_attack_chain(src, A, params))
+			return
+
+/mob/living/carbon/MiddleClickOn(atom/A, params)
 	var/list/modifiers = params2list(params)
 	if(incapacitated())
 		return
