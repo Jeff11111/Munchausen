@@ -83,7 +83,6 @@
 		return
 
 	if(bodytemperature >= TCRYO && !(HAS_TRAIT(src, TRAIT_NOCLONE))) //cryosleep or husked people do not pump the blood.
-
 		//Blood regeneration if there is some space, and a spleen
 		var/obj/item/organ/spleen/spleen = getorganslot(ORGAN_SLOT_SPLEEN)
 		if(spleen && blood_volume < (BLOOD_VOLUME_NORMAL * blood_ratio) && !HAS_TRAIT(src, TRAIT_NOHUNGER))
@@ -112,7 +111,45 @@
 			adjust_nutrition(-nutrition_ratio * HUNGER_FACTOR)
 			blood_volume = min((BLOOD_VOLUME_NORMAL * blood_ratio), blood_volume + spleen.get_blood() * nutrition_ratio * hydration_ratio)
 
-		//Effects of bloodloss
+		//Paleness
+		switch(get_blood_circulation())
+			if(-INFINITY to (BLOOD_VOLUME_OKAY))
+				if(dna && dna.not_pale_skin_tone && dna.pale_skin_tone)
+					skin_tone = dna.pale_skin_tone
+					dna.skin_tone_override = dna.pale_skin_tone
+				//shit copypasta code lol
+				else
+					if(dna)
+						if(!dna.not_pale_skin_tone)
+							dna.not_pale_skin_tone =  dna.skin_tone_override || (SKINTONE2HEX(skin_tone))
+						if(!dna.pale_skin_tone)
+							var/list/piss = list()
+							var/fuck = color2hex(dna.not_pale_skin_tone)
+							piss |= hex2num(copytext(fuck, 1, 2))
+							piss |= hex2num(copytext(fuck, 3, 4))
+							piss |= hex2num(copytext(fuck, 5, 6))
+							piss[1] = min(255, piss[1] + 30)
+							piss[2] = min(255, piss[2] + 30)
+							piss[3] = min(255, piss[3] + 30)
+							dna.pale_skin_tone = rgb(piss[1], piss[2], piss[3])
+			else
+				if(dna)
+					if(!dna.not_pale_skin_tone)
+						dna.not_pale_skin_tone =  dna.skin_tone_override || (SKINTONE2HEX(skin_tone))
+					if(!dna.pale_skin_tone)
+						var/list/piss = list()
+						var/fuck = color2hex(dna.not_pale_skin_tone)
+						piss |= hex2num(copytext(fuck, 1, 2))
+						piss |= hex2num(copytext(fuck, 3, 4))
+						piss |= hex2num(copytext(fuck, 5, 6))
+						piss[1] = min(255, piss[1] + 30)
+						piss[2] = min(255, piss[2] + 30)
+						piss[3] = min(255, piss[3] + 30)
+						dna.pale_skin_tone = rgb(piss[1], piss[2], piss[3])
+					skin_tone = dna.not_pale_skin_tone
+					dna.skin_tone_override = dna.not_pale_skin_tone
+	
+		//Effects of low blood oxygenation
 		var/word = pick("dizzy","woozy","faint")
 		switch(get_blood_oxygenation())
 			if(BLOOD_VOLUME_EXCESS to BLOOD_VOLUME_MAX_LETHAL)

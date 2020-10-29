@@ -18,6 +18,8 @@
 	var/stability = 100
 	var/scrambled = FALSE //Did we take something like mutagen? In that case we cant get our genes scanned to instantly cheese all the powers.
 	var/skin_tone_override //because custom skin tones are not found in the skin_tones global list.
+	var/pale_skin_tone
+	var/not_pale_skin_tone
 	//SKYRAT CHANGE
 	var/blood_color = ""
 	var/monkey_aspect = FALSE //Cannot be absorbed by changelings, is "simple minded"
