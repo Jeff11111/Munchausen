@@ -210,4 +210,4 @@
 	if(CHECK_BITFIELD(wear_mask?.flags_inv, HIDEFACE | HIDEEYES) || CHECK_BITFIELD(head?.flags_inv, HIDEFACE | HIDEEYES) || CHECK_BITFIELD(glasses?.flags_inv, HIDEFACE | HIDEEYES))
 		return
 	
-	visible_message(message = "<span class='notice'>\The [src] examines [examined].</span>", vision_distance = 2)
+	visible_message(message = "<span class='notice'>\The [src] examines [examined].</span>", vision_distance = 4)
