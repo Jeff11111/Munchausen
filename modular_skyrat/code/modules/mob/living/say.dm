@@ -5,7 +5,7 @@
 
 /mob/living/say(message, bubble_type, list/spans, sanitize, datum/language/language, ignore_spam, forced)
 	//force punctuation bich
-	if(config.punctuation_filter && !findtext(message, config.punctuation_filter, length(message)))
+	if(config.punctuation_filter && !findtext(message, config.punctuation_filter, length(message)) && !findtext(message, "*", 1, 1))
 		message += "."
 	if(config.ic_filter_regex && findtext(message, config.ic_filter_regex))
 		// let's try to be a bit more informative!

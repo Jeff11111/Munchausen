@@ -248,6 +248,12 @@
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/enforcer.dmi'
 	icon_state = "earmor"
 
+/obj/item/clothing/suit/armor/vest/alt
+	icon_state = "earmor"
+
+/obj/item/clothing/suit/armor/vest/old
+	icon_state = "earmor"
+
 /obj/item/clothing/suit/armor/hos
 	armor = list("melee" = 30, "bullet" = 30, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 70, "acid" = 90, "wound" = 25)
 
