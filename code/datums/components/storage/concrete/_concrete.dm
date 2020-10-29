@@ -163,7 +163,7 @@
 	if(!istype(I))
 		return FALSE
 	if(M)
-		if(!worn_check(I, M))
+		if(!worn_check(parent, M))
 			return FALSE
 		if(!M.temporarilyRemoveItemFromInventory(I))
 			return FALSE

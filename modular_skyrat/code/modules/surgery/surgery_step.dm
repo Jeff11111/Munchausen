@@ -24,7 +24,7 @@
 		if(target == user) //self-surgery is hard
 			if(user.mind)
 				var/datum/skills/surgery/surgerye = GET_SKILL(user, surgery)
-				if(surgerye && surgerye <= 10)
+				if(surgerye && surgerye.level <= 10)
 					speed_mod *= 0.6
 			else
 				prob_chance *= 0.6

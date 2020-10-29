@@ -3,7 +3,7 @@
 	name = "10mm pistol"
 	desc = "The stechkin 10mm pistol - A small, easily concealable 10mm handgun and timeless classic. Has a threaded barrel for suppressors."
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
-	icon_state = "stechkin"
+	icon_state = "pistol10mm"
 	fire_sound = 'modular_skyrat/sound/guns/pistol2.ogg'
 	suppressed_pixel_x = 4
 
@@ -47,7 +47,7 @@
 	desc = "ML Nangler - Standard issue security firearm, widely used by low tier corporate militias. \
 			Unreliable at best, this small sidearm is chambered in 9mm."
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
-	icon_state = "smallpistol"
+	icon_state = "pistol9mm"
 	fire_sound = 'modular_skyrat/sound/guns/pistol1.ogg'
 	mag_type = /obj/item/ammo_box/magazine/nangler
 	can_suppress = FALSE

@@ -1582,22 +1582,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		dehydration_rate *= bladder_hydration_loss
 		dehydration_rate *= H.physiology.hunger_mod
 		H.adjust_hydration(-dehydration_rate)
-
-	//Metabolism change
-	if(H.hydration > HYDRATION_LEVEL_FULL)
-		H.metabolism_efficiency = 1
-	else if(H.hydration > HYDRATION_LEVEL_HYDRATED)
-		if(H.metabolism_efficiency != 1.25 && !HAS_TRAIT(H, TRAIT_NOHUNGER))
-			to_chat(H, "<span class='notice'>You feel vigorous.</span>")
-			H.metabolism_efficiency = 1.25
-	else if(H.hydration < HYDRATION_LEVEL_DEHYDRATED + 50)
-		if(H.metabolism_efficiency != 0.8)
-			to_chat(H, "<span class='notice'>You feel sluggish.</span>")
-		H.metabolism_efficiency = 0.8
-	else
-		if(H.metabolism_efficiency == 1.25)
-			to_chat(H, "<span class='notice'>You no longer feel vigorous.</span>")
-		H.metabolism_efficiency = 1
 	
 	H.metabolism_efficiency *= bladder_hydration_gain
 	switch(H.hydration)

@@ -56,10 +56,20 @@
 	if(ammo_count() <= 0)
 		qdel(src)
 	return i
-	
+
 /obj/item/ammo_box/magazine/ammo_stack/give_round(obj/item/ammo_casing/R, replace_spent)
 	var/i = ..()
 	update_overlays()
 	if(ammo_count() <= 0)
 		qdel(src)
 	return i
+
+/obj/item/ammo_box/magazine/ammo_stack/handle_atom_del(atom/A)
+	..()
+	if(ammo_count() <= 0)
+		qdel(src)
+
+/obj/item/ammo_box/magazine/ammo_stack/empty_magazine()
+	..()
+	if(ammo_count() <= 0)
+		qdel(src)

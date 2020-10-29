@@ -98,9 +98,9 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 			var/mob/living/carbon/human/body_human = body
 			human_appearance = copy_appearance(body_human.appearance)
 			appearance = human_appearance
-		else if(client)
+		else
 			//Shit, try to make a humie to copy from
-			var/datum/preferences/prefs = client.prefs
+			var/datum/preferences/prefs = body?.client?.prefs
 			if(prefs)
 				var/mob/living/carbon/human/H = new(src)
 				prefs.copy_to(H)
