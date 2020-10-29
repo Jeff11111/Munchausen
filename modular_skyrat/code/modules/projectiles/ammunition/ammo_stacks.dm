@@ -39,7 +39,7 @@
 		var/mutable_appearance/comicao = mutable_appearance(AC.icon, AC.icon_state)
 		comicao.pixel_x = rand(0, 16)
 		comicao.pixel_y = rand(0, 16)
-		comicao.transform.Turn(rand(0, 360))
+		comicao.transform = comicao.transform.Turn(rand(0, 360))
 		add_overlay(comicao)
 
 /obj/item/ammo_box/magazine/ammo_stack/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
