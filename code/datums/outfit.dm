@@ -120,7 +120,7 @@
 						number = 1
 					for(var/i in 1 to number)
 						var/obj/item/xiehuapiaopiao = new path(backpack)
-						if(!SEND_SIGNAL(backpack, COMSIG_TRY_STORAGE_INSERT, xiehuapiaopiao, H, TRUE, TRUE))
+						if(!SEND_SIGNAL(backpack, COMSIG_TRY_STORAGE_INSERT, xiehuapiaopiao, null, TRUE, TRUE))
 							qdel(xiehuapiaopiao)
 
 	if(!H.head && toggle_helmet && istype(H.wear_suit, /obj/item/clothing/suit/space/hardsuit))
