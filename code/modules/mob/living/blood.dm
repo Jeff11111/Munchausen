@@ -110,7 +110,7 @@
 					hydration_ratio =  1
 			adjust_nutrition(-nutrition_ratio * HUNGER_FACTOR)
 			blood_volume = min((BLOOD_VOLUME_NORMAL * blood_ratio), blood_volume + spleen.get_blood() * nutrition_ratio * hydration_ratio)
-	
+		
 		//Effects of low blood oxygenation
 		var/word = pick("dizzy","woozy","faint")
 		switch(get_blood_oxygenation())
