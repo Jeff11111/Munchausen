@@ -383,8 +383,8 @@
 	desc = "A specialized exoskeleton armor helmet built into a suit of armor; offers decent protection, and comes with a flash-resistant HUD visor and headlamp."
 	armor = list("melee" = 40, "bullet" = 30, "laser" = 30, "energy" = 10, "bomb" = 25, "bio" = 50, "rad" = 0, "fire" = 70, "acid" = 90, "wound" = 20)
 	mutantrace_variation = NONE
-	icon_state = "hardsuit0-obentechhelmet"
-	item_state = "hardsuit0-obentechhelmet"
+	icon_state = "hardsuit0-obertechhelmet"
+	item_state = "hardsuit0-obertechhelmet"
 	hardsuit_type = "obertechhelmet"
 
 /obj/item/clothing/suit/space/hardsuit/security_armor/hos
