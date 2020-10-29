@@ -322,7 +322,7 @@
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/enforcer.dmi'
 	anthro_mob_worn_overlay = 'modular_skyrat/icons/mob/clothing/enforcer.dmi'
 	icon_state = "ejumpsuit"
-	can_adjust = FALSE //sorry but adjusting it with reskins would FUCK everything, sacrifice for the greater good
+	can_adjust = FALSE
 
 /obj/item/clothing/under/rank/security/officer/blueshirt
 	icon = 'icons/obj/clothing/uniforms.dmi'
@@ -639,6 +639,9 @@
 	armor = list("melee" = 70, "bullet" = 50, "laser" = 30, "energy" = 40, "bomb" = 70, "bio" = 60, "rad" = 50, "fire" = 100, "acid" = 100, "wound" = 30)
 
 //Cargo Utilitarian reskins
+/obj/item/clothing/under/rank/cargo
+	can_adjust = FALSE
+
 /obj/item/clothing/under/rank/cargo/qm
 	icon = 'modular_skyrat/icons/obj/clothing/cargoutilit.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/cargoutil.dmi'
