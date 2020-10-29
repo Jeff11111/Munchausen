@@ -227,16 +227,22 @@
 //we interpret "chamber_open" as having the shotgun break open or not
 /obj/item/gun/ballistic/revolver/doublebarrel
 	name = "\improper double barreled shotgun"
-	desc = "The Bobox double barreled shotgun - Not the classic but, fuck man that's pretty cool."
+	desc = "The double barreled shotgun - A true classic."
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/shotgun.dmi'
-	icon_state = "bobox"
+	icon_state = "dbshotgun"
+	item_state = "dbshotgun"
 	open_sound = 'modular_skyrat/sound/guns/shotgun_break.ogg'
 	close_sound = 'modular_skyrat/sound/guns/shotgun_reload.ogg'
 	fire_sound = 'modular_skyrat/sound/guns/shotgun.ogg'
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/dual
-	sawn_off = TRUE
 	unique_reskin = null
 
 /obj/item/gun/ballistic/revolver/doublebarrel/update_icon()
 	..()
 	icon_state = "[initial(icon_state)][sawn_off ? "_sawn" : ""][chamber_open ? "-open" : ""]"
+	item_state = "[initial(item_state)][sawn_off ? "_sawn" : ""][(!sawn_off && is_wielded) ? "-wielded" : ""]"
+
+/obj/item/gun/ballistic/revolver/doublebarrel/bobox
+	icon_state = "bobox"
+	desc = "The Bobox double barreled shotgun - The double barrel you know and love, but now polymerized and horrifying."
+	sawn_off = TRUE

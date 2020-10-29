@@ -174,4 +174,23 @@
 	icon_state = "[initial(icon_state)][chambered ? "" : "-open"]"
 
 /obj/item/gun/ballistic/shotgun
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/shotgun.dmi'
+	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/shotgun_lefthand.dmi'
+	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/shotgun_righthand.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/obj/bobstation/guns/worn/back.dmi'
+	icon_state = "shotgun"
+	item_state = "shotgun"
 	fire_sound = 'modular_skyrat/sound/guns/shotgun.ogg'
+
+/obj/item/gun/ballistic/shotgun/update_icon()
+	..()
+	icon_state = "[initial(icon_state)][chambered ? "" : "-e"]"
+	item_state = "{initial(item_state)][is_wielded ? "-wielded" : ""]"
+
+/obj/item/gun/ballistic/shotgun/riot
+	icon_state = "riotshotgun"
+	item_state = "riotshotgun"
+
+/obj/item/gun/ballistic/shotgun/automatic/combat
+	icon_state = "combatshotgun"
+	item_state = "combatshotgun"

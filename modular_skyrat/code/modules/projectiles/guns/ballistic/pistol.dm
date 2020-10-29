@@ -48,6 +48,9 @@
 			Unreliable at best, this small sidearm is chambered in 9mm."
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
 	icon_state = "pistol9mm"
+	item_state = "pistol9mm"
+	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/pistol_lefthand.dmi'
+	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/pistol_righthand.dmi'
 	fire_sound = 'modular_skyrat/sound/guns/pistol1.ogg'
 	mag_type = /obj/item/ammo_box/magazine/nangler
 	can_suppress = FALSE
