@@ -61,7 +61,9 @@
 	display_results(user, target, "<span class='notice'>You carve away some intact metal from [target]'s [parse_zone(target_zone)].</span>",
 		"<span class='notice'>[user] carves away some intact metal from [target]'s [parse_zone(target_zone)] with [tool]!</span>",
 		"<span class='notice'>[user] carves away some intact metal from  [target]'s [parse_zone(target_zone)]!</span>")
-	surgery.operated_bodypart.receive_damage(brute=rand(4,10), sharpness=SHARP_EDGED)
+	var/obj/item/bodypart/targeted_bodypart = target.get_bodypart(user.zone_selected)
+	if(targeted_bodypart)
+		targeted_bodypart.receive_damage(brute=rand(4,10), sharpness=SHARP_EDGED)
 
 /datum/surgery_step/robotic_debride/initiate(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail = FALSE)
 	if(!..())
