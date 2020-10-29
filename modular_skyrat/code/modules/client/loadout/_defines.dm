@@ -13,7 +13,7 @@
 							"Atmospheric Technician", "Station Engineer", "Warden", "Detective", "Security Officer", "Blueshield", "Brig Physician",\
 							"Cargo Technician", "Shaft Miner", "Mining Foreman", "Mining Technician",\
 							"Bartender", "Botanist", "Cook", "Curator", "Chaplain", "Janitor",\
-							"Clown", "Mime", "Lawyer", "Assistant"\
+							"Clown", "Mime", "Lawyer", "Stowaway"\
 							)
 
 // Some of these might be left unused, but still it's nice to have them around.
@@ -23,7 +23,7 @@
 #define SEC_ROLES list("Head of Security", "Security Officer", "Warden", "Brig Physician", "Blueshield")
 #define ENG_ROLES list("Chief Engineer", "Atmospheric Technician", "Station Engineer")
 #define CRG_ROLES list("Quartermaster", "Cargo Technician", "Shaft Miner", "Mining Foreman", "Mining Technician")
-#define CIV_ROLES list("Head of Personnel", "Bartender", "Botanist", "Cook", "Curator", "Chaplain", "Janitor", "Clown", "Mime", "Lawyer", "Assistant")
+#define CIV_ROLES list("Head of Personnel", "Bartender", "Botanist", "Cook", "Curator", "Chaplain", "Janitor", "Clown", "Mime", "Lawyer", "Stowaway")
 #define FUN_ROLES list("Clown", "Mime")
 
 // Hybrids. Might be left unused even more, aside from OrviTrek-like stuff. As for OPRS it is ENG+SEC+CRG.

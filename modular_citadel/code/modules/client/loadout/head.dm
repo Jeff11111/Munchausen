@@ -134,14 +134,14 @@
 	category = SLOT_HEAD
 	path = /obj/item/clothing/head/kepi/orvi/service
 	restricted_desc = "Service and Civilian, barring Clown, Mime and Lawyer"
-	restricted_roles = list("Assistant", "Bartender", "Botanist", "Cook", "Curator", "Janitor", "Chaplain")
+	restricted_roles = list("Stowaway", "Bartender", "Botanist", "Cook", "Curator", "Janitor", "Chaplain")
 
 /datum/gear/orvkepiass
 	name = "Federation Kepi, assistant"
 	description = "A visored cap. Intended to be used with ORV uniform."
 	category = SLOT_HEAD
 	path = /obj/item/clothing/head/kepi/orvi
-	restricted_roles = list("Assistant")
+	restricted_roles = list("Stowaway")
 
 /*Commenting out Until next Christmas or made automatic
 /datum/gear/santahatr

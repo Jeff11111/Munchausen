@@ -93,7 +93,7 @@
 	if(CONFIG_GET(flag/protect_roles_from_antagonist))
 		restricted_roles += protected_roles
 	if(CONFIG_GET(flag/protect_assistant_from_antagonist))
-		restricted_roles += "Assistant"
+		restricted_roles += "Stowaway"
 	var/weights = CONFIG_GET(keyed_list/dynamic_weight)
 	var/costs = CONFIG_GET(keyed_list/dynamic_cost)
 	var/requirementses = CONFIG_GET(keyed_list/dynamic_requirements) // can't damn well use requirements

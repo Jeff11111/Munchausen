@@ -22,7 +22,7 @@
 	item = /obj/item/storage/box/hug/angryclown
 	cost = 20
 	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
-	restricted_roles = list("Clown", "Mime", "Assistant")
+	restricted_roles = list("Clown", "Mime", "Stowaway")
 
 /obj/item/clothing/mask/gas/clown_hat/joker
 	name = "\proper Society's Mask"
@@ -174,7 +174,7 @@
 	item = /obj/item/storage/box/syndie_kit/truedab
 	cost = 6
 	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
-	restricted_roles = list("Assistant")
+	restricted_roles = list("Stowaway")
 
 /obj/item/storage/box/syndie_kit/truedab
 	name = "Desperate Assistance Battleforce Box (DABB)"

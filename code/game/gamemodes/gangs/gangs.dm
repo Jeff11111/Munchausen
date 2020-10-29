@@ -33,7 +33,7 @@ GLOBAL_LIST_EMPTY(gangs)
 		restricted_jobs += protected_jobs
 
 	if(CONFIG_GET(flag/protect_assistant_from_antagonist))
-		restricted_jobs += "Assistant"
+		restricted_jobs += "Stowaway"
 
 	//Spawn more bosses depending on server population
 	var/gangs_to_create = 2

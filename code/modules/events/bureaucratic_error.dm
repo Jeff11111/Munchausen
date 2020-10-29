@@ -12,7 +12,7 @@
 
 /datum/round_event/bureaucratic_error/start()
 	//Skyrat edit -- start
-	var/datum/job/random_job = SSjob.GetJob(pick(get_all_jobs() - "Assistant"))
+	var/datum/job/random_job = SSjob.GetJob(pick(get_all_jobs() - "Stowaway"))
 	var/cap = rand(10,15)
 	random_job.spawn_positions = cap
 	random_job.total_positions = cap

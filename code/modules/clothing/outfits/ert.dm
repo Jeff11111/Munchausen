@@ -223,7 +223,7 @@
 		return
 	var/obj/item/card/id/W = H.wear_id
 	W.registered_name = H.real_name
-	W.assignment = "Assistant"
+	W.assignment = "Stowaway"
 	W.access = list(ACCESS_MAINT_TUNNELS,ACCESS_CENT_GENERAL)
 	W.update_label(W.registered_name, W.assignment)
 

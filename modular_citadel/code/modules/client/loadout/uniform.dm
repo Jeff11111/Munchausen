@@ -479,13 +479,13 @@
 	name = "ORV uniform, assistant"
 	category = SLOT_W_UNIFORM
 	path = /obj/item/clothing/under/trek/orv
-	restricted_roles = list("Assistant")
+	restricted_roles = list("Stowaway")
 
 /datum/gear/orvsrv
 	name = "ORV uniform, service"
 	category = SLOT_W_UNIFORM
 	path = /obj/item/clothing/under/trek/orv/service
-	restricted_roles = list("Assistant", "Bartender", "Botanist", "Cook", "Curator", "Janitor", "Chaplain")
+	restricted_roles = list("Stowaway", "Bartender", "Botanist", "Cook", "Curator", "Janitor", "Chaplain")
 	restricted_desc = "Service and Civilian, barring Clown, Mime and Lawyer"
 
 //Memes

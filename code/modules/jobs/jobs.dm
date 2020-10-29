@@ -51,7 +51,7 @@ GLOBAL_LIST_INIT(civilian_positions, list(
 	"Clown",
 	"Mime",
 	"Prisoner",
-	"Assistant"))
+	"Stowaway"))
 // Added Blueshield SKYRAT EDIT
 GLOBAL_LIST_INIT(security_positions, list(
 	"Chief Enforcer",

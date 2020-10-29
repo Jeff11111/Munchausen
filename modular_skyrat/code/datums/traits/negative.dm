@@ -30,7 +30,7 @@
 			heirloom_type = /obj/item/clothing/accessory/medal/silver/valor
 		if("Scientist")
 			heirloom_type = /obj/item/toy/plush/slimeplushie
-		if("Assistant")
+		if("Stowaway")
 			heirloom_type = /obj/item/clothing/gloves/cut/family
 		if("Chaplain")
 			heirloom_type = /obj/item/camera/spooky/family

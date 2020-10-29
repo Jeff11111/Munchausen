@@ -2,20 +2,20 @@
 	name = "Staff Assistant's jumpsuit"
 	category = SLOT_W_UNIFORM
 	path = /obj/item/clothing/under/misc/staffassistant
-	restricted_roles = list("Assistant")
+	restricted_roles = list("Stowaway")
 
 /datum/gear/neetsuit
 	name = "D.A.B. suit"
 	category = SLOT_WEAR_SUIT
 	path = /obj/item/clothing/suit/assu_suit
-	restricted_roles = list("Assistant")
+	restricted_roles = list("Stowaway")
 	cost = 2
 
 /datum/gear/neethelm
 	name = "D.A.B. helmet"
 	category = SLOT_HEAD
 	path = /obj/item/clothing/head/assu_helmet
-	restricted_roles = list("Assistant")
+	restricted_roles = list("Stowaway")
 	cost = 2
 
 /datum/gear/plushvar
