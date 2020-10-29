@@ -32,6 +32,7 @@
 
 /datum/game_mode/dreamer/post_setup(report)
 	..()
-	for(var/datum/mind/dreamer in antag_candidates)
+	var/datum/mind/dreamer = pick(antag_candidates)
+	if(istype(dreamer))
 		var/datum/antagonist/dreamer/new_antag = new()
 		addtimer(CALLBACK(dreamer, /datum/mind.proc/add_antag_datum, new_antag), rand(100,200))
