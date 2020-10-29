@@ -400,8 +400,8 @@
 	name = "blueshield techarmor"
 	desc = "The techarmor helmet of Command's first line of defense."
 	armor = list("melee" = 30, "bullet" = 20, "laser" = 20,"energy" = 10, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 75, "acid" = 75, "wound" = 20)
-	icon_state = "hardsuit0-obentechhelmet"
-	item_state = "hardsuit0-obentechhelmet"
+	icon_state = "hardsuit0-obertechhelmet"
+	item_state = "hardsuit0-obertechhelmet"
 	hardsuit_type = "obertechhelmet"
 
 /obj/item/clothing/suit/space/hardsuit/security_armor/blueshield
