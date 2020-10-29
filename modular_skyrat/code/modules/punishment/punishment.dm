@@ -12,7 +12,7 @@ GLOBAL_LIST_INIT(fraggots, world.file2list('config/fraggots.txt'))
 		//Announce to every player but the fraggot
 		for(var/client/C in (GLOB.clients - client))
 			SEND_SOUND(C, sound('modular_skyrat/sound/fraggot/kill_her_now_kill_her_now.ogg', FALSE, CHANNEL_COMBAT, 100))
-			to_chat(C, "<span class='warning'><span class='bigbold'>[emoji_parse(":killher:")][new_mob] IS A FRAGGOT! KILL HER! KILL HER![emoji_parse(":killher:")]</span>")
+			to_chat(C, "<span class='warning'><span class='bigbold'>[emoji_parse(":killher:")][new_mob] IS A NIGGER FRAGGOT! KILL HER! KILL HER![emoji_parse(":killher:")]</span>")
 
 /mob/living/Life(seconds, times_fired)
 	. = ..()
@@ -41,6 +41,8 @@ GLOBAL_LIST_INIT(fraggots, world.file2list('config/fraggots.txt'))
 			to_chat(src, "<span class='userdanger'>PLANES ARE STORED IN DA PARKIGN LOTS!!!!</span>")
 		if(prob(25))
 			to_chat(src, "<span class='userdanger'>AIRCRAFT MORTORS ARE ENGINES!!!!</span>")
+		if(prob(25))
+			to_chat(src, "<span class='userdanger'>NIGGER!!!!</span>")
 		//Screaming
 		if(prob(25))
 			agony_scream()

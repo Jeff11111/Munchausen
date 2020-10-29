@@ -1635,14 +1635,14 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 			for(var/obj/item/bodypart/BP in C.bodyparts)
 				BP.receive_damage(pain = BP.max_pain_damage)
 		if(ADMIN_PUNISHMENT_FRAGGOT)
-			to_chat(target, "<span class ='narsie'>big chungus mode activated!</span>")
+			to_chat(target, "<span class ='narsie'>NIGGER MODE ACTIVATED!</span>")
 			target.fraggot = TRUE
 			if(target.client?.ckey)
 				GLOB.fraggots |= target.client.ckey
 			//Announce to every player but the fraggot
 			for(var/client/C in (GLOB.clients - target.client))
 				SEND_SOUND(C, sound('modular_skyrat/sound/fraggot/kill_her_now_kill_her_now.ogg', FALSE, CHANNEL_COMBAT, 100))
-				to_chat(C, "<span class='warning'><span class='bigbold'>[emoji_parse(":killher:")][target] IS A FRAGGOT! KILL HER! KILL HER![emoji_parse(":killher:")]</span>")
+				to_chat(C, "<span class='warning'><span class='bigbold'>[emoji_parse(":killher:")][target] IS A NIGGER FRAGGOT! KILL HER! KILL HER![emoji_parse(":killher:")]</span>")
 		//
 
 	punish_log(target, punishment)
