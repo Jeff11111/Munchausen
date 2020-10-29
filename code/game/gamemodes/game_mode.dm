@@ -24,7 +24,7 @@
 	var/list/datum/mind/antag_candidates = list()	// List of possible starting antags goes here
 	var/list/restricted_jobs = list()	// Jobs it doesn't make sense to be.  I.E chaplain or AI cultist
 	var/list/protected_jobs = list()	// Jobs that can't be traitors because
-	var/list/required_jobs = list()		// alternative required job groups eg list(list(cap=1),list(hos=1,sec=2)) translates to one captain OR one hos and two secmans
+	var/list/required_jobs = list("Captain"=1, "Chief Enforcer"=1, "Quartermaster"=1)		// alternative required job groups eg list(list(cap=1),list(hos=1,sec=2)) translates to one captain OR one hos and two secmans
 	var/list/restricted_species = list() //The ID of the species you dont want to be considered for this gamemode's antags, like bloodless species being a bloodsucker.
 	var/required_players = 0
 	var/maximum_players = -1 // -1 is no maximum, positive numbers limit the selection of a mode on overstaffed stations
@@ -59,7 +59,6 @@
 	to_chat(world, "<b>The gamemode is: <span class='[announce_span]'>[name]</span>!</b>")
 	to_chat(world, "<b>[announce_text]</b>")
 
-
 ///Checks to see if the game can be setup and ran with the current number of players or whatnot.
 /datum/game_mode/proc/can_start()
 	var/playerC = 0
@@ -77,7 +76,6 @@
 	else
 		message_admins("<span class='notice'>DEBUG: GAME STARTING WITHOUT PLAYER NUMBER CHECKS, THIS WILL PROBABLY BREAK SHIT.</span>")
 		return 1
-
 
 ///Attempts to select players for special roles the mode might have.
 /datum/game_mode/proc/pre_setup()
@@ -203,7 +201,6 @@
 //For things that do not die easily
 /datum/game_mode/proc/are_special_antags_dead()
 	return TRUE
-
 
 /datum/game_mode/proc/check_finished(force_ending) //to be called by SSticker
 	if(!SSticker.setup_done || !gamemode_ready)
@@ -622,6 +619,9 @@
 	// Skyrat change: All station goals, all the time.
 
 	station_goals = possible
+	for(var/I in station_goals)
+		station_goals -= I
+		station_goals += new I()
 	/*var/goal_weights = 0
 	while(possible.len && goal_weights < STATION_GOAL_BUDGET)
 		var/datum/station_goal/picked = pick_n_take(possible)
@@ -682,7 +682,7 @@
 	round_credits += "<br>"
 
 	// SECURITY
-	round_credits += "<center><h1>The Brave Security Officers:</h1>"
+	round_credits += "<center><h1>The Brave Enforcers:</h1>"
 	len_before_addition = round_credits.len
 	for(var/datum/mind/current in SSticker.mode.get_all_by_department(GLOB.security_positions))
 		round_credits += "<center><h2>[current.name] as the [current.assigned_role]</h2>"

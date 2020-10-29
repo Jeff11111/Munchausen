@@ -14,7 +14,7 @@
 	biology_required = list()
 	required_status = null
 
-/datum/wound/disembowel/proc/apply_disembowel(obj/item/bodypart/L, wounding_type=WOUND_SLASH)
+/datum/wound/disembowel/proc/apply_disembowel(obj/item/bodypart/L, wounding_type = WOUND_SLASH, silent = FALSE)
 	var/list/organs = L?.owner?.getorganszone(L.body_zone)
 	for(var/obj/item/organ/genital/G in organs)
 		organs -= G
@@ -62,7 +62,8 @@
 
 	var/msg = "<b><span class='danger'>[victim]'s [L.name] [occur_text]!</span></b>"
 
-	victim.visible_message(msg, "<span class='userdanger'>Your [L.name] [occur_text]!</span>")
+	if(!silent)
+		victim.visible_message(msg, "<span class='userdanger'>Your [L.name] [occur_text]!</span>")
 
 	//apply the blood gush effect
 	if(wounding_type != WOUND_BURN && L.owner)
@@ -83,22 +84,33 @@
 
 	second_wind()
 	log_wound(victim, src)
+	L.disembowel(dam_type = (wounding_type == WOUND_BURN ? BURN : BRUTE),silent = TRUE, wound = TRUE)
 	qdel(src)
-	return L.disembowel(dam_type = (wounding_type == WOUND_BURN ? BURN : BRUTE),silent = TRUE, wound = TRUE)
+	var/kaplosh_sound = pick(
+		'modular_skyrat/sound/gore/chop1.ogg',
+		'modular_skyrat/sound/gore/chop2.ogg',
+		'modular_skyrat/sound/gore/chop3.ogg',
+		'modular_skyrat/sound/gore/chop4.ogg',
+		'modular_skyrat/sound/gore/chop5.ogg',
+		'modular_skyrat/sound/gore/chop6.ogg',
+	)
+	if(length(L.dismember_sounds))
+		kaplosh_sound = pick(L.dismember_sounds)
+	if(L.is_robotic_limb())
+		kaplosh_sound = 'modular_skyrat/sound/effects/crowbarhit.ogg'
+	playsound(L.owner, kaplosh_sound, 80, 0)
+	L.disembowel(dam_type = (wounding_type == WOUND_BURN ? BURN : BRUTE), silent = TRUE, wound = TRUE, wounding_type = wounding_type)
+	qdel(src)
 
 /datum/wound/slash/critical/incision/disembowel
 	name = "Disembowelment"
 	desc = "Patient's limb has been violently avulsioned, to the point of large chunks of flesh and organs getting lost."
 	treat_text = "Immediate surgical closure of the wound, as well as reimplantation of lost organs."
 	examine_desc = "has a wide and gaping wound, enough to see through the flesh"
-	sound_effect = 'modular_skyrat/sound/effects/dismember.ogg'
 	viable_zones = ALL_BODYPARTS
 	severity = WOUND_SEVERITY_CRITICAL
 	wound_type = WOUND_LIST_DISEMBOWEL
 	ignore_preexisting = TRUE
-	initial_flow = 2
-	minimum_flow = 0
-	clot_rate = 0
 	max_per_type = 4
 	threshold_penalty = 80
 	demotes_to = null
@@ -107,52 +119,56 @@
 	scarring_descriptions = list("is several skintone shades paler than the rest of the body", "is a gruesome patchwork of artificial flesh", "has a large series of attachment scars at the articulation points")
 	required_status = BODYPART_ORGANIC
 	biology_required = list()
-	sound_effect = 'sound/misc/splort.ogg'
+	pain_amount = 40 //Just absolutely unbearable. Will send you into shock most of the time.
+	infection_chance = 90
 	occur_text = null
+	initial_flow = 4.25
+	minimum_flow = 4
+	clot_rate = 0
+	descriptive = "The limb is disemboweled!"
 
 /datum/wound/slash/critical/incision/disembowel/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
 	. = ..()
 	switch(L.body_zone)
 		if(BODY_ZONE_HEAD)
-			initial_flow = 3
-			minimum_flow = 0
+			initial_flow *= 1
+			minimum_flow *= (1/4)
 		if(BODY_ZONE_CHEST)
-			initial_flow = 4
-			minimum_flow = 0
+			initial_flow *= (5/4)
+			minimum_flow *= (1/4)
 		if(BODY_ZONE_PRECISE_GROIN)
-			initial_flow = 4
-			minimum_flow = 0.2
+			initial_flow *= (5/4)
+			minimum_flow *= (1/4)
 		if(BODY_ZONE_L_ARM)
-			initial_flow = 2.5
-			minimum_flow = 0.5
+			initial_flow *= (3/4)
+			minimum_flow *= (1/4)
 		if(BODY_ZONE_R_ARM)
-			initial_flow = 2.5
-			minimum_flow = 0.5
+			initial_flow *= (3/4)
+			minimum_flow *= (1/4)
 		if(BODY_ZONE_PRECISE_L_HAND)
-			initial_flow = 1.5
-			minimum_flow = 0.75
+			initial_flow *= (1/2)
+			minimum_flow *= (1/3)
 		if(BODY_ZONE_PRECISE_R_HAND)
-			initial_flow = 1.5
-			minimum_flow = 0.75
+			initial_flow *= (1/2)
+			minimum_flow *= (1/3)
 		if(BODY_ZONE_L_LEG)
-			initial_flow = 3
-			minimum_flow = 0.3
+			initial_flow *= (3/4)
+			minimum_flow *= (1/4)
 		if(BODY_ZONE_R_LEG)
-			initial_flow = 3
-			minimum_flow = 0.3
+			initial_flow *= (3/4)
+			minimum_flow *= (1/4)
 		if(BODY_ZONE_PRECISE_L_FOOT)
-			initial_flow = 2
-			minimum_flow = 0.5
+			initial_flow *= (1/2)
+			minimum_flow *= (1/3)
 		if(BODY_ZONE_PRECISE_R_FOOT)
-			initial_flow = 2
-			minimum_flow = 0.5
+			initial_flow *= (1/2)
+			minimum_flow *= (1/3)
 
 /datum/wound/mechanical/slash/critical/incision/disembowel
 	name = "Disemboweled"
 	desc = "Patient's limb has been violently shredded, to the point of large chunks of metal and components getting lost."
 	treat_text = "Immediate welding of the wound, as well as reattachment of lost components."
 	examine_desc = "has a wide and gaping tear, enough to see through the exoskeleton"
-	sound_effect = 'modular_skyrat/sound/effects/dismember.ogg'
 	viable_zones = ALL_BODYPARTS
 	severity = WOUND_SEVERITY_CRITICAL
 	wound_type = WOUND_LIST_DISEMBOWEL
@@ -167,7 +183,9 @@
 	scarring_descriptions = list("is several skintone shades paler than the rest of the body", "is a gruesome patchwork of artificial flesh", "has a large series of attachment scars at the articulation points")
 	required_status = BODYPART_ROBOTIC
 	biology_required = list()
+	pain_amount = 40 //Just absolutely unbearable. Will send you into shock most of the time.
 	occur_text = null
+	descriptive = "The limb is disemboweled!"
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/get_examine_description(mob/user)
 	. = ..()
@@ -178,35 +196,35 @@
 	. = ..()
 	switch(L.body_zone)
 		if(BODY_ZONE_HEAD)
-			initial_flow = 3
-			minimum_flow = 0
+			initial_flow *= 1
+			minimum_flow *= (1/4)
 		if(BODY_ZONE_CHEST)
-			initial_flow = 4
-			minimum_flow = 0
+			initial_flow *= (5/4)
+			minimum_flow *= (1/4)
 		if(BODY_ZONE_PRECISE_GROIN)
-			initial_flow = 4
-			minimum_flow = 0.2
+			initial_flow *= (5/4)
+			minimum_flow *= (1/4)
 		if(BODY_ZONE_L_ARM)
-			initial_flow = 2.5
-			minimum_flow = 0.5
+			initial_flow *= (3/4)
+			minimum_flow *= (1/4)
 		if(BODY_ZONE_R_ARM)
-			initial_flow = 2.5
-			minimum_flow = 0.5
+			initial_flow *= (3/4)
+			minimum_flow *= (1/4)
 		if(BODY_ZONE_PRECISE_L_HAND)
-			initial_flow = 1.5
-			minimum_flow = 0.75
+			initial_flow *= (1/2)
+			minimum_flow *= (1/3)
 		if(BODY_ZONE_PRECISE_R_HAND)
-			initial_flow = 1.5
-			minimum_flow = 0.75
+			initial_flow *= (1/2)
+			minimum_flow *= (1/3)
 		if(BODY_ZONE_L_LEG)
-			initial_flow = 3
-			minimum_flow = 0.3
+			initial_flow *= (3/4)
+			minimum_flow *= (1/4)
 		if(BODY_ZONE_R_LEG)
-			initial_flow = 3
-			minimum_flow = 0.3
+			initial_flow *= (3/4)
+			minimum_flow *= (1/4)
 		if(BODY_ZONE_PRECISE_L_FOOT)
-			initial_flow = 2
-			minimum_flow = 0.5
+			initial_flow *= (1/2)
+			minimum_flow *= (1/3)
 		if(BODY_ZONE_PRECISE_R_FOOT)
-			initial_flow = 2
-			minimum_flow = 0.5
+			initial_flow *= (1/2)
+			minimum_flow *= (1/3)

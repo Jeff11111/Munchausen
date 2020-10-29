@@ -1,14 +1,91 @@
-//detective revomlver changes
+//Revolver mechanics epic
+/obj/item/gun/ballistic/revolver
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/revolver.dmi'
+	icon_state = "cheapo"
+	fire_sound = 'modular_skyrat/sound/guns/revolver1.ogg'
+	safety_sound = 'modular_skyrat/sound/guns/safety2.ogg'
+	safety = FALSE
+	var/open_sound = 'modular_skyrat/sound/guns/revolver_open.ogg'
+	var/close_sound = 'modular_skyrat/sound/guns/revolver_close.ogg'
+	var/chamber_open = FALSE
+
+/obj/item/gun/ballistic/revolver/do_fire(atom/target, mob/living/user, message, params, zone_override, bonus_spread, stam_cost)
+	if(chamber_open)
+		return shoot_with_empty_chamber(user)
+	else
+		return ..()
+
+/obj/item/gun/ballistic/revolver/chamber_round(spin)
+	..()
+	update_icon()
+
+/obj/item/gun/ballistic/revolver/attack_hand(mob/user)
+	if(chamber_open && (src in list(user.get_active_held_item(), user.get_inactive_held_item())))
+		var/obj/item/ammo_casing/CB
+		CB = magazine.get_round(0)
+		user.put_in_hands(CB)
+		update_icon()
+		to_chat(user, "<span class='notice'>I unload [CB] from [src].</span>")
+	else
+		return ..()
+	
+/obj/item/gun/ballistic/revolver/attack_self(mob/living/user)
+	if(chamber_open)
+		var/num_unloaded = 0
+		chambered = null
+		while(get_ammo() > 0)
+			var/obj/item/ammo_casing/CB
+			CB = magazine.get_round(0)
+			if(CB)
+				CB.forceMove(drop_location())
+				CB.bounce_away(FALSE, NONE)
+				num_unloaded++
+		update_icon()
+		if(num_unloaded)
+			to_chat(user, "<span class='notice'>I unload [num_unloaded] shell\s from [src].</span>")
+		else
+			to_chat(user, "<span class='warning'>[src] is empty!</span>")
+	else
+		to_chat(user, "<span class='warning'>I must open [src]'s chamber to unload it.")
+
+/obj/item/gun/ballistic/revolver/round_check(mob/user)
+	. = ""
+	if((user.mind && GET_SKILL_LEVEL(user, ranged) >= 8) || chamber_open || isobserver(user))
+		. += "It has [get_ammo()] round\s remaining."
+		. += "[get_ammo(0,0)] of those are live rounds."
+	else
+		. += "I'm not sure how many rounds are loaded on [src]."
+
+/obj/item/gun/ballistic/revolver/rightclick_attack_self(mob/user)
+	return toggle_chamber(user)
+
+/obj/item/gun/ballistic/revolver/proc/toggle_chamber(mob/user, silent = FALSE)
+	chamber_open = !chamber_open
+	if(!silent)
+		if(chamber_open)
+			playsound(src, open_sound, 50)
+		else
+			playsound(src, close_sound, 50)
+	update_icon()
+	if(user)
+		to_chat(user, "<span class='notice'>I [chamber_open ? "open" : "close"] [src]'s chamber.</span>")
+	return TRUE
+
+/obj/item/gun/ballistic/revolver/update_icon()
+	..()
+	icon_state = "[initial(icon_state)][chamber_open ? "-open-[min(6, get_ammo())]" : ""]"
+
+//Detective revomlver changes
 /obj/item/gun/ballistic/revolver/detective
 	desc = "Although far surpassed by newer firearms, this revolver is still quite effective and popular as a self defense weapon, and as an oldschool styled sidearm for military contractors. Chambering .357 in it however, is not recommended."
 
 //Contender, made by ArcLumin. Ported from hippie.
 /obj/item/gun/ballistic/revolver/doublebarrel/contender
+	name = "Contender"
 	desc = "The Contender G13, a favorite amongst space hunters. An easily modified bluespace barrel and break action loading means it can use any ammo available.\
 	The side has an engraving which reads 'Made by ArcWorks'."
-	name = "Contender"
-	icon = 'modular_skyrat/icons/obj/guns/projectile.dmi'
-	icon_state = "contender-s"
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/shotgun.dmi'
+	icon_state = "contender"
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/contender
 	w_class = WEIGHT_CLASS_NORMAL
 	obj_flags = UNIQUE_RENAME
@@ -42,6 +119,10 @@
 	var/explodioprob = 50
 	var/list/blacklist = list("40mm", ".50")
 
+/obj/item/gun/ballistic/revolver/doublebarrel/contender/box_gun/update_icon()
+	..()
+	icon_state = "box_gun"
+
 /obj/item/gun/ballistic/revolver/doublebarrel/contender/box_gun/afterattack(atom/target, mob/living/user, flag, params)
 	. = ..()
 	if((istype(user) && prob(explodioprob)) || (blacklist.Find(chambered.caliber)))
@@ -49,9 +130,9 @@
 		var/obj/item/bodypart/r_arm = user.get_bodypart(BODY_ZONE_R_ARM)
 		user.visible_message("<span class='warning'>\The [src] explodes in [user]'s hand!</span>", "<span class='warning'>\The [src] explodes in your hand!</span>")
 		explosion(user, 0, 0, 0, 1)
-		if(prob(50) && (l_arm != null ))
+		if(prob(50) && (l_arm != null))
 			l_arm.dismember()
-		else
+		else if(r_arm)
 			r_arm.dismember()
 		qdel(src)
 
@@ -60,8 +141,6 @@
 	caliber = "all"
 	ammo_type = /obj/item/ammo_casing
 	max_ammo = 1
-
-
 
 //
 ///////////////
@@ -74,7 +153,7 @@
 /obj/item/gun/ballistic/revolver/rifle
 	name = "\improper .38 Revolving Rifle"
 	desc = "A revolving rifle chambered in .38. "
-	icon = 'modular_skyrat/icons/obj/guns/projectile40x32.dmi'
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/40x32.dmi'
 	icon_state = "revolving-rifle"
 	item_state = "revolving"
 	mag_type = /obj/item/ammo_box/magazine/internal/cylinder/rev38	//This is just a detective's revolver but it's too big for bags..
@@ -105,7 +184,6 @@
 	w_class = WEIGHT_CLASS_BULKY
 
 // .45 Cylinder
-
 /obj/item/ammo_box/magazine/internal/cylinder/rev45
 	name = "revolver .45 cylinder"
 	ammo_type = /obj/item/ammo_casing/c45
@@ -117,3 +195,48 @@
 // REVOLVERS //
 ///////////////
 //
+/obj/item/gun/ballistic/revolver/detective
+	name = "\improper .38 snubnose revolver"
+	icon_state = "snubnose"
+	unique_reskin = null
+
+/obj/item/gun/ballistic/revolver/dual_ammo
+	name = "\improper .38 revolver"
+	desc = "The NT Lady Luck revolver - A classic law enforcement firearm, for a lawless land."
+	icon_state = "ladyluck"
+	mag_type = /obj/item/ammo_box/magazine/internal/cylinder/rev38
+
+/obj/item/gun/ballistic/revolver/dual_ammo/AltClick(mob/user)
+	. = ..()
+	if(magazine)
+		switch(magazine.caliber)
+			if("38")
+				magazine.caliber = "357"
+				to_chat(user, "<span class='notice'>\The [src] will now chamber .357 rounds.</span>")
+			if("357")
+				magazine.caliber = "38"
+				to_chat(user, "<span class='notice'>\The [src] will now chamber .38 rounds.</span>")
+
+/obj/item/gun/ballistic/revolver/mateba/bladerunner
+	name = "\improper .357 NT Sheriff"
+	desc = "The NT Sheriff - A high quality revolver chambered in .357 rounds."
+	icon_state = "bladerunner"
+	fire_sound = 'modular_skyrat/sound/guns/revolver2.ogg'
+
+//new double barreled shotgun
+//we interpret "chamber_open" as having the shotgun break open or not
+/obj/item/gun/ballistic/revolver/doublebarrel
+	name = "\improper double barreled shotgun"
+	desc = "The Bobox double barreled shotgun - Not the classic but, fuck man that's pretty cool."
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/shotgun.dmi'
+	icon_state = "bobox"
+	open_sound = 'modular_skyrat/sound/guns/shotgun_break.ogg'
+	close_sound = 'modular_skyrat/sound/guns/shotgun_reload.ogg'
+	fire_sound = 'modular_skyrat/sound/guns/shotgun.ogg'
+	mag_type = /obj/item/ammo_box/magazine/internal/shot/dual
+	sawn_off = TRUE
+	unique_reskin = null
+
+/obj/item/gun/ballistic/revolver/doublebarrel/update_icon()
+	..()
+	icon_state = "[initial(icon_state)][sawn_off ? "_sawn" : ""][chamber_open ? "-open" : ""]"

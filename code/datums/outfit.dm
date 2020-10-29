@@ -112,12 +112,16 @@
 			backpack_contents[box] = 1
 
 		if(backpack_contents)
-			for(var/path in backpack_contents)
-				var/number = backpack_contents[path]
-				if(!isnum(number))//Default to 1
-					number = 1
-				for(var/i in 1 to number)
-					H.equip_to_slot_or_del(new path(H),SLOT_IN_BACKPACK)
+			var/obj/item/backpack = H.back
+			if(backpack && backpack.GetComponent(/datum/component/storage))
+				for(var/path in backpack_contents)
+					var/number = backpack_contents[path]
+					if(!isnum(number))//Default to 1
+						number = 1
+					for(var/i in 1 to number)
+						var/obj/item/xiehuapiaopiao = new path(backpack)
+						if(!SEND_SIGNAL(backpack, COMSIG_TRY_STORAGE_INSERT, xiehuapiaopiao, H, TRUE, TRUE))
+							qdel(xiehuapiaopiao)
 
 	if(!H.head && toggle_helmet && istype(H.wear_suit, /obj/item/clothing/suit/space/hardsuit))
 		var/obj/item/clothing/suit/space/hardsuit/HS = H.wear_suit

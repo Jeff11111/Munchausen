@@ -243,20 +243,24 @@
 	color = "#AAAAAA77" // rgb: 170, 170, 170, 77 (alpha)
 	taste_description = "water"
 	overdose_threshold = 150 //Imagine drinking a gallon of water
-	var/cooling_temperature = 2
 	glass_icon_state = "glass_clear"
 	glass_name = "glass of water"
 	glass_desc = "The father of all refreshments."
 	shot_glass_icon_state = "shotglassclear"
+	var/cooling_temperature = 2
+	var/hydration_gain = REAGENTS_METABOLISM
 
 /datum/reagent/water/on_mob_life(mob/living/carbon/M)
 	. = ..()
-	if(M.blood_volume)
-		M.blood_volume += 0.1 // water is good for you!
+	var/obj/item/organ/spleen/spleen = M.getorganslot(ORGAN_SLOT_SPLEEN)
+	if(M.blood_volume && spleen)
+		M.blood_volume += (spleen.get_blood()/spleen.blood_amount) // water is good for you!
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(isslimeperson(H))
-			M.blood_volume += 0.5 // water is REALLY good for you!
+		if(isslimeperson(H) && spleen)
+			M.blood_volume += (spleen.get_blood()) // water is REALLY good for you!
+	//warter....
+	M.adjust_hydration(hydration_gain, INFINITY)
 
 /*
  *	Water reaction to turf
@@ -334,7 +338,13 @@
 /datum/reagent/water/holywater/on_mob_metabolize(mob/living/L)
 	. = ..()
 	if(L.blood_volume)
-		L.blood_volume += 0.1 // water is good for you!
+		if(iscarbon(L))
+			var/mob/living/carbon/C = L
+			var/obj/item/organ/spleen/spleen = C.getorganslot(ORGAN_SLOT_SPLEEN)
+			if(spleen)
+				C.blood_volume += (spleen.get_blood()/5)
+		else
+			L.blood_volume += 0.1 // water is good for you!
 	ADD_TRAIT(L, TRAIT_HOLY, type)
 
 	if(is_servant_of_ratvar(L))
@@ -428,7 +438,9 @@
 		M.adjustBruteLoss(-2, FALSE)
 		M.adjustFireLoss(-2, FALSE)
 		if(ishuman(M) && M.blood_volume < (BLOOD_VOLUME_NORMAL*M.blood_ratio))
-			M.blood_volume += 3
+			var/obj/item/organ/spleen/spleen = M.getorganslot(ORGAN_SLOT_SPLEEN)
+			if(spleen)
+				M.blood_volume += (6 * spleen.get_blood())
 	else  // Will deal about 90 damage when 50 units are thrown
 		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3, 150)
 		M.adjustToxLoss(2, FALSE)
@@ -1086,7 +1098,9 @@
 	if((HAS_TRAIT(C, TRAIT_NOMARROW)))
 		return
 	if(C.blood_volume < (BLOOD_VOLUME_NORMAL*C.blood_ratio) && !AmBloodsucker(C))
-		C.blood_volume += 0.25
+		var/obj/item/organ/spleen/spleen = C.getorganslot(ORGAN_SLOT_SPLEEN)
+		if(spleen)
+			C.blood_volume += (spleen.get_blood()/2)
 	..()
 
 /datum/reagent/iron/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
@@ -1456,7 +1470,9 @@
 	M.drowsyness += 2
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		H.blood_volume = max(H.blood_volume - 2.5, 0)
+		var/obj/item/organ/spleen/spleen = H.getorganslot(ORGAN_SLOT_SPLEEN)
+		if(spleen)
+			H.blood_volume = max(H.blood_volume - 5 * spleen.get_blood(), 0)
 	if(prob(20))
 		M.losebreath += 2
 		M.confused = min(M.confused + 2, 5)
@@ -2338,21 +2354,30 @@
 	var/significant = FALSE
 	process_flags = REAGENT_ORGANIC | REAGENT_SYNTHETIC
 
+/datum/reagent/determination/on_mob_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.add_chem_effect(CE_PAINKILLER, 10)
+
 /datum/reagent/determination/on_mob_end_metabolize(mob/living/carbon/M)
 	if(significant)
 		var/stam_crash = 0
 		for(var/thing in M.all_wounds)
 			var/datum/wound/W = thing
 			if(istype(W))
-				stam_crash += (W.severity + 1) * 3 // spike of 3 stam damage per wound severity (moderate = 6, severe = 9, critical = 12) when the determination wears off if it was a combat rush
+				stam_crash += (W.severity + 1) * 3 // Spike of 3 stam damage per wound severity (moderate = 6, severe = 9, critical = 12) when the determination wears off if it was a combat rush
 		M.adjustStaminaLoss(stam_crash)
+	if(iscarbon(M))
+		var/mob/living/carbon/C = M
+		C.remove_chem_effect(CE_PAINKILLER, 10)
 	M.remove_status_effect(STATUS_EFFECT_DETERMINED)
 	..()
 
 /datum/reagent/determination/on_mob_life(mob/living/carbon/M)
 	if(!significant && volume >= WOUND_DETERMINATION_SEVERE)
 		significant = TRUE
-		M.apply_status_effect(STATUS_EFFECT_DETERMINED) // in addition to the slight healing, limping cooldowns are divided by 4 during the combat high
+		M.apply_status_effect(STATUS_EFFECT_DETERMINED) // In addition to the slight healing, limping cooldowns are divided by 4 during the combat high
 
 	volume = min(volume, WOUND_DETERMINATION_MAX)
 
@@ -2362,5 +2387,6 @@
 			var/obj/item/bodypart/wounded_part = W.limb
 			if(istype(wounded_part))
 				wounded_part.heal_damage(0.25, 0.25)
-			M.adjustStaminaLoss(-0.25*REM) // the more wounds, the more stamina regen
+			M.adjustStaminaLoss(-0.25*REM) // The more wounds, the more stamina regen
+			M.adjustPainLoss(-0.1*REM) //The more wounds, the more pain regen
 	..()

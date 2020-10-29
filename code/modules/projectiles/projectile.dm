@@ -127,7 +127,7 @@
 	var/ignore_source_check = FALSE
 
 	var/damage = 10
-	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE are the only things that should be in here
+	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, PAIN are the only things that should be in here
 	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
 	var/flag = "bullet" //Defines what armor to use when it hits things.  Must be set to bullet, laser, energy,or bomb
 	var/projectile_type = /obj/item/projectile
@@ -140,7 +140,8 @@
 	/// factor to multiply by for zone accuracy percent.
 	var/zone_accuracy_factor = 1
 
-		//Effects
+	//Effects
+	var/pain = 0
 	var/stun = 0
 	var/knockdown = 0
 	var/knockdown_stamoverride
@@ -215,7 +216,7 @@
 		SEND_SIGNAL(fired_from, COMSIG_PROJECTILE_ON_HIT, firer, target, Angle)
 	// i know that this is probably more with wands and gun mods in mind, but it's a bit silly that the projectile on_hit signal doesn't ping the projectile itself.
 	// maybe we care what the projectile thinks! See about combining these via args some time when it's not 5AM
-	var/obj/item/bodypart/hit_limb
+	var/hit_limb
 	if(isliving(target))
 		var/mob/living/L = target
 		hit_limb = L.check_limb_hit(def_zone)
@@ -253,7 +254,22 @@
 			if(starting)
 				splatter_dir = get_dir(starting, target_loca)
 			var/obj/item/bodypart/B = L.get_bodypart(def_zone)
-			if(B && B.status == BODYPART_ROBOTIC) // So if you hit a robotic, it sparks instead of bloodspatters
+			// Bullets cause a lot of havoc on organs, ON TOP of what we cause by damage alone
+			if((damage_type == BRUTE) && B)
+				var/wounding = WOUND_PIERCE
+				switch(get_sharpness())
+					if(SHARP_NONE)
+						wounding = WOUND_BLUNT
+					if(SHARP_EDGED)
+						wounding = WOUND_SLASH
+					if(SHARP_POINTY)
+						wounding = WOUND_PIERCE
+				B.damage_organs((damage*2/100)*(100 - blocked), wounding_type = wounding)
+			// Cause pain damage
+			if(B && src.pain)
+				B.receive_damage(pain = (src.pain*((100-blocked)/100)))
+			// So if you hit a robotic, it sparks instead of bloodspatters
+			if(B && B.status == BODYPART_ROBOTIC)
 				do_sparks(2, FALSE, target.loc)
 				if(prob(25))
 					new /obj/effect/decal/cleanable/oil(target_loca)
@@ -270,8 +286,14 @@
 		else if(impact_effect_type && !hitscan)
 			new impact_effect_type(target_loca, hitx, hity)
 
+		L.on_hit(src)
+
 		var/organ_hit_text = ""
 		var/limb_hit = hit_limb
+		var/wound_message = ""
+		if(iscarbon(L))
+			var/mob/living/carbon/C = L
+			wound_message = C.wound_message
 		if(limb_hit)
 			organ_hit_text = " in \the [parse_zone(limb_hit)]"
 
@@ -279,16 +301,20 @@
 			playsound(loc, hitsound, 5, TRUE, -1)
 		else if(suppressed)
 			playsound(loc, hitsound, 5, 1, -1)
-			to_chat(L, "<span class='userdanger'>You're shot by \a [src][organ_hit_text]!</span>")
+			to_chat(L, "<span class='userdanger'>You're shot by \a [src][organ_hit_text]![wound_message]</span>")
 		else
 			if(hitsound)
 				var/volume = vol_by_damage()
 				playsound(loc, hitsound, volume, 1, -1)
-			L.visible_message("<span class='danger'>[L] is hit by \a [src][organ_hit_text]!</span>", \
-					"<span class='userdanger'>[L] is hit by \a [src][organ_hit_text]!</span>", null, COMBAT_MESSAGE_RANGE)
+			L.visible_message("<span class='danger'>[L] is hit by \a [src][organ_hit_text]![wound_message]</span>", \
+					"<span class='userdanger'>[L] is hit by \a [src][organ_hit_text]![wound_message]</span>", null, COMBAT_MESSAGE_RANGE)
+		
 		if(candink && def_zone == BODY_ZONE_HEAD)
 			playsound(src, 'sound/weapons/dink.ogg', 30, 1)
-		L.on_hit(src)
+		
+		if(iscarbon(L))
+			var/mob/living/carbon/C = L
+			C.wound_message = ""
 
 	var/reagent_note
 	if(reagents)
@@ -666,6 +692,10 @@
 		else
 			pixel_x = traj_px
 			pixel_y = traj_py
+	//Boobstation projectiles work different
+	if(loc == get_turf(original))
+		qdel(src)
+		return
 
 /obj/item/projectile/proc/set_homing_target(atom/A)
 	if(!A || (!isturf(A) && !isturf(A.loc)))

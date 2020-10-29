@@ -5,8 +5,8 @@
 	name = "medical pack"
 	singular_name = "medical pack"
 	icon = 'modular_skyrat/icons/obj/stack_objects.dmi'
-	amount = 15
-	max_amount = 15
+	amount = 16
+	max_amount = 16
 	w_class = WEIGHT_CLASS_TINY
 	full_w_class = WEIGHT_CLASS_TINY
 	throw_speed = 3
@@ -15,6 +15,7 @@
 	max_integrity = 40
 	novariants = FALSE
 	item_flags = NOBLUDGEON
+	germ_level = 0
 	var/self_delay = 50
 	var/other_delay = 10
 	var/repeating = TRUE
@@ -60,20 +61,29 @@
 /obj/item/stack/medical/proc/try_heal(mob/living/M, mob/user, silent = FALSE, obj/item/bodypart/specific_part)
 	if(!M.can_inject(user, TRUE))
 		return
+	var/time_mod = 1
+
+	//Medical skill affects the speed of the do_mob
+	if(user.mind)
+		var/datum/skills/firstaid/firstaid = GET_SKILL(user, firstaid)
+		if(firstaid)
+			time_mod *= firstaid.get_medicalstack_mod()
+	
 	if(M == user)
 		if(!silent)
 			user.visible_message("<span class='notice'>[user] starts to apply \the [src] on [user.p_them()]self...</span>", "<span class='notice'>You begin applying \the [src] on yourself...</span>")
-		if(!do_mob(user, M, self_delay, extra_checks=CALLBACK(M, /mob/living/proc/can_inject, user, TRUE)))
+		if(!do_mob(user, M, self_delay * time_mod, extra_checks=CALLBACK(M, /mob/living/proc/can_inject, user, TRUE)))
 			return
 	else if(other_delay)
 		if(!silent)
 			user.visible_message("<span class='notice'>[user] starts to apply \the [src] on [M].</span>", "<span class='notice'>You begin applying \the [src] on [M]...</span>")
-		if(!do_mob(user, M, other_delay, extra_checks=CALLBACK(M, /mob/living/proc/can_inject, user, TRUE)))
+		if(!do_mob(user, M, other_delay * time_mod, extra_checks=CALLBACK(M, /mob/living/proc/can_inject, user, TRUE)))
 			return
 
 	if(heal(M, user))
 		log_combat(user, M, "healed", src.name)
-		if(repeating && amount > 0)
+		var/obj/item/bodypart/BP = M.get_bodypart(user.zone_selected)
+		if(repeating && (amount > 0) && (!BP || (BP.brute_dam && heal_brute) || (BP.burn_dam && heal_burn) || (BP.stamina_dam && heal_stamina)))
 			try_heal(M, user, TRUE)
 
 /obj/item/stack/medical/proc/heal(mob/living/M, mob/user, silent = FALSE, obj/item/bodypart/specific_part)
@@ -210,6 +220,11 @@
 	if(!silent)
 		user.visible_message("<span class='warning'>[user] begins wrapping the wounds on [M]'s [limb.name] with [src]...</span>", "<span class='warning'>You begin wrapping the wounds on [user == M ? "your" : "[M]'s"] [limb.name] with [src]...</span>")
 	var/time_mod = 1
+	//Medical skill affects the speed of the do_after
+	if(user.mind)
+		var/datum/skills/firstaid/firstaid = GET_SKILL(user, firstaid)
+		if(firstaid)
+			time_mod *= firstaid.get_medicalstack_mod()
 	if(!do_after(user, (user == M ? self_delay : other_delay) * time_mod, target=M))
 		return
 
@@ -220,7 +235,7 @@
 		var/childcount = 0
 		for(var/bodypart in limb.heal_zones)
 			var/obj/item/bodypart/child = M.get_bodypart(bodypart)
-			if(!child)
+			if(!child || !length(child.wounds))
 				continue
 			try_heal(M, user, silent, child, TRUE)
 			childcount++
@@ -363,7 +378,7 @@
 	other_delay = 20
 	amount = 12
 	max_amount = 12
-	heal_burn = 5
+	heal_burn = 20
 	flesh_regeneration = 2.5
 	sanitization = 0.25
 	grind_results = list(/datum/reagent/medicine/silver_sulfadiazine = 10)

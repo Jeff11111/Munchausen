@@ -14,9 +14,10 @@
 		CRASH("Invalid target given")
 	if (goal_number)
 		goal = goal_number
-	bar = image('icons/effects/progessbar.dmi', target, "prog_bar_0", HUD_LAYER)
+	bar = image('modular_skyrat/icons/effects/loadingcircle.dmi', target, "progress-0", HUD_LAYER)
 	bar.plane = HUD_PLANE
 	bar.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
+	bar.color = "#00FF7F"
 	user = User
 	if(user)
 		client = user.client
@@ -26,7 +27,8 @@
 	var/list/bars = user.progressbars[bar.loc]
 	bars.Add(src)
 	listindex = bars.len
-	bar.pixel_y = 32 + (PROGRESSBAR_HEIGHT * (listindex - 1))
+	bar.pixel_y = 8 + (PROGRESSBAR_HEIGHT * (listindex - 1))
+	bar.pixel_x = 12
 
 /datum/progressbar/proc/update(progress)
 	if (!user || !user.client)
@@ -39,7 +41,7 @@
 			user.client.images += bar
 
 	progress = clamp(progress, 0, goal)
-	bar.icon_state = "prog_bar_[round(((progress / goal) * 100), 5)]"
+	bar.icon_state = "progress-[round((progress / goal) * 10, 1)]"
 	if (!shown)
 		user.client.images += bar
 		shown = 1

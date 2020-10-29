@@ -65,10 +65,13 @@ h1.alert, h2.alert		{color: #000000;}
 .disarm					{color: #990000;}
 .passive				{color: #660000;}
 
-.userdanger				{color: #ff0000;	font-weight: bold; font-size: 3;}
+.userdanger				{color: #BA55D3;	font-weight: bold}
+.bigdanger				{color: #ff0000;	font-size: 3;}
+.mediumdanger			{color: #ff0000;	font-size: 2;}
+.bolddanger				{color: #ff0000;	font-weight: bold}
 .danger					{color: #ff0000;}
-.tinydanger				{color: #ff0000; font-size: 85%;}
 .smalldanger			{color: #ff0000; font-size: 90%;}
+.tinydanger				{color: #ff0000; font-size: 85%;}
 .warning				{color: #ff0000;	font-style: italic;}
 .boldwarning			{color: #ff0000;	font-style: italic;	font-weight: bold}
 .announce 				{color: #228b22;	font-weight: bold;}
@@ -154,6 +157,7 @@ h1.alert, h2.alert		{color: #000000;}
 .reallybig				{font-size: 4;}
 .extremelybig			{font-size: 5;}
 .greentext				{color: #00FF00;	font-size: 3;}
+.bobux					{color: #80cf30;	font-size: 5;}
 .redtext				{color: #FF0000;	font-size: 3;}
 .yellowtext				{color: #FFCC00;	font-size: 3;}
 .clown					{color: #FF69Bf;	font-size: 3; font-family: "Comic Sans MS", cursive, sans-serif; font-weight: bold;}

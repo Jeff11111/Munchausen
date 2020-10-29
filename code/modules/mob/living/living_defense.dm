@@ -99,6 +99,30 @@
 		apply_damage(totaldamage, P.damage_type, def_zone, armor, wound_bonus=P.wound_bonus, bare_wound_bonus=P.bare_wound_bonus, sharpness=P.sharpness) //skyrat edit
 		if(P.dismemberment)
 			check_projectile_dismemberment(P, def_zone)
+		if((P.damage_type == BRUTE) && iscarbon(src))
+			// Always stumble when shot
+			Stumble(P.damage)
+			// Do a diceroll to decide whether we get paralyzed/knocked down
+			if(mind)
+				switch(mind.diceroll(STAT_DATUM(end), mod = (-P.damage*0.35)))
+					if(DICE_CRIT_SUCCESS)
+						shake_camera(src, ((P.damage - 10) * 0.01 + 1) * 2, ((P.damage - 10) * 0.01)* 2)
+					if(DICE_SUCCESS)
+						shake_camera(src, ((P.damage - 10) * 0.01 + 1) * 3, ((P.damage - 10) * 0.01)* 3)
+						SetImmobilized(P.damage/5)
+					if(DICE_FAILURE)
+						shake_camera(src, ((P.damage - 10) * 0.01 + 1) * 4, ((P.damage - 10) * 0.01) * 4)
+						SetImmobilized(P.damage/2)
+					if(DICE_CRIT_FAILURE)
+						shake_camera(src, ((P.damage - 10) * 0.01 + 1) * 5, ((P.damage - 10) * 0.01) * 5)
+						drop_all_held_items()
+						SetParalyzed(P.damage)
+						SetKnockdown(P.damage*2)
+			else
+				shake_camera(src, ((P.damage - 10) * 0.01 + 1) * 5, ((P.damage - 10) * 0.01) * 5)
+				drop_all_held_items()
+				Paralyze(P.damage)
+				DefaultCombatKnockdown(P.damage*2)
 	var/missing = 100 - final_percent
 	var/armor_ratio = armor * 0.01
 	if(missing > 0)
@@ -204,7 +228,7 @@
 /mob/living/fire_act()
 	adjust_fire_stacks(3)
 	IgniteMob()
-
+/* New grabbing system is in modular_skyrat
 /mob/living/proc/grabbedby(mob/living/carbon/user, supress_message = FALSE)
 	if(user == anchored || !isturf(user.loc))
 		return FALSE
@@ -290,7 +314,7 @@
 					Move(user.loc)
 		user.set_pull_offsets(src, grab_state)
 		return 1
-
+*/
 /mob/living/attack_hand(mob/user)
 	..() //Ignoring parent return value here.
 	SEND_SIGNAL(src, COMSIG_MOB_ATTACK_HAND, user)
@@ -430,7 +454,7 @@
 					"<span class='notice'>[M] caresses you with its scythe like arm.</span>", target = M,
 					target_message = "<span class='notice'>You caress [src] with your scythe like arm.</span>")
 			return FALSE
-		if (INTENT_GRAB)
+		if(INTENT_GRAB)
 			grabbedby(M)
 			return FALSE
 		if(INTENT_HARM)

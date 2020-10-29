@@ -43,6 +43,9 @@
 			if(user.transferItemToLoc(AM, src))
 				magazine = AM
 				if(oldmag)
+					if(user.mind && (GET_SKILL_LEVEL(user, ranged) < JOB_SKILLPOINTS_AVERAGE))
+						to_chat(user, "<span class='warning'>I'm too incompetent to perform a tactical reload.</span>")
+						return FALSE
 					to_chat(user, "<span class='notice'>You perform a tactical reload on \the [src], replacing the magazine.</span>")
 					oldmag.forceMove(get_turf(src.loc))
 					oldmag.update_icon()
@@ -50,10 +53,11 @@
 					to_chat(user, "<span class='notice'>You insert the magazine into \the [src].</span>")
 
 				playsound(user, 'sound/weapons/autoguninsert.ogg', 60, 1)
-				chamber_round()
+				if(autochamber)
+					chamber_round()
 				A.update_icon()
 				update_icon()
-				return 1
+				return TRUE
 			else
 				to_chat(user, "<span class='warning'>You cannot seem to get \the [src] out of your hands!</span>")
 
@@ -416,7 +420,7 @@
 	can_suppress = TRUE
 	w_class = WEIGHT_CLASS_NORMAL
 	inaccuracy_modifier = 0.5
-	zoomable = TRUE
+	zoomable = FALSE
 	zoom_amt = 10 //Long range, enough to see in front of you, but no tiles behind you.
 	zoom_out_amt = 13
 	slot_flags = ITEM_SLOT_BACK

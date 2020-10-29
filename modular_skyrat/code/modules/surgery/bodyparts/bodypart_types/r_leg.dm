@@ -6,12 +6,12 @@
 	icon_state = "default_human_r_leg"
 	attack_verb = list("kicked", "stomped")
 	max_damage = 50
+	max_stamina_damage = 50
 	body_zone = BODY_ZONE_R_LEG
 	body_part = LEG_RIGHT
 	body_damage_coeff = 0.75
 	px_x = 2
 	px_y = 12
-	max_stamina_damage = 50
 	stam_heal_tick = 4
 	amputation_point = "groin"
 	dismember_bodyzone = BODY_ZONE_PRECISE_GROIN
@@ -22,6 +22,8 @@
 	max_cavity_size = WEIGHT_CLASS_SMALL
 	dismember_mod = 0.8
 	disembowel_mod = 0.8
+	zone_prob = 50
+	extra_zone_prob = 25
 
 /obj/item/bodypart/r_leg/is_disabled()
 	if(HAS_TRAIT(owner, TRAIT_PARALYSIS_R_LEG))

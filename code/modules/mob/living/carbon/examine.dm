@@ -36,7 +36,7 @@
 	*/
 	var/list/msg = list()
 
-	var/list/missing = ALL_BODYPARTS
+	var/list/missing = get_missing_limbs()
 	var/list/disabled = list()
 	for(var/X in bodyparts)
 		var/obj/item/bodypart/BP = X
@@ -53,6 +53,8 @@
 				msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] embedded in [t_his] [BP.name]!</B>\n"
 		if(BP.etching)
 			msg += "<B>[t_His] [BP.name] has \"[BP.etching]\" etched on it!</B>\n"
+		if(BP.is_dead())
+			msg += "<span class='deadsay'><B>[t_His] [BP.name] is completely necrotic!</B></span>\n"
 		for(var/datum/wound/W in BP.wounds)
 			if(W.get_examine_description(user))
 				msg += "[W.get_examine_description(user)]\n"
@@ -177,7 +179,7 @@
 			bleed_text += "</B>\n"
 
 		for(var/obj/item/bodypart/grasped_part in grasped_limbs)
-			bleed_text += "[t_He] [t_is] holding [t_his] [grasped_part.name] to slow the bleeding!\n"
+			bleed_text += "[t_He] [t_is] holding [t_his] [grasped_part.name]!\n"
 		
 		msg += bleed_text
 	

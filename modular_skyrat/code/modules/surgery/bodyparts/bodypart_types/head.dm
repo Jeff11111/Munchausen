@@ -4,13 +4,13 @@
 	desc = "Didn't make sense not to live for fun, your brain gets smart but your head gets dumb."
 	icon = 'modular_skyrat/icons/mob/human_parts.dmi'
 	icon_state = "default_human_head"
-	max_damage = 100
+	max_damage = 75
+	max_stamina_damage = 75
 	body_zone = BODY_ZONE_HEAD
 	body_part = HEAD
 	w_class = WEIGHT_CLASS_BULKY
 	stam_heal_tick = 2
 	stam_damage_coeff = 1
-	max_stamina_damage = 100
 	throw_range = 5
 	px_x = 0
 	px_y = -8
@@ -42,6 +42,65 @@
 	var/obj/item/stack/sticky_tape/tapered = null
 	dismember_mod = 0.7
 	disembowel_mod = 0.7
+	encased = "skull"
+	amputation_point = "neck" 
+	zone_prob = 50
+	extra_zone_prob = 25
+	max_teeth = 32
+	dismember_sounds = list(
+		'modular_skyrat/sound/gore/head_explodie1.ogg',
+		'modular_skyrat/sound/gore/head_explodie2.ogg',
+		'modular_skyrat/sound/gore/head_explodie3.ogg',
+		'modular_skyrat/sound/gore/head_explodie4.ogg',
+	)
+
+/obj/item/bodypart/head/Initialize()
+	. = ..()
+	//Add TEETH.
+	fill_teeth()
+
+/obj/item/bodypart/head/get_teeth_amount()
+	. = 0
+	if(teeth_object)
+		. += teeth_object.amount
+
+/obj/item/bodypart/head/knock_out_teeth(amount = 1, throw_dir = SOUTH)
+	amount = clamp(amount, 0, 32)
+	if(!amount)
+		return
+	if(teeth_object && teeth_object.amount)
+		//No point in making many stacks because they get merged on the ground
+		var/drop = min(teeth_object.amount, amount)
+		if(!drop)
+			return
+		for(var/y in 1 to drop)
+			var/obj/item/stack/teeth/dropped_teeth = new teeth_object.type(get_turf(owner))
+			dropped_teeth.add_mob_blood(owner)
+			dropped_teeth.amount = 1
+			teeth_object.use(1)
+			var/range = clamp(round(amount/2), rand(0,1), 3)
+			var/turf/target_turf = get_ranged_target_turf(dropped_teeth, throw_dir, range)
+			dropped_teeth.throw_at(target_turf, range, rand(1,3))
+			spawn(0)
+				dropped_teeth.do_knock_out_animation()
+		if(teeth_mod)
+			teeth_mod.update_lisp()
+		else
+			teeth_mod = new()
+			if(owner)
+				teeth_mod.add_speech_mod(owner)
+		if(owner)
+			sound_hint(owner, owner)
+		return drop
+
+/obj/item/bodypart/head/update_teeth()
+	if(teeth_mod)
+		teeth_mod.update_lisp()
+	else
+		if(get_teeth_amount() < max_teeth)
+			teeth_mod = new()
+			teeth_mod.add_speech_mod(owner)
+	return TRUE
 
 /obj/item/bodypart/head/update_limb(dropping_limb, mob/living/carbon/source)
 	var/mob/living/carbon/C
@@ -228,12 +287,18 @@
 	. = ..()
 	if(. && tapered && owner)
 		ADD_TRAIT(owner, TRAIT_MUTE, "tape")
+	//Handle teeth stuff
+	if(teeth_mod)
+		teeth_mod.add_speech_mod(C)
 
-/obj/item/bodypart/head/drop_limb(special, ignore_children, dismembered, destroyed)
+/obj/item/bodypart/head/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
 	. = ..()
 	var/mob/living/og_owner = owner
 	if(.)
 		REMOVE_TRAIT(og_owner, TRAIT_MUTE, "tape")
+	//Handle teeth stuff
+	if(teeth_mod)
+		teeth_mod.remove_speech_mod()
 
 /obj/item/bodypart/head/replace_limb(mob/living/carbon/C, special)
 	if(!istype(C))

@@ -1,7 +1,9 @@
-/datum/job/hos/radio_help_message(mob/M)
-	to_chat(M, "<span class='warning'>Do not forget the prisoners. Interact with them occasionally.</span>")
+/datum/job/hos
+	title = "Chief Enforcer"
 
 /datum/outfit/job/hos
-	backpack_contents = list(/obj/item/melee/classic_baton/telescopic=1,
-							/obj/item/gun/ballistic/automatic/pistol/uspm = 1,
-							/obj/item/ammo_box/magazine/usp = 1)
+	backpack_contents = list(/obj/item/pda/heads/hos=1,
+							/obj/item/melee/mace=1,
+							/obj/item/ammo_box/magazine/nangler=1)
+	belt = /obj/item/storage/belt/sabre/hos
+	suit_store = /obj/item/gun/ballistic/automatic/pistol/nangler

@@ -1256,7 +1256,6 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 								ADMIN_PUNISHMENT_BLEED,
 								ADMIN_PUNISHMENT_PERFORATE,
 								ADMIN_PUNISHMENT_BURN,
-								ADMIN_PUNISHMENT_INTERNALBLEED,
 								ADMIN_PUNISHMENT_WARCRIME,
 								ADMIN_PUNISHMENT_INCISIONIFY,
 								ADMIN_PUNISHMENT_SHRAPNEL,
@@ -1271,6 +1270,8 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 								ADMIN_PUNISHMENT_MEDIC,
 								ADMIN_PUNISHMENT_PAPAJOHNS,
 								ADMIN_PUNISHMENT_PHANTOM_PAIN,
+								ADMIN_PUNISHMENT_SHARETHEPAIN,
+								ADMIN_PUNISHMENT_FRAGGOT,
 								)
 
 	var/punishment = input("Choose a punishment", "DIVINE SMITING") as null|anything in punishment_list
@@ -1401,14 +1402,6 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 				if(!burn_part.is_organic_limb())
 					type_wound = pick(WOUND_LIST_BURN_MECHANICAL)
 				burn_part.force_wound_upwards(type_wound, smited=TRUE)
-		if(ADMIN_PUNISHMENT_INTERNALBLEED)
-			if(!iscarbon(target))
-				to_chat(usr,"<span class='warning'>This must be used on a carbon mob.</span>")
-				return
-			var/mob/living/carbon/C = target
-			for(var/obj/item/bodypart/blood_part in C.bodyparts)
-				var/type_wound = pick(WOUND_LIST_INTERNAL_BLEEDING)
-				blood_part.force_wound_upwards(type_wound, smited=TRUE)
 		if(ADMIN_PUNISHMENT_WARCRIME)
 			if(!iscarbon(target))
 				to_chat(usr,"<span class='warning'>This must be used on a carbon mob.</span>")
@@ -1443,9 +1436,6 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 					if(!squish_part.is_organic_limb())
 						type_wound = pick(WOUND_LIST_BLUNT_MECHANICAL)
 					squish_part.force_wound_upwards(type_wound, smited=TRUE)
-				for(var/obj/item/bodypart/blood_part in C.bodyparts)
-					var/type_wound = pick(WOUND_LIST_INTERNAL_BLEEDING)
-					blood_part.force_wound_upwards(type_wound, smited=TRUE)
 		if(ADMIN_PUNISHMENT_INCISIONIFY)
 			if(!iscarbon(target))
 				to_chat(usr,"<span class='warning'>This must be used on a carbon mob.</span>")
@@ -1636,6 +1626,23 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 			var/mob/living/carbon/C = target
 			for(var/obj/item/bodypart/BP in C.bodyparts)
 				BP.drop_limb(TRUE, TRUE, FALSE, FALSE)
+		if(ADMIN_PUNISHMENT_SHARETHEPAIN)
+			if(!iscarbon(target))
+				to_chat(usr,"<span class='warning'>This must be used on a carbon mob.</span>")
+				return
+			var/mob/living/carbon/C = target
+			C.say("I regret nothing.")
+			for(var/obj/item/bodypart/BP in C.bodyparts)
+				BP.receive_damage(pain = BP.max_pain_damage)
+		if(ADMIN_PUNISHMENT_FRAGGOT)
+			to_chat(target, "<span class ='narsie'>big chungus mode activated!</span>")
+			target.fraggot = TRUE
+			if(target.client?.ckey)
+				GLOB.fraggots |= target.client.ckey
+			//Announce to every player but the fraggot
+			for(var/client/C in (GLOB.clients - target.client))
+				SEND_SOUND(C, sound('modular_skyrat/sound/fraggot/kill_her_now_kill_her_now.ogg', FALSE, CHANNEL_COMBAT, 100))
+				to_chat(C, "<span class='warning'><span class='bigbold'>[emoji_parse(":killher:")][target] IS A FRAGGOT! KILL HER! KILL HER![emoji_parse(":killher:")]</span>")
 		//
 
 	punish_log(target, punishment)

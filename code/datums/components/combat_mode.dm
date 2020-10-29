@@ -43,7 +43,7 @@
 /datum/component/combat_mode/proc/on_mob_hud_created(mob/source)
 	hud_icon = new
 	hud_icon.hud = source.hud_used
-	hud_icon.icon = tg_ui_icon_to_cit_ui(source.hud_used.ui_style)
+	hud_icon.icon = 'modular_skyrat/icons/mob/combat_intents.dmi'
 	hud_icon.screen_loc = hud_loc
 	source.hud_used.static_inventory += hud_icon
 	hud_icon.update_icon()
@@ -78,20 +78,26 @@
 		var/self_message = forced? "<span class='warning'>Your muscles reflexively tighten!</span>" : "<span class='warning'>You drop into a combative stance!</span>"
 		if(visible && (forced || world.time >= combatmessagecooldown))
 			combatmessagecooldown = world.time + 10 SECONDS
+			var/list/ignore_mobs = list()
+			//Only INTJ boys can notice someone going combat
+			for(var/mob/living/carbon/human/H in view(src))
+				if(H != source)
+					if(H.mind?.diceroll(STAT_DATUM(int)) <= DICE_FAILURE)
+						ignore_mobs |= H
 			if(!forced)
 				if(source.a_intent != INTENT_HELP)
-					source.visible_message("<span class='warning'>[source] [source.resting ? "tenses up" : "drops into a combative stance"].</span>", self_message)
+					source.visible_message("<span class='warning'>[source] [source.resting ? "tenses up" : "drops into a combative stance"].</span>", self_message, ignored_mobs = ignore_mobs)
 				else
-					source.visible_message("<span class='notice'>[source] [pick("looks","seems","goes")] [pick("alert","attentive","vigilant")].</span>")
+					source.visible_message("<span class='notice'>[source] [pick("looks","seems","goes")] [pick("alert","attentive","vigilant")].</span>", ignored_mobs = ignore_mobs)
 			else
-				source.visible_message("<span class='warning'>[source] drops into a combative stance!</span>", self_message)
+				source.visible_message("<span class='warning'>[source] drops into a combative stance!</span>", self_message, ignored_mobs = ignore_mobs)
 		else
 			to_chat(source, self_message)
 		if(playsound)
 			source.playsound_local(source, 'sound/misc/ui_toggle.ogg', 50, FALSE, pressure_affected = FALSE) //Sound from interbay!
 		source.stop_sound_channel(CHANNEL_COMBAT)
-		if(source.client?.prefs?.combat_music && GLOB.combat_music_options[source.client.prefs.combat_music])
-			var/sound/music = sound(get_sfx(GLOB.combat_music_options[source.client.prefs.combat_music]), TRUE)
+		if(source.client?.prefs?.combat_music)
+			var/sound/music = sound(get_sfx(source.client.prefs.combat_music), TRUE)
 			source.playsound_local(turf_source = source, S = music, vol = 75, vary = 0, channel = CHANNEL_COMBAT, pressure_affected = FALSE)
 	//RegisterSignal(source, COMSIG_MOB_CLIENT_MOUSEMOVE, .proc/onMouseMove) //Skyrat change
 	RegisterSignal(source, COMSIG_MOVABLE_MOVED, .proc/on_move)
@@ -195,9 +201,8 @@
 /// The screen button.
 /obj/screen/combattoggle
 	name = "toggle combat mode"
-	icon = 'modular_citadel/icons/ui/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/combat_intents.dmi'
 	icon_state = "combat_off"
-	var/mutable_appearance/flashy
 	var/combat_on = FALSE ///Wheter combat mode is enabled or not, so we don't have to store a reference.
 
 /obj/screen/combattoggle/Click()
@@ -220,12 +225,6 @@
 	var/mob/living/carbon/user = hud?.mymob
 	if(!(user?.client))
 		return
-
-	if(combat_on)
-		if(!flashy)
-			flashy = mutable_appearance('icons/mob/screen_gen.dmi', "togglefull_flash")
-		flashy.color = user.client.prefs.hud_toggle_color
-		. += flashy //TODO - beg lummox jr for the ability to force mutable appearances or images to be created rendering from their first frame of animation rather than being based entirely around the client's frame count
 
 //Skyrat changes down here
 /datum/component/combat_mode/proc/onMouseUpDown(mob/living/source, object, location, control, params)

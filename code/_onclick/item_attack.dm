@@ -69,7 +69,7 @@
   * @params
   * * mob/living/M - target
   * * mob/living/user - attacker
-  * * attackchain_Flags - see [code/__DEFINES/_flags/return_values.dm]
+  * * attackchain_flags - see [code/__DEFINES/_flags/return_values.dm]
   * * damage_multiplier - what to multiply the damage by
   */
 /obj/item/proc/attack(mob/living/M, mob/living/user, attackchain_flags = NONE, damage_multiplier = 1)
@@ -96,7 +96,7 @@
 	log_combat(user, M, "attacked", src.name, "(INTENT: [uppertext(user.a_intent)]) (DAMTYPE: [uppertext(damtype)])")
 	add_fingerprint(user)
 
-	var/weight = getweight(user, STAM_COST_ATTACK_MOB_MULT) //CIT CHANGE - makes attacking things cause stamina loss
+	var/weight = getweight(user, STAM_COST_ATTACK_MOB_MULT, attackchain_flags = attackchain_flags) //CIT CHANGE - makes attacking things cause stamina loss
 	if(weight)
 		user.adjustStaminaLossBuffered(weight)
 
@@ -126,7 +126,32 @@
 		var/penalty = (stamloss - STAMINA_NEAR_SOFTCRIT)/(STAMINA_NEAR_CRIT - STAMINA_NEAR_SOFTCRIT)*STAM_CRIT_ITEM_ATTACK_PENALTY
 		totitemdamage *= 1 - penalty
 		next_move_mult += penalty*STAM_CRIT_ITEM_ATTACK_DELAY
-	user.changeNext_move(I.click_delay*next_move_mult)
+
+	//Dexterity alters how quickly we recover from an attack
+	var/click_stat_mod = 1
+	if(user.mind)
+		var/datum/stats/dex/dex = GET_STAT(user, dex)
+		if(dex)
+			click_stat_mod *= dex.get_click_mod()
+	
+	//Same applies for the combat intent
+	var/c_intent = CI_DEFAULT
+	if(iscarbon(user))
+		var/mob/living/carbon/carbon_mob = user
+		c_intent = carbon_mob.combat_intent
+	
+	switch(c_intent)
+		if(CI_FURIOUS)
+			if(attackchain_flags & ATTACKCHAIN_RIGHTCLICK)
+				click_stat_mod *= 0.75 //Keep it simple, endurance already changes the stamina penalty, dexterity already buffed us before
+		if(CI_STRONG)
+			if(attackchain_flags & ATTACKCHAIN_RIGHTCLICK)
+				click_stat_mod *= 2 //Keep it simple, strength already buffs damage a fuckton
+		if(CI_DEFEND)
+			damage_multiplier *= 0.5 //Straight up halve the damage - stats and skills will just dictate parrying and blocking
+		if(CI_GUARD)
+			damage_multiplier *= 0.66 //2/3rds of the damage - stats and skills will just dictate parrying and blocking
+	user.changeNext_move(I.click_delay*next_move_mult*click_stat_mod)
 
 	if(SEND_SIGNAL(user, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
 		bad_trait = SKILL_COMBAT_MODE //blacklist combat skills.
@@ -138,9 +163,23 @@
 			if(!(I.used_skills[skill] & SKILL_TRAIN_ATTACK_OBJ))
 				continue
 			user.mind.auto_gain_experience(skill, I.skill_gain)
-
+	
+	//If the user has a mind and the item uses a stat, we always try to get a damage multiplier based on the stat
+	if(user.mind && I.used_melee_stat)
+		totitemdamage *= user.mind.get_skillstat_damagemod(I.used_melee_stat)
+	
+	//If the user has bad st, sometimes... the attack gets really shit
+	var/pitiful = FALSE
+	if(user.mind && GET_STAT_LEVEL(user, str) < 10)
+		switch(user.mind.diceroll(STAT_DATUM(str)))
+			if(DICE_FAILURE)
+				totitemdamage *= 0.65
+				pitiful = TRUE
+			if(DICE_CRIT_FAILURE)
+				totitemdamage *= 0.25
+				pitiful = TRUE
 	if(totitemdamage)
-		visible_message("<span class='danger'>[user] has hit [src] with [I]!</span>", null, null, COMBAT_MESSAGE_RANGE)
+		visible_message("<span class='danger'>[user] has[pitiful ? " pitifully" : ""] hit [src] with [I]!</span>", null, null, COMBAT_MESSAGE_RANGE)
 		//only witnesses close by and the victim see a hit message.
 		log_combat(user, src, "attacked", I)
 	take_damage(totitemdamage, I.damtype, "melee", 1)
@@ -148,14 +187,14 @@
 
 /mob/living/attacked_by(obj/item/I, mob/living/user, attackchain_flags = NONE, damage_multiplier = 1)
 	var/list/block_return = list()
-	var/totitemdamage = pre_attacked_by(I, user) * damage_multiplier
+	var/totitemdamage = pre_attacked_by(I, user, attackchain_flags = attackchain_flags) * damage_multiplier
 	if((user != src) && mob_run_block(I, totitemdamage, "the [I.name]", ((attackchain_flags & ATTACKCHAIN_PARRY_COUNTERATTACK)? ATTACK_TYPE_PARRY_COUNTERATTACK : NONE) | ATTACK_TYPE_MELEE, I.armour_penetration, user, null, block_return) & BLOCK_SUCCESS)
 		return FALSE
 	totitemdamage = block_calculate_resultant_damage(totitemdamage, block_return)
-	send_item_attack_message(I, user, null, totitemdamage)
 	I.do_stagger_action(src, user, totitemdamage)
 	if(I.force)
 		apply_damage(totitemdamage, I.damtype)
+		send_item_attack_message(I, user, null, totitemdamage)
 		if(I.damtype == BRUTE)
 			if(prob(33))
 				I.add_mob_blood(src)
@@ -170,6 +209,23 @@
 					var/obj/effect/decal/cleanable/blood/hitsplatter/B = new(loc, get_blood_dna_list())
 					B.add_blood_DNA(get_blood_dna_list())
 					B.GoTo(targ, dist)
+		
+		//Combat intent can cause some effects
+		var/c_intent = CI_DEFAULT
+		if(iscarbon(user))
+			var/mob/living/carbon/carbon_mob = user
+			c_intent = carbon_mob.combat_intent
+		
+		switch(c_intent)
+			if(CI_FEINT)
+				if(attackchain_flags & ATTACKCHAIN_RIGHTCLICK)
+					//Successful feint attack - victim is unable to attack for a while
+					var/multi = 2
+					if(user.mind)
+						var/datum/skills/melee/melee = GET_SKILL(user, melee)
+						if(melee)
+							multi = melee.level/(MAX_SKILL/4)
+					changeNext_move(CLICK_CD_MELEE * multi)
 
 		return TRUE //successful attack
 
@@ -180,7 +236,7 @@
 	else
 		return ..()
 
-/mob/living/proc/pre_attacked_by(obj/item/I, mob/living/user)
+/mob/living/proc/pre_attacked_by(obj/item/I, mob/living/user, attackchain_flags)
 	. = I.force
 	if(!.)
 		return
@@ -195,7 +251,32 @@
 	if(stam_mobility_mult > LYING_DAMAGE_PENALTY && !CHECK_MOBILITY(user, MOBILITY_STAND)) //damage penalty for fighting prone, doesn't stack with the above.
 		stam_mobility_mult = LYING_DAMAGE_PENALTY
 	. *= stam_mobility_mult
-	user.changeNext_move(I.click_delay*next_move_mult)
+
+	//Dexterity alters how quickly we recover from an attack
+	var/click_stat_mod = 1
+	if(user.mind)
+		var/datum/stats/dex/dex = GET_STAT(user, dex)
+		if(dex)
+			click_stat_mod *= dex.get_click_mod()
+	
+	//Same applies for the combat intent
+	var/c_intent = CI_DEFAULT
+	if(iscarbon(user))
+		var/mob/living/carbon/carbon_mob = user
+		c_intent = carbon_mob.combat_intent
+	
+	switch(c_intent)
+		if(CI_FURIOUS)
+			if(attackchain_flags & ATTACKCHAIN_RIGHTCLICK)
+				click_stat_mod *= 0.75 //Keep it simple, endurance already changes the stamina penalty, dexterity already buffed us before
+		if(CI_STRONG)
+			if(attackchain_flags & ATTACKCHAIN_RIGHTCLICK)
+				click_stat_mod *= 2 //Keep it simple, strength already buffs damage a fuckton
+		if(CI_DEFEND)
+			. *= 0.5 //Straight up halve the damage - stats and skills will just dictate parrying and blocking
+		if(CI_GUARD)
+			. *= 0.66 //2/3rds of the damage - stats and skills will just dictate parrying and blocking
+	user.changeNext_move(I.click_delay*next_move_mult*click_stat_mod)
 	I.attack_delay_done = TRUE
 
 	var/bad_trait
@@ -203,10 +284,22 @@
 		if(SEND_SIGNAL(user, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
 			bad_trait = SKILL_COMBAT_MODE //blacklist combat skills.
 			if(SEND_SIGNAL(src, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_ACTIVE))
-				. *= 0.8
+				. *= 0.9
 		else if(SEND_SIGNAL(src, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
-			. *= 1.2
+			. *= 1.1
 
+	//If the user has a mind and the item uses a stat, we always try to get a damage multiplier based on the stat
+	if(user.mind && I.used_melee_stat)
+		. *= user.mind.get_skillstat_damagemod(I.used_melee_stat)
+
+	//If the user has bad st, sometimes... the attack gets really shit
+	if(user.mind && GET_STAT_LEVEL(user, str) < 10)
+		switch(user.mind.diceroll(STAT_DATUM(str)))
+			if(DICE_FAILURE)
+				. *= 0.65
+			if(DICE_CRIT_FAILURE)
+				. *= 0.25
+	
 	if(!user.mind || !I.used_skills)
 		return
 	if(.)
@@ -263,7 +356,7 @@
 	return 1
 
 /// How much stamina this takes to swing this is not for realism purposes hecc off.
-/obj/item/proc/getweight(mob/living/user, multiplier = 1, trait = SKILL_STAMINA_COST)
+/obj/item/proc/getweight(mob/living/user, multiplier = 1, trait = SKILL_STAMINA_COST, attackchain_flags)
 	. = (total_mass || w_class * STAM_COST_W_CLASS_MULT) * multiplier
 	if(!user)
 		return
@@ -274,6 +367,30 @@
 	if(used_skills && user.mind)
 		. = user.mind.item_action_skills_mod(src, ., skill_difficulty, trait, bad_trait, FALSE)
 	var/total_health = user.getStaminaLoss()
+	var/c_intent = CI_DEFAULT
+	if(iscarbon(user))
+		var/mob/living/carbon/carbon_mob = user
+		c_intent = carbon_mob.combat_intent
+	
+	switch(c_intent)
+		if(CI_FURIOUS)
+			if(attackchain_flags & ATTACKCHAIN_RIGHTCLICK)
+				//Endurance lowers the staminaloss penalty
+				var/multi = 2
+				if(user.mind)
+					var/datum/stats/end/end = GET_STAT(user, end)
+					if(end)
+						multi = (2.5 - (end.level/MAX_STAT))
+				. *= multi
+		if(CI_STRONG)
+			if(attackchain_flags & ATTACKCHAIN_RIGHTCLICK)
+				//Endurance lowers the staminaloss penalty
+				var/multi = 2.5
+				if(user.mind)
+					var/datum/stats/end/end = GET_STAT(user, end)
+					if(end)
+						multi = (3 - ((end.level/MAX_STAT) * 1.5))
+				. *= multi
 	. = clamp(., 0, STAMINA_NEAR_CRIT - total_health)
 
 /// How long this staggers for. 0 and negatives supported.
@@ -302,3 +419,74 @@
 	animate(src, pixel_x = -2, pixel_y = -2, time = 1, flags = ANIMATION_RELATIVE | ANIMATION_PARALLEL)
 	animate(pixel_x = 4, pixel_y = 4, time = 1, flags = ANIMATION_RELATIVE)
 	animate(pixel_x = -2, pixel_y = -2, time = 0.5, flags = ANIMATION_RELATIVE)
+
+//Do stuff depending on stats and skills etc
+/mob/living/carbon/proc/do_stat_effects(mob/living/carbon/user, obj/item/weapon, force)
+	var/did_something = FALSE
+	var/victim_str = 10
+	if(GET_STAT_LEVEL(src, str))
+		victim_str = GET_STAT_LEVEL(src, str)
+	var/user_str = 10
+	if(GET_STAT_LEVEL(user, str))
+		user_str = GET_STAT_LEVEL(user, str)
+	var/force_mod = round(force/15, 0.1)
+	var/knockback_tiles = clamp(round((user_str - victim_str)/3 * force_mod * rand(1,2)), 0, 5)
+	//Slam time
+	if(knockback_tiles)
+		if(knockback_tiles > 1)
+			Stumble(knockback_tiles * 10)
+			sound_hint(src, user)
+		var/turf/target_turf = get_ranged_target_turf(src, get_dir(user, src), knockback_tiles)
+		throw_at(target_turf, knockback_tiles, 1, user, spin = FALSE)
+		did_something = TRUE
+	//Knock teeth out
+	if(!weapon || !weapon.get_sharpness())
+		var/obj/item/bodypart/teeth_part = get_bodypart(user.zone_selected)
+		var/zone_mod = 1
+		if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
+			zone_mod *= 3
+		else if(user.zone_selected == BODY_ZONE_PRECISE_THROAT)
+			zone_mod *= 1.5
+		if(teeth_part && teeth_part.max_teeth && prob(force * zone_mod * 1.5))
+			if(teeth_part.knock_out_teeth(rand(1, 2) * max(round(force/10), 1), get_dir(user, src)))
+				var/tooth_sound = pick('modular_skyrat/sound/gore/trauma1.ogg',
+								'modular_skyrat/sound/gore/trauma2.ogg',
+								'modular_skyrat/sound/gore/trauma3.ogg')
+				playsound(src, tooth_sound, 60)
+				wound_message += " [src]'s teeth sail off in an arc!"
+				Stun(2 SECONDS)
+				Stumble(4 SECONDS)
+				did_something = TRUE
+	//Critical hits and critical failures
+	if(user.mind)
+		switch(rand(1,100))
+			if(99 to 100)
+				var/crit = rand(1,3)
+				switch(crit)
+					if(1)
+						wound_message += " <b>CRITICAL HIT!</b> [src] is stunned!"
+						Stun(3 SECONDS)
+					if(2)
+						wound_message += " <b>CRITICAL HIT!</b> [src] is knocked down!"
+						DefaultCombatKnockdown(3 SECONDS)
+					if(3)
+						wound_message += " <b>CRITICAL HIT!</b> [src] is paralyzed!"
+						Paralyze(3 SECONDS)
+				did_something = TRUE
+			if(0 to 1)
+				var/crit = rand(1,2)
+				switch(crit)
+					if(1)
+						if(user != src)
+							wound_message += " <b>CRITICAL FAILURE!</b> [user] knock[user.p_s()] [p_themselves()] down!"
+							user.drop_all_held_items()
+							user.DefaultCombatKnockdown(3 SECONDS)
+					if(2)
+						if(user != src)
+							wound_message += " <b>CRITICAL FAILURE!</b> [user] hit[user.p_s()] [p_themselves()]!"
+							if(weapon)
+								weapon.melee_attack_chain(user, user)
+							else
+								user.UnarmedAttack(user)
+				did_something = TRUE
+	return did_something

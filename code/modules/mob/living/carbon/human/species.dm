@@ -91,8 +91,8 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	var/inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
 
 	var/attack_verb = "punch"	// punch-specific attack verb
-	var/sound/attack_sound = 'sound/weapons/punch1.ogg'
-	var/sound/miss_sound = 'sound/weapons/punchmiss.ogg'
+	var/sound/attack_sound = 'modular_skyrat/sound/gore/punch1.ogg'
+	var/sound/miss_sound = 'modular_skyrat/sound/gore/punchmiss.ogg'
 
 	var/list/mob/living/ignored_by = list()	// list of mobs that will ignore this species
 	//Breathing!
@@ -103,12 +103,18 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	var/obj/item/organ/heart/mutant_heart = /obj/item/organ/heart
 	var/obj/item/organ/eyes/mutanteyes = /obj/item/organ/eyes
 	var/obj/item/organ/ears/mutantears = /obj/item/organ/ears
-	var/obj/item/mutanthands
+	var/obj/item/organ/liver/mutantliver = /obj/item/organ/liver
+	var/obj/item/organ/kidneys/mutantkidneys = /obj/item/organ/kidneys
+	var/obj/item/organ/stomach/mutantstomach = /obj/item/organ/stomach
+	var/obj/item/organ/intestines/mutantintestines = /obj/item/organ/intestines
+	var/obj/item/organ/spleen/mutantspleen = /obj/item/organ/spleen
+	var/obj/item/organ/bladder/mutantbladder = /obj/item/organ/bladder
+	var/obj/item/organ/innards/mutant_mystery_organ
 	var/obj/item/organ/tongue/mutanttongue = /obj/item/organ/tongue
-	var/obj/item/organ/tail/mutanttail = null
+	var/obj/item/organ/tail/mutanttail
 
-	var/obj/item/organ/liver/mutantliver
-	var/obj/item/organ/stomach/mutantstomach
+	var/obj/item/mutanthands
+
 	var/override_float = FALSE
 
 	//Citadel snowflake
@@ -119,6 +125,9 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	var/icon_limbs //Overrides the icon used for the limbs of this species. Mainly for downstream, and also because hardcoded icons disgust me. Implemented and maintained as a favor in return for a downstream's implementation of synths.
 	/// Our default override for typing indicator state
 	var/typing_indicator_state
+	/// Pain messages
+	var/painloss_message = "slumps over, too weak to continue fighting..."
+	var/painloss_message_self = "The pain is too severe for you to keep going..."
 
 ///////////
 // PROCS //
@@ -202,18 +211,28 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	var/obj/item/organ/ears/ears = C.getorganslot(ORGAN_SLOT_EARS)
 	var/obj/item/organ/tongue/tongue = C.getorganslot(ORGAN_SLOT_TONGUE)
 	var/obj/item/organ/liver/liver = C.getorganslot(ORGAN_SLOT_LIVER)
+	var/obj/item/organ/kidneys/kidneys = C.getorganslot(ORGAN_SLOT_KIDNEYS)
 	var/obj/item/organ/stomach/stomach = C.getorganslot(ORGAN_SLOT_STOMACH)
+	var/obj/item/organ/intestines/intestines = C.getorganslot(ORGAN_SLOT_INTESTINES)
+	var/obj/item/organ/spleen/spleen = C.getorganslot(ORGAN_SLOT_SPLEEN)
+	var/obj/item/organ/bladder/bladder = C.getorganslot(ORGAN_SLOT_BLADDER)
+	var/obj/item/organ/innards/mystery_organ = C.getorganslot(ORGAN_SLOT_INNARDS)
 	var/obj/item/organ/tail/tail = C.getorganslot(ORGAN_SLOT_TAIL)
 
 	var/should_have_brain = TRUE
 	var/should_have_heart = !(NOBLOOD in species_traits)
 	var/should_have_lungs = !(TRAIT_NOBREATH in inherent_traits)
-	var/should_have_appendix = !(TRAIT_NOHUNGER in inherent_traits)
 	var/should_have_eyes = TRUE
 	var/should_have_ears = TRUE
 	var/should_have_tongue = TRUE
 	var/should_have_liver = !(NOLIVER in species_traits)
+	var/should_have_appendix = !(NOAPPENDIX in species_traits)
+	var/should_have_kidneys = !(NOKIDNEYS in species_traits)
 	var/should_have_stomach = !(NOSTOMACH in species_traits)
+	var/should_have_spleen = !(NOSPLEEN in species_traits)
+	var/should_have_intestines = !(NOINTESTINES in species_traits)
+	var/should_have_bladder = !(NOBLADDER in species_traits)
+	var/should_have_mystery_organ = !(NOAPPENDIX in species_traits) //Mystery organ is like a second appendix anyways
 	var/should_have_tail = mutanttail
 
 	if(brain && (replace_current || !should_have_brain))
@@ -251,6 +270,16 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			liver = new()
 		liver.Insert(C)
 
+	if(kidneys && (!should_have_kidneys || replace_current))
+		kidneys.Remove(TRUE)
+		QDEL_NULL(kidneys)
+	if(should_have_kidneys && !kidneys)
+		if(mutantkidneys)
+			kidneys = new mutantkidneys()
+		else
+			kidneys = new()
+		kidneys.Insert(C)
+
 	if(stomach && (!should_have_stomach || replace_current))
 		stomach.Remove(TRUE)
 		QDEL_NULL(stomach)
@@ -261,12 +290,49 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			stomach = new()
 		stomach.Insert(C)
 
+	if(spleen && (!should_have_spleen || replace_current))
+		spleen.Remove(TRUE)
+		QDEL_NULL(spleen)
+	if(should_have_spleen && !spleen)
+		if(mutantspleen)
+			spleen = new mutantspleen()
+		else
+			spleen = new()
+		spleen.Insert(C)
+
+	if(intestines && (!should_have_intestines || replace_current))
+		intestines.Remove(TRUE)
+		QDEL_NULL(intestines)
+	if(should_have_intestines && !intestines)
+		if(mutantintestines)
+			intestines = new mutantintestines()
+		else
+			intestines = new()
+		intestines.Insert(C)
+
 	if(appendix && (!should_have_appendix || replace_current))
 		appendix.Remove(TRUE)
 		QDEL_NULL(appendix)
 	if(should_have_appendix && !appendix)
 		appendix = new()
 		appendix.Insert(C)
+
+	if(bladder && (!should_have_bladder || replace_current))
+		bladder.Remove(TRUE)
+		QDEL_NULL(bladder)
+	if(should_have_bladder && !bladder)
+		if(mutantbladder)
+			bladder = new mutantbladder()
+		else
+			bladder = new()
+		bladder.Insert(C)
+	
+	if(mystery_organ && (!should_have_mystery_organ || replace_current))
+		mystery_organ.Remove(TRUE)
+		QDEL_NULL(appendix)
+	if(should_have_mystery_organ && prob(2) && !mystery_organ)
+		mystery_organ = new()
+		mystery_organ.Insert(C)
 
 	if(tail && (!should_have_tail || replace_current))
 		tail.Remove(TRUE)
@@ -1102,7 +1168,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		H.losebreath = 0
 
 		var/takes_crit_damage = !HAS_TRAIT(H, TRAIT_NOCRITDAMAGE)
-		if((H.health < H.crit_threshold) && takes_crit_damage)
+		if(H.is_asystole() && takes_crit_damage)
 			H.adjustBruteLoss(1)
 
 /datum/species/proc/spec_death(gibbed, mob/living/carbon/human/H)
@@ -1407,8 +1473,14 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			//
 			H.update_inv_wear_suit()
 
+	var/obj/item/organ/intestines/intestines = H.getorganslot(ORGAN_SLOT_INTESTINES)
+	var/intestines_nutrition_loss = 2 //This is the maximum loss multiplier you can get with an intestine, in case they don't have none
+	var/intestines_nutrition_gain = 0
+	if(intestines)
+		intestines_nutrition_loss = intestines.get_nutrition_loss()
+		intestines_nutrition_gain = intestines.get_nutrition_gain()
 	// nutrition decrease and satiety
-	if (H.nutrition > 0 && H.stat != DEAD && !HAS_TRAIT(H, TRAIT_NOHUNGER))
+	if(H.nutrition > 0 && H.stat != DEAD && !HAS_TRAIT(H, TRAIT_NOHUNGER))
 		// THEY HUNGER
 		var/hunger_rate = HUNGER_FACTOR
 		var/datum/component/mood/mood = H.GetComponent(/datum/component/mood)
@@ -1427,18 +1499,19 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			if(prob(round(-H.satiety/40)))
 				H.Jitter(5)
 			hunger_rate = 3 * HUNGER_FACTOR
+		hunger_rate *= intestines_nutrition_loss
 		hunger_rate *= H.physiology.hunger_mod
 		H.adjust_nutrition(-hunger_rate)
 
-
-	if (H.nutrition > NUTRITION_LEVEL_FULL)
+	if(H.nutrition > NUTRITION_LEVEL_FULL)
 		if(H.overeatduration < 600) //capped so people don't take forever to unfat
 			H.overeatduration++
 	else
 		if(H.overeatduration > 1)
-			H.overeatduration -= 2 //doubled the unfat rate
+			H.overeatduration -= (2 * intestines_nutrition_gain) //I know this doesn't make much sense since it's gain, but you should not
+									// be rewarded for damaged intestines
 
-	//metabolism change
+	//Metabolism change
 	if(H.nutrition > NUTRITION_LEVEL_FAT)
 		H.metabolism_efficiency = 1
 	else if(H.nutrition > NUTRITION_LEVEL_FED && H.satiety > 80)
@@ -1453,6 +1526,8 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(H.metabolism_efficiency == 1.25)
 			to_chat(H, "<span class='notice'>You no longer feel vigorous.</span>")
 		H.metabolism_efficiency = 1
+	
+	H.metabolism_efficiency *= intestines_nutrition_gain
 
 	//Hunger slowdown for if mood isn't enabled
 	if(CONFIG_GET(flag/disable_human_mood))
@@ -1464,7 +1539,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				H.remove_movespeed_modifier(/datum/movespeed_modifier/hunger)
 	
 	var/obj/item/organ/O = H.getorganslot(ORGAN_SLOT_STOMACH)
-	if(O.organ_flags & ORGAN_ROBOTIC)
+	if(istype(O) && (O.status & ORGAN_ROBOTIC))
 		switch(H.nutrition)
 			if(NUTRITION_LEVEL_FULL to INFINITY)
 				H.throw_alert("nutrition", /obj/screen/alert/fat/synth)
@@ -1484,6 +1559,54 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				H.throw_alert("nutrition", /obj/screen/alert/hungry)
 			if(0 to NUTRITION_LEVEL_STARVING)
 				H.throw_alert("nutrition", /obj/screen/alert/starving)
+
+//copypasta from handle digestion lole!
+/datum/species/proc/handle_hydration(mob/living/carbon/human/H)
+	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
+		return //thirst is for BABIES (in hot cars)
+
+	var/obj/item/organ/bladder/bladder = H.getorganslot(ORGAN_SLOT_BLADDER)
+	var/bladder_hydration_loss = 2 //This is the maximum loss multiplier you can get with a bladder, in case they don't have none
+	var/bladder_hydration_gain = 0
+	if(bladder)
+		bladder_hydration_loss = bladder.get_hydration_loss()
+		bladder_hydration_gain = bladder.get_hydration_gain()
+	// hydration decrease wowie
+	if(H.hydration > 0 && H.stat != DEAD && !HAS_TRAIT(H, TRAIT_NOHUNGER))
+		// THEY hydrate
+		var/dehydration_rate = THIRST_FACTOR
+		var/datum/component/mood/mood = H.GetComponent(/datum/component/mood)
+		if(mood && mood.sanity > SANITY_DISTURBED)
+			dehydration_rate *= max(0.5, 1 - 0.002 * mood.sanity) //0.85 to 0.75
+
+		dehydration_rate *= bladder_hydration_loss
+		dehydration_rate *= H.physiology.hunger_mod
+		H.adjust_hydration(-dehydration_rate)
+
+	//Metabolism change
+	if(H.hydration > HYDRATION_LEVEL_FULL)
+		H.metabolism_efficiency = 1
+	else if(H.hydration > HYDRATION_LEVEL_HYDRATED)
+		if(H.metabolism_efficiency != 1.25 && !HAS_TRAIT(H, TRAIT_NOHUNGER))
+			to_chat(H, "<span class='notice'>You feel vigorous.</span>")
+			H.metabolism_efficiency = 1.25
+	else if(H.hydration < HYDRATION_LEVEL_DEHYDRATED + 50)
+		if(H.metabolism_efficiency != 0.8)
+			to_chat(H, "<span class='notice'>You feel sluggish.</span>")
+		H.metabolism_efficiency = 0.8
+	else
+		if(H.metabolism_efficiency == 1.25)
+			to_chat(H, "<span class='notice'>You no longer feel vigorous.</span>")
+		H.metabolism_efficiency = 1
+	
+	H.metabolism_efficiency *= bladder_hydration_gain
+	switch(H.hydration)
+		if(HYDRATION_LEVEL_THIRSTY to INFINITY)
+			H.clear_alert("hydration")
+		if(HYDRATION_LEVEL_DEHYDRATED to HYDRATION_LEVEL_THIRSTY)
+			H.throw_alert("hydration", /obj/screen/alert/thirsty)
+		if(0 to HYDRATION_LEVEL_DEHYDRATED)
+			H.throw_alert("hydration", /obj/screen/alert/dehydrated)
 
 /datum/species/proc/update_health_hud(mob/living/carbon/human/H)
 	return 0
@@ -1553,6 +1676,32 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		target.visible_message("<span class='warning'>[target] blocks [user]'s grab attempt!</span>", target = user, \
 			target_message = "<span class='warning'>[target] blocks your grab attempt!</span>")
 		return 0
+	
+	if(target.mind?.handle_parry(target, null, 0, user))
+		playsound(get_turf(target), 'modular_skyrat/sound/attack/parry.ogg', 70)
+		var/held_item
+		if(target.get_active_held_item())
+			held_item = " with [target.p_their()] [target.get_active_held_item()]"
+		else
+			held_item = " with [target.p_their()] bare hands"
+		target.visible_message("<span class='danger'>[target] blocks [user][held_item]!</span>")
+		return 0
+
+	if(target.mind?.handle_dodge(target, null, 0, user))
+		//Make the victim step to an adjacent tile because ooooooh dodge
+		var/list/turf/dodge_turfs = list()
+		for(var/turf/open/O in range(1,target))
+			if(target.CanReach(O))
+				dodge_turfs += O
+		//No available turfs == we can't actually dodge
+		if(length(dodge_turfs))
+			var/turf/yoink = pick(dodge_turfs)
+			//We moved to the tile, therefore we dodged successfully
+			if(target.Move(yoink, get_dir(target, yoink)))
+				playsound(get_turf(target), miss_sound, 70)
+				target.visible_message("<span class='danger'>[target] dodges [user]!</span>")
+				return 0
+	
 	if(attacker_style && attacker_style.grab_act(user,target))
 		return 1
 	else
@@ -1571,6 +1720,31 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			target_message = "<span class='warning'>[target] blocks your attack!</span>")
 		return FALSE
 
+	if(target.mind?.handle_parry(target, null, 0, user))
+		playsound(get_turf(target), 'modular_skyrat/sound/attack/parry.ogg', 70)
+		var/held_item
+		if(target.get_active_held_item())
+			held_item = " with [target.p_their()] [target.get_active_held_item()]"
+		else
+			held_item = " with [target.p_their()] bare hands"
+		target.visible_message("<span class='danger'>[target] blocks [user][held_item]!</span>")
+		return FALSE
+
+	if(target.mind?.handle_dodge(target, null, 0, user))
+		//Make the victim step to an adjacent tile because ooooooh dodge
+		var/list/turf/dodge_turfs = list()
+		for(var/turf/open/O in range(1,target))
+			if(target.CanReach(O))
+				dodge_turfs += O
+		//No available turfs == we can't actually dodge
+		if(length(dodge_turfs))
+			var/turf/yoink = pick(dodge_turfs)
+			//We moved to the tile, therefore we parried successfully
+			if(target.Move(yoink, get_dir(target, yoink)))
+				playsound(get_turf(target), miss_sound, 70)
+				target.visible_message("<span class='danger'>[target] dodges [user]!</span>")
+				return FALSE
+
 	if(HAS_TRAIT(user, TRAIT_PUGILIST))//CITADEL CHANGE - makes punching cause staminaloss but funny martial artist types get a discount
 		user.adjustStaminaLossBuffered(1.5)
 	else
@@ -1581,12 +1755,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	else
 
 		var/atk_verb = user.dna.species.attack_verb
-		if(!(target.mobility_flags & MOBILITY_STAND))
-			atk_verb = ATTACK_EFFECT_KICK
-
 		switch(atk_verb)
-			if(ATTACK_EFFECT_KICK)
-				user.do_attack_animation(target, ATTACK_EFFECT_KICK)
 			if(ATTACK_EFFECT_CLAW)
 				user.do_attack_animation(target, ATTACK_EFFECT_CLAW)
 			if(ATTACK_EFFECT_SMASH)
@@ -1594,33 +1763,83 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			else
 				user.do_attack_animation(target, ATTACK_EFFECT_PUNCH)
 
-		var/damage = rand(user.dna.species.punchdamagelow, user.dna.species.punchdamagehigh)
-		var/puncherstam = user.getStaminaLoss()
-		var/puncherbrute = user.getBruteLoss()
+		var/damage = (user.dna.species.punchdamagelow + user.dna.species.punchdamagehigh)/2
+
+		//Raw damage is affected by the user's strength
+		var/str_mod = 1
+		if(user.mind)
+			str_mod = user.mind.get_skillstat_damagemod(STAT_DATUM(str))
+		damage *= str_mod
+
+		//Combat intents change how much your fisto deals
+		var/c_intent = user.combat_intent
+		switch(c_intent)
+			if(CI_STRONG)
+				damage *= 1.5 //fuck it
+			if(CI_WEAK)
+				damage *= 0.4
+
 		var/punchedstam = target.getStaminaLoss()
 		var/punchedbrute = target.getBruteLoss()
 
 		//CITADEL CHANGES - makes resting and disabled combat mode reduce punch damage, makes being out of combat mode result in you taking more damage
-		if(!SEND_SIGNAL(target, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
-			damage *= 1.2
+		if(SEND_SIGNAL(target, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
+			damage *= 1.1
 		if(!CHECK_MOBILITY(user, MOBILITY_STAND))
-			damage *= 0.8
+			damage *= 0.75
 		if(SEND_SIGNAL(user, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
-			damage *= 0.8
+			damage *= 0.9
 		//END OF CITADEL CHANGES
 
-		var/obj/item/bodypart/affecting = target.get_bodypart(ran_zone(user.zone_selected))
+		//If the user has bad st, sometimes... the attack gets really shit
+		var/pitiful = FALSE
+		if(user.mind && GET_STAT_LEVEL(user, str) < 10)
+			switch(user.mind.diceroll(STAT_DATUM(str)))
+				if(DICE_CRIT_FAILURE)
+					damage *= 0.4
+					pitiful = TRUE
+		
+		//The probability of hitting the correct zone depends on dexterity
+		//and also on which limb we aim at
+		var/obj/item/bodypart/supposed_to_affect = target.get_bodypart(user.zone_selected)
+		var/ran_zone_prob = 50
+		var/extra_zone_prob = 50
+		if(supposed_to_affect)
+			ran_zone_prob = supposed_to_affect.zone_prob
+			extra_zone_prob = supposed_to_affect.extra_zone_prob
+		if(user.mind)
+			var/datum/stats/dex/dex = GET_STAT(user, dex)
+			if(dex)
+				ran_zone_prob = dex.get_ran_zone_prob(ran_zone_prob, extra_zone_prob)
 
-		var/miss_chance = 100//calculate the odds that a punch misses entirely. considers stamina and brute damage of the puncher. punches miss by default to prevent weird cases
-		if(user.dna.species.punchdamagelow)
-			if(atk_verb == ATTACK_EFFECT_KICK) //kicks never miss (provided your species deals more than 0 damage)
-				miss_chance = 0
-			else if(HAS_TRAIT(user, TRAIT_PUGILIST)) //pugilists have a flat 10% miss chance
-				miss_chance = 10
-			else
-				miss_chance = min(10 + max(puncherstam * 0.5, puncherbrute * 0.5), 100) //probability of miss has a base of 10, and modified based on half brute total. Capped at max 100 to prevent weirdness in prob()
+		//Aimed combat intent means we almost never miss, at the cost of stamina
+		//we deduct stamina later down, based on endurance
+		switch(c_intent)
+			if(CI_AIMED)
+				ran_zone_prob = 100
+				if(user.mind)
+					var/datum/stats/dex/dex = GET_STAT(user, dex)
+					if(dex)
+						ran_zone_prob = 80 + dex.level
+		
+		//Get the bodypart we actually affect
+		var/obj/item/bodypart/affecting = target.get_bodypart(ran_zone(user.zone_selected, ran_zone_prob))
 
-		if(!damage || !affecting || prob(miss_chance))//future-proofing for species that have 0 damage/weird cases where no zone is targeted
+		var/missed = FALSE
+		//Dice roll to see if we fuck up
+		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.3, GET_SKILL_LEVEL(user, melee)*0.7) <= DICE_CRIT_FAILURE)
+			missed = TRUE
+		//Aimed combat intent means we never miss, at the cost of stamina
+		switch(c_intent)
+			if(CI_AIMED)
+				missed = FALSE
+				var/endurance_mod = 1
+				if(user.mind)
+					var/datum/stats/end = GET_STAT(user, dex)
+					endurance_mod = round((MAX_STAT/2)/end.level, 0.1)
+				user.adjustStaminaLoss(5 * endurance_mod)
+
+		if(!damage || !affecting || (missed && target != user))//future-proofing for species that have 0 damage/weird cases where no zone is targeted
 			playsound(target.loc, user.dna.species.miss_sound, 25, TRUE, -1)
 			target.visible_message("<span class='danger'>[user]'s [atk_verb] misses [target]!</span>", \
 							"<span class='danger'>You avoid [user]'s [atk_verb]!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, null, \
@@ -1632,10 +1851,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		var/armor_block = target.run_armor_check(affecting, "melee")
 
 		playsound(target.loc, user.dna.species.attack_sound, 25, 1, -1)
-
-		target.visible_message("<span class='danger'>[user] [atk_verb]s [target]!</span>", \
-					"<span class='userdanger'>[user] [atk_verb]s you!</span>", null, COMBAT_MESSAGE_RANGE, null, \
-					user, "<span class='danger'>You [atk_verb] [target]!</span>")
 
 		target.lastattacker = user.real_name
 		target.lastattackerckey = user.ckey
@@ -1652,10 +1867,20 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			target.apply_damage(damage, BRUTE, affecting, armor_block)
 			target.apply_damage(damage*2, STAMINA, affecting, armor_block)
 			log_combat(user, target, "punched")
+		
+		//Knockdown and stuff
+		target.do_stat_effects(user, null, damage)
 
+		//Attack message
+		target.visible_message("<span class='danger'>[user][pitiful ? " pitifully" : ""] [atk_verb]s [target] on their [affecting.name]![target.wound_message]</span>", \
+					"<span class='userdanger'>[user][pitiful ? " pitifully" : ""] [atk_verb]s you on your [affecting.name]![target.wound_message]</span>", null, COMBAT_MESSAGE_RANGE, null, \
+					user, "<span class='danger'>You[pitiful ? " pitifully" : ""] [atk_verb] [target] on their [affecting.name]![target.wound_message]</span>")
+
+		//Clean the descriptive string
+		target.wound_message = ""
+		
 		if((target.stat != DEAD) && damage >= user.dna.species.punchstunthreshold)
 			if((punchedstam > 50) && prob(punchedstam*0.5)) //If our punch victim has been hit above the threshold, and they have more than 50 stamina damage, roll for stun, probability of 1% per 2 stamina damage
-
 				target.visible_message("<span class='danger'>[user] knocks [target] down!</span>", \
 								"<span class='userdanger'>You're knocked down by [user]!</span>",
 								"<span class='hear'>You hear aggressive shuffling followed by a loud thud!</span>", COMBAT_MESSAGE_RANGE, null,
@@ -1694,6 +1919,32 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		target.visible_message("<span class='warning'>[target] blocks [user]'s disarm attempt!</span>", target = user, \
 			target_message = "<span class='warning'>[target] blocks your disarm attempt!</span>")
 		return FALSE
+	
+	if(target.mind?.handle_parry(target, null, 0, user))
+		playsound(get_turf(target), 'modular_skyrat/sound/attack/parry.ogg', 70)
+		var/held_item
+		if(target.get_active_held_item())
+			held_item = " with [target.p_their()] [target.get_active_held_item()]"
+		else
+			held_item = " with [target.p_their()] bare hands"
+		target.visible_message("<span class='danger'>[target] blocks [user][held_item]!</span>")
+		return 0
+
+	if(target.mind?.handle_dodge(target, null, 0, user))
+		//Make the victim step to an adjacent tile because ooooooh dodge
+		var/list/turf/dodge_turfs = list()
+		for(var/turf/open/O in range(1,target))
+			if(target.CanReach(O))
+				dodge_turfs += O
+		//No available turfs == we can't actually dodge
+		if(length(dodge_turfs))
+			var/turf/yoink = pick(dodge_turfs)
+			//We moved to the tile, therefore we parried successfully
+			if(target.Move(yoink, get_dir(target, yoink)))
+				playsound(get_turf(target), miss_sound, 70)
+				target.visible_message("<span class='danger'>[target] dodges [user]!</span>")
+				return 0
+	
 	if(IS_STAMCRIT(user))
 		to_chat(user, "<span class='warning'>You're too exhausted!</span>")
 		return FALSE
@@ -1773,6 +2024,18 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			randn -= 25 //if you are a pugilist, you're slapping that item from them pretty reliably
 		if(HAS_TRAIT(target, TRAIT_PUGILIST))
 			randn += 25 //meanwhile, pugilists are less likely to get disarmed
+		
+		//High dexterity target means it's harder to disarm
+		if(target.mind)
+			var/datum/stats/dex/dex = GET_STAT(target, dex)
+			if(dex)
+				randn *= dex.get_disarm_mult()
+		
+		//High dexterity attacker means it's easier to disarm
+		if(user.mind)
+			var/datum/stats/dex/dex = GET_STAT(user, dex)
+			if(dex)
+				randn /= dex.get_disarm_mult()
 
 		if(randn <= 35)//CIT CHANGE - changes this back to a 35% chance to accomodate for the above being commented out in favor of right-click pushing
 			var/obj/item/I = null
@@ -1817,16 +2080,22 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(attacker_style?.pacifism_check && HAS_TRAIT(M, TRAIT_PACIFISM)) // most martial arts are quite harmful, alas.
 			attacker_style = null
 	switch(M.a_intent)
-		if("help")
+		if(INTENT_HELP)
 			help(M, H, attacker_style)
 
-		if("grab")
+		if(INTENT_GRAB)
 			grab(M, H, attacker_style)
 
-		if("harm")
-			harm(M, H, attacker_style)
+		if(INTENT_HARM)
+			switch(M.special_attack)
+				if(SPECIAL_ATK_NONE)
+					harm(M, H, attacker_style)
+				if(SPECIAL_ATK_KICK)
+					kick(M, H, attacker_style)
+				if(SPECIAL_ATK_BITE)
+					bite(M, H, attacker_style)
 
-		if("disarm")
+		if(INTENT_DISARM)
 			disarm(M, H, attacker_style)
 
 /datum/species/proc/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H, attackchain_flags = NONE, damage_multiplier = 1)
@@ -1834,18 +2103,44 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	// Allows you to put in item-specific reactions based on species
 	if(user != H)
 		var/list/block_return = list()
-		if(H.mob_run_block(I, totitemdamage, "the [I.name]", ((attackchain_flags & ATTACKCHAIN_PARRY_COUNTERATTACK)? ATTACK_TYPE_PARRY_COUNTERATTACK : NONE) | ATTACK_TYPE_MELEE, I.armour_penetration, user, affecting.body_zone, block_return) & BLOCK_SUCCESS)
+		if(H.mob_run_block(I, totitemdamage, "the [I.name]", ((attackchain_flags & ATTACKCHAIN_PARRY_COUNTERATTACK)? ATTACK_TYPE_PARRY_COUNTERATTACK : NONE) | ATTACK_TYPE_MELEE, I.armour_penetration, user, affecting?.body_zone, block_return) & BLOCK_SUCCESS)
 			return 0
 		totitemdamage = block_calculate_resultant_damage(totitemdamage, block_return)
+	
 	if(H.check_martial_melee_block())
 		H.visible_message("<span class='warning'>[H] blocks [I]!</span>")
 		return 0
+	
+	if(H.mind?.handle_parry(H, I, totitemdamage, user))
+		playsound(get_turf(H), 'modular_skyrat/sound/attack/parry.ogg', 70)
+		var/held_item
+		if(H.get_active_held_item())
+			held_item = " with [H.p_their()] [H.get_active_held_item()]"
+		else
+			held_item = " with [H.p_their()] bare hands"
+		H.visible_message("<span class='warning'>[H] blocks [I][held_item]!</span>")
+		return 0
+
+	if(H.mind?.handle_dodge(H, I, totitemdamage, user))
+		//Make the victim step to an adjacent tile because ooooooh dodge
+		var/list/turf/dodge_turfs = list()
+		for(var/turf/open/O in range(1,H))
+			if(H.CanReach(O))
+				dodge_turfs += O
+		//No available turfs == we can't actually dodge
+		if(length(dodge_turfs))
+			var/turf/yoink = pick(dodge_turfs)
+			//We moved to the tile, therefore we parried successfully
+			if(H.Move(yoink, get_dir(H, yoink)))
+				playsound(get_turf(H), miss_sound, 70)
+				H.visible_message("<span class='warning'>[H] dodges [I]!</span>")
+				return 0
 
 	var/hit_area
 	if(!affecting) //Something went wrong. Maybe the limb is missing?
 		affecting = H.bodyparts[1]
 
-	hit_area = affecting.body_zone
+	hit_area = affecting?.body_zone
 	var/armor_block = H.run_armor_check(affecting, "melee", "<span class='notice'>Your armor has protected your [parse_zone(hit_area)].</span>", "<span class='notice'>Your armor has softened a hit to your [parse_zone(hit_area)].</span>",I.armour_penetration)
 	var/Iforce = I.force //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
 	//skyrat edit
@@ -1857,19 +2152,30 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		Iwound_bonus = CANT_WOUND
 	//
 	var/weakness = H.check_weakness(I, user)
-
-	H.send_item_attack_message(I, user, hit_area, totitemdamage, affecting)
 	
+	//Damage moment
 	apply_damage(totitemdamage * weakness, I.damtype, hit_area, armor_block, H, wound_bonus = Iwound_bonus, bare_wound_bonus = I.bare_wound_bonus, sharpness = I.get_sharpness()) //CIT CHANGE - replaces I.force with totitemdamage //skyrat edit
 
+	//How the fuck does this work?
 	I.do_stagger_action(H, user, totitemdamage)
 
+	//Mine is fucking better idc
+	if(H.mind || user.mind)
+		H.do_stat_effects(user, I, totitemdamage)
+
+	//Send item attack message
+	H.send_item_attack_message(I, user, hit_area, totitemdamage * weakness, affecting)
+	
+	//Clean the descriptive string
+	H.wound_message = ""
+
+	//fuck piss
 	if(!totitemdamage)
 		return 0 //item force is zero
 	
 	var/bloody = 0
 	if(((I.damtype == BRUTE) && I.force && prob(25 + (I.force * 2))))
-		if(affecting.status == BODYPART_ORGANIC)
+		if(affecting.status & BODYPART_ORGANIC)
 			I.add_mob_blood(H)	//Make the weapon bloody, not the person.
 			if(prob(I.force * 2))	//blood spatter!
 				bloody = 1
@@ -2018,6 +2324,32 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			"<span class='warning'>You block [user]'s shoving attempt!</span>", target = user, \
 			target_message = "<span class='warning'>[target] blocks your shoving attempt!</span>")
 		return FALSE
+	
+	if(target.mind?.handle_parry(target, null, 0, user))
+		playsound(get_turf(target), 'modular_skyrat/sound/attack/parry.ogg', 70)
+		var/held_item
+		if(target.get_active_held_item())
+			held_item = " with [target.p_their()] [target.get_active_held_item()]"
+		else
+			held_item = " with [target.p_their()] bare hands"
+		target.visible_message("<span class='danger'>[target] blocks [user][held_item]!</span>")
+		return 0
+
+	if(target.mind?.handle_dodge(target, null, 0, user))
+		//Make the victim step to an adjacent tile because ooooooh dodge
+		var/list/turf/dodge_turfs = list()
+		for(var/turf/open/O in range(1,target))
+			if(target.CanReach(O))
+				dodge_turfs += O
+		//No available turfs == we can't actually dodge
+		if(length(dodge_turfs))
+			var/turf/yoink = pick(dodge_turfs)
+			//We moved to the tile, therefore we parried successfully
+			if(target.Move(yoink, get_dir(target, yoink)))
+				playsound(get_turf(target), miss_sound, 70)
+				target.visible_message("<span class='danger'>[target] dodges [user]!</span>")
+				return 0
+	
 	if(attacker_style && attacker_style.disarm_act(user,target))
 		return TRUE
 	if(!CHECK_MOBILITY(user, MOBILITY_STAND))
@@ -2191,7 +2523,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	if(HAS_TRAIT(H, TRAIT_NOBREATH))
 		return TRUE
 
-
 /datum/species/proc/handle_environment(datum/gas_mixture/environment, mob/living/carbon/human/H)
 	if(!environment)
 		return
@@ -2297,13 +2628,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				if(length(H.bodyparts) && prob(SPECIFY_BODYPART_INTERNAL_PROB))
 					BP = pick(H.bodyparts)
 				var/applydam = (min(((adjusted_pressure / HAZARD_HIGH_PRESSURE) -1 ) * PRESSURE_DAMAGE_COEFFICIENT, MAX_HIGH_PRESSURE_DAMAGE) * H.physiology.pressure_mod)
-				/* Commented out for the moment
-				if(BP && (BP.brute_dam >= (LOW_PRESSURE_DAMAGE * 0.75)))
-					BP.painless_wound_roll(WOUND_INTERNALBLEED, applydam * INTERNAL_WOUND_ROLL_MULT)
-				if(H.InCritical())
-					for(var/obj/item/organ/O in H.internal_organs)
-						H.adjustOrganLoss(O.slot, O.maxHealth/50)
-				*/
 				H.apply_damage(damage = applydam, damagetype = BRUTE, def_zone = BP, wound_bonus = CANT_WOUND)
 			else
 				H.clear_alert("pressure")
@@ -2322,13 +2646,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				var/obj/item/bodypart/BP
 				if(length(H.bodyparts) && prob(SPECIFY_BODYPART_INTERNAL_PROB))
 					BP = pick(H.bodyparts)
-				/* Commented out for the moment
-				if(BP && (BP.brute_dam >= (LOW_PRESSURE_DAMAGE * 0.75)))
-					BP.painless_wound_roll(WOUND_INTERNALBLEED, applydam * INTERNAL_WOUND_ROLL_MULT)
-				if(H.InCritical())
-					for(var/obj/item/organ/O in H.internal_organs)
-						H.adjustOrganLoss(O.slot, O.maxHealth/50)
-				*/
 				H.apply_damage(damage = applydam, damagetype = BRUTE, def_zone = BP, wound_bonus = CANT_WOUND)
 
 //////////

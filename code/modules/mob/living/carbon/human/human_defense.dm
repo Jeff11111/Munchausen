@@ -38,7 +38,6 @@
 	if(dna && dna.species)
 		dna.species.on_hit(P, src)
 
-
 /mob/living/carbon/human/bullet_act(obj/item/projectile/P, def_zone)
 	if(dna && dna.species)
 		var/spec_return = dna.species.bullet_act(P, src)
@@ -50,6 +49,42 @@
 			var/martial_art_result = mind.martial_art.on_projectile_hit(src, P, def_zone)
 			if(!(martial_art_result == BULLET_ACT_HIT))
 				return martial_art_result
+		if(mind.handle_dodge(src, P, P.damage, P.firer))
+			//Make the victim step to an adjacent tile because ooooooh dodge
+			var/list/turf/dodge_turfs = list()
+			for(var/turf/open/O in range(1,src))
+				if(CanReach(O))
+					dodge_turfs += O
+			//No available turfs == we can't actually dodge
+			if(length(dodge_turfs))
+				var/turf/yoink = pick(dodge_turfs)
+				//We moved to the tile, therefore we dodged successfully
+				if(Move(yoink, get_dir(src, yoink)))
+					playsound(get_turf(src), dna?.species?.miss_sound, 70)
+					visible_message("<span class='danger'>[src] dodges [P]!</span>")
+					return BULLET_ACT_FORCE_PIERCE
+	//Dice roll to handle missing
+	if(P.firer && ishuman(P.firer))
+		var/mob/living/carbon/human/fireboy = P.firer
+		if(fireboy.mind)
+			var/victim_dex = 10
+			if(mind)
+				victim_dex = GET_STAT_LEVEL(src, dex)
+			//Victims being held at gunpoint are less likely to have the shots miss them
+			if(length(gunpointed))
+				victim_dex -= GET_SKILL_LEVEL(fireboy, ranged)
+			switch(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.5, GET_SKILL_LEVEL(fireboy, ranged), mod = -victim_dex/2))
+				//Missed shot
+				if(DICE_CRIT_FAILURE)
+					if(fireboy != src)
+						visible_message("<span class='danger'><b>CRITICAL FAILURE!</b> [P] misses [src] entirely!</span>")
+						return BULLET_ACT_FORCE_PIERCE
+	//Dice roll to handle crits
+	if(mind)
+		switch(rand(1,100))
+			if(0 to 2)
+				visible_message("<span class='danger'><b>CRITICAL HIT!</b> [P] mauls [src]!")
+				P.damage *= 2
 	return ..()
 
 /mob/living/carbon/human/proc/check_martial_melee_block()
@@ -90,7 +125,6 @@
 		w_uniform.add_fingerprint(user)
 	..()
 
-
 /mob/living/carbon/human/attacked_by(obj/item/I, mob/living/user, attackchain_flags = NONE, damage_multiplier = 1)
 	if(!I || !user)
 		return 0
@@ -99,7 +133,55 @@
 	if(user == src)
 		affecting = get_bodypart(check_zone(user.zone_selected)) //stabbing yourself always hits the right target
 	else
-		affecting = get_bodypart(ran_zone(user.zone_selected))
+		//Hitting where the attacker aimed is dictated by a few things
+		var/obj/item/bodypart/supposed_to_affect = get_bodypart(check_zone(user.zone_selected))
+		var/ran_zone_prob = 50
+		var/extra_zone_prob = 50
+		if(supposed_to_affect)
+			ran_zone_prob = supposed_to_affect.zone_prob
+			extra_zone_prob = supposed_to_affect.extra_zone_prob
+		var/c_intent = CI_DEFAULT
+		if(iscarbon(user))
+			var/mob/living/carbon/carbon_mob = user
+			//Chance to miss the attack entirely, based on a diceroll
+			var/missed = FALSE
+			if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.3, GET_SKILL_LEVEL(user, melee)*0.7) <= DICE_CRIT_FAILURE)
+				missed = TRUE
+			c_intent = carbon_mob.combat_intent
+			if(carbon_mob.mind)
+				var/datum/stats/dex/dex = GET_STAT(carbon_mob, dex)
+				if(dex)
+					ran_zone_prob = dex.get_ran_zone_prob(ran_zone_prob, extra_zone_prob)
+			switch(c_intent)
+				if(CI_AIMED)
+					if(attackchain_flags & ATTACKCHAIN_RIGHTCLICK)
+						//Aimed attack - the attacker will RARELY miss
+						ran_zone_prob = 100
+						missed = FALSE
+						if(carbon_mob.mind)
+							var/datum/stats/dex/dex = GET_STAT(carbon_mob, dex)
+							if(dex)
+								ran_zone_prob = 80 + dex.level
+			if(missed && (user != src))
+				visible_message("<span class='danger'>[user]'s misses [src] with [I]!</span>", \
+							"<span class='danger'>You avoid [user]'s attack with [I]!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, null, \
+							user, "<span class='warning'>You miss [src] with [I]!</span>")
+				var/swing_sound = pick('modular_skyrat/sound/attack/swing_01.ogg',
+									'modular_skyrat/sound/attack/swing_02.ogg',
+									'modular_skyrat/sound/attack/swing_03.ogg',
+									)
+				playsound(get_turf(src), swing_sound, 50)
+				return 0
+			else if(c_intent == CI_FEINT)
+				if(attackchain_flags & ATTACKCHAIN_RIGHTCLICK)
+					//Successful feint attack - victim is unable to attack for a while
+					var/multi = 2
+					if(user.mind)
+						var/datum/skills/melee/melee = GET_SKILL(user, melee)
+						if(melee)
+							multi = melee.level/(MAX_SKILL/2)
+					changeNext_move(CLICK_CD_MELEE * multi)
+		affecting = get_bodypart(ran_zone(check_zone(user.zone_selected), ran_zone_prob))
 	var/target_area = parse_zone(check_zone(user.zone_selected)) //our intended target
 
 	SEND_SIGNAL(I, COMSIG_ITEM_ATTACK_ZONE, src, user, affecting)
@@ -107,7 +189,7 @@
 	SSblackbox.record_feedback("nested tally", "item_used_for_combat", 1, list("[I.force]", "[I.type]"))
 	SSblackbox.record_feedback("tally", "zone_targeted", 1, target_area)
 
-	// the attacked_by code varies among species
+	// The attacked_by code varies among species
 	return dna.species.spec_attacked_by(I, user, affecting, a_intent, src, attackchain_flags, damage_multiplier)
 
 /mob/living/carbon/human/attack_hulk(mob/living/carbon/human/user, does_attack_animation = FALSE)
@@ -181,7 +263,7 @@
 				"<span class='userdanger'>[M] has lunged at you!</span>", target = M, \
 				target_message = "<span class='danger'>You have lunged at [src]!</span>")
 			return 0
-		var/obj/item/bodypart/affecting = get_bodypart(ran_zone(M.zone_selected))
+		var/obj/item/bodypart/affecting = get_bodypart(ran_zone(check_zone(M.zone_selected)))
 		if(!affecting)
 			affecting = get_bodypart(BODY_ZONE_CHEST)
 		var/armor_block = run_armor_check(affecting, "melee", null, null,10)
@@ -217,7 +299,7 @@
 	var/damage = rand(1, 3)
 	if(stat != DEAD)
 		L.amount_grown = min(L.amount_grown + damage, L.max_grown)
-		var/obj/item/bodypart/affecting = get_bodypart(ran_zone(L.zone_selected))
+		var/obj/item/bodypart/affecting = get_bodypart(ran_zone(check_zone(L.zone_selected)))
 		if(!affecting)
 			affecting = get_bodypart(BODY_ZONE_CHEST)
 		var/armor_block = run_armor_check(affecting, "melee")
@@ -995,6 +1077,22 @@
 				to_chat(src, "<span class='info'>You feel quite hungry.</span>")
 			if(0 to NUTRITION_LEVEL_STARVING)
 				to_chat(src, "<span class='danger'>You're starving!</span>")
+
+	//warter
+	if(!HAS_TRAIT(src, TRAIT_NOHUNGER))
+		switch(hydration)
+			if(HYDRATION_LEVEL_FULL to INFINITY)
+				to_chat(src, "<span class='info'>You're completely full!</span>")
+			if(HYDRATION_LEVEL_WELL_HYDRATED to HYDRATION_LEVEL_FULL)
+				to_chat(src, "<span class='info'>You're well hydrated!</span>")
+			if(HYDRATION_LEVEL_HYDRATED to HYDRATION_LEVEL_WELL_HYDRATED)
+				to_chat(src, "<span class='info'>You're not thirsty.</span>")
+			if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_HYDRATED)
+				to_chat(src, "<span class='info'>You could use a drink.</span>")
+			if(HYDRATION_LEVEL_DEHYDRATED to HYDRATION_LEVEL_THIRSTY)
+				to_chat(src, "<span class='info'>You feel quite thirsty.</span>")
+			if(0 to HYDRATION_LEVEL_DEHYDRATED)
+				to_chat(src, "<span class='danger'>You're dehydrated!</span>")
 
 	//Compiles then shows the list of damaged organs and broken organs
 	var/list/broken = list()

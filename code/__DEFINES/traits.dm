@@ -206,6 +206,8 @@
 #define TRAIT_FAST_PUMP				"fast_pump"
 #define TRAIT_NICE_SHOT			"nice_shot" //hnnnnnnnggggg..... you're pretty good....
 //SKYRAT traits
+#define TRAIT_NOPAIN			"no_pain"
+#define TRAIT_PAINGOOD			"pain_good"
 #define TRAIT_SCREWY_MOOD		"screwy_mood"
 #define TRAIT_SCREWY_CHECKSELF	"screwy_checkself"
 #define TRAIT_HARD_SOLES		"hard_soles"
@@ -219,6 +221,7 @@
 #define TRAIT_SYNTH				"synthetic"	//robotic boy
 #define TRAIT_TOXIMMUNE			"toxin_immune"
 #define TRAIT_CLONEIMMUNE		"clone_immune" //This is for clone damage
+#define TRAIT_BLOODLOSSIMMUNE	"blood_immune"
 #define TRAIT_DNC		"cant_clone"
 #define TRAIT_DNR		"cant_revive" //You just can't be revived without supernatural means
 #define TRAIT_NODETERMINATION	"no_determination" //tfw no undertales

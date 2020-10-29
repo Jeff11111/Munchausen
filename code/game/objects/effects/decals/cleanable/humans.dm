@@ -8,6 +8,45 @@
 	bloodiness = BLOOD_AMOUNT_PER_DECAL
 	color = BLOOD_COLOR_HUMAN //default so we don't have white splotches everywhere.
 	beauty = -100
+	dirtiness = 25
+
+/obj/effect/decal/cleanable/blood/verb/run_finger()
+	set category = "Object"
+	set name = "Run finger"
+	set desc = "Run your finger through a blood splatter to check if it's fresh."
+	set src in view(1)
+
+	if(!usr.canUseTopic(src, TRUE) || INTERACTING_WITH(usr, src))
+		return FALSE
+	
+	to_chat(usr, "<span class='notice'>You begin wiping your finger across \the [src.name]...</span>")
+
+	if(!do_after(usr, 2 SECONDS, TRUE, src))
+		return FALSE
+	
+	if(bloodiness)
+		to_chat(usr, "<span class='warning'>\The [src] seems to be fresh...</span>")
+		bloodiness = max(0, bloodiness - 5)
+		if(ishuman(usr))
+			var/mob/living/carbon/human/H = usr
+			if(H.gloves)
+				H.gloves.add_blood_DNA(blood_DNA)
+				H.gloves.add_blood_overlay()
+			else
+				H.bloody_hands = (H.bloody_hands + rand(2, 4))
+				H.update_inv_gloves()
+				H.janitize(WOUND_SANITIZATION_STERILIZER * 2)
+		else
+			usr.add_blood_DNA(blood_DNA)
+	else
+		to_chat(usr, "<span class='notice'>\The [src] seems to have dried up.</span>")
+
+/obj/effect/decal/cleanable/blood/Initialize(mapload, list/datum/disease/diseases)
+	. = ..()
+	janitize(WOUND_SANITIZATION_STERILIZER * 2)
+	var/turf/open/floor/floor = get_turf(src)
+	if(istype(floor))
+		floor.update_dirtiness()
 
 /obj/effect/decal/cleanable/blood/replace_decal(obj/effect/decal/cleanable/blood/C)
 	if (C.blood_DNA)
@@ -20,10 +59,16 @@
 /obj/effect/decal/cleanable/blood/transfer_blood_dna()
 	..()
 	update_icon()
+	var/turf/open/floor/floor = get_turf(src)
+	if(istype(floor))
+		floor.update_dirtiness()
 
 /obj/effect/decal/cleanable/blood/transfer_mob_blood_dna()
 	. = ..()
 	update_icon()
+	var/turf/open/floor/floor = get_turf(src)
+	if(istype(floor))
+		floor.update_dirtiness()
 
 /obj/effect/decal/cleanable/blood/update_icon()
 	color = blood_DNA_to_color()
@@ -52,11 +97,43 @@
 
 /obj/effect/decal/cleanable/trail_holder //not a child of blood on purpose
 	name = "blood"
-	icon_state = "ltrails_1"
+	icon = 'modular_skyrat/icons/effects/blood_fuck.dmi'
+	icon_state = "nothing"
 	desc = "Your instincts say you shouldn't be following these."
 	random_icon_states = null
 	beauty = -50
 	var/list/existing_dirs = list()
+
+/obj/effect/decal/cleanable/trail_holder/verb/run_finger()
+	set category = "Object"
+	set name = "Run finger"
+	set desc = "Run your finger through a blood splatter to check if it's fresh."
+	set src in view(1)
+
+	if(!usr.canUseTopic(src, TRUE) || INTERACTING_WITH(usr, src))
+		return FALSE
+	
+	to_chat(usr, "<span class='notice'>You begin wiping your finger across \the [src.name]...</span>")
+
+	if(!do_after(usr, 2 SECONDS, TRUE, src))
+		return FALSE
+	
+	if(bloodiness)
+		to_chat(usr, "<span class='warning'>\The [src] seems to be fresh...</span>")
+		bloodiness = max(0, bloodiness - 5)
+		if(ishuman(usr))
+			var/mob/living/carbon/human/H = usr
+			if(H.gloves)
+				H.gloves.add_blood_DNA(blood_DNA)
+				H.gloves.add_blood_overlay()
+			else
+				H.bloody_hands = (H.bloody_hands + rand(2, 4))
+				H.update_inv_gloves()
+				H.janitize(WOUND_SANITIZATION_STERILIZER)
+		else
+			usr.add_blood_DNA(blood_DNA)
+	else
+		to_chat(usr, "<span class='notice'>\The [src] seems to have dried up.</span>")
 
 /obj/effect/decal/cleanable/trail_holder/update_icon()
 	color = blood_DNA_to_color()
@@ -79,8 +156,8 @@
 //BLOODY FOOTPRINTS
 /obj/effect/decal/cleanable/blood/footprints
 	name = "footprints"
-	icon = 'icons/effects/footprints.dmi'
-	icon_state = "nothingwhatsoever"
+	icon = 'modular_skyrat/icons/effects/blood_footprints.dmi'
+	icon_state = "nothing"
 	desc = "WHOSE FOOTPRINTS ARE THESE?"
 	random_icon_states = null
 	var/entered_dirs = 0

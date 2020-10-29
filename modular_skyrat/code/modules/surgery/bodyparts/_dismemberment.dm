@@ -1,21 +1,15 @@
 //Check if the limb is dismemberable
 /obj/item/bodypart/proc/can_dismember(obj/item/I)
-	if(status & BODYPART_HARDDISMEMBER)
-		if(owner && brain && !((owner.stat == DEAD) || owner.InCritical()))
-			return FALSE
 	if(dismemberable)
 		return TRUE
 
 //Check if the limb is disembowable
 /obj/item/bodypart/proc/can_disembowel(obj/item/I)
-	if(status & BODYPART_HARDDISMEMBER)
-		if(owner && brain && !((owner.stat == DEAD) || owner.InCritical()))
-			return FALSE
 	if(disembowable)
 		return TRUE
 
 //Dismember a limb
-/obj/item/bodypart/proc/dismember(dam_type = BRUTE, silent = FALSE, destroy = FALSE)
+/obj/item/bodypart/proc/dismember(dam_type = BRUTE, silent = FALSE, destroy = FALSE, wounding_type = WOUND_SLASH)
 	if(!owner)
 		return FALSE
 	var/mob/living/carbon/C = owner
@@ -32,17 +26,15 @@
 		C.visible_message("<span class='danger'><B>[C]'s [src.name] has been violently dismembered!</B></span>")
 	if(body_zone != BODY_ZONE_HEAD)
 		C.emote("scream")
-	playsound(get_turf(C), 'modular_skyrat/sound/effects/dismember.ogg', 80, TRUE)
+	if(!silent)
+		playsound(get_turf(C), 'modular_skyrat/sound/effects/dismember.ogg', 80, TRUE)
 	SEND_SIGNAL(C, COMSIG_ADD_MOOD_EVENT, "dismembered", /datum/mood_event/dismembered)
-	drop_limb(dismembered = TRUE, destroyed = (dam_type == BURN ? TRUE : destroy))
+	drop_limb(dismembered = TRUE, destroyed = destroy, wounding_type = wounding_type)
 	C.update_equipment_speed_mods() // Update in case speed affecting item unequipped by dismemberment
 
 	C.bleed(12)
 
 	if(QDELETED(src)) //Could have dropped into lava/explosion/chasm/whatever
-		return TRUE
-	if(dam_type == BURN)
-		burn()
 		return TRUE
 	add_mob_blood(C)
 	var/direction = pick(GLOB.cardinals)
@@ -59,7 +51,7 @@
 	return TRUE
 
 //Disembowel a limb
-/obj/item/bodypart/proc/disembowel(dam_type = BRUTE, silent = FALSE, wound = FALSE)
+/obj/item/bodypart/proc/disembowel(dam_type = BRUTE, silent = FALSE, wound = FALSE, wounding_type = WOUND_SLASH)
 	if(!owner)
 		return FALSE
 	var/mob/living/carbon/C = owner
@@ -105,14 +97,14 @@
 	
 	return FALSE
 
-/obj/item/bodypart/head/dismember(dam_type = BRUTE, silent = FALSE)
+/obj/item/bodypart/head/dismember(dam_type = BRUTE, silent = FALSE, destroy = FALSE, wounding_type = WOUND_SLASH)
 	. = ..()
-	if(. && (HAS_TRAIT(owner, TRAIT_NODECAP) || HAS_TRAIT(owner, TRAIT_NODISMEMBER)))
+	if(owner && (HAS_TRAIT(owner, TRAIT_NODECAP) || HAS_TRAIT(owner, TRAIT_NODISMEMBER)))
 		return FALSE
 
 //Limb removal. The "special" argument is used for swapping a limb with a new one without the effects of losing a limb kicking in.
 //Destroyed just qdels the limb.
-/obj/item/bodypart/proc/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE)
+/obj/item/bodypart/proc/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
 	if(!owner)
 		return
 	var/atom/Tsec = owner.drop_location()
@@ -121,8 +113,9 @@
 	update_limb(1)
 	C.bodyparts -= src
 
-	if(held_index && owner?.get_item_for_held_index(held_index))
-		C.dropItemToGround(owner.get_item_for_held_index(held_index), TRUE, TRUE)
+	if(held_index)
+		if(C.get_item_for_held_index(held_index))
+			C.dropItemToGround(owner.get_item_for_held_index(held_index), TRUE, TRUE)
 		C.hand_bodyparts[held_index] = null
 	
 	for(var/thing in scars)
@@ -148,6 +141,16 @@
 			lost.fake_body_zone = body_zone
 			lost.desc = "Patient's [lowertext(name)] has been violently dismembered from [owner.p_their(FALSE)] [parse_zone(dismember_bodyzone)], leaving only a severely damaged stump in it's place."
 			lost.examine_desc = "has been violently severed from [owner.p_their(FALSE)] [parse_zone(dismember_bodyzone)]"
+			lost.descriptive = "The limb is violently dismembered!"
+			switch(wounding_type)
+				if(WOUND_BLUNT)
+					lost.descriptive = "The limb is shattered into gore!"
+				if(WOUND_BURN)
+					lost.descriptive = "The limb is incinerated into dust!"
+				if(WOUND_SLASH)
+					lost.descriptive = "The limb is violently dismembered!"
+				if(WOUND_PIERCE)
+					lost.descriptive = "The limb is punctured into gore!"
 			lost.apply_wound(BP, TRUE)
 	owner = null
 	if(!ignore_children)
@@ -189,8 +192,14 @@
 	update_icon_dropped()
 	if(destroyed)
 		for(var/obj/item/organ/O in src)
-			O.applyOrganDamage(O.maxHealth/10 * 9)
-			O.forceMove(get_turf(src))
+			if(istype(O, /obj/item/organ/brain))
+				C.ghostize(voluntary = FALSE)
+			qdel(O)
+	
+	//Start processing rotting
+	if(!destroyed)
+		START_PROCESSING(SSobj, src)
+	
 	C.update_health_hud() //update the healthdoll
 	C.update_body()
 	C.update_hair()
@@ -216,48 +225,31 @@
   * Returns: BODYPART_MANGLED_NONE if we're fine, BODYPART_MANGLED_SKIN if our skin is broken, BODYPART_MANGLED_BONE if our bone is broken, or BODYPART_MANGLED_BOTH if both are broken and we're up for dismembering
   */
 /obj/item/bodypart/proc/get_mangled_state()
-	if(!owner)
-		return FALSE
 	. = BODYPART_MANGLED_NONE
+
+	var/biological_state = owner?.get_biological_state()
 	var/required_bone_severity = WOUND_SEVERITY_SEVERE
-	var/required_flesh_severity = WOUND_SEVERITY_SEVERE
+	var/required_muscle_severity = WOUND_SEVERITY_SEVERE
 	var/required_skin_severity = WOUND_SEVERITY_MODERATE
 
-	if(owner && (owner.get_biological_state() == BIO_BONE || owner.get_biological_state() == BIO_BONE|BIO_SKIN) && !HAS_TRAIT(owner, TRAIT_EASYDISMEMBER))
+	if(biological_state && (biological_state & BIO_BONE) && !(biological_state & BIO_FLESH) && !HAS_TRAIT(owner, TRAIT_EASYDISMEMBER))
 		required_bone_severity = WOUND_SEVERITY_CRITICAL
 	
-	if(owner && (owner.get_biological_state() == BIO_FLESH || owner.get_biological_state() == BIO_FLESH|BIO_SKIN) && !HAS_TRAIT(owner, TRAIT_EASYDISMEMBER))
-		required_flesh_severity = WOUND_SEVERITY_CRITICAL
+	if(biological_state && (biological_state & BIO_FLESH) && !(biological_state & BIO_FLESH) && !HAS_TRAIT(owner, TRAIT_EASYDISMEMBER))
+		required_muscle_severity = WOUND_SEVERITY_CRITICAL
 
-	if(owner && owner.get_biological_state() == BIO_SKIN && !HAS_TRAIT(owner, TRAIT_EASYDISMEMBER))
+	if(biological_state && (biological_state == BIO_SKIN) && !HAS_TRAIT(owner, TRAIT_EASYDISMEMBER))
 		required_skin_severity = WOUND_SEVERITY_CRITICAL
 
 	// we can (generally) only have one wound per type, but remember there's multiple types
-	for(var/datum/wound/W in wounds)
-		//using the wound_type variable DOES NOT FUCKING WORK AT ALL.
-		//we have to settle for stupidity.
-		if((istype(W, /datum/wound/blunt)) && (W.severity >= required_bone_severity))
+	for(var/i in wounds)
+		var/datum/wound/W = i
+		if((W.wound_flags & MANGLES_SKIN) && (W.severity >= required_skin_severity))
+			. |= BODYPART_MANGLED_SKIN
+		if((W.wound_flags & MANGLES_MUSCLE) && (W.severity >= required_muscle_severity))
+			. |= BODYPART_MANGLED_MUSCLE
+		if((W.wound_flags & MANGLES_BONE) && (W.severity >= required_bone_severity))
 			. |= BODYPART_MANGLED_BONE
-		else if((istype(W, /datum/wound/mechanical/blunt)) && (W.severity >= required_bone_severity))
-			. |= BODYPART_MANGLED_BONE
-		
-		if((istype(W, /datum/wound/slash)) && (W.severity >= required_flesh_severity))
-			. |= BODYPART_MANGLED_MUSCLE
-		else if((istype(W, /datum/wound/pierce)) && (W.severity >= required_flesh_severity))
-			. |= BODYPART_MANGLED_MUSCLE
-		else if((istype(W, /datum/wound/mechanical/slash)) && (W.severity >= required_flesh_severity))
-			. |= BODYPART_MANGLED_MUSCLE
-		else if((istype(W, /datum/wound/mechanical/pierce)) && (W.severity >= required_flesh_severity))
-			. |= BODYPART_MANGLED_MUSCLE
-		
-		if((istype(W, /datum/wound/slash)) && (W.severity >= required_skin_severity))
-			. |= BODYPART_MANGLED_SKIN
-		else if((istype(W, /datum/wound/pierce)) && (W.severity >= required_skin_severity))
-			. |= BODYPART_MANGLED_SKIN
-		else if((istype(W, /datum/wound/mechanical/slash)) && (W.severity >= required_skin_severity))
-			. |= BODYPART_MANGLED_SKIN
-		else if((istype(W, /datum/wound/mechanical/pierce)) && (W.severity >= required_skin_severity))
-			. |= BODYPART_MANGLED_SKIN
 
 /**
   * try_dismember() is used, once we've confirmed that a flesh and bone bodypart has both the skin, muscle and bone mangled, to actually roll for it
@@ -277,12 +269,12 @@
 		return
 	if(!can_dismember() || !dismemberable || (wounding_dmg < DISMEMBER_MINIMUM_DAMAGE) || ((wounding_dmg + wound_bonus) < DISMEMBER_MINIMUM_DAMAGE) || wound_bonus <= CANT_WOUND)
 		return FALSE
-	var/base_chance = wounding_dmg + ((get_damage() / max_damage) * 45) // how much damage we dealt with this blow, + 40% of the damage percentage we already had on this bodypart
+	var/base_chance = wounding_dmg + ((get_damage() / max_damage) * 10) // how much damage we dealt with this blow, + 40% of the damage percentage we already had on this bodypart
 	var/bio_state = owner.get_biological_state()
 	for(var/i in wounds)
 		var/datum/wound/W = i
 		if((W.wound_type in list(WOUND_LIST_INCISION, WOUND_LIST_INCISION_MECHANICAL)) && (bio_state & BIO_FLESH)) // incisions make you very vulnerable to dismemberment
-			base_chance += 20
+			base_chance += 15
 			break
 		else if(((W.wound_type in list(WOUND_LIST_BLUNT, WOUND_LIST_BLUNT_MECHANICAL)) && W.severity >= WOUND_SEVERITY_CRITICAL) && (bio_state & BIO_BONE)) // we only require a severe bone break, but if there's a critical bone break, we'll add 10% more
 			base_chance += 10
@@ -294,23 +286,26 @@
 	// We multiply by our dismemberment mod (the leg is tougher than a foot, etc)
 	base_chance *= dismember_mod
 
+	// Lower the chance a bit more
+	base_chance = round(base_chance/4)
+
 	if(!prob(base_chance))
 		return
 
-	dismember_wound(wounding_type)
+	dismember_wound(wounding_type, TRUE)
 
 	return TRUE
 
-/obj/item/bodypart/proc/dismember_wound(wounding_type)
+/obj/item/bodypart/proc/dismember_wound(wounding_type, silent = FALSE)
 	var/datum/wound/loss/dismembering = new()
-	dismembering.apply_dismember(src, wounding_type)
+	dismembering.apply_dismember(src, wounding_type, silent)
 
 /obj/item/bodypart/proc/try_disembowel(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	if(!owner)
 		return
 	if(!can_disembowel() || !disembowable || (wounding_dmg < DISEMBOWEL_MINIMUM_DAMAGE) || ((wounding_dmg + wound_bonus) < DISEMBOWEL_MINIMUM_DAMAGE) || (wound_bonus <= CANT_WOUND))
 		return FALSE
-	var/base_chance = wounding_dmg + ((get_damage() / max_damage) * 35) // how much damage we dealt with this blow, + 35% of the damage percentage we already had on this bodypart
+	var/base_chance = (wounding_dmg + ((get_damage() / max_damage) * 10)/4) // how much damage we dealt with this blow, + 35% of the damage percentage we already had on this bodypart
 	var/bio_state = owner.get_biological_state()
 	for(var/i in wounds)
 		var/datum/wound/W = i
@@ -327,14 +322,18 @@
 	// We multiply by our disembowel mod (the chest is tougher than a groin, etc)
 	base_chance *= disembowel_mod
 
+	// Lower the chance a bit more
+	base_chance = round(base_chance/4)
+
 	if(!prob(base_chance))
 		return
 
-	return disembowel_wound(wounding_type)
+	disembowel_wound(wounding_type, TRUE)
+	return TRUE
 
-/obj/item/bodypart/proc/disembowel_wound(wounding_type)
+/obj/item/bodypart/proc/disembowel_wound(wounding_type, silent = FALSE)
 	var/datum/wound/disembowel/disemboweled = new()
-	return disemboweled.apply_disembowel(src, wounding_type)
+	return disemboweled.apply_disembowel(src, wounding_type, silent)
 
 //when a limb is dropped, the internal organs are removed from the mob and put into the limb
 /obj/item/organ/proc/transfer_to_limb(obj/item/bodypart/LB, mob/living/carbon/C)
@@ -355,11 +354,11 @@
 	LB.eyes = src
 	..()
 
-/obj/item/bodypart/chest/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE)
+/obj/item/bodypart/chest/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
 	if(special)
 		..()
 
-/obj/item/bodypart/r_hand/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE)
+/obj/item/bodypart/r_hand/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
 	var/mob/living/carbon/C = owner
 	..()
 	if(C && !special)
@@ -376,7 +375,7 @@
 			C.dropItemToGround(C.gloves, TRUE)
 		C.update_inv_gloves() //to remove the bloody hands overlay
 
-/obj/item/bodypart/l_hand/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE)
+/obj/item/bodypart/l_hand/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
 	var/mob/living/carbon/C = owner
 	..()
 	if(C && !special)
@@ -394,7 +393,7 @@
 		C.update_inv_gloves() //to remove the bloody hands overlay
 
 
-/obj/item/bodypart/r_foot/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE)
+/obj/item/bodypart/r_foot/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
 	if(owner && !special)
 		if(owner.legcuffed)
 			owner.legcuffed.forceMove(owner.drop_location()) //At this point bodypart is still in nullspace
@@ -405,7 +404,7 @@
 			owner.dropItemToGround(owner.shoes, TRUE)
 	..()
 
-/obj/item/bodypart/l_foot/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE) //copypasta
+/obj/item/bodypart/l_foot/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH) //copypasta
 	if(owner && !special)
 		if(owner.legcuffed)
 			owner.legcuffed.forceMove(owner.drop_location())
@@ -416,7 +415,7 @@
 			owner.dropItemToGround(owner.shoes, TRUE)
 	..()
 
-/obj/item/bodypart/head/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE)
+/obj/item/bodypart/head/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
 	if(!special)
 		//Drop all worn head items
 		for(var/X in list(owner.glasses, owner.ears, owner.wear_mask, owner.head))

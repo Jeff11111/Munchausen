@@ -38,6 +38,7 @@
 	biology_required = list(HAS_FLESH)
 	required_status = BODYPART_ORGANIC
 	can_self_treat = TRUE
+	wound_flags = (MANGLES_SKIN | MANGLES_MUSCLE)
 
 /datum/wound/slash/self_treat(mob/living/carbon/user, first_time = FALSE)
 	. = ..()
@@ -45,10 +46,7 @@
 		return TRUE
 	
 	if(victim && limb?.body_zone)
-		var/obj/screen/zone_sel/sel = victim.hud_used?.zone_select
-		if(istype(sel))
-			sel.set_selected_zone(limb?.body_zone)
-			victim.grabbedby(victim)
+		victim.attempt_self_grasp(victim, limb.body_zone)
 		return
 
 /datum/wound/slash/on_hemostatic(quantity)
@@ -172,72 +170,54 @@
 		tool_cauterize(I, user)
 	else if(istype(I, /obj/item/stack/medical/suture))
 		suture(I, user)
-/*
-/datum/wound/slash/try_handling(mob/living/carbon/human/user)
-	if(user.pulling != victim || user.zone_selected != limb.body_zone || user.a_intent == INTENT_GRAB)
-		return FALSE
-	
-	if(!iscatperson(user))
-		return FALSE
 
-	lick_wounds(user)
-	
-	return TRUE
-
-/// if a felinid is licking this cut to reduce bleeding
-/datum/wound/slash/proc/lick_wounds(mob/living/carbon/human/user)
-	/*
-	if(INTERACTING_WITH(user, victim))
-		to_chat(user, "<span class='warning'>You're already interacting with [victim]!</span>")
-		return
-	*/
-	user.visible_message("<span class='notice'>[user] begins licking the wounds on [victim]'s [limb.name].</span>", "<span class='notice'>You begin licking the wounds on [victim]'s [limb.name]...</span>", ignored_mobs=victim)
-	to_chat(victim, "<span class='notice'>[user] begins to lick the wounds on your [limb.name].</span")
-	if(!do_after(user, base_treat_time, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
-		return
-
-	user.visible_message("<span class='notice'>[user] licks the wounds on [victim]'s [limb.name].</span>", "<span class='notice'>You lick some of the wounds on [victim]'s [limb.name]</span>", ignored_mobs=victim)
-	to_chat(victim, "<span class='green'>[user] licks the wounds on your [limb.name]!</span")
-	blood_flow -= 0.5
-
-	if(blood_flow > minimum_flow)
-		try_handling(user)
-	else if(demotes_to)
-		to_chat(user, "<span class='green'>You successfully lower the severity of [victim]'s cuts.</span>")
-*/
 /datum/wound/slash/on_xadone(power)
 	. = ..()
 	blood_flow -= 0.03 * power // i think it's like a minimum of 3 power, so .09 blood_flow reduction per tick is pretty good for 0 effort
 
 /// If someone's putting a laser gun up to our cut to cauterize it
 /datum/wound/slash/proc/las_cauterize(obj/item/gun/energy/laser/lasgun, mob/user)
-	var/self_penalty_mult = (user == victim ? 2 : 1)
+	var/time_mod = (user == victim ? 2 : 1)
+
+	//Ranged skill affects the speed of the do_mob lol
+	if(user.mind)
+		var/datum/skills/ranged/ranged = GET_SKILL(user, ranged)
+		if(ranged)
+			time_mod *= ((MAX_SKILL/2)/ranged.level)
+		
 	user.visible_message("<span class='warning'>[user] begins aiming [lasgun] directly at [victim]'s [fake_limb ? "[fake_limb] stump" : limb.name]...</span>", "<span class='userdanger'>You begin aiming [lasgun] directly at [user == victim ? "your" : "[victim]'s"] [fake_limb ? "[fake_limb] stump" : limb.name]...</span>")
-	if(!do_after(user, base_treat_time  * self_penalty_mult, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
+	if(!do_after(user, base_treat_time  * time_mod, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
+	
 	var/damage = lasgun.chambered.BB.damage
 	lasgun.chambered.BB.wound_bonus -= 30
-	lasgun.chambered.BB.damage *= self_penalty_mult
+	lasgun.chambered.BB.damage *= time_mod
 	if(!lasgun.process_fire(victim, victim, TRUE, null, limb.body_zone))
 		return
 	victim.emote("scream")
-	blood_flow -= damage / (5 * self_penalty_mult) // 20 / 5 = 4 bloodflow removed, p good
-	cauterized += damage / (5 * self_penalty_mult)
+	blood_flow -= damage / (5 * time_mod) // 20 / 5 = 4 bloodflow removed, p good
+	cauterized += damage / (5 * time_mod)
 	victim.visible_message("<span class='warning'>The cuts on [victim]'s [fake_limb ? "[fake_limb] stump" : limb.name] scar over!</span>")
 
 /// If someone is using either a cautery tool or something with heat to cauterize this cut
 /datum/wound/slash/proc/tool_cauterize(obj/item/I, mob/user)
-	var/self_penalty_mult = (user == victim ? 2 : 1)
 	user.visible_message("<span class='danger'>[user] begins cauterizing [victim]'s [fake_limb ? "[fake_limb] stump" : limb.name] with [I]...</span>", "<span class='danger'>You begin cauterizing [user == victim ? "your" : "[victim]'s"] [fake_limb ? "[fake_limb] stump" : limb.name] with [I]...</span>")
-	var/time_mod = 1
-	if(!do_after(user, base_treat_time * time_mod * self_penalty_mult, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
+	var/time_mod = (user == victim ? 2 : 1)
+
+	//Medical skill affects the speed of the do_mob
+	if(user.mind)
+		var/datum/skills/firstaid/firstaid = GET_SKILL(user, ranged)
+		if(firstaid)
+			time_mod *= firstaid.get_medicalstack_mod()
+	
+	if(!do_after(user, base_treat_time * time_mod, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 
 	user.visible_message("<span class='green'>[user] cauterizes some of the bleeding on [victim].</span>", "<span class='green'>You cauterize some of the bleeding on [victim].</span>")
 	limb.receive_damage(burn = 2 + severity, wound_bonus = CANT_WOUND)
 	if(prob(30))
 		victim.emote("scream")
-	var/blood_cauterized = (0.6 / max(1, self_penalty_mult))
+	var/blood_cauterized = (0.6 / max(1, time_mod))
 	blood_flow -= blood_cauterized
 	cauterized += blood_cauterized
 
@@ -248,17 +228,24 @@
 
 /// If someone is using a suture to close this cut
 /datum/wound/slash/proc/suture(obj/item/stack/medical/suture/I, mob/user)
-	var/self_penalty_mult = (user == victim ? 2 : 1)
 	user.visible_message("<span class='notice'>[user] begins stitching [victim]'s [fake_limb ? "[fake_limb] stump" : limb.name] with [I]...</span>", "<span class='notice'>You begin stitching [user == victim ? "your" : "[victim]'s"] [fake_limb ? "[fake_limb] stump" : limb.name] with [I]...</span>")
-	var/time_mod = 1 //no skills for now, cit skills are horrible
-	if(!do_after(user, base_treat_time * time_mod * self_penalty_mult, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
+	var/time_mod = (user == victim ? 2 : 1)
+
+	//Medical skill affects the speed of the do_mob
+	if(user.mind)
+		var/datum/skills/firstaid/firstaid = GET_SKILL(user, firstaid)
+		if(firstaid)
+			time_mod *= firstaid.get_medicalstack_mod()
+	
+	if(!do_after(user, base_treat_time * time_mod, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
+	
 	if(!I.use(1))
 		to_chat(user, "<span class='warning'>There aren't enough stacks of [I.name] to heal \the [src.name]!</span>")
 		return
 	
 	user.visible_message("<span class='green'>[user] stitches up some of the bleeding on [victim].</span>", "<span class='green'>You stitch up some of the bleeding on [user == victim ? "yourself" : "[victim]"].</span>")
-	var/blood_sutured = I.stop_bleeding / max(1, self_penalty_mult)
+	var/blood_sutured = I.stop_bleeding / max(1, time_mod)
 	blood_flow -= blood_sutured
 	sutured += blood_sutured
 	limb.heal_damage(I.heal_brute, I.heal_burn)
@@ -285,6 +272,9 @@
 	threshold_penalty = 10
 	status_effect_type = /datum/status_effect/wound/slash/moderate
 	scarring_descriptions = list("light, faded lines", "minor cut marks", "a small faded slit", "a series of small scars")
+	pain_amount = 8
+	infection_chance = 45
+	descriptive = "The skin is slashed!"
 
 /datum/wound/slash/severe
 	name = "Open Laceration"
@@ -304,6 +294,9 @@
 	demotes_to = /datum/wound/slash/moderate
 	status_effect_type = /datum/status_effect/wound/slash/severe
 	scarring_descriptions = list("a twisted line of faded gashes", "a gnarled sickle-shaped slice scar", "a long-faded puncture wound")
+	pain_amount = 15
+	infection_chance = 60
+	descriptive = "The flesh is torn!"
 
 /datum/wound/slash/critical
 	name = "Weeping Avulsion"
@@ -323,6 +316,9 @@
 	demotes_to = /datum/wound/slash/severe
 	status_effect_type = /datum/status_effect/wound/slash/critical
 	scarring_descriptions = list("a winding path of very badly healed scar tissue", "a series of peaks and valleys along a gruesome line of cut scar tissue", "a grotesque snake of indentations and stitching scars")
+	pain_amount = 20
+	infection_chance = 80
+	descriptive = "The flesh is lacerated!"
 
 /datum/wound/slash/critical/incision
 	name = "Incision"
@@ -334,9 +330,12 @@
 	severity = WOUND_SEVERITY_CRITICAL
 	viable_zones = ALL_BODYPARTS
 	wound_type = WOUND_LIST_INCISION
-	initial_flow = 1.5
+	initial_flow = 1
 	minimum_flow = 0
-	clot_rate = 0.025
+	clot_rate = 0
 	max_per_type = 5
 	demotes_to = null
 	scarring_descriptions = list("a precise line of scarred tissue", "a long line of slightly darker tissue")
+	pain_amount = 15
+	infection_chance = 90
+	descriptive = "The flesh is incised!"

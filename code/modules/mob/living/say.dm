@@ -95,7 +95,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	var/datum/saymode/saymode = SSradio.saymodes[talk_key]
 	var/message_mode = get_message_mode(message)
 	var/original_message = message
-	var/in_critical = InCritical()
+	var/in_critical = InFullCritical()
 
 	if(one_character_prefix[message_mode])
 		message = copytext_char(message, 2)
@@ -115,7 +115,8 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		return
 
 	if(stat == DEAD)
-		say_dead(original_message)
+		if(world.time > (timeofdeath + 1.5 MINUTES))
+			say_dead(original_message)
 		return
 
 	if(check_emote(original_message) || !can_speak_basic(original_message, ignore_spam))
@@ -158,19 +159,17 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 
 	var/succumbed = FALSE
 
-	var/fullcrit = InFullCritical()
-	if((InCritical() && !fullcrit) || message_mode == MODE_WHISPER)
+	if(in_critical || message_mode == MODE_WHISPER)
 		message_range = 1
 		message_mode = MODE_WHISPER
 		src.log_talk(message, LOG_WHISPER)
-		if(fullcrit)
-			var/health_diff = round(-HEALTH_THRESHOLD_DEAD + health)
+		if(in_critical)
+			var/health_diff = round(-HEALTH_THRESHOLD_DEAD + (get_physical_damage() - health))
 			// If we cut our message short, abruptly end it with a-..
 			var/message_len = length_char(message)
 			message = copytext_char(message, 1, health_diff) + "[message_len > health_diff ? "-.." : "..."]"
 			message = Ellipsis(message, 10, 1)
 			message_mode = MODE_WHISPER_CRIT
-			succumbed = TRUE
 	else
 		src.log_talk(message, LOG_SAY, forced_by=forced)
 

@@ -1,7 +1,11 @@
-//surplus rifle changes, because its fucking actual garbage, a fucking PIPE PISTOL is better.
+//Surplus rifle changes, because its fucking actual garbage, a fucking PIPE PISTOL is better.
 /obj/item/gun/ballistic/automatic/surplus
-	fire_delay = 7.5
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/rifle.dmi'
+	icon_state = "surplus"
+	fire_delay = 5
 	w_class = WEIGHT_CLASS_BULKY
+	safety_sound = 'modular_skyrat/sound/guns/safety2.ogg'
 
-/obj/item/ammo_box/magazine/m10mm/rifle
-	max_ammo = 7
+/obj/item/gun/ballistic/automatic/surplus/update_icon()
+	..()
+	icon_state = "[initial(icon_state)][chambered ? "" : "-e"][magazine ? "" : "-nomag"][safety ? "-safe" : ""]"

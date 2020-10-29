@@ -52,12 +52,18 @@
 		SSblackbox.ReportDeath(src)
 	if(is_devil(src))
 		INVOKE_ASYNC(is_devil(src), /datum/antagonist/devil.proc/beginResurrectionCheck, src)
+	
+	//Play the funny death sound
+	playsound_local(get_turf(src), 'modular_skyrat/sound/effects/death_sound.ogg', 100, 0)
+
+	//Color the client's view in greyscale
+	if(client)
+		handle_client_color()
 
 /mob/living/carbon/human/proc/makeSkeleton()
 	ADD_TRAIT(src, TRAIT_DISFIGURED, TRAIT_GENERIC)
 	set_species(/datum/species/skeleton)
 	return TRUE
-
 
 /mob/living/carbon/proc/Drain()
 	become_husk(CHANGELING_DRAIN)

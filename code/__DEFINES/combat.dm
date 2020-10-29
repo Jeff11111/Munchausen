@@ -5,6 +5,7 @@
 //Damage defines //TODO: merge these down to reduce on defines
 #define BRUTE		"brute"
 #define BURN		"fire"
+#define PAIN		"pain"
 #define TOX			"tox"
 #define OXY			"oxy"
 #define CLONE		"clone"
@@ -14,10 +15,11 @@
 //bitflag damage defines used for suicide_act
 #define BRUTELOSS 		(1<<0)
 #define FIRELOSS 		(1<<1)
-#define TOXLOSS 		(1<<2)
-#define OXYLOSS 		(1<<3)
-#define SHAME 			(1<<4)
-#define MANUAL_SUICIDE	(1<<5)	//suicide_act will do the actual killing.
+#define PAINLOSS		(1<<2)
+#define TOXLOSS 		(1<<3)
+#define OXYLOSS 		(1<<4)
+#define SHAME 			(1<<5)
+#define MANUAL_SUICIDE	(1<<6)	//suicide_act will do the actual killing.
 
 #define EFFECT_STUN		"stun"
 #define EFFECT_KNOCKDOWN		"knockdown"
@@ -111,13 +113,14 @@
 #define CLICK_CD_BREAKOUT 100
 #define CLICK_CD_HANDCUFFED 10
 #define CLICK_CD_RESIST 20
-#define CLICK_CD_GRABBING 10
+#define CLICK_CD_GRABBING 20 //VERY long because we use a different grab system
 
 //Cuff resist speeds
 #define FAST_CUFFBREAK 1
 #define INSTANT_CUFFBREAK 2
 
-//Grab levels
+//Grab levels (we only use passive and aggressive)
+#define GRAB_NOTGRABBING			0
 #define GRAB_PASSIVE				0
 #define GRAB_AGGRESSIVE				1
 #define GRAB_NECK					2
@@ -249,6 +252,7 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 #define BODY_ZONE_R_LEG		"r_leg"
 #define BODY_ZONE_PRECISE_EYES		"eyes"
 #define BODY_ZONE_PRECISE_MOUTH		"mouth"
+#define BODY_ZONE_PRECISE_THROAT	"throat"
 #define BODY_ZONE_PRECISE_GROIN		"groin"
 #define BODY_ZONE_PRECISE_L_HAND	"l_hand"
 #define BODY_ZONE_PRECISE_R_HAND	"r_hand"

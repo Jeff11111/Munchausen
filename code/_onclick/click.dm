@@ -90,7 +90,7 @@
 		CtrlShiftClickOn(A)
 		return
 	if(modifiers["middle"])
-		MiddleClickOn(A)
+		MiddleClickOn(A, params)
 		return
 	if(modifiers["shift"] && (client && client.show_popup_menus || modifiers["right"])) //CIT CHANGE - makes shift-click examine use right click instead of left click in combat mode
 		ShiftClickOn(A)
@@ -125,7 +125,7 @@
 		changeNext_move(CLICK_CD_HANDCUFFED)   //Doing shit in cuffs shall be vey slow
 		RestrainedClickOn(A)
 		return
-
+	
 	if(in_throw_mode)
 		throw_item(A)
 		return
@@ -136,7 +136,7 @@
 		W.attack_self(src)
 		update_inv_hands()
 		return
-
+	
 	//These are always reachable.
 	//User itself, current loc, and user inventory
 	if(A in DirectAccess())
@@ -164,7 +164,7 @@
 		if(W)
 			W.ranged_attack_chain(src, A, params)
 		else
-			RangedAttack(A,params)
+			RangedAttack(A, params)
 
 //Is the atom obscured by a PREVENT_CLICK_UNDER_1 object above it
 /atom/proc/IsObscured()
@@ -269,7 +269,7 @@
 	proximity_flag is not currently passed to attack_hand, and is instead used
 	in human click code to allow glove touches only at melee range.
 */
-/mob/proc/UnarmedAttack(atom/A, proximity_flag)
+/mob/proc/UnarmedAttack(atom/A, proximity_flag, attackchain_flags)
 	if(ismob(A))
 		changeNext_move(CLICK_CD_MELEE)
 	return
@@ -297,10 +297,72 @@
 	Middle click
 	Only used for swapping hands
 */
-/mob/proc/MiddleClickOn(atom/A)
-	return
+/mob/proc/MiddleClickOn(atom/A, params)
+	var/list/modifiers = params2list(params)
+	if(incapacitated())
+		return
 
-/mob/living/carbon/MiddleClickOn(atom/A)
+	if(next_move > world.time) // in the year 2000...
+		return
+
+	if(!modifiers["catcher"] && A.IsObscured())
+		return
+	
+	if(ismecha(loc))
+		var/obj/mecha/M = loc
+		return M.click_action(A,src,params)
+
+	if(restrained())
+		changeNext_move(CLICK_CD_HANDCUFFED)   //Doing shit in cuffs shall be vey slow
+		RestrainedClickOn(A)
+		return
+	
+	var/obj/item/W = get_active_held_item()
+	if(W == A)
+		if(!W.middleclick_attack_self(src))
+			return
+		update_inv_hands()
+		return
+
+	//These are always reachable.
+	//User itself, current loc, and user inventory
+	else if((A in DirectAccess()) && W)
+		if(W.middleclick_melee_attack_chain(src, A, params))
+			return
+
+/mob/living/carbon/MiddleClickOn(atom/A, params)
+	var/list/modifiers = params2list(params)
+	if(incapacitated())
+		return
+
+	if(next_move > world.time) // in the year 2000...
+		return
+
+	if(!modifiers["catcher"] && A.IsObscured())
+		return
+	
+	if(ismecha(loc))
+		var/obj/mecha/M = loc
+		return M.click_action(A,src,params)
+
+	if(restrained())
+		changeNext_move(CLICK_CD_HANDCUFFED)   //Doing shit in cuffs shall be vey slow
+		RestrainedClickOn(A)
+		return
+	
+	var/obj/item/W = get_active_held_item()
+	if(W == A)
+		if(!W.middleclick_attack_self(src))
+			return
+		update_inv_hands()
+		return
+
+	//These are always reachable.
+	//User itself, current loc, and user inventory
+	else if((A in DirectAccess()) && W)
+		if(W.middleclick_melee_attack_chain(src, A, params))
+			return
+	
 	if(!stat && mind && iscarbon(A) && A != src)
 		var/datum/antagonist/changeling/C = mind.has_antag_datum(/datum/antagonist/changeling)
 		if(C && C.chosen_sting)

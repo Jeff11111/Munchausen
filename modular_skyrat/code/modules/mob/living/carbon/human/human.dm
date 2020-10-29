@@ -104,3 +104,11 @@
 		if(BP.body_zone != BODY_ZONE_CHEST)
 			BP.drop_limb(TRUE, TRUE, FALSE, TRUE)
 	return TRUE
+
+/mob/living/carbon/human/death(gibbed)
+	. = ..()
+	SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "died", /datum/mood_event/died)
+	if(!fraggot)
+		for(var/mob/living/carbon/human/H in range(src))
+			if(H != src && (src in view(H)))
+				SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "saw_dead", /datum/mood_event/saw_dead)

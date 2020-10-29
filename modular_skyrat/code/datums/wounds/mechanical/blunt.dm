@@ -30,6 +30,7 @@
 	base_treat_time = 5 SECONDS
 	biology_required = list(HAS_BONE)
 	required_status = BODYPART_ROBOTIC
+	pain_amount = 3
 
 /*
 	Overwriting of base procs
@@ -218,6 +219,9 @@
 	scarring_descriptions = list("light discoloring", "a slight blue tint")
 	associated_alerts = list()
 	can_self_treat = TRUE
+	pain_amount = 10
+	flat_damage_roll_increase = 5
+	descriptive = "A joint is snapped!"
 
 /datum/wound/mechanical/blunt/moderate/self_treat(mob/living/carbon/user, first_time = FALSE)
 	. = ..()
@@ -226,17 +230,22 @@
 	
 	var/time = base_treat_time
 	var/time_mod = 2
-	var/prob_mod = 20
+	var/prob_mod = 12.5
 	
 	if(first_time)
 		user.visible_message("<span class='notice'>[user] starts to force their [limb.name]'s rotors back in place...</span>", "<span class='notice'>You start forcing your [limb.name]'s rotors back in place...</span>")
-	if(time_mod)
-		time *= time_mod
 
-	if(!do_after(user, time, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
+	//Electronics skill affects the speed of the do_mob
+	if(user.mind)
+		var/datum/skills/electronics/electronics = GET_SKILL(user, electronics)
+		if(electronics)
+			time_mod *= ((MAX_SKILL/2)/electronics.level)
+			prob_mod *= ((MAX_SKILL/2)/electronics.level)
+
+	if(!do_after(user, time * time_mod, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 
-	if(prob(30 + prob_mod))
+	if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, electronics) * 0.75) >= DICE_SUCCESS)
 		user.visible_message("<span class='danger'>[user] snaps their own [limb.name]'s rotors back in place!</span>", "<span class='danger'>You snap your own [limb.name]'s rotors back into place!</span>")
 		victim.emote("scream")
 		limb.receive_damage(brute=12, wound_bonus=CANT_WOUND)
@@ -274,13 +283,18 @@
 	var/time = base_treat_time
 	var/time_mod = 1
 	var/prob_mod = 10
-	if(time_mod)
-		time *= time_mod
 
-	if(!do_after(user, time, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
+	//Electronics skill affects the speed of the do_mob
+	if(user.mind)
+		var/datum/skills/electronics/electronics = GET_SKILL(user, electronics)
+		if(electronics)
+			time_mod *= ((MAX_SKILL/2)/electronics.level)
+			prob_mod *= ((MAX_SKILL/2)/electronics.level)
+
+	if(!do_after(user, time * time_mod, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 
-	if(prob(45 + prob_mod))
+	if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, electronics) * 0.75) >= DICE_SUCCESS)
 		user.visible_message("<span class='danger'>[user] forcefully connects [victim]'s disconnected [limb.name] actuators!</span>", "<span class='notice'>You forcefully connect [victim]'s disconnected [limb.name] actuators!</span>", ignored_mobs=victim)
 		to_chat(victim, "<span class='userdanger'>[user] snaps your desynchronized [limb.name] actuators back into place!</span>")
 		victim.emote("scream")
@@ -294,25 +308,30 @@
 
 /// If someone is snapping our dislocated joint into a fracture by hand with an aggro grab and harm or disarm intent
 /datum/wound/mechanical/blunt/moderate/proc/malpractice(mob/living/carbon/human/user)
-	var/time = base_treat_time
-	var/time_mod = 1
-	var/prob_mod = 10
-	if(time_mod)
-		time *= time_mod
-	if(!do_after(user, time, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
+	. = FALSE
+	if(user.next_move >= world.time)
 		return
+	var/dice = DICE_SUCCESS
+	if(user.mind)
+		dice = user.mind.diceroll(GET_STAT_LEVEL(user, str)*0.75, GET_SKILL_LEVEL(user, melee)*0.5)
 
-	if(prob(45 + prob_mod))
-		user.visible_message("<span class='danger'>[user] torques [victim]'s disconnected [limb.name] actuators with a loud pop!</span>", "<span class='danger'>You torque [victim]'s disconnected [limb.name] actuators with a loud pop!</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='userdanger'>[user] snaps your dislocated [limb.name] with a sickening crack!</span>")
-		victim.emote("scream")
-		limb.receive_damage(brute=12, wound_bonus=30 + prob_mod * 3, wound_bonus = CANT_WOUND)
+	if(dice >= DICE_SUCCESS)
+		user.visible_message("<span class='danger'>[user] torques [victim]'s disconnected [limb.name] actuators with a loud pop![victim.wound_message]</span>", "<span class='danger'>You torque [victim]'s disconnected [limb.name] actuators with a loud pop![victim.wound_message]</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='userdanger'>[user] snaps your dislocated [limb.name] with a sickening crack![victim.wound_message]</span>")
+		victim.agony_scream()
+		if(dice >= DICE_CRIT_SUCCESS)
+			replace_wound(/datum/wound/blunt/critical)
+		else
+			replace_wound(/datum/wound/blunt/severe)
+		limb.receive_damage(brute=GET_STAT_LEVEL(user, str)*0.75, wound_bonus = CANT_WOUND)
 	else
-		user.visible_message("<span class='danger'>[user] grinds [victim]'s disconnected [limb.name] actuators around!</span>", "<span class='danger'>You grind [victim]'s disconnected [limb.name] actuators around painfully!</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='userdanger'>[user] grinds your dislocated [limb.name] actuators around!</span>")
-		limb.receive_damage(brute=8, wound_bonus=CANT_WOUND)
-		malpractice(user)
-
+		user.visible_message("<span class='danger'>[user] grinds [victim]'s disconnected [limb.name] actuators around![victim.wound_message]</span>", "<span class='danger'>You grind [victim]'s disconnected [limb.name] actuators around painfully![victim.wound_message]</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='userdanger'>[user] grinds your dislocated [limb.name] actuators around![victim.wound_message]</span>")
+		limb.receive_damage(brute=GET_STAT_LEVEL(user, str)*0.5, wound_bonus = CANT_WOUND)
+	//Clean the wound string either way
+	victim.wound_message = ""
+	user.changeNext_move(CLICK_CD_GRABBING)
+	return TRUE
 
 /datum/wound/mechanical/blunt/moderate/treat(obj/item/I, mob/user)
 	if(victim == user)
@@ -324,10 +343,12 @@
 		return
 
 	if(victim == user)
-		limb.receive_damage(brute=15, wound_bonus=CANT_WOUND)
+		if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, electronics) * 0.75) < DICE_SUCCESS)
+			limb.receive_damage(brute=15, wound_bonus=CANT_WOUND)
 		victim.visible_message("<span class='danger'>[user] finishes resetting [victim.p_their()] [limb.name]!</span>", "<span class='userdanger'>You reset your [limb.name]!</span>")
 	else
-		limb.receive_damage(brute=7, wound_bonus=CANT_WOUND)
+		if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, electronics) * 0.75) < DICE_SUCCESS)
+			limb.receive_damage(brute=7, wound_bonus=CANT_WOUND)
 		user.visible_message("<span class='danger'>[user] finishes resetting [victim]'s [limb.name]!</span>", "<span class='nicegreen'>You finish resetting [victim]'s [limb.name]!</span>", victim)
 		to_chat(victim, "<span class='userdanger'>[user] resets your [limb.name]!</span>")
 
@@ -358,6 +379,9 @@
 	brain_trauma_group = BRAIN_TRAUMA_MILD
 	trauma_cycle_cooldown = 1.5 MINUTES
 	shock_chance = 30
+	pain_amount = 20
+	flat_damage_roll_increase = 10
+	descriptive = "A joint is fractured!"
 
 /*
 	Critical (Broken Actuators)
@@ -383,6 +407,10 @@
 	brain_trauma_group = BRAIN_TRAUMA_SEVERE
 	trauma_cycle_cooldown = 2.5 MINUTES
 	shock_chance = 45
+	pain_amount = 30
+	flat_damage_roll_increase = 15
+	wound_flags = (MANGLES_BONE)
+	descriptive = "A joint is shattered!"
 
 /// if someone is using a reagent container
 /datum/wound/mechanical/blunt/proc/wrench(obj/item/I, mob/user)

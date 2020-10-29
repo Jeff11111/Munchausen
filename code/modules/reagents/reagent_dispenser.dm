@@ -150,6 +150,11 @@
 			playsound(src, 'sound/effects/refill.ogg', 50, 1)
 			W.update_icon()
 		else
+			//You need to be a dentbrain to do fuel tank explodie funny
+			if(user.mind && (user.mind.diceroll(STAT_DATUM(int)) > DICE_CRIT_FAILURE))
+				to_chat(user, "<span class='warning'>That would be stupid. Why would i ever do that?</span>")
+				return FALSE
+			
 			var/turf/T = get_turf(src)
 			user.visible_message("<span class='warning'>[user] catastrophically fails at refilling [user.p_their()] [W.name]!</span>", "<span class='userdanger'>That was stupid of you.</span>")
 

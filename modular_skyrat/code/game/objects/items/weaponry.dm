@@ -180,18 +180,18 @@
 
 /obj/item/ebonyblade/Initialize()
 	. = ..()
-	RegisterSignal(src, COMSIG_TWOHANDED_WIELD, .proc/wield)
-	RegisterSignal(src, COMSIG_TWOHANDED_UNWIELD, .proc/unwield)
+	RegisterSignal(src, COMSIG_TWOHANDED_WIELD, .proc/on_wield)
+	RegisterSignal(src, COMSIG_TWOHANDED_UNWIELD, .proc/on_unwield)
 
 /obj/item/ebonyblade/ComponentInitialize()
 	AddComponent(/datum/component/butchering, 100, 110)
 	AddComponent(/datum/component/two_handed, force_unwielded=5, force_wielded=13, icon_wielded="ebonyblade1")
 
-/obj/item/ebonyblade/proc/unwield(mob/living/carbon/user, show_message = TRUE)
+/obj/item/ebonyblade/proc/on_unwield(mob/living/carbon/user, show_message = TRUE)
 	block_chance = initial(block_chance)
 	lifesteal = initial(current_lifesteal)
 
-/obj/item/ebonyblade/proc/wield(mob/living/carbon/user, show_message = TRUE)
+/obj/item/ebonyblade/proc/on_wield(mob/living/carbon/user, show_message = TRUE)
 	block_chance = block_chance_wielded
 	current_lifesteal = lifesteal
 
@@ -706,6 +706,69 @@
 	desc = "The safeword is police brutality."
 	icon = 'modular_skyrat/icons/obj/items_and_weapons.dmi'
 	icon_state = "blackbaton"
+	item_state = "blackbaton"
 	lefthand_file = 'modular_skyrat/icons/mob/inhands/weapons/melee_lefthand.dmi'
 	righthand_file = 'modular_skyrat/icons/mob/inhands/weapons/melee_righthand.dmi'
-	item_state = "blackbaton"
+
+//Butcher knife
+/obj/item/kitchen/knife/butcher
+	icon = 'modular_skyrat/icons/obj/bobstation/melee/cleaver.dmi'
+	icon_state = "cleaver"
+	item_state = "cleaver"
+	lefthand_file = 'modular_skyrat/icons/obj/bobstation/melee/inhands/cleaver_lefthand.dmi'
+	righthand_file = 'modular_skyrat/icons/obj/bobstation/melee/inhands/cleaver_righthand.dmi'
+
+//HoS sabre
+/obj/item/melee/sabre/hos
+	name = "soulbreaker sabre"
+	desc = "An elegant weapon, fit for the execution of those who break (sharia) law."
+	icon = 'modular_skyrat/icons/obj/bobstation/melee/sabre.dmi'
+	icon_state = "sabre"
+	item_state = "sabre"
+	lefthand_file = 'modular_skyrat/icons/obj/bobstation/melee/inhands/sabre_lefthand.dmi'
+	righthand_file = 'modular_skyrat/icons/obj/bobstation/melee/inhands/sabre_righthand.dmi'
+	attack_verb = list("slashed", "cut", "gutted")
+	force = 21
+	throwforce = 15
+	armour_penetration = 20 //Trade penetration for damage buff and weight loss
+	w_class = WEIGHT_CLASS_NORMAL
+	total_mass = 2.5
+
+/obj/item/melee/sabre/hos/get_belt_overlay()
+	return mutable_appearance(src.icon, "sabre-overlay")
+
+/obj/item/storage/belt/sabre/hos
+	name = "sabre sheath"
+	desc = "An ornate sheath designed to hold an officer's sabre."
+	icon = 'modular_skyrat/icons/obj/bobstation/melee/sabre.dmi'
+	lefthand_file = 'modular_skyrat/icons/obj/bobstation/melee/inhands/sabre_lefthand.dmi'
+	righthand_file = 'modular_skyrat/icons/obj/bobstation/melee/inhands/sabre_righthand.dmi'
+	icon_state = "sabre_sheath"
+	item_state = "sabre_sheath"
+	starting_sword = /obj/item/melee/sabre/hos
+	content_overlays = TRUE
+	onmob_overlays = FALSE
+
+/obj/item/storage/belt/sabre/hos/get_belt_overlay()
+	return mutable_appearance(src.icon, "sabre_sheath[length(contents) ? "-full" : ""]")
+
+//Head of staff mace
+/obj/item/melee/mace
+	name = "steel mace"
+	desc = "The grandson of the club, yet the grandfather of the baseball bat. Used to subdue unruly employees."
+	icon = 'modular_skyrat/icons/obj/bobstation/melee/mace.dmi'
+	icon_state = "mace"
+	item_state = "mace"
+	lefthand_file = 'modular_skyrat/icons/obj/bobstation/melee/inhands/mace_lefthand.dmi'
+	righthand_file = 'modular_skyrat/icons/obj/bobstation/melee/inhands/mace_righthand.dmi'
+	attacksound = 'modular_skyrat/sound/weapons/club.ogg'
+	force = 18
+	throwforce = 14
+	wound_bonus = 5 //Great at breaking bones!
+	bare_wound_bonus = 5 //Very great in fact!
+	w_class = WEIGHT_CLASS_NORMAL
+	total_mass = 3
+	slot_flags = ITEM_SLOT_BELT
+
+/obj/item/melee/mace/get_belt_overlay()
+	return mutable_appearance('modular_skyrat/icons/obj/bobstation/melee/belt.dmi', "mace")

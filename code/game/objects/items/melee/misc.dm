@@ -251,7 +251,7 @@
 	lefthand_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/security_righthand.dmi'
 	slot_flags = ITEM_SLOT_BELT
-	force = 12 //9 hit crit
+	force = 18
 	w_class = WEIGHT_CLASS_NORMAL
 	var/stun_stam_cost_coeff = 1.25
 	var/hardstun_ds = TRUE
@@ -274,6 +274,7 @@
 
 	//skyrat edit
 	wound_bonus = 15
+	var/pain = 20 //Batons actually hurt a lot, there is a reason they stun
 	//
 
 /obj/item/melee/classic_baton/Initialize()
@@ -311,7 +312,7 @@
 // Are we applying any special effects when we stun to silicon
 /obj/item/melee/classic_baton/proc/additional_effects_silicon(mob/living/target, mob/living/user)
 	return
-
+/* Fuck stun combat.
 /obj/item/melee/classic_baton/attack(mob/living/target, mob/living/user)
 	if(!on)
 		return ..()
@@ -323,7 +324,12 @@
 	add_fingerprint(user)
 	if((HAS_TRAIT(user, TRAIT_CLUMSY)) && prob(50))
 		to_chat(user, "<span class ='danger'>You club yourself over the head.</span>")
-		user.DefaultCombatKnockdown(60 * force)
+		var/mob/living/C = target
+		if(istype(C) && target.chem_effects[CE_PAINKILLER] < 35)
+			var/apply_knock = 60 * force * max(0.1, 1 - (target.chem_effects[CE_PAINKILLER]/100))
+			user.DefaultCombatKnockdown(apply_knock)
+		else if(!istype(C))
+			user.DefaultCombatKnockdown(60 * force)
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
 			H.apply_damage(2*force, BRUTE, BODY_ZONE_HEAD)
@@ -364,7 +370,17 @@
 			if(stun_animation)
 				user.do_attack_animation(target)
 			playsound(get_turf(src), on_stun_sound, 75, 1, -1)
-			target.DefaultCombatKnockdown(softstun_ds, TRUE, FALSE, hardstun_ds, stam_dmg)
+			var/mob/living/carbon/C = target
+			if(istype(C) && target.chem_effects[CE_PAINKILLER] < 35)
+				var/apply_knock = max(0.1, 1 - (C.chem_effects[CE_PAINKILLER]/100)) * softstun_ds
+				target.DefaultCombatKnockdown(apply_knock, TRUE, FALSE, hardstun_ds, stam_dmg)
+			else if(!istype(C))
+				target.DefaultCombatKnockdown(softstun_ds, TRUE, FALSE, hardstun_ds, stam_dmg)
+			if(iscarbon(target))
+				var/obj/item/bodypart/bodypart = C.get_bodypart(user.zone_selected)
+				var/apply_pain = pain * max(0.1, 1 - (C.chem_effects[CE_PAINKILLER]/100))
+				if(bodypart)
+					bodypart.receive_damage(pain = apply_pain)
 			additional_effects_carbon(target, user)
 			log_combat(user, target, "stunned", src)
 			add_fingerprint(user)
@@ -379,7 +395,7 @@
 			var/wait_desc = get_wait_description()
 			if(wait_desc)
 				to_chat(user, wait_desc)
-
+*/
 /obj/item/melee/classic_baton/telescopic
 	name = "telescopic baton"
 	desc = "A compact yet robust personal defense weapon. Can be concealed when folded."
@@ -391,13 +407,13 @@
 	slot_flags = ITEM_SLOT_BELT
 	w_class = WEIGHT_CLASS_SMALL
 	item_flags = NONE
-	force = 0
+	force = 5
 	on = FALSE
 	on_sound = 'sound/weapons/batonextend.ogg'
 	on_icon_state = "telebaton_1"
 	off_icon_state = "telebaton_0"
 	on_item_state = "nullrod"
-	force_on = 10
+	force_on = 18
 	force_off = 0
 	weight_class_on = WEIGHT_CLASS_BULKY
 	total_mass = TOTAL_MASS_NORMAL_ITEM
@@ -464,7 +480,7 @@
 	on_icon_state = "contractor_baton_1"
 	off_icon_state = "contractor_baton_0"
 	on_item_state = "contractor_baton"
-	force_on = 16
+	force_on = 20
 	force_off = 5
 	weight_class_on = WEIGHT_CLASS_NORMAL
 
@@ -474,7 +490,9 @@
 /obj/item/melee/classic_baton/telescopic/contractor_baton/additional_effects_carbon(mob/living/target, mob/living/user)
 	target.Jitter(20)
 	target.apply_effect(EFFECT_STUTTER, 20)
-	target.apply_status_effect(/datum/status_effect/electrostaff, 30)	//knockdown, disarm, and slowdown, the unholy triumvirate of stam combat
+	var/mob/living/carbon/C = target
+	if(istype(C))
+		target.apply_status_effect(/datum/status_effect/electrostaff, (30 * max(0.1, 1 - (target.chem_effects[CE_PAINKILLER]/100))))	//knockdown, disarm, and slowdown, the unholy triumvirate of stam combat
 
 /obj/item/melee/supermatter_sword
 	name = "supermatter sword"

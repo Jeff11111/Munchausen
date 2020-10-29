@@ -148,7 +148,7 @@
 				return TRUE
 			return FALSE
 	return ..()
-
+/* New grabbing system in modular_skyrat
 /atom/movable/proc/start_pulling(atom/movable/AM, state, force = move_force, supress_message = FALSE)
 	if(QDELETED(AM))
 		return FALSE
@@ -228,7 +228,7 @@
 			return
 	if(pulledby && moving_diagonally != FIRST_DIAG_STEP && get_dist(src, pulledby) > 1)		//separated from our puller and not in the middle of a diagonal move.
 		pulledby.stop_pulling()
-
+*/
 /atom/movable/Destroy(force)
 	QDEL_NULL(proximity_monitor)
 	QDEL_NULL(language_holder)
@@ -274,6 +274,9 @@
 	if((force < (move_resist * MOVE_FORCE_THROW_RATIO)) || (move_resist == INFINITY))
 		return
 	return throw_at(target, range, speed, thrower, spin, diagonals_first, callback, force, messy_throw)
+
+/atom/movable
+	var/datum/thrownthing/current_throw
 
 /atom/movable/proc/throw_at(atom/target, range, speed, mob/thrower, spin = TRUE, diagonals_first = FALSE, datum/callback/callback, force = INFINITY, messy_throw = TRUE) //If this returns FALSE then callback will not be called.
 	. = FALSE
@@ -415,9 +418,10 @@
 
 
 /atom/movable/proc/do_attack_animation(atom/A, visual_effect_icon, obj/item/used_item, no_effect)
+	/* Commented out because it looks fucking stupid.
 	if(!no_effect && (visual_effect_icon || used_item))
 		do_item_attack_animation(A, visual_effect_icon, used_item)
-
+	*/
 	if(A == src)
 		return //don't do an animation if attacking self
 	var/pixel_x_diff = 0
@@ -601,7 +605,7 @@
 //Returns an atom's power cell, if it has one. Overload for individual items.
 /atom/movable/proc/get_cell()
 	return
-
+/* New grabbing in modular_skyrat
 /atom/movable/proc/can_be_pulled(user, grab_state, force)
 	if(src == user || !isturf(loc))
 		return FALSE
@@ -615,7 +619,7 @@
 /// This exists to act as a hook for behaviour
 /atom/movable/proc/setGrabState(newstate)
 	grab_state = newstate
-
+*/
 /obj/item/proc/do_pickup_animation(atom/target)
 	set waitfor = FALSE
 	if(!istype(loc, /turf))

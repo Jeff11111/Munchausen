@@ -25,8 +25,12 @@
 
 	if(stat != DEAD)
 		handle_liver()
+	
+	if(stat != DEAD)
+		handle_kidneys()
 
-	//Updates the number of stored chemicals for powers
+	if(stat != DEAD)
+		handle_shock()
 
 /mob/living/carbon/PhysicalLife(seconds, times_fired)
 	if(!(. = ..()))
@@ -34,6 +38,9 @@
 	if(damageoverlaytemp)
 		damageoverlaytemp = 0
 		update_damage_hud()
+	// Increase germ_level regularly
+	if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
+		germ_level++
 
 //Procs called while dead
 /mob/living/carbon/proc/handle_death()
@@ -88,21 +95,21 @@
 
 	var/datum/gas_mixture/breath
 
-	if(!getorganslot(ORGAN_SLOT_BREATHING_TUBE))
-		if(health <= HEALTH_THRESHOLD_FULLCRIT || (pulledby && pulledby.grab_state >= GRAB_KILL) || HAS_TRAIT(src, TRAIT_MAGIC_CHOKE) || (lungs && lungs.organ_flags & ORGAN_FAILING))
-			losebreath++  //You can't breath at all when in critical or when being choked, so you're going to miss a breath
-
-		else if(health <= crit_threshold)
-			losebreath += 0.25 //You're having trouble breathing in soft crit, so you'll miss a breath one in four times
-
+	if(!getorganslot(ORGAN_SLOT_BREATHING_TUBE) && !chem_effects[CE_STABLE])
+		if(is_asystole() || nervous_system_failure() || (pulledby && pulledby.grab_state >= GRAB_KILL) || HAS_TRAIT(src, TRAIT_MAGIC_CHOKE) || (lungs && CHECK_BITFIELD(lungs.organ_flags, ORGAN_FAILING | ORGAN_DEAD)))
+			losebreath++  //You can't breath at all!
+		else if(InShock())
+			losebreath += 0.25 //You're having trouble breathing.
+	
+	if(pulledby && pulledby.grab_state >= GRAB_KILL)
+		visible_message("<span class='danger'>[pulledby] strangles [src]!</span>", "<span class='userdanger'>[pulledby] strangles you!</span>", ignored_mobs = pulledby)
+		to_chat(pulledby, "<span class='danger'>You strangle [src]!</span>")
+	
 	//Suffocate
 	if(losebreath >= 1) //You've missed a breath, take oxy damage
 		losebreath--
-		if(prob(10))
+		if(prob(10) && !nervous_system_failure()) //Gasp per 10 ticks? Sounds about right.
 			emote("gasp")
-		if(istype(loc, /obj/))
-			var/obj/loc_as_obj = loc
-			loc_as_obj.handle_internal_lifeform(src,0)
 	else
 		//Breathe from internal
 		breath = get_breath_from_internal(BREATH_VOLUME)
@@ -123,7 +130,9 @@
 			if(istype(loc, /obj/))
 				var/obj/loc_as_obj = loc
 				loc_as_obj.handle_internal_lifeform(src,0)
-
+			//Do annoying breathing sounds
+			playsound(get_turf(src), 'modular_skyrat/sound/misc/tank_breathe.ogg', 40, 1, -6)
+	
 	check_breath(breath)
 
 	if(breath)
@@ -185,7 +194,7 @@
 		SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "suffocation", /datum/mood_event/suffocation)
 
 	if(O2_partialpressure < safe_oxy_min) //Not enough oxygen
-		if(prob(20))
+		if(prob(20) && !nervous_system_failure())
 			emote("gasp")
 		if(O2_partialpressure > 0)
 			var/ratio = 1 - O2_partialpressure/safe_oxy_min
@@ -201,7 +210,7 @@
 	else //Enough oxygen
 		failed_last_breath = 0
 		o2overloadtime = 0 //reset our counter for this too
-		if(health >= crit_threshold)
+		if(!is_asystole() && !nervous_system_failure())
 			adjustOxyLoss(-5)
 		oxygen_used = breath_gases[/datum/gas/oxygen]
 		clear_alert("not_enough_oxy")
@@ -388,6 +397,18 @@
 		var/obj/item/bodypart/BP = I
 		if(BP.needs_processing)
 			. |= BP.on_life()
+			if(!lying && !buckled && world.time - last_move_time < 15)
+				//Moving around with broken bones won't do you any good
+				if(!stat && BP.is_broken() && BP.get_organs() && prob(10) && !stat && can_feel_pain() && chem_effects[CE_PAINKILLER] < 50)
+					custom_pain("Pain jolts through your broken [BP.encased ? BP.encased : BP.name], staggering you!", 50, affecting = BP)
+					Stun(200)
+				//Moving makes open wounds get infected much faster
+				for(var/datum/wound/W in BP.wounds)
+					if(W.infection_check())
+						W.germ_level += W.infection_rate
+		
+		//Always try to update the germ level of bodyparts
+		BP.update_germs()
 
 /mob/living/carbon/proc/handle_organs()
 	if(stat != DEAD)
@@ -396,12 +417,20 @@
 			if(O)
 				O.on_life()
 	else
-		if(reagents.has_reagent(/datum/reagent/toxin/formaldehyde, 1) || reagents.has_reagent(/datum/reagent/medicine/preservahyde, 1)) // No  organ decay if the body contains formaldehyde. Orpreservahyde. Skyrat Edit - repaths perservahyde
+		if(reagents.has_reagent(/datum/reagent/toxin/formaldehyde, 1) || reagents.has_reagent(/datum/reagent/medicine/preservahyde, 1)) // No  organ decay if the body contains formaldehyde. Or preservahyde. Skyrat Edit - repaths perservahyde
 			return
 		for(var/V in internal_organs)
 			var/obj/item/organ/O = V
 			if(O)
 				O.on_death() //Needed so organs decay while inside the body.
+		
+		//Rot the bodyparts too if we are dead
+		//This is stupid but makes my life easier
+		for(var/bopa in bodyparts)
+			var/obj/item/bodypart/BP = bopa
+			if(BP)
+				BP.on_death()
+				BP.update_germs()
 
 /mob/living/carbon/handle_diseases()
 	for(var/thing in diseases)
@@ -456,6 +485,7 @@
 	if(radiation > RAD_MOB_SAFE)
 		adjustToxLoss(log(radiation-RAD_MOB_SAFE)*RAD_TOX_COEFFICIENT)
 
+//i literally do not know what the fuck this code is but i assume its bad stuff
 /mob/living/carbon/handle_stomach()
 	set waitfor = 0
 	for(var/mob/living/M in stomach_contents)
@@ -472,7 +502,7 @@
 				if(!(M.status_flags & GODMODE))
 					M.adjustBruteLoss(5)
 				adjust_nutrition(10)
-
+				adjust_hydration(10)
 
 /*
 Alcohol Poisoning Chart
@@ -610,10 +640,10 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 			throw_alert("drunk", /obj/screen/alert/drunk)
 		else if(drunkenness > 121)
 			throw_alert("drunk", /obj/screen/alert/drunk/drunker)
-			ADD_TRAIT(src, TRAIT_PAINKILLER, "drunk")
+			add_up_to_chem_effect(CE_PAINKILLER, 25)
 		else if(drunkenness <= 20) //drunk goes away very slowly so we need to be nice here to the players and NOT pollute their screen
 			clear_alert("drunk")
-			REMOVE_TRAIT(src, TRAIT_PAINKILLER, "drunk")
+			remove_chem_effect(CE_PAINKILLER, 25)
 		//
 		if(drunkenness >= 40) //skyrat-edit
 			SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "drunk", /datum/mood_event/drunk)
@@ -707,7 +737,7 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 	var/obj/item/organ/liver/liver = getorganslot(ORGAN_SLOT_LIVER)
 	if((!dna && !liver) || (NOLIVER in dna.species.species_traits))
 		return
-	if(!liver || liver.organ_flags & ORGAN_FAILING)
+	if(!liver || CHECK_BITFIELD(liver.organ_flags, ORGAN_FAILING | ORGAN_DEAD))
 		liver_failure()
 
 /mob/living/carbon/proc/liver_failure()
@@ -715,10 +745,35 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 	reagents.metabolize(src, can_overdose=FALSE, liverless = TRUE)
 	if(HAS_TRAIT(src, TRAIT_STABLELIVER))
 		return
-	adjustToxLoss(4, TRUE,  TRUE)
+	adjustToxLoss(2, TRUE, TRUE)
 	if(prob(15))
 		to_chat(src, "<span class='danger'>You feel a stabbing pain in your abdomen!</span>")
 
+///////////
+//KIDNEYS//
+///////////
+/mob/living/carbon/proc/handle_kidneys()
+	var/obj/item/organ/kidneys/kidneys = getorganslot(ORGAN_SLOT_LIVER)
+	if((!dna && !kidneys) || (NOKIDNEYS in dna.species.species_traits))
+		return
+	if(!kidneys || CHECK_BITFIELD(kidneys.organ_flags, ORGAN_FAILING | ORGAN_DEAD))
+		liver_failure()
+
+/mob/living/carbon/proc/kidney_failure()
+	if(prob(10))
+		to_chat(src, "<span class='danger'>You feel a stabbing pain in your groin!</span>")
+		vomit(5, 5, TRUE)
+	else if(prob(10))
+		to_chat(src, "<span class='danger'>You feel a stabbing pain in your groin!</span>")
+		var/obj/item/bodypart/groin/groin = get_bodypart(BODY_ZONE_PRECISE_GROIN)
+		if(groin)
+			groin.receive_damage(toxin = 8)
+	else if(prob(5))
+		var/obj/item/bodypart/groin/groin = get_bodypart(BODY_ZONE_PRECISE_GROIN)
+		if(groin)
+			//le kidney stones
+			groin.generic_bleedstacks += 5
+			to_chat(src, "<span class='danger'>Blood leaks from your [groin.name]...")
 
 ////////////////
 //BRAIN DAMAGE//
@@ -736,8 +791,9 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 /mob/living/carbon/proc/can_heartattack()
 	if(!needs_heart())
 		return FALSE
+	
 	var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
-	if(!heart || (heart.organ_flags & ORGAN_SYNTHETIC))
+	if(!heart || CHECK_BITFIELD(heart.organ_flags, ORGAN_SYNTHETIC) || CHECK_BITFIELD(heart.status, ORGAN_ROBOTIC))
 		return FALSE
 	return TRUE
 
@@ -750,7 +806,7 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 
 /mob/living/carbon/proc/undergoing_cardiac_arrest()
 	var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
-	if(istype(heart) && heart.beating)
+	if(istype(heart) && heart.pulse)
 		return FALSE
 	else if(!needs_heart())
 		return FALSE
@@ -764,11 +820,14 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 	if(!istype(heart))
 		return
 
-	heart.beating = !status
+	if(status)
+		heart.Stop()
+	else
+		heart.Restart()
 
 //skyrat edit
 /mob/living/carbon/handle_wounds()
 	for(var/thing in all_wounds)
 		var/datum/wound/W = thing
-		if(istype(W) && W.processes) // meh
+		if(istype(W) && W.processes) //meh
 			W.handle_process()

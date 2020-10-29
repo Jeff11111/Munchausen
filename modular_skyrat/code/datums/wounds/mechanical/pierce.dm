@@ -28,6 +28,7 @@
 	biology_required = list(HAS_FLESH)
 	required_status = BODYPART_ROBOTIC
 	can_self_treat = TRUE
+	wound_flags = (MANGLES_SKIN | MANGLES_MUSCLE)
 
 /datum/wound/mechanical/pierce/self_treat(mob/living/carbon/user, first_time = FALSE)
 	. = ..()
@@ -35,10 +36,7 @@
 		return TRUE
 	
 	if(victim && limb?.body_zone)
-		var/obj/screen/zone_sel/sel = victim.hud_used?.zone_select
-		if(istype(sel))
-			sel.set_selected_zone(limb?.body_zone)
-			victim.grabbedby(victim)
+		victim.attempt_self_grasp(victim, limb.body_zone)
 		return
 
 /datum/wound/mechanical/pierce/wound_injury(datum/wound/old_wound)
@@ -101,9 +99,15 @@
 		user.visible_message("<span class='notice'>[user] begins welding \the [patch] on [victim]'s [limb.name] with \the [I]...</span>", "<span class='notice'>You begin welding \the [patch] [user == victim ? "your" : "[victim]'s"] [limb.name] with \the [I]...</span>")
 	else
 		user.visible_message("<span class='notice'>[user] begins welding \the [lowertext(name)] on [victim]'s [limb.name] with \the [I]...</span>", "<span class='notice'>You begin welding \the [lowertext(name)] on [user == victim ? "your" : "[victim]'s"] [limb.name] with \the [I]...</span>")
-	var/self_penalty_mult = (user == victim ? 2 : 1)
-	var/time_mod = 1
-	if(!do_after(user, base_treat_time * time_mod * self_penalty_mult, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
+	var/time_mod = (user == victim ? 2 : 1)
+
+	//Electronics skill affects the speed of the do_mob
+	if(user.mind)
+		var/datum/skills/electronics/electronics = GET_SKILL(user, electronics)
+		if(electronics)
+			time_mod *= ((MAX_SKILL/2)/electronics.level)
+	
+	if(!do_after(user, base_treat_time * time_mod, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 
 	limb.heal_damage(10, 10)
@@ -112,7 +116,7 @@
 		user.visible_message("<span class='green'>[user] welds \the [patch] on [victim]'s [limb.name] with [I].</span>", "<span class='green'>You weld \the patch on [user == victim ? "your" : "[victim]'s"] [limb.name] with [I].</span>")
 	else
 		user.visible_message("<span class='green'>[user] welds \the [lowertext(name)] [victim]'s [limb.name] with [I].</span>", "<span class='green'>You weld \the [lowertext(name)] on [user == victim ? "your" : "[victim]'s"] [limb.name] with [I].</span>")
-	var/blood_cauterized = (1 / self_penalty_mult) * max(0.5, patched)
+	var/blood_cauterized = (1 / time_mod) * max(0.5, patched)
 	blood_flow -= blood_cauterized
 
 	if(repeat_patch)
@@ -130,9 +134,15 @@
 		to_chat(user, "<span class='warning'>The limb has already been patched!</span>")
 		return
 	user.visible_message("<span class='notice'>[user] begins wrapping [victim]'s [limb.name] with \the [I]...</span>", "<span class='notice'>You begin wrapping [user == victim ? "your" : "[victim]'s"] [limb.name] with \the [I]...</span>")
-	var/self_penalty_mult = (user == victim ? 2 : 1)
-	var/time_mod = 1
-	if(!do_after(user, base_treat_time * time_mod * self_penalty_mult, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
+	var/time_mod = (user == victim ? 2 : 1)
+
+	//Electronics skill affects the speed of the do_mob
+	if(user.mind)
+		var/datum/skills/electronics/electronics = GET_SKILL(user, electronics)
+		if(electronics)
+			time_mod *= ((MAX_SKILL/2)/electronics.level)
+	
+	if(!do_after(user, base_treat_time * time_mod, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 	
 	if(!I.use(max(1, severity - WOUND_SEVERITY_TRIVIAL)))
@@ -174,9 +184,11 @@
 	internal_bleeding_chance = 30
 	internal_bleeding_coefficient = 1.25
 	threshold_minimum = 30
-	threshold_penalty = 15
+	threshold_penalty = 20
 	status_effect_type = /datum/status_effect/wound/pierce/moderate
 	scarring_descriptions = list("a small, faded bruise", "a small twist of reformed skin", "a thumb-sized puncture scar")
+	pain_amount = 8
+	descriptive = "The exoskeleton is penetrated!"
 
 /datum/wound/mechanical/pierce/severe
 	name = "Open Dent"
@@ -193,9 +205,11 @@
 	internal_bleeding_chance = 60
 	internal_bleeding_coefficient = 1.5
 	threshold_minimum = 50
-	threshold_penalty = 25
+	threshold_penalty = 35
 	status_effect_type = /datum/status_effect/wound/pierce/severe
 	scarring_descriptions = list("an ink-splat shaped pocket of scar tissue", "a long-faded puncture wound", "a tumbling puncture hole with evidence of faded stitching")
+	pain_amount = 15
+	descriptive = "The exoskeleton is punctured!"
 
 /datum/wound/mechanical/pierce/critical
 	name = "Ruptured Hydraulics"
@@ -212,6 +226,8 @@
 	internal_bleeding_chance = 80
 	internal_bleeding_coefficient = 1.75
 	threshold_minimum = 100
-	threshold_penalty = 40
+	threshold_penalty = 50
 	status_effect_type = /datum/status_effect/wound/pierce/critical
 	scarring_descriptions = list("a rippling shockwave of scar tissue", "a wide, scattered cloud of shrapnel marks", "a gruesome multi-pronged puncture scar")
+	pain_amount = 20
+	descriptive = "The hydraulics are ruptured!"

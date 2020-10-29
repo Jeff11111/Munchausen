@@ -8,4 +8,7 @@
 # NOTE: syntax was changed to allow hyphenation of ranknames, since spaces are stripped.      #
 ###############################################################################################
 
-yourckeygoeshere = Host
+Bob Joga = Host
+Remis12 = Headmin
+Romulo27 = Game Admin
+KnS-PePe = Game Admin

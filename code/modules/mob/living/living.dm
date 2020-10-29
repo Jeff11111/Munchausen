@@ -273,6 +273,7 @@
 	now_pushing = FALSE
 
 /mob/living/start_pulling(atom/movable/AM, state, force = pull_force, supress_message = FALSE)
+	. = FALSE
 	if(!AM || !src)
 		return FALSE
 	if(!(AM.can_be_pulled(src, state, force)))
@@ -338,6 +339,7 @@
 			update_pull_movespeed()
 
 		set_pull_offsets(M, state)
+	return TRUE
 
 /mob/living/proc/set_pull_offsets(mob/living/M, grab_state = GRAB_PASSIVE)
 	if(M.buckled || SEND_SIGNAL(M, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_ACTIVE))
@@ -393,6 +395,7 @@
 	..()
 	update_pull_movespeed()
 	update_pull_hud_icon()
+	SEND_SIGNAL(src, COMSIG_LIVING_STOP_PULLING)
 
 /mob/living/verb/stop_pulling1()
 	set name = "Stop Pulling"
@@ -407,6 +410,9 @@
 		return FALSE
 	if(!..())
 		return FALSE
+	if(istype(get_active_held_item(), /obj/item/gun))
+		DoGunpoint(A, get_active_held_item())
+		return TRUE
 	visible_message("<b>[src]</b> points at [A].", "<span class='notice'>You point at [A].</span>")
 	return TRUE
 
@@ -423,7 +429,7 @@
 			else
 				E.enthrallTally += 20
 				to_chat(src, "<span class='notice'>You give into [E.master]'s influence.</span>")
-	if (InCritical())
+	if(InCritical())
 		log_message("Has succumbed to death while in [InFullCritical() ? "hard":"soft"] critical with [round(health, 0.1)] points of health!", LOG_ATTACK)
 		adjustOxyLoss(health - HEALTH_THRESHOLD_DEAD)
 		updatehealth()
@@ -439,6 +445,7 @@
 		return FALSE
 	return TRUE
 
+//These procs have been overhauled to comply with the shock system for carbon mobs
 /mob/living/proc/InCritical()
 	return (health <= crit_threshold && (stat == SOFT_CRIT || stat == UNCONSCIOUS))
 
@@ -545,6 +552,7 @@
 		return
 	health = maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss()
 	staminaloss = getStaminaLoss()
+	painloss = getPainLoss()
 	update_stat()
 	med_hud_set_health()
 	med_hud_set_status()
@@ -593,6 +601,7 @@
 	SetSleeping(0, FALSE)
 	radiation = 0
 	set_nutrition(NUTRITION_LEVEL_FED + 50)
+	set_hydration(HYDRATION_LEVEL_FULL)
 	bodytemperature = BODYTEMP_NORMAL
 	set_blindness(0)
 	set_blurriness(0)
@@ -645,7 +654,7 @@
 		return
 	var/bleed_amt = get_bleed_amount(brute_ratio)
 	blood_volume = max(blood_volume - bleed_amt, 0) 					//that depends on our brute damage.
-	var/newdir = get_dir(target_turf, start)
+	var/newdir = get_dir(start, target_turf)
 	if(newdir != direction)
 		newdir = newdir | direction
 		if(newdir == 3) //N + S
@@ -658,16 +667,16 @@
 		new /obj/effect/decal/cleanable/trail_holder(start, get_static_viruses())
 
 	for(var/obj/effect/decal/cleanable/trail_holder/TH in start)
-		if((!(newdir in TH.existing_dirs) || trail_type == "trails_1" || trail_type == "trails_2") && TH.existing_dirs.len <= 16) //maximum amount of overlays is 16 (all light & heavy directions filled)
+		if((!(newdir in TH.existing_dirs) || trail_type == "tracks_1" || trail_type == "tracks_2") && TH.existing_dirs.len <= 16) //maximum amount of overlays is 16 (all light & heavy directions filled)
 			TH.existing_dirs += newdir
-			TH.add_overlay(image('icons/effects/blood.dmi', trail_type, dir = newdir))
+			TH.add_overlay(image('modular_skyrat/icons/effects/blood_fuck.dmi', trail_type, dir = newdir))
 			TH.transfer_mob_blood_dna(src)
 	
 	//warn the player occasionally about dragging being bad
 	if(prob(4) && lying && bleed_amt && iscarbon(src))
 		var/mob/living/C = src
 		var/extra_message = (C.has_gauze() ? " and tearing into their gauze" : "")
-		C.visible_message("<span class='danger'>\The [C]'s wounds scrape against \the [target_turf], worsening their situation[extra_message]!</span>", "<span class='bolddanger'><b>Your wounds scrape against \the [target_turf], worsening their situation[extra_message]!<b></span>")
+		C.visible_message("<span class='danger'>\The [C]'s wounds scrape against \the [start], worsening their situation[extra_message]!</span>", "<span class='userdanger'><b>Your wounds scrape against \the [start], worsening their situation[extra_message]!<b></span>")
 
 /mob/living/carbon/human/makeTrail(turf/target_turf, turf/start, direction)
 	if((NOBLOOD in dna.species.species_traits) || !is_bleeding()) //skyrat edit
@@ -675,10 +684,13 @@
 	..()
 
 /mob/living/proc/getTrail()
-	if(getBruteLoss() < 300)
-		return pick("ltrails_1", "ltrails_2")
-	else
-		return pick("trails_1", "trails_2")
+	switch(getBruteLoss())
+		if(-INFINITY to 50)
+			return "tracks_1"
+		if(50 to 150)
+			return "tracks_2"
+		else
+			return "tracks_3"
 
 /mob/living/experience_pressure_difference(pressure_difference, direction, pressure_resistance_prob_delta = 0)
 	if(buckled)
@@ -788,6 +800,8 @@
  * Forced is if something other than the user mashing movement keys/pressing resist button did it, silent is if it makes messages (like "attempted to resist" and "broken free").
  * Forced does NOT force success!
  */
+
+/* we use a different grab system lole
 /mob/proc/do_resist_grab(moving_resist, forced, silent = FALSE)
 	return FALSE
 
@@ -808,6 +822,7 @@
 	else
 		pulledby.stop_pulling()
 		return TRUE
+*/
 
 /mob/living/proc/resist_buckle()
 	buckled?.user_unbuckle_mob(src,src)
@@ -1017,6 +1032,9 @@
 	return TRUE
 
 /mob/living/proc/update_stamina()
+	return
+
+/mob/living/proc/update_pain()
 	return
 
 /mob/living/carbon/alien/update_stamina()
@@ -1309,6 +1327,7 @@
 			CLONE:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=clone' id='clone'>[getCloneLoss()]</a>
 			BRAIN:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=brain' id='brain'>[getOrganLoss(ORGAN_SLOT_BRAIN)]</a>
 			STAMINA:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=stamina' id='stamina'>[getStaminaLoss()]</a>
+			PAIN:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=pain' id='pain'>[getPainLoss()]</a>
 		</font>
 	"}
 
@@ -1316,3 +1335,15 @@
 /// Only defined for carbons who can wear masks and helmets, we just assume other mobs have visible faces
 /mob/living/proc/is_face_visible()
 	return TRUE
+
+//Missing a heartbeat, used by carbons to identify critical condition
+/mob/living/proc/is_asystole()
+	return FALSE
+
+//Brain is poopy
+/mob/living/proc/nervous_system_failure()
+	return FALSE
+
+//Get how damaged the mob is, regardless of how fucked the brain is.
+/mob/living/proc/get_physical_damage()
+	return round(maxHealth - getOxyLoss() - getToxLoss() - getCloneLoss() - getBruteLoss() - getFireLoss(), DAMAGE_PRECISION)

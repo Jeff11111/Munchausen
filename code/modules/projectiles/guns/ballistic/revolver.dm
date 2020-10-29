@@ -27,9 +27,9 @@
 	var/num_loaded = magazine.attackby(A, user, params, 1)
 	if(num_loaded)
 		to_chat(user, "<span class='notice'>You load [num_loaded] shell\s into \the [src].</span>")
-		playsound(user, 'sound/weapons/bulletinsert.ogg', 60, 1)
+		var/loadsound = pick('modular_skyrat/sound/weapons/revolver_load1.ogg', 'modular_skyrat/sound/weapons/revolver_load2.ogg')
+		playsound(src, loadsound, 60, 1)
 		A.update_icon()
-		update_icon()
 		chamber_round(0)
 
 /obj/item/gun/ballistic/revolver/attack_self(mob/living/user)
@@ -42,7 +42,8 @@
 			CB.forceMove(drop_location())
 			CB.bounce_away(FALSE, NONE)
 			num_unloaded++
-	if (num_unloaded)
+	update_icon()
+	if(num_unloaded)
 		to_chat(user, "<span class='notice'>You unload [num_unloaded] shell\s from [src].</span>")
 	else
 		to_chat(user, "<span class='warning'>[src] is empty!</span>")
@@ -67,6 +68,7 @@
 	. = istype(C)
 	if(.)
 		C.spin()
+		playsound(src, 'modular_skyrat/sound/weapons/revolver_spin.ogg', 50)
 		chamber_round(0)
 
 /obj/item/gun/ballistic/revolver/can_shoot()
@@ -79,10 +81,6 @@
 	if (magazine)
 		boolets += magazine.ammo_count(countempties)
 	return boolets
-
-/obj/item/gun/ballistic/revolver/examine(mob/user)
-	. = ..()
-	. += "[get_ammo(0,0)] of those are live rounds."
 
 /obj/item/gun/ballistic/revolver/detective
 	name = "\improper .38 Mars Special"
@@ -100,7 +98,8 @@
 
 /obj/item/gun/ballistic/revolver/detective/Initialize()
 	. = ..()
-	safe_calibers = magazine.caliber
+	if(!safe_calibers)
+		safe_calibers = magazine.caliber
 
 /obj/item/gun/ballistic/revolver/detective/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0, stam_cost = 0)
 	if(chambered && !(chambered.caliber in safe_calibers))
@@ -142,7 +141,6 @@
 			desc = initial(desc)
 			to_chat(user, "<span class='notice'>You remove the modifications on [src]. Now it will fire .38 rounds.</span>")
 	return TRUE
-
 
 /obj/item/gun/ballistic/revolver/mateba
 	name = "\improper Unica 6 auto-revolver"
@@ -294,28 +292,12 @@
 
 /obj/item/gun/ballistic/revolver/doublebarrel/attackby(obj/item/A, mob/user, params)
 	..()
-	if(istype(A, /obj/item/ammo_box) || istype(A, /obj/item/ammo_casing))
-		chamber_round()
 	if(A.tool_behaviour == TOOL_SAW || istype(A, /obj/item/gun/energy/plasmacutter))
 		sawoff(user)
 	if(istype(A, /obj/item/melee/transforming/energy))
 		var/obj/item/melee/transforming/energy/W = A
 		if(W.active)
 			sawoff(user)
-
-/obj/item/gun/ballistic/revolver/doublebarrel/attack_self(mob/living/user)
-	var/num_unloaded = 0
-	while (get_ammo() > 0)
-		var/obj/item/ammo_casing/CB
-		CB = magazine.get_round(0)
-		chambered = null
-		CB.forceMove(drop_location())
-		CB.update_icon()
-		num_unloaded++
-	if (num_unloaded)
-		to_chat(user, "<span class='notice'>You break open \the [src] and unload [num_unloaded] shell\s.</span>")
-	else
-		to_chat(user, "<span class='warning'>[src] is empty!</span>")
 
 /////////////////////////////
 //   IMPROVISED SHOTGUN    //

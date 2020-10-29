@@ -68,13 +68,13 @@
 /obj/structure/closet/crate/necropolis/bubblegum/PopulateContents()
 	new /obj/item/clothing/suit/space/hostile_environment(src)
 	new /obj/item/clothing/head/helmet/space/hostile_environment(src)
-	new /obj/item/gun/magic/staff/spellblade(src)
+	new /obj/item/crucible(src)
 
 /obj/structure/closet/crate/necropolis/bubblegum/crusher/PopulateContents()
 	new /obj/item/clothing/suit/space/hostile_environment(src)
 	new /obj/item/clothing/head/helmet/space/hostile_environment(src)
 	new /obj/item/crusher_trophy/demon_claws(src)
-	new /obj/item/gun/magic/staff/spellblade(src)
+	new /obj/item/crucible(src)
 
 /mob/living/simple_animal/hostile/megafauna/bubblegum/hard
 	name = "enraged bubblegum chest"
@@ -98,11 +98,10 @@
 /obj/item/gun/ballistic/revolver/doublebarrel/super
 	burst_size = 1
 	actions_types = list(/datum/action/item_action/toggle_hook)
-	icon = 'modular_skyrat/icons/obj/guns/projectile.dmi'
 	icon_state = "heckgun"
+	item_state = "heckgun"
 	lefthand_file = 'modular_skyrat/icons/mob/inhands/weapons/guns_lefthand.dmi'
 	righthand_file = 'modular_skyrat/icons/mob/inhands/weapons/guns_righthand.dmi'
-	item_state = "heckgun"
 	sharpness = SHARP_NONE
 	force = 15
 	inhand_x_dimension = 0
@@ -228,13 +227,13 @@
 	var/brightness_on = 6
 	total_mass = 1
 	var/total_mass_on = TOTAL_MASS_MEDIEVAL_WEAPON
-	var/wielded
+	var/wielded = FALSE
 	var/item_state_on = "crucible1"
 
 /obj/item/crucible/Initialize()
 	. = ..()
-	RegisterSignal(src, COMSIG_TWOHANDED_WIELD, .proc/wield)
-	RegisterSignal(src, COMSIG_TWOHANDED_UNWIELD, .proc/unwield)
+	RegisterSignal(src, COMSIG_TWOHANDED_WIELD, .proc/on_wield)
+	RegisterSignal(src, COMSIG_TWOHANDED_UNWIELD, .proc/on_unwield)
 
 /obj/item/crucible/ComponentInitialize()
 	. = ..()
@@ -301,7 +300,7 @@
 		return BLOCK_NONE
 	return ..()
 
-/obj/item/crucible/proc/wield(mob/living/carbon/M)
+/obj/item/crucible/proc/on_wield(mob/living/carbon/M)
 	wielded = TRUE
 	sharpness = SHARP_EDGED
 	w_class = w_class_on
@@ -313,7 +312,7 @@
 	set_light(brightness_on)
 	AddElement(/datum/element/sword_point)
 
-/obj/item/crucible/proc/unwield()
+/obj/item/crucible/proc/on_unwield()
 	wielded = FALSE
 	sharpness = initial(sharpness)
 	w_class = initial(w_class)

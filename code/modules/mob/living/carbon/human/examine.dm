@@ -228,6 +228,8 @@
 						for(var/obj/item/organ/O in getorganszone(BP.body_zone))
 							for(var/i in O.surgical_examine(user))
 								msg += "<B>[icon2html(O.examine_icon ? O.examine_icon : O, user, O.examine_icon_state ? O.examine_icon_state : O.icon_state)] [i]</B>\n"
+					if((user != src) && W.severity >= WOUND_SEVERITY_CRITICAL)
+						SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured)
 			//
 			missing -= BP.body_zone
 
@@ -243,6 +245,14 @@
 					damage_text = (BP.brute_dam >= BP.burn_dam) ? BP.heavy_brute_msg : BP.heavy_burn_msg
 				msg += "<B>[capitalize(t_his)] [BP.name] is [damage_text]!</B>\n"
 			//
+	
+	//Teeth
+	if(!screwy_self)
+		for(var/obj/item/bodypart/teeth_part in bodyparts)
+			if(!teeth_part.max_teeth)
+				continue
+			else if(teeth_part.get_teeth_amount() < teeth_part.max_teeth)
+				msg += "<B>[capitalize(t_his)] [teeth_part.name] is missing [teeth_part.max_teeth - teeth_part.get_teeth_amount()] [teeth_part.max_teeth - teeth_part.get_teeth_amount() == 1 ? "tooth" : "teeth"]!</B>\n"
 
 	//stores missing limbs
 	var/l_limbs_missing = 0
@@ -317,10 +327,20 @@
 	if(nutrition < NUTRITION_LEVEL_STARVING - 50)
 		msg += "[t_He] [t_is] severely malnourished.\n"
 	else if(nutrition >= NUTRITION_LEVEL_FAT)
+		//what the fuck is this shit
 		if(user.nutrition < NUTRITION_LEVEL_STARVING - 50)
 			msg += "[t_He] [t_is] plump and delicious looking - Like a fat little piggy. A tasty piggy.\n"
 		else
 			msg += "[t_He] [t_is] quite chubby.\n"
+
+	//ok lets follow the same pattern of the previous insane coder
+	if(hydration < HYDRATION_LEVEL_DEHYDRATED - 50)
+		msg += "[t_He] [t_is] severely dehydrated.\n"
+	else if(hydration >= HYDRATION_LEVEL_FULL)
+		//no message for being full of water because that would be fucking stupid
+		if(user.hydration < HYDRATION_LEVEL_DEHYDRATED - 50)
+			msg += "[t_He] [t_is] plump and balloony looking - Like a fat little whale. A tasty whale.\n"
+	
 	switch(disgust)
 		if(DISGUST_LEVEL_GROSS to DISGUST_LEVEL_VERYGROSS)
 			msg += "[t_He] look[p_s()] a bit grossed out.\n"
@@ -328,6 +348,24 @@
 			msg += "[t_He] look[p_s()] really grossed out.\n"
 		if(DISGUST_LEVEL_DISGUSTED to INFINITY)
 			msg += "[t_He] look[p_s()] extremely disgusted.\n"
+	var/datum/component/mood/moodie = GetComponent(/datum/component/mood)
+	if(moodie && !(user == src && HAS_TRAIT(user, TRAIT_SCREWY_MOOD)))
+		switch(moodie.shown_mood)
+			if(-INFINITY to MOOD_LEVEL_SAD4)
+				. += "[t_He] look[p_s()] depressed."
+			if(MOOD_LEVEL_SAD4 to MOOD_LEVEL_SAD3)
+				. += "[t_He] look[p_s()] very sad."
+			if(MOOD_LEVEL_SAD3 to MOOD_LEVEL_SAD1)
+				. += "[t_He] look[p_s()] a bit down."
+			if(MOOD_LEVEL_SAD1 to MOOD_LEVEL_HAPPY1)
+				. += "[t_He] look[p_s()] about fine."
+			if(MOOD_LEVEL_HAPPY1 to MOOD_LEVEL_HAPPY3)
+				. += "[t_He] look[p_s()] quite happy."
+			if(MOOD_LEVEL_HAPPY3 to MOOD_LEVEL_HAPPY4)
+				. += "[t_He] look[p_s()] very happy."
+			if(MOOD_LEVEL_HAPPY4 to INFINITY)
+				. += "[t_He] look[p_s()] ecstatic."
+	
 	if(!screwy_self)
 		if(ShowAsPaleExamine())
 			var/apparent_blood_volume = blood_volume
@@ -531,18 +569,39 @@
 				msg += "<span class='notice'><b><i>[t_He] [t_has] significantly disfiguring scarring, you can look again to take a closer look...</i></b></span>\n"
 			if(WOUND_SEVERITY_LOSS to INFINITY)
 				msg += "<span class='notice'><b><i>[t_He] [t_is] just absolutely fucked up, you can look again to take a closer look...</i></b></span>\n"
-
+	
 	if(gunpointing)
 		msg += "<b>[t_He] [t_is] holding [gunpointing.target.name] at gunpoint with [gunpointing.aimed_gun.name]!</b>\n"
 	if(gunpointed.len)
 		for(var/datum/gunpoint/GP in gunpointed)
 			msg += "<b>[GP.source.name] [GP.source.p_are()] holding [t_him] at gunpoint with [GP.aimed_gun.name]!</b>\n"
-	
 	//Skyrat changes end
 
 	if(length(msg))
 		. += "<span class='warning'>[msg.Join("")]</span>"
 
+	//Strength message
+	var/our_str = 10
+	if(mind)
+		our_str = GET_STAT_LEVEL(src, str)
+	
+	var/user_str = 10
+	if(user.mind)
+		user_str = GET_STAT_LEVEL(user, str)
+	
+	var/str_diff = user_str - our_str
+	switch(str_diff)
+		if(-INFINITY to -3)
+			. += "[t_He] [t_is] much stronger than me."
+		if(-2 to -1)
+			. += "[t_He] [t_is] stronger than me."
+		if(0)
+			. += "[t_He] [t_is] about as strong as me."
+		if(1 to 2)
+			. += "[t_He] [t_is] weaker than me."
+		if(3 to INFINITY)
+			. += "[t_He] [t_is] much weaker than me."
+	
 	var/trait_exam = common_trait_examine()
 	if(!screwy_self)
 		if(!isnull(trait_exam))
@@ -587,7 +646,7 @@
 						if(R)
 							criminal = R.fields["criminal"]
 
-						. += jointext(list("<span class='deptradio'>Criminal status:</span> <a href='?src=[REF(src)];hud=s;status=1'>\[[criminal]\]</a>",
+						. += jointext(list("<span class='deptradio'>Criminal status:</span> <a href='?src=[REF(src)];hud=s;status=1'>\[[criminal]\]</a>\n",
 							"<span class='deptradio'>Security record:</span> <a href='?src=[REF(src)];hud=s;view=1'>\[View\]</a>",
 							"<a href='?src=[REF(src)];hud=s;add_crime=1'>\[Add crime\]</a>",
 							"<a href='?src=[REF(src)];hud=s;view_comment=1'>\[View comment log\]</a>",

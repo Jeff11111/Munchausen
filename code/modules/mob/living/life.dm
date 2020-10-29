@@ -66,6 +66,9 @@
 
 	handle_block_parry(seconds)
 
+	// Pain
+	handle_pain()
+
 	// These two MIGHT need to be moved to base Life() if we get any in the future that's a "physical" effect that needs to fire even while in stasis.
 	handle_traits() // eye, ear, brain damages
 	handle_status_effects() //all special effects, stun, knockdown, jitteryness, hallucination, sleeping, etc
@@ -101,9 +104,20 @@
 	handle_wounds()
 	//
 
+	//Handle our client's color
+	handle_client_color()
+
 	if(machine)
 		machine.check_eye(src)
 	return TRUE
+
+/mob/living/proc/handle_client_color()
+	if(!client)
+		return
+	if(stat >= DEAD && (client.color != MATRIX_GREYSCALE))
+		animate(client, color = MATRIX_GREYSCALE, time = 2 SECONDS)
+	else if(stat < DEAD && (client.color))
+		animate(client, color = null, time = 2 SECONDS)
 
 /mob/living/proc/handle_breathing(times_fired)
 	return

@@ -6,10 +6,17 @@
 /obj/item/organ/vocal_cords //organs that are activated through speech with the :x/MODE_KEY_VOCALCORDS channel
 	name = "vocal cords"
 	icon_state = "appendix"
-	zone = BODY_ZONE_PRECISE_MOUTH
+	zone = BODY_ZONE_PRECISE_THROAT
 	slot = ORGAN_SLOT_VOICE
 	gender = PLURAL
 	var/list/spans = null
+	relative_size = 20
+	maxHealth = 50
+	high_threshold = 35
+	low_threshold = 10
+	//For some reason vocal cords aren't start organs
+	//So in case we *do* have one, it'll be easy to damage
+	relative_size = 25
 
 /obj/item/organ/vocal_cords/proc/can_speak_with() //if there is any limitation to speaking with these cords
 	return TRUE

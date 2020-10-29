@@ -168,6 +168,24 @@
 	static_inventory += using
 	//END OF CITADEL CHANGES
 
+	//SKYRAT CHANGES - Wield button
+	wielded = new /obj/screen/wield
+	wielded.icon = ui_style_modular(ui_style)
+	wielded.icon_state = "act_wield"
+	wielded.screen_loc = ui_wield
+	wielded.hud = src
+	static_inventory += wielded
+	//END OF SKYRAT CHANGES
+
+	//SKYRAT CHANGES - Combat intents
+	combat_intents = new /obj/screen/combat_intent
+	combat_intents.icon = 'modular_skyrat/icons/mob/combat_intents.dmi'
+	combat_intents.icon_state = CI_DEFAULT
+	combat_intents.screen_loc = ui_combatintent
+	combat_intents.hud = src
+	static_inventory += combat_intents
+	//END OF SKYRAT CHANGES
+
 	//same as above but buffer.
 	sprint_buffer = new /obj/screen/sprint_buffer
 	sprint_buffer.screen_loc = ui_sprintbufferloc
@@ -429,8 +447,26 @@
 	healthdoll.hud = src
 	infodisplay += healthdoll
 
+	pains = new /obj/screen/human/pain()
+	pains.icon = 'modular_skyrat/icons/mob/screen_pain.dmi'
+	pains.screen_loc = ui_pain
+	pains.hud = src
+	infodisplay += pains
+
+	redpains = new /obj/screen/fullscreen/pain()
+	redpains.icon = 'modular_skyrat/icons/mob/screen_full.dmi'
+	redpains.screen_loc = "CENTER-7,CENTER-7"
+	redpains.hud = src
+	screenoverlays += redpains
+
+	noise_filter = new /obj/screen/fullscreen/noise()
+	noise_filter.icon = 'modular_skyrat/icons/mob/noise.dmi'
+	noise_filter.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	noise_filter.hud = src
+	screenoverlays += noise_filter
+
 	pull_icon = new /obj/screen/pull()
-	pull_icon.icon = ui_style
+	pull_icon.icon = ui_style_modular(ui_style) //SKYRAT EDIT
 	pull_icon.hud = src
 	pull_icon.update_icon()
 	pull_icon.screen_loc = ui_pull_resist

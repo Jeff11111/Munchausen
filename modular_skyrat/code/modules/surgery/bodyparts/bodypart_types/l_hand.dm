@@ -4,8 +4,8 @@
 	icon_state = "default_human_l_hand"
 	aux_icons = list(BODY_ZONE_PRECISE_L_HAND = HANDS_PART_LAYER, "l_hand_behind" = BODY_BEHIND_LAYER)
 	attack_verb = list("slapped", "punched")
-	max_damage = 50
-	max_stamina_damage = 50
+	max_damage = 30
+	max_stamina_damage = 30
 	body_zone = BODY_ZONE_PRECISE_L_HAND
 	body_part = HAND_LEFT
 	held_index = 1
@@ -19,6 +19,8 @@
 	children_zones = list()
 	specific_locations = list("left palm", "left back palm")
 	max_cavity_size = WEIGHT_CLASS_TINY
+	zone_prob = 50
+	extra_zone_prob = 25
 
 /obj/item/bodypart/l_hand/is_disabled()
 	if(HAS_TRAIT(owner, TRAIT_PARALYSIS_L_ARM))
@@ -31,6 +33,8 @@
 		return
 	if(owner.stat < UNCONSCIOUS)
 		switch(disabled)
+			if(BODYPART_DISABLED_PAIN)
+				owner.custom_pain("The pain in your [name] is too agonizing!", pain_dam/3, TRUE, src)
 			if(BODYPART_DISABLED_DAMAGE)
 				owner.emote("scream")
 				to_chat(owner, "<span class='userdanger'>Your [name] is too damaged to function!</span>")

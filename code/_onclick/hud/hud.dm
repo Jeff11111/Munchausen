@@ -82,6 +82,9 @@ GLOBAL_LIST_INIT(modular_ui_styles, list(
 	var/obj/screen/healths
 	var/obj/screen/healthdoll
 	var/obj/screen/internals
+	var/obj/screen/pains
+	var/obj/screen/fullscreen/pain/redpains
+	var/obj/screen/fullscreen/noise/noise_filter
 
 	// subtypes can override this to force a specific UI style
 	var/ui_style
@@ -129,6 +132,9 @@ GLOBAL_LIST_INIT(modular_ui_styles, list(
 	healths = null
 	healthdoll = null
 	internals = null
+	pains = null
+	redpains = null
+	noise_filter = null
 	lingchemdisplay = null
 	devilsouldisplay = null
 	lingstingdisplay = null
@@ -177,6 +183,12 @@ GLOBAL_LIST_INIT(modular_ui_styles, list(
 			//skyrat edit
 			if(extra_inventory.len && screenmob.hud_used && screenmob.hud_used.extra_shown)
 				screenmob.client.screen += extra_inventory
+			if(redpains)
+				redpains.update_for_view(screenmob.client.view)
+				screenmob.client.screen += redpains
+			if(noise_filter)
+				noise_filter.update_for_view(screenmob.client.view)
+				screenmob.client.screen += noise_filter
 			//
 			if(hotkeybuttons.len && !hotkey_ui_hidden)
 				screenmob.client.screen += hotkeybuttons
@@ -221,6 +233,10 @@ GLOBAL_LIST_INIT(modular_ui_styles, list(
 			//skyrat edit
 			if(extra_inventory.len)
 				screenmob.client.screen -= extra_inventory
+			if(redpains)
+				screenmob.client.screen -= redpains
+			if(noise_filter)
+				screenmob.client.screen -= noise_filter
 			//
 			if(hotkeybuttons.len)
 				screenmob.client.screen -= hotkeybuttons

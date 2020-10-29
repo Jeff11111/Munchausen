@@ -69,6 +69,13 @@ SUBSYSTEM_DEF(job)
 	RETURN_TYPE(/datum/job)
 	if(!occupations.len)
 		SetupOccupations()
+	//this is very chungus code
+	if(rank == "Assistant")
+		rank = "Stowaway"
+	if(rank == "Security Officer")
+		rank = "Enforcer"
+	if(rank == "Head of Security")
+		rank = "Chief Enforcer"
 	return name_occupations[rank]
 
 /datum/controller/subsystem/job/proc/GetJobType(jobtype)
@@ -98,7 +105,6 @@ SUBSYSTEM_DEF(job)
 		return TRUE
 	JobDebug("AR has failed, Player: [player], Rank: [rank]")
 	return FALSE
-
 
 /datum/controller/subsystem/job/proc/FindOccupationCandidates(datum/job/job, level, flag)
 	JobDebug("Running FOC, Job: [job], Level: [level], Flag: [flag]")
@@ -385,7 +391,12 @@ SUBSYSTEM_DEF(job)
 				break
 		if(group_ok)
 			return TRUE
-	SSticker.mode.setup_error = "Required jobs not present."
+	var/list/blah = list()
+	for(var/i in required_jobs)
+		var/datum/job/J = GetJob(i)
+		blah |= "[J.flatter_string ? "[J.flatter_string] " : ""][i]"
+	var/need_string = english_list(blah)
+	SSticker.mode.setup_error = "Required jobs not present. The station needs [need_string] for the shift to start."
 	return FALSE
 
 //We couldn't find a job from prefs for this guy.
@@ -515,15 +526,15 @@ SUBSYSTEM_DEF(job)
 		return C.holder.auto_deadmin()*/
 
 /datum/controller/subsystem/job/proc/setup_officer_positions()
-	var/datum/job/J = SSjob.GetJob("Security Officer")
+	var/datum/job/J = SSjob.GetJob("Enforcer")
 	if(!J)
-		CRASH("setup_officer_positions(): Security officer job is missing")
+		CRASH("setup_officer_positions(): Enforcer job is missing")
 
 	var/ssc = CONFIG_GET(number/security_scaling_coeff)
 	if(ssc > 0)
 		if(J.spawn_positions > 0)
 			var/officer_positions = min(12, max(J.spawn_positions, round(unassigned.len / ssc))) //Scale between configured minimum and 12 officers
-			JobDebug("Setting open security officer positions to [officer_positions]")
+			JobDebug("Setting open enforcer positions to [officer_positions]")
 			J.total_positions = officer_positions
 			J.spawn_positions = officer_positions
 

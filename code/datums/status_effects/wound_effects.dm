@@ -13,10 +13,11 @@
 
 /datum/status_effect/determined/on_apply()
 	. = ..()
-	owner.visible_message("<span class='danger'>[owner] grits [owner.p_their()] teeth in pain!</span>", "<span class='notice'><b>Your senses sharpen as your body tenses up from the wounds you've sustained!</b></span>", vision_distance=COMBAT_MESSAGE_RANGE)
+	owner.emote("gasp")
 
 /datum/status_effect/determined/on_remove()
-	owner.visible_message("<span class='danger'>[owner]'s body slackens noticeably!</span>", "<span class='warning'><b>Your adrenaline rush dies off, and the pain from your wounds come aching back in...</b></span>", vision_distance=COMBAT_MESSAGE_RANGE)
+	owner.emote("gasp")
+	to_chat(owner, "<span class='warning'><b>Your adrenaline rush dies off, and the pain from your wounds come aching back in...</b></span>")
 	return ..()
 
 /datum/status_effect/limp
@@ -67,19 +68,13 @@
 		return
 	var/determined_mod = 1
 	if(owner.has_status_effect(STATUS_EFFECT_DETERMINED))
-		determined_mod = 0.25
-	if(next_leg == left_leg)
+		determined_mod = 0.65
+	if(next_leg == right_leg)
 		owner.client.move_delay += slowdown_left * determined_mod
-		next_leg = left_foot
-	else if(next_leg == left_foot)
+		next_leg = left_leg
+	else if(next_leg == left_leg)
 		owner.client.move_delay += slowdown_left * determined_mod
 		next_leg = right_leg
-	else if(next_leg == right_leg)
-		owner.client.move_delay += slowdown_left * determined_mod
-		next_leg = right_foot
-	else if(next_leg == right_foot)
-		owner.client.move_delay += slowdown_right * determined_mod
-		next_leg = left_leg
 
 /datum/status_effect/limp/proc/update_limp()
 	var/mob/living/carbon/C = owner

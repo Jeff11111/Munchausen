@@ -24,9 +24,6 @@
 	attack_verb = list("struck", "hit", "bashed")
 
 	var/fire_sound = "gunshot"
-	var/suppressed = null					//whether or not a message is displayed when fired
-	var/can_suppress = FALSE
-	var/can_unsuppress = TRUE
 	var/recoil = 0						//boom boom shake the room
 	var/clumsy_check = TRUE
 	var/obj/item/ammo_casing/chambered = null
@@ -62,28 +59,49 @@
 	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
 
-	var/obj/item/firing_pin/pin = /obj/item/firing_pin //standard firing pin for most guns
+	//Firing pin stuff
+	var/obj/item/firing_pin/pin = /obj/item/firing_pin //reference for the current firing pin, and typepath of the initial firing pin
 	var/no_pin_required = FALSE //whether the gun can be fired without a pin
 
+	// Flashlight stuff
 	var/obj/item/flashlight/gun_light
-	var/can_flashlight = 0
-	var/obj/item/kitchen/knife/bayonet
-	var/mutable_appearance/knife_overlay
-	var/can_bayonet = FALSE
+	var/mutable_appearance/flashlight_overlay
+	var/flight_x_offset = 0
+	var/flight_y_offset = 0
+	var/can_flashlight = FALSE
+	var/can_unflashlight = TRUE
 	var/datum/action/item_action/toggle_gunlight/alight
 	var/custom_light_icon //custom flashlight icon
 	var/custom_light_state //custom flashlight state
 	var/custom_light_color //custom flashlight light color
-	var/mutable_appearance/flashlight_overlay
 
-	var/ammo_x_offset = 0 //used for positioning ammo count overlay on sprite
-	var/ammo_y_offset = 0
-	var/flight_x_offset = 0
-	var/flight_y_offset = 0
+	// Bayonet stuff
+	var/obj/item/kitchen/knife/bayonet
+	var/mutable_appearance/knife_overlay
 	var/knife_x_offset = 0
 	var/knife_y_offset = 0
+	var/can_bayonet = FALSE
+	var/can_unbayonet = TRUE
 
-	//Zooming
+	// Suppressor stuff
+	var/obj/item/suppressor/suppressed //having a suppressor means we dont make funny sound
+	var/mutable_appearance/suppressed_overlay //this ass can fart
+	var/suppressed_pixel_x = 0
+	var/suppressed_pixel_y = 0
+	var/sound_suppressed = 'modular_skyrat/sound/weapons/shot_silenced.ogg' //fire sound when suppressed
+	var/can_suppress = FALSE
+	var/can_unsuppress = TRUE
+
+	// Safety stuff
+	var/safety = TRUE
+	var/mutable_appearance/safety_overlay
+	var/safety_sound = 'modular_skyrat/sound/weapons/safety1.ogg'
+
+	// Used for positioning ammo count overlay on some sprites
+	var/ammo_x_offset = 0
+	var/ammo_y_offset = 0
+
+	// Zooming
 	var/zoomable = FALSE //whether the gun generates a Zoom action on creation
 	var/zoomed = FALSE //Zoom toggle
 	var/zoom_amt = 3 //Distance in TURFs to move the user's screen forward (the "zoom" effect)
@@ -97,6 +115,9 @@
 
 	var/automatic = 0 //can gun use it, 0 is no, anything above 0 is the delay between clicks in ds
 
+	/// It's less intensive to use a boolean rather than always getting the component when firing
+	var/is_wielded = FALSE
+
 /obj/item/gun/Initialize()
 	. = ..()
 	if(no_pin_required)
@@ -107,6 +128,22 @@
 		alight = new (src)
 	if(zoomable)
 		azoom = new (src)
+	RegisterSignal(src, COMSIG_TWOHANDED_WIELD, .proc/on_wield)
+	RegisterSignal(src, COMSIG_TWOHANDED_UNWIELD, .proc/on_unwield)
+
+/obj/item/gun/proc/on_wield()
+	is_wielded = TRUE
+
+/obj/item/gun/proc/on_unwield()
+	is_wielded = FALSE
+
+/obj/item/gun/verb/safety_toggle()
+	set name = "Toggle Safety"
+	set category = "Object"
+	set desc = "Toggle a firearm's safety mechanisms."
+
+	if(usr.default_can_use_topic(src))
+		perform_safety(usr)
 
 /obj/item/gun/Destroy()
 	if(pin)
@@ -136,6 +173,33 @@
 		. += "It has \a [pin] installed."
 	else
 		. += "It doesn't have a firing pin installed, and won't fire."
+	. += "It's safety is [safety ? "enabled" : "disabled"]."
+
+/obj/item/gun/rightclick_attack_self(mob/user)
+	return perform_safety(user)
+
+/obj/item/gun/proc/perform_safety(mob/user)
+	if(iscarbon(user) && user.mind)
+		var/ranged_skill = GET_SKILL_LEVEL(user, ranged)
+		if(ranged_skill <= JOB_SKILLPOINTS_NOVICE)
+			to_chat(user, "<span class='warning'>Hnngh... How do i use this thing?</span>")
+			if(!do_after(user, (20 - ranged_skill) * 2, TRUE, src))
+				to_chat(user, "<span class='warning'>You must stand still to disable/enable [src]'s safety!</span>")
+				return
+		if(user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.25, GET_SKILL_LEVEL(user, ranged)*0.75) >= DICE_SUCCESS)
+			toggle_safety(user)
+		else
+			to_chat(user, "<span class='danger'>Damn it! I wasn't able to figure out how to toggle [src]'s safety features!</span>")
+	else
+		toggle_safety(user)
+	return TRUE
+
+/obj/item/gun/proc/toggle_safety(mob/user)
+	safety = !safety
+	if(user)
+		to_chat(user, "<span class='notice'>I [safety ? "enable" : "disable"] \the [src]'s safety mechanism.</span>")
+		playsound(get_turf(src), safety_sound, 50, 0)
+	update_icon()
 
 /obj/item/gun/equipped(mob/living/user, slot)
 	. = ..()
@@ -151,12 +215,13 @@
 /obj/item/gun/proc/can_shoot()
 	return TRUE
 
-/obj/item/gun/proc/shoot_with_empty_chamber(mob/living/user as mob|obj)
+/obj/item/gun/proc/shoot_with_empty_chamber(mob/living/user as mob|obj, no_message = FALSE)
 	//skyrat edit
 	if(on_cooldown())
 		return FALSE
 	//
-	to_chat(user, "<span class='danger'>*click*</span>")
+	if(!no_message)
+		to_chat(user, "<span class='danger'>*click*</span>")
 	last_fire = world.time
 	playsound(src, "gun_dry_fire", 30, 1)
 
@@ -196,13 +261,14 @@
 	var/stamloss = user.getStaminaLoss()
 	if(stamloss >= STAMINA_NEAR_SOFTCRIT) //The more tired you are, the less damage you do.
 		var/penalty = (stamloss - STAMINA_NEAR_SOFTCRIT)/(STAMINA_NEAR_CRIT - STAMINA_NEAR_SOFTCRIT)*STAM_CRIT_GUN_DELAY
+		//low dexterity = higher penalty
+		var/dexterity = GET_STAT_LEVEL(user, dex)
+		penalty = max(0, penalty + (10-dexterity)/10)
 		user.changeNext_move(CLICK_CD_RANGE+(CLICK_CD_RANGE*penalty))
 	if(flag) //It's adjacent, is the user, or is on the user's person
 		if(target in user.contents) //can't shoot stuff inside us.
 			return
-		if(!ismob(target) || user.a_intent == INTENT_HARM) //melee attack
-			return
-		if(target == user && user.zone_selected != BODY_ZONE_PRECISE_MOUTH) //so we can't shoot ourselves (unless mouth selected)
+		if(!ismob(target) || (user.a_intent == INTENT_HARM && user != target)) //melee attack
 			return
 	//skyrat edit
 		if(iscarbon(target))
@@ -221,23 +287,27 @@
 		shoot_with_empty_chamber(user)
 		return
 
-	if(flag)
-		if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
-			handle_suicide(user, target, params)
-			return
-
 	//Exclude lasertag guns from the TRAIT_CLUMSY check.
 	if(clumsy_check)
 		if(istype(user))
-			if (HAS_TRAIT(user, TRAIT_CLUMSY) && prob(40))
+			if(HAS_TRAIT(user, TRAIT_CLUMSY) && prob(40))
 				to_chat(user, "<span class='userdanger'>You shoot yourself in the foot with [src]!</span>")
 				var/shot_leg = pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 				process_fire(user, user, FALSE, params, shot_leg)
 				user.dropItemToGround(src, TRUE)
 				return
+	
+	//Critical failures
+	if(user.mind)
+		switch(user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, ranged)))
+			if(DICE_CRIT_FAILURE)
+				to_chat(user, "<span class='userdanger'>CRITICAL FAILURE! You shoot yourself with [src]!</span>")
+				process_fire(user, user, FALSE, params, pick(ALL_BODYPARTS))
+				return
 
-	if(weapon_weight == WEAPON_HEAVY && user.get_inactive_held_item())
-		to_chat(user, "<span class='userdanger'>You need both hands free to fire \the [src]!</span>")
+	var/ranged = GET_SKILL_LEVEL(user, ranged)
+	if((weapon_weight >= WEAPON_HEAVY) && !is_wielded && !(ranged >= JOB_SKILLPOINTS_EXPERT))
+		to_chat(user, "<span class='userdanger'>You need to wield \the [src] to be able to fire it!</span>")
 		return
 
 	//DUAL (or more!) WIELDING
@@ -250,13 +320,21 @@
 	if(user)
 		bonus_spread += calculate_extra_inaccuracy(user, bonus_spread, stamloss)
 	//
+	
+	//Wielding always makes you aim better, no matter the weapon size
+	if(!is_wielded)
+		var/spread_penalty = 2.5
+		if(ranged)
+			spread_penalty = (50/(ranged*2))
+		bonus_spread += (spread_penalty * weapon_weight)
+
 	if(ishuman(user) && user.a_intent == INTENT_HARM && weapon_weight <= WEAPON_LIGHT)
 		var/mob/living/carbon/human/H = user
 		for(var/obj/item/gun/G in H.held_items)
 			if(G == src || G.weapon_weight >= WEAPON_MEDIUM)
 				continue
 			else if(G.can_trigger_gun(user))
-				bonus_spread += 24 * G.weapon_weight * G.dualwield_spread_mult
+				bonus_spread += (24 * G.weapon_weight * G.dualwield_spread_mult * (ranged ? ((MAX_SKILL/2)/ranged) : 1))
 				loop_counter++
 				var/stam_cost = G.getstamcost(user)
 				addtimer(CALLBACK(G, /obj/item/gun.proc/process_fire, target, user, TRUE, params, null, bonus_spread, stam_cost), loop_counter)
@@ -322,8 +400,8 @@
 		randomized_gun_spread = rand(0, burst_spread)
 	if(HAS_TRAIT(user, TRAIT_POOR_AIM)) //nice shootin' tex
 		bonus_spread += 25
+	
 	var/randomized_bonus_spread = rand(0, bonus_spread)
-
 	if(burst_size > 1)
 		do_burst_shot(user, target, message, params, zone_override, sprd, randomized_gun_spread, randomized_bonus_spread, rand_spr, 1)
 		for(var/i in 2 to burst_size)
@@ -335,7 +413,7 @@
 		if(chambered)
 			sprd = round((rand() - 0.5) * DUALWIELD_PENALTY_EXTRA_MULTIPLIER * (randomized_gun_spread + randomized_bonus_spread))
 			before_firing(target,user)
-			if(!chambered.fire_casing(target, user, params, , suppressed, zone_override, sprd, src))
+			if(safety || !chambered.fire_casing(target, user, params, , suppressed, zone_override, sprd, src))
 				shoot_with_empty_chamber(user)
 				return
 			else
@@ -399,6 +477,52 @@
 			return ..()
 	attack_delay_done = TRUE //we are firing the gun, not bashing people with its butt.
 
+/obj/item/gun/update_overlays()
+	. = ..()
+	cut_overlays()
+	if(safety_overlay)
+		. += safety_overlay
+	if(suppressed_overlay)
+		. += suppressed_overlay
+	if(flashlight_overlay)
+		. += flashlight_overlay
+	if(knife_overlay)
+		. += knife_overlay
+
+/obj/item/gun/middleclick_attack_self(mob/user)
+	. = ..()
+	if(src in list(user.get_active_held_item(), user.get_inactive_held_item()))
+		if(!user.is_holding(src))
+			return ..()
+		else if(suppressed && can_unsuppress)
+			var/obj/item/suppressor/S = suppressed
+			to_chat(user, "<span class='notice'>You unscrew \the [S] from [src].</span>")
+			user.put_in_hands(S)
+			fire_sound = S.oldsound
+			w_class -= S.w_class
+			suppressed = null
+			suppressed_overlay = null
+			update_overlays()
+			return TRUE
+		else if(gun_light && can_unflashlight)
+			var/obj/item/flashlight/seclite/S = gun_light
+			to_chat(user, "<span class='notice'>You unscrew \the [S] from \the [src].</span>")
+			user.put_in_hands(S)
+			gun_light = null
+			update_gunlight(user)
+			S.update_brightness(user)
+			QDEL_NULL(alight)
+			update_overlays()
+			return TRUE
+		else if(bayonet && can_unbayonet)
+			var/obj/item/kitchen/knife/K = bayonet
+			to_chat(user, "<span class='notice'>You unscrew \the [K] from \the [src].</span>")
+			user.put_in_hands(K)
+			bayonet = null
+			knife_overlay = null
+			update_overlays()
+			return TRUE
+
 /obj/item/gun/attack_obj(obj/O, mob/user)
 	if(user.a_intent == INTENT_HARM)
 		if(bayonet)
@@ -440,22 +564,6 @@
 		knife_overlay.pixel_x = knife_x_offset
 		knife_overlay.pixel_y = knife_y_offset
 		add_overlay(knife_overlay, TRUE)
-	else if(istype(I, /obj/item/screwdriver))
-		if(gun_light)
-			var/obj/item/flashlight/seclite/S = gun_light
-			to_chat(user, "<span class='notice'>You unscrew the seclite from \the [src].</span>")
-			gun_light = null
-			S.forceMove(get_turf(user))
-			update_gunlight(user)
-			S.update_brightness(user)
-			QDEL_NULL(alight)
-		if(bayonet)
-			to_chat(user, "<span class='notice'>You unscrew the bayonet from \the [src].</span>")
-			var/obj/item/kitchen/knife/K = bayonet
-			K.forceMove(get_turf(user))
-			bayonet = null
-			cut_overlay(knife_overlay, TRUE)
-			knife_overlay = null
 	else
 		return ..()
 
@@ -582,7 +690,18 @@
 /obj/item/gun/proc/zoom(mob/living/user, forced_zoom)
 	if(!(user?.client))
 		return
+	
+	//Maximum zoom is based on ranged skill
+	if(!user.mind)
+		to_chat(user, "<span class='warning'>My mindless form cannot aim with [src].</span>")
+		return FALSE
 
+	var/ranged_skill = GET_SKILL_LEVEL(user, ranged)
+	if(ranged_skill <= JOB_SKILLPOINTS_NOVICE)
+		to_chat(user, "<span class='warning'>I am far too incompetent to aim with [src].</span>")
+		return FALSE
+	
+	var/zoomies = round(zoom_amt * ranged_skill/(MAX_SKILL/2))
 	if(!isnull(forced_zoom))
 		if(zoomed == forced_zoom)
 			return
@@ -595,19 +714,21 @@
 		var/_y = 0
 		switch(user.dir)
 			if(NORTH)
-				_y = zoom_amt
+				_y = zoomies
 			if(EAST)
-				_x = zoom_amt
+				_x = zoomies
 			if(SOUTH)
-				_y = -zoom_amt
+				_y = -zoomies
 			if(WEST)
-				_x = -zoom_amt
-
-		user.client.change_view(zoom_out_amt)
+				_x = -zoomies
+		
+		if(zoom_out_amt)
+			user.client.change_view(zoom_out_amt)
 		user.client.pixel_x = world.icon_size*_x
 		user.client.pixel_y = world.icon_size*_y
 	else
-		user.client.change_view(CONFIG_GET(string/default_view))
+		if(zoom_out_amt)
+			user.client.change_view(CONFIG_GET(string/default_view))
 		user.client.pixel_x = 0
 		user.client.pixel_y = 0
 
@@ -623,12 +744,21 @@
 	var/aiming_delay = 0 //Otherwise aiming would be meaningless for slower guns such as sniper rifles and launchers.
 	if(fire_delay)
 		var/penalty = (last_fire + GUN_AIMING_TIME + fire_delay) - world.time
-		if(penalty > 0) //Yet we only penalize users firing it multiple times in a haste. fire_delay isn't necessarily cumbersomeness.
-			aiming_delay = penalty
+		var/ranged = GET_SKILL_LEVEL(user, ranged)
+		//High ranged skill means we ignore accuracy penalties for burst firing
+		if(ranged <= JOB_SKILLPOINTS_EXPERT)
+			if(penalty > 0) //Yet we only penalize users firing it multiple times in a haste. fire_delay isn't necessarily cumbersomeness.
+				aiming_delay = penalty
 	if(SEND_SIGNAL(user, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_ACTIVE)) //To be removed in favor of something less tactless later.
 		base_inaccuracy /= 1.5
 	if(stamloss > STAMINA_NEAR_SOFTCRIT) //This can null out the above bonus.
 		base_inaccuracy *= 1 + (stamloss - STAMINA_NEAR_SOFTCRIT)/(STAMINA_NEAR_CRIT - STAMINA_NEAR_SOFTCRIT)*0.5
+	var/ranged = GET_SKILL_LEVEL(user, ranged)
+	if(ranged)
+		//damn we suck huh
+		if(ranged <= JOB_SKILLPOINTS_NOVICE)
+			base_inaccuracy += (MAX_SKILL - ranged)
+		base_inaccuracy *= (ranged/(MAX_SKILL/2))
 	var/mult = max((GUN_AIMING_TIME + aiming_delay + user.last_click_move - world.time)/GUN_AIMING_TIME, -0.5) //Yes, there is a bonus for taking time aiming.
 	if(mult < 0) //accurate weapons should provide a proper bonus with negative inaccuracy. the opposite is true too.
 		mult *= 1/inaccuracy_modifier
