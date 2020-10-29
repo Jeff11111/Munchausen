@@ -141,13 +141,6 @@
 			return
 	grasped_zone = attempted_grasper.zone_selected
 
-	//Bodypart checks
-	if(grasped_part && (grasped_part.body_zone in TORSO_BODYPARTS))
-		var/obj/item/grab/inactive_grab = attempted_grasper.get_inactive_held_item()
-		if(!istype(inactive_grab) || !((inactive_grab.grab_state == GM_WRENCH) || (inactive_grab.grab_state == GM_STRANGLE) || (inactive_grab.grasped_mob == grasped_mob) || (inactive_grab.actions_done <= 0)))
-			to_chat(attempted_grasper, "<span class='warning'>You can't grab [src] by [p_their()] [parse_zone(attempted_grasper.zone_selected)] without grabbing and twisting another limb!</span>")
-			return
-
 	RegisterSignal(grasping_mob, COMSIG_PARENT_QDELETING, .proc/qdel_void)
 	RegisterSignal(grasped_mob, COMSIG_PARENT_QDELETING, .proc/qdel_void)
 	if(grasped_part)
@@ -180,6 +173,10 @@
 
 /// Takedown move
 /obj/item/grab/proc/do_takedown(mob/living/carbon/victim, obj/item/bodypart/grasped_part, mob/living/carbon/user)
+	var/obj/item/grab/inactive_grab = attempted_grasper.get_inactive_held_item()
+	if(!istype(inactive_grab) || !((inactive_grab.grab_state == GM_WRENCH) || (inactive_grab.grab_state == GM_STRANGLE) || (inactive_grab.grasped_mob == grasped_mob) || (inactive_grab.actions_done <= 0)))
+		to_chat(attempted_grasper, "<span class='warning'>You can't take [src] down by [p_their()] [parse_zone(attempted_grasper.zone_selected)] without grabbing and twisting another limb!</span>")
+		return FALSE
 	var/user_str = 10
 	if(grasping_mob.mind)
 		user_str = GET_STAT_LEVEL(grasping_mob, str)
