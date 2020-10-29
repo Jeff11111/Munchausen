@@ -21,7 +21,6 @@
 			//Skyrat changes - changes maroon to flavor obj 
 			var/datum/objective/maroon/maroon = new
 			maroon.owner = T.owner
-			maroon.forge_objective()
 			T.add_objective(maroon)
 			//End of skyrat changes
 	else
