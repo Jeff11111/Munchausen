@@ -32,7 +32,10 @@
 
 /datum/game_mode/dreamer/post_setup(report)
 	..()
-	var/datum/mind/dreamer = pick(antag_candidates)
+	var/datum/mind/dreamer = pick_n_take(antag_candidates)
+	while(!istype(dreamer))
+		if(length(antag_candidates)
+			dreamer = pick_n_take(antag_candidates)
 	if(istype(dreamer))
 		var/datum/antagonist/dreamer/new_antag = new()
 		addtimer(CALLBACK(dreamer, /datum/mind.proc/add_antag_datum, new_antag), rand(100,200))
