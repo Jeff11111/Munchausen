@@ -11,4 +11,3 @@
 Bob Joga = Host
 Remis12 = Headmin
 Romulo27 = Game Admin
-KnS-PePe = Game Admin
