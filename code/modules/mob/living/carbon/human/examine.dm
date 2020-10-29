@@ -384,7 +384,7 @@
 		if(is_bleeding())
 			for(var/i in bodyparts)
 				var/obj/item/bodypart/BP = i
-				if(BP.grasped_by && BP.grasped_by.owner == src)
+				if(BP.grasped_by && BP.grasped_by.grasping_mob == src)
 					grasped_limbs += BP
 				if(BP.get_bleed_rate() && !BP.current_gauze)
 					bleeding_limbs += BP
