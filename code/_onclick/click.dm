@@ -490,7 +490,7 @@
 
 // Simple helper to face what you clicked on, in case it should be needed in more than one place
 /mob/proc/face_atom(atom/A, ismousemovement = FALSE)
-	if( buckled || stat != CONSCIOUS || !loc || !A || !A.x || !A.y )
+	if(buckled || stat != CONSCIOUS || !loc || !istype(A) || !A.x || !A.y )
 		return
 	var/atom/L = loc
 	if(L.flags_1 & BLOCK_FACE_ATOM_1)
