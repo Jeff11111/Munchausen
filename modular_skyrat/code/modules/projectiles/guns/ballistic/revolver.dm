@@ -229,6 +229,8 @@
 	name = "\improper double barreled shotgun"
 	desc = "The double barreled shotgun - A true classic."
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/shotgun.dmi'
+	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/shotgun_lefthand.dmi'
+	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/shotgun_righthand.dmi'
 	icon_state = "dbshotgun"
 	item_state = "dbshotgun"
 	open_sound = 'modular_skyrat/sound/guns/shotgun_break.ogg'

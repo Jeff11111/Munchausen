@@ -78,6 +78,8 @@
 	//construction, electronics and gaming
 	skill_variance_negative = 2
 	skill_variance_positive = 2
+	skill_melee = JOB_SKILLPOINTS_NOVICE
+	skill_ranged = JOB_SKILLPOINTS_WORTHLESS
 	skill_gaming = JOB_STATPOINTS_AVERAGE
 	skill_construction = JOB_STATPOINTS_NOVICE
 	skill_electronics = JOB_STATPOINTS_NOVICE
@@ -87,6 +89,7 @@
 	//extra endurance
 	stat_end = JOB_STATPOINTS_TRAINED
 	//Fantastic construction, trained electronics
+	skill_melee = 8
 	skill_construction = JOB_SKILLPOINTS_EXPERT
 	skill_electronics = JOB_SKILLPOINTS_TRAINED
 
@@ -100,6 +103,7 @@
 	//Also little variance
 	skill_variance_negative = 1
 	skill_variance_positive = 1
+	skill_melee = 8
 	skill_chemistry = JOB_SKILLPOINTS_AVERAGE
 	skill_ranged = JOB_SKILLPOINTS_TRAINED
 	skill_cooking = JOB_SKILLPOINTS_TRAINED
@@ -130,6 +134,8 @@
 	stat_dex = 8
 	stat_int = 8
 	//Decent construction and electronics
+	skill_melee = 10
+	skill_ranged = 8
 	skill_construction = JOB_SKILLPOINTS_TRAINED
 	skill_electronics = JOB_SKILLPOINTS_TRAINED
 
@@ -137,6 +143,7 @@
 	//Decent stats, god blessed them
 	stat_variance_negative = 1
 	//Decent first aid and cooking
+	skill_melee = 8
 	skill_firstaid = JOB_SKILLPOINTS_TRAINED
 	skill_cooking = JOB_SKILLPOINTS_TRAINED
 
@@ -156,6 +163,8 @@
 	stat_end = 14
 	stat_int = 14
 	//Godlike construction and electronics
+	skill_melee = 10
+	skill_ranged = 7
 	skill_construction = 18
 	skill_electronics = 18
 
@@ -163,6 +172,7 @@
 	//High intellect, average everything else
 	stat_int = JOB_STATPOINTS_EXPERT
 	//Godlike surgery, expert chemsitry and firstaid
+	skill_ranged = 8
 	skill_surgery = 18
 	skill_chemistry = JOB_SKILLPOINTS_EXPERT
 	skill_firstaid = JOB_SKILLPOINTS_EXPERT
@@ -173,6 +183,7 @@
 	stat_int = 6
 	//Uhhh... godlike gaming?...
 	skill_gaming = JOB_SKILLPOINTS_LEGENDARY
+	skill_melee = 6
 
 //Either gets ridiculously low or ridiculously high strength, no inbetween
 /datum/job/clown/special_assign_skills_stats(mob/living/carbon/human/H)
@@ -232,14 +243,16 @@
 	stat_str = 14
 	stat_end = 14
 	//Godlike melee and ranged, novice firstaid
-	skill_melee = JOB_SKILLPOINTS_AVERAGE
-	skill_ranged = JOB_SKILLPOINTS_AVERAGE
+	skill_melee = 17
+	skill_ranged = JOB_SKILLPOINTS_EXPERT
+	skill_firstaid = JOB_SKILLPOINTS_AVERAGE
 
 /datum/job/janitor
 	//Decent endurance, below average strength
 	stat_str = 9
 	stat_end = 14
 	//Average construction and electronics i guess?
+	skill_melee = 8
 	skill_construction = JOB_SKILLPOINTS_AVERAGE
 	skill_electronics = JOB_SKILLPOINTS_AVERAGE
 
@@ -260,6 +273,7 @@
 	stat_end = 14
 	stat_int = 6
 	//Uhhh... godlike gaming?...
+	skill_ranged = 6
 	skill_gaming = JOB_SKILLPOINTS_LEGENDARY
 
 //Either gets ridiculously low or ridiculously high strength, no inbetween
@@ -297,6 +311,8 @@
 	stat_str = JOB_STATPOINTS_TRAINED
 	stat_end = JOB_STATPOINTS_TRAINED
 	//Decent construction and electronics
+	skill_melee = 8
+	skill_ranged = 10
 	skill_construction = JOB_SKILLPOINTS_TRAINED
 	skill_electronics = JOB_SKILLPOINTS_TRAINED
 
@@ -307,6 +323,7 @@
 	stat_dex = JOB_STATPOINTS_EXPERT
 	stat_int = JOB_STATPOINTS_EXPERT
 	//Amazing research and chemistry
+	skill_ranged = 10
 	skill_chemistry = JOB_SKILLPOINTS_EXPERT
 	skill_research = 18
 
@@ -340,6 +357,7 @@
 	//Decent melee and ranged
 	skill_melee = JOB_SKILLPOINTS_TRAINED
 	skill_ranged = JOB_SKILLPOINTS_TRAINED
+	skill_firstaid = JOB_SKILLPOINTS_NOVICE
 
 /datum/job/mining
 	//Better str and end, at the cost of int and dex
@@ -348,7 +366,7 @@
 	stat_dex = 8
 	stat_int = 8
 	//Average melee and ranged
-	skill_melee = JOB_SKILLPOINTS_AVERAGE
+	skill_melee = JOB_SKILLPOINTS_TRAINED
 	skill_ranged = JOB_SKILLPOINTS_AVERAGE
 
 /datum/job/engineer
@@ -356,6 +374,7 @@
 	//extra endurance
 	stat_end = JOB_STATPOINTS_TRAINED
 	//Fantastic construction, trained electronics
+	skill_melee = 8
 	skill_construction = JOB_SKILLPOINTS_EXPERT
 	skill_electronics = JOB_SKILLPOINTS_TRAINED
 
@@ -389,6 +408,7 @@
 	//Great melee, trained ranged
 	skill_melee = JOB_SKILLPOINTS_EXPERT
 	skill_ranged = JOB_SKILLPOINTS_TRAINED
+	skill_firstaid = JOB_SKILLPOINTS_NOVICE
 
 /datum/job/blueshield
 	//Better str and end, at the cost of int
