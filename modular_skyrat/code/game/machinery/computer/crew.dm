@@ -3,7 +3,7 @@
 
 	var/list/jobs = new/list()
 	jobs["Captain"] = 00
-	jobs["Head of Security"] = 10
+	jobs["Chief Enforcer"] = 10
 	jobs["Warden"] = 11
 	jobs["Security Officer"] = 12
 	jobs["Detective"] = 13

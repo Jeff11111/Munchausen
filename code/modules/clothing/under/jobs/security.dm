@@ -133,20 +133,20 @@
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 
 /*
- * Head of Security
+ * Chief Enforcer
  */
 
 /obj/item/clothing/under/rank/security/head_of_security
-	name = "head of security's jumpsuit"
-	desc = "A security jumpsuit decorated for those few with the dedication to achieve the position of Head of Security."
+	name = "Chief Enforcer's jumpsuit"
+	desc = "A security jumpsuit decorated for those few with the dedication to achieve the position of Chief Enforcer."
 	icon_state = "rhos"
 	item_state = "r_suit"
 	armor = list("melee" = 10, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 15) //skyrat edit
 	strip_delay = 60
 
 /obj/item/clothing/under/rank/security/head_of_security/skirt
-	name = "head of security's jumpskirt"
-	desc = "A security jumpskirt decorated for those few with the dedication to achieve the position of Head of Security."
+	name = "Chief Enforcer's jumpskirt"
+	desc = "A security jumpskirt decorated for those few with the dedication to achieve the position of Chief Enforcer."
 	icon_state = "rhos_skirt"
 	item_state = "r_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -155,20 +155,20 @@
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 
 /obj/item/clothing/under/rank/security/head_of_security/grey
-	name = "head of security's grey jumpsuit"
+	name = "Chief Enforcer's grey jumpsuit"
 	desc = "There are old men, and there are bold men, but there are very few old, bold men."
 	icon_state = "hos"
 	item_state = "gy_suit"
 
 /obj/item/clothing/under/rank/security/head_of_security/alt
-	name = "head of security's turtleneck"
-	desc = "A stylish alternative to the normal head of security jumpsuit, complete with tactical pants."
+	name = "Chief Enforcer's turtleneck"
+	desc = "A stylish alternative to the normal Chief Enforcer jumpsuit, complete with tactical pants."
 	icon_state = "hosalt"
 	item_state = "bl_suit"
 
 /obj/item/clothing/under/rank/security/head_of_security/alt/skirt
-	name = "head of security's turtleneck skirt"
-	desc = "A stylish alternative to the normal head of security jumpsuit, complete with a tactical skirt."
+	name = "Chief Enforcer's turtleneck skirt"
+	desc = "A stylish alternative to the normal Chief Enforcer jumpsuit, complete with a tactical skirt."
 	icon_state = "hosalt_skirt"
 	item_state = "bl_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -177,21 +177,21 @@
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 
 /obj/item/clothing/under/rank/security/head_of_security/formal
-	desc = "The insignia on this uniform tells you that this uniform belongs to the Head of Security."
-	name = "head of security's formal uniform"
+	desc = "The insignia on this uniform tells you that this uniform belongs to the Chief Enforcer."
+	name = "Chief Enforcer's formal uniform"
 	icon_state = "hosblueclothes"
 	item_state = "hosblueclothes"
 
 /obj/item/clothing/under/rank/security/head_of_security/parade
-	name = "head of security's parade uniform"
-	desc = "A male head of security's luxury-wear, for special occasions."
+	name = "Chief Enforcer's parade uniform"
+	desc = "A male Chief Enforcer's luxury-wear, for special occasions."
 	icon_state = "hos_parade_male"
 	item_state = "r_suit"
 	can_adjust = FALSE
 
 /obj/item/clothing/under/rank/security/head_of_security/parade/female
-	name = "head of security's parade uniform"
-	desc = "A female head of security's luxury-wear, for special occasions."
+	name = "Chief Enforcer's parade uniform"
+	desc = "A female Chief Enforcer's luxury-wear, for special occasions."
 	icon_state = "hos_parade_fem"
 	item_state = "r_suit"
 	fitted = FEMALE_UNIFORM_TOP

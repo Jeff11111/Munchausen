@@ -1,5 +1,5 @@
 /datum/job/hos
-	title = "Head of Security"
+	title = "Chief Enforcer"
 	flag = HOS
 //	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD|DEADMIN_POSITION_SECURITY
 	department_head = list("Captain")
@@ -35,7 +35,7 @@
 	threat = 3
 
 /datum/outfit/job/hos
-	name = "Head of Security"
+	name = "Chief Enforcer"
 	jobtype = /datum/job/hos
 
 	id = /obj/item/card/id/silver
@@ -62,7 +62,7 @@
 	chameleon_extras = list(/obj/item/gun/energy/e_gun/hos, /obj/item/stamp/hos)
 
 /datum/outfit/job/hos/hardsuit
-	name = "Head of Security (Hardsuit)"
+	name = "Chief Enforcer (Hardsuit)"
 
 	mask = /obj/item/clothing/mask/gas/sechailer
 	suit = /obj/item/clothing/suit/space/hardsuit/security/hos

@@ -75,7 +75,7 @@
 	name = "securistan banner"
 	desc = "The banner of Securistan, ruling the station with an iron fist."
 	icon_state = "banner_security"
-	job_loyalties = list("Security Officer", "Warden", "Detective", "Head of Security")
+	job_loyalties = list("Security Officer", "Warden", "Detective", "Chief Enforcer")
 	warcry = "EVERYONE DOWN ON THE GROUND!!"
 */
 /obj/item/banner/security/mundane
@@ -139,7 +139,7 @@
 	name = "command banner"
 	desc = "The banner of Command, a staunch and ancient line of bueraucratic kings and queens."
 	//No icon state here since the default one is the NT banner
-	job_loyalties = list("Captain", "Head of Personnel", "Senior Engineer", "Head of Security", "Research Director", "Chief Medical Officer")
+	job_loyalties = list("Captain", "Head of Personnel", "Senior Engineer", "Chief Enforcer", "Research Director", "Chief Medical Officer")
 	warcry = "Hail Nanotrasen!"
 
 /obj/item/banner/command/mundane

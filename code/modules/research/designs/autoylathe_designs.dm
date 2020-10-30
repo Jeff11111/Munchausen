@@ -350,7 +350,7 @@
 	build_path = /obj/item/toy/figure/hop
 
 /datum/design/autoylathe/figure/hos
-	name = "Head of Security"
+	name = "Chief Enforcer"
 	id = "hosfigure"
 	materials = list(/datum/material/plastic = 500, /datum/material/iron = 50)
 	build_path = /obj/item/toy/figure/hos

@@ -32,10 +32,10 @@
 	excludefromjob = list("Captain")
 
 /datum/objective_item/steal/hoslaser
-	name = "the head of security's personal gun."
+	name = "the chief enforcer's personal gun."
 	targetitem = /obj/item/gun/energy/e_gun/hos
 	difficulty = 10
-	excludefromjob = list("Head Of Security", "Chief Enforcer")
+	excludefromjob = list("Chief Enforcer", "Chief Enforcer")
 	altitems = list(/obj/item/choice_beacon/hosgun,
 					/obj/item/gun/ballistic/revolver/mateba/bladerunner,
 					) //Funny gun
@@ -83,7 +83,7 @@
 	name = "a reflector vest."
 	targetitem = /obj/item/clothing/suit/armor/laserproof
 	difficulty = 3
-	excludefromjob = list("Head of Security", "Warden")
+	excludefromjob = list("Chief Enforcer", "Warden")
 
 /datum/objective_item/steal/reactive
 	name = "a reactive teleport armor."

@@ -580,7 +580,7 @@
 	icon_state = "winterhood_security"
 
 /obj/item/clothing/suit/hooded/wintercoat/hos
-	name = "head of security's winter coat"
+	name = "Chief Enforcer's winter coat"
 	desc = "A red, armor-padded winter coat, lovingly woven with a Kevlar interleave and reinforced with semi-ablative polymers and a silver azide fill material. The zipper tab looks like a tiny replica of Beepsky."
 	icon_state = "coathos"
 	item_state = "coathos"

@@ -2,12 +2,12 @@
 	title = "Detective"
 	flag = DETECTIVE
 //	auto_deadmin_role_flags = DEADMIN_POSITION_SECURITY
-	department_head = list("Head of Security")
+	department_head = list("Chief Enforcer")
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the head of security"
+	supervisors = "the Chief Enforcer"
 	selection_color = "#c02f2f"
 	minimal_player_age = 7
 	exp_requirements = 120 //SKYRAT CHANGE - lowers security exp requirement

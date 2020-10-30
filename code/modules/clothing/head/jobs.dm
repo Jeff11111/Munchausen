@@ -154,8 +154,8 @@
 //Security
 
 /obj/item/clothing/head/HoS
-	name = "head of security cap"
-	desc = "The robust standard-issue cap of the Head of Security. For showing the officers who's in charge."
+	name = "chief enforcer cap"
+	desc = "The robust standard-issue cap of the Chief Enforcer. For showing the officers who's in charge."
 	icon_state = "hoscap"
 	armor = list("melee" = 40, "bullet" = 30, "laser" = 25, "energy" = 10, "bomb" = 25, "bio" = 10, "rad" = 0, "fire" = 50, "acid" = 60, "wound" = 20)
 	strip_delay = 80
@@ -166,13 +166,13 @@
 	desc = "A black cap fit for a high ranking syndicate officer."
 
 /obj/item/clothing/head/HoS/beret
-	name = "head of security beret"
-	desc = "A robust beret for the Head of Security, for looking stylish while not sacrificing protection."
+	name = "chief enforcer beret"
+	desc = "A robust beret for the Chief Enforcer, for looking stylish while not sacrificing protection."
 	icon_state = "hosberetblack"
 
 /obj/item/clothing/head/HoS/beret/officer
-	name = "head of security officer beret"
-	desc = "A robust beret for the Head of Security, for looking stylish while not sacrificing protection."
+	name = "chief enforcer officer beret"
+	desc = "A robust beret for the Chief Enforcer, for looking stylish while not sacrificing protection."
 	icon_state = "beret_centcom_officer"
 
 /obj/item/clothing/head/HoS/beret/syndicate
@@ -263,8 +263,8 @@
 	dog_fashion = null
 
 /obj/item/clothing/head/beret/sec/navyhos
-	name = "head of security's beret"
-	desc = "A special beret with the Head of Security's insignia emblazoned on it. A symbol of excellence, a badge of courage, a mark of distinction."
+	name = "chief enforcer's beret"
+	desc = "A special beret with the Chief Enforcer's insignia emblazoned on it. A symbol of excellence, a badge of courage, a mark of distinction."
 	icon_state = "hosberet"
 
 /obj/item/clothing/head/beret/sec/navywarden

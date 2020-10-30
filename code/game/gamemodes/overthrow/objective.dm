@@ -5,7 +5,7 @@
 // Point system:
 // Base points for each role:
 // AI, Captain = 5;
-// Head of Personnel, Head of Security, target = 4;
+// Head of Personnel, Chief Enforcer, target = 4;
 // Senior Engineer, Chief Medical Officer, Research Director = 3;
 
 // Modifiers:
@@ -93,7 +93,7 @@
 					target_points = CAPPTS
 				if("Head of Personnel")
 					target_points = HOPPTS
-				if("Head of Security")
+				if("Chief Enforcer")
 					target_points = HOSPTS
 				if("Senior Engineer")
 					target_points = CEPTS

@@ -2,13 +2,13 @@
 	title = "Security Officer"
 	flag = OFFICER
 //	auto_deadmin_role_flags = DEADMIN_POSITION_SECURITY
-	department_head = list("Head of Security")
+	department_head = list("Chief Enforcer")
 	department_flag = ENGSEC
 	faction = "Station"
 	// Skyrat EDIT: from 5 to 8
 	total_positions = 8 //Handled in /datum/controller/occupations/proc/setup_officer_positions()
 	spawn_positions = 8 //Handled in /datum/controller/occupations/proc/setup_officer_positions()
-	supervisors = "the head of security, and the head of your assigned department (if applicable)"
+	supervisors = "the Chief Enforcer, and the head of your assigned department (if applicable)"
 	selection_color = "#c02f2f"
 	minimal_player_age = 7
 	exp_requirements = 120 //SKYRAT CHANGE - lowers security exp requirement

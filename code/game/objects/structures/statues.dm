@@ -152,7 +152,7 @@
 	impressiveness = 30
 
 /obj/structure/statue/gold/hos
-	name = "statue of the head of security"
+	name = "statue of the chief enforcer"
 	icon_state = "hos"
 
 /obj/structure/statue/gold/hop

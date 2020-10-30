@@ -100,7 +100,7 @@
 	name = "Upload a hacked law to the AI."
 	sabotage_type = "ailaw"
 	special_equipment = list(/obj/item/aiModule/syndicate)
-	excludefromjob = list("Senior Engineer","Research Director","Head of Personnel","Captain","Chief Medical Officer","Head Of Security")
+	excludefromjob = list("Senior Engineer","Research Director","Head of Personnel","Captain","Chief Medical Officer","Chief Enforcer")
 
 /datum/sabotage_objective/ai_law/can_run()
 	return length(active_ais())

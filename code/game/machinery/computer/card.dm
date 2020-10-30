@@ -31,7 +31,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 		"Cyborg",
 		"Captain",
 		"Head of Personnel",
-		"Head of Security",
+		"Chief Enforcer",
 		"Senior Engineer",
 		"Research Director",
 		"Chief Medical Officer",
@@ -411,7 +411,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 							get_subordinates("Head of Personnel")
 						if((ACCESS_HOS in inserted_scan_id.access) && ((target_dept==2) || !target_dept))
 							region_access |= 2
-							get_subordinates("Head of Security")
+							get_subordinates("Chief Enforcer")
 						if((ACCESS_CMO in inserted_scan_id.access) && ((target_dept==3) || !target_dept))
 							region_access |= 3
 							get_subordinates("Chief Medical Officer")

@@ -21,7 +21,7 @@
 	antag_datum = /datum/antagonist/terror_spider
 	antag_flag = ROLE_TERROR_SPIDER
 	antag_flag_override = ROLE_ALIEN
-	enemy_roles = list("Security Officer", "Detective", "Head of Security", "Captain")
+	enemy_roles = list("Security Officer", "Detective", "Chief Enforcer", "Captain")
 	required_enemies = list(3,3,2,2,1,1,1,1,1,0)
 	required_candidates = 1
 	weight = 3

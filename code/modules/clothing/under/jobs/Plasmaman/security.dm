@@ -15,6 +15,6 @@
 
 /obj/item/clothing/under/plasmaman/security/hos
 	name = "security plasma envirosuit"
-	desc = "A slick black and red plasmaman containment suit designed for the head of security, also called the LAW."
+	desc = "A slick black and red plasmaman containment suit designed for the Chief Enforcer, also called the LAW."
 	icon_state = "hos_envirosuit"
 	item_state = "hos_envirosuit"

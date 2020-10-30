@@ -86,8 +86,8 @@
 	item_state = "warden_envirohelm"
 
 /obj/item/clothing/head/helmet/space/plasmaman/security/hos
-	name = "head of security's plasma envirosuit helmet"
-	desc = "A plasmaman containment helmet designed for the head of security, manacing black with red stripes, to differenciate them from other members of security."
+	name = "Chief Enforcer's plasma envirosuit helmet"
+	desc = "A plasmaman containment helmet designed for the Chief Enforcer, manacing black with red stripes, to differenciate them from other members of security."
 	icon_state = "hos_envirohelm"
 	item_state = "hos_envirohelm"
 

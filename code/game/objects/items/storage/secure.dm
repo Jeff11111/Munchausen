@@ -212,4 +212,4 @@
 	return attack_self(user)
 
 /obj/item/storage/secure/safe/HoS
-	name = "head of security's safe"
+	name = "chief enforcer's safe"

@@ -1459,7 +1459,7 @@ GLOBAL_LIST_INIT(valid_toy_paths, valid_toy_paths())
 	toysay = "Giving out all access!"
 
 /obj/item/toy/figure/hos
-	name = "Head of Security action figure"
+	name = "Chief Enforcer action figure"
 	icon_state = "hos"
 	toysay = "Go ahead, make my day."
 
