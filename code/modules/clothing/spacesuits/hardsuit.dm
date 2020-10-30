@@ -548,12 +548,12 @@
 /obj/item/clothing/head/helmet/space/hardsuit/security/hos
 	name = "Chief Enforcer's hardsuit helmet"
 	desc = "A special bulky helmet designed for work in a hazardous, low pressure environment. Has an additional layer of armor."
-	icon_state = "hardsuit0-hos"
-	hardsuit_type = "hos"
+	icon_state = "hardsuit0-odst"
+	hardsuit_type = "odst"
 	armor = list("melee" = 45, "bullet" = 25, "laser" = 30, "energy" = 10, "bomb" = 25, "bio" = 100, "rad" = 50, "fire" = 95, "acid" = 95, "wound" = 25) //skyrat edit
 
 /obj/item/clothing/suit/space/hardsuit/security/hos
-	icon_state = "hardsuit-hos"
+	icon_state = "hardsuit-odst"
 	name = "Chief Enforcer's hardsuit"
 	desc = "A special bulky suit that protects against hazardous, low pressure environments. Has an additional layer of armor."
 	armor = list("melee" = 45, "bullet" = 25, "laser" = 30, "energy" = 10, "bomb" = 25, "bio" = 100, "rad" = 50, "fire" = 95, "acid" = 95, "wound" = 25) //skyrat edit
