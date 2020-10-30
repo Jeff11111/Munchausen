@@ -25,7 +25,8 @@
 	gun_light = new /obj/item/flashlight/seclite(src)
 	return ..()
 
-/obj/item/gun/energy/e_gun/mini/update_icon()
+/obj/item/gun/energy/e_gun/mini/update_overlays()
+	. = ..()
 	..()
 	if(gun_light && gun_light.on)
 		add_overlay("mini-light")
@@ -112,7 +113,7 @@
 
 /obj/item/gun/energy/e_gun/nuclear/shoot_live_shot(mob/living/user, pointblank = FALSE, mob/pbtarget, message = 1, stam_cost = 0)
 	failcheck()
-	update_icon()
+	update_overlays()
 	..()
 
 /obj/item/gun/energy/e_gun/nuclear/proc/failcheck()
@@ -138,7 +139,7 @@
 		return
 	fail_chance = min(fail_chance + round(15/severity), 100)
 
-/obj/item/gun/energy/e_gun/nuclear/update_icon()
+/obj/item/gun/energy/e_gun/nuclear/update_overlays()
 	..()
 	if(crit_fail)
 		add_overlay("[icon_state]_fail_3")
@@ -182,7 +183,7 @@
 			fire_sound = 'sound/weapons/taser2.ogg' //I have to set these manually unfortunately
 			fire_delay = 3.5
 			post_set_firemode()
-			update_icon(TRUE)
+			update_overlays(TRUE)
 
 /obj/item/gun/energy/e_gun/large/attack_self(mob/living/user)
 	. = ..()
@@ -195,7 +196,7 @@
 			fire_sound = 'sound/weapons/taser2.ogg'
 			fire_delay = 3.5
 			post_set_firemode()
-			update_icon(TRUE)
+			update_overlays(TRUE)
 		else
 			return
 
