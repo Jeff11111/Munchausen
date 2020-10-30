@@ -257,7 +257,7 @@
 		//High endurance means we recover even faster
 		if(mind)
 			var/datum/stats/end/end = GET_STAT(src, end)
-			if(end.level >= 10)
+			if(end.level > 10)
 				recovery++
 			if(end.level >= 15)
 				recovery++
