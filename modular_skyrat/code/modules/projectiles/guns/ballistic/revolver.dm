@@ -251,3 +251,4 @@
 	desc = "The Bobox double barreled shotgun - The double barrel you know and love, but now polymerized and horrifying."
 	sawn_off = TRUE
 	w_class = WEIGHT_CLASS_NORMAL
+	unique_reskin = null

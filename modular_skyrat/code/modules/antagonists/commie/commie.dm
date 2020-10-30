@@ -11,6 +11,11 @@
 	. = ..()
 	viva_la_revolucion()
 	gain_stats()
+	greet()
+
+/datum/antagonist/communist/greet()
+	to_chat(owner, "<span class='danger'>You are a communist stowaway.</span>")
+	owner.announce_objectives()
 
 /datum/antagonist/communist/proc/viva_la_revolucion()
 	var/datum/objective/commie/viva = new()
