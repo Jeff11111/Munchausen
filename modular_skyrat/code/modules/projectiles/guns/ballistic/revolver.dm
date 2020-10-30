@@ -67,7 +67,7 @@
 	. = ""
 	if((user.mind && GET_SKILL_LEVEL(user, ranged) >= 8) || chamber_open || isobserver(user))
 		. += "It has [get_ammo()] round\s remaining."
-		. += "[get_ammo(0,0)] of those are live rounds."
+		. += " [get_ammo(0,0)] of those are live rounds."
 	else
 		. += "I'm not sure how many rounds are loaded on [src]."
 
