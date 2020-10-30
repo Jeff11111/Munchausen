@@ -71,10 +71,10 @@
 		if("Head of Personnel")
 			O = new /datum/outfit/plasmaman/hop
 
-		if("Head of Security")
+		if("Chief Enforcer")
 			O = new /datum/outfit/plasmaman/hos
 
-		if("Chief Engineer")
+		if("Senior Engineer")
 			O = new /datum/outfit/plasmaman/ce
 
 		if("Chief Medical Officer")

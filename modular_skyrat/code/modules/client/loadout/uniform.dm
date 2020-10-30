@@ -61,7 +61,7 @@
 	name = "EntCorp uniform, ops, cmd"
 	category = SLOT_W_UNIFORM
 	path = /obj/item/clothing/under/trek/command/orv/engsec
-	restricted_roles = list("Head of Security", "Chief Engineer")
+	restricted_roles = list("Chief Enforcer", "Senior Engineer")
 
 /datum/gear/capt_alternative
 	name = "Captains Naval Alternative"

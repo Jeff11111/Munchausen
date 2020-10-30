@@ -927,14 +927,14 @@ GLOBAL_LIST_EMPTY(possible_items_special)
 	department_minds = list()
 	department_real_names = list()
 
-	var/list/departments = list("Head of Security","Research Director","Chief Engineer","Chief Medical Officer")
+	var/list/departments = list("Head of Security","Research Director","Senior Engineer","Chief Medical Officer")
 	var/department_head = pick(departments)
 	switch(department_head)
 		if("Head of Security")
 			department_string = "security"
 		if("Research Director")
 			department_string = "science"
-		if("Chief Engineer")
+		if("Senior Engineer")
 			department_string = "engineering"
 		if("Chief Medical Officer")
 			department_string = "medical"

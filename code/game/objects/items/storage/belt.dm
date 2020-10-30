@@ -71,7 +71,7 @@
 	STR.can_hold = can_hold
 
 /obj/item/storage/belt/utility/chief
-	name = "\improper Chief Engineer's toolbelt" //"the Chief Engineer's toolbelt", because "Chief Engineer's toolbelt" is not a proper noun
+	name = "\improper Senior Engineer's toolbelt" //"the Chief Engineer's toolbelt", because "Chief Engineer's toolbelt" is not a proper noun
 	desc = "Holds tools, looks snazzy."
 	icon_state = "utilitybelt_ce"
 	item_state = "utility_ce"

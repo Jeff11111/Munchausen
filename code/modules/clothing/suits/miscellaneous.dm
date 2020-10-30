@@ -712,7 +712,7 @@
 	icon_state = "winterhood_rd"
 
 /obj/item/clothing/suit/hooded/wintercoat/ce
-	name = "chief engineer's winter coat"
+	name = "senior engineer's winter coat"
 	desc = "A white winter coat with reflective green and yellow stripes. Stuffed with asbestos, treated with fire retardant PBDE, lined with a micro thin sheet of lead foil and snugly fitted to your body's measurements. This baby's ready to save you from anything except the thyroid cancer and systemic fibrosis you'll get from wearing it. The zipper tab is a tiny golden wrench."
 	icon_state = "coatce"
 	item_state = "coatce"

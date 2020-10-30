@@ -337,12 +337,12 @@
 
 //Chief Engineer
 /obj/item/clothing/head/beret/ce
-	name = "chief engineer's beret"
+	name = "senior engineer's beret"
 	desc = "A beret that will surely make you look way cooler than a hard hat, although lack of protection is the price."
 	icon_state = "ceberet"
 
 /obj/item/clothing/head/beret/ce/white
-	name = "chief engineer's white beret"
+	name = "senior engineer's white beret"
 	desc = "A beret that will surely make you look way cooler than a hard hat, although lack of protection is the price."
 	icon_state = "beret_ce_white"
 

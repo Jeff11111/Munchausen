@@ -42,7 +42,7 @@
 	dye_color = DYE_HOS
 
 /obj/item/stamp/ce
-	name = "chief engineer's rubber stamp"
+	name = "senior engineer's rubber stamp"
 	icon_state = "stamp-ce"
 	dye_color = DYE_CE
 

@@ -148,8 +148,8 @@
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 100, "rad" = 10, "fire" = 100, "acid" = 75, "wound" = 2)
 
 /obj/item/clothing/head/helmet/space/plasmaman/engineering/ce
-	name = "chief engineer's plasma envirosuit helmet"
-	desc = "A space-worthy helmet specially designed for the chief engineer, white with gold stripes designed for high visibility."
+	name = "senior engineer's plasma envirosuit helmet"
+	desc = "A space-worthy helmet specially designed for the senior engineer, white with gold stripes designed for high visibility."
 	icon_state = "ce_envirohelm"
 	item_state = "ce_envirohelm"
 

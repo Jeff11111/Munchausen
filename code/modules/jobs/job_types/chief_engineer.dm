@@ -1,5 +1,5 @@
 /datum/job/chief_engineer
-	title = "Chief Engineer"
+	title = "Senior Engineer"
 	flag = CHIEF
 //	auto_deadmin_role_flags = DEADMIN_POSITION_HEAD
 	department_head = list("Captain")
@@ -36,7 +36,7 @@
 	threat = 2
 
 /datum/outfit/job/ce
-	name = "Chief Engineer"
+	name = "Senior Engineer"
 	jobtype = /datum/job/chief_engineer
 
 	id = /obj/item/card/id/silver
@@ -57,7 +57,7 @@
 	chameleon_extras = /obj/item/stamp/ce
 
 /datum/outfit/job/ce/rig
-	name = "Chief Engineer (Hardsuit)"
+	name = "Senior Engineer (Hardsuit)"
 
 	mask = /obj/item/clothing/mask/breath
 	suit = /obj/item/clothing/suit/space/hardsuit/engine/elite

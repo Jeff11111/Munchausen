@@ -53,10 +53,10 @@
 	excludefromjob = list("Captain")
 
 /datum/objective_item/steal/magboots
-	name = "the chief engineer's advanced magnetic boots."
+	name = "the senior engineer's advanced magnetic boots."
 	targetitem =  /obj/item/clothing/shoes/magboots/advance
 	difficulty = 5
-	excludefromjob = list("Chief Engineer", "Station Engineer", "Atmospheric Technician")
+	excludefromjob = list("Senior Engineer", "Station Engineer", "Atmospheric Technician")
 
 /datum/objective_item/steal/capmedal
 	name = "the medal of captaincy."
@@ -124,7 +124,7 @@
 	name = "28 moles of plasma (full tank)."
 	targetitem = /obj/item/tank
 	difficulty = 3
-	excludefromjob = list("Chief Engineer","Research Director","Station Engineer","Scientist","Atmospheric Technician")
+	excludefromjob = list("Senior Engineer","Research Director","Station Engineer","Scientist","Atmospheric Technician")
 
 /datum/objective_item/steal/plasma/check_special_completion(obj/item/tank/T)
 	var/target_amount = text2num(name)
@@ -148,7 +148,7 @@
 	name = "the station blueprints."
 	targetitem = /obj/item/areaeditor/blueprints
 	difficulty = 10
-	excludefromjob = list("Chief Engineer", "Station Engineer", "Atmospheric Technician")
+	excludefromjob = list("Senior Engineer", "Station Engineer", "Atmospheric Technician")
 	altitems = list(/obj/item/photo)
 
 /datum/objective_item/steal/blueprints/check_special_completion(obj/item/I)

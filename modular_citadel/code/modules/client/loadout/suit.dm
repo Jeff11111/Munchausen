@@ -113,13 +113,13 @@
 	name = "Engineering winter coat"
 	category = SLOT_WEAR_SUIT
 	path = /obj/item/clothing/suit/hooded/wintercoat/engineering
-	restricted_roles = list("Chief Engineer", "Station Engineer") // Reserve it to Station Engineers and their boss, the Chief Engineer
+	restricted_roles = list("Senior Engineer", "Station Engineer") // Reserve it to Station Engineers and their boss, the Senior Engineer
 
 /datum/gear/coat/eng/atmos
 	name = "Atmospherics winter coat"
 	category = SLOT_WEAR_SUIT
 	path = /obj/item/clothing/suit/hooded/wintercoat/engineering/atmos
-	restricted_roles = list("Chief Engineer", "Atmospheric Technician") // Reserve it to Atmos Techs and their boss, the Chief Engineer
+	restricted_roles = list("Senior Engineer", "Atmospheric Technician") // Reserve it to Atmos Techs and their boss, the Senior Engineer
 
 /datum/gear/coat/hydro
 	name = "Hydroponics winter coat"
@@ -160,7 +160,7 @@
 	category = SLOT_WEAR_SUIT
 	path = /obj/item/clothing/suit/storage/trek/ds9
 	restricted_desc = "All, barring Service and Civilian"
-	restricted_roles = list("Head of Security","Captain","Head of Personnel","Chief Engineer","Research Director","Chief Medical Officer","Quartermaster",
+	restricted_roles = list("Head of Security","Captain","Head of Personnel","Senior Engineer","Research Director","Chief Medical Officer","Quartermaster",
 							"Medical Doctor","Chemist","Virologist","Paramedic","Geneticist","Scientist", "Roboticist",
 							"Atmospheric Technician","Station Engineer","Warden","Detective","Security Officer",
 							"Cargo Technician", "Shaft Miner") //everyone who actually deserves a job.
@@ -176,7 +176,7 @@
 	category = SLOT_WEAR_SUIT
 	path = /obj/item/clothing/suit/storage/fluff/fedcoat
 	restricted_desc = "Heads of Staff and Security"
-	restricted_roles = list("Head of Security","Captain","Head of Personnel","Chief Engineer","Research Director","Chief Medical Officer","Quartermaster","Warden","Detective","Security Officer")
+	restricted_roles = list("Head of Security","Captain","Head of Personnel","Senior Engineer","Research Director","Chief Medical Officer","Quartermaster","Warden","Detective","Security Officer")
 
 /datum/gear/trekmedscimov
 	name = "Fed (movie) uniform, Blue"
@@ -190,7 +190,7 @@
 	category = SLOT_WEAR_SUIT
 	path = /obj/item/clothing/suit/storage/fluff/fedcoat/eng
 	restricted_desc = "Engineering and Cargo"
-	restricted_roles = list("Chief Engineer","Atmospheric Technician","Station Engineer","Cargo Technician", "Shaft Miner", "Quartermaster")
+	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Cargo Technician", "Shaft Miner", "Quartermaster")
 
 /datum/gear/trekcmdcapmod
 	name = "Fed (Modern) uniform, White"
@@ -203,7 +203,7 @@
 	category = SLOT_WEAR_SUIT
 	path = /obj/item/clothing/suit/storage/fluff/modernfedcoat/sec
 	restricted_desc = "Heads of Staff and Security"
-	restricted_roles = list("Head of Security","Captain","Head of Personnel","Chief Engineer","Research Director","Chief Medical Officer","Quartermaster","Warden","Detective","Security Officer")
+	restricted_roles = list("Head of Security","Captain","Head of Personnel","Senior Engineer","Research Director","Chief Medical Officer","Quartermaster","Warden","Detective","Security Officer")
 
 /datum/gear/trekmedscimod
 	name = "Fed (Modern) uniform, Blue"
@@ -217,7 +217,7 @@
 	category = SLOT_WEAR_SUIT
 	path = /obj/item/clothing/suit/storage/fluff/modernfedcoat/eng
 	restricted_desc = "Engineering and Cargo"
-	restricted_roles = list("Chief Engineer","Atmospheric Technician","Station Engineer","Cargo Technician", "Shaft Miner", "Quartermaster")
+	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Cargo Technician", "Shaft Miner", "Quartermaster")
 
 /datum/gear/christmascoatr
 	name = "Red Christmas Coat"

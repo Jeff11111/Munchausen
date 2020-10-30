@@ -1460,7 +1460,7 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 	popup.open(FALSE)
 	onclose(user, "capturekeypress", src)
 
-/datum/preferences/proc/SetChoices(mob/user, limit = 17, list/splitJobs = list("Chief Engineer"), widthPerColumn = 295, height = 620)
+/datum/preferences/proc/SetChoices(mob/user, limit = 17, list/splitJobs = list("Senior Engineer"), widthPerColumn = 295, height = 620)
 	if(!SSjob)
 		return
 

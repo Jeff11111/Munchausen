@@ -6,8 +6,8 @@
 	var/mob/living/carbon/human/H = speaker
 	if(!istype(H))
 		return FALSE
-	if(!H.mind || H.mind.assigned_role != "Chief Engineer")
-		return FALSE // Not CE, Poly don't care!
+	if(!H.mind || H.mind.assigned_role != "Senior Engineer")
+		return FALSE // Not SE, Poly don't care!
 	
 	if(findtext(message, "poly"))
 		if(findtext(message, "perch") || findtext(message, "hop"))

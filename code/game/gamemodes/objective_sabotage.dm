@@ -62,7 +62,7 @@
 	sabotage_type = "supermatter"
 	special_equipment = list(/obj/item/paper/guides/antag/supermatter_sabotage)
 	var/list/supermatters = list()
-	excludefromjob = list("Chief Engineer", "Station Engineer", "Atmospheric Technician")
+	excludefromjob = list("Senior Engineer", "Station Engineer", "Atmospheric Technician")
 
 /datum/sabotage_objective/processing/supermatter/check_condition_processing()
 	if(!supermatters.len)
@@ -100,7 +100,7 @@
 	name = "Upload a hacked law to the AI."
 	sabotage_type = "ailaw"
 	special_equipment = list(/obj/item/aiModule/syndicate)
-	excludefromjob = list("Chief Engineer","Research Director","Head of Personnel","Captain","Chief Medical Officer","Head Of Security")
+	excludefromjob = list("Senior Engineer","Research Director","Head of Personnel","Captain","Chief Medical Officer","Head Of Security")
 
 /datum/sabotage_objective/ai_law/can_run()
 	return length(active_ais())

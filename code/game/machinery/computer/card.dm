@@ -32,7 +32,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 		"Captain",
 		"Head of Personnel",
 		"Head of Security",
-		"Chief Engineer",
+		"Senior Engineer",
 		"Research Director",
 		"Chief Medical Officer",
 		"Quartermaster")
@@ -420,7 +420,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 							get_subordinates("Research Director")
 						if((ACCESS_CE in inserted_scan_id.access) && ((target_dept==5) || !target_dept))
 							region_access |= 5
-							get_subordinates("Chief Engineer")
+							get_subordinates("Senior Engineer")
 						if((ACCESS_QM in inserted_scan_id.access) && ((target_dept==6) || !target_dept))
 							region_access |= 6
 							get_subordinates("Quartermaster")

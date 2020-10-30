@@ -1403,7 +1403,7 @@ GLOBAL_LIST_INIT(valid_toy_paths, valid_toy_paths())
 	toysay = "For Cargonia!"
 
 /obj/item/toy/figure/ce
-	name = "Chief Engineer action figure"
+	name = "Senior Engineer action figure"
 	icon_state = "ce"
 	toysay = "Wire the solars!"
 

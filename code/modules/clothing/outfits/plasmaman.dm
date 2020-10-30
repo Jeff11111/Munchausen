@@ -138,7 +138,7 @@
 	uniform = /obj/item/clothing/under/plasmaman/engineering
 
 /datum/outfit/plasmaman/ce
-	name = "Chief Engineer Plasmaman"
+	name = "Senior Engineer Plasmaman"
 
 	head = /obj/item/clothing/head/helmet/space/plasmaman/engineering/ce
 	uniform = /obj/item/clothing/under/plasmaman/engineering/ce

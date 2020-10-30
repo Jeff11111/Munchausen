@@ -1,12 +1,12 @@
 /datum/job/atmos
 	title = "Atmospheric Technician"
 	flag = ATMOSTECH
-	department_head = list("Chief Engineer")
+	department_head = list("Senior Engineer")
 	department_flag = ENGSEC
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 3
-	supervisors = "the chief engineer"
+	supervisors = "the senior engineer"
 	selection_color = "#ff9b3d"
 	exp_requirements = 120 //SKYRAT CHANGE - upping the exp time on jobs
 	exp_type = EXP_TYPE_CREW

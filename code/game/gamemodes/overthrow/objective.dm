@@ -6,7 +6,7 @@
 // Base points for each role:
 // AI, Captain = 5;
 // Head of Personnel, Head of Security, target = 4;
-// Chief Engineer, Chief Medical Officer, Research Director = 3;
+// Senior Engineer, Chief Medical Officer, Research Director = 3;
 
 // Modifiers:
 // Converting: 1.5 for the converting team, 1 for all the other ones;
@@ -95,7 +95,7 @@
 					target_points = HOPPTS
 				if("Head of Security")
 					target_points = HOSPTS
-				if("Chief Engineer")
+				if("Senior Engineer")
 					target_points = CEPTS
 				if("Research Director")
 					target_points = RDPTS

@@ -6,8 +6,8 @@
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 100, "rad" = 10, "fire" = 95, "acid" = 95)
 
 /obj/item/clothing/under/plasmaman/engineering/ce
-	name = "chief engineer's plasma envirosuit"
-	desc = "An advanced air-tight suit designed to be used by plasmamen chief engineers, complete with ornamental widgets and gizmo. It protects the user from fire and acid damage."
+	name = "senior engineer's plasma envirosuit"
+	desc = "An advanced air-tight suit designed to be used by plasmamen senior engineers, complete with ornamental widgets and gizmo. It protects the user from fire and acid damage."
 	icon_state = "ce_envirosuit"
 	item_state = "ce_envirosuit"
 

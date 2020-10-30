@@ -146,7 +146,7 @@
 	name = "Ion Storm"
 	config_tag = "ion_storm"
 	typepath = /datum/round_event/ion_storm
-	enemy_roles = list("Research Director","Captain","Chief Engineer")
+	enemy_roles = list("Research Director","Captain","Senior Engineer")
 	required_enemies = list(1,1,0,0,0,0,0,0,0,0)
 	weight = 4
 	// no repeatable weight decrease. too variable to be unfun multiple times in one round
@@ -168,7 +168,7 @@
 	name = "Meteor Wave"
 	config_tag = "meteor_wave"
 	typepath = /datum/round_event/meteor_wave
-	enemy_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Captain","Cyborg")
+	enemy_roles = list("Senior Engineer","Station Engineer","Atmospheric Technician","Captain","Cyborg")
 	required_enemies = list(3,3,3,3,3,3,3,3,3,3)
 	cost = 15
 	weight = 3
@@ -204,7 +204,7 @@
 	name = "Anomaly: Bluespace"
 	config_tag = "anomaly_bluespace"
 	typepath = /datum/round_event/anomaly/anomaly_bluespace
-	enemy_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Research Director","Scientist","Captain")
+	enemy_roles = list("Senior Engineer","Station Engineer","Atmospheric Technician","Research Director","Scientist","Captain")
 	required_enemies = list(1,1,1,0,0,0,0,0,0,0)
 	weight = 2
 	repeatable_weight_decrease = 1
@@ -219,7 +219,7 @@
 	name = "Anomaly: Hyper-Energetic Flux"
 	config_tag = "anomaly_flux"
 	typepath = /datum/round_event/anomaly/anomaly_flux
-	enemy_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Research Director","Scientist","Captain")
+	enemy_roles = list("Senior Engineer","Station Engineer","Atmospheric Technician","Research Director","Scientist","Captain")
 	required_enemies = list(1,1,1,0,0,0,0,0,0,0)
 	weight = 2
 	repeatable_weight_decrease = 1
@@ -250,7 +250,7 @@
 	weight = 2
 	repeatable_weight_decrease = 1
 	cost = 5
-	enemy_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Research Director","Scientist","Captain","Cyborg")
+	enemy_roles = list("Senior Engineer","Station Engineer","Atmospheric Technician","Research Director","Scientist","Captain","Cyborg")
 	required_enemies = list(1,1,1,1,1,1,1,1,1,1)
 	requirements = list(10,10,10,10,10,10,10,10,10,10)
 	high_population_requirement = 10
@@ -265,7 +265,7 @@
 	weight = 2
 	repeatable_weight_decrease = 1
 	cost = 5
-	enemy_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Research Director","Scientist","Captain","Cyborg")
+	enemy_roles = list("Senior Engineer","Station Engineer","Atmospheric Technician","Research Director","Scientist","Captain","Cyborg")
 	required_enemies = list(1,1,1,1,1,1,1,1,1,1)
 	requirements = list(10,10,10,10,10,10,10,10,10,10)
 	high_population_requirement = 10
@@ -286,7 +286,7 @@
 	weight = 1
 	repeatable_weight_decrease = 1
 	cost = 2
-	enemy_roles = list("Chief Engineer","Station Engineer","Atmospheric Technician","Research Director","Scientist","Captain","Cyborg")
+	enemy_roles = list("Senior Engineer","Station Engineer","Atmospheric Technician","Research Director","Scientist","Captain","Cyborg")
 	required_enemies = list(1,1,1,1,0,0,0,0,0,0)
 	requirements = list(10,10,10,10,10,10,10,10,10,10)
 	high_population_requirement = 10
@@ -315,7 +315,7 @@
 	cost = 4
 	weight = 2
 	repeatable_weight_decrease = 3
-	enemy_roles = list("Chief Engineer","Station Engineer")
+	enemy_roles = list("Senior Engineer","Station Engineer")
 	required_enemies = list(1,1,1,0,0,0,0,0,0,0)
 	requirements = list(5,5,5,5,5,5,5,5,5,5)
 	high_population_requirement = 5
@@ -330,7 +330,7 @@
 	cost = 4
 	weight = 2
 	repeatable_weight_decrease = 3
-	enemy_roles = list("Chief Engineer","Station Engineer")
+	enemy_roles = list("Senior Engineer","Station Engineer")
 	required_enemies = list(1,1,1,0,0,0,0,0,0,0)
 	requirements = list(5,5,5,5,5,5,5,5,5,5)
 	high_population_requirement = 5
@@ -346,7 +346,7 @@
 	cost = 2
 	weight = 2
 	repeatable_weight_decrease = 1
-	enemy_roles = list("Chief Engineer","Station Engineer")
+	enemy_roles = list("Senior Engineer","Station Engineer")
 	required_enemies = list(1,1,1,0,0,0,0,0,0,0)
 	requirements = list(5,5,5,5,5,5,5,5,5,5)
 	high_population_requirement = 5
@@ -363,7 +363,7 @@
 	cost = 4
 	weight = 2
 	repeatable_weight_decrease = 1
-	enemy_roles = list("Chief Engineer","Station Engineer")
+	enemy_roles = list("Senior Engineer","Station Engineer")
 	required_enemies = list(2,2,2,2,2,2,2,2,2,2)
 	requirements = list(10,10,10,10,10,10,10,10,10,10)
 	high_population_requirement = 10
@@ -378,7 +378,7 @@
 	cost = 1
 	weight = 2
 	repeatable_weight_decrease = 1
-	enemy_roles = list("Chief Engineer","Station Engineer")
+	enemy_roles = list("Senior Engineer","Station Engineer")
 	required_enemies = list(1,1,1,0,0,0,0,0,0,0)
 	requirements = list(5,5,5,5,5,5,5,5,5,5)
 	high_population_requirement = 5
@@ -449,7 +449,7 @@
 	cost = 10
 	weight = 1
 	earliest_start = 30 MINUTES
-	enemy_roles = list("AI","Security Officer","Head of Security","Captain","Station Engineer","Atmos Technician","Chief Engineer")
+	enemy_roles = list("AI","Security Officer","Head of Security","Captain","Station Engineer","Atmos Technician","Senior Engineer")
 	required_enemies = list(4,4,4,4,3,3,2,2,1,1)
 	requirements = list(101,101,101,101,101,101,101,101,101,101)
 	high_population_requirement =  5
@@ -474,7 +474,7 @@
 	name = "Revenant"
 	config_tag = "revenant"
 	typepath = /datum/round_event/ghost_role/revenant
-	enemy_roles = list("Chief Engineer","Station Engineer","Captain","Chaplain","AI")
+	enemy_roles = list("Senior Engineer","Station Engineer","Captain","Chaplain","AI")
 	required_enemies = list(2,1,1,1,0,0,0,0,0,0)
 	required_candidates = 1
 	weight = 4

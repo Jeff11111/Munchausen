@@ -261,7 +261,7 @@
 	network = list("rd")
 
 /obj/machinery/computer/security/telescreen/ce
-	name = "Chief Engineer's telescreen"
+	name = "Senior Engineer's telescreen"
 	desc = "Used for watching the engine, telecommunications and the minisat."
 	network = list("engine", "singularity", "tcomms", "minisat")
 

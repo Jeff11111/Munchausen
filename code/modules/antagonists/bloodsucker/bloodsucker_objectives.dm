@@ -65,13 +65,13 @@
 		"Captain",
 		"Head of Personnel",
 		"Research Director",
-		"Chief Engineer",
+		"Senior Engineer",
 		"Chief Medical Officer",
 		"Quartermaster"
 	)
 	var/list/departs = list(
 		"Research Director",
-		"Chief Engineer",
+		"Senior Engineer",
 		"Chief Medical Officer",
 		"Quartermaster"
 	)
@@ -93,7 +93,7 @@
 		switch(target_role)
 			if("Research Director")
 				department_string = "Science"
-			if("Chief Engineer")
+			if("Senior Engineer")
 				department_string = "Engineering"
 			if("Chief Medical Officer")
 				department_string = "Medical"

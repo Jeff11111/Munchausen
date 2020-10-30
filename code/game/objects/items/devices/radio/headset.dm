@@ -190,7 +190,7 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	bowman = TRUE
 
 /obj/item/radio/headset/heads/ce
-	name = "\proper the chief engineer's headset"
+	name = "\proper the senior engineer's headset"
 	desc = "The headset of the guy in charge of keeping the station powered and undamaged."
 	icon_state = "com_headset"
 	keyslot = new /obj/item/encryptionkey/heads/ce

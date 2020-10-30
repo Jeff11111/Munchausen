@@ -31,7 +31,7 @@
 	item = /obj/item/clothing/gloves/color/yellow/power
 	cost = 12
 	limited_stock = 1
-	restricted_roles = list("Station Engineer", "Atmospheric Technician", "Chief Engineer")
+	restricted_roles = list("Station Engineer", "Atmospheric Technician", "Senior Engineer")
 
 //clown
 /datum/uplink_item/role_restricted/clumsyDNA

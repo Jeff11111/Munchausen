@@ -39,7 +39,7 @@
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/neck.dmi' // Skyrat Modularisation
 
 /obj/item/clothing/neck/cloak/ce
-	name = "chief engineer's cloak"
+	name = "senior engineer's cloak"
 	desc = "Worn by Engitopia, wielders of an unlimited power."
 	icon_state = "cecloak"
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/neck.dmi' // Skyrat Modularisation

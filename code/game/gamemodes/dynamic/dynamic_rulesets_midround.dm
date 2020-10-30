@@ -200,7 +200,7 @@
 	antag_datum = /datum/antagonist/traitor
 	antag_flag = ROLE_TRAITOR
 	restricted_roles = list("Cyborg", "Positronic Brain")
-	protected_roles = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Head of Personnel", "Chief Engineer", "Chief Medical Officer", "Research Director", "Quartermaster", "Blueshield") ///Skyrat changes, makes heads of staff no longer traitors
+	protected_roles = list("Security Officer", "Warden", "Detective", "Head of Security", "Captain", "Head of Personnel", "Senior Engineer Engineer", "Senior Engineer Medical Officer", "Research Director", "Quartermaster", "Blueshield") ///Skyrat changes, makes heads of staff no longer traitors
 	required_candidates = 1
 	weight = 7
 	cost = 10
@@ -259,7 +259,7 @@
 	config_tag = "midround_malf_ai"
 	antag_datum = /datum/antagonist/traitor
 	antag_flag = ROLE_MALF
-	enemy_roles = list("Security Officer", "Warden","Detective","Head of Security", "Captain", "Scientist", "Chemist", "Research Director", "Chief Engineer", "Blueshield") //Skyrat changes adds Blue to list
+	enemy_roles = list("Security Officer", "Warden","Detective","Head of Security", "Captain", "Scientist", "Chemist", "Research Director", "Senior Engineer Engineer", "Blueshield") //Skyrat changes adds Blue to list
 	exclusive_roles = list("AI")
 	required_enemies = list(6,6,6,4,4,4,2,2,2,1)
 	required_candidates = 1

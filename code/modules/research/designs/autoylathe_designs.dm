@@ -278,7 +278,7 @@
 	build_path = /obj/item/toy/figure/cargotech
 
 /datum/design/autoylathe/figure/ce
-	name = "Chief Engineer"
+	name = "Senior Engineer"
 	id = "cefigure"
 	materials = list(/datum/material/plastic = 500, /datum/material/iron = 50)
 	build_path = /obj/item/toy/figure/ce

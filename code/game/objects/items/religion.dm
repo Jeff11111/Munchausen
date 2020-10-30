@@ -126,7 +126,7 @@
 	name = "engitopia banner"
 	desc = "The banner of Engitopia, wielders of limitless power."
 	icon_state = "banner_engineering"
-	job_loyalties = list("Station Engineer", "Atmospheric Technician", "Chief Engineer")
+	job_loyalties = list("Station Engineer", "Atmospheric Technician", "Senior Engineer")
 	warcry = "All hail lord Singuloth!!"
 
 /obj/item/banner/engineering/mundane
@@ -139,7 +139,7 @@
 	name = "command banner"
 	desc = "The banner of Command, a staunch and ancient line of bueraucratic kings and queens."
 	//No icon state here since the default one is the NT banner
-	job_loyalties = list("Captain", "Head of Personnel", "Chief Engineer", "Head of Security", "Research Director", "Chief Medical Officer")
+	job_loyalties = list("Captain", "Head of Personnel", "Senior Engineer", "Head of Security", "Research Director", "Chief Medical Officer")
 	warcry = "Hail Nanotrasen!"
 
 /obj/item/banner/command/mundane
