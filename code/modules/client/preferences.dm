@@ -1019,7 +1019,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 				dat += "<span style='border:1px solid #161616; background-color: #[socks_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=socks_color;task=input'>Change</a><BR>"
 			*/
 			dat += "<b>Backpack:</b><a style='display:block;width:100px' href ='?_src_=prefs;preference=bag;task=input'>[backbag]</a><br>"
-			dat += "<b>Jumpsuit:</b><BR><a href ='?_src_=prefs;preference=suit;task=input'>[jumpsuit_style]</a><br>"
 			dat += "<b>Uplink Location:</b><a style='display:block;width:100px' href ='?_src_=prefs;preference=uplink_loc;task=input'>[uplink_spawn_loc]</a>"
 			dat += "</td>"
 
@@ -2269,8 +2268,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 					use_custom_skin_tone = null
 				if("bag")
 					backbag = pick(GLOB.backbaglist)
-				if("suit")
-					jumpsuit_style = pick(GLOB.jumpsuitlist)
 				if("all")
 					random_character()
 					scars_list = ASSOCIATED_SCARS
@@ -3003,13 +3000,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 					var/new_backbag = input(user, "Choose your character's style of bag:", "Character Preference")  as null|anything in GLOB.backbaglist
 					if(new_backbag)
 						backbag = new_backbag
-
-				if("suit")
-					if(jumpsuit_style == PREF_SUIT)
-						jumpsuit_style = PREF_SKIRT
-					else
-						jumpsuit_style = PREF_SUIT
-
 
 				if("uplink_loc")
 					var/new_loc = input(user, "Choose your character's traitor uplink spawn location:", "Character Preference") as null|anything in GLOB.uplink_spawn_loc_list

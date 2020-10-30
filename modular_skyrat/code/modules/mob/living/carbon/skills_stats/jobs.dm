@@ -171,8 +171,8 @@
 /datum/job/cmo
 	//High intellect, average everything else
 	stat_int = JOB_STATPOINTS_EXPERT
-	//Godlike surgery, expert chemsitry and firstaid
-	skill_ranged = 8
+	//Godlike surgery, expert chemistry and firstaid
+	skill_melee = 8
 	skill_surgery = 18
 	skill_chemistry = JOB_SKILLPOINTS_EXPERT
 	skill_firstaid = JOB_SKILLPOINTS_EXPERT

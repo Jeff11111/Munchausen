@@ -233,6 +233,7 @@
 
 	if(!do_after(user, time_taken, target = victim))
 		return
+	
 	if(!weapon || !limb || weapon.loc != victim || !(weapon in limb.embedded_objects))
 		qdel(src)
 		return
@@ -240,14 +241,14 @@
 	if(harmful)
 		var/damage = weapon.w_class * remove_pain_mult
 		limb.receive_damage(brute=(1-pain_stam_pct) * damage, stamina=pain_stam_pct * damage, sharpness=SHARP_EDGED) //It hurts to rip it out, get surgery you dingus.
-		victim.emote("scream")
+		victim.agony_scream()
 
 	victim.visible_message("<span class='notice'>[user] successfully rips [weapon] [harmful ? "out" : "off"] of [user == victim ? victim.p_their() : "[victim]'s"] [limb.name]!</span>", "<span class='notice'>You successfully remove [weapon] from [user == victim ? "your" : "[victim]'s"] [limb.name].</span>")
-	safeRemove(user == victim ? TRUE : FALSE)
+	safeRemove(hand_override = user)
 
 /// This proc handles the final step and actual removal of an embedded/stuck item from a carbon, whether or not it was actually removed safely.
 /// Pass TRUE for to_hands if we want it to go to the victim's hands when they pull it out
-/datum/component/embedded/proc/safeRemove(to_hands)
+/datum/component/embedded/proc/safeRemove(to_hands, mob/hand_override)
 	var/mob/living/carbon/victim = parent
 	limb.embedded_objects -= weapon
 	UnregisterSignal(weapon, list(COMSIG_MOVABLE_MOVED, COMSIG_PARENT_QDELETING)) // have to do it here otherwise we trigger weaponDeleted()
@@ -255,7 +256,10 @@
 	if(!weapon.unembedded()) // if it hasn't deleted itself due to drop del
 		UnregisterSignal(weapon, list(COMSIG_MOVABLE_MOVED, COMSIG_PARENT_QDELETING))
 		if(to_hands)
-			victim.put_in_hands(weapon)
+			if(hand_override)
+				hand_override.put_in_hands(weapon)
+			else
+				victim.put_in_hands(weapon)
 		else
 			weapon.forceMove(get_turf(victim))
 

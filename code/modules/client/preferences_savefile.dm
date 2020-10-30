@@ -534,6 +534,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["socks_color"]			>> socks_color
 	S["backbag"]				>> backbag
 	S["jumpsuit_style"]			>> jumpsuit_style
+	if(jumpsuit_style != PREF_SUIT)
+		jumpsuit_style = PREF_SUIT
 	S["uplink_loc"]				>> uplink_spawn_loc
 	/*S["custom_speech_verb"]		>> custom_speech_verb SKYRAT EDIT
 	S["custom_tongue"]			>> custom_tongue*/

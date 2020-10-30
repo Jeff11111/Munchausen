@@ -226,9 +226,8 @@
 #undef DECREMENT_OR_WRAP
 #undef IS_VALID_INDEX
 
-/obj/item/gun/energy/update_icon(force_update)
-	if(QDELETED(src))
-		return
+/obj/item/gun/energy/update_overlays()
+	//We already cut overlays on the parent proc
 	..()
 	if(!automatic_charge_overlays)
 		return
@@ -238,7 +237,6 @@
 	if(ratio == old_ratio && !force_update)
 		return
 	old_ratio = ratio
-	cut_overlays()
 	var/iconState = "[icon_state]_charge"
 	var/itemState = null
 	if(!initial(item_state))
@@ -286,7 +284,6 @@
 		user.visible_message("<span class='suicide'>[user] is pretending to melt [user.p_their()] face off with [src]! It looks like [user.p_theyre()] trying to commit suicide!</b></span>")
 		playsound(src, "gun_dry_fire", 30, 1)
 		return (OXYLOSS)
-
 
 /obj/item/gun/energy/vv_edit_var(var_name, var_value)
 	switch(var_name)

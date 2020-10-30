@@ -92,7 +92,16 @@
 	var/can_suppress = FALSE
 	var/can_unsuppress = TRUE
 
+	// Sling stuff
+	var/obj/item/stack/cable_coil/sling
+	var/mutable_appearance/sling_overlay
+	var/sling_pixel_x = 0
+	var/sling_pixel_y = 0
+	var/can_sling = FALSE
+	var/can_unsling = TRUE
+
 	// Safety stuff
+	var/has_safety = TRUE
 	var/safety = TRUE
 	var/mutable_appearance/safety_overlay
 	var/safety_sound = 'modular_skyrat/sound/weapons/safety1.ogg'
@@ -142,6 +151,9 @@
 	set category = "Object"
 	set desc = "Toggle a firearm's safety mechanisms."
 
+	if(!has_safety)
+		set hidden = TRUE
+
 	if(usr.default_can_use_topic(src))
 		perform_safety(usr)
 
@@ -173,7 +185,8 @@
 		. += "It has \a [pin] installed."
 	else
 		. += "It doesn't have a firing pin installed, and won't fire."
-	. += "It's safety is [safety ? "enabled" : "disabled"]."
+	if(has_safety)
+		. += "It's safety is [safety ? "enabled" : "disabled"]."
 
 /obj/item/gun/rightclick_attack_self(mob/user)
 	return perform_safety(user)
@@ -413,7 +426,7 @@
 		if(chambered)
 			sprd = round((rand() - 0.5) * DUALWIELD_PENALTY_EXTRA_MULTIPLIER * (randomized_gun_spread + randomized_bonus_spread))
 			before_firing(target,user)
-			if(safety || !chambered.fire_casing(target, user, params, , suppressed, zone_override, sprd, src))
+			if((safety && has_safety) || !chambered.fire_casing(target, user, params, , suppressed, zone_override, sprd, src))
 				shoot_with_empty_chamber(user)
 				return
 			else
@@ -488,6 +501,8 @@
 		. += flashlight_overlay
 	if(knife_overlay)
 		. += knife_overlay
+	if(sling_overlay)
+		. += sling_overlay
 
 /obj/item/gun/middleclick_attack_self(mob/user)
 	. = ..()
