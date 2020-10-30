@@ -69,6 +69,7 @@ GLOBAL_LIST_INIT(special_roles, list(
 	ROLE_GANG = /datum/game_mode/gang,
 	ROLE_BLOODSUCKER = /datum/game_mode/bloodsucker,
 	ROLE_DREAMER = /datum/game_mode/dreamer,
+	ROLE_COMMIE,
 	//ROLE_MONSTERHUNTER Disabled for now
 ))
 
