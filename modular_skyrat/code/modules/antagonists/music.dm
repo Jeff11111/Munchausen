@@ -29,3 +29,8 @@
 				'modular_skyrat/sound/music/rollermobster.ogg',
 				'modular_skyrat/sound/music/deathsquads.ogg',
 				)
+
+/datum/antagonist/commie/New()
+	. = ..()
+	music_file = pick('modular_skyrat/sound/music/motherrussiableeds.ogg',
+				)
