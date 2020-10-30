@@ -29,7 +29,6 @@
 	else
 		return ..()
 
-
 /obj/item/gun/ballistic/revolver/attackby(obj/item/A, mob/user, params)
 	. = ..()
 	if(.)
