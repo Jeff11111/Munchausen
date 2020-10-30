@@ -181,6 +181,8 @@
 	icon_state = "shotgun"
 	item_state = "shotgun"
 	fire_sound = 'modular_skyrat/sound/guns/shotgun.ogg'
+	inhand_x_dimension = 0
+	inhand_y_dimension = 0
 
 /obj/item/gun/ballistic/shotgun/update_icon()
 	..()

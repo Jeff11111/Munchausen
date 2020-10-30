@@ -231,6 +231,8 @@
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/shotgun.dmi'
 	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/shotgun_lefthand.dmi'
 	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/shotgun_righthand.dmi'
+	inhand_x_dimension = 0
+	inhand_y_dimension = 0
 	icon_state = "dbshotgun"
 	item_state = "dbshotgun"
 	open_sound = 'modular_skyrat/sound/guns/shotgun_break.ogg'
