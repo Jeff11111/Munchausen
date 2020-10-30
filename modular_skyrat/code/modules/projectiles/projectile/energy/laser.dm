@@ -1,3 +1,8 @@
+//ultra laser buff
+/obj/item/projectile/beam/laser
+	bare_wound_bonus = 10
+	wound_bonus = 20
+
 //makeshift laser rifle
 /obj/item/projectile/beam/laser/makeshiftlasrifle
 	damage = 20
@@ -24,10 +29,11 @@
 //captain's laser gun
 /obj/item/projectile/beam/laser/hellfire/ultra
 	name = "deluxe hellfire laser"
-	wound_bonus = 15
+	wound_bonus = 25
 
 /obj/item/projectile/beam/disabler/hellfire/ultra
 	name = "deluxe hellfire disabler beam"
 	damage = 34
+	color = LIGHT_COLOR_PURPLE
 	light_color = LIGHT_COLOR_PURPLE
 	eyeblur = 6
