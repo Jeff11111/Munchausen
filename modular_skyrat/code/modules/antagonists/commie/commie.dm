@@ -5,6 +5,7 @@
 	antag_memory = "My people have suffered for long enough on this cursed station. I must bring justice to the stowaways."
 	threat = 10
 	silent = FALSE
+	var/commie_type = "Melee"
 
 /datum/antagonist/communist/on_gain()
 	. = ..()
@@ -16,7 +17,7 @@
 	objectives += viva
 
 /datum/antagonist/communist/proc/gain_stats()
-	var/commie_type = pick("Melee", "Ranged", "Defense")
+	commie_type = pick("Melee", "Ranged", "Defense")
 	switch(commie_type)
 		if("Melee")
 			var/datum/stats/stat = owner.mob_stats[STAT_DATUM(str)]
