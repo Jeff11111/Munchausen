@@ -7,7 +7,7 @@
 	if(!lavaland_equipment_pressure_check(get_turf(src)))
 		name = "weakened [name]"
 		damage = damage * pressure_decrease
-		dismemberment = dismemberment * pressure_decrease
+		dismemberment = 0
 		pressure_decrease_active = TRUE
 
 /obj/item/projectile/plasma/on_hit(atom/target)
