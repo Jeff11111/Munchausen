@@ -4,6 +4,7 @@
 	wound_bonus = 20
 	hitsound = null
 	hitsound_wall = null
+	pixels_per_second = TILES_TO_PIXELS(30) //very fast lol
 
 //makeshift laser rifle
 /obj/item/projectile/beam/laser/makeshiftlasrifle
