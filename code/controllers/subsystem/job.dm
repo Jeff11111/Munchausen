@@ -72,7 +72,7 @@ SUBSYSTEM_DEF(job)
 	//this is very chungus code
 	if(rank == "Assistant")
 		rank = "Stowaway"
-	if(rank == "Security Officer")
+	if(rank == "enforcer")
 		rank = "Enforcer"
 	if(rank == "Head of Security")
 		rank = "Chief Enforcer"
@@ -266,7 +266,7 @@ SUBSYSTEM_DEF(job)
 	if(unassigned.len == 0)
 		return validate_required_jobs(required_jobs)
 
-	//Scale number of open security officer slots to population
+	//Scale number of open enforcer slots to population
 	setup_officer_positions()
 
 	//Jobs will have fewer access permissions if the number of players exceeds the threshold defined in game_options.txt

@@ -1533,7 +1533,7 @@ GLOBAL_LIST_INIT(valid_toy_paths, valid_toy_paths())
 	toysay = "Get that fucking disk!"
 
 /obj/item/toy/figure/secofficer
-	name = "Security Officer action figure"
+	name = "Enforcer action figure"
 	icon_state = "secofficer"
 	toysay = "I am the law!"
 	toysound = 'sound/voice/complionator/dredd.ogg'
@@ -1544,7 +1544,7 @@ GLOBAL_LIST_INIT(valid_toy_paths, valid_toy_paths())
 	toysay = "The cure is potassium!"
 
 /obj/item/toy/figure/warden
-	name = "Warden action figure"
+	name = "Lieutenant action figure"
 	icon_state = "warden"
 	toysay = "Seventeen minutes for coughing at an officer!"
 

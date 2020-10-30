@@ -39,7 +39,7 @@
 				keyprint = "<font color='#F0C829'>[key]</font>"
 			else if (in_tracked_watchlist(key))
 				keyprint = "<font color='#B653C9'>[key]</font>"
-			else if (C.mob && (C.mob.job == "Security Officer" || C.mob.job == "Warden" || C.mob.job == "Detective" || C.mob.job == "Chief Enforcer"))
+			else if (C.mob && (C.mob.job == "Enforcer" || C.mob.job == "Lieutenant" || C.mob.job == "Detective" || C.mob.job == "Chief Enforcer"))
 				keyprint = "<font color='#BF1D1D'>[key]</font>"
 			else if(!C.prefs.exp || text2num(C.prefs.exp[EXP_TYPE_LIVING]) < 300)
 				keyprint = "<font color='#538EED'>[key]</font>"

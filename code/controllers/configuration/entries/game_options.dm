@@ -98,7 +98,7 @@
 	config_entry_value = 6
 	min_val = 1
 
-/datum/config_entry/number/security_scaling_coeff	//how much does the amount of players get divided by to determine open security officer positions
+/datum/config_entry/number/security_scaling_coeff	//how much does the amount of players get divided by to determine open enforcer positions
 	config_entry_value = 8
 	min_val = 1
 

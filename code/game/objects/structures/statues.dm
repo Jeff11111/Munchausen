@@ -188,7 +188,7 @@
 	icon_state = "jani"
 
 /obj/structure/statue/silver/sec
-	name = "statue of a security officer"
+	name = "statue of a enforcer"
 	icon_state = "sec"
 
 /obj/structure/statue/silver/secborg

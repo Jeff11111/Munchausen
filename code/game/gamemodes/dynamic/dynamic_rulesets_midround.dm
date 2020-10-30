@@ -200,7 +200,7 @@
 	antag_datum = /datum/antagonist/traitor
 	antag_flag = ROLE_TRAITOR
 	restricted_roles = list("Cyborg", "Positronic Brain")
-	protected_roles = list("Security Officer", "Warden", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer Engineer", "Senior Engineer Medical Officer", "Research Director", "Quartermaster", "Blueshield") ///Skyrat changes, makes heads of staff no longer traitors
+	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer Engineer", "Senior Engineer Medical Officer", "Research Director", "Quartermaster", "Blueshield") ///Skyrat changes, makes heads of staff no longer traitors
 	required_candidates = 1
 	weight = 7
 	cost = 10
@@ -259,7 +259,7 @@
 	config_tag = "midround_malf_ai"
 	antag_datum = /datum/antagonist/traitor
 	antag_flag = ROLE_MALF
-	enemy_roles = list("Security Officer", "Warden","Detective","Chief Enforcer", "Captain", "Scientist", "Chemist", "Research Director", "Senior Engineer Engineer", "Blueshield") //Skyrat changes adds Blue to list
+	enemy_roles = list("Enforcer", "Lieutenant","Detective","Chief Enforcer", "Captain", "Scientist", "Chemist", "Research Director", "Senior Engineer Engineer", "Blueshield") //Skyrat changes adds Blue to list
 	exclusive_roles = list("AI")
 	required_enemies = list(6,6,6,4,4,4,2,2,2,1)
 	required_candidates = 1
@@ -316,7 +316,7 @@
 	config_tag = "midround_wizard"
 	antag_datum = /datum/antagonist/wizard
 	antag_flag = ROLE_WIZARD
-	enemy_roles = list("Security Officer","Detective","Chief Enforcer", "Captain")
+	enemy_roles = list("Enforcer","Detective","Chief Enforcer", "Captain")
 	required_enemies = list(4,4,3,2,2,1,1,0,0,0)
 	required_candidates = 1
 	weight = 1
@@ -363,7 +363,7 @@
 	config_tag = "midround_nuclear"
 	antag_flag = ROLE_OPERATIVE
 	antag_datum = /datum/antagonist/nukeop
-	enemy_roles = list("AI", "Cyborg", "Security Officer", "Warden","Detective","Chief Enforcer", "Captain")
+	enemy_roles = list("AI", "Cyborg", "Enforcer", "Lieutenant","Detective","Chief Enforcer", "Captain")
 	required_enemies = list(5,5,4,3,3,2,2,2,1,1)
 	required_candidates = 5
 	weight = 5
@@ -409,7 +409,7 @@
 	config_tag = "blob"
 	antag_datum = /datum/antagonist/blob
 	antag_flag = ROLE_BLOB
-	enemy_roles = list("Security Officer", "Detective", "Chief Enforcer", "Captain")
+	enemy_roles = list("Enforcer", "Detective", "Chief Enforcer", "Captain")
 	required_enemies = list(3,3,2,2,2,1,1,1,1,0)
 	required_candidates = 1
 	blocking_rules = list(/datum/dynamic_ruleset/roundstart/clockcult)
@@ -435,7 +435,7 @@
 	config_tag = "xenos"
 	antag_datum = /datum/antagonist/xeno
 	antag_flag = ROLE_ALIEN
-	enemy_roles = list("Security Officer", "Detective", "Chief Enforcer", "Captain")
+	enemy_roles = list("Enforcer", "Detective", "Chief Enforcer", "Captain")
 	required_enemies = list(3,3,2,2,1,1,1,1,1,0)
 	required_candidates = 1
 	weight = 3
@@ -489,7 +489,7 @@
 	antag_datum = /datum/antagonist/nightmare
 	antag_flag = "Nightmare"
 	antag_flag_override = ROLE_ALIEN
-	enemy_roles = list("Security Officer", "Detective", "Chief Enforcer", "Captain")
+	enemy_roles = list("Enforcer", "Detective", "Chief Enforcer", "Captain")
 	required_enemies = list(2,2,1,1,1,1,1,0,0,0)
 	required_candidates = 1
 	weight = 3
@@ -538,7 +538,7 @@
 	name = "Slaughter Demon"
 	config_tag = "slaughter_demon"
 	antag_flag = ROLE_ALIEN
-	enemy_roles = list("Security Officer","Shaft Miner","Chief Enforcer","Captain","Janitor","AI","Cyborg")
+	enemy_roles = list("Enforcer","Shaft Miner","Chief Enforcer","Captain","Janitor","AI","Cyborg")
 	required_enemies = list(3,2,2,2,2,1,1,1,1,0)
 	required_candidates = 1
 	weight = 4
@@ -585,7 +585,7 @@
 	config_tag = "abductors"
 	antag_flag = ROLE_ABDUCTOR
 	// Has two antagonist flags, in fact
-	enemy_roles = list("AI", "Cyborg", "Security Officer", "Warden","Detective","Chief Enforcer", "Captain")
+	enemy_roles = list("AI", "Cyborg", "Enforcer", "Lieutenant","Detective","Chief Enforcer", "Captain")
 	required_enemies = list(3,3,2,2,1,1,0,0,0,0)
 	required_candidates = 2
 	weight = 8
@@ -625,7 +625,7 @@
 	name = "Space Ninja"
 	config_tag = "ninja"
 	antag_flag = ROLE_NINJA
-	enemy_roles = list("Security Officer","Chief Enforcer","Captain","AI","Cyborg")
+	enemy_roles = list("Enforcer","Chief Enforcer","Captain","AI","Cyborg")
 	required_enemies = list(3,2,2,2,2,1,1,1,1,0)
 	required_candidates = 1
 	weight = 4

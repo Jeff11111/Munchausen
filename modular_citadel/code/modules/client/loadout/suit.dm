@@ -162,7 +162,7 @@
 	restricted_desc = "All, barring Service and Civilian"
 	restricted_roles = list("Chief Enforcer","Captain","Head of Personnel","Senior Engineer","Research Director","Chief Medical Officer","Quartermaster",
 							"Medical Doctor","Chemist","Virologist","Paramedic","Geneticist","Scientist", "Roboticist",
-							"Atmospheric Technician","Station Engineer","Warden","Detective","Security Officer",
+							"Atmospheric Technician","Station Engineer","Lieutenant","Detective","Enforcer",
 							"Cargo Technician", "Shaft Miner") //everyone who actually deserves a job.
 //Federation jackets from movies
 /datum/gear/trekcmdcap
@@ -176,7 +176,7 @@
 	category = SLOT_WEAR_SUIT
 	path = /obj/item/clothing/suit/storage/fluff/fedcoat
 	restricted_desc = "Heads of Staff and Security"
-	restricted_roles = list("Chief Enforcer","Captain","Head of Personnel","Senior Engineer","Research Director","Chief Medical Officer","Quartermaster","Warden","Detective","Security Officer")
+	restricted_roles = list("Chief Enforcer","Captain","Head of Personnel","Senior Engineer","Research Director","Chief Medical Officer","Quartermaster","Lieutenant","Detective","Enforcer")
 
 /datum/gear/trekmedscimov
 	name = "Fed (movie) uniform, Blue"
@@ -203,7 +203,7 @@
 	category = SLOT_WEAR_SUIT
 	path = /obj/item/clothing/suit/storage/fluff/modernfedcoat/sec
 	restricted_desc = "Heads of Staff and Security"
-	restricted_roles = list("Chief Enforcer","Captain","Head of Personnel","Senior Engineer","Research Director","Chief Medical Officer","Quartermaster","Warden","Detective","Security Officer")
+	restricted_roles = list("Chief Enforcer","Captain","Head of Personnel","Senior Engineer","Research Director","Chief Medical Officer","Quartermaster","Lieutenant","Detective","Enforcer")
 
 /datum/gear/trekmedscimod
 	name = "Fed (Modern) uniform, Blue"

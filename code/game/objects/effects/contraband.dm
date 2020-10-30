@@ -425,7 +425,7 @@
 
 /obj/structure/sign/poster/contraband/scum
 	name = "Security are Scum"
-	desc = "Anti-security propaganda. Features a human NanoTrasen security officer being shot in the head, with the words 'Scum' and a short inciteful manifesto. Used to anger security."
+	desc = "Anti-security propaganda. Features a human NanoTrasen enforcer being shot in the head, with the words 'Scum' and a short inciteful manifesto. Used to anger security."
 	icon_state = "poster46"
 
 /obj/structure/sign/poster/contraband/syndicate_logo

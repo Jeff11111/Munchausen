@@ -13,7 +13,7 @@
 	antag_flag = ROLE_REV
 	false_report_weight = 10
 	restricted_jobs = list("AI", "Cyborg")
-	protected_jobs = list("Security Officer", "Warden", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Quartermaster")
+	protected_jobs = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Quartermaster")
 	required_players = 20
 	required_enemies = 1
 	recommended_enemies = 3
@@ -37,7 +37,7 @@
 ///////////////////////////
 /datum/game_mode/revolution/announce()
 	to_chat(world, "<B>The current game mode is - Revolution!</B>")
-	to_chat(world, "<B>Some crewmembers are attempting to start a revolution!<BR>\nRevolutionaries - Kill the Captain, HoP, HoS, CE, RD, QM and CMO. Convert other crewmembers (excluding the heads of staff, and security officers) to your cause by flashing them. Protect your leaders.<BR>\nPersonnel - Protect the heads of staff. Kill the leaders of the revolution, and brainwash the other revolutionaries (by beating them in the head).</B>")
+	to_chat(world, "<B>Some crewmembers are attempting to start a revolution!<BR>\nRevolutionaries - Kill the Captain, HoP, HoS, CE, RD, QM and CMO. Convert other crewmembers (excluding the heads of staff, and Enforcers) to your cause by flashing them. Protect your leaders.<BR>\nPersonnel - Protect the heads of staff. Kill the leaders of the revolution, and brainwash the other revolutionaries (by beating them in the head).</B>")
 
 
 ///////////////////////////////////////////////////////////////////////////////

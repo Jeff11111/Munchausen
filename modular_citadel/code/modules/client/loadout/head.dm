@@ -94,14 +94,14 @@
 	category = SLOT_HEAD
 	path = /obj/item/clothing/head/caphat/formal/fedcover/eng
 	restricted_desc = "Engineering, Security, and Cargo"
-	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Warden","Detective","Security Officer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Quartermaster")
+	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Lieutenant","Detective","Enforcer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Quartermaster")
 
 /datum/gear/trekcapsec
 	name = "Federation Officer's Cap (Red)"
 	category = SLOT_HEAD
 	path = /obj/item/clothing/head/caphat/formal/fedcover/sec
 	restricted_desc = "Engineering, Security, and Cargo"
-	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Warden","Detective","Security Officer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Quartermaster")
+	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Lieutenant","Detective","Enforcer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Quartermaster")
 
 // orvilike "original" kepi
 /datum/gear/orvkepicom
@@ -118,7 +118,7 @@
 	category = SLOT_HEAD
 	path = /obj/item/clothing/head/kepi/orvi/engsec
 	restricted_desc = "Engineering, Security and Cargo"
-	restricted_roles = list("Senior Engineer", "Atmospheric Technician", "Station Engineer", "Warden", "Detective", "Security Officer", "Chief Enforcer", "Cargo Technician", "Shaft Miner", "Quartermaster")
+	restricted_roles = list("Senior Engineer", "Atmospheric Technician", "Station Engineer", "Lieutenant", "Detective", "Enforcer", "Chief Enforcer", "Cargo Technician", "Shaft Miner", "Quartermaster")
 
 /datum/gear/orvkepimedsci
 	name = "Federation Kepi, medsci"
@@ -181,7 +181,7 @@
 	category = SLOT_HEAD
 	path = /obj/item/clothing/head/cowboyhat/sec
 	restricted_desc = "Security"
-	restricted_roles = list("Warden","Detective","Security Officer","Chief Enforcer")
+	restricted_roles = list("Lieutenant","Detective","Enforcer","Chief Enforcer")
 
 // Misc
 /datum/gear/wkepi

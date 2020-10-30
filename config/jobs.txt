@@ -41,9 +41,9 @@ Psychologist=1,1 //Skyrat change
 Scientist=9,7
 Roboticist=2,2
 
-Warden=1,1
+Lieutenant=1,1
 Detective=1,1
-Security Officer=8,8
+Enforcer=8,8
 Brig Physician=1,1
 
 AI=0,1

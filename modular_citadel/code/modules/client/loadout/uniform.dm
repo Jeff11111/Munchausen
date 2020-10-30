@@ -317,7 +317,7 @@
 	category = SLOT_W_UNIFORM
 	path = /obj/item/clothing/under/trek/engsec
 	restricted_desc = "Engineering, Security, and Cargo"
-	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Warden","Detective","Security Officer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Quartermaster")
+	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Lieutenant","Detective","Enforcer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Quartermaster")
 
 /* //handled by modular skyrat code as reskins
 //TNG
@@ -340,7 +340,7 @@
 	category = SLOT_W_UNIFORM
 	path = /obj/item/clothing/under/trek/engsec/next
 	restricted_desc = "Engineering, Security, and Cargo"
-	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Warden","Detective","Security Officer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Quartermaster")
+	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Lieutenant","Detective","Enforcer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Quartermaster")
 
 //VOY
 /datum/gear/trekcmdvoy
@@ -362,7 +362,7 @@
 	category = SLOT_W_UNIFORM
 	path = /obj/item/clothing/under/trek/engsec/voy
 	restricted_desc = "Engineering, Security, and Cargo"
-	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Warden","Detective","Security Officer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Quartermaster")
+	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Lieutenant","Detective","Enforcer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Quartermaster")
 
 //DS9
 /datum/gear/trekcmdds9
@@ -384,7 +384,7 @@
 	category = SLOT_W_UNIFORM
 	path = /obj/item/clothing/under/trek/engsec/ds9
 	restricted_desc = "Engineering, Security, and Cargo"
-	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Warden","Detective","Security Officer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Quartermaster")
+	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Lieutenant","Detective","Enforcer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Quartermaster")
 
 //ENT
 /datum/gear/trekcmdent
@@ -406,7 +406,7 @@
 	category = SLOT_W_UNIFORM
 	path = /obj/item/clothing/under/trek/engsec/ent
 	restricted_desc = "Engineering, Security, and Cargo"
-	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Warden","Detective","Security Officer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Quartermaster")
+	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Lieutenant","Detective","Enforcer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Quartermaster")
 */
 
 //TheMotionPicture
@@ -417,7 +417,7 @@
 	restricted_desc = "All, barring Service and Civilian"
 	restricted_roles = list("Chief Enforcer","Captain","Head of Personnel","Senior Engineer","Research Director","Chief Medical Officer","Quartermaster",
 							"Medical Doctor","Chemist","Virologist","Paramedic","Geneticist","Scientist", "Roboticist",
-							"Atmospheric Technician","Station Engineer","Warden","Detective","Security Officer",
+							"Atmospheric Technician","Station Engineer","Lieutenant","Detective","Enforcer",
 							"Cargo Technician", "Shaft Miner")
 
 /* handled by modular code
@@ -466,7 +466,7 @@
 	category = SLOT_W_UNIFORM
 	path = /obj/item/clothing/under/trek/engsec/orv
 	restricted_desc = "Engineering, Security and Cargo"
-	restricted_roles = list("Senior Engineer", "Atmospheric Technician", "Station Engineer", "Warden", "Detective", "Security Officer", "Chief Enforcer", "Cargo Technician", "Shaft Miner", "Quartermaster")
+	restricted_roles = list("Senior Engineer", "Atmospheric Technician", "Station Engineer", "Lieutenant", "Detective", "Enforcer", "Chief Enforcer", "Cargo Technician", "Shaft Miner", "Quartermaster")
 
 /datum/gear/orvcmd_ops
 	name = "ORV uniform, ops/sec, cmd"

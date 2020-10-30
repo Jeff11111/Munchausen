@@ -83,7 +83,7 @@
 	icon_state = "pda-detective"
 
 /obj/item/pda/warden
-	name = "warden PDA"
+	name = "lieutenant PDA"
 	default_cartridge = /obj/item/cartridge/security
 	icon_state = "pda-warden"
 

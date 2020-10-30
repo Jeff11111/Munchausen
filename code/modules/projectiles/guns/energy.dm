@@ -234,7 +234,7 @@
 	var/ratio = can_shoot() ? CEILING(clamp(cell.charge / cell.maxcharge, 0, 1) * charge_sections, 1) : 0
 				// Sets the ratio to 0 if the gun doesn't have enough charge to fire, or if it's power cell is removed.
 				// TG issues #5361 & #47908
-	if(ratio == old_ratio && !force_update)
+	if(ratio == old_ratio)
 		return
 	old_ratio = ratio
 	var/iconState = "[icon_state]_charge"

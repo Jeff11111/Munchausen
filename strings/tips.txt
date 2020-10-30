@@ -16,7 +16,7 @@ The resist button will allow you to resist out of handcuffs, being buckled to a 
 You can move an item out of the way by dragging it and then clicking on an adjacent tile with an empty hand.
 You can recolor certain items like jumpsuits and gloves in washing machines by also throwing in a crayon.
 Maintenance is full of equipment that is randomized every round. Look around and see if anything is worth using.
-Some roles cannot be antagonists by default, but antag selection is decided first. For instance, you can set Security Officer to High without affecting your chances of becoming an antag -- the game will just select a different role.
+Some roles cannot be antagonists by default, but antag selection is decided first. For instance, you can set Enforcer to High without affecting your chances of becoming an antag -- the game will just select a different role.
 There are many places around the station to hide contraband. A few for starters: linen boxes, toilet cisterns, body bags. Experiment to find more!
 On all maps, you can use a machine in the vault to deposit space cash for cargo points. Otherwise, use it to steal the station's cash and get out before the alarm goes off.
 As the Captain, you are one of the highest priority targets on the station. Everything from revolutions, to nuclear operatives, to traitors that need to rob you of your unique lasgun or your life are things to worry about.
@@ -108,31 +108,31 @@ As an Atmospheric Technician, you can take a few cans worth of N2/N2O and cool i
 As the Chief Enforcer, you are expected to coordinate your security force to handle any threat that comes to the station. Sometimes it means making use of the armory to handle a blob, sometimes it means being ruthless during a revolution or cult.
 As the Chief Enforcer, you can call for executions or forced cyborgization, but may require the Captain's approval.
 As the Chief Enforcer, don't let the power go to your head. You may have high access, great equipment, and a miniature army at your side, but being a terrible person without a good reason is grounds for banning.
-As the Warden, your duty is to be the watchdog of the brig and handler of prisoners when little is happening, and to hand out equipment and weapons to the security officers when a crisis strikes.
-As the Warden, keep a close eye on the armory at all times, as it is a favored strike point of nuclear operatives and cocky traitors.
-As the Warden, if a prisoner's crimes are heinous enough you can put them in permabrig or the gulag. Make sure to check on them once in a while!
-As the Warden, never underestimate the power of tech slugs! Scattershot fires a cone of weaker lasers, Ion slugs fires EMPs that only effect the tiles they hit, and Pulse slugs fire a singular laser that can one-hit almost any wall!
-As the Warden, you can use a surgical saw on riot shotguns to shorten the barrel, making them able to fit in your backpack.
-As the Warden, you can implant criminals you suspect might re-offend with devices that will track their location and allow you to remotely inject them with disabling chemicals. 
-As the Warden, you can use handcuffs on orange prisoner shoes to turn them into cuffed shoes, forcing prisoners to walk and potentially thwarting an escape.
-As the Warden, tracker implants can be used on sec officers. Doing this will let you track their corpse even without suits, though the implant will biodegrade after 5 minutes.
-As the Warden, cryostasis shotgun darts hold 10u of chemicals that will not react untill it hits someone.
-As the Warden, chemical implants can be loaded with a cocktail of healing or combat chems, perfect for the Hos or other sec officers to use. Be sure to keep a eye on them though, it will not auto inject! EMPs or starvation mite lead to the chemical implant to go off as well.
-As the Warden, tracker implants can be used on sec officers. Doing this will let you be able to message them when telecoms are out, or when you suspect coms are compromised. This is also good against rogue AIs as the prisoner tracker doesn't leave logs or alarms for the AI.
-As a Security Officer, remember that correlation does not equal causation. Someone may have just been at the wrong place at the wrong time!
-As a Security Officer, remember that your belt can hold more then one stun baton. 
-As a Security Officer, remember harm battoning someone in the head can deconvert them form a being a rev! This sadly doesn't work against the cult, nor does this protect them from getting reconverted.
-As a Security Officer, remember that you can attach a sec-lite to your taser or your helmet!
-As a Security Officer, communicate and coordinate with your fellow officers using the security channel (:s) to avoid confusion.
-As a Security Officer, your sechuds or HUDsunglasses can not only see crewmates' job assignments and criminal status, but also if they are mindshield implanted. Use this to your advantage in a revolution to definitively tell who is on your side!
-As a Security Officer, mindshield implants can only prevent someone from being turned into a cultist: unlike revolutionaries, it will not de-cult them if they have already been converted.
-As a Security Officer, examining someone while wearing sechuds or HUDsunglasses will let you set their arrest level, which will cause Beepsky and other security bots to chase after them.
-As a Security Officer, you can take out the power cell on your baton to replace it with a better or fully charged one. Just use a screwdriver on your baton to remove the old cell
-As a Security Officer, you can place riot shotguns on your armor, this even works with winter sec coats!
+As the Lieutenant, your duty is to be the watchdog of the brig and handler of prisoners when little is happening, and to hand out equipment and weapons to the Enforcers when a crisis strikes.
+As the Lieutenant, keep a close eye on the armory at all times, as it is a favored strike point of nuclear operatives and cocky traitors.
+As the Lieutenant, if a prisoner's crimes are heinous enough you can put them in permabrig or the gulag. Make sure to check on them once in a while!
+As the Lieutenant, never underestimate the power of tech slugs! Scattershot fires a cone of weaker lasers, Ion slugs fires EMPs that only effect the tiles they hit, and Pulse slugs fire a singular laser that can one-hit almost any wall!
+As the Lieutenant, you can use a surgical saw on riot shotguns to shorten the barrel, making them able to fit in your backpack.
+As the Lieutenant, you can implant criminals you suspect might re-offend with devices that will track their location and allow you to remotely inject them with disabling chemicals. 
+As the Lieutenant, you can use handcuffs on orange prisoner shoes to turn them into cuffed shoes, forcing prisoners to walk and potentially thwarting an escape.
+As the Lieutenant, tracker implants can be used on sec officers. Doing this will let you track their corpse even without suits, though the implant will biodegrade after 5 minutes.
+As the Lieutenant, cryostasis shotgun darts hold 10u of chemicals that will not react untill it hits someone.
+As the Lieutenant, chemical implants can be loaded with a cocktail of healing or combat chems, perfect for the Hos or other sec officers to use. Be sure to keep a eye on them though, it will not auto inject! EMPs or starvation mite lead to the chemical implant to go off as well.
+As the Lieutenant, tracker implants can be used on sec officers. Doing this will let you be able to message them when telecoms are out, or when you suspect coms are compromised. This is also good against rogue AIs as the prisoner tracker doesn't leave logs or alarms for the AI.
+As a Enforcer, remember that correlation does not equal causation. Someone may have just been at the wrong place at the wrong time!
+As a Enforcer, remember that your belt can hold more then one stun baton. 
+As a Enforcer, remember harm battoning someone in the head can deconvert them form a being a rev! This sadly doesn't work against the cult, nor does this protect them from getting reconverted.
+As a Enforcer, remember that you can attach a sec-lite to your taser or your helmet!
+As a Enforcer, communicate and coordinate with your fellow officers using the security channel (:s) to avoid confusion.
+As a Enforcer, your sechuds or HUDsunglasses can not only see crewmates' job assignments and criminal status, but also if they are mindshield implanted. Use this to your advantage in a revolution to definitively tell who is on your side!
+As a Enforcer, mindshield implants can only prevent someone from being turned into a cultist: unlike revolutionaries, it will not de-cult them if they have already been converted.
+As a Enforcer, examining someone while wearing sechuds or HUDsunglasses will let you set their arrest level, which will cause Beepsky and other security bots to chase after them.
+As a Enforcer, you can take out the power cell on your baton to replace it with a better or fully charged one. Just use a screwdriver on your baton to remove the old cell
+As a Enforcer, you can place riot shotguns on your armor, this even works with winter sec coats!
 As the Detective, people leave fingerprints everywhere and on everything. With the exception of white latex, gloves will hide them. All is not lost, however, as gloves leave fibers specific to their kind such as black or nitrile, pointing to a general department.
 As the Detective, you can use your forensics scanner from a distance.
 As the Detective, your revolver can be loaded with .357 ammunition obtained from a hacked autolathe. Firing it has a decent chance to blow up your revolver.
-As the Lawyer, try to negotiate with the Warden if sentences seem too high for the crime.
+As the Lawyer, try to negotiate with the Lieutenant if sentences seem too high for the crime.
 As the Lawyer, you can try to convince the captain and Chief Enforcer to hold trials for prisoners in the courtroom.
 As the Head of Personnel, you are not higher ranking than other heads of staff, even though you are expected to take the Captain's place first should he go missing. If the situation seems too rough for you, consider allowing another head to become temporary Captain.
 As the Head of Personnel, you are just as large a target as the Captain because of the potential power your ID and computer can hand out.
@@ -214,7 +214,7 @@ As the Blob, removing strong blobs, resource nodes, factories, and nodes will gi
 As the Blob, talking will send a message to all other overminds and all Blobbernauts, allowing you to direct attacks and coordinate.
 As a Blobbernaut, you can communicate with overminds and other Blobbernauts via :b.
 As a Blobbernaut, your HUD shows your health and the core health of the overmind that created you.
-As a Revolutionary, you cannot convert a head of staff or someone who has a mindshield implant, such as a security officer or those they implant. Implants can however be surgically removed, and do not carry over with cloning. Take control of medbay to keep control of conversions!
+As a Revolutionary, you cannot convert a head of staff or someone who has a mindshield implant, such as a Enforcer or those they implant. Implants can however be surgically removed, and do not carry over with cloning. Take control of medbay to keep control of conversions!
 During a revolution, you cannot convert someone with brain damage, making an un-upgraded cloner a makeshift deconversion device.
 As a Revolutionary, cargo can be your best friend or your worst nightmare. In the best case scenario you will be able to order a limitless amount of guns and armor, in the worst case scenario security will take control and order a limitless number of mindshield implants to turn your fellow revolutionaries against you.
 As a Revolutionary, your main power comes from how quickly you spread. Convert people as fast as you can and overwhelm the heads of staff before security can arm up.

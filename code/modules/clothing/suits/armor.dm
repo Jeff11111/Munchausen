@@ -16,8 +16,8 @@
 		allowed = GLOB.security_vest_allowed
 
 /obj/item/clothing/suit/armor/navyblue
-	name = "security officer's jacket"
-	desc = "This jacket is for those special occasions when a security officer isn't required to wear their armor."
+	name = "enforcer's jacket"
+	desc = "This jacket is for those special occasions when a enforcer isn't required to wear their armor."
 	icon_state = "officerbluejacket"
 	item_state = "officerbluejacket"
 	body_parts_covered = CHEST|ARMS
@@ -82,8 +82,8 @@
 	unique_reskin = list("Coat" = "hostrench", "Cloak" = "trenchcloak")
 
 /obj/item/clothing/suit/armor/vest/warden
-	name = "warden's jacket"
-	desc = "A navy-blue armored jacket with blue shoulder designations and '/Warden/' stitched into one of the chest pockets."
+	name = "lieutenant's jacket"
+	desc = "A navy-blue armored jacket with blue shoulder designations and '/Lieutenant/' stitched into one of the chest pockets."
 	icon_state = "warden_alt"
 	item_state = "armor"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -95,13 +95,13 @@
 	mutantrace_variation = STYLE_DIGITIGRADE
 
 /obj/item/clothing/suit/armor/vest/warden/alt
-	name = "warden's armored jacket"
+	name = "Lieutenant's armored jacket"
 	desc = "A red jacket with silver rank pips and body armor strapped on top."
 	icon_state = "warden_jacket"
 
 /obj/item/clothing/suit/armor/vest/warden/navyblue
-	name = "warden's jacket"
-	desc = "Perfectly suited for the warden that wants to leave an impression of style on those who visit the brig."
+	name = "Lieutenant's jacket"
+	desc = "Perfectly suited for the Lieutenant that wants to leave an impression of style on those who visit the brig."
 	icon_state = "wardenbluejacket"
 	item_state = "wardenbluejacket"
 	body_parts_covered = CHEST|ARMS

@@ -105,7 +105,7 @@
 
 /obj/item/clothing/under/color/orange
 	name = "orange jumpsuit"
-	desc = "Don't wear this near paranoid security officers."
+	desc = "Don't wear this near paranoid enforcers."
 	icon_state = "orange"
 	item_state = "o_suit"
 

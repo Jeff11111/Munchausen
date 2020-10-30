@@ -26,7 +26,7 @@
 			heirloom_type = /obj/item/pen/blue
 		if("Janitor")
 			heirloom_type = /obj/item/mop
-		if("Security Officer")
+		if("Enforcer")
 			heirloom_type = /obj/item/clothing/accessory/medal/silver/valor
 		if("Scientist")
 			heirloom_type = /obj/item/toy/plush/slimeplushie

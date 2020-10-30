@@ -245,7 +245,7 @@
 						)
 
 /obj/item/gun/ballistic/shotgun/automatic/combat/compact
-	name = "warden's combat shotgun"
+	name = "Lieutenant's combat shotgun"
 	desc = "A modified version of the semi automatic combat shotgun with a collapsible stock. For close encounters."
 	icon_state = "cshotgunc"
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/com

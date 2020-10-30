@@ -65,7 +65,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 			heirloom_type = /obj/item/storage/briefcase/lawyer/family
 		if("Janitor")
 			heirloom_type = /obj/item/mop
-		if("Security Officer")
+		if("enforcer")
 			heirloom_type = /obj/item/clothing/accessory/medal/silver/valor
 		if("Scientist")
 			heirloom_type = /obj/item/toy/plush/slimeplushie

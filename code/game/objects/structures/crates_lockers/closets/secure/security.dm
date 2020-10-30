@@ -95,7 +95,7 @@
 	new /obj/item/clothing/suit/hooded/wintercoat/hos(src)
 
 /obj/structure/closet/secure_closet/warden
-	name = "\proper warden's locker"
+	name = "\proper lieutenant's locker"
 	req_access = list(ACCESS_ARMORY)
 	icon_state = "warden"
 /obj/structure/closet/secure_closet/warden/PopulateContents()
@@ -120,7 +120,7 @@
 	//new /obj/item/gun/ballistic/shotgun/automatic/combat/compact(src) | SKYRAT CHANGE, REMOVES COMPACT SHOTGUN
 	new /obj/item/clothing/head/beret/sec/corporatewarden(src)
 /obj/structure/closet/secure_closet/security
-	name = "security officer's locker"
+	name = "enforcer's locker"
 	req_access = list(ACCESS_SECURITY)
 	icon_state = "sec"
 /obj/structure/closet/secure_closet/security/PopulateContents()
@@ -131,7 +131,7 @@
 	new /obj/item/clothing/glasses/hud/security/sunglasses(src)
 	new /obj/item/flashlight/seclite(src)
 /obj/structure/closet/secure_closet/security_xenoarch
-	name = "security officer's locker"
+	name = "enforcer's locker"
 	req_access = list(ACCESS_SECURITY)
 	icon_state = "sec"
 /obj/structure/closet/secure_closet/security/PopulateContents()

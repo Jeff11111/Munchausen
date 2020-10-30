@@ -61,7 +61,7 @@
 	config_tag = "pirates"
 	typepath = /datum/round_event/pirates
 	antag_flag = ROLE_TRAITOR
-	enemy_roles = list("AI","Security Officer","Chief Enforcer","Captain")
+	enemy_roles = list("AI","Enforcer","Chief Enforcer","Captain")
 	required_enemies = list(2,2,1,1,0,0,0,0,0,0)
 	weight = 5
 	cost = 10
@@ -87,7 +87,7 @@
 	name = "Spider Infestation"
 	config_tag = "spiders"
 	typepath = /datum/round_event/spider_infestation
-	enemy_roles = list("AI","Security Officer","Chief Enforcer","Captain")
+	enemy_roles = list("AI","Enforcer","Chief Enforcer","Captain")
 	required_enemies = list(2,2,1,1,0,0,0,0,0,0)
 	weight = 5
 	cost = 10
@@ -421,7 +421,7 @@
 	typepath = /datum/round_event/portal_storm/syndicate_shocktroop
 	cost = 10
 	weight = 1
-	enemy_roles = list("Chief Enforcer","Security Officer","AI","Captain","Shaft Miner")
+	enemy_roles = list("Chief Enforcer","Enforcer","AI","Captain","Shaft Miner")
 	required_enemies = list(2,2,2,2,2,2,2,2,2,2)
 	requirements = list(101,101,101,30,30,30,30,30,30,30)
 	high_population_requirement =  30
@@ -449,7 +449,7 @@
 	cost = 10
 	weight = 1
 	earliest_start = 30 MINUTES
-	enemy_roles = list("AI","Security Officer","Chief Enforcer","Captain","Station Engineer","Atmos Technician","Senior Engineer")
+	enemy_roles = list("AI","Enforcer","Chief Enforcer","Captain","Station Engineer","Atmos Technician","Senior Engineer")
 	required_enemies = list(4,4,4,4,3,3,2,2,1,1)
 	requirements = list(101,101,101,101,101,101,101,101,101,101)
 	high_population_requirement =  5

@@ -1,5 +1,5 @@
 /datum/job/officer
-	title = "Security Officer"
+	title = "Enforcer"
 	flag = OFFICER
 //	auto_deadmin_role_flags = DEADMIN_POSITION_SECURITY
 	department_head = list("Chief Enforcer")
@@ -125,7 +125,7 @@ GLOBAL_LIST_INIT(available_depts, list(SEC_DEPT_ELITE, SEC_DEPT_ENGINEERING, SEC
 		to_chat(M, "<b>You have not been assigned to any department. Patrol the halls and help where needed.</b>")
 
 /datum/outfit/job/security
-	name = "Security Officer"
+	name = "Enforcer"
 	jobtype = /datum/job/officer
 
 	belt = /obj/item/pda/security
