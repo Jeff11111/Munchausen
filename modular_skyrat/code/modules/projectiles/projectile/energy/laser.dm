@@ -32,11 +32,13 @@
 //captain's laser gun
 /obj/item/projectile/beam/laser/hellfire/ultra
 	name = "deluxe hellfire laser"
-	wound_bonus = 25
+	damage = 30
+	wound_bonus = 36
+	bare_wound_bonus = 30
 
 /obj/item/projectile/beam/disabler/hellfire/ultra
 	name = "deluxe hellfire disabler beam"
-	damage = 34
+	damage = 35
 	color = LIGHT_COLOR_PURPLE
 	light_color = LIGHT_COLOR_PURPLE
 	eyeblur = 6

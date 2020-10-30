@@ -15,8 +15,8 @@
 	ricochet_chance = 80
 	is_reflectable = TRUE
 	//skyrat edit
-	wound_bonus = -20
-	bare_wound_bonus = 10
+	wound_bonus = 30
+	bare_wound_bonus = 15
 	//
 
 /obj/item/projectile/beam/Initialize()
@@ -32,7 +32,8 @@
 //overclocked laser, does a bit more damage but has much higher wound power (5 vs -20)
 /obj/item/projectile/beam/laser/hellfire
 	name = "hellfire laser"
-	wound_bonus = 5
+	wound_bonus = 35
+	bare_wound_bonus = 20
 	damage = 25
 
 /obj/item/projectile/beam/laser/hellfire/Initialize()
@@ -48,7 +49,7 @@
 	muzzle_type = /obj/effect/projectile/muzzle/heavy_laser
 	impact_type = /obj/effect/projectile/impact/heavy_laser
 	//skyrat edit
-	wound_bonus = 10
+	wound_bonus = 20
 	//
 
 /obj/item/projectile/beam/laser/on_hit(atom/target, blocked = FALSE)
