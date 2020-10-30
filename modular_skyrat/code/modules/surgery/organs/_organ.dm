@@ -445,6 +445,16 @@
 			user.visible_message("<span class='notice'>[user] etches something on \the [src] with \the [I].</span>", " <span class='notice'>You etch <b>\"[badboy]\"</b> on [src] with \the [I]. Hehe.</span>")
 		else
 			return ..()
+	else if(I.get_sharpness() && (user.a_intent == INTENT_HARM))
+		user.visible_message("<span class='warning'>[user] begins to butcher [src].</span>",\
+			"<span class='notice'>You begin butchering [src]...</span>")
+		if(do_after(user, 54, target = src))
+			user.visible_message("<span class='warning'>[user] butchers [src] into giblets!</span>",\
+				"<span class='warning'>You butcher [src] into giblets!</span>")
+			new /obj/item/reagent_containers/food/snacks/meat/slab/human(get_turf(src))
+			if(prob(50))
+				new /obj/item/reagent_containers/food/snacks/meat/slab/human(get_turf(src))
+			return qdel(src)
 
 /obj/item/organ/item_action_slot_check(slot,mob/user)
 	return //so we don't grant the organ's action to mobs who pick up the organ.

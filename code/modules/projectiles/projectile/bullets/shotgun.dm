@@ -86,9 +86,9 @@
 /obj/item/projectile/bullet/pellet/shotgun_buckshot
 	name = "buckshot pellet"
 	//skyrat edit
-	damage = 10
-	bare_wound_bonus = 10
-	wound_bonus = 15
+	damage = 12.5
+	bare_wound_bonus = 15
+	wound_bonus = 20
 	//
 
 /obj/item/projectile/bullet/pellet/shotgun_rubbershot

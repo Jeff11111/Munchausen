@@ -486,7 +486,7 @@
 	..()
 
 /obj/item/bodypart/attackby(obj/item/W, mob/user, params)
-	if(W.get_sharpness())
+	if(W.get_sharpness() && (user.a_intent == INTENT_HARM))
 		add_fingerprint(user)
 		if(!contents.len)
 			user.visible_message("<span class='warning'>[user] begins to butcher [src].</span>",\

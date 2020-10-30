@@ -138,9 +138,10 @@
 		return FALSE
 	
 	var/obj/item/bodypart/parent = owner.get_bodypart(zone)
-	if(istype(parent))
+	if(istype(parent) && !is_bruised())
 		owner.custom_pain("You feel a stabbing pain in your [parent.name]!", 50, TRUE, affecting = parent)
-	break_organ()
+	if(!is_broken())
+		applyOrganDamage(maxHealth/4)
 
 //Exposure to extreme pressures can rupture lungs
 /obj/item/organ/lungs/proc/check_rupturing(breath_pressure, datum/gas_mixture/enviro)

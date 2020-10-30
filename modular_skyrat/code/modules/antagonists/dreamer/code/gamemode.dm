@@ -12,24 +12,6 @@
 	required_enemies = 1 //One dreamer only
 	recommended_enemies = 1 //One dreamer only
 
-/datum/game_mode/dreamer/get_players_for_role(role)
-	//We give 0 shits about preferences lmao
-	//eat pen
-	var/list/players = list()
-	var/list/candidates = list()
-
-	for(var/mob/dead/new_player/player in GLOB.player_list)
-		if(player.client && player.ready == PLAYER_READY_TO_PLAY && player.check_preferences())
-			players += player
-
-	players = shuffle(players)
-
-	for(var/mob/dead/new_player/player in players)
-		if(player.client && player.ready == PLAYER_READY_TO_PLAY)
-			candidates += player.mind
-
-	return candidates
-
 /datum/game_mode/dreamer/post_setup(report)
 	..()
 	var/datum/mind/dreamer
