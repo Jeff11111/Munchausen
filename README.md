@@ -1,9 +1,5 @@
-## Citadel Station 13
-Based and maintained from /tg/station.
-
-[![Build Status](https://api.travis-ci.org/Citadel-Station-13/Citadel-Station-13.png)](https://travis-ci.org/Citadel-Station-13/Citadel-Station-13) 
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/Citadel-Station-13/Citadel-Station-13.svg)](http://isitmaintained.com/project/Citadel-Station-13/Citadel-Station-13 "Percentage of issues still open")  
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/Citadel-Station-13/Citadel-Station-13.svg)](http://isitmaintained.com/project/Citadel-Station-13/Citadel-Station-13 "Average time to resolve an issue")
+## Bobstation
+Based from Skyrat's modification of /tg/station code.
 
 [![forthebadge](http://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)](https://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/pretty-risque.svg)](https://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/you-didnt-ask-for-this.svg)](http://forthebadge.com) [![forinfinityandbyond](https://user-images.githubusercontent.com/5211576/29499758-4efff304-85e6-11e7-8267-62919c3688a9.gif)](https://www.reddit.com/r/SS13/comments/5oplxp/what_is_the_main_problem_with_byond_as_an_engine/dclbu1a)
 
@@ -14,16 +10,11 @@ Based and maintained from /tg/station.
 * **Codedocs:** <https://codedocs.tgstation13.org>
 * **/tg/station Discord:** <https://tgstation13.org/phpBB/viewforum.php?f=60>
 * **Coderbus Discord:** <https://discord.gg/Vh8TJp9>
-* ~~**IRC:** <irc://irc.rizon.net/coderbus>~~ (dead)  
+* ~~**IRC:** <irc://irc.rizon.net/coderbus>~~ (dead)
 
-**Citadel Station Information**  
-* **Website:** <http://citadel-station.net>
-* **Code:** <https://github.com/Citadel-Station-13/Citadel-Station-13>
-* **Wiki:** <https://citadel-station.net/wiki/index.php?title=Main_Page>
-* **Forums:** <http://citadel-station.net/forum>
-* **Ban Appeals:** <http://citadel-station.net/forum/forumdisplay.php?fid=8>
-* **Discord:**  <https://discord.gg/E6SQuhz>
-  
+**Bobstation Information**
+* **Discord:** <https://discord.gg/B4zvEP8>
+
 ## DOWNLOADING
 
 There are a number of ways to download the source code. Some are described here, an alternative all-inclusive guide is also located at http://www.tgstation13.org/wiki/Downloading_the_source_code
@@ -115,7 +106,6 @@ https://github.com/tgstation/tgstation-server
 * [DeltaStation](https://tgstation13.org/wiki/DeltaStation)
 * [OmegaStation](https://tgstation13.org/wiki/OmegaStation)
 * [PubbyStation](https://tgstation13.org/wiki/PubbyStation)
-
 
 All maps have their own code file that is in the base of the _maps directory. Maps are loaded dynamically when the game starts. Follow this guideline when adding your own map, to your fork, for easy compatibility.
 
