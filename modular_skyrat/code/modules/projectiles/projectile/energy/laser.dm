@@ -2,6 +2,8 @@
 /obj/item/projectile/beam/laser
 	bare_wound_bonus = 10
 	wound_bonus = 20
+	hitsound = null
+	hitsound_wall = null
 
 //makeshift laser rifle
 /obj/item/projectile/beam/laser/makeshiftlasrifle

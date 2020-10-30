@@ -1,3 +1,6 @@
+//piss
+/obj/item/ammo_casing/energy
+	fire_sound = 'modular_skyrat/sound/weapons/laser.ogg'
 //makeshift laser rifle
 /obj/item/ammo_casing/energy/laser/makeshiftlasrifle
 	e_cost = 750
