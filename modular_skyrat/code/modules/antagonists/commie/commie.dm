@@ -1,5 +1,6 @@
 /datum/antagonist/communist
 	name = "Communist Agent"
+	antagpanel_category = "Commie"
 	roundend_category = "bolsheviks"
 	antag_memory = "My people have suffered for long enough on this cursed station. I must bring justice to the stowaways."
 	threat = 10
