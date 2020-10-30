@@ -3809,6 +3809,8 @@
 #include "modular_skyrat\code\modules\antagonists\abductor\abductee\abductee_objectives.dm"
 #include "modular_skyrat\code\modules\antagonists\bloodsucker\datum_vassal.dm"
 #include "modular_skyrat\code\modules\antagonists\changeling\changeling.dm"
+#include "modular_skyrat\code\modules\antagonists\commie\commie.dm"
+#include "modular_skyrat\code\modules\antagonists\commie\objective.dm"
 #include "modular_skyrat\code\modules\antagonists\devil\sintouched\sintouched.dm"
 #include "modular_skyrat\code\modules\antagonists\dreamer\code\_dreamer.dm"
 #include "modular_skyrat\code\modules\antagonists\dreamer\code\dreamer_life.dm"

@@ -365,7 +365,8 @@
 	stat_end = 14
 	stat_dex = 8
 	stat_int = 8
-	//Average melee and ranged
+	//Average melee and ranged, novice first aid
+	skill_firstaid = 8
 	skill_melee = JOB_SKILLPOINTS_TRAINED
 	skill_ranged = JOB_SKILLPOINTS_AVERAGE
 

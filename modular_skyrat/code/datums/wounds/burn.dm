@@ -182,5 +182,5 @@
 	..()
 	//Limbs with critical burns can become BONIFIED
 	if((wounding_type == WOUND_BURN) && !limb.is_dead() && prob(wounding_dmg/2))
-		owner.visible_message("<span class='danger'>[victim]'s [limb] completely melts away into bone!</span>", "<span class='userdanger'>OH GOD! My [limb] is molten into bone!</span>")
+		victim.visible_message("<span class='danger'>[victim]'s [limb] completely melts away into bone!</span>", "<span class='userdanger'>OH GOD! My [limb] is molten into bone!</span>")
 		limb.kill_limb()
