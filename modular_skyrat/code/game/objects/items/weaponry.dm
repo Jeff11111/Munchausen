@@ -710,6 +710,17 @@
 	lefthand_file = 'modular_skyrat/icons/mob/inhands/weapons/melee_lefthand.dmi'
 	righthand_file = 'modular_skyrat/icons/mob/inhands/weapons/melee_righthand.dmi'
 
+//Kitchen knife
+/obj/item/kitchen/knife
+	icon = 'modular_skyrat/icons/obj/bobstation/melee/knife.dmi'
+	icon_state = "knife"
+
+/obj/item/kitchen/knife/combat
+	icon = 'icons/obj/kitchen.dmi'
+
+/obj/item/kitchen/knife/carrotshiv
+	icon = 'icons/obj/kitchen.dmi'
+
 //Butcher knife
 /obj/item/kitchen/knife/butcher
 	icon = 'modular_skyrat/icons/obj/bobstation/melee/cleaver.dmi'
