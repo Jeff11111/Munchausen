@@ -19,7 +19,7 @@
 /obj/item/gun/ballistic/revolver/shoot_with_empty_chamber(mob/living/user as mob|obj)
 	..()
 	chamber_round(1)
-
+/*modular
 /obj/item/gun/ballistic/revolver/attackby(obj/item/A, mob/user, params)
 	. = ..()
 	if(.)
@@ -31,7 +31,7 @@
 		playsound(src, loadsound, 60, 1)
 		A.update_icon()
 		chamber_round(0)
-
+*/
 /obj/item/gun/ballistic/revolver/attack_self(mob/living/user)
 	var/num_unloaded = 0
 	chambered = null

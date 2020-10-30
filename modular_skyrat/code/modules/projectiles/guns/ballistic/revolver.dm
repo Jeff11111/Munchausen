@@ -28,7 +28,23 @@
 		to_chat(user, "<span class='notice'>I unload [CB] from [src].</span>")
 	else
 		return ..()
-	
+
+
+/obj/item/gun/ballistic/revolver/attackby(obj/item/A, mob/user, params)
+	. = ..()
+	if(.)
+		return
+	if(chamber_open)
+		var/num_loaded = magazine.attackby(A, user, params, 1)
+		if(num_loaded)
+			to_chat(user, "<span class='notice'>I load [num_loaded] shell\s into \the [src].</span>")
+			var/loadsound = pick('modular_skyrat/sound/weapons/revolver_load1.ogg', 'modular_skyrat/sound/weapons/revolver_load2.ogg')
+			playsound(src, loadsound, 60, 1)
+			A.update_icon()
+			chamber_round(0)
+	else
+		to_chat(user, "<span class='warning'>I can't load [src] with a closed chamber.</span>")
+
 /obj/item/gun/ballistic/revolver/attack_self(mob/living/user)
 	if(chamber_open)
 		var/num_unloaded = 0
