@@ -15,6 +15,16 @@
 
 /datum/antagonist/communist/greet()
 	to_chat(owner, "<span class='danger'>You are a communist stowaway.</span>")
+	var/list/commies = list()
+	for(var/datum/antagonist/communist/C in GLOB.antagonists)
+		if(C == src)
+			continue
+		if(C.owner?.current?.name)
+			commies |= C.owner.current.name
+	if(length(commies))
+		to_chat(owner, "<span class='danger'>[english_list(commies)] [length(commies) > 1 ? "are your allies" : "is your ally"].</span>")
+	else
+		to_chat(owner, "<span class='danger'>You have no allies on-board. Thread carefully, comrade.</span>")
 	owner.announce_objectives()
 
 /datum/antagonist/communist/proc/viva_la_revolucion()
