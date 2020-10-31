@@ -7,3 +7,6 @@
 		to_chat(parent, "<span class='bobux'>[message]</span>")
 	save_preferences()
 	return TRUE
+
+/datum/mind
+	var/list/bobux_bought = list()

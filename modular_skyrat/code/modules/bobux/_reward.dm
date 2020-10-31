@@ -16,6 +16,7 @@
 		noob = M.client
 	if(!noob || !noob.prefs)
 		return FALSE
+	noob.mob?.mind?.bobux_bought |= type
 	if(buy_message)
 		to_chat(noob, "<span class='bobux'>[buy_message]</span>")
 
