@@ -313,6 +313,54 @@
 	if(M.drunkenness)
 		M.adjustOrganLoss(ORGAN_SLOT_LIVER, initial_volume/30) // More tramadol = More liver destruction
 
+/datum/reagent/medicine/promedol
+	name = "Promedol"
+	description = "An extremely strong, albeit extremely addictive, painkiller."
+	taste_description = "numbness"
+	reagent_state = LIQUID
+	color = "#430568"
+	addiction_threshold = 15
+
+/datum/reagent/medicine/promedol/on_mob_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.add_chem_effect(CE_PAINKILLER, 200)
+
+/datum/reagent/medicine/promedol/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.remove_chem_effect(CE_PAINKILLER, 200)
+
+/datum/reagent/medicine/promedol/addiction_act_stage1(mob/living/M)
+	. = ..()
+	if(prob(2))
+		M.custom_pain("Everything is numb, yet everything hurts.", 30)
+
+/datum/reagent/medicine/promedol/addiction_act_stage2(mob/living/M)
+	. = ..()
+	if(prob(3))
+		M.custom_pain("Your entire body feels as if it is being pricked by sharp needles.", 40)
+	if(prob(5))
+		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, rand(5, 10))
+
+/datum/reagent/medicine/promedol/addiction_act_stage3(mob/living/M)
+	. = ..()
+	M.adjustOrganLoss(ORGAN_SLOT_KIDNEYS, rand(0, 1))
+	if(prob(8) && iscarbon(M))
+		var/mob/living/carbon/C = M
+		C.vomit(rand(4,10))
+
+/datum/reagent/medicine/promedol/addiction_act_stage4(mob/living/M)
+	. = ..()
+	if(prob(10))
+		M.custom_pain("My liver will kick the bucket...", 60)
+	M.adjustOrganLoss(ORGAN_SLOT_LIVER, rand(1, 2))
+	if(prob(10) && iscarbon(M))
+		var/mob/living/carbon/C = M
+		C.set_heartattack(TRUE)
+
 /datum/reagent/medicine/bicaridine/on_mob_metabolize(mob/living/L)
 	. = ..()
 	if(iscarbon(L))

@@ -290,7 +290,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["pda_skin"]			>> pda_skin
 	// SKYRAT EDIT START
 	S["show_credits"] 		>> show_credits
-	S["eorg_teleport"]		>> eorg_teleport]
+	S["eorg_teleport"]		>> eorg_teleport
 	S["bobux_amount"]		>> bobux_amount
 	// SKYRAT EDIT END
 
