@@ -1,46 +1,69 @@
 //the rewards themselves
-/* shitposts for testing
-/datum/bobux_reward/thuxtk
-	name = "MODO THUXTK"
-	desc = "COMPRE PARA VIRAR THUXTK"
-	buy_message = "VOCE AGORA E UM BOIOLA VIADO TRAVECO COM PENIS"
-	id = "thuxtk"
-	cost = 10
+/datum/bobux_reward/become_traitor
+	name = "Become Traitor"
+	desc = "Become a syndicate agent. Took you long to remember your mission!"
+	buy_message = "<b>You remember your true purpose on the station...</span>"
+	id = "become_traitor"
+	cost = 5
 
-/datum/bobux_reward/thuxtk/can_buy(client/noob, silent = FALSE, fail_message = "You don't have enough bobux to buy NAME!")
+/datum/bobux_reward/become_traitor/can_buy(client/noob, silent, fail_message)
 	. = ..()
-	if(.)
-		if(!ishuman(noob.mob))
-			to_chat(noob, "<span class='bobux'>You need to be controlling a human mob to ATIVAR MODO THUXTK!</span>")
-			return FALSE
+	if(. && ishuman(noob.mob) && noob.mob.mind)
+		return TRUE
 
-/datum/bobux_reward/thuxtk/on_buy(client/noob)
+/datum/bobux_reward/become_traitor/on_buy(client/noob)
 	. = ..()
 	var/mob/living/carbon/human/H = noob.mob
-	H.set_gender(FEMALE)
-	var/obj/item/organ/genital/vagina/vagina = H.getorganslot(ORGAN_SLOT_VAGINA)
-	if(vagina)
-		qdel(vagina)
-	var/obj/item/organ/genital/penis/penis = H.getorganslot(ORGAN_SLOT_PENIS)
-	if(!penis)
-		penis = new(H)
-		penis.Insert(H)
-	var/obj/item/organ/genital/testicles/testicles = H.getorganslot(ORGAN_SLOT_TESTICLES)
-	if(!testicles)
-		testicles = new(H)
-		testicles.Insert(H)
-	H.dna?.features["body_model"] = FEMALE
-	H.name = "Yuri Tamashiro"
-	H.real_name = "Yuri Tamashiro"
+	H.mind.add_antag_datum(new /datum/antagonist/traitor())
 
-/datum/bobux_reward/mayer_summer_car
-	name = "CORTAR DE GIRO MAYER SUMMER CAR"
-	desc = "CORTANDO DE GIRO NO MAYER SUMMER CAR"
-	buy_message = "SE VOCE SABE TROCAR DE MARCHA NO MAYER SUMMER CAR DE LIKE FAVORITO"
-	id = "mayersummercar"
+/datum/bobux_reward/become_dreamer
+	name = "Become Dreamer"
+	desc = "Become the dreamer. Wake up."
+	buy_message = "<b>Visions...</span>"
+	id = "become_dreamer"
 	cost = 10
 
-/datum/bobux_reward/mayer_summer_car/on_buy(client/noob)
+/datum/bobux_reward/become_dreamer/can_buy(client/noob, silent, fail_message)
 	. = ..()
-	new /obj/vehicle/ridden/scooter(get_turf(noob.mob))
-*/
+	if(. && ishuman(noob.mob) && noob.mob.mind)
+		return TRUE
+
+/datum/bobux_reward/become_dreamer/on_buy(client/noob)
+	. = ..()
+	var/mob/living/carbon/human/H = noob.mob
+	H.mind.add_antag_datum(new /datum/antagonist/dreamer())
+
+/datum/bobux_reward/stat_boost
+	name = "Boost Stats"
+	desc = "Improve all stats by one point."
+	buy_message = "<b>I become stronger.</span>"
+	id = "statboost"
+	cost = 2
+
+/datum/bobux_reward/stat_boost/can_buy(client/noob, silent, fail_message)
+	. = ..()
+	if(. && ishuman(noob.mob) && noob.mob.mind)
+		return TRUE
+
+/datum/bobux_reward/stat_boost/on_buy(client/noob)
+	. = ..()
+	for(var/datum/stats/stat in noob.mob.mind.mob_stats)
+		stat.level += 1
+
+/datum/bobux_reward/combat_boost
+	name = "Combat Boost"
+	desc = "Improve melee and ranged skill by 4 to 7 points."
+	buy_message = "<b>I become better at combat.</span>"
+	id = "combatboost"
+	cost = 2
+
+/datum/bobux_reward/combat_boost/can_buy(client/noob, silent, fail_message)
+	. = ..()
+	if(. && ishuman(noob.mob) && noob.mob.mind)
+		return TRUE
+
+/datum/bobux_reward/combat_boost/on_buy(client/noob)
+	. = ..()
+	for(var/datum/skills/skill in noob.mob.mind.mob_skills)
+		if(istype(skill, SKILL_DATUM(melee)) || istype(skill, SKILL_DATUM(ranged)))
+			skill.level += rand(4,7)

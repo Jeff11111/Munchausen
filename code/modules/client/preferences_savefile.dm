@@ -290,7 +290,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["pda_skin"]			>> pda_skin
 	// SKYRAT EDIT START
 	S["show_credits"] 		>> show_credits
-	S["eorg_teleport"]		>> eorg_teleport
+	S["eorg_teleport"]		>> eorg_teleport]
+	S["bobux_amount"]		>> bobux_amount
 	// SKYRAT EDIT END
 
 	// Custom hotkeys
@@ -362,8 +363,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	scars_list = SANITIZE_LIST(scars_list)
 	cosmetic_scars = SANITIZE_LIST(cosmetic_scars)
 	eorg_teleport			= sanitize_integer(eorg_teleport, 0, 1, initial(eorg_teleport))
-	if(combat_music)
-		combat_music = sanitize_inlist(combat_music, GLOB.combat_music_options)
 	pain_style = sanitize_text(pain_style, initial(pain_style))
 	//SKYRAT CHANGES END
 
@@ -464,7 +463,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["scars_list"], scars_list)
 	WRITE_FILE(S["eorg_teleport"], eorg_teleport)
 	WRITE_FILE(S["combat_music"], combat_music)
-	WRITE_FILE(S["pain_style"], pain_style)
+	WRITE_FILE(S["bobux_amount"], bobux_amount)
 	//SKYRAT CHANGES END
 
 	return 1

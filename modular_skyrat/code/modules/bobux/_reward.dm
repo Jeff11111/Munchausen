@@ -27,6 +27,9 @@
 		noob = M.client
 	if(!noob || !noob.prefs)
 		return FALSE
+	if(type in noob.mob?.mind?.bobux_bought)
+		to_chat(noob, "<span clas='bobux'>You have already bought this bobux reward!</span>")
+		return FALSE
 	if((noob?.prefs?.bobux_amount >= cost) && !unbuyable)
 		return TRUE
 	else if(!silent)
