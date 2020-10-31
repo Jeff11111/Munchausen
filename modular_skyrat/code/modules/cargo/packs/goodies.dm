@@ -114,7 +114,7 @@
 	name = "9mm Tactical Submachine Gun"
 	desc = "Contains one NT Saber SMG, chambered in 9mm. Never know when you need it."
 	cost = 12000
-	contains = list(/obj/item/gun/ballistic/automatic/proto)
+	contains = list(/obj/item/gun/ballistic/automatic/proto/unrestricted)
 
 /datum/supply_pack/goody/tactical_smg_ammo
 	name = "9mm Tactical SMG Magazines"
