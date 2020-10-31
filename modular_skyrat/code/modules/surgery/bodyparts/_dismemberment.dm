@@ -281,12 +281,16 @@
 		else if(((W.wound_type in list(WOUND_LIST_SLASH, WOUND_LIST_SLASH_MECHANICAL,WOUND_LIST_PIERCE, WOUND_LIST_PIERCE_MECHANICAL)) && W.severity >= WOUND_SEVERITY_CRITICAL) && (bio_state & BIO_FLESH)) // we only need a severe slash or pierce, but critical and we add 10%
 			base_chance += 10
 			break
+	
+	//High endurance - less dismemberment
+	if(owner?.mind)
+		base_chance -= GET_STAT_LEVEL(owner, end)
 
 	// We multiply by our dismemberment mod (the leg is tougher than a foot, etc)
 	base_chance *= dismember_mod
 
 	// Lower the chance a bit more
-	base_chance = round(base_chance/4)
+	base_chance = round(base_chance/3)
 
 	if(!prob(base_chance))
 		return
@@ -317,12 +321,16 @@
 		else if(((W.wound_type in list(WOUND_LIST_SLASH, WOUND_LIST_SLASH_MECHANICAL,WOUND_LIST_PIERCE, WOUND_LIST_PIERCE_MECHANICAL)) && W.severity >= WOUND_SEVERITY_CRITICAL) && (bio_state & BIO_FLESH)) // we only need a severe slash or pierce, but critical and we add 10%
 			base_chance += 10
 			break
+
+	//High endurance - less dismemberment
+	if(owner?.mind)
+		base_chance -= GET_STAT_LEVEL(owner, end)
 	
 	// We multiply by our disembowel mod (the chest is tougher than a groin, etc)
 	base_chance *= disembowel_mod
 
 	// Lower the chance a bit more
-	base_chance = round(base_chance/4)
+	base_chance = round(base_chance/3)
 
 	if(!prob(base_chance))
 		return

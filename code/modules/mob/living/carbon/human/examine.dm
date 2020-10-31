@@ -446,7 +446,7 @@
 
 	if(isliving(user))
 		var/mob/living/L = user
-		if(src != user && HAS_TRAIT(L, TRAIT_EMPATH) && !(stat != CONSCIOUS))
+		if(src != user && HAS_TRAIT(L, TRAIT_EMPATH) && (stat == CONSCIOUS))
 			if (a_intent != INTENT_HELP)
 				msg += "[t_He] seem[p_s()] to be on guard.\n"
 			if (getOxyLoss() >= 10)

@@ -909,7 +909,7 @@
 		if(health <= HEALTH_THRESHOLD_DEAD && !HAS_TRAIT(src, TRAIT_NODEATH))
 			death()
 			return
-		if(IsUnconscious() || IsSleeping() || getOxyLoss() > 50 || (HAS_TRAIT(src, TRAIT_DEATHCOMA)))
+		if(IsUnconscious() || IsSleeping() || ((getOxyLoss() >= 50) && (mind?.diceroll(STAT_DATUM(end)) <= DICE_FAILURE)) || (HAS_TRAIT(src, TRAIT_DEATHCOMA)))
 			stat = UNCONSCIOUS
 			SEND_SIGNAL(src, COMSIG_DISABLE_COMBAT_MODE)
 			if(!eye_blind)
