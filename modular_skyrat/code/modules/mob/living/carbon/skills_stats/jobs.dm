@@ -326,6 +326,7 @@
 	skill_ranged = 10
 	skill_chemistry = JOB_SKILLPOINTS_EXPERT
 	skill_research = 18
+	skill_surgery = JOB_SKILLPOINTS_TRAINED
 
 /datum/job/roboticist
 	//INTJ, physically incapable but smort
