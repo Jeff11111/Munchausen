@@ -37,6 +37,6 @@
 		config.ic_filter_regex = regex("\\b([jointext(GLOB.in_character_filter, "|")])\\b", "i")
 	
 	if(!config.punctuation_filter)
-		config.punctuation_filter = regex(@"([\.|\?|,|!|;])", "i")
+		config.punctuation_filter = regex(@"([\.|\?|,|!|;|\*])", "i")
 
 	return GLOB.in_character_filter
