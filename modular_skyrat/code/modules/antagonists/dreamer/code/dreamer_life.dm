@@ -26,7 +26,7 @@
 	if(prob(3))
 		var/obj/screen/fullscreen/dreamer/dream = hud_used?.dreamer
 		if(dream)
-			dream.icon_state = "hall[rand(1,9)]"
+			dream.icon_state = "hall[rand(1,10)]"
 			var/kill_her = 2
 			animate(dream, alpha = 255, time = kill_her)
 			spawn(kill_her)
@@ -66,6 +66,8 @@
 							"We will help you wake up.",
 							"You can kill us.",
 							"Let's wake up, together.",
+							"Slaughter us! Slaughter us!",
+							"Let the blood flow! Let the blood flo-o-ow!",
 							)
 			var/message = compose_message(person, language_holder?.selected_language, speak,"[FREQ_COMMON]", list(person.speech_span), face_name = TRUE, source = (person.ears ? person.ears : person.ears_extra))
 			to_chat(src, message)
