@@ -243,21 +243,21 @@
 		itemState = icon_state
 	if(modifystate)
 		var/obj/item/ammo_casing/energy/shot = ammo_type[current_firemode_index]
-		add_overlay("[icon_state]_[shot.select_name]")
+		. += mutable_appearance(icon, "[icon_state]_[shot.select_name]")
 		iconState += "_[shot.select_name]"
 		if(itemState)
 			itemState += "[shot.select_name]"
 	if(ratio == 0)
-		add_overlay("[icon_state]_empty")
+		. += mutable_appearance(icon, "[icon_state]_empty")
 	else
 		if(!shaded_charge)
 			var/mutable_appearance/charge_overlay = mutable_appearance(icon, iconState)
 			for(var/i = ratio, i >= 1, i--)
 				charge_overlay.pixel_x = ammo_x_offset * (i - 1)
 				charge_overlay.pixel_y = ammo_y_offset * (i - 1)
-				add_overlay(charge_overlay)
+				. += charge_overlay
 		else
-			add_overlay("[icon_state]_charge[ratio]")
+			. += mutable_appearance(icon, "[icon_state]_charge[ratio]")
 	if(itemState)
 		itemState += "[ratio]"
 		item_state = itemState
