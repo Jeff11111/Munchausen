@@ -181,6 +181,7 @@
 								"One, two, three, four...",
 								"Wake up.",
 								"Hangars are just parking lots.",
+								"CRIMINAL CRIMINAL CRIMINAL",
 								)
 			else
 				message = last_words
