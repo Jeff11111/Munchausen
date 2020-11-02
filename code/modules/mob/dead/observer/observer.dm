@@ -724,6 +724,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set category = "Ghost"
 	set name = "Possess!"
 	set desc= "Take over the body of a mindless creature!"
+	set hidden = TRUE
 
 	if(!can_reenter_round())
 		return FALSE

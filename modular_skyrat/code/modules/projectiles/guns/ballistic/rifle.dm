@@ -9,3 +9,13 @@
 /obj/item/gun/ballistic/automatic/surplus/update_icon()
 	..()
 	icon_state = "[initial(icon_state)][chambered ? "" : "-e"][magazine ? "" : "-nomag"][safety ? "-safe" : ""]"
+
+/obj/item/gun/ballistic/shotgun/boltaction
+	name = "bolt action rifle"
+	desc = "A crappy 7.62 chambered rifle. Although it has taken quite a beating, you can still make out the \"Gorlex Corporal\" logo."
+	icon_state = "baction"
+	fire_sound = 'modular_skyrat/sound/weapons/rifle2.ogg'
+
+/obj/item/gun/ballistic/shotgun/boltaction/update_icon()
+	..()
+	icon_state = "[initial(icon_state)][bolt_open ? "" : "-e"]"

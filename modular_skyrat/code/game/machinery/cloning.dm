@@ -24,11 +24,11 @@
 	var/attempting = FALSE //One clone attempt at a time thanks
 	var/speed_coeff
 	var/efficiency
-	var/cloneill_duration = 20 MINUTES
+	var/cloneill_duration = 15 MINUTES
 	var/cloneill_cloneloss = 20
 	var/cloneill_hallucination = 10
 	var/cloneill_healthpenalty = 25
-	var/cloneill = FALSE
+	var/cloneill = TRUE
 
 	var/datum/mind/clonemind
 	var/grab_ghost_when = CLONER_MATURE_CLONE
@@ -46,7 +46,6 @@
 	var/max_biomass = 1200
 	var/biomass_per_clone = 400
 
-	var/pays_for_clone = FALSE
 	var/cost_per_clone = 1000 //cost in credits for a clone, of course.
 	var/dep_id = ACCOUNT_MED
 	var/datum/bank_account/currently_linked_account
@@ -143,7 +142,7 @@
 
 //Start growing a human clone in the pod!
 /obj/machinery/clonepod/proc/growclone(ckey, clonename, ui, mutation_index, mindref, datum/species/mrace, list/features, factions, list/quirks)
-	if(pays_for_clone && !currently_linked_account.adjust_money(-cost_per_clone))
+	if(SSeconomy.full_ancap && !currently_linked_account.adjust_money(-cost_per_clone))
 		if(radio)
 			SPEAK("Insufficient amount of credits to initiate cloning procedure.")
 		return FALSE

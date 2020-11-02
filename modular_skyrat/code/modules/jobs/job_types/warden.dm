@@ -8,8 +8,9 @@
 /datum/outfit/job/warden
 	backpack_contents = list(
 					/obj/item/ammo_box/magazine/nangler=1,
+					/obj/item/gun/energy/e_gun/advtaser=1,
 					/obj/item/melee/classic_baton/black=1,
-					/obj/item/choice_beacon/warden=1)
+					)
 	suit_store = /obj/item/gun/ballistic/automatic/pistol/nangler
 
 /obj/item/choice_beacon/warden
@@ -20,13 +21,16 @@
 	var/static/list/shotties
 	if(!shotties)
 		shotties = list()
-		shotties["M1911"] = /obj/item/storage/briefcase/choice/m1911
-		shotties["Lawman-17"] = /obj/item/storage/briefcase/choice/glock
+		shotties["Nangler"] = /obj/item/storage/briefcase/choice/nangler
 	return shotties
 
 /obj/item/storage/briefcase/choice
 	name = "gun briefcase"
 	desc = "Smells like omelette du fromage."
+
+/obj/item/storage/briefcase/choice/nangler/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/nangler(src)
+	new /obj/item/ammo_box/magazine/nangler(src)
 
 /obj/item/storage/briefcase/choice/m1911/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/m1911(src)

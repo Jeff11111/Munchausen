@@ -240,7 +240,7 @@
 	var/iconState = "[icon_state]_charge"
 	var/itemState = null
 	if(!initial(item_state))
-		itemState = icon_state
+		itemState = initial(icon_state)
 	if(modifystate)
 		var/obj/item/ammo_casing/energy/shot = ammo_type[current_firemode_index]
 		. += mutable_appearance(icon, "[icon_state]_[shot.select_name]")

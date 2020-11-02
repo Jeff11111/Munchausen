@@ -67,6 +67,11 @@
 /obj/item/gun/ballistic/automatic/pistol/m1911/kitchengun
 	icon_state = "pistol45"
 
+//Captain 1911
+/obj/item/gun/ballistic/automatic/pistol/m1911/captain
+	name = "silverballer 1911"
+	desc = "A prized, authentic silver Colt M1911. A classy firearm fit for a king."
+
 //Glock 17
 /obj/item/gun/ballistic/automatic/pistol/APS/glock
 	name = "burstfire 9mm pistol"

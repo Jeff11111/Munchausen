@@ -129,6 +129,11 @@
 			if(authenticated==2)
 				playsound(src, 'sound/machines/terminal_prompt.ogg', 50, 0)
 				make_announcement(usr)
+		
+		if("decree")
+			if(authenticated==2)
+				playsound(src, 'sound/machines/terminal_prompt.ogg', 50, 0)
+				make_announcement(usr)
 
 		if("crossserver")
 			if(authenticated==2)
@@ -497,6 +502,7 @@
 				if (authenticated==2)
 					dat += "<BR><BR><B>Captain Functions</B>"
 					dat += "<BR>\[ <A HREF='?src=[REF(src)];operation=announce'>Make a Captain's Announcement</A> \]"
+					dat += "<BR>\[ <A HREF='?src=[REF(src)];operation=decree'>Make a Captain's Decree</A> \]"
 					var/cross_servers_count = length(CONFIG_GET(keyed_list/cross_server))
 					if(cross_servers_count)
 						dat += "<BR>\[ <A HREF='?src=[REF(src)];operation=crossserver'>Send a message to [cross_servers_count == 1 ? "an " : ""]allied station[cross_servers_count > 1 ? "s" : ""]</A> \]"
@@ -733,6 +739,16 @@
 		return
 	SScommunications.make_announcement(user, is_silicon, input)
 	deadchat_broadcast("<span class='deadsay'><span class='name'>[user.real_name]</span> made an priority announcement from <span class='name'>[get_area_name(usr, TRUE)]</span>.</span>", user)
+
+/obj/machinery/computer/communications/proc/make_decree(mob/living/user, is_silicon)
+	if(!SScommunications.can_announce(user, is_silicon))
+		to_chat(user, "Intercomms recharging. Please stand by.")
+		return
+	var/input = stripped_input(user, "Please choose a decree to announce to the station crew.", "Tall Order")
+	if(!input || !user.canUseTopic(src))
+		return
+	SScommunications.make_decree(user, is_silicon, input)
+	deadchat_broadcast("<span class='deadsay'><span class='name'>[user.real_name]</span> made a new decree from <span class='name'>[get_area_name(usr, TRUE)]</span>.</span>", user)
 
 /obj/machinery/computer/communications/proc/post_status(command, data1, data2)
 

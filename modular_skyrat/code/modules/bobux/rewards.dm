@@ -67,3 +67,40 @@
 	for(var/datum/skills/skill in noob.mob.mind.mob_skills)
 		if(istype(skill, SKILL_DATUM(melee)) || istype(skill, SKILL_DATUM(ranged)))
 			skill.level += rand(4,7)
+
+/datum/bobux_reward/posses_mob
+	name = "Possess Mob"
+	desc = "Possess a mindless mob, if you're a ghost."
+	buy_message = "<b>My mind seizes control over a soulless husk.</span>"
+	id = "possess"
+	cost = 2
+
+/datum/bobux_reward/posses_mob/can_buy(client/noob, silent, fail_message)
+	. = ..()
+	if(. && noob.mob && (isobserver(noob.mob)) && length(GLOB.mob_living_list))
+		return TRUE
+
+/datum/bobux_reward/posses_mob/on_buy(client/noob)
+	..()
+	var/list/husks = list()
+	for(var/mob/living/L in GLOB.mob_living_list)
+		if(!L.mind && !L.client && !ismegafauna(L) && !istype(L, /mob/living/simple_animal/hostile/boss))
+			husks |= L
+	if(!length(husks))
+		to_chat(noob, "<span class='bobux'>You are unable to possess any husk. Bobux refunded.</span>")
+		noob.prefs?.adjust_bobux(cost)
+		return FALSE
+	var/mob/living/choice = input(noob, "I will take over a vessel. Which one?", "Possession", null)
+	if(!choice)
+		to_chat(noob, "<span class='bobux'>Bobux refunded.</span>")
+		noob.prefs?.adjust_bobux(cost)
+		return FALSE
+	var/datum/mind/mind = choice.mind
+	noob.mob.transfer_ckey(choice, TRUE)
+	if(mind)
+		var/datum/mind/our_mind = noob.mob.mind
+		for(var/datum/skills/skill in our_mind.mob_skills)
+			skill.level = mind.mob_skills[skill.type].level
+		for(var/datum/stats/stat in our_mind.mob_stats)
+			stat.level = mind.mob_stats[stat.type].level
+	to_chat(noob, "<span class='deadsay'>I have taken over [choice]. The soul does not store memories, the knowledge i have gained in the afterlife no longer serves me.</span>")

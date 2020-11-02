@@ -570,7 +570,7 @@
 	if(stamina_dam > DAMAGE_PRECISION)
 		. = TRUE
 	//else if.. else if.. so on.
-	else if(get_pain() > DAMAGE_PRECISION)
+	else if(max(0, get_pain() - (owner?.chem_effects[CE_PAINKILLER]/max(1, length(bodyparts)))) > DAMAGE_PRECISION)
 		. = TRUE
 	else if(tox_dam > DAMAGE_PRECISION)
 		. = TRUE
@@ -640,7 +640,7 @@
 	if(stam_heal_tick && stamina_dam > DAMAGE_PRECISION)
 		//Pain makes you regenerate stamina slower.
 		//At maximum pain, you barely regenerate stamina on the limb.
-		var/pain_multiplier = max(0.1, 1 - (get_pain()/max_pain_damage))
+		var/pain_multiplier = max(0.1, 1 - (max(0, get_pain() - (owner?.chem_effects[CE_PAINKILLER]/max(1, length(bodyparts))))/max_pain_damage))
 		if(heal_damage(stamina = (stam_heal_tick * (disabled ? 2 : 1) * pain_multiplier), only_robotic = FALSE, only_organic = FALSE, updating_health = FALSE))
 			. |= BODYPART_LIFE_UPDATE_HEALTH
 	if(pain_heal_tick && pain_dam > DAMAGE_PRECISION)
@@ -928,10 +928,9 @@
 			extrastamina = round(extrastamina/length(spreadable_limbs), 1)
 			extratoxin = round(extratoxin/length(spreadable_limbs), 1)
 			extraclone = round(extraclone/length(spreadable_limbs), 1)
-			extrapain = round(extrapain/length(spreadable_limbs), 1)
 			for(var/obj/item/bodypart/damage_limb in spreadable_limbs)
 				//We apply damage without any armor checks, because the limb that made it suffer damage is absolutely FUCKED anyways.
-				damage_limb.receive_damage(brute = extrabrute, burn = extraburn, stamina = extrastamina, toxin = extratoxin, clone = extraclone, pain = extrapain, sharpness = sharpness, spread_damage = FALSE)
+				damage_limb.receive_damage(brute = extrabrute, burn = extraburn, stamina = extrastamina, toxin = extratoxin, clone = extraclone, sharpness = sharpness, spread_damage = FALSE)
 
 	brute_dam += brute
 	burn_dam += burn
@@ -945,6 +944,9 @@
 		pain = 0
 	
 	pain_dam += (pain - (owner?.chem_effects[CE_PAINKILLER]/3))
+	if(extrapain && owner)
+		//extra pain - add it straight to the shock value
+		owner.shock_stage += max(0, extrapain - (owner?.chem_effects[CE_PAINKILLER]/3))
 
 	if(owner && pain && (pain >= (max_pain_damage * 0.5)) && prob(10))
 		owner.emote("agonyscream")
@@ -1304,7 +1306,7 @@
 			return BODYPART_DISABLED_DAMAGE
 		if(stamina_dam >= max_stamina_damage)
 			return BODYPART_DISABLED_DAMAGE	
-		if((pain_dam - owner?.chem_effects[CE_PAINKILLER]) >= pain_disability_threshold)
+		if((get_pain() - (owner?.chem_effects[CE_PAINKILLER]/max(1,length(owner?.bodyparts)))) >= pain_disability_threshold)
 			return BODYPART_DISABLED_PAIN
 		if(disabled && (get_damage(include_stamina = TRUE) <= (max_damage * 0.8)) && (pain_dam < pain_disability_threshold)) // reenabled at 80% now instead of 50% as of wounds update
 			last_maxed = FALSE

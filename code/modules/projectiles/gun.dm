@@ -256,6 +256,11 @@
 			else
 				user.visible_message("<span class='danger'>[user] fires [src]!</span>", null, null, COMBAT_MESSAGE_RANGE)
 
+	var/ranged = GET_SKILL_LEVEL(user, ranged)
+	if((weapon_weight >= WEAPON_HEAVY) && !is_wielded && !(ranged >= JOB_SKILLPOINTS_EXPERT))
+		user.visible_message("<span class='danger'>\The [src] falls out of user's unskilled hands!</span>", "<span class='userdanger'>\The [src] falls out of my unskilled hands!</span>")
+		user.dropItemToGround(src)
+
 /obj/item/gun/emp_act(severity)
 	. = ..()
 	if(!(. & EMP_PROTECT_CONTENTS))
@@ -319,9 +324,6 @@
 				return
 
 	var/ranged = GET_SKILL_LEVEL(user, ranged)
-	if((weapon_weight >= WEAPON_HEAVY) && !is_wielded && !(ranged >= JOB_SKILLPOINTS_EXPERT))
-		to_chat(user, "<span class='userdanger'>You need to wield \the [src] to be able to fire it!</span>")
-		return
 
 	//DUAL (or more!) WIELDING
 	var/bonus_spread = 0

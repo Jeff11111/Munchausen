@@ -1,9 +1,3 @@
-//reeeeeeee gib oldie icon
-/obj/item/gun/energy/laser/Initialize()
-	. = ..()
-	if(src.type == /obj/item/gun/energy/laser)
-		icon = 'modular_skyrat/icons/obj/guns/energy.dmi'
-
 //watcher projector. stolen from hippie.
 /obj/item/gun/energy/watcherprojector
 	name = "watcher projector"
@@ -238,3 +232,12 @@
 	custom_light_state = "caplaser_bayonet"
 	custom_light_color = "#d30000" //ANGRY BLOOD RED >:)
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
+
+//cooler icons
+/obj/item/gun/energy/laser
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/energy.dmi'
+	lefthand_file = 'modular_skyrat/icons/bobstation/guns/guns_lefthand.dmi'
+	righthand_file = 'modular_skyrat/icons/bobstation/guns/guns_righthand.dmi'
+	icon_state = "laser"
+	item_state = null
+	modifystate = FALSE

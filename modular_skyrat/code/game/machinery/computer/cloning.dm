@@ -203,7 +203,7 @@
 		dat += "<div class='statusDisplay'><b>Paying Account:</b> [pod.currently_linked_account.account_holder]"
 		dat += " <a href='byond://?src=[REF(src)];task=payday'>Change Account</a>"
 		dat += "<br>"
-		dat += "<b>Credits:</b> [pod.currently_linked_account.account_balance]/[pod.cost_per_clone] ([pod.pays_for_clone ? "Payment" : "No Payment"])</div>"
+		dat += "<b>Credits:</b> [pod.currently_linked_account.account_balance]/[pod.cost_per_clone] ([SSeconomy.full_ancap ? "Payment" : "No Payment"])</div>"
 	switch(src.menu)
 		if(1)
 			// Modules

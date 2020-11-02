@@ -562,7 +562,7 @@ GENETICS SCANNER
 	for(var/obj/item/bodypart/BP in C.bodyparts)
 		var/result = "<span class='info'>[capitalize(BP.name)]: "
 		var/list/results = BP.get_scan_results(TRUE)
-		var/pain = BP.get_pain()
+		var/pain = max(0, BP.get_pain() - (chem_effects[CE_PAINKILLER]/max(1, length(bodyparts))))
 		if(!advanced)
 			pain = (round(pain/10, 1) * 10)
 		if(pain)

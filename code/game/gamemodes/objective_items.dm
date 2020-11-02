@@ -26,8 +26,8 @@
 	return ..()
 
 /datum/objective_item/steal/caplaser
-	name = "the captain's antique laser gun."
-	targetitem = /obj/item/gun/energy/laser/captain
+	name = "the captain's silverballer Colt M1911."
+	targetitem = /obj/item/gun/ballistic/automatic/pistol/m1911/captain
 	difficulty = 5
 	excludefromjob = list("Captain")
 

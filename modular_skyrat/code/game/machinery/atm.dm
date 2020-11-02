@@ -8,6 +8,15 @@
 	var/emagaccount = null
 	var/totalmoney = null
 
+/obj/machinery/atm/attack_hand(mob/living/user)
+	. = ..()
+	playsound(src, 'modular_skyrat/sound/machinery/atmbeep2', 50)
+	to_chat(user, "<b>Station decrees:</b>")
+	for(var/i in SScommunications.decrees)
+		to_chat(user, "• [i]")
+	if(!length(SScommunications.decrees))
+		to_chat(user, "• None.")
+
 /obj/machinery/atm/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/card/id))
 		CID = W

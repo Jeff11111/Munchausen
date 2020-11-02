@@ -3623,16 +3623,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 	if(pref_species.mutant_bodyparts["meat_type"])
 		character.type_of_meat = GLOB.meat_types[features["meat_type"]]
 
-	if(character.dna.species.mutant_bodyparts["legs"] && (character.dna.features["legs"] == "Digitigrade" || character.dna.features["legs"] == "Avian"))
-		pref_species.species_traits |= DIGITIGRADE
-	else
-		pref_species.species_traits -= DIGITIGRADE
-
-	if(DIGITIGRADE in pref_species.species_traits)
-		character.Digitigrade_Leg_Swap(FALSE)
-	else
-		character.Digitigrade_Leg_Swap(TRUE)
-
 	character.give_genitals(TRUE) //character.update_genitals() is already called on genital.update_appearance()
 
 	character.dna.update_body_size(old_size)

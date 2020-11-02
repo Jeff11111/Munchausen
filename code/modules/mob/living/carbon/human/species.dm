@@ -383,12 +383,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	if(C.hud_used)
 		C.hud_used.update_locked_slots()
 
-	// this needs to be FIRST because qdel calls update_body which checks if we have DIGITIGRADE legs or not and if not then removes DIGITIGRADE from species_traits
-	if(C.dna.species.mutant_bodyparts["legs"] && (C.dna.features["legs"] == "Digitigrade" || C.dna.features["legs"] == "Avian"))
-		species_traits |= DIGITIGRADE
-	if(DIGITIGRADE in species_traits)
-		C.Digitigrade_Leg_Swap(FALSE)
-
 	C.mob_biotypes = inherent_biotypes
 
 	regenerate_organs(C,old_species)
@@ -465,8 +459,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			C.dna.blood_type = random_blood_type()
 		else
 			C.dna.blood_type = new_species.exotic_bloodtype
-	if(DIGITIGRADE in species_traits)
-		C.Digitigrade_Leg_Swap(TRUE)
 	for(var/X in inherent_traits)
 		REMOVE_TRAIT(C, X, SPECIES_TRAIT)
 
@@ -839,37 +831,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	//Digitigrade legs are stuck in the phantom zone between true limbs and mutant bodyparts. Mainly it just needs more agressive updating than most limbs.
 	var/update_needed = FALSE
 	var/not_digitigrade = TRUE
-	for(var/X in H.bodyparts)
-		var/obj/item/bodypart/O = X
-		if(!O.use_digitigrade)
-			continue
-		not_digitigrade = FALSE
-		if(!(DIGITIGRADE in species_traits)) //Someone cut off a digitigrade leg and tacked it on
-			species_traits += DIGITIGRADE
-		var/should_be_squished = FALSE
-		if(H.wear_suit)
-			if(!(H.wear_suit.mutantrace_variation & STYLE_DIGITIGRADE) || (tauric && (H.wear_suit.mutantrace_variation & STYLE_ALL_TAURIC))) //digitigrade/taur suits
-				should_be_squished = TRUE
-		if(H.w_uniform && !H.wear_suit)
-			if(!(H.w_uniform.mutantrace_variation & STYLE_DIGITIGRADE))
-				should_be_squished = TRUE
-		//skyrat edit
-		if(H.w_underwear && !H.wear_suit && !H.w_uniform)
-			if(!(H.w_underwear.mutantrace_variation & STYLE_DIGITIGRADE))
-				should_be_squished = TRUE
-		if(H.w_socks && !H.wear_suit && !H.w_uniform)
-			if(!(H.w_socks.mutantrace_variation & STYLE_DIGITIGRADE))
-				should_be_squished = TRUE
-		if(H.w_shirt && !H.wear_suit && !H.w_uniform)
-			if(!(H.w_shirt.mutantrace_variation & STYLE_DIGITIGRADE))
-				should_be_squished = TRUE
-		//
-		if(O.use_digitigrade == FULL_DIGITIGRADE && should_be_squished)
-			O.use_digitigrade = SQUISHED_DIGITIGRADE
-			update_needed = TRUE
-		else if(O.use_digitigrade == SQUISHED_DIGITIGRADE && !should_be_squished)
-			O.use_digitigrade = FULL_DIGITIGRADE
-			update_needed = TRUE
 	if(update_needed)
 		H.update_body_parts()
 	if(not_digitigrade && (DIGITIGRADE in species_traits)) //Curse is lifted

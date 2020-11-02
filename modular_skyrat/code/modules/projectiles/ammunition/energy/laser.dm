@@ -1,6 +1,16 @@
 //piss
 /obj/item/ammo_casing/energy
-	fire_sound = 'modular_skyrat/sound/weapons/laser.ogg'
+	fire_sound = 'modular_skyrat/sound/weapons/laser1.ogg'
+	click_cooldown_override = 4
+
+/obj/item/ammo_casing/energy/disabler
+	fire_sound = 'modular_skyrat/sound/weapons/painfire1.ogg'
+	select_name = "sparq"
+	click_cooldown_override = 7
+
+/obj/item/ammo_casing/energy/disabler/lowcost
+	e_cost = 30
+	click_cooldown_override = 6
 
 //makeshift laser rifle
 /obj/item/ammo_casing/energy/laser/makeshiftlasrifle
@@ -29,4 +39,4 @@
 /obj/item/ammo_casing/energy/disabler/captain
 	e_cost = 60
 	projectile_type = /obj/item/projectile/beam/disabler/hellfire/ultra
-	select_name = "hell-disabler"
+	select_name = "hell-sparq"

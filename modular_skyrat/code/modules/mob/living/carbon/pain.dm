@@ -169,7 +169,7 @@
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF))
 			var/list/damaged_bodyparts = list()
 			for(var/obj/item/bodypart/BP in bodyparts)
-				var/bpain = max(0, BP.get_pain() - chem_effects[CE_PAINKILLER])
+				var/bpain = max(0, BP.get_pain() - (chem_effects[CE_PAINKILLER]/max(1, length(bodyparts))))
 				if(!BP.is_robotic_limb())
 					if(bpain >= BP.max_damage)
 						damaged_bodyparts += "<span class='bigdanger'>I want to tear my [BP.name] off!</span>\n"
@@ -226,7 +226,7 @@
 		var/datum/stats/end/end = GET_STAT(src, end)
 		if(end)
 			traumatic_shock *= end.get_shock_mult()
-	traumatic_shock -= chem_effects[CE_PAINKILLER]
+	traumatic_shock -= chem_effects[CE_PAINKILLER]/2
 	return max(0,traumatic_shock)
 
 /mob/living/carbon/proc/InShock()
@@ -240,10 +240,29 @@
 		shock_stage = 0
 		return
 	
+	//Handle pain effects - as raw pain, not shock
+	var/traumatic_shock = get_shock()
+	if(pain >= PAIN_GIVES_IN)
+		switch(mind?.diceroll(STAT_DATUM(end)))
+			//Critical success = nothing happens]
+			//Success = blurry eyes (update_health() handles the speed penalty)
+			if(DICE_SUCCESS)
+				blur_eyes(2)
+			//Failure - we are knocked down
+			if(DICE_FAILURE)
+				if(!IsKnockdown())
+					visible_message("<span class='danger'>[src] gives in to the pain!</span>", "<span class='userdanger'>I give in to the pain.</span>")
+				AdjustKnockdown(20)
+			//Crit failure - unconsciousness
+			if(DICE_CRIT_FAILURE)
+				if(!IsUnconscious())
+					visible_message("<span class='danger'>[src] falls in to the pain!</span>", "<span class='userdanger'>I fall in to the pain.</span>")
+				AdjustUnconscious(20)
+
+	//Start handling shock
 	if(is_asystole())
 		shock_stage = max(shock_stage + 1, SHOCK_STAGE_4)
 	
-	var/traumatic_shock = get_shock()
 	if(traumatic_shock >= max(SHOCK_STAGE_2, 0.8*shock_stage))
 		shock_stage += 1
 	else if(!is_asystole())

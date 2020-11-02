@@ -77,7 +77,7 @@
 	. = 0
 	for(var/X in bodyparts)
 		var/obj/item/bodypart/BP = X
-		. += BP.get_pain()
+		. += max(0, BP.get_pain() - (chem_effects[CE_PAINKILLER]/max(1, length(bodyparts))))
 
 /mob/living/carbon/getToxLoss()
 	. = 0

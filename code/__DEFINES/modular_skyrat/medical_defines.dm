@@ -219,3 +219,6 @@
 #define DAMAGE_LOW_OXYGENATION 1 //Brainloss caused by low blood oxygenation
 #define DAMAGE_LOWER_OXYGENATION 2 //Brainloss caused by lower than low blood oxygenation
 #define DAMAGE_VERY_LOW_OXYGENATION 3 //The above but even worse
+
+//Pain required to do endurancce rolls with negative effects
+#define PAIN_GIVES_IN 60
