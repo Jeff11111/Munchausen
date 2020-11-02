@@ -35,6 +35,7 @@
 	var/buildstage = 2 // 2 = complete, 1 = no wires, 0 = circuit gone
 	var/last_alarm = 0
 	var/area/myarea = null
+	var/datum/looping_sound/firealarm/soundloop
 //Skyrat changes start
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..()
@@ -65,9 +66,11 @@
 	update_icon()
 	myarea = get_base_area(src)
 	LAZYADD(myarea.firealarms, src)
+	soundloop = new(list(src), FALSE)
 
 /obj/machinery/firealarm/Destroy()
 	LAZYREMOVE(myarea.firealarms, src)
+	QDEL_NULL(soundloop)
 	return ..()
 
 /obj/machinery/firealarm/power_change()
@@ -146,7 +149,7 @@
 	last_alarm = world.time
 	var/area/A = get_base_area(src)
 	A.firealert(src)
-	playsound(loc, 'goon/sound/machinery/FireAlarm.ogg', 75)
+	// playsound(loc, 'goon/sound/machinery/FireAlarm.ogg', 75)
 	if(user)
 		log_game("[user] triggered a fire alarm at [COORD(src)]")
 
@@ -322,8 +325,10 @@
 		return  // do nothing if we're already active
 	if(fire)
 		set_light(l_power = 0.8)
+		soundloop.start()
 	else
 		set_light(l_power = 0)
+		soundloop.stop()
 
 /*
  * Return of Party button

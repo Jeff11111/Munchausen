@@ -98,10 +98,12 @@
 
 /obj/machinery/sleeper/open_machine()
 	if(!state_open && !panel_open)
+		playsound(src, 'sound/machines/openhiss.ogg', 25, 0)
 		..()
 
 /obj/machinery/sleeper/close_machine(mob/user)
 	if((isnull(user) || istype(user)) && state_open && !panel_open)
+		playsound(src, 'sound/machines/closehiss.ogg', 25, 0)
 		..(user)
 		var/mob/living/mob_occupant = occupant
 		if(mob_occupant && mob_occupant.stat != DEAD)

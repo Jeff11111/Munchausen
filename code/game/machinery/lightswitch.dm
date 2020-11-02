@@ -40,6 +40,7 @@
 /obj/machinery/light_switch/interact(mob/user)
 	. = ..()
 	on = !on
+	playsound(src, 'sound/machines/lightswitch.ogg', 25, 0)
 
 	area.lightswitch = on
 	area.update_icon()
