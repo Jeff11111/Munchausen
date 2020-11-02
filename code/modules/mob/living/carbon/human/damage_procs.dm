@@ -8,5 +8,5 @@
 	. = ..()
 	//if the amount is greater than 5, do an end diceroll to put this dude unconscious
 	if((amount >= 5) && !IsUnconscious() && mind && (mind.diceroll(STAT_DATUM(end)) <= DICE_FAILURE))
-		to_chat(src, "<span class='userdanger'>You pass out.</span>")
+		to_chat(src, "<span class='userdanger'>I pass out.</span>")
 		AdjustUnconscious(rand(10, 50))
