@@ -33,6 +33,8 @@
 
 /datum/emote/living/grunt/run_emote(mob/user, params)
 	. = ..()
+	//emotes are singletons so we need to clear out the sound
+	sound = null
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(length(H.dna?.species?.agony_moans_male))
@@ -43,6 +45,8 @@
 // Groaning
 /datum/emote/living/groan/run_emote(mob/user, params)
 	. = ..()
+	//emotes are singletons so we need to clear out the sound
+	sound = null
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(length(H.dna?.species?.agony_moans_male))
@@ -62,6 +66,8 @@
 
 /datum/emote/living/agonyscream/run_emote(mob/user, params)
 	. = ..()
+	//emotes are singletons so we need to clear out the sound
+	sound = null
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(length(H.dna?.species?.agony_sounds_male))
@@ -81,11 +87,14 @@
 
 /datum/emote/living/gargle/run_emote(mob/user, params)
 	. = ..()
-	var/garglesound = pick('modular_skyrat/sound/gore/throat1.ogg',
-						'modular_skyrat/sound/gore/throat2.ogg',
-						'modular_skyrat/sound/gore/throat3.ogg',
-						)
-	sound = garglesound
+	//emotes are singletons so we need to clear out the sound
+	sound = null
+	if(ishuman(user))
+		var/garglesound = pick('modular_skyrat/sound/gore/throat1.ogg',
+							'modular_skyrat/sound/gore/throat2.ogg',
+							'modular_skyrat/sound/gore/throat3.ogg',
+							)
+		sound = garglesound
 
 // Death rattle
 /datum/emote/living/deathrattle
@@ -100,6 +109,8 @@
 
 /datum/emote/living/deathrattle/run_emote(mob/user, params)
 	. = ..()
+	//emotes are singletons so we need to clear out the sound
+	sound = null
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(length(H.dna?.species?.death_rattles_male))
@@ -110,6 +121,8 @@
 // Death gasps make a death rattle sound
 /datum/emote/living/deathgasp/run_emote(mob/user, params)
 	. = ..()
+	//emotes are singletons so we need to clear out the sound
+	sound = null
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(length(H.dna?.species?.death_rattles_male))
@@ -120,6 +133,8 @@
 // Gasping makes a sound
 /datum/emote/living/gasp/run_emote(mob/user, params)
 	. = ..()
+	//emotes are singletons so we need to clear out the sound
+	sound = null
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(length(H.dna?.species?.agony_gasps_male))
@@ -130,6 +145,8 @@
 // Crying makes a sound
 /datum/emote/living/whimper/run_emote(mob/user, params)
 	. = ..()
+	//emotes are singletons so we need to clear out the sound
+	sound = null
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(length(H.dna?.species?.cry_male))
@@ -139,6 +156,8 @@
 
 /datum/emote/living/carbon/human/cry/run_emote(mob/user, params)
 	. = ..()
+	//emotes are singletons so we need to clear out the sound
+	sound = null
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(length(H.dna?.species?.cry_male))
@@ -149,6 +168,8 @@
 // Moaning makes a sound
 /datum/emote/living/carbon/moan/run_emote(mob/user, params)
 	. = ..()
+	//emotes are singletons so we need to clear out the sound
+	sound = null
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(length(H.dna?.species?.agony_moans_male))
@@ -159,6 +180,8 @@
 // Coughing, too, makes a sound
 /datum/emote/living/cough/run_emote(mob/living/user, params)
 	. = ..()
+	//emotes are singletons so we need to clear out the sound
+	sound = null
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(length(H.dna?.species?.coughs_male))
@@ -179,6 +202,8 @@
 
 /datum/emote/living/sag/run_emote(mob/user, params)
 	. = ..()
+	//emotes are singletons so we need to clear out the sound
+	sound = null
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(length(H.dna?.species?.death_rattles_male))
