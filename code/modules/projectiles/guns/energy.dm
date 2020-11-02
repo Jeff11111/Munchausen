@@ -228,7 +228,7 @@
 
 /obj/item/gun/energy/update_overlays()
 	//We already cut overlays on the parent proc
-	..()
+	. = ..()
 	if(!automatic_charge_overlays)
 		return
 	var/ratio = can_shoot() ? CEILING(clamp(cell.charge / cell.maxcharge, 0, 1) * charge_sections, 1) : 0
@@ -262,6 +262,7 @@
 	if(ismob(loc))		//forces inhands to update
 		var/mob/M = loc
 		M.update_inv_hands()
+	return 
 
 /obj/item/gun/energy/suicide_act(mob/living/user)
 	if (istype(user) && can_shoot() && can_trigger_gun(user) && user.get_bodypart(BODY_ZONE_HEAD))
