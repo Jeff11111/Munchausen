@@ -133,7 +133,7 @@
 		if("decree")
 			if(authenticated==2)
 				playsound(src, 'sound/machines/terminal_prompt.ogg', 50, 0)
-				make_announcement(usr)
+				make_decree(usr)
 
 		if("crossserver")
 			if(authenticated==2)
