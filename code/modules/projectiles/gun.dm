@@ -142,9 +142,15 @@
 
 /obj/item/gun/proc/on_wield()
 	is_wielded = TRUE
+	if(ismob(loc))
+		var/mob/living/M = loc
+		M.update_inv_hands()
 
 /obj/item/gun/proc/on_unwield()
 	is_wielded = FALSE
+	if(ismob(loc))
+		var/mob/living/M = loc
+		M.update_inv_hands()
 
 /obj/item/gun/verb/safety_toggle()
 	set name = "Toggle Safety"
