@@ -48,15 +48,15 @@
 // The numbers just define the ordering, they are meaningless otherwise.
 
 #define INIT_ORDER_PROFILER			100
-#define INIT_ORDER_FAIL2TOPIC		99
-#define INIT_ORDER_TITLE			98
-#define INIT_ORDER_GARBAGE			95
-#define INIT_ORDER_DBCORE			93
-#define INIT_ORDER_BLACKBOX			92
-#define INIT_ORDER_SERVER_MAINT		91
-#define INIT_ORDER_INPUT			90
-#define INIT_ORDER_SOUNDS			85
-#define INIT_ORDER_VIS				80
+#define INIT_ORDER_INPUT			99
+#define INIT_ORDER_FAIL2TOPIC		98
+#define INIT_ORDER_TITLE			97
+#define INIT_ORDER_GARBAGE			96
+#define INIT_ORDER_DBCORE			94
+#define INIT_ORDER_BLACKBOX			93
+#define INIT_ORDER_SERVER_MAINT		92
+#define INIT_ORDER_SOUNDS			91
+#define INIT_ORDER_VIS				90
 #define INIT_ORDER_RESEARCH			75
 #define INIT_ORDER_EVENTS			70
 #define INIT_ORDER_JOBS				65
