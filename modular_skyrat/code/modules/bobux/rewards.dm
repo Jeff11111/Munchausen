@@ -90,7 +90,7 @@
 		to_chat(noob, "<span class='bobux'>You are unable to possess any husk. Bobux refunded.</span>")
 		noob.prefs?.adjust_bobux(cost)
 		return FALSE
-	var/mob/living/choice = input(noob, "I will take over a vessel. Which one?", "Possession", null)
+	var/mob/living/choice = input(noob, "I will take over a vessel. Which one?", "Possession", null) as mob in husks
 	if(!choice)
 		to_chat(noob, "<span class='bobux'>Bobux refunded.</span>")
 		noob.prefs?.adjust_bobux(cost)
