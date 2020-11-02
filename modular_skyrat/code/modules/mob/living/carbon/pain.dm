@@ -354,8 +354,7 @@
 	
 	if(shock_stage >= SHOCK_STAGE_8)
 		if(!IsUnconscious())
-			to_chat(src, "<span class='warning'>[dna.species.painloss_message_self]</span>")
-			visible_message("<span class='warning'>[dna.species.painloss_message]</span>", "<span class='danger'>[dna.species.painloss_message_self]</span>")
+			visible_message("<span class='danger'>[src] [dna.species.painloss_message]</span>", "<span class='userdanger'>[dna.species.painloss_message_self]</span>")
 		//We are fucking dying, do the rattle
 		if(prob(10))
 			death_rattle()
