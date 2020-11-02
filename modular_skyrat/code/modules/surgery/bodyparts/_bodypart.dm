@@ -961,7 +961,7 @@
 	//Damage the wounds, too
 	for(var/i in wounds)
 		var/datum/wound/W = i
-		W.receive_damage(sharpness, wounding_dmg, wound_bonus, pain)
+		W.receive_damage(wounding_type, wounding_dmg, wound_bonus, pain)
 
 	//Update the owner's health stuffies
 	if(owner && updating_health)

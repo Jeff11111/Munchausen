@@ -165,7 +165,7 @@
 	if(user_for_feedback)
 		to_chat(user_for_feedback, "<span class='notice'>[src] is now set to [C.select_name || C].</span>")
 	post_set_firemode()
-	update_overlays(TRUE)
+	update_overlays()
 
 /obj/item/gun/energy/proc/post_set_firemode(recharge_newshot = TRUE)
 	if(recharge_newshot)
