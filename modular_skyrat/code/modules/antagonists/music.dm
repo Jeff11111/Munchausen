@@ -30,7 +30,7 @@
 				'modular_skyrat/sound/music/deathsquads.ogg',
 				)
 
-/datum/antagonist/commie/New()
+/datum/antagonist/communist/New()
 	. = ..()
 	music_file = pick('modular_skyrat/sound/music/motherrussiableeds.ogg',
 				)
