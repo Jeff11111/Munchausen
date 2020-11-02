@@ -163,6 +163,14 @@
 					H.update_damage_overlays()
 			else
 				H.adjustFireLoss(damage_amount)
+		if(PAIN)
+			H.damageoverlaytemp = 20
+			var/damage_amount = forced ? damage : damage * hit_percent * painmod * H.physiology.burn_mod
+			if(BP)
+				if(damage > 0 ? BP.receive_damage(pain = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness) : BP.heal_damage(0, abs(damage_amount)))
+					H.update_damage_overlays()
+			else
+				H.adjustPainLoss(damage_amount)
 		if(TOX)
 			var/damage_amount = forced ? damage : damage * hit_percent * toxmod * H.physiology.tox_mod
 			H.adjustToxLoss(damage_amount)
