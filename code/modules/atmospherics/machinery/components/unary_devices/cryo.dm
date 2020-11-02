@@ -40,6 +40,7 @@
 	///Cryo will continue to treat people with 0 damage but existing wounds, but will sound off when damage healing is done in case doctors want to directly treat the wounds instead
 	var/treating_wounds = FALSE
 	//
+	var/datum/looping_sound/cryotube/soundloop
 
 /obj/machinery/atmospherics/components/unary/cryo_cell/Initialize()
 	. = ..()
@@ -50,6 +51,7 @@
 	radio.subspace_transmission = TRUE
 	radio.canhear_range = 0
 	radio.recalculateChannels()
+	soundloop = new(list(src), FALSE)
 
 /obj/machinery/atmospherics/components/unary/cryo_cell/on_construction()
 	..(dir, dir)
@@ -72,6 +74,7 @@
 /obj/machinery/atmospherics/components/unary/cryo_cell/Destroy()
 	QDEL_NULL(radio)
 	QDEL_NULL(beaker)
+	QDEL_NULL(soundloop)
 	return ..()
 
 /obj/machinery/atmospherics/components/unary/cryo_cell/contents_explosion(severity, target)
@@ -166,6 +169,7 @@
 		return
 	if(!is_operational())
 		on = FALSE
+		soundloop.stop()
 		update_icon()
 		return
 	if(!occupant)
@@ -191,6 +195,7 @@
 				treating_wounds = FALSE
 		if(!treating_wounds)
 			on = FALSE
+			soundloop.stop()
 			update_icon()
 			playsound(src, 'sound/machines/cryo_warning.ogg', volume) // Bug the doctors.
 			var/msg = "Patient fully restored."
@@ -230,6 +235,7 @@
 
 	if(!nodes[1] || !airs[1] || !air1.gases.len || air1.gases[/datum/gas/oxygen] < 5) // Turn off if the machine won't work.
 		on = FALSE
+		soundloop.stop()
 		update_icon()
 		return
 
@@ -265,6 +271,7 @@
 /obj/machinery/atmospherics/components/unary/cryo_cell/open_machine(drop = 0)
 	if(!state_open && !panel_open)
 		on = FALSE
+		soundloop.stop()
 		..()
 	for(var/mob/M in contents) //only drop mobs
 		M.forceMove(get_turf(src))
@@ -273,6 +280,7 @@
 			L.update_mobility()
 	occupant = null
 	update_icon()
+	playsound(src, 'sound/machines/openhiss.ogg', 25, 0)
 
 /obj/machinery/atmospherics/components/unary/cryo_cell/close_machine(mob/living/carbon/user)
 	//skyrat edit
@@ -281,6 +289,7 @@
 	if((isnull(user) || istype(user)) && state_open && !panel_open)
 		..(user)
 		reagent_transfer = 0
+		playsound(src, 'sound/machines/closehiss.ogg', 25, 0)
 		return occupant
 
 /obj/machinery/atmospherics/components/unary/cryo_cell/container_resist(mob/living/user)
@@ -406,8 +415,10 @@
 		if("power")
 			if(on)
 				on = FALSE
+				soundloop.stop()
 			else if(!state_open)
 				on = TRUE
+				soundloop.start()
 			. = TRUE
 		if("door")
 			if(state_open)
@@ -430,6 +441,10 @@
 /obj/machinery/atmospherics/components/unary/cryo_cell/CtrlClick(mob/user)
 	if(user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK) && !state_open)
 		on = !on
+		if(on)
+			soundloop.start()
+		else
+			soundloop.stop()
 		update_icon()
 	return ..()
 

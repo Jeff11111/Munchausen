@@ -69,6 +69,7 @@
 		else
 			to_chat(user, "<span class='danger'>Maintenance Access Denied</span>")
 			flick("[skin]-denied", src)
+			playsound(src, 'sound/machines/buttondeny.ogg', 25, 0)
 		return
 
 	if(panel_open)
@@ -167,10 +168,12 @@
 	if(!allowed(user))
 		to_chat(user, "<span class='danger'>Access Denied</span>")
 		flick("[skin]-denied", src)
+		playsound(src, 'sound/machines/buttondeny.ogg', 25, 0)
 		return
 
 	use_power(5)
 	icon_state = "[skin]1"
+	playsound(src, 'sound/machines/buttonaccess.ogg', 25, 0)
 
 	if(device)
 		device.pulsed()
