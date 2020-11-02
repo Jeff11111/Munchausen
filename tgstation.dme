@@ -1857,6 +1857,7 @@
 #include "code\modules\clothing\masks\breath.dm"
 #include "code\modules\clothing\masks\gasmask.dm"
 #include "code\modules\clothing\masks\hailer.dm"
+#include "code\modules\clothing\masks\hecu.dm"
 #include "code\modules\clothing\masks\miscellaneous.dm"
 #include "code\modules\clothing\neck\_neck.dm"
 #include "code\modules\clothing\outfits\ert.dm"
