@@ -30,6 +30,8 @@
 	var/yo = null
 	var/xo = null
 	var/atom/original = null // the original target clicked
+	var/turf/original_turf // the original turf of the target clicked
+	var/original_dist = 0 // original distance between firer and target's turf
 	var/turf/starting = null // the projectile's starting turf
 	var/list/permutated = list() // we've passed through these atoms, don't try to hit them again
 	var/p_x = 16
@@ -693,9 +695,8 @@
 			pixel_x = traj_px
 			pixel_y = traj_py
 	//Boobstation projectiles work different
-	if(loc == get_turf(original))
-		qdel(src)
-		return
+	if(get_dist(starting, original_turf) >= original_dist)
+		return on_range()
 
 /obj/item/projectile/proc/set_homing_target(atom/A)
 	if(!A || (!isturf(A) && !isturf(A.loc)))
@@ -748,6 +749,8 @@
 	trajectory_ignore_forcemove = FALSE
 	starting = get_turf(source)
 	original = target
+	original_turf = get_turf(target)
+	original_dist = get_dist(starting, original_turf)
 	if(targloc || !params)
 		yo = targloc.y - curloc.y
 		xo = targloc.x - curloc.x
