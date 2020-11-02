@@ -24,5 +24,3 @@
 		G.verbs += /mob/dead/observer/verb/boo
 		G.verbs += /mob/dead/observer/verb/possess
 		to_chat(G, "You suddenly feel a welling of new spooky powers...")
-	for(var/mob/dead/observer/verb/possess/P in world)
-		P.hidden = FALSE

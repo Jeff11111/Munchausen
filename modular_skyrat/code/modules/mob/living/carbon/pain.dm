@@ -242,7 +242,7 @@
 	
 	//Handle pain effects - as raw pain, not shock
 	var/traumatic_shock = get_shock()
-	if(pain >= PAIN_GIVES_IN)
+	if(traumatic_shock >= PAIN_GIVES_IN)
 		switch(mind?.diceroll(STAT_DATUM(end)))
 			//Critical success = nothing happens]
 			//Success = blurry eyes (update_health() handles the speed penalty)

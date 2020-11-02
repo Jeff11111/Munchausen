@@ -1136,8 +1136,8 @@
 	if(!HAS_TRAIT(src, TRAIT_IGNOREDAMAGESLOWDOWN))	//if we want to ignore slowdown from damage, but not from equipment
 		var/health = ((maxHealth + stambufferinfluence) - getPainLoss() - (getStaminaLoss()*0.75))//CIT CHANGE - reduces the impact of staminaloss and makes stamina buffer influence it
 		if(health < (maxHealth - PAIN_GIVES_IN))
-			add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown, TRUE, (health_deficiency-39) / 75)
-			add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown_flying, TRUE, (health_deficiency-39) / 25)
+			add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown, TRUE, ((maxHealth-health)-39) / 75)
+			add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown_flying, TRUE, ((maxHealth-health)-39) / 25)
 		else
 			remove_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown)
 			remove_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown_flying)

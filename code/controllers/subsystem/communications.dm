@@ -36,7 +36,7 @@ SUBSYSTEM_DEF(communications)
 		minor_announce(html_decode(input),"[user.name] Decrees:")
 		silicon_message_cooldown = world.time + COMMUNICATION_COOLDOWN_AI
 	else
-		priority_announce(html_decode(user.treat_message(input)), "Station Decree", 'modular_skyrat/sound/misc/announce.ogg', "Captain")
+		priority_announce(html_decode(user.treat_message(input)), "Station Decree", 'modular_skyrat/sound/machinery/decree.ogg', "Captain")
 		nonsilicon_message_cooldown = world.time + COMMUNICATION_COOLDOWN
 	user.log_talk(input, LOG_SAY, tag="decree")
 	message_admins("[ADMIN_LOOKUPFLW(user)] has made a decree.")
