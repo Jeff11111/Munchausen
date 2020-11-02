@@ -1261,6 +1261,8 @@
 
 //Returns whether or not the bodypart can feel pain
 /obj/item/bodypart/proc/can_feel_pain()
+	if(HAS_TRAIT(owner, TRAIT_NOPAIN))
+		return FALSE
 	return TRUE
 
 //Checks disabled status thresholds

@@ -500,7 +500,6 @@
 
 /obj/item/gun/update_overlays()
 	. = ..()
-	cut_overlays()
 	if(safety_overlay)
 		. += safety_overlay
 	if(suppressed_overlay)

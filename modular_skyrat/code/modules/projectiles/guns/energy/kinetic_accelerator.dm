@@ -1,5 +1,5 @@
 //Kinetic accelerator charging meme bugfix
-/obj/item/gun/energy/kinetic_accelerator/
+/obj/item/gun/energy/kinetic_accelerator
 	var/chargetimer = null
 
 /obj/item/gun/energy/kinetic_accelerator/proc/reload()
