@@ -21,5 +21,5 @@
 		return TRUE
 	return FALSE
 
-/atom/middle_attack_hand(mob/user)
+/atom/proc/middle_attack_hand(mob/user)
 	return FALSE
