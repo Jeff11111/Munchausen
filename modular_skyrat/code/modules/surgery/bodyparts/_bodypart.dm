@@ -1916,9 +1916,9 @@
 		should_draw_gender = FALSE
 
 	if(is_organic_limb() || render_like_organic)
-		limb.icon = base_bp_icon || 'icons/mob/human_parts.dmi'
+		limb.icon = base_bp_icon || 'modular_skyrat/icons/mob/human_parts.dmi'
 		if(is_dead())
-			limb.icon = base_bp_icon
+			limb.icon = 'modular_skyrat/icons/mob/human_parts.dmi'
 			species_id = "skeleton"
 			limb.icon_state = "[species_id]_[body_zone]"
 		else

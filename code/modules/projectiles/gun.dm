@@ -512,7 +512,7 @@
 	if(sling_overlay)
 		. += sling_overlay
 
-/obj/item/gun/middleclick_attack_self(mob/user)
+/obj/item/gun/middle_attack_hand(mob/user)
 	. = ..()
 	if(src in list(user.get_active_held_item(), user.get_inactive_held_item()))
 		if(!user.is_holding(src))

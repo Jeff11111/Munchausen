@@ -329,6 +329,8 @@
 	else if((A in DirectAccess()) && W)
 		if(W.middleclick_melee_attack_chain(src, A, params))
 			return
+	else if(!W)
+		A.middle_attack_hand(src)
 
 /mob/living/carbon/MiddleClickOn(atom/A, params)
 	var/list/modifiers = params2list(params)

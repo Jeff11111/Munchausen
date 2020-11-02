@@ -20,3 +20,6 @@
 		attempt_initiate_surgery(src, target, user)
 		return TRUE
 	return FALSE
+
+/atom/middle_attack_hand(mob/user)
+	return FALSE
