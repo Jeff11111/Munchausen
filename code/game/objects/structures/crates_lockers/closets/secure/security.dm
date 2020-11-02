@@ -55,7 +55,7 @@
 	new /obj/item/clothing/head/hopcap/beret/white(src)
 
 /obj/structure/closet/secure_closet/hos
-	name = "\proper chieff enforcer's locker"
+	name = "\proper chief enforcer's locker"
 	req_access = list(ACCESS_HOS)
 	icon_state = "hos"
 /obj/structure/closet/secure_closet/hos/PopulateContents()
