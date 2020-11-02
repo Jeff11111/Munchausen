@@ -236,8 +236,8 @@
 //cooler icons
 /obj/item/gun/energy/laser
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/energy.dmi'
-	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/guns_lefthand.dmi'
-	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/guns_righthand.dmi'
+	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/energy_lefthand.dmi'
+	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/energy_righthand.dmi'
 	icon_state = "laser"
 	item_state = null
 	modifystate = FALSE
