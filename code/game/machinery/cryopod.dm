@@ -250,6 +250,7 @@
 		else
 			despawn_world_time = world.time + time_till_despawn
 	icon_state = "cryopod"
+	playsound(src, 'sound/machines/closehiss.ogg', 25, 0)
 
 /obj/machinery/cryopod/open_machine()
 	if(occupant)
@@ -258,6 +259,7 @@
 	icon_state = "cryopod-open"
 	density = TRUE
 	name = initial(name)
+	playsound(src, 'sound/machines/openhiss.ogg', 25, 0)
 
 /obj/machinery/cryopod/container_resist(mob/living/user)
 	investigate_log("Cryogenics machine container resisted by [key_name(user)] with occupant [key_name(occupant)].", INVESTIGATE_CRYOGENICS)

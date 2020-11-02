@@ -61,6 +61,7 @@ GLOBAL_LIST_EMPTY(network_holopads)
 	var/ringing = FALSE
 	var/offset = FALSE
 	var/on_network = TRUE
+	var/datum/looping_sound/holopad/soundloop
 
 /obj/machinery/holopad/tutorial
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
@@ -98,6 +99,7 @@ GLOBAL_LIST_EMPTY(network_holopads)
 	. = ..()
 	if(on_network)
 		GLOB.network_holopads += src
+	soundloop = new(list(src), FALSE)
 
 /obj/machinery/holopad/Destroy()
 	if(outgoing_call)
@@ -118,6 +120,7 @@ GLOBAL_LIST_EMPTY(network_holopads)
 	QDEL_NULL(disk)
 
 	GLOB.network_holopads -= src
+	QDEL_NULL(soundloop)
 	return ..()
 
 /obj/machinery/holopad/power_change()
@@ -436,8 +439,10 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	active_power_usage = HOLOPAD_PASSIVE_POWER_USAGE + (HOLOGRAM_POWER_USAGE * total_users)
 	if(total_users || replay_mode)
 		set_light(2)
+		soundloop.start()
 	else
 		set_light(0)
+		soundloop.stop()
 	update_icon()
 
 /obj/machinery/holopad/update_icon_state()
