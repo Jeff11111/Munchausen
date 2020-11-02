@@ -168,7 +168,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 		return
 
 	if(cookie != "none")
-		var/regex/crashy_thingy = new /regex("\[.*\[")
+		var/regex/crashy_thingy = new /regex(@"\[.*\[")
 		if(crashy_thingy.Find(cookie))
 			message_admins("[key_name(src.owner)] tried to crash the server using malformed cookies")
 			log_admin_private("[key_name(owner)] tried to crash the server using malformed cookies")
