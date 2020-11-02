@@ -3,8 +3,8 @@
 	name = "energy gun"
 	desc = "A basic hybrid energy gun with two settings: sparq and kill."
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/energy.dmi'
-	lefthand_file = 'modular_skyrat/icons/bobstation/guns/guns_lefthand.dmi'
-	righthand_file = 'modular_skyrat/icons/bobstation/guns/guns_righthand.dmi'
+	lefthand_file = 'modular_skyrat/icons/bobstation/guns/inhands/guns_lefthand.dmi'
+	righthand_file = 'modular_skyrat/icons/bobstation/guns/inhands/guns_righthand.dmi'
 	icon_state = "hellgun"
 	item_state = null
 	modifystate = FALSE

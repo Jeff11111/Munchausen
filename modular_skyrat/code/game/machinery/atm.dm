@@ -10,7 +10,7 @@
 
 /obj/machinery/atm/attack_hand(mob/living/user)
 	. = ..()
-	playsound(src, 'modular_skyrat/sound/machinery/atmbeep2', 50)
+	playsound(src, 'modular_skyrat/sound/machinery/atmbeep2.ogg', 50)
 	to_chat(user, "<b>Station decrees:</b>")
 	for(var/i in SScommunications.decrees)
 		to_chat(user, "• [i]")
