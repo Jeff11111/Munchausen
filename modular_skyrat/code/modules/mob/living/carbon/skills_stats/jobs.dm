@@ -110,6 +110,7 @@
 
 /datum/job/hydro
 	//Expert agriculture, trained cooking
+	skill_chemistry = JOB_SKILLPOINTS_AVERAGE
 	skill_cooking = JOB_SKILLPOINTS_TRAINED
 	skill_agriculture = JOB_STATPOINTS_EXPERT
 
@@ -200,6 +201,7 @@
 
 /datum/job/cook
 	//Expert cooking, trained agriculture
+	skill_chemistry = JOB_SKILLPOINTS_AVERAGE
 	skill_cooking = JOB_SKILLPOINTS_EXPERT
 	skill_agriculture = JOB_SKILLPOINTS_TRAINED
 
