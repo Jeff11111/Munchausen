@@ -3,9 +3,8 @@
 	if(owner)
 		for(var/datum/stats/stat in owner.mob_stats)
 			stat.level = min(stat.level + 1, MAX_STAT)
-		var/datum/skills/ranged/ranged = owner.mob_skills[SKILL_DATUM(ranged)]
-		if(ranged)
-			ranged.level = min(ranged.level + rand(7,10), MAX_SKILL)
+			if(istype(stat, /datum/stats/str))
+				stat.level = min(stat.level + rand(3, 5), MAX_STAT)
 		var/datum/skills/melee/melee = owner.mob_skills[SKILL_DATUM(melee)]
 		if(melee)
-			melee.level = min(melee.level + rand(7,10), MAX_SKILL)
+			melee.level = min(melee.level + rand(10,20), MAX_SKILL)
