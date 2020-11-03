@@ -25,7 +25,7 @@
 	/// The index of the ammo_types/firemodes which we're using right now
 	var/current_firemode_index = 1
 	var/can_charge = 1 //Can it be charged in a recharger?
-	var/automatic_charge_overlays = TRUE	//Do we handle overlays with base update_overlays()?
+	var/automatic_charge_overlays = TRUE	//Do we handle overlays with base update_icon()?
 	var/charge_sections = 4
 	ammo_x_offset = 2
 	var/shaded_charge = FALSE //if this gun uses a stateful charge bar for more detail
@@ -45,7 +45,7 @@
 		cell.use(round(cell.charge / severity))
 		chambered = null //we empty the chamber
 		recharge_newshot() //and try to charge a new shot
-		update_overlays()
+		update_icon()
 
 /obj/item/gun/energy/get_cell()
 	return cell
@@ -62,7 +62,7 @@
 	recharge_newshot(TRUE)
 	if(selfcharge)
 		START_PROCESSING(SSobj, src)
-	update_overlays()
+	update_icon()
 
 /obj/item/gun/energy/Destroy()
 	STOP_PROCESSING(SSobj, src)
@@ -91,7 +91,7 @@
 		cell.give(100)
 		if(!chambered) //if empty chamber we try to charge a new shot
 			recharge_newshot(TRUE)
-		update_overlays()
+		update_icon()
 
 // ATTACK SELF IGNORING PARENT RETURN VALUE
 /obj/item/gun/energy/attack_self(mob/living/user)
@@ -165,7 +165,7 @@
 	if(user_for_feedback)
 		to_chat(user_for_feedback, "<span class='notice'>[src] is now set to [C.select_name || C].</span>")
 	post_set_firemode()
-	update_overlays()
+	update_icon()
 
 /obj/item/gun/energy/proc/post_set_firemode(recharge_newshot = TRUE)
 	if(recharge_newshot)
@@ -226,7 +226,7 @@
 #undef DECREMENT_OR_WRAP
 #undef IS_VALID_INDEX
 
-/obj/item/gun/energy/update_overlays()
+/obj/item/gun/energy/update_icon()
 	//We already cut overlays on the parent proc
 	. = ..()
 	if(!automatic_charge_overlays)
@@ -274,7 +274,7 @@
 			playsound(src, 'sound/weapons/dink.ogg', 30, 1)
 			var/obj/item/ammo_casing/energy/shot = ammo_type[current_firemode_index]
 			cell.use(shot.e_cost)
-			update_overlays()
+			update_icon()
 			return(FIRELOSS)
 		else
 			user.visible_message("<span class='suicide'>[user] panics and starts choking to death!</span>")
