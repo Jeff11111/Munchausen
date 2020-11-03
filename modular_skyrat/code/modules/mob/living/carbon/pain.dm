@@ -247,19 +247,19 @@
 			//Critical success = nothing happens]
 			//Success = blurry eyes (update_health() handles the speed penalty)
 			if(DICE_SUCCESS)
-				blur_eyes(1)
+				blur_eyes(rand(1,2))
 			//Failure - we are knocked down
 			if(DICE_FAILURE)
-				blur_eyes(1)
+				blur_eyes(rand(1,2))
 				if(!IsKnockdown())
 					visible_message("<span class='danger'>[src] gives in to the pain!</span>", "<span class='userdanger'>I give in to the pain.</span>")
-				AdjustKnockdown(40)
+				AdjustKnockdown(25)
 			//Crit failure - unconsciousness
 			if(DICE_CRIT_FAILURE)
-				blur_eyes(1)
+				blur_eyes(rand(1,2))
 				if(!IsUnconscious())
 					visible_message("<span class='danger'>[src] falls in to the pain!</span>", "<span class='userdanger'>I fall in to the pain.</span>")
-				AdjustUnconscious(40)
+				AdjustUnconscious(25)
 
 	//Start handling shock
 	if(is_asystole())
