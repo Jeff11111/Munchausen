@@ -142,10 +142,6 @@
 
 //Start growing a human clone in the pod!
 /obj/machinery/clonepod/proc/growclone(ckey, clonename, ui, mutation_index, mindref, datum/species/mrace, list/features, factions, list/quirks)
-	if(SSeconomy.full_ancap && !currently_linked_account.adjust_money(-cost_per_clone))
-		if(radio)
-			SPEAK("Insufficient amount of credits to initiate cloning procedure.")
-		return FALSE
 	if(biomass < biomass_per_clone)
 		if(radio)
 			SPEAK("Insufficient amount of biomass to initiate cloning procedure.")
@@ -188,6 +184,12 @@
 		biomass -= 300
 	else
 		return FALSE
+
+	if(SSeconomy.full_ancap && !currently_linked_account.adjust_money(-cost_per_clone))
+		if(radio)
+			SPEAK("Insufficient amount of credits to initiate cloning procedure.")
+		return FALSE
+	
 	attempting = TRUE //One at a time!!
 	countdown.start()
 
