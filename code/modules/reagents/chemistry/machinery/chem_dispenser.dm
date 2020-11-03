@@ -114,13 +114,13 @@
 	. = ..()
 	if(panel_open)
 		. += "<span class='notice'>[src]'s maintenance hatch is open!</span>"
-	if(in_range(user, src) || isobserver(user))
+	if((in_range(user, src) && (GET_SKILL_LEVEL(user, chemistry) >= JOB_SKILLPOINTS_TRAINED)) || isobserver(user))
 		. += "<span class='notice'>The status display reads:\n\
 		Recharging <b>[recharge_amount]</b> power units per interval.\n\
 		Power efficiency increased by <b>[round((powerefficiency*1000)-100, 1)]%</b>.</span>"
 
 /obj/machinery/chem_dispenser/process()
-	if (recharge_counter >= 4)
+	if(recharge_counter >= 4)
 		if(!is_operational())
 			return
 		var/usedpower = cell.give(recharge_amount)
@@ -202,7 +202,7 @@
 			beakerCurrentVolume += R.volume
 	data["beakerContents"] = beakerContents
 
-	if (beaker)
+	if(beaker)
 		data["beakerCurrentVolume"] = beakerCurrentVolume
 		data["beakerMaxVolume"] = beaker.volume
 		data["beakerTransferAmounts"] = beaker.possible_transfer_amounts
@@ -225,7 +225,7 @@
 		var/datum/reagent/temp = GLOB.chemical_reagents_list[re]
 		if(temp)
 			var/chemname = temp.name
-			if(is_hallucinating && prob(5))
+			if((is_hallucinating && prob(5)) || (GET_SKILL_LEVEL(user, chemistry) < JOB_SKILLPOINTS_AVERAGE && (user.mind?.diceroll(STAT_DATUM(int), SKILL_DATUM(chemistry), "6d6", 20) <= DICE_FAILURE)))
 				chemname = "[pick_list_replacements("hallucination.json", "chemicals")]"
 			chemicals.Add(list(list("title" = chemname, "id" = ckey(temp.name))))
 	data["chemicals"] = chemicals
@@ -244,6 +244,10 @@
 			var/target = text2num(params["target"])
 			if(target in beaker.possible_transfer_amounts)
 				amount = target
+				//people that suck at chemistry fuck up at chemistry
+				if((GET_SKILL_LEVEL(usr, chemistry) < JOB_SKILLPOINTS_AVERAGE) && (usr.mind?.diceroll(STAT_DATUM(int), SKILL_DATUM(chemistry), "6d6", 20) <= DICE_FAILURE))
+					to_chat(usr, "<span class='warning'>[pick("Uhhh...", "Hnggg...", "Fnord!", "Augh!", "Ugh!")]</span>")
+					amount = pick(beaker.possible_transfer_amounts)
 				work_animation()
 				. = TRUE
 		if("dispense")
@@ -252,6 +256,10 @@
 			var/reagent_name = params["reagent"]
 			if(!recording_recipe)
 				var/reagent = GLOB.name2reagent[reagent_name]
+				//people that suck at chemistry fuck up at chemistry
+				if((GET_SKILL_LEVEL(usr, chemistry) < JOB_SKILLPOINTS_AVERAGE) && (usr.mind?.diceroll(STAT_DATUM(int), SKILL_DATUM(chemistry), "6d6", 20) <= DICE_FAILURE))
+					reagent = pick(dispensable_reagents)
+					to_chat(usr, "<span class='warning'>[pick("Is this the right button?","No... This isn't right...", "Uhhh...", "Fnord! How do i use this thing?")]</span>")
 				if(beaker && dispensable_reagents.Find(reagent))
 					var/datum/reagents/R = beaker.reagents
 					var/free = R.maximum_volume - R.total_volume
@@ -270,6 +278,10 @@
 			if(!is_operational() || recording_recipe)
 				return
 			var/amount = text2num(params["amount"])
+			//people that suck at chemistry fuck up at chemistry
+			if((GET_SKILL_LEVEL(usr, chemistry) < JOB_SKILLPOINTS_AVERAGE) && (usr.mind?.diceroll(STAT_DATUM(int), SKILL_DATUM(chemistry), "6d6", 20) <= DICE_FAILURE))
+				to_chat(usr, "<span class='warning'>[pick("Uhhh...", "Hnggg...", "Fnord!", "Augh!", "Ugh!")]</span>")
+				amount = pick(beaker.possible_transfer_amounts)
 			if(beaker && (amount in beaker.possible_transfer_amounts))
 				beaker.reagents.remove_all(amount)
 				work_animation()

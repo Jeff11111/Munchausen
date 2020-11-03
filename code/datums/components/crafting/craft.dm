@@ -197,6 +197,8 @@
 		if(check_tools(user, R, contents))
 			if(do_after(user, R.time, target = user))
 				contents = get_surroundings(user)
+				if(user.mind?.diceroll(STAT_DATUM(int)) <= DICE_FAILURE)
+					return ", i fucked up."
 				if(!check_contents(user, R, contents))
 					return ", missing component."
 				if(!check_tools(user, R, contents))
@@ -382,6 +384,10 @@
 			continue
 
 		if((R.category != cur_category) || (R.subcategory != cur_subcategory))
+			continue
+		
+		//User too stupidd to make this
+		if((GET_STAT_LEVEL(user, int) <= R.int_difficulty) || (GET_SKILL_LEVEL(user, construction) <= R.construction_difficulty))
 			continue
 
 		craftability["[REF(R)]"] = check_contents(user, R, surroundings)

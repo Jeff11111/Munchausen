@@ -7,6 +7,8 @@
 	var/time = 30 //time in deciseconds
 	var/list/parts = list() //type paths of items that will be placed in the result
 	var/list/chem_catalysts = list() //like tools but for reagents
+	var/int_difficulty = JOB_STATPOINTS_NOVICE //How much int you need, at the very least, to craft this
+	var/construction_difficulty = JOB_SKILLPOINTS_NOVICE //How much construction you need, at the very least, to craft this
 	var/category = CAT_NONE //where it shows up in the crafting UI
 	var/subcategory = CAT_NONE
 	var/always_availible = TRUE //Set to FALSE if it needs to be learned first.
