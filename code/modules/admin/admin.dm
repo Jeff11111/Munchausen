@@ -681,6 +681,11 @@
 	set category = "Server"
 	set desc="Respawn basically"
 	set name="Toggle Respawn"
+	
+	if(CONFIG_GET(flag/norespawn))
+		to_chat(usr, "<span class='userdanger'>You cannot enable respawn.</span>")
+		return FALSE
+
 	var/new_nores = !CONFIG_GET(flag/norespawn)
 	CONFIG_SET(flag/norespawn, new_nores)
 	if (!new_nores)
