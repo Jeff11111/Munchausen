@@ -17,7 +17,6 @@
 			if(!AC.BB)//found a spent ammo
 				stored_ammo -= AC
 				AC.forceMove(get_turf(src.loc))
-
 				stored_ammo += R
 				R.forceMove(src)
 				return TRUE
