@@ -358,6 +358,7 @@
 	beam_segments[beam_index] = pcache
 	beam_index = pcache
 	beam_segments[beam_index] = null
+
 /obj/item/projectile/Bump(atom/A)
 	if(!trajectory)
 		return
@@ -694,8 +695,10 @@
 		else
 			pixel_x = traj_px
 			pixel_y = traj_py
-	//Boobstation projectiles work different
-	if(get_dist(starting, original_turf) >= original_dist)
+	
+	//I am a fucking demented retard
+	//anyways projectiles only go as far as the original distance between firer and target
+	if(get_dist(starting, get_turf(src)) >= original_dist)
 		return on_range()
 
 /obj/item/projectile/proc/set_homing_target(atom/A)
