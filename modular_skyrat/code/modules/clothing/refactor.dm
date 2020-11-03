@@ -248,6 +248,10 @@
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/enforcer.dmi'
 	icon_state = "earmor"
 
+/obj/item/clothing/suit/armor/vest/warden
+	icon = 'icons/obj/clothing/suits.dmi'
+	mob_overlay_icon = 'icons/mob/clothing/suit.dmi'
+
 /obj/item/clothing/suit/armor/vest/alt
 	icon_state = "earmor"
 
