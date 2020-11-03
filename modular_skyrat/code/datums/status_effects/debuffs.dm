@@ -57,7 +57,7 @@
 	id = "cloneill"
 	status_type = STATUS_EFFECT_REPLACE
 	tick_interval = 7 SECONDS
-	duration = 20 MINUTES
+	duration = 15 MINUTES
 	alert_type = /obj/screen/alert/cloneill
 	var/healthpenalty = 25
 	var/cloneloss_amount = 20
