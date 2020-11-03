@@ -113,6 +113,10 @@
 			for(var/datum/objective/O in A.objectives)
 				var/result = "UNKNOWN"
 				var/actual_result = O.check_completion()
+				if(actual_result && O.bobux_reward)
+					A.owner.current?.client?.prefs?.adjust_bobux(O.bobux_reward)
+				else if(O.bobux_penalty)
+					A.owner.current?.client?.prefs?.adjust_bobux(-O.penalty)
 				if(actual_result >= 1)
 					result = "SUCCESS"
 				else if(actual_result <= 0)

@@ -13,6 +13,8 @@ GLOBAL_LIST_EMPTY(objectives)
 	var/completed = FALSE				//currently only used for custom objectives.
 	var/completable = TRUE				//Whether this objective shows greentext when completed
 	var/martyr_compatible = FALSE		//If the objective is compatible with martyr objective, i.e. if you can still do it while dead.
+	var/bobux_reward = 1			 	//how much bobux this objective nets the antag on completion
+	var/bobux_penalty = 1					//how much bobux the antag loses on failure
 
 /datum/objective/New(var/text)
 	GLOB.objectives += src // CITADEL EDIT FOR CRYOPODS
