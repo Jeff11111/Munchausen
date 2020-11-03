@@ -8,7 +8,7 @@
 	Base definition
 */
 /datum/wound/blunt
-	sound_effect = 'modular_skyrat/sound/gore/trauma2.ogg'
+	sound_effect = 'modular_skyrat/sound/gore/trauma1.ogg'
 	wound_type = WOUND_LIST_BLUNT
 
 	associated_alerts = list("bone" = /obj/screen/alert/status_effect/wound/bone)
