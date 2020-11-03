@@ -6,12 +6,11 @@
 		return FALSE
 
 /* hippie start - Check for caliber == "all" */
-	if ((caliber == "all" && stored_ammo.len < max_ammo) || (stored_ammo.len < max_ammo))
+	if(stored_ammo.len < max_ammo)
 		stored_ammo += R
 		R.forceMove(src)
 		return TRUE
 /*hippie end*/
-
 	//for accessibles magazines (e.g internal ones) when full, start replacing spent ammo
 	else if(replace_spent)
 		for(var/obj/item/ammo_casing/AC in stored_ammo)
