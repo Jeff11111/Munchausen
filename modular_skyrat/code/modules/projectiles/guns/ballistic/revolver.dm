@@ -225,10 +225,10 @@
 	. = ..()
 	if(magazine)
 		switch(magazine.caliber)
-			if("38")
+			if(list("38"), "38")
 				magazine.caliber = "357"
 				to_chat(user, "<span class='notice'>\The [src] will now chamber .357 rounds.</span>")
-			if("357")
+			if(list("357"), "357")
 				magazine.caliber = "38"
 				to_chat(user, "<span class='notice'>\The [src] will now chamber .38 rounds.</span>")
 
