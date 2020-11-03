@@ -40,7 +40,7 @@
 		var/obj/item/ammo_box/magazine/AM = A
 		if(istype(AM, mag_type))
 			var/obj/item/ammo_box/magazine/oldmag = magazine
-			if(user.mind && (GET_SKILL_LEVEL(user, ranged) < JOB_SKILLPOINTS_AVERAGE))
+			if(istype(oldmag) && user.mind && (GET_SKILL_LEVEL(user, ranged) < JOB_SKILLPOINTS_AVERAGE))
 				to_chat(user, "<span class='warning'>I'm too incompetent to perform a tactical reload.</span>")
 				return FALSE
 			if(user.transferItemToLoc(AM, src))
