@@ -23,9 +23,10 @@
 	if(chamber_open && (src in list(user.get_active_held_item(), user.get_inactive_held_item())))
 		var/obj/item/ammo_casing/CB
 		CB = magazine.get_round(0)
-		user.put_in_hands(CB)
-		update_icon()
-		to_chat(user, "<span class='notice'>I unload [CB] from [src].</span>")
+		if(CB)
+			user.put_in_hands(CB)
+			update_icon()
+			to_chat(user, "<span class='notice'>I unload [CB] from [src].</span>")
 	else
 		return ..()
 
