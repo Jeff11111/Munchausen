@@ -6,7 +6,7 @@
 	shorthand = "ST"
 
 /datum/stats/str/proc/get_equip_slowdown_mult()
-	return round(1.5 - (0.75 * level/MAX_STAT), 0.1) //Varies from 1.5 to 0.75 depending on how good/bad we are
+	return round(1.5 - (1 * level/MAX_STAT), 0.1) //Varies from 1.5 to 0.5 depending on how good/bad we are
 
 //Endurance
 /datum/stats/end
