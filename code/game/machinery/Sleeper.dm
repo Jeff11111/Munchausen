@@ -214,10 +214,6 @@
 		ui = new(user, src, ui_key, "sleeper", name, 550, 700, master_ui, state)
 		ui.open()
 
-/obj/machinery/sleeper/process()
-	..()
-	check_nap_violations()
-
 /obj/machinery/sleeper/nap_violation(mob/violator)
 	open_machine()
 
@@ -306,7 +302,6 @@
 	if(..())
 		return
 	var/mob/living/mob_occupant = occupant
-	check_nap_violations()
 	switch(action)
 		if("door")
 			if(state_open)

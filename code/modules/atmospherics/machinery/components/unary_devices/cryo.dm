@@ -176,8 +176,6 @@
 		return
 
 	var/mob/living/mob_occupant = occupant
-	if(!check_nap_violations())
-		return
 	if(mob_occupant.stat == DEAD) // We don't bother with dead people.
 		return
 

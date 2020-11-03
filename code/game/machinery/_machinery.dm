@@ -260,6 +260,7 @@ Class Procs:
 				return FALSE
 	return TRUE
 
+//Who the fuck did this? This is beyond fucking retarded i will fucking rape you.
 /obj/machinery/proc/check_nap_violations()
 	if(!SSeconomy.full_ancap)
 		return TRUE
