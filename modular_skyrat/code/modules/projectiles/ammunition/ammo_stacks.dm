@@ -50,7 +50,8 @@
 		var/obj/item/I = get_round()
 		I.forceMove(loc)
 		I.throw_at(loc)
-	qdel(src)
+	if(!QDELETED(src))
+		qdel(src)
 
 /obj/item/ammo_box/magazine/ammo_stack/get_round(keep)
 	var/i = ..()
@@ -62,16 +63,16 @@
 /obj/item/ammo_box/magazine/ammo_stack/give_round(obj/item/ammo_casing/R, replace_spent)
 	var/i = ..()
 	update_overlays()
-	if(ammo_count() <= 0)
+	if(ammo_count() <= 0 && !QDELETED(src))
 		qdel(src)
 	return i
 
 /obj/item/ammo_box/magazine/ammo_stack/handle_atom_del(atom/A)
 	..()
-	if(ammo_count() <= 0)
+	if(ammo_count() <= 0 && !QDELETED(src))
 		qdel(src)
 
 /obj/item/ammo_box/magazine/ammo_stack/empty_magazine()
 	..()
-	if(ammo_count() <= 0)
+	if(ammo_count() <= 0 && !QDELETED(src))
 		qdel(src)
