@@ -14,6 +14,9 @@
 		resting = new_resting
 		if(!silent)
 			to_chat(src, "<span class='notice'>You are now [resting? "resting" : "getting up"].</span>")
+			var/fall_sound = pick('modular_skyrat/sound/effects/fall1.ogg', 'modular_skyrat/sound/effects/fall2.ogg')
+			playsound(src, fall_sound, 50)
+			sound_hint(src, src)
 		update_resting(updating)
 
 /mob/living/proc/update_resting(update_mobility = TRUE)
@@ -28,9 +31,6 @@
 	set_resting(TRUE, TRUE, updating)
 	if(disarm_items)
 		drop_all_held_items()
-	var/fall_sound = pick('modular_skyrat/sound/effects/fall1.ogg', 'modular_skyrat/sound/effects/fall2.ogg')
-	playsound(src, fall_sound, 50)
-	sound_hint(src, src)
 
 /mob/living/proc/lay_down()
 	set name = "Rest"
