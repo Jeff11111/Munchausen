@@ -3693,6 +3693,7 @@
 #include "modular_skyrat\code\game\mecha\working\buzz.dm"
 #include "modular_skyrat\code\game\mecha\working\clarke.dm"
 #include "modular_skyrat\code\game\mecha\working\killdozer.dm"
+#include "modular_skyrat\code\game\modular_icons\machinery\conveyor.dm"
 #include "modular_skyrat\code\game\modular_icons\machinery\doors\airlock_types.dm"
 #include "modular_skyrat\code\game\modular_icons\machinery\doors\windoor.dm"
 #include "modular_skyrat\code\game\modular_icons\objects\effects\spawners\structure.dm"
