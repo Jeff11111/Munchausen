@@ -20,6 +20,7 @@ SUBSYSTEM_DEF(ticker)
 	var/event = 0
 
 	var/login_music							//music played in pregame lobby
+	var/round_start_sound = 'modular_skyrat/sounds/dementia/roundstart.ogg'	//music/jingle played when the round starts
 	var/round_end_sound						//music/jingle played when the world reboots
 	var/round_end_sound_sent = TRUE			//If all clients have loaded it
 
@@ -406,6 +407,8 @@ SUBSYSTEM_DEF(ticker)
 			if(N.new_character)
 				to_chat(N, "Captainship not forced on anyone.")
 			CHECK_TICK
+	if(round_start_sound)
+		SEND_SOUND(world, sound(round_start_sound))
 
 /datum/controller/subsystem/ticker/proc/transfer_characters()
 	var/list/livings = list()
@@ -612,7 +615,12 @@ SUBSYSTEM_DEF(ticker)
 	if(SSblackbox.first_death)
 		var/list/ded = SSblackbox.first_death
 		if(ded.len)
-			news_message += " NT Sanctioned Psykers picked up faint traces of someone near the station, allegedly having had died. Their name was: [ded["name"]], [ded["role"]], at [ded["area"]].[ded["last_words"] ? " Their last words were: \"[ded["last_words"]]\"" : ""]"
+			news_message += " NT Sanctioned Psykers picked up faint traces of someone near the station, allegedly having had died."
+			news_message += " Their name was: [ded["name"]], [ded["role"]], at [ded["area"]]."
+			var/last_words = ded["last_words"]
+			if(last_words)
+				last_words = "\"[last_words]\""
+			news_message += " [last_words ? " Their last words were: [last_words]" : ""]"
 		else
 			news_message += " NT Sanctioned Psykers proudly confirm reports that nobody died this shift!"
 
@@ -705,18 +713,8 @@ SUBSYSTEM_DEF(ticker)
 	save_admin_data()
 	update_everything_flag_in_db()
 	if(!round_end_sound)
-		round_end_sound = pick(\
-		'sound/roundend/newroundsexy.ogg',
-		'sound/roundend/apcdestroyed.ogg',
-		'sound/roundend/seeyoulaterokay.ogg',
-		'sound/roundend/bangindonk.ogg',
-		'sound/roundend/leavingtg.ogg',
-		'sound/roundend/its_only_game.ogg',
-		'sound/roundend/yeehaw.ogg',
-		'sound/roundend/disappointed.ogg',
-		'sound/roundend/gondolabridge.ogg',
-		'sound/roundend/haveabeautifultime.ogg'\
+		round_end_sound = pick(
+			'modular_skyrat/sound/dementia/roundstart.ogg',
 		)
-
 	SEND_SOUND(world, sound(round_end_sound))
 	text2file(login_music, "data/last_round_lobby_music.txt")
