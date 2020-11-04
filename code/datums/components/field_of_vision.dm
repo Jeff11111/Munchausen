@@ -98,7 +98,7 @@
 		if(M.client)
 			UnregisterSignal(M, list(COMSIG_ATOM_DIR_CHANGE, COMSIG_MOVABLE_MOVED, COMSIG_MOB_DEATH, COMSIG_LIVING_REVIVE))
 		M.hud_used?.fov_holder = null
-		M.hud_used?.show_hud()
+		M.hud_used?.show_hud(HUD_STYLE_STANDARD)
 		qdel(fov, TRUE) // Forced.
 		fov = null
 		QDEL_NULL(owner_mask)
@@ -150,7 +150,7 @@
 	if(M.client.view != "[current_fov_size[1]]x[current_fov_size[2]]")
 		resize_fov(current_fov_size, getviewsize(M.client.view))
 	M.hud_used?.fov_holder = fov
-	M.hud_used?.show_hud()
+	M.hud_used?.show_hud(HUD_STYLE_STANDARD)
 
 ///Rotates the shadow cone to a certain degree. Backend shenanigans.
 /datum/component/field_of_vision/proc/rotate_shadow_cone(new_angle)
