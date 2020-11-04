@@ -181,7 +181,7 @@
 	//Extra prob, multiplied by dexterity/MAX_STAT
 	var/extra_zone_prob = 50
 	//TEETH!
-	var/max_teeth = 0	
+	var/max_teeth = 0
 	var/datum/speech_mod/lisp/teeth_mod
 	var/obj/item/stack/teeth/teeth_object
 	//Specific dismemberment sounds
@@ -304,7 +304,7 @@
 
 	if(germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(virus_immunity*0.3))
 		germ_level--
-	
+
 	if(germ_level >= INFECTION_LEVEL_ONE/2)
 		//Warn the user that they're a bit fucked
 		if(prob(4) && germ_level < INFECTION_LEVEL_ONE)
@@ -316,14 +316,14 @@
 				germ_level += clamp(round(1/virus_immunity), 1, 10) //Immunity starts at 100. This doubles infection rate at 50% immunity. Rounded to nearest whole.
 			else //Will only trigger if immunity has hit zero. Once it does, 10x infection rate.
 				germ_level += 10
-	
+
 	if(germ_level >= INFECTION_LEVEL_ONE)
 		if(prob(6) && germ_level < INFECTION_LEVEL_TWO)
 			if(owner.stat != DEAD)
 				owner.custom_pain("Your [src.name] feels hotter than normal...", 12, FALSE, src)
 		var/fever_temperature = (BODYTEMP_HEAT_DAMAGE_LIMIT - BODYTEMP_NORMAL - 5)* min(germ_level/INFECTION_LEVEL_TWO, 1) + BODYTEMP_NORMAL
 		owner.bodytemperature += clamp((fever_temperature - T20C)/BODYTEMP_COLD_DIVISOR + 1, 0, fever_temperature - owner.bodytemperature)
-	
+
 	//Spread the infection to internal organs, child and parent bodyparts
 	if(germ_level >= INFECTION_LEVEL_TWO)
 		//Chance to cause minor toxin damage once every ~30 seconds
@@ -333,7 +333,7 @@
 		if(prob(8))
 			if(owner.stat != DEAD)
 				owner.custom_pain("Your [src.name] starts leaking some pus...", 18, FALSE, src)
-		
+
 		//Make internal organs become infected one at a time instead of all at once
 		var/obj/item/organ/target_organ
 		for(var/obj/item/organ/O in get_organs())
@@ -346,7 +346,7 @@
 		//Infect the target organ
 		if(target_organ)
 			target_organ.germ_level++
-		
+
 		//Spread the infection to child and parent organs
 		var/zones = list()
 		zones |= parent_bodyzone
@@ -365,7 +365,7 @@
 			if(owner.stat != DEAD)
 				owner.custom_pain("You can't feel your [name] anymore...", 21,  TRUE, src, FALSE)
 			update_disabled()
-		
+
 		germ_level++
 		receive_damage(toxin = 1)
 
@@ -378,10 +378,10 @@
 		original_species = owner.dna?.species
 		rejecting = 0
 		return
-	
+
 	if(is_robotic_limb() || is_synthetic_limb())
 		return
-	
+
 	if(original_dna)
 		if(!rejecting)
 			if(!(owner.dna.blood_type in get_safe_blood(original_dna?.blood_type)))
@@ -570,7 +570,7 @@
 	if(stamina_dam > DAMAGE_PRECISION)
 		. = TRUE
 	//else if.. else if.. so on.
-	else if(max(0, (get_pain() - owner?.chem_effects[CE_PAINKILLER]) > DAMAGE_PRECISION)
+	else if(max(0, (get_pain() - owner?.chem_effects[CE_PAINKILLER]) > DAMAGE_PRECISION))
 		. = TRUE
 	else if(tox_dam > DAMAGE_PRECISION)
 		. = TRUE
@@ -668,12 +668,12 @@
 	//If we have no wounds, nor germ level, no point in trying to update
 	if(!length(wounds) && !germ_level)
 		return
-	
+
 	//If we have antibiotics, then skip over, the infection is going away
 	var/antibiotics = owner.get_antibiotics()
 	if(antibiotics > 0)
 		return
-	
+
 	var/turf/open/floor/T = get_turf(owner)
 	var/owner_germ_level = 2*owner.germ_level
 	for(var/obj/item/embeddies in embedded_objects)
@@ -712,11 +712,11 @@
 /obj/item/bodypart/proc/receive_damage(brute = 0, burn = 0, stamina = 0, blocked = 0, updating_health = TRUE, required_status = null, wound_bonus = 0, bare_wound_bonus = 0, sharpness = SHARP_NONE, spread_damage = TRUE, pain = 0, toxin = 0, clone = 0)
 	if(!owner)
 		return FALSE
-	
+
 	var/hit_percent = (100-blocked)/100
 	if((!brute && !burn && !stamina && !pain && !toxin && !clone) || hit_percent <= 0)
 		return FALSE
-	
+
 	if(owner.status_flags & GODMODE)
 		return FALSE	//godmode
 
@@ -777,7 +777,7 @@
 				wounding_dmg *= 2
 			if(WOUND_PIERCE)
 				wounding_dmg *= 1.5
-	
+
 	//We check all wound-related traits to multiply damage adequately.
 	if(body_zone == BODY_ZONE_HEAD && HAS_TRAIT(owner, TRAIT_GLASSJAW))
 		wounding_dmg *= 2
@@ -787,7 +787,7 @@
 		wounding_dmg *= 2
 	if(wounding_type == WOUND_BURN && HAS_TRAIT(owner, TRAIT_EASYBURN))
 		wounding_dmg *= 2
-	
+
 	//Handling for bone only/flesh only/skin only/all of them targets
 	// if we're bone only, all cutting attacks go straight to the bone
 	if((bio_state & BIO_BONE) && !(bio_state & BIO_FLESH))
@@ -799,10 +799,10 @@
 			wounding_type = WOUND_BLUNT
 			if(!easy_dismember)
 				wounding_dmg *= 0.75
-		
+
 		if((mangled_state & BODYPART_MANGLED_BONE) && (try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus) || try_disembowel(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)))
 			return
-	
+
 	// slime people p much they dont have bone
 	else if((bio_state & BIO_FLESH) && !(bio_state & BIO_BONE))
 		if(wounding_type == WOUND_BLUNT)
@@ -811,7 +811,7 @@
 				wounding_dmg *= 0.5
 		else if(wounding_type == WOUND_PIERCE)
 			wounding_dmg *= 1.5 // it's easy to puncture into plain flesh
-		
+
 		if((mangled_state & BODYPART_MANGLED_MUSCLE) && (try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus) || try_disembowel(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)))
 			return
 
@@ -845,7 +845,7 @@
 			if(!easy_dismember)
 				wounding_dmg *= 0.5
 			wounding_type = WOUND_SLASH
-		
+
 		if(mangled_state & BODYPART_MANGLED_BOTH && (try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus) || try_disembowel(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)))
 			return
 	/*
@@ -863,14 +863,14 @@
 	pain += 0.7 * burn
 	pain += 0.6 * brute
 	pain += 0.5 * toxin
-	
+
 	//We damage the organs, if possible, before adding onto the limb's damage
 	//Doing so later would fuck up with calculations
 	damage_organs(brute = brute, burn = burn, toxin = toxin, clone = clone, wounding_type = wounding_type)
 
 	//Total damage used to calculate the can_inflicts
 	var/total_damage = brute + burn
-	
+
 	//How much we are actuallly allowed to inflict
 	var/can_inflict = max_damage - get_damage()
 	var/can_inflict_brute = max(0, (brute/max(1, total_damage)) * can_inflict)
@@ -887,7 +887,7 @@
 	var/extratoxin = max(0, toxin - can_inflict_toxin)
 	var/extraclone = max(0, clone - can_inflict_clone)
 	var/extrapain = max(0, pain - can_inflict_pain)
-	
+
 	if(stamina && (stamina > can_inflict_stamina))
 		stamina = can_inflict_stamina
 	if(toxin && (toxin > can_inflict_toxin))
@@ -896,11 +896,11 @@
 		clone = can_inflict_clone
 	if(pain && (pain > can_inflict_pain))
 		pain = can_inflict_pain
-	
+
 	if(total_damage && (total_damage > can_inflict))
 		brute = can_inflict_brute
 		burn = can_inflict_burn
-	
+
 	if(owner && spread_damage && (extrabrute || extraburn || extrastamina || extraclone || extrapain))
 		//We still have damage left. Time to spread.
 		//First we get the body zones.
@@ -911,7 +911,7 @@
 			spreadable_limbs |= parent_bodyzone
 		if(length(children_zones))
 			spreadable_limbs |= children_zones
-		
+
 		//We replace the body zones with the appropriate limbs
 		for(var/i in spreadable_limbs)
 			spreadable_limbs -= i
@@ -920,7 +920,7 @@
 				spreadable_limbs |= BP
 			else if(BP && ((BP.brute_dam + BP.burn_dam) >= BP.max_damage) && owner.get_bodypart(BP.dismember_bodyzone))
 				spreadable_limbs |= owner.get_bodypart(BP.dismember_bodyzone)
-		
+
 		//We have the limbs. Now we divide the damage appropriately between children and parent.
 		if(length(spreadable_limbs))
 			extrabrute = round(extrabrute/length(spreadable_limbs), 1)
@@ -942,7 +942,7 @@
 	if(!can_feel_pain())
 		//Or not - The trip was cut short
 		pain = 0
-	
+
 	pain_dam += (pain - (owner?.chem_effects[CE_PAINKILLER]/3))
 	if(extrapain && owner)
 		//extra pain - add it straight to the shock value
@@ -950,10 +950,10 @@
 
 	if(owner && pain && (pain >= (max_pain_damage * 0.5)) && prob(10))
 		owner.emote("agonyscream")
-	
+
 	if(owner && pain)
 		owner.flash_pain(min(round(pain/30) * 255, 255), 0, rand(1,4), pick(5,10))
-	
+
 	if((status & BODYPART_ROBOTIC) && owner)
 		if((brute+burn)>3 && prob((20+brute+burn)))
 			do_sparks(3,FALSE,src.owner)
@@ -972,7 +972,7 @@
 		if(pain > DAMAGE_PRECISION)
 			owner.update_pain()
 			. = TRUE
-	
+
 	consider_processing()
 	update_disabled()
 	return update_bodypart_damage_state() || .
@@ -1006,7 +1006,7 @@
 		phantom_wounding_dmg *= 2
 	if(wounding_type == WOUND_BURN && HAS_TRAIT(owner, TRAIT_EASYBURN))
 		phantom_wounding_dmg *= 2
-	
+
 	//Handling for bone only/flesh only/skin only/all of them targets
 	if((bio_state & BIO_BONE) && !(bio_state & BIO_FLESH)) // if we're bone only, all cutting attacks go straight to the bone
 		if(wounding_type == WOUND_SLASH)
@@ -1017,10 +1017,10 @@
 			wounding_type = WOUND_BLUNT
 			if(!easy_dismember)
 				phantom_wounding_dmg *= 0.75
-		
+
 		if((mangled_state & BODYPART_MANGLED_BONE) && (try_dismember(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus) || try_disembowel(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus)))
 			return
-	
+
 	// slime people p much, they dont have bone
 	else if((bio_state & BIO_FLESH) && !(bio_state & BIO_BONE))
 		if(wounding_type == WOUND_BLUNT)
@@ -1062,7 +1062,7 @@
 			if(!easy_dismember)
 				phantom_wounding_dmg *= 0.5
 			wounding_type = WOUND_SLASH
-		
+
 		if((mangled_state & BODYPART_MANGLED_BOTH) && (try_dismember(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus) || try_disembowel(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus)))
 			return
 
@@ -1077,7 +1077,7 @@
 			internal_organs[O] = O.relative_size
 	if(!length(internal_organs) || (!brute && !burn && !toxin && !clone))
 		return
-	
+
 	var/broken = is_broken()
 	var/initial_damage_amt = brute
 	var/cur_damage = brute_dam
@@ -1092,7 +1092,7 @@
 		//Clone damage makes you way more likely to get your organs fricked up
 		//Think of it as cancer
 		cur_damage += clone
-	
+
 	var/damage_amt = initial_damage_amt
 	var/organ_damage_threshold = organ_damage_hit_minimum
 	var/organ_damage_required = organ_damage_requirement
@@ -1110,12 +1110,12 @@
 		organ_damage_required = max(1, organ_damage_required - (organ_damage_requirement * W.organ_required_reduction))
 	if(!(cur_damage + damage_amt >= organ_damage_required) && !(damage_amt >= organ_damage_threshold))
 		return FALSE
-	
+
 	var/organ_hit_chance = (25 * damage_amt/organ_damage_threshold)
 
 	if(encased && !broken)
 		organ_hit_chance *= 0.6
-	
+
 	organ_hit_chance = CEILING(organ_hit_chance, 1)
 	organ_hit_chance = min(organ_hit_chance, 100)
 
@@ -1156,14 +1156,14 @@
 				owner.cure_husk(0) // If it has REVIVESBYHEALING, it probably can't be cloned. No husk cure.
 	consider_processing()
 	update_disabled()
-	return update_bodypart_damage_state() 
+	return update_bodypart_damage_state()
 
 //Filters toxins into the organs
 /obj/item/bodypart/proc/filter_toxins(toxins = 0, only_robotic = FALSE, only_organic = FALSE, updating_health = FALSE)
 	toxins = clamp(toxins, 0, max(0, tox_dam))
 	if(!toxins || !owner)
 		return
-	
+
 	// Heal the bodypart toxin damage.
 	var/tox_before = tox_dam
 	heal_damage(toxin = toxins, only_robotic = only_robotic, only_organic = only_organic, updating_health = updating_health)
@@ -1187,22 +1187,22 @@
 	if(kidneys && (kidneys in pick_organs))
 		pick_organs -= kidneys
 		pick_organs.Insert(1, kidneys)
-	
+
 	// Brain damage literally kills us, so we damage the brain last
 	var/obj/item/organ/brain/brain = owner.getorganslot(ORGAN_SLOT_BRAIN)
 	if(brain && (brain in pick_organs))
 		pick_organs -= brain
 		pick_organs += brain
-	
+
 	for(var/obj/item/organ/O in pick_organs)
 		if(toxins <= 0)
 			break
-		
+
 		var/cap_damage = (O.maxHealth - O.damage)
 		O.applyOrganDamage(min(cap_damage, toxins * O.toxin_multiplier))
 		if(toxins > cap_damage)
 			toxins -= cap_damage
-	
+
 	// Well... shit, we ran through our organs but we still need to dish out pain.
 	// We run another cycle through all of the organs
 	if(toxins > 0)
@@ -1216,7 +1216,7 @@
 		for(var/obj/item/organ/O in pick_organs)
 			if(toxins <= 0)
 				break
-			
+
 			var/cap_damage = (O.maxHealth - O.damage)
 			O.applyOrganDamage(min(cap_damage, toxins))
 			if(toxins > cap_damage)
@@ -1307,7 +1307,7 @@
 				owner?.emote("scream")
 			return BODYPART_DISABLED_DAMAGE
 		if(stamina_dam >= max_stamina_damage)
-			return BODYPART_DISABLED_DAMAGE	
+			return BODYPART_DISABLED_DAMAGE
 		if((get_pain() - owner?.chem_effects[CE_PAINKILLER]) >= pain_disability_threshold)
 			return BODYPART_DISABLED_PAIN
 		if(disabled && (get_damage(include_stamina = TRUE) <= (max_damage * 0.8)) && (pain_dam < pain_disability_threshold)) // reenabled at 80% now instead of 50% as of wounds update
@@ -1504,10 +1504,10 @@
 			if(!organic)
 				wounds_checking = WOUND_LIST_BURN_MECHANICAL
 			check_gauze = TRUE
-	
+
 	if(!length(wounds_checking))
 		return
-	
+
 	//check if there's gauze, and if we should destroy or damage it, before we apply any wounds
 	if(current_gauze && check_gauze)
 		if(prob(base_roll/4))
@@ -1522,7 +1522,7 @@
 				owner.visible_message("<span class='danger'>\The [current_gauze] on [owner]'s [src.name] falls off!</span>", "<span class='userdanger'>\The [current_gauze] on your [src.name] falls off!</span>")
 				current_gauze.add_mob_blood(owner)
 				remove_gauze(drop_gauze = TRUE)
-		
+
 		else if(prob(base_roll))
 			owner.visible_message("<span class='boldwarning'>\The [current_gauze] on [owner]'s [src.name] tears up a bit!</span>", "<span class='danger'>\The [current_gauze] on your [src.name] tears up a bit!</span>")
 			for(var/i in wounds)
@@ -1609,7 +1609,7 @@
 /obj/item/bodypart/proc/check_woundings_mods(wounding_type, damage, wound_bonus, bare_wound_bonus)
 	var/armor_ablation = 0
 	var/injury_mod = 0
-	
+
 	if(owner && ishuman(owner))
 		var/mob/living/carbon/human/H = owner
 		var/list/clothing = H.clothingonpart(src)
@@ -1663,7 +1663,7 @@
 	// we can (normally) only have one wound per type, but remember there's multiple types (smites like :B:loodless can generate multiple cuts on a limb)
 	for(var/datum/wound/W in wounds)
 		dam_mul *= W.damage_multiplier_penalty
-	
+
 	if(!LAZYLEN(wounds) && current_gauze && !replaced && (current_gauze.absorption_capacity <= 0))
 		owner.visible_message("<span class='notice'>\The [current_gauze] on [owner]'s [name] fall away.</span>", "<span class='notice'>The [current_gauze] on your [name] fall away.</span>")
 		remove_gauze(drop_gauze = FALSE)
@@ -1678,7 +1678,7 @@
 	var/bleed_rate = 0
 	if(generic_bleedstacks > 0)
 		bleed_rate++
-	
+
 	//We want an accurate reading of .len
 	listclearnulls(embedded_objects)
 	for(var/obj/item/embeddies in embedded_objects)
@@ -1689,10 +1689,10 @@
 		var/datum/wound/W = thing
 		if(istype(W))
 			bleed_rate += W.blood_flow
-	
+
 	if(current_gauze)
 		bleed_rate = max(0, bleed_rate - current_gauze.absorption_rate)
-	
+
 	if(owner.mobility_flags & ~MOBILITY_STAND)
 		bleed_rate *= 0.75
 
@@ -1716,14 +1716,14 @@
 /obj/item/bodypart/proc/remove_gauze(drop_gauze = FALSE)
 	if(!current_gauze)
 		return
-	
+
 	if(!drop_gauze)
 		QDEL_NULL(current_gauze)
 	else
 		var/turf/drop = get_turf(src)
 		current_gauze.forceMove(drop)
 		current_gauze = null
-	
+
 	if(!owner)
 		update_icon_dropped()
 	else
@@ -1771,7 +1771,7 @@
 		no_update = TRUE
 		body_markings = "husk" // reeee
 		aux_marking = "husk"
-	
+
 	if(no_update)
 		return
 
@@ -1997,7 +1997,7 @@
 			else
 				marking = image(body_markings_icon, "[body_markings]_[digitigrade_type]_[use_digitigrade]_[body_zone]", -MARKING_LAYER, image_dir)
 			. += marking
-		
+
 	if(color_src) //TODO - add color matrix support for base species limbs
 		var/draw_color = mutation_color || species_color
 		var/grayscale = FALSE
@@ -2029,5 +2029,5 @@
 					marking.color = "#141414"
 				else
 					marking.color = list(markings_color)
-	
+
 	return
