@@ -12,6 +12,7 @@
 				"Big big chungus!",
 				)
 	var/chungus_music = 'modular_skyrat/sound/chungus/bigchungus.ogg'
+	speak_chance = 20
 
 /mob/living/simple_animal/pet/chungus/BiologicalLife(seconds, times_fired)
 	. = ..()
@@ -59,9 +60,9 @@
 		say("[message] [capitalize(pick(cringe))]!", forced = TRUE)
 		//do the funny laugh
 		playsound(src, pick(funny), 65, 0)
-		//give xom glasses for 2.5 seconds after shitposting
+		//give xom glasses for 3 seconds after shitposting
 		icon_state = icon_state_cool
-		addtimer(CALLBACK(src, .proc/not_cool), 2.5 SECONDS)
+		addtimer(CALLBACK(src, .proc/not_cool), 3 SECONDS)
 
 /mob/living/simple_animal/pet/chungus/xom/proc/not_cool()
 	icon_state = initial(icon_state)
