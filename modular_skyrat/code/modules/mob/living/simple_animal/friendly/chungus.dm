@@ -53,7 +53,8 @@
 				if(nlog_type & LOG_SAY)
 					var/list/reversed = log_source[log_type]
 					if(islist(reversed))
-						possible_messages |= reverseRange(reversed.Copy())
+						for(var/i in reversed)
+							possible_messages |= reversed[i]
 						break
 		if(length(possible_messages))
 			message = pick(possible_messages)
