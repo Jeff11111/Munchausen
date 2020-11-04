@@ -193,6 +193,7 @@
 	var/assignment = null
 	var/access_txt // mapping aid
 	var/bank_support = ID_FREE_BANK_ACCOUNT
+	var/can_withdraw = FALSE //Can you take money from this ID, directly?
 	var/datum/bank_account/registered_account
 	var/obj/machinery/paystand/my_store
 	var/uses_overlays = TRUE
@@ -339,7 +340,7 @@
 
 /obj/item/card/id/AltClick(mob/living/user)
 	. = ..()
-	if(!bank_support || !alt_click_can_use_id(user))
+	if(!can_withdraw || !bank_support || !alt_click_can_use_id(user))
 		return
 
 	if(!registered_account && bank_support == ID_FREE_BANK_ACCOUNT)
