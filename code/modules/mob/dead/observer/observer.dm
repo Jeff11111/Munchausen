@@ -54,8 +54,8 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	// of the mob
 	var/deadchat_name
 	var/datum/spawners_menu/spawners_menu
-	// copying the appearance of the human mob
-	var/mutable_appearance/human_appearance
+	// copying the appearance of the mob
+	var/mutable_appearance/body_appearance
 
 /mob/dead/observer/Initialize(mapload, mob/body)
 	set_invisibility(GLOB.observer_default_invisibility)
@@ -92,20 +92,20 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 
 		suiciding = body.suiciding // Transfer whether they committed suicide.
 
-		if(ishuman(body))
-			//Human body! Let's copy their appearance.
+		if(isliving(body))
+			//A body! Let's copy their appearance.
 			icon_state = ""
-			var/mob/living/carbon/human/body_human = body
-			human_appearance = copy_appearance(body_human.appearance)
-			appearance = human_appearance
+			var/mob/living/living_body = body
+			body_appearance = copy_appearance(living_body.appearance)
+			appearance = body_appearance
 		else
 			//Shit, try to make a humie to copy from
 			var/datum/preferences/prefs = body?.client?.prefs
 			if(prefs)
 				var/mob/living/carbon/human/H = new(src)
 				prefs.copy_to(H)
-				human_appearance = copy_appearance(H.appearance)
-				appearance = human_appearance
+				body_appearance = copy_appearance(H.appearance)
+				appearance = body_appearance
 				qdel(H)
 		
 	update_icon()
@@ -237,14 +237,14 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 		else
 			ghostimage_default.icon_state = new_form
 	
-	if(!human_appearance)
+	if(!body_appearance)
 		if(ghost_accs >= GHOST_ACCS_DIR && (icon_state in GLOB.ghost_forms_with_directions_list)) //if this icon has dirs AND the client wants to show them, we make sure we update the dir on movement
 			updatedir = 1
 		else
 			updatedir = 0	//stop updating the dir in case we want to show accessories with dirs on a ghost sprite without dirs
 			setDir(2 		)//reset the dir to its default so the sprites all properly align up
 
-	if(!human_appearance)
+	if(!body_appearance)
 		if(ghost_accs == GHOST_ACCS_FULL && (icon_state in GLOB.ghost_forms_with_accessories_list)) //check if this form supports accessories and if the client wants to show them
 			var/datum/sprite_accessory/S
 			if(facial_hair_style)
@@ -264,7 +264,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 					hair_overlay.alpha = 200
 					add_overlay(hair_overlay)
 	else
-		appearance = human_appearance
+		appearance = body_appearance
 		icon_state = ""
 		updatedir = TRUE
 
