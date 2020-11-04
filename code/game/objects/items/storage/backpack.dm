@@ -206,9 +206,10 @@
 	worn_access = TRUE
 
 /obj/item/storage/backpack/satchel/ComponentInitialize()
-	. = ..()
+	..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_combined_w_class = 12
+	if(STR)
+		STR.max_combined_w_class = 12
 
 /obj/item/storage/backpack/satchel/leather
 	name = "leather satchel"
