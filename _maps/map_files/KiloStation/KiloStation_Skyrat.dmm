@@ -559,6 +559,14 @@
 /obj/effect/landmark/start/prisoner/prilate,
 /turf/open/floor/plasteel/showroomfloor,
 /area/security/prison)
+"abi" = (
+/obj/structure/rack,
+/turf/open/floor/plasteel/dark,
+/area/ai_monitored/security/armory)
+"abj" = (
+/obj/structure/rack,
+/turf/open/floor/plasteel/showroomfloor,
+/area/ai_monitored/security/armory)
 "abk" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable{
@@ -711,6 +719,13 @@
 	},
 /turf/open/floor/engine,
 /area/ai_monitored/turret_protected/ai)
+"abA" = (
+/obj/structure/closet/secure_closet{
+	name = "shotgun rubber rounds";
+	req_access_txt = "1"
+	},
+/turf/open/floor/plasteel/dark,
+/area/ai_monitored/security/armory)
 "abB" = (
 /obj/machinery/flasher{
 	id = "AI";
@@ -736,6 +751,16 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/starboard)
+"abE" = (
+/obj/structure/rack,
+/obj/item/gun/energy/ionrifle{
+	pixel_y = 4
+	},
+/obj/item/radio/intercom{
+	pixel_y = -28
+	},
+/turf/open/floor/plasteel/dark,
+/area/ai_monitored/security/armory)
 "abF" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable{
@@ -4951,10 +4976,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/science/robotics/mechbay)
-"akC" = (
-/obj/structure/closet/secure_closet/lethalshots,
-/turf/open/floor/plasteel/dark,
-/area/ai_monitored/security/armory)
 "akD" = (
 /obj/machinery/power/smes,
 /obj/structure/cable{
@@ -5305,7 +5326,6 @@
 	name = "Lia's bed"
 	},
 /mob/living/simple_animal/hostile/retaliate/bat{
-	!INVALID_VAR! = "pets";
 	desc = "A failed experiment of Nanotrasen to create weaponised carp technology. This less than intimidating carp now serves as an authority figure's pet.";
 	emote_taunt = list("gnashes");
 	faction = list("carp");
@@ -5411,75 +5431,6 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/department/electrical)
-"alv" = (
-/obj/structure/rack,
-/obj/item/clothing/suit/armor/riot{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/clothing/suit/armor/riot,
-/obj/item/clothing/suit/armor/riot{
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/obj/item/clothing/head/helmet/riot{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/clothing/head/helmet/riot,
-/obj/item/clothing/head/helmet/riot{
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/obj/item/shield/riot{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/shield/riot,
-/obj/item/shield/riot{
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/turf/open/floor/plasteel/dark,
-/area/ai_monitored/security/armory)
-"alx" = (
-/obj/structure/rack,
-/obj/item/gun/energy/e_gun{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/gun/energy/e_gun,
-/obj/item/gun/energy/e_gun{
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/turf/open/floor/plasteel/showroomfloor,
-/area/ai_monitored/security/armory)
-"aly" = (
-/obj/structure/rack,
-/obj/item/gun/energy/laser{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/gun/energy/laser,
-/obj/item/gun/energy/laser{
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/turf/open/floor/plasteel/showroomfloor,
-/area/ai_monitored/security/armory)
 "alz" = (
 /obj/structure/closet/secure_closet/security/sec,
 /obj/machinery/status_display/evac{
@@ -5629,23 +5580,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/security/warden)
-"alS" = (
-/obj/structure/rack,
-/obj/item/gun/energy/disabler{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/gun/energy/disabler,
-/obj/item/gun/energy/disabler{
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/turf/open/floor/plasteel/showroomfloor,
-/area/ai_monitored/security/armory)
 "alT" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 10
@@ -6063,18 +5997,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/maintenance/fore)
-"amM" = (
-/obj/structure/rack,
-/obj/item/gun/energy/ionrifle{
-	pixel_y = 4
-	},
-/obj/item/gun/energy/temperature/security,
-/obj/item/clothing/suit/armor/laserproof,
-/obj/item/radio/intercom{
-	pixel_y = -28
-	},
-/turf/open/floor/plasteel/dark,
-/area/ai_monitored/security/armory)
 "amN" = (
 /obj/structure/sign/warning/securearea,
 /turf/closed/wall/r_wall,
@@ -11958,32 +11880,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/medical/morgue)
-"azo" = (
-/obj/structure/rack,
-/obj/item/clothing/suit/armor/bulletproof{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/clothing/suit/armor/bulletproof,
-/obj/item/clothing/suit/armor/bulletproof{
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/obj/item/clothing/head/helmet/alt{
-	layer = 3.00001;
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/clothing/head/helmet/alt{
-	layer = 3.00001
-	},
-/obj/item/clothing/head/helmet/alt{
-	layer = 3.00001;
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/turf/open/floor/plasteel/dark,
-/area/ai_monitored/security/armory)
 "azp" = (
 /obj/machinery/airalarm{
 	dir = 4;
@@ -14868,31 +14764,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/security/warden)
-"aEX" = (
-/obj/item/storage/box/rubbershot{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/storage/box/rubbershot{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/storage/box/rubbershot,
-/obj/item/storage/box/rubbershot,
-/obj/item/storage/box/rubbershot{
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/obj/item/storage/box/rubbershot{
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/obj/structure/closet/secure_closet{
-	name = "shotgun rubber rounds";
-	req_access_txt = "1"
-	},
-/turf/open/floor/plasteel/dark,
-/area/ai_monitored/security/armory)
 "aEY" = (
 /obj/effect/turf_decal/tile/purple{
 	dir = 1
@@ -27763,17 +27634,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/science/research)
-"bdK" = (
-/obj/structure/rack,
-/obj/item/gun/energy/e_gun/dragnet{
-	pixel_x = -4;
-	pixel_y = 4
-	},
-/obj/item/gun/energy/e_gun/dragnet,
-/obj/item/gun/energy/e_gun/advtaser,
-/obj/item/gun/energy/e_gun/advtaser,
-/turf/open/floor/plasteel/dark,
-/area/ai_monitored/security/armory)
 "bdL" = (
 /obj/effect/turf_decal/tile/red,
 /obj/effect/turf_decal/tile/red{
@@ -88599,10 +88459,10 @@ cIZ
 amI
 aka
 akV
-azo
-alv
+abi
+abi
 alP
-aEX
+abA
 aCF
 anG
 aeu
@@ -88855,7 +88715,7 @@ aiS
 ccO
 cee
 aka
-akC
+alP
 chc
 cil
 cil
@@ -89114,10 +88974,10 @@ cea
 bPI
 cgt
 chd
-alx
+abj
 aCz
 ckT
-bdK
+abi
 aka
 aeu
 aeu
@@ -89371,10 +89231,10 @@ ceb
 cDH
 cgv
 che
-aly
-alS
+abj
+abj
 ckT
-amM
+abE
 aka
 aeu
 aeu

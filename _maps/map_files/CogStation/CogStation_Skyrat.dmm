@@ -191,13 +191,10 @@
 /turf/open/floor/plating,
 /area/hallway/secondary/service)
 "aaC" = (
-/obj/structure/closet/secure_closet/lethalshots,
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
 	},
 /obj/item/storage/box/firingpins,
-/obj/item/storage/box/firingpins,
-/obj/effect/spawner/lootdrop/armory_contraband/metastation,
 /turf/open/floor/plasteel,
 /area/ai_monitored/security/armory)
 "aaD" = (
@@ -242,13 +239,6 @@
 	pixel_x = 22
 	},
 /obj/structure/rack,
-/obj/item/gun/energy{
-	pixel_y = -6
-	},
-/obj/item/gun/energy{
-	pixel_y = -3
-	},
-/obj/item/gun/energy,
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/security/armory)
 "aaI" = (
@@ -501,15 +491,6 @@
 	pixel_y = 24
 	},
 /obj/structure/rack,
-/obj/item/gun/energy/laser{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/gun/energy/laser,
-/obj/item/gun/energy/laser{
-	pixel_x = 3;
-	pixel_y = -3
-	},
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/security/armory)
 "abm" = (
@@ -521,10 +502,6 @@
 	dir = 4
 	},
 /obj/structure/rack,
-/obj/item/gun/ballistic/shotgun/riot{
-	pixel_y = 6
-	},
-/obj/item/gun/ballistic/shotgun/riot,
 /obj/item/gun/ballistic/shotgun/riot{
 	pixel_y = -6
 	},
@@ -543,15 +520,6 @@
 /obj/structure/table,
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
-	},
-/obj/item/storage/box/rubbershot{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/storage/box/rubbershot,
-/obj/item/storage/box/rubbershot{
-	pixel_x = 3;
-	pixel_y = -3
 	},
 /turf/open/floor/plasteel,
 /area/ai_monitored/security/armory)
@@ -590,28 +558,6 @@
 	dir = 8
 	},
 /obj/structure/rack,
-/obj/item/clothing/suit/armor/bulletproof{
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/clothing/suit/armor/bulletproof,
-/obj/item/clothing/suit/armor/bulletproof{
-	pixel_x = 3;
-	pixel_y = -3
-	},
-/obj/item/clothing/head/helmet/alt{
-	layer = 3.00001;
-	pixel_x = -3;
-	pixel_y = 3
-	},
-/obj/item/clothing/head/helmet/alt{
-	layer = 3.00001
-	},
-/obj/item/clothing/head/helmet/alt{
-	layer = 3.00001;
-	pixel_x = 3;
-	pixel_y = -3
-	},
 /turf/open/floor/plasteel,
 /area/ai_monitored/security/armory)
 "abx" = (
@@ -754,10 +700,6 @@
 /obj/item/gun/energy/ionrifle{
 	pixel_y = 4
 	},
-/obj/item/gun/energy/temperature/security{
-	pixel_y = -4
-	},
-/obj/item/clothing/suit/armor/laserproof,
 /turf/open/floor/plasteel,
 /area/ai_monitored/security/armory)
 "abQ" = (
@@ -905,33 +847,9 @@
 /turf/open/floor/plating/airless,
 /area/router/aux)
 "ack" = (
+/obj/structure/rack,
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
-	},
-/obj/structure/rack,
-/obj/item/clothing/suit/armor/riot,
-/obj/item/clothing/suit/armor/riot,
-/obj/item/clothing/suit/armor/riot,
-/obj/item/clothing/head/helmet/riot,
-/obj/item/clothing/head/helmet/riot,
-/obj/item/clothing/head/helmet/riot,
-/obj/item/shield/riot{
-	pixel_x = -6
-	},
-/obj/item/shield/riot{
-	pixel_x = -6
-	},
-/obj/item/shield/riot{
-	pixel_x = -6
-	},
-/obj/item/clothing/mask/gas/sechailer/swat{
-	pixel_x = -4
-	},
-/obj/item/clothing/mask/gas/sechailer/swat{
-	pixel_x = -4
-	},
-/obj/item/clothing/mask/gas/sechailer/swat{
-	pixel_x = -4
 	},
 /turf/open/floor/plasteel,
 /area/ai_monitored/security/armory)
@@ -1038,20 +956,6 @@
 	},
 /turf/open/floor/plating/airless,
 /area/router/aux)
-"acy" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 8
-	},
-/obj/item/gun/energy/e_gun/advtaser{
-	pixel_y = 6
-	},
-/obj/item/gun/energy/e_gun/advtaser,
-/obj/item/gun/energy/e_gun/advtaser{
-	pixel_y = -6
-	},
-/obj/structure/rack,
-/turf/open/floor/plasteel,
-/area/ai_monitored/security/armory)
 "acz" = (
 /obj/machinery/mass_driver{
 	dir = 4;
@@ -96552,7 +96456,7 @@ abk
 abo
 abw
 abP
-acy
+abw
 aaA
 adb
 anU
