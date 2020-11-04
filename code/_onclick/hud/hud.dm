@@ -213,6 +213,9 @@ GLOBAL_LIST_INIT(modular_ui_styles, list(
 			//skyrat edit
 			if(extra_inventory.len)
 				screenmob.client.screen -= extra_inventory
+			if(noise_filter)
+				noise_filter.update_for_view(screenmob.client.view)
+				screenmob.client.screen += noise_filter
 			if(fov_holder)
 				screenmob.client.screen += fov_holder
 			//
@@ -242,7 +245,8 @@ GLOBAL_LIST_INIT(modular_ui_styles, list(
 			if(redpains)
 				screenmob.client.screen -= redpains
 			if(noise_filter)
-				screenmob.client.screen -= noise_filter
+				noise_filter.update_for_view(screenmob.client.view)
+				screenmob.client.screen += noise_filter
 			if(fov_holder)
 				screenmob.client.screen += fov_holder
 			//
