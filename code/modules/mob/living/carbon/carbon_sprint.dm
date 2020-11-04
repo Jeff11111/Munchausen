@@ -44,8 +44,8 @@
 			to_chat(src, "<span class='danger'>I can't sprint without a [parse_zone(bodypart_check)]!</span>")
 			return FALSE
 		//If we are not under painkillers, add the pain
-		if((big_walka.get_pain() - (chem_effects[CE_PAINKILLER]/max(1, length(bodyparts)))) > 0)
-			leg_pain += (big_walka.get_pain() - (chem_effects[CE_PAINKILLER]/max(1, length(bodyparts))))
+		if((big_walka.get_pain() - chem_effects[CE_PAINKILLER]) > 0)
+			leg_pain += (big_walka.get_pain() - chem_effects[CE_PAINKILLER])
 	if(leg_pain >= SHOCK_STAGE_2)
 		to_chat(src, "<span class'danger'>It hurts to walk, let alone sprint!</span>")
 		return FALSE

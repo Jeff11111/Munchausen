@@ -647,7 +647,7 @@
 		total_brute	+= (BP.brute_dam * BP.body_damage_coeff)
 		total_burn	+= (BP.burn_dam * BP.body_damage_coeff)
 		total_stamina += (BP.stamina_dam * BP.stam_damage_coeff)
-		total_pain += max(0, (BP.get_pain() - (chem_effects[CE_PAINKILLER]/max(1, length(bodyparts)))) * BP.pain_damage_coeff)
+		total_pain += max(0, (BP.get_pain() - chem_effects[CE_PAINKILLER]) * BP.pain_damage_coeff)
 		total_clone += (BP.clone_dam * BP.body_damage_coeff)
 		total_pain += (BP.tox_dam * BP.body_damage_coeff)
 	health = round(maxHealth - getOxyLoss() - getToxLoss() - getCloneLoss() - total_burn - total_brute, DAMAGE_PRECISION)

@@ -1134,7 +1134,7 @@
 		return
 	var/stambufferinfluence = (bufferedstam*(100/stambuffer))*0.2 //CIT CHANGE - makes stamina buffer influence movedelay
 	if(!HAS_TRAIT(src, TRAIT_IGNOREDAMAGESLOWDOWN))	//if we want to ignore slowdown from damage, but not from equipment
-		var/health = ((maxHealth + stambufferinfluence) - getPainLoss() - (getStaminaLoss()*0.75))//CIT CHANGE - reduces the impact of staminaloss and makes stamina buffer influence it
+		var/health = ((maxHealth + stambufferinfluence) - get_shock() - (getStaminaLoss()*0.75))//CIT CHANGE - reduces the impact of staminaloss and makes stamina buffer influence it
 		if(health < (maxHealth - PAIN_GIVES_IN))
 			add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown, TRUE, ((maxHealth-health)-39) / 75)
 			add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown_flying, TRUE, ((maxHealth-health)-39) / 25)

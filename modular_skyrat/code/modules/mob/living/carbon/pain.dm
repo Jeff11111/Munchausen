@@ -8,9 +8,9 @@
 		return
 	
 	//Great amounts of pain hinder your stamina
-	if(getPainLoss() >= 25 && !lying)
-		var/max_payne = getPainLoss()
-		adjustStaminaLossBuffered(round(max_payne/5))
+	if(get_shock() >= 30 && !lying)
+		var/max_payne = get_shock()
+		adjustStaminaLossBuffered(round(max_payne/15))
 	
 	var/maxdam = 0
 	var/obj/item/bodypart/damaged_bodypart = null
@@ -123,7 +123,7 @@
 	if(stat != DEAD)
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF))
 			if(!(ROBOTIC_LIMBS in dna?.species?.species_traits))
-				switch(getPainLoss() - chem_effects[CE_PAINKILLER])
+				switch(get_shock())
 					if(-INFINITY to 5) //pain0
 						msg += "<span class='nicegreen'>I feel healthy.</span>\n"
 					if(5 to 15) //pain1
@@ -139,7 +139,7 @@
 					if(75 to INFINITY) //pain6
 						msg += "<span class='bigdanger'>I want to die!</span>\n"
 			else
-				switch(getPainLoss() - chem_effects[CE_PAINKILLER])
+				switch(get_shock())
 					if(-INFINITY to 5) //pain0
 						msg += "<span class='nicegreen'>All systems nominal.</span>\n"
 					if(5 to 15) //pain1
@@ -169,7 +169,7 @@
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF))
 			var/list/damaged_bodyparts = list()
 			for(var/obj/item/bodypart/BP in bodyparts)
-				var/bpain = max(0, BP.get_pain() - (chem_effects[CE_PAINKILLER]/max(1, length(bodyparts))))
+				var/bpain = max(0, BP.get_pain() - chem_effects[CE_PAINKILLER])
 				if(!BP.is_robotic_limb())
 					if(bpain >= BP.max_damage)
 						damaged_bodyparts += "<span class='bigdanger'>I want to tear my [BP.name] off!</span>\n"
@@ -226,7 +226,7 @@
 		var/datum/stats/end/end = GET_STAT(src, end)
 		if(end)
 			traumatic_shock *= end.get_shock_mult()
-	traumatic_shock -= chem_effects[CE_PAINKILLER]/2
+	traumatic_shock -= chem_effects[CE_PAINKILLER]
 	return max(0,traumatic_shock)
 
 /mob/living/carbon/proc/InShock()
