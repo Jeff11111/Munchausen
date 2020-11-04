@@ -35,6 +35,8 @@
 		'modular_skyrat/sound/cultiste/cultiste_rire_6.ogg',
 	)
 
+/mob/living/simple_animal/pet/chungus/xom/verb/say_something_funny()
+
 /mob/living/simple_animal/pet/chungus/xom/handle_automated_speech(override)
 	set waitfor = FALSE
 	if(prob(speak_chance) || override)
@@ -58,9 +60,14 @@
 		if(config.punctuation_filter && !findtext(message, config.punctuation_filter, length(message)) && !findtext(message, config.punctuation_filter, 1, 2))
 			message += "."
 		say("[message] [capitalize(pick(cringe))]!", forced = TRUE)
-		//do the funny laugh
-		playsound(src, pick(funny), 65, 0)
 		//give xom glasses for 3 seconds after shitposting
+		icon_state = icon_state_cool
+		addtimer(CALLBACK(src, .proc/not_cool), 3 SECONDS)
+
+/mob/living/simple_animal/pet/chungus/xom/say(message, bubble_type, list/spans, sanitize, datum/language/language, ignore_spam, forced)
+	//do the funny laugh
+	playsound(src, pick(funny), 65, 0)
+	if(client)
 		icon_state = icon_state_cool
 		addtimer(CALLBACK(src, .proc/not_cool), 3 SECONDS)
 

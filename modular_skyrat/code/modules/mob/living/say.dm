@@ -7,7 +7,7 @@
 	//force punctuation bich
 	if(config.punctuation_filter && !findtext(message, config.punctuation_filter, length(message)) && !findtext(message, config.punctuation_filter, 1, 2))
 		message += "."
-	if((GET_SKILL_LEVEL(src, gaming) < JOB_SKILLPOINTS_TRAINED) && config.ic_filter_regex && findtext(message, config.ic_filter_regex))
+	if(!forced && (GET_SKILL_LEVEL(src, gaming) < JOB_SKILLPOINTS_TRAINED) && config.ic_filter_regex && findtext(message, config.ic_filter_regex))
 		// let's try to be a bit more informative!
 		var/warning_message = "A splitting spike of headache prevents you from saying whatever vile words you planned to say! You think better of saying such nonsense again. The following terms repulse you: \""
 		var/list/words = splittext(message, " ")
