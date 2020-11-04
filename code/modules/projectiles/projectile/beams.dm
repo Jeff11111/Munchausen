@@ -19,7 +19,8 @@
 
 /obj/item/projectile/beam/Initialize()
 	 . = ..()
-	 AddComponent(/datum/component/overlay_lighting, light_color, 2, 1)
+	if(light_color)
+		AddComponent(/datum/component/overlay_lighting, light_color, 2, 1)
 
 /obj/item/projectile/beam/laser
 	tracer_type = /obj/effect/projectile/tracer/laser

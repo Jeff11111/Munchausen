@@ -21,6 +21,7 @@
 	pixels_per_second = TILES_TO_PIXELS(22) //very fast lol
 	impact_effect_type = null
 	impact_type = null
+	light_color = null
 	eyeblur = 2
 
 //makeshift laser rifle
