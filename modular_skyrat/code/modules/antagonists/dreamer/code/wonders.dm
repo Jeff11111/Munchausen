@@ -10,6 +10,8 @@
 				)
 	category = CAT_PRIMAL
 	always_availible = FALSE
+	skill_required = null
+	stat_required = null
 
 //Crafting recipes do not support singleton names. I had to do stupid.
 /datum/crafting_recipe/wonder/proc/update_global_wonder()
