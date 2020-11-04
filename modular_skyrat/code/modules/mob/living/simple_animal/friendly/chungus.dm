@@ -56,7 +56,7 @@
 			message = pick(possible_messages)
 		if(config.punctuation_filter && !findtext(message, config.punctuation_filter, length(message)) && !findtext(message, config.punctuation_filter, 1, 2))
 			message += "."
-		say("[message] [capitalize(pick(cringe))]!")
+		say("[message] [capitalize(pick(cringe))]!", forced = TRUE)
 		//do the funny laugh
 		playsound(src, pick(funny), 65, 0)
 		//give xom glasses for 2.5 seconds after shitposting
