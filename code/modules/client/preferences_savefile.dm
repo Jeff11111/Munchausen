@@ -535,7 +535,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["jumpsuit_style"]			>> jumpsuit_style
 	if(jumpsuit_style != PREF_SUIT)
 		jumpsuit_style = PREF_SUIT
-	S["uplink_loc"]				>> uplink_spawn_loc
 	/*S["custom_speech_verb"]		>> custom_speech_verb SKYRAT EDIT
 	S["custom_tongue"]			>> custom_tongue*/
 	S["feature_mcolor"]					>> features["mcolor"]
@@ -730,7 +729,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	features["wings_color"]			= sanitize_hexcolor(features["wings_color"], 3, FALSE, "FFFFFF")
 	backbag							= sanitize_inlist(backbag, GLOB.backbaglist, initial(backbag))
 	jumpsuit_style					= sanitize_inlist(jumpsuit_style, GLOB.jumpsuitlist, initial(jumpsuit_style))
-	uplink_spawn_loc				= sanitize_inlist(uplink_spawn_loc, GLOB.uplink_spawn_loc_list, initial(uplink_spawn_loc))
 	features["mcolor"]				= sanitize_hexcolor(features["mcolor"], 3, 0)
 	features["tail_lizard"]			= sanitize_inlist(features["tail_lizard"], GLOB.tails_list_lizard)
 	features["tail_human"]			= sanitize_inlist(features["tail_human"], GLOB.tails_list_human)
@@ -855,7 +853,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["socks_color"]				, socks_color)
 	WRITE_FILE(S["backbag"]					, backbag)
 	WRITE_FILE(S["jumpsuit_style"]			, jumpsuit_style)
-	WRITE_FILE(S["uplink_loc"]				, uplink_spawn_loc)
 	WRITE_FILE(S["species"]					, pref_species.id)
 	/*WRITE_FILE(S["custom_speech_verb"]		, custom_speech_verb) SKYRAT EDIT
 	WRITE_FILE(S["custom_tongue"]			, custom_tongue)*/

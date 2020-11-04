@@ -130,6 +130,7 @@ GLOBAL_LIST_EMPTY(uplinks)
 			if(old_discounts)
 				uplink_items["Discounted Gear"] = old_discounts
 		ui_interact(user)
+		SEND_SIGNAL(parent, COMSIG_COMPONENT_UPLINK_OPEN)
 
 	// an unlocked uplink blocks also opening the PDA or headset menu
 	return COMPONENT_NO_INTERACT
@@ -225,6 +226,7 @@ GLOBAL_LIST_EMPTY(uplinks)
 			telecrystals += hidden_crystals
 			hidden_crystals = 0
 			SStgui.close_uis(src)
+			SEND_SIGNAL(parent, COMSIG_COMPONENT_UPLINK_LOCK)
 		if("select")
 			selected_cat = params["category"]
 		if("compact_toggle")

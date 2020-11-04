@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(ticker)
 	var/event = 0
 
 	var/login_music							//music played in pregame lobby
-	var/round_start_sound = 'modular_skyrat/sounds/dementia/roundstart.ogg'	//music/jingle played when the round starts
+	var/round_start_sound = 'modular_skyrat/sound/dementia/roundstart.ogg'	//music/jingle played when the round starts
 	var/round_end_sound						//music/jingle played when the world reboots
 	var/round_end_sound_sent = TRUE			//If all clients have loaded it
 

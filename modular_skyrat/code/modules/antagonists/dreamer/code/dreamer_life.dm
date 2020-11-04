@@ -145,7 +145,7 @@ GLOBAL_LIST_INIT(dreamer_object_talk, world.file2list('modular_skyrat/code/modul
 		if(length(objects))
 			var/message
 			if(prob(66) || !length(last_words))
-				var/list/dreamer_hallu = GLOB.dreamer_visions.Copy()
+				var/list/dreamer_hallu = GLOB.dreamer_object_talk.Copy()
 				dreamer_hallu |= "[rand(0,9)][rand(0,9)][rand(0,9)][rand(0,9)]"
 				message = pick(dreamer_hallu)
 			else

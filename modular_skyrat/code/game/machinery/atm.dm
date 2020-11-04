@@ -3,19 +3,52 @@
 	desc = "A terminal that will allow you to access your bank account."
 	icon = 'modular_skyrat/icons/obj/machines/terminals.dmi'
 	icon_state = "atm"
-
+	var/datum/component/uplink/comicao_trading
 	var/obj/item/card/id/CID = null
+	var/agent = "BINGUS"
 	var/emagaccount = null
 	var/totalmoney = null
 
+/obj/machinery/atm/ComponentInitialize()
+	. = ..()
+	comicao_trading = AddComponent(/datum/component/uplink, null, TRUE, FALSE, /datum/game_mode/nuclear)
+	RegisterSignal(src, COMSIG_COMPONENT_UPLINK_LOCK, /atom/.proc/update_icon)
+	RegisterSignal(src, COMSIG_COMPONENT_UPLINK_OPEN, /atom/.proc/update_icon)
+
+/obj/machinery/atm/update_icon()
+	..()
+	if(!comicao_trading || comicao_trading.locked)
+		icon_state = initial(icon_state)
+	else
+		icon_state = "[initial(icon_state)]-borked"
+
 /obj/machinery/atm/attack_hand(mob/living/user)
 	. = ..()
-	playsound(src, 'modular_skyrat/sound/machinery/atmbeep2.ogg', 50)
-	to_chat(user, "<b>Station decrees:</b>")
-	for(var/i in SScommunications.decrees)
-		to_chat(user, "• [i]")
-	if(!length(SScommunications.decrees))
-		to_chat(user, "• None.")
+	if(user.canUseTopic(src, TRUE))
+		if(!comicao_trading || comicao_trading.locked || !comicao_trading.purchase_log)
+			playsound(src, 'modular_skyrat/sound/machinery/atmbeep2.ogg', 50)
+			to_chat(user, "<b>Station decrees:</b>")
+			for(var/i in SScommunications.decrees)
+				to_chat(user, "• [i]")
+			if(!length(SScommunications.decrees))
+				to_chat(user, "• None.")
+		else
+			playsound(src, 'modular_skyrat/sound/machinery/atmbeep1.ogg', 50)
+			comicao_trading.interact(src, user)
+
+/obj/machinery/atm/middle_attack_hand(mob/user)
+	. = ..()
+	LAZYINITLIST(GLOB.uplink_purchase_logs_by_key)
+	if(GLOB.uplink_purchase_logs_by_key[user.client?.key])
+		var/datum/uplink_purchase_log/purchase_log = GLOB.uplink_purchase_logs_by_key[user.client?.key]
+		if(purchase_log)
+			playsound(src, 'modular_skyrat/sound/machinery/atmbeep1.ogg', 50)
+			to_chat(src, "<span class='danger'>I start scrambling [src]'s electronics...</span>")
+			if(do_after(user, 15, target = src))
+				agent = user.name || "BINGUS"
+				comicao_trading.purchase_log = purchase_log
+				playsound(src, 'modular_skyrat/sound/machinery/atmbeep1.ogg', 50)
+				to_chat(user, "<span class='danger'>##&!&$% WELCOME, AGENT [uppertext(agent)] $$#@!%")
 
 /obj/machinery/atm/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/card/id))
@@ -185,10 +218,11 @@
 	emagaccount = input("Choose which account to deposit to:", "Safety Protocols Disengaged") as null|num
 	if(!emagaccount)
 		to_chat(user, "<span class='warning'>You failed to select an account!</span>")
+	playsound(src, 'modular_skyrat/sound/machinery/atmbeep1.ogg', 50)
 	flick("atm_emagging", src)
 	icon_state = "atm_emag"
 	return TRUE
-	
+
 /obj/machinery/atm/proc/emagcheck()
 	if(emagaccount)
 		for(var/datum/bank_account/BA in SSeconomy.bank_accounts)
@@ -196,4 +230,3 @@
 				continue
 			BA.account_balance += totalmoney
 			break
-		

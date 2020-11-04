@@ -322,31 +322,10 @@
 			P = inowhaveapen
 
 	var/obj/item/uplink_loc
-
-	if(traitor_mob.client && traitor_mob.client.prefs)
-		switch(traitor_mob.client.prefs.uplink_spawn_loc)
-			if(UPLINK_PDA)
-				uplink_loc = PDA
-				if(!uplink_loc)
-					uplink_loc = R
-				if(!uplink_loc)
-					uplink_loc = P
-			if(UPLINK_RADIO)
-				uplink_loc = R
-				if(!uplink_loc)
-					uplink_loc = PDA
-				if(!uplink_loc)
-					uplink_loc = P
-			if(UPLINK_PEN)
-				uplink_loc = P
-				if(!uplink_loc)
-					uplink_loc = PDA
-				if(!uplink_loc)
-					uplink_loc = R
-
-	if (!uplink_loc)
+	if(!uplink_loc)
 		if(!silent)
-			to_chat(traitor_mob, "Unfortunately, [traitor_class.employer] wasn't able to get you an Uplink.")
+			to_chat(traitor_mob, "<span class='danger'>Unfortunately, [traitor_class.employer] wasn't able to get you a fancy Uplink.</span>")
+			to_chat(traitor_mob, "<span class='danger'>You must hack an ATM machine instead!</span>")
 		. = 0
 	else
 		. = uplink_loc
