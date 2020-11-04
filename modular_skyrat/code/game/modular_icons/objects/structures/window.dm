@@ -14,18 +14,16 @@
 		canSmoothWith |= typesof(/obj/structure/falsewall)
 		canSmoothWith |= typesof(/turf/closed/indestructible/riveted)
 		canSmoothWith |= typesof(/obj/structure/table/low_wall)
-	update_overlays()
+	update_icon()
 
 /obj/structure/window/setAnchored(anchorvalue)
 	..()
 	update_icon()
-	update_overlays()
 
 /obj/structure/window/Bumped(atom/movable/AM)
 	. = ..()
 	if(!anchored)
 		update_icon()
-		update_overlays()
 
 /obj/structure/window/update_icon()
 	..()
