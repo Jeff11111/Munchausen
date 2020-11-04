@@ -30,6 +30,8 @@
 		species_name_string = ", [prefix_a_or_an(dna.custom_species)] <EM>[dna.custom_species]</EM>!"
 	else
 		species_name_string = ", [prefix_a_or_an(dna.species.name)] <EM>[dna.species.name]</EM>!"
+	if(is_dreamer(user) && prob(25))
+		species_name_string = ", a disgusting pig!"
 	//End of skyrat stuff
 
 	. = list("<span class='info'>*---------*\nThis is <EM>[!obscure_name ? name : "Unknown"]</EM>[species_name_string]") //Skyrat edit
