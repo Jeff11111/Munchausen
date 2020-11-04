@@ -23,6 +23,7 @@
 	name = "xom"
 	desc = "This otherwordly creature keeps spouting senseless crap. Maybe you're just not wise enough to comprehend."
 	icon_state = "xom"
+	chungus_music = null
 	var/icon_state_cool = "cooler_xom"
 	var/static/list/funny = list(
 		'modular_skryrat/sound/cultiste/cultiste_rire_1.ogg',
