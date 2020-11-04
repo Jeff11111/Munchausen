@@ -4,7 +4,7 @@
 	var/next_pain_time = 0
 	var/next_pain_message_time = 0
 
-// aghhh shiver me timbers shiver me ni-
+// Aghhh shiver me timbers shiver me niggers
 /mob/living/proc/agony_scream()
 	return
 
@@ -14,7 +14,7 @@
 /mob/living/proc/death_rattle()
 	return
 
-//Called on Life()
+// Called on Life()
 /mob/living/proc/handle_pain()
 	return
 
