@@ -1066,7 +1066,7 @@
 		if((mangled_state & BODYPART_MANGLED_BOTH) && (try_dismember(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus) || try_disembowel(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus)))
 			return
 
-	check_wounding(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus)
+	check_wounding(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus, silent = FALSE)
 
 //Proc for damaging organs inside a limb
 /obj/item/bodypart/proc/damage_organs(brute = 0, burn = 0, toxin = 0, clone = 0, wounding_type = WOUND_BLUNT)
@@ -1468,8 +1468,9 @@
   * * damage- How much damage is tied to this attack, since wounding potential scales with damage in an attack (see: WOUND_DAMAGE_EXPONENT)
   * * wound_bonus- The wound_bonus of an attack
   * * bare_wound_bonus- The bare_wound_bonus of an attack
+  * * silent - If not silent, the wound displays a message in chat
   */
-/obj/item/bodypart/proc/check_wounding(woundtype, damage, wound_bonus, bare_wound_bonus)
+/obj/item/bodypart/proc/check_wounding(woundtype, damage, wound_bonus, bare_wound_bonus, silent = TRUE)
 	if(!owner)
 		return
 	// actually roll wounds if applicable
@@ -1561,12 +1562,12 @@
 		if(possible_wound.threshold_minimum * CONFIG_GET(number/wound_threshold_multiplier) < injury_roll)
 			var/datum/wound/new_wound
 			if(replaced_wound)
-				new_wound = replaced_wound.replace_wound(possible_wound.type, FALSE, TRUE, TRUE)
+				new_wound = replaced_wound.replace_wound(possible_wound.type, FALSE, TRUE, silent)
 				log_wound(owner, new_wound, damage, wound_bonus, bare_wound_bonus, base_roll)
 				qdel(possible_wound)
 			else
 				new_wound = new possible_wound.type
-				new_wound.apply_wound(src, TRUE)
+				new_wound.apply_wound(src, silent)
 				if(new_wound.wound_type == (WOUND_LIST_BURN || WOUND_LIST_BURN_MECHANICAL))
 					for(var/datum/wound/slash/critical/incision/inch in wounds) //yes, getting a burn wound cauterizes open incisions
 						inch.remove_wound()
