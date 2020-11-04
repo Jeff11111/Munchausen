@@ -26,12 +26,12 @@
 	chungus_music = null
 	var/icon_state_cool = "cooler_xom"
 	var/static/list/funny = list(
-		'modular_skryrat/sound/cultiste/cultiste_rire_1.ogg',
-		'modular_skryrat/sound/cultiste/cultiste_rire_2.ogg',
-		'modular_skryrat/sound/cultiste/cultiste_rire_3.ogg',
-		'modular_skryrat/sound/cultiste/cultiste_rire_4.ogg',
-		'modular_skryrat/sound/cultiste/cultiste_rire_5.ogg',
-		'modular_skryrat/sound/cultiste/cultiste_rire_6.ogg',
+		'modular_skyrat/sound/cultiste/cultiste_rire_1.ogg',
+		'modular_skyrat/sound/cultiste/cultiste_rire_2.ogg',
+		'modular_skyrat/sound/cultiste/cultiste_rire_3.ogg',
+		'modular_skyrat/sound/cultiste/cultiste_rire_4.ogg',
+		'modular_skyrat/sound/cultiste/cultiste_rire_5.ogg',
+		'modular_skyrat/sound/cultiste/cultiste_rire_6.ogg',
 	)
 
 /mob/living/simple_animal/pet/chungus/xom/handle_automated_speech(override)
