@@ -640,7 +640,7 @@
 	if(stam_heal_tick && stamina_dam > DAMAGE_PRECISION)
 		//Pain makes you regenerate stamina slower.
 		//At maximum pain, you barely regenerate stamina on the limb.
-		var/pain_multiplier = max(0.1, 1 - (max(0, (get_pain() - owner?.chem_effects[CE_PAINKILLER])/max_pain_damage))
+		var/pain_multiplier = max(0.1, 1 - (max(0, (get_pain() - owner?.chem_effects[CE_PAINKILLER])/max_pain_damage)))
 		if(heal_damage(stamina = (stam_heal_tick * (disabled ? 2 : 1) * pain_multiplier), only_robotic = FALSE, only_organic = FALSE, updating_health = FALSE))
 			. |= BODYPART_LIFE_UPDATE_HEALTH
 	if(pain_heal_tick && pain_dam > DAMAGE_PRECISION)
