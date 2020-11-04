@@ -1,12 +1,7 @@
 /obj/item/gun/ballistic/automatic
 	w_class = WEIGHT_CLASS_NORMAL
 	var/alarmed = 0
-	//woops skyrat edit
-	canMouseDown = TRUE
 	var/select = SEMIAUTO
-	var/can_fullauto = TRUE
-	var/done_empty = 0
-	//
 	var/automatic_burst_overlay = TRUE
 	can_suppress = TRUE
 	burst_size = 3
@@ -26,7 +21,7 @@
 /obj/item/gun/ballistic/automatic/update_icon()
 	..()
 	if(automatic_burst_overlay)
-		if(select == (ROUNDBURST || FULLAUTO))
+		if(select == ROUNDBURST)
 			add_overlay("[initial(icon_state)]burst")
 		else
 			add_overlay("[initial(icon_state)]semi")
@@ -69,30 +64,14 @@
 
 /obj/item/gun/ballistic/automatic/proc/burst_select()
 	var/mob/living/carbon/human/user = usr
-	//woops skyrat edit
-	if(!can_fullauto)
-		if(select == ROUNDBURST)
-			select = SEMIAUTO
-			disable_burst()
-			to_chat(user, "<span class='notice'>You switch to semi-automatic.</span>")
-		else
-			select = ROUNDBURST
-			enable_burst()
-			to_chat(user, "<span class='notice'>You switch to [burst_size]-rnd burst.</span>")
+	if(select == ROUNDBURST)
+		select = SEMIAUTO
+		disable_burst()
+		to_chat(user, "<span class='notice'>You switch to semi-automatic.</span>")
 	else
-		if(select == FULLAUTO)
-			select = SEMIAUTO
-			disable_burst()
-			to_chat(user, "<span class='notice'>You switch to semi-automatic.</span>")
-		else if(select == ROUNDBURST)
-			select = FULLAUTO
-			disable_burst()
-			to_chat(user, "<span class='notice'>You switch to full-automatic.</span>")
-		else
-			select = ROUNDBURST
-			enable_burst()
-			to_chat(user, "<span class='notice'>You switch to [burst_size]-rnd burst.</span>")
-	//
+		select = ROUNDBURST
+		enable_burst()
+		to_chat(user, "<span class='notice'>You switch to [burst_size]-rnd burst.</span>")
 
 	playsound(user, 'sound/weapons/empty.ogg', 100, 1)
 	update_icon()
@@ -115,30 +94,6 @@
 		update_icon()
 		alarmed = 1
 	return
-//skyrat edit
-/obj/item/gun/ballistic/automatic/onMouseDrag(src_object, over_object, src_location, over_location, params, mob)
-	. = ..()
-	var/mob/living/L = mob
-	if(istype(L) && can_fullauto && (select == FULLAUTO) && over_object)
-		process_afterattack(over_object, L, TRUE)
-
-/obj/item/gun/ballistic/automatic/on_cooldown()
-	return busy_action || firing || (last_fire + fire_delay > world.time) || ((select == FULLAUTO) && (last_fire + burst_shot_delay >= world.time))
-
-/obj/item/gun/ballistic/automatic/calculate_extra_inaccuracy(mob/living/user, bonus_spread, stamloss)
-	if(select == FULLAUTO)
-		return getinaccuracy(user, bonus_spread, stamloss)
-
-/obj/item/gun/ballistic/automatic/shoot_with_empty_chamber(mob/living/user)
-	if(done_empty >= world.time)
-		return FALSE
-	else
-		if(select == FULLAUTO)
-			done_empty = world.time + 2 SECONDS
-		return ..()
-
-/obj/item/gun/ballistic/automatic/
-//
 
 /obj/item/gun/ballistic/automatic/c20r
 	name = "\improper C-20r SMG"
@@ -422,7 +377,7 @@
 	inaccuracy_modifier = 0.5
 	zoomable = FALSE
 	zoom_amt = 10 //Long range, enough to see in front of you, but no tiles behind you.
-	zoom_out_amt = 13
+	zoom_out_amt = 6
 	slot_flags = ITEM_SLOT_BACK
 	actions_types = list()
 
