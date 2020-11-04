@@ -85,6 +85,7 @@ GLOBAL_LIST_INIT(modular_ui_styles, list(
 	var/obj/screen/pains
 	var/obj/screen/fullscreen/pain/redpains
 	var/obj/screen/fullscreen/noise/noise_filter
+	var/obj/screen/fov_holder/fov_holder
 
 	// subtypes can override this to force a specific UI style
 	var/ui_style
@@ -135,6 +136,7 @@ GLOBAL_LIST_INIT(modular_ui_styles, list(
 	pains = null
 	redpains = null
 	noise_filter = null
+	fov_holder = null
 	lingchemdisplay = null
 	devilsouldisplay = null
 	lingstingdisplay = null
@@ -189,6 +191,8 @@ GLOBAL_LIST_INIT(modular_ui_styles, list(
 			if(noise_filter)
 				noise_filter.update_for_view(screenmob.client.view)
 				screenmob.client.screen += noise_filter
+			if(fov_holder)
+				screenmob.client.screen += fov_holder
 			//
 			if(hotkeybuttons.len && !hotkey_ui_hidden)
 				screenmob.client.screen += hotkeybuttons
@@ -209,6 +213,8 @@ GLOBAL_LIST_INIT(modular_ui_styles, list(
 			//skyrat edit
 			if(extra_inventory.len)
 				screenmob.client.screen -= extra_inventory
+			if(fov_holder)
+				screenmob.client.screen += fov_holder
 			//
 			if(hotkeybuttons.len)
 				screenmob.client.screen -= hotkeybuttons
@@ -237,6 +243,8 @@ GLOBAL_LIST_INIT(modular_ui_styles, list(
 				screenmob.client.screen -= redpains
 			if(noise_filter)
 				screenmob.client.screen -= noise_filter
+			if(fov_holder)
+				screenmob.client.screen += fov_holder
 			//
 			if(hotkeybuttons.len)
 				screenmob.client.screen -= hotkeybuttons
@@ -257,6 +265,11 @@ GLOBAL_LIST_INIT(modular_ui_styles, list(
 			show_hud(hud_version, M)
 	else if (viewmob.hud_used)
 		viewmob.hud_used.plane_masters_update()
+	
+	//Update the FOV
+	var/datum/component/field_of_vision/track_and_field = GetComponent(/datum/component/field_of_vision)
+	if(track_and_field)
+		track_and_field.resize_fov(track_and_field.current_fov_size, screenmob.client.view)
 
 	return TRUE
 

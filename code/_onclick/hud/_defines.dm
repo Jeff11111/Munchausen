@@ -172,13 +172,15 @@
 #define ui_wrists "WEST+1:8,SOUTH+4:13"
 //
 
-//Ghosts
+//Stuff
+#define ui_fov "CENTER-7:0,CENTER-7:0"
 
+//Ghosts
 #define ui_ghost_jumptomob "SOUTH:6,CENTER-2:24"
 #define ui_ghost_orbit "SOUTH:6,CENTER-1:24"
 #define ui_ghost_reenter_corpse "SOUTH:6,CENTER:24"
 #define ui_ghost_teleport "SOUTH:6,CENTER+1:24"
-#define ui_ghost_spawners "SOUTH: 6, CENTER+2:24"
+#define ui_ghost_spawners "SOUTH:6,CENTER+2:24"
 #define ui_ghost_eventsignup "NORTH:-80:26, WEST:6" // Skyrat change
 
 

@@ -40,7 +40,7 @@
   * That special invisible, almost neigh indestructible movable
   * that holds both shadow cone mask and image and follows the player around.
   */
-	var/atom/movable/fov_holder/fov
+	var/obj/screen/fov_holder/fov
 	///The current screen size this field of vision is meant to fit for.
 	var/current_fov_size = list(15, 15)
 	///How much is the cone rotated clockwise, purely backend. Please use rotate_shadow_cone() if you must.
@@ -97,10 +97,8 @@
 	if(!QDELETED(fov))
 		if(M.client)
 			UnregisterSignal(M, list(COMSIG_ATOM_DIR_CHANGE, COMSIG_MOVABLE_MOVED, COMSIG_MOB_DEATH, COMSIG_LIVING_REVIVE))
-			M.client.images -= owner_mask
-			M.client.images -= shadow_mask
-			M.client.images -= visual_shadow
-			M.client.images -= adj_mask
+		M.hud_used?.fov_holder = null
+		M.hud_used?.show_hud()
 		qdel(fov, TRUE) // Forced.
 		fov = null
 		QDEL_NULL(owner_mask)
@@ -118,19 +116,24 @@
   */
 /datum/component/field_of_vision/proc/generate_fov_holder(mob/M, _angle = 0)
 	if(QDELETED(fov))
-		fov = new(get_turf(M))
+		fov = new
+		fov.hud = M.hud_used
 		fov.icon_state = "[shadow_angle]"
 		fov.dir = M.dir
-		shadow_mask = image('icons/misc/field_of_vision.dmi', fov, "[shadow_angle]", FIELD_OF_VISION_LAYER)
+		fov.screen_loc = ui_fov
+		shadow_mask = image('icons/misc/field_of_vision.dmi', null, "[shadow_angle]", FIELD_OF_VISION_LAYER)
 		shadow_mask.plane = FIELD_OF_VISION_PLANE
-		visual_shadow = image('icons/misc/field_of_vision.dmi', fov, "[shadow_angle]_v", FIELD_OF_VISION_LAYER)
+		fov.add_overlay(shadow_mask)
+		visual_shadow = image('icons/misc/field_of_vision.dmi', null, "[shadow_angle]_v", FIELD_OF_VISION_LAYER)
 		visual_shadow.plane = FIELD_OF_VISION_VISUAL_PLANE
+		fov.add_overlay(visual_shadow)
 		owner_mask = new
 		owner_mask.appearance_flags = RESET_TRANSFORM
 		owner_mask.plane = FIELD_OF_VISION_BLOCKER_PLANE
-		adj_mask = image('icons/misc/field_of_vision.dmi', fov, "adj_mask", FIELD_OF_VISION_LAYER)
+		adj_mask = image('icons/misc/field_of_vision.dmi', null, "adj_mask", FIELD_OF_VISION_LAYER)
 		adj_mask.appearance_flags = RESET_TRANSFORM
 		adj_mask.plane = FIELD_OF_VISION_BLOCKER_PLANE
+		fov.add_overlay(adj_mask)
 		if(_angle)
 			rotate_shadow_cone(_angle)
 	fov.alpha = M.stat == DEAD ? 0 : 255
@@ -144,12 +147,10 @@
 		REGISTER_NESTED_LOCS(M, nested_locs, COMSIG_MOVABLE_MOVED, .proc/on_loc_moved)
 		A = nested_locs[nested_locs.len]
 	CENTERED_RENDER_SOURCE(owner_mask, A, src)
-	M.client.images += shadow_mask
-	M.client.images += visual_shadow
-	M.client.images += owner_mask
-	M.client.images += adj_mask
 	if(M.client.view != "[current_fov_size[1]]x[current_fov_size[2]]")
 		resize_fov(current_fov_size, getviewsize(M.client.view))
+	M.hud_used?.fov_holder = fov
+	M.hud_used?.show_hud()
 
 ///Rotates the shadow cone to a certain degree. Backend shenanigans.
 /datum/component/field_of_vision/proc/rotate_shadow_cone(new_angle)
@@ -159,8 +160,8 @@
 		var/old_rot_scale = rot_scale
 		rot_scale = 1 + to_scale
 		if(old_rot_scale != rot_scale)
-			visual_shadow.transform = shadow_mask.transform = shadow_mask.transform.Scale(rot_scale/old_rot_scale)
-	visual_shadow.transform = shadow_mask.transform = shadow_mask.transform.Turn(fov.transform, simple_degrees)
+			fov.transform = visual_shadow.transform = shadow_mask.transform = shadow_mask.transform.Scale(rot_scale/old_rot_scale)
+	fov.transform = visual_shadow.transform = shadow_mask.transform = shadow_mask.transform.Turn(fov.transform, simple_degrees)
 
 /**
   * Resizes the shadow to match the current screen size.
@@ -172,7 +173,7 @@
 	var/new_size = max(view[1], view[2])
 	if(old_size == new_size) //longest edges are still of the same length.
 		return
-	visual_shadow.transform = shadow_mask.transform = shadow_mask.transform.Scale(new_size/old_size)
+	fov.transform = visual_shadow.transform = shadow_mask.transform = shadow_mask.transform.Scale(new_size/old_size)
 
 /datum/component/field_of_vision/proc/on_mob_login(mob/source, client/client)
 	generate_fov_holder(source, angle)
@@ -210,35 +211,27 @@
   * As well as modify the owner mask to match the topmost item.
   */
 /datum/component/field_of_vision/proc/on_mob_moved(mob/source, atom/oldloc, dir, forced)
-	var/turf/T
 	if(!isturf(source.loc)) //Recalculate all nested locations.
 		UNREGISTER_NESTED_LOCS( nested_locs, COMSIG_MOVABLE_MOVED, 1)
 		REGISTER_NESTED_LOCS(source, nested_locs, COMSIG_MOVABLE_MOVED, .proc/on_loc_moved)
-		var/atom/movable/topmost = nested_locs[nested_locs.len]
-		T = topmost.loc
+		var/obj/screen/topmost = nested_locs[nested_locs.len]
 		CENTERED_RENDER_SOURCE(owner_mask, topmost, src)
 	else
-		T = source.loc
 		if(length(nested_locs))
 			UNREGISTER_NESTED_LOCS(nested_locs, COMSIG_MOVABLE_MOVED, 1)
 			CENTERED_RENDER_SOURCE(owner_mask, source, src)
-	if(T)
-		fov.forceMove(T, harderforce = TRUE)
 
 /// Pretty much like the above, but meant for other movables the mob is stored in (bodybags, boxes, mechs etc).
 /datum/component/field_of_vision/proc/on_loc_moved(atom/movable/source, atom/oldloc, dir, forced)
 	if(isturf(source.loc) && isturf(oldloc)) //This is the case of the topmost movable loc moving around the world, skip.
-		fov.forceMove(source.loc, harderforce = TRUE)
 		return
-	var/atom/movable/prev_topmost = nested_locs[nested_locs.len]
+	var/obj/screen/prev_topmost = nested_locs[nested_locs.len]
 	if(prev_topmost != source)
 		UNREGISTER_NESTED_LOCS(nested_locs, COMSIG_MOVABLE_MOVED, nested_locs.Find(source) + 1)
 	REGISTER_NESTED_LOCS(source, nested_locs, COMSIG_MOVABLE_MOVED, .proc/on_loc_moved)
-	var/atom/movable/topmost = nested_locs[nested_locs.len]
+	var/obj/screen/topmost = nested_locs[nested_locs.len]
 	if(topmost != prev_topmost)
 		CENTERED_RENDER_SOURCE(owner_mask, topmost, src)
-		if(topmost.loc)
-			fov.forceMove(topmost.loc, harderforce = TRUE)
 
 /// A hacky comsig proc for things that somehow decide to change icon on the go. may make a change_icon_file() proc later but...
 /datum/component/field_of_vision/proc/manual_centered_render_source(mob/source, old_icon)
@@ -313,42 +306,40 @@
   * The shadow cone's mask and visual images holder which can't locate inside the mob,
   * lest they inherit the mob opacity and cause a lot of hindrance
   */
-/atom/movable/fov_holder
+/obj/screen/fov_holder
 	name = "field of vision holder"
-	pixel_x = -224 //the image is about 480x480 px, ergo 15 tiles (480/32) big, and we gotta center it.
-	pixel_y = -224
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	plane = FIELD_OF_VISION_PLANE
 	anchored = TRUE
 
-/atom/movable/fov_holder/ConveyorMove()
+/obj/screen/fov_holder/ConveyorMove()
 	return
 
-/atom/movable/fov_holder/has_gravity(turf/T)
+/obj/screen/fov_holder/has_gravity(turf/T)
 	return FALSE
 
-/atom/movable/fov_holder/ex_act(severity)
+/obj/screen/fov_holder/ex_act(severity)
 	return FALSE
 
-/atom/movable/fov_holder/singularity_act()
+/obj/screen/fov_holder/singularity_act()
 	return
 
-/atom/movable/fov_holder/singularity_pull()
+/obj/screen/fov_holder/singularity_pull()
 	return
 
-/atom/movable/fov_holder/blob_act()
+/obj/screen/fov_holder/blob_act()
 	return
 
-/atom/movable/fov_holder/onTransitZ()
+/obj/screen/fov_holder/onTransitZ()
 	return
 
 /// Prevents people from moving these after creation, because they shouldn't be.
-/atom/movable/fov_holder/forceMove(atom/destination, no_tp=FALSE, harderforce = FALSE)
+/obj/screen/fov_holder/forceMove(atom/destination, no_tp=FALSE, harderforce = FALSE)
 	if(harderforce)
 		return ..()
 
 /// Last but not least, these shouldn't be deleted by anything but the component itself
-/atom/movable/fov_holder/Destroy(force = FALSE)
+/obj/screen/fov_holder/Destroy(force = FALSE)
 	if(!force)
 		return QDEL_HINT_LETMELIVE
 	return ..()
