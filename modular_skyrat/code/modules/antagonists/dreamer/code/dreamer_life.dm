@@ -1,4 +1,6 @@
 //Life procs related to dreamer, so he hallucinates and shit
+GLOBAL_LIST_INIT(dreamer_object_talk, world.file2list('modular_skyrat/code/modules/antagonists/dreamer/visions.txt'))
+
 /mob/living/carbon
 	var/dreamer_dreaming = FALSE
 
@@ -62,12 +64,15 @@
 			people += H
 		if(length(people))
 			var/mob/living/carbon/human/person = pick(people)
-			var/speak = pick("We are DYING to see your WONDERS.",
+			var/speak = pick(
+							"Let the blood flow, let the blood flo-ow, let the blood flo-o-ow!",
+							"We are DYING to see your WONDERS.",
 							"We will help you wake up.",
 							"You can kill us.",
 							"Let's wake up, together.",
 							"Slaughter us! Slaughter us!",
-							"Let the blood flow! Let the blood flo-o-ow!",
+							"Where is the blood? You've killed someone!",
+							"[src] HAS JUST KILLED SOMEONE!",
 							)
 			var/message = compose_message(person, language_holder?.selected_language, speak,"[FREQ_COMMON]", list(person.speech_span), face_name = TRUE, source = (person.ears ? person.ears : person.ears_extra))
 			to_chat(src, message)
@@ -140,49 +145,9 @@
 		if(length(objects))
 			var/message
 			if(prob(66) || !length(last_words))
-				message = pick("[rand(0,9)][rand(0,9)][rand(0,9)][rand(0,9)]",
-								"Show them your WONDERS.",
-								"Look inside me.",
-								"You're not evil. You'll meet the real evil before you die.",
-								"Tell them what made you do it. They will forgive you.",
-								"You have the right to lie to me too.",
-								"Who am i?",
-								"Who are you?",
-								"Hey.",
-								"Hello.",
-								"Avoid speech.",
-								"Silence.",
-								"Why do you bother?",
-								"You're vile.",
-								"I hate you.",
-								"Sightless, unless my eyes reappear.",
-								"I love you.",
-								"Trust me.",
-								"It's all in your head.",
-								"Do you enjoy what you do?",
-								"Do you like hurting other people?",
-								"None of this is real.",
-								"You will be put on a cross.",
-								"HATE.",
-								"DEATH.",
-								"PUTREFACTION.",
-								"Reality.",
-								"You can do it.",
-								"You're real.",
-								"You don't deserve to be loved.",
-								"Why are we still here?",
-								"Just to suffer?",
-								"In the end.",
-								"None of this matters.",
-								"Murderer.",
-								"Trey Liam. That is your name.",
-								"Whispering.",
-								"Show them your powers.",
-								"One, two, three, four...",
-								"Wake up.",
-								"Hangars are just parking lots.",
-								"CRIMINAL CRIMINAL CRIMINAL",
-								)
+				var/list/dreamer_hallu = GLOB.dreamer_visions.Copy()
+				dreamer_hallu |= "[rand(0,9)][rand(0,9)][rand(0,9)][rand(0,9)]"
+				message = pick(dreamer_hallu)
 			else
 				message = last_words
 			var/obj/speaker = pick(objects)
@@ -212,8 +177,7 @@
 	for(var/F in floorlist)
 		spawn(0)
 			handle_dreamer_floor(F)
-	
-	//shit on THA walls
+	//Shit on THA walls
 	var/list/turf/closed/wall/walllist = list()
 	for(var/turf/closed/wall/W in view(src))
 		if(prob(7))
