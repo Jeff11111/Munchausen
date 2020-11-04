@@ -2,11 +2,12 @@
 /obj/item/projectile/beam
 	impact_effect_type = null
 	impact_type = null
+	pixels_per_second = TILES_TO_PIXELS(22) //very fast lol
 
 /obj/item/projectile/beam/laser
 	bare_wound_bonus = 15
 	wound_bonus = 30
-	pixels_per_second = TILES_TO_PIXELS(25) //very fast lol
+	pixels_per_second = TILES_TO_PIXELS(22) //very fast lol
 	impact_effect_type = null
 	impact_type = null
 
