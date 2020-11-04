@@ -387,7 +387,7 @@
 			continue
 		
 		//User too stupidd to make this
-		if((GET_STAT_LEVEL(user, int) <= R.int_difficulty) || (GET_SKILL_LEVEL(user, construction) <= R.construction_difficulty))
+		if((user.mind.mob_skills[R.skill_required] <= R.skill_difficulty) || (user.mind.mob_stats[R.stat_required] <= R.stat_difficulty))
 			continue
 
 		craftability["[REF(R)]"] = check_contents(user, R, surroundings)

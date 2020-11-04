@@ -34,7 +34,6 @@
 		update_hud_sprint_bar()
 
 /mob/living/carbon/enable_sprint_mode(update_icon)
-	. = ..()
 	var/leg_pain = 0
 	//First, let's check for missing feet/legs. Missing any at all, we can't sprint.
 	for(var/bodypart_check in list(BODY_ZONE_PRECISE_GROIN,
@@ -50,3 +49,4 @@
 	if(leg_pain >= SHOCK_STAGE_2)
 		to_chat(src, "<span class'danger'>It hurts to walk, let alone sprint!</span>")
 		return FALSE
+	return ..()
