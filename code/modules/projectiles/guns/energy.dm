@@ -226,7 +226,7 @@
 #undef DECREMENT_OR_WRAP
 #undef IS_VALID_INDEX
 
-/obj/item/gun/energy/update_icon()
+/obj/item/gun/energy/update_overlays()
 	//We already cut overlays on the parent proc
 	. = ..()
 	if(!automatic_charge_overlays)
