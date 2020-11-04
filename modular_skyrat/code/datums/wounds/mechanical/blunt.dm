@@ -6,8 +6,6 @@
 	treatable_by = list(/obj/item/stack/sticky_tape, /obj/item/reagent_containers)
 	treatable_tool = TOOL_WRENCH
 
-	associated_alerts = list("bone" = /obj/screen/alert/status_effect/wound/blunt)
-
 	/// Have we been taped?
 	var/taped
 	/// Have we been wrenched?

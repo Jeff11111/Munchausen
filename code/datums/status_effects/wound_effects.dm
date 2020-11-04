@@ -222,9 +222,6 @@
 		qdel(src)
 
 // blunt
-/datum/status_effect/wound/blunt
-	alert_type = /obj/screen/alert/status_effect/wound/blunt
-
 /datum/status_effect/wound/blunt/interact_speed_modifier()
 	var/mob/living/carbon/C = owner
 
@@ -252,9 +249,6 @@
 	id = "compound"
 
 // slash
-/datum/status_effect/wound/slash
-	alert_type = /obj/screen/alert/status_effect/wound/slash
-
 /datum/status_effect/wound/slash/moderate
 	id = "abrasion"
 
@@ -265,9 +259,6 @@
 	id = "avulsion"
 
 // pierce
-/datum/status_effect/wound/pierce
-	alert_type = /obj/screen/alert/status_effect/wound/pierce
-
 /datum/status_effect/wound/pierce/moderate
 	id = "breakage"
 
@@ -280,12 +271,8 @@
 // dismemberment
 /datum/status_effect/wound/loss
 	id = "loss"
-	alert_type =  /obj/screen/alert/status_effect/wound/loss
 
 // burns
-/datum/status_effect/wound/burn
-	alert_type = /obj/screen/alert/status_effect/wound/burn
-
 /datum/status_effect/wound/burn/moderate
 	id = "seconddeg"
 
