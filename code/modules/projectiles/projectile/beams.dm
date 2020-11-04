@@ -18,7 +18,7 @@
 	//
 
 /obj/item/projectile/beam/Initialize()
-	 . = ..()
+	. = ..()
 	if(light_color)
 		AddComponent(/datum/component/overlay_lighting, light_color, 2, 1)
 
