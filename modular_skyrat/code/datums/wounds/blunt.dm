@@ -11,7 +11,7 @@
 	sound_effect = 'modular_skyrat/sound/gore/trauma1.ogg'
 	wound_type = WOUND_LIST_BLUNT
 
-	associated_alerts = list("bone" = /obj/screen/alert/status_effect/wound/bone)
+	associated_alerts = list()
 
 	/// Have we been taped?
 	var/taped

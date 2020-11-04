@@ -8,8 +8,6 @@
 
 	treatable_by = list(/obj/item/stack/medical/ointment, /obj/item/stack/medical/mesh) // sterilizer and alcohol will require reagent treatments, coming soon
 
-	associated_alerts = list("sepsis" = /obj/screen/alert/status_effect/wound/sepsis)
-
 	// Flesh damage vars
 	/// How much damage to our flesh we currently have. Once both this and germ_level reach 0, the wound is considered healed
 	var/flesh_damage = 5
