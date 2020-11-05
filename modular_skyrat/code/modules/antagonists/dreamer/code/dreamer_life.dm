@@ -138,7 +138,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 			if(prob(66) || !length(last_words))
 				var/list/dreamer_object = GLOB.dreamer_object.Copy()
 				dreamer_object |= "[rand(0,9)][rand(0,9)][rand(0,9)][rand(0,9)]"
-				message = pick(dreamer_hallu)
+				message = pick(dreamer_object)
 			else
 				message = last_words
 			var/obj/speaker = pick(objects)

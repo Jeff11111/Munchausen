@@ -646,7 +646,7 @@ SUBSYSTEM_DEF(job)
 		// Make them unconscious and gasp for a bit
 		var/mob/living/carbon/human/H = M
 		H.AdjustUnconscious(6 SECONDS)
-		addtimer(CALLBACK(H, /mob/living/carbon/human.proc/agony_gasp), rand(2, 5 SECONDS))
+		addtimer(CALLBACK(H, /mob/living/carbon/human.proc/emote, "agonygasp"), rand(2, 5 SECONDS))
 		return
 	..()
 

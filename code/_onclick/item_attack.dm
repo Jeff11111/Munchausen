@@ -14,7 +14,7 @@
 			to_chat(L, "<span class='warning'>You are unable to swing [src] right now!</span>")
 			return
 		if(L.pinned() && w_class >= WEIGHT_CLASS_NORMAL)
-			to_chat(L, "<span class='warning'>[W] is too heavy to use while pinned!</span>")
+			to_chat(L, "<span class='warning'>[src] is too heavy to use while pinned!</span>")
 			return
 	if(tool_behaviour && target.tool_act(user, src, tool_behaviour))
 		return
@@ -34,7 +34,7 @@
 			to_chat(L, "<span class='warning'>You are unable to raise [src] right now!</span>")
 			return
 		if(L.pinned() && w_class >= WEIGHT_CLASS_NORMAL)
-			to_chat(L, "<span class='warning'>[W] is too heavy to use while pinned!</span>")
+			to_chat(L, "<span class='warning'>[src] is too heavy to use while pinned!</span>")
 			return
 	afterattack(target, user, FALSE, params)
 
@@ -43,7 +43,7 @@
 	if(isliving(user))
 		var/mob/living/L = user
 		if(L.pinned() && w_class >= WEIGHT_CLASS_NORMAL)
-			to_chat(L, "<span class='warning'>[W] is too heavy to use while pinned!</span>")
+			to_chat(L, "<span class='warning'>[src] is too heavy to use while pinned!</span>")
 			return
 	if(SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_SELF, user) & COMPONENT_NO_INTERACT)
 		return
