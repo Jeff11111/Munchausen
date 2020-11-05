@@ -240,8 +240,8 @@
 //fuck lammar we like Xom
 /obj/structure/displaycase/labcage/Initialize()
 	..()
-	qdel(src)
 	new /mob/living/simple_animal/pet/chungus/xom(get_turf(src))
+	qdel(src)
 
 /obj/structure/displaycase/clown
 	desc = "In the event of clown, honk glass."
