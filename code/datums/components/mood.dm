@@ -120,7 +120,6 @@
 			shown_mood += event.mood_change
 		mood *= mood_modifier
 		shown_mood *= mood_modifier
-
 	switch(mood)
 		if(-INFINITY to MOOD_LEVEL_SAD4)
 			mood_level = 1
@@ -140,17 +139,22 @@
 			mood_level = 8
 		if(MOOD_LEVEL_HAPPY4 to INFINITY)
 			mood_level = 9
+	var/mob/living/L = parent
+	if(istype(L) && is_dreamer(L))
+		mood_level = MOOD_LEVEL_NEUTRAL
+		sanity = SANITY_NEUTRAL
 	update_mood_icon()
-
 
 /datum/component/mood/proc/update_mood_icon()
 	var/mob/living/owner = parent
 	//skyrat edit - screwy mood
 	if(!HAS_TRAIT(owner, TRAIT_SCREWY_MOOD))
 		if(owner.client && owner.hud_used)
-			if(sanity < 25)
+			if(is_dreamer(owner))
+				screen_obj.icon_state = "mood_dreamer"
+			else if(sanity < 25)
 				screen_obj.icon_state = "mood_insane"
-			else if (owner.has_status_effect(/datum/status_effect/chem/enthrall))//Fermichem enthral chem, maybe change?
+			else if(owner.has_status_effect(/datum/status_effect/chem/enthrall))//Fermichem enthral chem, maybe change?
 				screen_obj.icon_state = "mood_entrance"
 			else
 				screen_obj.icon_state = "mood[mood_level]"
@@ -163,7 +167,6 @@
 		qdel(src)
 		return
 	var/mob/living/owner = parent
-
 	switch(mood_level)
 		if(1)
 			setSanity(sanity-0.2)
@@ -271,6 +274,10 @@
 	setSanity(sanity + amount, minimum, maximum)
 
 /datum/component/mood/proc/add_event(datum/source, category, type, param) //Category will override any events in the same category, should be unique unless the event is based on the same thing like hunger.
+	//trey liam dose not give a fuck
+	var/mob/living/L = parent
+	if(istype(L) && is_dreamer(L))
+		return
 	var/datum/mood_event/the_event
 	if(mood_events[category])
 		the_event = mood_events[category]
