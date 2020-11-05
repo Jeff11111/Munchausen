@@ -645,7 +645,7 @@ SUBSYSTEM_DEF(job)
 	if(buckle && ishuman(M) && buckle_mob(M, TRUE, FALSE))
 		// Make them unconscious and gasp for a bit
 		var/mob/living/carbon/human/H = M
-		H.AdjustUnconscious(6 SECONDS)
+		H.AdjustUnconscious(15 SECONDS)
 		addtimer(CALLBACK(H, /mob/living/carbon/human.proc/emote, "agonygasp"), rand(2, 5 SECONDS))
 		return
 	..()
