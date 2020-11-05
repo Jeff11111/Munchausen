@@ -237,6 +237,12 @@
 	start_showpiece_type = /obj/item/clothing/mask/facehugger/lamarr
 	req_access = list(ACCESS_RD)
 
+//fuck lammar we like Xom
+/obj/structure/displaycase/labcage/Initialize()
+	..()
+	qdel(src)
+	new /mob/living/simple_animal/pet/chungus/xom(get_turf(src))
+
 /obj/structure/displaycase/clown
 	desc = "In the event of clown, honk glass."
 	alert = TRUE
