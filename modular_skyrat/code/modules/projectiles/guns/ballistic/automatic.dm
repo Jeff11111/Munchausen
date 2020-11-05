@@ -30,3 +30,11 @@
 /obj/item/gun/ballistic/automatic/ar/update_icon()
 	..()
 	icon_state = "[initial(icon_state)][chambered ? "" : "-e"][magazine ? "" : "-nomag"][safety ? "-safe" : ""]"
+
+//israel gun
+/obj/item/gun/ballistic/automatic/mini_uzi
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/smg.dmi'
+	righthand_file = 'modular_skyrat/icons/mob/inhands/weapons/guns_righthand.dmi'
+	lefthand_file = 'modular_skyrat/icons/mob/inhands/weapons/guns_lefthand.dmi'
+	icon_state = "uzi"
+	item_state = "uzi"
