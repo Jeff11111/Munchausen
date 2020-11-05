@@ -323,7 +323,7 @@
 
 	var/obj/item/uplink_loc
 	if(!uplink_loc)
-		if(traitor_mob.client?.key && !uplink_purchase_logs_by_key[traitor_mob.client.key])
+		if(traitor_mob.client?.key && !GLOB.uplink_purchase_logs_by_key[traitor_mob.client.key])
 			new /datum/uplink_purchase_log(traitor_mob.client.key)
 		if(!silent)
 			to_chat(traitor_mob, "<span class='danger'>Unfortunately, [traitor_class.employer] wasn't able to get you a fancy Uplink.</span>")
