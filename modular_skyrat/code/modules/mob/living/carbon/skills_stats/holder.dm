@@ -48,8 +48,8 @@
 		var/list/stat_string = list()
 		for(var/i in mind?.mob_stats)
 			var/datum/stats/mystat = mind.mob_stats[i]
-			stats |= "[mystat.shorthand]: [mystat.level]"
-		if(length(stats))
+			stat_string |= "[mystat.shorthand]: [mystat.level]"
+		if(length(stat_string))
 			stat(null, "\n\n[stats.Join("\n\n")]\n\n")
 
 //Remove the crappy citadel skills verb
