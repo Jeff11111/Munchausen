@@ -32,8 +32,8 @@
 //israel gun
 /obj/item/gun/ballistic/automatic/mini_uzi
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/smg.dmi'
-	righthand_file = 'modular_skyrat/icons/obj/guns/inhands/smg_righthand.dmi'
-	lefthand_file = 'modular_skyrat/icons/obj/guns/inhands/smg_lefthand.dmi'
+	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/smg_righthand.dmi'
+	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/smg_lefthand.dmi'
 	icon_state = "uzi"
 	item_state = "uzi"
 
