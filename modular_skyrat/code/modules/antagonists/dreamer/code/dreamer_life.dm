@@ -3,7 +3,7 @@ GLOBAL_LIST_INIT(dreamer_object, world.file2list('modular_skyrat/code/modules/an
 GLOBAL_LIST_INIT(dreamer_radio, world.file2list('modular_skyrat/code/modules/antagonists/dreamer/radio_visions.txt'))
 GLOBAL_LIST_INIT(dreamer_ahelp, world.file2list('modular_skyrat/code/modules/antagonists/dreamer/ahelp_visions.txt'))
 GLOBAL_LIST_INIT(dreamer_ooc, world.file2list('modular_skyrat/code/modules/antagonists/dreamer/ooc_visions.txt'))
-GLOBAL_LIST_INIT(dreamer_ban, world.file2list('modular_skyrat/code/modules/antagonists/dreamer/ban_visions.txt'))
+GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/antagonists/dreamer/ban_visions.txt'))
 
 /mob/living/carbon
 	var/dreamer_dreaming = FALSE
@@ -68,13 +68,13 @@ GLOBAL_LIST_INIT(dreamer_ban, world.file2list('modular_skyrat/code/modules/antag
 			people += H
 		if(length(people))
 			var/mob/living/carbon/human/person = pick(people)
-			var/list/dreamer_radio = GLOB.dreamer_readio.Copy()
-			for(var/chungus in radio_visions)
+			var/list/dreamer_radio = GLOB.dreamer_radio.Copy()
+			for(var/chungus in dreamer_radio)
 				chungus = replacetext(chungus, "SRC", "[src.real_name]")
 				chungus = replacetext(chungus, "CAPITALIZESRC", "[capitalize(src.real_name)]")
 			dreamer_radio |= last_pain_message
 			dreamer_radio |= last_words
-			var/speak = pick(radio_visions)
+			var/speak = pick(dreamer_radio)
 			var/message = compose_message(person, language_holder?.selected_language, speak,"[FREQ_COMMON]", list(person.speech_span), face_name = TRUE, source = (person.ears ? person.ears : person.ears_extra))
 			to_chat(src, message)
 	//VERY rare mom/mob hallucination
@@ -105,7 +105,7 @@ GLOBAL_LIST_INIT(dreamer_ban, world.file2list('modular_skyrat/code/modules/antag
 		var/list/dreamer_ahelps = GLOB.dreamer_ahelp.Copy()
 		dreamer_ahelps |= last_pain_message
 		dreamer_ahelps |= last_words
-		var/message = pick(dreamer_bwoinks)
+		var/message = pick(dreamer_ahelps)
 		to_chat(src, "<font color='red' size='4'><b>-- Administrator private message --</b></font>")
 		to_chat(src, "<span class='danger'>Admin PM from-<b><a href='https://youtu.be/wJWksPWDKOc'>[fakemin]</a></b>: <span class='linkify'>[message]</span></span>")
 		to_chat(src, "<span class='danger'><i>Click on the administrator's name to reply, or see all of your tickets in the admin column.</i></span>")
