@@ -1,5 +1,9 @@
 //Life procs related to dreamer, so he hallucinates and shit
-GLOBAL_LIST_INIT(dreamer_object_talk, world.file2list('modular_skyrat/code/modules/antagonists/dreamer/visions.txt'))
+GLOBAL_LIST_INIT(dreamer_object, world.file2list('modular_skyrat/code/modules/antagonists/dreamer/object_visions.txt'))
+GLOBAL_LIST_INIT(dreamer_radio, world.file2list('modular_skyrat/code/modules/antagonists/dreamer/radio_visions.txt'))
+GLOBAL_LIST_INIT(dreamer_ahelp, world.file2list('modular_skyrat/code/modules/antagonists/dreamer/ahelp_visions.txt'))
+GLOBAL_LIST_INIT(dreamer_ooc, world.file2list('modular_skyrat/code/modules/antagonists/dreamer/ooc_visions.txt'))
+GLOBAL_LIST_INIT(dreamer_ban, world.file2list('modular_skyrat/code/modules/antagonists/dreamer/ban_visions.txt'))
 
 /mob/living/carbon
 	var/dreamer_dreaming = FALSE
@@ -64,16 +68,13 @@ GLOBAL_LIST_INIT(dreamer_object_talk, world.file2list('modular_skyrat/code/modul
 			people += H
 		if(length(people))
 			var/mob/living/carbon/human/person = pick(people)
-			var/speak = pick(
-							"Let the blood flow, let the blood flo-ow, let the blood flo-o-ow!",
-							"We are DYING to see your WONDERS.",
-							"We will help you wake up.",
-							"You can kill us.",
-							"Let's wake up, together.",
-							"Slaughter us! Slaughter us!",
-							"Where is the blood? You've killed someone!",
-							"[src] HAS JUST KILLED SOMEONE!",
-							)
+			var/list/dreamer_radio = GLOB.dreamer_readio.Copy()
+			for(var/chungus in radio_visions)
+				chungus = replacetext(chungus, "SRC", "[src.real_name]")
+				chungus = replacetext(chungus, "CAPITALIZESRC", "[capitalize(src.real_name)]")
+			dreamer_radio |= last_pain_message
+			dreamer_radio |= last_words
+			var/speak = pick(radio_visions)
 			var/message = compose_message(person, language_holder?.selected_language, speak,"[FREQ_COMMON]", list(person.speech_span), face_name = TRUE, source = (person.ears ? person.ears : person.ears_extra))
 			to_chat(src, message)
 	//VERY rare mom/mob hallucination
@@ -86,14 +87,13 @@ GLOBAL_LIST_INIT(dreamer_object_talk, world.file2list('modular_skyrat/code/modul
 		if(prob(50))
 			var/client/cliente = pick(GLOB.clients)
 			clientkey = cliente.key
-		var/message = pick("My ANUS is <span style='color: #DC143C'>BLEEDING!</span>",
-						"[src] is the dreamer!",
-						"I'm reporting [src] for murderbone.",
-						"Lmao [src] is such an awful [pick("antag","dreamer")].",
-						"I'm gonna frag [src]",
-						last_pain_message,
-						last_words,
-						)
+		var/list/ooc_visions = GLOB.dreamer_ooc.Copy()
+		for(var/chungus in ooc_visions)
+			chungus = replacetext(chungus, "SRC", "[src.real_name]")
+			chungus = replacetext(chungus, "CAPITALIZESRC", "[capitalize(src.real_name)]")
+		ooc_visions |= last_pain_message
+		ooc_visions |= last_words
+		var/message = pick(ooc_visions)
 		to_chat(src, "<span class='ooc'><span class='prefix'>OOC:</span> <EM>[clientkey]:</EM> <span class='message linkify'>[message]</span></span>")
 	//Even rarer than that jannie hallucination - bwoink hallucination
 	else if(prob(1) && prob(10))
@@ -102,14 +102,10 @@ GLOBAL_LIST_INIT(dreamer_object_talk, world.file2list('modular_skyrat/code/modul
 			var/datum/admins/badmin = pick(GLOB.admin_datums)
 			if(badmin?.owner?.key)
 				fakemin = badmin.owner.key
-		var/message = pick("You need to wake up.",
-							"Are you scared of being banned?",
-							"What are you doing?",
-							"Have you read the rules?",
-							"You got a moment?",
-							last_pain_message,
-							last_words,
-							)
+		var/list/dreamer_ahelps = GLOB.dreamer_ahelp.Copy()
+		dreamer_ahelps |= last_pain_message
+		dreamer_ahelps |= last_words
+		var/message = pick(dreamer_bwoinks)
 		to_chat(src, "<font color='red' size='4'><b>-- Administrator private message --</b></font>")
 		to_chat(src, "<span class='danger'>Admin PM from-<b><a href='https://youtu.be/wJWksPWDKOc'>[fakemin]</a></b>: <span class='linkify'>[message]</span></span>")
 		to_chat(src, "<span class='danger'><i>Click on the administrator's name to reply, or see all of your tickets in the admin column.</i></span>")
@@ -121,15 +117,10 @@ GLOBAL_LIST_INIT(dreamer_object_talk, world.file2list('modular_skyrat/code/modul
 			var/datum/admins/badmin = pick(GLOB.admin_datums)
 			if(badmin?.owner?.key)
 				fakemin = badmin.owner.key
-		var/message = pick("I hate you.",
-						"You are not real.",
-						"None of this matters.",
-						"Do you even care?",
-						"Murderbone.",
-						"Bad roleplay.",
-						last_pain_message,
-						last_words,
-						)
+		var/list/dreamer_ban = GLOB.dreamer_bans.Copy()
+		dreamer_ban |= last_pain_message
+		dreamer_ban |= last_words
+		var/message = pick(dreamer_ban)
 		to_chat(src, "<span class='boldannounce'><BIG>You have been banned by [fakemin].\nReason: [message]</BIG></span>")
 		to_chat(src, "<span class='danger'>This is a permanent ban. The round ID is [GLOB.round_id].</span>")
 		var/bran = CONFIG_GET(string/banappeals)
@@ -138,15 +129,15 @@ GLOBAL_LIST_INIT(dreamer_object_talk, world.file2list('modular_skyrat/code/modul
 		to_chat(src, "<span class='danger'>To try to resolve this matter head to <a href='https://www.sprc.org/'>[bran]</a>")
 		to_chat(src, "<div class='connectionClosed internal'>You are either AFK, experiencing lag or the connection has closed.</div>")
 	//Talking objects
-	if(prob(5))
+	if(prob(6))
 		var/list/objects = list()
 		for(var/obj/O in view(src))
 			objects += O
 		if(length(objects))
 			var/message
 			if(prob(66) || !length(last_words))
-				var/list/dreamer_hallu = GLOB.dreamer_object_talk.Copy()
-				dreamer_hallu |= "[rand(0,9)][rand(0,9)][rand(0,9)][rand(0,9)]"
+				var/list/dreamer_object = GLOB.dreamer_object.Copy()
+				dreamer_object |= "[rand(0,9)][rand(0,9)][rand(0,9)][rand(0,9)]"
 				message = pick(dreamer_hallu)
 			else
 				message = last_words
@@ -185,7 +176,6 @@ GLOBAL_LIST_INIT(dreamer_object_talk, world.file2list('modular_skyrat/code/modul
 	for(var/W in walllist)
 		spawn(0)
 			handle_dreamer_wall(W)
-	
 	dreamer_dreaming = FALSE
 
 /mob/living/carbon/proc/handle_dreamer_floor(turf/open/floor/T)

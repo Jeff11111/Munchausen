@@ -10,7 +10,7 @@
 
 //Fake str, used by the dreamer
 /datum/stats/fakestr
-	name = "Strength"
+	name = "Fake Strength"
 	shorthand = "ST"
 	level =  0
 	fake_type = /datum/stats/str

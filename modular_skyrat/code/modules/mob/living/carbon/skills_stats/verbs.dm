@@ -18,6 +18,9 @@
 	msg += "<span class='info'>Let's check my physical capabilities...</span><br>"
 	for(var/s in mind.mob_stats)
 		var/datum/stats/stat = mind.mob_stats[s]
+		//Ignore the fakes
+		if(stat.fake_type)
+			continue
 		msg += "<span class='info'>I have <b>[stat.statnumtodesc(stat.level)] ([stat.level])</b> <b>[lowertext(stat.name)] ([stat.shorthand])</b>.</span><br>"
 	
 	to_chat(usr, msg)
