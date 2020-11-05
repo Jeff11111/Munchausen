@@ -99,7 +99,7 @@
 	S.oldsound = fire_sound
 	fire_sound = sound_suppressed
 	w_class += S.w_class //so pistols do not fit in pockets when suppressed
-	suppressed_overlay = mutable_appearance(icon, "[initial(icon_state)]-suppressor")
+	suppressed_overlay = mutable_appearance('modular_skyrat/icons/obj/bobstation/gun_mods/mods.dmi', "[initial(icon_state)]-suppressor")
 	update_icon()
 
 /obj/item/gun/ballistic/attack_self(mob/living/user)

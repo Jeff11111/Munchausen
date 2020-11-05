@@ -9,8 +9,6 @@
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/smg.dmi'
 	icon_state = "wt550"
 	item_state = "arg"
-	righthand_file = 'modular_skyrat/icons/mob/inhands/weapons/guns_righthand.dmi'
-	lefthand_file = 'modular_skyrat/icons/mob/inhands/weapons/guns_lefthand.dmi'
 
 /obj/item/gun/ballistic/automatic/wt550/update_icon()
 	..()
@@ -34,8 +32,8 @@
 //israel gun
 /obj/item/gun/ballistic/automatic/mini_uzi
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/smg.dmi'
-	righthand_file = 'modular_skyrat/icons/mob/inhands/weapons/guns_righthand.dmi'
-	lefthand_file = 'modular_skyrat/icons/mob/inhands/weapons/guns_lefthand.dmi'
+	righthand_file = 'modular_skyrat/icons/obj/guns/inhands/smg_righthand.dmi'
+	lefthand_file = 'modular_skyrat/icons/obj/guns/inhands/smg_lefthand.dmi'
 	icon_state = "uzi"
 	item_state = "uzi"
 
@@ -47,3 +45,11 @@
 	..()
 	if(magazine)
 		add_overlay("[initial(icon_state)]-mag")
+
+//Saber should be an MP5 that would be cool i think
+/obj/item/gun/ballistic/automatic/proto
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/40x32.dmi'
+	icon_state = "mp5"
+	item_state = "arg"
+	desc = "A prototype three-round burst 9mm submachine gun, designated 'SABR'. Looks eerily similar to another submachine gun..."
+	can_suppress = FALSE

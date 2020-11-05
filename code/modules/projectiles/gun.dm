@@ -95,6 +95,7 @@
 	// Sling stuff
 	var/obj/item/stack/cable_coil/sling
 	var/mutable_appearance/sling_overlay
+	var/sling_icon_state = "sling_overlay"
 	var/sling_pixel_x = 0
 	var/sling_pixel_y = 0
 	var/can_sling = FALSE
@@ -542,6 +543,13 @@
 			knife_overlay = null
 			update_overlays()
 			return TRUE
+		else if(sling && can_unsling)
+			var/obj/item/slong = sling
+			to_chat(user, "<span class='notice'>You rip \the [slong] from \the [src].</span>")
+			QDEL_NULL(sling)
+			sling_overlay = null
+			update_overlays()
+			return TRUE
 
 /obj/item/gun/attack_obj(obj/O, mob/user)
 	if(user.a_intent == INTENT_HARM)
@@ -583,7 +591,20 @@
 		knife_overlay = mutable_appearance(bayonet_icons, state)
 		knife_overlay.pixel_x = knife_x_offset
 		knife_overlay.pixel_y = knife_y_offset
-		add_overlay(knife_overlay, TRUE)
+		update_icon()
+	else if(istype(I, /obj/item/stack/cable_coil))
+		if(!can_sling || sling)
+			return ..()
+		if(I.use_tool(src, user, 0, 10))
+			slot_flags |= (ITEM_SLOT_BACK | ITEM_SLOT_SUITSTORE)
+			to_chat(user, "<span class='notice'>You tie the lengths of cable to \the [src], making a sling.</span>")
+			sling = new /obj/item/stack/cable_coil(src)
+			sling_overlay = mutable_appearance('modular_skyrat/icons/obj/bobstation/gun_mods/mods.dmi')
+			sling_overlay.pixel_x = sling_pixel_x
+			sling_overlay.pixel_y = sling_pixel_y
+			update_icon()
+		else
+			to_chat(user, "<span class='warning'>You need at least ten lengths of cable if you want to make a sling!</span>")
 	else
 		return ..()
 

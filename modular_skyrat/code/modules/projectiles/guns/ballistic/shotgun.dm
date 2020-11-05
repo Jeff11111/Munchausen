@@ -93,7 +93,6 @@
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/improvised
 	sawn_desc = "A break-action 12 gauge shotgun, but with most of the stock and some of the barrel removed. You still need both hands to fire this."
 	unique_reskin = null
-	var/slung = FALSE
 	weapon_weight = WEAPON_HEAVY	// It's big.
 	recoil = 4	// We're firing 12 gauge.
 	var/barrel_open
@@ -111,8 +110,8 @@
 
 /obj/item/gun/ballistic/shotgun/improvised/update_icon()
 	..()
-	icon_state = "[initial(icon_state)][slung ? "slung" : ""][barrel_open ? "-open" : ""]"
-	item_state = "[initial(item_state)][slung ? "sling" :  ""]"
+	icon_state = "[initial(icon_state)][sling ? "slung" : ""][barrel_open ? "-open" : ""]"
+	item_state = "[initial(item_state)][sling ? "sling" :  ""]"
 
 /obj/item/gun/ballistic/shotgun/improvised/attackby(obj/item/A, mob/user, params)
 	if(!barrel_open)
@@ -120,25 +119,6 @@
 		return
 	else
 		return ..()
-
-//	//	//	Shotgun sawn-off & sling code block - Because our shotgun is no longer a revolver and now a shotgun and inheriting shotgun code, we're commenting out the entire original shotgun.
-/obj/item/gun/ballistic/shotgun/improvised/attackby(obj/item/A, mob/user, params)
-	..()
-	if(istype(A, /obj/item/stack/cable_coil) && !sawn_off)
-		if(A.use_tool(src, user, 0, 10, max_level = JOB_SKILL_BASIC))
-			slot_flags = ITEM_SLOT_BACK
-			to_chat(user, "<span class='notice'>You tie the lengths of cable to the shotgun, making a sling.</span>")
-			slung = TRUE
-			update_icon()
-		else
-			to_chat(user, "<span class='warning'>You need at least ten lengths of cable if you want to make a sling!</span>")
-
-/obj/item/gun/ballistic/shotgun/improvised/sawoff(mob/user)
-	. = ..()
-	if(. && slung) //sawing off the gun removes the sling
-		new /obj/item/stack/cable_coil(get_turf(src), 10)
-		slung = FALSE
-		update_icon()
 
 /obj/item/gun/ballistic/shotgun/improvised/sawn
 	name = "sawn-off improvised shotgun"
