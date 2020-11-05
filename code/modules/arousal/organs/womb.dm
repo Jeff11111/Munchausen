@@ -8,3 +8,13 @@
 	genital_flags = GENITAL_INTERNAL|GENITAL_FUID_PRODUCTION
 	fluid_id = /datum/reagent/consumable/femcum
 	linked_organ_slot = ORGAN_SLOT_VAGINA
+
+/obj/item/organ/genital/womb/get_features(mob/living/carbon/human/H)
+	var/datum/dna/D = H.dna
+	var/datum/species/S = D.species
+	if(S)
+		//commies stole the means of reproduction again idk
+		if(!S.has_womber)
+			Remove()
+			qdel(src)
+			return

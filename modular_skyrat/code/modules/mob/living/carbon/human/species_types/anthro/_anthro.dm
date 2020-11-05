@@ -14,9 +14,7 @@
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/human
 	liked_food = MEAT | FRIED
 	disliked_food = TOXIC
-	//Skyrat change - blood
 	bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
-	//
 
 //Curiosity killed the cat's wagging tail.
 /datum/species/anthro/spec_death(gibbed, mob/living/carbon/human/H)

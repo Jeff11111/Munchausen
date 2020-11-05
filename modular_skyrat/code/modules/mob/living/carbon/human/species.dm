@@ -12,6 +12,17 @@
 		/datum/mob_descriptor/height = "default",
 		/datum/mob_descriptor/build = "default",
 	)
+	//Genitals
+	//set list of types to force certain types of genital
+	var/has_weiner = TRUE
+	var/list/weiner_type = null
+	var/has_balls = TRUE
+	var/list/balls_type = null
+	var/has_bobs = TRUE
+	var/list/bobs_type = null
+	var/has_vegana = TRUE
+	var/list/vegana_type = null
+	var/has_womber = TRUE
 	var/static/list/pain_emote_by_power = list(
 	"100" = "agonyscream",
 	"90" = "whimper",

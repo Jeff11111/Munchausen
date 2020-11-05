@@ -247,7 +247,6 @@
 /obj/item/organ/genital/proc/get_features(mob/living/carbon/human/H)
 	return
 
-
 //procs to handle sprite overlays being applied to humans
 
 /mob/living/carbon/human/equip_to_slot(obj/item/I, slot)

@@ -23,6 +23,16 @@
 	display_order = JOB_DISPLAY_ORDER_ROBOTICIST
 	threat = 1
 
+
+/datum/job/roboticist/equip(mob/living/carbon/human/H, visualsOnly, announce, latejoin, datum/outfit/outfit_override, client/preference_source)
+	..()
+	if(SSevents.holidays && SSevents.holidays[KILLDOZER_DAY])
+		var/obj/item/card/id/id = H.wear_id
+		if(id)
+			id.update_label(H.name, "Welder")
+		var/obj/item/gun/ballistic/automatic/ar/ar = new(get_turf(H))
+		H.put_in_hands(ar)
+
 /datum/outfit/job/roboticist
 	name = "Roboticist"
 	jobtype = /datum/job/roboticist

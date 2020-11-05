@@ -59,6 +59,13 @@
 
 /obj/item/organ/genital/testicles/get_features(mob/living/carbon/human/H)
 	var/datum/dna/D = H.dna
+	var/datum/species/S = D.species
+	if(S)
+		//species has no balls (literally, not figuratively), remove
+		if(!S.has_balls)
+			Remove()
+			qdel(src)
+			return
 	if(D.species.use_skintones && D.features["genitals_use_skintone"])
 		color = SKINTONE2HEX(H.skin_tone)
 	else
@@ -67,4 +74,8 @@
 	fluid_rate = D.features["balls_cum_rate"]
 	fluid_mult = D.features["balls_cum_mult"]
 	fluid_efficiency = D.features["balls_efficiency"]
+	//species has ball type
+	//lets check if its correct
+	if(length(S.balls_type) && !(shape in S.balls_type))
+		shape = S.balls_type[1]
 	toggle_visibility(D.features["balls_visibility"], FALSE)

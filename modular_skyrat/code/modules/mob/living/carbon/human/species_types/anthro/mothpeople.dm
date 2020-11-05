@@ -17,6 +17,8 @@
 	toxic_food = MEAT | RAW
 	mutanteyes = /obj/item/organ/eyes/insect/moth
 	icon_limbs = 'modular_skyrat/icons/mob/moth_parts.dmi'
+	has_bobs = FALSE
+	weiner_type = list("Hemi", "Knotted Hemi")
 
 /datum/species/insect/moth/random_name(gender,unique,lastname)
 	if(unique)

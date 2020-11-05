@@ -113,6 +113,13 @@
 
 /obj/item/organ/genital/penis/get_features(mob/living/carbon/human/H)
 	var/datum/dna/D = H.dna
+	var/datum/species/S = D.species
+	if(S)
+		//species has no willy, remove
+		if(!S.has_weiner)
+			Remove()
+			qdel(src)
+			return
 	if(D.species.use_skintones && D.features["genitals_use_skintone"])
 		color = SKINTONE2HEX(H.skin_tone)
 	else
@@ -121,4 +128,8 @@
 	diameter_ratio = D.features["cock_diameter_ratio"]
 	shape = D.features["cock_shape"]
 	prev_length = length
+	//species has weiner type
+	//lets check if its correct
+	if(length(S.weiner_type) && !(shape in S.weiner_type))
+		shape = S.weiner_type[1]
 	toggle_visibility(D.features["cock_visibility"], FALSE)

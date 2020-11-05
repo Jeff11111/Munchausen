@@ -66,9 +66,20 @@
 
 /obj/item/organ/genital/vagina/get_features(mob/living/carbon/human/H)
 	var/datum/dna/D = H.dna
+	var/datum/species/S = D.species
+	if(S)
+		//commies stole the means of reproduction idk
+		if(!S.has_vegana)
+			Remove()
+			qdel(src)
+			return
 	if(D.species.use_skintones && D.features["genitals_use_skintone"])
 		color = SKINTONE2HEX(H.skin_tone)
 	else
 		color = "[D.features["vag_color"]]"
 	shape = "[D.features["vag_shape"]]"
+	//species has veagana type
+	//lets check if its correct
+	if(length(S.vegana_type) && !(shape in S.vegana_type))
+		shape = S.vegana_type[1]
 	toggle_visibility(D.features["vag_visibility"], FALSE)

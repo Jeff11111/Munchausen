@@ -14,6 +14,5 @@
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/mammal
 	liked_food = MEAT | FRIED
 	disliked_food = TOXIC
-	//Skyrat change - blood
 	bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
-	//
+	weiner_type = list("Knotted")

@@ -14,6 +14,6 @@
 	meat = /obj/item/reagent_containers/food/snacks/carpmeat/aquatic
 	liked_food = MEAT | FRIED
 	disliked_food = TOXIC
-	//Skyrat change - blood
 	bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
-	//
+	has_bobs = FALSE
+	weiner_type = list("Hemi", "Knotted Hemi")

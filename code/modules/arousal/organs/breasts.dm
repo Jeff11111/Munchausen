@@ -122,6 +122,13 @@
 
 /obj/item/organ/genital/breasts/get_features(mob/living/carbon/human/H)
 	var/datum/dna/D = H.dna
+	var/datum/species/S = D.species
+	if(S)
+		//species has no boobies, remove
+		if(!S.has_bobs)
+			Remove()
+			qdel(src)
+			return
 	if(D.species.use_skintones && D.features["genitals_use_skintone"])
 		color = SKINTONE2HEX(H.skin_tone)
 	else
@@ -135,6 +142,10 @@
 	else
 		cached_size = size
 		size = breast_values[size]
+	//species has tiddy type
+	//lets check if its correct
+	if(length(S.bobs_type) && !(shape in S.bobs_type))
+		shape = S.bobs_type[1]
 	prev_size = cached_size
 	toggle_visibility(D.features["breasts_visibility"], FALSE)
 

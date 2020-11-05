@@ -26,6 +26,8 @@
 		/datum/mob_descriptor/build = "default",
 		/datum/mob_descriptor/vox_markings = "default",
 	)
+	has_bobs = FALSE
+	weiner_type = list("Hemi", "Knotted Hemi")
 
 /datum/species/vox/before_equip_job(datum/job/J, mob/living/carbon/human/H, visualsOnly = FALSE)
 	var/datum/outfit/vox/O = new /datum/outfit/vox

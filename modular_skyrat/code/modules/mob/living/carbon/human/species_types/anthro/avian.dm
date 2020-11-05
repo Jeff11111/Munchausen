@@ -13,8 +13,8 @@
 	attack_sound = 'sound/weapons/slash.ogg'
 	miss_sound = 'sound/weapons/slashmiss.ogg'
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/avian
-	liked_food = MEAT | FRIED
-	disliked_food = TOXIC
-	//Skyrat change - blood
+	liked_food = VEGETABLES | FRUIT
+	disliked_food = TOXIC | MEAT
 	bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
-	//
+	has_bobs = FALSE
+	weiner_type = list("Hemi", "Knotted Hemi")
