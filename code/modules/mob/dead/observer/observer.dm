@@ -99,14 +99,11 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 			body_appearance = copy_appearance(living_body.appearance)
 			appearance = body_appearance
 		else
-			//Shit, try to make a humie to copy from
-			var/datum/preferences/prefs = body?.client?.prefs
-			if(prefs)
-				var/mob/living/carbon/human/H = new(src)
-				prefs.copy_to(H)
-				body_appearance = copy_appearance(H.appearance)
-				appearance = body_appearance
-				qdel(H)
+			//No body, try to copy their prefs later
+			addtimer(CALLBACK(src, /mob/dead/observer.proc/get_appearance_from_prefs), 2 SECONDS)
+	else
+		//No body, try to copy their prefs later
+		addtimer(CALLBACK(src, /mob/dead/observer.proc/get_appearance_from_prefs), 2 SECONDS)
 		
 	update_icon()
 
@@ -176,6 +173,15 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	MA.alpha = 127
 
 	return MA
+
+/mob/dead/observer/proc/get_appearance_from_prefs()
+	if(!client?.prefs)
+		return
+	var/datum/preferences/prefs = client.prefs
+	var/mob/living/carbon/human/H = new(src)
+	prefs.copy_to(H, TRUE, FALSE)
+	body_appearance = copy_appearance(H.appearance)
+	appearance = body_appearance
 
 /mob/dead/observer/get_photo_description(obj/item/camera/camera)
 	if(!invisibility || camera.see_ghosts)
