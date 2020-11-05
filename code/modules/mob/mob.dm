@@ -231,6 +231,9 @@ mob/visible_message(message, self_message, blind_message, vision_distance = DEFA
 /mob/proc/restrained(ignore_grab)
 	return
 
+/mob/proc/pinned(ignore_grab)
+	return (!ignore_grab && pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE)
+
 /mob/proc/incapacitated(ignore_restraints, ignore_grab)
 	return
 

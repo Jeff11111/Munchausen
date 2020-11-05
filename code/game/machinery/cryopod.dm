@@ -164,8 +164,8 @@
 /obj/machinery/cryopod
 	name = "cryogenic freezer"
 	desc = "Suited for Cyborgs and Humanoids, the pod is a safe place for personnel affected by the Space Sleep Disorder to get some rest."
-	icon = 'icons/obj/cryogenic2.dmi'
-	icon_state = "cryopod-open"
+	icon = 'modular_skyrat/icons/obj/machines/cryopod.dmi'
+	icon_state = "cryochamber"
 	density = TRUE
 	anchored = TRUE
 	state_open = TRUE
@@ -216,6 +216,21 @@
 		/obj/item/gun/energy/laser/cyborg
 	))
 
+/obj/machinery/cryopod/update_icon()
+	. = ..()
+	if(has_buckled_mobs())
+		icon_state = "[initial(icon_state)]-closed"
+	else
+		if(state_open)
+			icon_state = "[initial(icon_state)]-open"
+		else
+			icon_state = "[initial(icon_state)]-freezy"
+
+/obj/machinery/cryopod/buckle_mob(mob/living/M, force, check_loc)
+	. = ..()
+	// Play freeze/de=freeze sound
+	playsound(src, 'modular_skyrat/sound/machinery/cryo_wakeup.ogg', 60, 0)
+
 /obj/machinery/cryopod/Initialize(mapload)
 	. = ..()
 	update_icon()
@@ -249,23 +264,25 @@
 			despawn_world_time = world.time + (time_till_despawn * 0.1)
 		else
 			despawn_world_time = world.time + time_till_despawn
-	icon_state = "cryopod"
-	playsound(src, 'sound/machines/closehiss.ogg', 25, 0)
+	update_icon()
+	playsound(src, 'modular_skyrat/sound/machinery/cryo_lock.ogg', 25, 0)
 
 /obj/machinery/cryopod/open_machine()
 	if(occupant)
 		investigate_log("Cryogenics machine opened with occupant [key_name(occupant)] inside.", INVESTIGATE_CRYOGENICS)
 	..()
-	icon_state = "cryopod-open"
+	update_icon()
 	density = TRUE
 	name = initial(name)
-	playsound(src, 'sound/machines/openhiss.ogg', 25, 0)
+	playsound(src, 'modular_skyrat/sound/machinery/cryo_open.ogg', 25, 0)
 
 /obj/machinery/cryopod/container_resist(mob/living/user)
-	investigate_log("Cryogenics machine container resisted by [key_name(user)] with occupant [key_name(occupant)].", INVESTIGATE_CRYOGENICS)
-	visible_message("<span class='notice'>[occupant] emerges from [src]!</span>",
-		"<span class='notice'>You climb out of [src]!</span>")
-	open_machine()
+	visible_message("<span class='danger'>[user] bangs loudly on [src]!</span>", \
+				"<span class='userdanger'>I bang loudly on [src]. It's stuck!</span>")
+
+/obj/machinery/cryopod/alt_attack_hand(mob/user)
+	. = ..()
+	open_machine(user)
 
 /obj/machinery/cryopod/relaymove(mob/user)
 	container_resist(user)
@@ -420,7 +437,7 @@
 		var/atom/A = I
 		if(!QDELETED(A))
 			qdel(A)
-	open_machine()
+	update_icon()
 	name = initial(name)
 
 #undef CRYO_DESTROY

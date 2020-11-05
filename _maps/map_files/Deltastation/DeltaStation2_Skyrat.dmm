@@ -241,10 +241,58 @@
 /mob/living/simple_animal/sloth/citrus,
 /turf/open/floor/plasteel,
 /area/quartermaster/qm)
+"aaD" = (
+/turf/closed/wall/r_wall,
+/area/shuttle/arrival)
 "aaE" = (
 /obj/structure/lattice/catwalk,
 /turf/open/space,
 /area/solar/starboard/fore)
+"aaF" = (
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"aaG" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/machinery/door/airlock/external{
+	name = "Port Docking Bay 1"
+	},
+/turf/open/floor/plating,
+/area/shuttle/arrival)
+"aaH" = (
+/obj/machinery/cryopod,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"aaI" = (
+/obj/machinery/cryopod,
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"aaJ" = (
+/obj/machinery/computer/cryopod{
+	dir = 8;
+	pixel_x = 26
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"aaK" = (
+/obj/structure/closet/wardrobe/green,
+/obj/machinery/light,
+/turf/open/floor/mineral/titanium/purple,
+/area/shuttle/arrival)
+"aaL" = (
+/obj/structure/closet/wardrobe/black,
+/turf/open/floor/mineral/titanium/purple,
+/area/shuttle/arrival)
+"aaM" = (
+/obj/structure/closet/wardrobe/mixed,
+/turf/open/floor/mineral/titanium/purple,
+/area/shuttle/arrival)
+"aaN" = (
+/obj/structure/closet/wardrobe/grey,
+/turf/open/floor/mineral/titanium/purple,
+/area/shuttle/arrival)
 "aaO" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
@@ -252,6 +300,14 @@
 "aaP" = (
 /turf/closed/wall/mineral/plastitanium,
 /area/hallway/secondary/entry)
+"aaQ" = (
+/obj/structure/closet/wardrobe/grey,
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/light,
+/turf/open/floor/mineral/titanium/purple,
+/area/shuttle/arrival)
 "aaS" = (
 /turf/closed/wall/mineral/plastitanium,
 /area/construction/mining/aux_base)
@@ -1742,16 +1798,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/security/prison)
-"aid" = (
-/obj/docking_port/stationary{
-	dwidth = 2;
-	height = 13;
-	id = "ferry_home";
-	name = "port bay 2";
-	width = 5
-	},
-/turf/open/space/basic,
-/area/space)
 "aig" = (
 /turf/closed/wall,
 /area/maintenance/starboard/fore)
@@ -137544,14 +137590,14 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+aaD
+aaD
+aaD
+aaD
+aaD
+aaD
+aaD
+aaD
 aad
 aaO
 abf
@@ -137801,14 +137847,14 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+aaD
+aaH
+aaF
+aaF
+aaF
+aaF
+aaK
+aaD
 aad
 adq
 agk
@@ -138058,14 +138104,14 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+aaD
+aaI
+aaF
+aaF
+aaF
+aaF
+aaL
+aaD
 aaO
 aaO
 aaO
@@ -138315,14 +138361,14 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aid
+aaD
+aaI
+aaF
+aaF
+aaF
+aaF
+aaM
+aaD
 aiA
 aeb
 ajf
@@ -138572,14 +138618,14 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+aaD
+aaI
+aaF
+aaF
+aaF
+aaF
+aaN
+aaD
 aaO
 aaO
 aaO
@@ -138829,14 +138875,14 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+aaD
+aaH
+aaJ
+aaF
+aaF
+aaF
+aaQ
+aaD
 aad
 ads
 agj
@@ -139086,14 +139132,14 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+aaD
+aaD
+aaD
+aaG
+aaD
+aaD
+aaD
+aaD
 aad
 aaO
 abf

@@ -956,6 +956,9 @@
 	},
 /turf/open/floor/plating/airless,
 /area/router/aux)
+"acy" = (
+/turf/closed/wall/r_wall,
+/area/shuttle/arrival)
 "acz" = (
 /obj/machinery/mass_driver{
 	dir = 4;
@@ -22740,23 +22743,18 @@
 	},
 /turf/open/floor/plasteel,
 /area/bridge)
-"aXk" = (
-/obj/machinery/door/firedoor,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/machinery/door/airlock/external{
-	name = "Port Docking Bay"
-	},
-/turf/open/floor/plasteel,
-/area/hallway/primary/central)
 "aXl" = (
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
 	},
 /obj/machinery/door/airlock/external{
-	name = "Port Docking Bay"
+	name = "Port Docking Bay 1"
 	},
-/turf/open/floor/plasteel,
-/area/hallway/primary/central)
+/turf/open/floor/plating,
+/area/shuttle/arrival)
+"aXm" = (
+/turf/closed/wall,
+/area/shuttle/arrival)
 "aXn" = (
 /obj/effect/turf_decal/tile/bar,
 /obj/effect/turf_decal/tile/bar{
@@ -22796,6 +22794,16 @@
 "aXr" = (
 /turf/open/floor/plasteel,
 /area/ai_monitored/storage/eva)
+"aXs" = (
+/obj/machinery/cryopod{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 1;
+	light_color = "#cee5d2"
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
 "aXt" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/sign/warning/securearea,
@@ -24560,13 +24568,6 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/department/chapel)
-"baZ" = (
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/machinery/door/airlock/external{
-	name = "Port Docking Bay"
-	},
-/turf/open/floor/plasteel,
-/area/hallway/primary/central)
 "bba" = (
 /obj/effect/landmark/start/assistant,
 /obj/structure/cable{
@@ -27499,16 +27500,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/port/fore)
-"bhS" = (
-/obj/machinery/door/firedoor,
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
-	},
-/obj/machinery/door/airlock/external{
-	name = "Port Docking Bay"
-	},
-/turf/open/floor/plasteel,
-/area/hallway/primary/central)
 "bhT" = (
 /obj/structure/sign/departments/engineering,
 /turf/closed/wall,
@@ -30236,6 +30227,9 @@
 	},
 /turf/open/floor/plasteel,
 /area/science/mixing)
+"bnl" = (
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
 "bnm" = (
 /obj/machinery/atmospherics/pipe/manifold/orange/hidden{
 	dir = 4
@@ -34570,6 +34564,13 @@
 	},
 /turf/open/floor/plating,
 /area/router)
+"bwM" = (
+/obj/machinery/computer/arcade,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/open/floor/mineral/titanium/purple,
+/area/shuttle/arrival)
 "bwN" = (
 /obj/machinery/atmospherics/pipe/simple/general/visible{
 	dir = 4
@@ -36295,6 +36296,10 @@
 /area/medical/medbay/zone2{
 	name = "Medbay Treatment Center"
 	})
+"bAz" = (
+/obj/structure/closet/wardrobe/green,
+/turf/open/floor/mineral/titanium/purple,
+/area/shuttle/arrival)
 "bAA" = (
 /obj/structure/lattice,
 /obj/structure/cable{
@@ -36452,6 +36457,10 @@
 /area/medical/medbay/zone2{
 	name = "Medbay Treatment Center"
 	})
+"bAN" = (
+/obj/structure/closet/wardrobe/black,
+/turf/open/floor/mineral/titanium/purple,
+/area/shuttle/arrival)
 "bAO" = (
 /obj/machinery/atmospherics/pipe/simple/supplymain/hidden{
 	dir = 4
@@ -40452,6 +40461,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/plasteel,
 /area/medical/chemistry)
+"bJg" = (
+/obj/structure/closet/wardrobe/mixed,
+/turf/open/floor/mineral/titanium/purple,
+/area/shuttle/arrival)
 "bJh" = (
 /obj/structure/sign/warning/biohazard,
 /obj/structure/disposalpipe/segment{
@@ -52989,6 +53002,10 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/port/fore)
+"ciA" = (
+/obj/structure/closet/wardrobe/grey,
+/turf/open/floor/mineral/titanium/purple,
+/area/shuttle/arrival)
 "ciB" = (
 /obj/structure/frame/computer,
 /obj/structure/disposalpipe/segment,
@@ -55525,6 +55542,35 @@
 	icon_state = "panelscorched"
 	},
 /area/maintenance/port/fore)
+"cnG" = (
+/obj/structure/closet/wardrobe/grey,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/open/floor/mineral/titanium/purple,
+/area/shuttle/arrival)
+"cnH" = (
+/obj/machinery/cryopod{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 1;
+	light_color = "#cee5d2"
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"cnI" = (
+/obj/machinery/cryopod{
+	dir = 4
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"cnJ" = (
+/obj/machinery/cryopod{
+	dir = 8
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
 "cnK" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -55534,10 +55580,62 @@
 	},
 /turf/open/floor/plasteel,
 /area/engine/teg_hot)
+"cnL" = (
+/obj/machinery/cryopod{
+	dir = 8
+	},
+/obj/structure/window{
+	dir = 4
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"cnM" = (
+/obj/machinery/cryopod{
+	dir = 4
+	},
+/obj/structure/window{
+	dir = 8
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"cnN" = (
+/obj/machinery/light,
+/obj/machinery/cryopod{
+	dir = 4
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
 "cnO" = (
 /obj/effect/landmark/event_spawn,
 /turf/open/floor/engine,
 /area/science/storage)
+"cnP" = (
+/obj/machinery/cryopod{
+	dir = 8
+	},
+/obj/structure/window{
+	dir = 4
+	},
+/obj/machinery/light,
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"cnQ" = (
+/obj/machinery/cryopod{
+	dir = 4
+	},
+/obj/structure/window{
+	dir = 8
+	},
+/obj/machinery/light,
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"cnR" = (
+/obj/machinery/cryopod{
+	dir = 8
+	},
+/obj/machinery/light,
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
 "cnS" = (
 /obj/structure/cable{
 	icon_state = "0-2"
@@ -59097,16 +59195,12 @@
 	name = "Research Observatory"
 	})
 "cut" = (
-/obj/docking_port/stationary{
-	dir = 2;
-	dwidth = 7;
-	height = 9;
-	id = "whiteship_home";
-	name = "SS13: Merchant Dock";
-	width = 13
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/machinery/door/airlock/external{
+	name = "Port Docking Bay 1"
 	},
-/turf/open/space/basic,
-/area/space)
+/turf/open/floor/plating,
+/area/shuttle/arrival)
 "cuu" = (
 /obj/effect/turf_decal/tile/yellow{
 	dir = 1
@@ -92655,15 +92749,15 @@ aaa
 aaU
 aaa
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+acy
+acy
+acy
+acy
+acy
+acy
+acy
+acy
+acy
 aaa
 aaa
 aaa
@@ -92912,15 +93006,15 @@ aaa
 aaU
 aaa
 aaa
-aaU
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+acy
+aXs
+cnI
+cnI
+cnI
+cnI
+cnI
+cnN
+acy
 aaa
 aaU
 aaa
@@ -93169,15 +93263,15 @@ bdg
 bdg
 bdg
 bdg
-aaU
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+acy
+bnl
+bnl
+bnl
+bnl
+bnl
+bnl
+bnl
+acy
 aaa
 aaU
 bdg
@@ -93425,16 +93519,16 @@ aaa
 bdg
 beN
 bgx
-bdg
-aaU
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+beJ
+acy
+bnl
+bnl
+bnl
+bnl
+bnl
+bnl
+bnl
+acy
 aaa
 aaU
 bdg
@@ -93682,16 +93776,16 @@ aaa
 bdg
 beR
 beJ
-bdg
-bdg
-bdg
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+beJ
+acy
+bnl
+bnl
+bnl
+bnl
+bnl
+bnl
+bnl
+acy
 bdg
 bdg
 bdg
@@ -93939,19 +94033,19 @@ aaa
 bdg
 beJ
 beJ
-aXk
-bjg
+beJ
 aXl
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-baZ
-bjg
-bhS
+bwM
+bnl
+bnl
+bnl
+bnl
+bnl
+bnl
+cut
+beJ
+beJ
+beJ
 beJ
 beJ
 bdg
@@ -94196,16 +94290,16 @@ aaa
 bdg
 beJ
 beJ
-bdg
-bdg
-bdg
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+beJ
+aXm
+bAz
+bnl
+bnl
+bnl
+bnl
+bnl
+bnl
+aXm
 bdg
 bdg
 bdg
@@ -94453,16 +94547,16 @@ aaa
 bdg
 beJ
 beJ
-bdg
-aaU
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+bbI
+aXm
+bAN
+bnl
+cnL
+cnL
+cnL
+cnL
+cnP
+aXm
 aaa
 aaU
 bdg
@@ -94710,16 +94804,16 @@ aaa
 bdg
 beJ
 bbI
-bdg
-aaU
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+beJ
+aXm
+bJg
+bnl
+cnM
+cnM
+cnM
+cnM
+cnQ
+aXm
 aaa
 aaU
 bdg
@@ -94967,16 +95061,16 @@ aaa
 bdg
 beJ
 beJ
-bdg
-aaU
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+beJ
+aXm
+ciA
+bnl
+bnl
+bnl
+bnl
+bnl
+bnl
+aXm
 aaa
 aaU
 bdg
@@ -95224,16 +95318,16 @@ aaa
 bdg
 beJ
 beJ
-bdg
-bdg
-bdg
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+beJ
+aXm
+cnG
+bnl
+bnl
+bnl
+bnl
+bnl
+bnl
+aXm
 bdg
 bdg
 bdg
@@ -95481,19 +95575,19 @@ bdg
 bdg
 beJ
 beJ
-aXk
-bjg
+beJ
 aXl
+bnl
+bnl
+bnl
+bnl
+bnl
+bnl
+bnl
 cut
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-baZ
-bjg
-bhS
+beJ
+beJ
+beJ
 beJ
 beJ
 bGI
@@ -95738,16 +95832,16 @@ bdj
 beF
 beJ
 beJ
-bdg
-bdg
-bdg
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+beJ
+aXm
+bnl
+bnl
+bnl
+bnl
+bnl
+bnl
+bnl
+aXm
 bdg
 bdg
 bdg
@@ -95995,16 +96089,16 @@ bdr
 beJ
 beJ
 beJ
-bdg
-aaU
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+beJ
+aXm
+cnH
+cnJ
+cnJ
+cnJ
+cnJ
+cnJ
+cnR
+aXm
 aaa
 aaU
 bdg
@@ -96253,15 +96347,15 @@ beJ
 beT
 bbI
 bdg
-aaU
-aaa
-aaU
-aaU
-aaU
-aaU
-aaU
-aaU
-aaU
+aXm
+aXm
+aXm
+aXm
+aXm
+aXm
+aXm
+aXm
+aXm
 aaa
 aaU
 bdg

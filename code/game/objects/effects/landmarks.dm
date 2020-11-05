@@ -63,6 +63,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/assistant
 	name = "Assistant"
 	icon_state = "Assistant"
+	jobspawn_override = TRUE //Stowaways MUST spawn in maint etc
 
 /obj/effect/landmark/start/assistant/override
 	jobspawn_override = TRUE

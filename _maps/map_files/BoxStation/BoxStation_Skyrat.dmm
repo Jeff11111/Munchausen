@@ -242,6 +242,43 @@
 /mob/living/carbon/monkey,
 /turf/open/floor/plasteel/freezer,
 /area/medical/virology)
+"aau" = (
+/obj/machinery/firealarm{
+	pixel_y = 24
+	},
+/turf/open/floor/carpet,
+/area/crew_quarters/cryopod)
+"aav" = (
+/obj/machinery/airalarm{
+	pixel_y = 23
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 4
+	},
+/turf/open/floor/carpet,
+/area/crew_quarters/cryopod)
+"aaw" = (
+/obj/machinery/cryopod{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 1;
+	light_color = "#cee5d2"
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"aax" = (
+/turf/closed/wall/r_wall,
+/area/shuttle/arrival)
+"aay" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 1
+	},
+/obj/machinery/door/airlock/external{
+	name = "Port Docking Bay 1"
+	},
+/turf/open/floor/plating,
+/area/shuttle/arrival)
 "aaz" = (
 /obj/machinery/disposal/bin,
 /obj/structure/sign/plaques/deempisi{
@@ -268,6 +305,19 @@
 	},
 /turf/open/floor/plasteel,
 /area/crew_quarters/bar)
+"aaA" = (
+/turf/open/floor/carpet,
+/area/crew_quarters/cryopod)
+"aaB" = (
+/turf/closed/wall,
+/area/shuttle/arrival)
+"aaC" = (
+/obj/machinery/computer/arcade,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/open/floor/mineral/titanium/purple,
+/area/shuttle/arrival)
 "aaD" = (
 /obj/effect/turf_decal/box,
 /obj/effect/turf_decal/caution/stand_clear,
@@ -287,9 +337,32 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/security/prison)
+"aaE" = (
+/obj/structure/closet/wardrobe/green,
+/turf/open/floor/mineral/titanium/purple,
+/area/shuttle/arrival)
+"aaF" = (
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
+/obj/machinery/door/airlock/external{
+	name = "Port Docking Bay 1"
+	},
+/turf/open/floor/plating,
+/area/shuttle/arrival)
+"aaG" = (
+/obj/structure/closet/wardrobe/black,
+/turf/open/floor/mineral/titanium/purple,
+/area/shuttle/arrival)
 "aaH" = (
 /turf/open/floor/plating/airless,
 /area/space/nearstation)
+"aaI" = (
+/obj/structure/closet/wardrobe/mixed,
+/turf/open/floor/mineral/titanium/purple,
+/area/shuttle/arrival)
+"aaJ" = (
+/obj/structure/closet/wardrobe/grey,
+/turf/open/floor/mineral/titanium/purple,
+/area/shuttle/arrival)
 "aaK" = (
 /obj/structure/trash_pile,
 /turf/open/floor/plating,
@@ -375,6 +448,23 @@
 	},
 /turf/open/floor/plasteel/dark/corner,
 /area/security/prison)
+"aaV" = (
+/obj/structure/window/shuttle,
+/turf/open/space/basic,
+/area/space)
+"aaW" = (
+/obj/structure/closet/wardrobe/grey,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/open/floor/mineral/titanium/purple,
+/area/shuttle/arrival)
+"aaX" = (
+/obj/machinery/cryopod{
+	dir = 4
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
 "aaY" = (
 /obj/structure/rack,
 /obj/item/tank/internals/plasmaman/belt{
@@ -406,6 +496,15 @@
 /obj/structure/grille/broken,
 /turf/open/space,
 /area/space/nearstation)
+"abb" = (
+/obj/machinery/cryopod{
+	dir = 8
+	},
+/obj/structure/window{
+	dir = 4
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
 "abc" = (
 /obj/effect/decal/cleanable/oil,
 /obj/machinery/light/small{
@@ -413,6 +512,57 @@
 	},
 /turf/open/floor/plating,
 /area/security/prison)
+"abd" = (
+/obj/machinery/cryopod{
+	dir = 4
+	},
+/obj/structure/window{
+	dir = 8
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"abe" = (
+/obj/machinery/cryopod{
+	dir = 8
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"abf" = (
+/obj/machinery/light,
+/obj/machinery/cryopod{
+	dir = 4
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"abg" = (
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"abh" = (
+/obj/machinery/cryopod{
+	dir = 8
+	},
+/obj/structure/window{
+	dir = 4
+	},
+/obj/machinery/light,
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"abi" = (
+/obj/machinery/computer/cryopod{
+	pixel_y = -28
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
+"abj" = (
+/obj/machinery/cryopod{
+	dir = 4
+	},
+/obj/structure/window{
+	dir = 8
+	},
+/obj/machinery/light,
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
 "abk" = (
 /obj/structure/closet/bombcloset/security,
 /obj/effect/turf_decal/box,
@@ -421,6 +571,16 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/security/main)
+"abl" = (
+/obj/machinery/cryopod{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 1;
+	light_color = "#cee5d2"
+	},
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
 "abm" = (
 /turf/open/floor/plasteel/dark,
 /area/security/main)
@@ -472,6 +632,13 @@
 "abu" = (
 /turf/closed/wall,
 /area/security/prison)
+"abv" = (
+/obj/machinery/cryopod{
+	dir = 8
+	},
+/obj/machinery/light,
+/turf/open/floor/mineral/titanium,
+/area/shuttle/arrival)
 "abz" = (
 /obj/machinery/camera{
 	c_tag = "Xenobiology South";
@@ -484,6 +651,13 @@
 	},
 /turf/open/floor/engine,
 /area/science/xenobiology)
+"abC" = (
+/obj/item/radio/intercom{
+	name = "Station Intercom (General)";
+	pixel_y = 20
+	},
+/turf/open/floor/plasteel,
+/area/hallway/secondary/entry)
 "abE" = (
 /turf/open/floor/plasteel,
 /area/security/prison)
@@ -9935,12 +10109,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/maintenance/department/electrical)
-"awV" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
-	},
-/turf/open/floor/plasteel,
-/area/hallway/secondary/entry)
 "awW" = (
 /obj/effect/spawner/structure/window/reinforced,
 /turf/open/floor/plating,
@@ -10811,13 +10979,6 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/department/electrical)
-"azy" = (
-/obj/effect/mapping_helpers/airlock/cyclelink_helper,
-/obj/machinery/door/airlock/external{
-	name = "Port Docking Bay 1"
-	},
-/turf/open/floor/plating,
-/area/hallway/secondary/entry)
 "azz" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -11775,16 +11936,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/ai_monitored/storage/eva)
-"aCd" = (
-/obj/machinery/airalarm{
-	pixel_y = 23
-	},
-/obj/machinery/cryopod,
-/obj/machinery/atmospherics/pipe/simple/supply/hidden{
-	dir = 4
-	},
-/turf/open/floor/carpet,
-/area/crew_quarters/cryopod)
 "aCe" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
 /turf/closed/wall,
@@ -16829,28 +16980,9 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/secondary/exit)
-"aPt" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 9
-	},
-/obj/item/kirbyplants{
-	icon_state = "plant-20"
-	},
-/turf/open/floor/plasteel,
-/area/hallway/secondary/entry)
 "aPu" = (
 /obj/effect/turf_decal/stripes/corner{
 	dir = 4
-	},
-/turf/open/floor/plasteel,
-/area/hallway/secondary/entry)
-"aPv" = (
-/obj/item/radio/intercom{
-	name = "Station Intercom (General)";
-	pixel_y = 20
-	},
-/obj/effect/turf_decal/stripes/line{
-	dir = 1
 	},
 /turf/open/floor/plasteel,
 /area/hallway/secondary/entry)
@@ -17321,12 +17453,6 @@
 	dir = 1
 	},
 /area/security/prison)
-"aQH" = (
-/obj/effect/turf_decal/stripes/corner{
-	dir = 8
-	},
-/turf/open/floor/plasteel,
-/area/hallway/secondary/entry)
 "aQI" = (
 /obj/machinery/door/firedoor,
 /obj/effect/turf_decal/tile/neutral{
@@ -51048,27 +51174,6 @@
 /obj/item/mmi,
 /turf/open/floor/plasteel/dark,
 /area/science/robotics/lab)
-"cIg" = (
-/obj/docking_port/stationary{
-	dir = 8;
-	dwidth = 3;
-	height = 15;
-	id = "arrivals_stationary";
-	name = "arrivals";
-	roundstart_template = /datum/map_template/shuttle/arrival/box;
-	width = 7
-	},
-/turf/open/space/basic,
-/area/space)
-"cIh" = (
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 1
-	},
-/obj/machinery/door/airlock/external{
-	name = "Port Docking Bay 1"
-	},
-/turf/open/floor/plating,
-/area/hallway/secondary/entry)
 "cIv" = (
 /obj/structure/sign/poster/official/cohiba_robusto_ad,
 /turf/closed/wall,
@@ -63861,15 +63966,6 @@
 	},
 /turf/open/floor/plasteel/dark/side,
 /area/security/brig)
-"tqg" = (
-/obj/machinery/cryopod{
-	dir = 4
-	},
-/obj/machinery/firealarm{
-	pixel_y = 24
-	},
-/turf/open/floor/carpet,
-/area/crew_quarters/cryopod)
 "tqB" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
@@ -64377,12 +64473,6 @@
 /obj/structure/sign/departments/restroom,
 /turf/closed/wall,
 /area/crew_quarters/toilet)
-"ujF" = (
-/obj/machinery/cryopod{
-	dir = 4
-	},
-/turf/open/floor/carpet,
-/area/crew_quarters/cryopod)
 "ujS" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 10
@@ -65824,12 +65914,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/science/misc_lab)
-"woR" = (
-/obj/machinery/cryopod{
-	dir = 1
-	},
-/turf/open/floor/carpet,
-/area/crew_quarters/cryopod)
 "wph" = (
 /obj/docking_port/stationary{
 	area_type = /area/construction/mining/aux_base;
@@ -75300,7 +75384,7 @@ gXs
 aaa
 aaa
 aaa
-aaa
+aaV
 aaa
 aaa
 aaa
@@ -75554,15 +75638,15 @@ asE
 cyb
 asE
 arB
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+aax
+aax
+aax
+aax
+aax
+aax
+aax
+aax
+aax
 arB
 asE
 cyb
@@ -75811,16 +75895,16 @@ auO
 auP
 cwT
 aAC
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aAC
+aax
+aaw
+aaX
+aaX
+aaX
+aaX
+aaX
+abf
+aax
+arB
 auO
 auP
 cxY
@@ -76068,15 +76152,15 @@ avP
 iEJ
 asE
 arB
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+aax
+abg
+abg
+abg
+abg
+abg
+abg
+abg
+aax
 arB
 asE
 iEJ
@@ -76323,20 +76407,20 @@ apN
 apJ
 fpI
 ayk
-liD
-awW
-awW
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-awW
-awW
-liD
-awV
+ayl
+ayl
+aax
+abg
+abg
+abg
+abg
+abg
+abg
+abg
+aax
+ayl
+ayl
+ayl
 aRX
 arB
 aaa
@@ -76580,19 +76664,19 @@ apN
 apJ
 awZ
 ayl
-azy
-auP
-cIh
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-azy
-auP
-cIh
+ayl
+ayl
+aay
+abg
+abg
+abg
+abg
+abg
+abg
+abg
+aaF
+ayl
+ayl
 ayl
 aRY
 awW
@@ -76837,20 +76921,20 @@ apN
 apJ
 awZ
 ayk
-awW
-awW
-awW
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-awW
-awW
-awW
-awV
+ayl
+ayl
+aaB
+aaC
+abg
+abb
+abb
+abb
+abb
+abh
+aaB
+ayl
+ayl
+ayl
 aRY
 awW
 aaa
@@ -77096,18 +77180,18 @@ awZ
 cqr
 azz
 aAF
-awW
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-awW
+aaB
+aaE
+abg
+abd
+abd
+abd
+abd
+abd
+aaB
 aOf
-azz
-aPu
+ayl
+ayl
 aRY
 awW
 aaa
@@ -77353,15 +77437,15 @@ awZ
 aIK
 ayl
 aAE
-awW
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-awW
+aaB
+aaG
+abg
+abg
+abg
+abg
+abg
+abi
+aaB
 aOe
 ayl
 ayl
@@ -77610,15 +77694,15 @@ awZ
 aIK
 ayl
 aAH
-awW
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-awW
+aaB
+aaI
+abg
+abb
+abb
+abb
+abb
+abb
+aaB
 aOh
 ayl
 jHh
@@ -77867,18 +77951,18 @@ awZ
 cry
 azA
 aAG
-awW
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-awW
+aaB
+aaJ
+abg
+abd
+abd
+abd
+abd
+abj
+aaB
 aOg
-azA
-aQH
+ayl
+ayl
 aRY
 awW
 aaa
@@ -78122,20 +78206,20 @@ apN
 apJ
 awZ
 crz
-awW
-awW
-awW
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-awW
-awW
-awW
-awV
+ayl
+ayl
+aaB
+aaW
+abg
+abg
+abg
+abg
+abg
+abg
+aaB
+ayl
+ayl
+ayl
 aRY
 awW
 aaa
@@ -78379,19 +78463,19 @@ asF
 apJ
 axh
 aIK
-azy
-auP
-cIh
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-azy
-auP
-cIh
+ayl
+ayl
+aay
+abg
+abg
+abg
+abg
+abg
+abg
+abg
+aaF
+ayl
+ayl
 ayl
 aRY
 awW
@@ -78636,20 +78720,20 @@ auc
 avp
 axI
 ayp
-liD
-awW
-awW
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-aaa
-awW
-awW
-liD
-awV
+ayl
+ayl
+aaB
+abg
+abg
+abg
+abg
+abg
+abg
+abg
+aaB
+ayl
+ayl
+ayl
 aRX
 arB
 aaa
@@ -78894,19 +78978,19 @@ aLu
 axH
 ayo
 azB
-awW
-aaa
-aaa
-aaa
-aaa
-cIg
-aaa
-aaa
-aaa
-aaa
-awW
-aPt
-aPu
+ayl
+aaB
+abl
+abe
+abe
+abe
+abe
+abe
+abv
+aaB
+ayl
+ayl
+ayl
 aRY
 arB
 awW
@@ -79151,18 +79235,18 @@ apJ
 clB
 aIK
 azC
-arB
-arB
-arB
-awW
-awW
-awW
-awW
-awW
-arB
-arB
-arB
-aPv
+ayl
+aaB
+aaB
+aaB
+aaB
+aaB
+aaB
+aaB
+aaB
+aaB
+abC
+ayl
 ayl
 aRZ
 asE
@@ -79418,8 +79502,8 @@ azz
 azz
 aLv
 aBH
-azz
-aPu
+ayl
+ayl
 ayl
 ayl
 aNh
@@ -97142,10 +97226,10 @@ arf
 aqa
 atf
 dgz
-tqg
-ujF
-ujF
-ujF
+aau
+aaA
+aaA
+aaA
 dgz
 aaa
 aJn
@@ -97656,10 +97740,10 @@ arf
 ayV
 ath
 dgz
-aCd
+aav
 qIw
 gfD
-woR
+aaA
 dgz
 aJw
 oEP

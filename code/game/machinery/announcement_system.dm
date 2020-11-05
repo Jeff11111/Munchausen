@@ -17,7 +17,7 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 	circuit = /obj/item/circuitboard/machine/announcement_system
 
 	var/obj/item/radio/headset/radio
-	var/arrival = "%PERSON has signed up as %RANK"
+	var/arrival = "%PERSON, %RANK, has awakened from cryosleep."
 	var/arrivalToggle = 1
 	var/newhead = "%PERSON, %RANK, is the department head."
 	var/newheadToggle = 1
@@ -93,7 +93,7 @@ GLOBAL_LIST_EMPTY(announcement_systems)
 		message = CompileText("%PERSON, %RANK has been moved to cryo storage.", user, rank)
 	//END EDIT
 	else if(message_type == "ARRIVALS_BROKEN")
-		message = "The arrivals shuttle has been damaged. Docking for repairs..."
+		message = "The cryodorms have been damaged. Awaiting for repairs..."
 
 	if(channels.len == 0)
 		radio.talk_into(src, message, null)

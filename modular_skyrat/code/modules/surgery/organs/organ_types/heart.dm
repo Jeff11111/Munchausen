@@ -173,7 +173,7 @@
 	
 	if(!is_working())	//heart broke, stopped beating, death imminent
 		if(owner.stat == CONSCIOUS)
-			owner.visible_message("<span class='userdanger'>[owner] clutches at [owner.p_their()] chest as if [owner.p_their()] heart is stopping!</span>")
+			owner.visible_message("<span class='danger'>[owner] clutches at [owner.p_their()] chest as if [owner.p_their()] heart is stopping!</span>", "<span class='userdanger'>MY HEART HAS STOPPED!</span>")
 		owner.set_heartattack(TRUE)
 		failed = TRUE
 

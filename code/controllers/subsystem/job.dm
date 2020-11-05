@@ -636,7 +636,17 @@ SUBSYSTEM_DEF(job)
 
 /obj/structure/chair/JoinPlayerHere(mob/M, buckle)
 	// Placing a mob in a chair will attempt to buckle it, or else fall back to default.
-	if (buckle && isliving(M) && buckle_mob(M, FALSE, FALSE))
+	if(buckle && isliving(M) && buckle_mob(M, FALSE, FALSE))
+		return
+	..()
+
+/obj/machinery/cryopod/JoinPlayerHere(mob/M, buckle)
+	// Buckle 'em
+	if(buckle && ishuman(M) && buckle_mob(M, FALSE, FALSE))
+		// Make them unconscious and gasp for a bit
+		var/mob/living/carbon/human/H = M
+		H.AdjustUnconscious(6 SECONDS)
+		addtimer(CALLBACK(H, /mob/living/carbon/human.proc/agony_gasp), rand(2, 5 SECONDS))
 		return
 	..()
 
@@ -655,13 +665,19 @@ SUBSYSTEM_DEF(job)
 	//bad mojo
 	var/area/shuttle/arrival/A = GLOB.areas_by_type[/area/shuttle/arrival]
 	if(A)
-		//first check if we can find a chair
-		var/obj/structure/chair/C = locate() in A
+		//first check if we can find a cryopod
+		var/obj/machinery/cryopod/C = locate() in A
+		var/cumcount = 0
+		while(!C || C.has_buckled_mobs())
+			if(cumcount >= 10)
+				break
+			C = locate() in A
+			cumcount++
 		if(C)
 			C.JoinPlayerHere(M, buckle)
 			return
 
-		//last hurrah
+		//no cryopod, any turf on the "shuttle" counts
 		var/list/avail = list()
 		for(var/turf/T in A)
 			if(!is_blocked_turf(T, TRUE))
@@ -671,7 +687,8 @@ SUBSYSTEM_DEF(job)
 			destination.JoinPlayerHere(M, FALSE)
 			return
 
-	//pick an open spot on arrivals and dump em
+	//not even that worked!
+	//try and just dump them on the area
 	var/list/arrivals_turfs = shuffle(get_area_turfs(/area/shuttle/arrival))
 	if(arrivals_turfs.len)
 		for(var/turf/T in arrivals_turfs)

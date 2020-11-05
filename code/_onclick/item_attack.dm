@@ -13,6 +13,9 @@
 		if(!CHECK_MOBILITY(L, MOBILITY_USE) && !(flags & ATTACKCHAIN_PARRY_COUNTERATTACK))
 			to_chat(L, "<span class='warning'>You are unable to swing [src] right now!</span>")
 			return
+		if(L.pinned() && w_class >= WEIGHT_CLASS_NORMAL)
+			to_chat(L, "<span class='warning'>[W] is too heavy to use while pinned!</span>")
+			return
 	if(tool_behaviour && target.tool_act(user, src, tool_behaviour))
 		return
 	if(pre_attack(target, user, params))
@@ -30,10 +33,18 @@
 		if(!CHECK_MOBILITY(L, MOBILITY_USE))
 			to_chat(L, "<span class='warning'>You are unable to raise [src] right now!</span>")
 			return
+		if(L.pinned() && w_class >= WEIGHT_CLASS_NORMAL)
+			to_chat(L, "<span class='warning'>[W] is too heavy to use while pinned!</span>")
+			return
 	afterattack(target, user, FALSE, params)
 
 // Called when the item is in the active hand, and clicked; alternately, there is an 'activate held object' verb or you can hit pagedown.
 /obj/item/proc/attack_self(mob/user)
+	if(isliving(user))
+		var/mob/living/L = user
+		if(L.pinned() && w_class >= WEIGHT_CLASS_NORMAL)
+			to_chat(L, "<span class='warning'>[W] is too heavy to use while pinned!</span>")
+			return
 	if(SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_SELF, user) & COMPONENT_NO_INTERACT)
 		return
 	SEND_SIGNAL(user, COMSIG_MOB_ITEM_ATTACK_SELF, src) //Skyrat change

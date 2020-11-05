@@ -24,7 +24,7 @@
 	if(user.mind)
 		dice = user.mind.diceroll(GET_STAT_LEVEL(user, str)*0.5, GET_SKILL_LEVEL(user, melee)*0.5)
 	
-	if(!is_dislocated() && dice >= DICE_SUCCESS)
+	if(!is_dislocated() && (dice >= DICE_SUCCESS) && (user.a_intent != INTENT_HELP))
 		var/datum/wound/W
 		if(bio_state & BIO_BONE)
 			if(status & BODYPART_ORGANIC)

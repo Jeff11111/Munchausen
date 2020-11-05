@@ -174,7 +174,7 @@
 /// Takedown move
 /obj/item/grab/proc/do_takedown(mob/living/carbon/victim, obj/item/bodypart/grasped_part, mob/living/carbon/user)
 	var/obj/item/grab/inactive_grab = grasping_mob.get_inactive_held_item()
-	if(!istype(inactive_grab) || !((inactive_grab.grab_state == GM_WRENCH) || (inactive_grab.grab_state == GM_STRANGLE)) || (inactive_grab.grasped_mob == grasped_mob) || (inactive_grab.actions_done <= 0))
+	if(!actions_done && (!istype(inactive_grab) || !((inactive_grab.grab_state == GM_WRENCH) || (inactive_grab.grab_state == GM_STRANGLE)) || (inactive_grab.grasped_mob != grasped_mob) || (inactive_grab.actions_done <= 0)))
 		to_chat(grasping_mob, "<span class='warning'>You can't take [victim] down by [p_their()] [parse_zone(grasping_mob.zone_selected)] without grabbing and twisting another limb!</span>")
 		return FALSE
 	

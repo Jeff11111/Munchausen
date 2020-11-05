@@ -259,11 +259,15 @@
 		thrown_thing.safe_throw_at(target, thrown_thing.throw_range, thrown_thing.throw_speed, src, null, null, null, move_force, random_turn)
 
 /mob/living/carbon/restrained(ignore_grab)
-	. = (handcuffed || (!ignore_grab && pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE))
+	var/chungus = FALSE
+	if(!ignore_grab && pulledby)
+		for(var/obj/item/grab/bungus in pulledby.held_items)
+			if(bungus.actions_done && ((bungus.grab_mode == GM_TAKEDOWN) || (bungus.grab_mode == GM_STRANGLE)))
+				chungus = TRUE
+	return (handcuffed || chungus)
 
 /mob/living/carbon/proc/canBeHandcuffed()
 	return 0
-
 
 /mob/living/carbon/show_inv(mob/user)
 	user.set_machine(src)
