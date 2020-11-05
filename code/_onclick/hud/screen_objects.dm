@@ -665,6 +665,7 @@
 
 /obj/screen/mood
 	name = "mood"
+	icon = 'modular_skyrat/icons/mob/mood.dmi'
 	icon_state = "mood5"
 	screen_loc = ui_mood
 
