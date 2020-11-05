@@ -642,7 +642,7 @@ SUBSYSTEM_DEF(job)
 
 /obj/machinery/cryopod/JoinPlayerHere(mob/M, buckle)
 	// Buckle 'em
-	if(buckle && ishuman(M) && buckle_mob(M, FALSE, FALSE))
+	if(buckle && ishuman(M) && buckle_mob(M, TRUE, FALSE))
 		// Make them unconscious and gasp for a bit
 		var/mob/living/carbon/human/H = M
 		H.AdjustUnconscious(6 SECONDS)
