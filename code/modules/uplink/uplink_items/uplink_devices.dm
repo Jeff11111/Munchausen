@@ -18,13 +18,13 @@
 	name = "Electromagnet Charging Device"
 	desc = "A small device intended for recharging Cryptographic Sequencers. Using it will add five extra charges to the Cryptographic Sequencer."
 	item = /obj/item/emagrecharge
-	cost = 2
+	cost = 1
 
 /datum/uplink_item/device_tools/bluespacerecharge
 	name = "Bluespace Crystal Recharging Device"
 	desc = "A small device intended for recharging Wall Walking boots. Using it will add six charges to them. Use ten bluespace crystals on this recharger to add three more charges to it. "
 	item = /obj/item/bluespacerecharge
-	cost = 2
+	cost = 1
 
 /datum/uplink_item/device_tools/phantomthief
 	name = "Syndicate Mask"
@@ -65,7 +65,7 @@
 			during gravitational generator failures. These reverse-engineered knockoffs of Nanotrasen's \
 			'Advanced Magboots' slow you down in simulated-gravity environments much like the standard issue variety."
 	item = /obj/item/clothing/shoes/magboots/syndie
-	cost = 2
+	cost = 1
 	include_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 
 /datum/uplink_item/device_tools/compressionkit
@@ -75,7 +75,7 @@
 			Recharge using bluespace crystals. \
 			Comes with 5 charges."
 	item = /obj/item/compressionkit
-	cost = 5
+	cost = 4
 
 /datum/uplink_item/device_tools/briefcase_launchpad
 	name = "Briefcase Launchpad"
@@ -145,7 +145,7 @@
 	desc = "When used with an upload console, this module allows you to upload priority laws to an artificial intelligence. \
 			Be careful with wording, as artificial intelligences may look for loopholes to exploit."
 	item = /obj/item/aiModule/syndicate
-	cost = 9
+	cost = 8
 
 /datum/uplink_item/device_tools/headsetupgrade
 	name = "Headset Upgrader"
@@ -158,7 +158,7 @@
 	desc = "A wonder of Syndicate engineering, the Medbeam gun, or Medi-Gun enables a medic to keep his fellow \
 			operatives in the fight, even while under fire. Don't cross the streams!"
 	item = /obj/item/gun/medbeam
-	cost = 15
+	cost = 14
 	include_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 
 /datum/uplink_item/device_tools/nutcracker
@@ -177,13 +177,13 @@
 	item = /obj/item/sbeacondrop
 	cost = 14
 
-/*/datum/uplink_item/device_tools/powersink
+/datum/uplink_item/device_tools/powersink
 	name = "Power Sink"
 	desc = "When screwed to wiring attached to a power grid and activated, this large device lights up and places excessive \
 			load on the grid, causing a station-wide blackout. The sink is large and cannot be stored in most \
 			traditional bags and boxes. Caution: Will explode if the powernet contains sufficient amounts of energy."
 	item = /obj/item/powersink
-	cost = 6 */
+	cost = 6 
 
 /datum/uplink_item/device_tools/rad_laser
 	name = "Radioactive Microlaser"
@@ -250,7 +250,7 @@
 			of the originals, these inferior copies are still quite useful, being able to provide \
 			both weal and woe on the battlefield, even if they do occasionally bite off a finger."
 	item = /obj/item/storage/book/bible/syndicate
-	cost = 9
+	cost = 8
 
 /datum/uplink_item/device_tools/thermal
 	name = "Thermal Imaging Glasses"

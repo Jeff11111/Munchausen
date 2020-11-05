@@ -11,7 +11,7 @@
 	item = /obj/item/conversion_kit
 	cost = 4
 
-/datum/uplink_item/device_tools/revolverkit
+/datum/uplink_item/device_tools/jammerpen
 	name = "Jammer Pen"
 	desc = "A stealthier, more lightweight, radio jammer."
 	item = /obj/item/pen/jammerpen

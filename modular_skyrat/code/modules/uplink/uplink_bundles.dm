@@ -20,7 +20,7 @@
 	name = "Society Box"
 	desc = "A crate with a .38 revolver with ammo, special knife and special clothing to enact revenge on society as a whole."
 	item = /obj/item/storage/box/hug/angryclown
-	cost = 20
+	cost = 14
 	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 	restricted_roles = list("Clown", "Mime", "Stowaway")
 
@@ -77,7 +77,7 @@
 	name = "Motherbase Shipment"
 	desc = "A kit containing the essentials for any 'big boss'. Contains a tactical turtleneck, thermal eyepatch, sneaking boots and a robotic CQC arm implanter."
 	item = /obj/item/storage/box/syndie_kit/snake
-	cost = 20
+	cost = 12
 	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 	cant_discount = TRUE
 
@@ -155,7 +155,7 @@
 	name = "Screamer Kit"
 	desc = "A box, coming with a mask and robes that render you completely unrecognizable when worn, and a special knife."
 	item = /obj/item/storage/box/syndie_kit/ghostface
-	cost = 12
+	cost = 6
 	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 
 /obj/item/storage/box/syndie_kit/ghostface
@@ -172,7 +172,7 @@
 	name = "Tactical DAB Suit"
 	desc = "Ever found a cheap replica of one of these? Get to wear the real thing! Has slightly better protection than normal riot armor."
 	item = /obj/item/storage/box/syndie_kit/truedab
-	cost = 6
+	cost = 4
 	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 	restricted_roles = list("Stowaway")
 

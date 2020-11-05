@@ -58,7 +58,7 @@
 			Additionally the suit is collapsible, making it small enough to fit within a backpack. \
 			Nanotrasen crew who spot these suits are known to panic."
 	item = /obj/item/clothing/suit/space/hardsuit/syndi
-	cost = 8
+	cost = 6
 	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops) //you can't buy it in nuke, because the elite hardsuit costs the same while being better
 
 /datum/uplink_item/suits/hardsuit/elite
@@ -83,13 +83,13 @@
 	name = "Thieving Gloves"
 	desc = "A pair of gloves that are insulated and frictionless, allowing you to steal easily from anyone you see."
 	item = /obj/item/clothing/gloves/thief
-	cost = 4
+	cost = 2
 
 /datum/uplink_item/suits/wallwalkers
 	name = "Wall Walking Boots"
 	desc = "Through bluespace magic stolen from an organisation that hoards technology, these boots simply allow you to slip through the atoms that make up anything, but only while walking, for safety reasons. As well as this, they unfortunately cause minor breath loss as the majority of atoms in your lungs are sucked out into any solid object you walk through."
 	item = /obj/item/clothing/shoes/wallwalkers
-	cost = 6
+	cost = 4
 
 /datum/uplink_item/device_tools/guerillagloves
 	name = "Guerilla Gloves"

@@ -59,7 +59,6 @@
 	cost = 15
 	restricted_roles = list("Clown")
 
-/*
 /datum/uplink_item/role_restricted/clowncar
 	name = "Clown Car"
 	desc = "The Clown Car is the ultimate transportation method for any worthy clown! \
@@ -70,7 +69,6 @@
 	item = /obj/vehicle/sealed/car/clowncar
 	cost = 15
 	restricted_roles = list("Clown")
-*/
 
 /datum/uplink_item/role_restricted/haunted_magic_eightball
 	name = "Haunted Magic Eightball"

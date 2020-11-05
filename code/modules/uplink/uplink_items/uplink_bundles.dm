@@ -82,7 +82,7 @@
 	desc = "A heavy briefcase containing one modular pistol (chambered in 10mm), one supressor, and spare ammunition, including a box of soporific ammo. \
 		Includes a suit jacket that is padded with a robust liner."
 	item = /obj/item/storage/briefcase/modularbundle
-	cost = 12
+	cost = 10
 
 /datum/uplink_item/bundles_TC/shredder
 	name = "Shredder bundle"
