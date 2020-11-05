@@ -31,7 +31,7 @@ GLOBAL_LIST_EMPTY(uplinks)
 	var/list/filters = list()
 
 /datum/component/uplink/Initialize(_owner, _lockable = TRUE, _enabled = FALSE, datum/game_mode/_gamemode, starting_tc = 20, datum/ui_state/_checkstate, datum/traitor_class/traitor_class)
-	if(!isobj(parent))
+	if(!isatom(parent))
 		return COMPONENT_INCOMPATIBLE
 
 	RegisterSignal(parent, COMSIG_PARENT_ATTACKBY, .proc/OnAttackBy)
