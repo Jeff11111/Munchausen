@@ -38,3 +38,12 @@
 	lefthand_file = 'modular_skyrat/icons/mob/inhands/weapons/guns_lefthand.dmi'
 	icon_state = "uzi"
 	item_state = "uzi"
+
+/obj/item/gun/ballistic/automatic/mini_uzi/update_icon()
+	..()
+	icon_state = "[initial(icon_state)][chambered ? "" : "-e"]"
+
+/obj/item/gun/ballistic/automatic/mini_uzi/update_overlays()
+	..()
+	if(magazine)
+		add_overlay("[initial(icon_state)]-mag")
