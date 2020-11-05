@@ -46,6 +46,7 @@
 			if(do_after(user, 15, target = src))
 				agent = user.name || "BINGUS"
 				comicao_trading.purchase_log = purchase_log
+				comicao_trading.telecrystals = max(0, 20 - total_spent)
 				playsound(src, 'modular_skyrat/sound/machinery/atmbeep1.ogg', 50)
 				to_chat(user, "<span class='danger'>##&!&$% WELCOME, AGENT [uppertext(agent)] $$#@!%")
 	return TRUE
