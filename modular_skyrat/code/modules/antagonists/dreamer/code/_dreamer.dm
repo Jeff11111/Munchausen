@@ -69,6 +69,9 @@
 	if(!istype(M) || !M.mind)
 		return
 	var/datum/stats/str/str = GET_STAT(M, str)
+	var/datum/stats/fakestr/fake = GET_STAT(M, fakestr)
+	if(istype(fake) && istype(str))
+		fake.level = str.level
 	if(istype(str))
 		str.level = min(str.level + 15, 30)
 	var/datum/stats/end/end = GET_STAT(M, end)

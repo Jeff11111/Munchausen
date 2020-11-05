@@ -7,6 +7,7 @@
 	var/desc = "Makes you better at doing vague things." //Description of the stat
 	var/level = START_STAT //Level, used in stat calculations.
 	var/shorthand = "SH" //Shorthand
+	var/fake_type //Use this for "fake" stats which display over another stat
 
 //An all purpose proc for getting a multiplicative modifier
 //Create new specific subtype procs for more careful handling, this is for simple dumb tasks

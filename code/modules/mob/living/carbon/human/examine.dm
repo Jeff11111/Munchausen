@@ -583,7 +583,9 @@
 	//Strength message
 	var/our_str = 10
 	if(mind)
-		our_str = GET_STAT_LEVEL(src, str)
+		our_str = GET_STAT_LEVEL(src, fakestr)
+		if(our_str <= 0)
+			our_str = GET_STAT_LEVEL(src, str)
 	
 	var/user_str = 10
 	if(user.mind)

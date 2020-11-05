@@ -40,7 +40,15 @@
 		var/list/stats = list()
 		for(var/i in mind?.mob_stats)
 			var/datum/stats/mystat = mind.mob_stats[i]
-			stats += "[mystat.shorthand]: [mystat.level]"
+			stats |= mystat
+			if(mystat.fake_type)
+				for(var/y in stats)
+					if(istype(y, mystat.fake_type))
+						stats -= y
+		var/list/stat_string = list()
+		for(var/i in mind?.mob_stats)
+			var/datum/stats/mystat = mind.mob_stats[i]
+			stats |= "[mystat.shorthand]: [mystat.level]"
 		if(length(stats))
 			stat(null, "\n\n[stats.Join("\n\n")]\n\n")
 

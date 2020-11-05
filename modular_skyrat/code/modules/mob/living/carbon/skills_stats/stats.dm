@@ -8,6 +8,13 @@
 /datum/stats/str/proc/get_equip_slowdown_mult()
 	return round(1.5 - (1 * level/MAX_STAT), 0.1) //Varies from 1.5 to 0.5 depending on how good/bad we are
 
+//Fake str, used by the dreamer
+/datum/stats/fakestr
+	name = "Strength"
+	shorthand = "ST"
+	level =  0
+	fake_type = /datum/stats/str
+
 //Endurance
 /datum/stats/end
 	name = "Endurance"
