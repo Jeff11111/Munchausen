@@ -323,6 +323,8 @@
 
 	var/obj/item/uplink_loc
 	if(!uplink_loc)
+		if()
+			new /datum/uplink_purchase_log(traitor_mob.client)
 		if(!silent)
 			to_chat(traitor_mob, "<span class='danger'>Unfortunately, [traitor_class.employer] wasn't able to get you a fancy Uplink.</span>")
 			to_chat(traitor_mob, "<span class='danger'>You must hack an ATM machine instead!</span>")

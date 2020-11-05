@@ -168,7 +168,7 @@
 	icon_state = "cryochamber"
 	density = TRUE
 	anchored = TRUE
-	state_open = TRUE
+	state_open = FALSE
 
 	var/on_store_message = "has entered long-term storage."
 	var/on_store_name = "Cryogenic Oversight"
@@ -227,7 +227,7 @@
 			icon_state = "[initial(icon_state)]-freezy"
 
 /obj/machinery/cryopod/buckle_mob(mob/living/M, force, check_loc)
-	. = ..()
+	..()
 	// Play freeze/de=freeze sound
 	playsound(src, 'modular_skyrat/sound/machinery/cryo_wakeup.ogg', 60, 0)
 
@@ -235,6 +235,10 @@
 	. = ..()
 	update_icon()
 	find_control_computer(mapload)
+
+/obj/machinery/cryopod/close_machine(mob/user)
+	..()
+	update_icon()
 
 /obj/machinery/cryopod/proc/find_control_computer(urgent = FALSE)
 	for(var/obj/machinery/computer/cryopod/C in get_area(src))
