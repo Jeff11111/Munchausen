@@ -50,7 +50,7 @@
 			var/datum/stats/mystat = mind.mob_stats[i]
 			stat_string |= "[mystat.shorthand]: [mystat.level]"
 		if(length(stat_string))
-			stat(null, "\n\n[stats.Join("\n\n")]\n\n")
+			stat(null, "\n\n[stat_string.Join("\n\n")]\n\n")
 
 //Remove the crappy citadel skills verb
 /mob/Initialize()
