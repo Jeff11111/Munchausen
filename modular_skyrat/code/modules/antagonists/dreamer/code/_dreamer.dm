@@ -119,6 +119,8 @@
 		H.give_genital(/obj/item/organ/genital/testicles)
 		H.equipOutfit(/datum/outfit/treyliam)
 		H.regenerate_icons()
+		for(var/obj/machinery/vr_sleeper/chungus in get_turf(H))
+			chungus.buckle_mob(H, TRUE, FALSE)
 		return H
 
 /datum/antagonist/dreamer/proc/wake_up()
