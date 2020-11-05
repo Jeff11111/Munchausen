@@ -31,11 +31,12 @@ GLOBAL_LIST_EMPTY(uplinks)
 	var/list/filters = list()
 
 /datum/component/uplink/Initialize(_owner, _lockable = TRUE, _enabled = FALSE, datum/game_mode/_gamemode, starting_tc = 20, datum/ui_state/_checkstate, datum/traitor_class/traitor_class)
-	if(!isitem(parent))
+	if(!isobj(parent))
 		return COMPONENT_INCOMPATIBLE
 
 	RegisterSignal(parent, COMSIG_PARENT_ATTACKBY, .proc/OnAttackBy)
-	RegisterSignal(parent, COMSIG_ITEM_ATTACK_SELF, .proc/interact)
+	if(isitem(parent))
+		RegisterSignal(parent, COMSIG_ITEM_ATTACK_SELF, .proc/interact)
 	if(istype(parent, /obj/item/implant))
 		RegisterSignal(parent, COMSIG_IMPLANT_ACTIVATED, .proc/implant_activation)
 		RegisterSignal(parent, COMSIG_IMPLANT_IMPLANTING, .proc/implanting)

@@ -371,10 +371,6 @@
 			C.chosen_sting.try_to_sting(src,A)
 			next_click = world.time + 5
 			return
-	swap_hand()
-
-/mob/living/simple_animal/drone/MiddleClickOn(atom/A)
-	swap_hand()
 
 // In case of use break glass
 /*

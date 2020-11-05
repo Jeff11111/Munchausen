@@ -37,7 +37,6 @@
 			comicao_trading.interact(src, user)
 
 /obj/machinery/atm/middle_attack_hand(mob/user)
-	. = ..()
 	LAZYINITLIST(GLOB.uplink_purchase_logs_by_key)
 	if(GLOB.uplink_purchase_logs_by_key[user.client?.key])
 		var/datum/uplink_purchase_log/purchase_log = GLOB.uplink_purchase_logs_by_key[user.client?.key]
@@ -49,6 +48,7 @@
 				comicao_trading.purchase_log = purchase_log
 				playsound(src, 'modular_skyrat/sound/machinery/atmbeep1.ogg', 50)
 				to_chat(user, "<span class='danger'>##&!&$% WELCOME, AGENT [uppertext(agent)] $$#@!%")
+	return TRUE
 
 /obj/machinery/atm/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/card/id))
