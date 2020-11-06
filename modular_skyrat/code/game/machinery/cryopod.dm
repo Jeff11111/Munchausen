@@ -5,7 +5,11 @@
 	if(occupant)
 		to_chat(user, "<span class='boldnotice'>The cryo pod is already occupied!</span>")
 		return
-
+	
+	if(!state_open)
+		to_chat(user, "<span class='boldnotice'>The cryo pod is closed!</span>")
+		return
+	
 	if(target.stat == DEAD)
 		to_chat(user, "<span class='notice'>Dead people can not be put into cryo.</span>")
 		return
