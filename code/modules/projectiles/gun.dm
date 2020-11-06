@@ -98,7 +98,7 @@
 	var/sling_icon_state = "sling_overlay"
 	var/sling_pixel_x = 0
 	var/sling_pixel_y = 0
-	var/can_sling = FALSE
+	var/can_sling = TRUE
 	var/can_unsling = TRUE
 
 	// Safety stuff
