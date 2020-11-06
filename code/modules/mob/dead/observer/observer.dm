@@ -178,10 +178,13 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	if(!client?.prefs)
 		return
 	var/datum/preferences/prefs = client.prefs
-	var/mob/living/carbon/human/H = new(src)
+	var/mob/living/carbon/human/dummy/H = generate_or_wait_for_human_dummy(DUMMY_HUMAN_SLOT_HALLUCINATION)
 	prefs.copy_to(H, TRUE, FALSE)
+	COMPILE_OVERLAYS(H)
+	CHECK_TICK
 	body_appearance = copy_appearance(H.appearance)
 	appearance = body_appearance
+	unset_busy_human_dummy(DUMMY_HUMAN_SLOT_HALLUCINATION)
 
 /mob/dead/observer/get_photo_description(obj/item/camera/camera)
 	if(!invisibility || camera.see_ghosts)
