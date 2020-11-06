@@ -34,7 +34,7 @@
 		'modular_skyrat/sound/cultiste/cultiste_rire_5.ogg',
 		'modular_skyrat/sound/cultiste/cultiste_rire_6.ogg',
 	)
-	speak_chance = 10
+	speak_chance = 5
 
 /mob/living/simple_animal/pet/chungus/xom/verb/say_something_funny()
 	set category = "IC"
