@@ -26,15 +26,13 @@
 		update_icon()
 
 /obj/structure/window/update_icon()
-	..()
+	. = ..()
 	//this is fucking stupid but if we're not fulltile, we always use the no brim icon
 	if(fulltile)
 		for(var/obj/structure/table/low_wall/low_wall in get_turf(src))
 			icon = wall_icon
 			return
 		icon = nowall_icon
-	else
-		icon = wall_icon
 
 /obj/structure/window/update_overlays()
 	. = ..()
