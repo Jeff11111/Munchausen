@@ -61,6 +61,8 @@
 /turf/closed/indestructible/oldshuttle/corner
 	icon_state = "corner"
 
+GLOBAL_LIST_INIT(splash_memes, world.file2list('config/splash_memes.txt'))
+
 /turf/closed/indestructible/splashscreen
 	name = "Space Station 13"
 	icon = 'icons/blank_title.png'
@@ -70,6 +72,8 @@
 	var/mutable_appearance/black_underlay
 
 /turf/closed/indestructible/splashscreen/New()
+	if(length(splash_memes))
+		name = pick(splash_memes)
 	SStitle.splash_turf = src
 	if(SStitle.icon)
 		icon = SStitle.icon

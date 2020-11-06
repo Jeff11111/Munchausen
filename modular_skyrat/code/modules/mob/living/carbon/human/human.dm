@@ -110,5 +110,5 @@
 	SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "died", /datum/mood_event/died)
 	if(!fraggot)
 		for(var/mob/living/carbon/human/H in range(src))
-			if(H != src && (src in view(H)))
+			if(H != src && (src in view(H)) && (GET_SKILL_LEVEL(H, firstaid) < JOB_SKILLPOINTS_AVERAGE))
 				SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "saw_dead", /datum/mood_event/saw_dead)
