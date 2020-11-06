@@ -879,26 +879,22 @@
 		return
 	if(hud_used.healths)
 		if(stat != DEAD)
-			if(chem_effects[CE_PAINKILLER] < 100)
-				. = 1
-				if(!shown_health_amount)
-					shown_health_amount = get_physical_damage()
-				if(shown_health_amount >= maxHealth)
-					hud_used.healths.icon_state = "health0"
-				else if(shown_health_amount > maxHealth*0.8)
-					hud_used.healths.icon_state = "health1"
-				else if(shown_health_amount > maxHealth*0.6)
-					hud_used.healths.icon_state = "health2"
-				else if(shown_health_amount > maxHealth*0.4)
-					hud_used.healths.icon_state = "health3"
-				else if(shown_health_amount > maxHealth*0.2)
-					hud_used.healths.icon_state = "health4"
-				else if(shown_health_amount > 0)
+			. = 1
+			switch(pulse())
+				if(PULSE_NONE)
+					hud_used.healths.icon_state = "health7"
+				if(PULSE_SLOW)
+					hud_used.healths.icon_state = "health6"
+				if(PULSE_THREADY)
 					hud_used.healths.icon_state = "health5"
+				if(PULSE_2FAST)
+					hud_used.healths.icon_state = "health4"
+				if(PULSE_FAST)
+					hud_used.healths.icon_state = "health3"
+				if(PULSE_NORM)
+					hud_used.healths.icon_state = "health0"
 				else
 					hud_used.healths.icon_state = "health6"
-			else
-				hud_used.healths.icon_state = "health0"
 		else
 			hud_used.healths.icon_state = "health7"
 

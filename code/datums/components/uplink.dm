@@ -138,9 +138,11 @@ GLOBAL_LIST_EMPTY(uplinks)
 
 /datum/component/uplink/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
 									datum/tgui/master_ui = null, datum/ui_state/state = GLOB.inventory_state)
+	if(!isitem(parent))
+		state = GLOB.default_state
 	state = checkstate ? checkstate : state
 	active = TRUE
-	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, TRUE)
 	if(!ui)
 		ui = new(user, src, ui_key, "uplink", name, 620, 580, master_ui, state)
 		ui.set_autoupdate(FALSE) // This UI is only ever opened by one person, and never is updated outside of user input.
@@ -237,7 +239,7 @@ GLOBAL_LIST_EMPTY(uplinks)
 /datum/component/uplink/proc/MakePurchase(mob/user, datum/uplink_item/U)
 	if(!istype(U))
 		return
-	if (!user || user.incapacitated())
+	if(!user || user.incapacitated())
 		return
 
 	if(telecrystals < U.cost || U.limited_stock == 0)

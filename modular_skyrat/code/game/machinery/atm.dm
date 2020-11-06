@@ -47,8 +47,9 @@
 				agent = user.name || "BINGUS"
 				comicao_trading.purchase_log = purchase_log
 				comicao_trading.telecrystals = max(0, 20 - purchase_log.total_spent)
+				comicao_trading.locked = FALSE
 				playsound(src, 'modular_skyrat/sound/machinery/atmbeep1.ogg', 50)
-				to_chat(user, "<span class='danger'>##&!&$% WELCOME, AGENT [uppertext(agent)] $$#@!%")
+				to_chat(user, "<span class='danger'><b>##&!&$% WELCOME, AGENT [uppertext(agent)] $$#@!%</b></span>")
 	return TRUE
 
 /obj/machinery/atm/attackby(obj/item/W, mob/user, params)
