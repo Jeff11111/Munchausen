@@ -46,7 +46,7 @@
 		var/list/stat_string = list()
 		for(var/i in mind?.mob_stats)
 			var/datum/stats/mystat = mind.mob_stats[i]
-			if(!mystat.fake_type)
+			if(mystat.fake_type)
 				continue
 			stat_string |= "[mystat.shorthand]: [mystat.level]"
 		if(length(stat_string))
