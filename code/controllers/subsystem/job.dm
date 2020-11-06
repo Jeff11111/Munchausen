@@ -507,6 +507,12 @@ SUBSYSTEM_DEF(job)
 		equip_loadout(N, H, TRUE)//CIT CHANGE - makes players spawn with in-backpack loadout items properly. A little hacky but it works
 	if(SSaspects.chosen_aspect)
 		SSaspects.chosen_aspect.post_equip(H, M.client, joined_late)
+	//If they respawn as the same character nuke their stats and fraggot them
+	for(var/datum/data/record/record in GLOB.data_core.general)
+		if(H.real_name == record.fields["name"])
+			H.fraggotify()
+			H.client?.prefs?.adjust_bobux(-10)
+			break
 	return H
 /*
 /datum/controller/subsystem/job/proc/handle_auto_deadmin_roles(client/C, rank)
