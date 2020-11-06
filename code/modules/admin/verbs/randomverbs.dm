@@ -571,6 +571,22 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	message_admins("[key_name_admin(src)] has created a command report")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Create Command Report") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/proc/cmd_admin_create_centcom_report()
+	set category = "Special Verbs"
+	set name = "Create Station Decree"
+
+	if(!check_rights(R_ADMIN))
+		return
+
+	var/input = input(usr, "Enter a Station Deree. Ensure it makes sense IC.", "What?", "") as message|null
+	if(!input)
+		return
+
+	SScommunications.make_decree(usr, FALSE, input)
+	log_admin("[key_name(src)] has created a station decree: [input]")
+	message_admins("[key_name_admin(src)] has created a station decree")
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Create Station Decree") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 /client/proc/cmd_change_command_name()
 	set category = "Special Verbs"
 	set name = "Change Command Name"
