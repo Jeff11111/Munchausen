@@ -56,7 +56,7 @@
 				else
 					W = new /datum/wound/mechanical/slash/critical()
 		if(istype(W))
-			W.apply_wound(src, FALSE)
+			W.apply_wound(src, TRUE)
 		var/str = GET_STAT_LEVEL(user, str)
 		if(str)
 			receive_damage(str*0.75, wound_bonus=CANT_WOUND)
