@@ -244,22 +244,40 @@
 	var/traumatic_shock = get_shock()
 	if(traumatic_shock >= PAIN_GIVES_IN)
 		switch(mind?.diceroll(STAT_DATUM(end)))
-			//Critical success = nothing happens]
+			//Critical success = nothing happens
 			//Success = blurry eyes (update_health() handles the speed penalty)
 			if(DICE_SUCCESS)
-				blur_eyes(rand(1,2))
+				blur_eyes(2)
 			//Failure - we are knocked down
 			if(DICE_FAILURE)
-				blur_eyes(rand(1,2))
-				if(!IsKnockdown())
+				blur_eyes(2)
+				if(IsKnockdown())
+					AdjustKnockdown(35)
+				else
 					visible_message("<span class='danger'>[src] gives in to the pain!</span>", "<span class='userdanger'>I give in to the pain.</span>")
-				AdjustKnockdown(35)
+					//Cum blood on they screen
+					//(very quick)
+					flash_pain(255, 0, 1, 3)
+					//Immobilize for half a second
+					Stun(5)
+					//Fall down
+					spawn(5)
+						AdjustKnockdown(35)
 			//Crit failure - unconsciousness
 			if(DICE_CRIT_FAILURE)
-				blur_eyes(rand(1,2))
+				blur_eyes(2)
 				if(!IsUnconscious())
+					AdjustUnconscious(35)
+				else
 					visible_message("<span class='danger'>[src] falls in to the pain!</span>", "<span class='userdanger'>I fall in to the pain.</span>")
-				AdjustUnconscious(35)
+					//Cum blood on they screen
+					//(very quick)
+					flash_pain(255, 0, 1, 3)
+					//Immobilize for half a second
+					Stun(5)
+					//Fall down
+					spawn(5)
+						AdjustUnconscious(35)
 
 	//Start handling shock
 	if(is_asystole())
