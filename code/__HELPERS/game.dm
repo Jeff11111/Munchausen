@@ -561,6 +561,9 @@
 		return
 	if((character.mind.assigned_role == "Cyborg") || (character.mind.assigned_role == character.mind.special_role))
 		return
+	//We don't care about stowaways.
+	if(rank == "Stowaway")
+		return
 
 	//Skyrat changes
 	var/displayed_rank = rank
