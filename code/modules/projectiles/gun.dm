@@ -293,15 +293,15 @@
 	if(flag) //It's adjacent, is the user, or is on the user's person
 		if(target in user.contents) //can't shoot stuff inside us.
 			return
-		if(!ismob(target) || (user.a_intent == INTENT_HARM && user != target)) //melee attack
+		if(!ismob(target) || (user.a_intent == INTENT_HARM && (user != target) && !isturf(target))) //melee attack
 			return
-	//skyrat edit
+		//skyrat edit
 		if(iscarbon(target))
 			var/mob/living/carbon/C = target
 			for(var/datum/wound/W in C.all_wounds)
 				if(W.try_treating(src, user))
 					return // another coward cured!
-	//
+		//
 
 	if(istype(user))//Check if the user can use the gun, if the user isn't alive(turrets) assume it can.
 		var/mob/living/L = user
