@@ -29,8 +29,8 @@ SUBSYSTEM_DEF(communications)
 	user.log_talk(input, LOG_SAY, tag="priority announcement")
 	message_admins("[ADMIN_LOOKUPFLW(user)] has made a priority announcement.")
 
-/datum/controller/subsystem/communications/proc/make_decree(mob/living/user, is_silicon, input)
-	if(!can_announce(user, is_silicon))
+/datum/controller/subsystem/communications/proc/make_decree(mob/living/user, is_silicon, input, force = FALSE)
+	if(!can_announce(user, is_silicon) && !force)
 		return FALSE
 	if(is_silicon)
 		minor_announce(html_decode(input),"[user.name] Decrees:")

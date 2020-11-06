@@ -582,7 +582,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!input)
 		return
 
-	SScommunications.make_decree(usr, FALSE, input)
+	SScommunications.make_decree(usr, FALSE, input, TRUE)
 	log_admin("[key_name(src)] has created a station decree: [input]")
 	message_admins("[key_name_admin(src)] has created a station decree")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Create Station Decree") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
