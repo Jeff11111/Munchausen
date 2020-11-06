@@ -51,7 +51,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 											'modular_skyrat/code/modules/antagonists/dreamer/sound/comic4.ogg',
 											)
 						playsound_local(get_turf(src), comicsound, 100, 0)
-					spawn(rand(5, 15))
+					spawn(5)
 						animate(dream, alpha = 0, time = 10)
 	//Just random laughter
 	else if(prob(2))
@@ -269,9 +269,10 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 	if(!QDELETED(I))
 		qdel(I)
 	if(caught_dreamer)
-		Paralyze(rand(3, 5) SECONDS)
+		Paralyze(rand(2, 5) SECONDS)
 		var/pain_msg = pick("NO!", "THEY GOT ME!", "AGH!")
 		to_chat(src, "<span class='bigdanger'>[pain_msg]</span>")
+		flash_pain(255, 0, 5, 10)
 
 /mob/living/carbon/proc/handle_dreamer_waking_up()
 	if(!client)
