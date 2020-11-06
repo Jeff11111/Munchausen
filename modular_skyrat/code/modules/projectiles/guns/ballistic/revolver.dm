@@ -234,7 +234,7 @@
 				to_chat(user, "<span class='notice'>\The [src] will now chamber .38 rounds.</span>")
 
 /obj/item/gun/ballistic/revolver/mateba/bladerunner
-	name = "\improper .357 NT Sheriff"
+	name = "\improper .357 revolver"
 	desc = "The NT Sheriff - A high quality revolver chambered in .357 rounds."
 	icon_state = "bladerunner"
 	fire_sound = 'modular_skyrat/sound/guns/revolver2.ogg'

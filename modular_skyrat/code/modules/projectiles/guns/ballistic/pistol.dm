@@ -13,7 +13,7 @@
 
 //Pipe pistol
 /obj/item/gun/ballistic/automatic/pistol/makeshift
-	name = "pipe pistol"
+	name = "10mm pipe pistol"
 	desc = "A somewhat bulky aberration of pipes and wood, in the form of a pistol. It probably should get the job done, still."
 	icon = 'modular_skyrat/icons/obj/guns/projectile.dmi'
 	icon_state = "pistolms"
@@ -57,6 +57,8 @@
 
 //M1911
 /obj/item/gun/ballistic/automatic/pistol/m1911
+	name = "\improper .45 pistol"
+	desc = "A decent modern replica of the classic Colt M1911, with a small magazine capacity."
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
 	icon_state = "pistol45"
 	item_state = "pistol45"
@@ -69,8 +71,9 @@
 
 //Captain 1911
 /obj/item/gun/ballistic/automatic/pistol/m1911/captain
-	name = "silverballer 1911"
-	desc = "A prized, authentic silver Colt M1911. A classy firearm fit for a king."
+	name = "\improper .45 pistol"
+	icon_state = "captain45"
+	desc = "A prized silver Colt M1911. A classy firearm fit for a king."
 
 //Glock 17
 /obj/item/gun/ballistic/automatic/pistol/APS/glock
