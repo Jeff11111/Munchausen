@@ -17,9 +17,11 @@
 	icon_state = "painpistol"
 	item_state = null
 	ammo_type = list(/obj/item/ammo_casing/energy/disabler)
+	cell_type = /obj/item/stock_parts/cell{charge = 600; maxcharge = 600}
 
 /obj/item/gun/energy/e_gun/advtaser/large
 	name = "large sparq gun"
 	desc = "NT Riot - A less cheap, less than lethal energy weapon that fires sparq disabler beams, which cause massive pain on the target."
 	icon_state = "painpistolx"
 	ammo_type = list(/obj/item/ammo_casing/energy/disabler/lowcost)
+	cell_type = /obj/item/stock_parts/cell{charge = 720; maxcharge = 720}

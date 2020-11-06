@@ -6,10 +6,11 @@
 /obj/item/ammo_casing/energy/disabler
 	fire_sound = 'modular_skyrat/sound/weapons/painfire1.ogg'
 	select_name = "sparq"
-	click_cooldown_override = 7
+	e_cost = 100
+	click_cooldown_override = 8
 
 /obj/item/ammo_casing/energy/disabler/lowcost
-	e_cost = 30
+	e_cost = 60
 	click_cooldown_override = 6
 
 //makeshift laser rifle
