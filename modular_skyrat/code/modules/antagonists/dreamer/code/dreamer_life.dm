@@ -239,7 +239,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 	var/image/I = image('modular_skyrat/code/modules/antagonists/dreamer/icons/dreamer_mobs.dmi', turfie, hall_type, FLOAT_LAYER, get_dir(turfie, src))
 	I.plane = FLOAT_PLANE
 	src.client?.images += I
-	to_chat(src, "<span class='userdanger'>[mob_msg]</span>")
+	to_chat(src, "<span class='danger'><big>[mob_msg]</big></span>")
 	sleep(5)
 	var/hallsound = pick(
 						'modular_skyrat/code/modules/antagonists/dreamer/sound/hall_attack1.ogg',
@@ -249,7 +249,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 						)
 	playsound_local(get_turf(src), hallsound, 100, 0)
 	var/chase_tiles = 7
-	var/chase_wait_per_tile = rand(3,5)
+	var/chase_wait_per_tile = rand(4,6)
 	var/caught_dreamer = FALSE
 	while(chase_tiles > 0)
 		turfie = get_step(turfie, get_dir(turfie, src))
@@ -271,7 +271,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 	if(caught_dreamer)
 		Paralyze(rand(2, 5) SECONDS)
 		var/pain_msg = pick("NO!", "THEY GOT ME!", "AGH!")
-		to_chat(src, "<span class='bigdanger'>[pain_msg]</span>")
+		to_chat(src, "<span class='userdanger'>[pain_msg]</span>")
 		flash_pain(255, 0, 5, 10)
 
 /mob/living/carbon/proc/handle_dreamer_waking_up()
