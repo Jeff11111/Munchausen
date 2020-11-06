@@ -570,7 +570,7 @@
 	if(stamina_dam > DAMAGE_PRECISION)
 		. = TRUE
 	//else if.. else if.. so on.
-	else if(max(0, (get_pain() - owner?.chem_effects[CE_PAINKILLER]) > DAMAGE_PRECISION))
+	else if(can_feel_pain() && max(0, (get_pain() - owner?.chem_effects[CE_PAINKILLER]) > DAMAGE_PRECISION))
 		. = TRUE
 	else if(tox_dam > DAMAGE_PRECISION)
 		. = TRUE
@@ -641,6 +641,8 @@
 		//Pain makes you regenerate stamina slower.
 		//At maximum pain, you barely regenerate stamina on the limb.
 		var/pain_multiplier = max(0.1, 1 - (max(0, (get_pain() - owner?.chem_effects[CE_PAINKILLER])/max_pain_damage)))
+		if(!can_feel_pain())
+			pain_multiplier = 1
 		if(heal_damage(stamina = (stam_heal_tick * (disabled ? 2 : 1) * pain_multiplier), only_robotic = FALSE, only_organic = FALSE, updating_health = FALSE))
 			. |= BODYPART_LIFE_UPDATE_HEALTH
 	if(pain_heal_tick && pain_dam > DAMAGE_PRECISION)
@@ -1308,7 +1310,7 @@
 			return BODYPART_DISABLED_DAMAGE
 		if(stamina_dam >= max_stamina_damage)
 			return BODYPART_DISABLED_DAMAGE
-		if((get_pain() - owner?.chem_effects[CE_PAINKILLER]) >= pain_disability_threshold)
+		if((can_feel_pain()) && ((get_pain() - owner?.chem_effects[CE_PAINKILLER]) >= pain_disability_threshold))
 			return BODYPART_DISABLED_PAIN
 		if(disabled && (get_damage(include_stamina = TRUE) <= (max_damage * 0.8)) && (pain_dam < pain_disability_threshold)) // reenabled at 80% now instead of 50% as of wounds update
 			last_maxed = FALSE
