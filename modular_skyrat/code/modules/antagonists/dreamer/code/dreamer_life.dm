@@ -99,7 +99,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 	else if(prob(1) && prob(10))
 		var/fakemin = "Trey Liam"
 		if(length(GLOB.admin_datums))
-			var/datum/admins/badmin = pick(GLOB.admin_datums)
+			var/datum/admins/badmin = GLOB.admin_datums[pick(GLOB.admin_datums)]
 			if(badmin?.owner?.key)
 				fakemin = badmin.owner.key
 		var/list/dreamer_ahelps = GLOB.dreamer_ahelp.Copy()
@@ -114,7 +114,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 	else if(prob(1) && prob(5))
 		var/fakemin = "Trey Liam"
 		if(length(GLOB.admin_datums))
-			var/datum/admins/badmin = pick(GLOB.admin_datums)
+			var/datum/admins/badmin = GLOB.admin_datums[pick(GLOB.admin_datums)]
 			if(badmin?.owner?.key)
 				fakemin = badmin.owner.key
 		var/list/dreamer_ban = GLOB.dreamer_bans.Copy()

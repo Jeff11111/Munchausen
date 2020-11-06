@@ -326,7 +326,7 @@
 
 	//These are always reachable.
 	//User itself, current loc, and user inventory
-	else if((A in DirectAccess()) && W)
+	else if(W && (A in DirectAccess()))
 		if(W.middleclick_melee_attack_chain(src, A, params))
 			return
 	else if(!W)
