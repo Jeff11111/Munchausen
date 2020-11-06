@@ -495,13 +495,16 @@ mob/visible_message(message, self_message, blind_message, vision_distance = DEFA
 /mob/verb/abandon_mob()
 	set name = "Respawn"
 	set category = "OOC"
-
-	if (CONFIG_GET(flag/norespawn))
-		return
-	if ((stat != DEAD || !( SSticker )))
+	
+	if((stat != DEAD || !( SSticker )))
 		to_chat(usr, "<span class='boldnotice'>You must be dead to use this!</span>")
 		return
 
+	if(CONFIG_GET(flag/norespawn))
+		if(stat == DEAD)
+			to_chat(usr, "<span class='warning'>My body has not been laid to rest.</span>")
+		return
+	
 	log_game("[key_name(usr)] used abandon mob.")
 
 	to_chat(usr, "<span class='boldnotice'>Please roleplay correctly!</span>")
