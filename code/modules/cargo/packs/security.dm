@@ -10,7 +10,6 @@
 	group = "Security"
 	access = ACCESS_SECURITY
 	crate_type = /obj/structure/closet/crate/secure/gear
-	can_private_buy = FALSE
 
 /datum/supply_pack/security/ammo
 	name = "Ammo Crate - General Purpose"

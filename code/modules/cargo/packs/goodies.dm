@@ -2,7 +2,7 @@
 /datum/supply_pack/goody
 	access = NONE
 	group = "Goodies"
-	goody = PACK_GOODY_PRIVATE
+	goody = PACK_GOODY_PUBLIC
 
 /datum/supply_pack/goody/sologamermitts
 	name = "Insulated Gloves Single-Pack"

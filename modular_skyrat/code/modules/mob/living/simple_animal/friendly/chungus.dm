@@ -34,6 +34,7 @@
 		'modular_skyrat/sound/cultiste/cultiste_rire_5.ogg',
 		'modular_skyrat/sound/cultiste/cultiste_rire_6.ogg',
 	)
+	var/list/possible_messages = list()
 	speak_chance = 5
 
 /mob/living/simple_animal/pet/chungus/xom/verb/say_something_funny()
@@ -51,17 +52,16 @@
 		var/list/cringe = list("nigger")
 		cringe |= GLOB.in_character_filter
 		var/message = "Penis guacamole"
-		var/list/possible_messages = list()
-		for(var/mob/living/L in GLOB.mob_living_list)
-			var/log_source = L.logging
-			for(var/log_type in log_source)//this whole loop puts the read-ee's say logs into say_log in an easy to access way
-				var/nlog_type = text2num(log_type)
-				if(nlog_type & LOG_SAY)
-					var/list/reversed = log_source[log_type]
-					if(islist(reversed))
-						for(var/i in reversed)
-							possible_messages |= reversed[i]
-						break
+		if(!length(possible_messages) || prob(speak_chance))
+			for(var/mob/living/L in GLOB.mob_living_list)
+				var/log_source = L.logging
+				for(var/log_type in log_source)//this whole loop puts the read-ee's say logs into say_log in an easy to access way
+					var/nlog_type = text2num(log_type)
+					if(nlog_type & LOG_SAY)
+						var/list/bingus = log_source[log_type]
+						if(islist(bingus))
+							for(var/i in bingus)
+								possible_messages |= bingus[i]
 		if(length(possible_messages))
 			message = pick(possible_messages)
 		message = replacetext(message, "\"", "")
