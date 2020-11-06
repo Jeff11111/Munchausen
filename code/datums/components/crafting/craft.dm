@@ -366,7 +366,6 @@
 		ui = new(user, src, ui_key, "personal_crafting", "Crafting Menu", 700, 800, master_ui, state)
 		ui.open()
 
-
 /datum/component/personal_crafting/ui_data(mob/user)
 	var/list/data = list()
 	data["busy"] = busy
@@ -386,8 +385,8 @@
 		if((R.category != cur_category) || (R.subcategory != cur_subcategory))
 			continue
 		
-		//User too stupidd to make this
-		if((R.skill_required && user.mind.mob_skills[R.skill_required] <= R.skill_difficulty) || (R.stat_required && user.mind.mob_stats[R.stat_required] <= R.stat_difficulty))
+		//User too stupid to make this
+		if((R.skill_required && user.mind.mob_skills[R.skill_required] < R.skill_difficulty) || (R.stat_required && user.mind.mob_stats[R.stat_required] < R.stat_difficulty))
 			continue
 
 		craftability["[REF(R)]"] = check_contents(user, R, surroundings)
