@@ -641,6 +641,8 @@ SUBSYSTEM_DEF(job)
 	..()
 
 /obj/machinery/cryopod/JoinPlayerHere(mob/M, buckle)
+	// Open this bitch
+	open_machine()
 	// Slap 'em in
 	if(buckle && ishuman(M))
 		M.forceMove(get_turf(src))
