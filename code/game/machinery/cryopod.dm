@@ -271,13 +271,15 @@
 	update_icon()
 	playsound(src, 'modular_skyrat/sound/machinery/cryo_lock.ogg', 25, 0)
 
-/obj/machinery/cryopod/open_machine()
+/obj/machinery/cryopod/open_machine(drop = TRUE)
 	var/mob/living/L = occupant
 	if(occupant)
 		investigate_log("Cryogenics machine opened with occupant [key_name(occupant)] inside.", INVESTIGATE_CRYOGENICS)
 	..()
 	update_icon()
 	if(istype(L))
+		L.Stun(6)
+		spawn(rand(4,6))
 		L.DefaultCombatKnockdown(3 SECONDS)
 	density = TRUE
 	name = initial(name)

@@ -408,7 +408,9 @@ SUBSYSTEM_DEF(ticker)
 				to_chat(N, "Captainship not forced on anyone.")
 			CHECK_TICK
 	if(round_start_sound)
-		SEND_SOUND(world, sound(round_start_sound))
+		//wait just a bit for shit to initialize then do the roundstart sound
+		spawn(1.5 SECONDS)
+			SEND_SOUND(world, sound(round_start_sound))
 
 /datum/controller/subsystem/ticker/proc/transfer_characters()
 	var/list/livings = list()
