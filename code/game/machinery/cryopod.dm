@@ -218,7 +218,7 @@
 
 /obj/machinery/cryopod/update_icon()
 	. = ..()
-	if(has_buckled_mobs())
+	if(occupant)
 		icon_state = "[initial(icon_state)]-closed"
 	else
 		if(state_open)

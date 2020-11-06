@@ -641,12 +641,14 @@ SUBSYSTEM_DEF(job)
 	..()
 
 /obj/machinery/cryopod/JoinPlayerHere(mob/M, buckle)
-	// Buckle 'em
-	if(buckle && ishuman(M) && buckle_mob(M, TRUE, FALSE))
+	// Slap 'em in
+	if(buckle && ishuman(M))
+		M.forceMove(get_turf(src))
+		close_machine()
 		// Make them unconscious and gasp for a bit
 		var/mob/living/carbon/human/H = M
-		H.AdjustUnconscious(15 SECONDS)
-		addtimer(CALLBACK(H, /mob/living/carbon/human.proc/emote, "agonygasp"), rand(2, 5 SECONDS))
+		H.AdjustUnconscious(rand(7, 15) SECONDS)
+		addtimer(CALLBACK(H, /mob/living/carbon/human.proc/emote, "agonygasp"), rand(2, 5) SECONDS)
 		return
 	..()
 
