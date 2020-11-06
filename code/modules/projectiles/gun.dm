@@ -141,12 +141,14 @@
 
 /obj/item/gun/proc/on_wield()
 	is_wielded = TRUE
+	update_icon()
 	if(ismob(loc))
 		var/mob/living/M = loc
 		M.update_inv_hands()
 
 /obj/item/gun/proc/on_unwield()
 	is_wielded = FALSE
+	update_icon()
 	if(ismob(loc))
 		var/mob/living/M = loc
 		M.update_inv_hands()
