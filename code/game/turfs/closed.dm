@@ -72,8 +72,8 @@ GLOBAL_LIST_INIT(splash_memes, world.file2list('config/splash_memes.txt'))
 	var/mutable_appearance/black_underlay
 
 /turf/closed/indestructible/splashscreen/New()
-	if(length(splash_memes))
-		name = pick(splash_memes)
+	if(length(GLOB.splash_memes))
+		name = pick(GLOB.splash_memes)
 	SStitle.splash_turf = src
 	if(SStitle.icon)
 		icon = SStitle.icon
