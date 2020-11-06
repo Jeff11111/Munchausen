@@ -1,6 +1,5 @@
 //predominantly positive traits
 //this file is named weirdly so that positive traits are listed above negative ones
-
 /datum/quirk/alcohol_tolerance
 	name = "Alcohol Tolerance"
 	desc = "You become drunk more slowly and suffer fewer drawbacks from alcohol."

@@ -522,7 +522,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	job_preferences	= SANITIZE_LIST(job_preferences) //Skyrat edit - lack of this could cause game-mode failure
 
 	//Quirks
-	S["all_quirks"]			>> all_quirks
+	S["special_char"]			>> special_char
+
 	//SKYRAT EDIT
 	S["language"]			>> language
 	S["body_descriptors"]	>> body_descriptors
@@ -731,8 +732,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if(job_preferences["[j]"] != JP_LOW && job_preferences["[j]"] != JP_MEDIUM && job_preferences["[j]"] != JP_HIGH)
 			job_preferences -= j
 
-	all_quirks = SANITIZE_LIST(all_quirks)
-
 	cit_character_pref_load(S)
 
 	return 1
@@ -858,7 +857,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["job_preferences"] , job_preferences)
 
 	//Quirks
-	WRITE_FILE(S["all_quirks"]			, all_quirks)
+	WRITE_FILE(S["special_char"]		, special_char)
 	//SKYRAT ADDITION - additional language
 	WRITE_FILE(S["language"]			, language)
 	WRITE_FILE(S["body_descriptors"]	, body_descriptors)

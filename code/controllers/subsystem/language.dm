@@ -34,11 +34,6 @@ SUBSYSTEM_DEF(language)
 				user.grant_language(cool.type, TRUE, TRUE, LANGUAGE_ADDITIONAL)
 				to_chat(user, "<span class='notice'>You are able to speak in [my_lang]. If you're actually good at it or not, it's up to you.</span>")
 			else
-				for(var/datum/quirk/Q in cli.prefs.all_quirks)
-					if(cool.name in Q.languagewhitelist)
-						user.grant_language(cool, TRUE, TRUE, LANGUAGE_ADDITIONAL)
-						to_chat(user, "<span class='notice'>You are able to speak in [my_lang]. If you're actually good at it or not, it's up to you.</span>")
-						return
 				to_chat(user, "<span class='warning'>Uh oh. [my_lang] is a restricted language, and couldn't be assigned!</span>")
 				to_chat(user, "<span class='warning'>This probably shouldn't be happening. Scream at Bob on #main-dev.</span>")
 		else

@@ -1,5 +1,4 @@
 //predominantly negative traits
-
 /datum/quirk/blooddeficiency
 	name = "Acute Blood Deficiency"
 	desc = "Your body can't produce enough blood to sustain itself."

@@ -109,7 +109,7 @@
 	if(isliving(user))
 		var/mob/living/L = user
 		if(HAS_TRAIT(L, TRAIT_SKITTISH))
-			. += "<span class='notice'>Ctrl-Shift-click [src] to jump inside.</span>"
+			. += "<span class='notice'>Middle-click [src] to jump inside.</span>"
 
 /obj/structure/closet/CanPass(atom/movable/mover, turf/target)
 	if(wall_mounted)
@@ -540,12 +540,13 @@
 	togglelock(user)
 	return TRUE
 
-/obj/structure/closet/CtrlShiftClick(mob/living/user)
+/obj/structure/closet/middle_attack_hand(mob/user)
 	if(!HAS_TRAIT(user, TRAIT_SKITTISH))
 		return ..()
 	if(!user.canUseTopic(src) || !isturf(user.loc) || !user.Adjacent(src) || !user.CanReach(src))
 		return
 	dive_into(user)
+	return TRUE
 
 /obj/structure/closet/emag_act(mob/user)
 	. = ..()
