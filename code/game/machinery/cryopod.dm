@@ -291,7 +291,10 @@
 
 /obj/machinery/cryopod/alt_attack_hand(mob/user)
 	. = ..()
-	open_machine(user)
+	if(!state_open)
+		open_machine(user)
+	else
+		close_machine(user)
 
 /obj/machinery/cryopod/relaymove(mob/user)
 	container_resist(user)

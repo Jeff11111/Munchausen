@@ -672,8 +672,8 @@ SUBSYSTEM_DEF(job)
 		//first check if we can find a cryopod
 		var/obj/machinery/cryopod/C = locate() in A
 		var/cumcount = 0
-		while(!C || C.has_buckled_mobs())
-			if(cumcount >= 10)
+		while(!C || C.occupant || C.state_open)
+			if(cumcount >= 30)
 				break
 			C = locate() in A
 			cumcount++

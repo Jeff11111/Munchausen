@@ -34,6 +34,7 @@
 		'modular_skyrat/sound/cultiste/cultiste_rire_5.ogg',
 		'modular_skyrat/sound/cultiste/cultiste_rire_6.ogg',
 	)
+	speak_chance = 10
 
 /mob/living/simple_animal/pet/chungus/xom/verb/say_something_funny()
 	set category = "IC"
@@ -63,9 +64,13 @@
 						break
 		if(length(possible_messages))
 			message = pick(possible_messages)
+		message = replacetext(message, "\"", "")
 		if(config.punctuation_filter && !findtext(message, config.punctuation_filter, length(message)) && !findtext(message, config.punctuation_filter, 1, 2))
 			message += "."
 		say("[message] [capitalize(pick(cringe))]!", forced = TRUE)
+		//sunglasses
+		icon_state = icon_state_cool
+		addtimer(CALLBACK(src, .proc/not_cool), 3 SECONDS)
 
 /mob/living/simple_animal/pet/chungus/xom/say(message, bubble_type, list/spans, sanitize, datum/language/language, ignore_spam, forced)
 	. = ..()
