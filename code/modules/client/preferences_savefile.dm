@@ -115,38 +115,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		S["feature_lizard_legs"] >> digi
 		if(digi == "Digitigrade Legs")
 			WRITE_FILE(S["feature_lizard_legs"], "Digitigrade")
-
-	if(current_version < 26)
-		var/vr_path = "data/player_saves/[parent.ckey[1]]/[parent.ckey]/vore/character[default_slot].json"
-		if(fexists(vr_path))
-			var/list/json_from_file = json_decode(file2text(vr_path))
-			if(json_from_file)
-				if(json_from_file["digestable"])
-					ENABLE_BITFIELD(vore_flags,DIGESTABLE)
-				if(json_from_file["devourable"])
-					ENABLE_BITFIELD(vore_flags,DEVOURABLE)
-				if(json_from_file["feeding"])
-					ENABLE_BITFIELD(vore_flags,FEEDING)
-				if(json_from_file["lickable"])
-					ENABLE_BITFIELD(vore_flags,LICKABLE)
-				belly_prefs = json_from_file["belly_prefs"]
-				vore_taste = json_from_file["vore_taste"]
-
-		for(var/V in all_quirks) // quirk migration
-			switch(V)
-				if("Acute hepatic pharmacokinesis")
-					DISABLE_BITFIELD(cit_toggles, PENIS_ENLARGEMENT)
-					DISABLE_BITFIELD(cit_toggles, BREAST_ENLARGEMENT)
-					ENABLE_BITFIELD(cit_toggles,FORCED_FEM)
-					ENABLE_BITFIELD(cit_toggles,FORCED_MASC)
-					all_quirks -= V
-				if("Crocin Immunity")
-					ENABLE_BITFIELD(cit_toggles,NO_APHRO)
-					all_quirks -= V
-				if("Buns of Steel")
-					ENABLE_BITFIELD(cit_toggles,NO_ASS_SLAP)
-					all_quirks -= V
-
 		if(features["meat_type"] == "Inesct")
 			features["meat_type"] = "Insect"
 
@@ -163,33 +131,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if(malformed_hockeys[hockey])
 			features["cock_shape"] = malformed_hockeys[hockey]
 			features["cock_taur"] = TRUE
-
-	if(current_version < 29)
-		var/digestable
-		var/devourable
-		var/feeding
-		var/lickable
-		S["digestable"]						>> digestable
-		S["devourable"]						>> devourable
-		S["feeding"]						>> feeding
-		S["lickable"]						>> lickable
-		if(digestable)
-			ENABLE_BITFIELD(vore_flags,DIGESTABLE)
-		if(devourable)
-			ENABLE_BITFIELD(vore_flags,DEVOURABLE)
-		if(feeding)
-			ENABLE_BITFIELD(vore_flags,FEEDING)
-		if(lickable)
-			ENABLE_BITFIELD(vore_flags,LICKABLE)
-
-	if(current_version < 30)
-		switch(features["taur"])
-			if("Husky", "Lab", "Shepherd", "Fox", "Wolf")
-				features["taur"] = "Canine"
-			if("Panther", "Tiger")
-				features["taur"] = "Feline"
-			if("Cow")
-				features["taur"] = "Cow (Spotted)"
 
 	if(current_version < 31)
 		S["wing_color"]			>> features["wings_color"]
@@ -216,7 +157,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(!ckey)
 		return
 	path = "data/player_saves/[ckey[1]]/[ckey]/[filename]"
-	vr_path = "data/player_saves/[ckey[1]]/[ckey]/vore"
 
 /datum/preferences/proc/load_preferences()
 	if(!path)
@@ -304,7 +244,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["damagescreenshake"]	>> damagescreenshake
 	S["widescreenpref"]		>> widescreenpref
 	S["autostand"]			>> autostand
-	S["cit_toggles"]		>> cit_toggles
 	S["preferred_chaos"]	>> preferred_chaos
 	S["auto_ooc"]			>> auto_ooc
 	S["no_tetris_storage"]		>> no_tetris_storage
@@ -349,7 +288,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	damagescreenshake	= sanitize_integer(damagescreenshake, 0, 2, initial(damagescreenshake))
 	widescreenpref		= sanitize_integer(widescreenpref, 0, 1, initial(widescreenpref))
 	autostand			= sanitize_integer(autostand, 0, 1, initial(autostand))
-	cit_toggles			= sanitize_integer(cit_toggles, 0, 16777215, initial(cit_toggles))
 	auto_ooc			= sanitize_integer(auto_ooc, 0, 1, initial(auto_ooc))
 	no_tetris_storage		= sanitize_integer(no_tetris_storage, 0, 1, initial(no_tetris_storage))
 	key_bindings 			= sanitize_islist(key_bindings, list())
@@ -450,7 +388,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["arousable"], arousable)
 	WRITE_FILE(S["widescreenpref"], widescreenpref)
 	WRITE_FILE(S["autostand"], autostand)
-	WRITE_FILE(S["cit_toggles"], cit_toggles)
 	WRITE_FILE(S["preferred_chaos"], preferred_chaos)
 	WRITE_FILE(S["auto_ooc"], auto_ooc)
 	WRITE_FILE(S["no_tetris_storage"], no_tetris_storage)
@@ -656,14 +593,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["feature_ooc_notes"]				>> features["ooc_notes"]
 	S["silicon_flavor_text"] >> features["silicon_flavor_text"]
 
-	S["vore_flags"]						>> vore_flags
-	S["vore_taste"]						>> vore_taste
-	var/char_vr_path = "[vr_path]/character_[default_slot]_v2.json"
-	if(fexists(char_vr_path))
-		var/list/json_from_file = json_decode(file2text(char_vr_path))
-		if(json_from_file)
-			belly_prefs = json_from_file["belly_prefs"]
-	
 	//gear loadout
 	var/text_to_load
 	S["loadout"] >> text_to_load
@@ -804,10 +733,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	all_quirks = SANITIZE_LIST(all_quirks)
 
-	vore_flags						= sanitize_integer(vore_flags, 0, MAX_VORE_FLAG, 0)
-	vore_taste						= copytext(vore_taste, 1, MAX_TASTE_LEN)
-	belly_prefs 					= SANITIZE_LIST(belly_prefs)
-
 	cit_character_pref_load(S)
 
 	return 1
@@ -938,16 +863,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["language"]			, language)
 	WRITE_FILE(S["body_descriptors"]	, body_descriptors)
 	//
-
-	WRITE_FILE(S["vore_flags"]			, vore_flags)
-	WRITE_FILE(S["vore_taste"]			, vore_taste)
-
-	//Belly_prefs
-	var/char_vr_path = "[vr_path]/character_[default_slot]_v2.json"
-	var/belly_prefs_json = safe_json_encode(list("belly_prefs" = belly_prefs))
-	if(fexists(char_vr_path))
-		fdel(char_vr_path)
-	text2file(belly_prefs_json,char_vr_path)
 
 	//gear loadout
 	if(chosen_gear.len)

@@ -751,11 +751,6 @@
 		log_combat(src, buckled, "resisted buckle")
 		return resist_buckle()
 
-	// CIT CHANGE - climbing out of a gut.
-	if(attempt_vr(src,"vore_process_resist",args))
-		//Sure, give clickdelay for anti spam. shouldn't be combat voring anyways.
-		return TRUE
-
 	//Breaking out of a container (Locker, sleeper, cryo...)
 	if(isobj(loc))
 		var/obj/C = loc
@@ -1309,10 +1304,8 @@
 	return ..() && CHECK_MOBILITY(src, MOBILITY_MOVE)
 
 /mob/living/proc/set_gender(ngender = NEUTER, silent = FALSE, update_icon = TRUE, forced = FALSE)
-	if(forced || (!ckey || client?.prefs.cit_toggles & (ngender == FEMALE ? FORCED_FEM : FORCED_MASC)))
-		gender = ngender
-		return TRUE
-	return FALSE
+	gender = ngender
+	return TRUE
 
 /mob/living/vv_get_header()
 	. = ..()

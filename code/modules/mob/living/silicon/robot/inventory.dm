@@ -35,12 +35,6 @@
 	else if(istype(O,/obj/item/gun/energy/disabler/cyborg) || istype(O,/obj/item/gun/energy/e_gun/advtaser/cyborg))
 		disabler = FALSE
 		update_icons() //PUT THE GUN AWAY
-	else if(istype(O,/obj/item/dogborg/sleeper))
-		sleeper_g = FALSE
-		sleeper_r = FALSE
-		update_icons()
-		var/obj/item/dogborg/sleeper/S = O
-		S.go_out() //this should stop edgecase deletions
 	//END CITADEL EDIT
 	if(client)
 		client.screen -= O

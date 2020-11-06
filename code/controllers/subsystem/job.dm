@@ -379,8 +379,8 @@ SUBSYSTEM_DEF(job)
 /datum/controller/subsystem/job/proc/validate_required_jobs(list/required_jobs)
 	if(!required_jobs.len)
 		return TRUE
+	var/group_ok = TRUE
 	for(var/required_group in required_jobs)
-		var/group_ok = TRUE
 		for(var/rank in required_group)
 			var/datum/job/J = GetJob(rank)
 			if(!J)
@@ -396,7 +396,7 @@ SUBSYSTEM_DEF(job)
 		for(var/required_group in required_jobs)
 			for(var/rank in required_group)
 				var/datum/job/J = GetJob(rank)
-				blah |= "[J.flatter_string ? "[J.flatter_string] " : ""][i]"
+				blah |= "[J.flatter_string ? "[J.flatter_string] " : ""][rank]"
 		
 		SSticker.mode.setup_error = "Required jobs not present. The station needs [english_list(blah)] for the shift to start."
 		return FALSE

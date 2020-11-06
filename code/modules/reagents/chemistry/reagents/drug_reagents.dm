@@ -570,18 +570,17 @@
 	can_synth = FALSE
 
 /datum/reagent/drug/aphrodisiac/on_mob_life(mob/living/M)
-	if(M && M.client?.prefs.arousable && !(M.client?.prefs.cit_toggles & NO_APHRO))
-		if((prob(min(current_cycle/2,5))))
-			M.emote(pick("moan","blush"))
-		if(prob(min(current_cycle/4,10)))
-			var/aroused_message = pick("You feel frisky.", "You're having trouble suppressing your urges.", "You feel in the mood.")
-			to_chat(M, "<span class='userlove'>[aroused_message]</span>")
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-			var/list/genits = H.adjust_arousal(current_cycle, aphro = TRUE) // redundant but should still be here
-			for(var/g in genits)
-				var/obj/item/organ/genital/G = g
-				to_chat(M, "<span class='userlove'>[G.arousal_verb]!</span>")
+	if((prob(min(current_cycle/2,5))))
+		M.emote(pick("moan","blush"))
+	if(prob(min(current_cycle/4,10)))
+		var/aroused_message = pick("You feel frisky.", "You're having trouble suppressing your urges.", "You feel in the mood.")
+		to_chat(M, "<span class='userlove'>[aroused_message]</span>")
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		var/list/genits = H.adjust_arousal(current_cycle, aphro = TRUE) // redundant but should still be here
+		for(var/g in genits)
+			var/obj/item/organ/genital/G = g
+			to_chat(M, "<span class='userlove'>[G.arousal_verb]!</span>")
 	..()
 
 /datum/reagent/drug/aphrodisiacplus
@@ -596,26 +595,25 @@
 	can_synth = FALSE
 
 /datum/reagent/drug/aphrodisiacplus/on_mob_life(mob/living/M)
-	if(M && M.client?.prefs.arousable && !(M.client?.prefs.cit_toggles & NO_APHRO))
-		if(prob(5))
-			if(prob(current_cycle))
-				M.say(pick("Hnnnnngghh...", "Ohh...", "Mmnnn..."))
-			else
-				M.emote(pick("moan","blush"))
-		if(prob(5))
-			var/aroused_message
-			if(current_cycle>25)
-				aroused_message = pick("You need to fuck someone!", "You're bursting with sexual tension!", "You can't get sex off your mind!")
-			else
-				aroused_message = pick("You feel a bit hot.", "You feel strong sexual urges.", "You feel in the mood.", "You're ready to go down on someone.")
-			to_chat(M, "<span class='userlove'>[aroused_message]</span>")
-			REMOVE_TRAIT(M,TRAIT_NEVERBONER,APHRO_TRAIT)
-		if(ishuman(M))
-			var/mob/living/carbon/human/H = M
-			var/list/genits = H.adjust_arousal(100, aphro = TRUE) // redundant but should still be here
-			for(var/g in genits)
-				var/obj/item/organ/genital/G = g
-				to_chat(M, "<span class='userlove'>[G.arousal_verb]!</span>")
+	if(prob(5))
+		if(prob(current_cycle))
+			M.say(pick("Hnnnnngghh...", "Ohh...", "Mmnnn..."))
+		else
+			M.emote(pick("moan","blush"))
+	if(prob(5))
+		var/aroused_message
+		if(current_cycle>25)
+			aroused_message = pick("You need to fuck someone!", "You're bursting with sexual tension!", "You can't get sex off your mind!")
+		else
+			aroused_message = pick("You feel a bit hot.", "You feel strong sexual urges.", "You feel in the mood.", "You're ready to go down on someone.")
+		to_chat(M, "<span class='userlove'>[aroused_message]</span>")
+		REMOVE_TRAIT(M,TRAIT_NEVERBONER,APHRO_TRAIT)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		var/list/genits = H.adjust_arousal(100, aphro = TRUE) // redundant but should still be here
+		for(var/g in genits)
+			var/obj/item/organ/genital/G = g
+			to_chat(M, "<span class='userlove'>[G.arousal_verb]!</span>")
 	..()
 
 /datum/reagent/drug/aphrodisiacplus/addiction_act_stage2(mob/living/M)
@@ -633,11 +631,10 @@
 	..()
 
 /datum/reagent/drug/aphrodisiacplus/overdose_process(mob/living/M)
-	if(M && M.client?.prefs.arousable && !(M.client?.prefs.cit_toggles & NO_APHRO) && prob(33))
-		if(prob(5) && ishuman(M) && M.has_dna() && (M.client?.prefs.cit_toggles & BIMBOFICATION))
-			if(!HAS_TRAIT(M,TRAIT_PERMABONER))
-				to_chat(M, "<span class='userlove'>Your libido is going haywire!</span>")
-				ADD_TRAIT(M,TRAIT_PERMABONER,APHRO_TRAIT)
+	if(prob(5) && ishuman(M) && M.has_dna())
+		if(!HAS_TRAIT(M,TRAIT_PERMABONER))
+			to_chat(M, "<span class='userlove'>Your libido is going haywire!</span>")
+			ADD_TRAIT(M,TRAIT_PERMABONER,APHRO_TRAIT)
 	..()
 
 /datum/reagent/drug/anaphrodisiac
@@ -651,7 +648,7 @@
 	can_synth = FALSE
 
 /datum/reagent/drug/anaphrodisiac/on_mob_life(mob/living/M)
-	if(M && M.client?.prefs.arousable && prob(16))
+	if(prob(16))
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			var/list/genits = H.adjust_arousal(-100, aphro = TRUE)
@@ -669,7 +666,7 @@
 	can_synth = FALSE
 
 /datum/reagent/drug/anaphrodisiacplus/on_mob_life(mob/living/M)
-	if(M && M.client?.prefs.arousable)
+	if(M)
 		REMOVE_TRAIT(M,TRAIT_PERMABONER,APHRO_TRAIT)
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
@@ -680,7 +677,7 @@
 	..()
 
 /datum/reagent/drug/anaphrodisiacplus/overdose_process(mob/living/M)
-	if(M && M.client?.prefs.arousable && prob(5))
+	if(M)
 		to_chat(M, "<span class='userlove'>You feel like you'll never feel aroused again...</span>")
 		ADD_TRAIT(M,TRAIT_NEVERBONER,APHRO_TRAIT)
 	..()

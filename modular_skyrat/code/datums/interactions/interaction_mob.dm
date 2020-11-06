@@ -35,20 +35,6 @@
 	else
 		return TRUE
 
-///atom/movable/attack_hand(mob/living/carbon/human/user)
-//	. = ..()
-//	if(can_buckle && buckled_mob)
-//		if(user_unbuckle_mob(user))
-//			return 1
-/*
-/atom/movable/MouseDrop_T(mob/living/carbon/human/M, mob/living/carbon/human/user)
-	. = ..()
-	if(can_buckle && istype(M) && !buckled_mob)
-		if(user_buckle_mob(M, user))
-			return TRUE
-
-*/
-
 /mob/living/proc/do_blowsmoke(mob/living/partner)
 	to_chat(src, "<span class='warning'>You aren't even humanoid. How are you hoping to accomplish this?</span>")
 	return
@@ -57,11 +43,11 @@
     var/obj/item/clothing/mask/cigarette/held_cig = get_active_held_item()
     var/obj/item/clothing/mask/vape/held_vape = get_active_held_item()
     var/smoking_cig = FALSE
-    if (istype(wear_mask, /obj/item/clothing/mask/cigarette))
+    if(istype(wear_mask, /obj/item/clothing/mask/cigarette))
         var/obj/item/clothing/mask/cigarette/worn_cig = wear_mask
-        if (worn_cig.lit)
+        if(worn_cig.lit)
             smoking_cig = TRUE
-    if (istype(wear_mask, /obj/item/clothing/mask/vape))
+    if(istype(wear_mask, /obj/item/clothing/mask/vape))
         smoking_cig = TRUE
     if((istype(held_cig, /obj/item/clothing/mask/cigarette) && held_cig.lit) || smoking_cig || istype(held_vape, /obj/item/clothing/mask/vape))
         var/message
@@ -69,12 +55,7 @@
             "blows a plume of smoke into \the <b>[partner]</b>'s face.",
             "takes a drag before blowing smoke into \the <b>[partner]</b>'s face.",
             "exhales a cloud of smoke into \the <b>[partner]</b>'s face")]"
-        var/client/cli = partner.client
         var/mob/living/carbon/C = partner
-        if(cli && istype(C))
-            if(cli.prefs.extremeharm != "No")
-                if(prob(65) && C.oxyloss < 36) //So it won't go further than 51.
-                    C.adjustOxyLoss(15)
         var/datum/effect_system/smoke_spread/chem/smoke_machine/s = new
         s.set_up(reagents, 0, 24, C.loc)
         s.start()

@@ -109,7 +109,6 @@ SUBSYSTEM_DEF(recycling)
 		M.nutrition = rand(NUTRITION_LEVEL_START_MIN, NUTRITION_LEVEL_START_MAX)
 		M.update_config_movespeed()
 		M.update_movespeed(TRUE)
-		hook_vr("mob_new",list(M))
 
 		//Living
 		GLOB.mob_living_list += M
@@ -302,8 +301,7 @@ SUBSYSTEM_DEF(recycling)
 		//S.nutrition = rand(NUTRITION_LEVEL_START_MIN, NUTRITION_LEVEL_START_MAX)
 		S.update_config_movespeed()
 		S.update_movespeed(TRUE)
-		hook_vr("mob_new",list(S))
-
+		
 		//Living
 		GLOB.mob_living_list += S
 

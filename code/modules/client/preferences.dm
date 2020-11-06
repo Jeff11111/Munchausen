@@ -120,11 +120,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 	var/bloodreagent = ""
 	var/bloodcolor = ""
 	var/skyrat_ooc_notes = ""
-	var/erppref = "Ask"
-	var/nonconpref = "Ask"
-	var/vorepref = "Ask"
-	var/extremepref = "No" //This is for extreme shit, maybe even literal shit, better to keep it on no by default
-	var/extremeharm = "No" //If "extreme content" is enabled, this option serves as a toggle for the related interactions to cause damage or not
 	var/general_records = ""
 	var/security_records = ""
 	var/medical_records = ""
@@ -283,15 +278,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 	var/list/menuoptions
 
 	var/action_buttons_screen_locs = list()
-
-	//bad stuff
-	var/vore_flags = 0
-	var/list/belly_prefs = list()
-	var/vore_taste = "nothing in particular"
-	var/toggleeatingnoise = TRUE
-	var/toggledigestionnoise = TRUE
-	var/hound_sleeper = TRUE
-	var/cit_toggles = TOGGLES_CITADEL
 
 	//backgrounds
 	var/mutable_appearance/character_background
@@ -493,10 +479,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 					dat += "[skyrat_ooc_notes]"
 			else
 				dat += "[TextPreview(skyrat_ooc_notes)]..."
-			dat +=	"<h2>ERP Preferences</h2>"
-			dat += 	"<b>ERP :</b> <a href='?_src_=prefs;preference=erp_pref'>[erppref]</a> "
-			dat += 	"<b>Non-Con :</b> <a href='?_src_=prefs;preference=noncon_pref'>[nonconpref]</a> "
-			dat += 	"<b>Vore :</b> <a href='?_src_=prefs;preference=vore_pref'>[vorepref]</a><br>"
 			dat += 	"<h2>Records</h2>"
 			dat += 	"<a href='?_src_=prefs;preference=general_records;task=input'><b>General</b></a><br>"
 			if(length(general_records) <= 40)
@@ -1322,30 +1304,8 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 			dat += "</table>"
 		if(4) // Content preferences
 			dat += "<table><tr><td width='340px' height='300px' valign='top'>"
-			dat += "<h2>Fetish content prefs</h2>"
-			dat += "<b>Allow Lewd Verbs:</b> <a href='?_src_=prefs;preference=verb_consent'>[(toggles & VERB_CONSENT) ? "Yes":"No"]</a><br>" // Skyrat - ERP Mechanic Addition
-			dat += "<b>Mute Lewd Verb Sounds:</b> <a href='?_src_=prefs;preference=mute_lewd_verb_sounds'>[(toggles & LEWD_VERB_SOUNDS) ? "Yes":"No"]</a><br>" // Skyrat - ERP Mechanic Addition
-			dat += "<b>Arousal:</b><a href='?_src_=prefs;preference=arousable'>[arousable == TRUE ? "Enabled" : "Disabled"]</a><BR>"
-			dat += "<b>Voracious MediHound sleepers:</b> <a href='?_src_=prefs;preference=hound_sleeper'>[(cit_toggles & MEDIHOUND_SLEEPER) ? "Yes" : "No"]</a><br>"
-			dat += "<b>Hear Vore Sounds:</b> <a href='?_src_=prefs;preference=toggleeatingnoise'>[(cit_toggles & EATING_NOISES) ? "Yes" : "No"]</a><br>"
-			dat += "<b>Hear Vore Digestion Sounds:</b> <a href='?_src_=prefs;preference=toggledigestionnoise'>[(cit_toggles & DIGESTION_NOISES) ? "Yes" : "No"]</a><br>"
-			dat += "<b>Forced Feminization:</b> <a href='?_src_=prefs;preference=feminization'>[(cit_toggles & FORCED_FEM) ? "Allowed" : "Disallowed"]</a><br>"
-			dat += "<b>Forced Masculinization:</b> <a href='?_src_=prefs;preference=masculinization'>[(cit_toggles & FORCED_MASC) ? "Allowed" : "Disallowed"]</a><br>"
-			dat += "<b>Lewd Hypno:</b> <a href='?_src_=prefs;preference=hypno'>[(cit_toggles & HYPNO) ? "Allowed" : "Disallowed"]</a><br>"
-			dat += "<b>Bimbofication:</b> <a href='?_src_=prefs;preference=bimbo'>[(cit_toggles & BIMBOFICATION) ? "Allowed" : "Disallowed"]</a><br>"
-			dat += "</td>"
 			dat +="<td width='300px' height='300px' valign='top'>"
-			dat += "<h2>Other content prefs</h2>"
-			dat += "<b>Breast Enlargement:</b> <a href='?_src_=prefs;preference=breast_enlargement'>[(cit_toggles & BREAST_ENLARGEMENT) ? "Allowed" : "Disallowed"]</a><br>"
-			dat += "<b>Penis Enlargement:</b> <a href='?_src_=prefs;preference=penis_enlargement'>[(cit_toggles & PENIS_ENLARGEMENT) ? "Allowed" : "Disallowed"]</a><br>"
-			dat += "<b>Hypno:</b> <a href='?_src_=prefs;preference=never_hypno'>[(cit_toggles & NEVER_HYPNO) ? "Disallowed" : "Allowed"]</a><br>"
-			dat += "<b>Aphrodisiacs:</b> <a href='?_src_=prefs;preference=aphro'>[(cit_toggles & NO_APHRO) ? "Disallowed" : "Allowed"]</a><br>"
-			dat += "<b>Ass Slapping:</b> <a href='?_src_=prefs;preference=ass_slap'>[(cit_toggles & NO_ASS_SLAP) ? "Disallowed" : "Allowed"]</a><br>"
-			//SKYRAT EDIT
-			dat += 	"<b>Extreme ERP verbs :</b> <a href='?_src_=prefs;preference=extremepref'>[extremepref]</a><br>" // https://youtu.be/0YrU9ASVw6w
-			if(extremepref != "No")
-				dat += "<b><span style='color: #e60000;'Harmful ERP verbs :</b> <a href='?_src_=prefs;preference=extremeharm'>[extremeharm]</a><br>"
-			//END OF SKYRAT EDIT
+			dat += "<h2>I literally do not give a shit about your preferences.</h2>"
 			dat += "</tr></table>"
 			dat += "<br>"
 		if(5) // Custom keybindings
@@ -3165,49 +3125,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 							damagescreenshake = 1
 				if("nameless")
 					nameless = !nameless
-
-				if("erp_pref")
-					switch(erppref)
-						if("Yes")
-							erppref = "Ask"
-						if("Ask")
-							erppref = "No"
-						if("No")
-							erppref = "Yes"
-				if("noncon_pref")
-					switch(nonconpref)
-						if("Yes")
-							nonconpref = "Ask"
-						if("Ask")
-							nonconpref = "No"
-						if("No")
-							nonconpref = "Yes"
-				if("vore_pref")
-					switch(vorepref)
-						if("Yes")
-							vorepref = "Ask"
-						if("Ask")
-							vorepref = "No"
-						if("No")
-							vorepref = "Yes"
-				//Skyrat edit - *someone* offered me actual money for this shit
-				if("extremepref") //i hate myself for doing this
-					switch(extremepref) //why the fuck did this need to use cycling instead of input from a list
-						if("Yes")		//seriously this confused me so fucking much
-							extremepref = "Ask"
-						if("Ask")
-							extremepref = "No"
-							extremeharm = "No"
-						if("No")
-							extremepref = "Yes"
-				if("extremeharm")
-					switch(extremeharm)
-						if("Yes")	//this is cursed code
-							extremeharm = "No"
-						if("No")
-							extremeharm = "Yes"
-					if(extremepref == "No")
-						extremeharm = "No"
 				if("auto_hiss")
 					auto_hiss = !auto_hiss
 				//END CITADEL EDIT
@@ -3375,12 +3292,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 					toggles ^= SOUND_MEGAFAUNA
 				//SKYRAT CHANGES END
 
-				if("verb_consent") // Skyrat - ERP Mechanic Addition
-					toggles ^= VERB_CONSENT // Skyrat - ERP Mechanic Addition
-
-				if("mute_lewd_verb_sounds") // Skyrat - ERP Mechanic Addition
-					toggles ^= LEWD_VERB_SOUNDS // Skyrat - ERP Mechanic Addition
-
 				if("lobby_music")
 					toggles ^= SOUND_LOBBY
 					if((toggles & SOUND_LOBBY) && user.client && isnewplayer(user))
@@ -3427,45 +3338,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 					parallax = WRAP(parallax - 1, PARALLAX_INSANE, PARALLAX_DISABLE + 1)
 					if (parent && parent.mob && parent.mob.hud_used)
 						parent.mob.hud_used.update_parallax_pref(parent.mob)
-
-				// Citadel edit - Prefs don't work outside of this. :c
-				if("hound_sleeper")
-					cit_toggles ^= MEDIHOUND_SLEEPER
-
-				if("toggleeatingnoise")
-					cit_toggles ^= EATING_NOISES
-
-				if("toggledigestionnoise")
-					cit_toggles ^= DIGESTION_NOISES
-
-				if("breast_enlargement")
-					cit_toggles ^= BREAST_ENLARGEMENT
-
-				if("penis_enlargement")
-					cit_toggles ^= PENIS_ENLARGEMENT
-
-				if("feminization")
-					cit_toggles ^= FORCED_FEM
-
-				if("masculinization")
-					cit_toggles ^= FORCED_MASC
-
-				if("hypno")
-					cit_toggles ^= HYPNO
-
-				if("never_hypno")
-					cit_toggles ^= NEVER_HYPNO
-
-				if("aphro")
-					cit_toggles ^= NO_APHRO
-
-				if("ass_slap")
-					cit_toggles ^= NO_ASS_SLAP
-
-				if("bimbo")
-					cit_toggles ^= BIMBOFICATION
-
-				//END CITADEL EDIT
 
 				if("ambientocclusion")
 					ambientocclusion = !ambientocclusion

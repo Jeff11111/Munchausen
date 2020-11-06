@@ -151,18 +151,6 @@
 	hat_offset = INFINITY
 	basic_modules += new /obj/item/dogborg_nose(src)
 	basic_modules += new /obj/item/dogborg_tongue(src)
-	var/obj/item/dogborg/sleeper/K9/flavour/I = new(src)
-	if(istype(src, /obj/item/robot_module/engineering))
-		I.icon_state = "decompiler"
-	if(istype(src, /obj/item/robot_module/security))
-		I.icon_state = "sleeperb"
-	if(istype(src, /obj/item/robot_module/medical))
-		I.icon_state = "sleeper"
-	if(istype(src, /obj/item/robot_module/butler))
-		I.icon_state = "servicer"
-		if(cyborg_base_icon == "scrubpup")
-			I.icon_state = "compactor"
-	basic_modules += I
 	rebuild_modules()
 
 /obj/item/robot_module/proc/remove_module(obj/item/I, delete_after)

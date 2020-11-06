@@ -310,13 +310,13 @@ SUBSYSTEM_DEF(ticker)
 	round_start_time = world.time
 	SSdbcore.SetRoundStart()
 	
-	var/bungus_message = list(
+	var/list/bungus_message = list(
 						"May god have mercy on us.",
 						"You are not invited.",
 						"Tread carefully.",
 						"Blessed are those who hunger and thirst for righteousness.",
 						)
-	to_chat(world, "<span class='notice'><B>Welcome to [station_name()]. [pick(bungus_messsage)]</B></span>")
+	to_chat(world, "<span class='notice'><B>Welcome to [station_name()]. [pick(bungus_message)]</B></span>")
 	if(round_start_sound)
 		//wait just a bit for shit to initialize then do the roundstart sound
 		spawn(2 SECONDS)

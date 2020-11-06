@@ -158,14 +158,6 @@
 */
 
 //Preamble
-
-/mob/living/verb/toggle_hypno()
-	set category = "IC"
-	set name = "Toggle Lewd Hypno"
-	set desc = "Allows you to toggle if you'd like lewd flavour messages for hypno features, such as MKUltra."
-	client.prefs.cit_toggles ^= HYPNO
-	to_chat(usr, "You [((client.prefs.cit_toggles & HYPNO) ?"will":"no longer")] receive lewd flavour messages for hypno.")
-
 /datum/status_effect/chem/enthrall
 	id = "enthrall"
 	alert_type = null
@@ -218,7 +210,7 @@
 	RegisterSignal(owner, COMSIG_LIVING_RESIST, .proc/owner_resist) //Do resistance calc if resist is pressed#
 	RegisterSignal(owner, COMSIG_MOVABLE_HEAR, .proc/owner_hear)
 	mental_capacity = 500 - M.getOrganLoss(ORGAN_SLOT_BRAIN)//It's their brain!
-	lewd = (owner.client?.prefs.cit_toggles & HYPNO) && (master.client?.prefs.cit_toggles & HYPNO)
+	lewd = TRUE
 	var/message = "[(lewd ? "I am a good pet for [enthrallGender]." : "[master] is a really inspirational person!")]"
 	SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "enthrall", /datum/mood_event/enthrall, message)
 	to_chat(owner, "<span class='[(lewd ?"big velvet":"big warning")]'><b>You feel inexplicably drawn towards [master], their words having a demonstrable effect on you. It seems the closer you are to them, the stronger the effect is. However you aren't fully swayed yet and can resist their effects by repeatedly resisting as much as you can!</b></span>")
@@ -683,7 +675,7 @@
 		deltaResist *= 1.25
 	if (owner.reagents.has_reagent(/datum/reagent/medicine/neurine))
 		deltaResist *= 1.5
-	if (!(owner.client?.prefs.cit_toggles & NO_APHRO) && lewd)
+	if (lewd)
 		if (owner.reagents.has_reagent(/datum/reagent/drug/anaphrodisiac))
 			deltaResist *= 1.5
 		if (owner.reagents.has_reagent(/datum/reagent/drug/anaphrodisiacplus))

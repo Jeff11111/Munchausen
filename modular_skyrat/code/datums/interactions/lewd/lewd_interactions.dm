@@ -269,18 +269,6 @@
 						if(!silent)
 							to_chat(user, "<span class = 'warning'>Your earsockets need to be unexposed.</span>")
 						return FALSE
-
-		if(extreme)
-			var/client/cli = user.client
-			if(cli)
-				if(cli.prefs.extremepref == "No")
-					if(!silent)
-						to_chat(user, "<span class = 'warning'>That's way too much for you.</span>")
-					return FALSE
-
-		if(require_ooc_consent)
-			if(user.client && user.client.prefs.toggles & VERB_CONSENT)
-				return TRUE
 		return FALSE
 	return FALSE
 
@@ -486,14 +474,6 @@
 				to_chat(user, "<span class = 'warning'>Their clothes are in the way.</span>")
 			return FALSE
 		
-		if(extreme)
-			var/client/cli = target.client
-			if(cli)
-				if(target.client.prefs.extremepref == "No")
-					if(!silent)
-						to_chat(user, "<span class = 'warning'>For some reason, you don't want to do this to [target].</span>")
-					return FALSE
-		
 		if(require_target_bottomless && !target.is_bottomless())
 			if(!silent)
 				to_chat(user, "<span class = 'warning'>Their pants are in the way.</span>")
@@ -536,27 +516,6 @@
 		dat += "<br>...are acting rough."
 	else if(a_intent == INTENT_HARM)
 		dat += "<br>...are fighting anyone who comes near."
-	//Here comes the fucking weird shit.
-	if(client)
-		var/client/cli = client
-		var/client/ucli = LM.client
-		if(cli.prefs.extremepref != "No")
-			if(!ucli || (ucli.prefs.extremepref != "No"))
-				if(!get_item_by_slot(ITEM_SLOT_EARS))
-					if(has_ears())
-						dat += "<br>...have unprotected ears."
-					else
-						dat += "<br>...have a hole where their ears should be."
-				else
-					dat += "<br>...have covered ears."
-				if(!get_item_by_slot(ITEM_SLOT_EYES))
-					if(has_eyes())
-						dat += "<br>...have exposed eyes."
-					else
-						dat += "<br>...have exposed eyesockets."
-				else
-					dat += "<br>...have covered eyes."
-	//
 	if(is_topless()  && is_bottomless())
 		dat += "<br>...are naked."
 	else
