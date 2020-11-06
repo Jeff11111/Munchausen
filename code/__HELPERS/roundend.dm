@@ -115,7 +115,7 @@
 				var/actual_result = O.check_completion()
 				if(actual_result && O.bobux_reward)
 					A.owner.current?.client?.prefs?.adjust_bobux(O.bobux_reward)
-				else if(O.bobux_penalty)
+				else if(!actual_result && O.bobux_penalty)
 					A.owner.current?.client?.prefs?.adjust_bobux(-O.bobux_penalty)
 				if(actual_result >= 1)
 					result = "SUCCESS"
