@@ -6,6 +6,10 @@
 /mob/living/carbon/human/agony_gargle()
 	return dna?.species?.agony_gargle(src)
 
+// gasp
+/mob/living/carbon/human/agony_gasp()
+	return dna?.species?.agony_gasp(src)
+
 // death rattle
 /mob/living/carbon/human/death_rattle()
 	return dna?.species?.death_rattle(src)

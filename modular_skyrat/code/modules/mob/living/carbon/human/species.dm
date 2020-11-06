@@ -257,7 +257,7 @@
 /datum/species/proc/agony_gasp(var/mob/living/carbon/human/H)
 	if(!istype(H))
 		return FALSE
-	H.emote("agonygasp")
+	H.emote("gasp")
 
 /datum/species/proc/death_rattle(var/mob/living/carbon/human/H)
 	if(!istype(H))

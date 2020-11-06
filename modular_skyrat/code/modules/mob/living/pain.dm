@@ -11,6 +11,9 @@
 /mob/living/proc/agony_gargle()
 	return
 
+/mob/living/proc/agony_gasp()
+	return
+
 /mob/living/proc/death_rattle()
 	return
 
