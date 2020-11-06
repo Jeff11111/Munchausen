@@ -12,7 +12,7 @@
 
 /obj/item/gun/ballistic/automatic/wt550/update_icon()
 	..()
-	icon_state = "[initial(icon_state)]-[magazine ? magazine.ammo_count() : 0]"
+	icon_state = "[initial(icon_state)][magazine ? "-[CEILING(get_ammo(0)/4, 1)*4]" : "-0"]"
 
 /obj/item/gun/ballistic/automatic/wt550/update_overlays()
 	. = ..()
@@ -53,3 +53,7 @@
 	item_state = "arg"
 	desc = "A prototype three-round burst 9mm submachine gun, designated 'SABR'. Looks eerily similar to another submachine gun..."
 	can_suppress = FALSE
+
+/obj/item/gun/ballistic/automatic/proto/update_icon()
+	..()
+	icon_state = "[initial(icon_state)][chambered ? "" : "-e"][magazine ? "" : "-nomag"][safety ? "-safe" : ""]"
