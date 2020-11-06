@@ -165,7 +165,7 @@ SUBSYSTEM_DEF(ticker)
 			create_observers()
 			fire()
 		if(GAME_STATE_PREGAME)
-				//lobby stats for statpanels
+			//lobby stats for statpanels
 			if(isnull(timeLeft))
 				timeLeft = max(0,start_at - world.time)
 			totalPlayers = 0
@@ -309,10 +309,19 @@ SUBSYSTEM_DEF(ticker)
 	log_world("Game start took [(world.timeofday - init_start)/10]s")
 	round_start_time = world.time
 	SSdbcore.SetRoundStart()
-
-	to_chat(world, "<span class='notice'><B>Welcome to [station_name()], enjoy your stay!</B></span>")
-	SEND_SOUND(world, sound(get_announcer_sound("welcome")))
-
+	
+	var/bungus_message = list(
+						"May god have mercy on us.",
+						"You are not invited.",
+						"Tread carefully.",
+						"Blessed are those who hunger and thirst for righteousness.",
+						)
+	to_chat(world, "<span class='notice'><B>Welcome to [station_name()]. [pick(bungus_messsage)]</B></span>")
+	if(round_start_sound)
+		//wait just a bit for shit to initialize then do the roundstart sound
+		spawn(2 SECONDS)
+			SEND_SOUND(world, sound(round_start_sound))
+	
 	current_state = GAME_STATE_PLAYING
 	Master.SetRunLevel(RUNLEVEL_GAME)
 
@@ -407,10 +416,6 @@ SUBSYSTEM_DEF(ticker)
 			if(N.new_character)
 				to_chat(N, "Captainship not forced on anyone.")
 			CHECK_TICK
-	if(round_start_sound)
-		//wait just a bit for shit to initialize then do the roundstart sound
-		spawn(1.5 SECONDS)
-			SEND_SOUND(world, sound(round_start_sound))
 
 /datum/controller/subsystem/ticker/proc/transfer_characters()
 	var/list/livings = list()

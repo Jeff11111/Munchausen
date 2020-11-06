@@ -389,15 +389,17 @@ SUBSYSTEM_DEF(job)
 			if(J.current_positions < required_group[rank])
 				group_ok = FALSE
 				break
-		if(group_ok)
-			return TRUE
-	var/list/blah = list()
-	for(var/i in required_jobs)
-		var/datum/job/J = GetJob(i)
-		blah |= "[J.flatter_string ? "[J.flatter_string] " : ""][i]"
-	var/need_string = english_list(blah)
-	SSticker.mode.setup_error = "Required jobs not present. The station needs [need_string] for the shift to start."
-	return FALSE
+	if(group_ok)
+		return TRUE
+	else
+		var/list/blah = list()
+		for(var/required_group in required_jobs)
+			for(var/rank in required_group)
+				var/datum/job/J = GetJob(rank)
+				blah |= "[J.flatter_string ? "[J.flatter_string] " : ""][i]"
+		
+		SSticker.mode.setup_error = "Required jobs not present. The station needs [english_list(blah)] for the shift to start."
+		return FALSE
 
 //We couldn't find a job from prefs for this guy.
 /datum/controller/subsystem/job/proc/HandleUnassigned(mob/dead/new_player/player)
