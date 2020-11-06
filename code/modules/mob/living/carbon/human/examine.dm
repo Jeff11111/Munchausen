@@ -608,6 +608,9 @@
 		if(3 to INFINITY)
 			. += "[t_He] [t_is] much weaker than me."
 	
+	//descriptors
+	. |= show_descriptors_to(user)
+	
 	var/trait_exam = common_trait_examine()
 	if(!screwy_self)
 		if(!isnull(trait_exam))
@@ -723,8 +726,6 @@
 
 /mob/living/carbon/human/examine_more(mob/user)
 	var/msg = list("<span class='notice'><i>You examine [src] closer, and note the following...</i></span>")
-	for(var/i in show_descriptors_to(user))
-		msg |= "\t[i]"
 	if((src == user) && HAS_TRAIT(user, TRAIT_SCREWY_CHECKSELF))
 		msg |= "\t<span class='smallnotice'>[p_they(TRUE)] [p_have()] no significantly damaged bodyparts.</span>"
 		msg |= "\t<span class='smallnotice'><i>[p_they(TRUE)] [p_have()] no visible scars.</i></span>"
