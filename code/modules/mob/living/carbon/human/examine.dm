@@ -742,8 +742,8 @@
 		var/text = ""
 		if(!BP.brute_dam && !BP.burn_dam)
 			continue
-		if(BP.brute_dam >= (BP.max_damage/3))
-			sev = round(BP.brute_dam/BP.max_damage * 3, 1)
+		if(BP.brute_dam)
+			sev = clamp(round(BP.brute_dam/BP.max_damage * 3, 1), 1, 3)
 			max_sev = max(max_sev, sev)
 			switch(sev)
 				if(1)
@@ -752,8 +752,8 @@
 					how_brute = BP.medium_brute_msg
 				if(3)
 					how_brute = BP.heavy_brute_msg
-		if(BP.burn_dam >= (BP.max_damage/3))
-			sev = round(BP.burn_dam/BP.max_damage * 3, 1)
+		if(BP.burn_dam)
+			sev = clamp(round(BP.burn_dam/BP.max_damage * 3, 1), 1, 3)
 			max_sev = max(max_sev, sev)
 			switch(sev)
 				if(1)
