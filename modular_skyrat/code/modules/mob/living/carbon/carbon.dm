@@ -193,11 +193,24 @@
 		
 		client.pixel_x = world.icon_size*_x
 		client.pixel_y = world.icon_size*_y
+		if(hud_used?.fov_holder)
+			var/change_y = 0
+			var/change_x = 0
+			if(direction & NORTH)
+				change_y += zoomies
+			if(direction & EAST)
+				change_x += zoomies
+			if(direction & SOUTH)
+				change_y += -zoomies
+			if(direction & WEST)
+				change_x += -zoomies
+			hud_used.fov_holder.screen_loc = "CENTER[-7 + change_x]:0,CENTER[-7 + change_y]:0"
 	else
 		client.change_view(CONFIG_GET(string/default_view))
-		
 		client.pixel_x = 0
 		client.pixel_y = 0
+		if(hud_used?.fov_holder)
+			hud_used.fov_holder.screen_loc = ui_fov
 	to_chat(src, "<span class='notice'>I [zoomed ? "look" : "stop looking"] at the distance.</span>")
 
 /mob/living/carbon/on_examine_atom(atom/examined)
