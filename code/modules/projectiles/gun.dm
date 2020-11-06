@@ -523,7 +523,7 @@
 			w_class -= S.w_class
 			suppressed = null
 			suppressed_overlay = null
-			update_overlays()
+			update_icon()
 			return TRUE
 		else if(gun_light && can_unflashlight)
 			var/obj/item/flashlight/seclite/S = gun_light
@@ -533,7 +533,7 @@
 			update_gunlight(user)
 			S.update_brightness(user)
 			QDEL_NULL(alight)
-			update_overlays()
+			update_icon()
 			return TRUE
 		else if(bayonet && can_unbayonet)
 			var/obj/item/kitchen/knife/K = bayonet
@@ -541,14 +541,14 @@
 			user.put_in_hands(K)
 			bayonet = null
 			knife_overlay = null
-			update_overlays()
+			update_icon()
 			return TRUE
 		else if(sling && can_unsling)
 			var/obj/item/slong = sling
 			to_chat(user, "<span class='notice'>You rip \the [slong] from \the [src].</span>")
 			QDEL_NULL(sling)
 			sling_overlay = null
-			update_overlays()
+			update_icon()
 			return TRUE
 
 /obj/item/gun/attack_obj(obj/O, mob/user)
