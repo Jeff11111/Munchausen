@@ -295,7 +295,6 @@
 
 /*
 	Middle click
-	Only used for swapping hands
 */
 /mob/proc/MiddleClickOn(atom/A, params)
 	var/list/modifiers = params2list(params)
@@ -326,11 +325,13 @@
 
 	//These are always reachable.
 	//User itself, current loc, and user inventory
-	else if(W && (A in DirectAccess()))
-		if(W.middleclick_melee_attack_chain(src, A, params))
-			return
-	else if(!W)
-		A.middle_attack_hand(src)
+	else if(A in DirectAccess())
+		if(W)
+			if(W.middleclick_melee_attack_chain(src, A, params))
+				return
+		else
+			if(A.middle_attack_hand(src))
+				return
 
 /mob/living/carbon/MiddleClickOn(atom/A, params)
 	var/list/modifiers = params2list(params)
@@ -361,9 +362,13 @@
 
 	//These are always reachable.
 	//User itself, current loc, and user inventory
-	else if((A in DirectAccess()) && W)
-		if(W.middleclick_melee_attack_chain(src, A, params))
-			return
+	else if(A in DirectAccess())
+		if(W)
+			if(W.middleclick_melee_attack_chain(src, A, params))
+				return
+		else
+			if(A.middle_attack_hand(src))
+				return
 	
 	if(!stat && mind && iscarbon(A) && A != src)
 		var/datum/antagonist/changeling/C = mind.has_antag_datum(/datum/antagonist/changeling)
