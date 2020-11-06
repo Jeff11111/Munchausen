@@ -1,8 +1,8 @@
 //improvised explosives//
 
 /obj/item/grenade/iedcasing
-	name = "improvised firebomb"
-	desc = "A weak, improvised incendiary device."
+	name = "pipebomb"
+	desc = "A weak, improvised incendiary device. Suited for storage in mailboxes."
 	w_class = WEIGHT_CLASS_SMALL
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "improvised_grenade"
@@ -29,7 +29,7 @@
 		range = 1
 		det_time = rand(30,80)
 	else
-		range = pick(2,2,2,3,3,3,4)
+		range = pick(2,3,4)
 
 /obj/item/grenade/iedcasing/CheckParts(list/parts_list)
 	..()
@@ -42,7 +42,6 @@
 		can_underlay.plane = FLOAT_PLANE
 		underlays += can_underlay
 
-
 /obj/item/grenade/iedcasing/attack_self(mob/user)
 	if(!active)
 		if(!botch_check(user))
@@ -53,7 +52,7 @@
 /obj/item/grenade/iedcasing/prime(mob/living/lanced_by) //Blowing that can up
 	. = ..()
 	update_mob()
-	explosion(src.loc,-1,-1,2, flame_range = 4)	// small explosion, plus a very large fireball.
+	explosion(src.loc,-1, 0, range, flame_range = (range+2)) //Small explosion, plus a large fireball.
 	qdel(src)
 
 /obj/item/grenade/iedcasing/examine(mob/user)

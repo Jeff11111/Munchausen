@@ -242,11 +242,9 @@ GLOBAL_LIST_EMPTY(crematoriums)
 		return //don't let you cremate something twice or w/e
 	// Make sure we don't delete the actual morgue and its tray
 	var/list/conts = GetAllContents() - src - connected
-
 	if(!conts.len)
 		audible_message("<span class='italics'>You hear a hollow crackle.</span>")
 		return
-
 	else
 		audible_message("<span class='italics'>You hear a roar as the crematorium activates.</span>")
 
@@ -254,16 +252,27 @@ GLOBAL_LIST_EMPTY(crematoriums)
 		update_icon()
 
 		for(var/mob/living/M in conts)
-			if (M.stat != DEAD)
-				M.emote("scream")
+			if(M.stat != DEAD)
+				M.agony_scream()
 			if(user)
 				log_combat(user, M, "cremated")
 			else
 				M.log_message("was cremated", LOG_ATTACK)
 
-			M.death(1)
-			if(M) //some animals get automatically deleted on death.
+			//Send back to lobby if they have a mind
+			if(M.mind)
+				var/mob/dead/new_player/NP = new()
+				M.transfer_ckey(NP)
+			else
 				M.ghostize()
+			
+			//Good mood event for those who watched
+			for(var/mob/living/L in view(src))
+				SEND_SIGNAL(L, COMSIG_ADD_MOOD_EVENT, "cremated", /datum/mood_event/cremated)
+			
+			//kill and chill
+			M.death(TRUE)
+			if(M) //some animals get automatically deleted on death.
 				qdel(M)
 
 		for(var/obj/O in conts) //conts defined above, ignores crematorium and tray

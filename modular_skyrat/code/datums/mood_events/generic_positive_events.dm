@@ -7,16 +7,13 @@
 //Hydration
 /datum/mood_event/wellhydrated
 	description = "<span class='nicegreen'>I'm gonna burst!</span>\n"
-	mood_change = 6
+	mood_change = 4
 
 /datum/mood_event/hydrated
 	description = "<span class='nicegreen'>I have recently had some water.</span>\n"
-	mood_change = 3
+	mood_change = 2
 
-/datum/mood_event/thirsty
-	description = "<span class='warning'>I'm getting a bit thirsty.</span>\n"
-	mood_change = -8
-
-/datum/mood_event/dehydrated
-	description = "<span class='boldwarning'>I'm dehydrated!</span>\n"
-	mood_change = -15
+//Cremation
+/datum/mood_event/cremated
+	description = "<span class='nicegreen'>Not everyone can be saved. At least they have been put to rest.</span>\n"
+	mood_change = 2
