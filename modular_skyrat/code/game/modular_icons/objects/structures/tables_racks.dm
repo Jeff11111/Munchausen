@@ -55,15 +55,16 @@
 	name = "titanium low wall"
 	buildstackamount = 4
 	max_integrity = 100
-	color = "#c7c7c7"
 	low_type = /obj/structure/table/low_wall/titanium
+	icon = 'modular_skyrat/icons/eris/obj/smooth_structures/titanium_low_wall.dmi'
 
 /obj/structure/table/low_wall/plastitanium
 	name = "plastitanium low wall"
 	buildstackamount = 4
 	max_integrity = 120
-	color = "#555555"
+	color = "#6e6e6e"
 	low_type = /obj/structure/table/low_wall/plastitanium
+	icon = 'modular_skyrat/icons/eris/obj/smooth_structures/titanium_low_wall.dmi'
 
 /obj/structure/table/low_wall/Initialize(mapload, direct)
 	. = ..()

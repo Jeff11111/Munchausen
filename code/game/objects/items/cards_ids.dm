@@ -278,7 +278,7 @@
 		to_chat(user, "<span class='warning'>[src] doesn't have a linked account to deposit into!</span>")
 		return FALSE
 
-	if (!money || !money.len)
+	if(!money || !money.len)
 		return FALSE
 
 	var/total = 0
@@ -340,19 +340,21 @@
 
 /obj/item/card/id/AltClick(mob/living/user)
 	. = ..()
-	if(!can_withdraw || !bank_support || !alt_click_can_use_id(user))
+	if(!bank_support || !alt_click_can_use_id(user))
 		return
 
 	if(!registered_account && bank_support == ID_FREE_BANK_ACCOUNT)
 		set_new_account(user)
 		return
-
-	if (world.time < registered_account.withdrawDelay)
+	
+	if(!can_withdraw)
+		return
+	
+	if(world.time < registered_account.withdrawDelay)
 		registered_account.bank_card_talk("<span class='warning'>ERROR: UNABLE TO LOGIN DUE TO SCHEDULED MAINTENANCE. MAINTENANCE IS SCHEDULED TO COMPLETE IN [(registered_account.withdrawDelay - world.time)/10] SECONDS.</span>", TRUE)
 		return
 
 	var/amount_to_remove =  input(user, "How much do you want to withdraw? Current Balance: [registered_account.account_balance]", "Withdraw Funds", 5) as num|null
-
 	if(!amount_to_remove || amount_to_remove < 0)
 		return
 	if(!alt_click_can_use_id(user))
