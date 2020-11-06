@@ -51,7 +51,7 @@
 		//to say a cringe word at the end (or nigger)
 		var/list/cringe = list("nigger")
 		cringe |= GLOB.in_character_filter
-		var/message = "Penis guacamole"
+		var/message = "Penis guacamole!"
 		if(!length(possible_messages) || prob(speak_chance))
 			for(var/mob/living/L in GLOB.mob_living_list)
 				var/log_source = L.logging
