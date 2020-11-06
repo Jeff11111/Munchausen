@@ -512,7 +512,7 @@
 
 /obj/item/gun/middle_attack_hand(mob/user)
 	. = ..()
-	if(src in list(user.get_active_held_item(), user.get_inactive_held_item()))
+	if(src in user.held_items)
 		if(!user.is_holding(src))
 			return ..()
 		else if(suppressed && can_unsuppress)
