@@ -35,3 +35,5 @@ GLOBAL_VAR(holy_weapon_type)
 GLOBAL_VAR(holy_armor_type)
 
 GLOBAL_VAR_INIT(internal_tick_usage, 0.2 * world.tick_lag)
+
+GLOBAL_LIST_INIT(roundstart_messages, world.file2list('config/roundstart_messages.txt'))
