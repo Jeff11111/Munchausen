@@ -1,3 +1,6 @@
+## Comment to deactivate the aspects system
+#ASPECTS
+
 ## Uncomment to prevent young accounts from connecting unless they're admins or allowed through bunker
 AGE_LOCK
 

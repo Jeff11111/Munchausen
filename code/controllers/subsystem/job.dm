@@ -476,12 +476,6 @@ SUBSYSTEM_DEF(job)
 
 		SSpersistence.antag_rep_change[M.client.ckey] += job.GetAntagRep()
 
-/*		if(M.client.holder)
-			if(CONFIG_GET(flag/auto_deadmin_players) || (M.client.prefs?.toggles & DEADMIN_ALWAYS))
-				M.client.holder.auto_deadmin()
-			else
-				handle_auto_deadmin_roles(M.client, rank) */
-
 	//Skyrat changes
 	var/display_rank = rank
 	if(M.client && M.client.prefs && M.client.prefs.alt_titles_preferences[rank])
@@ -511,7 +505,8 @@ SUBSYSTEM_DEF(job)
 			equip_loadout(N, H) // CIT CHANGE - allows players to spawn with loadout items
 		job.after_spawn(H, M, joined_late) // note: this happens before the mob has a key! M will always have a client, H might not.
 		equip_loadout(N, H, TRUE)//CIT CHANGE - makes players spawn with in-backpack loadout items properly. A little hacky but it works
-
+	if(SSaspects.chosen_aspect)
+		SSaspects.chosen_aspect.post_equip(H, M.client, joined_late)
 	return H
 /*
 /datum/controller/subsystem/job/proc/handle_auto_deadmin_roles(client/C, rank)

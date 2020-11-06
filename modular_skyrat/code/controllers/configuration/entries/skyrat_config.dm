@@ -40,3 +40,5 @@
 		config.punctuation_filter = regex(@"([\.|\?|,|!|;|\*])", "i")
 
 	return GLOB.in_character_filter
+
+/datum/config_entry/flag/aspects

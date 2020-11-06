@@ -327,7 +327,10 @@ SUBSYSTEM_DEF(ticker)
 		for(var/holidayname in SSevents.holidays)
 			var/datum/holiday/holiday = SSevents.holidays[holidayname]
 			to_chat(world, "<h4>[holiday.greet()]</h4>")
-
+	
+	if(SSaspects.chosen_aspect)
+		SSaspects.chosen_aspect.on_roundstart()
+	
 	PostSetup()
 	SSshuttle.realtimeofstart = world.realtime
 
