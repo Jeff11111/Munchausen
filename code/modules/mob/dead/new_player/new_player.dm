@@ -37,7 +37,7 @@
 	var/output = "<center><p>Welcome, <b>[client ? client.prefs.real_name : "Unknown User"]</b></p>"
 	output += "<center><p><a href='byond://?src=[REF(src)];show_preferences=1'>Setup Character</a></p>"
 	if(CONFIG_GET(flag/roundstart_traits))
-		output += "Be special: <a href='?_src_=prefs;preference=trait'>[client?.prefs?.special_char ? "Yes" : "No"]</a><br></center>"
+		output += "<b>Be special:</b> <a href='?_src_=prefs;preference=trait'>[client?.prefs?.special_char ? "Yes" : "No"]</a><br></center>"
 	if(SSticker.current_state <= GAME_STATE_PREGAME)
 		switch(ready)
 			if(PLAYER_NOT_READY)
