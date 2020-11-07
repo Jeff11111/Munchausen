@@ -70,8 +70,8 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 			var/mob/living/carbon/human/person = pick(people)
 			var/list/dreamer_radio = GLOB.dreamer_radio.Copy()
 			for(var/chungus in dreamer_radio)
-				chungus = replacetext(chungus, "SRC", "[src.real_name]")
-				chungus = replacetext(chungus, "CAPITALIZESRC", "[capitalize(src.real_name)]")
+				chungus = replacetext_char(chungus, "SRC", "[src.real_name]")
+				chungus = replacetext_char(chungus, "CAPITALIZESRC", "[capitalize(src.real_name)]")
 			dreamer_radio |= last_pain_message
 			dreamer_radio |= last_words
 			var/speak = pick(dreamer_radio)
@@ -89,8 +89,8 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 			clientkey = cliente.key
 		var/list/ooc_visions = GLOB.dreamer_ooc.Copy()
 		for(var/chungus in ooc_visions)
-			chungus = replacetext(chungus, "SRC", "[src.real_name]")
-			chungus = replacetext(chungus, "CAPITALIZESRC", "[capitalize(src.real_name)]")
+			chungus = replacetext_char(chungus, "SRC", "[src.real_name]")
+			chungus = replacetext_char(chungus, "CAPITALIZESRC", "[capitalize(src.real_name)]")
 		ooc_visions |= last_pain_message
 		ooc_visions |= last_words
 		var/message = pick(ooc_visions)

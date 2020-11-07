@@ -8,7 +8,7 @@
 	Base definition
 */
 /datum/wound/blunt
-	sound_effect = 'modular_skyrat/sound/gore/trauma1.ogg'
+	sound_effect = 'modular_skyrat/sound/gore/crack1.ogg'
 	wound_type = WOUND_LIST_BLUNT
 
 	associated_alerts = list()
@@ -723,7 +723,7 @@
 	viable_zones = ALL_BODYPARTS
 	interaction_efficiency_penalty = 2
 	limp_slowdown = 6
-	sound_effect = 'modular_skyrat/sound/gore/crack1.ogg'
+	sound_effect = 'modular_skyrat/sound/gore/crack2.ogg'
 	threshold_minimum = 60
 	threshold_penalty = 30
 	treatable_by = list(/obj/item/stack/sticky_tape/surgical, /obj/item/stack/medical/bone_gel)
@@ -748,7 +748,7 @@
 	viable_zones = ALL_BODYPARTS
 	interaction_efficiency_penalty = 4
 	limp_slowdown = 9
-	sound_effect = 'modular_skyrat/sound/gore/crack2.ogg'
+	sound_effect = 'modular_skyrat/sound/gore/crack3.ogg'
 	threshold_minimum = 115
 	threshold_penalty = 50
 	disabling = TRUE
