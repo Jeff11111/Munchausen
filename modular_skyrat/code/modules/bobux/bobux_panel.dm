@@ -40,7 +40,7 @@
 		<a href='?src=[REF(src)];bobux=remove'>Remove</a>\
 		<B>Bobux rewards bought:</B> [english_list(bobux_rewards, "Nothing", ", ")].</B>"
 		)
-	var/datum/browser/panel = new(usr, "bobuxpanel", "", 500, 400)
+	var/datum/browser/panel = new(usr, "bobuxpanel", "", 300, 400)
 	panel.set_content(out.Join())
 	panel.open()
 	return
