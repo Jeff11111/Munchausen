@@ -1912,6 +1912,7 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 	else if(href_list["preference"] == "trait")
 		special_char = !special_char
 		to_chat(user, "Your character [special_char ? "will " : "won't"] be special.")
+		save_character()
 		ShowChoices(user)
 		return TRUE
 	//SKYRAT CHANGE - food prefs and language pref
