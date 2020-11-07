@@ -479,9 +479,6 @@
 				to_chat(user, "<span class = 'warning'>Their pants are in the way.</span>")
 			return FALSE
 
-		if(require_ooc_consent)
-			if(target.client && target.client.prefs.toggles & VERB_CONSENT)
-				return TRUE
 		return FALSE
 	return FALSE
 

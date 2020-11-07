@@ -199,13 +199,6 @@
 	var/temp = getBruteLoss() //no need to calculate each of these twice
 
 	var/list/msg = list()
-
-	if(client && client.prefs) // Skyrat Change
-		if(client.prefs.toggles & VERB_CONSENT) // Skyrat Change
-			. += "[t_His] player has allowed lewd verbs.\n" // Skyrat Change
-		else // Skyrat Change
-			. += "[t_His] player has not allowed lewd verbs.\n" // Skyrat Change
-
 	var/list/missing = ALL_BODYPARTS
 	var/list/disabled = list()
 	if(!screwy_self)
