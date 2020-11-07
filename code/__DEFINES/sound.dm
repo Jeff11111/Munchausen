@@ -32,9 +32,9 @@
 
 //Ambience types
 
-#define GENERIC list('modular_skyrat/sound/ambience/menu_orbital1.ogg','modular_skyrat/sound/ambience/happy_temple.ogg',\
-					'modular_skyrat/sound/ambience/ambi2.ogg','modular_skyrat/sound/ambience/menu5.ogg',\
-					'modular_skyrat/sound/ambience/ravenheart1.ogg','modular_skyrat/sound/ambience/ravenheart2.ogg',\
+#define GENERIC list('modular_skyrat/sound/ambience/bobambience/menu_orbital1.ogg','modular_skyrat/sound/ambience/bobambience/happy_temple.ogg',\
+					'modular_skyrat/sound/ambience/bobambience/ambi2.ogg','modular_skyrat/sound/ambience/bobambience/menu5.ogg',\
+					'modular_skyrat/sound/ambience/bobambience/ravenheart1.ogg','modular_skyrat/sound/ambience/bobambience/ravenheart2.ogg',\
 					'sound/ambience/ambigen1.ogg','sound/ambience/ambigen3.ogg',\
 					'sound/ambience/ambigen4.ogg','sound/ambience/ambigen5.ogg',\
 					'sound/ambience/ambigen6.ogg','sound/ambience/ambigen7.ogg',\
@@ -43,46 +43,46 @@
 					'sound/ambience/ambigen12.ogg','sound/ambience/ambigen14.ogg',\
 					'sound/ambience/ambigen15.ogg')
 
-#define HOLY list('modular_skyrat/sound/ambience/sherold.ogg','modular_skyrat/sound/ambience/holy1.ogg',\
-				'modular_skyrat/sound/ambience/holy2.ogg', 'modular_skyrat/sound/ambience/holy3.ogg',\
+#define HOLY list('modular_skyrat/sound/ambience/bobambience/sherold.ogg','modular_skyrat/sound/ambience/bobambience/holy1.ogg',\
+				'modular_skyrat/sound/ambience/bobambience/holy2.ogg', 'modular_skyrat/sound/ambience/bobambience/holy3.ogg',\
 				'sound/ambience/ambiholy2.ogg','sound/ambience/ambiholy3.ogg',\
 				)
 
-#define HIGHSEC list('modular_skyrat/sound/ambience/highsec1.ogg','modular_skyrat/sound/ambience/highsec2.ogg',\
+#define HIGHSEC list('modular_skyrat/sound/ambience/bobambience/highsec1.ogg','modular_skyrat/sound/ambience/bobambience/highsec2.ogg',\
 					'sound/ambience/ambidanger.ogg', 'sound/ambience/ambidanger2.ogg')
 
-#define RUINS list('modular_skyrat/sound/ambience/ruins1.ogg','modular_skyrat/sound/ambience/ruins2.ogg',\
-				'modular_skyrat/sound/ambience/ruins3.ogg','modular_skyrat/sound/ambience/ruins4.ogg',\
+#define RUINS list('modular_skyrat/sound/ambience/bobambience/ruins1.ogg','modular_skyrat/sound/ambience/bobambience/ruins2.ogg',\
+				'modular_skyrat/sound/ambience/bobambience/ruins3.ogg','modular_skyrat/sound/ambience/bobambience/ruins4.ogg',\
 				'sound/ambience/ambiruin2.ogg',  'sound/ambience/ambiruin3.ogg',  'sound/ambience/ambiruin4.ogg',\
 				'sound/ambience/ambiruin5.ogg',  'sound/ambience/ambiruin6.ogg',  'sound/ambience/ambiruin7.ogg',\
 				'sound/ambience/ambidanger.ogg', 'sound/ambience/ambidanger2.ogg', 'sound/ambience/ambitech3.ogg',\
 				'sound/ambience/ambimystery.ogg', 'sound/ambience/ambimaint1.ogg')
 
-#define ENGINEERING list('modular_skyrat/sound/ambience/engi1.ogg','modular_skyrat/sound/ambience/wanderlust.ogg',\
+#define ENGINEERING list('modular_skyrat/sound/ambience/bobambience/engi1.ogg','modular_skyrat/sound/ambience/bobambience/wanderlust.ogg',\
 				'sound/ambience/ambisin2.ogg','sound/ambience/ambisin3.ogg',\
 				'sound/ambience/ambisin4.ogg', 'sound/ambience/ambiatmos.ogg',\
 				'sound/ambience/ambiatmos2.ogg', 'sound/ambience/ambitech.ogg',\
 				'sound/ambience/ambitech2.ogg', 'sound/ambience/ambitech3.ogg',\
 				)
 
-#define MINING list('modular_skyrat/sound/ambience/to_hell.ogg', 'modular_skyrat/sound/ambience/cave1.ogg',\
-					'modular_skyrat/sound/ambience/cave2.ogg', 'modular_skyrat/sound/ambience/cave3.ogg',\
+#define MINING list('modular_skyrat/sound/ambience/bobambience/to_hell.ogg', 'modular_skyrat/sound/ambience/bobambience/cave1.ogg',\
+					'modular_skyrat/sound/ambience/bobambience/cave2.ogg', 'modular_skyrat/sound/ambience/bobambience/cave3.ogg',\
 					'sound/ambience/ambiruin2.ogg',  'sound/ambience/ambiruin3.ogg',  'sound/ambience/ambiruin4.ogg',\
 					'sound/ambience/ambiruin5.ogg',  'sound/ambience/ambiruin6.ogg',  'sound/ambience/ambiruin7.ogg',\
 					'sound/ambience/ambidanger.ogg', 'sound/ambience/ambidanger2.ogg', 'sound/ambience/ambimaint1.ogg', 'sound/ambience/ambilava.ogg')
 
-#define MEDICAL list('sound/ambience/ambinice.ogg', 'modular_skyrat/sound/ambience/good_ending.ogg', 'modular_skyrat/sound/ambience/medical1.ogg')
+#define MEDICAL list('sound/ambience/ambinice.ogg', 'modular_skyrat/sound/ambience/bobambience/good_ending.ogg', 'modular_skyrat/sound/ambience/bobambience/medical1.ogg')
 
 #define SPOOKY list('sound/ambience/ambimo1.ogg','sound/ambience/ambimo2.ogg',\
 					'sound/ambience/ambiruin7.ogg','sound/ambience/ambiruin6.ogg',\
 					'sound/ambience/ambiodd.ogg', 'sound/ambience/ambimystery.ogg')
 
-#define SPACE list('modular_skyrat/sound/ambience/space1.ogg', 'modular_skyrat/sound/ambience/space2.ogg',\
+#define SPACE list('modular_skyrat/sound/ambience/bobambience/space1.ogg', 'modular_skyrat/sound/ambience/bobambience/space2.ogg',\
 				'sound/ambience/ambispace.ogg', 'sound/ambience/ambispace2.ogg',\
 				'sound/ambience/title2.ogg', 'sound/ambience/ambiatmos.ogg')
 
-#define MAINTENANCE list('modular_skyrat/sound/ambience/maint1.ogg', 'modular_skyrat/sound/ambience/maint2.ogg',\
-					'modular_skyrat/sound/ambience/maint3.ogg',\
+#define MAINTENANCE list('modular_skyrat/sound/ambience/bobambience/maint1.ogg', 'modular_skyrat/sound/ambience/bobambience/maint2.ogg',\
+					'modular_skyrat/sound/ambience/bobambience/maint3.ogg',\
 					'sound/ambience/ambimaint1.ogg', 'sound/ambience/ambimaint2.ogg',\
 					'sound/ambience/ambimaint3.ogg', 'sound/ambience/ambimaint4.ogg',\
 					'sound/ambience/ambimaint5.ogg', 'sound/voice/lowHiss2.ogg',\
