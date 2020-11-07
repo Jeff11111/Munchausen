@@ -245,7 +245,7 @@
 		if(severity > WOUND_SEVERITY_MODERATE)
 			msg = "<b>[msg]</b>"
 			vis_dist = DEFAULT_MESSAGE_RANGE
-		victim.visible_message(msg,  "<span class='userdanger'>Your [limb.name] [occur_text]!</span>"), vision_distance = vis_dist)
+		victim.visible_message(msg,  "<span class='userdanger'>Your [limb.name] [occur_text]!</span>", vision_distance = vis_dist)
 		if(sound_effect)
 			playsound(L.owner, sound_effect, 60 + 20 * severity, TRUE)
 		if(do_sound_hint)
