@@ -489,12 +489,12 @@
 				switch(crit)
 					if(1)
 						if(user != src)
-							wound_message += " <b>CRITICAL FAILURE!</b> [user] knock[user.p_s()] [p_themselves()] down!"
+							wound_message += " <b>CRITICAL FAILURE!</b> [user] knock[user.p_s()] [user.p_themselves()] down!"
 							user.drop_all_held_items()
 							user.DefaultCombatKnockdown(3 SECONDS)
 					if(2)
 						if(user != src)
-							wound_message += " <b>CRITICAL FAILURE!</b> [user] hit[user.p_s()] [p_themselves()]!"
+							wound_message += " <b>CRITICAL FAILURE!</b> [user] hit[user.p_s()] [user.p_themselves()]!"
 							if(weapon)
 								weapon.melee_attack_chain(user, user)
 							else
