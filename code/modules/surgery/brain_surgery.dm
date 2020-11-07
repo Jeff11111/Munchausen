@@ -46,7 +46,7 @@
 	display_results(user, target, "<span class='notice'>You succeed in fixing [target]'s brain.</span>",
 		"[user] successfully fixes [target]'s brain!",
 		"[user] completes the surgery step on [target]'s brain.")
-	var/datum/surgery/healing/the_surgery = surgery
+	var/datum/surgery/fix_brain/the_surgery = surgery
 	the_surgery.antispam = TRUE
 	return TRUE
 
@@ -59,4 +59,6 @@
 		target.gain_trauma_type(BRAIN_TRAUMA_SEVERE, TRAUMA_RESILIENCE_LOBOTOMY)
 	else
 		user.visible_message("<span class='warning'>[user] suddenly notices that the brain [user.p_they()] [user.p_were()] working on is not there anymore.", "<span class='warning'>You suddenly notice that the brain you were working on is not there anymore.</span>")
-	return FALSE
+	var/datum/surgery/fix_brain/the_surgery = surgery
+	the_surgery.antispam = TRUE
+	return TRUE
