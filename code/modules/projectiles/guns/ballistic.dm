@@ -129,6 +129,7 @@
 			else
 				playsound(src, "gun_remove_empty_magazine", 70, 1)
 			magazine = null
+			update_icon()
 			to_chat(user, "<span class='notice'>I pull the magazine out of \the [src].</span>")
 
 /obj/item/gun/ballistic/examine(mob/user)
