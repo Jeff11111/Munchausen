@@ -66,11 +66,6 @@
 	new_objective.forge_objective()
 	objectives += new_objective
 
-	if(!(locate(/datum/objective/escape) in objectives))
-		var/datum/objective/escape/escape_objective = new
-		escape_objective.owner = owner
-		objectives += escape_objective
-
 /datum/antagonist/wizard/on_removal()
 	unregister()
 	owner.RemoveAllSpells() // TODO keep track which spells are wizard spells which innate stuff
