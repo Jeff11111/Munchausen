@@ -196,12 +196,6 @@
 	M.overlay_fullscreen("wakeup", /obj/screen/fullscreen/dreaming/waking_up, 1)
 	M.hud_used?.dreamer?.waking_up = TRUE
 
-/datum/antagonist/dreamer/on_removal()
-	. = ..()
-	agony(owner.current)
-	spawn(40)
-		cant_wake_up()
-
 /datum/antagonist/dreamer/Destroy()
 	. = ..()
 	if(owner?.current)
