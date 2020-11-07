@@ -96,7 +96,10 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 			//A body! Let's copy their appearance.
 			icon_state = ""
 			var/mob/living/living_body = body
-			body_appearance = copy_appearance(living_body.appearance)
+			if(iscarbon(body))
+				body_appearance = copy_appearance(living_body.appearance)
+			else
+				body_appearance = living_body.appearance
 			appearance = body_appearance
 		else
 			//No body, try to copy their prefs later
