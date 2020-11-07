@@ -139,19 +139,15 @@
 	RegisterSignal(src, COMSIG_TWOHANDED_WIELD, .proc/on_wield)
 	RegisterSignal(src, COMSIG_TWOHANDED_UNWIELD, .proc/on_unwield)
 
-/obj/item/gun/proc/on_wield()
+/obj/item/gun/proc/on_wield(mob/living/carbon/user)
 	is_wielded = TRUE
 	update_icon()
-	if(ismob(loc))
-		var/mob/living/M = loc
-		M.update_inv_hands()
+	user.update_inv_hands()
 
-/obj/item/gun/proc/on_unwield()
+/obj/item/gun/proc/on_unwield(mob/living/carbon/user)
 	is_wielded = FALSE
 	update_icon()
-	if(ismob(loc))
-		var/mob/living/M = loc
-		M.update_inv_hands()
+	user.update_inv_hands()
 
 /obj/item/gun/verb/safety_toggle()
 	set name = "Toggle Safety"
