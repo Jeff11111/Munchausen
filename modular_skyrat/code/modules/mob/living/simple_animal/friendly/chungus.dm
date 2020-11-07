@@ -37,7 +37,7 @@
 		'modular_skyrat/sound/cultiste/cultiste_rire_6.ogg',
 	)
 	var/list/possible_messages = list()
-	speak_chance = 5
+	speak_chance = 10
 
 //client controlled xom can forcefully shitpost
 /mob/living/simple_animal/pet/chungus/xom/verb/say_something_funny()
