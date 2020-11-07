@@ -374,9 +374,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 
 			dat += "<center><h2>Occupation Choices</h2>"
 			dat += "<a href='?_src_=prefs;preference=job;task=menu'>Set Occupation Preferences</a><br></center>"
-			if(CONFIG_GET(flag/roundstart_traits))
-				dat += "<center><h2>Be Special</h2>"
-				dat += "<a href='?_src_=prefs;preference=trait'>[special_char ? "Yes" : "No"]</a><br></center>"
 			//Skyrat edit - food preferences
 			dat += "<center><h2>Food Setup</h2>"
 			dat += "<a href='?_src_=prefs;preference=food;task=menu'>Configure Foods</a></center>"
