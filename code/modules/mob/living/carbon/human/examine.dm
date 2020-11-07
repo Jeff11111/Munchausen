@@ -654,7 +654,6 @@
 		. += "<span class='info'><b>Traits:</b> [traitstring]</span>"
 
 	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .) //This also handles flavor texts now
-	var/invisible_man = skipface || get_visible_name() == "Unknown" // SKYRAT EDIT -- BEGIN
 	//SKYRAT EDIT - admin lookup on records/extra flavor
 	if(client)
 		var/list/line = list()
