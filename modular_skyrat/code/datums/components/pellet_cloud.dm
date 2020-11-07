@@ -234,7 +234,6 @@
 /datum/component/pellet_cloud/proc/finalize()
 	var/obj/item/projectile/P = projectile_type
 	var/proj_name = initial(P.name)
-
 	for(var/atom/target in targets_hit)
 		var/num_hits = targets_hit[target]
 		UnregisterSignal(target, COMSIG_PARENT_QDELETING)
@@ -244,19 +243,18 @@
 			hit_part = target
 			target = hit_part.owner
 			if(initial(P.damtype) != BURN)
-				hit_part.painless_wound_roll(initial(P.sharpness), damage_dealt, initial(P.wound_bonus), initial(P.bare_wound_bonus))
+				hit_part.painless_wound_roll(initial(P.sharpness), damage_dealt, initial(P.wound_bonus), initial(P.bare_wound_bonus), silent = TRUE)
+		var/wound_message = ""
+		if(iscarbon(target))
+			var/mob/living/carbon/C = target
+			wound_message = C.wound_message
+			C.wound_message = ""
 		if(num_hits > 1)
-			target.visible_message("<span class='danger'>[target] is hit by [num_hits] [proj_name]s[hit_part ? " in the [hit_part.name]" : ""]!</span>", null, null, COMBAT_MESSAGE_RANGE, target)
-			to_chat(target, "<span class='userdanger'>You're hit by [num_hits] [proj_name]s[hit_part ? " in the [hit_part.name]" : ""]!</span>")
+			target.visible_message("<span class='danger'>[target] is hit by [num_hits] [proj_name]s[hit_part ? " in the [hit_part.name]" : ""]![wound_message]</span>", null, null, COMBAT_MESSAGE_RANGE, target)
+			to_chat(target, "<span class='userdanger'>You're hit by [num_hits] [proj_name]s[hit_part ? " in the [hit_part.name]" : ""]![wound_message]</span>")
 		else
-			target.visible_message("<span class='danger'>[target] is hit by a [proj_name][hit_part ? " in the [hit_part.name]" : ""]!</span>", null, null, COMBAT_MESSAGE_RANGE, target)
-			to_chat(target, "<span class='userdanger'>You're hit by a [proj_name][hit_part ? " in the [hit_part.name]" : ""]!</span>")
-	/*
-	for(var/M in purple_hearts)
-		var/mob/living/martyr = M
-		if(martyr.stat == DEAD && martyr.client)
-			martyr.client.give_award(/datum/award/achievement/misc/lookoutsir, martyr)
-	*/
+			target.visible_message("<span class='danger'>[target] is hit by a [proj_name][hit_part ? " in the [hit_part.name]" : ""]![wound_message]</span>", null, null, COMBAT_MESSAGE_RANGE, target)
+			to_chat(target, "<span class='userdanger'>You're hit by a [proj_name][hit_part ? " in the [hit_part.name]" : ""]![wound_message]</span>")
 	UnregisterSignal(parent, COMSIG_PARENT_PREQDELETED)
 	if(queued_delete)
 		qdel(parent)
