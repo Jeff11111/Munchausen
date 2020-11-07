@@ -673,12 +673,17 @@ SUBSYSTEM_DEF(job)
 	var/area/shuttle/arrival/A = GLOB.areas_by_type[/area/shuttle/arrival]
 	if(A)
 		//first check if we can find a cryopod
-		var/obj/machinery/cryopod/C = locate() in A
+		var/list/pods = list()
+		for(var/obj/machinery/cryopod/cryopod in A)
+			pods |= cryopod
+		var/obj/machinery/cryopod/C
+		if(length(pods))
+			C = pick_n_take(pods)
 		var/cumcount = 0
 		while(!C || C.occupant || C.state_open)
-			if(cumcount >= 30)
+			if((cumcount >= 30) || !length(pods))
 				break
-			C = locate() in A
+			C = pick_n_take(pods)
 			cumcount++
 		if(C)
 			C.JoinPlayerHere(M, buckle)
