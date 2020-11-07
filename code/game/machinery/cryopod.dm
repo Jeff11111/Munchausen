@@ -163,7 +163,7 @@
 //Cryopods themselves.
 /obj/machinery/cryopod
 	name = "cryogenic freezer"
-	desc = "Suited for Cyborgs and Humanoids, the pod is a safe place for personnel affected by the Space Sleep Disorder to get some rest."
+	desc = "Suited for most humanoids, the pod is a safe place for personnel to be retracted until they are needed again."
 	icon = 'modular_skyrat/icons/obj/machines/cryopod.dmi'
 	icon_state = "cryochamber"
 	density = TRUE
