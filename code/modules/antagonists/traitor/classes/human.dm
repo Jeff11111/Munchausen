@@ -74,7 +74,6 @@
 		else  // cum. not counting download: 40%
 			var/datum/objective/hijack/hijack = new
 			hijack.owner = T.owner
-			hijack.forge_objective()
 			T.add_objective(hijack)
 
 /datum/traitor_class/human/greet(datum/antagonist/traitor/T)

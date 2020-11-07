@@ -63,7 +63,6 @@
 /datum/antagonist/wizard/proc/create_objectives()
 	var/datum/objective/hijack/new_objective = new
 	new_objective.owner = owner
-	new_objective.forge_objective()
 	objectives += new_objective
 
 /datum/antagonist/wizard/on_removal()
