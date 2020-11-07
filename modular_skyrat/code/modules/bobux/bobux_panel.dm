@@ -37,7 +37,7 @@
 		<B>Bobux amount:</B> [prefs.bobux_amount ? prefs.bobux_amount : "No Bobux"]<br>\
 		<a href='?src=[REF(src)];bobux=set'>Set</a> \
 		<a href='?src=[REF(src)];bobux=add'>Add</a> \
-		<a href='?src=[REF(src)];bobux=remove'>Remove</a>\
+		<a href='?src=[REF(src)];bobux=remove'>Remove</a><br>\
 		<B>Bobux rewards bought:</B> [english_list(bobux_rewards, "Nothing", ", ")].</B>"
 		)
 	var/datum/browser/panel = new(usr, "bobuxpanel", "", 300, 400)

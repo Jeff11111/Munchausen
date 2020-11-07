@@ -1515,17 +1515,17 @@ GLOBAL_LIST(objective_choices)
 		var/datum/preferences/prefs = current?.client?.prefs
 		var/type = href_list["bobux"]
 		switch(type)
-			if("Add")
+			if("add")
 				var/choice = abs(input(usr, "How much to add?", "Infinite Bobux", 0) as num)
 				if(choice)
 					var/secondchoice = input(usr, "Display a message to the target?") as text|null
 					prefs.adjust_bobux(choice, (secondchoice ? "<span class='bobux'>[secondchoice]</span>" : null))
-			if("Remove")
+			if("remove")
 				var/choice = -abs(input(usr, "How much to remove?", "No Bobux", 0) as num)
 				if(choice)
 					var/secondchoice = input(usr, "Display a message to the target?") as text|null
 					prefs.adjust_bobux(choice, (secondchoice ? "<span class='bobux'>[secondchoice]</span>" : null))
-			if("Set")
+			if("set")
 				var/choice =  input(usr, "How much to set?", "All Bobux", 0) as num
 				if(choice)
 					var/secondchoice = input(usr, "Display a message to the target?") as text|null
