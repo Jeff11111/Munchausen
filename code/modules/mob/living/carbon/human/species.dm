@@ -1329,12 +1329,12 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				return TRUE
 			return FALSE
 		if(SLOT_S_STORE)
+			var/obj/item/gun/G = I
 			if(HAS_TRAIT(I, TRAIT_NODROP))
 				return FALSE
 			if(H.s_store)
 				return FALSE
 			if(!H.wear_suit)
-				var/obj/item/gun/G = I
 				if(!istype(G))
 					if(!disable_warning)
 						to_chat(H, "<span class='warning'>You need a suit before you can attach this [I.name]!</span>")
