@@ -284,7 +284,7 @@
 			user.visible_message("<span class='notice'>[user] [anchored ? "fastens" : "unfastens"] [src].</span>", \
 								 "<span class='notice'>You [anchored ? "fasten [src] to" : "unfasten [src] from"] the floor.</span>")
 			return
-	else if(istype(W, buildstack) && broken)
+	else if(istype(W, buildstack) && broken && low_type)
 		var/obj/item/stack/R = W
 		if(!shock(user, 90) && R.use(buildstackamount))
 			user.visible_message("<span class='notice'>[user] rebuilds the broken low wall.</span>", \
