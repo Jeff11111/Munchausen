@@ -62,7 +62,7 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 		quirk_names_by_path[T] = initial(T.name)
 
 /datum/controller/subsystem/processing/quirks/proc/AssignQuirks(mob/living/user, client/cli, spawn_effects, roundstart = FALSE, datum/job/job, silent = FALSE, mob/to_chat_target)
-	var/is_special = cli.prefs.be_special
+	var/is_special = cli.prefs.special_char
 	var/list/possible_quirks = quirks.Copy()
 	if(job?.blacklisted_quirks)
 		possible_quirks = filter_quirks(possible_quirks, job.blacklisted_quirks)
