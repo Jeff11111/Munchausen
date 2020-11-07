@@ -576,7 +576,7 @@
 	plane = FULLSCREEN_PLANE
 
 /obj/screen/healths
-	name = "health"
+	name = "pulse"
 	icon_state = "health0"
 	screen_loc = ui_health
 
