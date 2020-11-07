@@ -831,6 +831,7 @@ use_mob_overlay_icon: if FALSE, it will always use the default_icon_file even if
 	var/mutable_appearance/standing
 	if(femaleuniform || alpha_mask)
 		standing = wear_alpha_masked_version(t_state, file2use, layer2use, femaleuniform, alpha_mask)
+	
 	if(!standing)
 		standing = mutable_appearance(file2use, t_state, -layer2use)
 
@@ -947,7 +948,7 @@ use_mob_overlay_icon: if FALSE, it will always use the default_icon_file even if
 
 // Only renders the head of the human
 /mob/living/carbon/human/proc/update_body_parts_head_only()
-	if (!dna)
+	if(!dna)
 		return
 
 	if (!dna.species)

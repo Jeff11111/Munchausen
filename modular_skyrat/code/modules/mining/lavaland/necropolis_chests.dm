@@ -104,8 +104,8 @@
 	righthand_file = 'modular_skyrat/icons/mob/inhands/weapons/guns_righthand.dmi'
 	sharpness = SHARP_NONE
 	force = 15
-	inhand_x_dimension = 0
-	inhand_y_dimension = 0
+	inhand_x_dimension = 32
+	inhand_y_dimension = 32
 	var/recharge_rate = 4
 	var/charge_tick = 0
 	var/toggled = FALSE

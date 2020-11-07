@@ -1,6 +1,6 @@
 SUBSYSTEM_DEF(aspects)
 	name = "Aspects"
-	flags = SS_BACKGROUND
+	flags = SS_NO_FIRE
 	var/datum/aspect/chosen_aspect
 	var/list/aspect_datums = list()
 
