@@ -194,7 +194,7 @@
 		client.pixel_x = world.icon_size*_x
 		client.pixel_y = world.icon_size*_y
 		//the smarter solution of moving the fov thing didnt work
-		if(hud_used?.fov_holder)
+		if((zoomies > 4) && hud_used?.fov_holder)
 			hud_used.fov_holder.alpha = 0
 	else
 		client.change_view(CONFIG_GET(string/default_view))
