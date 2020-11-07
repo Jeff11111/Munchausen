@@ -584,7 +584,7 @@
 /obj/screen/healths/Click(location, control, params)
 	var/mob/living/carbon/C = usr
 	if(istype(C))
-		C.check_self_for_injuries()
+		C.check_pulse()
 //
 
 /obj/screen/healths/alien
