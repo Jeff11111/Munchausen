@@ -262,6 +262,11 @@
 	icon_state = "[initial(icon_state)][sawn_off ? "_sawn" : ""][chamber_open ? "-open" : ""]"
 	item_state = "[initial(item_state)][sawn_off ? "_sawn" : ""][(!sawn_off && is_wielded) ? "-wielded" : ""]"
 
+/obj/item/gun/ballistic/revolver/doublebarrel/WieldInitialize()
+	..()
+	var/datum/component/two_handed/TW = GetComponent(/datum/component/two_handed)
+	TW.state_wielded = "[initial(item_state)]-wielded"
+
 /obj/item/gun/ballistic/revolver/doublebarrel/bobox
 	icon_state = "bobox"
 	desc = "The Bobox double barreled shotgun - The double barrel you know and love, but now polymerized and horrifying."

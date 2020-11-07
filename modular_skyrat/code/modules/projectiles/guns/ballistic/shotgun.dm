@@ -167,7 +167,11 @@
 /obj/item/gun/ballistic/shotgun/update_icon()
 	..()
 	icon_state = "[initial(icon_state)][chambered ? "" : "-e"]"
-	item_state = "{initial(item_state)][is_wielded ? "-wielded" : ""]"
+
+/obj/item/gun/ballistic/shotgun/WieldInitialize()
+	..()
+	var/datum/component/two_handed/TW = GetComponent(/datum/component/two_handed)
+	TW.state_wielded = "[initial(item_state)]-wielded"
 
 /obj/item/gun/ballistic/shotgun/riot
 	icon_state = "riotshotgun"

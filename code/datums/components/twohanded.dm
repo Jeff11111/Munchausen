@@ -15,6 +15,7 @@
 	var/attacksound = FALSE							/// Play sound on attack when wielded
 	var/require_twohands = FALSE					/// Does it have to be held in both hands
 	var/icon_wielded = FALSE						/// The icon that will be used when wielded
+	var/state_wielded = FALSE						/// The item state that will be used when wielded
 	var/obj/item/offhand/offhand_item = null		/// Reference to the offhand created for the item
 	var/sharpened_increase = 0						/// The amount of increase recived from sharpening the item
 	//SKYRAT CHANGES - Option to avoid attack self activation
@@ -35,7 +36,8 @@
  * * icon_wielded (optional) The icon to be used when wielded
  */
 /datum/component/two_handed/Initialize(require_twohands=FALSE, wieldsound=FALSE, unwieldsound=FALSE, attacksound=FALSE, \
-										force_multiplier=0, force_wielded=0, force_unwielded=0, icon_wielded=FALSE, ignore_attack_self=FALSE) //skyrat change - ignore_attack_self
+										force_multiplier=0, force_wielded=0, force_unwielded=0, icon_wielded=FALSE,\
+										ignore_attack_self=FALSE, state_wielded=FALSE) //skyrat change - ignore_attack_self
 	if(!isitem(parent))
 		return COMPONENT_INCOMPATIBLE
 
@@ -49,11 +51,12 @@
 	src.icon_wielded = icon_wielded
 	//skyrat change
 	src.ignore_attack_self = ignore_attack_self
+	src.state_wielded = state_wielded
 	//skyrat changes end
 
 // Inherit the new values passed to the component
 /datum/component/two_handed/InheritComponent(datum/component/two_handed/new_comp, original, require_twohands, wieldsound, unwieldsound, \
-											force_multiplier, force_wielded, force_unwielded, icon_wielded, ignore_attack_self) //skyrat change - ignore_attack_self
+											force_multiplier, force_wielded, force_unwielded, icon_wielded, ignore_attack_self, state_wielded) //skyrat change - ignore_attack_self
 	if(!original)
 		return
 	if(require_twohands)
@@ -74,6 +77,8 @@
 		src.icon_wielded = icon_wielded
 	if(ignore_attack_self)
 		src.ignore_attack_self = ignore_attack_self
+	if(state_wielded)
+		src.state_wielded = state_wielded
 
 // register signals withthe parent item
 /datum/component/two_handed/RegisterWithParent()
@@ -265,11 +270,14 @@
  * Updates the icon using icon_wielded if set
  */
 /datum/component/two_handed/proc/on_update_icon(datum/source)
-	if(icon_wielded && wielded)
+	if(wielded)
 		var/obj/item/parent_item = parent
 		if(parent_item)
-			parent_item.icon_state = icon_wielded
-			return COMSIG_ATOM_NO_UPDATE_ICON_STATE
+			if(state_wielded)
+				parent_item.item_state = state_wielded
+			if(icon_wielded)
+				parent_item.icon_state = icon_wielded
+				return COMSIG_ATOM_NO_UPDATE_ICON_STATE
 
 /**
  * on_moved Triggers on item moved
