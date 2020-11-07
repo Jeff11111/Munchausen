@@ -119,7 +119,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 	var/bloodtype = ""
 	var/bloodreagent = ""
 	var/bloodcolor = ""
-	var/skyrat_ooc_notes = ""
 	var/general_records = ""
 	var/security_records = ""
 	var/medical_records = ""
@@ -232,9 +231,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 		"vag_visibility"	= GEN_VISIBLE_NO_UNDIES,
 		"ipc_screen" = "Sunburst",
 		"ipc_antenna" = "None",
-		"flavor_text" = "",
-		"silicon_flavor_text" = "",
-		"ooc_notes" = "",
 		"meat_type" = "Mammalian",
 		"body_model" = MALE,
 		"ipc_chassis" = "Morpheus Cyberkinetics(Greyscale)", //SKYRAT CHANGE
@@ -447,34 +443,7 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 					dat += "</center>"
 
 			dat += "<table><tr><td width='340px' height='300px' valign='top'>"
-			dat += "<h2>Flavor Text</h2>"
-			dat += "<a href='?_src_=prefs;preference=flavor_text;task=input'><b>Set Examine Text</b></a><br>" //skyrat - <br> moved one line down
-			if(length(features["flavor_text"]) <= 40)
-				if(!length(features["flavor_text"]))
-					dat += "\[...\]" //skyrat - adds <br> //come to brazil or brazil comes to you
-				else
-					dat += "[html_encode(features["flavor_text"])]" //skyrat - adds <br> and uses html_encode
-			else
-				dat += "[TextPreview(html_encode(features["flavor_text"]))]..." //skyrat edit, uses html_encode
-			//SKYRAT EDIT
-			dat += "<h2>Silicon Flavor Text</h2>"
-			dat += "<a href='?_src_=prefs;preference=silicon_flavor_text;task=input'><b>Set Silicion Examine Text</b></a><br>"
-			if(length(features["silicon_flavor_text"]) <= 40)
-				if(!length(features["silicon_flavor_text"]))
-					dat += "\[...\]"
-				else
-					dat += "[features["silicon_flavor_text"]]"
-			else
-				dat += "[TextPreview(features["silicon_flavor_text"])]..."
-			dat +=  "<h2>OOC Notes</h2>"
-			dat += 	"<a href='?_src_=prefs;preference=skyrat_ooc_notes;task=input'><b>Set OOC Notes</b></a><br>"
-			if(length(skyrat_ooc_notes) <= 40)
-				if(!length(skyrat_ooc_notes))
-					dat += "\[...\]"
-				else
-					dat += "[skyrat_ooc_notes]"
-			else
-				dat += "[TextPreview(skyrat_ooc_notes)]..."
+
 			dat += 	"<h2>Records</h2>"
 			dat += 	"<a href='?_src_=prefs;preference=general_records;task=input'><b>General</b></a><br>"
 			if(length(general_records) <= 40)
@@ -535,19 +504,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 				dat += 	" <a href='?_src_=prefs;preference=bloodtype;task=input'>[bloodtype ? bloodtype : "Default"]</a><br>"
 			dat += "<b>Faction/Employer :</b> <a href='?_src_=prefs;preference=flavor_faction;task=input'>[flavor_faction ? flavor_faction : "Unset"]</a><br>"
 			dat += "<b>Custom runechat color :</b> <a href='?_src_=prefs;preference=enable_personal_chat_color'>[enable_personal_chat_color ? "Enabled" : "Disabled"]</a> [enable_personal_chat_color ? "<span style='border: 1px solid #161616; background-color: [personal_chat_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=personal_chat_color;task=input'>Change</a>" : ""]<br>"
-			//END OF SKYRAT EDIT
-			/*Skyrat edit - comments out Citadel's OOC notes in favor for our owns
-			dat += "<h2>OOC notes</h2>"
-			dat += "<a href='?_src_=prefs;preference=ooc_notes;task=input'><b>Set OOC notes</b></a><br>"
-			var/ooc_notes_len = length(features["ooc_notes"])
-			if(ooc_notes_len <= 40)
-				if(!ooc_notes_len)
-					dat += "\[...\]"
-				else
-					dat += "[features["ooc_notes"]]"
-			else
-				dat += "[TextPreview(features["ooc_notes"])]...<BR>"
-			*/
 			dat += "<h2>Body</h2>"
 			dat += "<b>Gender:</b><a style='display:block;width:100px' href='?_src_=prefs;preference=gender;task=input'>[gender == MALE ? "Male" : (gender == FEMALE ? "Female" : (gender == PLURAL ? "Non-binary" : "Object"))]</a><BR>"
 			if(gender != NEUTER && pref_species.sexes)
@@ -2160,22 +2116,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 					if(new_age)
 						age = max(min( round(text2num(new_age)), AGE_MAX),AGE_MIN)
 
-				if("flavor_text")
-					var/msg = input(usr, "Set the flavor text in your 'examine' verb. This can also be used for OOC notes and preferences!", "Flavor Text", features["flavor_text"]) as message|null //Skyrat edit, removed stripped_multiline_input()
-					if(!isnull(msg))
-						features["flavor_text"] = strip_html_simple(msg, MAX_FLAVOR_LEN, TRUE) //Skyrat edit, removed strip_html_simple()
-
-				if("silicon_flavor_text")
-					var/msg = input(usr, "Set the silicon flavor text in your 'examine' verb. This can also be used for OOC notes and preferences!", "Silicon Flavor Text", features["silicon_flavor_text"]) as message|null //Skyrat edit, removed stripped_multiline_input()
-					if(!isnull(msg))
-						features["silicon_flavor_text"] = strip_html_simple(msg, MAX_FLAVOR_LEN, TRUE) //Skyrat edit, uses strip_html_simple()
-
-				//SKYRAT CHANGES
-				if("skyrat_ooc_notes")
-					var/msg = input(usr, "Set your OOC Notes", "OOC Notes", skyrat_ooc_notes) as message|null
-					if(msg)
-						skyrat_ooc_notes = strip_html_simple(msg, MAX_FLAVOR_LEN, TRUE)
-
 				if("bloodtype")
 					var/msg = input(usr, "Choose your blood type", "Blood Type", "") as anything in (pref_species.bloodtypes + "Default")
 					if(msg)
@@ -2238,13 +2178,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 					var/msg = input(usr, "Set your exploitable information, this rarely will be showed to antagonists", "Exploitable Info", exploitable_info) as message|null
 					if(msg)
 						exploitable_info = strip_html_simple(msg, MAX_FLAVOR_LEN, TRUE)
-				//END OF SKYRAT CHANGES
-				/* Skyrat changes - do nothing here because we dont use this and this may be exploited
-				if("ooc_notes")
-					var/msg = stripped_multiline_input(usr, "Set always-visible OOC notes related to content preferences. THIS IS NOT FOR CHARACTER DESCRIPTIONS!", "OOC notes", html_decode(features["ooc_notes"]), MAX_FLAVOR_LEN, TRUE)
-					if(!isnull(msg))
-						features["ooc_notes"] = msg*/
-
 				if("hair")
 					var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference","#"+hair_color) as color|null
 					if(new_hair)
