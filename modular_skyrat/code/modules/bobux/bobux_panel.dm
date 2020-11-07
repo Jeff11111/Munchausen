@@ -34,7 +34,7 @@
 		bobux_rewards |= initial(chungoose.name)
 	var/list/out = list(
 		"<B><span class='bobux'>[key]</span></B><br>\
-		<B>Bobux amount:</B> [prefs.bobux_amount]<br>\
+		<B>Bobux amount:</B> [prefs.bobux_amount ? prefs.bobux_amount : "No Bobux"]<br>\
 		<a href='?src=[REF(src)];bobux=set'>Set</a> \
 		<a href='?src=[REF(src)];bobux=add'>Add</a> \
 		<a href='?src=[REF(src)];bobux=remove'>Remove</a>\
