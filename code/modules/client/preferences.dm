@@ -1913,10 +1913,10 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 		special_char = !special_char
 		to_chat(user, "Your character [special_char ? "will " : "won't"] be special.")
 		save_character()
-		var/mob/dead/observer/O = user
-		if(istype(O))
-			O << browse(null, "window=playersetup") //closes the player setup window
-			O.new_player_panel()
+		var/mob/dead/new_player/NP = user
+		if(istype(NP))
+			NP << browse(null, "window=playersetup") //closes the player setup window
+			NP.new_player_panel()
 		return TRUE
 	//SKYRAT CHANGE - food prefs and language pref
 	else if(href_list["preference"] == "food")
