@@ -1529,7 +1529,7 @@ GLOBAL_LIST(objective_choices)
 				var/choice =  input(usr, "How much to set?", "All Bobux", 0) as num
 				if(choice)
 					var/secondchoice = input(usr, "Display a message to the target?") as text|null
-					choice = (prefs.bobux_amount - choice)
+					choice = (choice - prefs.bobux_amount)
 					prefs.adjust_bobux(choice, (secondchoice ? "<span class='bobux'>[secondchoice]</span>" : null))
 		bobux_panel()
 	//Something in here might have changed your mob
