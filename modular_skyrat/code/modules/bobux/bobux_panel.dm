@@ -35,9 +35,9 @@
 	var/list/out = list(
 		"<B>[key]</B><br>\
 		<B>Bobux amount:</B> [prefs.bobux_amount]\
-		<a href='?src=[REF(src)];bobux=set>Set</span> \
-		<a href='?src=[REF(src)];bobux=add>Add</span> \
-		<a href='?src=[REF(src)];bobux=remove>Remove</span>\
+		<a href='?src=[REF(src)];bobux=set>Set</a> \
+		<a href='?src=[REF(src)];bobux=add>Add</a> \
+		<a href='?src=[REF(src)];bobux=remove>Remove</a>\
 		<B>Bobux rewards bought:</B> [english_list(bobux_rewards, "Nothing", ", ")].</B>"
 		)
 	var/datum/browser/panel = new(usr, "bobuxpanel", "", 500, 400)
