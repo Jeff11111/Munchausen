@@ -2428,6 +2428,16 @@
 				D.traitor_panel()
 		else
 			show_traitor_panel(M)
+	
+	else if(href_list["bobux"])
+		if(!check_rights(R_ADMIN))
+			return
+		
+		var/mob/M = locate(href_list["bobux"])
+		if(!M?.mind)
+			return
+		
+		show_bobux_panel(M)
 
 	else if(href_list["borgpanel"])
 		if(!check_rights(R_ADMIN))

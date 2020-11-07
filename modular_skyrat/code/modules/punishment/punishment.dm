@@ -7,11 +7,11 @@ GLOBAL_LIST_INIT(fraggots, world.file2list('config/fraggots.txt'))
 /mob/proc/fraggotify()
 	fraggot = TRUE
 	if(client?.key)
-		GLOB.fraggots |= target.client.key
+		GLOB.fraggots |= client.key
 	//Announce to every player but the fraggot
 	for(var/client/C in (GLOB.clients - client))
 		SEND_SOUND(C, sound('modular_skyrat/sound/fraggot/kill_her_now_kill_her_now.ogg', FALSE, CHANNEL_COMBAT, 70))
-		to_chat(C, "<span class='warning'><span class='bigbold'>[emoji_parse(":killher:")][target] IS A NIGGER FRAGGOT! KILL HER! KILL HER![emoji_parse(":killher:")]</span>")
+		to_chat(C, "<span class='warning'><span class='bigbold'>[emoji_parse(":killher:")][src] IS A NIGGER FRAGGOT! KILL HER! KILL HER![emoji_parse(":killher:")]</span>")
 
 /mob/transfer_ckey(mob/new_mob, send_signal)
 	. = ..()

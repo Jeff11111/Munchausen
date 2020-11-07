@@ -3824,6 +3824,7 @@
 #include "modular_skyrat\code\modules\awaymissions\gateway.dm"
 #include "modular_skyrat\code\modules\awaymissions\zlevel.dm"
 #include "modular_skyrat\code\modules\bobux\_reward.dm"
+#include "modular_skyrat\code\modules\bobux\bobux_panel.dm"
 #include "modular_skyrat\code\modules\bobux\holder.dm"
 #include "modular_skyrat\code\modules\bobux\rewards.dm"
 #include "modular_skyrat\code\modules\bobux\subsystem.dm"

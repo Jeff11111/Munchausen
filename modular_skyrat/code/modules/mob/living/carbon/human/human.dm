@@ -100,7 +100,7 @@
 	if(!fraggot)
 		for(var/mob/living/carbon/human/H in range(src))
 			if(H != src && (src in view(H)))
-				if(GET_SKILL_LEVEL(H, firstaid) < JOB_SKILLPOINTS_NOVICE))
+				if(GET_SKILL_LEVEL(H, firstaid) < JOB_SKILLPOINTS_NOVICE)
 					SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "saw_dead", /datum/mood_event/saw_dead)
 				else
 					SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "saw_dead", /datum/mood_event/saw_dead/lesser)

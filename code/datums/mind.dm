@@ -587,7 +587,6 @@ GLOBAL_LIST(objective_choices)
 
 /datum/mind/Topic(href, href_list)
 //SKYRAT CHANGES BEGIN
-
 	if (href_list["refresh_obj_amb"])
 		do_edit_objectives_ambitions()
 		return
@@ -1507,12 +1506,32 @@ GLOBAL_LIST(objective_choices)
 
 	else if (href_list["obj_announce"])
 		announce_objectives()
-//SKYRAT CHANGES BEGIN
-		if(href_list["ambition_panel"])
-			do_edit_objectives_ambitions()
-			return
-//SKYRAT CHANGES END
 
+	else if(href_list["ambition_panel"])
+		do_edit_objectives_ambitions()
+		return
+
+	else if(href_list["bobux"])
+		var/datum/preferences/prefs = current?.client?.prefs
+		var/type = href_list["bobux"]
+		switch(type)
+			if("Add")
+				var/choice = abs(input(usr, "How much to add?", "Infinite Bobux", 0) as num)
+				if(choice)
+					var/secondchoice = input(usr, "Display a message to the target?") as text|null
+					prefs.adjust_bobux(choice, (secondchoice ? "<span class='bobux'>[secondchoice]</span>" : null))
+			if("Remove")
+				var/choice = -abs(input(usr, "How much to remove?", "No Bobux", 0) as num)
+				if(choice)
+					var/secondchoice = input(usr, "Display a message to the target?") as text|null
+					prefs.adjust_bobux(choice, (secondchoice ? "<span class='bobux'>[secondchoice]</span>" : null))
+			if("Set")
+				var/choice =  input(usr, "How much to set?", "All Bobux", 0) as num
+				if(choice)
+					var/secondchoice = input(usr, "Display a message to the target?") as text|null
+					choice = (prefs.bobux_amount - choice)
+					prefs.adjust_bobux(choice, (secondchoice ? "<span class='bobux'>[secondchoice]</span>" : null))
+		bobux_panel()
 	//Something in here might have changed your mob
 	if(self_antagging && (!usr || !usr.client) && current.client)
 		usr = current
