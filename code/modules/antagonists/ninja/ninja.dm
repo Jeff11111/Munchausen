@@ -38,7 +38,7 @@
 				else if(M.assigned_role in GLOB.command_positions)
 					possible_targets[M] = 1						//good-guy
 
-	var/list/possible_objectives = list(1,2,3,4)
+	var/list/possible_objectives = list(1,2,3)
 
 	while(objectives.len < quantity)
 		switch(pick_n_take(possible_objectives))
@@ -73,11 +73,6 @@
 					O.target = M
 					O.explanation_text = "Protect \the [M.current.real_name], the [M.assigned_role], from harm."
 					objectives += O
-			if(4)	//flavor
-				var/datum/objective/flavor/O = helping_station ? new /datum/objective/flavor/ninja_helping : new /datum/objective/flavor/ninja_syndie
-				O.owner = owner
-				O.forge_objective()
-				objectives += O
 			else
 				break
 	var/datum/objective/O = new /datum/objective/survive()

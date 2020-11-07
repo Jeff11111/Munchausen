@@ -42,18 +42,16 @@
 			destroy_objective.find_target()
 			T.add_objective(destroy_objective)
 		else if(prob(30) || (is_dynamic && (mode.storyteller.flags & NO_ASSASSIN)))
-			//Skyrat changes - changes maroon to flavor obj 
 			var/datum/objective/maroon/maroon = new
 			maroon.owner = T.owner
 			T.add_objective(maroon)
-			//End of skyrat changes
 		else if(prob(max(0,assassin_prob-20)))
 			var/datum/objective/assassinate/kill_objective = new
 			kill_objective.owner = T.owner
 			kill_objective.find_target()
 			T.add_objective(kill_objective)
 		else
-			var/datum/objective/assassinate/once/kill_objective = new
+			var/datum/objective/assassinate/kill_objective = new
 			kill_objective.owner = T.owner
 			kill_objective.find_target()
 			T.add_objective(kill_objective)
@@ -74,10 +72,10 @@
 			sabotage_objective.find_target()
 			T.add_objective(sabotage_objective)
 		else  // cum. not counting download: 40%
-			var/datum/objective/flavor/traitor/flavor_objective = new
-			flavor_objective.owner = T.owner
-			flavor_objective.forge_objective()
-			T.add_objective(flavor_objective)
+			var/datum/objective/hijack/hijack = new
+			hijack.owner = T.owner
+			hijack.forge_objective()
+			T.add_objective(hijack)
 
 /datum/traitor_class/human/greet(datum/antagonist/traitor/T)
 	to_chat(T.owner.current, "<B><font size=2 color=red>You are under contract with [employer]. They have given you your objectives.</font></B>")

@@ -61,12 +61,12 @@
 		owner.current.forceMove(pick(GLOB.wizardstart))
 
 /datum/antagonist/wizard/proc/create_objectives()
-	var/datum/objective/flavor/wizard/new_objective = new
+	var/datum/objective/hijack/new_objective = new
 	new_objective.owner = owner
 	new_objective.forge_objective()
 	objectives += new_objective
 
-	if (!(locate(/datum/objective/escape) in objectives))
+	if(!(locate(/datum/objective/escape) in objectives))
 		var/datum/objective/escape/escape_objective = new
 		escape_objective.owner = owner
 		objectives += escape_objective
