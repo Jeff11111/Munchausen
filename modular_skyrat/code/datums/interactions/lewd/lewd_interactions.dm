@@ -269,7 +269,7 @@
 						if(!silent)
 							to_chat(user, "<span class = 'warning'>Your earsockets need to be unexposed.</span>")
 						return FALSE
-		return FALSE
+		return TRUE
 	return FALSE
 
 /datum/interaction/lewd/evaluate_target(mob/living/user, mob/living/target, silent = TRUE)

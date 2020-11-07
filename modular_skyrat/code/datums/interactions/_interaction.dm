@@ -73,6 +73,7 @@ var/list/interactions
 
 	if(user.last_interaction_time < world.time)
 		return TRUE
+	
 	return FALSE
 
 /datum/interaction/proc/evaluate_target(mob/living/user, mob/living/target, silent = TRUE)
