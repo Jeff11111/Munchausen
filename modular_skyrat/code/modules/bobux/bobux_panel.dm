@@ -33,11 +33,11 @@
 		var/datum/bobux_reward/chungoose = chungus
 		bobux_rewards |= initial(chungoose.name)
 	var/list/out = list(
-		"<B>[key]</B><br>\
-		<B>Bobux amount:</B> [prefs.bobux_amount]\
-		<a href='?src=[REF(src)];bobux=set>Set</a> \
-		<a href='?src=[REF(src)];bobux=add>Add</a> \
-		<a href='?src=[REF(src)];bobux=remove>Remove</a>\
+		"<B><span class='bobux'>[key]</span></B><br>\
+		<B>Bobux amount:</B> [prefs.bobux_amount]<br>\
+		<a href='?src=[REF(src)];bobux=set'>Set</a> \
+		<a href='?src=[REF(src)];bobux=add'>Add</a> \
+		<a href='?src=[REF(src)];bobux=remove'>Remove</a>\
 		<B>Bobux rewards bought:</B> [english_list(bobux_rewards, "Nothing", ", ")].</B>"
 		)
 	var/datum/browser/panel = new(usr, "bobuxpanel", "", 500, 400)

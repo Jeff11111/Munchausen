@@ -1754,31 +1754,24 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		var/obj/item/bodypart/supposed_to_affect = target.get_bodypart(user.zone_selected)
 		var/ran_zone_prob = 50
 		var/extra_zone_prob = 50
+		var/miss_entirely = 10
 		if(supposed_to_affect)
 			ran_zone_prob = supposed_to_affect.zone_prob
 			extra_zone_prob = supposed_to_affect.extra_zone_prob
+			miss_entirely = supposed_to_affect.miss_entirely_prob
 		if(user.mind)
 			var/datum/stats/dex/dex = GET_STAT(user, dex)
 			if(dex)
 				ran_zone_prob = dex.get_ran_zone_prob(ran_zone_prob, extra_zone_prob)
-
-		//Aimed combat intent means we almost never miss, at the cost of stamina
-		//we deduct stamina later down, based on endurance
-		switch(c_intent)
-			if(CI_AIMED)
-				ran_zone_prob = 100
-				if(user.mind)
-					var/datum/stats/dex/dex = GET_STAT(user, dex)
-					if(dex)
-						ran_zone_prob = 80 + dex.level
 		
 		//Get the bodypart we actually affect
 		var/obj/item/bodypart/affecting = target.get_bodypart(ran_zone(user.zone_selected, ran_zone_prob))
 
 		var/missed = FALSE
 		//Dice roll to see if we fuck up
-		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.3, GET_SKILL_LEVEL(user, melee)*0.7) <= DICE_CRIT_FAILURE)
+		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*0.75, mod = -(miss_entirely/5)) <= DICE_FAILURE)
 			missed = TRUE
+		
 		//Aimed combat intent means we never miss, at the cost of stamina
 		switch(c_intent)
 			if(CI_AIMED)

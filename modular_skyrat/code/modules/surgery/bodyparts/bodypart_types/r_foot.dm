@@ -18,10 +18,6 @@
 	heal_zones = list(BODY_ZONE_R_LEG)
 	specific_locations = list("right sole", "right ankle", "right heel")
 	max_cavity_size = WEIGHT_CLASS_TINY
-	zone_prob = 50
-	extra_zone_prob = 25
-
-//This is useless. Thanks Pooj.
-/obj/item/bodypart/r_foot/digitigrade
-	name = "right digitigrade foot"
-	use_digitigrade = FULL_DIGITIGRADE
+	miss_entirely_prob = 25
+	zone_prob = 30
+	extra_zone_prob = 35

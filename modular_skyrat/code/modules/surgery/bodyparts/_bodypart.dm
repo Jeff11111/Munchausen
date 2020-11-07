@@ -176,16 +176,18 @@
 	var/decay_factor = 0.01 //Multiplier of max_tox_damage applied when rotting
 	var/datum/dna/original_dna
 	var/datum/species/original_species
-	//Base prob of hitting this limb correctly in melee attacks
-	var/zone_prob = 50
-	//Extra prob, multiplied by dexterity/MAX_STAT
-	var/extra_zone_prob = 50
 	//TEETH!
 	var/max_teeth = 0
 	var/datum/speech_mod/lisp/teeth_mod
 	var/obj/item/stack/teeth/teeth_object
 	//Specific dismemberment sounds
 	var/list/dismember_sounds
+	//Raw probability of missing entirely in melee attacks
+	var/miss_entirely_prob = 10
+	//Base prob of hitting this limb correctly in melee attacks
+	var/zone_prob = 50
+	//Extra prob, multiplied by dexterity/MAX_STAT
+	var/extra_zone_prob = 50
 
 /obj/item/bodypart/Initialize()
 	. = ..()

@@ -380,8 +380,22 @@
 			return TRUE
 
 	var/distance = get_dist(T, starting) // Get the distance between the turf shot from and the mob we hit and use that for the calculations.
-	if(def_zone && check_zone(def_zone) != BODY_ZONE_CHEST)
-		def_zone = ran_zone(def_zone, max(100-(7*distance), 5) * zone_accuracy_factor) //Lower accurancy/longer range tradeoff. 7 is a balanced number to use.
+	if(def_zone && ishuman(firer))
+		//Ran zone is a shitty proc that does not follow the laws of physics
+		var/mob/living/carbon/human/school_shooter = firer
+		var/obj/item/bodypart/supposed_to_affect = SSquirks.associated_bodyparts[check_zone(def_zone)]
+		var/ran_zone_prob = 50
+		var/extra_zone_prob = 50
+		if(supposed_to_affect)
+			ran_zone_prob = supposed_to_affect.zone_prob
+			extra_zone_prob = supposed_to_affect.extra_zone_prob
+		var/datum/stats/dex/dex = GET_STAT(school_shooter, dex)
+		if(dex)
+			ran_zone_prob = dex.get_ran_zone_prob(ran_zone_prob, extra_zone_prob)
+		def_zone = ran_zone(def_zone, (max(ran_zone_prob-(4*distance), 0) * zone_accuracy_factor))
+	else if(def_zone)
+		//Firer is dumb and mindless so we don't follow the laws of physics
+		def_zone = ran_zone(def_zone, max(100-(7*distance), 5) * zone_accuracy_factor)
 
 	if(isturf(A) && hitsound_wall)
 		var/volume = clamp(vol_by_damage() + 20, 0, 100)

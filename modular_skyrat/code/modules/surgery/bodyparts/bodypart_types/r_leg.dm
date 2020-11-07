@@ -22,6 +22,7 @@
 	max_cavity_size = WEIGHT_CLASS_SMALL
 	dismember_mod = 0.8
 	disembowel_mod = 0.8
+	miss_entirely_prob = 15
 	zone_prob = 50
 	extra_zone_prob = 25
 
@@ -40,8 +41,3 @@
 			to_chat(owner, "<span class='userdanger'>Your [name] is too damaged to function!</span>")
 		if(BODYPART_DISABLED_PARALYSIS)
 			to_chat(owner, "<span class='userdanger'>You can't feel your [name]!</span>")
-
-//Thanks Pooj, this is useless.
-/obj/item/bodypart/r_leg/digitigrade
-	name = "right digitigrade leg"
-	use_digitigrade = FULL_DIGITIGRADE

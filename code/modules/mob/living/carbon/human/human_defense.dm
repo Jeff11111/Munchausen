@@ -73,11 +73,16 @@
 			//Victims being held at gunpoint are less likely to have the shots miss them
 			if(length(gunpointed))
 				victim_dex -= GET_SKILL_LEVEL(fireboy, ranged)
-			switch(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.5, GET_SKILL_LEVEL(fireboy, ranged), mod = -victim_dex/2))
+			//We already dealt with hitting the wrong zone, so let's deal with missing entirely
+			var/miss_entirely = 10
+			var/obj/item/bodypart/supposed_to_affect = get_bodypart(P.def_zone)
+			if(supposed_to_affect)
+				miss_entirely = supposed_to_affect.miss_entirely_prob
+			switch(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.5, GET_SKILL_LEVEL(fireboy, ranged), mod = -(miss_entirely/5)))
 				//Missed shot
 				if(DICE_CRIT_FAILURE, DICE_FAILURE)
 					if(fireboy != src)
-						visible_message("<span class='danger'><b>CRITICAL FAILURE!</b> [P] misses [src] entirely!</span>")
+						visible_message("<span class='danger'><b>FAILURE!</b> [P] misses [src] entirely!</span>")
 						return BULLET_ACT_FORCE_PIERCE
 	//Critical hits
 	if(mind)
@@ -137,31 +142,23 @@
 		var/obj/item/bodypart/supposed_to_affect = get_bodypart(check_zone(user.zone_selected))
 		var/ran_zone_prob = 50
 		var/extra_zone_prob = 50
+		var/miss_entirely = 10
 		if(supposed_to_affect)
 			ran_zone_prob = supposed_to_affect.zone_prob
 			extra_zone_prob = supposed_to_affect.extra_zone_prob
+			miss_entirely = supposed_to_affect.miss_entirely_prob
 		var/c_intent = CI_DEFAULT
 		if(iscarbon(user))
 			var/mob/living/carbon/carbon_mob = user
 			//Chance to miss the attack entirely, based on a diceroll
 			var/missed = FALSE
-			if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.3, GET_SKILL_LEVEL(user, melee)*0.7) <= DICE_CRIT_FAILURE)
+			if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*0.75, mod = -(miss_entirely/5)) <= DICE_FAILURE)
 				missed = TRUE
 			c_intent = carbon_mob.combat_intent
 			if(carbon_mob.mind)
 				var/datum/stats/dex/dex = GET_STAT(carbon_mob, dex)
 				if(dex)
 					ran_zone_prob = dex.get_ran_zone_prob(ran_zone_prob, extra_zone_prob)
-			switch(c_intent)
-				if(CI_AIMED)
-					if(attackchain_flags & ATTACKCHAIN_RIGHTCLICK)
-						//Aimed attack - the attacker will RARELY miss
-						ran_zone_prob = 100
-						missed = FALSE
-						if(carbon_mob.mind)
-							var/datum/stats/dex/dex = GET_STAT(carbon_mob, dex)
-							if(dex)
-								ran_zone_prob = 80 + dex.level
 			if(missed && (user != src))
 				visible_message("<span class='danger'>[user]'s misses [src] with [I]!</span>", \
 							"<span class='danger'>You avoid [user]'s attack with [I]!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, null, \

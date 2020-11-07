@@ -44,8 +44,6 @@
 	disembowel_mod = 0.7
 	encased = "skull"
 	amputation_point = "neck" 
-	zone_prob = 50
-	extra_zone_prob = 25
 	max_teeth = 32
 	dismember_sounds = list(
 		'modular_skyrat/sound/gore/head_explodie1.ogg',
@@ -53,6 +51,9 @@
 		'modular_skyrat/sound/gore/head_explodie3.ogg',
 		'modular_skyrat/sound/gore/head_explodie4.ogg',
 	)
+	miss_entirely_prob = 25
+	zone_prob = 30
+	extra_zone_prob = 30
 
 /obj/item/bodypart/head/Initialize()
 	. = ..()

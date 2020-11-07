@@ -19,6 +19,7 @@
 	children_zones = list()
 	specific_locations = list("right palm", "right back palm")
 	max_cavity_size = WEIGHT_CLASS_TINY
+	miss_entirely_prob = 25
 	zone_prob = 30
 	extra_zone_prob = 35
 
