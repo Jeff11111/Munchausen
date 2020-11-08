@@ -1911,7 +1911,7 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 
 	else if(href_list["preference"] == "trait")
 		special_char = !special_char
-		to_chat(user, "Your character [special_char ? "will " : "won't"] be special.")
+		to_chat(user, "<span class='notice'>Your character [special_char ? "will " : "won't"] be special.</span>")
 		save_character()
 		var/mob/dead/new_player/NP = user
 		if(istype(NP))
