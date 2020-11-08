@@ -40,7 +40,6 @@ var/list/interactions
 	var/interaction_sound
 
 	var/max_distance = 1
-	var/require_ooc_consent = FALSE
 	var/require_user_mouth
 	var/require_user_hands
 	var/require_target_mouth
@@ -71,7 +70,7 @@ var/list/interactions
 			to_chat(user, "<span class = 'warning'>You don't have hands.</span>")
 		return FALSE
 
-	if(user.last_interaction_time < world.time)
+	if(user.last_interaction_time >= world.time)
 		return FALSE
 	
 	return TRUE

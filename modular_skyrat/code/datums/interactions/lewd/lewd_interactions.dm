@@ -6,7 +6,6 @@
 	simple_style = "danger"
 	interaction_sound = 'sound/weapons/slap.ogg'
 	needs_physical_contact = TRUE
-	require_ooc_consent = TRUE
 	max_distance = 1
 
 	write_log_user = "ass-slapped"
