@@ -561,6 +561,8 @@
 	var/list/our_organs = list()
 	for(var/X in owner.internal_organs)
 		var/obj/item/organ/O = X
+		if(!istype(O))
+			continue
 		var/org_zone = check_zone(O.zone)
 		if(org_zone == body_zone)
 			LAZYADD(our_organs, O)
