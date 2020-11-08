@@ -174,7 +174,7 @@
 	state_open = FALSE
 	light_color = LIGHT_COLOR_BLUE
 	light_power = 1
-	light_range = 2
+	light_range = 1
 
 	var/on_store_message = "has entered long-term storage."
 	var/on_store_name = "Cryogenic Oversight"
@@ -222,10 +222,18 @@
 		/obj/item/gun/energy/laser/cyborg
 	))
 
+/obj/machinery/cryopod/examine(mob/user)
+	. = ..()
+	if(!state_open && !occupant)
+		. += "<span class='notice'>I can faintly make out a humanoid figure inside it, \
+			waiting patiently for their slumber to end.</span>"
+	else if(occupant)
+		. += "<span class='notice'>I can clearly see \the [occupant] inside of it.</span>"
+
 /obj/machinery/cryopod/update_icon()
 	. = ..()
 	if(occupant)
-		light_range = 2
+		light_range = 0
 		icon_state = "[initial(icon_state)]-closed"
 	else
 		if(state_open)
@@ -233,13 +241,8 @@
 			icon_state = "[initial(icon_state)]-open"
 		else
 			icon_state = "[initial(icon_state)]-freezy"
-			light_range = 0
+			light_range = 1
 	update_light()
-
-/obj/machinery/cryopod/buckle_mob(mob/living/M, force, check_loc)
-	..()
-	// Play freeze/de=freeze sound
-	playsound(src, 'modular_skyrat/sound/machinery/cryo_wakeup.ogg', 60, 0)
 
 /obj/machinery/cryopod/Initialize(mapload)
 	. = ..()
@@ -283,7 +286,7 @@
 
 /obj/machinery/cryopod/open_machine(drop = TRUE)
 	var/mob/living/L = occupant
-	if(occupant)
+	if(istype(L))
 		investigate_log("Cryogenics machine opened with occupant [key_name(occupant)] inside.", INVESTIGATE_CRYOGENICS)
 	..()
 	update_icon()
@@ -302,8 +305,11 @@
 /obj/machinery/cryopod/alt_attack_hand(mob/user)
 	. = ..()
 	if(!state_open)
+		if(!occupant)
+			to_chat(user, "<span class='warning'>It won't budge. I should leave them alone.</span>")
+			return
 		open_machine(user)
-	else
+	else if(state_open)
 		close_machine(user)
 
 /obj/machinery/cryopod/relaymove(mob/user)
