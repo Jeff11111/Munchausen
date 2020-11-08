@@ -45,9 +45,6 @@
 	interaction_sound = null
 	max_distance = 1
 
-/datum/interaction/lewd/titgrope/post_interaction(mob/living/carbon/human/user, mob/living/carbon/human/target)
-	. = ..()
-
 /datum/interaction/lewd/titgrope/display_interaction(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	if(user.a_intent == INTENT_HELP)
 		user.visible_message(

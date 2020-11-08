@@ -478,8 +478,7 @@
 				to_chat(user, "<span class = 'warning'>Their pants are in the way.</span>")
 			return FALSE
 
-		return FALSE
-	return FALSE
+		return TRUE
 
 /datum/interaction/lewd/post_interaction(mob/living/user, mob/living/target)
 	if(user_refractory_cost)
