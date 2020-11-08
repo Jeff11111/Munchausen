@@ -157,9 +157,15 @@
 	name = "chief enforcer cap"
 	desc = "The robust standard-issue cap of the Chief Enforcer. For showing the officers who's in charge."
 	icon_state = "hoscap"
-	armor = list("melee" = 40, "bullet" = 30, "laser" = 25, "energy" = 10, "bomb" = 25, "bio" = 10, "rad" = 0, "fire" = 50, "acid" = 60, "wound" = 20)
+	armor = list("melee" = 40, "bullet" = 30, "laser" = 30, "energy" = 10, "bomb" = 25, "bio" = 10, "rad" = 0, "fire" = 50, "acid" = 60, "wound" = 20)
 	strip_delay = 80
 	dynamic_hair_suffix = ""
+
+/obj/item/clothing/head/HoS/police
+	name = "chief enforcer's police hat"
+	icon = 'modular_skyrat/icons/obj/clothing/enforcer.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/enforcer.dmi'
+	icon_state = "ce-hat"
 
 /obj/item/clothing/head/HoS/syndicate
 	name = "syndicate cap"

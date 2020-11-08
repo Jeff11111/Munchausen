@@ -67,16 +67,9 @@
 	new /obj/item/clothing/neck/cloak/hos(src)
 	new /obj/item/cartridge/hos(src)
 	new /obj/item/radio/headset/heads/hos(src)
-	new /obj/item/clothing/under/rank/security/head_of_security/parade/female(src)
-	new /obj/item/clothing/under/rank/security/head_of_security/parade(src)
-	new /obj/item/clothing/suit/armor/vest/leather(src)
 	new /obj/item/clothing/suit/armor/hos(src)
-	new /obj/item/clothing/under/rank/security/head_of_security/skirt(src)
-	new /obj/item/clothing/under/rank/security/head_of_security/alt(src)
-	new /obj/item/clothing/under/rank/security/head_of_security/alt/skirt(src)
-	new /obj/item/clothing/head/HoS(src)
+	new /obj/item/clothing/head/HoS/police(src)
 	new /obj/item/clothing/glasses/hud/security/sunglasses/eyepatch(src)
-	new /obj/item/clothing/glasses/hud/security/sunglasses/gars/supergars(src)
 	new /obj/item/clothing/under/rank/security/head_of_security/grey(src)
 	new /obj/item/storage/lockbox/medal/sec(src)
 	new /obj/item/megaphone/sec(src)
@@ -91,8 +84,6 @@
 	new /obj/item/flashlight/seclite(src)
 	new /obj/item/pinpointer/nuke(src)
 	new /obj/item/circuitboard/machine/techfab/department/security(src)
-	new /obj/item/storage/photo_album/HoS(src)
-	new /obj/item/clothing/suit/hooded/wintercoat/hos(src)
 
 /obj/structure/closet/secure_closet/warden
 	name = "\proper lieutenant's locker"
@@ -101,13 +92,8 @@
 /obj/structure/closet/secure_closet/warden/PopulateContents()
 	..()
 	new /obj/item/radio/headset/headset_sec(src)
-	new /obj/item/clothing/suit/armor/vest/warden(src)
-	new /obj/item/clothing/head/warden(src)
-	new /obj/item/clothing/head/warden/drill(src)
 	new /obj/item/clothing/head/beret/sec/navywarden(src)
 	new /obj/item/clothing/suit/armor/vest/warden/alt(src)
-	new /obj/item/clothing/under/rank/security/warden/formal(src)
-	new /obj/item/clothing/under/rank/security/warden/skirt(src)
 	new /obj/item/clothing/glasses/hud/security/sunglasses(src)
 	new /obj/item/holosign_creator/security(src)
 	new /obj/item/clothing/mask/gas/sechailer(src)
@@ -117,8 +103,7 @@
 	new /obj/item/flashlight/seclite(src)
 	new /obj/item/clothing/gloves/krav_maga/sec(src)
 	new /obj/item/door_remote/head_of_security(src)
-	//new /obj/item/gun/ballistic/shotgun/automatic/combat/compact(src) | SKYRAT CHANGE, REMOVES COMPACT SHOTGUN
-	new /obj/item/clothing/head/beret/sec/corporatewarden(src)
+
 /obj/structure/closet/secure_closet/security
 	name = "enforcer's locker"
 	req_access = list(ACCESS_SECURITY)
@@ -130,6 +115,7 @@
 	new /obj/item/radio/headset/headset_sec/alt(src)
 	new /obj/item/clothing/glasses/hud/security/sunglasses(src)
 	new /obj/item/flashlight/seclite(src)
+
 /obj/structure/closet/secure_closet/security_xenoarch
 	name = "enforcer's locker"
 	req_access = list(ACCESS_SECURITY)
@@ -142,10 +128,13 @@
 	new /obj/item/radio/headset/headset_sec/alt(src)
 	new /obj/item/clothing/glasses/hud/security/sunglasses(src)
 	new /obj/item/flashlight/seclite(src)
+
 /obj/structure/closet/secure_closet/security/sec
+
 /obj/structure/closet/secure_closet/security/sec/PopulateContents()
 	..()
 	new /obj/item/storage/belt/security/full(src)
+
 /obj/structure/closet/secure_closet/security/cargo
 /obj/structure/closet/secure_closet/security/cargo/PopulateContents()
 	..()
@@ -168,7 +157,7 @@
 	new /obj/item/encryptionkey/headset_med(src)
 
 /obj/structure/closet/secure_closet/detective
-	name = "\improper detective's cabinet"
+	name = "\improper deputy's cabinet"
 	req_access = list(ACCESS_FORENSICS_LOCKERS)
 	icon_state = "cabinet"
 	resistance_flags = FLAMMABLE
@@ -179,12 +168,10 @@
 /obj/structure/closet/secure_closet/detective/PopulateContents()
 	..()
 	new /obj/item/clothing/under/rank/security/detective(src)
-	new /obj/item/clothing/under/rank/security/detective/skirt(src)
 	new /obj/item/clothing/suit/det_suit(src)
 	new /obj/item/clothing/head/fedora/det_hat(src)
 	new /obj/item/clothing/gloves/color/black(src)
 	new /obj/item/clothing/under/rank/security/detective/grey(src)
-	new /obj/item/clothing/under/rank/security/detective/grey/skirt(src)
 	new /obj/item/clothing/accessory/waistcoat(src)
 	new /obj/item/clothing/suit/det_suit/grey(src)
 	new /obj/item/clothing/head/fedora(src)
@@ -207,16 +194,19 @@
 	..()
 	for(var/i in 1 to 5)
 		new /obj/item/reagent_containers/syringe/lethal/execution(src)
+
 /obj/structure/closet/secure_closet/brig
 	name = "brig locker"
 	req_access = list(ACCESS_BRIG)
 	anchored = TRUE
 	var/id = null
+
 /obj/structure/closet/secure_closet/evidence
 	anchored = TRUE
 	name = "Secure Evidence Closet"
 	req_access_txt = "0"
 	req_one_access_txt = list(ACCESS_ARMORY, ACCESS_FORENSICS_LOCKERS)
+
 /obj/structure/closet/secure_closet/brig/PopulateContents()
 	..()
 	new /obj/item/clothing/under/rank/prisoner( src )
