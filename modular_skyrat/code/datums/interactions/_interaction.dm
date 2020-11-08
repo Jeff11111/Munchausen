@@ -72,9 +72,9 @@ var/list/interactions
 		return FALSE
 
 	if(user.last_interaction_time < world.time)
-		return TRUE
+		return FALSE
 	
-	return FALSE
+	return TRUE
 
 /datum/interaction/proc/evaluate_target(mob/living/user, mob/living/target, silent = TRUE)
 	if(!user_is_target)
@@ -156,29 +156,3 @@ var/list/interactions
 	if(interaction_sound)
 		playsound(get_turf(user), interaction_sound, 50, 1, -1)
 	return
-/*
-/atom/movable/attack_hand(mob/living/user)
-	. = ..()
-	if(can_buckle && buckled_mob)
-		if(user_unbuckle_mob(user))
-			return TRUE
-
-/atom/movable/MouseDrop_T(mob/living/M, mob/living/user)
-	. = ..()
-	if(can_buckle && istype(M) && !buckled_mob)
-		if(user_buckle_mob(M, user))
-			return TRUE
-
-
-/atom/movable/attack_hand(mob/living/user)
-	. = ..()
-	if(can_buckle && buckled_mob)
-		if(user_unbuckle_mob(user))
-			return TRUE
-
-/atom/movable/MouseDrop_T(mob/living/carbon/human/M, mob/living/user)
-	. = ..()
-	if(can_buckle && istype(M) && !buckled_mob)
-		if(user_buckle_mob(M, user))
-			return TRUE
-*/
