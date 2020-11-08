@@ -82,6 +82,9 @@
 	var/list/ambitions
 // SKYRAT CHANGES END
 
+	/// Combat music
+	var/combat_music = 'modular_skyrat/sound/music/ritual.ogg'
+
 /datum/mind/New(var/key)
 	skill_holder = new(src)
 	src.key = key

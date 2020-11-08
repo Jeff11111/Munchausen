@@ -22,11 +22,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 		"Pineapple" = PINEAPPLE,
 		"Breakfast" = BREAKFAST
 	))
-GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
-		"Hot Plates" = 'modular_skyrat/sound/music/hot_plates.ogg',
-		"Thunderdome" = 'modular_skyrat/sound/music/thunderdome.ogg',
-		"Death Squad" ='modular_skyrat/sound/music/deathsquads.ogg',
-	))
 
 /datum/preferences
 	var/client/parent
@@ -141,8 +136,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 	var/list/body_descriptors = list()
 
 	var/list/alt_titles_preferences = list()
-
-	var/combat_music = "None"
 	
 	var/accept_ERG = FALSE
 
@@ -3052,12 +3045,6 @@ GLOBAL_LIST_INIT(combat_music_options, list( // Skyrat addition
 							pain_style = "Mood Guy"
 						if("Mood Guy")
 							pain_style = "Pain Guy"
-				if("combat_music")
-					combat_music = input(user, "What song do you want to use as combat music?", "Combat music") as null|anything in (GLOB.combat_music_options + "None")
-					if(!combat_music || (combat_music == "None"))
-						combat_music = null
-					else
-						combat_music = sanitize_inlist(combat_music, GLOB.combat_music_options)
 				if("persistent_scars")
 					persistent_scars = !persistent_scars
 				if("clear_scars")
