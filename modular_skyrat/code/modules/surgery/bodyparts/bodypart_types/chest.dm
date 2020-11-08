@@ -18,6 +18,6 @@
 	dismember_mod = 0.3
 	disembowel_mod = 0.6
 	encased = "ribs"
-	miss_entirely_prob = 10
+	miss_entirely_prob = 5
 	zone_prob = 70
 	extra_zone_prob = 30

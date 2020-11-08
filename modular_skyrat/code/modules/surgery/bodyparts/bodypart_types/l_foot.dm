@@ -18,6 +18,6 @@
 	heal_zones = list(BODY_ZONE_L_LEG)
 	specific_locations = list("left sole", "left ankle", "left heel")
 	max_cavity_size = WEIGHT_CLASS_TINY
-	miss_entirely_prob = 25
+	miss_entirely_prob = 15
 	zone_prob = 30
 	extra_zone_prob = 35

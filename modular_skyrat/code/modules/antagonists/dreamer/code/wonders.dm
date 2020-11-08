@@ -104,22 +104,19 @@
 	if(gazed_at)
 		STOP_PROCESSING(SSobj, src)
 		return
-	var/list/viewers = view(src)
+	var/list/viewers = range(5, src)
 	for(var/mob/living/carbon/human/H in viewers)
 		if(is_dreamer(H))
 			if(H.stat == DEAD)
 				continue
 			for(var/mob/living/carbon/human/Y in viewers - H)
-				H.blur_eyes(2)
+				Y.blur_eyes(2)
 				if(prob(10))
-					to_chat(H, "<span class='userdanger'>It is WONDERFUL!</span>")
-				continue
-			continue
+					to_chat(Y, "<span class='userdanger'>It is WONDERFUL!</span>")
+				break
 		else
 			if(H.stat == DEAD)
 				continue
-			if(gazed_at)
-				return
 			var/obj/item/organ/heart/heart = H.getorganslot(ORGAN_SLOT_HEART)
 			if(dream_master && heart && (!heart.etching || !(heart.etching in dream_master.heart_keys)))
 				heart.etching = "<b>INRL</b> - [key_text] - [key_num]"

@@ -21,6 +21,6 @@
 	dismember_mod = 0.7
 	disembowel_mod = 0.7
 	encased = "hips"
-	miss_entirely_prob = 20
+	miss_entirely_prob = 10
 	zone_prob = 50
 	extra_zone_prob = 25
