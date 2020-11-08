@@ -18,6 +18,9 @@
 	interaction_flags_machine = INTERACT_MACHINE_OFFLINE
 	req_one_access = list(ACCESS_HEADS, ACCESS_ARMORY) //Heads of staff or the warden can go here to claim recover items from their department that people went were cryodormed with.
 
+	light_color = LIGHT_COLOR_GREEN
+	light_power = 1
+	light_range = 2
 	var/menu = 1 //Which menu screen to display
 
 	//Used for logging people entering cryosleep and important items they are carrying.
@@ -169,6 +172,9 @@
 	density = TRUE
 	anchored = TRUE
 	state_open = FALSE
+	light_color = LIGHT_COLOR_BLUE
+	light_power = 1
+	light_range = 2
 
 	var/on_store_message = "has entered long-term storage."
 	var/on_store_name = "Cryogenic Oversight"
@@ -219,12 +225,16 @@
 /obj/machinery/cryopod/update_icon()
 	. = ..()
 	if(occupant)
+		light_range = 2
 		icon_state = "[initial(icon_state)]-closed"
 	else
 		if(state_open)
+			light_range = 0
 			icon_state = "[initial(icon_state)]-open"
 		else
 			icon_state = "[initial(icon_state)]-freezy"
+			light_range = 0
+	update_light()
 
 /obj/machinery/cryopod/buckle_mob(mob/living/M, force, check_loc)
 	..()
