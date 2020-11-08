@@ -157,9 +157,14 @@
 	name = "chief enforcer cap"
 	desc = "The robust standard-issue cap of the Chief Enforcer. For showing the officers who's in charge."
 	icon_state = "hoscap"
-	armor = list("melee" = 40, "bullet" = 30, "laser" = 25, "energy" = 10, "bomb" = 25, "bio" = 10, "rad" = 0, "fire" = 50, "acid" = 60, "wound" = 20)
+	armor = list("melee" = 40, "bullet" = 30, "laser" = 30, "energy" = 10, "bomb" = 25, "bio" = 10, "rad" = 0, "fire" = 50, "acid" = 60, "wound" = 20)
 	strip_delay = 80
 	dynamic_hair_suffix = ""
+
+/obj/item/clothing/head/HoS/police
+	name = "chief enforcer's police hat"
+	desc = "It's a special armored hat issued to the Chief Enforcer of a security force. Protects the head from impacts"
+	icon_state = "policehelm-ce"
 
 /obj/item/clothing/head/HoS/syndicate
 	name = "syndicate cap"
