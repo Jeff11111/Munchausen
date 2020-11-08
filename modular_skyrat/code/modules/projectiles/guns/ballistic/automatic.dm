@@ -6,13 +6,15 @@
 /obj/item/gun/ballistic/automatic/wt550
 	name = "security semi-auto WT-550"
 	desc = "An outdated personal defence weapon. Uses 4.6x30mm rounds."
-	icon = 'modular_skyrat/icons/obj/bobstation/guns/smg.dmi'
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/rifle.dmi'
 	icon_state = "wt550"
 	item_state = "arg"
 
 /obj/item/gun/ballistic/automatic/wt550/update_icon()
 	..()
-	icon_state = "[initial(icon_state)][magazine ? "-[CEILING(get_ammo(0)/4, 1)*4]" : "-0"]"
+	icon_state = "[initial(icon_state)][chambered ? "-e" : ""]"
+	if(magazine)
+		add_overlay("[initial(icon_state)]-mag")
 
 /obj/item/gun/ballistic/automatic/wt550/update_overlays()
 	. = ..()

@@ -141,7 +141,7 @@
 	if(istype(parent) && !is_bruised())
 		owner.custom_pain("You feel a stabbing pain in your [parent.name]!", 50, TRUE, affecting = parent)
 	if(!is_broken())
-		applyOrganDamage(maxHealth/4)
+		applyOrganDamage(35) //yeah its suppose to not be affected by how good lung is
 
 //Exposure to extreme pressures can rupture lungs
 /obj/item/organ/lungs/proc/check_rupturing(breath_pressure, datum/gas_mixture/enviro)
