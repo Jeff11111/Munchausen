@@ -18,10 +18,10 @@
 	UnregisterSignal(src, COMSIG_MOB_EXAMINED)
 
 /mob/living/proc/on_examine_atom(atom/examined)
-	if(!istype(examined) || !client)
+	if(!istype(examined) || !client || !examined.on_examined_check())
 		return
 
 	if(get_dist(src, examined) > EYE_CONTACT_RANGE)
 		return
 	
-	visible_message(message = "<span class='notice'>\The [src] examines [examined].</span>", vision_distance = 2)
+	visible_message("<span class='notice'>\The [src] examines [examined].</span>", "<span class='notice'>I examine [examined].</span>", vision_distance = 4)
