@@ -721,7 +721,7 @@ SUBSYSTEM_DEF(ticker)
 	update_everything_flag_in_db()
 	if(!round_end_sound)
 		round_end_sound = pick(
-			'modular_skyrat/sound/dementia/roundstart.ogg',
+			'modular_skyrat/sound/dementia/roundend.ogg',
 		)
 	SEND_SOUND(world, sound(round_end_sound))
 	text2file(login_music, "data/last_round_lobby_music.txt")
