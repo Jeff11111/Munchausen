@@ -10,7 +10,8 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 
 /mob/living/carbon/BiologicalLife(seconds, times_fired)
 	. = ..()
-	handle_dreamer()
+	if(.)
+		handle_dreamer()
 
 /mob/living/carbon/proc/handle_dreamer()
 	if(mind && client && hud_used && hud_used.dreamer)
