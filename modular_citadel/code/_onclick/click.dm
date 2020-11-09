@@ -47,7 +47,7 @@
 			switch(c_intent)
 				if(CI_DUAL)
 					var/obj/item/wap = get_inactive_held_item()
-					visible_message("<span class='warning'><b>\The [src]</b> attacks with their offhand!</span>")
+					visible_message("<span class='warning'>\The [src]attacks with their offhand!</span>")
 					if(wap)
 						wap.melee_attack_chain(src, A, params, flags = ATTACKCHAIN_RIGHTCLICK)
 					else
@@ -75,7 +75,7 @@
 			switch(c_intent)
 				if(CI_DUAL)
 					var/obj/item/wap = get_inactive_held_item()
-					visible_message("<span class='warning'><b>\The [src]</b> attacks with their offhand!</span>")
+					visible_message("<span class='warning'>\The [src] attacks with their offhand!</span>")
 					if(wap)
 						wap.melee_attack_chain(src, A, params, flags = ATTACKCHAIN_RIGHTCLICK)
 					else

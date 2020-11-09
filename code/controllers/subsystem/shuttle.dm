@@ -18,7 +18,6 @@ SUBSYSTEM_DEF(shuttle)
 
 		//emergency shuttle stuff
 	var/obj/docking_port/mobile/emergency/emergency
-	var/obj/docking_port/mobile/arrivals/arrivals
 	var/obj/docking_port/mobile/emergency/backup/backup_shuttle
 	var/emergencyCallTime = 6000	//time taken for emergency shuttle to reach the station when called (in deciseconds)
 	var/emergencyDockTime = 1800	//time taken for emergency shuttle to leave again once it has docked (in deciseconds)
@@ -79,8 +78,6 @@ SUBSYSTEM_DEF(shuttle)
 
 	initial_load()
 
-	if(!arrivals)
-		WARNING("No /obj/docking_port/mobile/arrivals placed on the map!")
 	if(!emergency)
 		WARNING("No /obj/docking_port/mobile/emergency placed on the map!")
 	if(!backup_shuttle)
@@ -557,8 +554,6 @@ SUBSYSTEM_DEF(shuttle)
 
 	if (istype(SSshuttle.emergency))
 		emergency = SSshuttle.emergency
-	if (istype(SSshuttle.arrivals))
-		arrivals = SSshuttle.arrivals
 	if (istype(SSshuttle.backup_shuttle))
 		backup_shuttle = SSshuttle.backup_shuttle
 

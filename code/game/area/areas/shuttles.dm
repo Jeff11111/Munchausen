@@ -114,8 +114,10 @@
 	name = "Custom Powered player shuttle"
 	requires_power = FALSE
 
+//not a shuttle, a remnant of a darker age
 /area/shuttle/arrival
-	name = "Arrival Shuttle"
+	name = "Cryodorms"
+	dynamic_lighting = DYNAMIC_LIGHTING_ENABLED
 	unique = TRUE  // SSjob refers to this area for latejoiners
 
 /area/shuttle/pod_1

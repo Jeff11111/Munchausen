@@ -27,7 +27,7 @@
 	name = "84mm Rocket Propelled Grenade Launcher"
 	desc = "A reusable rocket propelled grenade launcher preloaded with a low-yield 84mm HE round. \
 		Guaranteed to send your target out with a bang or your money back!"
-	item = /obj/item/gun/ballistic/rocketlauncher
+	item = /obj/item/gun/ballistic/rocketlauncher/unrestricted
 	cost = 8
 	surplus = 30
 	include_modes = list(/datum/game_mode/nuclear)
@@ -38,7 +38,7 @@
 			this extremely dubious pistol is guaranteed to dislocate your wrists and hit the broad side of a barn! \
 	 		Uses sniper ammo. \
 	 		Bullets tend to veer off-course. We are not responsible for any unintentional damage or injury resulting from inaacuracy."
-	item = /obj/item/gun/ballistic/automatic/pistol/antitank/syndicate
+	item = /obj/item/gun/ballistic/automatic/pistol/antitank
 	cost = 14
 	surplus = 25
 	include_modes = list(/datum/game_mode/nuclear)
@@ -91,7 +91,7 @@
 	name = "Bulldog Shotgun"
 	desc = "A fully-loaded semi-automatic drum-fed shotgun. Compatible with all 12g rounds. Designed for close \
 			quarter anti-personnel engagements."
-	item = /obj/item/gun/ballistic/automatic/shotgun/bulldog
+	item = /obj/item/gun/ballistic/automatic/shotgun/bulldog/unrestricted
 	cost = 8
 	surplus = 40
 	include_modes = list(/datum/game_mode/nuclear)
@@ -100,7 +100,7 @@
 	name = "C-20r Submachine Gun"
 	desc = "A fully-loaded Scarborough Arms bullpup submachine gun. The C-20r fires .45 rounds with a \
 			24-round magazine and is compatible with suppressors."
-	item = /obj/item/gun/ballistic/automatic/c20r
+	item = /obj/item/gun/ballistic/automatic/c20r/unrestricted
 	cost = 10
 	surplus = 40
 	include_modes = list(/datum/game_mode/nuclear)
@@ -189,7 +189,7 @@
 	name = "L6 Squad Automatic Weapon"
 	desc = "A fully-loaded Aussec Armoury belt-fed machine gun. \
 			This deadly weapon has a massive 50-round magazine of devastating 1.95x129mm ammunition."
-	item = /obj/item/gun/ballistic/automatic/l6_saw
+	item = /obj/item/gun/ballistic/automatic/l6_saw/unrestricted
 	cost = 18
 	surplus = 0
 	include_modes = list(/datum/game_mode/nuclear)
@@ -198,7 +198,7 @@
 	name = "M-90gl Carbine"
 	desc = "A fully-loaded, specialized three-round burst carbine that fires 5.56mm ammunition from a 30 round magazine \
 			with a toggleable 40mm underbarrel grenade launcher."
-	item = /obj/item/gun/ballistic/automatic/m90
+	item = /obj/item/gun/ballistic/automatic/m90/unrestricted
 	cost = 18
 	surplus = 50
 	include_modes = list(/datum/game_mode/nuclear)
@@ -215,7 +215,7 @@
 /datum/uplink_item/dangerous/sniper
 	name = "Sniper Rifle"
 	desc = "Ranged fury, Syndicate style. Guaranteed to cause shock and awe or your TC back!"
-	item = /obj/item/gun/ballistic/automatic/sniper_rifle/syndicate
+	item = /obj/item/gun/ballistic/automatic/sniper_rifle
 	cost = 16
 	surplus = 25
 	include_modes = list(/datum/game_mode/nuclear)
@@ -230,7 +230,7 @@
 /datum/uplink_item/dangerous/foamsmg
 	name = "Toy Submachine Gun"
 	desc = "A fully-loaded Donksoft bullpup submachine gun that fires riot grade darts with a 20-round magazine."
-	item = /obj/item/gun/ballistic/automatic/c20r/toy
+	item = /obj/item/gun/ballistic/automatic/c20r/toy/unrestricted/riot
 	cost = 5
 	surplus = 0
 	include_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
@@ -239,7 +239,7 @@
 	name = "Toy Machine Gun"
 	desc = "A fully-loaded Donksoft belt-fed machine gun. This weapon has a massive 50-round magazine of devastating \
 			riot grade darts, that can briefly incapacitate someone in just one volley."
-	item = /obj/item/gun/ballistic/automatic/l6_saw/toy
+	item = /obj/item/gun/ballistic/automatic/l6_saw/toy/unrestricted/riot
 	cost = 10
 	surplus = 0
 	include_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
@@ -248,6 +248,6 @@
 	name = "Toy Pistol with Riot Darts"
 	desc = "An innocent-looking toy pistol designed to fire foam darts. Comes loaded with riot-grade \
 			darts effective at incapacitating a target."
-	item = /obj/item/gun/ballistic/automatic/toy/pistol/riot
+	item = /obj/item/gun/ballistic/automatic/toy/pistol/riot/unrestricted
 	cost = 3
 	surplus = 10

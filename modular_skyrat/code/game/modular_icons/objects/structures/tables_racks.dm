@@ -112,9 +112,19 @@
 
 	if(adjacencies & N_SOUTH)
 		if(adjacencies & N_WEST)
-			adjacencies |= N_SOUTHWEST
+			AM = find_type_in_direction(A, SOUTHWEST, /turf/closed/wall)
+			if(AM == NULLTURF_BORDER)
+				if((A.smooth & SMOOTH_BORDER))
+					adjacencies |= SOUTHWEST
+			else if( (AM && !istype(AM)) || (istype(AM) && AM.anchored) )
+				adjacencies |= SOUTHWEST
 		if(adjacencies & N_EAST)
-			adjacencies |= N_SOUTHEAST
+			AM = find_type_in_direction(A, SOUTHEAST)
+			if(AM == NULLTURF_BORDER)
+				if((A.smooth & SMOOTH_BORDER))
+					adjacencies |= N_SOUTHEAST
+			else if( (AM && !istype(AM)) || (istype(AM) && AM.anchored) )
+				adjacencies |= N_SOUTHEAST
 
 	return adjacencies
 

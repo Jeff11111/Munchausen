@@ -236,19 +236,6 @@
 			if(!SSshuttle.toggleShuttle("ferry","ferry_home","ferry_away"))
 				message_admins("[key_name_admin(usr)] moved the CentCom ferry")
 				log_admin("[key_name(usr)] moved the CentCom ferry")
-
-		if("togglearrivals")
-			if(!check_rights(R_FUN)) //Skyrat change
-				return
-			var/obj/docking_port/mobile/arrivals/A = SSshuttle.arrivals
-			if(A)
-				var/new_perma = !A.perma_docked
-				A.perma_docked = new_perma
-				SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Permadock Arrivals Shuttle", "[new_perma ? "Enabled" : "Disabled"]"))
-				message_admins("[key_name_admin(usr)] [new_perma ? "stopped" : "started"] the arrivals shuttle")
-				log_admin("[key_name(usr)] [new_perma ? "stopped" : "started"] the arrivals shuttle")
-			else
-				to_chat(usr, "<span class='admin'>There is no arrivals shuttle</span>")
 		if("showailaws")
 			if(!check_rights(R_ADMIN))
 				return

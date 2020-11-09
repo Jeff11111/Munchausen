@@ -369,11 +369,9 @@
 			switch(apparent_blood_volume)
 				if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 					msg += "[t_He] [t_has] pale skin.\n"
-				if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+				if(-INFINITY to BLOOD_VOLUME_OKAY)
 					msg += "<b>[t_He] look[p_s()] like pale death.</b>\n"
-				if(-INFINITY to BLOOD_VOLUME_BAD)
-					msg += "<span class='deadsay'><b>[t_He] resemble[p_s()] a crushed, empty juice pouch.</b></span>\n"
-	
+
 	var/bleed_text
 	var/list/obj/item/bodypart/bleeding_limbs = list()
 	var/list/obj/item/bodypart/grasped_limbs = list()

@@ -27,12 +27,6 @@
 	preferred_direction = dir
 	return INITIALIZE_HINT_LATELOAD	//for latejoin list
 
-/obj/docking_port/mobile/arrivals/register()
-	..()
-	if(SSshuttle.arrivals)
-		WARNING("More than one arrivals docking_port placed on map! Ignoring duplicates.")
-	SSshuttle.arrivals = src
-
 /obj/docking_port/mobile/arrivals/LateInitialize()
 	areas = list()
 

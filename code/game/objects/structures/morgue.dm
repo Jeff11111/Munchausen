@@ -261,6 +261,9 @@ GLOBAL_LIST_EMPTY(crematoriums)
 
 			//Send back to lobby if they have a mind
 			if(M.mind)
+				//GET BACK HERE NIGGA YOU'RE GETTING
+				//JEWED
+				M.mind.grab_ghost(TRUE)
 				var/mob/dead/new_player/NP = new()
 				M.transfer_ckey(NP)
 			else

@@ -8,7 +8,7 @@
 	var/c_intent = combat_intent
 	if(c_intent == CI_DUAL)
 		var/obj/item/W = get_inactive_held_item()
-		visible_message("<span class='warning'><b>\The [src]</b> attakcs with their offhand!</span>")
+		visible_message("<span class='warning'>\The [src]<attakcs with their offhand!</span>")
 		if(W)
 			W.melee_attack_chain(src, A)
 		else
