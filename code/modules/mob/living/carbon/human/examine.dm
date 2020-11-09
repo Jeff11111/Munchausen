@@ -536,15 +536,54 @@
 		
 		if((consciousness != LOOKS_DEAD) && getorgan(/obj/item/organ/brain))
 			if(!key)
-				. += "<span class='deadsay'>[t_He] [t_is] totally catatonic. The stresses of life in deep-space must have been too much for [t_him]. Any recovery is unlikely.</span>\n"
+				msg += "<span class='deadsay'>[t_He] [t_is] totally catatonic. The stresses of life in deep-space must have been too much for [t_him]. Any recovery is unlikely.</span>\n"
 			else if(!client)
-				. += "[t_He] [t_has] a blank, absent-minded stare and [t_has] been completely unresponsive to anything for [round(((world.time - lastclienttime) / (1 MINUTES)),1)] minutes. [t_He] may snap out of it soon.\n" //SKYRAT CHANGE - ssd indicator
+				msg += "[t_He] [t_has] a blank, absent-minded stare and [t_has] been completely unresponsive to anything for [round(((world.time - lastclienttime) / (1 MINUTES)),1)] minutes. [t_He] may snap out of it soon.\n" //SKYRAT CHANGE - ssd indicator
 		
 		if(consciousness_msg)
-			. += consciousness_msg
+			msg += consciousness_msg
 	//
 
 	//Skyrat changes begin
+	if(gunpointing)
+		msg += "<b>[t_He] [t_is] holding [gunpointing.target.name] at gunpoint with [gunpointing.aimed_gun.name]!</b>\n"
+	if(gunpointed.len)
+		for(var/datum/gunpoint/GP in gunpointed)
+			msg += "<b>[GP.source.name] [GP.source.p_are()] holding [t_him] at gunpoint with [GP.aimed_gun.name]!</b>\n"
+	//Skyrat changes end
+
+	//Strength message
+	var/our_str = 10
+	if(mind)
+		our_str = GET_STAT_LEVEL(src, fakestr)
+		if(our_str <= 0)
+			our_str = GET_STAT_LEVEL(src, str)
+	
+	var/user_str = 10
+	if(user.mind)
+		user_str = GET_STAT_LEVEL(user, str)
+	
+	var/str_diff = user_str - our_str
+	switch(str_diff)
+		if(-INFINITY to -3)
+			msg += "[t_He] [t_is] much stronger than me."
+		if(-2 to -1)
+			msg += "[t_He] [t_is] stronger than me."
+		if(0)
+			msg += "[t_He] [t_is] about as strong as me."
+		if(1 to 2)
+			msg += "[t_He] [t_is] weaker than me."
+		if(3 to INFINITY)
+			msg += "[t_He] [t_is] much weaker than me."
+	
+	//descriptors
+	msg |= show_descriptors_to(user)
+	
+	var/trait_exam = common_trait_examine()
+	if(!screwy_self)
+		if(!isnull(trait_exam))
+			msg += trait_exam
+
 	var/scar_severity = 0
 	if(!screwy_self)
 		for(var/i in all_scars)
@@ -561,49 +600,10 @@
 				msg += "<span class='notice'><b><i>[t_He] [t_has] significantly disfiguring scarring, you can look again to take a closer look...</i></b></span>\n"
 			if(WOUND_SEVERITY_LOSS to INFINITY)
 				msg += "<span class='notice'><b><i>[t_He] [t_is] just absolutely fucked up, you can look again to take a closer look...</i></b></span>\n"
-	
-	if(gunpointing)
-		msg += "<b>[t_He] [t_is] holding [gunpointing.target.name] at gunpoint with [gunpointing.aimed_gun.name]!</b>\n"
-	if(gunpointed.len)
-		for(var/datum/gunpoint/GP in gunpointed)
-			msg += "<b>[GP.source.name] [GP.source.p_are()] holding [t_him] at gunpoint with [GP.aimed_gun.name]!</b>\n"
-	//Skyrat changes end
 
 	if(length(msg))
 		. += "<span class='warning'>[msg.Join("")]</span>"
-
-	//Strength message
-	var/our_str = 10
-	if(mind)
-		our_str = GET_STAT_LEVEL(src, fakestr)
-		if(our_str <= 0)
-			our_str = GET_STAT_LEVEL(src, str)
 	
-	var/user_str = 10
-	if(user.mind)
-		user_str = GET_STAT_LEVEL(user, str)
-	
-	var/str_diff = user_str - our_str
-	switch(str_diff)
-		if(-INFINITY to -3)
-			. += "[t_He] [t_is] much stronger than me."
-		if(-2 to -1)
-			. += "[t_He] [t_is] stronger than me."
-		if(0)
-			. += "[t_He] [t_is] about as strong as me."
-		if(1 to 2)
-			. += "[t_He] [t_is] weaker than me."
-		if(3 to INFINITY)
-			. += "[t_He] [t_is] much weaker than me."
-	
-	//descriptors
-	. |= show_descriptors_to(user)
-	
-	var/trait_exam = common_trait_examine()
-	if(!screwy_self)
-		if(!isnull(trait_exam))
-			. += trait_exam
-
 	var/traitstring = get_trait_string()
 	if(ishuman(user))
 		var/obj/item/organ/cyberimp/eyes/hud/CIH = H.getorgan(/obj/item/organ/cyberimp/eyes/hud)
