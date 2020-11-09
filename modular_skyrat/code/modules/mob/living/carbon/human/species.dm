@@ -372,6 +372,7 @@
 			ran_zone_prob = supposed_to_affect.zone_prob * 0.75
 			extra_zone_prob = supposed_to_affect.extra_zone_prob * 0.5
 			miss_entirely = supposed_to_affect.miss_entirely_prob * 1.5
+		miss_entirely /= (lying ? 1 : 10)
 		if(user.mind)
 			var/datum/stats/dex/dex = GET_STAT(user, dex)
 			if(dex)
@@ -553,6 +554,7 @@
 			ran_zone_prob = supposed_to_affect.zone_prob * 0.75
 			extra_zone_prob = supposed_to_affect.extra_zone_prob * 0.5
 			miss_entirely = supposed_to_affect.miss_entirely_prob * 1.5
+		miss_entirely /= (lying ? 1 : 10)
 		if(user.mind)
 			var/datum/stats/dex/dex = GET_STAT(user, dex)
 			if(dex)

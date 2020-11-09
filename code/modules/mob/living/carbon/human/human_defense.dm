@@ -78,6 +78,7 @@
 			var/obj/item/bodypart/supposed_to_affect = get_bodypart(P.def_zone)
 			if(supposed_to_affect)
 				miss_entirely = supposed_to_affect.miss_entirely_prob
+			miss_entirely /= (lying ? 1 : 10)
 			switch(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.5, GET_SKILL_LEVEL(fireboy, ranged), mod = -(miss_entirely/5)))
 				//Missed shot
 				if(DICE_CRIT_FAILURE, DICE_FAILURE)
@@ -147,6 +148,7 @@
 			ran_zone_prob = supposed_to_affect.zone_prob
 			extra_zone_prob = supposed_to_affect.extra_zone_prob
 			miss_entirely = supposed_to_affect.miss_entirely_prob
+		miss_entirely /= (lying ? 1 : 10)
 		var/c_intent = CI_DEFAULT
 		if(iscarbon(user))
 			var/mob/living/carbon/carbon_mob = user
