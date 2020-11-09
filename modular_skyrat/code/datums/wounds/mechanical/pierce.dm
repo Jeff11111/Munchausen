@@ -42,29 +42,6 @@
 /datum/wound/mechanical/pierce/wound_injury(datum/wound/old_wound)
 	blood_flow = initial_flow
 
-/datum/wound/mechanical/pierce/receive_damage(wounding_type, wounding_dmg, wound_bonus)
-	if(!victim || victim.stat == DEAD || wounding_dmg < WOUND_MINIMUM_DAMAGE)
-		return
-	if(victim.blood_volume && prob(internal_bleeding_chance + wounding_dmg))
-		if(limb.current_gauze && limb.current_gauze.splint_factor)
-			wounding_dmg *= (1 - limb.current_gauze.splint_factor)
-		var/blood_bled = rand(1, wounding_dmg * internal_bleeding_coefficient) // 12 brute toolbox can cause up to 15/18/21 bloodloss on mod/sev/crit
-		switch(blood_bled)
-			if(1 to 6)
-				victim.bleed(blood_bled, TRUE)
-			if(7 to 13)
-				victim.visible_message("<span class='smalldanger'>Hydraulic fluid leaks from the hole in [victim]'s [limb.name].</span>", "<span class='danger'>You leak hydraulic fluid from the blow to your [limb.name].</span>", vision_distance=COMBAT_MESSAGE_RANGE)
-				victim.bleed(blood_bled, TRUE)
-			if(14 to 19)
-				victim.visible_message("<span class='smalldanger'>A small stream of hydraulic fluid spurts from the hole in [victim]'s [limb.name]!</span>", "<span class='danger'>You spurt a string of hydraulic fluid from the blow to your [limb.name]!</span>", vision_distance=COMBAT_MESSAGE_RANGE)
-				new /obj/effect/temp_visual/dir_setting/bloodsplatter(victim.loc, victim.dir)
-				victim.bleed(blood_bled)
-			if(20 to INFINITY)
-				victim.visible_message("<span class='danger'>A spray of hydraulic fluid streams from the gash in [victim]'s [limb.name]!</span>", "<span class='danger'><b>You gush out a spray of hydraulic fluid from the blow to your [limb.name]!</b></span>", vision_distance=COMBAT_MESSAGE_RANGE)
-				victim.bleed(blood_bled)
-				new /obj/effect/temp_visual/dir_setting/bloodsplatter(victim.loc, victim.dir)
-				victim.add_splatter_floor(get_step(victim.loc, victim.dir))
-
 /datum/wound/mechanical/pierce/handle_process()
 	blood_flow = min(blood_flow, WOUND_SLASH_MAX_BLOODFLOW)
 

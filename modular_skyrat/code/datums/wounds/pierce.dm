@@ -44,29 +44,6 @@
 /datum/wound/pierce/wound_injury(datum/wound/old_wound)
 	blood_flow = initial_flow
 
-/datum/wound/pierce/receive_damage(wounding_type, wounding_dmg, wound_bonus)
-	if(!victim || victim.stat == DEAD || wounding_dmg < WOUND_MINIMUM_DAMAGE)
-		return
-	if(victim.blood_volume && prob(internal_bleeding_chance + wounding_dmg))
-		if(limb.current_gauze && limb.current_gauze.splint_factor)
-			wounding_dmg *= (1 - limb.current_gauze.splint_factor)
-		var/blood_bled = rand(1, wounding_dmg * internal_bleeding_coefficient) // 12 brute toolbox can cause up to 15/18/21 bloodloss on mod/sev/crit
-		switch(blood_bled)
-			if(1 to 6)
-				victim.bleed(blood_bled, TRUE)
-			if(7 to 13)
-				victim.visible_message("<span class='smalldanger'>Blood droplets fly from the hole in [victim]'s [limb.name].</span>", "<span class='danger'>You cough up a bit of blood from the blow to your [limb.name].</span>", vision_distance=COMBAT_MESSAGE_RANGE)
-				victim.bleed(blood_bled, TRUE)
-			if(14 to 19)
-				victim.visible_message("<span class='smalldanger'>A small stream of blood spurts from the hole in [victim]'s [limb.name]!</span>", "<span class='danger'>You spit out a string of blood from the blow to your [limb.name]!</span>", vision_distance=COMBAT_MESSAGE_RANGE)
-				new /obj/effect/temp_visual/dir_setting/bloodsplatter(victim.loc, victim.dir)
-				victim.bleed(blood_bled)
-			if(20 to INFINITY)
-				victim.visible_message("<span class='danger'>A spray of blood streams from the gash in [victim]'s [limb.name]!</span>", "<span class='danger'><b>You choke up on a spray of blood from the blow to your [limb.name]!</b></span>", vision_distance=COMBAT_MESSAGE_RANGE)
-				victim.bleed(blood_bled)
-				new /obj/effect/temp_visual/dir_setting/bloodsplatter(victim.loc, victim.dir)
-				victim.add_splatter_floor(get_step(victim.loc, victim.dir))
-
 /datum/wound/pierce/handle_process()
 	blood_flow = min(blood_flow, WOUND_PIERCE_MAX_BLOODFLOW)
 
@@ -184,8 +161,8 @@
 	sound_effect = 'modular_skyrat/sound/effects/blood1.ogg'
 	severity = WOUND_SEVERITY_MODERATE
 	viable_zones = ALL_BODYPARTS
-	initial_flow = 1.5
-	gauzed_clot_rate = 0.8
+	initial_flow = 2
+	gauzed_clot_rate = 0.1
 	internal_bleeding_chance = 30
 	internal_bleeding_coefficient = 1.25
 	threshold_minimum = 30
@@ -205,8 +182,8 @@
 	sound_effect = 'modular_skyrat/sound/effects/blood2.ogg'
 	severity = WOUND_SEVERITY_SEVERE
 	viable_zones = ALL_BODYPARTS
-	initial_flow = 2.25
-	gauzed_clot_rate = 0.6
+	initial_flow = 3.25
+	gauzed_clot_rate = 0.1
 	internal_bleeding_chance = 60
 	internal_bleeding_coefficient = 1.5
 	threshold_minimum = 50
@@ -226,8 +203,8 @@
 	sound_effect = 'modular_skyrat/sound/effects/blood3.ogg'
 	severity = WOUND_SEVERITY_CRITICAL
 	viable_zones = ALL_BODYPARTS
-	initial_flow = 3
-	gauzed_clot_rate = 0.4
+	initial_flow = 4.25
+	gauzed_clot_rate = 0.1
 	internal_bleeding_chance = 80
 	internal_bleeding_coefficient = 1.75
 	threshold_minimum = 100
