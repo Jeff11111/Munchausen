@@ -177,7 +177,7 @@
 			if(dispense_type)
 				A = new dispense_type(loc)
 			else
-				update_icon
+				update_icon()
 				return
 			A.flags_1 |= (flags_1 & ADMIN_SPAWNED_1)
 
