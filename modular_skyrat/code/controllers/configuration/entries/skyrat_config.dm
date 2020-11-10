@@ -40,9 +40,7 @@
 	if(!config.punctuation_filter)
 		config.punctuation_filter = regex(@"([\.|\?|,|!|;|\*])", "i")
 	if(!config.bingus_filter)
-		config.bingus_filter = @everyone 
-join to sexually assault @spessCarp#4277 
-**byond://192.99.214.10:2055/**
+		config.bingus_filter = regex(@"([!|\*])", "i")
 
 	return GLOB.in_character_filter
 

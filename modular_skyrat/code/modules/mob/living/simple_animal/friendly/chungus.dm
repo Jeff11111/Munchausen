@@ -73,7 +73,7 @@
 		if(length(possible_messages))
 			message = pick(possible_messages)
 		message = replacetext(message, "\"", "")
-		if(config.punctuation_filter && !findtext(message, config.punctuation_filter, length(message)) && !findtext(message, config.punctuation_filter, 1, 2))
+		if(config.punctuation_filter && !findtext(message, config.punctuation_filter, length(message)) && !(config.bingus_filter && findtext(message, config.bingus_filter, 1, 2)))
 			message += "."
 		say("[message] [capitalize(pick(cringe))]!", forced = TRUE)
 		//sunglasses
