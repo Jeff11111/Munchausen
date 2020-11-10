@@ -111,7 +111,6 @@
 
 	var/sitting = 0
 	var/bellyup = 0
-	var/dogborg = FALSE
 
 	var/cansprint = 1
 

@@ -46,7 +46,7 @@
 		add_overlay(head_overlay)
 	update_fire()
 
-	if(client && stat != DEAD && module.dogborg == TRUE)
+	if(client && stat != DEAD)
 		if(resting)
 			if(sitting)
 				icon_state = "[module.cyborg_base_icon]-sit"

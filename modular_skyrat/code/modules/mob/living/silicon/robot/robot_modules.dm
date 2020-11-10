@@ -191,11 +191,6 @@ obj/item/robot_module/butler/Initialize()
 			cyborg_base_icon = "marinapeace"
 			cyborg_icon_override = 'modular_skyrat/icons/mob/customrobot.dmi'
 			has_snowflake_deadsprite = TRUE
-		if("Drake")
-			cyborg_base_icon = "drakepeace" 
-			sleeper_overlay = "drakepeacesleeper"
-			cyborg_icon_override = 'icons/mob/cyborg/drakemech.dmi'
-			dogborg = TRUE
 		if("Bootyborg")
 			cyborg_base_icon = "bootypeace"
 			cyborg_icon_override = 'modular_skyrat/icons/mob/moreborgsmodels.dmi'
@@ -385,8 +380,6 @@ obj/item/robot_module/butler/Initialize()
 		/obj/item/reagent_containers/borghypo/borgshaker/miscshaker,
 		/obj/item/soap/nanotrasen,
 		/obj/item/borg/cyborghug,
-		/obj/item/dogborg_nose,
-		/obj/item/dogborg_tongue,
 		/obj/item/borg_shapeshifter/stable)
 	moduleselect_icon = "standard"
 	hat_offset = -3
