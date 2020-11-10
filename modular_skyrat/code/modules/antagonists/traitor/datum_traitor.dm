@@ -5,7 +5,7 @@
 			stat.level = min(stat.level + 1, MAX_STAT)
 		var/datum/skills/ranged/ranged = owner.mob_skills[SKILL_DATUM(ranged)]
 		if(ranged)
-			ranged.level = min(ranged.level + rand(7,10), MAX_SKILL)
+			ranged.level = min(ranged.level + rand(5,8), MAX_SKILL)
 		var/datum/skills/melee/melee = owner.mob_skills[SKILL_DATUM(melee)]
 		if(melee)
-			melee.level = min(melee.level + rand(5,7), MAX_SKILL)
+			melee.level = min(melee.level + rand(4,6), MAX_SKILL)
