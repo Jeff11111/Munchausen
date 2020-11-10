@@ -1,4 +1,8 @@
 //why did citadel take the moths away anyways
+/datum/species/insect
+	has_bobs = FALSE
+	weiner_type = list("Hemi", "Knotted Hemi")
+
 /datum/species/insect/moth
 	name = "Mothperson"
 	id = "moth"
