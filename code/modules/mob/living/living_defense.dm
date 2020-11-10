@@ -104,7 +104,7 @@
 			Stumble(P.damage)
 			// Do a diceroll to decide whether we get paralyzed/knocked down
 			if(mind)
-				switch(mind.diceroll(STAT_DATUM(end), mod = (-P.damage*0.25)))
+				switch(mind.diceroll(STAT_DATUM(end), mod = -min(15, P.damage*0.2)))
 					if(DICE_CRIT_SUCCESS)
 						shake_camera(src, ((P.damage - 10) * 0.01 + 1) * 2, ((P.damage - 10) * 0.01)* 2)
 					if(DICE_SUCCESS)
