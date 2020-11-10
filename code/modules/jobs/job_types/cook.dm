@@ -41,11 +41,3 @@
 			head = /obj/item/clothing/head/soft/mime
 		if(!visualsOnly)
 			J.cooks++
-
-/datum/outfit/job/cook/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source)
-	..()
-	if(visualsOnly)
-		return
-	var/datum/martial_art/cqc/under_siege/justacook = new
-	justacook.teach(H)
-

@@ -37,24 +37,6 @@
 	item = /obj/item/pen/edagger
 	cost = 2
 
-/datum/uplink_item/stealthy_weapons/martialarts
-	name = "Sleeping Carp Scroll"
-	desc = "This scroll contains the secrets of an ancient martial arts technique. You will master unarmed combat, \
-			gain skin as hard as steel and swat bullets from the air, but you also refuse to use dishonorable ranged weaponry."
-	item = /obj/item/book/granter/martial/carp
-	cost = 17
-	surplus = 0
-	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
-
-/datum/uplink_item/stealthy_weapons/martialartstwo
-	name = "Rising Bass Scroll"
-	desc = "This scroll contains the secrets of an ancient martial arts technique. You will become proficient in fleeing situations, \
-	and dodging all ranged weapon fire, but you will refuse to use dishonorable ranged weaponry."
-	item = /obj/item/book/granter/martial/bass
-	cost = 18
-	surplus = 0
-	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
-
 /datum/uplink_item/stealthy_weapons/crossbow
 	name = "Miniature Energy Crossbow"
 	desc = "A short bow mounted across a tiller in miniature. Small enough to \
@@ -94,13 +76,6 @@
 	item = /obj/item/pen/sleepy
 	cost = 4
 	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
-
-datum/uplink_item/stealthy_weapons/taeclowndo_shoes
-	name = "Tae-clown-do Shoes"
-	desc = "A pair of shoes for the most elite agents of the honkmotherland. They grant the mastery of taeclowndo with some honk-fu moves as long as they're worn."
-	cost = 12
-	item = /obj/item/clothing/shoes/clown_shoes/taeclowndo
-	include_modes = list(/datum/game_mode/nuclear/clown_ops)
 
 /datum/uplink_item/stealthy_weapons/suppressor
 	name = "Suppressor"
