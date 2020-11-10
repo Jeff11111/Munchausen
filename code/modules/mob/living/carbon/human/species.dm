@@ -1343,7 +1343,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 					if(!disable_warning)
 						to_chat(H, "<span class='warning'>\The [G] needs to be slinged before you can wear it!</span>")
 						return FALSE
-			if(!H.wear_suit.allowed)
+			else if(!H.wear_suit.allowed)
 				if(!disable_warning)
 					to_chat(H, "You somehow have a suit with no defined allowed items for suit storage, stop that.")
 				return FALSE
