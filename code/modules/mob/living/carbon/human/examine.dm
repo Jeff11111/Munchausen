@@ -349,19 +349,19 @@
 	if(moodie && !(user == src && HAS_TRAIT(user, TRAIT_SCREWY_MOOD)))
 		switch(moodie.shown_mood)
 			if(-INFINITY to MOOD_LEVEL_SAD4)
-				. += "[t_He] look[p_s()] depressed."
+				msg += "<span class='notice'>[t_He] look[p_s()] depressed.</span>"
 			if(MOOD_LEVEL_SAD4 to MOOD_LEVEL_SAD3)
-				. += "[t_He] look[p_s()] very sad."
+				msg += "<span class='notice'>[t_He] look[p_s()] very sad.</span>"
 			if(MOOD_LEVEL_SAD3 to MOOD_LEVEL_SAD1)
-				. += "[t_He] look[p_s()] a bit down."
+				msg += "<span class='notice'>[t_He] look[p_s()] a bit down.</span>"
 			if(MOOD_LEVEL_SAD1 to MOOD_LEVEL_HAPPY1)
-				. += "[t_He] look[p_s()] about fine."
+				msg += "<span class='notice'>[t_He] look[p_s()] about fine.</span>"
 			if(MOOD_LEVEL_HAPPY1 to MOOD_LEVEL_HAPPY3)
-				. += "[t_He] look[p_s()] quite happy."
+				msg += "<span class='notice'>[t_He] look[p_s()] quite happy.</span>"
 			if(MOOD_LEVEL_HAPPY3 to MOOD_LEVEL_HAPPY4)
-				. += "[t_He] look[p_s()] very happy."
+				msg += "<span class='notice'>[t_He] look[p_s()] very happy.</span>"
 			if(MOOD_LEVEL_HAPPY4 to INFINITY)
-				. += "[t_He] look[p_s()] ecstatic."
+				msg += "<span class='notice'>[t_He] look[p_s()] ecstatic.</span>"
 	
 	if(!screwy_self)
 		if(ShowAsPaleExamine())
@@ -564,20 +564,23 @@
 		user_str = GET_STAT_LEVEL(user, str)
 	
 	var/str_diff = user_str - our_str
+	var/yeah = "<span class='notice'>"
 	switch(str_diff)
 		if(-INFINITY to -3)
-			msg += "[t_He] [t_is] much stronger than me."
+			yeah += "[t_He] [t_is] much stronger than me."
 		if(-2 to -1)
-			msg += "[t_He] [t_is] stronger than me."
+			yeah += "[t_He] [t_is] stronger than me."
 		if(0)
-			msg += "[t_He] [t_is] about as strong as me."
+			yeah += "[t_He] [t_is] about as strong as me."
 		if(1 to 2)
-			msg += "[t_He] [t_is] weaker than me."
+			yeah += "[t_He] [t_is] weaker than me."
 		if(3 to INFINITY)
-			msg += "[t_He] [t_is] much weaker than me."
+			yeah += "[t_He] [t_is] much weaker than me."
+	yeah += "</span>"
+	msg += yeah
 	
 	//descriptors
-	msg |= show_descriptors_to(user)
+	msg |= jointext(show_descriptors_to(user), "<br>")
 	
 	var/trait_exam = common_trait_examine()
 	if(!screwy_self)
