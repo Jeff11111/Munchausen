@@ -72,15 +72,6 @@
 	desc = "<b>I'LL MAKE YOU HONK ALRIGHT.</b>"
 	armor = list("melee" = 10, "bullet" = 10, "laser" = 10,"energy" = 10, "bomb" = 100, "bio" = 100, "rad" = 100, "fire" = 100, "acid" = 100)
 
-//punished venom traitor bundle. yes i'll keep the theme of inconsistent file paths and shit because i'm too lazy to create new files and shit for everything here.
-/datum/uplink_item/bundles_TC/punished
-	name = "Motherbase Shipment"
-	desc = "A kit containing the essentials for any 'big boss'. Contains a tactical turtleneck, thermal eyepatch, sneaking boots and a robotic CQC arm implanter."
-	item = /obj/item/storage/box/syndie_kit/snake
-	cost = 12
-	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
-	cant_discount = TRUE
-
 /obj/item/storage/box/syndie_kit/snake
 	name = "Motherbase Shipment"
 	desc = "Kept you waiting, huh?"

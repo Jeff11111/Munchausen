@@ -160,6 +160,7 @@
 	armor = list("melee" = 40, "bullet" = 30, "laser" = 30, "energy" = 10, "bomb" = 25, "bio" = 10, "rad" = 0, "fire" = 50, "acid" = 60, "wound" = 20)
 	strip_delay = 80
 	dynamic_hair_suffix = ""
+	mutantrace_variation = STYLE_NO_ANTHRO_ICON
 
 /obj/item/clothing/head/HoS/police
 	name = "chief enforcer's police hat"
