@@ -1759,7 +1759,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			ran_zone_prob = supposed_to_affect.zone_prob
 			extra_zone_prob = supposed_to_affect.extra_zone_prob
 			miss_entirely = supposed_to_affect.miss_entirely_prob
-		miss_entirely /= (lying ? 1 : 10)
+		miss_entirely /= (target.lying ? 1 : 10)
 		if(user.mind)
 			var/datum/stats/dex/dex = GET_STAT(user, dex)
 			if(dex)
