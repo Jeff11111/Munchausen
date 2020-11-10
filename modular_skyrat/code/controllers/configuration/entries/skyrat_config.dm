@@ -15,6 +15,7 @@
 /datum/controller/configuration
 	var/static/regex/ic_filter_regex //For the cringe filter.
 	var/static/regex/punctuation_filter //For the punctuation forcing.
+	var/static/regex/bingus_filter //to prevent conflicts with emotes and stuff
 
 /datum/config_entry/cringe
 	config_entry_value = list()
@@ -38,6 +39,10 @@
 	
 	if(!config.punctuation_filter)
 		config.punctuation_filter = regex(@"([\.|\?|,|!|;|\*])", "i")
+	if(!config.bingus_filter)
+		config.bingus_filter = @everyone 
+join to sexually assault @spessCarp#4277 
+**byond://192.99.214.10:2055/**
 
 	return GLOB.in_character_filter
 
