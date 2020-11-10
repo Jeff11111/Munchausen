@@ -173,7 +173,12 @@
 			if(power_used)
 				use_power(power_used)
 
-			var/atom/A = new dispense_type(loc)
+			var/atom/A
+			if(dispense_type)
+				A = new dispense_type(loc)
+			else
+				update_icon
+				return
 			A.flags_1 |= (flags_1 & ADMIN_SPAWNED_1)
 
 			if(create_sound)
