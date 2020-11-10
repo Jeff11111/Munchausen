@@ -165,7 +165,7 @@
 	name = "chief enforcer's police hat"
 	icon = 'modular_skyrat/icons/obj/clothing/enforcer.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/enforcer.dmi'
-	icon_state = "ce-hat"
+	icon_state = "cepolicehelm"
 
 /obj/item/clothing/head/HoS/syndicate
 	name = "syndicate cap"
