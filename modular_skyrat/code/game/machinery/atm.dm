@@ -12,6 +12,7 @@
 /obj/machinery/atm/ComponentInitialize()
 	. = ..()
 	comicao_trading = AddComponent(/datum/component/uplink, null, TRUE, FALSE, /datum/game_mode/nuclear)
+	comicao_trading.teleports_items = FALSE
 	RegisterSignal(src, COMSIG_COMPONENT_UPLINK_LOCK, /atom/.proc/update_icon)
 	RegisterSignal(src, COMSIG_COMPONENT_UPLINK_OPEN, /atom/.proc/update_icon)
 

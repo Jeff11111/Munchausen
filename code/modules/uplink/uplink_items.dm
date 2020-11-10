@@ -94,13 +94,33 @@
 		A = new spawn_path(get_turf(user))
 	else
 		A = spawn_path
-	if(ishuman(user) && istype(A, /obj/item))
-		var/mob/living/carbon/human/H = user
-		if(H.put_in_hands(A))
-			to_chat(H, "[A] materializes into your hands!")
+	if(U.teleports_items || !isitem(A))
+		if(ishuman(user) && istype(A, /obj/item))
+			var/mob/living/carbon/human/H = user
+			if(H.put_in_hands(A))
+				to_chat(H, "[A] materializes into your hands!")
+				return A
+		to_chat(user, "[A] materializes onto the floor.")
+		return A
+	else
+		var/list/turf/chungus = list()
+		for(var/fuck in SSpersistence.spawned_objects)
+			chungus |= get_turf(SSpersistence.spawned_objects[fuck])
+		var/turf/open/fuck
+		if(length(chungus))
+			fuck = pick(chungus)
+		else
+			for(var/FUCK in GLOB.deliverybeacons)
+				chungus |= get_turf(FUCK)
+			if(length(chungus))
+				fuck = pick(chungus)
+		if(fuck)
+			var/obj/item/storage/backpack/satchel/flat/fucker = new(fuck)
+			A.forceMove(fuck)
+			SEND_SIGNAL(fucker, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE)
+			var/area/chungi = get_area(fucker)
+			to_chat(user, "<span class='info'>[A] has been delivered to: [fucker.x], [fucker.y], [fucker.z] ([chungi.name]).<br>Good luck, agent.</span>")
 			return A
-	to_chat(user, "[A] materializes onto the floor.")
-	return A
 
 /*
 	Uplink Categories:

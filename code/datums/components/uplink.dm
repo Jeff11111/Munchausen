@@ -29,6 +29,7 @@ GLOBAL_LIST_EMPTY(uplinks)
 	var/debug = FALSE
 	var/saved_player_population = 0
 	var/list/filters = list()
+	var/teleports_items = TRUE
 
 /datum/component/uplink/Initialize(_owner, _lockable = TRUE, _enabled = FALSE, datum/game_mode/_gamemode, starting_tc = 20, datum/ui_state/_checkstate, datum/traitor_class/traitor_class)
 	if(!isatom(parent))
