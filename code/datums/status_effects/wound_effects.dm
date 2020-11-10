@@ -9,7 +9,6 @@
 
 /datum/status_effect/determined
 	id = "determined"
-	alert_type = /obj/screen/alert/status_effect/determined
 
 /datum/status_effect/determined/on_apply()
 	. = ..()
