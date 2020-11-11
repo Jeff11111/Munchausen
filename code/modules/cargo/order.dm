@@ -113,10 +113,10 @@
 
 /datum/supply_order/proc/generate(atom/A)
 	var/obj/structure/closet/crate/C = pack.generate(A, paying_account)
-	generateManifest(C, paying_account, pack)
+	generateManifest(C, paying_account.account_holder, pack)
 	return C
 
-/datum/supply_order/proc/generateCombo(var/miscbox, var/misc_own, var/misc_contents)
+/datum/supply_order/proc/generateCombo(miscbox, misc_own, misc_contents)
 	for (var/I in misc_contents)
 		new I(miscbox)
 	generateManifest(miscbox, misc_own, "")
