@@ -107,7 +107,7 @@
 
 /datum/bobux_reward/bounty_hunter
 	name = "Bounty Hunter"
-	desc = "Contract a bounty hunter, to find and kill one or two targets."
+	desc = "Contract a syndicate bounty hunter, to find and kill a human target."
 	buy_message = null
 	id = "bounty_hunter"
 	cost = 10
