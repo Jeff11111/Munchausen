@@ -131,6 +131,23 @@
 	permeability_coefficient = 0.05 //Thick soles, and covers the ankle
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes
 
+/obj/item/clothing/shoes/jackboots/ComponentInitialize()
+	. = ..()
+	AddComponent(/datum/component/squeak, list('sound/effects/jackboot1.ogg'=1,'sound/effects/jackboot2.ogg'=1), 40)
+
+// yeah nah i cant figure out how the fuck to properly remove the component
+/*
+/obj/item/clothing/shoes/jackboots/attackby(obj/item/W, mob/user, params)
+	if(istype(W, /obj/item/stack/sticky_tape))
+		var/obj/item/stack/sticky_tape/S = W
+		if(S.get_amount() < 5)
+			to_chat(user, "<span class='warning'>You need five bits of tape to cover the bottom of the [src]!</span>")
+			return
+		if(S.use_tool(src, user, 30, 5))
+			to_chat(user, "<span class='notice'>You tape the bottom of the [src]!</span>")
+	return ..()
+*/
+
 /obj/item/clothing/shoes/jackboots/fast
 	slowdown = -1
 
