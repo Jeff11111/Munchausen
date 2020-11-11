@@ -576,11 +576,11 @@
 			yeah += "[t_He] [t_is] weaker than me."
 		if(3 to INFINITY)
 			yeah += "[t_He] [t_is] much weaker than me."
-	yeah += "</span>"
+	yeah += "</span>\n"
 	msg += yeah
 	
 	//descriptors
-	msg |= jointext(show_descriptors_to(user), "<br>")
+	msg |= jointext(show_descriptors_to(user), "\n")
 	
 	var/trait_exam = common_trait_examine()
 	if(!screwy_self)
