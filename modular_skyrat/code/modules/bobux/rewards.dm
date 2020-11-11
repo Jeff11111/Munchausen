@@ -104,3 +104,35 @@
 		for(var/datum/stats/stat in our_mind.mob_stats)
 			stat.level = mind.mob_stats[stat.type].level
 	to_chat(noob, "<span class='deadsay'>I have taken over [choice]. The soul does not store memories, the knowledge i have gained in the afterlife no longer serves me.</span>")
+
+/datum/bobux_reward/bounty_hunter
+	name = "Bounty Hunter"
+	desc = "Contract a bounty hunter, to find and kill one or two targets."
+	buy_message = null
+	id = "bounty_hunter"
+	cost = 10
+
+/datum/bobux_reward/bounty_hunter/on_buy(client/noob)
+	..()
+	var/list/possible_targes = list()
+	for(var/mob/living/carbon/human/H in GLOB.player_list)
+		if(L.mind)
+			possible_targes |= L
+	if(!length(possible_targes))
+		to_chat(noob, "<span class='bobux'>You are unable to send a bounty hunter. Bobux refunded.</span>")
+		noob.prefs?.adjust_bobux(cost)
+		return FALSE
+	var/mob/living/carbon/human/input = input(noob, "I have contracted a bounty hunter. Who is the first bounty?", "Bounty Hunter", null) as mob in husks
+	if(!input)
+		to_chat(noob, "<span class='bobux'>You are unable to send a bounty hunter. Bobux refunded.</span>")
+		noob.prefs?.adjust_bobux(cost)
+		return FALSE
+	else
+		for(var/mob/living/carbon/human/H in shuffle(GLOB.player_list - input))
+			if(ROLE_TRAITOR in H.client?.prefs?.be_special)
+				var/datum/antagonist/bounty_hunter = H.mind.add_antag_datum(/datum/antagonist/traitor)
+				var/datum/objective/assassinate/kill_objective = new
+				kill_objective.owner = H.mind
+				kill_objective.target = input
+				bounty_hunter.add_objective(kill_objective)
+				return TRUE
