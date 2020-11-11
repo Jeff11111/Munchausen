@@ -80,12 +80,24 @@
 	icon_state = "captain45"
 	desc = "A prized silver Colt M1911. A classy firearm fit for a king."
 
+//Stechkin APS
+/obj/item/gun/ballistic/automatic/pistol/APS
+	name = "burstfire 9mm pistol"
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
+	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/pistol_lefthand.dmi'
+	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/pistol_righthand.dmi'
+	icon_state = "aps"
+	item_state = "aps"
+	suppressed_pixel_x = 2
+	fire_sound = 'modular_skyrat/sound/guns/pistol1.ogg'
+
 //Glock 17
 /obj/item/gun/ballistic/automatic/pistol/APS/glock
 	name = "burstfire 9mm pistol"
 	desc = "The NT Lawman 17 - A decent and lightweight polymer firearm for general law enforcement use."
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
 	icon_state = "glock"
+	item_state = "pistol9mm"
 	w_class = WEIGHT_CLASS_SMALL
 	mag_type = /obj/item/ammo_box/magazine/pistolm9mm
 	can_suppress = FALSE

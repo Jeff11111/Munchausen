@@ -99,7 +99,7 @@
 		if(wear_suit)
 			. += "[t_He] [t_is] carrying [s_store.get_examine_string(user)] on [t_his] [wear_suit.name]."
 		else
-			. += "[t_He] [t_is] carrying a slinged [s_store.get_examine_string(user)]."
+			. += "[t_He] [t_is] carrying a slung [s_store.get_examine_string(user)]."
 	//back
 	if(back)
 		. += "[t_He] [t_has] [back.get_examine_string(user)] on [t_his] back."

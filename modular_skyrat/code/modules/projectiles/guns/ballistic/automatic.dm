@@ -60,6 +60,23 @@
 	..()
 	icon_state = "[initial(icon_state)][chambered ? "" : "-e"][magazine ? "" : "-nomag"][safety ? "-safe" : ""]"
 
+//C20r
+/obj/item/gun/ballistic/automatic/c20r
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/smg.dmi'
+	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/smg_righthand.dmi'
+	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/smg_lefthand.dmi'
+	icon_state = "c20r"
+	item_state = "c20r"
+
+/obj/item/gun/ballistic/automatic/c20r/update_icon()
+	..()
+	icon_state = "[initial(icon_state)][chambered ? "" : "-e"]"
+
+/obj/item/gun/ballistic/automatic/c20r/update_overlays()
+	..()
+	if(magazine)
+		add_overlay("[initial(icon_state)]-mag")
+
 //Bulldog but sound better
 //also eris sprite
 /obj/item/gun/ballistic/automatic/shotgun

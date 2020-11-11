@@ -5,7 +5,7 @@
 
 /mob/living/say(message, bubble_type, list/spans, sanitize, datum/language/language, ignore_spam, forced)
 	//force punctuation bich
-	if(config.punctuation_filter && !findtext(message, config.punctuation_filter, length(message)) && !findtext(message, config.punctuation_filter, 1, 2))
+	if(config.punctuation_filter && !findtext(message, config.punctuation_filter, length(message)) && !findtext(message, config.bingus_filter, 1, 2))
 		message += "."
 	if(!forced && (GET_SKILL_LEVEL(src, gaming) < JOB_SKILLPOINTS_TRAINED) && config.ic_filter_regex && findtext(message, config.ic_filter_regex))
 		// let's try to be a bit more informative!
