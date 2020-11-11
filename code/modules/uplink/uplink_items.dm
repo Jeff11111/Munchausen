@@ -119,7 +119,7 @@
 			do_teleport(A, get_turf(fucker), 0, TRUE, no_effects = TRUE)
 			SEND_SIGNAL(fucker, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE)
 			var/area/chungi = get_area(fucker)
-			to_chat(user, "<span class='info'>[A] has been delivered to: [fucker.x], [fucker.y], [fucker.z] ([chungi.name]).<br>Good luck, agent.</span>")
+			to_chat(user, "<span class='danger'>[A] has been delivered to: [fucker.x], [fucker.y], [fucker.z] ([chungi.name]).<br>Good luck, agent.</span>")
 			return A
 
 /*

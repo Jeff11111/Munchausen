@@ -254,8 +254,6 @@ GLOBAL_LIST_EMPTY(uplinks)
 	
 	//funny sound
 	playsound(parent, 'modular_skyrat/sound/machinery/uplink_thanet.ogg', 50, 0)
-	to_chat(user, "<span class='notice'>Success. I have bought \an [U.name].</span>")
-
 	SSblackbox.record_feedback("nested tally", "traitor_uplink_items_bought", 1, list("[initial(U.name)]", "[U.cost]"))
 	return TRUE
 
