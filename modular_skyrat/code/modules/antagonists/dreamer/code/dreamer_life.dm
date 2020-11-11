@@ -70,12 +70,11 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 		if(length(people))
 			var/mob/living/carbon/human/person = pick(people)
 			var/list/dreamer_radio = GLOB.dreamer_radio.Copy()
-			for(var/chungus in dreamer_radio)
-				chungus = replacetext_char(chungus, "SRC", "[src.real_name]")
-				chungus = replacetext_char(chungus, "CAPITALIZESRC", "[capitalize(src.real_name)]")
 			dreamer_radio |= last_pain_message
 			dreamer_radio |= last_words
 			var/speak = pick(dreamer_radio)
+			speak = replacetext_char(speak, "SRC", "[src.real_name]")
+			speak = replacetext_char(speak, "CAPITALIZESRC", "[capitalize(src.real_name)]")
 			var/message = compose_message(person, language_holder?.selected_language, speak,"[FREQ_COMMON]", list(person.speech_span), face_name = TRUE, source = (person.ears ? person.ears : person.ears_extra))
 			to_chat(src, message)
 	//VERY rare mom/mob hallucination
@@ -89,12 +88,11 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 			var/client/cliente = pick(GLOB.clients)
 			clientkey = cliente.key
 		var/list/ooc_visions = GLOB.dreamer_ooc.Copy()
-		for(var/chungus in ooc_visions)
-			chungus = replacetext_char(chungus, "SRC", "[src.real_name]")
-			chungus = replacetext_char(chungus, "CAPITALIZESRC", "[capitalize(src.real_name)]")
 		ooc_visions |= last_pain_message
 		ooc_visions |= last_words
 		var/message = pick(ooc_visions)
+		message = replacetext_char(message, "SRC", "[src.real_name]")
+		message = replacetext_char(message, "CAPITALIZESRC", "[capitalize(src.real_name)]")
 		to_chat(src, "<span class='ooc'><span class='prefix'>OOC:</span> <EM>[clientkey]:</EM> <span class='message linkify'>[message]</span></span>")
 	//Even rarer than that jannie hallucination - bwoink hallucination
 	else if(prob(1) && prob(10))
@@ -107,6 +105,8 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 		dreamer_ahelps |= last_pain_message
 		dreamer_ahelps |= last_words
 		var/message = pick(dreamer_ahelps)
+		message = replacetext_char(message, "SRC", "[src.real_name]")
+		message = replacetext_char(message, "CAPITALIZESRC", "[capitalize(src.real_name)]")
 		to_chat(src, "<font color='red' size='4'><b>-- Administrator private message --</b></font>")
 		to_chat(src, "<span class='danger'>Admin PM from-<b><a href='https://youtu.be/wJWksPWDKOc'>[fakemin]</a></b>: <span class='linkify'>[message]</span></span>")
 		to_chat(src, "<span class='danger'><i>Click on the administrator's name to reply, or see all of your tickets in the admin column.</i></span>")
@@ -122,6 +122,8 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 		dreamer_ban |= last_pain_message
 		dreamer_ban |= last_words
 		var/message = pick(dreamer_ban)
+		message = replacetext_char(message, "SRC", "[src.real_name]")
+		message = replacetext_char(message, "CAPITALIZESRC", "[capitalize(src.real_name)]")
 		to_chat(src, "<span class='boldannounce'><BIG>You have been banned by [fakemin].\nReason: [message]</BIG></span>")
 		to_chat(src, "<span class='danger'>This is a permanent ban. The round ID is [GLOB.round_id].</span>")
 		var/bran = CONFIG_GET(string/banappeals)
@@ -142,6 +144,8 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 				message = pick(dreamer_object)
 			else
 				message = last_words
+			message = replacetext_char(message, "SRC", "[src.real_name]")
+			message = replacetext_char(message, "CAPITALIZESRC", "[capitalize(src.real_name)]")
 			var/obj/speaker = pick(objects)
 			if(speaker && message)
 				var/speak_sound = pick(

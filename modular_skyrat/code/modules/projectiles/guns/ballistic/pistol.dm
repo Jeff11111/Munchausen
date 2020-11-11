@@ -90,6 +90,7 @@
 	item_state = "aps"
 	suppressed_pixel_x = 2
 	fire_sound = 'modular_skyrat/sound/guns/pistol1.ogg'
+	can_suppress = TRUE
 
 //Glock 17
 /obj/item/gun/ballistic/automatic/pistol/APS/glock
