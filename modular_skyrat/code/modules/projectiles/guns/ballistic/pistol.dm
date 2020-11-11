@@ -1,16 +1,3 @@
-//Stechkin v2, base proc changes
-/obj/item/gun/ballistic/automatic/pistol
-	name = "10mm pistol"
-	desc = "The stechkin 10mm pistol - A small, easily concealable 10mm handgun and timeless classic. Has a threaded barrel for suppressors."
-	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
-	icon_state = "pistol10mm"
-	fire_sound = 'modular_skyrat/sound/guns/pistol2.ogg'
-	suppressed_pixel_x = 4
-
-/obj/item/gun/ballistic/automatic/pistol/update_icon()
-	..()
-	icon_state = "[initial(icon_state)][chambered ? "" : "-e"][magazine ? "" : "-nomag"][safety ? "-safe" : ""]"
-
 //Pipe pistol
 /obj/item/gun/ballistic/automatic/pistol/makeshift
 	name = "10mm pipe pistol"
@@ -41,7 +28,25 @@
 	can_suppress = FALSE
 	obj_flags = UNIQUE_RENAME
 
-//Seccie pistol
+//Stechkin v2, base proc changes
+/obj/item/gun/ballistic/automatic/pistol
+	name = "10mm pistol"
+	desc = "The stechkin 10mm pistol - A small, easily concealable 10mm handgun and timeless classic. Has a threaded barrel for suppressors."
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
+	icon_state = "pistol10mm"
+	fire_sound = 'modular_skyrat/sound/guns/pistol2.ogg'
+	suppressed_pixel_x = 4
+
+/obj/item/gun/ballistic/automatic/pistol/update_icon()
+	..()
+	icon_state = "[initial(icon_state)][chambered ? "" : "-e"][magazine ? "" : "-nomag"][safety ? "-safe" : ""]"
+
+//Modular pistol
+/obj/item/gun/ballistic/automatic/pistol/modular
+	icon_state = "modularpistol"
+	unique_reskin = null
+
+//Nangler
 /obj/item/gun/ballistic/automatic/pistol/nangler
 	name = "9mm pistol"
 	desc = "ML Nangler - Standard issue security firearm, widely used by low tier corporate militias. \

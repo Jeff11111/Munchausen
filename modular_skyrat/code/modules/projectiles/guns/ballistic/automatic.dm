@@ -6,7 +6,7 @@
 /obj/item/gun/ballistic/automatic/wt550
 	name = "security semi-auto WT-550"
 	desc = "An outdated personal defence weapon. Uses 4.6x30mm rounds."
-	icon = 'modular_skyrat/icons/obj/bobstation/guns/rifle.dmi'
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/smg.dmi'
 	icon_state = "wt550"
 	item_state = "arg"
 
@@ -59,3 +59,22 @@
 /obj/item/gun/ballistic/automatic/proto/update_icon()
 	..()
 	icon_state = "[initial(icon_state)][chambered ? "" : "-e"][magazine ? "" : "-nomag"][safety ? "-safe" : ""]"
+
+//Bulldog but sound better
+//also eris sprite
+/obj/item/gun/ballistic/automatic/shotgun
+	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/shotgun_lefthand.dmi'
+	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/shotgun_righthand.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/obj/bobstation/guns/worn/back.dmi'
+	icon_state = "bo"
+	item_state = "shotgun"
+	fire_sound = 'modular_skyrat/sound/guns/shotgun.ogg'
+	inhand_x_dimension = 32
+	inhand_y_dimension = 32
+
+/obj/item/gun/ballistic/automatic/shotgun/update_icon()
+	..()
+	icon_state = "[initial(icon_state)][chambered ? "" : "-e"]"
+	item_state = "[initial(item_state)][is_wielded ? "-wielded" : ""]"
+	if(magazine)
+		add_overlay("[initial(magazine.icon_state)]")

@@ -278,12 +278,6 @@
 	. = ..()
 	update_icon()
 
-/obj/item/gun/ballistic/automatic/shotgun/bulldog/update_icon()
-	cut_overlays()
-	if(magazine)
-		add_overlay("[magazine.icon_state]")
-	icon_state = "bulldog[chambered ? "" : "-e"]"
-
 /obj/item/gun/ballistic/automatic/shotgun/bulldog/afterattack()
 	. = ..()
 	empty_alarm()

@@ -153,6 +153,7 @@
 /obj/item/gun/ballistic/shotgun/boltaction/improvised/update_icon()
 	icon_state = "[initial(icon_state)][chambered ? "" : "-open"]"
 
+//Shotgun but better
 /obj/item/gun/ballistic/shotgun
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/shotgun.dmi'
 	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/shotgun_lefthand.dmi'
