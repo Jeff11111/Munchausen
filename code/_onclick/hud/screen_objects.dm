@@ -578,7 +578,7 @@
 /obj/screen/healths
 	name = "pulse"
 	icon_state = "health0"
-	screen_loc = ui_health
+	screen_loc = ui_pulse
 
 //skyrat edit
 /obj/screen/healths/Click(location, control, params)
@@ -608,20 +608,20 @@
 
 /obj/screen/healths/blob/naut/core
 	name = "overmind health"
-	screen_loc = ui_health
+	screen_loc = ui_pulse
 	icon_state = "corehealth"
 
 /obj/screen/healths/guardian
 	name = "summoner health"
 	icon = 'icons/mob/guardian.dmi'
 	icon_state = "base"
-	screen_loc = ui_health
+	screen_loc = ui_pulse
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/screen/healths/clock
 	icon = 'icons/mob/actions.dmi'
 	icon_state = "bg_clock"
-	screen_loc = ui_health
+	screen_loc = ui_pulse
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/screen/healths/clock/gear
@@ -633,7 +633,7 @@
 	name = "essence"
 	icon = 'icons/mob/actions.dmi'
 	icon_state = "bg_revenant"
-	screen_loc = ui_health
+	screen_loc = ui_pulse
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/screen/healths/construct
@@ -645,7 +645,7 @@
 /obj/screen/healths/lavaland_elite
 	icon = 'icons/mob/screen_elite.dmi'
 	icon_state = "elite_health0"
-	screen_loc = ui_health
+	screen_loc = ui_pulse
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/screen/healthdoll

@@ -107,10 +107,11 @@
 
 
 //Middle right (status indicators)
-#define ui_healthdoll "EAST-1:28,CENTER-3:10"
-#define ui_health "EAST-1:28,CENTER-1:15"
-#define ui_internal "EAST-1:28,CENTER+1:19"//CIT CHANGE - moves internal icon up a little bit to accommodate for the stamina meter
-#define ui_mood "EAST-1:28,CENTER-4:10"
+#define ui_internal "EAST-1:28,CENTER+1:19"
+#define ui_stamina "EAST-1:28,CENTER:17"
+#define ui_pulse "EAST-1:28,CENTER-1:9"
+#define ui_healthdoll "EAST-1:28,CENTER-3:13"
+#define ui_mood "EAST-1:28,CENTER-4:13"
 #define ui_pain	"EAST-1:28,CENTER-2:13"
 
 //living
@@ -184,7 +185,6 @@
 
 
 //UI position overrides for 1:1 screen layout. (default is 7:5)
-#define ui_stamina "EAST-1:28,CENTER:17" // replacing internals button
 #define ui_overridden_resist "EAST-3:24,SOUTH+1:7"
 #define ui_combat_toggle "EAST-4:22,SOUTH:5"
 
