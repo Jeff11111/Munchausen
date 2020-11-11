@@ -133,6 +133,6 @@
 				var/datum/antagonist/bounty_hunter = H.mind.add_antag_datum(/datum/antagonist/traitor)
 				var/datum/objective/assassinate/kill_objective = new
 				kill_objective.owner = H.mind
-				kill_objective.target = input
+				kill_objective.target = input.mind
 				bounty_hunter.add_objective(kill_objective)
 				return TRUE
