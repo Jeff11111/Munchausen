@@ -129,7 +129,7 @@
 		return FALSE
 	else
 		for(var/mob/living/carbon/human/H in shuffle(GLOB.player_list - input))
-			if(ROLE_TRAITOR in H.client?.prefs?.be_special)
+			if((ROLE_TRAITOR in H.client?.prefs?.be_special) && (H.client?.prefs?.toggles & MIDROUND_ANTAG))
 				var/datum/antagonist/bounty_hunter = H.mind.add_antag_datum(/datum/antagonist/traitor)
 				var/datum/objective/assassinate/kill_objective = new
 				kill_objective.owner = H.mind
