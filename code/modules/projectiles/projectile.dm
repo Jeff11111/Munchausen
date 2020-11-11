@@ -712,7 +712,7 @@
 	
 	//I am a fucking demented retard
 	//anyways projectiles only go as far as the original distance between firer and target
-	if(firer && get_dist(starting, get_turf(src)) >= original_dist)
+	if(ismob(firer) && get_dist(starting, get_turf(src)) >= original_dist)
 		return on_range()
 
 /obj/item/projectile/proc/set_homing_target(atom/A)
