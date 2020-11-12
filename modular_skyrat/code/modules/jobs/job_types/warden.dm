@@ -4,6 +4,7 @@
 	department_head = list("Chief Enforcer")
 	total_positions = 0
 	spawn_positions = 0
+	music_file = 'modular_skyrat/sound/music/knock.ogg'
 
 /datum/outfit/job/warden
 	backpack_contents = list(
