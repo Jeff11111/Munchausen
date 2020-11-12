@@ -118,12 +118,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if(features["meat_type"] == "Inesct")
 			features["meat_type"] = "Insect"
 
-	if(current_version < 27)
-		var/tennis
-		S["feature_balls_shape"] >> tennis
-		if(tennis == "Hidden")
-			features["balls_visibility"] = GEN_VISIBLE_NEVER
-
 	if(current_version < 28)
 		var/hockey
 		S["feature_cock_shape"] >> hockey
@@ -548,25 +542,20 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["feature_cock_color"]				>> features["cock_color"]
 	S["feature_cock_length"]			>> features["cock_length"]
 	S["feature_cock_diameter"]			>> features["cock_diameter"]
-	S["feature_cock_taur"]				>> features["cock_taur"]
-	S["feature_cock_visibility"]		>> features["cock_visibility"]
 	//balls features
 	S["feature_has_balls"]				>> features["has_balls"]
 	S["feature_balls_color"]			>> features["balls_color"]
 	S["feature_balls_size"]				>> features["balls_size"]
-	S["feature_balls_visibility"]		>> features["balls_visibility"]
 	//breasts features
 	S["feature_has_breasts"]			>> features["has_breasts"]
 	S["feature_breasts_size"]			>> features["breasts_size"]
 	S["feature_breasts_shape"]			>> features["breasts_shape"]
 	S["feature_breasts_color"]			>> features["breasts_color"]
 	S["feature_breasts_producing"]		>> features["breasts_producing"]
-	S["feature_breasts_visibility"]		>> features["breasts_visibility"]
 	//vagina features
 	S["feature_has_vag"]				>> features["has_vag"]
 	S["feature_vag_shape"]				>> features["vag_shape"]
 	S["feature_vag_color"]				>> features["vag_color"]
-	S["feature_vag_visibility"]			>> features["vag_visibility"]
 	//womb features
 	S["feature_has_womb"]				>> features["has_womb"]
 
@@ -680,15 +669,34 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	
 	features["breasts_size"]		= sanitize_inlist(features["breasts_size"], B_sizes, BREASTS_SIZE_DEF)
 	features["cock_length"]			= sanitize_integer(features["cock_length"], min_D, max_D, COCK_SIZE_DEF)
-	features["breasts_shape"]		= sanitize_inlist(features["breasts_shape"], GLOB.breasts_shapes_list, DEF_BREASTS_SHAPE)
-	features["cock_shape"]			= sanitize_inlist(features["cock_shape"], GLOB.cock_shapes_list, DEF_COCK_SHAPE)
-	features["balls_shape"]			= sanitize_inlist(features["balls_shape"], GLOB.balls_shapes_list, DEF_BALLS_SHAPE)
-	features["vag_shape"]			= sanitize_inlist(features["vag_shape"], GLOB.vagina_shapes_list, DEF_VAGINA_SHAPE)
+	var/list/fuck = GLOB.breasts_shapes_list.Copy()
+	if(length(pref_species.bobs_type))
+		fuck = pref_species.bobs_type.Copy()
+	features["breasts_shape"]		= sanitize_inlist(features["breasts_shape"], fuck, fuck[1])
+	fuck = GLOB.cock_shapes_list.Copy()
+	if(length(pref_species.weiner_type))
+		fuck = pref_species.weiner_type.Copy()
+	features["cock_shape"]			= sanitize_inlist(features["cock_shape"], fuck, fuck[1])
+	fuck = GLOB.balls_shapes_list.Copy()
+	if(length(pref_species.balls_type))
+		fuck = pref_species.balls_type.Copy()
+	features["balls_shape"]			= sanitize_inlist(features["balls_shape"], fuck, fuck[1])
+	fuck = GLOB.vagina_shapes_list.Copy()
+	if(length(pref_species.vegana_type))
+		fuck = pref_species.vegana_type.Copy()
+	features["vag_shape"]			= sanitize_inlist(features["vag_shape"], fuck, fuck[1])
+	
+	var/skintoned = pref_species.use_skintones
 	features["breasts_color"]		= sanitize_hexcolor(features["breasts_color"], 3, FALSE, "FFF")
 	features["cock_color"]			= sanitize_hexcolor(features["cock_color"], 3, FALSE, "FFF")
 	features["balls_color"]			= sanitize_hexcolor(features["balls_color"], 3, FALSE, "FFF")
 	features["vag_color"]			= sanitize_hexcolor(features["vag_color"], 3, FALSE, "FFF")
-
+	if(skintoned)
+		features["breasts_color"] = SKINTONE2HEX(skin_tone)
+		features["cock_color"] = SKINTONE2HEX(skin_tone)
+		features["balls_color"] = SKINTONE2HEX(skin_tone)
+		features["vag_color"] = SKINTONE2HEX(skin_tone)
+	
 	joblessrole	= sanitize_integer(joblessrole, 1, 3, initial(joblessrole))
 	//Validate job prefs
 	for(var/j in job_preferences)
@@ -782,25 +790,20 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_cock_shape"], features["cock_shape"])
 	WRITE_FILE(S["feature_cock_color"], features["cock_color"])
 	WRITE_FILE(S["feature_cock_length"], features["cock_length"])
-	WRITE_FILE(S["feature_cock_taur"], features["cock_taur"])
-	WRITE_FILE(S["feature_cock_visibility"], features["cock_visibility"])
 
 	WRITE_FILE(S["feature_has_balls"], features["has_balls"])
 	WRITE_FILE(S["feature_balls_color"], features["balls_color"])
 	WRITE_FILE(S["feature_balls_size"], features["balls_size"])
-	WRITE_FILE(S["feature_balls_visibility"], features["balls_visibility"])
 
 	WRITE_FILE(S["feature_has_breasts"], features["has_breasts"])
 	WRITE_FILE(S["feature_breasts_size"], features["breasts_size"])
 	WRITE_FILE(S["feature_breasts_shape"], features["breasts_shape"])
 	WRITE_FILE(S["feature_breasts_color"], features["breasts_color"])
 	WRITE_FILE(S["feature_breasts_producing"], features["breasts_producing"])
-	WRITE_FILE(S["feature_breasts_visibility"], features["breasts_visibility"])
 
 	WRITE_FILE(S["feature_has_vag"], features["has_vag"])
 	WRITE_FILE(S["feature_vag_shape"], features["vag_shape"])
 	WRITE_FILE(S["feature_vag_color"], features["vag_color"])
-	WRITE_FILE(S["feature_vag_visibility"], features["vag_visibility"])
 
 	WRITE_FILE(S["feature_has_womb"], features["has_womb"])
 
