@@ -19,7 +19,6 @@
 	if(!magazine)
 		magazine = new mag_type(src)
 	chamber_round()
-	update_icon()
 
 /obj/item/gun/ballistic/update_icon_state()
 	if(current_skin)

@@ -62,7 +62,6 @@
 	recharge_newshot(TRUE)
 	if(selfcharge)
 		START_PROCESSING(SSobj, src)
-	update_icon()
 
 /obj/item/gun/energy/Destroy()
 	STOP_PROCESSING(SSobj, src)

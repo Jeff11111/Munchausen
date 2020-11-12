@@ -182,7 +182,6 @@
 	. = ..()
 	do_spin()
 	spun = TRUE
-	update_icon()
 
 /obj/item/gun/ballistic/revolver/russian/attackby(obj/item/A, mob/user, params)
 	..()

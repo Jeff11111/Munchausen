@@ -112,10 +112,6 @@
 /obj/item/gun/ballistic/automatic/c20r/unrestricted
 	pin = /obj/item/firing_pin
 
-/obj/item/gun/ballistic/automatic/c20r/Initialize()
-	. = ..()
-	update_icon()
-
 /obj/item/gun/ballistic/automatic/c20r/afterattack()
 	. = ..()
 	empty_alarm()
@@ -177,7 +173,6 @@
 /obj/item/gun/ballistic/automatic/m90/Initialize()
 	. = ..()
 	underbarrel = new /obj/item/gun/ballistic/revolver/grenadelauncher(src)
-	update_icon()
 
 /obj/item/gun/ballistic/automatic/m90/unrestricted
 	pin = /obj/item/firing_pin
@@ -185,7 +180,6 @@
 /obj/item/gun/ballistic/automatic/m90/unrestricted/Initialize()
 	. = ..()
 	underbarrel = new /obj/item/gun/ballistic/revolver/grenadelauncher/unrestricted(src)
-	update_icon()
 
 /obj/item/gun/ballistic/automatic/m90/afterattack(atom/target, mob/living/user, flag, params)
 	if(select == 2)
@@ -273,10 +267,6 @@
 
 /obj/item/gun/ballistic/automatic/shotgun/bulldog/unrestricted
 	pin = /obj/item/firing_pin
-
-/obj/item/gun/ballistic/automatic/shotgun/bulldog/Initialize()
-	. = ..()
-	update_icon()
 
 /obj/item/gun/ballistic/automatic/shotgun/bulldog/afterattack()
 	. = ..()
