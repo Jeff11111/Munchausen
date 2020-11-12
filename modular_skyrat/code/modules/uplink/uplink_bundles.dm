@@ -1,11 +1,4 @@
 //armstrong CBT
-/datum/uplink_item/dangerous/armstrong
-	name = "Armstrong Style Kit"
-	desc = "A kit with the necessary equipment to become an excellent martial artist, and terrible parent!"
-	item = /obj/item/storage/box/syndie_kit/armstrong
-	cost = 20 //bumped up from 14 because by god this has murderbone potential.
-	surplus = 20 // someone who respects the eldritch god Nar-Sie a little (((too much))) complained
-
 /obj/item/storage/box/syndie_kit/armstrong
 	name = "\improper Brad Armstrong Family Style Karate Kit"
 	desc = "A kit with the necessary tools to become the best karate master on the planet!\
@@ -14,13 +7,13 @@
 
 /obj/item/storage/box/syndie_kit/armstrong/PopulateContents()
 	new /obj/item/armstrong_scroll(src)
-//joker kit
 
+//joker kit
 /datum/uplink_item/bundles_TC/joker
 	name = "Society Box"
 	desc = "A crate with a .38 revolver with ammo, special knife and special clothing to enact revenge on society as a whole."
 	item = /obj/item/storage/box/hug/angryclown
-	cost = 14
+	cost = 12
 	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 	restricted_roles = list("Clown", "Mime", "Stowaway")
 
