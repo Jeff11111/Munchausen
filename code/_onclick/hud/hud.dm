@@ -109,6 +109,13 @@ GLOBAL_LIST_INIT(modular_ui_styles, list(
 		plane_masters["[instance.plane]"] = instance
 		instance.backdrop(mymob)
 
+	//All huds use the noise filter no matter what
+	noise_filter = new /obj/screen/fullscreen/noise()
+	noise_filter.icon = 'modular_skyrat/icons/mob/noise.dmi'
+	noise_filter.screen_loc = "WEST,SOUTH to EAST,NORTH"
+	noise_filter.hud = src
+	screenoverlays += noise_filter
+
 /datum/hud/Destroy()
 	if(mymob.hud_used == src)
 		mymob.hud_used = null
