@@ -125,38 +125,37 @@ GLOBAL_LIST_INIT(modular_ui_styles, list(
 	QDEL_LIST(static_inventory)
 
 	inv_slots.Cut()
-	action_intent = null
-	zone_select = null
-	pull_icon = null
+	QDEL_NULL(action_intent)
+	QDEL_NULL(zone_select)
+	QDEL_NULL(pull_icon)
 
 	QDEL_LIST(toggleable_inventory)
 	//skyrat edit
 	QDEL_LIST(extra_inventory)
 	//
 	QDEL_LIST(hotkeybuttons)
-	throw_icon = null
+	QDEL_NULL(throw_icon)
 	QDEL_LIST(infodisplay)
 
-	healths = null
-	healthdoll = null
-	internals = null
-	pains = null
-	redpains = null
+	QDEL_NULL(healths)
+	QDEL_NULL(healthdoll)
+	QDEL_NULL(internals)
+	QDEL_NULL(pains)
+	QDEL_NULL(redpains)
 	QDEL_NULL(noise_filter)
-	fov_holder = null
-	lingchemdisplay = null
-	devilsouldisplay = null
-	lingstingdisplay = null
-	blobpwrdisplay = null
-	alien_plasma_display = null
-	alien_queen_finder = null
+	QDEL_NULL(fov_holder)
+	QDEL_NULL(lingchemdisplay)
+	QDEL_NULL(lingstingdisplay)
+	QDEL_NULL(devilsouldisplay)
+	QDEL_NULL(blobpwrdisplay)
+	QDEL_NULL(alien_plasma_display)
+	QDEL_NULL(alien_queen_finder)
 
 	QDEL_LIST_ASSOC_VAL(plane_masters)
 	QDEL_LIST(screenoverlays)
 	mymob = null
 
 	return ..()
-
 
 /mob/proc/create_mob_hud()
 	if(!client || hud_used)
