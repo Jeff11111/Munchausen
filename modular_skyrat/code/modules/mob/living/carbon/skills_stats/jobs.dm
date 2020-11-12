@@ -135,7 +135,7 @@
 	stat_dex = 8
 	stat_int = 8
 	//Decent construction and electronics
-	skill_melee = 10
+	skill_melee = 8
 	skill_ranged = 8
 	skill_construction = JOB_SKILLPOINTS_TRAINED
 	skill_electronics = JOB_SKILLPOINTS_TRAINED
@@ -164,7 +164,7 @@
 	stat_end = 14
 	stat_int = 14
 	//Godlike construction and electronics
-	skill_melee = 10
+	skill_melee = 8
 	skill_ranged = 7
 	skill_construction = 18
 	skill_electronics = 18
