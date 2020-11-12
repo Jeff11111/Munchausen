@@ -60,17 +60,13 @@
 							msg += "<B>[icon2html(O.examine_icon ? O.examine_icon : O, user, O.examine_icon_state ? O.examine_icon_state : O.icon_state)] [i]</B>\n"
 		//
 
+	var/list/disabled_names = list()
 	for(var/X in disabled)
 		var/obj/item/bodypart/BP = X
-		var/damage_text
-		//skyrat edit
-		if(BP.is_disabled() != BODYPART_DISABLED_WOUND) // skip if it's disabled by a wound (cuz we'll be able to see the bone sticking out!)
-			if(!(BP.get_damage(include_stamina = FALSE) >= BP.max_damage)) //we don't care if it's stamcritted
-				damage_text = "limp!"
-			else
-				damage_text = (BP.brute_dam >= BP.burn_dam) ? BP.heavy_brute_msg : BP.heavy_burn_msg
-			msg += "<B>[capitalize(t_his)] [BP.name] is [damage_text]!</B>\n"
-		//
+		disabled_names |= BP.name
+	if(length(disabled_names))
+		msg += "<B>[capitalize(t_his)] [english_list(disabled_names)] [length(disabled_names) > 1 ? "are" "is"] [damage_text]!</B>\n"
+
 
 	//stores missing limbs
 	var/l_limbs_missing = 0

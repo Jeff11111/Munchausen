@@ -203,16 +203,15 @@
 	var/list/disabled = list()
 	if(!screwy_self)
 		for(var/obj/item/bodypart/BP in bodyparts)
-			//skyrat edit
 			if(BP.is_disabled())
 				disabled += BP
 			for(var/obj/item/I in BP.embedded_objects)
-			//skyrat edit
 				if(I.isEmbedHarmless())
 					msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] stuck to [t_his] [BP.name]!</B>\n"
 				else
 					msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] embedded in [t_his] [BP.name]!</B>\n"
-			//
+			if(BP.is_dead())
+				msg += "<span class='deadsay'><B>[t_His] [BP.name] is completely skeletonized!</B></span>\n"
 			if(BP.etching && !clothingonpart(BP))
 				msg += "<B>[t_His] [BP.name] has \"[BP.etching]\" etched on it!</B>\n"
 			for(var/datum/wound/W in BP.wounds)
@@ -231,18 +230,13 @@
 			missing -= BP.body_zone
 
 	if(!screwy_self)
+		var/list/disabled_names = list()
 		for(var/X in disabled)
 			var/obj/item/bodypart/BP = X
-			var/damage_text
-			//skyrat edit
-			if(BP.is_disabled() != BODYPART_DISABLED_WOUND) // skip if it's disabled by a wound (cuz we'll be able to see the bone sticking out!)
-				if(!(BP.get_damage(include_stamina = FALSE) >= BP.max_damage)) //we don't care if it's stamcritted
-					damage_text = "disabled"
-				else
-					damage_text = (BP.brute_dam >= BP.burn_dam) ? BP.heavy_brute_msg : BP.heavy_burn_msg
-				msg += "<B>[capitalize(t_his)] [BP.name] is [damage_text]!</B>\n"
-			//
-	
+			disabled_names |= BP.name
+		if(length(disabled_names))
+			msg += "<B>[capitalize(t_his)] [english_list(disabled_names)] [length(disabled_names) > 1 ? "are" "is"] [damage_text]!</B>\n"
+
 	//Teeth
 	if(!screwy_self)
 		for(var/obj/item/bodypart/teeth_part in bodyparts)
