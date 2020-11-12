@@ -235,7 +235,7 @@
 			var/obj/item/bodypart/BP = X
 			disabled_names |= BP.name
 		if(length(disabled_names))
-			msg += "<B>[capitalize(t_his)] [english_list(disabled_names)] [length(disabled_names) > 1 ? "are" : "is"] [damage_text]!</B>\n"
+			msg += "<B>[capitalize(t_his)] [english_list(disabled_names)] [length(disabled_names) > 1 ? "are" : "is"] disabled!</B>\n"
 
 	//Teeth
 	if(!screwy_self)

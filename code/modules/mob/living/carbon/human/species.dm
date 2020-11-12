@@ -1547,8 +1547,9 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 		dehydration_rate *= bladder_hydration_loss
 		dehydration_rate *= H.physiology.hunger_mod
+		dehydration_rate -= bladder_hydration_gain
 		H.adjust_hydration(-dehydration_rate)
-	
+
 	switch(H.hydration)
 		if(HYDRATION_LEVEL_THIRSTY to INFINITY)
 			H.clear_alert("hydration")
