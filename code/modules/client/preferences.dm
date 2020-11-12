@@ -224,9 +224,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 		"ipc_chassis" = "Morpheus Cyberkinetics(Greyscale)", //SKYRAT CHANGE
 		"body_size" = RESIZE_DEFAULT_SIZE
 		)
-	/*var/custom_speech_verb = "default" //if your say_mod is to be something other than your races SKYRAT EDIT
-	var/custom_tongue = "default"*/ //if your tongue is to be something other than your races
-
 	var/list/custom_names = list()
 	var/preferred_ai_core_display = "Blue"
 	var/prefered_security_department = SEC_DEPT_RANDOM
@@ -550,13 +547,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				dat += "</td>"
 			else if(use_skintones || mutant_colors)
 				dat += "</td>"
-
-			/*dat += APPEARANCE_CATEGORY_COLUMN SKYRAT EDIT
-			dat += "<h2>Speech preferences</h2>"
-			dat += "<b>Custom Speech Verb:</b><BR>"
-			dat += "</b><a style='display:block;width:100px' href='?_src_=prefs;preference=speech_verb;task=input'>[custom_speech_verb]</a><BR>"
-			dat += "<b>Custom Tongue:</b><BR>"
-			dat += "</b><a style='display:block;width:100px' href='?_src_=prefs;preference=tongue;task=input'>[custom_tongue]</a><BR>"*/
 
 			if(HAIR in pref_species.species_traits)
 
@@ -921,23 +911,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				dat += "<a href='?_src_=prefs;preference=cosmetic_scars;task=menu'>Configure Scars</a><BR>"
 			//
 			dat += "<h2>Clothing & Equipment</h2>"
-			/* skyrat change
-			dat += "<b>Underwear:</b><a style='display:block;width:100px' href ='?_src_=prefs;preference=underwear;task=input'>[underwear]</a><br>"
-			if(GLOB.underwear_list[underwear]?.has_color)
-				dat += "<b>Underwear Color:</b>"
-				dat += "<BR>"
-				dat += "<span style='border:1px solid #161616; background-color: #[undie_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=undie_color;task=input'>Change</a><BR>"
-			dat += "<b>Undershirt:</b><a style='display:block;width:100px' href ='?_src_=prefs;preference=undershirt;task=input'>[undershirt]</a><br>"
-			if(GLOB.undershirt_list[undershirt]?.has_color)
-				dat += "<b>Undershirt Color:</b>"
-				dat += "<BR>"
-				dat += "<span style='border:1px solid #161616; background-color: #[shirt_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=shirt_color;task=input'>Change</a><BR>"
-			dat += "<b>Socks:</b><a style='display:block;width:100px' href ='?_src_=prefs;preference=socks;task=input'>[socks]</a><br>"
-			if(GLOB.socks_list[socks]?.has_color)
-				dat += "<b>Socks Color:</b>"
-				dat += "<BR>"
-				dat += "<span style='border:1px solid #161616; background-color: #[socks_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=socks_color;task=input'>Change</a><BR>"
-			*/
 			dat += "<b>Backpack:</b><a style='display:block;width:100px' href ='?_src_=prefs;preference=bag;task=input'>[backbag]</a><br>"
 			dat += "</td>"
 
@@ -946,7 +919,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				dat += "<b>Your species ([pref_species.name]) does not support genitals!</b><br>"
 			else
 				if(pref_species.use_skintones)
-					dat += "<b>Genitals use skintone:</b><a href='?_src_=prefs;preference=genital_colour'>[features["genitals_use_skintone"] == TRUE ? "Yes" : "No"]</a>"
+					dat += "<b>Genitals use skintone:</b><a href='?_src_=prefs;preference=genital_colour'>[pref_species.use_skintones ? "Yes" : "No"]</a>"
 				dat += "<h3>Penis</h3>"
 				dat += "<a style='display:block;width:50px' href='?_src_=prefs;preference=has_cock'>[(features["has_cock"] && pref_species.has_weiner) ? "Yes" : "No"]</a>"
 				if(features["has_cock"] && pref_species.has_weiner)
@@ -974,7 +947,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				dat += APPEARANCE_CATEGORY_COLUMN
 				dat += "<h3>Vagina</h3>"
 				dat += "<a style='display:block;width:50px' href='?_src_=prefs;preference=has_vag'>[features["has_vag"] == TRUE ? "Yes" : "No"]</a>"
-				if(features["has_vag"])
+				if(features["has_vag"] && pref_species.has_vegana)
 					dat += "<b>Vagina Type:</b> <a style='display:block;width:100px' href='?_src_=prefs;preference=vag_shape;task=input'>[features["vag_shape"]]</a>"
 					if(pref_species.use_skintones || features["genitals_use_skintone"])
 						dat += "<b>Vagina Color:</b></a><BR>"
@@ -987,7 +960,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				dat += APPEARANCE_CATEGORY_COLUMN
 				dat += "<h3>Breasts</h3>"
 				dat += "<a style='display:block;width:50px' href='?_src_=prefs;preference=has_breasts'>[features["has_breasts"] == TRUE ? "Yes" : "No"]</a>"
-				if(features["has_breasts"])
+				if(features["has_breasts"] && pref_species.has_bobs)
 					if(pref_species.use_skintones || features["genitals_use_skintone"])
 						dat += "<b>Color:</b></a><BR>"
 						dat += "<span style='border: 1px solid #161616; background-color: [SKINTONE2HEX(skin_tone)];'>&nbsp;&nbsp;&nbsp;</span>(Skin tone overriding)<br>"
@@ -2024,17 +1997,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					facial_hair_color = random_short_color()
 				if("facial_hair_style")
 					facial_hair_style = random_facial_hair_style(gender)
-				/* skyrat edit
-				if("underwear")
-					underwear = random_underwear(gender)
-					undie_color = random_short_color()
-				if("undershirt")
-					undershirt = random_undershirt(gender)
-					shirt_color = random_short_color()
-				if("socks")
-					socks = random_socks()
-					socks_color = random_short_color()
-				*/
 				if(BODY_ZONE_PRECISE_EYES)
 					eye_color = random_eye_color()
 				if("s_tone")
@@ -2194,37 +2156,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 
 				if("cycle_bg")
 					bgstate = next_list_item(bgstate, bgstate_options)
-				/* skyrat edit
-				if("underwear")
-					var/new_underwear = input(user, "Choose your character's underwear:", "Character Preference")  as null|anything in GLOB.underwear_list
-					if(new_underwear)
-						underwear = new_underwear
-
-				if("undie_color")
-					var/n_undie_color = input(user, "Choose your underwear's color.", "Character Preference", "#[undie_color]") as color|null
-					if(n_undie_color)
-						undie_color = sanitize_hexcolor(n_undie_color)
-
-				if("undershirt")
-					var/new_undershirt = input(user, "Choose your character's undershirt:", "Character Preference") as null|anything in GLOB.undershirt_list
-					if(new_undershirt)
-						undershirt = new_undershirt
-
-				if("shirt_color")
-					var/n_shirt_color = input(user, "Choose your undershirt's color.", "Character Preference", "#[shirt_color]") as color|null
-					if(n_shirt_color)
-						shirt_color = sanitize_hexcolor(n_shirt_color)
-
-				if("socks")
-					var/new_socks = input(user, "Choose your character's socks:", "Character Preference") as null|anything in GLOB.socks_list
-					if(new_socks)
-						socks = new_socks
-
-				if("socks_color")
-					var/n_socks_color = input(user, "Choose your socks' color.", "Character Preference", "#[socks_color]") as color|null
-					if(n_socks_color)
-						socks_color = sanitize_hexcolor(n_socks_color)
-				*/
+				
 				if("eyes")
 					var/new_eyes = input(user, "Choose your character's eye colour:", "Character Preference","#"+eye_color) as color|null
 					if(new_eyes)
@@ -2847,19 +2779,13 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 								return
 						if(dorfy != "No")
 							features["body_size"] = new_body_size
-				/*if("tongue") SKYRAT EDIT
-					var/selected_custom_tongue = input(user, "Choose your desired tongue (none means your species tongue)", "Character Preference") as null|anything in GLOB.roundstart_tongues
-					if(selected_custom_tongue)
-						custom_tongue = selected_custom_tongue
-				if("speech_verb")
-					var/selected_custom_speech_verb = input(user, "Choose your desired speech verb (none means your species speech verb)", "Character Preference") as null|anything in GLOB.speech_verbs
-					if(selected_custom_speech_verb)
-						custom_speech_verb = selected_custom_speech_verb*/
 		else
 			switch(href_list["preference"])
 				//CITADEL PREFERENCES EDIT - I can't figure out how to modularize these, so they have to go here. :c -Pooj
 				if("genital_colour")
 					features["genitals_use_skintone"] = !features["genitals_use_skintone"]
+					if(pref_species.use_skintones)
+						features["genitals_use_skintone"] = TRUE
 				if("arousable")
 					arousable = !arousable
 				if("has_cock")
@@ -3221,15 +3147,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 	character.dna.skin_tone_override = use_custom_skin_tone ? skin_tone : null
 	character.hair_style = hair_style
 	character.facial_hair_style = facial_hair_style
-	/* skyrat edit
-	character.underwear = underwear
-
-	character.saved_underwear = underwear
-	character.undershirt = undershirt
-	character.saved_undershirt = undershirt
-	character.socks = socks
-	character.saved_socks = socks
-	*/
 	character.undie_color = undie_color
 	character.shirt_color = shirt_color
 	character.socks_color = socks_color
@@ -3256,18 +3173,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 	character.give_genitals(TRUE) //character.update_genitals() is already called on genital.update_appearance()
 
 	character.dna.update_body_size(old_size)
-
-	/*//speech stuff SKYRAT EDIT
-	var/new_tongue = GLOB.roundstart_tongues[custom_tongue]
-	if(new_tongue)
-		var/obj/item/organ/tongue/T = character.getorganslot(ORGAN_SLOT_TONGUE)
-		if(T)
-			qdel(T)
-		var/obj/item/organ/tongue/new_custom_tongue = new new_tongue
-		new_custom_tongue.Insert(character)
-	if(custom_speech_verb != "default")
-		character.dna.species.say_mod = custom_speech_verb*/
-
 
 	SEND_SIGNAL(character, COMSIG_HUMAN_PREFS_COPIED_TO, src, icon_updates, roundstart_checks)
 

@@ -458,8 +458,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["jumpsuit_style"]			>> jumpsuit_style
 	if(jumpsuit_style != PREF_SUIT)
 		jumpsuit_style = PREF_SUIT
-	/*S["custom_speech_verb"]		>> custom_speech_verb SKYRAT EDIT
-	S["custom_tongue"]			>> custom_tongue*/
 	S["feature_mcolor"]					>> features["mcolor"]
 	S["feature_lizard_tail"]			>> features["tail_lizard"]
 	S["feature_lizard_snout"]			>> features["snout"]
@@ -749,8 +747,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["backbag"]					, backbag)
 	WRITE_FILE(S["jumpsuit_style"]			, jumpsuit_style)
 	WRITE_FILE(S["species"]					, pref_species.id)
-	/*WRITE_FILE(S["custom_speech_verb"]		, custom_speech_verb) SKYRAT EDIT
-	WRITE_FILE(S["custom_tongue"]			, custom_tongue)*/
 	WRITE_FILE(S["feature_mcolor"]					, features["mcolor"])
 	WRITE_FILE(S["feature_lizard_tail"]				, features["tail_lizard"])
 	WRITE_FILE(S["feature_human_tail"]				, features["tail_human"])
