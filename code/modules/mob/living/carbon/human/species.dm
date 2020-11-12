@@ -1142,10 +1142,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	if(slot in no_equip)
 		if(!I.species_exception || !is_type_in_list(src, I.species_exception))
 			return FALSE
-	/* skyrat edit
-	var/num_arms = H.get_num_arms(FALSE)
-	var/num_legs = H.get_num_legs(FALSE)
-	*/
+
 	//skyrat edit
 	var/num_hands = H.get_num_hands(FALSE)
 	var/num_feet = H.get_num_feet(FALSE)
@@ -1351,7 +1348,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				if(!disable_warning)
 					to_chat(H, "The [I.name] is too big to attach.") //should be src?
 				return FALSE
-			if(istype(I, /obj/item/pda) || istype(I, /obj/item/pen) || (istype(G) && G.sling) || is_type_in_list(I, H.wear_suit.allowed))
+			if(istype(I, /obj/item/pda) || istype(I, /obj/item/pen) || (istype(G) && G.sling) || is_type_in_list(I, H.wear_suit?.allowed))
 				return TRUE
 			return FALSE
 		if(SLOT_HANDCUFFED)
