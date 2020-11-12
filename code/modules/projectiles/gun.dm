@@ -597,7 +597,7 @@
 			slot_flags |= (ITEM_SLOT_BACK | ITEM_SLOT_SUITSTORE)
 			to_chat(user, "<span class='notice'>You tie the lengths of cable to \the [src], making a sling.</span>")
 			sling = new /obj/item/stack/cable_coil(src)
-			sling_overlay = mutable_appearance('modular_skyrat/icons/obj/bobstation/gun_mods/mods.dmi', sling_icon_state)
+			sling_overlay = mutable_appearance((sling_icon_state && (sling_icon_state != "sling_overlay")) ? icon : 'modular_skyrat/icons/obj/bobstation/gun_mods/mods.dmi', sling_icon_state)
 			sling_overlay.pixel_x = sling_pixel_x
 			sling_overlay.pixel_y = sling_pixel_y
 			update_icon()

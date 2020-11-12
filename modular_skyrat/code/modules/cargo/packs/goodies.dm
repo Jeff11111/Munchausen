@@ -224,8 +224,8 @@
 	name = "9mm Pistol Magazines"
 	desc = "Contains 2 ML Nangler magazines. Never know when you need it."
 	cost = 1500
-	contains = list(/obj/item/ammo_box/magazine/nangler,
-					/obj/item/ammo_box/magazine/nangler)
+	contains = list(/obj/item/ammo_box/magazine/m9mm/small,
+					/obj/item/ammo_box/magazine/m9mm/small)
 
 /datum/supply_pack/goody/surplus
 	name = "10mm Surplus Rifle"

@@ -245,7 +245,7 @@
 /datum/uplink_item/ammo/pistolaps
 	name = "9mm Handgun Magazine"
 	desc = "An additional 15-round 9mm magazine, compatible with the Stechkin APS pistol, found in the Spetsnaz Pyro bundle."
-	item = /obj/item/ammo_box/magazine/pistolm9mm
+	item = /obj/item/ammo_box/magazine/m9mm
 	cost = 2
 	include_modes = list(/datum/game_mode/nuclear)
 

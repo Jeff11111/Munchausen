@@ -110,7 +110,7 @@
 
 /obj/item/gun/ballistic/shotgun/improvised/update_icon()
 	..()
-	icon_state = "[initial(icon_state)][sling ? "slung" : ""][barrel_open ? "-open" : ""]"
+	icon_state = "[initial(icon_state)][barrel_open ? "-open" : ""]"
 	item_state = "[initial(item_state)][sling ? "sling" :  ""]"
 
 /obj/item/gun/ballistic/shotgun/improvised/attackby(obj/item/A, mob/user, params)
@@ -177,3 +177,16 @@
 /obj/item/gun/ballistic/shotgun/automatic/combat
 	icon_state = "combatshotgun"
 	item_state = "combatshotgun"
+
+//Bulldog
+/obj/item/gun/ballistic/automatic/shotgun
+	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/shotgun_lefthand.dmi'
+	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/shotgun_righthand.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/obj/bobstation/guns/worn/back.dmi'
+	icon_state = "bo"
+	item_state = "shotgun"
+	fire_sound = 'modular_skyrat/sound/guns/shotgun.ogg'
+
+/obj/item/gun/ballistic/automatic/shotgun/update_icon()
+	..()
+	item_state = "[initial(item_state)][is_wielded ? "-wielded" : ""]"

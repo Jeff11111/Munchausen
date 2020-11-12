@@ -351,7 +351,7 @@
 /datum/export/weapon/ninemmammo
 	cost = 20
 	unit_name = "9mm ammo magazine"
-	export_types = list(/obj/item/ammo_box/magazine/pistolm9mm)
+	export_types = list(/obj/item/ammo_box/magazine/m9mm)
 
 /datum/export/weapon/fletcher_ammo
 	cost = 60

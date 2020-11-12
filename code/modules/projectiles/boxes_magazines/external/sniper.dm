@@ -12,7 +12,7 @@
 		icon_state = "[initial(icon_state)]"
 
 /obj/item/ammo_box/magazine/sniper_rounds/soporific
-	name = "sniper rounds (Zzzzz)"
+	name = "sniper rounds (soporific)"
 	desc = "Soporific sniper rounds, designed for happy days and dead quiet nights..."
 	icon_state = "soporific"
 	ammo_type = /obj/item/ammo_casing/p50/soporific

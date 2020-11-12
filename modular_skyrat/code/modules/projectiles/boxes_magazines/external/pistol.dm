@@ -23,31 +23,17 @@
 	caliber = "9mm"
 	max_ammo = 15
 
-//Nangler
-/obj/item/ammo_box/magazine/nangler
-	name = "nangler magazine (9mm)"
-	desc = "A low capacity magazine for compact pistols."
-	icon = 'modular_skyrat/icons/obj/bobstation/ammo/pistol.dmi'
-	icon_state = "pistol9mm"
-	ammo_type = /obj/item/ammo_casing/c9mm
-	caliber = "9mm"
-	max_ammo = 8
-
-/obj/item/ammo_box/magazine/nangler/update_icon()
-	..()
-	icon_state = "[initial(icon_state)]-[ammo_count() ? "8" : "0"]"
-
 //M1911
 /obj/item/ammo_box/magazine/m45
 	icon = 'modular_skyrat/icons/obj/bobstation/ammo/pistol.dmi'
 	icon_state = "pistol45"
 
+/obj/item/ammo_box/magazine/m45/kitchengun
+	icon_state = "pistol45_r"
+
 /obj/item/ammo_box/magazine/m45/update_icon()
 	..()
-	icon_state = "[initial(icon_state)]-[ammo_count()]"
-
-/obj/item/ammo_box/magazine/m45/kitchengun
-	icon_state = "pistol45"
+	icon_state = "[initial(icon_state)]-[round(ammo_count(), 2)]"
 
 //Stechkin
 /obj/item/ammo_box/magazine/m10mm
@@ -55,17 +41,32 @@
 	icon_state = "pistol10mm"
 
 /obj/item/ammo_box/magazine/m10mm/fire
-	icon_state = "pistol10mm"
-
-/obj/item/ammo_box/magazine/m10mm/ap
-	icon_state = "pistol10mm"
+	icon_state = "pistol10mm_p"
 
 /obj/item/ammo_box/magazine/m10mm/hp
-	icon_state = "pistol10mm"
+	icon_state = "pistol10mm_hv"
 
-/obj/item/ammo_box/magazine/m10mm/soporific
-	icon_state = "pistol10mm"
+/obj/item/ammo_box/magazine/m10mm/ap
+	icon_state = "pistol10mm_l"
 
 /obj/item/ammo_box/magazine/m10mm/update_icon()
 	..()
-	icon_state = "[initial(icon_state)]-[ammo_count() ? "8" : "0"]"
+	icon_state = "[initial(icon_state)]-[round(ammo_count(), 2)]"
+
+//APS
+/obj/item/ammo_box/magazine/m9mm
+	icon = 'modular_skyrat/icons/obj/bobstation/ammo/pistol.dmi'
+	icon_state = "pistol9mm"
+
+/obj/item/ammo_box/magazine/m9mm/update_icon()
+	..()
+	icon_state = "[initial(icon_state)]-[round(ammo_count(), 2)]"
+
+//Nangler
+/obj/item/ammo_box/magazine/m9mm/small
+	name = "nangler magazine (9mm)"
+	desc = "A low capacity magazine for compact pistols."
+	icon_state = "small9mm"
+	ammo_type = /obj/item/ammo_casing/c9mm
+	caliber = "9mm"
+	max_ammo = 8

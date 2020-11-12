@@ -102,7 +102,7 @@
 	desc = "The original Russian version of a widely used Syndicate sidearm. Uses 9mm ammo."
 	icon_state = "aps"
 	w_class = WEIGHT_CLASS_SMALL
-	mag_type = /obj/item/ammo_box/magazine/pistolm9mm
+	mag_type = /obj/item/ammo_box/magazine/m9mm
 	can_suppress = FALSE
 	burst_size = 3
 	fire_delay = 2

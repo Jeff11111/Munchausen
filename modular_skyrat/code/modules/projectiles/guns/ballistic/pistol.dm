@@ -1,3 +1,7 @@
+//Base pistol changes
+/obj/item/gun/ballistic/automatic/pistol
+	generic_magazine_overlays = TRUE
+
 //Pipe pistol
 /obj/item/gun/ballistic/automatic/pistol/makeshift
 	name = "10mm pipe pistol"
@@ -10,10 +14,6 @@
 	burst_size = 1
 	fire_delay = 3
 	actions_types = list()
-
-/obj/item/gun/ballistic/automatic/pistol/makeshift/update_icon()
-	..()
-	icon_state = "[initial(icon_state)][chambered ? "" : "-e"]"
 
 //USP pistol
 /obj/item/gun/ballistic/automatic/pistol/uspm
@@ -28,7 +28,7 @@
 	can_suppress = FALSE
 	obj_flags = UNIQUE_RENAME
 
-//Stechkin v2, base proc changes
+//Stechkin v2
 /obj/item/gun/ballistic/automatic/pistol
 	name = "10mm pistol"
 	desc = "The stechkin 10mm pistol - A small, easily concealable 10mm handgun and timeless classic. Has a threaded barrel for suppressors."
@@ -36,10 +36,6 @@
 	icon_state = "pistol10mm"
 	fire_sound = 'modular_skyrat/sound/guns/pistol2.ogg'
 	suppressed_pixel_x = 4
-
-/obj/item/gun/ballistic/automatic/pistol/update_icon()
-	..()
-	icon_state = "[initial(icon_state)][chambered ? "" : "-e"][magazine ? "" : "-nomag"][safety ? "-safe" : ""]"
 
 //Modular pistol
 /obj/item/gun/ballistic/automatic/pistol/modular
@@ -57,7 +53,7 @@
 	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/pistol_lefthand.dmi'
 	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/pistol_righthand.dmi'
 	fire_sound = 'modular_skyrat/sound/guns/pistol1.ogg'
-	mag_type = /obj/item/ammo_box/magazine/nangler
+	mag_type = /obj/item/ammo_box/magazine/m9mm/small
 	can_suppress = FALSE
 
 //M1911
@@ -100,7 +96,7 @@
 	icon_state = "glock"
 	item_state = "pistol9mm"
 	w_class = WEIGHT_CLASS_SMALL
-	mag_type = /obj/item/ammo_box/magazine/pistolm9mm
+	mag_type = /obj/item/ammo_box/magazine/m9mm
 	can_suppress = FALSE
 	burst_size = 2
 	fire_delay = 2

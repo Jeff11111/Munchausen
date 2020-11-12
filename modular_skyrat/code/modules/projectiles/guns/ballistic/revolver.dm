@@ -211,11 +211,14 @@
 // REVOLVERS //
 ///////////////
 //
+
+//Snubnose
 /obj/item/gun/ballistic/revolver/detective
 	name = "\improper .38 snubnose revolver"
-	icon_state = "snubnose"
+	icon_state = "havelock"
 	unique_reskin = null
 
+//Lady luck
 /obj/item/gun/ballistic/revolver/dual_ammo
 	name = "\improper .38 revolver"
 	desc = "The NT Lady Luck revolver - A classic law enforcement firearm, for a lawless land."
@@ -233,13 +236,18 @@
 				magazine.caliber = list("357")
 				to_chat(user, "<span class='notice'>\The [src] will now chamber .38 rounds.</span>")
 
+//NT Bingus
 /obj/item/gun/ballistic/revolver/mateba/bladerunner
 	name = "\improper .357 revolver"
-	desc = "The NT Sheriff - A high quality revolver chambered in .357 rounds."
-	icon_state = "bladerunner"
+	desc = "The NT Bingus - A high quality revolver chambered in .357 rounds."
+	icon_state = "bingus"
 	fire_sound = 'modular_skyrat/sound/guns/revolver2.ogg'
 
-//new double barreled shotgun
+//Nagant
+/obj/item/gun/ballistic/revolver/nagant
+	icon_state = "miller"
+
+//new double barreled shotgun syste,
 //we interpret "chamber_open" as having the shotgun break open or not
 /obj/item/gun/ballistic/revolver/doublebarrel
 	name = "\improper double barreled shotgun"
@@ -262,6 +270,7 @@
 	icon_state = "[initial(icon_state)][sawn_off ? "_sawn" : ""][chamber_open ? "-open" : ""]"
 	item_state = "[initial(item_state)][sawn_off ? "_sawn" : ""][(!sawn_off && is_wielded) ? "-wielded" : ""]"
 
+//Bobox db shotgun
 /obj/item/gun/ballistic/revolver/doublebarrel/bobox
 	icon_state = "bobox"
 	desc = "The Bobox double barreled shotgun - The double barrel you know and love, but now polymerized and horrifying."

@@ -59,13 +59,13 @@
 	category = list("Ammo")
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
 
-/datum/design/pistolm9mm
+/datum/design/m9mm
 	name = "pistol magazine (9mm)"
 	desc = "A gun magazine."
-	id = "pistolm9mm"
+	id = "m9mm"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 80000)
-	build_path = /obj/item/ammo_box/magazine/pistolm9mm
+	build_path = /obj/item/ammo_box/magazine/m9mm
 	category = list("Ammo")
 	departmental_flags = DEPARTMENTAL_FLAG_SECURITY
 

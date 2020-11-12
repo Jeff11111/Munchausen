@@ -199,7 +199,7 @@
 	cost = 4000
 	var/num_contained = 3
 	contains = list(/obj/item/ammo_box/a357,
-					/obj/item/ammo_box/magazine/pistolm9mm,
+					/obj/item/ammo_box/magazine/m9mm,
 					/obj/item/ammo_box/magazine/m45/kitchengun)
 	crate_name = "crate"
 

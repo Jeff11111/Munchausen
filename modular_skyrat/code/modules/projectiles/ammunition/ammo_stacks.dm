@@ -1,4 +1,4 @@
-//Ammo stacks
+//Ammo casing interaction code
 /obj/item/ammo_casing
 	var/obj/item/ammo_box/magazine/ammo_stack = /obj/item/ammo_box/magazine/ammo_stack
 
@@ -23,6 +23,7 @@
 		else if(!AC.ammo_stack)
 			to_chat(user, "<span class='warning'>[AC] can't be stacked.</span>")
 
+//The ammo stack itself
 /obj/item/ammo_box/magazine/ammo_stack
 	name = "ammo stack"
 	desc = "A stack of ammo."
@@ -55,24 +56,30 @@
 
 /obj/item/ammo_box/magazine/ammo_stack/get_round(keep)
 	var/i = ..()
-	update_overlays()
+	update_icon()
 	if(ammo_count() <= 0)
 		qdel(src)
 	return i
 
 /obj/item/ammo_box/magazine/ammo_stack/give_round(obj/item/ammo_casing/R, replace_spent)
 	var/i = ..()
-	update_overlays()
-	if(ammo_count() <= 0 && !QDELETED(src))
-		qdel(src)
+	update_icon()
 	return i
 
 /obj/item/ammo_box/magazine/ammo_stack/handle_atom_del(atom/A)
 	..()
-	if(ammo_count() <= 0 && !QDELETED(src))
-		qdel(src)
+	check_for_del()
 
 /obj/item/ammo_box/magazine/ammo_stack/empty_magazine()
 	..()
+	check_for_del()
+
+/obj/item/ammo_box/magazine/ammo_stack/update_icon()
+	..()
+	check_for_del()
+
+/obj/item/ammo_box/magazine/ammo_stack/proc/check_for_del()
+	. = FALSE
 	if(ammo_count() <= 0 && !QDELETED(src))
 		qdel(src)
+		return TRUE

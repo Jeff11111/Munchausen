@@ -6,18 +6,18 @@
 	contains = list(/obj/item/gun/ballistic/automatic/pistol/nangler,
 					/obj/item/gun/ballistic/automatic/pistol/nangler,
 					/obj/item/gun/ballistic/automatic/pistol/nangler,
-					/obj/item/ammo_box/magazine/nangler,
-					/obj/item/ammo_box/magazine/nangler,
-					/obj/item/ammo_box/magazine/nangler)
+					/obj/item/ammo_box/magazine/m9mm/small,
+					/obj/item/ammo_box/magazine/m9mm/small,
+					/obj/item/ammo_box/magazine/m9mm/small)
 	crate_name = "9mm pistols crate"
 
 /datum/supply_pack/security/armory/nangler_ammo
 	name = "9mm Pistol Ammo Crate"
 	desc = "Contains 3 ML Nangler magazines."
 	cost = 2000
-	contains = list(/obj/item/ammo_box/magazine/nangler,
-					/obj/item/ammo_box/magazine/nangler,
-					/obj/item/ammo_box/magazine/nangler)
+	contains = list(/obj/item/ammo_box/magazine/m9mm/small,
+					/obj/item/ammo_box/magazine/m9mm/small,
+					/obj/item/ammo_box/magazine/m9mm/small)
 	crate_name = "9mm pistol ammo crate"
 
 /datum/supply_pack/security/armory/blackbaton

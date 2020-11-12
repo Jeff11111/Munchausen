@@ -266,7 +266,7 @@
 						wounding = WOUND_SLASH
 					if(SHARP_POINTY)
 						wounding = WOUND_PIERCE
-				B.damage_organs((damage/100)*(100 - blocked), wounding_type = wounding)
+				B.damage_organs((damage/100)*1.5*(100 - blocked), wounding_type = wounding)
 			// Cause pain damage
 			if(B && src.pain)
 				B.receive_damage(pain = (src.pain*((100-blocked)/100)))

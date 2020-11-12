@@ -48,14 +48,14 @@
 	desc = "BANG! BANG! BANG!"
 	ammo_type = /obj/item/ammo_casing/c45/kitchengun
 
-/obj/item/ammo_box/magazine/pistolm9mm
+/obj/item/ammo_box/magazine/m9mm
 	name = "pistol magazine (9mm)"
 	icon_state = "9x19p-8"
 	ammo_type = /obj/item/ammo_casing/c9mm
 	caliber = "9mm"
-	max_ammo = 15
+	max_ammo = 16
 
-/obj/item/ammo_box/magazine/pistolm9mm/update_icon()
+/obj/item/ammo_box/magazine/m9mm/update_icon()
 	..()
 	icon_state = "9x19p-[ammo_count() ? "8" : "0"]"
 

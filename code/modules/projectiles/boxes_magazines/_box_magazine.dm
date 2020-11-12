@@ -130,7 +130,7 @@
 			icon_state = "[initial(icon_state)]-[stored_ammo.len ? "[max_ammo]" : "0"]"
 
 //Behavior for magazines
-/obj/item/ammo_box/magazine/proc/ammo_count()
+/obj/item/ammo_box/proc/ammo_count()
 	return stored_ammo.len
 
 /obj/item/ammo_box/magazine/proc/empty_magazine()

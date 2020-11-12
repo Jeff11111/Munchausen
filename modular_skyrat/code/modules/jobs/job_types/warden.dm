@@ -7,7 +7,7 @@
 
 /datum/outfit/job/warden
 	backpack_contents = list(
-					/obj/item/ammo_box/magazine/nangler=1,
+					/obj/item/ammo_box/magazine/m9mm/small=1,
 					/obj/item/gun/energy/e_gun/advtaser=1,
 					/obj/item/melee/classic_baton/black=1,
 					)
@@ -30,7 +30,7 @@
 
 /obj/item/storage/briefcase/choice/nangler/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/nangler(src)
-	new /obj/item/ammo_box/magazine/nangler(src)
+	new /obj/item/ammo_box/magazine/m9mm/small(src)
 
 /obj/item/storage/briefcase/choice/m1911/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/m1911(src)
@@ -38,7 +38,7 @@
 
 /obj/item/storage/briefcase/choice/glock/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/APS/glock(src)
-	new /obj/item/ammo_box/magazine/pistolm9mm(src)
+	new /obj/item/ammo_box/magazine/m9mm(src)
 
 /obj/item/storage/briefcase/choice/mateba/PopulateContents()
 	new /obj/item/gun/ballistic/revolver/mateba(src)
