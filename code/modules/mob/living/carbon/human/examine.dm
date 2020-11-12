@@ -580,7 +580,7 @@
 	msg += yeah
 	
 	//descriptors
-	msg |= jointext(show_descriptors_to(user), "\n")
+	msg |= "[jointext(show_descriptors_to(user), "\n")]\n"
 	
 	var/trait_exam = common_trait_examine()
 	if(!screwy_self)
