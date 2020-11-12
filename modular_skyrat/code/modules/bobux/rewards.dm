@@ -21,7 +21,7 @@
 	desc = "Become the dreamer. Wake up."
 	buy_message = "<b>Visions...</span>"
 	id = "become_dreamer"
-	cost = 10
+	cost = 15
 
 /datum/bobux_reward/become_dreamer/can_buy(client/noob, silent, fail_message)
 	. = ..()
