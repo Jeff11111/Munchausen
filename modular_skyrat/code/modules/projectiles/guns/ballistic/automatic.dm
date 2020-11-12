@@ -11,4 +11,4 @@
 	. = ..()
 	safety_overlay = mutable_appearance(icon, "[initial(icon_state)][safety ? "-safe" : "-unsafe"]")
 	if(magazine)
-		. += mutable_appearance(icon, "[initial(icon_state)]-[generic_magazine_overlays ? "-mag" : initial(magazine.icon_state)]")
+		. += mutable_appearance(icon, "[initial(icon_state)]-[generic_magazine_overlays ? "mag" : initial(magazine.icon_state)]")
