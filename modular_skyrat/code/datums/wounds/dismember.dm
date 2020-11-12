@@ -68,6 +68,8 @@
 
 	if(!silent)
 		victim.visible_message(msg, "<span class='userdanger'>Your [L.name] [occur_text]!</span>")
+	else
+		victim.wound_message += " \The [limb.name] is [wounding_type == WOUND_SLASH ? "dismembered" : "gored"]!"
 	
 	if(wounding_type == WOUND_BURN)
 		if(L.is_organic_limb())
@@ -136,7 +138,7 @@
 	initial_flow = 4.25
 	minimum_flow = 4
 	clot_rate = 0
-	descriptive = "The limb is dismembered!"
+	descriptive = null
 
 /datum/wound/slash/loss/get_examine_description(mob/user)
 	. = ..()
@@ -200,7 +202,7 @@
 	biology_required = list()
 	pain_amount = 40
 	occur_text = null
-	descriptive = "The limb is dismembered!"
+	descriptive = null
 
 /datum/wound/mechanical/slash/loss/get_examine_description(mob/user)
 	. = ..()

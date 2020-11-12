@@ -4,19 +4,6 @@
 
 #define EXOTIC_BLEED_MULTIPLIER 4 //Multiplies the actually bled amount by this number for the purposes of turf reaction calculations.
 
-/* skyrat edit
-/mob/living/carbon/human/proc/suppress_bloodloss(amount)
-	if(bleedsuppress)
-		return
-	else
-		bleedsuppress = TRUE
-		addtimer(CALLBACK(src, .proc/resume_bleeding), amount)
-
-/mob/living/carbon/human/proc/resume_bleeding()
-	bleedsuppress = 0
-	if(stat != DEAD && bleed_rate) //skyrat edit
-		to_chat(src, "<span class='warning'>The blood soaks through your bandage.</span>")
-*/
 
 //skyrat edit
 ///Returns how much blood we're losing from being dragged a tile, from [mob/living/proc/makeTrail]
@@ -73,15 +60,9 @@
 // Takes care blood loss and regeneration
 /mob/living/carbon/human/handle_blood()
 	if(NOBLOOD in dna.species.species_traits)
-		//bleed_rate = 0 //skyrat edit
 		return
-	/* skyrat edit
-	if(bleed_rate < 0)
-		bleed_rate = 0
-	*/
 	if(HAS_TRAIT(src, TRAIT_NOMARROW)) //Bloodsuckers don't need to be here.
 		return
-
 	if(bodytemperature >= TCRYO && !(HAS_TRAIT(src, TRAIT_NOCLONE))) //cryosleep or husked people do not pump the blood.
 		//Blood regeneration if there is some space, and a spleen
 		var/obj/item/organ/spleen/spleen = getorganslot(ORGAN_SLOT_SPLEEN)
@@ -187,7 +168,7 @@
 									'modular_skyrat/sound/gore/blood5.ogg',
 									'modular_skyrat/sound/gore/blood6.ogg',
 									)
-					playsound(get_turf(src), bloodsound, 50)
+					playsound(get_turf(src), bloodsound, 100)
 
 /mob/living/proc/restore_blood()
 	blood_volume = initial(blood_volume)

@@ -64,7 +64,7 @@
 
 	if(!silent)
 		victim.visible_message(msg, "<span class='userdanger'>Your [L.name] [occur_text]!</span>")
-
+	
 	//apply the blood gush effect
 	if(wounding_type != WOUND_BURN && L.owner)
 		var/direction = L.owner.dir
@@ -84,7 +84,6 @@
 
 	second_wind()
 	log_wound(victim, src)
-	L.disembowel(dam_type = (wounding_type == WOUND_BURN ? BURN : BRUTE),silent = TRUE, wound = TRUE)
 	qdel(src)
 	var/kaplosh_sound = pick(
 		'modular_skyrat/sound/gore/chop1.ogg',
