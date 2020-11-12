@@ -30,10 +30,6 @@
 	if (back)
 		. += "[t_He] [t_has] [back.get_examine_string(user)] on [t_his] back."
 
-	//holy shit this is a big skyrat edit
-	/* skyrat edit
-	var/list/missing = get_missing_limbs()
-	*/
 	var/list/msg = list()
 
 	var/list/missing = get_missing_limbs()
@@ -135,17 +131,6 @@
 			else
 				msg += "<b>[t_He] [t_is] severely deformed!</b>\n"
 
-	if(HAS_TRAIT(src, TRAIT_DUMB))
-		msg += "[t_He] seem[p_s()] to be clumsy and unable to think.\n"
-
-	if(fire_stacks > 0)
-		msg += "[t_He] [t_is] covered in something flammable.\n"
-	if(fire_stacks < 0)
-		msg += "[t_He] look[p_s()] a little soaked.\n"
-
-	if(pulledby && pulledby.grab_state)
-		msg += "[t_He] [t_is] restrained by [pulledby]'s grip.\n"
-	
 	var/bleed_text
 	var/list/obj/item/bodypart/bleeding_limbs = list()
 	var/list/obj/item/bodypart/grasped_limbs = list()
@@ -198,7 +183,6 @@
 			msg += "<span class='notice'><b><i>[t_He] [t_has] significantly disfiguring scarring, you can look again to take a closer look...</i></b></span>\n"
 		if(WOUND_SEVERITY_LOSS to INFINITY)
 			msg += "<span class='notice'><b><i>[t_He] [t_is] just absolutely fucked up, you can look again to take a closer look...</i></b></span>\n"
-	//
 
 	if(msg.len)
 		. += "<span class='warning'>[msg.Join("")]</span>"
@@ -275,8 +259,19 @@
 	
 	if(consciousness_msg)
 		. += consciousness_msg
-	//
+	
+	if(HAS_TRAIT(src, TRAIT_DUMB))
+		msg += "[t_He] seem[p_s()] to be clumsy and unable to think.\n"
 
+	if(fire_stacks > 0)
+		msg += "[t_He] [t_is] covered in something flammable.\n"
+		
+	if(fire_stacks < 0)
+		msg += "[t_He] look[p_s()] a little soaked.\n"
+
+	if(pulledby && pulledby.grab_state)
+		msg += "[t_He] [t_is] restrained by [pulledby]'s grip.\n"
+	
 	if(digitalcamo)
 		. += "[t_He] [t_is] moving [t_his] body in an unnatural and blatantly unsimian manner."
 

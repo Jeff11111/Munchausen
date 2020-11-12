@@ -162,7 +162,7 @@
 	severity = WOUND_SEVERITY_MODERATE
 	viable_zones = ALL_BODYPARTS
 	initial_flow = 2
-	gauzed_clot_rate = 0.1
+	gauzed_clot_rate = 0.4
 	internal_bleeding_chance = 30
 	internal_bleeding_coefficient = 1.25
 	threshold_minimum = 30
@@ -183,7 +183,7 @@
 	severity = WOUND_SEVERITY_SEVERE
 	viable_zones = ALL_BODYPARTS
 	initial_flow = 3.25
-	gauzed_clot_rate = 0.1
+	gauzed_clot_rate = 0.5
 	internal_bleeding_chance = 60
 	internal_bleeding_coefficient = 1.5
 	threshold_minimum = 50
@@ -204,7 +204,7 @@
 	severity = WOUND_SEVERITY_CRITICAL
 	viable_zones = ALL_BODYPARTS
 	initial_flow = 4.25
-	gauzed_clot_rate = 0.1
+	gauzed_clot_rate = 0.6
 	internal_bleeding_chance = 80
 	internal_bleeding_coefficient = 1.75
 	threshold_minimum = 100
