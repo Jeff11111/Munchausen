@@ -217,10 +217,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 		"vag_shape" = DEF_VAGINA_SHAPE,
 		"vag_color" = "fff",
 		"has_womb" = FALSE,
-		"balls_visibility"	= GEN_VISIBLE_NO_UNDIES,
-		"breasts_visibility"= GEN_VISIBLE_NO_UNDIES,
-		"cock_visibility"	= GEN_VISIBLE_NO_UNDIES,
-		"vag_visibility"	= GEN_VISIBLE_NO_UNDIES,
 		"ipc_screen" = "Sunburst",
 		"ipc_antenna" = "None",
 		"meat_type" = "Mammalian",
@@ -952,57 +948,47 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				if(pref_species.use_skintones)
 					dat += "<b>Genitals use skintone:</b><a href='?_src_=prefs;preference=genital_colour'>[features["genitals_use_skintone"] == TRUE ? "Yes" : "No"]</a>"
 				dat += "<h3>Penis</h3>"
-				dat += "<a style='display:block;width:50px' href='?_src_=prefs;preference=has_cock'>[features["has_cock"] == TRUE ? "Yes" : "No"]</a>"
-				if(features["has_cock"])
-					if(pref_species.use_skintones && features["genitals_use_skintone"] == TRUE)
+				dat += "<a style='display:block;width:50px' href='?_src_=prefs;preference=has_cock'>[(features["has_cock"] && pref_species.has_weiner) ? "Yes" : "No"]</a>"
+				if(features["has_cock"] && pref_species.has_weiner)
+					if(pref_species.use_skintones || features["genitals_use_skintone"])
 						dat += "<b>Penis Color:</b></a><BR>"
 						dat += "<span style='border: 1px solid #161616; background-color: [SKINTONE2HEX(skin_tone)];'>&nbsp;&nbsp;&nbsp;</span>(Skin tone overriding)</a><br>"
 					else
 						dat += "<b>Penis Color:</b></a><BR>"
 						dat += "<span style='border: 1px solid #161616; background-color: #[features["cock_color"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=cock_color;task=input'>Change</a><br>"
-					var/tauric_shape = FALSE
-					if(features["cock_taur"])
-						var/datum/sprite_accessory/penis/P = GLOB.cock_shapes_list[features["cock_shape"]]
-						if(P.taur_icon && pref_species.mutant_bodyparts["taur"])
-							var/datum/sprite_accessory/taur/T = GLOB.taur_list[features["taur"]]
-							if(T.taur_mode & P.accepted_taurs)
-								tauric_shape = TRUE
-					dat += "<b>Penis Shape:</b> <a style='display:block;width:120px' href='?_src_=prefs;preference=cock_shape;task=input'>[features["cock_shape"]][tauric_shape ? " (Taur)" : ""]</a>"
+					dat += "<b>Penis Shape:</b> <a style='display:block;width:120px' href='?_src_=prefs;preference=cock_shape;task=input'>[features["cock_shape"]]</a>"
 					//Skyrat edit - Metric measurements
 					if(toggles & METRIC_OR_BUST)
 						dat += "<b>Penis Length:</b> <a style='display:block;width:120px' href='?_src_=prefs;preference=cock_length;task=input'>[round(features["cock_length"] * 2.54, 1)] centimeter(s)</a>"
 					else
 						dat += "<b>Penis Length:</b> <a style='display:block;width:120px' href='?_src_=prefs;preference=cock_length;task=input'>[features["cock_length"]] inch(es)</a>"
 					//Skyrat edit end
-					dat += "<b>Penis Visibility:</b><a style='display:block;width:100px' href='?_src_=prefs;preference=cock_visibility;task=input'>[features["cock_visibility"]]</a>"
-					dat += "<b>Has Testicles:</b><a style='display:block;width:50px' href='?_src_=prefs;preference=has_balls'>[features["has_balls"] == TRUE ? "Yes" : "No"]</a>"
-					if(features["has_balls"])
-						if(pref_species.use_skintones && features["genitals_use_skintone"] == TRUE)
+					dat += "<b>Has Testicles:</b><a style='display:block;width:50px' href='?_src_=prefs;preference=has_balls'>[(features["has_balls"] && pref_species.has_balls) ? "Yes" : "No"]</a>"
+					if(features["has_balls"] && pref_species.has_balls)
+						if(pref_species.use_skintones || features["genitals_use_skintone"])
 							dat += "<b>Testicles Color:</b></a><BR>"
 							dat += "<span style='border: 1px solid #161616; background-color: [SKINTONE2HEX(skin_tone)];'>&nbsp;&nbsp;&nbsp;</span>(Skin tone overriding)<br>"
 						else
 							dat += "<b>Testicles Color:</b></a><BR>"
 							dat += "<span style='border: 1px solid #161616; background-color: #[features["balls_color"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=balls_color;task=input'>Change</a><br>"
-						dat += "<b>Testicles Visibility:</b><a style='display:block;width:100px' href='?_src_=prefs;preference=balls_visibility;task=input'>[features["balls_visibility"]]</a>"
 				dat += APPEARANCE_CATEGORY_COLUMN
 				dat += "<h3>Vagina</h3>"
 				dat += "<a style='display:block;width:50px' href='?_src_=prefs;preference=has_vag'>[features["has_vag"] == TRUE ? "Yes" : "No"]</a>"
 				if(features["has_vag"])
 					dat += "<b>Vagina Type:</b> <a style='display:block;width:100px' href='?_src_=prefs;preference=vag_shape;task=input'>[features["vag_shape"]]</a>"
-					if(pref_species.use_skintones && features["genitals_use_skintone"] == TRUE)
+					if(pref_species.use_skintones || features["genitals_use_skintone"])
 						dat += "<b>Vagina Color:</b></a><BR>"
 						dat += "<span style='border: 1px solid #161616; background-color: [SKINTONE2HEX(skin_tone)];'>&nbsp;&nbsp;&nbsp;</span>(Skin tone overriding)<br>"
 					else
 						dat += "<b>Vagina Color:</b></a><BR>"
 						dat += "<span style='border: 1px solid #161616; background-color: #[features["vag_color"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=vag_color;task=input'>Change</a><br>"
-					dat += "<b>Vagina Visibility:</b><a style='display:block;width:100px' href='?_src_=prefs;preference=vag_visibility;task=input'>[features["vag_visibility"]]</a>"
 					dat += "<b>Has Womb:</b><a style='display:block;width:50px' href='?_src_=prefs;preference=has_womb'>[features["has_womb"] == TRUE ? "Yes" : "No"]</a>"
 				dat += "</td>"
 				dat += APPEARANCE_CATEGORY_COLUMN
 				dat += "<h3>Breasts</h3>"
 				dat += "<a style='display:block;width:50px' href='?_src_=prefs;preference=has_breasts'>[features["has_breasts"] == TRUE ? "Yes" : "No"]</a>"
 				if(features["has_breasts"])
-					if(pref_species.use_skintones && features["genitals_use_skintone"] == TRUE)
+					if(pref_species.use_skintones || features["genitals_use_skintone"])
 						dat += "<b>Color:</b></a><BR>"
 						dat += "<span style='border: 1px solid #161616; background-color: [SKINTONE2HEX(skin_tone)];'>&nbsp;&nbsp;&nbsp;</span>(Skin tone overriding)<br>"
 					else
@@ -1010,7 +996,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						dat += "<span style='border: 1px solid #161616; background-color: #[features["breasts_color"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=breasts_color;task=input'>Change</a><br>"
 					dat += "<b>Cup Size:</b><a style='display:block;width:50px' href='?_src_=prefs;preference=breasts_size;task=input'>[features["breasts_size"]]</a>"
 					dat += "<b>Breasts Shape:</b><a style='display:block;width:50px' href='?_src_=prefs;preference=breasts_shape;task=input'>[features["breasts_shape"]]</a>"
-					dat += "<b>Breasts Visibility:</b><a style='display:block;width:100px' href='?_src_=prefs;preference=breasts_visibility;task=input'>[features["breasts_visibility"]]</a>"
 					dat += "<b>Lactates:</b><a style='display:block;width:50px' href='?_src_=prefs;preference=breasts_producing'>[features["breasts_producing"] == TRUE ? "Yes" : "No"]</a>"
 				dat += "</td>"
 			dat += "</td>"
@@ -2641,8 +2626,10 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					var/new_cockcolor = input(user, "Penis color:", "Character Preference","#"+features["cock_color"]) as color|null
 					if(new_cockcolor)
 						var/temp_hsv = RGBtoHSV(new_cockcolor)
-						if(new_cockcolor == "#000000")
+						if((new_cockcolor == "#000000") || pref_species.use_skintones)
 							features["cock_color"] = pref_species.default_color
+							if(pref_species.use_skintones)
+								features["cock_color"] = SKINTONE2HEX(skin_tone)	
 						else if(ReadHSV(temp_hsv)[3] >= ReadHSV("#202020")[3])
 							features["cock_color"] = sanitize_hexcolor(new_cockcolor)
 						else
@@ -2667,41 +2654,25 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 
 				if("cock_shape")
 					var/new_shape
-					var/list/hockeys = list()
-					if(pref_species.mutant_bodyparts["taur"])
-						var/datum/sprite_accessory/taur/T = GLOB.taur_list[features["taur"]]
-						for(var/A in GLOB.cock_shapes_list)
-							var/datum/sprite_accessory/penis/P = GLOB.cock_shapes_list[A]
-							if(P.taur_icon && T.taur_mode & P.accepted_taurs)
-								LAZYSET(hockeys, "[A] (Taur)", A)
-					new_shape = input(user, "Penis shape:", "Character Preference") as null|anything in (GLOB.cock_shapes_list + hockeys)
+					var/list/fuck = GLOB.cock_shapes_list.Copy()
+					if(length(pref_species.weiner_type))
+						fuck = pref_species.weiner_type.Copy()
+					new_shape = input(user, "Penis shape:", "Character Preference") as null|anything in fuck
 					if(new_shape)
-						features["cock_taur"] = FALSE
-						if(hockeys[new_shape])
-							new_shape = hockeys[new_shape]
-							features["cock_taur"] = TRUE
 						features["cock_shape"] = new_shape
-
-				if("cock_visibility")
-					var/n_vis = input(user, "Penis Visibility", "Character Preference") as null|anything in CONFIG_GET(keyed_list/safe_visibility_toggles)
-					if(n_vis)
-						features["cock_visibility"] = n_vis
 
 				if("balls_color")
 					var/new_ballscolor = input(user, "Testicles Color:", "Character Preference","#"+features["balls_color"]) as color|null
 					if(new_ballscolor)
 						var/temp_hsv = RGBtoHSV(new_ballscolor)
-						if(new_ballscolor == "#000000")
+						if((new_ballscolor == "#000000") || pref_species.use_skintones)
 							features["balls_color"] = pref_species.default_color
+							if(pref_species.use_skintones)
+								features["balls_color"] = SKINTONE2HEX(skin_tone)
 						else if(ReadHSV(temp_hsv)[3] >= ReadHSV("#202020")[3])
 							features["balls_color"] = sanitize_hexcolor(new_ballscolor)
 						else
 							to_chat(user,"<span class='danger'>Invalid color. Your color is not bright enough.</span>")
-
-				if("balls_visibility")
-					var/n_vis = input(user, "Testicles Visibility", "Character Preference") as null|anything in CONFIG_GET(keyed_list/safe_visibility_toggles)
-					if(n_vis)
-						features["balls_visibility"] = n_vis
 
 				if("breasts_size")
 					var/new_size = input(user, "Breast Size", "Character Preference") as null|anything in CONFIG_GET(keyed_list/breasts_cups_prefs)
@@ -2710,7 +2681,10 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 
 				if("breasts_shape")
 					var/new_shape
-					new_shape = input(user, "Breast Shape", "Character Preference") as null|anything in GLOB.breasts_shapes_list
+					var/list/fuck = GLOB.breasts_shapes_list.Copy()
+					if(length(pref_species.bobs_type))
+						fuck = pref_species.bobs_type.Copy()
+					new_shape = input(user, "Breast Shape", "Character Preference") as null|anything in fuck
 					if(new_shape)
 						features["breasts_shape"] = new_shape
 
@@ -2718,21 +2692,21 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					var/new_breasts_color = input(user, "Breast Color:", "Character Preference","#"+features["breasts_color"]) as color|null
 					if(new_breasts_color)
 						var/temp_hsv = RGBtoHSV(new_breasts_color)
-						if(new_breasts_color == "#000000")
+						if((new_breasts_color == "#000000") || pref_species.use_skintones)
 							features["breasts_color"] = pref_species.default_color
+							if(pref_species.use_skintones)
+								features["breasts_color"] = SKINTONE2HEX(skin_tone)
 						else if(ReadHSV(temp_hsv)[3] >= ReadHSV("#202020")[3])
 							features["breasts_color"] = sanitize_hexcolor(new_breasts_color)
 						else
 							to_chat(user,"<span class='danger'>Invalid color. Your color is not bright enough.</span>")
 
-				if("breasts_visibility")
-					var/n_vis = input(user, "Breasts Visibility", "Character Preference") as null|anything in CONFIG_GET(keyed_list/safe_visibility_toggles)
-					if(n_vis)
-						features["breasts_visibility"] = n_vis
-
 				if("vag_shape")
 					var/new_shape
-					new_shape = input(user, "Vagina Type", "Character Preference") as null|anything in GLOB.vagina_shapes_list
+					var/list/fuck = GLOB.vagina_shapes_list.Copy()
+					if(length(pref_species.vegana_type))
+						fuck = pref_species.vegana_type.Copy()
+					new_shape = input(user, "Vagina Type", "Character Preference") as null|anything in fuck
 					if(new_shape)
 						features["vag_shape"] = new_shape
 
@@ -2740,17 +2714,14 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					var/new_vagcolor = input(user, "Vagina color:", "Character Preference","#"+features["vag_color"]) as color|null
 					if(new_vagcolor)
 						var/temp_hsv = RGBtoHSV(new_vagcolor)
-						if(new_vagcolor == "#000000")
+						if((new_vagcolor == "#000000") || pref_species.use_skintones)
 							features["vag_color"] = pref_species.default_color
+							if(pref_species.use_skintones)
+								features["vag_color"] = SKINTONE2HEX(skin_tone)
 						else if(ReadHSV(temp_hsv)[3] >= ReadHSV("#202020")[3])
 							features["vag_color"] = sanitize_hexcolor(new_vagcolor)
 						else
 							to_chat(user,"<span class='danger'>Invalid color. Your color is not bright enough.</span>")
-
-				if("vag_visibility")
-					var/n_vis = input(user, "Vagina Visibility", "Character Preference") as null|anything in CONFIG_GET(keyed_list/safe_visibility_toggles)
-					if(n_vis)
-						features["vag_visibility"] = n_vis
 
 				if("ooccolor")
 					var/new_ooccolor = input(user, "Choose your OOC colour:", "Game Preference",ooccolor) as color|null

@@ -8,7 +8,7 @@
 	masturbation_verb = "stroke"
 	arousal_verb = "You pop a boner"
 	unarousal_verb = "Your boner goes down"
-	genital_flags = CAN_MASTURBATE_WITH|CAN_CLIMAX_WITH|GENITAL_CAN_AROUSE|UPDATE_OWNER_APPEARANCE|GENITAL_UNDIES_HIDDEN|GENITAL_CAN_TAUR
+	genital_flags = CAN_MASTURBATE_WITH|CAN_CLIMAX_WITH|GENITAL_CAN_AROUSE|UPDATE_OWNER_APPEARANCE|GENITAL_UNDIES_HIDDEN
 	linked_organ_slot = ORGAN_SLOT_TESTICLES
 	fluid_transfer_factor = 0.5
 	shape = DEF_COCK_SHAPE
@@ -88,7 +88,6 @@
 	var/datum/sprite_accessory/S = GLOB.cock_shapes_list[shape]
 	var/icon_shape = S ? S.icon_state : "human"
 	icon_state = "penis_[icon_shape]_[size]"
-	var/lowershape = lowertext(shape)
 	if(owner)
 		if(owner.dna.species.use_skintones && owner.dna.features["genitals_use_skintone"])
 			if(ishuman(owner)) // Check before recasting type, although someone fucked up if you're not human AND have use_skintones somehow...
@@ -98,10 +97,6 @@
 					icon_state += "_s"
 		else
 			color = "#[owner.dna.features["cock_color"]]"
-		if(genital_flags & GENITAL_CAN_TAUR && S?.taur_icon && (!S.feat_taur || owner.dna.features[S.feat_taur]) && owner.dna.species.mutant_bodyparts["taur"])
-			var/datum/sprite_accessory/taur/T = GLOB.taur_list[owner.dna.features["taur"]]
-			if(T.taur_mode & S.accepted_taurs) //looks out of place on those.
-				lowershape = "taur, [lowershape]"
 
 /obj/item/organ/genital/penis/genital_examine(mob/user)
 	. = list()
