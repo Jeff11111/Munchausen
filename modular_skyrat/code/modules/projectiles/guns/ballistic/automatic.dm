@@ -5,7 +5,7 @@
 
 /obj/item/gun/ballistic/automatic/update_icon()
 	..()
-	icon_state = "[initial(icon_state)][chambered ? "-e" : ""]"
+	icon_state = "[initial(icon_state)][chambered ? "" : "-e"]"
 
 /obj/item/gun/ballistic/automatic/update_overlays()
 	. = ..()
