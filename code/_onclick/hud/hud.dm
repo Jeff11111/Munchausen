@@ -142,7 +142,7 @@ GLOBAL_LIST_INIT(modular_ui_styles, list(
 	internals = null
 	pains = null
 	redpains = null
-	noise_filter = null
+	QDEL_NULL(noise_filter)
 	fov_holder = null
 	lingchemdisplay = null
 	devilsouldisplay = null
