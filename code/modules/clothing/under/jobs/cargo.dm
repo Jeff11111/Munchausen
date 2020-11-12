@@ -17,7 +17,7 @@
 
 /obj/item/clothing/under/rank/cargo/tech
 	name = "cargo technician's jumpsuit"
-	desc = "Shooooorts! They're comfy and easy to wear!"
+	desc = "Gorkas! They're comfy and easy to wear!"
 	icon_state = "cargo"
 	item_state = "lb_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
@@ -45,6 +45,6 @@
 /obj/item/clothing/under/rank/cargo/miner/lavaland
 	desc = "A green uniform for operating in hazardous environments."
 	name = "shaft miner's jumpsuit"
-	icon_state = "explorer"
-	item_state = "explorer"
+	icon_state = "miner"
+	item_state = "miner"
 	can_adjust = FALSE
