@@ -32,6 +32,12 @@
 	var/nopower_state = "dispenser_nopower"
 	var/has_panel_overlay = TRUE
 	var/obj/item/reagent_containers/beaker = null
+
+	var/obamacare = 1 //cost in credits to dispense 1u
+	var/dep_id = ACCOUNT_MED
+	var/datum/bank_account/currently_linked_account
+	var/datum/bank_account/initial_account
+
 	//dispensable_reagents is copypasted in plumbing synthesizers. Please update accordingly. (I didn't make it global because that would limit custom chem dispensers)
 	var/list/dispensable_reagents = list(
 		/datum/reagent/hydrogen,
@@ -103,6 +109,9 @@
 	if(upgrade_reagents3)
 		upgrade_reagents3 = sortList(upgrade_reagents3, /proc/cmp_reagents_asc)
 	dispensable_reagents = sortList(dispensable_reagents, /proc/cmp_reagents_asc)
+
+	initial_account = SSeconomy.get_dep_account(dep_id)
+	currently_linked_account = initial_account
 	update_icon()
 
 /obj/machinery/chem_dispenser/Destroy()
@@ -265,6 +274,9 @@
 					var/free = R.maximum_volume - R.total_volume
 					var/actual = min(amount, (cell.charge * powerefficiency)*10, free)
 
+					if(SSeconomy.full_ancap && !currently_linked_account.adjust_money(-actual*obamacare))
+						say("Insufficient credits to dispense reagent!")
+						return
 					if(!cell.use(actual / powerefficiency))
 						say("Not enough energy to complete operation!")
 						return
