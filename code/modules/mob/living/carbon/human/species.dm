@@ -6,7 +6,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 GLOBAL_LIST_EMPTY(roundstart_race_datums)
 //
 
-#define BURN_WOUND_ROLL_MULT 5
+#define BURN_WOUND_ROLL_MULT 10
 #define SPECIFY_BODYPART_BURN_PROB 50
 
 /datum/species
