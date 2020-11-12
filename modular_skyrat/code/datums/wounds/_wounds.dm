@@ -247,7 +247,7 @@
 			vis_dist = DEFAULT_MESSAGE_RANGE
 		victim.visible_message(msg,  "<span class='userdanger'>Your [limb.name] [occur_text]!</span>", vision_distance = vis_dist)
 		if(sound_effect)
-			playsound(L.owner, sound_effect, 40 + 20 * (severity - WOUND_SEVERITY_TRIVIAL))
+			playsound(L.owner, sound_effect, 60 + 10 * (severity - WOUND_SEVERITY_TRIVIAL))
 		if(do_sound_hint)
 			sound_hint(L.owner, L.owner)
 
