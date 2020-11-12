@@ -349,19 +349,19 @@
 	if(moodie && !(user == src && HAS_TRAIT(user, TRAIT_SCREWY_MOOD)))
 		switch(moodie.shown_mood)
 			if(-INFINITY to MOOD_LEVEL_SAD4)
-				msg += "<span class='notice'>[t_He] look[p_s()] depressed.</span>"
+				msg += "<span class='notice'>[t_He] look[p_s()] depressed.</span>\n"
 			if(MOOD_LEVEL_SAD4 to MOOD_LEVEL_SAD3)
-				msg += "<span class='notice'>[t_He] look[p_s()] very sad.</span>"
+				msg += "<span class='notice'>[t_He] look[p_s()] very sad.</span>\n"
 			if(MOOD_LEVEL_SAD3 to MOOD_LEVEL_SAD1)
-				msg += "<span class='notice'>[t_He] look[p_s()] a bit down.</span>"
+				msg += "<span class='notice'>[t_He] look[p_s()] a bit down.</span>\n"
 			if(MOOD_LEVEL_SAD1 to MOOD_LEVEL_HAPPY1)
-				msg += "<span class='notice'>[t_He] look[p_s()] about fine.</span>"
+				msg += "<span class='notice'>[t_He] look[p_s()] about fine.</span>\n"
 			if(MOOD_LEVEL_HAPPY1 to MOOD_LEVEL_HAPPY3)
-				msg += "<span class='notice'>[t_He] look[p_s()] quite happy.</span>"
+				msg += "<span class='notice'>[t_He] look[p_s()] quite happy.</span>\n"
 			if(MOOD_LEVEL_HAPPY3 to MOOD_LEVEL_HAPPY4)
-				msg += "<span class='notice'>[t_He] look[p_s()] very happy.</span>"
+				msg += "<span class='notice'>[t_He] look[p_s()] very happy.</span>\n"
 			if(MOOD_LEVEL_HAPPY4 to INFINITY)
-				msg += "<span class='notice'>[t_He] look[p_s()] ecstatic.</span>"
+				msg += "<span class='notice'>[t_He] look[p_s()] ecstatic.</span>\n"
 	
 	if(!screwy_self)
 		if(ShowAsPaleExamine())
