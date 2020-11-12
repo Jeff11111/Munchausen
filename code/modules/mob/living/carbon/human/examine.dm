@@ -541,7 +541,7 @@
 				msg += "[t_He] [t_has] a blank, absent-minded stare and [t_has] been completely unresponsive to anything for [round(((world.time - lastclienttime) / (1 MINUTES)),1)] minutes. [t_He] may snap out of it soon.\n" //SKYRAT CHANGE - ssd indicator
 		
 		if(consciousness_msg)
-			msg += consciousness_msg
+			msg += "[consciousness_msg]\n"
 	//
 
 	//Skyrat changes begin
