@@ -1,3 +1,7 @@
+/datum/job/chaplain
+	spawn_positions = 0
+	total_positions = 0
+
 /datum/outfit/job/chaplain
 	implants = list(/obj/item/implant/sad_trombone/mortis)
 

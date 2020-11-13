@@ -272,7 +272,7 @@
 		ready = PLAYER_NOT_READY
 		return FALSE
 
-	var/this_is_like_playing_right = alert(src,"Are you sure you wish to observe? You are allowed to respawn as a new character! Do not play the same character, unless they are alive and have been successfully cryo'd. You are also not allowed to meta-game!","Player Setup","Yes","No") //skyrat-edit
+	var/this_is_like_playing_right = alert(src,"Are you sure you wish to observe? You cannot spawn as a normal crewmember if you join as observer!","Player Setup","Yes","No")
 
 	if(QDELETED(src) || !src.client || this_is_like_playing_right != "Yes")
 		ready = PLAYER_NOT_READY

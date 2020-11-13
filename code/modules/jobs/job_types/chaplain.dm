@@ -19,7 +19,6 @@
 	display_order = JOB_DISPLAY_ORDER_CHAPLAIN
 	threat = 0.5
 
-
 /datum/job/chaplain/after_spawn(mob/living/H, mob/M)
 	. = ..()
 	if(H.mind)
