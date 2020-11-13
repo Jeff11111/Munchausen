@@ -4134,6 +4134,7 @@
 #include "modular_skyrat\code\modules\projectiles\ammunition\ammo_stacks.dm"
 #include "modular_skyrat\code\modules\projectiles\ammunition\ballistic\pistol.dm"
 #include "modular_skyrat\code\modules\projectiles\ammunition\ballistic\shotgun.dm"
+#include "modular_skyrat\code\modules\projectiles\ammunition\ballistic\smg.dm"
 #include "modular_skyrat\code\modules\projectiles\ammunition\ballistic\special.dm"
 #include "modular_skyrat\code\modules\projectiles\ammunition\energy\laser.dm"
 #include "modular_skyrat\code\modules\projectiles\ammunition\energy\misc.dm"
