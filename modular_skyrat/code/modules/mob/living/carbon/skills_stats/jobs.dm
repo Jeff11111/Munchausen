@@ -43,7 +43,7 @@
 	for(var/currentpath in all_stats)
 		var/datum/stats/stat = H.mind.mob_stats[currentpath]
 		if(stat)
-			stat.level = clamp(rand(all_stats[currentpath] - stat_variance_negative, all_stats[currentpath] + stat_variance_positive), 0, MAX_STAT)
+			stat.level = clamp(rand(all_stats[currentpath] - stat_variance_negative, all_stats[currentpath] + stat_variance_positive), MIN_STAT, MAX_STAT)
 	
 	//Assign skills
 	var/list/all_skills = list(
