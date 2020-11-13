@@ -101,14 +101,7 @@ Admin:
 /client/verb/changelog()
 	set name = "Changelog"
 	set category = "OOC"
-	var/datum/asset/changelog = get_asset_datum(/datum/asset/simple/changelog)
-	changelog.send(src)
-	src << browse('html/changelog.html', "window=changes;size=675x650")
-	if(prefs.lastchangelog != GLOB.changelog_hash)
-		prefs.lastchangelog = GLOB.changelog_hash
-		prefs.save_preferences()
-		winset(src, "infowindow.changelog", "font-style=;")
-
+	to_chat(usr, "<span class='danger'>nah nigga just check our discord lmao!</span>")
 
 /mob/proc/hotkey_help()
 	var/hotkey_mode = {"<font color='purple'>
