@@ -7,13 +7,11 @@
 
 /obj/item/projectile/bullet/shotgun_beanbag
 	name = "beanbag slug"
-	stamina = 70
-	//skyrat edit
+	stamina = 25
 	damage = 10
-	pain = 25 //hurts a lot
+	pain = 50
 	bare_wound_bonus = 10
 	sharpness = SHARP_NONE
-	//
 
 /obj/item/projectile/bullet/incendiary/shotgun
 	name = "incendiary slug"
@@ -57,6 +55,7 @@
 	knockdown = 80
 	hitsound = 'sound/effects/meteorimpact.ogg'
 	embedding = EMBED_NONE
+	sharpness = SHARP_NONE
 
 /obj/item/projectile/bullet/shotgun_meteorslug/on_hit(atom/target, blocked = FALSE)
 	. = ..()
@@ -72,7 +71,8 @@
 /obj/item/projectile/bullet/shotgun_frag12
 	name ="frag12 slug"
 	damage = 25
-	knockdown = 50
+	pain = 35
+	knockdown = 10
 
 /obj/item/projectile/bullet/shotgun_frag12/on_hit(atom/target, blocked = FALSE)
 	..()
@@ -85,11 +85,9 @@
 
 /obj/item/projectile/bullet/pellet/shotgun_buckshot
 	name = "buckshot pellet"
-	//skyrat edit
 	damage = 12.5
-	bare_wound_bonus = 15
+	bare_wound_bonus = 20
 	wound_bonus = 20
-	//
 
 /obj/item/projectile/bullet/pellet/shotgun_rubbershot
 	name = "rubbershot pellet"
@@ -97,8 +95,8 @@
 	embedding = null
 	bare_wound_bonus = 10
 	damage = 2
-	stamina = 15
-	pain = 7.5 //hurts a bit
+	stamina = 5
+	pain = 15
 
 /obj/item/projectile/bullet/pellet/Range()
 	..()
@@ -122,7 +120,6 @@
 	..()
 
 // Mech Scattershots
-
 /obj/item/projectile/bullet/scattershot
 	damage = 20
 

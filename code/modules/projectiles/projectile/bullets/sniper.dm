@@ -3,10 +3,9 @@
 /obj/item/projectile/bullet/p50
 	name =".50 BMG bullet"
 	pixels_per_second = TILES_TO_PIXELS(25)
-	damage = 92                    //Skyrat Edit
+	damage = 85                    //Skyrat Edit
 	knockdown = 100
-	dismemberment = 50
-	armour_penetration = 85        //Skyrat Edit: This means it will go clean through bulletproof armor and most hardsuits, it's 18000> Joules of kinetic force jfc
+	armour_penetration = 75        //Skyrat Edit: This means it will go clean through bulletproof armor and most hardsuits, it's 18000> Joules of kinetic force jfc
 	zone_accuracy_factor = 100		//This guarantees the projectile with hit the tile it's fired at 100%
 	var/breakthings = TRUE
 
@@ -37,10 +36,9 @@
 	name = "penetrator round"
 	damage = 60
 	movement_type = FLYING | UNSTOPPABLE
-	dismemberment = 0 //It goes through you cleanly.
 	knockdown = 0
 	breakthings = FALSE
-	wound_bonus = 65
+	wound_bonus = 50 //goes clean through lmao
 
 /obj/item/projectile/bullet/p50/penetrator/shuttle //Nukeop Shuttle Variety
 	icon_state = "gaussstrong"

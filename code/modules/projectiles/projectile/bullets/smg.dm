@@ -3,13 +3,13 @@
 /obj/item/projectile/bullet/c45
 	name = ".45 bullet"
 	damage = 30
-	wound_bonus = 25
+	wound_bonus = 10 //stopping power
 	stamina = 8 //Skyrat edit: Stopping power.
 
 /obj/item/projectile/bullet/c45_cleaning
 	name = ".45 bullet"
 	damage = 40 //BANG BANG BANG
-	wound_bonus = 30
+	wound_bonus = -15 //too clean to make a mess
 
 /obj/item/projectile/bullet/c45_cleaning/on_hit(atom/target, blocked = FALSE)
 	. = ..()
@@ -71,15 +71,12 @@
 
 /obj/item/projectile/bullet/c46x30mm
 	name = "4.6x30mm bullet"
-	damage = 20     //Skyrat edit: Why the fuck did this deal less damage than .38 lethals before?
-	wound_bonus = -5
-	bare_wound_bonus = 5
+	damage = 20
 	embed_falloff_tile = -4
-	wound_bonus = -20
 
 /obj/item/projectile/bullet/c46x30mm_ap
 	name = "4.6x30mm SS192 bullet"
-	damage = 14.5   //Skyrat edit
+	damage = 14.5
 	armour_penetration = 40
 	embedding = null
 	wound_bonus = 10
@@ -88,4 +85,3 @@
 	name = "4.6x30mm incendiary bullet"
 	damage = 7.5
 	fire_stacks = 1
-	wound_bonus = -80
