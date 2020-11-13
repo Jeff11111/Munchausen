@@ -145,7 +145,7 @@
 		if(radio)
 			SPEAK("Insufficient amount of biomass to initiate cloning procedure.")
 		return FALSE
-	if((/datum/quirk/dnc in quirks) || (/datum/quirk/dnr in quirks))
+	if(/datum/quirk/dnr in quirks)
 		if(radio)
 			SPEAK("Patient is a DNC/DNR, and cannot be cloned.")
 		return FALSE
