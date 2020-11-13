@@ -127,3 +127,13 @@
 	value = -2
 	mob_trait = TRAIT_GLASSJAW
 	medical_record_text = "Patient has an unnaturally weak cranium."
+
+//xavleg
+/datum/quirk/xavlegbmaofffassssitimiwoamndutroabcwapwaeiippohfffx
+	name = "Xavlegbmaofffassssitimiwoamndutroabcwapwaeiippohfffx"
+	desc = "Your name is really long."
+
+/datum/quirk/xavlegbmaofffassssitimiwoamndutroabcwapwaeiippohfffx/add()
+	. = ..()
+	quirk_holder.real_name = "Xavlegbmaofffassssitimiwoamndutroabcwapwaeiippohfffx"
+	quirk_holder.name = "Xavlegbmaofffassssitimiwoamndutroabcwapwaeiippohfffx"
