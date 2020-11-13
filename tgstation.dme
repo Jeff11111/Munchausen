@@ -4150,6 +4150,7 @@
 #include "modular_skyrat\code\modules\projectiles\guns\ballistic\automatic.dm"
 #include "modular_skyrat\code\modules\projectiles\guns\ballistic\crossbow.dm"
 #include "modular_skyrat\code\modules\projectiles\guns\ballistic\pistol.dm"
+#include "modular_skyrat\code\modules\projectiles\guns\ballistic\smg.dm"
 #include "modular_skyrat\code\modules\projectiles\guns\ballistic\revolver.dm"
 #include "modular_skyrat\code\modules\projectiles\guns\ballistic\rifle.dm"
 #include "modular_skyrat\code\modules\projectiles\guns\ballistic\shotgun.dm"
