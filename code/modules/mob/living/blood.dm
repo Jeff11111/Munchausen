@@ -133,6 +133,7 @@
 			temp_bleed += BP.get_bleed_rate()
 			BP.generic_bleedstacks = max(0, BP.generic_bleedstacks - 1)
 		//
+		bleed(temp_bleed)
 
 //Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/carbon/proc/bleed(amt)
@@ -144,7 +145,7 @@
 			if(amt >= 10)
 				add_splatter_floor(src.loc)
 			else
-				add_splatter_floor(src.loc, 1)
+				add_splatter_floor(src.loc, TRUE)
 
 /mob/living/carbon/human/bleed(amt)
 	if(!amt)
@@ -155,7 +156,7 @@
 		amt *= 2
 	//
 	if(!(NOBLOOD in dna.species.species_traits))
-		.=..()
+		. = ..()
 		if(dna.species.exotic_blood && .) // Do we have exotic blood, and have we left any on the ground?
 			var/datum/reagent/R = GLOB.chemical_reagents_list[get_blood_id()]
 			if(istype(R) && isturf(loc))
