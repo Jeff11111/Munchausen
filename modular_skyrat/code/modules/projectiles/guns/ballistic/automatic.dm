@@ -1,7 +1,7 @@
 //Base proc changes
 /obj/item/gun/ballistic/automatic
 	fire_sound = 'modular_skyrat/sound/guns/smg2.ogg'
-	var/generic_magazine_overlays = FALSE
+	var/generic_magazine_overlays = TRUE
 
 /obj/item/gun/ballistic/automatic/update_icon()
 	..()

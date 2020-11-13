@@ -186,6 +186,7 @@
 	icon_state = "bo"
 	item_state = "shotgun"
 	fire_sound = 'modular_skyrat/sound/guns/shotgun.ogg'
+	generic_magazine_overlays = FALSE
 
 /obj/item/gun/ballistic/automatic/shotgun/update_icon()
 	..()

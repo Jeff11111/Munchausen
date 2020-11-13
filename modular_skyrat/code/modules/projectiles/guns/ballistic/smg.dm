@@ -5,6 +5,7 @@
 	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/smg_lefthand.dmi'
 	icon_state = "uzi"
 	item_state = "uzi"
+	generic_magazine_overlays = FALSE
 
 //Saber should be an MP5 that would be cool i think
 /obj/item/gun/ballistic/automatic/proto
