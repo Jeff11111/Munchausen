@@ -493,24 +493,19 @@
 		else
 			if(IsSleeping() || HAS_TRAIT(src, TRAIT_LOOKSSLEEPY) || (consciousness == LOOKS_SLEEPY))
 				consciousness = LOOKS_SLEEPY
-				if(dist <= 2)
+				if((dist <= 7 && lying) || (dist <= 2))
 					consciousness_msg = "[t_He] [t_is]n't responding to anything around [t_him] and seems to be asleep."
-				else if(dist <= 10)
-					consciousness_msg = "[t_He] [t_is]n't responding to anything around [t_him] and seems to be either asleep or unconscious. Hard to tell without getting closer."
 			if(InCritical() || HAS_TRAIT(src, TRAIT_LOOKSUNCONSCIOUS) || (consciousness == LOOKS_UNCONSCIOUS))
 				consciousness = LOOKS_UNCONSCIOUS
 				if((dist <= 2 && is_face_visible() && !HAS_TRAIT(src, TRAIT_NOBREATH)) || (damage >= 75))
 					consciousness_msg = "<span class='warning'>[t_His] breathing is shallow and labored[IsUnconscious() ? ", and [t_he] seems to be unconscious" : ""].</span>"
-				else if((dist <= 10) && IsUnconscious())
-					consciousness = LOOKS_SLEEPY
-					consciousness_msg = "[t_He] [t_is]n't responding to anything around [t_him] and seems to be either asleep or unconscious. Hard to tell without getting closer."
 			if(InFullCritical() || HAS_TRAIT(src, TRAIT_LOOKSVERYUNCONSCIOUS) || (consciousness == LOOKS_VERYUNCONSCIOUS))
 				consciousness = LOOKS_VERYUNCONSCIOUS
-				if((dist <= 2) || (damage >= 75))
+				if(((dist <= 2) || (damage >= 75)) && losebreath)
 					consciousness_msg = "<span class='warning'>[t_He] seems to have no identifiable breath[IsUnconscious() ? ", and [t_he] seems to be unconscious" : ""].</span>"
-				else if((dist <= 10) && IsUnconscious())
+				else if((dist <= 7) && IsUnconscious())
 					consciousness = LOOKS_SLEEPY
-					consciousness_msg = "[t_He] [t_is]n't responding to anything around [t_him] and seems to be either asleep or unconscious. Hard to tell without getting closer."
+					consciousness_msg = "[t_He] [t_is]n't responding to anything around [t_him] and seems to be unconscious."
 			if((stat == DEAD) || (mob_biotypes & MOB_UNDEAD) || HAS_TRAIT(src, TRAIT_LOOKSDEAD) || HAS_TRAIT(src, TRAIT_FAKEDEATH) || (consciousness == LOOKS_DEAD))
 				consciousness = LOOKS_DEAD
 				if((dist <= 2) || (damage >= 75) || (mob_biotypes & MOB_UNDEAD))
@@ -521,9 +516,8 @@
 						consciousness_msg += "\n<span class='deadsay'>[t_His] soul seems to have been ripped out of [t_his] body.  Revival is impossible.</span>"
 					if(!getorgan(/obj/item/organ/brain) || (!key && !get_ghost(FALSE)))
 						consciousness_msg += "\n<span class='deadsay'>[t_His] body seems empty, [t_his] soul has since departed.</span>"
-				else if(dist <= 10 && (lying || IsUnconscious()))
-					consciousness_msg = "[t_He] [t_is]n't responding to anything around [t_him] and seems to be either asleep or unconscious. Hard to tell without getting closer."
-			
+				else if((dist <= 7) && (lying || IsUnconscious()))
+					consciousness_msg = "[t_He] [t_is]n't responding to anything around [t_him] and seems to be unconscious."
 			if(HAS_TRAIT(src, TRAIT_LOOKSCONSCIOUS))
 				consciousness = LOOKS_CONSCIOUS
 				consciousness_msg = null
@@ -532,7 +526,7 @@
 			if(!key)
 				msg += "<span class='deadsay'>[t_He] [t_is] totally catatonic. The stresses of life in deep-space must have been too much for [t_him]. Any recovery is unlikely.</span>\n"
 			else if(!client)
-				msg += "[t_He] [t_has] a blank, absent-minded stare and [t_has] been completely unresponsive to anything for [round(((world.time - lastclienttime) / (1 MINUTES)),1)] minutes. [t_He] may snap out of it soon.\n" //SKYRAT CHANGE - ssd indicator
+				msg += "[t_He] [t_has] a blank, absent-minded stare and [t_has] been completely unresponsive to anything for [round(((world.time - lastclienttime) / (1 MINUTES)),1)] minutes. [t_He] may snap out of it soon.\n"
 		
 		if(consciousness_msg)
 			msg += "[consciousness_msg]\n"
@@ -561,15 +555,18 @@
 	var/yeah = "<span class='notice'>"
 	switch(str_diff)
 		if(-INFINITY to -3)
+			yeah = "<span class='danger'>"
 			yeah += "[t_He] [t_is] much stronger than me."
 		if(-2 to -1)
+			yeah = "<span class='warning'>"
 			yeah += "[t_He] [t_is] stronger than me."
 		if(0)
+			yeah = "<span class='danger'>"
 			yeah += "[t_He] [t_is] about as strong as me."
 		if(1 to 2)
 			yeah += "[t_He] [t_is] weaker than me."
 		if(3 to INFINITY)
-			yeah += "[t_He] [t_is] much weaker than me."
+			yeah += "<b>[t_He] [t_is] much weaker than me.</b>"
 	yeah += "</span>\n"
 	msg += yeah
 	
