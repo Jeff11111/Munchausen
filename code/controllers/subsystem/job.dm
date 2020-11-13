@@ -455,7 +455,7 @@ SUBSYSTEM_DEF(job)
 				C = pick_n_take(pods)
 				cumcount++
 			if(C)
-				C.JoinPlayerHere(M, TRUE)
+				C.JoinPlayerHere(M, buckle)
 			else
 				var/list/turf/T = list()
 				for(var/turf/open/O in A)
