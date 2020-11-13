@@ -58,13 +58,6 @@
 	UnregisterSignal(heirloom, COMSIG_PARENT_QDELETING)
 	heirloom = null
 
-/datum/quirk/airhead
-	name = "Airhead"
-	desc = "You are exceptionally airheaded... but who cares?"
-	value = -1
-	mob_trait = TRAIT_DUMB
-	medical_record_text = "Patient exhibits rather low mental capabilities."
-
 /datum/quirk/disaster_artist
 	name = "Disaster Artist"
 	desc = "You always manage to wreak havoc on everything you touch."
@@ -92,31 +85,6 @@
 	value = -2
 	mob_trait = TRAIT_ASTHMATIC
 	medical_record_text = "Patient exhibits asthmatic symptoms."
-
-/datum/quirk/allergic
-	name = "Allergic"
-	desc = "You have had terrible allergies for as long as you can remember. Some foods will become toxic to your palate and cause unforeseen consequences."
-	value = -1
-	medical_record_text = "Patient is allergic to a certain type of food."
-
-/datum/quirk/allergic/add()
-	var/mob/living/carbon/human/H = quirk_holder
-	if(istype(H))
-		var/foodie = pick(GLOB.food)
-		var/randumb = GLOB.food[foodie]
-		while((H.dna.species.toxic_food | randumb) == initial(H.dna.species.toxic_food))
-			foodie = pick(GLOB.food)
-			randumb = GLOB.food[foodie]
-		H.dna.species.toxic_food |= randumb
-		H.dna.species.liked_food -= randumb
-		H.physiology.allergies |= randumb
-		addtimer(CALLBACK(src, .proc/inform, foodie), 5 SECONDS)
-
-/datum/quirk/allergic/proc/inform(allergy = "bad coders")
-	to_chat(quirk_holder, "<span class='boldwarning'>You are allergic to [lowertext(allergy)].</span>")
-	quirk_holder.add_memory("You are allergic to [lowertext(allergy)].")
-
-//bobmed quirks
 
 //frail
 /datum/quirk/frail
@@ -158,14 +126,4 @@
 	desc = "Your jaw is weak and susceptible to damage. You are twice as susceptible to wounds on your head."
 	value = -2
 	mob_trait = TRAIT_GLASSJAW
-	medical_record_text = "Patient has an unnaturally weak skull."
-
-//betz
-/datum/quirk/betz
-	name = "Betz Disorder"
-	desc = "You cannot feel pain very well! You cannot assess any wounds without the assistance of a health analyzer."
-	value = -1
-	mob_trait = TRAIT_SCREWY_CHECKSELF
-	gain_text = "<span class='danger'>You don't feel much of anything.</span>"
-	lose_text = "<span class='notice'>You can feel your skin tingling again.</span>"
-	medical_record_text = "Patient has little self-awareness, and cannot properly assess their health."
+	medical_record_text = "Patient has an unnaturally weak cranium."

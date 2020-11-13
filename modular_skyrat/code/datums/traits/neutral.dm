@@ -113,15 +113,6 @@
 				addtimer(CALLBACK(H, /mob/proc/emote, "laugh"), 5 SECONDS)
 				addtimer(CALLBACK(H, /mob/proc/emote, "laugh"), 10 SECONDS)
 
-//Do not clone
-/datum/quirk/dnc
-	name = "Do Not Clone"
-	desc = "For whatever reason, you cannot be cloned in any way. You can still be revived in other ways, <b><i>but medical doctors are not always required to revive you.</i></b>"
-	value = 0
-	gain_text = "<span class='notice'>Your feel your soul binding itself to your body.</span>"
-	lose_text = "<span class='notice'>You can feel your spirit detach from your body.</span>"
-	mob_trait = TRAIT_DNC
-
 //Do not revive
 /datum/quirk/dnr
 	name = "Do Not Revive"
@@ -130,3 +121,18 @@
 	gain_text = "<span class='notice'>Your spirit gets too scarred to accept revival.</span>"
 	lose_text = "<span class='notice'>You can feel your soul healing again.</span>"
 	mob_trait = TRAIT_DNR
+
+//Mime
+/datum/quirk/french
+	name = "French Clown"
+	desc = "Those frivolous jesters know not of true entertainment! You are the superior french man - A mime."
+	job_whitelist = list("Clown")
+
+/datum/quirk/french/on_spawn()
+	. = ..()
+	var/mob/living/carbon/human/retard = quirk_holder
+	var/datum/outfit/job/mime/outfit = new()
+	retard.equipOutfit(outfit)
+	var/datum/job/mime/meme = new()
+	meme.assign_skills_stats(retard)
+	meme.special_assign_skills_stats(retard)

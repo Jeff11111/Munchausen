@@ -66,10 +66,18 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 	var/list/possible_quirks = quirks.Copy()
 	if(job?.blacklisted_quirks)
 		possible_quirks = filter_quirks(possible_quirks, job.blacklisted_quirks)
+	
 	if(is_special)
-		var/datum/quirk/Q = quirks[pick(possible_quirks)]
-		if(Q)
+		var/datum/quirk/Q
+		var/fucktimes = 0
+		while(!Q || (length(Q.job_whitelist) && !(job.title in Q.job_whitelist)))
+			if(fucktimes >= 10)
+				break
+			fucktimes++
+			Q = quirks[pick(possible_quirks)]
+		if(Q && (!length(Q.job_whitelist) || (job.title in Q.job_whitelist)))
 			user.add_quirk(Q, spawn_effects)
+	
 	//SKYRAT CHANGE
 	//You might be asking... "bobyot y u do dis in quirk soobsistem it make no sense"
 	//i just don't want to create a whole other subsystem, along with a new proc, for doing this one time stuff
