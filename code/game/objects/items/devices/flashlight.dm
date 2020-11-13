@@ -28,6 +28,7 @@
 		powercell = new starting_cell(src)
 	AddComponent(/datum/component/overlay_lighting, light_color, brightness_on, flashlight_power, FALSE) //Skyrat change
 	update_brightness()
+	START_PROCESSING(SSobj, src)
 
 /obj/item/flashlight/proc/update_brightness(mob/user = null)
 	var/datum/component/overlay_lighting/OL = GetComponent(/datum/component/overlay_lighting)
