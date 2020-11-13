@@ -19,9 +19,4 @@
 	liked_food = MEAT
 	languagewhitelist = list("Xenomorph")
 	has_bobs = FALSE
-	weiner_type = list("Hemi", "Knotted Hemi")
-
-/*
-/datum/species/xeno/after_equip_job(datum/job/J, mob/living/carbon/human/H)
-	H.grant_language(/datum/language/xenocommon)
-*/
+	weiner_type = list("Hemi", "Knotted Hemi", "Tapered")

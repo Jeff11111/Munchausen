@@ -1,6 +1,6 @@
 /datum/species/lizard
 	has_bobs = FALSE
-	weiner_type = list("Hemi", "Knotted Hemi")
+	weiner_type = list("Hemi", "Knotted Hemi", "Tapered")
 
 /datum/species/lizard/ashwalker
 	name = "Ash Walker"
