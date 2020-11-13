@@ -692,14 +692,9 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	righthand_file = 'icons/mob/inhands/weapons/melee_righthand.dmi'
 	force = 10
 	throwforce = 12
-	//skyrat edit
-	wound_bonus = -10
-	//
 	attack_verb = list("beat", "smacked")
 	custom_materials = list(/datum/material/wood = MINERAL_MATERIAL_AMOUNT * 3.5)
 	w_class = WEIGHT_CLASS_BULKY
-	var/homerun_ready = 0
-	var/homerun_able = 0
 	total_mass = 2.7 //a regular wooden major league baseball bat weighs somewhere between 2 to 3.4 pounds, according to google
 
 /obj/item/melee/baseball_bat/chaplain
@@ -718,38 +713,6 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 /obj/item/melee/baseball_bat/homerun
 	name = "home run bat"
 	desc = "This thing looks dangerous... Dangerously good at baseball, that is."
-	homerun_able = 1
-
-/obj/item/melee/baseball_bat/attack_self(mob/user)
-	if(!homerun_able)
-		..()
-		return
-	if(homerun_ready)
-		to_chat(user, "<span class='notice'>You're already ready to do a home run!</span>")
-		..()
-		return
-	to_chat(user, "<span class='warning'>You begin gathering strength...</span>")
-	playsound(get_turf(src), 'sound/magic/lightning_chargeup.ogg', 65, 1)
-	if(do_after(user, 90, target = src))
-		to_chat(user, "<span class='userdanger'>You gather power! Time for a home run!</span>")
-		homerun_ready = 1
-	..()
-
-/obj/item/melee/baseball_bat/attack(mob/living/target, mob/living/user)
-	. = ..()
-	var/atom/throw_target = get_edge_target_turf(target, user.dir)
-	if(homerun_ready)
-		user.visible_message("<span class='userdanger'>It's a home run!</span>")
-		target.throw_at(throw_target, rand(8,10), 14, user)
-		target.ex_act(EXPLODE_HEAVY)
-		playsound(get_turf(src), 'sound/weapons/homerun.ogg', 100, 1)
-		homerun_ready = 0
-		return
-	else if(!target.anchored)
-		//skyrat edit peepee poopoo
-		var/whack_speed = (prob(60) ? 1 : 4)
-		target.throw_at(throw_target, rand(1, 2), whack_speed, user) // sorry friends, 7 speed batting caused wounds to absolutely delete whoever you knocked your target into (and said target)
-		//
 
 /obj/item/melee/baseball_bat/ablative
 	name = "metal baseball bat"
