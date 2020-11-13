@@ -1,6 +1,6 @@
 /datum/job/detective
 	title = "Deputy"
-	music_file = 'modular_skyrat/sound/music/knock.ogg'
+
 
 /datum/outfit/job/detective
 	name = "Deputy"

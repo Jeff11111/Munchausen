@@ -1,6 +1,5 @@
 /datum/job/hos
 	title = "Chief Enforcer"
-	music_file = 'modular_skyrat/sound/music/knock.ogg'
 
 /datum/outfit/job/hos
 	backpack_contents = list(/obj/item/pda/heads/hos=1,
