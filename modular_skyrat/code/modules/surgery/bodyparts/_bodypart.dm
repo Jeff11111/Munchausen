@@ -1684,7 +1684,7 @@
 
 	var/bleed_rate = 0
 	if(generic_bleedstacks > 0)
-		bleed_rate++
+		bleed_rate += 1
 
 	//We want an accurate reading of .len
 	listclearnulls(embedded_objects)
@@ -1704,7 +1704,7 @@
 		bleed_rate *= 0.75
 
 	if(grasped_by)
-		bleed_rate *= 0.7
+		bleed_rate *= 0.75
 
 	return bleed_rate
 
