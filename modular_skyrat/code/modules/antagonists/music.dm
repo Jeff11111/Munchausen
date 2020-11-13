@@ -4,7 +4,7 @@
 
 /datum/antagonist/on_gain()
 	. = ..()
-	if(music_file && owner.combat_music)
+	if(owner && music_file)
 		owner.combat_music = music_file
 
 /datum/antagonist/dreamer/New()
@@ -15,22 +15,31 @@
 
 /datum/antagonist/traitor/New()
 	. = ..()
-	music_file = pick('modular_skyrat/sound/music/stress.ogg',
+	music_file = pick(
+				'modular_skyrat/sound/music/stress.ogg',
 				'modular_skyrat/sound/music/hydrogen.ogg',
 				'modular_skyrat/sound/music/army.ogg',
 				'modular_skyrat/sound/music/divide.ogg',
 				'modular_skyrat/sound/music/selectedfaces.ogg',
 				)
 
+/datum/antagonist/nukeop/New()
+	. = ..()
+	music_file = pick(
+				'modular_skyrat/sound/music/pursuit.ogg',
+				'modular_skyrat/sound/music/evileye.ogg',
+				'modular_skyrat/sound/music/bingus.ogg',
+				)
+
 /datum/antagonist/ert/deathsquad/New()
 	. = ..()
-	music_file = pick('modular_skyrat/sound/music/bfgdivision.ogg',
-				'modular_skyrat/sound/music/theonlythingtheyfearisyou.ogg',
+	music_file = pick(
 				'modular_skyrat/sound/music/rollermobster.ogg',
 				'modular_skyrat/sound/music/deathsquads.ogg',
 				)
 
 /datum/antagonist/communist/New()
 	. = ..()
-	music_file = pick('modular_skyrat/sound/music/motherrussiableeds.ogg',
+	music_file = pick(
+				'modular_skyrat/sound/music/blackracers.ogg',
 				)
