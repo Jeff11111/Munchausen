@@ -271,9 +271,17 @@
 		return FALSE
 	if(!can_dismember() || !dismemberable || (wounding_dmg < DISMEMBER_MINIMUM_DAMAGE) || ((wounding_dmg + wound_bonus) < DISMEMBER_MINIMUM_DAMAGE) || wound_bonus <= CANT_WOUND)
 		return FALSE
+	
 	//High endurance - less dismemberment
 	if(owner?.mind)
 		wounding_dmg *= max(0.1, 2 - (GET_STAT_LEVEL(owner, end)/10))
+	
+	//If we have a compound fracture or a critical cut, then deal more integrity damage
+	if((locate(/datum/wound/blunt/critical) in wounds) || (locate(/datum/wound/mechanical/blunt/critical) in wounds))
+		wounding_dmg * 1.35
+	else if((locate(/datum/wound/slash/critical) in wounds) || (locate(/datum/wound/pierce/critical) in wounds) || \
+			(locate(/datum/wound/mechanical/slash/critical) in wounds) || (locate(/datum/wound/mechanical/pierce/critical) in wounds))
+		wounding_dmg * 1.15
 	//Damage the integrity with the wounding damage
 	limb_integrity = max(0, limb_integrity - wounding_dmg)
 
