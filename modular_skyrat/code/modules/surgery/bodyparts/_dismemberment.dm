@@ -268,7 +268,7 @@
 		return
 	if(!can_dismember() || !dismemberable || (wounding_dmg < DISMEMBER_MINIMUM_DAMAGE) || ((wounding_dmg + wound_bonus) < DISMEMBER_MINIMUM_DAMAGE) || wound_bonus <= CANT_WOUND)
 		return FALSE
-	var/base_chance = wounding_dmg + ((get_damage() / max_damage) * 10) // how much damage we dealt with this blow, + 40% of the damage percentage we already had on this bodypart
+	var/base_chance = wounding_dmg + ((get_damage() / max_damage) * 15) // how much damage we dealt with this blow, + 40% of the damage percentage we already had on this bodypart
 	var/bio_state = owner.get_biological_state()
 	for(var/i in wounds)
 		var/datum/wound/W = i
@@ -284,13 +284,13 @@
 	
 	//High endurance - less dismemberment
 	if(owner?.mind)
-		base_chance -= GET_STAT_LEVEL(owner, end)
+		base_chance -= max(0, GET_STAT_LEVEL(owner, end) - MAX_STAT/2)
 
 	// We multiply by our dismemberment mod (the leg is tougher than a foot, etc)
 	base_chance *= dismember_mod
 
 	// Lower the chance a bit more
-	base_chance = round(base_chance/3)
+	base_chance = round(base_chance/2)
 
 	if(!prob(base_chance))
 		return
@@ -308,7 +308,7 @@
 		return
 	if(!can_disembowel() || !disembowable || (wounding_dmg < DISEMBOWEL_MINIMUM_DAMAGE) || ((wounding_dmg + wound_bonus) < DISEMBOWEL_MINIMUM_DAMAGE) || (wound_bonus <= CANT_WOUND))
 		return FALSE
-	var/base_chance = (wounding_dmg + ((get_damage() / max_damage) * 10)/4) // how much damage we dealt with this blow, + 35% of the damage percentage we already had on this bodypart
+	var/base_chance = wounding_dmg + (get_damage() / max_damage) * 15) // how much damage we dealt with this blow, + 35% of the damage percentage we already had on this bodypart
 	var/bio_state = owner.get_biological_state()
 	for(var/i in wounds)
 		var/datum/wound/W = i
@@ -330,7 +330,7 @@
 	base_chance *= disembowel_mod
 
 	// Lower the chance a bit more
-	base_chance = round(base_chance/3)
+	base_chance = round(base_chance/4)
 
 	if(!prob(base_chance))
 		return
