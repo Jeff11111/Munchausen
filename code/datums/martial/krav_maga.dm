@@ -192,7 +192,6 @@
 
 //Krav Maga Gloves
 /obj/item/clothing/gloves/krav_maga
-	var/datum/martial_art/krav_maga/style = new
 
 //more obviously named, given to sec
 /obj/item/clothing/gloves/krav_maga/sec
