@@ -72,7 +72,7 @@
 
 /obj/item/flashlight/process()
 	. = ..()
-	if((on && powercell && !powercell.use(10)) || (on && !powercell))
+	if((on && powercell && !powercell.use(5)) || (on && !powercell))
 		attack_self()
 
 /obj/item/flashlight/attack_self(mob/user)
