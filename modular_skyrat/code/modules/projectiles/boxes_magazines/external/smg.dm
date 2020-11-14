@@ -1,4 +1,8 @@
 //9mm smg
+/obj/item/ammo_box/magazine/uzim9mm
+	icon = 'modular_skyrat/icons/obj/bobstation/ammo/smg.dmi'
+	icon_state = "smg"
+
 /obj/item/ammo_box/magazine/smgm9mm
 	icon = 'modular_skyrat/icons/obj/bobstation/ammo/smg.dmi'
 	icon_state = "smg"
