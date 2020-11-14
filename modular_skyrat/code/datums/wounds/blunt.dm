@@ -715,10 +715,8 @@
 	name = "Hairline Fracture"
 	desc = "Patient's bone has suffered a crack in the foundation, causing serious pain and reduced limb functionality."
 	treat_text = "Recommended light surgical application of bone gel, though a sling of medical gauze will prevent worsening situation."
-	examine_desc = "appears grotesquely swollen, its attachment weakened"
-
+	examine_desc = "appears grotesquely swollen"
 	occur_text = "cracks audibly and develops a nasty looking bruise"
-
 	severity = WOUND_SEVERITY_SEVERE
 	viable_zones = ALL_BODYPARTS
 	interaction_efficiency_penalty = 2
@@ -742,7 +740,7 @@
 	name = "Compound Fracture"
 	desc = "Patient's bones have suffered multiple gruesome fractures, causing significant pain and near uselessness of limb."
 	treat_text = "Immediate binding of affected limb, followed by surgical intervention ASAP."
-	examine_desc = "is mangled and pulped, seemingly held together by tissue alone"
+	examine_desc = "is mangled and pulped, with exposed and shattered pieces of bone"
 	occur_text = "cracks apart, exposing broken bones to open air"
 	severity = WOUND_SEVERITY_CRITICAL
 	viable_zones = ALL_BODYPARTS
