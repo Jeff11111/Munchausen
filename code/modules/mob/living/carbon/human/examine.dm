@@ -561,7 +561,6 @@
 			yeah = "<span class='warning'>"
 			yeah += "[t_He] [t_is] stronger than me."
 		if(0)
-			yeah = "<span class='danger'>"
 			yeah += "[t_He] [t_is] about as strong as me."
 		if(1 to 2)
 			yeah += "[t_He] [t_is] weaker than me."
