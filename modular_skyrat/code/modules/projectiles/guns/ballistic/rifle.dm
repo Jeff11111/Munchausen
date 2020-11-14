@@ -13,6 +13,7 @@
 
 //Bolt-action rifle
 /obj/item/gun/ballistic/shotgun/boltaction
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/rifle.dmi'
 	name = "bolt action rifle"
 	desc = "A crappy 7.62 chambered rifle. Although it has taken quite a beating, you can still make out the \"Gorlex Corporal\" logo."
 	icon_state = "baction"
