@@ -39,8 +39,8 @@
 
 //Modular pistol
 /obj/item/gun/ballistic/automatic/pistol/modular
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
 	icon_state = "modularpistol"
-	unique_reskin = null
 
 //Nangler
 /obj/item/gun/ballistic/automatic/pistol/nangler
@@ -102,3 +102,9 @@
 	fire_delay = 2
 	actions_types = list(/datum/action/item_action/toggle_firemode)
 	fire_sound = 'modular_skyrat/sound/guns/pistol1.ogg'
+
+//AT pistol
+/obj/item/gun/ballistic/automatic/pistol/antitank
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
+	icon_state = "antitank"
+	fire_sound = 'modular_skyrat/sound/weapons/rifle2.ogg'

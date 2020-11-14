@@ -25,14 +25,6 @@
 	icon_state = "cde"
 	can_unsuppress = TRUE
 	obj_flags = UNIQUE_RENAME
-	unique_reskin = list("Default" = "cde",
-						"N-99" = "n99",
-						"Stealth" = "stealthpistol",
-						"HKVP-78" = "vp78",
-						"Luger" = "p08b",
-						"Mk.58" = "secguncomp",
-						"PX4 Storm" = "px4"
-						)
 
 /obj/item/gun/ballistic/automatic/pistol/modular/update_icon()
 	..()
