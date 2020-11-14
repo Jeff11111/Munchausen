@@ -30,8 +30,8 @@
 	var/obj/item/bodypart/teeth_part = target.get_bodypart(check_zone(user.zone_selected))
 	var/obj/item/stack/our_teeth = tool
 	var/obj/item/stack/target_teeth = teeth_part.teeth_object
-	if(target_teeth)
-		target_teeth.merge(our_teeth)
+	if(target_teeth && our_teeth)
+		our_teeth.merge(target_teeth)
 	else
 		our_teeth.forceMove(teeth_part)
 		teeth_part.teeth_object = our_teeth
