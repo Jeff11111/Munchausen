@@ -5,7 +5,7 @@
 
 //Check if the limb is disembowable
 /obj/item/bodypart/proc/can_disembowel(obj/item/I)
-	if(disembowable)
+	if(disembowable && get_organs())
 		return TRUE
 
 //Dismember a limb
@@ -110,7 +110,7 @@
 	var/atom/Tsec = owner.drop_location()
 	var/mob/living/carbon/C = owner
 	SEND_SIGNAL(C, COMSIG_CARBON_REMOVE_LIMB, src, dismembered)
-	update_limb(1)
+	update_limb(TRUE)
 	C.bodyparts -= src
 
 	if(held_index)
@@ -198,6 +198,8 @@
 	//Start processing rotting
 	if(!destroyed)
 		START_PROCESSING(SSobj, src)
+		//Recover integrity
+		limb_integrity = max_integrity
 	
 	C.update_health_hud() //update the healthdoll
 	C.update_body()
@@ -263,40 +265,28 @@
   * * wound_bonus: Not actually used right now, but maybe someday
   * * bare_wound_bonus: ditto above
   */
-/obj/item/bodypart/proc/try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+
+/obj/item/bodypart/proc/damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	if(!owner)
-		return
+		return FALSE
 	if(!can_dismember() || !dismemberable || (wounding_dmg < DISMEMBER_MINIMUM_DAMAGE) || ((wounding_dmg + wound_bonus) < DISMEMBER_MINIMUM_DAMAGE) || wound_bonus <= CANT_WOUND)
 		return FALSE
-	var/base_chance = wounding_dmg + ((get_damage() / max_damage) * 20) // how much damage we dealt with this blow, + 40% of the damage percentage we already had on this bodypart
-	var/bio_state = owner.get_biological_state()
-	for(var/i in wounds)
-		var/datum/wound/W = i
-		if((W.wound_type in list(WOUND_LIST_INCISION, WOUND_LIST_INCISION_MECHANICAL)) && (bio_state & BIO_FLESH)) // incisions make you very vulnerable to dismemberment
-			base_chance += 15
-			break
-		else if(((W.wound_type in list(WOUND_LIST_BLUNT, WOUND_LIST_BLUNT_MECHANICAL)) && W.severity >= WOUND_SEVERITY_CRITICAL) && (bio_state & BIO_BONE)) // we only require a severe bone break, but if there's a critical bone break, we'll add 10% more
-			base_chance += 10
-			break
-		else if(((W.wound_type in list(WOUND_LIST_SLASH, WOUND_LIST_SLASH_MECHANICAL,WOUND_LIST_PIERCE, WOUND_LIST_PIERCE_MECHANICAL)) && W.severity >= WOUND_SEVERITY_CRITICAL) && (bio_state & BIO_FLESH)) // we only need a severe slash or pierce, but critical and we add 10%
-			base_chance += 10
-			break
-	
 	//High endurance - less dismemberment
 	if(owner?.mind)
-		base_chance -= GET_STAT_LEVEL(owner, end)
+		wounding_dmg *= max(0.1, 2 - (GET_STAT_LEVEL(owner, end)/10))
+	//Damage the integrity with the wounding damage
+	limb_integrity = max(0, limb_integrity - wounding_dmg)
 
-	// We multiply by our dismemberment mod (the leg is tougher than a foot, etc)
-	base_chance *= dismember_mod
+/obj/item/bodypart/proc/try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+	if(!owner)
+		return FALSE
+	if(!can_dismember() || !dismemberable || (wounding_dmg < DISMEMBER_MINIMUM_DAMAGE) || ((wounding_dmg + wound_bonus) < DISMEMBER_MINIMUM_DAMAGE) || wound_bonus <= CANT_WOUND)
+		return FALSE
 
-	// Lower the chance a bit more
-	base_chance = round(base_chance/2)
-
-	if(!prob(base_chance))
-		return
+	if(!(limb_integrity <= 0))
+		return FALSE
 
 	dismember_wound(wounding_type, TRUE)
-
 	return TRUE
 
 /obj/item/bodypart/proc/dismember_wound(wounding_type, silent = FALSE)
@@ -308,32 +298,9 @@
 		return
 	if(!can_disembowel() || !disembowable || (wounding_dmg < DISEMBOWEL_MINIMUM_DAMAGE) || ((wounding_dmg + wound_bonus) < DISEMBOWEL_MINIMUM_DAMAGE) || (wound_bonus <= CANT_WOUND))
 		return FALSE
-	var/base_chance = wounding_dmg + ((get_damage() / max_damage) * 20) // how much damage we dealt with this blow, + 35% of the damage percentage we already had on this bodypart
-	var/bio_state = owner.get_biological_state()
-	for(var/i in wounds)
-		var/datum/wound/W = i
-		if((W.wound_type in list(WOUND_LIST_INCISION, WOUND_LIST_INCISION_MECHANICAL)) && (bio_state & BIO_FLESH)) // incisions make you very vulnerable to disembowelment
-			base_chance += 15
-			break
-		else if(((W.wound_type in list(WOUND_LIST_BLUNT, WOUND_LIST_BLUNT_MECHANICAL)) && W.severity >= WOUND_SEVERITY_CRITICAL) && (bio_state & BIO_BONE)) // we only require a severe bone break, but if there's a critical bone break, we'll add 10% more
-			base_chance += 10
-			break
-		else if(((W.wound_type in list(WOUND_LIST_SLASH, WOUND_LIST_SLASH_MECHANICAL,WOUND_LIST_PIERCE, WOUND_LIST_PIERCE_MECHANICAL)) && W.severity >= WOUND_SEVERITY_CRITICAL) && (bio_state & BIO_FLESH)) // we only need a severe slash or pierce, but critical and we add 10%
-			base_chance += 10
-			break
 
-	//High endurance - less dismemberment
-	if(owner?.mind)
-		base_chance -= GET_STAT_LEVEL(owner, end)
-	
-	// We multiply by our disembowel mod (the chest is tougher than a groin, etc)
-	base_chance *= disembowel_mod
-
-	// Lower the chance a bit more
-	base_chance = round(base_chance/3)
-
-	if(!prob(base_chance))
-		return
+	if(!(limb_integrity <= 0))
+		return FALSE
 
 	disembowel_wound(wounding_type, TRUE)
 	return TRUE
