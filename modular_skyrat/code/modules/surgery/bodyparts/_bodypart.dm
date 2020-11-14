@@ -849,7 +849,7 @@
 		if((wounding_type == WOUND_BLUNT) && (mangled_state & BODYPART_MANGLED_BONE) && !sharpness)
 			playsound(src, "modular_skyrat/sound/effects/crackandbleed.ogg", 100)
 			if(!easy_dismember)
-				phantom_wounding_dmg *= 0.5
+				wounding_dmg *= 0.5
 			wounding_type = WOUND_SLASH
 
 		if(mangled_state & BODYPART_MANGLED_BOTH && (try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus) || try_disembowel(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)))
