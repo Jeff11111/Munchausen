@@ -120,14 +120,6 @@
 	mob_trait = TRAIT_EASYBURN
 	medical_record_text = "Patient's skin is unnaturally flammable, and tends to be easily burnt."
 
-//glass jaw
-/datum/quirk/glass_jaw
-	name = "Glass jaw"
-	desc = "Your jaw is weak and susceptible to damage. You are twice as susceptible to wounds on your head."
-	value = -2
-	mob_trait = TRAIT_GLASSJAW
-	medical_record_text = "Patient has an unnaturally weak cranium."
-
 //xavleg
 /datum/quirk/xavlegbmaofffassssitimiwoamndutroabcwapwaeiippohfffx
 	name = "Xavlegbmaofffassssitimiwoamndutroabcwapwaeiippohfffx"
@@ -137,3 +129,93 @@
 	. = ..()
 	quirk_holder.real_name = "Xavlegbmaofffassssitimiwoamndutroabcwapwaeiippohfffx"
 	quirk_holder.name = "Xavlegbmaofffassssitimiwoamndutroabcwapwaeiippohfffx"
+
+//poor
+/datum/quirk/endebted
+	name = "Endebted"
+	desc = "You owe corporate a lot of money. You start the shift with no money on your account."
+
+/datum/quirk/endebted/on_spawn()
+	. = ..()
+	var/mob/living/carbon/human/H = quirk_holder
+	var/obj/item/card/id/id = H.get_idcard()
+	if(id)
+		var/datum/bank_account/B = id.registered_account
+		B.adjust_money(-B.account_balance)
+
+//hunted
+/datum/quirk/hunted
+	name = "Hunted"
+	desc = "You have a secret enemy, you know they'll attack soon."
+
+/datum/quirk/hunted/on_spawn()
+	. = ..()
+	for(var/mob/living/carbon/human/H in shuffle(GLOB.player_list - quirk_holder))
+		if((ROLE_TRAITOR in H.client?.prefs?.be_special) && (H.client?.prefs?.toggles & MIDROUND_ANTAG))
+			var/datum/antagonist/traitor/bounty_hunter = H.mind.add_antag_datum(/datum/antagonist/traitor)
+			for(var/datum/objective/O in bounty_hunter.objectives)
+				qdel(O)
+			var/datum/objective/assassinate/kill_objective = new
+			kill_objective.owner = H.mind
+			kill_objective.target = quirk_holder.mind
+			bounty_hunter.add_objective(kill_objective)
+			H.mind.announce_objectives()
+			break
+
+//Do not revive
+/datum/quirk/dnr
+	name = "Do Not Revive"
+	desc = "For whatever reason, you cannot be revived in any way."
+	value = 0
+	gain_text = "<span class='notice'>Your spirit gets too scarred to accept revival.</span>"
+	lose_text = "<span class='notice'>You can feel your soul healing again.</span>"
+	mob_trait = TRAIT_DNR
+
+//fetal alcohol syndrome
+/datum/quirk/fas
+	name = "Fetal Alcohol Syndrome"
+	desc = "Mommy did bath salts when she was pregnant. -2 to every stat."
+
+/datum/quirk/fas/on_spawn()
+	. = ..()
+	for(var/datum/stats/fuck in quirk_holder.mind.mob_stats)
+		fuck.level = clamp(fuck.level - 2, MIN_STAT, MAX_STAT)
+
+//nigger
+/datum/quirk/nigger
+	name = "Nigger"
+	desc = "You skin is as dark as charcoal."
+
+/datum/quirk/nigger/on_spawn()
+	. = ..()
+	var/mob/living/carbon/human/H = quirk_holder
+	H.skin_tone = "african2"
+	var/firstname = pick("Nigga", "Nigger", "Tyrone", "Brutus", "Uganda", "Nigeria", "Fifty Cent", "Big Smoke", "Carl Johnson", "Black Lives")
+	var/lastname = pick("Africa", "Africanus", "Niggerius", "Watermelon", "Watermelonium","Cottonpicker", "George Floyd", "Tupac", "Lamp", "Obama", "Matter")
+	H.name = "[firstname] [lastname]"
+	H.real_name = "[firstname] [lastname]"
+
+//pure blooded aryan
+/datum/quirk/aryan
+	name = "Aryan"
+	desc = "You skin is as white as snow."
+
+/datum/quirk/aryan/on_spawn()
+	. = ..()
+	var/mob/living/carbon/human/H = quirk_holder
+	H.skin_tone = "albino"
+	var/firstname = pick("Hitler", "Adolf", "German", "Prussian-German", "Neo-Nazi", "Holocaust Denial", "Trump", "Racist", "Nordic", "Sigismund", "Fascist")
+	var/lastname = pick("Ethnicity", "Christchurch", "For-Chan", "Pol", "White Pride", "Steinhäuser", "Hitler", "Nietzsche", "Skyrim")
+	H.name = "[firstname] [lastname]"
+	H.real_name = "[firstname] [lastname]"
+
+//british
+/datum/quirk/british
+	name = "British"
+	desc = "Oi mate! Looks like tha' tea rotted away ya gums!"
+
+/datum/quirk/british/on_spawn()
+	. = ..()
+	var/mob/living/carbon/human/H = quirk_holder
+	var/obj/item/bodypart/feefh = H.get_bodypart(BODY_ZONE_HEAD)
+	feefh.knock_out_teeth(feefh.max_teeth)

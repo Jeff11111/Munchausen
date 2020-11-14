@@ -297,7 +297,6 @@ GLOBAL_LIST_EMPTY(antagonists)
 		return
 	..()
 
-
 ///Clears change requests from deleted objectives to avoid broken references.
 /datum/antagonist/proc/clean_request_from_del_objective(datum/objective/source, force)
 	var/objective_reference = REF(source)

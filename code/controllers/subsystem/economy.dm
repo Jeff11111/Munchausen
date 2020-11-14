@@ -75,7 +75,6 @@ SUBSYSTEM_DEF(economy)
 	if(D)
 		D.adjust_money(engineering_cash)
 
-
 /datum/controller/subsystem/economy/proc/car_payout()
 	var/cargo_cash = 500
 	var/datum/bank_account/D = get_dep_account(ACCOUNT_CAR)

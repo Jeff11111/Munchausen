@@ -113,15 +113,6 @@
 				addtimer(CALLBACK(H, /mob/proc/emote, "laugh"), 5 SECONDS)
 				addtimer(CALLBACK(H, /mob/proc/emote, "laugh"), 10 SECONDS)
 
-//Do not revive
-/datum/quirk/dnr
-	name = "Do Not Revive"
-	desc = "For whatever reason, you cannot be revived in any way."
-	value = 0
-	gain_text = "<span class='notice'>Your spirit gets too scarred to accept revival.</span>"
-	lose_text = "<span class='notice'>You can feel your soul healing again.</span>"
-	mob_trait = TRAIT_DNR
-
 //Mime
 /datum/quirk/french
 	name = "French Clown"
@@ -136,3 +127,13 @@
 	var/datum/job/mime/meme = new()
 	meme.assign_skills_stats(retard)
 	meme.special_assign_skills_stats(retard)
+
+//Qu'est-ce que c'est?
+/datum/quirk/psycho
+	name = "Paranoid Schizophrenic"
+	desc = "The crew is out to get you. No... You won't let them do it! They won't get you!"
+
+/datum/quirk/psycho/on_spawn()
+	. = ..()
+	quirk_holder.mind.add_antag_datum(/datum/antagonist/schizoid)
+	quirk_holder.mind.announce_objectives()

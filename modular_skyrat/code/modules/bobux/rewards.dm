@@ -114,15 +114,15 @@
 
 /datum/bobux_reward/bounty_hunter/on_buy(client/noob)
 	..()
-	var/list/possible_targes = list()
+	var/list/possible_targets = list()
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
 		if(H.mind)
-			possible_targes |= H
-	if(!length(possible_targes))
+			possible_targets |= H
+	if(!length(possible_targets))
 		to_chat(noob, "<span class='bobux'>You are unable to send a bounty hunter. Bobux refunded.</span>")
 		noob.prefs?.adjust_bobux(cost)
 		return FALSE
-	var/mob/living/carbon/human/input = input(noob, "I have contracted a bounty hunter. Who is the first bounty?", "Bounty Hunter", null) as mob in possible_targes
+	var/mob/living/carbon/human/input = input(noob, "I have contracted a bounty hunter. Who is the first bounty?", "Bounty Hunter", null) as mob in possible_targets
 	if(!input)
 		to_chat(noob, "<span class='bobux'>You are unable to send a bounty hunter. Bobux refunded.</span>")
 		noob.prefs?.adjust_bobux(cost)
@@ -131,8 +131,11 @@
 		for(var/mob/living/carbon/human/H in shuffle(GLOB.player_list - input))
 			if((ROLE_TRAITOR in H.client?.prefs?.be_special) && (H.client?.prefs?.toggles & MIDROUND_ANTAG))
 				var/datum/antagonist/traitor/bounty_hunter = H.mind.add_antag_datum(/datum/antagonist/traitor)
+				for(var/datum/objective/O in bounty_hunter.objectives)
+					qdel(O)
 				var/datum/objective/assassinate/kill_objective = new
 				kill_objective.owner = H.mind
 				kill_objective.target = input.mind
 				bounty_hunter.add_objective(kill_objective)
+				H.mind.announce_objectives()
 				return TRUE
