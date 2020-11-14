@@ -64,9 +64,10 @@
 
 /datum/bobux_reward/combat_boost/on_buy(client/noob)
 	. = ..()
-	for(var/datum/skills/skill in noob.mob.mind.mob_skills)
-		if(istype(skill, SKILL_DATUM(melee)) || istype(skill, SKILL_DATUM(ranged)))
-			skill.level += rand(4,7)
+	var/datum/skills/pog = GET_SKILL(noob.mob, melee)
+	pog.level += rand(4,7)
+	pog = GET_SKILL(noob.mob, ranged)
+	pog.level += rand(4,7)
 
 /datum/bobux_reward/posses_mob
 	name = "Possess Mob"
