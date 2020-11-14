@@ -74,9 +74,9 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 			if(fucktimes >= 10)
 				break
 			fucktimes++
-			Q = quirks[pick(possible_quirks)]
+			Q = new quirks[pick(possible_quirks)]
 		if(Q && (!length(Q.job_whitelist) || (job.title in Q.job_whitelist)))
-			user.add_quirk(Q, spawn_effects)
+			user.add_quirk(Q.type, spawn_effects)
 	
 	//SKYRAT CHANGE
 	//You might be asking... "bobyot y u do dis in quirk soobsistem it make no sense"
