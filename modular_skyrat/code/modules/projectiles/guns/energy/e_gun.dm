@@ -8,6 +8,7 @@
 	icon_state = "hellgun"
 	item_state = null
 	modifystate = FALSE
+	shaded_charge = TRUE
 	ammo_type = list(/obj/item/ammo_casing/energy/disabler, /obj/item/ammo_casing/energy/laser)
 
 //Sparq gun

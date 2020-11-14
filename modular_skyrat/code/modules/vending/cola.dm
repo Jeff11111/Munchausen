@@ -16,3 +16,5 @@
 	contraband = list(/obj/item/reagent_containers/food/drinks/soda_cans/thirteenloko = 6,
 					/obj/item/reagent_containers/food/drinks/soda_cans/shamblers = 6,
 					/obj/item/reagent_containers/food/drinks/soda_cans/maint_energy/raid = 5)
+	default_price = 200
+	extra_price = 300

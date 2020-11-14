@@ -22,6 +22,8 @@
 	armor = list("melee" = 100, "bullet" = 100, "laser" = 100, "energy" = 100, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 50)
 	refill_canister = /obj/item/vending_refill/hydronutrients/prisoner
 	resistance_flags = FIRE_PROOF
+	default_price = 200
+	extra_price = 350
 
 /obj/item/vending_refill/hydronutrients/prisoner
 	icon_state = "refill_hydro"

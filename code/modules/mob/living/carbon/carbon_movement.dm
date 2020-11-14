@@ -30,11 +30,11 @@
 			var/loss = HUNGER_FACTOR/10
 			if(m_intent == MOVE_INTENT_RUN)
 				loss *= 2
-			adjust_nutrition(loss)
+			adjust_nutrition(-loss)
 			var/hydration_loss = THIRST_FACTOR/5
 			if(m_intent == MOVE_INTENT_RUN) //running make you very thoisty
 				hydration_loss *= 4
-			adjust_hydration(hydration_loss)
+			adjust_hydration(-hydration_loss)
 
 /mob/living/carbon/can_move_under_living(mob/living/other)
 	. = ..()
