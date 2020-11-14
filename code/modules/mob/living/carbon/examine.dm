@@ -37,7 +37,7 @@
 	for(var/X in bodyparts)
 		var/obj/item/bodypart/BP = X
 		//skyrat edit
-		if(BP.is_disabled())
+		if((BP.is_disabled()) && (BP.is_disabled() != BODYPART_DISABLED_PAIN))
 			disabled += BP
 		//
 		missing -= BP.body_zone

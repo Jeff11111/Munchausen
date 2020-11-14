@@ -203,7 +203,7 @@
 	var/list/disabled = list()
 	if(!screwy_self)
 		for(var/obj/item/bodypart/BP in bodyparts)
-			if(BP.is_disabled())
+			if((BP.is_disabled()) && (BP.is_disabled() != BODYPART_DISABLED_PAIN))
 				disabled += BP
 			for(var/obj/item/I in BP.embedded_objects)
 				if(I.isEmbedHarmless())
