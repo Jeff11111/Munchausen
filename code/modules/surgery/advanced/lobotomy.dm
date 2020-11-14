@@ -12,6 +12,7 @@
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	possible_locs = list(BODY_ZONE_HEAD)
 	requires_bodypart_type = 0
+
 /datum/surgery/advanced/lobotomy/can_start(mob/user, mob/living/carbon/target, obj/item/tool)
 	if(!..())
 		return FALSE
@@ -19,11 +20,13 @@
 	if(!B)
 		return FALSE
 	return TRUE
+
 /datum/surgery_step/lobotomize
 	name = "Perform lobotomy"
 	implements = list(TOOL_SCALPEL = 85, /obj/item/melee/transforming/energy/sword = 55, /obj/item/kitchen/knife = 35,
 		/obj/item/shard = 25, /obj/item = 20)
 	time = 100
+
 /datum/surgery_step/lobotomize/tool_check(mob/user, obj/item/tool, mob/living/carbon/target)
 	if(implement_type == /obj/item && !tool.get_sharpness())
 		return FALSE
@@ -50,7 +53,7 @@
 			target.gain_trauma_type(BRAIN_TRAUMA_SPECIAL, TRAUMA_RESILIENCE_SURGERY)
 	// you're cutting off a part of the brain.
 	var/obj/item/organ/brain/B = target.getorganslot(ORGAN_SLOT_BRAIN)
-	B.applyOrganDamage(50, 100)
+	B.applyOrganDamage(15, 30)
 	return TRUE
 
 /datum/surgery_step/lobotomize/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
@@ -59,7 +62,7 @@
 		display_results(user, target, "<span class='warning'>You remove the wrong part, causing more damage!</span>",
 			"[user] successfully lobotomizes [target]!",
 			"[user] completes the surgery on [target]'s brain.")
-		B.applyOrganDamage(80)
+		B.applyOrganDamage(40)
 		switch(rand(1,3))
 			if(1)
 				target.gain_trauma_type(BRAIN_TRAUMA_MILD, TRAUMA_RESILIENCE_LOBOTOMY)
