@@ -166,17 +166,9 @@
 //Cursed stuff below.
 
 /datum/mood_event/orgasm
-	description = "<span class='userlove'>I came!</span>\n" //funny meme haha
-	mood_change = 3
-	timeout = 100 SECONDS
-
-/datum/mood_event/fedpred
-	description = "<span class='nicegreen'>I've devoured someone!</span>\n"
-	mood_change = 3
-
-/datum/mood_event/fedprey
-	description = "<span class='nicegreen'>It feels quite cozy in here.</span>\n"
-	mood_change = 3
+	description = "<span class='userlove'>I came!</span>\n"
+	mood_change = 4
+	timeout = 10 MINUTES
 
 /datum/mood_event/hope_lavaland
 	description = "<span class='nicegreen'>What a peculiar emblem.  It makes me feel hopeful for my future.</span>\n"
