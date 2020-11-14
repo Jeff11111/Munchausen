@@ -56,7 +56,6 @@
 	name = "ammo box (9mm rubber)"
 	icon_state = "pistol_r"
 	ammo_type = /obj/item/ammo_casing/c9mm/rubber
-	max_ammo = 30
 
 /obj/item/ammo_box/c9mm/update_icon()
 	..()
@@ -83,6 +82,7 @@
 	icon_state = "clrifle_r"
 
 /obj/item/ammo_box/c45
+	icon = 'modular_skyrat/icons/obj/bobstation/ammo/boxes.dmi'
 	icon_state = "magnum_l"
 
 /obj/item/ammo_box/c45/update_icon()

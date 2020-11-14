@@ -8,7 +8,9 @@
 		var/obj/item/ammo_casing/AC = I
 		if(ammo_stack && AC.ammo_stack && (caliber == AC.caliber) && BB && AC.BB)
 			var/obj/item/ammo_box/magazine/ammo_stack/AS = new(get_turf(src))
-			AS.name = "[caliber] rounds"
+			AS.name = "[capitalize(caliber)] rounds"
+			if(findtext(AC.name, config.punctuation_filter, 1, 1))
+				AS.name =  ".[capitalize(caliber)] rounds"
 			AS.caliber = caliber
 			AS.give_round(src)
 			AS.give_round(AC)
@@ -57,8 +59,6 @@
 /obj/item/ammo_box/magazine/ammo_stack/get_round(keep)
 	var/i = ..()
 	update_icon()
-	if(ammo_count() <= 0)
-		qdel(src)
 	return i
 
 /obj/item/ammo_box/magazine/ammo_stack/give_round(obj/item/ammo_casing/R, replace_spent)

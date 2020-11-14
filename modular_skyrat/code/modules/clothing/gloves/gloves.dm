@@ -178,7 +178,7 @@
 /obj/item/clothing/gloves/color/latex
 	germ_level = 0
 
-//captin gloves
+//Captin gloves
 /obj/item/clothing/gloves/color/captain
 	icon = 'modular_skyrat/icons/obj/clothing/captain.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/captain.dmi'
