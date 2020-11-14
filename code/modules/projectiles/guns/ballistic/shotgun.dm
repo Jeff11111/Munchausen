@@ -98,9 +98,6 @@
 	fire_delay = 7
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/riot
 	sawn_desc = "Come with me if you want to live."
-	unique_reskin = list("Polymer" = "riotshotgun",
-						"Ithaca '37" = "wood_riotshotgun"
-						)
 
 /obj/item/gun/ballistic/shotgun/riot/attackby(obj/item/A, mob/user, params)
 	..()
