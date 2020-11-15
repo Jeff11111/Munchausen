@@ -86,6 +86,8 @@
 	'modular_skyrat/sound/gore/agony_male11.ogg',
 	'modular_skyrat/sound/gore/agony_male12.ogg',
 	'modular_skyrat/sound/gore/agony_male13.ogg',
+	'modular_skyrat/sound/gore/agony_male14.ogg',
+	'modular_skyrat/sound/gore/agony_male15.ogg',
 	'modular_skyrat/sound/gore/concorado_scream.ogg',
 	)
 	var/static/list/agony_sounds_female = list(
