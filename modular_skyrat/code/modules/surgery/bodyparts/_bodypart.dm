@@ -213,7 +213,7 @@
 	if(!organ_damage_hit_minimum)
 		organ_damage_hit_minimum = 5
 	if(!max_limb_integrity)
-		max_limb_integrity = min(100, max_damage)
+		max_limb_integrity = min(100, round(max_damage/2))
 	limb_integrity = max_limb_integrity
 	//Runs decay when outside of a person AND ONLY WHEN OUTSIDE (i.e. long obj).
 	START_PROCESSING(SSobj, src)
