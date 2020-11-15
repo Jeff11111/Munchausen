@@ -7,10 +7,6 @@
 	safety_sound = 'modular_skyrat/sound/guns/safety2.ogg'
 	sling_icon_state = "surplus-sling"
 
-/obj/item/gun/ballistic/automatic/surplus/update_icon()
-	..()
-	icon_state = "[initial(icon_state)][chambered ? "" : "-e"][magazine ? "" : "-nomag"][safety ? "-safe" : ""]"
-
 //Bolt-action rifle
 /obj/item/gun/ballistic/shotgun/boltaction
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/rifle.dmi'
