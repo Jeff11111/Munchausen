@@ -190,7 +190,7 @@
 					. += facial_overlay
 
 			//Applies the debrained overlay if there is no brain
-			if(!owner?.getorganslot(ORGAN_SLOT_BRAIN) && !brain)
+			if((owner && owner.getorganslot(ORGAN_SLOT_BRAIN)) || brain)
 				var/datum/sprite_accessory/S2 = GLOB.hair_styles_list[hair_style]
 				if(S2)
 					var/image/hair_overlay = image(S2.icon, "[S2.icon_state]", -HAIR_LAYER, SOUTH)
