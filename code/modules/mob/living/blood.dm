@@ -51,7 +51,7 @@
 				else
 					hydration_ratio =  1
 			adjust_nutrition(-nutrition_ratio * HUNGER_FACTOR)
-			adjust_hydration(-hydration_ratio * HUNGER_FACTOR)
+			adjust_hydration(-hydration_ratio * THIRST_FACTOR)
 			blood_volume += (spleen.get_blood() * nutrition_ratio * hydration_ratio)
 		if(blood_volume < BLOOD_VOLUME_OKAY)
 			adjustOxyLoss(round((BLOOD_VOLUME_NORMAL - blood_volume) * 0.02, 1))
