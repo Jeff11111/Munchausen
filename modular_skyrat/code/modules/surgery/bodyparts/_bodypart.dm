@@ -1484,9 +1484,11 @@
 
 /obj/item/bodypart/proc/kill_limb()
 	status |= BODYPART_DEAD
+	update_limb(owner ? FALSE : TRUE)
 
 /obj/item/bodypart/proc/revive_limb()
 	status &= ~BODYPART_DEAD
+	update_limb(owner ? FALSE : TRUE)
 
 /obj/item/bodypart/proc/can_recover()
 	return ((max_damage > 0) && !(status & BODYPART_DEAD)) || (death_time >= world.time - ORGAN_RECOVERY_THRESHOLD)
