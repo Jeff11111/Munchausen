@@ -40,6 +40,9 @@
 	icon = 'modular_skyrat/icons/obj/bobstation/ammo/pistol.dmi'
 	icon_state = "pistol10mm"
 
+/obj/item/ammo_box/magazine/m10mm/soporific
+	icon_state = "pistol10mm_r"
+
 /obj/item/ammo_box/magazine/m10mm/fire
 	icon_state = "pistol10mm_p"
 
