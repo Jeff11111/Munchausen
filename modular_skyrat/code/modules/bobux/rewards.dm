@@ -4,7 +4,7 @@
 	desc = "Become a syndicate agent. Took you long to remember your mission!"
 	buy_message = "<b>You remember your true purpose on the station...</span>"
 	id = "become_traitor"
-	cost = 5
+	cost = 10
 
 /datum/bobux_reward/become_traitor/can_buy(client/noob, silent, fail_message)
 	. = ..()
@@ -15,23 +15,6 @@
 	. = ..()
 	var/mob/living/carbon/human/H = noob.mob
 	H.mind.add_antag_datum(new /datum/antagonist/traitor())
-
-/datum/bobux_reward/become_dreamer
-	name = "Become Dreamer"
-	desc = "Become the dreamer. Wake up."
-	buy_message = "<b>Visions...</span>"
-	id = "become_dreamer"
-	cost = 15
-
-/datum/bobux_reward/become_dreamer/can_buy(client/noob, silent, fail_message)
-	. = ..()
-	if(. && ishuman(noob.mob) && noob.mob.mind)
-		return TRUE
-
-/datum/bobux_reward/become_dreamer/on_buy(client/noob)
-	. = ..()
-	var/mob/living/carbon/human/H = noob.mob
-	H.mind.add_antag_datum(new /datum/antagonist/dreamer())
 
 /datum/bobux_reward/stat_boost
 	name = "Boost Stats"
