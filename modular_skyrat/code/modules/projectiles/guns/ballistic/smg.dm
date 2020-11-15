@@ -22,6 +22,7 @@
 	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/smg_lefthand.dmi'
 	icon_state = "c20r"
 	item_state = "c20r"
+	generic_magazine_overlays = FALSE
 
 //WT550 augh
 /obj/item/gun/ballistic/automatic/wt550

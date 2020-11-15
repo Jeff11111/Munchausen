@@ -25,7 +25,6 @@
 			add_overlay("[initial(icon_state)]burst")
 		else
 			add_overlay("[initial(icon_state)]semi")
-	icon_state = "[initial(icon_state)][magazine ? "-[magazine.max_ammo]" : ""][chambered ? "" : "-e"][suppressed ? "-suppressed" : ""]"
 
 /obj/item/gun/ballistic/automatic/attackby(obj/item/A, mob/user, params)
 	. = ..()

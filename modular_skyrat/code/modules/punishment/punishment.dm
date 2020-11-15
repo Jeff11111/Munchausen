@@ -15,7 +15,7 @@ GLOBAL_LIST_INIT(fraggots, world.file2list('config/fraggots.txt'))
 
 /mob/transfer_ckey(mob/new_mob, send_signal)
 	. = ..()
-	if(ckey in GLOB.fraggots)
+	if(client && (client.key in GLOB.fraggots))
 		fraggot = TRUE
 		new_mob.fraggot = TRUE
 		//Announce to every player but the fraggot
