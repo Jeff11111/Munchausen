@@ -115,10 +115,6 @@
 	. = ..()
 	empty_alarm()
 
-/obj/item/gun/ballistic/automatic/c20r/update_icon()
-	..()
-	icon_state = "c20r[magazine ? "-[CEILING(get_ammo(0)/4, 1)*4]" : ""][chambered ? "" : "-e"][suppressed ? "-suppressed" : ""]"
-
 /obj/item/gun/ballistic/automatic/wt550
 	name = "security semi-auto smg"
 	desc = "An outdated personal defence weapon. Uses 4.6x30mm rounds and is designated the WT-550 Semi-Automatic SMG."
