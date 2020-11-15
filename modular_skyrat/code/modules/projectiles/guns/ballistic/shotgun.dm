@@ -180,6 +180,7 @@
 
 //Bulldog
 /obj/item/gun/ballistic/automatic/shotgun
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/shotgun.dmi'
 	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/shotgun_lefthand.dmi'
 	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/shotgun_righthand.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/obj/bobstation/guns/worn/back.dmi'
