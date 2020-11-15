@@ -100,6 +100,8 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 				body_appearance = copy_appearance(living_body.appearance)
 			else
 				body_appearance = living_body.appearance
+				icon = living_body.icon
+				icon_state = living_body.icon_state
 			appearance = body_appearance
 		else
 			//No body, try to copy their prefs later
