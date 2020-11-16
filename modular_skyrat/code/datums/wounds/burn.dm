@@ -183,4 +183,7 @@
 		victim.visible_message("<span class='danger'>[victim]'s [limb] completely melts away into bone!</span>", "<span class='userdanger'>OH GOD! My [limb] is molten into bone!</span>")
 		limb.kill_limb()
 		for(var/obj/item/organ/O in limb.get_organs())
-			O.applyOrganDamage(rand(25, 60))
+			O.applyOrganDamage(O.maxHealth)
+			if(prob(20))
+				O.Remove()
+				O.forceMove(get_turf(victim))

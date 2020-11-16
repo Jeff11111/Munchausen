@@ -127,3 +127,19 @@
 		return
 	user.nextsoundemote = world.time + 7
 	playsound(user, 'modular_citadel/sound/voice/peep.ogg', 50, 1, -1)
+
+/datum/emote/living/quietnoise
+	key = "quitenoise"
+	key_third_person = "quietnoises"
+	message = "makes a quiet noise."
+	emote_type = EMOTE_AUDIBLE
+	muzzle_ignore = FALSE
+	restraint_check = FALSE
+
+/datum/emote/living/loudnoise
+	key = "loudnoise"
+	key_third_person = "loudnoises"
+	message = "makes a loud noise!"
+	emote_type = EMOTE_AUDIBLE
+	muzzle_ignore = FALSE
+	restraint_check = FALSE
