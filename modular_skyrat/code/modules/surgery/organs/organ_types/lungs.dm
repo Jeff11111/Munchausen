@@ -145,6 +145,9 @@
 
 //Exposure to extreme pressures can rupture lungs
 /obj/item/organ/lungs/proc/check_rupturing(breath_pressure, datum/gas_mixture/enviro)
+	if(!max_int_pressure_diff && !max_ext_pressure_diff)
+		return FALSE
+	
 	//Get external pressure
 	var/ext_pressure = enviro?.return_pressure()
 
