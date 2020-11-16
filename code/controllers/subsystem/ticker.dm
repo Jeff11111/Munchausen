@@ -321,8 +321,8 @@ SUBSYSTEM_DEF(ticker)
 		spawn(2 SECONDS)
 			SEND_SOUND(world, sound(round_start_sound))
 	
-	addtimer(CALLBACK(SSambience, .proc/do_funny, TRUE), 30 SECONDS)
-	
+	addtimer(CALLBACK(SSambience, /datum/controller/subsystem/ambience/.proc/do_funny, TRUE), 30 SECONDS)
+
 	current_state = GAME_STATE_PLAYING
 	Master.SetRunLevel(RUNLEVEL_GAME)
 
