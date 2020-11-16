@@ -163,6 +163,8 @@ SUBSYSTEM_DEF(ticker)
 			current_state = GAME_STATE_PREGAME
 			//Everyone who wants to be an observer is now spawned
 			create_observers()
+			//ambience time
+			SSambience.do_funny(TRUE)
 			fire()
 		if(GAME_STATE_PREGAME)
 			//lobby stats for statpanels
