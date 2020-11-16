@@ -34,6 +34,13 @@ export const KeycardAuth = props => {
                   }}
                   content="Red Alert" />
                 <Button
+                  icon="exclamation-triangle"
+                  fluid
+                  onClick={() => {
+                    return act('excommunication');
+                  }}
+                  content="Excommunication" />
+                <Button
                   icon="wrench"
                   fluid
                   onClick={() => act('emergency_maint')}

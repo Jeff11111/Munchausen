@@ -1,5 +1,6 @@
 GLOBAL_DATUM_INIT(keycard_events, /datum/events, new)
 
+#define KEYCARD_EXCOMMUNICATION "Excommunication"
 #define KEYCARD_RED_ALERT "Red Alert"
 #define KEYCARD_EMERGENCY_MAINTENANCE_ACCESS "Emergency Maintenance Access"
 #define KEYCARD_BSA_UNLOCK "Bluespace Artillery Unlock"
@@ -66,6 +67,10 @@ GLOBAL_DATUM_INIT(keycard_events, /datum/events, new)
 		return
 	playsound(src, 'sound/machines/keycardswipe.ogg', 50, FALSE)
 	switch(action)
+		if("excommunication")
+			if(!event_source)
+				sendEvent(KEYCARD_EXCOMMUNICATION, ID)
+				. = TRUE
 		if("red_alert")
 			if(!event_source)
 				sendEvent(KEYCARD_RED_ALERT, ID)
@@ -117,6 +122,23 @@ GLOBAL_DATUM_INIT(keycard_events, /datum/events, new)
 	var/area/A2 = get_area(confirmer)
 	deadchat_broadcast("<span class='deadsay'><span class='name'>[confirmer]</span> confirmed [event] at <span class='name'>[A2.name]</span>.</span>", confirmer)
 	switch(event)
+		if(KEYCARD_EXCOMMUNICATION)
+			//Nullify all decrees
+			SScommunications.decrees = list()
+			//Take access away from the captain
+			var/mob/living/carbon/human/captain
+			for(var/mob/living/carbon/human/H in GLOB.player_list)
+				if(H.mind.assigned_role == "Captain")
+					captain = H
+					break
+			if(captain)
+				var/obj/item/card/id/captain_id = captain.get_idcard()
+				if(captain_id)
+					captain_id.access = list()
+					captain_id.bank_support = ID_NO_BANK_ACCOUNT
+				SScommunications.make_decree(confirmer, FALSE, "[captain.name] has been excommunicated from command, and all station decrees have been wiped.", TRUE, 'modular_skyrat/sound/machinery/excommunication.ogg')
+			else
+				SScommunications.make_decree(confirmer, FALSE, "Excommunication event has been triggered - All station decrees have been wiped.", TRUE, 'modular_skyrat/sound/machinery/excommunication.ogg')
 		if(KEYCARD_RED_ALERT)
 			set_security_level(SEC_LEVEL_RED)
 		if(KEYCARD_EMERGENCY_MAINTENANCE_ACCESS)
@@ -151,3 +173,4 @@ GLOBAL_VAR_INIT(emergency_access, FALSE)
 #undef KEYCARD_RED_ALERT
 #undef KEYCARD_EMERGENCY_MAINTENANCE_ACCESS
 #undef KEYCARD_BSA_UNLOCK
+#undef KEYCARD_EXCOMMUNICATION
