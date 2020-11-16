@@ -290,6 +290,12 @@
 	switch(action)
 		if("cut")
 			I = L.is_holding_tool_quality(TOOL_WIRECUTTER)
+			if(GET_SKILL_LEVEL(L, electronics) < 8)
+				to_chat(L, "<span class='warning'>I don't... know how to do this.</span>")
+				return
+			if(L.mind.diceroll(STAT_DATUM(int), SKILL_DATUM(electronics), "6d6") <= DICE_FAILURE)
+				to_chat(L, "<span class='warning'>[pick("Uhh...", "Fnord...", "Fuck!", "Hnng...", "Ahh...")]</span>")
+				target_wire = pick(colors)
 			if(I || IsAdminGhost(usr))
 				if(cut_color(target_wire, L) && I && holder)
 					I.play_tool_sound(holder, 20)
@@ -298,6 +304,12 @@
 				to_chat(L, "<span class='warning'>You need wirecutters!</span>")
 		if("pulse")
 			I = L.is_holding_tool_quality(TOOL_MULTITOOL)
+			if(GET_SKILL_LEVEL(L, electronics) < 8)
+				to_chat(L, "<span class='warning'>I don't... know how to do this.</span>")
+				return
+			if(L.mind.diceroll(STAT_DATUM(int), SKILL_DATUM(electronics), "6d6") <= DICE_FAILURE)
+				to_chat(L, "<span class='warning'>[pick("Uhh...", "Fnord...", "Fuck!", "Hnng...", "Ahh...")]</span>")
+				target_wire = pick(colors)
 			if(I || IsAdminGhost(usr))
 				if(pulse_color(target_wire, L) && I && holder)
 					I.play_tool_sound(holder, 20)
@@ -305,6 +317,9 @@
 			else
 				to_chat(L, "<span class='warning'>You need a multitool!</span>")
 		if("attach")
+			if(GET_SKILL_LEVEL(L, electronics) < 8)
+				to_chat(L, "<span class='warning'>I don't... know how to do this.</span>")
+				return
 			if(is_attached(target_wire))
 				I = detach_assembly(target_wire)
 				if(I)

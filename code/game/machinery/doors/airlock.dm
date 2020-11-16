@@ -421,6 +421,9 @@
 		return FALSE	//Already shocked someone recently?
 	if(!prob(prb))
 		return FALSE //you lucked out, no shock for you
+	//you are skilled, you don't get shocked frequently
+	if(user.mind?.diceroll(stats = null, SKILL_DATUM(electronics)) >= DICE_CRIT_SUCCESS)
+		return FALSE
 	do_sparks(5, TRUE, src)
 	var/check_range = TRUE
 	if(electrocute_mob(user, get_area(src), src, 1, check_range))
