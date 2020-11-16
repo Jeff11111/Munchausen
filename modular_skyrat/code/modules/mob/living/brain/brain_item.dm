@@ -97,7 +97,7 @@
 		victim.Unconscious(600)
 	//Inform the victim
 	var/message = pick("... WHAT HAPPENED? ...", "... WHERE AM I? ...", "... WHO AM I? ...")
-	to_chat(victim, "<span class='deadsay'><span class='bigbold'>[message]</span></span>")
+	to_chat(victim, "<span class='deadsay'><span class='big bold'>[message]</span></span>")
 
 /obj/item/organ/brain/onDamage(d, maximum)
 	. = ..()

@@ -133,7 +133,7 @@
 
 /datum/bobux_reward/market_crash/on_buy(client/noob)
 	. = ..()
-	to_chat(world, "<span class='userdanger'><span class='bigbold'>The bobux market has been bogged by [noob.key]!</span></span>")
+	to_chat(world, "<span class='userdanger'><span class='big bold'>The bobux market has been bogged by [noob.key]!</span></span>")
 	SEND_SOUND(world, sound('modular_skyrat/sound/misc/dumpit.ogg', volume = 50))
 	for(var/client/C in GLOB.clients)
 		C.prefs?.adjust_bobux(-C.prefs.bobux_amount)
