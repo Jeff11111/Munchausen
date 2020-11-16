@@ -1,0 +1,13 @@
+modular_skyrat/sound/ambience/bobambience/ruins1.ogg
+modular_skyrat/sound/ambience/bobambience/ruins2.ogg
+modular_skyrat/sound/ambience/bobambience/ruins3.ogg
+modular_skyrat/sound/ambience/bobambience/ruins4.ogg
+modular_skyrat/sound/ambience/bobambience/ravenheart1.ogg
+modular_skyrat/sound/ambience/bobambience/ravenheart2.ogg
+modular_skyrat/sound/ambience/bobambience/punishers.ogg
+modular_skyrat/sound/ambience/bobambience/menu1.ogg
+modular_skyrat/sound/ambience/bobambience/menu2.ogg
+modular_skyrat/sound/ambience/bobambience/space1.ogg
+modular_skyrat/sound/ambience/bobambience/space2.ogg
+modular_skyrat/sound/ambience/bobambience/space3.ogg
+modular_skyrat/sound/ambience/bobambience/wanderlust.ogg
