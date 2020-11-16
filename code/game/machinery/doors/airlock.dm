@@ -422,7 +422,7 @@
 	if(!prob(prb))
 		return FALSE //you lucked out, no shock for you
 	//you are skilled, you don't get shocked frequently
-	if(user.mind?.diceroll(stats = null, SKILL_DATUM(electronics)) >= DICE_CRIT_SUCCESS)
+	if(user.mind?.diceroll(stats = null, skills = SKILL_DATUM(electronics)) >= DICE_CRIT_SUCCESS)
 		return FALSE
 	do_sparks(5, TRUE, src)
 	var/check_range = TRUE
