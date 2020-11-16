@@ -212,7 +212,7 @@
 	if(get_dist(src, examined) > EYE_CONTACT_RANGE)
 		return
 	
-	if(CHECK_BITFIELD(wear_mask?.flags_inv, HIDEFACE | HIDEEYES) || CHECK_BITFIELD(head?.flags_inv, HIDEFACE | HIDEEYES) || CHECK_BITFIELD(glasses?.flags_inv, HIDEFACE | HIDEEYES))
+	if(CHECK_BITFIELD(wear_mask?.flags_inv, HIDEFACE) || CHECK_BITFIELD(head?.flags_inv, HIDEFACE) || CHECK_BITFIELD(glasses?.flags_inv, HIDEFACE))
 		return
 	
 	visible_message("<span class='notice'>\The [src] examines [examined].</span>", "<span class='notice'>I examine [examined].</span>", vision_distance = 4)
