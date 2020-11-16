@@ -135,5 +135,14 @@
 	. = ..()
 	to_chat(world, "<span class='userdanger'><span class='big bold'>The bobux market has been bogged by [noob.key]!</span></span>")
 	SEND_SOUND(world, sound('modular_skyrat/sound/misc/dumpit.ogg', volume = 50))
-	for(var/client/C in GLOB.clients)
-		C.prefs?.adjust_bobux(-C.prefs.bobux_amount)
+	var/list/bogged = flist("data/player_saves/")
+	for(var/fuck in bogged)
+		var/list/bogged_again = flist("data/player_saves/[fuck]/")
+		for(var/fucked in bogged_again)
+			var/savefile/S = new /savefile("data/player_saves/[fuck]/[fucked]")
+			if(!S)
+				continue
+			S.cd = "/"
+			WRITE_FILE(S["bobux_amount"], 0)
+	for(var/datum/preferences/prefs in world)
+		prefs.load_preferences()
