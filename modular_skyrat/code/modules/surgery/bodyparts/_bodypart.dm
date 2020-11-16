@@ -1838,7 +1838,7 @@
 		C = owner
 		no_update = FALSE
 
-	if((HAS_TRAIT(C, TRAIT_HUSK) || germ_level >= INFECTION_LEVEL_TWO) && is_organic_limb())
+	if(((C && HAS_TRAIT(C, TRAIT_HUSK)) || germ_level >= INFECTION_LEVEL_TWO) && is_organic_limb())
 		species_id = "husk" //overrides species_id
 		dmg_overlay_type = "" //no damage overlay shown when husked
 		should_draw_gender = FALSE

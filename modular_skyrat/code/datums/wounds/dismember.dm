@@ -19,6 +19,7 @@
 	if(!istype(L) || !L.owner || !(L.body_zone in viable_zones) || isalien(L.owner) || !L.can_dismember())
 		qdel(src)
 		return
+	
 	if(L.body_zone == BODY_ZONE_CHEST)
 		qdel(src)
 		var/datum/wound/disembowel/des = new()
@@ -69,7 +70,7 @@
 	if(!silent)
 		victim.visible_message(msg, "<span class='userdanger'>Your [L.name] [occur_text]!</span>")
 	else
-		victim.wound_message += " \The [limb.name] is [wounding_type == WOUND_SLASH ? "dismembered" : "gored"]!"
+		victim.wound_message += " \The [L.name] is [wounding_type == WOUND_SLASH ? "dismembered" : "gored"]!"
 	
 	if(wounding_type == WOUND_BURN)
 		if(L.is_organic_limb())
