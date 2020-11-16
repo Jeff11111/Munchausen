@@ -20,9 +20,9 @@
 	max_cavity_size = WEIGHT_CLASS_SMALL
 	dismember_mod = 0.8
 	disembowel_mod = 0.8
-	miss_entirely_prob = 10
-	zone_prob = 50
-	extra_zone_prob = 25
+	miss_entirely_prob = 15
+	zone_prob = 70
+	extra_zone_prob = 30
 
 /obj/item/bodypart/r_arm/is_disabled()
 	if(HAS_TRAIT(owner, TRAIT_PARALYSIS_L_ARM))

@@ -51,9 +51,9 @@
 		'modular_skyrat/sound/gore/head_explodie3.ogg',
 		'modular_skyrat/sound/gore/head_explodie4.ogg',
 	)
-	miss_entirely_prob = 20
-	zone_prob = 30
-	extra_zone_prob = 30
+	miss_entirely_prob = 25
+	zone_prob = 60
+	extra_zone_prob = 40
 
 /obj/item/bodypart/head/Initialize()
 	. = ..()
