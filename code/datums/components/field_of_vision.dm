@@ -70,11 +70,13 @@
   * and that gives us some problems when the icon is larger or smaller than world.icon_size
   */
 	var/static/list/width_n_height_offsets = list()
+	var/has_adj_mask = FALSE
 
-/datum/component/field_of_vision/Initialize(fov_type = FOV_90_DEGREES, _angle = 0)
+/datum/component/field_of_vision/Initialize(fov_type = FOV_90_DEGREES, _angle = 0, _has_adj_mask = FALSE)
 	if(!ismob(parent))
 		return COMPONENT_INCOMPATIBLE
 	angle = _angle
+	has_adj_mask = _has_adj_mask
 	shadow_angle = fov_type
 
 /datum/component/field_of_vision/RegisterWithParent()
@@ -130,10 +132,11 @@
 		owner_mask = new
 		owner_mask.appearance_flags = RESET_TRANSFORM
 		owner_mask.plane = FIELD_OF_VISION_BLOCKER_PLANE
-		adj_mask = image('icons/misc/field_of_vision.dmi', null, "adj_mask", FIELD_OF_VISION_LAYER)
-		adj_mask.appearance_flags = RESET_TRANSFORM
-		adj_mask.plane = FIELD_OF_VISION_BLOCKER_PLANE
-		fov.add_overlay(adj_mask)
+		if(has_adj_mask)
+			adj_mask = image('icons/misc/field_of_vision.dmi', null, "adj_mask", FIELD_OF_VISION_LAYER)
+			adj_mask.appearance_flags = RESET_TRANSFORM
+			adj_mask.plane = FIELD_OF_VISION_BLOCKER_PLANE
+			fov.add_overlay(adj_mask)
 		if(_angle)
 			rotate_shadow_cone(_angle)
 	fov.alpha = M.stat == DEAD ? 0 : 255
