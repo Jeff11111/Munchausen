@@ -17,7 +17,7 @@ SUBSYSTEM_DEF(ambience)
 
 /datum/controller/subsystem/ambience/proc/do_funny(new_ambience = FALSE)
 	if(new_ambience)
-		select_generic
+		select_generic()
 	if(!current_generic)
 		return
 	var/sound/S = sound(current_generic, FALSE, 0, CHANNEL_AMBIENCE, 50)
