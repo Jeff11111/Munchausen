@@ -101,7 +101,6 @@
 	if(lying && !buckled && prob(getBruteLoss()*200/maxHealth))
 		makeTrail(newloc, T, old_direction)
 
-
 /mob/living/Move_Pulled(atom/A)
 	. = ..()
 	if(!. || !isliving(A))
