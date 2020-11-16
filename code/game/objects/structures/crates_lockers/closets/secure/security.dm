@@ -63,7 +63,6 @@
 	//SKYRAT EDIT - ATMS
 	new /obj/item/card/id/departmental_budget/sec(src)
 	//SKYRAT EDIT END
-	new /obj/item/clothing/suit/space/hardsuit/security_armor/hos(src)
 	new /obj/item/clothing/neck/cloak/hos(src)
 	new /obj/item/cartridge/hos(src)
 	new /obj/item/radio/headset/heads/hos(src)
@@ -110,7 +109,8 @@
 	icon_state = "sec"
 /obj/structure/closet/secure_closet/security/PopulateContents()
 	..()
-	new /obj/item/clothing/suit/space/hardsuit/security_armor(src)
+	new /obj/item/clothing/suit/armor/vest(src)
+	new /obj/item/clothing/head/helmet/sec(src)
 	new /obj/item/radio/headset/headset_sec(src)
 	new /obj/item/radio/headset/headset_sec/alt(src)
 	new /obj/item/clothing/glasses/hud/security/sunglasses(src)

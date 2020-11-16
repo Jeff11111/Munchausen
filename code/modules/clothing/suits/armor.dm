@@ -317,6 +317,8 @@
 	min_cold_protection_temperature = SPACE_SUIT_MIN_TEMP_PROTECT
 	armor = list("melee" = 25, "bullet" = 20, "laser" = 20, "energy" = 10, "bomb" = 20, "bio" = 50, "rad" = 20, "fire" = -10, "acid" = 50, "wound" = 10)
 
+/* Not here.
+
 //New and improved Tech Armor
 /obj/item/clothing/head/helmet/space/hardsuit/security_armor
 	name = "MK-I techhelmet"
@@ -382,7 +384,7 @@
 	name = "MK-III techhelmet"
 	desc = "A specialized exoskeleton armor helmet built into a suit of armor; offers decent protection, and comes with a flash-resistant HUD visor and headlamp."
 	armor = list("melee" = 40, "bullet" = 30, "laser" = 30, "energy" = 10, "bomb" = 25, "bio" = 50, "rad" = 0, "fire" = 70, "acid" = 90, "wound" = 20)
-	mutantrace_variation = NONE
+	mutantrace_variation = STYLE_MUZZLE
 	icon_state = "hardsuit0-obertechhelmet"
 	item_state = "hardsuit0-obertechhelmet"
 	hardsuit_type = "obertechhelmet"
@@ -412,3 +414,4 @@
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/security_armor/blueshield
 	icon_state = "obertecharmor"
 	item_state = "obertecharmor"
+*/

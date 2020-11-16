@@ -12,7 +12,7 @@
 //port tg's armor energy resists, adds reskins to various armors
 /obj/item/clothing/head/helmet
 	can_flashlight = 0 //for the sake of reskins
-	armor = list("melee" = 35, "bullet" = 30, "laser" = 30,"energy" = 40, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 15)
+	armor = list("melee" = 40, "bullet" = 30, "laser" = 30,"energy" = 40, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 15)
 
 /obj/item/clothing/head/helmet/sec
 	icon = 'modular_skyrat/icons/obj/clothing/enforcer.dmi'
@@ -23,14 +23,14 @@
 
 /obj/item/clothing/head/helmet/alt
 	can_flashlight = 1
-	armor = list("melee" = 15, "bullet" = 60, "laser" = 10, "energy" = 10, "bomb" = 40, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 15)
+	armor = list("melee" = 40, "bullet" = 60, "laser" = 20, "energy" = 20, "bomb" = 40, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 20)
 	icon = 'modular_skyrat/icons/obj/clothing/hats.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/head.dmi'
 	anthro_mob_worn_overlay = 'modular_skyrat/icons/mob/clothing/head.dmi'
 	icon_state = "epic_bp_helmet"
 
 /obj/item/clothing/head/helmet/riot
-	armor = list("melee" = 55, "bullet" = 10, "laser" = 10, "energy" = 10, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 80, "acid" = 80, "wound" = 25)
+	armor = list("melee" = 60, "bullet" = 10, "laser" = 10, "energy" = 10, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 80, "acid" = 80, "wound" = 25)
 	unique_reskin = null
 
 /obj/item/clothing/head/helmet/swat
@@ -196,11 +196,11 @@
 	icon_state = "hardsuit-assprotection"
 
 /obj/item/clothing/head/helmet/space/hardsuit/security/hos
-	armor = list("melee" = 45, "bullet" = 25, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 100, "rad" = 50, "fire" = 95, "acid" = 95, "wound" = 25)
+	armor = list("melee" = 45, "bullet" = 35, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 100, "rad" = 50, "fire" = 95, "acid" = 95, "wound" = 25)
 	unique_reskin = null
 
 /obj/item/clothing/suit/space/hardsuit/security/hos
-	armor = list("melee" = 45, "bullet" = 25, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 100, "rad" = 50, "fire" = 95, "acid" = 95, "wound" = 25)
+	armor = list("melee" = 45, "bullet" = 35, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 100, "rad" = 50, "fire" = 95, "acid" = 95, "wound" = 25)
 	unique_reskin = null
 
 /obj/item/clothing/suit/space/swat
@@ -270,7 +270,7 @@
 	unique_reskin = null
 
 /obj/item/clothing/suit/armor/riot
-	armor = list("melee" = 55, "bullet" = 20, "laser" = 15, "energy" = 25, "bomb" = 10, "bio" = 10, "rad" = 0, "fire" = 65, "acid" = 70, "wound" = 25)
+	armor = list("melee" = 60, "bullet" = 20, "laser" = 20, "energy" = 30, "bomb" = 10, "bio" = 10, "rad" = 0, "fire" = 65, "acid" = 70, "wound" = 25)
 	slowdown = 0
 	unique_reskin = null
 
@@ -279,7 +279,7 @@
 	unique_reskin = null
 
 /obj/item/clothing/suit/armor/bulletproof
-	armor = list("melee" = 15, "bullet" = 60, "laser" = 10, "energy" = 10, "bomb" = 40, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 15)
+	armor = list("melee" = 30, "bullet" = 60, "laser" = 20, "energy" = 20, "bomb" = 40, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 20)
 	icon = 'modular_skyrat/icons/obj/clothing/suits.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/suit.dmi'
 	anthro_mob_worn_overlay = 'modular_skyrat/icons/mob/clothing/suit_digi.dmi'
@@ -335,12 +335,22 @@
 	icon_state = "ejumpsuit"
 	can_adjust = FALSE
 
+/obj/item/clothing/under/rank/security/head_of_security
+	icon = 'modular_skyrat/icons/obj/clothing/enforcer.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/enforcer.dmi'
+	anthro_mob_worn_overlay = 'modular_skyrat/icons/mob/clothing/enforcer.dmi'
+	icon_state = "cejumpsuit"
+	can_adjust = FALSE
+
 /obj/item/clothing/under/rank/security/officer/blueshirt
 	icon = 'icons/obj/clothing/uniforms.dmi'
 	mob_overlay_icon = 'icons/mob/clothing/uniform.dmi'
 	anthro_mob_worn_overlay = 'icons/mob/clothing/uniform_digi.dmi'
 	icon_state = "blueshift"
 	item_state = "blueshift"
+
+/obj/item/storage/belt/military
+	desc = "A set of tactical webbing worn by militaries everywhere."
 
 /obj/item/clothing/head/helmet/roman
 	unique_reskin = null
