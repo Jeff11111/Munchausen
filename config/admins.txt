@@ -12,4 +12,5 @@ Bob Joga = Host
 Remis12 = Headmin
 Romulo27 = Game Admin
 Red Warrior42342432 = Game Admin
-AgentAgent = Game Admin
+Investigator77 = Game Admin
+Elchorico = Game Admin
