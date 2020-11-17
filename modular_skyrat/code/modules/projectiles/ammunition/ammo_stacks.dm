@@ -14,8 +14,8 @@
 			AS.caliber = caliber
 			AS.give_round(src)
 			AS.give_round(AC)
-			forceMove(AS)
-			AC.forceMove(AS)
+			user.transferItemToLoc(src, AS)
+			user.transferItemToLoc(AC, AS)
 			user.put_in_hands(AS)
 			to_chat(user, "<span class='notice'>[src] has been stacked into [AS].</span>")
 		else if(!BB || !AC.BB)
