@@ -76,7 +76,7 @@
 		attack_self()
 
 /obj/item/flashlight/attack_self(mob/user)
-	if((!on && powercell && powercell.use(50)) || on)
+	if((!on && powercell && powercell.use(10)) || on)
 		on = !on
 	if(on)
 		START_PROCESSING(SSobj, src)
