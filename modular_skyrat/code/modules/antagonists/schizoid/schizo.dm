@@ -8,4 +8,5 @@
 /datum/antagonist/schizoid/on_gain()
 	. = ..()
 	var/datum/objective/assassinate/kill = new()
+	kill.find_target()
 	objectives += kill
