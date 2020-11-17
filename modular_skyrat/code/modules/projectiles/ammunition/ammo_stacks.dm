@@ -74,10 +74,6 @@
 	..()
 	check_for_del()
 
-/obj/item/ammo_box/magazine/ammo_stack/update_icon()
-	..()
-	check_for_del()
-
 /obj/item/ammo_box/magazine/ammo_stack/proc/check_for_del()
 	. = FALSE
 	if(ammo_count() <= 0 && !QDELETED(src))
