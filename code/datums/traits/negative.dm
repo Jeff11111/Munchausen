@@ -1,4 +1,5 @@
 //predominantly negative traits
+/* modified and moved to modular_skyrat
 /datum/quirk/blooddeficiency
 	name = "Acute Blood Deficiency"
 	desc = "Your body can't produce enough blood to sustain itself."
@@ -13,7 +14,7 @@
 	if(NOBLOOD in H.dna.species.species_traits) //can't lose blood if your species doesn't have any
 		return
 	else
-		quirk_holder.blood_volume -= 0.2
+		quirk_holder.blood_volume -= 0.2*/
 
 /datum/quirk/depression
 	name = "Depression"
@@ -31,7 +32,7 @@
 
 /datum/quirk/family_heirloom
 	name = "Family Heirloom"
-	desc = "You are the current owner of an heirloom, passed down for generations. You have to keep it safe!"
+	desc = "I am the current owner of an heirloom, passed down for generations. I have to keep it safe!"
 	value = -1
 	mood_quirk = TRUE
 	medical_record_text = "Patient demonstrates an unnatural attachment to a family heirloom."
@@ -89,11 +90,11 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	where = H.equip_in_one_of_slots(heirloom, slots, FALSE) || "at your feet"
 */
 /datum/quirk/family_heirloom/post_add()
-	if(where == "in your backpack")
+	if(where == "in my backpack")
 		var/mob/living/carbon/human/H = quirk_holder
 		SEND_SIGNAL(H.back, COMSIG_TRY_STORAGE_SHOW, H)
 
-	to_chat(quirk_holder, "<span class='boldnotice'>There is a precious family [heirloom.name] [where], passed down from generation to generation. Keep it safe!</span>")
+	to_chat(quirk_holder, "<span class='boldnotice'>There is a precious family [heirloom.name] [where], passed down from generation to generation. I must keep it safe!</span>")
 	var/list/family_name = splittext(quirk_holder.real_name, " ")
 	heirloom.name = "\improper [family_name[family_name.len]] family [heirloom.name]"
 
