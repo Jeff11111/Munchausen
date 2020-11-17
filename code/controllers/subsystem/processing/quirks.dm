@@ -70,12 +70,16 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 	if(is_special)
 		var/datum/quirk/Q
 		var/fucktimes = 0
-		while(!Q || (length(Q.job_whitelist) && !(job.title in Q.job_whitelist)))
+		while(!Q)
 			if(fucktimes >= 10)
 				break
 			fucktimes++
 			var/fuck = quirk_path_by_name(pick(possible_quirks))
 			Q = new fuck
+			if(length(Q.job_whitelist) && !(job.title in Q.job_whitelist))
+				Q = null
+			if(!Q.special_requirement_check(user))
+				Q = null
 		if(Q && (!length(Q.job_whitelist) || (job.title in Q.job_whitelist)))
 			user.add_quirk(Q.type, spawn_effects)
 	

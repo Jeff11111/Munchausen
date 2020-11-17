@@ -49,6 +49,9 @@
 	quirk_holder = to_mob
 	on_transfer()
 
+/datum/quirk/proc/special_requirement_check(mob/living/carbon/human/imbecile) //special checks, e.g. is imbecile a female? return true or false depending on whether they pass or not
+	return TRUE
+
 /datum/quirk/proc/add() //special "on add" effects
 
 /datum/quirk/proc/on_spawn() //these should only trigger when the character is being created for the first time, i.e. roundstart/latejoin
