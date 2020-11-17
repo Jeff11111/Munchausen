@@ -15,6 +15,7 @@ GLOBAL_LIST_EMPTY(objectives)
 	var/martyr_compatible = FALSE		//If the objective is compatible with martyr objective, i.e. if you can still do it while dead.
 	var/bobux_reward = 1			 	//how much bobux this objective nets the antag on completion
 	var/bobux_penalty = 1					//how much bobux the antag loses on failure
+	var/flavor = "Objective" //Gets listed as [flavor] #1 etc thats cool i think
 
 /datum/objective/New(var/text)
 	GLOB.objectives += src // CITADEL EDIT FOR CRYOPODS
@@ -489,22 +490,33 @@ GLOBAL_LIST_EMPTY(objectives)
 	return TRUE
 
 /datum/objective/martyr
-	name = "martyr"
-	explanation_text = "Die a glorious death."
+	name = "mass murderer"
+	explanation_text = "Kill. Kill. Kill."
+	var/christchurch_victims = 5
+
+/datum/objective/martyr/New(text)
+	. = ..()
+	christchurch_victims = min(christchurch_victims, length(GLOB.joined_player_list))
+	explanation_text = "My employers sent me here on a special mission. I must kill [christchurch_victims] of the scum at my own discretion."
 
 /datum/objective/martyr/check_completion()
-	var/list/datum/mind/owners = get_owners()
-	for(var/datum/mind/M in owners)
-		if(considered_alive(M))
-			return FALSE
-		if(M.current?.suiciding) //killing yourself ISN'T glorious.
-			return FALSE
-	return TRUE
+	var/christchurch_counter = 0
+	for(var/M in GLOB.carbon_list)
+		var/mob/living/carbon/chungus = M
+		if(chungus.mind && chungus.stat == DEAD)
+			christchurch_counter++
+	
+	if(christchurch_counter >= no_russian)
+		return TRUE
+	
+	return FALSE
 
 /datum/objective/nuclear
 	name = "nuclear"
 	explanation_text = "Destroy the station with a nuclear device."
-	martyr_compatible = 1
+	bobux_reward = 5
+	bobux_penalty = 3
+	martyr_compatible = TRUE
 
 /datum/objective/nuclear/check_completion()
 	if(SSticker && SSticker.mode && SSticker.mode.station_was_nuked)

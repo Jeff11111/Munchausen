@@ -96,9 +96,9 @@ GLOBAL_LIST_EMPTY(antagonists)
 	if(!(owner?.current))
 		return
 	if(!silent)
-		greet()
+		spawn(0)
+			greet()
 	apply_innate_effects()
-	give_antag_moodies()
 	remove_blacklisted_quirks()
 	if(is_banned(owner.current) && replace_banned)
 		replace_banned_player()
@@ -148,6 +148,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 	qdel(src)
 
 /datum/antagonist/proc/greet()
+	give_antag_moodies()
 	return
 
 /datum/antagonist/proc/farewell()

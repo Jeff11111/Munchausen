@@ -1551,7 +1551,7 @@ GLOBAL_LIST(objective_choices)
 	to_chat(current, "<span class='notice'>Your current objectives:</span>")
 	for(var/objective in get_all_objectives())
 		var/datum/objective/O = objective
-		to_chat(current, "<B>Objective #[obj_count]</B>: [O.explanation_text]")
+		to_chat(current, "<B>[O.flavor] #[obj_count]</B>: [O.explanation_text]")
 		obj_count++
 
 /datum/mind/proc/find_syndicate_uplink()

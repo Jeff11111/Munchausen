@@ -19,7 +19,7 @@
 	var/obj/item/offhand/offhand_item = null		/// Reference to the offhand created for the item
 	var/sharpened_increase = 0						/// The amount of increase recived from sharpening the item
 	//SKYRAT CHANGES - Option to avoid attack self activation
-	var/ignore_attack_self = FALSE					/// We only register the attack self signal if this is true
+	var/ignore_attack_self = FALSE					/// We only register the attack self signal if this is false
 	//END OF SKYRAT CHANGES
 
 /**
@@ -177,9 +177,10 @@
 	if(wieldsound)
 		playsound(parent_item.loc, wieldsound, 50, TRUE)
 	
-	//skyrat edit - update the wield ui button
+	//Update the wield ui button
 	user.wield_ui_on()
-	//
+	//Update the user's inhands
+	user.update_inv_hands()
 
 	// Let's reserve the other hand
 	offhand_item = new(user)
@@ -252,9 +253,10 @@
 	// Clear any old refrence to an item that should be gone now
 	offhand_item = null
 
-	//skyrat edit - update the wield ui button
+	//Update the wield ui button
 	user.wield_ui_off()
-	//
+	//Update the user's inhand overlays
+	user.update_inv_hands()
 
 /**
  * on_attack triggers on attack with the parent item

@@ -73,7 +73,7 @@
 	traitor_kind.on_removal(src)
 	SSticker.mode.traitors -= owner
 	if(!silent && owner.current)
-		to_chat(owner.current,"<span class='userdanger'> You are no longer the [special_role]! </span>")
+		to_chat(owner.current,"<span class='userdanger'>... I am no longer the [special_role]! ...</span>")
 	owner.special_role = null
 	. = ..()
 
@@ -94,9 +94,14 @@
 	traitor_kind.forge_objectives(src)
 
 /datum/antagonist/traitor/greet()
-	to_chat(owner.current, "<B><font size=3 color=red>You are the [owner.special_role].</font></B>")
+	. = ..()
+	//Let's delay for a bit. Give them 10 minutes to think or so.
+	if(SSticker.current_state <= GAME_STATE_SETTING_UP)
+		sleep(rand(5, 15) MINUTES)
+	to_chat(owner.current, "<B><font size=3 color=red>... I'm not like these people ...</font></B>")
+	sleep(2 SECONDS)
+	owner.current.playsound_local(owner.current, 'modular_skyrat/sound/misc/villain.ogg', 100, 0)
 	traitor_kind.greet(src)
-	owner.announce_objectives()
 	if(should_give_codewords)
 		give_codewords()
 
@@ -114,7 +119,6 @@
 	if(traitor_kind.finalize_traitor(src))
 		if(should_equip)
 			equip(silent)
-		owner.current.playsound_local(get_turf(owner.current), 'sound/ambience/antag/tatoralert.ogg', 100, FALSE, pressure_affected = FALSE)
 
 /datum/antagonist/traitor/antag_panel_objectives()
 	. += "<i><b>Traitor class:</b></i> <a href='?src=[REF(owner)];traitor_class=1;target_antag=[REF(src)]'>[traitor_kind.employer]</a><br>"
@@ -156,7 +160,7 @@
 	var/phrases = jointext(GLOB.syndicate_code_phrase, ", ")
 	var/responses = jointext(GLOB.syndicate_code_response, ", ")
 
-	var/dat = "<U><B>The Syndicate have provided you with the following codewords to identify fellow agents:</B></U>\n"
+	var/dat = "<U><B>My employers have provided me with the following codewords to identify fellow agents:</B></U>\n"
 	dat += "<B>Code Phrase</B>: <span class='blue'>[phrases]</span>\n"
 	dat += "<B>Code Response</B>: <span class='red'>[responses]</span>"
 	to_chat(traitor_mob, dat)

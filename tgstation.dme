@@ -1618,7 +1618,6 @@
 #include "code\modules\antagonists\traitor\syndicate_contract.dm"
 #include "code\modules\antagonists\traitor\classes\ai.dm"
 #include "code\modules\antagonists\traitor\classes\assassin.dm"
-#include "code\modules\antagonists\traitor\classes\freeform.dm"
 #include "code\modules\antagonists\traitor\classes\hijack.dm"
 #include "code\modules\antagonists\traitor\classes\human.dm"
 #include "code\modules\antagonists\traitor\classes\martyr.dm"

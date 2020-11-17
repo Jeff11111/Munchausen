@@ -143,12 +143,10 @@
 /obj/item/gun/proc/on_wield(mob/living/carbon/user)
 	is_wielded = TRUE
 	update_icon()
-	user.update_inv_hands()
 
 /obj/item/gun/proc/on_unwield(mob/living/carbon/user)
 	is_wielded = FALSE
 	update_icon()
-	user.update_inv_hands()
 
 /obj/item/gun/verb/safety_toggle()
 	set name = "Toggle Safety"

@@ -20,6 +20,7 @@
 		else
 			var/datum/objective/maroon/maroon = new
 			maroon.owner = T.owner
+			maroon.find_target()
 			T.add_objective(maroon)
 	else
 		if(prob(15) && !(locate(/datum/objective/download) in T.objectives) && !(T.owner.assigned_role in list("Research Director", "Scientist", "Roboticist")))
@@ -33,7 +34,7 @@
 			steal_objective.find_target()
 			T.add_objective(steal_objective)
 		else
-			var/datum/objective/sabotage/sabotage_objective = new
-			sabotage_objective.owner = T.owner
-			sabotage_objective.find_target()
-			T.add_objective(sabotage_objective)
+			//sabotage objectives are lame, let's do something funny instead
+			var/datum/objective/nuclear/nuclear = new
+			nuclear.owner = T.owner
+			T.add_objective(nuclear)

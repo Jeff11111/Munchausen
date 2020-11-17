@@ -1,5 +1,5 @@
 /datum/traitor_class/human/assassin
-	name = "Donk Co Operative"
+	name = "Donk Corporative"
 	employer = "Donk Corporation"
 	weight = 0
 	chaos = 1
@@ -13,17 +13,16 @@
 		mode = SSticker.mode
 		is_dynamic = TRUE
 	var/list/active_ais = active_ais()
-	if(active_ais.len && prob(100/GLOB.joined_player_list.len))
+	if(active_ais.len && prob(30))
 		var/datum/objective/destroy/destroy_objective = new
 		destroy_objective.owner = T.owner
 		destroy_objective.find_target()
 		T.add_objective(destroy_objective)
 	else if(prob(30) || (is_dynamic && (mode.storyteller.flags & NO_ASSASSIN)))
-		//Skyrat changes - changes maroon to flavor obj 
 		var/datum/objective/maroon/maroon = new()
 		maroon.owner = T.owner
+		maroon.find_target()
 		T.add_objective(maroon)
-		//End of skyrat changes
 	else
 		var/datum/objective/assassinate/kill_objective = new
 		kill_objective.owner = T.owner

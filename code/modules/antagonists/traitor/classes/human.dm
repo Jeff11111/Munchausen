@@ -3,15 +3,15 @@
 	chaos = 0
 
 /datum/traitor_class/human/forge_objectives(datum/antagonist/traitor/T)
-	var/objective_count = 0 			//Hijacking counts towards number of objectives
-	if(!SSticker.mode.exchange_blue && SSticker.mode.traitors.len >= 8) 	//Set up an exchange if there are enough traitors
+	var/objective_count = 0 //Hijacking counts towards number of objectives
+	if(!SSticker.mode.exchange_blue && SSticker.mode.traitors.len >= 3) //Set up an exchange if there are enough traitors
 		if(!SSticker.mode.exchange_red)
 			SSticker.mode.exchange_red = T.owner
 		else
 			SSticker.mode.exchange_blue = T.owner
 			T.assign_exchange_role(SSticker.mode.exchange_red)
 			T.assign_exchange_role(SSticker.mode.exchange_blue)
-		objective_count += 1					//Exchange counts towards number of objectives
+		objective_count += 1 //Exchange counts towards number of objectives
 	var/toa = CONFIG_GET(number/traitor_objectives_amount)
 	for(var/i = objective_count, i < toa, i++)
 		forge_single_objective(T)
@@ -77,4 +77,4 @@
 			T.add_objective(hijack)
 
 /datum/traitor_class/human/greet(datum/antagonist/traitor/T)
-	to_chat(T.owner.current, "<B><font size=2 color=red>You are under contract with [employer]. They have given you your objectives.</font></B>")
+	to_chat(T.owner.current, "<B><font size=2 color=red>I am under contract with [employer]. I can check my objectives at an ATM.</font></B>")
