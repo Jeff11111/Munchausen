@@ -27,9 +27,9 @@
 	switch(level)
 		if(-INFINITY to 0)
 			return 2.5
-		if(1 to 10)
+		if(1 to 9)
 			return (2 - (level/MAX_STAT))
-		if(11 to 19)
+		if(10 to 19)
 			return (1.5 - (level/MAX_STAT))
 		if(20 to INFINITY)
 			return max(0.1, 0.2 - max(0, (22 - level)/10))
