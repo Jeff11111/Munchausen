@@ -1,6 +1,6 @@
 /datum/job/assistant
 	title = "Stowaway"
-	var/commieprob = 10
+	var/commieprob = 20
 
 /datum/job/assistant/equip(mob/living/carbon/human/H, visualsOnly, announce, latejoin, datum/outfit/outfit_override, client/preference_source)
 	..()
