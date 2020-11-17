@@ -1,2 +1,2 @@
 /obj/machinery/vending/security
-	contraband = list(/obj/item/storage/belt/military = 4)
+	premium = list(/obj/item/storage/belt/military = 4)
