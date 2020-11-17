@@ -9,9 +9,8 @@ SUBSYSTEM_DEF(ambience)
 
 /datum/controller/subsystem/ambience/fire(resumed)
 	. = ..()
-	if(SSticker.current_state == GAME_STATE_PLAYING)
-		if(world.time >= time_to_fire)
-			do_funny(TRUE)
+	if(world.time >= time_to_fire)
+		do_funny(TRUE)
 
 /datum/controller/subsystem/ambience/Initialize(start_timeofday)
 	. = ..()
