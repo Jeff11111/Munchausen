@@ -337,12 +337,12 @@
 	if(internal)
 		if(internal.loc != src)
 			internal = null
-			update_internals_hud_icon(0)
+			update_internals_hud_icon(FALSE)
 		else if (!internals && !getorganslot(ORGAN_SLOT_BREATHING_TUBE))
 			internal = null
-			update_internals_hud_icon(0)
+			update_internals_hud_icon(FALSE)
 		else
-			update_internals_hud_icon(1)
+			update_internals_hud_icon(TRUE)
 			. = internal.remove_air_volume(volume_needed)
 			if(!.)
 				return FALSE //to differentiate between no internals and active, but empty internals

@@ -301,7 +301,7 @@ Credit where due:
 	W.update_label()
 	if(plasmaman && !visualsOnly) //If we need to breathe from the plasma tank, we should probably start doing that
 		H.internal = H.get_item_for_held_index(2)
-		H.update_internals_hud_icon(1)
+		H.update_internals_hud_icon(TRUE)
 	PDA.owner = H.real_name
 	PDA.ownjob = "Stowaway"
 	PDA.update_label()

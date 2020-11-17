@@ -305,7 +305,7 @@
 	if((C.flags_inv & (HIDEHAIR|HIDEFACIALHAIR)) || (initial(C.flags_inv) & (HIDEHAIR|HIDEFACIALHAIR)))
 		update_hair()
 	if(toggle_off && internal && !getorganslot(ORGAN_SLOT_BREATHING_TUBE))
-		update_internals_hud_icon(0)
+		update_internals_hud_icon(FALSE)
 		internal = null
 	if(C.flags_inv & HIDEEYES)
 		update_inv_glasses()

@@ -33,7 +33,7 @@
 	var/datum/outfit/vox/O = new /datum/outfit/vox
 	H.equipOutfit(O, visualsOnly)
 	H.internal = H.get_item_for_held_index(2)
-	H.update_internals_hud_icon(1)
+	H.update_internals_hud_icon(TRUE)
 	return 0
 /*
 /datum/species/vox/after_equip_job(datum/job/J, mob/living/carbon/human/H)
