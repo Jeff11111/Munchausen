@@ -28,6 +28,6 @@ SUBSYSTEM_DEF(ambience)
 		select_generic()
 	if(!current_generic)
 		return
-	var/sound/S = sound(current_generic, FALSE, 0, CHANNEL_AMBIENT, 50)
+	var/sound/S = sound(current_generic, FALSE, 0, CHANNEL_AMBIENT, 30)
 	time_to_fire = world.time + S.len SECONDS
 	SEND_SOUND(world, S)
