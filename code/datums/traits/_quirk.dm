@@ -13,6 +13,7 @@
 	var/mob_trait //if applicable, apply and remove this mob trait
 	var/mob/living/quirk_holder
 	var/list/job_whitelist = list() //for quirks limited to certain roles
+	var/medical_condition = TRUE //Should this be shown on health analyzers?
 
 /datum/quirk/New(mob/living/quirk_mob, spawn_effects)
 	if(!quirk_mob || (human_only && !ishuman(quirk_mob)) || quirk_mob.has_quirk(type))
@@ -84,14 +85,16 @@
 	if(!medical)
 		for(var/V in roundstart_quirks)
 			var/datum/quirk/T = V
-			dat += T.name
+			if(T.medical_condition)
+				dat += T.name
 		if(!dat.len)
 			return "None"
 		return dat.Join(", ")
 	else
 		for(var/V in roundstart_quirks)
 			var/datum/quirk/T = V
-			dat += T.medical_record_text
+			if(T.medical_condition)
+				dat += T.medical_record_text
 		if(!dat.len)
 			return "None"
 		return dat.Join("<br>")
