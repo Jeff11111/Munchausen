@@ -233,7 +233,7 @@
 	else
 		quirk_holder.blood_volume -= 0.1 //Was actual aids at 0.2 but now you're less robust too.
 
-/datum/quirk/anemic/add()
+/datum/quirk/anemic/on_spawn()
 	. = ..()
 	var/datum/stats/strength = GET_STAT(quirk_holder, str)
 	var/datum/stats/endurance = GET_STAT(quirk_holder, end)

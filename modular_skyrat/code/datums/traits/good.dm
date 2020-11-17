@@ -3,7 +3,7 @@
 	name = "Fists of steel"
 	desc = "<span class='info'>I am exceptionally good at unarmed combat. My punches hurt more.</span>"
 
-/datum/quirk/steel_fists/add()
+/datum/quirk/steel_fists/on_spawn()
 	. = ..()
 	if(.)
 		var/mob/living/carbon/human/H = quirk_holder
@@ -43,7 +43,7 @@
 	desc = "<span class='info'>I know how to operate and use firearms, but I have much to learn.</span>"
 	lose_text = "<span class='warning'>All I know of the fighting is lost to memories.</span>"
 
-/datum/quirk/gun1/add()
+/datum/quirk/gun1/on_spawn()
 	. = ..()
 	var/datum/skills/ranged = GET_SKILL(quirk_holder, ranged)
 	var/datum/stats/dexterity = GET_STAT(quirk_holder, dex)
@@ -64,7 +64,7 @@
 	desc = "<span class='info'>I am skilled with firearms, able to use just about any like a natural.</span>"
 	lose_text = "<span class='warning'>All I know of the fighting is lost to memories.</span>"
 
-/datum/quirk/gun2/add()
+/datum/quirk/gun2/on_spawn()
 	. = ..()
 	var/datum/skills/ranged = GET_SKILL(quirk_holder, ranged)	
 	var/datum/stats/dexterity = GET_STAT(quirk_holder, dex)
@@ -85,7 +85,7 @@
 	desc = "<span class='boldnotice'>I am the shooter born in heaven.</span>"
 	lose_text = "<span class='warning'>All I know of the fighting is lost to memories.</span>"
 
-/datum/quirk/gun3/add()
+/datum/quirk/gun3/on_spawn()
 	. = ..()
 	var/datum/skills/ranged = GET_SKILL(quirk_holder, ranged)	
 	var/datum/stats/dexterity = GET_STAT(quirk_holder, dex)
@@ -106,7 +106,7 @@
 	desc = "<span class='info'>I am trained in self defense.</span>"
 	lose_text = "<span class='warning'>All I know of the fighting is lost to memories.</span>"
 
-/datum/quirk/melee1/add()
+/datum/quirk/melee1/on_spawn()
 	. = ..()
 	var/datum/skills/melee = GET_SKILL(quirk_holder, melee)	
 	var/datum/stats/strength = GET_STAT(quirk_holder, str)
@@ -127,7 +127,7 @@
 	desc = "<span class='info'>I am a skilled martial artist.</span>"
 	lose_text = "<span class='warning'>All I know of the fighting is lost to memories.</span>"
 
-/datum/quirk/melee2/add()
+/datum/quirk/melee2/on_spawn()
 	. = ..()
 	var/datum/skills/melee = GET_SKILL(quirk_holder, melee)	
 	var/datum/stats/strength = GET_STAT(quirk_holder, str)
@@ -148,7 +148,7 @@
 	desc = "<span class='boldnotice'>I am the legendary fighter of the Void.</span>"
 	lose_text = "<span class='warning'>All I know of the fighting is lost to memories.</span>"
 
-/datum/quirk/melee3/add()
+/datum/quirk/melee3/on_spawn()
 	. = ..()
 	var/datum/skills/melee = GET_SKILL(quirk_holder, melee)
 	var/datum/stats/strength = GET_STAT(quirk_holder, str)
@@ -169,7 +169,7 @@
 	desc = "<span class='info'>I am fitter than most.</span>"
 	lose_text = "<span class='warning'>A shame, my energy has waned.</span>"
 
-/datum/quirk/body1/add()
+/datum/quirk/body2/on_spawn()
 	. = ..()	
 	var/datum/stats/strength = GET_STAT(quirk_holder, str)
 	var/datum/stats/endurance = GET_STAT(quirk_holder, end)
@@ -194,7 +194,7 @@
 	desc = "<span class='info'>I am strong, my efforts have paid off in gains.</span>"
 	lose_text = "<span class='warning'>A shame, body is weak.</span>"
 
-/datum/quirk/body2/add()
+/datum/quirk/body2/on_spawn()
 	. = ..()
 	var/datum/stats/strength = GET_STAT(quirk_holder, str)
 	var/datum/stats/endurance = GET_STAT(quirk_holder, end)
@@ -215,7 +215,7 @@
 	desc = "<span class='boldnotice'>I am the beast I worship.</span>"
 	lose_text = "<span class='warning'>Oh god! My body is weak!</span>"
 
-/datum/quirk/body3/add()
+/datum/quirk/body3/on_spawn()
 	. = ..()
 	var/datum/stats/strength = GET_STAT(quirk_holder, str)
 	var/datum/stats/endurance = GET_STAT(quirk_holder, end)
