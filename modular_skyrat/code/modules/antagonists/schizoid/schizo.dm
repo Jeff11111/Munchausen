@@ -10,3 +10,4 @@
 	var/datum/objective/assassinate/kill = new()
 	kill.find_target()
 	objectives += kill
+	owner.announce_objectives()
