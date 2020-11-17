@@ -74,7 +74,8 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 			if(fucktimes >= 10)
 				break
 			fucktimes++
-			Q = new quirks[pick(possible_quirks)]
+			var/fuck = pick(possible_quirks)
+			Q = new quirks[fuck]
 		if(Q && (!length(Q.job_whitelist) || (job.title in Q.job_whitelist)))
 			user.add_quirk(Q.type, spawn_effects)
 	
