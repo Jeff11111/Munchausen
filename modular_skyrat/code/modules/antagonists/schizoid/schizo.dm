@@ -1,6 +1,6 @@
 //Paranoid schizo special
 /datum/antagonist/schizoid
-	name = "Antagonist"
+	name = "Paranoid Schizophrenic"
 	antagpanel_category = "Schizoid"
 	roundend_category = "paranoid schizophrenics"
 	show_name_in_check_antagonists = TRUE
