@@ -166,7 +166,7 @@
 /datum/quirk/dnr
 	name = "Do Not Revive"
 	desc = "<span class='warning'>I cannot be revived in any way, this is my only shot at life.</span>"
-	value = 0
+	value = -2
 	gain_text = "<span class='notice'>Your spirit gets too scarred to accept revival.</span>"
 	lose_text = "<span class='notice'>You can feel your soul healing again.</span>"
 	mob_trait = TRAIT_DNR
@@ -174,7 +174,7 @@
 //fetal alcohol syndrome
 /datum/quirk/fas
 	name = "Fetal Alcohol Syndrome"
-	desc = "<span class='warning'>I have fetal alcohol system, my mother didn't care.</span>"
+	desc = "<span class='warning'>I have fetal alcohol syndrome. My mother didn't care for me.</span>"
 
 /datum/quirk/fas/on_spawn()
 	. = ..()
@@ -212,7 +212,7 @@
 //british
 /datum/quirk/british
 	name = "British"
-	desc = "<span class='warning'>Oi mate! Looks like tha' tea rotted away ya gums!</span>"
+	desc = "<span class='warning'>The tea has completely rotted away my guns.</span>"
 
 /datum/quirk/british/on_spawn()
 	. = ..()

@@ -62,7 +62,7 @@
 /datum/quirk/proc/on_process() //process() has some special checks, so this is the actual process
 
 /datum/quirk/proc/post_add() //for text, disclaimers etc. given after you spawn in with the trait
-	to_chat(quirk_holder, "<span class='notice'>You're special!</span><br><span class='[value >= 0 ? "info" : "userdanger"]'><b>[name]:</b> [desc]</span>")
+	to_chat(quirk_holder, "<span class='notice'>I am special!</span><br><span class='[value >= 0 ? "info" : "userdanger"]'><b>[name]:</b></span> [desc]")
 
 /datum/quirk/proc/on_transfer() //code called when the trait is transferred to a new mob
 

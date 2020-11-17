@@ -28,7 +28,7 @@
 //rich
 /datum/quirk/wealthy
 	name = "Wealthy"
-	desc = "<span class='info'>I was born to awealthy family! I have savings to spare.</span>"
+	desc = "<span class='info'>I was born to a wealthy family! I have savings to spare.</span>"
 
 /datum/quirk/wealthy/on_spawn()
 	. = ..()
@@ -102,8 +102,8 @@
 		dexterity.level = clamp(dexterity.level - 4, MIN_STAT, MAX_STAT) // whoever removed this quirk knows what they're doing.
 
 /datum/quirk/melee1
-	name = "Self defence trained"
-	desc = "<span class='info'>I am trained in self defence.</span>"
+	name = "Self defense trained"
+	desc = "<span class='info'>I am trained in self defense.</span>"
 	lose_text = "<span class='warning'>All I know of the fighting is lost to memories.</span>"
 
 /datum/quirk/melee1/add()
