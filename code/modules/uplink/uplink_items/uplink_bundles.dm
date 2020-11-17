@@ -37,20 +37,9 @@
 			standard contractor gear to help with your mission - comes supplied with the tablet, specialised space suit, chameleon jumpsuit and mask, \
 			specialised contractor baton, and three randomly selected low cost items. Can include otherwise unobtainable items."
 	item = /obj/item/storage/box/syndie_kit/contract_kit
-	cost = 20
-	player_minimum = 15 // Skyrat edit - lowered it from 30 back to 15
+	cost = 14
 	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 	restricted = TRUE
-
-/datum/uplink_item/bundles_TC/northstar_bundle
-	name = "Northstar Bundle"
-	desc = "An item usually reserved for the Gorlex Marauders and their operatives, now available for recreational use.  \
-			These armbands let the user punch people very fast and with the lethality of a legendary martial artist. \
-			Does not improve weapon attack speed or the meaty fists of a hulk, but you will be unmatched in martial power. \
-			Combines with all martial arts, but the user will be unable to bring themselves to use guns, nor remove the armbands."
-	item = /obj/item/storage/box/syndie_kit/northstar
-	cost = 20
-	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 
 /datum/uplink_item/suits/infiltrator_bundle
 	name = "Insidious Infiltration Gear Case"
@@ -98,16 +87,7 @@
 			two soporific knockout magazines, a free surplus supressor, and a sharp-looking tactical turtleneck suit. \
 			We'll throw in a free red tie if you order NOW."
 	item = /obj/item/storage/briefcase/sniperbundle
-	cost = 20 // normally 26
-	include_modes = list(/datum/game_mode/nuclear)
-
-/datum/uplink_item/bundles_TC/firestarter
-	name = "Spetsnaz Pyro bundle"
-	desc = "For systematic suppression of carbon lifeforms in close quarters: Contains a lethal New Russian backpack spray, Elite hardsuit, \
-			Stechkin APS pistol, two magazines, a minibomb and a stimulant syringe. \
-			Order NOW and comrade Boris will throw in an extra tracksuit."
-	item = /obj/item/storage/backpack/duffelbag/syndie/firestarter
-	cost = 30
+	cost = 24
 	include_modes = list(/datum/game_mode/nuclear)
 
 /datum/uplink_item/bundles_TC/bundle

@@ -233,15 +233,6 @@
 /obj/item/melee/rapier/get_worn_belt_overlay(icon_file)
 	return mutable_appearance(icon_file, "-rapier")
 
-/obj/item/melee/rapier/attack(mob/living/target, mob/living/user)
-	. = ..()
-	if(iscarbon(target))
-		var/mob/living/carbon/H = target
-		H.Dizzy(10)
-		H.adjustStaminaLoss(30)
-		if(CHECK_STAMCRIT(H) != NOT_STAMCRIT)
-			H.Sleeping(180)
-
 /obj/item/melee/classic_baton
 	name = "police baton"
 	desc = "A wooden truncheon for beating criminal scum."

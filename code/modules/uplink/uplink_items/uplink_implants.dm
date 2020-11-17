@@ -19,22 +19,14 @@
 	name = "CNS Rebooter Implant"
 	desc = "This implant will help you get back up on your feet faster after being stunned. Comes with an autosurgeon."
 	item = /obj/item/autosurgeon/anti_stun
-	cost = 12
+	cost = 10
 	include_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
-
-/datum/uplink_item/implants/freedom
-	name = "Freedom Implant"
-	desc = "An implant injected into the body and later activated at the user's will. It will attempt to free the \
-			user from common restraints such as handcuffs."
-	item = /obj/item/storage/box/syndie_kit/imp_freedom
-	cost = 5
 
 /datum/uplink_item/implants/hijack
 	name = "Hijack Implant"
 	desc = "An implant that will let you hack into the APCs on station, allowing you to control them at will and the machinery within those rooms."
 	item = /obj/item/implanter/hijack
-	cost = 14 //really overkill, 14 tc, can still get caught in a room you haven't hijacked and you're fucked.
-	surplus = 0 //nope not having hijack implants with surplus crates nope nope nope nope
+	cost = 12
 	restricted = TRUE
 
 /datum/uplink_item/implants/radio
@@ -42,7 +34,7 @@
 	desc = "An implant injected into the body, allowing the use of an internal Syndicate radio. \
 			Used just like a regular headset, but can be disabled to use external headsets normally and to avoid detection."
 	item = /obj/item/storage/box/syndie_kit/imp_radio
-	cost = 4
+	cost = 3
 	restricted = TRUE
 
 /datum/uplink_item/implants/microbomb
@@ -96,9 +88,7 @@
 	desc = "An implant injected into the body, and later activated at the user's will. Has no telecrystals and must be charged by the use of physical telecrystals. \
 			Undetectable (except via surgery), and excellent for escaping confinement."
 	item = /obj/item/storage/box/syndie_kit/imp_uplink
-	cost = 4
-	// An empty uplink is kinda useless.
-	surplus = 0
+	cost = 3 // An empty uplink is kinda useless.
 	restricted = TRUE
 
 /datum/uplink_item/implants/xray
@@ -106,5 +96,4 @@
 	desc = "These cybernetic eyes will give you X-ray vision. Comes with an autosurgeon."
 	item = /obj/item/autosurgeon/xray_eyes
 	cost = 10
-	surplus = 0
 	include_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)

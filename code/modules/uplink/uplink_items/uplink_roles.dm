@@ -28,7 +28,7 @@
 			blast wave \"projectile\". Aspiring scientists may find this highly useful, as forcing the pressure shockwave into a narrow angle seems to be able to bypass whatever quirk of physics \
 			disallows explosive ranges above a certain distance, allowing for the device to use the theoretical yield of a transfer valve bomb, instead of the factual yield."
 	item = /obj/item/gun/blastcannon
-	cost = 14							//High cost because of the potential for extreme damage in the hands of a skilled gas masked scientist.
+	cost = 10
 	restricted_roles = list("Research Director", "Scientist")
 
 /datum/uplink_item/role_restricted/alientech
@@ -217,13 +217,6 @@
 	The revolver itself is actually real. Only clumsy people, and clowns, can fire it normally. Comes in a box of hugs. Honk."
 	cost = 14
 	item = /obj/item/storage/box/hug/reverse_revolver
-	restricted_roles = list("Clown")
-
-/datum/uplink_item/role_restricted/taeclowndo_shoes
-	name = "Tae-clown-do Shoes"
-	desc = "A pair of shoes for the most elite agents of the honkmotherland. They grant the mastery of taeclowndo with some honk-fu moves as long as they're worn."
-	cost = 14
-	item = /obj/item/clothing/shoes/clown_shoes/taeclowndo
 	restricted_roles = list("Clown")
 
 /datum/uplink_item/role_restricted/emitter_cannon

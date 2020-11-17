@@ -9,10 +9,9 @@
 
 /datum/uplink_item/stealthy_weapons/combatglovesplus
 	name = "Combat Gloves Plus"
-	desc = "A pair of gloves that are fireproof and shock resistant, however unlike the regular Combat Gloves this one uses nanotechnology \
-			to learn the abilities of krav maga to the wearer."
+	desc = "A pair of gloves that are fireproof and shock resistant."
 	item = /obj/item/clothing/gloves/krav_maga/combatglovesplus
-	cost = 5
+	cost = 4
 	include_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 	surplus = 0
 
@@ -63,8 +62,7 @@
 			On death, these nodules take control of the dead body, causing limited revivification, \
 			along with slurred speech, aggression, and the ability to infect others with this agent."
 	item = /obj/item/storage/box/syndie_kit/romerol
-	cost = 25
-	cant_discount = TRUE
+	cost = 20
 	exclude_modes = list(/datum/game_mode/nuclear)
 
 /datum/uplink_item/stealthy_weapons/sleepy_pen

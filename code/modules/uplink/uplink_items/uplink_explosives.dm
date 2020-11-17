@@ -47,7 +47,7 @@
 	name = "Bag of C-4 explosives"
 	desc = "Because sometimes quantity is quality. Contains 10 C-4 plastic explosives."
 	item = /obj/item/storage/backpack/duffelbag/syndie/c4
-	cost = 9 //10% discount!
+	cost = 8 //20% discount!
 	cant_discount = TRUE
 
 /datum/uplink_item/explosives/x4bag
@@ -56,7 +56,7 @@
 			X-4 can be placed on a solid surface, such as a wall or window, and it will blast through the wall, injuring anything on the opposite side, while being safer to the user. \
 			For when you want a controlled explosion that leaves a wider, deeper, hole."
 	item = /obj/item/storage/backpack/duffelbag/syndie/x4
-	cost = 4 //
+	cost = 4
 	cant_discount = TRUE
 
 /datum/uplink_item/explosives/clown_bomb_clownops
@@ -121,7 +121,7 @@
 			transported to you that will teleport the actual bomb to it upon activation. Note that this bomb can \
 			be defused, and some crew may attempt to do so."
 	item = /obj/item/sbeacondrop/bomb
-	cost = 11
+	cost = 10
 
 /datum/uplink_item/explosives/syndicate_detonator
 	name = "Syndicate Detonator"

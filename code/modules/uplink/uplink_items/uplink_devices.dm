@@ -12,7 +12,7 @@
 	desc = "The cryptographic sequencer, electromagnetic card, or emag, is a small card that unlocks hidden functions \
 			in electronic devices, subverts intended functions, and easily breaks security mechanisms."
 	item = /obj/item/card/emag
-	cost = 6
+	cost = 5
 
 /datum/uplink_item/device_tools/emagrecharge
 	name = "Electromagnet Charging Device"
@@ -30,7 +30,7 @@
 	name = "Syndicate Mask"
 	desc = "A cheap plastic mask fitted with an adrenaline autoinjector, which can be used by simply tensing your muscles"
 	item = /obj/item/clothing/glasses/phantomthief/syndicate
-	cost = 2
+	cost = 1
 
 /datum/uplink_item/device_tools/cutouts
 	name = "Adaptive Cardboard Cutouts"
@@ -121,7 +121,7 @@
 			You will receive the unlock code upon activating the virus, and the new uplink may be charged with \
 			telecrystals normally."
 	item = /obj/item/cartridge/virus/frame
-	cost = 2
+	cost = 1
 	restricted = TRUE
 
 /datum/uplink_item/device_tools/toolbox
@@ -158,7 +158,7 @@
 	desc = "A wonder of Syndicate engineering, the Medbeam gun, or Medi-Gun enables a medic to keep his fellow \
 			operatives in the fight, even while under fire. Don't cross the streams!"
 	item = /obj/item/gun/medbeam
-	cost = 14
+	cost = 12
 	include_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 
 /datum/uplink_item/device_tools/nutcracker
@@ -175,7 +175,7 @@
 			Because of its size, it cannot be carried. Ordering this sends you a small beacon \
 			that will teleport the larger beacon to your location upon activation."
 	item = /obj/item/sbeacondrop
-	cost = 14
+	cost = 12
 
 /datum/uplink_item/device_tools/powersink
 	name = "Power Sink"
@@ -183,7 +183,7 @@
 			load on the grid, causing a station-wide blackout. The sink is large and cannot be stored in most \
 			traditional bags and boxes. Caution: Will explode if the powernet contains sufficient amounts of energy."
 	item = /obj/item/powersink
-	cost = 6 
+	cost = 6
 
 /datum/uplink_item/device_tools/rad_laser
 	name = "Radioactive Microlaser"
@@ -201,7 +201,6 @@
 			racking fivefold. Then again, the techniques here only work on bolt-actions and pump-actions..."
 	item = /obj/item/book/granter/trait/rifleman
 	cost = 3
-	restricted_roles = list("Operative") // i want it to be surplusable but i also want it to be mostly nukie only, please advise
 	surplus = 90
 
 /datum/uplink_item/device_tools/stimpack
@@ -218,7 +217,7 @@
 			for rapid healing, a medical night vision HUD for quick identification of injured personnel, \
 			and other supplies helpful for a field medic."
 	item = /obj/item/storage/firstaid/tactical/nukeop
-	cost = 4
+	cost = 3
 	include_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 
 /datum/uplink_item/device_tools/surgerybag
@@ -232,7 +231,7 @@
 	name = "Advanced Syndicate Surgery Duffel Bag"
 	desc = "A Syndicate surgery duffel bag, with a set of upgraded surgery tools to boot."
 	item = /obj/item/storage/backpack/duffelbag/syndie/surgery_adv
-	cost = 6
+	cost = 5
 
 /datum/uplink_item/device_tools/encryptionkey
 	name = "Syndicate Encryption Key"
@@ -241,7 +240,6 @@
 	item = /obj/item/encryptionkey/syndicate
 	cost = 2
 	surplus = 75
-	restricted = TRUE
 
 /datum/uplink_item/device_tools/syndietome
 	name = "Syndicate Tome"
@@ -269,15 +267,3 @@
 	cost = 2
 	include_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 	restricted = TRUE
-
-/* for now
-/datum/uplink_item/device_tools/suspiciousphone
-	name = "Protocol CRAB-17 Phone"
-	desc = "The Protocol CRAB-17 Phone, a phone borrowed from an unknown third party, it can be used to crash the space market, funneling the losses of the crew to your bank account.\
-	The crew can move their funds to a new banking site though, unless they HODL, in which case they deserve it."
-	item = /obj/item/suspiciousphone
-	cost = 7
-	restricted = TRUE
-	limited_stock = 1
-*/
-

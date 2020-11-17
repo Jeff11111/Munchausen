@@ -20,7 +20,7 @@
 	desc = "Call in an additional team member. They won't come with any gear, so you'll have to save some telecrystals \
 			to arm them as well."
 	item = /obj/item/antag_spawner/nuke_ops
-	cost = 25
+	cost = 20
 	refundable = TRUE
 	include_modes = list(/datum/game_mode/nuclear)
 	restricted = TRUE

@@ -19,7 +19,7 @@
 	name = "Syndicate Revolver Kit"
 	desc = "A sleek box containing a brutally simple Syndicate revolver that fires .357 Magnum rounds and has 7 chambers, and an extra speedloader."
 	item = /obj/item/storage/box/syndie_kit/revolver
-	cost = 12
+	cost = 10
 	surplus = 50
 	exclude_modes = list(/datum/game_mode/nuclear/clown_ops)
 
@@ -30,17 +30,6 @@
 	item = /obj/item/gun/ballistic/rocketlauncher/unrestricted
 	cost = 8
 	surplus = 30
-	include_modes = list(/datum/game_mode/nuclear)
-
-/datum/uplink_item/dangerous/antitank
-	name = "Anti Tank Pistol"
-	desc = "Essentially amounting to a sniper rifle with no stock and barrel (or indeed, any rifling at all), \
-			this extremely dubious pistol is guaranteed to dislocate your wrists and hit the broad side of a barn! \
-	 		Uses sniper ammo. \
-	 		Bullets tend to veer off-course. We are not responsible for any unintentional damage or injury resulting from inaacuracy."
-	item = /obj/item/gun/ballistic/automatic/pistol/antitank
-	cost = 14
-	surplus = 25
 	include_modes = list(/datum/game_mode/nuclear)
 
 /datum/uplink_item/dangerous/pie_cannon
@@ -85,14 +74,14 @@
 	desc = "A box of shurikens and reinforced bolas from ancient Earth martial arts. They are highly effective \
 			 throwing weapons. The bolas can knock a target down and the shurikens will embed into limbs."
 	item = /obj/item/storage/box/syndie_kit/throwing_weapons
-	cost = 3
+	cost = 2
 
 /datum/uplink_item/dangerous/shotgun
 	name = "Bulldog Shotgun"
 	desc = "A fully-loaded semi-automatic drum-fed shotgun. Compatible with all 12g rounds. Designed for close \
 			quarter anti-personnel engagements."
 	item = /obj/item/gun/ballistic/automatic/shotgun/bulldog/unrestricted
-	cost = 8
+	cost = 10
 	surplus = 40
 	include_modes = list(/datum/game_mode/nuclear)
 
@@ -101,7 +90,7 @@
 	desc = "A fully-loaded Scarborough Arms bullpup submachine gun. The C-20r fires .45 rounds with a \
 			24-round magazine and is compatible with suppressors."
 	item = /obj/item/gun/ballistic/automatic/c20r/unrestricted
-	cost = 10
+	cost = 12
 	surplus = 40
 	include_modes = list(/datum/game_mode/nuclear)
 
@@ -162,21 +151,12 @@
 	surplus = 30
 	include_modes = list(/datum/game_mode/nuclear)
 
-/datum/uplink_item/dangerous/rapid
-	name = "Bands of the North Star"
-	desc = "These armbands let the user punch people very fast and with the lethality of a legendary martial artist. \
-			Does not improve weapon attack speed or the meaty fists of a hulk, but you will be unmatched in martial power. \
-			Combines with all martial arts, but the user will be unable to bring themselves to use guns, nor remove the armbands."
-	item = /obj/item/clothing/gloves/fingerless/pugilist/rapid
-	cost = 30
-	include_modes = list(/datum/game_mode/nuclear)
-
 /datum/uplink_item/dangerous/guardian
 	name = "Holoparasites"
 	desc = "Though capable of near sorcerous feats via use of hardlight holograms and nanomachines, they require an \
 			organic host as a home base and source of fuel. Holoparasites come in various types and share damage with their host."
 	item = /obj/item/storage/box/syndie_kit/guardian
-	cost = 15
+	cost = 14
 	refundable = TRUE
 	cant_discount = TRUE
 	surplus = 0
@@ -190,7 +170,7 @@
 	desc = "A fully-loaded Aussec Armoury belt-fed machine gun. \
 			This deadly weapon has a massive 50-round magazine of devastating 1.95x129mm ammunition."
 	item = /obj/item/gun/ballistic/automatic/l6_saw/unrestricted
-	cost = 18
+	cost = 20
 	surplus = 0
 	include_modes = list(/datum/game_mode/nuclear)
 
@@ -199,7 +179,7 @@
 	desc = "A fully-loaded, specialized three-round burst carbine that fires 5.56mm ammunition from a 30 round magazine \
 			with a toggleable 40mm underbarrel grenade launcher."
 	item = /obj/item/gun/ballistic/automatic/m90/unrestricted
-	cost = 18
+	cost = 20
 	surplus = 50
 	include_modes = list(/datum/game_mode/nuclear)
 
@@ -216,7 +196,7 @@
 	name = "Sniper Rifle"
 	desc = "Ranged fury, Syndicate style. Guaranteed to cause shock and awe or your TC back!"
 	item = /obj/item/gun/ballistic/automatic/sniper_rifle
-	cost = 16
+	cost = 20
 	surplus = 25
 	include_modes = list(/datum/game_mode/nuclear)
 

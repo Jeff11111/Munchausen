@@ -142,7 +142,7 @@
 	desc = "A 40mm HE grenade for use with the M-90gl's under-barrel grenade launcher. \
 			Your teammates will ask you to not shoot these down small hallways."
 	item = /obj/item/ammo_casing/a40mm
-	cost = 2
+	cost = 4
 	include_modes = list(/datum/game_mode/nuclear)
 
 /datum/uplink_item/ammo/smg/bag
@@ -160,7 +160,7 @@
 	include_modes = list(/datum/game_mode/nuclear)
 
 /datum/uplink_item/ammo/sniper
-	cost = 4
+	cost = 5
 	include_modes = list(/datum/game_mode/nuclear)
 
 /datum/uplink_item/ammo/sniper/basic
@@ -173,20 +173,20 @@
 	desc = "A 5-round magazine of penetrator ammo designed for use with .50 sniper rifles. \
 			Can pierce walls and multiple enemies."
 	item = /obj/item/ammo_box/magazine/sniper_rounds/penetrator
-	cost = 5
+	cost = 6
 
 /datum/uplink_item/ammo/sniper/soporific
 	name = ".50 Soporific Magazine"
 	desc = "A 3-round magazine of soporific ammo designed for use with .50 sniper rifles. Put your enemies to sleep today!"
 	item = /obj/item/ammo_box/magazine/sniper_rounds/soporific
-	cost = 6
+	cost = 7
 
 /datum/uplink_item/ammo/carbine
 	name = "5.56mm Toploader Magazine"
 	desc = "An additional 30-round 5.56mm magazine; suitable for use with the M-90gl carbine. \
 			These bullets pack less punch than 7.12x82mm rounds, but they still offer more power than .45 ammo."
 	item = /obj/item/ammo_box/magazine/m556
-	cost = 4
+	cost = 5
 	include_modes = list(/datum/game_mode/nuclear)
 
 /datum/uplink_item/ammo/machinegun/match
