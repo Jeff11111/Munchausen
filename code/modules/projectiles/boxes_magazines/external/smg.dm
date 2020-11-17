@@ -34,10 +34,6 @@
 	caliber = "9mm"
 	max_ammo = 32
 
-/obj/item/ammo_box/magazine/uzim9mm/update_icon()
-	..()
-	icon_state = "uzi9mm-[round(ammo_count(),4)]"
-
 /obj/item/ammo_box/magazine/smgm9mm
 	name = "SMG magazine (9mm)"
 	icon_state = "smg9mm-42"

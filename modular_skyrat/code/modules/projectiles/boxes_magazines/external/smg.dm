@@ -3,6 +3,10 @@
 	icon = 'modular_skyrat/icons/obj/bobstation/ammo/smg.dmi'
 	icon_state = "smg"
 
+/obj/item/ammo_box/magazine/uzim9mm/update_icon()
+	..()
+	icon_state = "[initial(icon_state)]-[ammo_count() ? "30" : "0"]"
+
 /obj/item/ammo_box/magazine/smgm9mm
 	icon = 'modular_skyrat/icons/obj/bobstation/ammo/smg.dmi'
 	icon_state = "smg"
