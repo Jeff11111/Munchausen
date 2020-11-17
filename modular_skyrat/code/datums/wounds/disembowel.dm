@@ -126,6 +126,7 @@
 
 /datum/wound/slash/critical/incision/disembowel/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
 	. = ..()
+	descriptive = "\The [L.name] is disemboweled!"
 	switch(L.body_zone)
 		if(BODY_ZONE_HEAD)
 			initial_flow *= 1
@@ -191,6 +192,7 @@
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
 	. = ..()
+	descriptive = "\The [L.name] is disemboweled!"
 	switch(L.body_zone)
 		if(BODY_ZONE_HEAD)
 			initial_flow *= 1
