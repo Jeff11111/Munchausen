@@ -23,10 +23,12 @@
 
 	var/rendered = "<span class='game deadsay'><span class='prefix'>DEAD:</span> <span class='name'>[uppertext(holder.rank)]([src.holder.fakekey ? pick(nicknames) : src.key])</span> says, <span class='message'>\"[emoji_parse(msg)]\"</span></span>"
 
-	for (var/mob/M in GLOB.player_list)
+	for(var/mob/M in GLOB.player_list)
 		if(isnewplayer(M))
 			continue
-		if (M.stat == DEAD || (M.client && M.client.holder && (M.client.prefs.chat_toggles & CHAT_DEAD))) //admins can toggle deadchat on and off. This is a proc in admin.dm and is only give to Administrators and above
+		if(iscarbon(M) && (world.time <= (C.timeofdeath + 1.5 MINUTES)))
+			continue
+		if(M.stat == DEAD || (M.client && M.client.holder && (M.client.prefs.chat_toggles & CHAT_DEAD))) //admins can toggle deadchat on and off. This is a proc in admin.dm and is only give to Administrators and above
 			to_chat(M, rendered)
 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Dsay") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
