@@ -25,9 +25,11 @@
 
 /datum/stats/end/get_shock_mult()
 	switch(level)
-		if(-INFINITY to 0)
+		if(-INFINITY to 1)
 			return 2.5
-		if(1 to 9)
+		if(2 to 5)
+			return (2.5 - (level/MAX_STAT))
+		if(6 to 9)
 			return (2 - (level/MAX_STAT))
 		if(10 to 19)
 			return (1.5 - (level/MAX_STAT))
