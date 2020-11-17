@@ -676,7 +676,7 @@
 	var/obj/effect/decal/cleanable/trail_holder/connected_trail
 	for(var/obj/effect/decal/cleanable/trail_holder/nice in start)
 		connected_trail = nice
-		if(connected_trail.connected_trail)
+		if(connected_trail.connected_trail && !QDELETED(connected_trail.connected_trail))
 			var/dire_straits = get_dir(connected_trail.connected_trail, connected_trail) | pretty
 			if(dire_straits in GLOB.diagonals)
 				connected_trail.cut_overlays()
