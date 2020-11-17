@@ -2,7 +2,7 @@ SUBSYSTEM_DEF(ambience)
 	name = "Ambience"
 	flags = SS_BACKGROUND
 	runlevels = RUNLEVEL_GAME
-	wait = 30 SECONDS
+	wait = 10 SECONDS
 	var/current_generic
 	var/list/generic_ambience = list()
 	var/time_to_fire = 0
