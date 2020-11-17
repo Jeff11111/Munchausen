@@ -143,6 +143,10 @@
 	. = ..()
 	update_icon()
 
+/obj/effect/decal/cleanable/trail_holder/Destroy(force)
+	. = ..()
+	connected_trail = null
+
 /obj/effect/decal/cleanable/trail_holder/can_bloodcrawl_in()
 	return TRUE
 
