@@ -669,23 +669,30 @@
 	
 	if(!blood_exists)
 		new /obj/effect/decal/cleanable/trail_holder(target_turf, get_static_viruses())
+	
+	//we use this later in two occasions
+	var/pretty = get_dir(start, target_turf)
 
+	var/obj/effect/decal/cleanable/trail_holder/connected_trail
+	for(var/obj/effect/decal/cleanable/trail_holder/nice in start)
+		connected_trail = nice
+		if(connected_trail.connected_trail)
+			var/dire_straits = get_dir(connected_trail.connected_trail, connected_trail) | pretty
+			if(dire_straits in GLOB.diagonals)
+				connected_trail.cut_overlays()
+				connected_trail.existing_dirs -= connected_trail.existing_dirs[length(connected_trail.existing_dirs)]
+				connected_trail.existing_dirs |= dire_straits
+				for(var/poggers in connected_trail.existing_dirs)
+					connected_trail.add_overlay(image('modular_skyrat/icons/effects/blood_fuck.dmi', trail_type, dir = poggers))
+		break
+	
 	for(var/obj/effect/decal/cleanable/trail_holder/TH in target_turf)
 		if((!(newdir in TH.existing_dirs) || trail_type == "tracks_1" || trail_type == "tracks_2" || trail_type == "tracks_3") && TH.existing_dirs.len <= 16) //maximum amount of overlays is 16 (all light & heavy directions filled)
 			TH.existing_dirs |= newdir
 			TH.add_overlay(image('modular_skyrat/icons/effects/blood_fuck.dmi', trail_type, dir = newdir))
 			TH.transfer_mob_blood_dna(src)
-	
-	//if we have a connected trial in start lets do something pretty
-	var/pretty = get_dir(start, target_turf)
-	if(pretty in GLOB.diagonals)
-		for(var/obj/effect/decal/cleanable/trail_holder/HT in start)
-			HT.cut_overlays()
-			HT.existing_dirs |= pretty
-			for(var/prettier in HT.existing_dirs)
-				HT.add_overlay(image('modular_skyrat/icons/effects/blood_fuck.dmi', trail_type, dir = prettier))
-			HT.transfer_mob_blood_dna(src)
-			break
+		if(connected_trail)
+			TH.connected_trail = connected_trail
 
 	//warn the player occasionally about dragging being bad
 	if(prob(4) && lying && bleed_amt && iscarbon(src))

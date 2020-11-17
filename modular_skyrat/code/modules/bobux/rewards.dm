@@ -144,5 +144,7 @@
 				continue
 			S.cd = "/"
 			WRITE_FILE(S["bobux_amount"], 0)
+	for(var/client/C in GLOB.clients)
+		C.prefs?.adjust_bobux(-C.prefs.bobux_amount)
 	for(var/datum/preferences/prefs in world)
 		prefs.load_preferences()

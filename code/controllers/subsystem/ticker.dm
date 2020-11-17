@@ -164,7 +164,6 @@ SUBSYSTEM_DEF(ticker)
 			//Everyone who wants to be an observer is now spawned
 			create_observers()
 			//ambience time
-			SSambience.do_funny(TRUE)
 			fire()
 		if(GAME_STATE_PREGAME)
 			//lobby stats for statpanels
@@ -320,8 +319,6 @@ SUBSYSTEM_DEF(ticker)
 		//wait just a bit for shit to initialize then do the roundstart sound
 		spawn(2 SECONDS)
 			SEND_SOUND(world, sound(round_start_sound))
-	
-	addtimer(CALLBACK(SSambience, /datum/controller/subsystem/ambience/.proc/do_funny, TRUE), 30 SECONDS)
 
 	current_state = GAME_STATE_PLAYING
 	Master.SetRunLevel(RUNLEVEL_GAME)
