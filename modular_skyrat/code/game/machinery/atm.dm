@@ -27,7 +27,6 @@
 	. = ..()
 	if(user.canUseTopic(src, TRUE))
 		if(!comicao_trading || comicao_trading.locked || !comicao_trading.purchase_log)
-			playsound(src, 'modular_skyrat/sound/machinery/atmbeep2.ogg', 50)
 			to_chat(user, "<b>Station decrees:</b>")
 			for(var/i in SScommunications.decrees)
 				to_chat(user, "• [i]")

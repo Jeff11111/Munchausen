@@ -360,12 +360,6 @@
 	slot_flags = ITEM_SLOT_BACK
 	actions_types = list()
 
-/obj/item/gun/ballistic/automatic/sniper_rifle/update_icon()
-	if(magazine)
-		icon_state = "sniper-mag"
-	else
-		icon_state = "sniper"
-
 /obj/item/gun/ballistic/automatic/sniper_rifle/syndicate
 	name = "syndicate sniper rifle"
 	desc = "An illegally modified .50 cal sniper rifle with suppression compatibility. Quickscoping still doesn't work."
