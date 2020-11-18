@@ -131,7 +131,8 @@
 		usr.visible_message("<span class='notice'>[usr] begins counting their own pulse.</span>",\
 		"<span class='notice'>You begin counting your pulse...</span>")
 
-	if(!do_mob(usr, src, 1 SECONDS))
+	var/pogtime = max(0.35, (MAX_SKILL - GET_SKILL_LEVEL(src, firstaid))/10)
+	if(!do_mob(usr, src, pogtime SECONDS))
 		to_chat(usr, "<span class='warning'>You failed to check [self ? "your" : "[src]'s"] pulse.</span>")
 		return FALSE
 
@@ -141,7 +142,7 @@
 		to_chat(usr, "<span class='danger'>[self ? "You have no" : "[src] has no"] pulse!</span>")
 		return FALSE
 	
-	if(do_mob(usr, src, 5 SECONDS))
+	if(do_mob(usr, src, pogtime * 5 SECONDS))
 		to_chat(usr, "<span class='notice'>[self ? "Your" : "[src]'s"] pulse is approximately <b>[src.get_pulse(GETPULSE_BASIC)] BPM</b>.</span>")
 	else
 		to_chat(usr, "<span class='warning'>You failed to check [self ? "your" : "[src]'s"] pulse.</span>")
