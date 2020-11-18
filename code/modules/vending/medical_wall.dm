@@ -23,7 +23,7 @@
 	default_price = PRICE_FREE
 	extra_price = PRICE_NORMAL
 	payment_department = ACCOUNT_MED
-	cost_multiplier_per_dept = list(ACCOUNT_MED = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_MED = 0.5)
 	tiltable = FALSE
 
 /obj/item/vending_refill/wallmed

@@ -32,7 +32,7 @@
 	default_price = PRICE_ALMOST_EXPENSIVE
 	extra_price = PRICE_REALLY_EXPENSIVE
 	payment_department = ACCOUNT_SEC
-	cost_multiplier_per_dept = list(ACCOUNT_SEC = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_SEC = 0.35)
 
 /obj/machinery/vending/security/pre_throw(obj/item/I)
 	if(istype(I, /obj/item/grenade))

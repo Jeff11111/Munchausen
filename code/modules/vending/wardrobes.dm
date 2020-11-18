@@ -35,7 +35,7 @@
 					/obj/item/clothing/head/beret/sec/navyofficer = 5)
 	refill_canister = /obj/item/vending_refill/wardrobe/sec_wardrobe
 	payment_department = ACCOUNT_SEC
-	cost_multiplier_per_dept = list(ACCOUNT_SEC = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_SEC = 0.35)
 	default_price = PRICE_ABOVE_NORMAL
 	extra_price = PRICE_EXPENSIVE
 
@@ -77,7 +77,7 @@
 					/obj/item/clothing/mask/surgical = 5)
 	refill_canister = /obj/item/vending_refill/wardrobe/medi_wardrobe
 	payment_department = ACCOUNT_MED
-	cost_multiplier_per_dept = list(ACCOUNT_MED = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_MED = 0.35)
 
 /obj/item/vending_refill/wardrobe/medi_wardrobe
 	machine_name = "MediDrobe"
@@ -104,7 +104,7 @@
 					/obj/item/clothing/head/hardhat/weldhat = 3)
 	refill_canister = /obj/item/vending_refill/wardrobe/engi_wardrobe
 	payment_department = ACCOUNT_ENG
-	cost_multiplier_per_dept = list(ACCOUNT_ENG = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_ENG = 0.35)
 
 /obj/item/vending_refill/wardrobe/engi_wardrobe
 	machine_name = "EngiDrobe"
@@ -129,7 +129,7 @@
 					/obj/item/clothing/shoes/sneakers/black = 5)
 	refill_canister = /obj/item/vending_refill/wardrobe/atmos_wardrobe
 	payment_department = ACCOUNT_ENG
-	cost_multiplier_per_dept = list(ACCOUNT_ENG = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_ENG = 0.35)
 
 /obj/item/vending_refill/wardrobe/atmos_wardrobe
 	machine_name = "AtmosDrobe"
@@ -149,7 +149,7 @@
 					/obj/item/radio/headset/headset_cargo = 3)
 	refill_canister = /obj/item/vending_refill/wardrobe/cargo_wardrobe
 	payment_department = ACCOUNT_CAR
-	cost_multiplier_per_dept = list(ACCOUNT_CAR = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_CAR = 0.35)
 
 /obj/item/vending_refill/wardrobe/cargo_wardrobe
 	machine_name = "CargoDrobe"
@@ -173,7 +173,7 @@
 	contraband = list(/obj/item/clothing/suit/hooded/techpriest = 2)
 	refill_canister = /obj/item/vending_refill/wardrobe/robo_wardrobe
 	payment_department = ACCOUNT_SCI
-	cost_multiplier_per_dept = list(ACCOUNT_SCI = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_SCI = 0.35)
 
 /obj/item/vending_refill/wardrobe/robo_wardrobe
 	machine_name = "RoboDrobe"
@@ -199,7 +199,7 @@
 					/obj/item/clothing/mask/gas = 5)
 	refill_canister = /obj/item/vending_refill/wardrobe/science_wardrobe
 	payment_department = ACCOUNT_SCI
-	cost_multiplier_per_dept = list(ACCOUNT_SCI = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_SCI = 0.35)
 
 /obj/item/vending_refill/wardrobe/science_wardrobe
 	machine_name = "SciDrobe"
@@ -222,7 +222,7 @@
 					/obj/item/clothing/mask/bandana = 4)
 	refill_canister = /obj/item/vending_refill/wardrobe/hydro_wardrobe
 	payment_department = ACCOUNT_SRV
-	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0.35)
 
 /obj/item/vending_refill/wardrobe/hydro_wardrobe
 	machine_name = "HyDrobe"
@@ -248,7 +248,7 @@
 					/obj/item/storage/bag/books = 1)
 	refill_canister = /obj/item/vending_refill/wardrobe/curator_wardrobe
 	payment_department = ACCOUNT_CIV
-	cost_multiplier_per_dept = list(ACCOUNT_CIV = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_CIV = 0.35)
 
 /obj/item/vending_refill/wardrobe/curator_wardrobe
 	machine_name = "CuraDrobe"
@@ -278,7 +278,7 @@
 					/obj/item/storage/belt/bandolier = 1)
 	refill_canister = /obj/item/vending_refill/wardrobe/bar_wardrobe
 	payment_department = ACCOUNT_SRV
-	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0.35)
 
 /obj/item/vending_refill/wardrobe/bar_wardrobe
 	machine_name = "BarDrobe"
@@ -305,7 +305,7 @@
 					/obj/item/book/granter/crafting_recipe/coldcooking = 2)
 	refill_canister = /obj/item/vending_refill/wardrobe/chef_wardrobe
 	payment_department = ACCOUNT_SRV
-	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0.35)
 
 /obj/item/vending_refill/wardrobe/chef_wardrobe
 	machine_name = "ChefDrobe"
@@ -338,7 +338,7 @@
 					/obj/item/stack/cable_coil/random = 4)
 	refill_canister = /obj/item/vending_refill/wardrobe/jani_wardrobe
 	payment_department = ACCOUNT_SRV
-	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0.35)
 
 /obj/item/vending_refill/wardrobe/jani_wardrobe
 	machine_name = "JaniDrobe"
@@ -371,7 +371,7 @@
 					/obj/item/clothing/accessory/lawyers_badge = 3)
 	refill_canister = /obj/item/vending_refill/wardrobe/law_wardrobe
 	payment_department = ACCOUNT_CIV
-	cost_multiplier_per_dept = list(ACCOUNT_CIV = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_CIV = 0.35)
 
 /obj/item/vending_refill/wardrobe/law_wardrobe
 	machine_name = "LawDrobe"
@@ -399,7 +399,7 @@
 					/obj/item/toy/plush/narplush = 1)
 	refill_canister = /obj/item/vending_refill/wardrobe/chap_wardrobe
 	payment_department = ACCOUNT_CIV
-	cost_multiplier_per_dept = list(ACCOUNT_CIV = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_CIV = 0.35)
 
 /obj/item/vending_refill/wardrobe/chap_wardrobe
 	machine_name = "ChapDrobe"
@@ -424,7 +424,7 @@
 					/obj/item/fermichem/pHbooklet = 3)//pH indicator)
 	refill_canister = /obj/item/vending_refill/wardrobe/chem_wardrobe
 	payment_department = ACCOUNT_MED
-	cost_multiplier_per_dept = list(ACCOUNT_MED = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_MED = 0.35)
 
 /obj/item/vending_refill/wardrobe/chem_wardrobe
 	machine_name = "ChemDrobe"
@@ -444,7 +444,7 @@
 					/obj/item/storage/backpack/satchel/gen = 3)
 	refill_canister = /obj/item/vending_refill/wardrobe/gene_wardrobe
 	payment_department = ACCOUNT_MED
-	cost_multiplier_per_dept = list(ACCOUNT_MED = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_MED = 0.35)
 
 /obj/item/vending_refill/wardrobe/gene_wardrobe
 	machine_name = "GeneDrobe"
@@ -468,7 +468,7 @@
 					// SKYRAT EDIT CLOSE
 	refill_canister = /obj/item/vending_refill/wardrobe/viro_wardrobe
 	payment_department = ACCOUNT_MED
-	cost_multiplier_per_dept = list(ACCOUNT_MED = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_MED = 0.35)
 
 /obj/item/vending_refill/wardrobe/viro_wardrobe
 	machine_name = "ViroDrobe"
@@ -506,7 +506,7 @@
 
 /obj/machinery/vending/wardrobe/cap_wardrobe/Initialize()
 	. = ..()
-	cost_multiplier_per_dept = list("[ACCESS_CAPTAIN]" = 0)
+	cost_multiplier_per_dept = list("[ACCESS_CAPTAIN]" = 0.5)
 
 /obj/item/vending_refill/wardrobe/cap_wardrobe
 	machine_name = "Captain's Wardrobe"

@@ -43,7 +43,7 @@
 	default_price = PRICE_ALMOST_CHEAP
 	extra_price = PRICE_EXPENSIVE
 	payment_department = ACCOUNT_SRV
-	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0.35)
 
 /obj/machinery/vending/boozeomat/pubby_maint //abandoned bar on Pubbystation
 	products = list(/obj/item/reagent_containers/food/drinks/bottle/whiskey = 1,
@@ -66,7 +66,7 @@
 
 /obj/machinery/vending/boozeomat/pubby_captain/Initialize()
 	. = ..()
-	cost_multiplier_per_dept = list("[ACCESS_CAPTAIN]" = 0)
+	cost_multiplier_per_dept = list("[ACCESS_CAPTAIN]" = 0.35)
 
 /obj/machinery/vending/boozeomat/syndicate_access
 	payment_department = NO_FREEBIES

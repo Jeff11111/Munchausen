@@ -15,7 +15,7 @@
 	default_price = PRICE_CHEAP
 	extra_price = PRICE_ALMOST_EXPENSIVE
 	payment_department = ACCOUNT_SRV
-	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0.35)
 
 /obj/item/vending_refill/games
 	machine_name = "\improper Good Clean Fun"

@@ -148,7 +148,7 @@
 
 /obj/machinery/vending/autodrobe/Initialize()
 	. = ..()
-	cost_multiplier_per_dept = list("[ACCESS_THEATRE]" = 0)
+	cost_multiplier_per_dept = list("[ACCESS_THEATRE]" = 0.35)
 
 /obj/machinery/vending/autodrobe/canLoadItem(obj/item/I,mob/user)
 	return (I.type in products)

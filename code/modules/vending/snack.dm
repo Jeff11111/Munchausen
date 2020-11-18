@@ -30,7 +30,7 @@
 	default_price = PRICE_REALLY_CHEAP
 	extra_price = PRICE_ALMOST_CHEAP
 	payment_department = ACCOUNT_SRV
-	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0.35)
 	input_display_header = "Chef's Food Selection"
 
 /obj/item/vending_refill/snack

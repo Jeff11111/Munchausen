@@ -33,7 +33,7 @@
 	default_price = PRICE_ALMOST_EXPENSIVE
 	extra_price = PRICE_ABOVE_EXPENSIVE
 	payment_department = ACCOUNT_ENG
-	cost_multiplier_per_dept = list(ACCOUNT_ENG = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_ENG = 0.35)
 
 /obj/item/vending_refill/engivend
 	icon_state = "refill_engi"

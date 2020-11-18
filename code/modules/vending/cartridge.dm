@@ -23,7 +23,7 @@
 
 /obj/machinery/vending/cart/Initialize()
 	. = ..()
-	cost_multiplier_per_dept = list("[ACCESS_CHANGE_IDS]" = 0)
+	cost_multiplier_per_dept = list("[ACCESS_CHANGE_IDS]" = 0.35)
 
 /obj/item/vending_refill/cart
 	icon_state = "refill_pda"

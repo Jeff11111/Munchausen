@@ -25,7 +25,7 @@
 	default_price = PRICE_REALLY_CHEAP
 	extra_price = PRICE_EXPENSIVE
 	payment_department = ACCOUNT_ENG
-	cost_multiplier_per_dept = list(ACCOUNT_ENG = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_ENG = 0.5)
 
 /obj/item/vending_refill/tool
 	icon_state = "refill_engi"

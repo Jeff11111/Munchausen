@@ -14,4 +14,4 @@
 	default_price = PRICE_EXPENSIVE
 	extra_price = PRICE_REALLY_EXPENSIVE
 	payment_department = ACCOUNT_SCI
-	cost_multiplier_per_dept = list(ACCOUNT_SCI = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_SCI = 0.35)

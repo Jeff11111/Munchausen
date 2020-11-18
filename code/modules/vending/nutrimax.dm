@@ -22,7 +22,7 @@
 	default_price = PRICE_REALLY_CHEAP
 	extra_price = PRICE_CHEAP
 	payment_department = ACCOUNT_SRV
-	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0.35)
 
 /obj/item/vending_refill/hydronutrients
 	icon_state = "refill_hydro"

@@ -62,7 +62,7 @@
 	default_price = PRICE_ALMOST_CHEAP
 	extra_price = PRICE_NORMAL
 	payment_department = ACCOUNT_SRV
-	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_SRV = 0.35)
 
 /obj/item/vending_refill/hydroseeds
 	icon_state = "refill_hydro"

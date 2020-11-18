@@ -31,4 +31,4 @@
 	default_price = PRICE_NORMAL
 	extra_price = PRICE_NORMAL
 	payment_department = ACCOUNT_ENG
-	cost_multiplier_per_dept = list(ACCOUNT_ENG = 0)
+	cost_multiplier_per_dept = list(ACCOUNT_ENG = 0.35)
