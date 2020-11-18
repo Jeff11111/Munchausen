@@ -15,8 +15,11 @@
 		var/static/datum/config_entry/number/movedelay/sprint_speed_increase/SSI
 		if(!SSI)
 			SSI = CONFIG_GET_ENTRY(number/movedelay/sprint_speed_increase)
-		. -= SSI.config_entry_value
-	if (m_intent == MOVE_INTENT_WALK && HAS_TRAIT(src, TRAIT_SPEEDY_STEP))
+		if(!mind)
+			. -= SSI.config_entry_value
+		else
+			. -= (SSI.config_entry_value * (GET_STAT_LEVEL(src, dex)/(MAX_STAT/2)))
+	if(m_intent == MOVE_INTENT_WALK && HAS_TRAIT(src, TRAIT_SPEEDY_STEP))
 		. -= 1.5
 
 /mob/living/carbon/human/slip(knockdown_amount, obj/O, lube)
