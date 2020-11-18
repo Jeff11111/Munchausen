@@ -12,4 +12,4 @@
 /obj/screen/fullscreen/noise/update_for_view(client_view)
 	. = ..()
 	poggers = rand(1,9)
-	icon_state = "[poggers]"
+	icon_state = "[poggers]j"
