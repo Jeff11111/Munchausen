@@ -303,7 +303,7 @@
 	if(!traitor_class)
 		traitor_class = GLOB.traitor_classes[TRAITOR_HUMAN]
 	var/mob/living/carbon/human/traitor_mob = current
-	if (!istype(traitor_mob))
+	if(!istype(traitor_mob))
 		return
 
 	var/list/all_contents = traitor_mob.GetAllContents()
@@ -311,9 +311,9 @@
 	var/obj/item/radio/R = locate() in all_contents
 	var/obj/item/pen/P
 
-	if (PDA) // Prioritize PDA pen, otherwise the pocket protector pens will be chosen, which causes numerous ahelps about missing uplink
+	if(PDA) // Prioritize PDA pen, otherwise the pocket protector pens will be chosen, which causes numerous ahelps about missing uplink
 		P = locate() in PDA
-	if (!P) // If we couldn't find a pen in the PDA, or we didn't even have a PDA, do it the old way
+	if(!P) // If we couldn't find a pen in the PDA, or we didn't even have a PDA, do it the old way
 		P = locate() in all_contents
 		if(!P) // I do not have a pen.
 			var/obj/item/pen/inowhaveapen
@@ -1548,7 +1548,7 @@ GLOBAL_LIST(objective_choices)
 
 /datum/mind/proc/announce_objectives()
 	var/obj_count = 1
-	to_chat(current, "<span class='notice'>Your current objectives:</span>")
+	to_chat(current, "<span class='notice'>My current objectives:</span>")
 	for(var/objective in get_all_objectives())
 		var/datum/objective/O = objective
 		to_chat(current, "<B>[O.flavor] #[obj_count]</B>: [O.explanation_text]")

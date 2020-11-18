@@ -102,8 +102,6 @@
 	sleep(2 SECONDS)
 	owner.current.playsound_local(owner.current, 'modular_skyrat/sound/misc/villain.ogg', 100, 0)
 	traitor_kind.greet(src)
-	if(should_give_codewords)
-		give_codewords()
 
 /datum/antagonist/traitor/proc/update_traitor_icons_added(datum/mind/traitor_mind)
 	var/datum/atom_hud/antag/traitorhud = GLOB.huds[ANTAG_HUD_TRAITOR]
@@ -118,7 +116,7 @@
 /datum/antagonist/traitor/proc/finalize_traitor()
 	if(traitor_kind.finalize_traitor(src))
 		if(should_equip)
-			equip(silent)
+			equip(TRUE)
 
 /datum/antagonist/traitor/antag_panel_objectives()
 	. += "<i><b>Traitor class:</b></i> <a href='?src=[REF(owner)];traitor_class=1;target_antag=[REF(src)]'>[traitor_kind.employer]</a><br>"
@@ -165,8 +163,8 @@
 	dat += "<B>Code Response</B>: <span class='red'>[responses]</span>"
 	to_chat(traitor_mob, dat)
 
-	antag_memory += "<b>Code Phrase</b>: <span class='blue'>[phrases]</span><br>"
-	antag_memory += "<b>Code Response</b>: <span class='red'>[responses]</span><br>"
+	antag_memory |= "<b>Code Phrase</b>: <span class='blue'>[phrases]</span><br>"
+	antag_memory |= "<b>Code Response</b>: <span class='red'>[responses]</span><br>"
 
 /datum/antagonist/traitor/proc/add_law_zero()
 	var/mob/living/silicon/ai/killer = owner.current
@@ -179,7 +177,7 @@
 	to_chat(killer, "Your radio has been upgraded! Use :t to speak on an encrypted channel with Syndicate Agents!")
 	killer.add_malf_picker()
 
-/datum/antagonist/traitor/proc/equip(var/silent = FALSE)
+/datum/antagonist/traitor/proc/equip(silent = TRUE)
 	owner.equip_traitor(traitor_kind, silent, src)
 
 /datum/antagonist/traitor/proc/assign_exchange_role()
@@ -217,7 +215,7 @@
 
 	var/where = "At your feet"
 	var/equipped_slot = mob.equip_in_one_of_slots(folder, slots)
-	if (equipped_slot)
+	if(equipped_slot)
 		where = "In your [equipped_slot]"
 	to_chat(mob, "<BR><BR><span class='info'>[where] is a folder containing <b>secret documents</b> that another Syndicate group wants. We have set up a meeting with one of their agents on station to make an exchange. Exercise extreme caution as they cannot be trusted and may be hostile.</span><BR>")
 

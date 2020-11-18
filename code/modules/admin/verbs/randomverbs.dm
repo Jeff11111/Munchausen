@@ -455,7 +455,6 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		SSjob.EquipRank(new_character, new_character.mind.assigned_role, 1)
 		traitordatum.equip()
 
-
 	switch(new_character.mind.special_role)
 		if(ROLE_WIZARD)
 			new_character.forceMove(pick(GLOB.wizardstart))

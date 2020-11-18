@@ -50,6 +50,10 @@
 				comicao_trading.locked = FALSE
 				playsound(src, 'modular_skyrat/sound/machinery/atmbeep1.ogg', 50)
 				to_chat(user, "<span class='danger'><b>##&!&$% WELCOME, AGENT [uppertext(agent)] $$#@!%</b></span>")
+				user.mind?.announce_objectives()
+				var/datum/antagonist/traitor/bingus = M.mind.has_antag_datum(/datum/antagonist/traitor)
+				if(bingus.should_give_codewords)
+					bingus.give_codewords()
 	return TRUE
 
 /obj/machinery/atm/attackby(obj/item/W, mob/user, params)
