@@ -6,11 +6,10 @@
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	layer = HUD_LAYER-1
 	plane = HUD_PLANE-1
-	alpha = 220
 	var/list/mutable_appearance/noise_overlays = list()
+	var/poggers = 1
 
 /obj/screen/fullscreen/noise/update_for_view(client_view)
 	. = ..()
-	var/noise = rand(1,9)
-	icon_state = "[noise]j"
-	alpha = 220
+	poggers = rand(1,9)
+	icon_state = "[poggers]"

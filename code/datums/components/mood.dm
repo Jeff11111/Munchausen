@@ -147,7 +147,6 @@
 
 /datum/component/mood/proc/update_mood_icon()
 	var/mob/living/owner = parent
-	//skyrat edit - screwy mood
 	if(!HAS_TRAIT(owner, TRAIT_SCREWY_MOOD))
 		if(owner.client && owner.hud_used)
 			if(is_dreamer(owner))
@@ -158,9 +157,17 @@
 				screen_obj.icon_state = "mood_entrance"
 			else
 				screen_obj.icon_state = "mood[mood_level]"
+			var/motherfucker = ""
+			switch(CEILING(mood_level/9, 1))
+				if(2)
+					motherfucker = "j"
+				if(3)
+					motherfucker = "h"
+			owner.hud_used.noise_filter?.icon_state = "[owner.hud_used.noise_filter.poggers][motherfucker]"
 	else
-		screen_obj.icon_state = "mood5"
-	//
+		if(owner.client && owner.hud_used)
+			screen_obj.icon_state = "mood5"
+			owner.hud_used.noise_filter?.icon_state = "[owner.hud_used.noise_filter.poggers]j"
 
 /datum/component/mood/process() //Called on SSobj process
 	if(QDELETED(parent)) // workaround to an obnoxious sneaky periodical runtime.
