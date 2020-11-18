@@ -974,18 +974,18 @@
 				isdisabled += " and "
 		
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF))
-			to_chat(src, "\t <span class='[no_damage ? "notice" : "warning"]'>Your [LB.name][isdisabled][self_aware ? " has " : " is "][status].</span>")
+			to_chat(src, "\t <span class='[no_damage ? "notice" : "warning"]'>My [LB.name][isdisabled][self_aware ? " has " : " is "][status].</span>")
 		else
-			to_chat(src, "\t <span class='notice'>Your [LB.name] is OK.</span>")
+			to_chat(src, "\t <span class='notice'>My [LB.name] is OK.</span>")
 		
 		if(LB.body_zone == BODY_ZONE_HEAD)
 			var/obj/item/bodypart/head/HD = LB
 			if(HD.tapered)
 				if(!wear_mask)
-					to_chat(src, "\t <span class='warning'>Your [HD.name] has \a <b><a href='?src=[REF(HD)];tape=[HD.tapered];'>[HD.tapered]</a></b> on it's mouth!</span>")
+					to_chat(src, "\t <span class='warning'>My [HD.name] has \a <b><a href='?src=[REF(HD)];tape=[HD.tapered];'>[HD.tapered]</a></b> on it's mouth!</span>")
 		
 		if(LB.current_gauze)
-			to_chat(src, "\t <span class='notice'>Your [LB.name] is wrapped in <a href='?src=[REF(LB)];gauze=1;'>[LB.current_gauze.name]</a>.</span>")
+			to_chat(src, "\t <span class='notice'>My [LB.name] is wrapped in <a href='?src=[REF(LB)];gauze=1;'>[LB.current_gauze.name]</a>.</span>")
 		
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF))
 			for(var/thing in LB.wounds)
@@ -998,13 +998,15 @@
 					woundmsg = "[lowertext(W.name)]"
 				switch(W.severity)
 					if(WOUND_SEVERITY_TRIVIAL)
-						msg = "\t <span class='danger'>Your [LB.name] is suffering [W.a_or_from] [woundmsg].</span>"
+						msg = "\t <span class='danger'>My [LB.name] is suffering [W.a_or_from] [woundmsg].</span>"
 					if(WOUND_SEVERITY_MODERATE)
-						msg = "\t <span class='warning'>Your [LB.name] is suffering [W.a_or_from] [woundmsg]!</span>"
+						msg = "\t <span class='warning'>My [LB.name] is suffering [W.a_or_from] [woundmsg]!</span>"
 					if(WOUND_SEVERITY_SEVERE)
-						msg = "\t <span class='warning'><b>Your [LB.name] is suffering [W.a_or_from] [woundmsg]!</b></span>"
+						msg = "\t <span class='warning'><b>My [LB.name] is suffering [W.a_or_from] [woundmsg]!</b></span>"
 					if(WOUND_SEVERITY_CRITICAL)
-						msg = "\t <span class='warning'><b>Your [LB.name] is suffering [W.a_or_from] [woundmsg]!!</b></span>"
+						msg = "\t <span class='warning'><b>My [LB.name] is suffering [W.a_or_from] [woundmsg]!!</b></span>"
+					else
+						msg = "\t <span class='warning'><b>My [LB.name] is suffering [W.a_or_from] [woundmsg]!!</b></span>"
 				to_chat(src, msg)
 		
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF))
@@ -1016,9 +1018,9 @@
 
 	for(var/t in missing)
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF))
-			to_chat(src, "\t <span class='boldannounce'>Your [parse_zone(t)] is missing!</span>")
+			to_chat(src, "\t <span class='boldannounce'>My [parse_zone(t)] is missing!</span>")
 		else
-			to_chat(src, "\t <span class='notice'>Your [parse_zone(t)] is OK.</span>")
+			to_chat(src, "\t <span class='notice'>My [parse_zone(t)] is OK.</span>")
 
 	if(is_bleeding() && !HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF))
 		var/list/obj/item/bodypart/bleeding_limbs = list()
@@ -1028,7 +1030,7 @@
 				bleeding_limbs += BP
 
 		var/num_bleeds = LAZYLEN(bleeding_limbs)
-		var/bleed_text = "<span class='danger'>You are bleeding from your"
+		var/bleed_text = "<span class='danger'>I am bleeding from my"
 		switch(num_bleeds)
 			if(1 to 2)
 				bleed_text += " [bleeding_limbs[1].name][num_bleeds == 2 ? " and [bleeding_limbs[2].name]" : ""]"
@@ -1042,56 +1044,56 @@
 	
 	if(getStaminaLoss() && !HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF))
 		if(getStaminaLoss() > 30)
-			to_chat(src, "<span class='info'>You're completely exhausted.</span>")
+			to_chat(src, "<span class='info'>I'm completely exhausted.</span>")
 		else
-			to_chat(src, "<span class='info'>You feel fatigued.</span>")
+			to_chat(src, "<span class='info'>I feel fatigued.</span>")
 	
 	if(HAS_TRAIT(src, TRAIT_SELF_AWARE) && !HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF))
 		if(toxloss)
 			if(toxloss > 10)
-				to_chat(src, "<span class='danger'>You feel sick.</span>")
+				to_chat(src, "<span class='danger'>I feel sick.</span>")
 			else if(toxloss > 20)
-				to_chat(src, "<span class='danger'>You feel nauseated.</span>")
+				to_chat(src, "<span class='danger'>I feel nauseated.</span>")
 			else if(toxloss > 40)
-				to_chat(src, "<span class='danger'>You feel very unwell!</span>")
+				to_chat(src, "<span class='danger'>I feel very unwell!</span>")
 		if(oxyloss)
 			if(oxyloss > 10)
-				to_chat(src, "<span class='danger'>You feel lightheaded.</span>")
+				to_chat(src, "<span class='danger'>I feel lightheaded.</span>")
 			else if(oxyloss > 20)
-				to_chat(src, "<span class='danger'>Your thinking is clouded and distant.</span>")
+				to_chat(src, "<span class='danger'>My thinking is clouded and distant.</span>")
 			else if(oxyloss > 30)
-				to_chat(src, "<span class='danger'>You're choking!</span>")
+				to_chat(src, "<span class='danger'>I'm choking!</span>")
 
 	if(!HAS_TRAIT(src, TRAIT_NOHUNGER))
 		switch(nutrition)
 			if(NUTRITION_LEVEL_FULL to INFINITY)
-				to_chat(src, "<span class='info'>You're completely stuffed!</span>")
+				to_chat(src, "<span class='info'>I'm completely stuffed!</span>")
 			if(NUTRITION_LEVEL_WELL_FED to NUTRITION_LEVEL_FULL)
-				to_chat(src, "<span class='info'>You're well fed!</span>")
+				to_chat(src, "<span class='info'>I'm well fed!</span>")
 			if(NUTRITION_LEVEL_FED to NUTRITION_LEVEL_WELL_FED)
-				to_chat(src, "<span class='info'>You're not hungry.</span>")
+				to_chat(src, "<span class='info'>I'm not hungry.</span>")
 			if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
-				to_chat(src, "<span class='info'>You could use a bite to eat.</span>")
+				to_chat(src, "<span class='info'>I could use a bite to eat.</span>")
 			if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
-				to_chat(src, "<span class='info'>You feel quite hungry.</span>")
+				to_chat(src, "<span class='info'>I feel quite hungry.</span>")
 			if(0 to NUTRITION_LEVEL_STARVING)
-				to_chat(src, "<span class='danger'>You're starving!</span>")
+				to_chat(src, "<span class='danger'>I'm starving!</span>")
 
 	//warter
 	if(!HAS_TRAIT(src, TRAIT_NOHUNGER))
 		switch(hydration)
 			if(HYDRATION_LEVEL_FULL to INFINITY)
-				to_chat(src, "<span class='info'>You're completely full!</span>")
+				to_chat(src, "<span class='info'>I'm completely full!</span>")
 			if(HYDRATION_LEVEL_WELL_HYDRATED to HYDRATION_LEVEL_FULL)
-				to_chat(src, "<span class='info'>You're well hydrated!</span>")
+				to_chat(src, "<span class='info'>I'm well hydrated!</span>")
 			if(HYDRATION_LEVEL_HYDRATED to HYDRATION_LEVEL_WELL_HYDRATED)
-				to_chat(src, "<span class='info'>You're not thirsty.</span>")
+				to_chat(src, "<span class='info'>I'm not thirsty.</span>")
 			if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_HYDRATED)
-				to_chat(src, "<span class='info'>You could use a drink.</span>")
+				to_chat(src, "<span class='info'>I could use a drink.</span>")
 			if(HYDRATION_LEVEL_DEHYDRATED to HYDRATION_LEVEL_THIRSTY)
-				to_chat(src, "<span class='info'>You feel quite thirsty.</span>")
+				to_chat(src, "<span class='info'>I feel quite thirsty.</span>")
 			if(0 to HYDRATION_LEVEL_DEHYDRATED)
-				to_chat(src, "<span class='danger'>You're dehydrated!</span>")
+				to_chat(src, "<span class='danger'>I'm dehydrated!</span>")
 
 	//Compiles then shows the list of damaged organs and broken organs
 	var/list/broken = list()

@@ -625,11 +625,8 @@
 					if(traitstring)
 						. += "<span class='info'>Detected physiological traits:\n[traitstring]</span>"
 
-
-
 				if(istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(CIH, /obj/item/organ/cyberimp/eyes/hud/security))
 					if(!user.stat && user != src)
-					//|| !user.canmove || user.restrained()) Fluff: Sechuds have eye-tracking technology and sets 'arrest' to people that the wearer looks and blinks at.
 						var/criminal = "None"
 
 						R = find_record("name", perpname, GLOB.data_core.security)
@@ -668,8 +665,8 @@
 					continue
 				line += "<a href='?src=[REF(src)];exploitable_info=1'>\[Exploitable Info\]</a>"
 				break
-
-		. += line.Join()
+		if(length(line))
+			. += line.Join("")
 	//END OF SKYRAT EDIT
 	. += "*---------*</span>"
 
