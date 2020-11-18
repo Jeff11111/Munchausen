@@ -11,7 +11,7 @@
 
 //port tg's armor energy resists, adds reskins to various armors
 /obj/item/clothing/head/helmet
-	can_flashlight = 0 //for the sake of reskins
+	can_flashlight = 1
 	armor = list("melee" = 40, "bullet" = 30, "laser" = 30,"energy" = 40, "bomb" = 25, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 15)
 
 /obj/item/clothing/head/helmet/sec
@@ -20,6 +20,20 @@
 	anthro_mob_worn_overlay = 'modular_skyrat/icons/mob/clothing/enforcer_muzzled.dmi'
 	icon_state = "ehelmet"
 	mutantrace_variation = STYLE_MUZZLE
+	flags_inv = HIDEEYES
+	flash_protect = 1
+
+/obj/item/clothing/head/helmet/sec/equipped(mob/living/carbon/human/user, slot)
+	..()
+	if(slot == SLOT_HEAD)
+		var/datum/atom_hud/DHUD = GLOB.huds[DATA_HUD_SECURITY_ADVANCED]
+		DHUD.add_hud_to(user)
+
+/obj/item/clothing/head/helmet/sec/dropped(mob/living/carbon/human/user)
+	..()
+	if(user.head == src)
+		var/datum/atom_hud/DHUD = GLOB.huds[DATA_HUD_SECURITY_ADVANCED]
+		DHUD.remove_hud_from(user)
 
 /obj/item/clothing/head/helmet/alt
 	can_flashlight = 1
@@ -94,7 +108,13 @@
 	armor = list("melee" = 25, "bullet" = 5, "laser" = 25, "energy" = 35, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 30, "acid" = 50, "wound" = 5)
 
 /obj/item/clothing/head/HoS
-	armor = list("melee" = 40, "bullet" = 30, "laser" = 25, "energy" = 35, "bomb" = 25, "bio" = 10, "rad" = 0, "fire" = 50, "acid" = 60, "wound" = 25)
+	armor = list("melee" = 40, "bullet" = 30, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 10, "rad" = 0, "fire" = 50, "acid" = 60, "wound" = 25)
+
+/obj/item/clothing/head/helmet/sec/HoS
+	name = "chief enforcer's helmet"
+	desc = "A slightly updated variant of the regular security helmet featuring... Suprisingly little difference."
+	armor = list("melee" = 40, "bullet" = 30, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 10, "rad" = 0, "fire" = 50, "acid" = 60, "wound" = 25)
+
 /obj/item/clothing/head/HoS/beret/syndicate
 	unique_reskin = null
 
@@ -181,7 +201,7 @@
 	armor = list("melee" = 30, "bullet" = 5, "laser" = 10, "energy" = 20, "bomb" = 100, "bio" = 100, "rad" = 60, "fire" = 60, "acid" = 80, "wound" = 12)
 
 /obj/item/clothing/head/helmet/space/hardsuit/security
-	armor = list("melee" = 35, "bullet" = 15, "laser" = 30,"energy" = 40, "bomb" = 10, "bio" = 100, "rad" = 50, "fire" = 75, "acid" = 75, "wound" = 20)
+	armor = list("melee" = 35, "bullet" = 30, "laser" = 30,"energy" = 40, "bomb" = 10, "bio" = 100, "rad" = 50, "fire" = 75, "acid" = 75, "wound" = 20)
 	icon = 'modular_skyrat/icons/obj/clothing/hats.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/head.dmi'
 	anthro_mob_worn_overlay = 'modular_skyrat/icons/mob/clothing/head_muzzled.dmi'
@@ -189,18 +209,18 @@
 	hardsuit_type = "assprotection"
 
 /obj/item/clothing/suit/space/hardsuit/security
-	armor = list("melee" = 35, "bullet" = 15, "laser" = 30,"energy" = 40, "bomb" = 10, "bio" = 100, "rad" = 50, "fire" = 75, "acid" = 75, "wound" = 20)
+	armor = list("melee" = 35, "bullet" = 30, "laser" = 30,"energy" = 40, "bomb" = 10, "bio" = 100, "rad" = 50, "fire" = 75, "acid" = 75, "wound" = 20)
 	icon = 'modular_skyrat/icons/obj/clothing/suits.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/suit.dmi'
 	anthro_mob_worn_overlay = 'modular_skyrat/icons/mob/clothing/suit_digi.dmi'
 	icon_state = "hardsuit-assprotection"
 
 /obj/item/clothing/head/helmet/space/hardsuit/security/hos
-	armor = list("melee" = 45, "bullet" = 35, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 100, "rad" = 50, "fire" = 95, "acid" = 95, "wound" = 25)
+	armor = list("melee" = 45, "bullet" = 30, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 100, "rad" = 50, "fire" = 95, "acid" = 95, "wound" = 25)
 	unique_reskin = null
 
 /obj/item/clothing/suit/space/hardsuit/security/hos
-	armor = list("melee" = 45, "bullet" = 35, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 100, "rad" = 50, "fire" = 95, "acid" = 95, "wound" = 25)
+	armor = list("melee" = 45, "bullet" = 30, "laser" = 30, "energy" = 40, "bomb" = 25, "bio" = 100, "rad" = 50, "fire" = 95, "acid" = 95, "wound" = 25)
 	unique_reskin = null
 
 /obj/item/clothing/suit/space/swat
@@ -351,6 +371,47 @@
 
 /obj/item/storage/belt/military
 	desc = "A set of tactical webbing worn by militaries everywhere."
+
+/obj/item/storage/belt/military/ComponentInitialize()
+	. = ..()
+	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
+	STR.max_w_class = WEIGHT_CLASS_NORMAL
+	STR.can_hold = typecacheof(list(
+		/obj/item/crowbar,
+		/obj/item/screwdriver,
+		/obj/item/weldingtool,
+		/obj/item/wirecutters,
+		/obj/item/wrench,
+		/obj/item/multitool,
+		/obj/item/flashlight,
+		/obj/item/stack/cable_coil,
+		/obj/item/analyzer,
+		/obj/item/extinguisher/mini,
+		/obj/item/radio,
+		/obj/item/clothing/gloves,
+		/obj/item/reagent_containers/hypospray,
+		/obj/item/gps,
+		/obj/item/melee/baton,
+		/obj/item/melee/classic_baton,
+		/obj/item/grenade,
+		/obj/item/reagent_containers/spray/pepper,
+		/obj/item/restraints/handcuffs,
+		/obj/item/assembly/flash/handheld,
+		/obj/item/clothing/glasses,
+		/obj/item/ammo_casing/shotgun,
+		/obj/item/ammo_box,
+		/obj/item/reagent_containers/food/snacks/donut,
+		/obj/item/kitchen/knife,
+		/obj/item/melee/classic_baton/telescopic,
+		/obj/item/clothing/gloves,
+		/obj/item/restraints/legcuffs/bola,
+		/obj/item/reagent_containers/pill,
+		/obj/item/storage/pill_bottle,
+		/obj/item/reagent_containers/syringe,
+		/obj/item/reagent_containers/medspray,
+		/obj/item/stack/medical,
+		/obj/item/pinpointer/crew
+		))
 
 /obj/item/clothing/head/helmet/roman
 	unique_reskin = null
