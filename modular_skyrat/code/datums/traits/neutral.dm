@@ -118,6 +118,7 @@
 	name = "French Clown"
 	desc = "Those frivolous jesters know not of true entertainment! You are the superior french man - A mime."
 	job_whitelist = list("Clown")
+	medical_condition = FALSE
 
 /datum/quirk/french/on_spawn()
 	. = ..()
@@ -132,6 +133,7 @@
 /datum/quirk/psycho
 	name = "Paranoid Schizophrenic"
 	desc = "The crew is out to get you. No... You won't let them do it! They won't get you!"
+	medical_condition = FALSE
 
 /datum/quirk/psycho/on_spawn()
 	. = ..()

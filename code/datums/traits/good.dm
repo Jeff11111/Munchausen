@@ -44,6 +44,7 @@
 	gain_text = "<span class='notice'>You feel in tune with those around you.</span>"
 	lose_text = "<span class='danger'>You feel isolated from others.</span>"
 	medical_record_text = "Patient is highly perceptive of and sensitive to social cues, or may possibly have ESP. Further testing needed."
+	medical_condition = FALSE
 
 /datum/quirk/freerunning
 	name = "Freerunning"
@@ -53,6 +54,7 @@
 	gain_text = "<span class='notice'>You feel lithe on your feet!</span>"
 	lose_text = "<span class='danger'>You feel clumsy again.</span>"
 	medical_record_text = "Patient scored highly on cardio tests."
+	medical_condition = FALSE
 
 /datum/quirk/friendly
 	name = "Friendly"
@@ -63,6 +65,7 @@
 	lose_text = "<span class='danger'>You no longer feel compelled to hug others.</span>"
 	mood_quirk = TRUE
 	medical_record_text = "Patient demonstrates low-inhibitions for physical contact and well-developed arms. Requesting another doctor take over this case."
+	medical_condition = FALSE
 
 /datum/quirk/jolly
 	name = "Jolly"
@@ -71,6 +74,7 @@
 	mob_trait = TRAIT_JOLLY
 	mood_quirk = TRUE
 	medical_record_text = "Patient demonstrates constant euthymia irregular for environment. It's a bit much, to be honest."
+	medical_condition = FALSE
 
 /datum/quirk/jolly/on_process()
 	if(prob(0.05))
@@ -84,6 +88,7 @@
 	gain_text = "<span class='notice'>You walk with a little more litheness.</span>"
 	lose_text = "<span class='danger'>You start tromping around like a barbarian.</span>"
 	medical_record_text = "Patient's dexterity belies a strong capacity for stealth."
+	medical_condition = FALSE
 
 /datum/quirk/quick_step
 	name = "Quick Step"
@@ -93,6 +98,7 @@
 	gain_text = "<span class='notice'>You feel determined. No time to lose.</span>"
 	lose_text = "<span class='danger'>You feel less determined. What's the rush, man?</span>"
 	medical_record_text = "Patient scored highly on racewalking tests."
+	medical_condition = FALSE
 
 /datum/quirk/musician
 	name = "Musician"
@@ -102,6 +108,7 @@
 	gain_text = "<span class='notice'>You know everything about musical instruments.</span>"
 	lose_text = "<span class='danger'>You forget how musical instruments work.</span>"
 	medical_record_text = "Patient brain scans show a highly-developed auditory pathway."
+	medical_condition = FALSE
 
 /datum/quirk/musician/on_spawn()
 	var/mob/living/carbon/human/H = quirk_holder
@@ -121,6 +128,7 @@
 	gain_text = "<span class='notice'>You know everything about photography.</span>"
 	lose_text = "<span class='danger'>You forget how photo cameras work.</span>"
 	medical_record_text = "Patient mentions photography as a stress-relieving hobby."
+	medical_condition = FALSE
 
 /datum/quirk/photographer/on_spawn()
 	var/mob/living/carbon/human/H = quirk_holder
@@ -135,6 +143,7 @@
 	value = 2
 	mob_trait = TRAIT_SELF_AWARE
 	medical_record_text = "Patient demonstrates an uncanny knack for self-diagnosis."
+	medical_condition = FALSE
 
 /datum/quirk/skittish
 	name = "Skittish"
@@ -142,6 +151,7 @@
 	value = 2
 	mob_trait = TRAIT_SKITTISH
 	medical_record_text = "Patient demonstrates a high aversion to danger and has described hiding in containers out of fear."
+	medical_condition = FALSE
 
 /datum/quirk/spiritual
 	name = "Spiritual"
@@ -151,6 +161,7 @@
 	gain_text = "<span class='notice'>You feel a little more faithful to the gods today.</span>"
 	lose_text = "<span class='danger'>You feel less faithful in the gods.</span>"
 	medical_record_text = "Patient reports a belief in a higher power."
+	medical_condition = FALSE
 
 /datum/quirk/tagger
 	name = "Tagger"
@@ -160,6 +171,7 @@
 	gain_text = "<span class='notice'>You know how to tag walls efficiently.</span>"
 	lose_text = "<span class='danger'>You forget how to tag walls properly.</span>"
 	medical_record_text = "Patient was recently seen for possible paint huffing incident."
+	medical_condition = FALSE
 
 /datum/quirk/tagger/on_spawn()
 	var/mob/living/carbon/human/H = quirk_holder

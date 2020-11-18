@@ -1,3 +1,6 @@
+/datum/quirk/family_heirloom
+	medical_condition = FALSE
+
 /datum/quirk/family_heirloom/on_spawn()
 	var/mob/living/carbon/human/H = quirk_holder
 	var/obj/item/heirloom_type

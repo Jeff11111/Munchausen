@@ -2,6 +2,7 @@
 /datum/quirk/steel_fists
 	name = "Fists of steel"
 	desc = "<span class='info'>I am exceptionally good at unarmed combat. My punches hurt more.</span>"
+	medical_condition = FALSE
 
 /datum/quirk/steel_fists/on_spawn()
 	. = ..()
@@ -12,7 +13,7 @@
 			H.dna.species.punchdamagelow += 5
 			H.dna.species.punchstunthreshold += 5
 
-//pain man good
+//Pain man good
 //(turns masochist into a proper non-meme quirk)
 /datum/quirk/maso
 	name = "Masochism"
@@ -23,12 +24,17 @@
 /datum/quirk/painless
 	name = "The Painless"
 	desc = "<span class='info'>I can't feel pain at all, I am numb to everything.</span>"
-	mob_trait = TRAIT_NOPAIN
+
+/datum/quirk/painless/on_spawn()
+	. = ..()
+	ADD_TRAIT(quirk_holder, TRAIT_NOPAIN)
+	ADD_TRAIT(quirk_holder, TRAIT_SCREWY_CHECKSELF)
 
 //rich
 /datum/quirk/wealthy
 	name = "Wealthy"
 	desc = "<span class='info'>I was born to a wealthy family! I have savings to spare.</span>"
+	medical_condition = FALSE
 
 /datum/quirk/wealthy/on_spawn()
 	. = ..()
@@ -42,6 +48,7 @@
 	name = "Gun nut"
 	desc = "<span class='info'>I know how to operate and use firearms, but I have much to learn.</span>"
 	lose_text = "<span class='warning'>All I know of the fighting is lost to memories.</span>"
+	medical_condition = FALSE
 
 /datum/quirk/gun1/on_spawn()
 	. = ..()
@@ -63,6 +70,7 @@
 	name = "Ranger"
 	desc = "<span class='info'>I am skilled with firearms, able to use just about any like a natural.</span>"
 	lose_text = "<span class='warning'>All I know of the fighting is lost to memories.</span>"
+	medical_condition = FALSE
 
 /datum/quirk/gun2/on_spawn()
 	. = ..()
@@ -84,6 +92,7 @@
 	name = "Legendary Gunslinger"
 	desc = "<span class='boldnotice'>I am the shooter born in heaven.</span>"
 	lose_text = "<span class='warning'>All I know of the fighting is lost to memories.</span>"
+	medical_condition = FALSE
 
 /datum/quirk/gun3/on_spawn()
 	. = ..()
@@ -105,6 +114,7 @@
 	name = "Self defense trained"
 	desc = "<span class='info'>I am trained in self defense.</span>"
 	lose_text = "<span class='warning'>All I know of the fighting is lost to memories.</span>"
+	medical_condition = FALSE
 
 /datum/quirk/melee1/on_spawn()
 	. = ..()
@@ -126,6 +136,7 @@
 	name = "Martial artist"
 	desc = "<span class='info'>I am a skilled martial artist.</span>"
 	lose_text = "<span class='warning'>All I know of the fighting is lost to memories.</span>"
+	medical_condition = FALSE
 
 /datum/quirk/melee2/on_spawn()
 	. = ..()
@@ -147,6 +158,7 @@
 	name = "Blademaster"
 	desc = "<span class='boldnotice'>I am the legendary fighter of the Void.</span>"
 	lose_text = "<span class='warning'>All I know of the fighting is lost to memories.</span>"
+	medical_condition = FALSE
 
 /datum/quirk/melee3/on_spawn()
 	. = ..()
@@ -168,6 +180,7 @@
 	name = "Fit"
 	desc = "<span class='info'>I am fitter than most.</span>"
 	lose_text = "<span class='warning'>A shame, my energy has waned.</span>"
+	medical_condition = FALSE
 
 /datum/quirk/body2/on_spawn()
 	. = ..()	
@@ -193,6 +206,7 @@
 	name = "Bodybuilder"
 	desc = "<span class='info'>I am strong, my efforts have paid off in gains.</span>"
 	lose_text = "<span class='warning'>A shame, body is weak.</span>"
+	medical_condition = FALSE
 
 /datum/quirk/body2/on_spawn()
 	. = ..()
@@ -214,6 +228,7 @@
 	name = "Beast"
 	desc = "<span class='boldnotice'>I am the beast I worship.</span>"
 	lose_text = "<span class='warning'>Oh god! My body is weak!</span>"
+	medical_condition = FALSE
 
 /datum/quirk/body3/on_spawn()
 	. = ..()

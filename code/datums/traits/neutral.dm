@@ -18,6 +18,7 @@
 	lose_text = "<span class='notice'>Well who cares about deco anyways?</span>"
 	medical_record_text = "Patient seems to be rather stuck up."
 	mob_trait = TRAIT_SNOB
+	medical_condition = FALSE
 
 /datum/quirk/pineapple_liker
 	name = "Ananas Affinity"
@@ -26,6 +27,7 @@
 	gain_text = "<span class='notice'>You feel an intense craving for pineapple.</span>"
 	lose_text = "<span class='notice'>Your feelings towards pineapples seem to return to a lukewarm state.</span>"
 	medical_record_text = "Patient demonstrates a pathological love of pineapple."
+	medical_condition = FALSE
 
 /datum/quirk/pineapple_liker/add()
 	var/mob/living/carbon/human/H = quirk_holder
@@ -45,6 +47,7 @@
 	gain_text = "<span class='notice'>You find yourself pondering what kind of idiot actually enjoys pineapples...</span>"
 	lose_text = "<span class='notice'>Your feelings towards pineapples seem to return to a lukewarm state.</span>"
 	medical_record_text = "Patient is correct to think that pineapple is disgusting."
+	medical_condition = FALSE
 
 /datum/quirk/pineapple_hater/add()
 	var/mob/living/carbon/human/H = quirk_holder
