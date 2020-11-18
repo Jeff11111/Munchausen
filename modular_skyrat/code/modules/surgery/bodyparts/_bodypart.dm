@@ -1358,7 +1358,7 @@
 	if(!owner)
 		return FALSE
 	if(is_dead())
-		return BODYPART_DISABLED_PARALYSIS
+		return BODYPART_DISABLED_DEAD
 	if(HAS_TRAIT(owner, TRAIT_PARALYSIS) || (status & BODYPART_DEAD))
 		return BODYPART_DISABLED_PARALYSIS
 	for(var/i in wounds)
@@ -1367,7 +1367,7 @@
 			return BODYPART_DISABLED_WOUND
 	if(can_dismember() && !HAS_TRAIT(owner, TRAIT_NODISMEMBER))
 		. = disabled //inertia, to avoid limbs healing 0.1 damage and being re-enabled
-		if(parent_bodyzone && !istype(src, /obj/item/bodypart/groin))
+		if(parent_bodyzone && !istype(src, /obj/item/bodypart/groin) && !istype(src, /obj/item/bodypart/head))
 			if(!(owner.get_bodypart(parent_bodyzone)))
 				return BODYPART_DISABLED_DAMAGE
 			else

@@ -119,6 +119,7 @@
 #define BODYPART_DISABLED_WOUND 2
 #define BODYPART_DISABLED_PAIN 3
 #define BODYPART_DISABLED_PARALYSIS 4
+#define BODYPART_DISABLED_DEAD 5
 
 //Maximum number of brain traumas wounds to the head can cause
 #define TRAUMA_LIMIT_WOUND 2
