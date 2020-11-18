@@ -260,7 +260,8 @@ GLOBAL_LIST_EMPTY(crematoriums)
 				M.log_message("was cremated", LOG_ATTACK)
 
 			//Send back to lobby if they have a mind
-			if(M.mind)
+			//Fraggots do not get this luxury
+			if(M.mind && !M.fraggot)
 				//GET BACK HERE NIGGA YOU'RE GETTING
 				//JEWED
 				M.mind.grab_ghost(TRUE)
