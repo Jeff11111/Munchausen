@@ -26,7 +26,7 @@
 	for(var/mob/M in GLOB.player_list)
 		if(isnewplayer(M))
 			continue
-		if(iscarbon(M) && (world.time <= (C.timeofdeath + 1.5 MINUTES)))
+		if(iscarbon(M) && (world.time <= (M.timeofdeath + 1.5 MINUTES)))
 			continue
 		if(M.stat == DEAD || (M.client && M.client.holder && (M.client.prefs.chat_toggles & CHAT_DEAD))) //admins can toggle deadchat on and off. This is a proc in admin.dm and is only give to Administrators and above
 			to_chat(M, rendered)

@@ -506,7 +506,7 @@ GLOBAL_LIST_EMPTY(objectives)
 		if(chungus.mind && chungus.stat == DEAD)
 			christchurch_counter++
 	
-	if(christchurch_counter >= no_russian)
+	if(christchurch_counter >= christchurch_victims)
 		return TRUE
 	
 	return FALSE
