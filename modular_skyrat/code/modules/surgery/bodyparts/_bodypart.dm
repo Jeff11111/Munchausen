@@ -338,7 +338,7 @@
 	//Spread the infection to internal organs, child and parent bodyparts
 	if(germ_level >= INFECTION_LEVEL_TWO)
 		//Chance to cause minor toxin damage once every ~30 seconds
-		if(prob(3))
+		if(prob(3) && (owner?.stat != DEAD))
 			receive_damage(toxin = 1)
 		//Chance to cause pain, while also informign the owner
 		if(prob(8))
@@ -378,7 +378,8 @@
 			update_disabled()
 
 		germ_level++
-		receive_damage(toxin = 1)
+		if(owner?.stat != DEAD)
+			receive_damage(toxin = 1)
 
 //Rejection
 /obj/item/bodypart/proc/handle_rejection()
@@ -409,7 +410,8 @@
 						germ_level += rand(2,3)
 					if(REJECTION_LEVEL_4 to INFINITY)
 						germ_level += rand(3,5)
-						receive_damage(toxin = rand(1,2))
+						if(owner?.stat != DEAD)
+							receive_damage(toxin = rand(1,2))
 
 /obj/item/bodypart/Topic(href, href_list)
 	. = ..()

@@ -143,7 +143,7 @@
 	value = REAGENT_VALUE_COMMON
 
 /datum/reagent/medicine/cryoxadone/on_mob_life(mob/living/carbon/M)
-	var/power = (-0.00003 * (M.bodytemperature ** 2) + 3) * 3 //fuck it
+	var/power = (-0.00003 * (M.bodytemperature ** 2) + 3) * 6 //fuck it
 	if(M.bodytemperature < T0C)
 		M.adjustOxyLoss(-3 * power, 0)
 		M.adjustBruteLoss(-power, 0)
