@@ -1,7 +1,5 @@
 #define PRINTER_TIMEOUT 10
 
-
-
 /obj/machinery/computer/bounty
 	name = "Nanotrasen bounty console"
 	desc = "Used to check and claim bounties offered by Nanotrasen"
@@ -85,6 +83,10 @@
 			var/datum/bounty/B = locate(href_list["d_rec"])
 			if(B in GLOB.bounties_list)
 				B.claim()
+			//play indihome paket globally if all cargo bounties are complete
+			if(!length(GLOB.bounties_list))
+				var/sound/ubur_bur = sound('modular_skyrat/sound/music/indihome_paket.ogg', FALSE, 0, CHANNEL_HIGHEST_AVAILABLE, 60)
+				SEND_SOUND(world, ubur_bur)
 
 	if(href_list["refresh"])
 		playsound(src, "terminal_type", 25, 0)
