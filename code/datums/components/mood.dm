@@ -163,11 +163,13 @@
 					motherfucker = "j"
 				if(3)
 					motherfucker = "h"
-			owner.hud_used.noise_filter?.icon_state = "[owner.hud_used.noise_filter.poggers][motherfucker]"
+			owner.hud_used.noise_filter?.loggers = motherfucker
+			owner.hud_used.noise_filter?.update_icon()
 	else
 		if(owner.client && owner.hud_used)
 			screen_obj.icon_state = "mood5"
-			owner.hud_used.noise_filter?.icon_state = "[owner.hud_used.noise_filter.poggers]j"
+			owner.hud_used.noise_filter?.loggers = "j"
+			owner.hud_used.noise_filter?.update_icon()
 
 /datum/component/mood/process() //Called on SSobj process
 	if(QDELETED(parent)) // workaround to an obnoxious sneaky periodical runtime.

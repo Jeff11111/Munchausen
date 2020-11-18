@@ -7,9 +7,14 @@
 	layer = HUD_LAYER-1
 	plane = HUD_PLANE-1
 	var/list/mutable_appearance/noise_overlays = list()
+	var/loggers = "j"
 	var/poggers = 1
 
 /obj/screen/fullscreen/noise/update_for_view(client_view)
 	. = ..()
 	poggers = rand(1,9)
-	icon_state = "[poggers]j"
+	update_icon()
+
+/obj/screen/fullscreen/noise/update_icon()
+	. = ..()
+	icon_state = "[poggers][loggers]"
