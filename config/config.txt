@@ -252,16 +252,16 @@ CHECK_RANDOMIZER
 # SERVER ss13.example.com:2506
 
 ## forum address
-FORUMURL discord.gg/B4zvEP8
+FORUMURL https://discord.gg/Ng5QenfzEh
 
 ## Wiki address
-WIKIURL discord.gg/B4zvEP8
+WIKIURL https://discord.gg/Ng5QenfzEh
 
 ## Rules address
-RULESURL discord.gg/B4zvEP8
+RULESURL https://discord.gg/Ng5QenfzEh
 
 ## Github address
-GITHUBURL https://github.com/BobJoga/Skyrat13/tree/bobstation-branch
+GITHUBURL https://gitlab.com/bobstation/bobstation
 
 ## Round specific stats address
 ## Link to round specific parsed logs; IE statbus. It is appended with the RoundID automatically by ticker/Reboot()
@@ -280,7 +280,7 @@ GITHUBURL https://github.com/BobJoga/Skyrat13/tree/bobstation-branch
 # GITHUBREPOID 62485194
 
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
-BANAPPEALS discord.gg/B4zvEP8
+BANAPPEALS https://discord.gg/Ng5QenfzEh
 
 ## System command that invokes youtube-dl, used by Play Internet Sound.
 ## You can install youtube-dl with
