@@ -25,19 +25,11 @@
 	muzzle_ignore = TRUE
 	restraint_check = FALSE
 	mob_type_allowed_typecache = list(/mob/living/carbon, /mob/living/silicon/pai)
-
-/datum/emote/living/quill/run_emote(mob/living/user, params)
-	if(!(. = ..()))
-		return
-	if(user.nextsoundemote >= world.time)
-		return
-	user.nextsoundemote = world.time + 7
-	playsound(user, 'modular_skyrat/sound/emotes/voxrustle.ogg', 50, 1, -1)
+	sound = 'modular_skyrat/sound/emotes/voxrustle.ogg'
 
 /datum/emote/living/scream/run_emote(mob/living/user, params) //I can't not port this shit, come on.
-	if(user.nextsoundemote >= world.time || user.stat != CONSCIOUS)
-		return
-	var/sound
+	. = ..()
+	sound = null
 	var/miming = user.mind ? user.mind.miming : 0
 	if(!user.is_muzzled() && !miming)
 		user.nextsoundemote = world.time + 7
@@ -74,25 +66,6 @@
 		message = "acts out a scream."
 	else
 		message = "makes a very loud noise."
-	. = ..()
-
-/datum/emote/living/cough/run_emote(mob/living/user, params)
-	if(!(. = ..()))
-		return
-	if(user.nextsoundemote >= world.time)
-		return
-	user.nextsoundemote = world.time + 7
-	if (isvox(user))
-		playsound(user, 'modular_skyrat/sound/emotes/voxcough.ogg', 50, 1, -1)
-
-/datum/emote/living/sneeze/run_emote(mob/living/user, params)
-	if(!(. = ..()))
-		return
-	if(user.nextsoundemote >= world.time)
-		return
-	user.nextsoundemote = world.time + 7
-	if (isvox(user))
-		playsound(user, 'modular_skyrat/sound/emotes/voxsneeze.ogg', 50, 1, -1)
 
 /datum/emote/living/peep
 	key = "peep"
@@ -102,14 +75,7 @@
 	muzzle_ignore = FALSE
 	restraint_check = FALSE
 	mob_type_allowed_typecache = list(/mob/living/carbon, /mob/living/silicon/pai)
-
-/datum/emote/living/peep/run_emote(mob/living/user, params)
-	if(!(. = ..()))
-		return
-	if(user.nextsoundemote >= world.time)
-		return
-	user.nextsoundemote = world.time + 7
-	playsound(user, 'modular_skyrat/sound/voice/peep_once.ogg', 50, 1, -1)
+	sound = 'modular_skyrat/sound/voice/peep_once.ogg'
 
 /datum/emote/living/peep2
 	key = "peep2"
@@ -119,14 +85,7 @@
 	muzzle_ignore = FALSE
 	restraint_check = FALSE
 	mob_type_allowed_typecache = list(/mob/living/carbon, /mob/living/silicon/pai)
-
-/datum/emote/living/peep2/run_emote(mob/living/user, params)
-	if(!(. = ..()))
-		return
-	if(user.nextsoundemote >= world.time)
-		return
-	user.nextsoundemote = world.time + 7
-	playsound(user, 'modular_citadel/sound/voice/peep.ogg', 50, 1, -1)
+	sound = 'modular_citadel/sound/voice/peep.ogg'
 
 /datum/emote/living/quietnoise
 	key = "quitenoise"

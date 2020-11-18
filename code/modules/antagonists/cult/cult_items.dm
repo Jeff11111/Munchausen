@@ -549,7 +549,7 @@
 		to_chat(user, "<span class='warning'>Nar'Sie is already on this plane, there is no delaying the end of all things.</span>")
 		return
 
-	if(SSshuttle.emergency.mode == SHUTTLE_CALL)
+	if(SSshuttle.emergency.mode == SHUTTLE_FUELING)
 		var/cursetime = 1800
 		var/timer = SSshuttle.emergency.timeLeft(1) + cursetime
 		var/security_num = SECLEVEL2NUM(NUM2SECLEVEL(GLOB.security_level))

@@ -192,8 +192,7 @@
 	H.skin_tone = "african2"
 	var/firstname = pick("Nigga", "Nigger", "Tyrone", "Brutus", "Uganda", "Nigeria", "Fifty Cent", "Big Smoke", "Carl Johnson", "Black Lives")
 	var/lastname = pick("Africa", "Africanus", "Niggerius", "Watermelon", "Watermelonium","Cottonpicker", "George Floyd", "Tupac", "Lamp", "Obama", "Matter")
-	H.name = "[firstname] [lastname]"
-	H.real_name = "[firstname] [lastname]"
+	H.fully_replace_character_name(H.real_name, "[firstname] [lastname]")
 
 //pure blooded aryan
 /datum/quirk/aryan
@@ -206,8 +205,7 @@
 	H.skin_tone = "albino"
 	var/firstname = pick("Hitler", "Adolf", "German", "Prussian-German", "Neo-Nazi", "Holocaust Denial", "Trump", "Racist", "Nordic", "Sigismund", "Fascist")
 	var/lastname = pick("Ethnicity", "Christchurch", "For-Chan", "Pol", "White Pride", "Steinhäuser", "Hitler", "Nietzsche", "Skyrim")
-	H.name = "[firstname] [lastname]"
-	H.real_name = "[firstname] [lastname]"
+	H.fully_replace_character_name(H.real_name, "[firstname] [lastname]")
 
 //british
 /datum/quirk/british

@@ -1827,7 +1827,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 
 /client/proc/admin_call_shuttle()
 	set category = "Admin"
-	set name = "Call Shuttle"
+	set name = "Fuel Shuttle"
 
 	if(EMERGENCY_AT_LEAST_DOCKED)
 		return
@@ -1843,12 +1843,12 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		SSshuttle.emergency.mode = SHUTTLE_IDLE
 
 	SSshuttle.emergency.request()
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Call Shuttle") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	log_admin("[key_name(usr)] admin-called the emergency shuttle.")
+	SSblackbox.record_feedback("tally", "admin_verb", 1, "Fuel Shuttle") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	log_admin("[key_name(usr)] admin-fueled the emergency shuttle.")
 	if(confirm == "Yes (No Recall)")
-		message_admins("<span class='adminnotice'>[key_name_admin(usr)] admin-called the emergency shuttle (non-recallable).</span>")
+		message_admins("<span class='adminnotice'>[key_name_admin(usr)] admin-fueled the emergency shuttle (non-recallable).</span>")
 	else
-		message_admins("<span class='adminnotice'>[key_name_admin(usr)] admin-called the emergency shuttle.</span>")
+		message_admins("<span class='adminnotice'>[key_name_admin(usr)] admin-fueled the emergency shuttle.</span>")
 	return
 
 /client/proc/admin_cancel_shuttle()

@@ -412,20 +412,20 @@
 		return
 
 	switch(mode)
-		if(SHUTTLE_CALL)
+		if(SHUTTLE_MISCCALLED)
 			if(S == destination)
 				if(timeLeft(1) < callTime * engine_coeff)
 					setTimer(callTime * engine_coeff)
 			else
 				destination = S
 				setTimer(callTime * engine_coeff)
-		if(SHUTTLE_RECALL)
+		if(SHUTTLE_MISCRECALLED)
 			if(S == destination)
 				setTimer(callTime * engine_coeff - timeLeft(1))
 			else
 				destination = S
 				setTimer(callTime * engine_coeff)
-			mode = SHUTTLE_CALL
+			mode = SHUTTLE_MISCCALLED
 		if(SHUTTLE_IDLE, SHUTTLE_IGNITING)
 			destination = S
 			mode = SHUTTLE_IGNITING
@@ -433,13 +433,13 @@
 
 //recall the shuttle to where it was previously
 /obj/docking_port/mobile/proc/cancel()
-	if(mode != SHUTTLE_CALL)
+	if(mode != SHUTTLE_MISCCALLED)
 		return
 
 	remove_ripples()
 
 	invertTimer()
-	mode = SHUTTLE_RECALL
+	mode = SHUTTLE_MISCRECALLED
 
 /obj/docking_port/mobile/proc/enterTransit()
 	if((SSshuttle.lockdown && is_station_level(z)) || !canMove())	//emp went off, no escape
@@ -571,7 +571,7 @@
 	// If we can't dock or we don't have a transit slot, wait for 20 ds,
 	// then try again
 	switch(mode)
-		if(SHUTTLE_CALL, SHUTTLE_PREARRIVAL)
+		if(SHUTTLE_MISCCALLED, SHUTTLE_PREARRIVAL)
 			if(prearrivalTime && mode != SHUTTLE_PREARRIVAL)
 				mode = SHUTTLE_PREARRIVAL
 				setTimer(prearrivalTime)
@@ -590,7 +590,7 @@
 				mode = SHUTTLE_RECHARGING
 				setTimer(rechargeTime)
 				return
-		if(SHUTTLE_RECALL)
+		if(SHUTTLE_MISCRECALLED)
 			if(initiate_docking(previous) != DOCKING_SUCCESS)
 				setTimer(20)
 				return
@@ -599,7 +599,7 @@
 				setTimer(20)
 				return
 			else
-				mode = SHUTTLE_CALL
+				mode = SHUTTLE_MISCCALLED
 				setTimer(callTime * engine_coeff)
 				enterTransit()
 				return
@@ -610,7 +610,7 @@
 
 /obj/docking_port/mobile/proc/check_effects()
 	if(!ripples.len)
-		if((mode == SHUTTLE_CALL) || (mode == SHUTTLE_RECALL))
+		if((mode == SHUTTLE_MISCCALLED) || (mode == SHUTTLE_MISCRECALLED))
 			var/tl = timeLeft(1)
 			if(tl <= SHUTTLE_RIPPLE_TIME)
 				create_ripples(destination, tl)
@@ -682,9 +682,9 @@
 	switch(mode)
 		if(SHUTTLE_IGNITING)
 			return "IGN"
-		if(SHUTTLE_RECALL)
+		if(SHUTTLE_MISCRECALLED)
 			return "RCL"
-		if(SHUTTLE_CALL)
+		if(SHUTTLE_MISCCALLED)
 			return "ETA"
 		if(SHUTTLE_DOCKED)
 			return "ETD"
@@ -723,7 +723,7 @@
 			return "hyperspace"
 		else
 			var/obj/docking_port/stationary/dst
-			if(mode == SHUTTLE_RECALL)
+			if(mode == SHUTTLE_MISCRECALLED)
 				dst = previous
 			else
 				dst = destination
@@ -739,7 +739,7 @@
 	. = (dockedAt && dockedAt.name) ? dockedAt.name : "unknown"
 	if(istype(dockedAt, /obj/docking_port/stationary/transit))
 		var/obj/docking_port/stationary/dst
-		if(mode == SHUTTLE_RECALL)
+		if(mode == SHUTTLE_MISCRECALLED)
 			dst = previous
 		else
 			dst = destination
@@ -853,7 +853,7 @@
 
 /obj/docking_port/mobile/proc/in_flight()
 	switch(mode)
-		if(SHUTTLE_CALL,SHUTTLE_RECALL,SHUTTLE_PREARRIVAL)
+		if(SHUTTLE_MISCCALLED,SHUTTLE_MISCRECALLED,SHUTTLE_PREARRIVAL)
 			return TRUE
 		if(SHUTTLE_IDLE,SHUTTLE_IGNITING)
 			return FALSE

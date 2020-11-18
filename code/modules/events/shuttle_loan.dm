@@ -74,7 +74,7 @@
 		D.adjust_money(bonus_points)
 	endWhen = activeFor + 1
 
-	SSshuttle.supply.mode = SHUTTLE_CALL
+	SSshuttle.supply.mode = SHUTTLE_FUELING
 	SSshuttle.supply.destination = SSshuttle.getDock("supply_home")
 	SSshuttle.supply.setTimer(3000)
 

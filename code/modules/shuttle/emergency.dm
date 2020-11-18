@@ -1,7 +1,7 @@
 #define TIME_LEFT (SSshuttle.emergency.timeLeft())
 #define ENGINES_START_TIME 100
 #define ENGINES_STARTED (SSshuttle.emergency.mode == SHUTTLE_IGNITING)
-#define IS_DOCKED (SSshuttle.emergency.mode == SHUTTLE_DOCKED || (ENGINES_STARTED))
+#define IS_DOCKED ((SSshuttle.emergency.mode in list(SHUTTLE_DOCKED, SHUTTLE_FUELING, SHUTTLE_IDLE)) || (ENGINES_STARTED))
 #define MAX_AUTH_INPUTS 6
 
 #define NOT_BEGUN 0
@@ -70,7 +70,6 @@
 			job = Gibberish(job, 0)
 		A += list(list("name" = name, "job" = job))
 	data["authorizations"] = A
-
 	data["enabled"] = (IS_DOCKED && !ENGINES_STARTED)
 	data["emagged"] = obj_flags & EMAGGED ? 1 : 0
 	return data
@@ -166,7 +165,7 @@
 
 	// Check to see if we've reached criteria for early launch
 	if((authorized.len >= auth_need) || (obj_flags & EMAGGED))
-		// shuttle timers use 1/10th seconds internally
+		// Shuttle timers use 1/10th seconds internally
 		SSshuttle.emergency.setTimer(ENGINES_START_TIME)
 		var/system_error = obj_flags & EMAGGED ? "SYSTEM ERROR:" : null
 		minor_announce("The emergency shuttle will launch in \
@@ -333,8 +332,8 @@
 	switch(mode)
 		// The shuttle can not normally be called while "recalling", so
 		// if this proc is called, it's via admin fiat
-		if(SHUTTLE_RECALL, SHUTTLE_IDLE, SHUTTLE_CALL)
-			mode = SHUTTLE_CALL
+		if(SHUTTLE_COMINGBACK, SHUTTLE_IDLE, SHUTTLE_FUELING)
+			mode = SHUTTLE_FUELING
 			setTimer(call_time)
 		else
 			return
@@ -347,18 +346,18 @@
 		SSshuttle.emergencyLastCallLoc = null
 
 	if(!silent)
-		priority_announce("The emergency shuttle has been called. [redAlert ? "Red Alert state confirmed: Dispatching priority shuttle. " : "" ]It will arrive in [timeLeft(600)] minutes.[reason][SSshuttle.emergencyLastCallLoc ? "\n\nCall signal traced. Results can be viewed on any communications console." : "" ][SSshuttle.adminEmergencyNoRecall ? "\n\nWarning: Shuttle recall subroutines disabled; Recall not possible." : ""]", null, "shuttlecalled", "Priority")
+		priority_announce("The emergency shuttle is fueling. [redAlert ? "Red Alert state confirmed: Dispatching priority shuttle. " : "" ]It will leave in [timeLeft(600)] minutes.[reason][SSshuttle.emergencyLastCallLoc ? "\n\nLeave signal traced. Results can be viewed on any communications console." : "" ][SSshuttle.adminEmergencyNoRecall ? "\n\nWarning: Shuttle recall subroutines disabled; Recall not possible." : ""]", null, "shuttlecalled", "Priority")
 
 /obj/docking_port/mobile/emergency/cancel(area/signalOrigin)
 	if(SSshuttle.adminEmergencyNoRecall)
 		return
-	if(mode != SHUTTLE_CALL)
+	if(mode != SHUTTLE_FUELING)
 		return
 	if(SSshuttle.emergencyNoRecall)
 		return
 
 	invertTimer()
-	mode = SHUTTLE_RECALL
+	mode = SHUTTLE_COMINGBACK
 
 	if(prob(70))
 		SSshuttle.emergencyLastCallLoc = signalOrigin
@@ -378,26 +377,40 @@
 	qdel(query_round_shuttle_name)
 
 /obj/docking_port/mobile/emergency/check()
+	if(mode == SHUTTLE_IDLE)
+		var/atom/FUCK = get_docked()
+		if(!is_station_level(FUCK.z))
+			//move emergency shuttle to station
+			if(initiate_docking(SSshuttle.getDock("emergency_home")) != DOCKING_SUCCESS)
+				setTimer(20)
+				return
+	
 	if(!timer)
 		return
 	var/time_left = timeLeft(1)
 
 	// The emergency shuttle doesn't work like others so this
 	// ripple check is slightly different
-	if(!ripples.len && (time_left <= SHUTTLE_RIPPLE_TIME) && ((mode == SHUTTLE_CALL) || (mode == SHUTTLE_ESCAPE)))
+	if(!ripples.len && (time_left <= SHUTTLE_RIPPLE_TIME) && ((mode == SHUTTLE_FUELING) || (mode == SHUTTLE_ESCAPE)))
 		var/destination
-		if(mode == SHUTTLE_CALL)
-			destination = SSshuttle.getDock("emergency_home")
-		else if(mode == SHUTTLE_ESCAPE)
-			destination = SSshuttle.getDock("emergency_away")
+		switch(mode)
+			if(SHUTTLE_FUELING)
+				destination = SSshuttle.getDock("emergency_home")
+			if(SHUTTLE_ESCAPE)
+				destination = SSshuttle.getDock("emergency_away")
 		create_ripples(destination)
 
 	switch(mode)
-		if(SHUTTLE_RECALL)
+		if(SHUTTLE_COMINGBACK)
 			if(time_left <= 0)
+				//move emergency shuttle to station
+				if(initiate_docking(SSshuttle.getDock("emergency_home")) != DOCKING_SUCCESS)
+					setTimer(20)
+					return
 				mode = SHUTTLE_IDLE
 				timer = 0
-		if(SHUTTLE_CALL)
+		
+		if(SHUTTLE_FUELING)
 			if(time_left <= 0)
 				//move emergency shuttle to station
 				if(initiate_docking(SSshuttle.getDock("emergency_home")) != DOCKING_SUCCESS)
@@ -405,10 +418,9 @@
 					return
 				mode = SHUTTLE_DOCKED
 				setTimer(SSshuttle.emergencyDockTime)
-				send2irc("Server", "The Emergency Shuttle has docked with the station.")
-				priority_announce("The Emergency Shuttle has docked with the station. You have [timeLeft(600)] minutes to board the Emergency Shuttle.", null, "shuttledock", "Priority")
+				send2irc("Server", "The Emergency Shuttle is ready to depart the station.")
+				priority_announce("The Emergency Shuttle is ready to depart the station. You have [timeLeft(600)] minutes to board the Emergency Shuttle.", null, "shuttledock", "Priority")
 				ShuttleDBStuff()
-
 
 		if(SHUTTLE_DOCKED)
 			if(time_left <= ENGINES_START_TIME)

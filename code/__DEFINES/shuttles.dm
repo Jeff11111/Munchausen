@@ -1,19 +1,21 @@
 //shuttle mode defines
+#define SHUTTLE_MISCCALLED	"misc_called"
+#define SHUTTLE_MISCRECALLED "misc_called"
+#define SHUTTLE_FUELING		"fueling"
+#define SHUTTLE_COMINGBACK	"coming back"
+#define SHUTTLE_DOCKED		"docked"
 #define SHUTTLE_IDLE		"idle"
 #define SHUTTLE_IGNITING	"igniting"
-#define SHUTTLE_RECALL		"recall"
-#define SHUTTLE_CALL		"call"
-#define SHUTTLE_DOCKED		"docked"
 #define SHUTTLE_STRANDED	"stranded"
 #define SHUTTLE_ESCAPE		"escape"
 #define SHUTTLE_ENDGAME		"endgame: game over"
-#define SHUTTLE_RECHARGING		"recharging"
-#define SHUTTLE_PREARRIVAL		"landing"
+#define SHUTTLE_RECHARGING	"recharging"
+#define SHUTTLE_PREARRIVAL	"landing"
 #define SHUTTLE_DISABLED	"disabled"
 
-#define EMERGENCY_IDLE_OR_RECALLED (SSshuttle.emergency && ((SSshuttle.emergency.mode == SHUTTLE_IDLE) || (SSshuttle.emergency.mode == SHUTTLE_RECALL)))
+#define EMERGENCY_IDLE_OR_RECALLED (SSshuttle.emergency && ((SSshuttle.emergency.mode == SHUTTLE_IDLE) || (SSshuttle.emergency.mode == SHUTTLE_COMINGBACK)))
 #define EMERGENCY_ESCAPED_OR_ENDGAMED (SSshuttle.emergency && ((SSshuttle.emergency.mode == SHUTTLE_ESCAPE) || (SSshuttle.emergency.mode == SHUTTLE_ENDGAME)))
-#define EMERGENCY_AT_LEAST_DOCKED (SSshuttle.emergency && SSshuttle.emergency.mode != SHUTTLE_IDLE && SSshuttle.emergency.mode != SHUTTLE_RECALL && SSshuttle.emergency.mode != SHUTTLE_CALL)
+#define EMERGENCY_AT_LEAST_DOCKED (SSshuttle.emergency && SSshuttle.emergency.mode != SHUTTLE_IDLE && SSshuttle.emergency.mode != SHUTTLE_COMINGBACK && SSshuttle.emergency.mode != SHUTTLE_FUELING)
 
 // Shuttle return values
 #define SHUTTLE_CAN_DOCK "can_dock"

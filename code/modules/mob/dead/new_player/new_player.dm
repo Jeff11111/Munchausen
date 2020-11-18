@@ -38,7 +38,7 @@
 	output += "<center><p><a href='byond://?src=[REF(src)];show_preferences=1'>Setup Character</a></p>"
 	if(SSticker.current_state <= GAME_STATE_PREGAME)
 		if(CONFIG_GET(flag/roundstart_traits))
-			output += "<center><p><b>Be special:</b> <a href='?_src_=prefs;preference=trait'>[client?.prefs?.special_char ? "Yes" : "No"]</a></p></center>"
+			output += "<center><p><b>Be special:</b> <a href='?_src_=prefs;preference=trait'>[client?.prefs?.special_char ? "<b>Yes>/b>" : "No"]</a></p></center>"
 		switch(ready)
 			if(PLAYER_NOT_READY)
 				output += "<p>\[ [LINKIFY_READY("Ready", PLAYER_READY_TO_PLAY)] | <b>Not Ready</b> | [LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE)] \]</p>"
@@ -405,9 +405,9 @@
 	if(CONFIG_GET(flag/allow_latejoin_antagonists) && humanc)	//Borgs aren't allowed to be antags. Will need to be tweaked if we get true latejoin ais.
 		if(SSshuttle.emergency)
 			switch(SSshuttle.emergency.mode)
-				if(SHUTTLE_RECALL, SHUTTLE_IDLE)
+				if(SHUTTLE_COMINGBACK, SHUTTLE_IDLE)
 					SSticker.mode.make_antag_chance(humanc)
-				if(SHUTTLE_CALL)
+				if(SHUTTLE_FUELING)
 					if(SSshuttle.emergency.timeLeft(1) > initial(SSshuttle.emergencyCallTime)*0.5)
 						SSticker.mode.make_antag_chance(humanc)
 
@@ -454,7 +454,7 @@
 		switch(SSshuttle.emergency.mode)
 			if(SHUTTLE_ESCAPE)
 				dat += "<div class='notice red'>The station has been evacuated.</div><br>"
-			if(SHUTTLE_CALL)
+			if(SHUTTLE_FUELING)
 				if(!SSshuttle.canRecall())
 					dat += "<div class='notice red'>The station is currently undergoing evacuation procedures.</div><br>"
 	for(var/datum/job/prioritized_job in SSjob.prioritized_jobs)

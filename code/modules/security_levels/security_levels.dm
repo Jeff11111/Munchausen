@@ -22,7 +22,7 @@ GLOBAL_LIST_INIT(all_security_levels, list("green", "blue", "violet", "orange", 
 		switch(level)
 			if(SEC_LEVEL_GREEN)
 				minor_announce(CONFIG_GET(string/alert_green), "Attention! Alert level lowered to green:") //Skyrat change
-				if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
+				if(SSshuttle.emergency.mode == SHUTTLE_FUELING || SSshuttle.emergency.mode == SHUTTLE_COMINGBACK)
 					if(GLOB.security_level >= SEC_LEVEL_RED)
 						SSshuttle.emergency.modTimer(4)
 					else if(GLOB.security_level == SEC_LEVEL_AMBER)
@@ -36,11 +36,11 @@ GLOBAL_LIST_INIT(all_security_levels, list("green", "blue", "violet", "orange", 
 			if(SEC_LEVEL_BLUE)
 				if(GLOB.security_level < SEC_LEVEL_BLUE)
 					minor_announce(CONFIG_GET(string/alert_blue_upto), "Attention! Alert level elevated to blue:",1) //Skyrat change
-					if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
+					if(SSshuttle.emergency.mode == SHUTTLE_FUELING || SSshuttle.emergency.mode == SHUTTLE_COMINGBACK)
 						SSshuttle.emergency.modTimer(0.6)
 				else
 					minor_announce(CONFIG_GET(string/alert_blue_downto), "Attention! Alert level lowered to blue:") //Skyrat change
-					if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
+					if(SSshuttle.emergency.mode == SHUTTLE_FUELING || SSshuttle.emergency.mode == SHUTTLE_COMINGBACK)
 						if(GLOB.security_level >= SEC_LEVEL_RED)
 							SSshuttle.emergency.modTimer(2.4)
 						else
@@ -54,14 +54,14 @@ GLOBAL_LIST_INIT(all_security_levels, list("green", "blue", "violet", "orange", 
 			if(SEC_LEVEL_VIOLET)
 				if(GLOB.security_level < SEC_LEVEL_VIOLET)
 					minor_announce(CONFIG_GET(string/alert_violet_upto), "Attention! Alert level set to violet:",1)
-					if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
+					if(SSshuttle.emergency.mode == SHUTTLE_FUELING || SSshuttle.emergency.mode == SHUTTLE_COMINGBACK)
 						if(GLOB.security_level == SEC_LEVEL_GREEN)
 							SSshuttle.emergency.modTimer(0.4)
 						else
 							SSshuttle.emergency.modTimer(0.66)
 				else
 					minor_announce(CONFIG_GET(string/alert_violet_downto), "Attention! Alert level set to violet:")
-					if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
+					if(SSshuttle.emergency.mode == SHUTTLE_FUELING || SSshuttle.emergency.mode == SHUTTLE_COMINGBACK)
 						SSshuttle.emergency.modTimer(1.6)
 				GLOB.security_level = SEC_LEVEL_VIOLET
 				sound_to_playing_players('modular_skyrat/sound/misc/notice1.ogg', volume = 50)
@@ -71,14 +71,14 @@ GLOBAL_LIST_INIT(all_security_levels, list("green", "blue", "violet", "orange", 
 			if(SEC_LEVEL_ORANGE)
 				if(GLOB.security_level < SEC_LEVEL_ORANGE)
 					minor_announce(CONFIG_GET(string/alert_orange_upto), "Attention! Alert level set to orange:",1)
-					if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
+					if(SSshuttle.emergency.mode == SHUTTLE_FUELING || SSshuttle.emergency.mode == SHUTTLE_COMINGBACK)
 						if(GLOB.security_level == SEC_LEVEL_GREEN)
 							SSshuttle.emergency.modTimer(0.4)
 						else
 							SSshuttle.emergency.modTimer(0.66)
 				else
 					minor_announce(CONFIG_GET(string/alert_orange_downto), "Attention! Alert level set to orange:")
-					if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
+					if(SSshuttle.emergency.mode == SHUTTLE_FUELING || SSshuttle.emergency.mode == SHUTTLE_COMINGBACK)
 						SSshuttle.emergency.modTimer(1.6)
 				GLOB.security_level = SEC_LEVEL_ORANGE
 				sound_to_playing_players('modular_skyrat/sound/misc/notice1.ogg', volume = 50)
@@ -89,14 +89,14 @@ GLOBAL_LIST_INIT(all_security_levels, list("green", "blue", "violet", "orange", 
 			if(SEC_LEVEL_AMBER)
 				if(GLOB.security_level < SEC_LEVEL_AMBER)
 					minor_announce(CONFIG_GET(string/alert_amber_upto), "Attention! Alert level set to amber:",1) //Skyrat change
-					if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
+					if(SSshuttle.emergency.mode == SHUTTLE_FUELING || SSshuttle.emergency.mode == SHUTTLE_COMINGBACK)
 						if(GLOB.security_level == SEC_LEVEL_GREEN)
 							SSshuttle.emergency.modTimer(0.4)
 						else
 							SSshuttle.emergency.modTimer(0.66)
 				else
 					minor_announce(CONFIG_GET(string/alert_amber_downto), "Attention! Alert level set to amber:") //Skyrat change
-					if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
+					if(SSshuttle.emergency.mode == SHUTTLE_FUELING || SSshuttle.emergency.mode == SHUTTLE_COMINGBACK)
 						SSshuttle.emergency.modTimer(1.6)
 				GLOB.security_level = SEC_LEVEL_AMBER
 				sound_to_playing_players('modular_skyrat/sound/misc/notice1.ogg', volume = 50) // Skyrat change
@@ -106,7 +106,7 @@ GLOBAL_LIST_INIT(all_security_levels, list("green", "blue", "violet", "orange", 
 			if(SEC_LEVEL_RED)
 				if(GLOB.security_level < SEC_LEVEL_RED)
 					minor_announce(CONFIG_GET(string/alert_red_upto), "Attention! Code red!",1)
-					if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
+					if(SSshuttle.emergency.mode == SHUTTLE_FUELING || SSshuttle.emergency.mode == SHUTTLE_COMINGBACK)
 						if(GLOB.security_level == SEC_LEVEL_GREEN)
 							SSshuttle.emergency.modTimer(0.25)
 						else if(GLOB.security_level == SEC_LEVEL_BLUE)
@@ -125,7 +125,7 @@ GLOBAL_LIST_INIT(all_security_levels, list("green", "blue", "violet", "orange", 
 					pod.admin_controlled = 0
 			if(SEC_LEVEL_DELTA)
 				minor_announce(CONFIG_GET(string/alert_delta), "Attention! Delta security level reached!",1)
-				if(SSshuttle.emergency.mode == SHUTTLE_CALL || SSshuttle.emergency.mode == SHUTTLE_RECALL)
+				if(SSshuttle.emergency.mode == SHUTTLE_FUELING || SSshuttle.emergency.mode == SHUTTLE_COMINGBACK)
 					if(GLOB.security_level < SEC_LEVEL_BLUE)
 						SSshuttle.emergency.modTimer(0.25)
 					else if(GLOB.security_level == SEC_LEVEL_BLUE)

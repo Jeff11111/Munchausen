@@ -219,7 +219,7 @@
 	if(!gang.recalls)
 		to_chat(user, "<span class='warning'>Error: Unable to access communication arrays. Firewall has logged our signature and is blocking all further attempts.</span>")
 		return
-	if(SSshuttle.emergency.mode != SHUTTLE_CALL) //Shuttle can only be recalled when it's moving to the station
+	if(SSshuttle.emergency.mode != SHUTTLE_FUELING) //Shuttle can only be recalled when it's fueling to leave
 		to_chat(user, "<span class='warning'>[icon2html(src, user)]Emergency shuttle cannot be recalled at this time.</span>")
 		recalling = FALSE
 		return

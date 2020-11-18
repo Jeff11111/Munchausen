@@ -52,14 +52,18 @@
 
 /proc/shuttlemode2str(mode)
 	switch(mode)
+		if(SHUTTLE_MISCCALLED)
+			. = "called"
+		if(SHUTTLE_MISCRECALLED)
+			. = "recalled"
 		if(SHUTTLE_IDLE)
 			. = "idle"
 		if(SHUTTLE_IGNITING)
 			. = "engines charging"
-		if(SHUTTLE_RECALL)
-			. = "recalled"
-		if(SHUTTLE_CALL)
-			. = "called"
+		if(SHUTTLE_COMINGBACK)
+			. = "coming back"
+		if(SHUTTLE_FUELING)
+			. = "fueling"
 		if(SHUTTLE_DOCKED)
 			. = "docked"
 		if(SHUTTLE_STRANDED)
@@ -70,7 +74,6 @@
 			. = "endgame"
 	if(!.)
 		CRASH("shuttlemode2str(): invalid mode [mode]")
-
 
 /obj/machinery/shuttle_manipulator/ui_data(mob/user)
 	var/list/data = list()

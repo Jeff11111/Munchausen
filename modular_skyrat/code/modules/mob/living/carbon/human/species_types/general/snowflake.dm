@@ -1,5 +1,5 @@
 /datum/species
-	var/list/screamsounds = list('modular_citadel/sound/voice/scream_m1.ogg', 'modular_citadel/sound/voice/scream_m2.ogg')
+	var/list/screamsounds = list('modular_skyrat/sound/gore/fear_male1.ogg', 'modular_skyrat/sound/gore/fear_male2.ogg')
 	var/list/femalescreamsounds = list()
 	var/fluff_desc = "No description."
 
@@ -37,54 +37,54 @@
 	fluff_desc = "Mothpeople are a variant of Insectoids, and are extremely similar in biology and overall appearance, but they most commonly resemble the moths found on old human Earth."
 
 /datum/species/human
-	femalescreamsounds = list('modular_citadel/sound/voice/scream_f1.ogg', 'modular_citadel/sound/voice/scream_f2.ogg')
+	femalescreamsounds = list('modular_skyrat/sound/gore/fear_female1.ogg', 'modular_skyrat/sound/gore/fear_female2.ogg', 'modular_skyrat/sound/gore/fear_female3.ogg')
 	fluff_desc = "Homo Sapiens Sapiens - Humans. The dominant species in the galaxy, Humanity originated from the Sol system and have quickly spread their race across the stars in the form of the vast, extraordinarily powerful Solar Federation star-state. They are the commanding species of NanoTrasen and the Solar Federation, and benefit from the highest social and economical status on both of them. While most Humans have since become welcoming of their alien comrades, they encompass a wide variety of cultures and creeds; no one Human is exactly alike."
 
 /datum/species/human/felinid
 	fluff_desc = "Felinid is simply a popular name for genemodded humans with animal-like features, most commonly resembling that of a house cat."
 
 /datum/species/human/humanoid
-	femalescreamsounds = list('modular_citadel/sound/voice/scream_f1.ogg', 'modular_citadel/sound/voice/scream_f2.ogg')
+	femalescreamsounds = list('modular_skyrat/sound/gore/fear_female1.ogg', 'modular_skyrat/sound/gore/fear_female2.ogg', 'modular_skyrat/sound/gore/fear_female3.ogg')
 	fluff_desc = "Humanoid is an umbrella term for sapient beings that share many physical similarities with humans, more so than anthropomorphs. They come from very wildly varying backgrounds, and their existence is sometimes used as religious proof for the existance of a \"great architect\" behind the known universe."
 
 /datum/species/human/humanoid/dunmer
-	femalescreamsounds = list('modular_citadel/sound/voice/scream_f1.ogg', 'modular_citadel/sound/voice/scream_f2.ogg')
+	femalescreamsounds = list('modular_skyrat/sound/gore/fear_female1.ogg', 'modular_skyrat/sound/gore/fear_female2.ogg', 'modular_skyrat/sound/gore/fear_female3.ogg')
 	fluff_desc = "Ashlanders come from lavaland, and are considered a cheap workforce by NanoTrasen and SolGov. Most of them quickly adapted to their colonization and greatly appreciated the new technology, though dunmeri tradionalists might feel unsatisfied with how they are treated as inferior and how their culture and religion is slowly being abandoned."
 
 /datum/species/angel
-	femalescreamsounds = list('modular_citadel/sound/voice/scream_f1.ogg', 'modular_citadel/sound/voice/scream_f2.ogg')
+	femalescreamsounds = list('modular_skyrat/sound/gore/fear_female1.ogg', 'modular_skyrat/sound/gore/fear_female2.ogg', 'modular_skyrat/sound/gore/fear_female3.ogg')
 	fluff_desc = "Little to nothing is known about Angels as a species. While sharing remarkable similarities with those found within Christian Mythology, the culture of Angels is almost entirely separate from that of Humanity. Conspiracy theories abound within the Solar Federation of if these \"Angels\" had in some way influenced early development of Human Civilization."
 
 /datum/species/corporate
-	femalescreamsounds = list('modular_citadel/sound/voice/scream_f1.ogg', 'modular_citadel/sound/voice/scream_f2.ogg')
+	femalescreamsounds = list('modular_skyrat/sound/gore/fear_female1.ogg', 'modular_skyrat/sound/gore/fear_female2.ogg', 'modular_skyrat/sound/gore/fear_female3.ogg')
 	fluff_desc = "Corporate androids are advanced androids employed by NanoTrasen, or loaned out as mercenary forces to SolGov. Most of the time, they are high ranking CentCom officers."
 
 /datum/species/dullahan
-	femalescreamsounds = list('modular_citadel/sound/voice/scream_f1.ogg', 'modular_citadel/sound/voice/scream_f2.ogg')
+	femalescreamsounds = list('modular_skyrat/sound/gore/fear_female1.ogg', 'modular_skyrat/sound/gore/fear_female2.ogg', 'modular_skyrat/sound/gore/fear_female3.ogg')
 	fluff_desc = "Not much is known about the mysterious dullahan, but they sure know how to make someone lose their mind."
 
 /datum/species/dwarf
-	femalescreamsounds = list('modular_citadel/sound/voice/scream_f1.ogg', 'modular_citadel/sound/voice/scream_f2.ogg')
+	femalescreamsounds = list('modular_skyrat/sound/gore/fear_female1.ogg', 'modular_skyrat/sound/gore/fear_female2.ogg', 'modular_skyrat/sound/gore/fear_female3.ogg')
 	fluff_desc = "The result of genetic modification for use in colonization efforts, Dwarves are extremely distant relatives of Humans. Originally made for planets with extreme gravity, Dwarves are much more bulky and short in their physiology; along with various other changes, the most unusual outcome was their biological dependence on alcohol to survive. If a Dwarf goes too long without alcohol, they will suffer similar effects to extreme dehydration in humans, eventually culminating in death."
 
 /datum/species/anthro
-	femalescreamsounds = list('modular_citadel/sound/voice/scream_f1.ogg', 'modular_citadel/sound/voice/scream_f2.ogg')
+	femalescreamsounds = list('modular_skyrat/sound/gore/fear_female1.ogg', 'modular_skyrat/sound/gore/fear_female2.ogg', 'modular_skyrat/sound/gore/fear_female3.ogg')
 	fluff_desc = "Anthropomorph is an umbrella term used to describe the vast majority of sapient species one might encounter within the galaxy. They can take almost any form, and can be found all across the stars."
 
 /datum/species/anthro/mammal
-	femalescreamsounds = list('modular_citadel/sound/voice/scream_f1.ogg', 'modular_citadel/sound/voice/scream_f2.ogg')
+	femalescreamsounds = list('modular_skyrat/sound/gore/fear_female1.ogg', 'modular_skyrat/sound/gore/fear_female2.ogg', 'modular_skyrat/sound/gore/fear_female3.ogg')
 	fluff_desc = "Mammal is an umbrella term used to describe sapient mammalian species one might encounter within the galaxy. They can take almost any form, and can be found all across the stars."
 
 /datum/species/anthro/avian
-	femalescreamsounds = list('modular_citadel/sound/voice/scream_f1.ogg', 'modular_citadel/sound/voice/scream_f2.ogg')
+	femalescreamsounds = list('modular_skyrat/sound/gore/fear_female1.ogg', 'modular_skyrat/sound/gore/fear_female2.ogg', 'modular_skyrat/sound/gore/fear_female3.ogg')
 	fluff_desc = "Avian is an umbrella term used to describe sapient avian species one might encounter within the galaxy. They can take almost any form, and can be found all across the stars."
 
 /datum/species/anthro/aquatic
-	femalescreamsounds = list('modular_citadel/sound/voice/scream_f1.ogg', 'modular_citadel/sound/voice/scream_f2.ogg')
+	femalescreamsounds = list('modular_skyrat/sound/gore/fear_female1.ogg', 'modular_skyrat/sound/gore/fear_female2.ogg', 'modular_skyrat/sound/gore/fear_female3.ogg')
 	fluff_desc = "Aquatic is an umbrella term used to describe sapient aquatic species one might encounter within the galaxy. They can take almost any form, and can be found all across the stars."
 
 /datum/species/jelly
-	femalescreamsounds = list('modular_citadel/sound/voice/scream_f1.ogg', 'modular_citadel/sound/voice/scream_f2.ogg')
+	femalescreamsounds = list('modular_skyrat/sound/gore/fear_female1.ogg', 'modular_skyrat/sound/gore/fear_female2.ogg', 'modular_skyrat/sound/gore/fear_female3.ogg')
 	fluff_desc = "Slimepeople are by and large the results of experimentation on various slime entities in control of various organizations, chief of which being Nanotrasen and their Xenobiological Research Department. While a vast majority of Slimepeople are the result of this experimentation, there exists many gel-like alien species in galaxy, along with those resultant from consumer-grade Nanotrasen brand Slime-Hybrid genemods."
 
 /datum/species/plasmaman
@@ -92,11 +92,11 @@
 	fluff_desc = "Plasmamen are the result of the catastrophic, long-term fusion of standard organic physiology with liquid and airborne pools of high-density plasma extract. The changes resulting from this fusion often times leave no trace of the victims original biology or species, turning them into an entirely plasma-based lifeform. Plasmamen are extremely reactive with oxygenated environments, requiring specialized environment suits to survive in such conditions. While most Plasmamen are employed by Nanotrasen, there are known to be pockets of plasma civilization where environmental conditions allow for at the very least tentative existence without the need of outside support."
 
 /datum/species/pod
-	femalescreamsounds = list('modular_citadel/sound/voice/scream_f1.ogg', 'modular_citadel/sound/voice/scream_f2.ogg')
+	femalescreamsounds = list('modular_skyrat/sound/gore/fear_female1.ogg', 'modular_skyrat/sound/gore/fear_female2.ogg', 'modular_skyrat/sound/gore/fear_female3.ogg')
 	fluff_desc = "Podpeople are a race of sapient humanoid plants, oftentimes the result of genetic experimentation or botanical research gone awry. While most podpeople within Nanotrasen-controlled space are the result of experimental revival techniques involving a species of large cabbage, plant-based lifeforms can take a wide variety of shapes and sizes within the galaxy."
 
 /datum/species/shadow
-	femalescreamsounds = list('modular_citadel/sound/voice/scream_f1.ogg', 'modular_citadel/sound/voice/scream_f2.ogg')
+	femalescreamsounds = list('modular_skyrat/sound/gore/fear_female1.ogg', 'modular_skyrat/sound/gore/fear_female2.ogg', 'modular_skyrat/sound/gore/fear_female3.ogg')
 	fluff_desc = "Shadowpeople are by and large, mostly unknown. Their origins are a mystery to almost all of civilized space - and with mystery, comes myths. The most popular of these myths is that shadowpeople were once a religious sect of ashlanders on lavaland, who lived in harmony with the dark forces who controlled the underground of the planet. One day, however it may have happened, that these people angered the dark gods of the molten hellscape, whom cursed them to forever live in eternal darkness, lest their forms waste away to the ash they had been born from. Most shadowpeople suffer extreme prejudice, as rumors are largely spread around the frontier about shadowpeople with bladelike appendages that live in the darkness, waiting to prey on the blood of the innocent and to curse everything with unending darkness."
 
 /datum/species/synthliz
@@ -104,7 +104,7 @@
 	fluff_desc = "Synthetic Lizardpeople are a variant of IPC, much more advanced in construction. Although benefitting from higher production quality and improved internal systems, they still suffer from all of the original problems that being a synthetic humanoid comes with."
 
 /datum/species/vampire
-	femalescreamsounds = list('modular_citadel/sound/voice/scream_f1.ogg', 'modular_citadel/sound/voice/scream_f2.ogg')
+	femalescreamsounds = list('modular_skyrat/sound/gore/fear_female1.ogg', 'modular_skyrat/sound/gore/fear_female2.ogg', 'modular_skyrat/sound/gore/fear_female3.ogg')
 	fluff_desc = "Vampires are humans suffering from some form of affliction outside the realm of Science. Their metabolic systems are only capable of processing blood, which they require to sustain themselves."
 
 /datum/species/vox

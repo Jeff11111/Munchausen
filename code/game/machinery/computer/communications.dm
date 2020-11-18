@@ -424,7 +424,7 @@
 		return
 
 	var/dat = ""
-	if(SSshuttle.emergency.mode == SHUTTLE_CALL)
+	if(SSshuttle.emergency.mode == SHUTTLE_FUELING)
 		var/timeleft = SSshuttle.emergency.timeLeft()
 		dat += "<B>Emergency shuttle</B>\n<BR>\nETA: [timeleft / 60 % 60]:[add_leading(num2text(timeleft % 60), 2, "0")]"
 
@@ -454,8 +454,8 @@
 				dat += "<BR><B>General Functions</B>"
 				dat += "<BR>\[ <A HREF='?src=[REF(src)];operation=messagelist'>Message List</A> \]"
 				switch(SSshuttle.emergency.mode)
-					if(SHUTTLE_IDLE, SHUTTLE_RECALL)
-						dat += "<BR>\[ <A HREF='?src=[REF(src)];operation=callshuttle'>Call Emergency Shuttle</A> \]"
+					if(SHUTTLE_IDLE, SHUTTLE_COMINGBACK)
+						dat += "<BR>\[ <A HREF='?src=[REF(src)];operation=callshuttle'>Fuel Emergency Shuttle</A> \]"
 					else
 						dat += "<BR>\[ <A HREF='?src=[REF(src)];operation=cancelshuttle'>Cancel Shuttle Call</A> \]"
 

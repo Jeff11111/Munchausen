@@ -53,7 +53,7 @@
 	. = ..()
 
 	if(perma_docked)
-		if(mode != SHUTTLE_CALL)
+		if(mode != SHUTTLE_MISCCALLED)
 			sound_played = FALSE
 			mode = SHUTTLE_IDLE
 		else
@@ -76,7 +76,7 @@
 		var/obj/machinery/announcement_system/announcer = safepick(GLOB.announcement_systems)
 		if(!QDELETED(announcer))
 			announcer.announce("ARRIVALS_BROKEN", channels = list())
-		if(mode != SHUTTLE_CALL)
+		if(mode != SHUTTLE_MISCCALLED)
 			sound_played = FALSE
 			mode = SHUTTLE_IDLE
 		else
@@ -84,7 +84,7 @@
 		return
 
 	var/found_awake = PersonCheck() || NukeDiskCheck()
-	if(mode == SHUTTLE_CALL)
+	if(mode == SHUTTLE_MISCCALLED)
 		if(found_awake)
 			SendToStation()
 	else if(mode == SHUTTLE_IGNITING)
@@ -124,7 +124,7 @@
 
 /obj/docking_port/mobile/arrivals/proc/SendToStation()
 	var/dockTime = CONFIG_GET(number/arrivals_shuttle_dock_window)
-	if(mode == SHUTTLE_CALL && timeLeft(1) > dockTime)
+	if(mode == SHUTTLE_MISCCALLED && timeLeft(1) > dockTime)
 		if(console)
 			console.say(damaged ? "Initiating emergency docking for repairs!" : "Now approaching: [station_name()].")
 		hyperspace_sound(HYPERSPACE_LAUNCH, areas)	//for the new guy
@@ -157,7 +157,7 @@
 
 /obj/docking_port/mobile/arrivals/check_effects()
 	..()
-	if(mode == SHUTTLE_CALL && !sound_played && timeLeft(1) <= HYPERSPACE_END_TIME)
+	if(mode == SHUTTLE_MISCCALLED && !sound_played && timeLeft(1) <= HYPERSPACE_END_TIME)
 		sound_played = TRUE
 		hyperspace_sound(HYPERSPACE_END, areas)
 
@@ -178,17 +178,17 @@
 		request(target)		//we will intentionally never return SHUTTLE_ALREADY_DOCKED
 
 /obj/docking_port/mobile/arrivals/proc/RequireUndocked(mob/user)
-	if(mode == SHUTTLE_CALL || damaged)
+	if(mode == SHUTTLE_MISCCALLED || damaged)
 		return
 
 	Launch(TRUE)
 
 	to_chat(user, "<span class='notice'>Calling your shuttle. One moment...</span>")
-	while(mode != SHUTTLE_CALL && !damaged)
+	while(mode != SHUTTLE_MISCCALLED && !damaged)
 		stoplag()
 
 /obj/docking_port/mobile/arrivals/proc/QueueAnnounce(mob, rank)
-	if(mode != SHUTTLE_CALL)
+	if(mode != SHUTTLE_MISCCALLED)
 		AnnounceArrival(mob, rank)
 	else
 		LAZYADD(queued_announces, CALLBACK(GLOBAL_PROC, .proc/AnnounceArrival, mob, rank))

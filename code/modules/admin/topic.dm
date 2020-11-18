@@ -316,15 +316,14 @@
 				if(EMERGENCY_AT_LEAST_DOCKED)
 					return
 				switch(SSshuttle.emergency.mode)
-					if(SHUTTLE_CALL)
+					if(SHUTTLE_FUELING)
 						SSshuttle.emergency.cancel()
 						log_admin("[key_name(usr)] sent the Emergency Shuttle back.")
-						message_admins("<span class='adminnotice'>[key_name_admin(usr)] sent the Emergency Shuttle back.</span>")
+						message_admins("<span class='adminnotice'>[key_name_admin(usr)] sent the Emergency Shuttle back to the station.</span>")
 					else
 						SSshuttle.emergency.cancel()
 						log_admin("[key_name(usr)] called the Emergency Shuttle.")
-						message_admins("<span class='adminnotice'>[key_name_admin(usr)] called the Emergency Shuttle to the station.</span>")
-
+						message_admins("<span class='adminnotice'>[key_name_admin(usr)] called the Emergency Shuttle to leave the station.</span>")
 
 		href_list["secrets"] = "check_antagonist"
 

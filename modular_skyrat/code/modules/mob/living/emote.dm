@@ -1,3 +1,4 @@
+// Bruh emotes
 /datum/emote/living/surrender
 	chat_popup = FALSE
 	image_popup = "surrender"
@@ -13,12 +14,16 @@
 // Pain emotes and stuff below
 /datum/emote/living
 	var/sound  // Sound to play when emote is called
-	var/vary = FALSE // Probably shouldn't vary cause it sounds wacky
+	var/vary = 0 // Probably shouldn't vary cause it sounds wacky
 	var/volume = 50
+	var/cooldown = 10
 
 /datum/emote/living/run_emote(mob/user, params)
 	. = ..()
 	if(. && sound)
+		if(user.nextsoundemote >= world.time)
+			return
+		user.nextsoundemote = world.time + cooldown
 		playsound(user.loc, sound, volume, vary)
 
 // Grunting

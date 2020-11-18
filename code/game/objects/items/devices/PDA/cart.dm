@@ -438,8 +438,8 @@ Code:
 			menu += "<BR><B>Supply shuttle</B><BR>"
 			menu += "Location: "
 			switch(SSshuttle.supply.mode)
-				if(SHUTTLE_CALL)
-					menu += "Moving to "
+				if(SHUTTLE_FUELING)
+					menu += "Fueling at"
 					if(!is_station_level(SSshuttle.supply.z))
 						menu += "station"
 					else

@@ -16,7 +16,7 @@ SUBSYSTEM_DEF(shuttle)
 	var/list/transit_requesters = list()
 	var/list/transit_request_failures = list()
 
-		//emergency shuttle stuff
+	//emergency shuttle stuff
 	var/obj/docking_port/mobile/emergency/emergency
 	var/obj/docking_port/mobile/emergency/backup/backup_shuttle
 	var/emergencyCallTime = 6000	//time taken for emergency shuttle to reach the station when called (in deciseconds)
@@ -212,11 +212,11 @@ SUBSYSTEM_DEF(shuttle)
 		return
 
 	switch(emergency.mode)
-		if(SHUTTLE_RECALL)
-			to_chat(user, "<span class='alert'>The emergency shuttle may not be called while returning to CentCom.</span>")
+		if(SHUTTLE_COMINGBACK)
+			to_chat(user, "<span class='alert'>The emergency shuttle may not be fueled while returning to the station.</span>")
 			return
-		if(SHUTTLE_CALL)
-			to_chat(user, "<span class='alert'>The emergency shuttle is already on its way.</span>")
+		if(SHUTTLE_FUELING)
+			to_chat(user, "<span class='alert'>The emergency shuttle is fueling itself.</span>")
 			return
 		if(SHUTTLE_DOCKED)
 			to_chat(user, "<span class='alert'>The emergency shuttle is already here.</span>")
@@ -267,7 +267,7 @@ SUBSYSTEM_DEF(shuttle)
 	message_admins("[ADMIN_LOOKUPFLW(user)] has called the shuttle. (<A HREF='?_src_=holder;[HrefToken()];trigger_centcom_recall=1'>TRIGGER CENTCOM RECALL</A>)")
 
 /datum/controller/subsystem/shuttle/proc/centcom_recall(old_timer, admiral_message)
-	if(emergency.mode != SHUTTLE_CALL || emergency.timer != old_timer)
+	if(emergency.mode != SHUTTLE_FUELING || emergency.timer != old_timer)
 		return
 	emergency.cancel()
 
@@ -302,7 +302,7 @@ SUBSYSTEM_DEF(shuttle)
 		return 1
 
 /datum/controller/subsystem/shuttle/proc/canRecall()
-	if(!emergency || emergency.mode != SHUTTLE_CALL || adminEmergencyNoRecall || emergencyNoRecall || SSticker.mode.name == "meteor")//MODULE: SHUTTLE TOGGLE
+	if(!emergency || emergency.mode != SHUTTLE_FUELING || adminEmergencyNoRecall || emergencyNoRecall || SSticker.mode.name == "meteor")//MODULE: SHUTTLE TOGGLE
 		return
 	var/security_num = GLOB.security_level
 	switch(security_num)

@@ -154,4 +154,6 @@
 /datum/emote/sound/run_emote(mob/user, params)
 	. = ..()
 	if(.)
+		if(user.nextsoundemote >= world.time)
+			return
 		playsound(user.loc, sound, volume, vary)
