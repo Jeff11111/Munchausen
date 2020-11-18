@@ -85,7 +85,7 @@
 				B.claim()
 			//play indihome paket globally if all cargo bounties are complete
 			if(!length(GLOB.bounties_list))
-				var/sound/ubur_bur = sound('modular_skyrat/sound/music/indihome_paket.ogg', FALSE, 0, CHANNEL_HIGHEST_AVAILABLE, 60)
+				var/sound/ubur_bur = sound('modular_skyrat/sound/music/indihomepaket.ogg', FALSE, 0, CHANNEL_HIGHEST_AVAILABLE, 60)
 				SEND_SOUND(world, ubur_bur)
 
 	if(href_list["refresh"])
