@@ -16,3 +16,7 @@
 /obj/item/stack/teeth/proc/do_knock_out_animation(shrink_time = 5)
 	transform = transform.Scale(2, 2)
 	animate(src, transform = transform.Scale(0.5, 0.5), time = shrink_time)
+
+//many teethe
+/obj/item/stack/teeth/full
+	amount = 32

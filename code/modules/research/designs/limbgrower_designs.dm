@@ -47,8 +47,8 @@
 	name = "Teeth"
 	id = "teeth"
 	build_type = LIMBGROWER
-	reagents_list = list(/datum/reagent/medicine/synthflesh = 2)
-	build_path = /obj/item/stack/teeth
+	reagents_list = list(/datum/reagent/medicine/synthflesh = 15)
+	build_path = /obj/item/stack/teeth/full
 	category = list("initial","human","lizard","fly","insect","plasmaman","mammal","xeno")
 
 /datum/design/chest
