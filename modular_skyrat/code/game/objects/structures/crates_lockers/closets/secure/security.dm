@@ -18,6 +18,7 @@
 /obj/structure/closet/secure_closet/brig_phys/PopulateContents()
 	..()
 	new /obj/item/radio/headset/headset_medsec(src)
+	new /obj/item/clothing/glasses/hud/health/sunglasses(src)
 	new	/obj/item/storage/firstaid/regular(src)
 	new	/obj/item/storage/firstaid/fire(src)
 	new	/obj/item/storage/firstaid/toxin(src)

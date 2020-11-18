@@ -67,9 +67,10 @@
 	new /obj/item/cartridge/hos(src)
 	new /obj/item/radio/headset/heads/hos(src)
 	new /obj/item/clothing/suit/armor/hos(src)
+	new /obj/item/clothing/suit/armor/hos/trenchcoat(src)
 	new /obj/item/clothing/head/HoS/police(src)
+	new /obj/item/clothing/head/HoS/beret(src)
 	new /obj/item/clothing/glasses/hud/security/sunglasses/eyepatch(src)
-	new /obj/item/clothing/under/rank/security/head_of_security/grey(src)
 	new /obj/item/storage/lockbox/medal/sec(src)
 	new /obj/item/megaphone/sec(src)
 	new /obj/item/holosign_creator/security(src)
@@ -120,7 +121,7 @@
 	name = "enforcer's locker"
 	req_access = list(ACCESS_SECURITY)
 	icon_state = "sec"
-/obj/structure/closet/secure_closet/security/PopulateContents()
+/obj/structure/closet/secure_closet/security_xenoarch/PopulateContents()
 	..()
 	new /obj/item/clothing/suit/armor/vest(src)
 	new /obj/item/clothing/head/helmet/sec(src)
@@ -130,7 +131,6 @@
 	new /obj/item/flashlight/seclite(src)
 
 /obj/structure/closet/secure_closet/security/sec
-
 /obj/structure/closet/secure_closet/security/sec/PopulateContents()
 	..()
 	new /obj/item/storage/belt/security/full(src)
@@ -140,16 +140,19 @@
 	..()
 	new /obj/item/clothing/accessory/armband/cargo(src)
 	new /obj/item/encryptionkey/headset_cargo(src)
+
 /obj/structure/closet/secure_closet/security/engine
 /obj/structure/closet/secure_closet/security/engine/PopulateContents()
 	..()
 	new /obj/item/clothing/accessory/armband/engine(src)
 	new /obj/item/encryptionkey/headset_eng(src)
+
 /obj/structure/closet/secure_closet/security/science
 /obj/structure/closet/secure_closet/security/science/PopulateContents()
 	..()
 	new /obj/item/clothing/accessory/armband/science(src)
 	new /obj/item/encryptionkey/headset_sci(src)
+
 /obj/structure/closet/secure_closet/security/med
 /obj/structure/closet/secure_closet/security/med/PopulateContents()
 	..()
