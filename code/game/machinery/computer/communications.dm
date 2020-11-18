@@ -26,7 +26,6 @@
 	var/const/STATE_ALERT_LEVEL = 8
 	var/const/STATE_CONFIRM_LEVEL = 9
 	var/const/STATE_TOGGLE_EMERGENCY = 10
-	var/const/STATE_PURCHASE = 11
 
 	var/stat_msg1
 	var/stat_msg2
@@ -151,44 +150,6 @@
 				message_admins("[ADMIN_LOOKUPFLW(usr)] has sent a message to the other server.")
 				deadchat_broadcast("<span class='deadsay bold'>[usr.real_name] has sent an outgoing message to the other station(s).</span>", usr)
 				CM.lastTimeUsed = world.time
-
-		if("purchase_menu")
-			state = STATE_PURCHASE
-
-		if("buyshuttle")
-			if(authenticated==2)
-				var/list/shuttles = flatten_list(SSmapping.shuttle_templates)
-				var/datum/map_template/shuttle/S = locate(href_list["chosen_shuttle"]) in shuttles
-				if(S && istype(S))
-					if(SSshuttle.emergency.mode != SHUTTLE_RECALL && SSshuttle.emergency.mode != SHUTTLE_IDLE)
-						to_chat(usr, "It's a bit late to buy a new shuttle, don't you think?")
-						return
-					if(SSshuttle.shuttle_purchased)
-						to_chat(usr, "A replacement shuttle has already been purchased.")
-					else if(!S.prerequisites_met())
-						to_chat(usr, "You have not met the requirements for purchasing this shuttle.")
-					else
-						var/points_to_check
-						var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_CAR)
-						if(D)
-							points_to_check = D.account_balance
-						if(points_to_check >= S.credit_cost)
-							var/obj/machinery/shuttle_manipulator/M = locate() in GLOB.machines
-							if(M)
-								SSshuttle.shuttle_purchased = TRUE
-								D.adjust_money(-S.credit_cost)
-								minor_announce("[usr.real_name] has purchased [S.name] for [S.credit_cost] credits." , "Shuttle Purchase")
-								message_admins("[ADMIN_LOOKUPFLW(usr)] purchased [S.name].")
-								SSblackbox.record_feedback("text", "shuttle_purchase", 1, "[S.name]")
-								M.unload_preview()
-								M.load_template(S)
-								M.existing_shuttle = SSshuttle.emergency
-								M.action_load(S)
-								message_admins("[S.name] loaded, purchased by [usr]")
-							else
-								to_chat(usr, "Something went wrong! The shuttle exchange system seems to be down.")
-						else
-							to_chat(usr, "Not enough credits.")
 
 		if("callshuttle")
 			state = STATE_DEFAULT
@@ -506,8 +467,6 @@
 					var/cross_servers_count = length(CONFIG_GET(keyed_list/cross_server))
 					if(cross_servers_count)
 						dat += "<BR>\[ <A HREF='?src=[REF(src)];operation=crossserver'>Send a message to [cross_servers_count == 1 ? "an " : ""]allied station[cross_servers_count > 1 ? "s" : ""]</A> \]"
-					if(SSmapping.config.allow_custom_shuttles)
-						dat += "<BR>\[ <A HREF='?src=[REF(src)];operation=purchase_menu'>Purchase Shuttle</A> \]"
 					dat += "<BR>\[ <A HREF='?src=[REF(src)];operation=changeseclevel'>Change Alert Level</A> \]"
 					dat += "<BR>\[ <A HREF='?src=[REF(src)];operation=emergencyaccess'>Emergency Maintenance Access</A> \]"
 					dat += "<BR>\[ <A HREF='?src=[REF(src)];operation=nukerequest'>Request Nuclear Authentication Codes</A> \]"
@@ -586,21 +545,6 @@
 			else
 				dat += "<b>Emergency Maintenance Access is currently <font color='green'>DISABLED</font></b>"
 				dat += "<BR>Lift access restrictions on maintenance and external airlocks? <BR>\[ <A HREF='?src=[REF(src)];operation=enableemergency'>OK</A> | <A HREF='?src=[REF(src)];operation=viewmessage'>Cancel</A> \]"
-
-		if(STATE_PURCHASE)
-			var/datum/bank_account/D = SSeconomy.get_dep_account(ACCOUNT_CAR)
-			dat += "Budget: [D.account_balance] Credits.<BR>"
-			dat += "<BR>"
-			dat += "<b>Caution: Purchasing dangerous shuttles may lead to mutiny and/or death.</b><br>"
-			dat += "<BR>"
-			for(var/shuttle_id in SSmapping.shuttle_templates)
-				var/datum/map_template/shuttle/S = SSmapping.shuttle_templates[shuttle_id]
-				if(S.can_be_bought && S.credit_cost < INFINITY)
-					dat += "[S.name] | [S.credit_cost] Credits<BR>"
-					dat += "[S.description]<BR>"
-					if(S.prerequisites)
-						dat += "Prerequisites: [S.prerequisites]<BR>"
-					dat += "<A href='?src=[REF(src)];operation=buyshuttle;chosen_shuttle=[REF(S)]'>(<font color=red><i>Purchase</i></font>)</A><BR><BR>"
 
 	dat += "<BR><BR>\[ [(state != STATE_DEFAULT) ? "<A HREF='?src=[REF(src)];operation=main'>Main Menu</A> | " : ""]<A HREF='?src=[REF(user)];mach_close=communications'>Close</A> \]"
 
