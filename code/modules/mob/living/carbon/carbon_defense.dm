@@ -174,7 +174,7 @@
 	if(surgeries.len)
 		if(user.a_intent == INTENT_HELP)
 			for(var/datum/surgery/S in surgeries)
-				if(!S.lying_required || (S.lying_required && lying))
+				if(!S.lying_required || (S.lying_required && lying) && (S.location == user.zone_selected))
 					if(S.next_step(user, user.a_intent))
 						return TRUE
 	
