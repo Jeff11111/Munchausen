@@ -197,7 +197,7 @@ var/horse_stance_effects = FALSE // ensures the horse stance gains it effect
 	playsound(get_turf(D), 'modular_skyrat/sound/weapons/armstrong_headbutt.ogg', 80, 0, -1)
 	A.playsound_local(get_turf(A), 'modular_skyrat/sound/weapons/armstrong_success.ogg', 50, FALSE, pressure_affected = FALSE)
 	D.AdjustUnconscious(15)
-	D.adjustOrganLoss(ORGAN_SLOT_BRAIN,30)
+	D.adjustBrainLoss(30)
 	add_exp(12, A, D)
 	var/datum/effect_system/explosion/E = new
 	E.set_up(get_turf(D))

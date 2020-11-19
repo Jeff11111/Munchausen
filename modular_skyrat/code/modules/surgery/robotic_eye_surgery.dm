@@ -43,7 +43,7 @@
 		display_results(user, target, "<span class='warning'>You accidentally stab [target] right in the brain!</span>",
 			"<span class='warning'>[user] accidentally stabs [target] right in the brain!</span>",
 			"<span class='warning'>[user] accidentally stabs [target] right in the brain!</span>")
-		target.adjustOrganLoss(ORGAN_SLOT_BRAIN, 70)
+		target.adjustBrainLoss(70)
 	else
 		display_results(user, target, "<span class='warning'>You accidentally stab [target] right in the brain! Or would have, if [target] had a brain.</span>",
 			"<span class='warning'>[user] accidentally stabs [target] right in the brain! Or would have, if [target] had a brain.</span>",

@@ -63,7 +63,7 @@
 	playsound(get_turf(our_guy), "sound/effects/tableheadsmash.ogg", 90, TRUE)
 	our_guy.visible_message("<span class='danger'>[our_guy] hits [our_guy.p_their()] head really badly falling down!</span>", "<span class='userdanger'>You hit your head really badly falling down!</span>")
 	the_head.receive_damage(75)
-	our_guy.adjustOrganLoss(ORGAN_SLOT_BRAIN, 100)
+	our_guy.adjustBrainLoss(100)
 	qdel(src)
 
 /// Hijack the mood system to see if we get the blessing mood event to cancel the omen

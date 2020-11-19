@@ -695,7 +695,7 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 				to_chat(src, "<span class='warning'>Maybe you should lie down for a bit...</span>")
 
 		if(drunkenness >= 301) //skyrat-edit
-			adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.4, 60)
+			adjustBrainLoss(0.4, 60)
 			if(prob(20) && !stat)
 				if(SSshuttle.emergency.mode == SHUTTLE_DOCKED && is_station_level(z)) //QoL mainly
 					to_chat(src, "<span class='warning'>You're so tired... but you can't miss that shuttle...</span>")

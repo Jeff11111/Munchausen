@@ -6,5 +6,5 @@
 	. = ..()
 	if(ishuman(target))
 		var/mob/living/carbon/human/M = target
-		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 20)
+		M.adjustBrainLoss(20)
 		M.hallucination += 30

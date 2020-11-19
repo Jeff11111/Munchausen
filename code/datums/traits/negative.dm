@@ -130,7 +130,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	medical_record_text = "Patient has a tumor in their brain that is slowly driving them to brain death."
 
 /datum/quirk/brainproblems/on_process()
-	quirk_holder.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.2)
+	quirk_holder.adjustBrainLoss(0.2)
 
 /datum/quirk/nearsighted //t. errorage
 	name = "Nearsighted"

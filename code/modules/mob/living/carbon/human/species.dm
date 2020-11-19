@@ -2133,7 +2133,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			if(BODY_ZONE_HEAD)
 				if(!I.get_sharpness() && armor_block < 50)
 					if(prob(I.force))
-						H.adjustOrganLoss(ORGAN_SLOT_BRAIN, 20)
+						H.adjustBrainLoss(20)
 						if(H.stat == CONSCIOUS)
 							H.visible_message("<span class='danger'>[H] has been knocked senseless!</span>", \
 											"<span class='userdanger'>You have been knocked senseless!</span>")
@@ -2142,7 +2142,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 						if(prob(5))
 							H.gain_trauma(/datum/brain_trauma/mild/concussion)
 					else
-						H.adjustOrganLoss(ORGAN_SLOT_BRAIN, I.force * 0.2)
+						H.adjustBrainLoss(I.force * 0.2)
 
 					if(H.stat == CONSCIOUS && H != user && prob(I.force + ((100 - H.health) * 0.5))) // rev deconversion through blunt trauma.
 						var/datum/antagonist/rev/rev = H.mind?.has_antag_datum(/datum/antagonist/rev)
@@ -2437,7 +2437,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				H.adjustStaminaLoss(damage_amount)
 		if(BRAIN)
 			var/damage_amount = forced ? damage : damage * hit_percent * H.physiology.brain_mod
-			H.adjustOrganLoss(ORGAN_SLOT_BRAIN, damage_amount)
+			H.adjustBrainLoss(damage_amount)
 	return 1
 */
 

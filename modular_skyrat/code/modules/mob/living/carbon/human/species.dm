@@ -214,7 +214,7 @@
 				H.adjustStaminaLoss(damage_amount)
 		if(BRAIN)
 			var/damage_amount = forced ? damage : damage * hit_percent * H.physiology.brain_mod
-			H.adjustOrganLoss(ORGAN_SLOT_BRAIN, damage_amount)
+			H.adjustBrainLoss(damage_amount)
 	return 1
 
 /datum/species/proc/spec_revival(mob/living/carbon/human/H)

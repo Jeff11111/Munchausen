@@ -53,7 +53,7 @@
 		M.hallucination = max(0, M.hallucination - 10)
 
 	if(A.stage >= 5)
-		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -3)
+		M.adjustBrainLoss(-3)
 		if(trauma_heal_mild && iscarbon(M))
 			var/mob/living/carbon/C = M
 			if(prob(10))

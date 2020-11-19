@@ -26,7 +26,7 @@
 		//Saying cringe 2 times or more in a span of 2 seconds will give you massive brain damage.
 		if(world.time <= last_cringe + 2 SECONDS)
 			SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "cringe", /datum/mood_event/ultracringe)
-			adjustOrganLoss(ORGAN_SLOT_BRAIN, rand(25, 50))
+			adjustBrainLoss(rand(25, 50))
 		last_cringe = world.time
 		cringecount++
 		//You aren't even trying. Literally just kills you at this point.

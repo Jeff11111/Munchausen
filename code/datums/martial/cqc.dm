@@ -66,7 +66,7 @@
 		D.apply_damage(damage + 5, BRUTE)
 		var/atom/throw_target = get_edge_target_turf(D, A.dir)
 		D.throw_at(throw_target, 1, 14, A)
-		D.adjustOrganLoss(ORGAN_SLOT_BRAIN, damage + 10, 150)
+		D.adjustBrainLoss(damage + 10, 150)
 	else
 		D.visible_message("<span class='warning'>[A] kicks [D]!</span>", \
 							"<span class='userdanger'>[A] kicks you!</span>")

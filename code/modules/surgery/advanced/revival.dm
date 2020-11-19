@@ -67,12 +67,7 @@
 		user.visible_message("...[target] wakes up, alive and aware!", "<span class='notice'><b>IT'S ALIVE!</b></span>")
 		target.visible_message("...[target] wakes up, alive and aware!")
 		target.emote("gasp")
-		target.adjustOrganLoss(ORGAN_SLOT_BRAIN, 50, 199) //MAD SCIENCE
-		/* skyrat edit
-		for(var/obj/item/organ/O in target.internal_organs)//zap those buggers back to life!
-			if(O.organ_flags & ORGAN_FAILING)
-				O.applyOrganDamage(-5)
-		*/
+		target.adjustBrainLoss(50, 199) //MAD SCIENCE
 		return TRUE
 	else
 		user.visible_message("...[target.p_they()] convulses, then lies still.")
@@ -84,5 +79,5 @@
 		"[user] send a powerful shock to [target]'s brain with [tool], but [target.p_they()] doesn't react.",
 		"[user] send a powerful shock to [target]'s brain with [tool], but [target.p_they()] doesn't react.")
 	playsound(get_turf(target), 'sound/magic/lightningbolt.ogg', 50, 1)
-	target.adjustOrganLoss(ORGAN_SLOT_BRAIN, 50, 199)
+	target.adjustBrainLoss(50, 199)
 	return FALSE

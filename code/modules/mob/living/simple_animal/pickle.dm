@@ -21,7 +21,7 @@
 
 /mob/living/simple_animal/pickle/death()
 	if(original_body)
-		original_body.adjustOrganLoss(ORGAN_SLOT_BRAIN, 200) //to be fair, you have to have a very high iq to understand-
+		original_body.adjustBrainLoss(200) //to be fair, you have to have a very high iq to understand-
 		original_body.forceMove(get_turf(src))
 		if(mind)
 			mind.transfer_to(original_body)

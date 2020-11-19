@@ -187,7 +187,7 @@
 		victim.adjust_blurriness(rand(1 * (severity - WOUND_SEVERITY_TRIVIAL), 10 * (severity - WOUND_SEVERITY_TRIVIAL)))
 		victim.confused += max(25, rand(1 * (severity - WOUND_SEVERITY_TRIVIAL), 10 * (severity - WOUND_SEVERITY_TRIVIAL)))
 		if(prob(wounding_dmg))
-			victim.adjustOrganLoss(ORGAN_SLOT_BRAIN, rand(1, 4) * (severity - WOUND_SEVERITY_TRIVIAL))
+			victim.adjustBrainLoss(rand(1, 4) * (severity - WOUND_SEVERITY_TRIVIAL))
 
 /datum/wound/blunt/get_examine_description(mob/user)
 	if(!limb.current_gauze && !gelled && !taped)

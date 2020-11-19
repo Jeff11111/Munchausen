@@ -142,7 +142,7 @@
 	process_flags = REAGENT_SYNTHETIC
 
 /datum/reagent/medicine/liquid_solder/on_mob_life(mob/living/carbon/C)
-	C.adjustOrganLoss(ORGAN_SLOT_BRAIN, -3*REM)
+	C.adjustBrainLoss(-3*REM)
 	if(prob(10))
 		C.cure_trauma_type(resilience = TRAUMA_RESILIENCE_BASIC)
 	..()
@@ -343,7 +343,7 @@
 	if(prob(3))
 		M.custom_pain("Your entire body feels as if it is being pricked by sharp needles.", 40)
 	if(prob(5))
-		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, rand(5, 10))
+		M.adjustBrainLoss(rand(5, 10))
 
 /datum/reagent/medicine/promedol/addiction_act_stage3(mob/living/M)
 	. = ..()

@@ -252,7 +252,7 @@
 /datum/symptom/heal/dna/Heal(mob/living/carbon/M, datum/disease/advance/A)
 	var/amt_healed = 1.2
 	if(healing_brain)
-		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -(2 * amt_healed))
+		M.adjustBrainLoss(-(2 * amt_healed))
 		var/mob/living/carbon/C = M
 		if(prob(30))
 			C.cure_all_traumas(resilience = TRAUMA_RESILIENCE_LOBOTOMY)

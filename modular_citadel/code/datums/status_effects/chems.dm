@@ -347,7 +347,7 @@
 			M.stuttering = max(0, M.stuttering - 5)
 			M.jitteriness = max(0, M.jitteriness - 5)
 			if(owner.getOrganLoss(ORGAN_SLOT_BRAIN) >=20)
-				owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, -0.2)
+				owner.adjustBrainLoss(-0.2)
 			if(withdrawal == TRUE)
 				REMOVE_TRAIT(owner, TRAIT_PACIFISM, "MKUltra")
 				SEND_SIGNAL(M, COMSIG_CLEAR_MOOD_EVENT, "EnthMissing1")
@@ -368,7 +368,7 @@
 				if(prob(5))
 					to_chat(owner, "<span class='notice'><i>You're starting to miss [(lewd?"your [enthrallGender]":"[master]")].</i></span>")
 				if(prob(5))
-					owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.1)
+					owner.adjustBrainLoss(0.1)
 					to_chat(owner, "<i>[(lewd?"[enthrallGender]":"[master]")] will surely be back soon</i>") //denial
 			if(36)
 				var/message = "[(lewd?"I feel empty when [enthrallGender]'s not around..":"I miss [master]'s presence")]"
@@ -376,11 +376,11 @@
 			if(37 to 65)//barganing
 				if(prob(10))
 					to_chat(owner, "<i>They are coming back, right...?</i>")
-					owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.5)
+					owner.adjustBrainLoss(0.5)
 				if(prob(10))
 					if(lewd)
 						to_chat(owner, "<i>I just need to be a good pet for [enthrallGender], they'll surely return if I'm a good pet.</i>")
-					owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, -1.5)
+					owner.adjustBrainLoss(-1.5)
 			if(66)
 				SEND_SIGNAL(M, COMSIG_CLEAR_MOOD_EVENT, "EnthMissing1")
 				var/message = "[(lewd?"I feel so lost in this complicated world without [enthrallGender]..":"I have to return to [master]!")]"
@@ -425,7 +425,7 @@
 						to_chat(owner, "<span class='warning'><i>You're unable to hold back your tears, suddenly sobbing as the desire to see your [enthrallGender] oncemore overwhelms you.</i></span>")
 					else
 						to_chat(owner, "<span class='warning'><i>You are overwheled with withdrawl from [master].</i></span>")
-					owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1)
+					owner.adjustBrainLoss(1)
 					owner.stuttering += 35
 					owner.jitteriness += 35
 					if(prob(10))//2% chance
@@ -441,14 +441,14 @@
 			if(140 to INFINITY) //acceptance
 				if(prob(15))
 					deltaResist += 5
-					owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, -1)
+					owner.adjustBrainLoss(-1)
 					if(prob(20))
 						if(lewd)
 							to_chat(owner, "<i><span class='small green'>Maybe you'll be okay without your [enthrallGender].</i></span>")
 						else
 							to_chat(owner, "<i><span class='small green'>You feel your mental functions slowly begin to return.</i></span>")
 				if(prob(5))
-					owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1)
+					owner.adjustBrainLoss(1)
 					M.hallucination += 30
 
 		withdrawalTick += 0.5//Enough to leave you with a major brain trauma, but not kill you.

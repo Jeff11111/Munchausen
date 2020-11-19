@@ -122,7 +122,9 @@
 					to_chat(src, "<span class='warning'>You feel extremely [word].</span>")
 			if(-INFINITY to BLOOD_VOLUME_SURVIVE)
 				adjustOxyLoss(10)
-				adjustOrganLoss(ORGAN_SLOT_HEART, 5)
+		
+		if(get_blood_circulation() <= BLOOD_VOLUME_SURVIVE)
+			adjustOrganLoss(ORGAN_SLOT_HEART, rand(1, 2))
 
 		var/temp_bleed = 0
 		//Bleeding out

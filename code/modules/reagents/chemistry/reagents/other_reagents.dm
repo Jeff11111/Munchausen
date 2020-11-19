@@ -442,7 +442,7 @@
 			if(spleen)
 				M.blood_volume += (6 * spleen.get_blood())
 	else  // Will deal about 90 damage when 50 units are thrown
-		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3, 150)
+		M.adjustBrainLoss(3, 150)
 		M.adjustToxLoss(2, FALSE)
 		M.adjustFireLoss(2, FALSE)
 		M.adjustOxyLoss(2, FALSE)
@@ -465,7 +465,7 @@
 	M.IgniteMob()			//Only problem with igniting people is currently the commonly availible fire suits make you immune to being on fire
 	M.adjustToxLoss(1, FALSE)
 	M.adjustFireLoss(1, FALSE)		//Hence the other damages... ain't I a bastard?
-	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 5, 150)
+	M.adjustBrainLoss(5, 150)
 	holder.remove_reagent(type, 1)
 	pH = 0.1
 
@@ -953,7 +953,7 @@
 		step(M, pick(GLOB.cardinals))
 	if(prob(5))
 		M.emote(pick("twitch","drool","moan"))
-	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1)
+	M.adjustBrainLoss(1)
 	..()
 
 /datum/reagent/sulfur
@@ -1339,7 +1339,7 @@
 /datum/reagent/impedrezene/on_mob_life(mob/living/carbon/M)
 	M.jitteriness = max(M.jitteriness-5,0)
 	if(prob(80))
-		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 2*REM)
+		M.adjustBrainLoss(2*REM)
 	if(prob(50))
 		M.drowsyness = max(M.drowsyness, 3)
 	if(prob(10))

@@ -88,7 +88,7 @@
 	return problems ? ..() : FALSE
 
 /datum/nanite_program/brain_heal/active_effect()
-	host_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, -1)
+	host_mob.adjustBrainLoss(-1)
 	if(iscarbon(host_mob) && prob(10))
 		var/mob/living/carbon/C = host_mob
 		C.cure_trauma_type(resilience = TRAUMA_RESILIENCE_BASIC)
@@ -217,7 +217,7 @@
 	return problems ? ..() : FALSE
 
 /datum/nanite_program/brain_heal_advanced/active_effect()
-	host_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, -2)
+	host_mob.adjustBrainLoss(-2)
 	if(iscarbon(host_mob) && prob(10))
 		var/mob/living/carbon/C = host_mob
 		C.cure_trauma_type(resilience = TRAUMA_RESILIENCE_SURGERY)

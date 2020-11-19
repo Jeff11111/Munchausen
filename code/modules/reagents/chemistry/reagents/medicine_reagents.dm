@@ -1008,7 +1008,7 @@
 	pH = 10.4
 
 /datum/reagent/medicine/mannitol/on_mob_life(mob/living/carbon/C)
-	C.adjustOrganLoss(ORGAN_SLOT_BRAIN, -2*REM)
+	C.adjustBrainLoss(-2*REM)
 	if(prob(10))
 		C.cure_trauma_type(resilience = TRAUMA_RESILIENCE_BASIC)
 	..()
@@ -1269,7 +1269,7 @@
 	M.adjustFireLoss(-5*REM, FALSE)
 	M.adjustOxyLoss(-15, FALSE)
 	M.adjustToxLoss(-5*REM, FALSE)
-	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -15*REM)
+	M.adjustBrainLoss(-15*REM)
 	M.adjustCloneLoss(-3*REM, FALSE)
 	M.adjustStaminaLoss(-25*REM,FALSE)
 	if(M.blood_volume < (BLOOD_VOLUME_NORMAL*M.blood_ratio))
@@ -1292,7 +1292,7 @@
 	M.adjustFireLoss(-2*REM, FALSE)
 	M.adjustOxyLoss(-5*REM, FALSE)
 	M.adjustToxLoss(-2*REM, FALSE)
-	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -5*REM)
+	M.adjustBrainLoss(-5*REM)
 	M.adjustCloneLoss(-1.25*REM, FALSE)
 	M.adjustStaminaLoss(-4*REM,FALSE)
 	if(M.blood_volume < (BLOOD_VOLUME_NORMAL*M.blood_ratio))
@@ -1341,7 +1341,7 @@
 	M.adjustFireLoss(-3 * REM, FALSE)
 	M.adjustOxyLoss(-15 * REM, FALSE)
 	M.adjustToxLoss(-3 * REM, FALSE, TRUE) //Heals TOXINLOVERS
-	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 2 * REM, 150) //This does, after all, come from ambrosia, and the most powerful ambrosia in existence, at that!
+	M.adjustBrainLoss(2 * REM, 150) //This does, after all, come from ambrosia, and the most powerful ambrosia in existence, at that!
 	M.adjustCloneLoss(-1 * REM, FALSE)
 	M.adjustStaminaLoss(-13 * REM, FALSE)
 	M.jitteriness = min(max(0, M.jitteriness + 3), 30)
@@ -1373,7 +1373,7 @@
 	if (M.hallucination >= 5)
 		M.hallucination -= 5
 	if(prob(20))
-		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1*REM, 50)
+		M.adjustBrainLoss(1*REM, 50)
 	M.adjustStaminaLoss(2.5*REM, 0)
 	..()
 	return TRUE
@@ -1701,7 +1701,7 @@
 	value = REAGENT_VALUE_UNCOMMON // while it's 'rare', it can be milked from the wisdom cow
 
 /datum/reagent/medicine/liquid_wisdom/on_mob_life(mob/living/carbon/C) //slightly stronger mannitol, from the wisdom cow
-	C.adjustOrganLoss(ORGAN_SLOT_BRAIN, -3*REM)
+	C.adjustBrainLoss(-3*REM)
 	if(prob(20))
 		C.cure_trauma_type(resilience = TRAUMA_RESILIENCE_BASIC)
 	if(prob(3))

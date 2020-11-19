@@ -407,7 +407,7 @@
 			var/mob/living/carbon/human/C = mob_occupant
 			C.update_pacification_ban()	// SKYRAT ADDITION -- END
 
-	mob_occupant.adjustOrganLoss(ORGAN_SLOT_BRAIN, mob_occupant.getCloneLoss())
+	mob_occupant.adjustBrainLoss(mob_occupant.getCloneLoss())
 
 	occupant.forceMove(T)
 	update_icon()
