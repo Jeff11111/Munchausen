@@ -403,19 +403,23 @@
 	switch(mode)
 		if(SHUTTLE_COMINGBACK)
 			if(time_left <= 0)
-				//move emergency shuttle to station
-				if(initiate_docking(SSshuttle.getDock("emergency_home")) != DOCKING_SUCCESS)
-					setTimer(20)
-					return
+				var/atom/FUCK = get_docked()
+				if(!is_station_level(FUCK.z))
+					//move emergency shuttle to station
+					if(initiate_docking(SSshuttle.getDock("emergency_home")) != DOCKING_SUCCESS)
+						setTimer(20)
+						return
 				mode = SHUTTLE_IDLE
 				timer = 0
 		
 		if(SHUTTLE_FUELING)
 			if(time_left <= 0)
-				//move emergency shuttle to station
-				if(initiate_docking(SSshuttle.getDock("emergency_home")) != DOCKING_SUCCESS)
-					setTimer(20)
-					return
+				var/atom/FUCK = get_docked()
+				if(!is_station_level(FUCK.z))
+					//move emergency shuttle to station
+					if(initiate_docking(SSshuttle.getDock("emergency_home")) != DOCKING_SUCCESS)
+						setTimer(20)
+						return
 				mode = SHUTTLE_DOCKED
 				setTimer(SSshuttle.emergencyDockTime)
 				send2irc("Server", "The Emergency Shuttle is ready to depart the station.")
