@@ -95,7 +95,7 @@
 			return BULLET_ACT_BLOCK
 		totaldamage = block_calculate_resultant_damage(totaldamage, returnlist)
 	var/armor = run_armor_check(def_zone, P.flag, null, null, P.armour_penetration, null)
-	if(total_damage && !P.nodamage)
+	if(totaldamage && !P.nodamage)
 		apply_damage(totaldamage, P.damage_type, def_zone, armor, wound_bonus=P.wound_bonus, bare_wound_bonus=P.bare_wound_bonus, sharpness=P.sharpness) //skyrat edit
 		if(P.dismemberment)
 			check_projectile_dismemberment(P, def_zone)
@@ -124,10 +124,10 @@
 				Paralyze(P.damage)
 				DefaultCombatKnockdown(P.damage*2)
 		if((P.damage_type == BRUTE) && ((mob_biotypes & MOB_ORGANIC) || (mob_biotypes & MOB_HUMANOID)) && (totaldamage >= 10) && !P.nodamage)
-			var/obj/effect/decal/cleanable/blood/hitsplatter/B = new(target.loc, L.get_blood_dna_list())
-			B.add_blood_DNA(L.get_blood_dna_list())
-			var/dist = rand(1,min(damage/10, 5))
-			var/turf/targ = get_ranged_target_turf(target, get_dir(starting, target), dist)
+			var/obj/effect/decal/cleanable/blood/hitsplatter/B = new(loc, get_blood_dna_list())
+			B.add_blood_DNA(get_blood_dna_list())
+			var/dist = rand(1,min(totaldamage/10, 5))
+			var/turf/targ = get_ranged_target_turf(src, get_dir(P.starting, src), dist)
 			B.GoTo(targ, dist)
 	var/missing = 100 - final_percent
 	var/armor_ratio = armor * 0.01
