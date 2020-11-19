@@ -27,8 +27,8 @@
 
 /datum/quirk/painless/on_spawn()
 	. = ..()
-	ADD_TRAIT(quirk_holder, TRAIT_NOPAIN)
-	ADD_TRAIT(quirk_holder, TRAIT_SCREWY_CHECKSELF)
+	ADD_TRAIT(quirk_holder, TRAIT_NOPAIN, "quirk")
+	ADD_TRAIT(quirk_holder, TRAIT_SCREWY_CHECKSELF, "quirk")
 
 //rich
 /datum/quirk/wealthy
