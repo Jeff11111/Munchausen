@@ -52,8 +52,8 @@
 	register_asset("[ckey(name)].js", file)
 
 /datum/browser/proc/set_content(ncontent)
-	if(user?.mind && (GET_STAT_LEVEL(user, int) <= JOB_STATPOINTS_WORTHLESS))
-		content = "<HTML><HEAD><TITLE>DUM DUM</TITLE></HEAD><BODY><h1><span style='font-family: 'Comic Sans MS', 'Comic Sans', cursive;'>DUM DUM MODE. ME DUM DUM.</h1></BODY></HTML>"
+	if(iscarbon(user) && user.mind && (GET_STAT_LEVEL(user, int) <= JOB_STATPOINTS_WORTHLESS))
+		content = "<h1><span style='font-family: 'Comic Sans MS', 'Comic Sans', cursive;'>DUM DUM MODE. ME DUM DUM.</span></h1>"
 	else
 		content = ncontent
 
