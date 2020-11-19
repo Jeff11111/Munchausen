@@ -127,7 +127,6 @@ SUBSYSTEM_DEF(events)
 	popup.set_content(dat)
 	popup.open()
 
-
 /*
 //////////////
 // HOLIDAYS //

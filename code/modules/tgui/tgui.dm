@@ -44,6 +44,8 @@
 	var/list/datum/tgui/children = list()
 	var/custom_browser_id = FALSE
 	var/ui_screen = "home"
+	/// Is this UI scrambled?
+	var/scrambled = FALSE
 
  /**
   * public
@@ -77,7 +79,10 @@
 		src.width = width
 	if(height)
 		src.height = height
-
+	//scromble if low IQ
+	if(user?.mind && (GET_STAT_LEVEL(user, int) <= JOB_STATPOINTS_WORTHLESS))
+		src.scrambled = TRUE
+	
 	src.master_ui = master_ui
 	if(master_ui)
 		master_ui.children += src
@@ -132,11 +137,28 @@
 		winset(user, window_id, "on-close=\"uiclose \ref[src]\"")
 
 	if(!initial_data)
-		initial_data = src_object.ui_data(user)
+		initial_data = (!scrambled ? src_object.ui_data(user) : scramble_data(src_object.ui_data(user)))
 	if(!initial_static_data)
 		initial_static_data = src_object.ui_static_data(user)
 
 	SStgui.on_open(src)
+
+/**
+ * Scrambles UIs for low intelligence niggers
+ **/
+/datum/tgui/proc/scramble_data(list/ui_data)
+	for(var/data in ui_data)
+		if(istext(data))
+			data = pick("Uhhhhhh", "Huuuuuuuuhhhh", "Fnord", "Uhm", "Hm?", "Ooh", "Ooooooooooo", "Uuuuuuuuuuuu", "Aaaaaaaaaa", "Ahhhhhhhhh")
+		else if(islist(data))
+			data = list("UUUUUUUUUUUUUUU")
+		else if(ispath(data))
+			data = pick(subtypesof(/obj/item/melee))
+		else if(isatom(data))
+			data = SStitle?.splash_turf
+		else
+			data = pick("Uhhhhhh", "Huuuuuuuuhhhh", "Fnord", "Uhm", "Hm?", "Ooh", "Ooooooooooo", "Uuuuuuuuuuuu", "Aaaaaaaaaa", "Ahhhhhhhhh")
+	return ui_data
 
  /**
   * public

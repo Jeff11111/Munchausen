@@ -14,7 +14,6 @@
 	var/head_content = ""
 	var/content = ""
 
-
 /datum/browser/New(nuser, nwindow_id, ntitle = 0, nwidth = 0, nheight = 0, var/atom/nref = null)
 
 	user = nuser
@@ -53,7 +52,10 @@
 	register_asset("[ckey(name)].js", file)
 
 /datum/browser/proc/set_content(ncontent)
-	content = ncontent
+	if(user?.mind && (GET_STAT_LEVEL(user, int) <= JOB_STATPOINTS_WORTHLESS))
+		content = "<HTML><HEAD><TITLE>DUM DUM</TITLE></HEAD><BODY><h1><span style='font-family: 'Comic Sans MS', 'Comic Sans', cursive;'>DUM DUM MODE. ME DUM DUM.</h1></BODY></HTML>"
+	else
+		content = ncontent
 
 /datum/browser/proc/add_content(ncontent)
 	content += ncontent

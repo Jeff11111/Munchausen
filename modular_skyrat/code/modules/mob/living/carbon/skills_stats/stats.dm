@@ -59,4 +59,4 @@
 //Intelligence
 /datum/stats/int
 	name = "Intelligence"
-	shorthand = "IT"
+	shorthand = "IQ"
