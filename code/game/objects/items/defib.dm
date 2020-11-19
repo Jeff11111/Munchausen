@@ -639,7 +639,7 @@
 					defib.cooldowncheck(user)
 				else
 					recharge(60)
-			else if (!H.getorgan(/obj/item/organ/heart))
+			else if(!H.getorgan(/obj/item/organ/heart))
 				user.visible_message("<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Patient's heart is missing. Operation aborted.</span>")
 				playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
 			else if(H.undergoing_cardiac_arrest())

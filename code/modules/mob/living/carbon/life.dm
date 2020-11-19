@@ -789,7 +789,7 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 		return FALSE
 	
 	var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
-	if(!heart || CHECK_BITFIELD(heart.organ_flags, ORGAN_SYNTHETIC) || CHECK_BITFIELD(heart.status, ORGAN_ROBOTIC))
+	if(!istype(heart))
 		return FALSE
 	return TRUE
 

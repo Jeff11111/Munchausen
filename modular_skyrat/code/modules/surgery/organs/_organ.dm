@@ -181,11 +181,13 @@
 	if((organ_flags & ORGAN_FROZEN) || (organ_flags & ORGAN_DEAD))
 		return
 	germ_level += rand(MIN_ORGAN_DECAY_INFECTION,MAX_ORGAN_DECAY_INFECTION)
+	if(germ_level >= INFECTION_LEVEL_ONE)
+		applyOrganDamage((maxHealth * decay_factor)/2)
 	if(germ_level >= INFECTION_LEVEL_TWO)
 		germ_level += rand(MIN_ORGAN_DECAY_INFECTION,MAX_ORGAN_DECAY_INFECTION)
+		applyOrganDamage((maxHealth * decay_factor)/2)
 	if(germ_level >= INFECTION_LEVEL_THREE)
 		kill_organ()
-	applyOrganDamage(maxHealth * decay_factor)
 
 /obj/item/organ/proc/can_decay()
 	if(CHECK_BITFIELD(organ_flags, ORGAN_NO_SPOIL | ORGAN_SYNTHETIC | ORGAN_FAILING | ORGAN_DEAD))

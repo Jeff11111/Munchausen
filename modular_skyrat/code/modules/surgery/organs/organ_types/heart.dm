@@ -198,7 +198,7 @@
 			beat = BEAT_NONE
 
 /obj/item/organ/heart/listen()
-	if((status & ORGAN_ROBOTIC) && is_working())
+	if(CHECK_BITFIELD(status, ORGAN_ROBOTIC) && is_working())
 		if(damage >= low_threshold)
 			return "sputtering pump"
 		else

@@ -234,14 +234,16 @@
 		STOP_PROCESSING(SSobj, src)
 		return
 	is_cold()
-	if((status & BODYPART_FROZEN) || (status & BODYPART_DEAD))
+	if(CHECK_BITFIELD(status, BODYPART_FROZEN | BOODYPART_DEAD))
 		return
 	germ_level += rand(MIN_ORGAN_DECAY_INFECTION,MAX_ORGAN_DECAY_INFECTION)
 	if(germ_level >= INFECTION_LEVEL_TWO)
 		germ_level += rand(MIN_ORGAN_DECAY_INFECTION,MAX_ORGAN_DECAY_INFECTION)
+		update_limb(owner ? FALSE : TRUE)
 	if(germ_level >= INFECTION_LEVEL_THREE)
 		kill_limb()
-	tox_dam = min(max_tox_damage, tox_dam + (max_tox_damage * decay_factor))
+	if(owner)
+		tox_dam = min(max_tox_damage, tox_dam + (max_tox_damage * decay_factor))
 
 //Checks to see if the bodypart is frozen from temperature
 /obj/item/bodypart/proc/is_cold()
@@ -517,6 +519,7 @@
 			"<span class='notice'>You begin to cut open [src]...</span>")
 		if(do_after(user, 54, target = src))
 			drop_organs(user)
+			update_limb(owner ? FALSE : TRUE)
 	else if((istype(W, /obj/item/cautery) || istype(W, /obj/item/pen)) && user.a_intent == INTENT_HELP)
 		var/badboy = input(user, "What do you want to inscribe on [src]?", "Malpractice", "") as text
 		if(badboy)
@@ -534,6 +537,7 @@
 		playsound(get_turf(src), 'sound/misc/splort.ogg', 50, 1, -1)
 	pixel_x = rand(-3, 3)
 	pixel_y = rand(-3, 3)
+	update_limb(owner ? FALSE : TRUE)
 
 //empties the bodypart from its organs and other things inside it
 /obj/item/bodypart/proc/drop_organs(mob/user, violent_removal)

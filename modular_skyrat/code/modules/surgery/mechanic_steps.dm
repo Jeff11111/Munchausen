@@ -92,7 +92,10 @@
 	var/metalamount = 5
 
 /datum/surgery_step/add_plating/tool_check(mob/user, obj/item/tool, mob/living/carbon/target)
-	var/obj/item/stack/sheet/metal/plat = tool
+	var/obj/item/stack/sheet/plat = tool
+	if(!istype(plat))
+		to_chat(user, "<span class='warning'>No, that won't work!</span>")
+		return FALSE
 	if(plat.get_amount() < metalamount)
 		to_chat(user, "<span class='warning'>Not enough metal!</span>")
 		return FALSE
@@ -100,7 +103,7 @@
 
 /datum/surgery_step/add_plating/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	var/obj/item/stack/sheet/metal/plat = tool
-	if(plat && !(plat.get_amount()<metalamount)) //failproof
+	if(plat && !(plat.get_amount() < metalamount)) //failproof
 		plat.use(metalamount)
 	return TRUE
 
