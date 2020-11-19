@@ -896,7 +896,7 @@
 		return
 
 	visible_message("<span class='notice'>[src] examines [p_themselves()].</span>", \
-		"<span class='notice'><i><b>You check yourself for injuries.</b><i></span>")
+		"<span class='notice'><i><b>I check myself for injuries.</b><i></span>")
 
 	var/list/missing = ALL_BODYPARTS
 
