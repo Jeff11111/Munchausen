@@ -991,8 +991,8 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	if(hover_tip && (SSticker.current_state >= GAME_STATE_SETTING_UP) && !isnewplayer(mob))
 		screen |= hover_tip
 		hover_tip.maptext = ""
-		if(iscarbon(object))
-			hover_tip.maptext = "<center style='[hover_tip.style_carbon]'>[object.name]</center>"
+		if(iscarbon(object) || isobserver(object))
+			hover_tip.maptext = "<center style='[hover_tip.style_carbon]'>[uppertext(object.name)]</center>"
 		else
 			hover_tip.maptext = "<center style='[hover_tip.style_atom]'>[uppertext(object.name)]</center>"
 
