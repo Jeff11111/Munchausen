@@ -122,6 +122,6 @@
 				heart.etching = "<b>INRL</b> - [key_text] - [key_num]"
 				SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "wonder", /datum/mood_event/saw_wonder)
 				H.emote("scream")
-				H.playsound(get_turf(H), 'modular_skyrat/code/modules/antagonists/dreamer/sound/seen_wonder.ogg', 80, 0)
+				playsound(get_turf(H), 'modular_skyrat/code/modules/antagonists/dreamer/sound/seen_wonder.ogg', 80, 0)
 				H.Paralyze(5 SECONDS)
 				gazed_at = TRUE
