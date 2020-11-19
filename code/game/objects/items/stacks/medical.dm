@@ -142,10 +142,6 @@
 	amount = 1
 
 /obj/item/stack/medical/bruise_pack/heal(mob/living/M, mob/user, silent = FALSE)
-	if(M.stat == DEAD)
-		if(!silent)
-			to_chat(user, "<span class='warning'>[M] is dead! You can not help [M.p_them()].</span>")
-		return
 	if(isanimal(M))
 		var/mob/living/simple_animal/critter = M
 		if (!(critter.healable))
@@ -340,10 +336,6 @@
 
 /obj/item/stack/medical/suture/heal(mob/living/M, mob/user, silent = FALSE, obj/item/bodypart/specific_part)
 	. = ..()
-	if(M.stat == DEAD)
-		if(!silent)
-			to_chat(user, "<span class='warning'>[M] is dead! You can not help [M.p_them()].</span>")
-		return
 	if(iscarbon(M))
 		return heal_carbon(M, user, heal_brute, heal_burn, FALSE, (mode == MODE_MULTIPLE ? TRUE : FALSE))
 	if(isanimal(M))
@@ -387,10 +379,6 @@
 	amount = 1
 
 /obj/item/stack/medical/ointment/heal(mob/living/M, mob/user, silent = FALSE, obj/item/bodypart/specific_part)
-	if(M.stat == DEAD)
-		if(!silent)
-			to_chat(user, "<span class='warning'>[M] is dead! You can not help [M.p_them()].</span>")
-		return
 	if(iscarbon(M))
 		return heal_carbon(M, user, heal_brute, heal_burn, FALSE, (mode == MODE_MULTIPLE ? TRUE : FALSE))
 	if(!silent)
@@ -455,10 +443,6 @@
 
 /obj/item/stack/medical/mesh/heal(mob/living/M, mob/user, silent = FALSE, obj/item/bodypart/specific_part)
 	. = ..()
-	if(M.stat == DEAD)
-		if(!silent)
-			to_chat(user, "<span class='warning'>[M] is dead! You can not help [M.p_them()].</span>")
-		return
 	if(iscarbon(M))
 		return heal_carbon(M, user, heal_brute, heal_burn, FALSE, (mode == MODE_MULTIPLE ? TRUE : FALSE))
 	if(!silent)
@@ -528,10 +512,6 @@
 
 /obj/item/stack/medical/aloe/heal(mob/living/M, mob/user, silent = FALSE, obj/item/bodypart/specific_part)
 	. = ..()
-	if(M.stat == DEAD)
-		if(!silent)
-			to_chat(user, "<span class='warning'>[M] is dead! You can not help [M.p_them()].</span>")
-		return FALSE
 	if(iscarbon(M))
 		return heal_carbon(M, user, heal, heal, FALSE, (mode == MODE_MULTIPLE ? TRUE : FALSE))
 	if(isanimal(M))
