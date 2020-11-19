@@ -127,6 +127,7 @@
 /datum/quirk/xavlegbmaofffassssitimiwoamndutroabcwapwaeiippohfffx
 	name = "Xavlegbmaofffassssitimiwoamndutroabcwapwaeiippohfffx"
 	desc = "<span class='warning'>This is my name.</span>"
+	medical_condition = FALSE
 
 /datum/quirk/xavlegbmaofffassssitimiwoamndutroabcwapwaeiippohfffx/add()
 	. = ..()
@@ -137,6 +138,7 @@
 /datum/quirk/endebted
 	name = "Endebted"
 	desc = "<span class='warning'>I owe corporate a lot of money. They took everything out of my account.</span>"
+	medical_condition = FALSE
 
 /datum/quirk/endebted/on_spawn()
 	. = ..()
@@ -150,6 +152,7 @@
 /datum/quirk/hunted
 	name = "Hunted"
 	desc = "<span class='warning'>I have a secret enemy, I dread that I will know who they are soon...</span>"
+	medical_condition = FALSE
 
 /datum/quirk/hunted/on_spawn()
 	. = ..()
@@ -188,6 +191,7 @@
 /datum/quirk/nigger
 	name = "Nigger"
 	desc = "<span class='warning'>My skin is as dark as charcoal.</span>"
+	medical_condition = FALSE
 
 /datum/quirk/nigger/on_spawn()
 	. = ..()
@@ -201,6 +205,7 @@
 /datum/quirk/aryan
 	name = "Aryan"
 	desc = "<span class='warning'>My skin is as white as snow.</span>"
+	medical_condition = FALSE
 
 /datum/quirk/aryan/on_spawn()
 	. = ..()
@@ -213,7 +218,8 @@
 //british
 /datum/quirk/british
 	name = "British"
-	desc = "<span class='warning'>The tea has completely rotted away my guns.</span>"
+	desc = "<span class='warning'>The tea has completely rotted away my gums.</span>"
+	medical_condition = FALSE
 
 /datum/quirk/british/on_spawn()
 	. = ..()
@@ -221,6 +227,7 @@
 	var/obj/item/bodypart/feefh = H.get_bodypart(BODY_ZONE_HEAD)
 	feefh.knock_out_teeth(feefh.max_teeth)
 
+//anemia
 /datum/quirk/anemic
 	name = "Anemia stricken"
 	desc = "<span class='warning'>I am anemic, my body cannot produce enough blood and I am lethargic.</span>"
