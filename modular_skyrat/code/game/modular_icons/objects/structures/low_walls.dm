@@ -302,7 +302,7 @@
 			qdel(src)
 			return
 
-//window placing begin
+	//window placing begin
 	else if(is_glass_sheet(W))
 		if (!broken)
 			var/obj/item/stack/ST = W
@@ -342,7 +342,7 @@
 				ST.use(2)
 				to_chat(user, "<span class='notice'>You place [WD] on [src].</span>")
 			return
-//window placing end
+	//window placing end
 
 	else if(istype(W, /obj/item/shard) || !shock(user, 70))
 		return ..()
