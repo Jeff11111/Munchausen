@@ -593,11 +593,13 @@
 				msg += "<span class='notice'><b><i>[t_He] [t_has] significantly disfiguring scarring, you can look again to take a closer look...</i></b></span>\n"
 			if(WOUND_SEVERITY_LOSS to INFINITY)
 				msg += "<span class='notice'><b><i>[t_He] [t_is] just absolutely fucked up, you can look again to take a closer look...</i></b></span>\n"
+	
 	if(is_dreamer(user))
 		var/obj/item/organ/heart = getorganslot(ORGAN_SLOT_HEART)
 		if(heart && heart.etching && findtext(heart.etching, "<b>INRL</b> - "))
 			var/key_text = copytext(heart.etching, 14, 18)
 			msg += "<span class='userdanger'>They KNOW the [key_text], i am sure of it!</span>"
+	
 	if(length(msg))
 		. += "<span class='warning'>[msg.Join("")]</span>"
 	
