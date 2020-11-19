@@ -205,6 +205,7 @@
 
 /datum/antagonist/dreamer/greet()
 	. = ..()
+	owner.current.playsound_local(owner.current, 'modular_skyrat/code/modules/antagonists/dreamer/sound/dreamer_warning.ogg', 100, 0)
 	to_chat(owner.current, "<span class='danger'><b>Recently I've been visited by a lot of VISIONS. They're all about another WORLD, ANOTHER life. I will do EVERYTHING to know the TRUTH, and return to the REAL world.</b></span>")
 	if(length(objectives))
 		owner.announce_objectives()
