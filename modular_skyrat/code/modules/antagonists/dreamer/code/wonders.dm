@@ -92,7 +92,7 @@
 				if(length(dream_master.associated_keys) >= wonder_id)
 					key_text = dream_master.associated_keys[wonder_id]
 				if(wonder_id > 4)
-					to_chat(H, "<span class='userdanger'>I must SUM the keys.<br>I am WAKING up!</span>")
+					to_chat(H, "<span class='userdanger'>I must SUM the keys. I am WAKING up!</span>")
 					for(var/datum/antagonist/dreamer/droomer in H.mind?.antag_datums)
 						droomer.agony(H)
 				break
@@ -122,6 +122,6 @@
 				heart.etching = "<b>INRL</b> - [key_text] - [key_num]"
 				SEND_SIGNAL(H, COMSIG_ADD_MOOD_EVENT, "wonder", /datum/mood_event/saw_wonder)
 				H.emote("scream")
-				H.playsound_local(get_turf(H), 'modular_skyrat/code/modules/antagonists/dreamer/sound/seen_wonder.ogg', 100, 0)
+				H.playsound(get_turf(H), 'modular_skyrat/code/modules/antagonists/dreamer/sound/seen_wonder.ogg', 80, 0)
 				H.Paralyze(5 SECONDS)
 				gazed_at = TRUE
