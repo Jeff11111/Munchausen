@@ -981,7 +981,20 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 /client/proc/generate_clickcatcher()
 	if(!void)
 		void = new()
-		screen += void
+		screen |= void
+	if(!hover_tip)
+		hover_tip = new()
+		screen |= hover_tip
+
+/client/MouseEntered(atom/object, location, control, params)
+	. = ..()
+	if(hover_tip && (SSticker.current_state >= GAME_STATE_SETTING_UP) && !isnewplayer(mob))
+		screen |= hover_tip
+		hover_tip.maptext = ""
+		if(iscarbon(object))
+			hover_tip.maptext = "<center style='[hover_tip.style_carbon]'>[object.name]</center>"
+		else
+			hover_tip.maptext = "<center style='[hover_tip.style_atom]'>[uppertext(object.name)]</center>"
 
 /client/proc/apply_clickcatcher(list/actualview)
 	generate_clickcatcher()

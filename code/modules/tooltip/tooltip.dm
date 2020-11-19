@@ -38,7 +38,6 @@ Notes:
 	var/queueHide = 0
 	var/init = 0
 
-
 /datum/tooltip/New(client/C)
 	if (C)
 		owner = C
@@ -47,7 +46,6 @@ Notes:
 		owner << browse(file2text('code/modules/tooltip/tooltip.html'), "window=[control]")
 
 	..()
-
 
 /datum/tooltip/proc/show(atom/movable/thing, params = null, title = null, content = null, theme = "default", special = "none")
 	if (!thing || !params || (!title && !content) || !owner || !isnum(world.icon_size))
@@ -85,7 +83,6 @@ Notes:
 
 	return 1
 
-
 /datum/tooltip/proc/hide()
 	if (queueHide)
 		addtimer(CALLBACK(src, .proc/do_hide), 1)
@@ -100,7 +97,6 @@ Notes:
 	winshow(owner, control, FALSE)
 
 /* TG SPECIFIC CODE */
-
 
 //Open a tooltip for user, at a location based on params
 //Theme is a CSS class in tooltip.html, by default this wrapper chooses a CSS class based on the user's UI_style (Midnight, Plasmafire, Retro, etc)
@@ -121,5 +117,3 @@ Notes:
 	if(istype(user))
 		if(user.client && user.client.tooltips)
 			user.client.tooltips.hide()
-
-

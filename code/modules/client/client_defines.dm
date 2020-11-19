@@ -54,6 +54,7 @@
 	preload_rsc = PRELOAD_RSC
 
 	var/obj/screen/click_catcher/void
+	var/obj/screen/hover_tip/hover_tip
 
 	//These two vars are used to make a special mouse cursor, with a unique icon for clicking
 	var/mouse_up_icon = null

@@ -9,14 +9,6 @@
 /mob/living/proc/wield_active_hand()
 	return
 
-/mob/living/Initialize()
-	. = ..()
-	RegisterSignal(src, COMSIG_MOB_EXAMINED, .proc/on_examine_atom)
-
-/mob/living/Destroy()
-	. = ..()
-	UnregisterSignal(src, COMSIG_MOB_EXAMINED)
-
 /mob/living/proc/on_examine_atom(atom/examined)
 	if(!istype(examined) || !client || !examined.on_examined_check())
 		return

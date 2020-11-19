@@ -15,7 +15,7 @@
 	if (goal_number)
 		goal = goal_number
 	bar = image('modular_skyrat/icons/effects/loadingcircle.dmi', target, "progress-0", HUD_LAYER)
-	bar.plane = HUD_PLANE
+	bar.plane = ABOVE_HUD_PLANE
 	bar.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
 	bar.color = "#00FF7F"
 	user = User

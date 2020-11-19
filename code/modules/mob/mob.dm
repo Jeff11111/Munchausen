@@ -513,7 +513,7 @@ mob/visible_message(message, self_message, blind_message, vision_distance = DEFA
 		log_game("[key_name(usr)] AM failed due to disconnect.")
 		return
 	client.screen.Cut()
-	client.screen += client.void
+	client.screen |= client.void
 	if(!client)
 		log_game("[key_name(usr)] AM failed due to disconnect.")
 		return

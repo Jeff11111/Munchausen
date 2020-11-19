@@ -66,9 +66,7 @@ GLOBAL_LIST_INIT(modular_ui_styles, list(
 
 	var/list/static_inventory = list() //the screen objects which are static
 	var/list/toggleable_inventory = list() //the screen objects which can be hidden
-	//skyrat edit
 	var/list/extra_inventory = list() //equipped item screens that don't show up even if using the initial toggle
-	//
 	var/list/obj/screen/hotkeybuttons = list() //the buttons that can be used via hotkeys
 	var/list/infodisplay = list() //the screen objects that display mob info (health, alien plasma, etc...)
 	var/list/screenoverlays = list() //the screen objects used as whole screen overlays (flash, damageoverlay, etc...)

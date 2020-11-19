@@ -3521,6 +3521,7 @@
 #include "modular_skyrat\code\_onclick\hud\alert.dm"
 #include "modular_skyrat\code\_onclick\hud\combat_intent.dm"
 #include "modular_skyrat\code\_onclick\hud\ghost.dm"
+#include "modular_skyrat\code\_onclick\hud\hover_tip.dm"
 #include "modular_skyrat\code\_onclick\hud\hud.dm"
 #include "modular_skyrat\code\_onclick\hud\iteminfo.dm"
 #include "modular_skyrat\code\_onclick\hud\noise.dm"

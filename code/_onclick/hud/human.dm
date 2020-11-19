@@ -266,7 +266,7 @@
 	static_inventory += inv_box
 
 	inv_box = new /obj/screen/inventory()
-	inv_box.name = "storage1"
+	inv_box.name = "pockets 1"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "pocket"
 	inv_box.screen_loc = ui_storage1
@@ -274,7 +274,7 @@
 	static_inventory += inv_box
 
 	inv_box = new /obj/screen/inventory()
-	inv_box.name = "storage2"
+	inv_box.name = "pockets 2"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "pocket"
 	inv_box.screen_loc = ui_storage2

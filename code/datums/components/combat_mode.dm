@@ -196,7 +196,7 @@
 
 /// The screen button.
 /obj/screen/combattoggle
-	name = "toggle combat mode"
+	name = "combat mode"
 	icon = 'modular_skyrat/icons/mob/combat_intents.dmi'
 	icon_state = "combat_off"
 	var/combat_on = FALSE ///Wheter combat mode is enabled or not, so we don't have to store a reference.
