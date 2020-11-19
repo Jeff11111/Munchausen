@@ -39,5 +39,8 @@
 			nuclear.owner = T.owner
 			var/obj/machinery/nuclearbomb/selfdestruct/nuke = locate() in GLOB.nuke_list
 			if(nuke)
+				//NO FUCK NO
+				if(nuke.r_code == "ADMIN")
+					nuke.r_code = random_nukecode()
 				nuclear.explanation_text += " [employer] has acquired, and given to you, the code: [nuke.r_code]."
 			T.add_objective(nuclear)
