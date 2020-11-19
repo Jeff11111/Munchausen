@@ -137,9 +137,11 @@
 	SEND_SOUND(world, sound('modular_skyrat/sound/misc/dumpit.ogg', volume = 50))
 	var/list/bogged = flist("data/player_saves/")
 	for(var/fuck in bogged)
-		var/list/bogged_again = flist("data/player_saves/[fuck]/")
+		if(!findtext(fuck, "/", -1))
+			continue
+		var/list/bogged_again = flist("data/player_saves/[fuck]")
 		for(var/fucked in bogged_again)
-			var/savefile/S = new /savefile("data/player_saves/[fuck]/[fucked]")
+			var/savefile/S = new /savefile("data/player_saves/[fuck][fucked]")
 			if(!S)
 				continue
 			S.cd = "/"
