@@ -34,9 +34,9 @@
 	mutantspleen =  /obj/item/organ/spleen/robot_ipc
 	//same damage as ipcs
 	coldmod = 0.5
-	burnmod = 1.1
-	heatmod = 1.2
-	brutemod = 1.1
+	burnmod = 1.25
+	heatmod = 1.25
+	brutemod = 1.25
 	toxmod = 0
 	clonemod = 0
 	siemens_coeff = 1.2

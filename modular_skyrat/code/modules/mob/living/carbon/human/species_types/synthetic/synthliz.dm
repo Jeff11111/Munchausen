@@ -8,9 +8,9 @@
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/ipc
 	gib_types = list(/obj/effect/gibspawner/ipc, /obj/effect/gibspawner/ipc/bodypartless)
 	coldmod = 0.5
-	burnmod = 1.1
-	heatmod = 1.2
-	brutemod = 1.1
+	burnmod = 1.25
+	heatmod = 1.25
+	brutemod = 1.25
 	toxmod = 0
 	clonemod = 0
 	siemens_coeff = 1.2 //Not more because some shocks will outright crit you, which is very unfun
