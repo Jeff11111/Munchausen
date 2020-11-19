@@ -62,7 +62,10 @@
 		next_trauma_cycle = world.time + (rand(100-WOUND_BONE_HEAD_TIME_VARIANCE, 100+WOUND_BONE_HEAD_TIME_VARIANCE) * 0.01 * trauma_cycle_cooldown)
 
 	RegisterSignal(victim, COMSIG_HUMAN_EARLY_UNARMED_ATTACK, .proc/attack_with_hurt_hand)
-	if(limb.held_index && victim.get_item_for_held_index(limb.held_index) && (disabling || prob(30 * severity)))
+	var/obj/item/bodypart/child
+	if(length(limb.children_zones))
+		child = victim.get_bodypart(limb.children_zones[1])
+	if((limb.held_index && victim.get_item_for_held_index(limb.held_index) && (disabling || prob(30 * severity))) || (child && child.held_index && victim.get_item_for_held_index(child.held_index) && (disabling || prob(30 * severity))))
 		var/obj/item/I = victim.get_item_for_held_index(limb.held_index)
 		if(istype(I, /obj/item/offhand))
 			I = victim.get_inactive_held_item()
@@ -106,17 +109,20 @@
 	if(!regen_points_needed)
 		return
 
-	regen_points_current++
-	if(prob(severity * 2))
-		victim.take_bodypart_damage(rand(2, (min(severity - 1, 1) * 2)), stamina=rand(2, severity * 2.5), wound_bonus=CANT_WOUND)
-		if(prob(33))
-			to_chat(victim, "<span class='danger'>You feel a sharp pain in your body as your bones are reforming!</span>")
+	regen_points_current += 0.2
+	if(GET_STAT_LEVEL(victim, end) >= (MAX_STAT/2))
+		regen_points_current += 0.2
+	if(GET_STAT_LEVEL(victim, end) >= ((MAX_STAT/4)*3))
+		regen_points_current += 0.2
+	
+	if(prob(severity * 1.5))
+		victim.custom_pain("I feel a sharp pain in nu body as my bones reform!", max(1, severity - WOUND_SEVERITY_TRIVIAL) * 15)
 
 	if(regen_points_current > regen_points_needed)
 		if(!victim || !limb)
 			qdel(src)
 			return
-		to_chat(victim, "<span class='green'>Your [limb.name] has recovered from your fracture!</span>")
+		to_chat(victim, "<span class='green'>My [limb.name] has recovered from my [lowertext(name)]!</span>")
 		remove_wound()
 
 /// If we're a human who's punching something with a broken arm, we might hurt ourselves doing so
@@ -124,8 +130,8 @@
 	if(victim.get_active_hand() != limb || victim.a_intent == INTENT_HELP || !ismob(target) || severity <= WOUND_SEVERITY_MODERATE)
 		return
 
-	// With a severe or critical wound, you have a 15% or 30% chance to proc pain on hit
-	if(prob((severity - 1) * 15))
+	// With a severe or critical wound, you have a 20% or so chance to proc pain on hit
+	if(prob((severity - WOUND_SEVERITY_TRIVIAL) * 20))
 		// And you have a 70% or 50% chance to actually land the blow, respectively
 		if(prob(70 - 20 * (severity - 1)))
 			to_chat(victim, "<span class='userdanger'>The fracture in your [limb.name] shoots with pain as you strike [target]!</span>")
@@ -148,7 +154,7 @@
 				victim.adjustOrganLoss(O.slot, rand(1, wounding_dmg/2), O.maxHealth)
 	
 	if(limb.body_zone in list(BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_R_ARM))
-		if(prob(round(max(wounding_dmg/10, 1), 1) * max(1, severity - WOUND_SEVERITY_TRIVIAL)))
+		if(prob(round(max(wounding_dmg/10, 1), 1) * (max(1, severity - WOUND_SEVERITY_TRIVIAL) * 10)))
 			var/obj/item/oops = victim?.get_item_for_held_index(limb?.held_index)
 			if(oops)
 				victim?.dropItemToGround(oops)
@@ -156,7 +162,7 @@
 		if(prob(max(1, severity - WOUND_SEVERITY_TRIVIAL) * 10))
 			victim?.agony_scream()
 	
-	if(limb.body_zone == BODY_ZONE_PRECISE_GROIN && prob(25))
+	if(limb.body_zone == BODY_ZONE_PRECISE_GROIN && prob(15 * max(1, severity - WOUND_SEVERITY_TRIVIAL)))
 		victim?.Paralyze(severity * 3)
 		to_chat(victim, "<span class='danger'>The excruciating pain on your [limb] paralyzes you for a moment!</span>")
 	
@@ -164,26 +170,8 @@
 		var/oxy_dmg = round(rand(1, (wounding_dmg/5) * (max(1, severity - WOUND_SEVERITY_TRIVIAL))))
 		victim.adjustOxyLoss(oxy_dmg)
 
-	if(limb.body_zone == BODY_ZONE_CHEST && victim.blood_volume && prob(internal_bleeding_chance + wounding_dmg))
-		var/blood_bled = rand(1, wounding_dmg * (severity == WOUND_SEVERITY_CRITICAL ? 2 : 1.5)) // 12 brute toolbox can cause up to 18/24 bleeding with a severe/critical chest wound
-		switch(blood_bled)
-			if(1 to 6)
-				victim.bleed(blood_bled, TRUE)
-			if(7 to 13)
-				victim.visible_message("<span class='smalldanger'>[victim] coughs up a bit of blood from the blow to [victim.p_their()] chest.</span>", "<span class='danger'>You cough up a bit of blood from the blow to your chest.</span>", vision_distance=COMBAT_MESSAGE_RANGE)
-				victim.bleed(blood_bled, TRUE)
-			if(14 to 19)
-				victim.visible_message("<span class='smalldanger'>[victim] spits out a string of blood from the blow to [victim.p_their()] chest!</span>", "<span class='danger'>You spit out a string of blood from the blow to your chest!</span>", vision_distance=COMBAT_MESSAGE_RANGE)
-				new /obj/effect/temp_visual/dir_setting/bloodsplatter(victim.loc, victim.dir)
-				victim.bleed(blood_bled)
-			if(20 to INFINITY)
-				victim.visible_message("<span class='smalldanger'>[victim] chokes up a spray of blood from the blow to [victim.p_their()] chest!</span>", "<span class='danger'><b>You choke up on a spray of blood from the blow to your chest!</b></span>", vision_distance=COMBAT_MESSAGE_RANGE)
-				victim.bleed(blood_bled)
-				new /obj/effect/temp_visual/dir_setting/bloodsplatter(victim.loc, victim.dir)
-				victim.add_splatter_floor(get_step(victim.loc, victim.dir))
-	
 	if(limb.body_zone == BODY_ZONE_HEAD && prob((severity - WOUND_SEVERITY_TRIVIAL + 1) * 12))
-		to_chat(victim, "<span class='userdanger'>The strike on your damaged [limb.name] hurts like hell!</span>")
+		to_chat(victim, "<span class='userdanger'>The strike on your [severity >= WOUND_SEVERITY_SEVERE ? "broken" : (severity >= WOUND_SEVERITY_MODERATE ? "dislocated" : "damaged")] [limb.name] hurts like hell!</span>")
 		victim.adjust_blurriness(rand(1 * (severity - WOUND_SEVERITY_TRIVIAL), 10 * (severity - WOUND_SEVERITY_TRIVIAL)))
 		victim.confused += max(25, rand(1 * (severity - WOUND_SEVERITY_TRIVIAL), 10 * (severity - WOUND_SEVERITY_TRIVIAL)))
 		if(prob(wounding_dmg))
@@ -486,7 +474,7 @@
 		victim.visible_message("<span class='danger'>[user] begins resetting [victim.p_their()] ribs with [I].</span>", "<span class='warning'>You begin resetting your ribs with [I]...</span>")
 	else
 		user.visible_message("<span class='danger'>[user] begins resetting [victim]'s ribs with [I].</span>", "<span class='notice'>You begin resetting [victim]'s ribs with [I]...</span>")
-	var/time_mod = (user == victim ? 2.5 : 1)
+	var/time_mod = (user == victim ? 2 : 1)
 
 	//Medical skill affects the speed of the do_mob
 	if(user.mind)
@@ -586,7 +574,7 @@
 		user.visible_message("<span class='danger'>[user] begins resetting [victim]'s femur with [I].</span>", "<span class='notice'>You begin resetting [victim]'s femur with [I]...</span>")
 
 	//Medical skill affects the speed of the do_mob
-	var/time_mod = (user == victim ? 2.5 : 1)
+	var/time_mod = (user == victim ? 2 : 1)
 	if(user.mind)
 		var/datum/skills/firstaid/firstaid = GET_SKILL(user, firstaid)
 		if(firstaid)
@@ -685,7 +673,7 @@
 		user.visible_message("<span class='danger'>[user] begins resetting [victim]'s jaw with [I].</span>", "<span class='notice'>You begin resetting [victim]'s jaw with [I]...</span>")
 	
 	//Medical skill affects the speed of the do_mob
-	var/time_mod = (user == victim ? 2.5 : 1)
+	var/time_mod = (user == victim ? 2 : 1)
 	if(user.mind)
 		var/datum/skills/firstaid/firstaid = GET_SKILL(user, firstaid)
 		if(firstaid)
@@ -783,7 +771,7 @@
 	user.visible_message("<span class='danger'>[user] begins hastily applying [I] to [victim]'s' [limb.name]...</span>", "<span class='warning'>You begin hastily applying [I] to [user == victim ? "your" : "[victim]'s"] [limb.name], disregarding the warning label...</span>")
 
 	//Medical skill affects the speed of the do_mob
-	var/time_mod = (user == victim ? 2.5 : 1)
+	var/time_mod = (user == victim ? 2 : 1)
 	if(user.mind)
 		var/datum/skills/firstaid/firstaid = GET_SKILL(user, firstaid)
 		if(firstaid)
