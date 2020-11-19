@@ -178,11 +178,9 @@
 					if(S.next_step(user, user.a_intent))
 						return TRUE
 	
-	//skyrat edit
 	for(var/datum/wound/W in all_wounds)
 		if(W.try_handling(user))
 			return TRUE
-	//
 
 /mob/living/carbon/attack_paw(mob/living/carbon/monkey/M)
 
