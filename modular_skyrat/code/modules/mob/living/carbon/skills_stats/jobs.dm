@@ -62,7 +62,7 @@
 	for(var/currentpath in all_skills)
 		var/datum/skills/skill = H.mind.mob_skills[currentpath]
 		if(skill)
-			skill.level = clamp(rand(all_skills[currentpath] - skill_variance_negative, all_skills[currentpath] + skill_variance_positive), 0, MAX_SKILL)
+			skill.level = clamp(rand(all_skills[currentpath] - skill_variance_negative, all_skills[currentpath] + skill_variance_positive), MIN_SKILL, MAX_SKILL)
 
 /datum/job/proc/special_assign_skills_stats(mob/living/carbon/human/H)
 	return
