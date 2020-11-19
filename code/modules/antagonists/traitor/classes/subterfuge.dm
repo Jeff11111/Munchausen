@@ -37,4 +37,7 @@
 			//sabotage objectives are lame, let's do something funny instead
 			var/datum/objective/nuclear/nuclear = new
 			nuclear.owner = T.owner
+			var/obj/machinery/nuclearbomb/selfdestruct/nuke = locate() in GLOB.nuke_list
+			if(nuke)
+				nuclear.explanation_text += " [employer] has acquired, and given to you, the code: [nuke.r_code]."
 			T.add_objective(nuclear)

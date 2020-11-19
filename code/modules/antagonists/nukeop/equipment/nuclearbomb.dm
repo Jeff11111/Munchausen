@@ -390,7 +390,6 @@
 			else
 				playsound(src, 'sound/machines/nuke/angry_beep.ogg', 50, FALSE)
 
-
 /obj/machinery/nuclearbomb/proc/set_anchor(mob/user)
 	if((istype(get_area(src), /area/space) || isinspace()) && !anchored)
 		to_chat(user, "<span class='warning'>This is not a suitable platform for anchoring [src]!</span>")
