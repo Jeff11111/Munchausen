@@ -69,13 +69,13 @@
 	..()
 
 /datum/antagonist/traitor/on_removal()
+	. = ..()
 	//Remove malf powers.
 	traitor_kind.on_removal(src)
 	SSticker.mode.traitors -= owner
 	if(!silent && owner.current)
 		to_chat(owner.current,"<span class='userdanger'>... I am no longer the [special_role]! ...</span>")
 	owner.special_role = null
-	. = ..()
 
 /datum/antagonist/traitor/proc/handle_hearing(datum/source, list/hearing_args)
 	var/message = hearing_args[HEARING_RAW_MESSAGE]
@@ -162,9 +162,10 @@
 	dat += "<B>Code Phrase</B>: <span class='blue'>[phrases]</span>\n"
 	dat += "<B>Code Response</B>: <span class='red'>[responses]</span>"
 	to_chat(traitor_mob, dat)
-
-	antag_memory |= "<b>Code Phrase</b>: <span class='blue'>[phrases]</span><br>"
-	antag_memory |= "<b>Code Response</b>: <span class='red'>[responses]</span><br>"
+	
+	if(!length(antag_memory))
+		antag_memory += "<b>Code Phrase</b>: <span class='blue'>[phrases]</span><br>"
+		antag_memory += "<b>Code Response</b>: <span class='red'>[responses]</span><br>"
 
 /datum/antagonist/traitor/proc/add_law_zero()
 	var/mob/living/silicon/ai/killer = owner.current
