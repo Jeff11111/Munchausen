@@ -1,9 +1,9 @@
-## Bobstation
+## Munchausen Outpost
 Based from Skyrat's modification of /tg/station code.
 
 [![forthebadge](http://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)](https://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/pretty-risque.svg)](https://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/you-didnt-ask-for-this.svg)](http://forthebadge.com) [![forinfinityandbyond](https://user-images.githubusercontent.com/5211576/29499758-4efff304-85e6-11e7-8267-62919c3688a9.gif)](https://www.reddit.com/r/SS13/comments/5oplxp/what_is_the_main_problem_with_byond_as_an_engine/dclbu1a)
 
-**Upstream Information**  
+**TG Station Information**  
 * **Website:** <https://www.tgstation13.org>
 * **Code:** <https://github.com/tgstation/tgstation>
 * **Wiki:** <https://tgstation13.org/wiki/Main_Page>
@@ -12,8 +12,8 @@ Based from Skyrat's modification of /tg/station code.
 * **Coderbus Discord:** <https://discord.gg/Vh8TJp9>
 * ~~**IRC:** <irc://irc.rizon.net/coderbus>~~ (dead)
 
-**Bobstation Information**
-* **Discord:** <https://discord.gg/B4zvEP8>
+**Munchausen Outpost/Bobstation Information**
+* **Discord:** <https://discord.gg/Ng5QenfzEh>
 
 ## DOWNLOADING
 
@@ -163,3 +163,5 @@ Font Awesome font files, used by tgui, are licensed under the SIL Open Font Lice
 tgui assets are licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
 
 All assets including icons and sound are under a [Creative Commons 3.0 BY-SA license](https://creativecommons.org/licenses/by-sa/3.0/) unless otherwise indicated.
+
+NOTE: I don't give much of a shit about licensing this is purely copypasted so i don't get sued or anything.
