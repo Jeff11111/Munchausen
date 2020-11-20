@@ -497,13 +497,13 @@ GLOBAL_LIST_EMPTY(objectives)
 /datum/objective/martyr/New(text)
 	. = ..()
 	christchurch_victims = min(christchurch_victims, length(GLOB.joined_player_list))
-	explanation_text = "My employers sent me here on a special mission. I must kill [christchurch_victims] of the scum at my own discretion."
+	explanation_text = "My employers have decided that NanoTrasen has had enough chances, and sent me here on a suicide mission. I must kill at least [christchurch_victims] crewmembers."
 
 /datum/objective/martyr/check_completion()
 	var/christchurch_counter = 0
 	for(var/M in GLOB.carbon_list)
-		var/mob/living/carbon/chungus = M
-		if(chungus.mind && chungus.stat == DEAD)
+		var/mob/living/carbon/human/chungus = M
+		if(istype(chungus) && chungus.mind && chungus.stat == DEAD)
 			christchurch_counter++
 	
 	if(christchurch_counter >= christchurch_victims)
@@ -922,7 +922,6 @@ GLOBAL_LIST_EMPTY(possible_items_special)
 	var/list/department_minds = list()
 	var/list/department_real_names = list()
 	var/department_string = ""
-
 
 /datum/objective/changeling_team_objective/impersonate_department/prepare()
 	var/result = FALSE

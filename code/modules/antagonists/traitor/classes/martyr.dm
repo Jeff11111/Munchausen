@@ -10,5 +10,5 @@
 /datum/traitor_class/human/martyr/forge_objectives(datum/antagonist/traitor/T)
 	var/datum/objective/martyr/O = new
 	O.owner = T.owner
+	O.explanation_text = explanation_text = "\The [employer] have decided that NanoTrasen has had enough chances, and sent me here on a suicide mission. I must kill at least [O.christchurch_victims] crewmembers."
 	T.add_objective(O)
-	return
