@@ -58,5 +58,30 @@
 
 //Intelligence
 /datum/stats/int
-	name = "Intelligence"
+	name = "Intellect"
 	shorthand = "IQ"
+
+/datum/stats/int/statnumtodesc(stat)
+	switch(stat)
+		if(-INFINITY to 6)
+			return "crippling"
+		if(7)
+			return "poor"
+		if(8,9)
+			return "below average"
+		if(10)
+			return "average"
+		if(11,12)
+			return "above average"
+		if(13,14)
+			return "exceptional"
+		if(15,16)
+			return "amazing"
+		if(17,18)
+			return "legendary"
+		if(19,20)
+			return "divine"
+		if(21 to INFINITY)
+			return "divine"
+		else
+			return "inhuman"
