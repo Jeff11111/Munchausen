@@ -6,8 +6,8 @@
 	var/range = 7
 	var/list/obj/item/device/cassette/stored_cassettes = list()
 
-/datum/component/boombox/Initialize(atom/A, _loud = TRUE, _volume = 100, _range = 7)
-	if(!istype(A))
+/datum/component/boombox/Initialize(_loud = TRUE, _volume = 100, _range = 7)
+	if(!isatom(parent))
 		return COMPONENT_INCOMPATIBLE
 	loud = _loud
 	volume = _volume
