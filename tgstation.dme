@@ -4174,6 +4174,8 @@
 #include "modular_skyrat\code\modules\projectiles\projectile\special\plasma.dm"
 #include "modular_skyrat\code\modules\projectiles\projectile\special\rods.dm"
 #include "modular_skyrat\code\modules\punishment\punishment.dm"
+#include "modular_skyrat\code\modules\radio_stations\component.dm"
+#include "modular_skyrat\code\modules\radio_stations\subsystem.dm"
 #include "modular_skyrat\code\modules\reagents\chemistry\holder.dm"
 #include "modular_skyrat\code\modules\reagents\chemistry\reagents.dm"
 #include "modular_skyrat\code\modules\reagents\chemistry\reagents\alcohol_reagents.dm"

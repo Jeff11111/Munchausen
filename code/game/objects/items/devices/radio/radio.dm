@@ -41,7 +41,11 @@
 	var/list/secure_radio_connections
 
 	var/const/FREQ_LISTENING = 1
-	//FREQ_BROADCASTING = 2
+	// FREQ_BROADCASTING = 2
+
+/obj/item/radio/ComponentInitialize()
+	. = ..()
+	AddComponent(/datum/component/radio_station, FALSE)
 
 /obj/item/radio/suicide_act(mob/living/user)
 	user.visible_message("<span class='suicide'>[user] starts bouncing [src] off [user.p_their()] head! It looks like [user.p_theyre()] trying to commit suicide!</span>")

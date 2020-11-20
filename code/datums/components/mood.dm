@@ -170,9 +170,9 @@
 	else
 		if(owner.client && owner.hud_used)
 			screen_obj.icon_state = "mood5"
-			if(is_dreamer(owner))
-				motherfucker = "h"
 			owner.hud_used.noise_filter?.loggers = "j"
+			if(is_dreamer(owner))
+				owner.hud_used.noise_filter?.loggers = "h"
 			owner.hud_used.noise_filter?.update_icon()
 
 /datum/component/mood/process() //Called on SSobj process

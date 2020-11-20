@@ -17,7 +17,8 @@
 /obj/item/proc/middleafterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	SEND_SIGNAL(src, COMSIG_ITEM_MIDDLE_AFTERATTACK, target, user, proximity_flag, click_parameters)
 	if(get_sharpness())
-		attempt_initiate_surgery(src, target, user)
+		if(user.a_intent == INTENT_HELP)
+			attempt_initiate_surgery(src, target, user)
 		return TRUE
 	return FALSE
 

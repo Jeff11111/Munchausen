@@ -312,10 +312,11 @@
 		return M.click_action(A,src,params)
 
 	if(restrained())
-		changeNext_move(CLICK_CD_HANDCUFFED)   //Doing shit in cuffs shall be vey slow
-		RestrainedClickOn(A)
 		return
 	
+	if(SEND_SIGNAL(A, COMSIG_CLICK_MIDDLE, src))
+		return
+
 	var/obj/item/W = get_active_held_item()
 	if(W == A)
 		if(!W.middleclick_attack_self(src))
