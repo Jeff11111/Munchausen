@@ -4,7 +4,7 @@
 /obj/item/stack/medical
 	name = "medical pack"
 	singular_name = "medical pack"
-	icon = 'modular_skyrat/icons/obj/stack_objects.dmi'
+	icon = 'modular_skyrat/icons/obj/medical.dmi'
 	amount = 16
 	max_amount = 16
 	w_class = WEIGHT_CLASS_TINY

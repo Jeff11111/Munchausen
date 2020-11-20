@@ -68,7 +68,7 @@
 	return TRUE
 
 /datum/component/boombox/proc/examine_message(datum/source, mob/user, list/examine_list)
-	examine_list += "<span class='info'>\The [parent] can play cassette tapes.</span>"
+	examine_list += "<span class='info'>[capitalize(parent.name)] can play cassette tapes.</span>"
 	examine_list += "<span class='info'><b>Volume:</b> [volume] ([loud ? "Loud" : "Local"])"
 	if(current_cassette)
 		examine_list += "<span class='info'><b>Current track:</b> [current_cassette.vibing_string]</span>"
