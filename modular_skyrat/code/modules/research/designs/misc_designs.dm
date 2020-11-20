@@ -61,3 +61,40 @@
 	build_path = /obj/item/stack/sticky_tape/pointy
 	category = list("Tool Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_ENGINEERING | DEPARTMENTAL_FLAG_SCIENCE
+
+/////////////////////////////////////////
+/////////////////Cassettes///////////////
+/////////////////////////////////////////
+
+/datum/design/cassette
+	name = "Cassette"
+	materials = list(/datum/material/iron = 2000, /datum/material/plastic = 1000)
+	build_path = /obj/item/device/cassette
+	build_type = PROTOLATHE | IMPRINTER
+	construction_time = 60
+	category = list("Subspace Telecomms")
+
+/datum/design/cassette/os13
+	name = "Cassette Vol. 1"
+	id = "cassette_os13"
+	build_path = /obj/item/device/cassette/os13
+
+/datum/design/cassette/manwhosoldtheworld
+	name = "Cassette Vol. 2"
+	id = "cassette_manwhosoldtheworld"
+	build_path = /obj/item/device/cassette/manwhosoldtheworld
+
+/datum/design/cassette/thecaretaker
+	name = "Cassette Vol. 3"
+	id = "cassette_thecaretaker"
+	build_path = /obj/item/device/cassette/everywhereattheendoftime
+
+/datum/design/cassette/thecaretaker
+	name = "Cassette Vol. 4"
+	id = "cassette_doom"
+	build_path = /obj/item/device/cassette/doom
+
+/datum/design/cassette/thecaretaker
+	name = "Cassette Vol. 5"
+	id = "cassette_irreversible"
+	build_path = /obj/item/device/cassette/irreversible

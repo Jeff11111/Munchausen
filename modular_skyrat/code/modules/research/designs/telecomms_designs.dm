@@ -3,10 +3,10 @@
 ///////////////////////////////////
 
 /datum/design/encryption
-		materials = list(/datum/material/iron = 500, /datum/material/glass = 500, /datum/material/silver = 200)
-		build_type = PROTOLATHE | IMPRINTER
-		construction_time = 50
-		category = list("Subspace Telecomms")
+	materials = list(/datum/material/iron = 500, /datum/material/glass = 500, /datum/material/silver = 200)
+	build_type = PROTOLATHE | IMPRINTER
+	construction_time = 50
+	category = list("Subspace Telecomms")
 
 /datum/design/encryption/eng_key
 	name = "Engineering radio encryption key"

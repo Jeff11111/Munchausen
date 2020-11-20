@@ -4,3 +4,7 @@
 
 /obj/item/radio/headset
 	slot_flags = ITEM_SLOT_EARS
+
+/obj/item/radio/ComponentInitialize()
+	. = ..()
+	AddComponent(/datum/component/boombox, (slot_flags & ITEM_SLOT_EARS ? FALSE : TRUE), 100, 7)

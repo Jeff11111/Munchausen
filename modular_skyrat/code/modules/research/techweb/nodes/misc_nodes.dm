@@ -1,3 +1,4 @@
+// Problem Computers
 /datum/techweb_node/computermath
 	id = "computermath"
 	display_name = "Problem Computer"
@@ -6,6 +7,7 @@
 	design_ids = list("computermath")
 	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 2500)
 
+// Encryption keys
 /datum/techweb_node/encryption
 	id = "encryption_key"
 	display_name = "Communication Encryption"
@@ -39,3 +41,11 @@
 // Nyanites
 /datum/techweb_node/nanite_smart
 	design_ids = list("purging_nanites", "research_nanites", "metabolic_nanites", "stealth_nanites", "memleak_nanites","sensor_voice_nanites", "voice_nanites", "signaler_nanites")
+
+// Cassettes
+/datum/techweb_node/Cassettes
+	id = "cassettes"
+	display_name = "Cassettes"
+	description = "Everyone needs some music to dance to."
+	prereq_ids = list("telecomms")
+	design_ids = list("cassette_os13", "cassette_manwhosoldtheworld", "cassette_thecaretaker", "cassette_doom", "cassette_irreversible")

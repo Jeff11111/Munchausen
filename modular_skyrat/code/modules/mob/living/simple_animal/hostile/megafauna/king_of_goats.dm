@@ -96,7 +96,7 @@ Difficulty: Insanely Hard
 	var/sound_id = "goat"
 	var/special_attacks = 0
 	var/list/rangers = list()
-	var/current_song = 'modular_skyrat/sound/ambience/Visager-Battle.ogg'
+	var/current_song = 'modular_skyrat/sound/music/Visager-Battle.ogg'
 	var/current_song_length = 1200
 	stun_chance = 7
 
@@ -225,7 +225,7 @@ Difficulty: Insanely Hard
 	spellscast = 0
 	maxHealth = 750
 	revive(TRUE)
-	current_song = 'modular_skyrat/sound/ambience/Visager-Miniboss_Fight.ogg'
+	current_song = 'modular_skyrat/sound/music/Visager-Miniboss_Fight.ogg'
 	current_song_length = 1759
 	var/sound/song_played = sound(current_song)
 	for(var/mob/M in rangers)

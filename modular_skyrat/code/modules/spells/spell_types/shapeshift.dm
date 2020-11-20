@@ -2,5 +2,5 @@
 	name = "Holy Dragon Form"
 	desc = "Take on the shape of a mystic dragon."
 	invocation = "The Dragon waits!"
-	sound = 'modular_skyrat/sound/ambience/oblivion.ogg'
+	sound = 'modular_skyrat/sound/music/oblivion.ogg'
 	shapeshift_type = /mob/living/simple_animal/hostile/megafauna/dragon/lesser/akatosh

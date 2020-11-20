@@ -166,6 +166,7 @@
 	// Check to see if we've reached criteria for early launch
 	if((authorized.len >= auth_need) || (obj_flags & EMAGGED))
 		// Shuttle timers use 1/10th seconds internally
+		SSshuttle.emergency.mode = SHUTTLE_DOCKED
 		SSshuttle.emergency.setTimer(ENGINES_START_TIME)
 		var/system_error = obj_flags & EMAGGED ? "SYSTEM ERROR:" : null
 		minor_announce("The emergency shuttle will launch in \
