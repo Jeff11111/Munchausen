@@ -12,9 +12,9 @@
 	loud = _loud
 	volume = _volume
 	range = _range
-	RegisterSignal(A, COMSIG_PARENT_ATTACKBY, .proc/check_for_cassete)
-	RegisterSignal(A, COMSIG_CLICK_MIDDLE, .proc/options)
-	RegisterSignal(A, COMSIG_PARENT_EXAMINE, .proc/examine_message)
+	RegisterSignal(parent, COMSIG_PARENT_ATTACKBY, .proc/check_for_cassete)
+	RegisterSignal(parent, COMSIG_CLICK_MIDDLE, .proc/options)
+	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, .proc/examine_message)
 
 /datum/component/boombox/proc/check_for_cassete(datum/source, obj/item/device/cassette/tuner, mob/user, params)
 	if(!istype(tuner))
