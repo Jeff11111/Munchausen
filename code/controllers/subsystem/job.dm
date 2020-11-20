@@ -458,11 +458,6 @@ SUBSYSTEM_DEF(job)
 
 		SSpersistence.antag_rep_change[M.client.ckey] += job.GetAntagRep()
 
-	//Skyrat changes
-	var/display_rank = rank
-	if(M.client && M.client.prefs && M.client.prefs.alt_titles_preferences[rank])
-		display_rank = M.client.prefs.alt_titles_preferences[rank]
-	//End of skyrat changes
 	if(job)
 		job.radio_help_message(M)
 		if(job.custom_spawn_text)
