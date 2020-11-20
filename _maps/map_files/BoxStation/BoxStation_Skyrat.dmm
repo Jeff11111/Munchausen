@@ -263,6 +263,19 @@
 /obj/item/kirbyplants/random,
 /turf/open/floor/carpet,
 /area/crew_quarters/dorms)
+"aaw" = (
+/obj/structure/table/wood,
+/obj/machinery/requests_console{
+	announcementConsole = 1;
+	department = "Captain's Desk";
+	departmentType = 5;
+	name = "Captain RC";
+	pixel_x = -30
+	},
+/obj/machinery/photocopier/faxmachine,
+/obj/item/device/cassette/os13,
+/turf/open/floor/wood,
+/area/crew_quarters/heads/captain)
 "aax" = (
 /turf/closed/wall/r_wall,
 /area/shuttle/arrival)
@@ -524,6 +537,10 @@
 /obj/structure/grille/broken,
 /turf/open/space,
 /area/space/nearstation)
+"abb" = (
+/mob/living/simple_animal/pet/caracal/floppa,
+/turf/open/floor/plasteel,
+/area/quartermaster/office)
 "abc" = (
 /obj/effect/decal/cleanable/oil,
 /obj/machinery/light/small{
@@ -7703,10 +7720,6 @@
 /obj/machinery/light,
 /turf/open/floor/plasteel,
 /area/security/processing)
-"aqV" = (
-/mob/living/simple_animal/sloth/paperwork,
-/turf/open/floor/plasteel,
-/area/quartermaster/office)
 "aqW" = (
 /turf/open/floor/carpet,
 /area/security/detectives_office)
@@ -23242,18 +23255,6 @@
 	},
 /turf/closed/wall/r_wall,
 /area/ai_monitored/turret_protected/ai_upload)
-"bfy" = (
-/obj/structure/table/wood,
-/obj/machinery/requests_console{
-	announcementConsole = 1;
-	department = "Captain's Desk";
-	departmentType = 5;
-	name = "Captain RC";
-	pixel_x = -30
-	},
-/obj/machinery/photocopier/faxmachine,
-/turf/open/floor/wood,
-/area/crew_quarters/heads/captain)
 "bfz" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 9
@@ -89455,7 +89456,7 @@ biT
 boU
 bmP
 buF
-aqV
+abb
 bbR
 btu
 bbR
@@ -97928,7 +97929,7 @@ bbo
 bch
 bdi
 bbw
-bfy
+aaw
 bgS
 bik
 aZV

@@ -103,10 +103,7 @@
 	},
 /area/ai_monitored/turret_protected/ai)
 "aao" = (
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer1{
-	dir = 8
-	},
-/mob/living/simple_animal/sloth/paperwork,
+/mob/living/simple_animal/pet/caracal/floppa,
 /turf/open/floor/plasteel,
 /area/quartermaster/storage)
 "aap" = (
@@ -780,6 +777,13 @@
 /obj/item/flashlight/lamp,
 /turf/open/floor/plasteel/dark,
 /area/security/warden)
+"abI" = (
+/obj/structure/table/wood,
+/obj/item/storage/fancy/donut_box,
+/obj/item/card/id/captains_spare,
+/obj/item/device/cassette/os13,
+/turf/open/floor/carpet,
+/area/crew_quarters/heads/captain)
 "abJ" = (
 /obj/structure/table/wood,
 /obj/structure/mirror{
@@ -9908,12 +9912,6 @@
 /obj/effect/landmark/start/geneticist,
 /turf/open/floor/plasteel/showroomfloor,
 /area/medical/genetics)
-"avj" = (
-/obj/structure/table/wood,
-/obj/item/storage/fancy/donut_box,
-/obj/item/card/id/captains_spare,
-/turf/open/floor/carpet,
-/area/crew_quarters/heads/captain)
 "avk" = (
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/plasteel/dark,
@@ -100250,7 +100248,7 @@ cdZ
 ahy
 asx
 aqt
-avj
+abI
 bDc
 ave
 abq
@@ -107189,7 +107187,7 @@ hpg
 blO
 blL
 api
-aao
+blK
 api
 bOI
 bAP
@@ -107703,7 +107701,7 @@ bpD
 bPj
 blb
 bPj
-bPj
+aao
 bPj
 bOI
 buY

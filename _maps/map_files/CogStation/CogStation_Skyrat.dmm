@@ -22743,6 +22743,10 @@
 	},
 /turf/open/floor/plasteel,
 /area/bridge)
+"aXk" = (
+/mob/living/simple_animal/pet/caracal/floppa,
+/turf/open/floor/plasteel,
+/area/quartermaster/storage)
 "aXl" = (
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 1
@@ -24568,6 +24572,20 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/department/chapel)
+"baZ" = (
+/obj/item/storage/secure/safe{
+	pixel_x = -24
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/structure/dresser,
+/obj/item/storage/lockbox/medal,
+/obj/item/device/cassette/os13,
+/turf/open/floor/carpet{
+	icon_state = "carpetsymbol"
+	},
+/area/crew_quarters/heads/captain)
 "bba" = (
 /obj/effect/landmark/start/assistant,
 /obj/structure/cable{
@@ -64293,19 +64311,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/security/checkpoint/supply)
-"cDB" = (
-/obj/item/storage/secure/safe{
-	pixel_x = -24
-	},
-/obj/machinery/light{
-	dir = 8
-	},
-/obj/structure/dresser,
-/obj/item/storage/lockbox/medal,
-/turf/open/floor/carpet{
-	icon_state = "carpetsymbol"
-	},
-/area/crew_quarters/heads/captain)
 "cDC" = (
 /obj/structure/chair/office/dark{
 	dir = 4
@@ -91201,7 +91206,7 @@ cQY
 aQW
 bmj
 bBt
-cDB
+baZ
 bLh
 aQW
 aQW
@@ -120543,7 +120548,7 @@ bhK
 bkn
 bkn
 bkn
-bhK
+aXk
 bow
 bgT
 boP

@@ -238,7 +238,7 @@
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
 	},
-/mob/living/simple_animal/sloth/citrus,
+/mob/living/simple_animal/pet/caracal/floppa/stanislav,
 /turf/open/floor/plasteel,
 /area/quartermaster/qm)
 "aaD" = (
@@ -404,6 +404,11 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/security/armory)
+"abd" = (
+/obj/effect/turf_decal/stripes/line,
+/mob/living/simple_animal/pet/caracal/floppa,
+/turf/open/floor/plasteel,
+/area/quartermaster/storage)
 "abe" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -413,6 +418,20 @@
 "abf" = (
 /turf/closed/wall,
 /area/hallway/secondary/entry)
+"abg" = (
+/obj/structure/table/wood,
+/obj/structure/cable/white{
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/structure/disposalpipe/segment,
+/obj/machinery/door/window/brigdoor/northleft{
+	name = "Captain's Desk";
+	req_access_txt = "20"
+	},
+/obj/item/device/cassette/os13,
+/turf/open/floor/carpet,
+/area/crew_quarters/heads/captain)
 "abi" = (
 /turf/closed/wall,
 /area/construction/mining/aux_base)
@@ -42826,19 +42845,6 @@
 	layer = 2.9
 	},
 /obj/machinery/photocopier/faxmachine,
-/turf/open/floor/carpet,
-/area/crew_quarters/heads/captain)
-"bSM" = (
-/obj/structure/table/wood,
-/obj/structure/cable/white{
-	icon_state = "1-2"
-	},
-/obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/obj/structure/disposalpipe/segment,
-/obj/machinery/door/window/brigdoor/northleft{
-	name = "Captain's Desk";
-	req_access_txt = "20"
-	},
 /turf/open/floor/carpet,
 /area/crew_quarters/heads/captain)
 "bSN" = (
@@ -144966,7 +144972,7 @@ bKN
 bMJ
 bOR
 bQS
-bSM
+abg
 bUM
 bXd
 bZm
@@ -146475,7 +146481,7 @@ aJr
 aDd
 aAG
 aAG
-aOW
+abd
 axk
 aSm
 aUa
