@@ -26,3 +26,11 @@
 	icon_state = "painpistolx"
 	ammo_type = list(/obj/item/ammo_casing/energy/disabler/lowcost)
 	cell_type = /obj/item/stock_parts/cell{charge = 720; maxcharge = 720}
+
+//Ion rifle
+/obj/item/gun/energy/ionrifle
+	shaded_charge = TRUE
+
+//Pulse rifle
+/obj/item/gun/energy/pulse
+	shaded_charge = TRUE
