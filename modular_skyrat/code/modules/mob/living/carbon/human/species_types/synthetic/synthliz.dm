@@ -42,11 +42,11 @@
 		O.synthetic = TRUE
 
 /datum/species/synthliz/spec_revival(mob/living/carbon/human/H)
-	H.say("Reactivating [pick("core systems", "central subroutines", "key functions")]...")
-	sleep(3 SECONDS)
-	H.say("Reinitializing [pick("personality matrix", "behavior logic", "morality subsystems")]...")
-	sleep(3 SECONDS)
-	H.say("Finalizing setup...")
-	sleep(3 SECONDS)
-	H.say("Unit [H.real_name] is fully functional. Have a nice day.")
-	return 
+	spawn(0)
+		H.say("Reactivating [pick("core systems", "central subroutines", "key functions")]...")
+		sleep(3 SECONDS)
+		H.say("Reinitializing [pick("personality matrix", "behavior logic", "morality subsystems")]...")
+		sleep(3 SECONDS)
+		H.say("Finalizing setup...")
+		sleep(3 SECONDS)
+		H.say("Unit [H.real_name] is fully functional. Have a nice day.")
