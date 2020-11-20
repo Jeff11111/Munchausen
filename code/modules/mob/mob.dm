@@ -395,7 +395,9 @@ mob/visible_message(message, self_message, blind_message, vision_distance = DEFA
 	//
 	to_chat(src, result.Join("\n"))
 	SEND_SIGNAL(src, COMSIG_MOB_EXAMINATE, A)
-	on_examine_atom(A)
+	if(isliving(src))
+		var/mob/living/L = src
+		L.on_examine_atom(A)
 
 /mob/proc/clear_from_recent_examines(atom/A)
 	if(!client)
