@@ -39,7 +39,8 @@
 		for(var/mob/M in view(range, src))
 			M.stop_sound_channel(CHANNEL_JUKEBOX)
 	else
-		var/mob/M = parent.loc
+		var/atom/A = parent
+		var/mob/M = A.loc
 		if(istype(M))
 			M.stop_sound_channel(CHANNEL_JUKEBOX)
 	if(user)
