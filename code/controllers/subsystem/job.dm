@@ -463,32 +463,27 @@ SUBSYSTEM_DEF(job)
 	if(M.client && M.client.prefs && M.client.prefs.alt_titles_preferences[rank])
 		display_rank = M.client.prefs.alt_titles_preferences[rank]
 	//End of skyrat changes
-	to_chat(M, "<b>You are the [display_rank].</b>") //Skyrat change
 	if(job)
-		to_chat(M, "<b>As the [display_rank] you answer directly to [job.supervisors]. Special circumstances may change this.</b>") //Skyrat change
 		job.radio_help_message(M)
-		if(job.req_admin_notify)
-			to_chat(M, "<b>You are playing a job that is important for Game Progression. If you have to disconnect immediately, please notify the admins via adminhelp. Otherwise put your locker gear back into the locker and cryo out.</b>")
 		if(job.custom_spawn_text)
 			to_chat(M, "<b>[job.custom_spawn_text]</b>")
 		if(CONFIG_GET(number/minimal_access_threshold))
-			to_chat(M, "<span class='notice'><B>As this station was initially staffed with a [CONFIG_GET(flag/jobs_have_minimal_access) ? "full crew, only your job's necessities" : "skeleton crew, additional access may"] have been added to your ID card.</B></span>")
-		//skyrat edit
-		if(display_rank != rank)
-			to_chat(M, "<span class='warning'>Remember that alternate titles are, for the most part, for flavor and roleplay. \
-					<b>Do not use your alt title as an excuse to forego your duties as a [rank].</b></span>")
-		//
+			to_chat(M, "<span class='notice'><B>As this station was initially staffed with a [CONFIG_GET(flag/jobs_have_minimal_access) ? "full crew, only your job's necessities" : "skeleton crew, additional access may"] have been added to my ID card.</B></span>")
+
 	if(ishuman(H))
 		var/mob/living/carbon/human/wageslave = H
-		to_chat(M, "<b><span class = 'big'>Your account ID is [wageslave.account_id].</span></b>")
-		H.add_memory("Your account ID is [wageslave.account_id].")
+		to_chat(M, "<b><span class = 'big'>My account ID is [wageslave.account_id].</span></b>")
+		H.add_memory("My account ID is [wageslave.account_id].")
+	
 	if(job && H)
 		if(job.dresscodecompliant)// CIT CHANGE - dress code compliance
 			equip_loadout(N, H) // CIT CHANGE - allows players to spawn with loadout items
 		job.after_spawn(H, M, joined_late) // note: this happens before the mob has a key! M will always have a client, H might not.
 		equip_loadout(N, H, TRUE)//CIT CHANGE - makes players spawn with in-backpack loadout items properly. A little hacky but it works
+	
 	if(SSaspects.chosen_aspect)
 		SSaspects.chosen_aspect.post_equip(H, M.client, joined_late)
+	
 	//If they respawn as the same character nuke their stats and fraggot them
 	for(var/datum/data/record/record in GLOB.data_core.general)
 		if(H.real_name == record.fields["name"])
@@ -662,11 +657,16 @@ SUBSYSTEM_DEF(job)
 		if(length(pods))
 			C = pick_n_take(pods)
 		var/cumcount = 0
-		while(!C || C.occupant || C.state_open)
-			if((cumcount >= 30) || !length(pods))
-				break
-			C = pick_n_take(pods)
-			cumcount++
+		if(M.mind?.assigned_role != "Captain")
+			while(!C || C.occupant || C.state_open)
+				if((cumcount >= 30) || !length(pods))
+					break
+				C = pick_n_take(pods)
+				cumcount++
+		else
+			var/area/crew_quarters/heads/captain/captain_office = locate() in world
+			C = locate() in captain_office
+		
 		if(C)
 			C.JoinPlayerHere(M, buckle)
 			return
