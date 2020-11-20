@@ -1943,7 +1943,7 @@
 			aux_marking = null
 
 	if(dropping_limb)
-		no_update = TRUE //when attached, the limb won't be affected by the appearance changes of its mob owner.
+		no_update = TRUE //when unattached, the limb won't be affected by the appearance changes of its mob owner.
 
 /obj/item/bodypart/proc/get_limb_icon(dropped)
 	cut_overlays()
