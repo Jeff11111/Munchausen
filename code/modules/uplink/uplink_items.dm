@@ -120,6 +120,8 @@
 			SEND_SIGNAL(fucker, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE)
 			var/area/chungi = get_area(fucker)
 			to_chat(user, "<span class='danger'>[A] has been delivered to: [fucker.x], [fucker.y], [fucker.z] ([chungi.name]).<br>Good luck, agent.</span>")
+			if(isfloorturf(fucker.loc) && !isplatingturf(fucker.loc))
+				fucker.hide(TRUE)
 			return A
 
 /*

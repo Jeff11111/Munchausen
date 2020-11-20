@@ -86,7 +86,7 @@ SUBSYSTEM_DEF(persistence)
 
 	if(F)
 		if(isfloorturf(F.loc) && !isplatingturf(F.loc))
-			F.hide(1)
+			F.hide(TRUE)
 		if(ispath(path))
 			var/spawned_item = new path(F)
 			spawned_objects[spawned_item] = TRUE
