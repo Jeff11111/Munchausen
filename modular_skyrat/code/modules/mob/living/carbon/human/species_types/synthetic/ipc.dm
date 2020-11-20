@@ -39,10 +39,10 @@
 
 /datum/species/ipc/on_species_gain(mob/living/carbon/C) // Let's make that IPC actually robotic.
 	. = ..()
-	//C.grant_language(/datum/language/machine)
-	var/obj/item/organ/appendix/appendix = C.getorganslot("appendix") // Easiest way to remove it.
-	appendix.Remove(C)
-	QDEL_NULL(appendix)
+	var/obj/item/organ/appendix/appendix = C.getorganslot(ORGAN_SLOT_APPENDIX) // Easiest way to remove it.
+	if(appendix)
+		appendix.Remove(C)
+		qdel(appendix)
 	var/chassis = C.dna.features["ipc_chassis"]
 	var/datum/sprite_accessory/ipc_chassis/chassis_of_choice = GLOB.ipc_chassis_list[chassis]
 	if(chassis_of_choice)
@@ -65,7 +65,3 @@
 	H.dna.features["ipc_screen"] = saved_screen
 	H.update_body()
 	return 
-
-/datum/species/ipc/on_species_loss(mob/living/carbon/human/C)
-	..()
-	//C.remove_language(/datum/language/machine)

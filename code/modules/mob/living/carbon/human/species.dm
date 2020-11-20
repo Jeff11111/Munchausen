@@ -389,12 +389,10 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	if(exotic_bloodtype && C.dna.blood_type != exotic_bloodtype)
 		C.dna.blood_type = exotic_bloodtype
 
-	//skyrat edti
 	if(C.client)
 		var/client/cli = C.client
 		if(rainbowblood && cli.prefs.bloodcolor)
 			C.dna.blood_color = cli.prefs.bloodcolor
-	//
 
 	if(old_species.mutanthands)
 		for(var/obj/item/I in C.held_items)

@@ -34,16 +34,12 @@
 
 /datum/species/synthliz/on_species_gain(mob/living/carbon/C) // Let's make that IPC actually robotic.
 	. = ..()
-	//C.grant_language(/datum/language/machine)
-	var/obj/item/organ/appendix/appendix = C.getorganslot("appendix") // Easiest way to remove it.
-	appendix.Remove(C)
-	QDEL_NULL(appendix)
+	var/obj/item/organ/appendix/appendix = C.getorganslot(ORGAN_SLOT_APPENDIX) // Easiest way to remove it.
+	if(appendix)
+		appendix.Remove(C)
+		qdel(appendix)
 	for(var/obj/item/bodypart/O in C.bodyparts)
 		O.synthetic = TRUE
-
-/datum/species/synthliz/on_species_loss(mob/living/carbon/human/C)
-	..()
-	//C.remove_language(/datum/language/machine)
 
 /datum/species/synthliz/spec_revival(mob/living/carbon/human/H)
 	H.say("Reactivating [pick("core systems", "central subroutines", "key functions")]...")
