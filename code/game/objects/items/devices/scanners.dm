@@ -303,7 +303,7 @@ GENETICS SCANNER
 			//LIVER
 			else if(istype(O, /obj/item/organ/liver))
 				var/obj/item/organ/liver/L = O
-				if(L.organ_flags & ORGAN_FAILING && H.stat != DEAD) //might be depreciated
+				if(L?.organ_flags & ORGAN_FAILING && H.stat != DEAD) //might be depreciated
 					temp_message += "\n<span class='danger'>Subject is suffering from liver failure: Apply Corazone and begin a liver transplant immediately!</span>"
 
 			//HEART
@@ -311,7 +311,7 @@ GENETICS SCANNER
 				var/obj/item/organ/heart/He = O
 				if(H.undergoing_cardiac_arrest() && H.stat != DEAD)
 					temp_message += "\n<span class='danger'>Subject suffering from heart attack: Apply defibrillation or other electric shock <b>immediately!</b></span>"
-				if(He.organ_flags & ORGAN_FAILING)
+				if(He?.organ_flags & ORGAN_FAILING)
 					heart_ded = TRUE
 
 			//TONGUE
@@ -339,11 +339,11 @@ GENETICS SCANNER
 
 			//GENERAL HANDLER
 			if(!damage_message)
-				if(O.organ_flags & ORGAN_FAILING)
+				if(O?.organ_flags & ORGAN_FAILING)
 					damage_message += "\n<span class='alert'><b>Chronic [O.name] failure detected.</b></span>"
-				else if(O.damage > O.high_threshold)
+				else if(O?.damage > O?.high_threshold)
 					damage_message += "\n<span class='alert'>Acute [O.name] failure detected.</span>"
-				else if(O.damage > O.low_threshold && advanced)
+				else if(O?.damage > O?.low_threshold && advanced)
 					damage_message += "\n<font color='red'>Minor [O.name] failure detected.</span>"
 
 			if(temp_message || damage_message)
