@@ -390,7 +390,6 @@
 		return TRUE
 	return
 
-//skyrat tools
 /obj/item/bonesetter
 	name = "bonesetter"
 	desc = "For setting things right."
@@ -406,4 +405,3 @@
 	tool_behaviour = TOOL_BONESET
 	toolspeed = 1
 	germ_level = 0
-//
