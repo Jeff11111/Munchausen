@@ -35,8 +35,13 @@
 		if(user)
 			to_chat(user, "<span class='notice'>What station, retard?</span>")
 		return TRUE
-	
-	user.stop_sound_channel(CHANNEL_JUKEBOX)
+	if(loud)
+		for(var/mob/M in view(range, src))
+			M.stop_sound_channel(CHANNEL_JUKEBOX)
+	else
+		var/mob/M = parent.loc
+		if(istype(M))
+			M.stop_sound_channel(CHANNEL_JUKEBOX)
 	if(user)
 		user.visible_message("<span class='notice'>[user] smashes the play music button on [parent].</span>",\
 							"<span class='notice'>You smash the play music button on [parent].</span>")
