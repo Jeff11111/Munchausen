@@ -89,12 +89,12 @@
 	id = "cassette_thecaretaker"
 	build_path = /obj/item/device/cassette/everywhereattheendoftime
 
-/datum/design/cassette/thecaretaker
+/datum/design/cassette/doom
 	name = "Cassette Vol. 4"
 	id = "cassette_doom"
 	build_path = /obj/item/device/cassette/doom
 
-/datum/design/cassette/thecaretaker
+/datum/design/cassette/irreversible
 	name = "Cassette Vol. 5"
 	id = "cassette_irreversible"
 	build_path = /obj/item/device/cassette/irreversible
