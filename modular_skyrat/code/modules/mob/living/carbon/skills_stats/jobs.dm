@@ -351,6 +351,7 @@
 	//Godlike research, expert electronics
 	skill_research = 18
 	skill_electronics = JOB_SKILLPOINTS_EXPERT
+	skill_chemistry = JOB_SKILLPOINTS_AVERAGE
 
 /datum/job/officer
 	//Better str and end, at the cost of int and dex
