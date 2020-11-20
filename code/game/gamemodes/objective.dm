@@ -69,7 +69,7 @@ GLOBAL_LIST_EMPTY(objectives)
 		return TRUE
 	if(SSticker.force_ending || SSticker.mode.station_was_nuked) // Just let them win.
 		return TRUE
-	if(SSshuttle.emergency.mode != SHUTTLE_ENDGAME)
+	if(!(SSshuttle.emergency.mode in list(SHUTTLE_ENDGAME, SHUTTLE_ESCAPE)))
 		return FALSE
 	var/turf/location = get_turf(M.current)
 	if(!location || istype(location, /turf/open/floor/plasteel/shuttle/red) || istype(location, /turf/open/floor/mineral/plastitanium/red/brig)) // Fails if they are in the shuttle brig
