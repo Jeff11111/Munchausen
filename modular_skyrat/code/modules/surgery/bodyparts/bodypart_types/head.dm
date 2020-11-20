@@ -104,14 +104,20 @@
 	return TRUE
 
 /obj/item/bodypart/head/update_limb(dropping_limb, mob/living/carbon/source)
+	..()
+	if(no_update)
+		return
+	
 	var/mob/living/carbon/C
 	if(source)
 		C = source
-	else
+	else if(owner)
 		C = owner
-
-	real_name = C.real_name
-	if(HAS_TRAIT(C, TRAIT_HUSK) || is_dead())
+	
+	if(C)
+		real_name = C.real_name
+	
+	if((C && HAS_TRAIT(C, TRAIT_HUSK)) || is_dead())
 		real_name = "Unknown"
 		hair_style = "Bald"
 		facial_hair_style = "Shaved"
@@ -158,7 +164,6 @@
 		else
 			lip_style = null
 			lip_color = "white"
-	..()
 
 /obj/item/bodypart/head/update_icon_dropped()
 	if(custom_head)
