@@ -17,13 +17,9 @@
 		if(zone == BODY_ZONE_HEAD)
 			. |= getorganszone(BODY_ZONE_PRECISE_EYES)
 			. |= getorganszone(BODY_ZONE_PRECISE_MOUTH)
-		/* skyrat edit
-		if(zone == BODY_ZONE_CHEST)
-			. |= getorganszone(BODY_ZONE_PRECISE_GROIN)
-		*/
-
-	for(var/X in internal_organs)
-		var/obj/item/organ/O = X
+			. |= getorganszone(BODY_ZONE_PRECISE_THROAT)
+	
+	for(var/obj/item/organ/O in internal_organs)
 		if(zone == O.zone)
 			. |= O
 
