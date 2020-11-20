@@ -250,14 +250,13 @@
 		if(is_taur && leg_day[BP.type])
 			continue
 		new_limbs += BP.get_limb_icon()
+	
 	if(new_limbs.len)
 		overlays_standing[BODYPARTS_LAYER] = new_limbs
 		limb_icon_cache[icon_render_key] = new_limbs
 
 	apply_overlay(BODYPARTS_LAYER)
 	update_damage_overlays()
-
-
 
 /////////////////////
 // Limb Icon Cache //

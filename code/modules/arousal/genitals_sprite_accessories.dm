@@ -6,7 +6,6 @@
 	var/taur_dimension_y = 32
 	var/taur_dimension_x = 32
 
-
 //DICKS,COCKS,PENISES,WHATEVER YOU WANT TO CALL THEM
 /datum/sprite_accessory/penis
 	icon = 'icons/obj/genitals/penis_onmob.dmi'

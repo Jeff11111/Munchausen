@@ -787,14 +787,18 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(!H.dna.features["insect_fluff"] || H.dna.features["insect_fluff"] == "None" || H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
 			bodyparts_to_add -= "insect_fluff"
 
-//CITADEL EDIT
+	//CITADEL EDIT
 	//Race specific bodyparts:
+	//Synthetics
+	if(mutant_bodyparts["ipc_screen"])
+		if(!H.dna.features["ipc_screen"] || H.dna.features["ipc_screen"] == "None" || H.head && (H.head.flags_inv & HIDEHAIR) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEHAIR)) || !HD || !(HD.status & BODYPART_ROBOTIC && !HD.render_like_organic))
+			bodyparts_to_add -= "ipc_screen"
 	//Xenos
 	if(mutant_bodyparts["xenodorsal"])
 		if(!H.dna.features["xenodorsal"] || H.dna.features["xenodorsal"] == "None" || (H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT)))
 			bodyparts_to_add -= "xenodorsal"
 	if(mutant_bodyparts["xenohead"])//This is an overlay for different castes using different head crests
-		if(!H.dna.features["xenohead"] || H.dna.features["xenohead"] == "None" || H.head && (H.head.flags_inv & HIDEHAIR) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEHAIR)) || !HD || (HD.status == BODYPART_ROBOTIC && !HD.render_like_organic)) //skyrat change
+		if(!H.dna.features["xenohead"] || H.dna.features["xenohead"] == "None" || H.head && (H.head.flags_inv & HIDEHAIR) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEHAIR)) || !HD || (HD.status & BODYPART_ROBOTIC && !HD.render_like_organic)) //skyrat change
 			bodyparts_to_add -= "xenohead"
 	if(mutant_bodyparts["xenotail"])
 		if(!H.dna.features["xenotail"] || H.dna.features["xenotail"] == "None" || H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
@@ -823,7 +827,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(!tauric || (H.wear_suit && (H.wear_suit.flags_inv & HIDETAUR)))
 			bodyparts_to_add -= "taur"
 
-//END EDIT
+	//END EDIT
 
 	//Digitigrade legs are stuck in the phantom zone between true limbs and mutant bodyparts. Mainly it just needs more agressive updating than most limbs.
 	var/update_needed = FALSE

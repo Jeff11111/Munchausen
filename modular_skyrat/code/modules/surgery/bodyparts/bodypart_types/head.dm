@@ -111,7 +111,7 @@
 		C = owner
 
 	real_name = C.real_name
-	if(HAS_TRAIT(C, TRAIT_HUSK))
+	if(HAS_TRAIT(C, TRAIT_HUSK) || is_dead())
 		real_name = "Unknown"
 		hair_style = "Bald"
 		facial_hair_style = "Shaved"
@@ -184,29 +184,29 @@
 			if(facial_hair_style)
 				var/datum/sprite_accessory/S = GLOB.facial_hair_styles_list[facial_hair_style]
 				if(S)
-					var/image/facial_overlay = image(S.icon, "[S.icon_state]", -HAIR_LAYER, SOUTH)
-					facial_overlay.color = "#" + facial_hair_color
-					facial_overlay.alpha = hair_alpha
-					. += facial_overlay
+				var/image/facial_overlay = image(S.icon, "[S.icon_state]", -HAIR_LAYER, SOUTH)
+				facial_overlay.color = "#" + facial_hair_color
+				facial_overlay.alpha = hair_alpha
+				. += facial_overlay
 
-			//Applies the debrained overlay if there is no brain
-			if((owner && owner.getorganslot(ORGAN_SLOT_BRAIN)) || brain)
-				var/datum/sprite_accessory/S2 = GLOB.hair_styles_list[hair_style]
-				if(S2)
-					var/image/hair_overlay = image(S2.icon, "[S2.icon_state]", -HAIR_LAYER, SOUTH)
-					hair_overlay.color = "#" + hair_color
-					hair_overlay.alpha = hair_alpha
-					. += hair_overlay
-			else
-				var/image/debrain_overlay = image(layer = -HAIR_LAYER, dir = SOUTH)
-				if(animal_origin == ALIEN_BODYPART)
-					debrain_overlay.icon = 'icons/mob/animal_parts.dmi'
-					debrain_overlay.icon_state = "debrained_alien"
-				else if(animal_origin == LARVA_BODYPART)
-					debrain_overlay.icon = 'icons/mob/animal_parts.dmi'
-					debrain_overlay.icon_state = "debrained_larva"
-				else if(!(NOBLOOD in species_flags_list))
-					debrain_overlay.icon = 'icons/mob/human_face.dmi'
+		//Applies the debrained overlay if there is no brain
+		if((owner && owner.getorganslot(ORGAN_SLOT_BRAIN)) || brain)
+			var/datum/sprite_accessory/S2 = GLOB.hair_styles_list[hair_style]
+			if(S2)
+				var/image/hair_overlay = image(S2.icon, "[S2.icon_state]", -HAIR_LAYER, SOUTH)
+				hair_overlay.color = "#" + hair_color
+				hair_overlay.alpha = hair_alpha
+				. += hair_overlay
+		else
+			var/image/debrain_overlay = image(layer = -HAIR_LAYER, dir = SOUTH)
+			if(animal_origin == ALIEN_BODYPART)
+				debrain_overlay.icon = 'icons/mob/animal_parts.dmi'
+				debrain_overlay.icon_state = "debrained_alien"
+			else if(animal_origin == LARVA_BODYPART)
+				debrain_overlay.icon = 'icons/mob/animal_parts.dmi'
+				debrain_overlay.icon_state = "debrained_larva"
+			else if(!(NOBLOOD in species_flags_list))
+				debrain_overlay.icon = 'icons/mob/human_face.dmi'
 					debrain_overlay.icon_state = "debrained"
 				. += debrain_overlay
 
@@ -227,7 +227,7 @@
 			eyes_overlay.color = "#" + eyes.eye_color
 	// tape gag
 	if(tapered)
-		var/mutable_appearance/tape_overlay = mutable_appearance('modular_skyrat/icons/mob/tapegag.dmi', "tapegag", -BODY_LAYER)
+		var/image/tape_overlay = image('modular_skyrat/icons/mob/tapegag.dmi', "tapegag", -BODY_LAYER, SOUTH)
 		. += tape_overlay
 
 /obj/item/bodypart/head/proc/get_stickied(obj/item/stack/sticky_tape/tape, mob/user)
