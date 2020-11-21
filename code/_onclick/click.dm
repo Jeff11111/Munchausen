@@ -314,7 +314,7 @@
 	if(restrained())
 		return
 	
-	if(SEND_SIGNAL(A, COMSIG_CLICK_MIDDLE, src))
+	if(A.MiddleClick(src))
 		return
 
 	var/obj/item/W = get_active_held_item()
@@ -364,6 +364,9 @@
 		changeNext_move(CLICK_CD_HANDCUFFED)   //Doing shit in cuffs shall be vey slow
 		RestrainedClickOn(A)
 		return
+
+	if(A.MiddleClick(src))
+		return
 	
 	var/obj/item/W = get_active_held_item()
 	if(W == A)
@@ -393,11 +396,8 @@
 		else
 			A.middle_attack_hand(src)
 
-// In case of use break glass
-/*
 /atom/proc/MiddleClick(mob/M as mob)
-	return
-*/
+	return SEND_SIGNAL(src, COMSIG_CLICK_MIDDLE, M)
 
 /*
 	Shift click

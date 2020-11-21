@@ -5,8 +5,8 @@
 	RegisterSignal(src, COMSIG_CLICK_ALT, .proc/pickup_react)
 
 //Proc for a bot to react upon someone trying to pick them up
-/mob/living/simple_animal/bot/proc/pickup_react(mob/living/user)
-	if(!(bot_core.allowed(usr) || !locked) && iscarbon(user))
+/mob/living/simple_animal/bot/proc/pickup_react(mob/living/source, mob/living/user)
+	if(!(bot_core.allowed(user) || !locked) && iscarbon(user))
 		emote("scream")
 		emote("shiver")
 	return
