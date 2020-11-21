@@ -84,6 +84,8 @@
 
 	/// Combat music
 	var/combat_music = 'modular_skyrat/sound/music/ritual.ogg'
+	/// Hide objectives
+	var/objectives_hidden = FALSE
 
 /datum/mind/New(var/key)
 	skill_holder = new(src)
@@ -400,7 +402,7 @@
 		output += A.antag_memory
 		all_objectives |= A.objectives
 
-	if(all_objectives.len)
+	if(all_objectives.len && !objectives_hidden)
 		output += "<B>Objectives:</B>"
 		var/obj_count = 1
 		for(var/datum/objective/objective in all_objectives)

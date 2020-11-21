@@ -54,6 +54,7 @@
 				var/datum/antagonist/traitor/bingus = user.mind.has_antag_datum(/datum/antagonist/traitor)
 				if(bingus.should_give_codewords)
 					bingus.give_codewords()
+				user.mind?.objectives_hidden = FALSE
 	return TRUE
 
 /obj/machinery/atm/attackby(obj/item/W, mob/user, params)
