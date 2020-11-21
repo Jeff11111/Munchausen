@@ -54,7 +54,7 @@
 		O.synthetic = TRUE
 	C.AddComponent(/datum/component/boombox)
 
-/datum/species/ipc/on_species_loss(mob/living/carbon/human/C)
+/datum/species/ipc/on_species_loss(mob/living/carbon/C)
 	. = ..()
 	var/datum/component/bingus = C.GetComponent(/datum/component/boombox)
 	if(bingus)
