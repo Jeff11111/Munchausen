@@ -225,16 +225,15 @@
 	icon_state = "bladerunner"
 	mag_type = /obj/item/ammo_box/magazine/internal/cylinder/rev38
 
-/obj/item/gun/ballistic/revolver/dual_ammo/AltClick(mob/user)
+/obj/item/gun/ballistic/revolver/dual_ammo/rightclick_attack_self(mob/user)
 	. = ..()
 	if(magazine)
-		switch(magazine.caliber)
-			if(list("38"), "38")
-				magazine.caliber = list("357")
-				to_chat(user, "<span class='notice'>\The [src] will now chamber .357 rounds.</span>")
-			if(list("357"), "357")
-				magazine.caliber = list("357")
-				to_chat(user, "<span class='notice'>\The [src] will now chamber .38 rounds.</span>")
+		if("38" in magazine.caliber)
+			magazine.caliber = list("357")
+			to_chat(user, "<span class='notice'>\The [src] will now chamber .357 rounds.</span>")
+		else if("357" in magazine.caliber)
+			magazine.caliber = list("357")
+			to_chat(user, "<span class='notice'>\The [src] will now chamber .38 rounds.</span>")
 
 //NT Bingus
 /obj/item/gun/ballistic/revolver/mateba/bladerunner
