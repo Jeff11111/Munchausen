@@ -429,12 +429,21 @@
 			else
 				E.enthrallTally += 20
 				to_chat(src, "<span class='notice'>You give into [E.master]'s influence.</span>")
-	if(InCritical())
-		log_message("Has succumbed to death while in [InFullCritical() ? "hard":"soft"] critical with [round(health, 0.1)] points of health!", LOG_ATTACK)
-		adjustOxyLoss(health - HEALTH_THRESHOLD_DEAD)
-		updatehealth()
-		to_chat(src, "<span class='notice'>You have given up life and succumbed to death.</span>")
-		death()
+	if(!iscarbon(src))
+		if(InCritical())
+			log_message("Has succumbed to death while in [InFullCritical() ? "hard":"soft"] critical with [round(health, 0.1)] points of health!", LOG_ATTACK)
+			adjustOxyLoss(health - HEALTH_THRESHOLD_DEAD)
+			updatehealth()
+			to_chat(src, "<span class='notice'>You have given up life and succumbed to death.</span>")
+			death()
+	else
+		var/mob/living/carbon/C = src
+		if((C.getBrainLoss() >= 120) && (C.InFullShock()) && (C.stat >= UNCONSCIOUS))
+			log_message("Has succumbed to death while in [InFullCritical() ? "hard":"soft"] critical with [round(health, 0.1)] points of health!", LOG_ATTACK)
+			adjustOxyLoss(health - HEALTH_THRESHOLD_DEAD)
+			updatehealth()
+			to_chat(src, "<span class='notice'>You have given up life and succumbed to death.</span>")
+			death()
 
 /mob/living/incapacitated(ignore_restraints = FALSE, ignore_grab = FALSE, check_immobilized = FALSE)
 	if(stat || IsUnconscious() || IsStun() || IsParalyzed() || (combat_flags & COMBAT_FLAG_HARD_STAMCRIT) || (check_immobilized && IsImmobilized()) || (!ignore_restraints && restrained(ignore_grab)))
