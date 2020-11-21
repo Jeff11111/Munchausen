@@ -191,10 +191,23 @@
 	toolspeed = 0.7
 	light_color = LIGHT_COLOR_GREEN
 	sharpness = SHARP_EDGED
+	var/datum/techweb/linked_techweb
 
 /obj/item/scalpel/advanced/Initialize()
 	. = ..()
-	set_light(1)
+	set_light(TRUE)
+	linked_techweb = SSresearch.science_tech
+
+/obj/item/scalpel/advanced/proc/get_advanced_surgeries()
+	. = list()
+	if(!linked_techweb)
+		return
+	for(var/subtype in subtypesof(/datum/design/surgery))
+		var/datum/design/surgery/prototype = subtype
+		var/id = initial(prototype.id)
+		if(id in linked_techweb.researched_designs)
+			prototype = SSresearch.techweb_design_by_id(id)
+			. |= prototype.surgery
 
 /obj/item/scalpel/advanced/attack_self(mob/user)
 	playsound(get_turf(user), 'sound/machines/click.ogg', 50, TRUE)

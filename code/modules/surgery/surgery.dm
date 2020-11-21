@@ -85,6 +85,10 @@
 		var/obj/item/surgical_drapes/advanced/A = tool
 		advanced_surgeries |= A.get_advanced_surgeries()
 
+	if(istype(tool, /obj/item/scalpel/advanced))
+		var/obj/item/scalpel/advanced/S = tool
+		advanced_surgeries |= S.get_advanced_surgeries()
+
 	if(replaced_by in advanced_surgeries)
 		return FALSE
 	if(type in advanced_surgeries)
