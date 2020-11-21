@@ -90,6 +90,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	var/inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
 
 	var/attack_verb = "punch"	// punch-specific attack verb
+	var/attack_verb_continuous = "punches"
 	var/sound/attack_sound = 'modular_skyrat/sound/gore/punch1.ogg'
 	var/sound/miss_sound = 'modular_skyrat/sound/gore/punchmiss.ogg'
 
@@ -1702,7 +1703,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	if(attacker_style && attacker_style.harm_act(user,target))
 		return TRUE
 	else
-
 		var/atk_verb = user.dna.species.attack_verb
 		switch(atk_verb)
 			if(ATTACK_EFFECT_CLAW)
@@ -1815,9 +1815,9 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		target.do_stat_effects(user, null, damage)
 
 		//Attack message
-		target.visible_message("<span class='danger'>[user][pitiful ? " pitifully" : ""] [atk_verb]s [target] on their [affecting.name]![target.wound_message]</span>", \
-					"<span class='userdanger'>[user][pitiful ? " pitifully" : ""] [atk_verb]s you on your [affecting.name]![target.wound_message]</span>", null, COMBAT_MESSAGE_RANGE, null, \
-					user, "<span class='danger'>You[pitiful ? " pitifully" : ""] [atk_verb] [target] on their [affecting.name]![target.wound_message]</span>")
+		target.visible_message("<span class='danger'>[user][pitiful ? " pitifully" : ""] [user.dna.species.attack_verb_continuous] [target] on their [affecting.name]![target.wound_message]</span>", \
+					"<span class='userdanger'>[user][pitiful ? " pitifully" : ""] [user.dna.species.attack_verb_continuous] you on your [affecting.name]![target.wound_message]</span>", null, COMBAT_MESSAGE_RANGE, null, \
+					user, "<span class='danger'>You[pitiful ? " pitifully" : ""] [user.dna.species.attack_verb_continuous] [target] on their [affecting.name]![target.wound_message]</span>")
 
 		//Clean the descriptive string
 		target.wound_message = ""
