@@ -392,6 +392,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(istype(poggers) && poggers.InFullShock() && !(poggers.stat == DEAD))
 		if(poggers.InFullShock() && !(stat == DEAD))
 			penalty = CANT_REENTER_ROUND
+		var/response = alert(src, "Are you -sure- you want to ghost?\n(You are alive. If you ghost whilst alive you won't be able to re-enter this round [penalty ? "or play ghost roles [penalty == CANT_REENTER_ROUND ? "until the round is over" : "for the next [DisplayTimeText(penalty)]"]" : ""]! You can't change your mind so choose wisely!!)","Are you sure you want to ghost?","Ghost","Stay in body")
+		if(response != "Ghost")
+			return
 		ghostize(FALSE)
 	else if((stat == DEAD) || sig_flags & COMPONENT_FREE_GHOSTING)
 		ghostize(TRUE)
