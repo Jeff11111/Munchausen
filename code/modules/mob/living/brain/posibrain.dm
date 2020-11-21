@@ -98,6 +98,14 @@ GLOBAL_VAR(posibrain_notify_cooldown)
 
 //ATTACK GHOST IGNORING PARENT RETURN VALUE
 /obj/item/mmi/posibrain/attack_ghost(mob/user)
+	var/mob/dead/observer/ghost = user
+	
+	//Check if they succumbed
+	if(!ghost.can_reenter_round(TRUE))
+		//Uh oh!
+		to_chat(user, "<span class='warning'>I can't possess this posibrain. I have relinquished the mortal realm.</span>")
+		return FALSE
+	
 	activate(user)
 
 /obj/item/mmi/posibrain/proc/is_occupied()
