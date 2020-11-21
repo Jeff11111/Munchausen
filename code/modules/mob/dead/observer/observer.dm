@@ -388,9 +388,9 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(sig_flags & COMPONENT_DO_NOT_PENALIZE_GHOSTING)
 		penalty = 0
 	
-	var/mob/living/carbon/C = src
-	if(istype(C) && C.InFullShock() && !(C.stat == DEAD))
-		if(C.InFullShock() && !(stat == DEAD))
+	var/mob/living/carbon/poggers = src
+	if(istype(poggers) && poggers.InFullShock() && !(poggers.stat == DEAD))
+		if(poggers.InFullShock() && !(stat == DEAD))
 			penalty = CANT_REENTER_ROUND
 		ghostize(FALSE)
 	else if((stat == DEAD) || sig_flags & COMPONENT_FREE_GHOSTING)
