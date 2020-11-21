@@ -92,7 +92,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 		ooc_visions |= last_words
 		var/message = pick(ooc_visions)
 		message = replacetext_char(message, "SRC", "[src.real_name]")
-		message = replacetext_char(message, "CAPITALIZEME", "[capitalize(src.real_name)]")
+		message = replacetext_char(message, "CAPITALIZEME", "[uppertext(src.real_name)]")
 		to_chat(src, "<span class='ooc'><span class='prefix'>OOC:</span> <EM>[clientkey]:</EM> <span class='message linkify'>[message]</span></span>")
 	//Even rarer than that jannie hallucination - bwoink hallucination
 	else if(prob(1) && prob(10))
