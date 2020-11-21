@@ -25,7 +25,7 @@
 	to_chat(user, "<span class='notice'>I insert \the [tuner] into \the [parent]'s cassette player.</span>")
 	return TRUE
 
-/datum/component/boombox/proc/options(mob/user)
+/datum/component/boombox/proc/options(datum/source, mob/user)
 	var/option = input(user, "What do i want to do with [parent]'s cassette module?", "Cassette Options", null) as null|anything in list("Toggle Loudness", "Change Range", "Change Volume", "Take Cassette Out", "Smash the play button")
 	switch(option)
 		if("Toggle Loudness")
