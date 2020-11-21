@@ -192,7 +192,7 @@
 	static_inventory += using
 
 	inv_box = new /obj/screen/inventory()
-	inv_box.name = "i_clothing"
+	inv_box.name = "uniform"
 	inv_box.icon = ui_style
 	inv_box.slot_id = SLOT_W_UNIFORM
 	inv_box.icon_state = "uniform"
@@ -200,7 +200,7 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /obj/screen/inventory()
-	inv_box.name = "o_clothing"
+	inv_box.name = "suit"
 	inv_box.icon = ui_style
 	inv_box.slot_id = SLOT_WEAR_SUIT
 	inv_box.icon_state = "suit"
