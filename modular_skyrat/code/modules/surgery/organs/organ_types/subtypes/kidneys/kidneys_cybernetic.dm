@@ -4,5 +4,5 @@
 	desc = "Urine trouble."
 	status = ORGAN_ROBOTIC
 
-/obj/item/organ/kidneys/emp_act(severity)
+/obj/item/organ/kidneys/cybernetic/emp_act(severity)
 	applyOrganDamage(severity * 10)

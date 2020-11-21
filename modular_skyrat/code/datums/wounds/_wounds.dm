@@ -142,6 +142,9 @@
 	var/do_sound_hint = TRUE
 	/// What we add to the carbon mob's descriptive wound string once acquired
 	var/descriptive = ""
+	/// Overlay we apply on a limb when acquired
+	/// Build this crap appropriately with the build_wound_overlay proc
+	var/mutable_appearance/wound_overlay
 
 /datum/wound/Topic(href, href_list)
 	if(!victim)
@@ -157,6 +160,8 @@
 	return FALSE
 
 /datum/wound/Destroy()
+	if(wound_overlay)
+		QDEL_NULL(wound_overlay)
 	if(attached_surgery)
 		QDEL_NULL(attached_surgery)
 	if(src in victim?.all_wounds)
@@ -179,6 +184,9 @@
 		if(victim)
 			for(var/i in associated_alerts)
 				victim.clear_alert(i)
+
+/datum/wound/proc/build_wound_overlay()
+	return FALSE
 
 /**
   * apply_wound() is used once a wound type is instantiated to assign it to a bodypart, and actually come into play.
@@ -224,6 +232,9 @@
 	LAZYADD(victim.all_wounds, src)
 	LAZYADD(limb.wounds, src)
 	limb.update_wounds()
+	build_wound_overlay()
+	if(wound_overlay)
+		limb.update_limb(limb.owner ? FALSE : TRUE)
 	if(status_effect_type && victim)
 		linked_status_effect = victim.apply_status_effect(status_effect_type, src)
 	SEND_SIGNAL(victim, COMSIG_CARBON_GAIN_WOUND, src, limb)
@@ -372,9 +383,10 @@
 		return TRUE
 	
 	// lastly, treat them
-	if(treat_infection(I, user))
-		return
-	treat(I, user)
+	if(treat(I, user))
+		return TRUE
+	else if(treat_infection(I, user))
+		return TRUE
 	return TRUE
 
 /// Return TRUE if we have an item that can only be used while aggro grabbed (unhanded aggro grab treatments go in [/datum/wound/proc/try_handling()]). Treatment is still is handled in [/datum/wound/proc/treat()]
@@ -658,7 +670,7 @@
 	
 	limb.heal_damage(I.heal_brute, I.heal_burn)
 	user.visible_message("<span class='green'>[user] applies [I] to [victim].</span>", "<span class='green'>You apply [I] to [user == victim ? "your" : "[victim]'s"] [limb.name].</span>")
-	sanitization += I.sanitization
+	sanitization += I.sanitization * WOUND_SANITIZATION_STERILIZER
 
 	if(sanitization >= germ_level)
 		to_chat(user, "<span class='notice'>You've done all you can with [I], now you must wait for the infection on [victim]'s [limb.name] to go away.</span>")
@@ -682,7 +694,7 @@
 	
 	limb.heal_damage(I.heal_brute, I.heal_burn)
 	user.visible_message("<span class='green'>[user] applies [I] to [victim].</span>", "<span class='green'>You apply [I] to [user == victim ? "your" : "[victim]'s"] [limb.name].</span>")
-	sanitization += I.sanitization
+	sanitization += I.sanitization * WOUND_SANITIZATION_STERILIZER
 
 	if((germ_level <= 0 || sanitization >= germ_level))
 		to_chat(user, "<span class='notice'>You've done all you can with [I], now you must wait for the infection on [victim]'s [limb.name] to go away.</span>")

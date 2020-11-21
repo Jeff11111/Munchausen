@@ -240,8 +240,10 @@
 	if(germ_level >= INFECTION_LEVEL_TWO)
 		germ_level += rand(MIN_ORGAN_DECAY_INFECTION,MAX_ORGAN_DECAY_INFECTION)
 		update_limb(owner ? FALSE : TRUE)
+		update_icon_dropped()
 	if(germ_level >= INFECTION_LEVEL_THREE)
 		kill_limb()
+		update_icon_dropped()
 	if(owner)
 		tox_dam = min(max_tox_damage, tox_dam + (max_tox_damage * decay_factor))
 
@@ -1743,7 +1745,7 @@
   * * replaced- If true, this is being called from the remove_wound() of a wound that's being replaced, so the bandage that already existed is still relevant, but the new wound hasn't been added yet
   */
 /obj/item/bodypart/proc/update_wounds(replaced = FALSE)
-	var/dam_mul = 1 //initial(wound_damage_multiplier)
+	var/dam_mul = initial(wound_damage_multiplier)
 
 	// we can (normally) only have one wound per type, but remember there's multiple types (smites like :B:loodless can generate multiple cuts on a limb)
 	for(var/datum/wound/W in wounds)
@@ -2114,5 +2116,7 @@
 					marking.color = "#141414"
 				else
 					marking.color = list(markings_color)
-
+	for(var/datum/wound/W in wounds)
+		if(W.wound_overlay)
+			. += W.wound_overlay
 	return

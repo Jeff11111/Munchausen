@@ -102,7 +102,7 @@
 	
 	limb.heal_damage(I.heal_brute, I.heal_burn)
 	user.visible_message("<span class='green'>[user] applies [I] to [victim].</span>", "<span class='green'>You apply [I] to [user == victim ? "your" : "[victim]'s"] [limb.name].</span>")
-	sanitization += I.sanitization
+	sanitization += I.sanitization * WOUND_SANITIZATION_STERILIZER
 	flesh_healing += I.flesh_regeneration
 
 	if(sanitization >= germ_level && flesh_healing > flesh_damage)

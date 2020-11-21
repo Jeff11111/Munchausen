@@ -4,5 +4,5 @@
 	icon_state = "capacitor-ipc"
 	status = ORGAN_ROBOTIC
 
-/obj/item/organ/kidneys/emp_act(severity)
+/obj/item/organ/kidneys/robot_ipc/emp_act(severity)
 	applyOrganDamage(severity * 10)

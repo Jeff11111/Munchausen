@@ -144,7 +144,7 @@
 	var/kick_verb = "kick"
 	var/kick_verb_continuous = "kicks"
 	var/bite_verb = "bite"
-	var/bite_verb_continous = "bites"
+	var/bite_verb_continuous = "bites"
 
 /datum/species/proc/apply_damage(damage, damagetype = BRUTE, def_zone = null, blocked, mob/living/carbon/human/H, forced = FALSE, wound_bonus = 0, bare_wound_bonus = 0, sharpness = SHARP_NONE)
 	var/hit_percent = (100-(blocked+armor))/100
@@ -420,9 +420,9 @@
 		target.do_stat_effects(user, null, damage)
 
 		//Attack message
-		target.visible_message("<span class='danger'>[user][pitiful ? " pitifully" : ""] [user.dna.species.kick_verb_continous] [target] on their [affecting.name]![target.wound_message]</span>", \
-					"<span class='userdanger'>[user][pitiful ? " pitifully" : ""] [user.dna.species.kick_verb_continous]s you on your [affecting.name]![target.wound_message]</span>", null, COMBAT_MESSAGE_RANGE, null, \
-					user, "<span class='danger'>You[pitiful ? " pitifully" : ""] [user.dna.species.kick_verb_continous] [target] on their [affecting.name]![target.wound_message]</span>")
+		target.visible_message("<span class='danger'>[user][pitiful ? " pitifully" : ""] [user.dna.species.kick_verb_continuous] [target] on their [affecting.name]![target.wound_message]</span>", \
+					"<span class='userdanger'>[user][pitiful ? " pitifully" : ""] [user.dna.species.kick_verb_continuous]s you on your [affecting.name]![target.wound_message]</span>", null, COMBAT_MESSAGE_RANGE, null, \
+					user, "<span class='danger'>You[pitiful ? " pitifully" : ""] [user.dna.species.kick_verb_continuous] [target] on their [affecting.name]![target.wound_message]</span>")
 		
 		//Clean the descriptive string
 		target.wound_message = ""

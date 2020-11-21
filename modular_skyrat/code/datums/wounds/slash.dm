@@ -343,3 +343,9 @@
 	infection_chance = 90
 	infection_rate = 6
 	descriptive = "The flesh is incised!"
+
+/datum/wound/slash/critical/incision/build_wound_overlay()
+	if(limb.body_zone in list(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN))
+		var/icon_poggers = "dissected_[limb.body_zone]"
+		wound_overlay = mutable_appearance('modular_skyrat/icons/mob/wound_overlays.dmi', icon_poggers)
+		return TRUE
