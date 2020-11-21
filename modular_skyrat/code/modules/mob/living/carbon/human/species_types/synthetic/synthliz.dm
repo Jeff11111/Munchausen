@@ -40,6 +40,13 @@
 		qdel(appendix)
 	for(var/obj/item/bodypart/O in C.bodyparts)
 		O.synthetic = TRUE
+	C.AddComponent(/datum/component/boombox)
+
+/datum/species/synthliz/on_species_loss(mob/living/carbon/human/C)
+	. = ..()
+	var/datum/component/bingus = C.GetComponent(/datum/component/boombox)
+	if(bingus)
+		bingus.RemoveComponent()
 
 /datum/species/synthliz/spec_revival(mob/living/carbon/human/H)
 	spawn(0)

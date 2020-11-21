@@ -4046,6 +4046,7 @@
 #include "modular_skyrat\code\modules\mob\living\carbon\human\species_types\general\snowflake.dm"
 #include "modular_skyrat\code\modules\mob\living\carbon\human\species_types\human\_humanoid.dm"
 #include "modular_skyrat\code\modules\mob\living\carbon\human\species_types\human\dunmer.dm"
+#include "modular_skyrat\code\modules\mob\living\carbon\human\species_types\human\dwarf.dm"
 #include "modular_skyrat\code\modules\mob\living\carbon\human\species_types\human\human.dm"
 #include "modular_skyrat\code\modules\mob\living\carbon\human\species_types\synthetic\ipc.dm"
 #include "modular_skyrat\code\modules\mob\living\carbon\human\species_types\synthetic\synthliz.dm"

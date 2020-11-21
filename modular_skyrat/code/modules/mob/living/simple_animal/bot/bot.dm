@@ -1,7 +1,7 @@
 //You can pick up bots!
 /mob/living/simple_animal/bot/ComponentInitialize()
 	. = ..()
-	AddElement(/datum/element/mob_holder, null, null, )
+	AddElement(/datum/element/mob_holder, null, null)
 	RegisterSignal(src, COMSIG_CLICK_ALT, .proc/pickup_react)
 
 //Proc for a bot to react upon someone trying to pick them up

@@ -99,15 +99,17 @@
 
 /datum/species/synth/on_species_gain(mob/living/carbon/human/H, datum/species/old_species)
 	. = ..()
-	//H.grant_language(/datum/language/machine)
 	RegisterSignal(H, COMSIG_MOB_SAY, .proc/handle_speech)
 	assume_disguise(old_species, H)
+	C.AddComponent(/datum/component/boombox)
 
 /datum/species/synth/on_species_loss(mob/living/carbon/human/H)
 	. = ..()
-	//H.remove_language(/datum/language/machine)
 	UnregisterSignal(H, COMSIG_MOB_SAY)
 	H.set_species(fake_species)
+	var/datum/component/bingus = C.GetComponent(/datum/component/boombox)
+	if(bingus)
+		bingus.RemoveComponent()
 
 /datum/species/synth/proc/handle_speech(datum/source, list/speech_args)
 	if(ishuman(source))

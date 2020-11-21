@@ -52,6 +52,13 @@
 		C.dna.species.limbs_id = chassis_of_choice.icon_state
 	for(var/obj/item/bodypart/O in C.bodyparts)
 		O.synthetic = TRUE
+	C.AddComponent(/datum/component/boombox)
+
+/datum/species/ipc/on_species_loss(mob/living/carbon/human/C)
+	. = ..()
+	var/datum/component/bingus = C.GetComponent(/datum/component/boombox)
+	if(bingus)
+		bingus.RemoveComponent()
 
 /datum/species/ipc/spec_revival(mob/living/carbon/human/H)
 	H.dna.features["ipc_screen"] = "BSOD"
