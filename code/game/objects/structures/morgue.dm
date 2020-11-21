@@ -264,9 +264,12 @@ GLOBAL_LIST_EMPTY(crematoriums)
 			if(M.mind && !M.fraggot)
 				//GET BACK HERE NIGGA YOU'RE GETTING
 				//JEWED
-				M.mind.grab_ghost(TRUE)
-				var/mob/dead/new_player/NP = new()
-				M.transfer_ckey(NP)
+				//(set to false so peoople who "succumbed" get fucked)
+				M.mind.grab_ghost(FALSE)
+				//If we succeeded, back to the lobby
+				if(M.client)
+					var/mob/dead/new_player/NP = new()
+					M.transfer_ckey(NP)
 			else
 				M.ghostize()
 			

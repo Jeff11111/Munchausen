@@ -338,8 +338,8 @@ Works together with spawning an observer, noted above.
 	var/mob/dead/observer/ghost = new(get_turf(src), src)	// Transfer safety to observer spawning proc.
 	SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
 	ghost.can_reenter_corpse = can_reenter_corpse || (sig_flags & COMPONENT_FREE_GHOSTING)
-	if (client && client.prefs && client.prefs.auto_ooc)
-		if (!(client.prefs.chat_toggles & CHAT_OOC))
+	if(client && client.prefs && client.prefs.auto_ooc)
+		if(!(client.prefs.chat_toggles & CHAT_OOC))
 			client.prefs.chat_toggles ^= CHAT_OOC
 	transfer_ckey(ghost, FALSE)
 	if(penalize)
@@ -387,8 +387,13 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	if(sig_flags & COMPONENT_DO_NOT_PENALIZE_GHOSTING)
 		penalty = 0
-
-	if((stat == DEAD) || (InFullCritical()) || sig_flags & COMPONENT_FREE_GHOSTING)
+	
+	var/mob/living/carbon/C = src
+	if(istype(C) && C.InFullShock() && !(C.stat == DEAD))
+		if(InFullShock() && !(stat == DEAD))
+			penalty = CANT_REENTER_ROUND
+		ghostize(FALSE)
+	else if((stat == DEAD) || sig_flags & COMPONENT_FREE_GHOSTING)
 		ghostize(TRUE)
 	else
 		var/response = alert(src, "Are you -sure- you want to ghost?\n(You are alive. If you ghost whilst alive you won't be able to re-enter this round [penalty ? "or play ghost roles [penalty == CANT_REENTER_ROUND ? "until the round is over" : "for the next [DisplayTimeText(penalty)]"]" : ""]! You can't change your mind so choose wisely!!)","Are you sure you want to ghost?","Ghost","Stay in body")
@@ -424,14 +429,12 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		penalty = 0
 
 	if(sig_flags & COMPONENT_FREE_GHOSTING)
-		ghostize(1)
+		ghostize(TRUE)
 	else
 		var/response = alert(src, "Are you -sure- you want to ghost?\n(You are alive. If you ghost whilst alive you won't be able to re-enter this round [penalty ? "or play ghost roles [penalty == CANT_REENTER_ROUND ? "until the round is over" : "for the next [DisplayTimeText(penalty)]"]" : ""]! You can't change your mind so choose wisely!!)","Are you sure you want to ghost?","Ghost","Stay in body")
 		if(response != "Ghost")
 			return
-		ghostize(0, penalize = TRUE)
-
-
+		ghostize(FALSE, penalize = TRUE)
 
 /mob/dead/observer/Move(NewLoc, direct)
 	if(updatedir)
