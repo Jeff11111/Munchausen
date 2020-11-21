@@ -468,7 +468,7 @@
 			if(INFECTION_LEVEL_TWO to INFECTION_LEVEL_THREE)
 				. +=  "<span class='deadsay'>[src] seems to be oozing some foul pus...</span>"
 			if(INFECTION_LEVEL_THREE to INFINITY)
-				. += "<span class='deadsay'>[src] seems to be awfully necrotic and riddled with dead tissue!</span>"
+				. += "<span class='deadsay'>[src] seems to be completely skeletonized and riddled with dead tissue!</span>"
 	for(var/obj/item/bodypart/BP in src)
 		if(BP.body_zone in children_zones)
 			. += "<span class='notice'>[src] has \a [lowertext(BP.name)] attached. Use a sharp item to cut it off!</span>"
@@ -519,7 +519,6 @@
 			"<span class='notice'>You begin to cut open [src]...</span>")
 		if(do_after(user, 54, target = src))
 			drop_organs(user)
-			update_limb(owner ? FALSE : TRUE)
 	else if((istype(W, /obj/item/cautery) || istype(W, /obj/item/pen)) && user.a_intent == INTENT_HELP)
 		var/badboy = input(user, "What do you want to inscribe on [src]?", "Malpractice", "") as text
 		if(badboy)
@@ -566,8 +565,12 @@
 				for(var/datum/action/item_action/hands_free/activate_pill/AP in I.actions)
 					qdel(AP)
 			I.forceMove(T)
+		if(istype(I, /obj/item/bodypart))
+			var/obj/item/bodypart/BP = I
+			BP.update_limb(TRUE)
 	if(cavity_item)
 		cavity_item = null
+	update_limb(owner ? FALSE : TRUE)
 
 /obj/item/bodypart/proc/get_organs()
 	if(!owner)
