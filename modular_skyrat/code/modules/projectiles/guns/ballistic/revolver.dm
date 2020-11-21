@@ -223,7 +223,6 @@
 	name = "\improper .38 revolver"
 	desc = "The NT Bladerunner revolver - A classic law enforcement firearm, for a lawless land."
 	icon_state = "bladerunner"
-	mag_type = /obj/item/ammo_box/magazine/internal/cylinder/rev38
 
 /obj/item/gun/ballistic/revolver/dual_ammo/rightclick_attack_self(mob/user)
 	. = ..()
