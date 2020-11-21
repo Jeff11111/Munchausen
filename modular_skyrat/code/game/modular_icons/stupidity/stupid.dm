@@ -18,10 +18,6 @@
 	plane = ABOVE_FLOOR_PLANE
 	layer = WIRE_LAYER
 
-/obj/machinery/door/poddoor
-	plane = ABOVE_FLOOR_PLANE
-	layer = POD_DOOR_LAYER
-
 /obj/machinery/atmospherics/pipe
 	//This is gonna cause issues with wall pipes. I know.
 	//The hardest choices require the strongest wills.
