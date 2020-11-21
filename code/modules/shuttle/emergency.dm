@@ -392,10 +392,10 @@
 
 	// The emergency shuttle doesn't work like others so this
 	// ripple check is slightly different
-	if(!ripples.len && (time_left <= SHUTTLE_RIPPLE_TIME) && ((mode == SHUTTLE_FUELING) || (mode == SHUTTLE_ESCAPE)))
+	if(!ripples.len && (time_left <= SHUTTLE_RIPPLE_TIME) && ((mode == SHUTTLE_IGNITING) || (mode == SHUTTLE_ESCAPE)))
 		var/destination
 		switch(mode)
-			if(SHUTTLE_FUELING)
+			if(SHUTTLE_IGNITING)
 				destination = SSshuttle.getDock("emergency_home")
 			if(SHUTTLE_ESCAPE)
 				destination = SSshuttle.getDock("emergency_away")
