@@ -15,3 +15,4 @@ Red Warrior42342432 = Game Admin
 Investigator77 = Game Admin
 Elchorico = Game Admin
 Mrhugetree = Game Admin
+SpessGameAccount = Game Admin
