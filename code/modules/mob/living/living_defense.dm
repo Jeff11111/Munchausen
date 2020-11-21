@@ -169,16 +169,60 @@
 		if(nosell_hit)
 			skipcatch = TRUE
 			hitpush = FALSE
+		
 		if(!skipcatch && isturf(I.loc) && catch_item(I))
 			return TRUE
+		
+		var/damage_caused = I.throwforce
 		var/dtype = BRUTE
-		//var/volume = I.get_volume_by_throwforce_and_or_w_class() //skyrat edit
-		//skyrat edit
 		var/zone = ran_zone(BODY_ZONE_CHEST, 65)//Hits a random part of the body, geared towards the chest
+		//If it was thrown by a human mob, let's do something a bit more involved
+		if(throwingdatum?.thrower?.mind && ishuman(throwingdatum.thrower) && iscarbon(src))
+			var/mob/living/carbon/human/assailant = throwingdatum.thrower
+			damage_caused *= (GET_STAT_LEVEL(assailant, str)/(MAX_STAT/2))
+			var/mob/living/carbon/victim = src
+			var/ran_zone_prob = 50
+			var/extra_zone_prob = 50
+			var/miss_entirely = 10
+			var/obj/item/bodypart/supposed_to_affect = victim.get_bodypart(check_zone(assailant.zone_selected))
+			if(supposed_to_affect)
+				ran_zone_prob = supposed_to_affect.zone_prob
+				extra_zone_prob = supposed_to_affect.extra_zone_prob
+				miss_entirely = supposed_to_affect.miss_entirely_prob
+			miss_entirely /= (victim.lying ? 10 : 1)
+			if(assailant.mind.diceroll(GET_STAT_LEVEL(assailant, dex)*1.5, GET_SKILL_LEVEL(assailant, melee)*0.5, mod = -(miss_entirely/5)) <= DICE_FAILURE)
+				blocked = 100
+				var/swing_sound = pick('modular_skyrat/sound/attack/swing_01.ogg',
+									'modular_skyrat/sound/attack/swing_02.ogg',
+									'modular_skyrat/sound/attack/swing_03.ogg',
+									)
+				playsound(get_turf(victim), swing_sound, 50)
+				visible_message("<span class='warning'>\The [I.name] misses [victim] entirely!</span>", \
+								"<span class='userdanger'>\The [I.name] misses you entirely!</span>")
+			var/datum/stats/dex/dex = GET_STAT(assailant, dex)
+			if(dex)
+				ran_zone_prob = dex.get_ran_zone_prob(ran_zone_prob, extra_zone_prob)
+			zone = ran_zone(check_zone(assailant.zone_selected), ran_zone_prob)
+		if(iscarbon(src) && mind?.handle_dodge(src, I, damage_caused, throwingdatum.thrower))
+			//le cops
+			var/mob/living/carbon/victim = src
+			//Make the victim step to an adjacent tile because ooooooh dodge
+			var/list/turf/dodge_turfs = list()
+			for(var/turf/open/O in range(1,src))
+				if(CanReach(O))
+					dodge_turfs += O
+			//No available turfs == we can't actually dodge
+			if(length(dodge_turfs))
+				var/turf/yoink = pick(dodge_turfs)
+				//We moved to the tile, therefore we dodged successfully
+				if(Move(yoink, get_dir(src, yoink)))
+					blocked = 100
+					playsound(get_turf(src), victim.dna?.species?.miss_sound, 70)
+					visible_message("<span class='danger'>[victim] dodges [I]!</span>")
+		
 		if(nosell_hit)
 			skipcatch = TRUE
 			hitpush = FALSE
-		//
 		dtype = I.damtype
 
 		if(!blocked)
@@ -189,11 +233,12 @@
 								"<span class='userdanger'>You're hit by [I]!</span>")
 				if(!I.throwforce)
 					return
+
 				var/armor = run_armor_check(zone, "melee", "Your armor has protected your [parse_zone(zone)].", "Your armor has softened hit to your [parse_zone(zone)].",I.armour_penetration)
 				apply_damage(I.throwforce, dtype, zone, armor, sharpness=I.get_sharpness(), wound_bonus=(nosell_hit * CANT_WOUND))
 			
 		else
-			return 1
+			return TRUE
 	else
 		playsound(loc, 'sound/weapons/genhit.ogg', 50, 1, -1)
 	..()
