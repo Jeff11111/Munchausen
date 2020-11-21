@@ -1,7 +1,7 @@
 
 /obj/item/clothing/under/rank/cargo/qm
-	name = "quartermaster's jumpsuit"
-	desc = "It's a jumpsuit worn by the quartermaster. It's specially designed to prevent back injuries caused by pushing paper."
+	name = "quartermaster's turtleneck"
+	desc = "It's a turtleneck worn by the quartermaster. It's specially designed to prevent back injuries caused by carrying gold."
 	icon_state = "qm"
 	item_state = "lb_suit"
 
@@ -16,11 +16,11 @@
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 
 /obj/item/clothing/under/rank/cargo/tech
-	name = "cargo technician's jumpsuit"
+	name = "cargo technician's gorka"
 	desc = "Gorkas! They're comfy and easy to wear!"
 	icon_state = "cargo"
 	item_state = "lb_suit"
-	body_parts_covered = CHEST|GROIN|ARMS
+	body_parts_covered = CHEST|GROIN|ARMS|LEGS
 	alt_covers_chest = TRUE
 
 /obj/item/clothing/under/rank/cargo/tech/skirt
@@ -43,7 +43,7 @@
 	//
 
 /obj/item/clothing/under/rank/cargo/miner/lavaland
-	desc = "A green uniform for operating in hazardous environments."
+	desc = "A hard-wroking uniform for operating in hazardous environments. It is very dirty."
 	name = "shaft miner's jumpsuit"
 	icon_state = "miner"
 	item_state = "miner"
