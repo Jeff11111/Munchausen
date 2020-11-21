@@ -1,5 +1,5 @@
 <h1>Welcome to Munchausen Outpost!</h1>
-<h2>PReviously Bobstation.</h2>
+<h2>Previously Bobstation.</h2>
 
 <i>The oldest SS13 anarchy server.</i><br>
 <i>Join the discord to see our "rules". <a href="https://discord.gg/Ng5QenfzEh"><b>https://discord.gg/Ng5QenfzEh</b></a></i>
