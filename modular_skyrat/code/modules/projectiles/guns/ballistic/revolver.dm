@@ -220,18 +220,18 @@
 
 //Bladerunner
 /obj/item/gun/ballistic/revolver/dual_ammo
-	name = "\improper .38 revolver"
+	name = "\improper .357 revolver"
 	desc = "The NT Bladerunner revolver - A classic law enforcement firearm, for a lawless land."
 	icon_state = "bladerunner"
 
-/obj/item/gun/ballistic/revolver/dual_ammo/rightclick_attack_self(mob/user)
+/obj/item/gun/ballistic/revolver/dual_ammo/AltClick(mob/user)
 	. = ..()
 	if(magazine)
 		if("38" in magazine.caliber)
 			magazine.caliber = list("357")
 			to_chat(user, "<span class='notice'>\The [src] will now chamber .357 rounds.</span>")
 		else if("357" in magazine.caliber)
-			magazine.caliber = list("357")
+			magazine.caliber = list("38")
 			to_chat(user, "<span class='notice'>\The [src] will now chamber .38 rounds.</span>")
 
 //NT Bingus
