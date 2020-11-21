@@ -26,7 +26,7 @@
 	return TRUE
 
 /datum/component/boombox/proc/options(datum/source, mob/user)
-	var/option = input(user, "What do i want to do with [parent]'s cassette module?", "Cassette Options", null) as null|anything in list("Toggle Loudness", "Change Range", "Change Volume", "Take Cassette Out", "Smash the play button")
+	var/option = input(user, "What do i want to do with [parent]'s cassette module?", "Cassette Options", null) as null|anything in list("Toggle Loudness", "Change Range", "Change Volume", "Take Cassette Out", "Smash the play button", "Smash the STOP button")
 	switch(option)
 		if("Toggle Loudness")
 			loud = !loud
@@ -65,6 +65,9 @@
 				user.stop_sound_channel(CHANNEL_JUKEBOX)
 				user.playsound_local(parent, current_cassette.current_tune, volume, 0, 7 - range)
 			to_chat(user, "<span class='warning'>I smash the play button on \the [parent]. Nice.</span>")
+		if("Smash the STOP button")
+			user.stop_sound_channel(CHANNEL_JUKEBOX)
+			to_chat(user, "<span class='warning'>I smash the STOP button - It does absolutely nothing.</span>")
 	return TRUE
 
 /datum/component/boombox/proc/examine_message(datum/source, mob/user, list/examine_list)
