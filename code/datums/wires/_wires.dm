@@ -269,6 +269,8 @@
 	// Station blueprints do that too, but only if the wires are not randomized.
 	else if(user.is_holding_item_of_type(/obj/item/areaeditor/blueprints) && !randomize)
 		reveal_wires = TRUE
+	else if(user.mind.diceroll(skills = SKILL_DATUM(electronics)))
+		reveal_wires = TRUE
 
 	for(var/color in colors)
 		payload.Add(list(list(
