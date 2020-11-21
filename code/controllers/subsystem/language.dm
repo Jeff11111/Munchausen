@@ -32,10 +32,8 @@ SUBSYSTEM_DEF(language)
 		if(my_lang == cool.name)
 			if(!cool.restricted || (cool.name in cli.prefs.pref_species.languagewhitelist))
 				user.grant_language(cool.type, TRUE, TRUE, LANGUAGE_ADDITIONAL)
-				to_chat(user, "<span class='notice'>You are able to speak in [my_lang]. If you're actually good at it or not, it's up to you.</span>")
 			else
 				to_chat(user, "<span class='warning'>Uh oh. [my_lang] is a restricted language, and couldn't be assigned!</span>")
 				to_chat(user, "<span class='warning'>This probably shouldn't be happening. Scream at Bob on #main-dev.</span>")
 		else
 			continue
-//
