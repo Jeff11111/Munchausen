@@ -98,10 +98,11 @@
 				CID.registered_account.account_password = passchoicenew
 				return
 			if("direct deposit")
-				var/selectaccount = input(user, "Please enter an account number:", "Account Selection") as null|num
-				if(!selectaccount)
-					not_selected_account()
-					return
+				if(CID.registered_account.account_id)
+					var/selectaccount = input(user, "Please enter an account number:", "Account Selection") as null|num
+					if(!selectaccount)
+						not_selected_account()
+						return
 				for(var/datum/bank_account/BA in SSeconomy.bank_accounts)
 					if(selectaccount != BA.account_id)
 						continue
