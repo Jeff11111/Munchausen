@@ -388,9 +388,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(sig_flags & COMPONENT_DO_NOT_PENALIZE_GHOSTING)
 		penalty = 0
 
-	if(stat != DEAD)
-		succumb()
-	if(stat == DEAD || sig_flags & COMPONENT_FREE_GHOSTING)
+	if((stat == DEAD) || (InFullCritical()) || sig_flags & COMPONENT_FREE_GHOSTING)
 		ghostize(TRUE)
 	else
 		var/response = alert(src, "Are you -sure- you want to ghost?\n(You are alive. If you ghost whilst alive you won't be able to re-enter this round [penalty ? "or play ghost roles [penalty == CANT_REENTER_ROUND ? "until the round is over" : "for the next [DisplayTimeText(penalty)]"]" : ""]! You can't change your mind so choose wisely!!)","Are you sure you want to ghost?","Ghost","Stay in body")
@@ -402,7 +400,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		else
 			suicide_log(TRUE)
 			ghostize(FALSE, penalize = TRUE, voluntary = TRUE) //FALSE parameter is so we can never re-enter our body, "Charlie, you can never come baaaack~" :3
-
 
 /mob/camera/verb/ghost()
 	set category = "OOC"
