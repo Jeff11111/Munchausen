@@ -680,6 +680,10 @@
 // returns 3-letter mode string, used by status screens and mob status panel
 /obj/docking_port/mobile/proc/getModeStr()
 	switch(mode)
+		if(SHUTTLE_FUELING)
+			return "FLG"
+		if(SHUTTLE_COMINGBACK)
+			return "RCL"
 		if(SHUTTLE_IGNITING)
 			return "IGN"
 		if(SHUTTLE_MISCRECALLED)
