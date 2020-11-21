@@ -13,7 +13,7 @@
 
 //disabler changes
 /obj/item/projectile/beam/disabler
-	icon = 'modular_skyrat/icons/obj/bobstation/guns/projectiles/projectile.dmi'
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/projectiles/projectiles.dmi'
 	icon_state = "sparq"
 	damage_type = PAIN
 	damage = 56
