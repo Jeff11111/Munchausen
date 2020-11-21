@@ -256,7 +256,7 @@
 	return
 
 /mob/living/proc/adjustBrainLoss(amount, maximum)
-	return adjustBrainLoss(amount, maximum)
+	return adjustOrganLoss(ORGAN_SLOT_BRAIN, amount, maximum)
 
 /mob/living/proc/setBrainLoss(amount, maximum)
 	return setOrganLoss(ORGAN_SLOT_BRAIN, amount, maximum)
