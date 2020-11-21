@@ -137,7 +137,9 @@
 		winset(user, window_id, "on-close=\"uiclose \ref[src]\"")
 
 	if(!initial_data)
-		initial_data = (!scrambled ? src_object.ui_data(user) : scramble_data(src_object.ui_data(user)))
+		initial_data = src_object.ui_data(user)
+		if(scrambled)
+			initial_data = scramble_data(initial_data)
 	if(!initial_static_data)
 		initial_static_data = src_object.ui_static_data(user)
 
