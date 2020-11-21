@@ -33,6 +33,7 @@
 				var/datum/wound/slash/critical/incision/inch = new()
 				inch.apply_wound(BP, TRUE)
 				BP.generic_bleedstacks += 5
+				target.wound_message = ""
 			//
 	return TRUE
 
