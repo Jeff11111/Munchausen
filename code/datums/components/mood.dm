@@ -48,7 +48,7 @@
 	STOP_PROCESSING(SSobj, src)
 
 /datum/component/mood/proc/print_mood(mob/user)
-	var/msg = "<span class='info'>*---------*\n<EM>Your current mood</EM></span>\n"
+	var/msg = "<span class='info'>*---------*\n<EM>My current mood</EM></span>\n"
 	msg += "<span class='notice'>My mental status: </span>" //Long term
 	//skyrat edit - screwy mood
 	if(!HAS_TRAIT(user, TRAIT_SCREWY_MOOD))
@@ -70,6 +70,7 @@
 	//
 
 	msg += "<span class='notice'>My current mood: </span>" //Short term
+	
 	//skyrat edit - screwy mood
 	if(!HAS_TRAIT(user, TRAIT_SCREWY_MOOD))
 		switch(mood_level)
@@ -91,6 +92,8 @@
 				msg += "<span class='nicegreen'>I feel amazing!</span>\n"
 			if(9)
 				msg += "<span class='nicegreen'>I love life!</span>\n"
+			else
+				msg += "<span class='nicegreen'>I'm alright.</span>\n"
 	else
 		msg += "<span class='notice'>No clue.</span>\n"
 	//

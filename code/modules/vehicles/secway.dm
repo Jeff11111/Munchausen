@@ -11,6 +11,8 @@
 	var/normalspeed = 2
 	var/last_tick = 0
 	var/list/progressbars_by_rider = list()
+	//No just no.
+	abandoned_code = TRUE
 
 /obj/vehicle/ridden/secway/Initialize()
 	. = ..()
