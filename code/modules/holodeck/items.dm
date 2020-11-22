@@ -101,7 +101,7 @@
 	density = TRUE
 
 /obj/structure/holohoop/attackby(obj/item/W as obj, mob/user as mob, params)
-	if(istype(I, /obj/item/grab))
+	if(istype(W, /obj/item/grab))
 		return attack_hand(user)
 	if(get_dist(src,user)<2)
 		if(user.transferItemToLoc(W, drop_location()))
