@@ -1,3 +1,8 @@
+//Jukeboxes work as boomboxes
+/obj/machinery/jukebox/ComponentInitialize()
+	. = ..()
+	AddComponent(/datum/component/boombox)
+
 //Jukebox searching
 /obj/machinery/jukebox/Topic(href, href_list)
 	if(..())
