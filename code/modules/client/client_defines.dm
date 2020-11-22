@@ -123,8 +123,6 @@
 	var/list/seen_messages
 	///A lazy list of atoms we've examined in the last EXAMINE_MORE_TIME (default 1.5) seconds, so that we will call [atom/proc/examine_more()] instead of [atom/proc/examine()] on them when examining
 	var/list/recent_examines
-	///When was the last time we warned them about not cryoing without an ahelp, set to -5 minutes so that rounstart cryo still warns
-	var/cryo_warned = -5 MINUTES
 
 	var/list/parallax_layers
 	var/list/parallax_layers_cached

@@ -28,11 +28,13 @@
 		to_chat(user, "<span class='danger'>You can't put [target] into [src]. They might wake up soon.</span>")
 		return
 
-	var/generic_plsnoleave_message = " Please adminhelp before leaving the round, even if there are no administrators online!"
+	//rerun the checks in case of shenanigans
+	if(!target || user.incapacitated() || !target.Adjacent(user) || !Adjacent(user) || (!ishuman(user) && !iscyborg(user)) || !istype(user.loc, /turf) || target.buckled)
+		return
 
 	if(target == user && world.time - target.client.cryo_warned > 5 MINUTES)//if we haven't warned them in the last 5 minutes
 		var/list/caught_string
-		var/addendum = ""
+		var/addendum = " Be sure you want to leave!"
 		if(target.mind.assigned_role in GLOB.command_positions)
 			LAZYADD(caught_string, "Head of Staff")
 			addendum = " Be sure to put your locker items back into your locker!"
@@ -47,14 +49,8 @@
 		if(target.mind.has_antag_datum(/datum/antagonist/rev))
 			LAZYADD(caught_string, "Revolutionary")
 
-		if(caught_string)
-			alert(target, "You're a [english_list(caught_string)]![generic_plsnoleave_message][addendum]")
-			target.client.cryo_warned = world.time
-			return
-
-	if(!target || user.incapacitated() || !target.Adjacent(user) || !Adjacent(user) || (!ishuman(user) && !iscyborg(user)) || !istype(user.loc, /turf) || target.buckled)
-		return
-		//rerun the checks in case of shenanigans
+		if(caught_string && addendum)
+			to_chat(target, "<span class='warning'>You're a [english_list(caught_string)]![addendum]</span>")
 
 	if(target == user)
 		visible_message("[user] starts climbing into the cryo pod.")
