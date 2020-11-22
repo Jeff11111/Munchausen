@@ -462,7 +462,7 @@
 	if(status & BODYPART_NOBLEED)
 		. += "<span class='notice'>[src] is impervious to [status & BODYPART_ORGANIC ? "bleeding" : "leakage"].</span>"
 	if(status & BODYPART_DEAD)
-		. += "<span class='deadsay'>[src] seems to have decayed, reaching a putrid state...</span>"
+		. += "<span class='deadsay'>[src] seems to have decayed, reaching a non-functional state...</span>"
 	if(germ_level)
 		switch(germ_level)
 			if(INFECTION_LEVEL_ONE to INFECTION_LEVEL_TWO)
