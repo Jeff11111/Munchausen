@@ -184,6 +184,8 @@
 			I.pixel_y = clamp(text2num(click_params["icon-y"]) - 16, -(world.icon_size/2), world.icon_size/2)
 			AfterPutItemOnTable(I, user)
 			return TRUE
+	if(istype(I, /obj/item/grab))
+		return attack_hand(user)
 	else
 		return ..()
 

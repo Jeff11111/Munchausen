@@ -74,6 +74,8 @@ God bless America.
 		. += "<span class='notice'>The status display reads: Frying at <b>[fry_speed*100]%</b> speed.<br>Using <b>[oil_use*10]</b> units of oil per second.</span>"
 
 /obj/machinery/deepfryer/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/grab))
+		return attack_hand(user)
 	if(istype(I, /obj/item/reagent_containers/pill))
 		if(!reagents.total_volume)
 			to_chat(user, "<span class='warning'>There's nothing to dissolve [I] in!</span>")

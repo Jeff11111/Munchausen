@@ -100,6 +100,8 @@
 	if(istype(W, /obj/item/crowbar))
 		for(var/obj/structure/transit_tube_pod/P in loc)
 			P.deconstruct(FALSE, user)
+	else if(istype(W, /obj/item/grab))
+		return attack_hand(user)
 	else
 		return ..()
 
