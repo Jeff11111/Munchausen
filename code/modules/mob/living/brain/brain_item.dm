@@ -58,9 +58,6 @@
 		var/datum/skill_modifier/S
 		ADD_SKILL_MODIFIER_BODY(/datum/skill_modifier/heavy_brain_damage, null, C, S)
 
-	//Update the body's icon so it doesnt appear debrained anymore
-	C.update_hair()
-
 /obj/item/organ/brain/Remove(special = FALSE, no_id_transfer = FALSE)
 	. = ..()
 	var/mob/living/carbon/C = .

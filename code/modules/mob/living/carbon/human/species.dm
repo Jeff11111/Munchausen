@@ -575,12 +575,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 	if(!hair_hidden || dynamic_hair_suffix)
 		var/mutable_appearance/hair_overlay = mutable_appearance(layer = -HAIR_LAYER)
-		if(!hair_hidden && !H.getorgan(/obj/item/organ/brain)) //Applies the debrained overlay if there is no brain
-			if(!(NOBLOOD in species_traits))
-				hair_overlay.icon = 'icons/mob/human_face.dmi'
-				hair_overlay.icon_state = "debrained"
-
-		else if(H.hair_style && (HAIR in species_traits))
+		if(H.hair_style && (HAIR in species_traits))
 			S = GLOB.hair_styles_list[H.hair_style]
 			if(S)
 				//List of all valid dynamic_hair_suffixes

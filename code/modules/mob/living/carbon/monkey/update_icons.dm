@@ -32,11 +32,6 @@
 		var/obj/item/clothing/mask/M = wear_mask
 		if(M.flags_inv & HIDEHAIR)
 			hair_hidden = 1
-	if(!hair_hidden)
-		if(!getorgan(/obj/item/organ/brain)) //Applies the debrained overlay if there is no brain
-			overlays_standing[HAIR_LAYER] = mutable_appearance('icons/mob/human_face.dmi', "debrained", -HAIR_LAYER)
-			apply_overlay(HAIR_LAYER)
-
 
 /mob/living/carbon/monkey/update_fire()
 	..("Monkey_burning")
