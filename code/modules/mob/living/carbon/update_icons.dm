@@ -282,14 +282,18 @@
 			. += "-digitigrade[BP.use_digitigrade]"
 		if(BP.animal_origin)
 			. += "-[BP.animal_origin]"
-		if(BP.status == BODYPART_ORGANIC)
+		if(BP.status & BODYPART_ORGANIC)
 			. += "-organic"
 		else
 			. += "-robotic"
+		if(BP.custom_overlay)
+			. += "-custom-[BP.custom_overlay.icon_state]"
+		for(var/datum/wound/W in BP.wounds)
+			if(W.wound_overlay)
+				. += "-wound-[lowertext(replacetext(W.name, " ", ""))]"
 
 	if(HAS_TRAIT(src, TRAIT_HUSK))
 		. += "-husk"
-
 
 //change the mob's icon to the one matching its key
 /mob/living/carbon/proc/load_limb_from_cache()

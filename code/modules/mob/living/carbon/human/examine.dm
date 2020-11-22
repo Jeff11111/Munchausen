@@ -207,20 +207,20 @@
 				disabled += BP
 			for(var/obj/item/I in BP.embedded_objects)
 				if(I.isEmbedHarmless())
-					msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] stuck to [t_his] [BP.name]!</B>\n"
+					msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] stuck to [t_his] [BP.name]!</B>"
 				else
-					msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] embedded in [t_his] [BP.name]!</B>\n"
+					msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] embedded in [t_his] [BP.name]!</B>"
 			if(BP.is_dead())
-				msg += "<span class='deadsay'><B>[t_His] [BP.name] is completely skeletonized!</B></span>\n"
+				msg += "<span class='deadsay'><B>[t_His] [BP.name] is completely skeletonized!</B></span>"
 			if(BP.etching && !clothingonpart(BP))
-				msg += "<B>[t_His] [BP.name] has \"[BP.etching]\" etched on it!</B>\n"
+				msg += "<B>[t_His] [BP.name] has \"[BP.etching]\" etched on it!</B>"
 			for(var/datum/wound/W in BP.wounds)
 				if(W.get_examine_description(user))
-					msg += "[W.get_examine_description(user)]\n"
+					msg += "[W.get_examine_description(user)]"
 					if(istype(W, /datum/wound/slash/critical/incision))
 						for(var/obj/item/organ/O in getorganszone(BP.body_zone))
 							for(var/i in O.surgical_examine(user))
-								msg += "<B>[icon2html(O.examine_icon ? O.examine_icon : O, user, O.examine_icon_state ? O.examine_icon_state : O.icon_state)] [i]</B>\n"
+								msg += "<B>[icon2html(O.examine_icon ? O.examine_icon : O, user, O.examine_icon_state ? O.examine_icon_state : O.icon_state)] [i]</B>"
 					if((user != src) && W.severity >= WOUND_SEVERITY_CRITICAL)
 						if(GET_SKILL_LEVEL(user, firstaid) < JOB_SKILLPOINTS_NOVICE)
 							SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured)
@@ -235,7 +235,7 @@
 			var/obj/item/bodypart/BP = X
 			disabled_names |= BP.name
 		if(length(disabled_names))
-			msg += "<B>[capitalize(t_his)] [english_list(disabled_names)] [length(disabled_names) > 1 ? "are" : "is"] disabled!</B>\n"
+			msg += "<B>[capitalize(t_his)] [english_list(disabled_names)] [length(disabled_names) > 1 ? "are" : "is"] disabled!</B>"
 
 	//Teeth
 	if(!screwy_self)
@@ -243,16 +243,16 @@
 			if(!teeth_part.max_teeth)
 				continue
 			else if(teeth_part.get_teeth_amount() < teeth_part.max_teeth)
-				msg += "<B>[capitalize(t_his)] [teeth_part.name] is missing [teeth_part.max_teeth - teeth_part.get_teeth_amount()] [teeth_part.max_teeth - teeth_part.get_teeth_amount() == 1 ? "tooth" : "teeth"]!</B>\n"
+				msg += "<B>[capitalize(t_his)] [teeth_part.name] is missing [teeth_part.max_teeth - teeth_part.get_teeth_amount()] [teeth_part.max_teeth - teeth_part.get_teeth_amount() == 1 ? "tooth" : "teeth"]!</B>"
 
 	//stores missing limbs
 	var/l_limbs_missing = 0
 	var/r_limbs_missing = 0
 	if(!screwy_self)
 		for(var/t in missing)
-			var/should_msg = "<B>[capitalize(t_his)] [parse_zone(t)] is missing!</B>\n"
+			var/should_msg = "<B>[capitalize(t_his)] [parse_zone(t)] is missing!</B>"
 			if(t==BODY_ZONE_HEAD)
-				should_msg = "<span class='deadsay'><B>[t_His] [parse_zone(t)] is missing!</B></span>\n"
+				should_msg = "<span class='deadsay'><B>[t_His] [parse_zone(t)] is missing!</B></span>"
 			else if(t == BODY_ZONE_L_ARM || t == BODY_ZONE_L_LEG || t == BODY_ZONE_PRECISE_L_FOOT || t == BODY_ZONE_PRECISE_R_FOOT)
 				l_limbs_missing++
 			else if(t == BODY_ZONE_R_ARM || t == BODY_ZONE_R_LEG || t == BODY_ZONE_PRECISE_L_HAND || t == BODY_ZONE_PRECISE_R_HAND)
@@ -272,99 +272,99 @@
 				msg += should_msg
 
 	if(l_limbs_missing >= 2 && r_limbs_missing == 0)
-		msg += "[t_He] look[p_s()] all right now.\n"
+		msg += "[t_He] look[p_s()] all right now."
 	else if(l_limbs_missing == 0 && r_limbs_missing >= 4)
-		msg += "[t_He] really keeps to the left.\n"
+		msg += "[t_He] really keeps to the left."
 	else if(l_limbs_missing >= 4 && r_limbs_missing >= 4)
-		msg += "[t_He] [p_do()]n't seem all there.\n"
+		msg += "[t_He] [p_do()]n't seem all there."
 
 	if(!screwy_self && !(user == src && src.hal_screwyhud == SCREWYHUD_HEALTHY)) //fake healthy
 		if(temp)
 			if(temp < 25)
-				msg += "[t_He] [t_has] minor bruising.\n"
+				msg += "[t_He] [t_has] minor bruising."
 			else if(temp < 50)
-				msg += "[t_He] [t_has] <b>moderate</b> bruising!\n"
+				msg += "[t_He] [t_has] <b>moderate</b> bruising!"
 			else
-				msg += "<B>[t_He] [t_has] severe bruising!</B>\n"
+				msg += "<B>[t_He] [t_has] severe bruising!</B>"
 
 		temp = getFireLoss()
 		if(temp)
 			if(temp < 25)
-				msg += "[t_He] [t_has] minor burns.\n"
+				msg += "[t_He] [t_has] minor burns."
 			else if (temp < 50)
-				msg += "[t_He] [t_has] <b>moderate</b> burns!\n"
+				msg += "[t_He] [t_has] <b>moderate</b> burns!"
 			else
-				msg += "<B>[t_He] [t_has] severe burns!</B>\n"
+				msg += "<B>[t_He] [t_has] severe burns!</B>"
 
 		temp = getCloneLoss()
 		if(temp)
 			if(temp < 25)
-				msg += "[t_He] [t_has] minor cellular damage.\n"
+				msg += "[t_He] [t_has] minor cellular damage."
 			else if(temp < 50)
-				msg += "[t_He] [t_has] <b>moderate</b> cellular damage!\n"
+				msg += "[t_He] [t_has] <b>moderate</b> cellular damage!"
 			else
-				msg += "<b>[t_He] [t_has] severe cellular damage!</b>\n"
+				msg += "<b>[t_He] [t_has] severe cellular damage!</b>"
 
 	if(!screwy_self)
 		if(fire_stacks > 0)
-			msg += "[t_He] [t_is] covered in something flammable.\n"
+			msg += "[t_He] [t_is] covered in something flammable."
 		if(fire_stacks < 0)
-			msg += "[t_He] look[p_s()] a little soaked.\n"
+			msg += "[t_He] look[p_s()] a little soaked."
 
 
 	if(pulledby && pulledby.grab_state)
-		msg += "[t_He] [t_is] restrained by [pulledby]'s grip.\n"
+		msg += "[t_He] [t_is] restrained by [pulledby]'s grip."
 
 	if(nutrition < NUTRITION_LEVEL_STARVING - 50)
-		msg += "[t_He] [t_is] severely malnourished.\n"
+		msg += "[t_He] [t_is] severely malnourished."
 	else if(nutrition >= NUTRITION_LEVEL_FAT)
 		//what the fuck is this shit
 		if(user.nutrition < NUTRITION_LEVEL_STARVING - 50)
-			msg += "[t_He] [t_is] plump and delicious looking - Like a fat little piggy. A tasty piggy.\n"
+			msg += "[t_He] [t_is] plump and delicious looking - Like a fat little piggy. A tasty piggy."
 		else
 			msg += "[t_He] [t_is] quite chubby.\n"
 
 	//ok lets follow the same pattern of the previous insane coder
 	if(hydration < HYDRATION_LEVEL_DEHYDRATED - 50)
-		msg += "[t_He] [t_is] severely dehydrated.\n"
+		msg += "[t_He] [t_is] severely dehydrated."
 	else if(hydration >= HYDRATION_LEVEL_FULL)
 		//no message for being full of water because that would be fucking stupid
 		if(user.hydration < HYDRATION_LEVEL_DEHYDRATED - 50)
-			msg += "[t_He] [t_is] plump and balloony looking - Like a fat little whale. A tasty whale.\n"
+			msg += "[t_He] [t_is] plump and balloony looking - Like a fat little whale. A tasty whale."
 	
 	switch(disgust)
 		if(DISGUST_LEVEL_GROSS to DISGUST_LEVEL_VERYGROSS)
-			msg += "[t_He] look[p_s()] a bit grossed out.\n"
+			msg += "[t_He] look[p_s()] a bit grossed out."
 		if(DISGUST_LEVEL_VERYGROSS to DISGUST_LEVEL_DISGUSTED)
-			msg += "[t_He] look[p_s()] really grossed out.\n"
+			msg += "[t_He] look[p_s()] really grossed out."
 		if(DISGUST_LEVEL_DISGUSTED to INFINITY)
-			msg += "[t_He] look[p_s()] extremely disgusted.\n"
+			msg += "[t_He] look[p_s()] extremely disgusted."
 	var/datum/component/mood/moodie = GetComponent(/datum/component/mood)
 	if(moodie && !(user == src && HAS_TRAIT(user, TRAIT_SCREWY_MOOD)))
 		switch(moodie.shown_mood)
 			if(-INFINITY to MOOD_LEVEL_SAD4)
-				msg += "<span class='notice'>[t_He] look[p_s()] depressed.</span>\n"
+				msg += "<span class='notice'>[t_He] look[p_s()] depressed.</span>"
 			if(MOOD_LEVEL_SAD4 to MOOD_LEVEL_SAD3)
-				msg += "<span class='notice'>[t_He] look[p_s()] very sad.</span>\n"
+				msg += "<span class='notice'>[t_He] look[p_s()] very sad.</span>"
 			if(MOOD_LEVEL_SAD3 to MOOD_LEVEL_SAD1)
-				msg += "<span class='notice'>[t_He] look[p_s()] a bit down.</span>\n"
+				msg += "<span class='notice'>[t_He] look[p_s()] a bit down.</span>"
 			if(MOOD_LEVEL_SAD1 to MOOD_LEVEL_HAPPY1)
-				msg += "<span class='notice'>[t_He] look[p_s()] about fine.</span>\n"
+				msg += "<span class='notice'>[t_He] look[p_s()] about fine.</span>"
 			if(MOOD_LEVEL_HAPPY1 to MOOD_LEVEL_HAPPY3)
-				msg += "<span class='notice'>[t_He] look[p_s()] quite happy.</span>\n"
+				msg += "<span class='notice'>[t_He] look[p_s()] quite happy.</span>"
 			if(MOOD_LEVEL_HAPPY3 to MOOD_LEVEL_HAPPY4)
-				msg += "<span class='notice'>[t_He] look[p_s()] very happy.</span>\n"
+				msg += "<span class='notice'>[t_He] look[p_s()] very happy.</span>"
 			if(MOOD_LEVEL_HAPPY4 to INFINITY)
-				msg += "<span class='notice'>[t_He] look[p_s()] ecstatic.</span>\n"
+				msg += "<span class='notice'>[t_He] look[p_s()] ecstatic.</span>"
 	
 	if(!screwy_self)
 		if(ShowAsPaleExamine())
 			var/apparent_blood_volume = get_blood_circulation()
 			switch(apparent_blood_volume)
 				if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-					msg += "[t_He] [t_has] pale skin.\n"
+					msg += "[t_He] [t_has] pale skin."
 				if(-INFINITY to BLOOD_VOLUME_OKAY)
-					msg += "<b>[t_He] look[p_s()] like pale death.</b>\n"
+					msg += "<b>[t_He] look[p_s()] like pale death.</b>"
 
 	var/bleed_text
 	var/list/obj/item/bodypart/bleeding_limbs = list()
@@ -397,41 +397,41 @@
 					bleed_text += " incredibly quickly"
 				
 				bleed_text += "!"
-				bleed_text += "</B>\n"
+				bleed_text += "</B>"
 
 			for(var/obj/item/bodypart/grasped_part in grasped_limbs)
-				bleed_text += "[t_He] [t_is] holding [t_his] [grasped_part.name] to slow the bleeding!\n"
+				bleed_text += "\n[t_He] [t_is] holding [t_his] [grasped_part.name] to slow the bleeding!"
 			
 			msg += bleed_text
 		
 		if(reagents.has_reagent(/datum/reagent/teslium))
-			msg += "[t_He] [t_is] emitting a gentle blue glow!\n"
+			msg += "[t_He] [t_is] emitting a gentle blue glow!"
 
 		if(islist(stun_absorption))
 			for(var/i in stun_absorption)
 				if(stun_absorption[i]["end_time"] > world.time && stun_absorption[i]["examine_message"])
-					msg += "[t_He] [t_is][stun_absorption[i]["examine_message"]]\n"
+					msg += "[t_He] [t_is][stun_absorption[i]["examine_message"]]"
 
 		if(drunkenness && !skipface && !(stat == DEAD)) //Drunkenness
 			switch(drunkenness)
 				if(11 to 21)
-					msg += "[t_He] [t_is] slightly flushed.\n"
+					msg += "[t_He] [t_is] slightly flushed."
 				if(21.01 to 41) //.01s are used in case drunkenness ends up to be a small decimal
-					msg += "[t_He] [t_is] flushed.\n"
+					msg += "[t_He] [t_is] flushed."
 				if(41.01 to 51)
-					msg += "[t_He] [t_is] quite flushed and [t_his] breath smells of alcohol.\n"
+					msg += "[t_He] [t_is] quite flushed and [t_his] breath smells of alcohol."
 				if(51.01 to 61)
-					msg += "[t_He] [t_is] very flushed and [t_his] movements jerky, with breath reeking of alcohol.\n"
+					msg += "[t_He] [t_is] very flushed and [t_his] movements jerky, with breath reeking of alcohol."
 				if(61.01 to 91)
-					msg += "[t_He] look[p_s()] like a drunken mess.\n"
+					msg += "[t_He] look[p_s()] like a drunken mess."
 				if(91.01 to INFINITY)
-					msg += "[t_He] [t_is] a shitfaced, slobbering wreck.\n"
+					msg += "[t_He] [t_is] a shitfaced, slobbering wreck."
 
 		if(reagents.has_reagent(/datum/reagent/fermi/astral))
 			if(mind)
-				msg += "[t_He] has wild, spacey eyes and they have a strange, abnormal look to them.\n"
+				msg += "[t_He] has wild, spacey eyes and they have a strange, abnormal look to them."
 			else
-				msg += "[t_He] has wild, spacey eyes and they don't look like they're all there.\n"
+				msg += "[t_He] has wild, spacey eyes and they don't look like they're all there."
 
 	if(isliving(user))
 		var/mob/living/L = user
@@ -439,23 +439,23 @@
 			if (a_intent != INTENT_HELP)
 				msg += "[t_He] seem[p_s()] to be on guard.\n"
 			if (getOxyLoss() >= 10)
-				msg += "[t_He] seem[p_s()] winded.\n"
+				msg += "[t_He] seem[p_s()] winded."
 			if (getToxLoss() >= 10)
-				msg += "[t_He] seem[p_s()] sickly.\n"
+				msg += "[t_He] seem[p_s()] sickly."
 			var/datum/component/mood/mood = GetComponent(/datum/component/mood)
 			if(mood.sanity <= SANITY_DISTURBED)
 				SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "empath", /datum/mood_event/sad_empath, src)
 			if(mood.shown_mood >= 6)
 				SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "empathH", /datum/mood_event/happy_empath, src)
 			if (HAS_TRAIT(src, TRAIT_BLIND))
-				msg += "[t_He] appear[p_s()] to be staring off into space.\n"
+				msg += "[t_He] appear[p_s()] to be staring off into space."
 			if (HAS_TRAIT(src, TRAIT_DEAF))
-				msg += "[t_He] appear[p_s()] to not be responding to noises.\n"
+				msg += "[t_He] appear[p_s()] to not be responding to noises."
 
 	var/obj/item/organ/vocal_cords/Vc = user.getorganslot(ORGAN_SLOT_VOICE)
 	if(Vc)
 		if(istype(Vc, /obj/item/organ/vocal_cords/velvet))
-			msg += "<span class='velvet'><i>You feel your chords resonate looking at them.</i></span>\n"
+			msg += "<span class='velvet'><i>You feel your chords resonate looking at them.</i></span>"
 
 	//CONSCIOUSNESS
 	var/dist = get_dist(user, src)
@@ -570,7 +570,7 @@
 	msg += yeah
 	
 	//descriptors
-	msg |= "[jointext(show_descriptors_to(user), "\n")]\n"
+	msg |= "[jointext(show_descriptors_to(user), "\n")]"
 	
 	var/trait_exam = common_trait_examine()
 	if(!screwy_self)
@@ -601,7 +601,7 @@
 			msg += "<span class='userdanger'>They KNOW the [key_text], i am sure of it!</span>"
 	
 	if(length(msg))
-		. += "<span class='warning'>[msg.Join("")]</span>"
+		. += "<span class='warning'>[msg.Join("\n")]</span>"
 	
 	var/traitstring = get_trait_string()
 	if(ishuman(user))

@@ -929,8 +929,6 @@ use_mob_overlay_icon: if FALSE, it will always use the default_icon_file even if
 	..()
 	update_hair()
 
-
-
 /mob/living/carbon/human/proc/update_observer_view(obj/item/I, inventory)
 	if(observers && observers.len)
 		for(var/M in observers)

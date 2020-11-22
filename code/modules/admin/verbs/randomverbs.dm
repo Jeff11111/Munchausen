@@ -1627,6 +1627,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 					H.dna.species.name = "Papa John's Pizza"
 					H.dna.species.exotic_blood = /datum/reagent/consumable/tomatojuice
 					H.dna.species.exotic_bloodtype = "Tomato Sauce"
+					H.dna.blood_color = "#ff0000"
 					H.dna.species.liked_food = GRAIN | DAIRY | JUNKFOOD
 					H.dna.species.say_mod = "salsas"
 					H.dna.species.meat = /obj/item/reagent_containers/food/snacks/pizza

@@ -583,7 +583,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 			dissectionmsg = " via Experimental Dissection"
 		else if(HAS_TRAIT_FROM(src, TRAIT_DISSECTED,"Thorough Dissection"))
 			dissectionmsg = " via Thorough Dissection"
-		. += "<span class='notice'>This body has been dissected and analyzed[dissectionmsg].</span><br>"
+		. += "<span class='notice'>This body has been dissected and analyzed[dissectionmsg].</span>\n"
 
 //gets ID card object from special clothes slot or null.
 /mob/proc/get_idcard(hand_first = TRUE)

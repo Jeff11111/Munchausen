@@ -570,6 +570,7 @@
 		if(istype(I, /obj/item/bodypart))
 			var/obj/item/bodypart/BP = I
 			BP.update_limb(TRUE)
+			BP.update_icon_dropped()
 	if(cavity_item)
 		cavity_item = null
 	update_limb(owner ? FALSE : TRUE)
@@ -1511,25 +1512,25 @@
 //To update the bodypart's icon when not attached to a mob
 /obj/item/bodypart/proc/update_icon_dropped()
 	cut_overlays()
-	var/list/standing = get_limb_icon(1)
+	var/list/standing = get_limb_icon(TRUE)
 	for(var/image/I in standing)
 		I.pixel_x = px_x
 		I.pixel_y = px_y
 	for(var/obj/item/bodypart/BP in src)
-		var/list/substanding = BP.get_limb_icon(1)
+		var/list/substanding = BP.get_limb_icon(TRUE)
 		for(var/image/I in substanding)
 			I.pixel_x = px_x
 			I.pixel_y = px_y
 		standing |= substanding
 		for(var/obj/item/bodypart/grandchild in BP)
-			var/list/subsubstanding = grandchild.get_limb_icon(1)
+			var/list/subsubstanding = grandchild.get_limb_icon(TRUE)
 			for(var/image/I in subsubstanding)
 				I.pixel_x = px_x
 				I.pixel_y = px_y
 			standing |= subsubstanding
 			//the ride never ends
 			for(var/obj/item/bodypart/ggrandchild in grandchild)
-				var/list/subsubsubstanding = ggrandchild.get_limb_icon(1)
+				var/list/subsubsubstanding = ggrandchild.get_limb_icon(TRUE)
 				for(var/image/I in subsubsubstanding)
 					I.pixel_x = px_x
 					I.pixel_y = px_y
@@ -1849,7 +1850,7 @@
 		C = owner
 		no_update = FALSE
 
-	if(((C && HAS_TRAIT(C, TRAIT_HUSK)) || germ_level >= INFECTION_LEVEL_TWO) && is_organic_limb())
+	if(C && HAS_TRAIT(C, TRAIT_HUSK))
 		species_id = "husk" //overrides species_id
 		dmg_overlay_type = "" //no damage overlay shown when husked
 		should_draw_gender = FALSE
@@ -1858,7 +1859,16 @@
 		no_update = TRUE
 		body_markings = "husk" // reeee
 		aux_marking = "husk"
-
+	else if((germ_level >= INFECTION_LEVEL_TWO) && is_organic_limb())
+		species_id = "rot" //overrides species_id
+		dmg_overlay_type = "" //no damage overlay shown when rotting
+		should_draw_gender = FALSE
+		color_src = FALSE
+		base_bp_icon = DEFAULT_BODYPART_ICON
+		no_update = TRUE
+		body_markings = "husk" // reeee
+		aux_marking = "husk"
+	
 	if(no_update)
 		return
 
@@ -2010,6 +2020,7 @@
 			limb.icon = 'modular_skyrat/icons/mob/human_parts.dmi'
 			species_id = "skeleton"
 			limb.icon_state = "[species_id]_[body_zone]"
+			color_src = FALSE
 		else
 			if(should_draw_gender)
 				limb.icon_state = "[species_id]_[body_zone]_[icon_gender]"
