@@ -19,6 +19,12 @@
 		give_hallucination_object(new_body)
 		if(new_body.hud_used?.dreamer && old_body.hud_used?.dreamer)
 			new_body.hud_used.dreamer.waking_up = old_body.hud_used.dreamer.waking_up
+	if(iscarbon(new_body))
+		var/mob/living/carbon/C = new_body
+		var/obj/item/organ/heart/my_heart = C.getorganslot(ORGAN_SLOT_HEART)
+		my_heart.organ_flags |= ORGAN_VITAL
+		var/obj/item/organ/brain/my_brain = C.getorganslot(ORGAN_SLOT_BRAIN)
+		my_brain.organ_flags |= ~ORGAN_VITAL
 
 /datum/antagonist/dreamer/New()
 	. = ..()
