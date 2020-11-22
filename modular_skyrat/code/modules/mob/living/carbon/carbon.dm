@@ -176,9 +176,9 @@
 	
 	//Big chungus
 	zoomed = !zoomed
+	var/_x = 0
+	var/_y = 0
 	if(zoomed)
-		var/_x = 0
-		var/_y = 0
 		var/direction = get_dir(src, A)
 		if(direction & NORTH)
 			_y += zoomies
@@ -188,22 +188,23 @@
 			_y += -zoomies
 		if(direction & WEST)
 			_x += -zoomies
-		
+
+	if(zoomed)		
 		if(zoomout)
 			client.change_view(zoomout)
 		
 		client.pixel_x = world.icon_size*_x
 		client.pixel_y = world.icon_size*_y
-		//the smarter solution of moving the fov thing didnt work
-		if((zoomies >= 4) && hud_used?.fov_holder)
-			hud_used.fov_holder.alpha = 0
+		if(hud_used?.fov_holder)
+			hud_used.fov_holder.screen_loc = "CENTER-7:[world.icon_size*-_x],CENTER-7:[world.icon_size*-_y]"
+			hud_used.fov_holder.resize_fov()
 	else
 		client.change_view(CONFIG_GET(string/default_view))
 		client.pixel_x = 0
 		client.pixel_y = 0
-		//the smarter solution of moving the fov thing didnt work
 		if(hud_used?.fov_holder)
-			hud_used.fov_holder.alpha = 255
+			hud_used.fov_holder.screen_loc = ui_fov
+			hud_used.fov_holder.resize_fov()
 	to_chat(src, "<span class='notice'>I [zoomed ? "look" : "stop looking"] at the distance.</span>")
 
 /mob/living/carbon/on_examine_atom(atom/examined)

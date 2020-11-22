@@ -501,11 +501,9 @@ GLOBAL_LIST_EMPTY(objectives)
 
 /datum/objective/martyr/check_completion()
 	var/christchurch_counter = 0
-	for(var/M in GLOB.carbon_list)
-		var/mob/living/carbon/human/chungus = M
-		if(istype(chungus) && chungus.mind && chungus.stat == DEAD)
-			christchurch_counter++
-	
+	for(var/mob/living/carbon/C in GLOB.carbon_list)
+		if(C.mind && !considered_alive(C.mind))
+			christchurch_counter++ 
 	if(christchurch_counter >= christchurch_victims)
 		return TRUE
 	

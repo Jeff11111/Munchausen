@@ -679,19 +679,16 @@
 	if(!blood_exists)
 		new /obj/effect/decal/cleanable/trail_holder(target_turf, get_static_viruses())
 	
-	//We use this later
-	var/pretty = get_dir(start, target_turf)
-
 	var/obj/effect/decal/cleanable/trail_holder/connected_trail
 	for(var/obj/effect/decal/cleanable/trail_holder/nice in start)
 		connected_trail = nice
 		if(connected_trail.connected_trail && !QDELETED(connected_trail.connected_trail))
-			var/dire_straits = get_dir(connected_trail.connected_trail, connected_trail) | pretty
+			var/dire_straits = get_dir(connected_trail.connected_trail, target_turf)
 			if(dire_straits in GLOB.diagonals)
-				dire_straits = turn(dire_straits, 180)
 				connected_trail.cut_overlays()
 				connected_trail.existing_dirs -= connected_trail.existing_dirs[length(connected_trail.existing_dirs)]
 				connected_trail.existing_dirs |= dire_straits
+				connected_trail.cut_overlays()
 				for(var/poggers in connected_trail.existing_dirs)
 					connected_trail.add_overlay(image('modular_skyrat/icons/effects/blood_fuck.dmi', trail_type, dir = poggers))
 		break

@@ -22,17 +22,6 @@
 	if(HAS_TRAIT(src, TRAIT_HUSK))
 		return
 
-	var/hair_hidden = 0
-
-	if(head)
-		var/obj/item/I = head
-		if(I.flags_inv & HIDEHAIR)
-			hair_hidden = 1
-	if(wear_mask)
-		var/obj/item/clothing/mask/M = wear_mask
-		if(M.flags_inv & HIDEHAIR)
-			hair_hidden = 1
-
 /mob/living/carbon/monkey/update_fire()
 	..("Monkey_burning")
 
