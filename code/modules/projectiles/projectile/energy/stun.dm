@@ -3,8 +3,8 @@
 	icon_state = "spark"
 	color = "#FFFF00"
 	nodamage = TRUE
-	knockdown = 60
-	knockdown_stamoverride = 36
+	knockdown = 10
+	knockdown_stamoverride = 20
 	knockdown_stam_max = 50
 	stutter = 10
 	jitter = 20
@@ -14,10 +14,10 @@
 	tracer_type = /obj/effect/projectile/tracer/stun
 	muzzle_type = /obj/effect/projectile/muzzle/stun
 	impact_type = /obj/effect/projectile/impact/stun
-	var/tase_duration = 50
+	var/tase_duration = 10
 	var/strong_tase = TRUE
 	wound_bonus = CANT_WOUND
-	pain = 20 //WHAT DO YOU MEAN TASERS ACTUALLY HURT A LOT?
+	pain = 60 //WHAT DO YOU MEAN TASERS ACTUALLY HURT A LOT?
 
 /obj/item/projectile/energy/electrode/on_hit(atom/target, blocked = FALSE)
 	. = ..()
@@ -41,15 +41,17 @@
 	..()
 
 /obj/item/projectile/energy/electrode/security
-	tase_duration = 30
+	tase_duration = 10
 	knockdown = 0
 	stamina = 10
 	knockdown_stamoverride = 0
 	knockdown_stam_max = 0
 	strong_tase = FALSE
+	pain = 35 //WHAT DO YOU MEAN TASERS ACTUALLY HURT A LOT?
 
 /obj/item/projectile/energy/electrode/security/hos
-	knockdown = 100
-	knockdown_stamoverride = 30
+	knockdown = 20
+	knockdown_stamoverride = 25
 	knockdown_stam_max = null
-	tase_duration = 10
+	tase_duration = 20
+	pain = 60 //WHAT DO YOU MEAN TASERS ACTUALLY HURT A LOT?
