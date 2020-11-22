@@ -1335,6 +1335,7 @@
 		return BLOOD_VOLUME_NORMAL
 	if(HAS_TRAIT(src, TRAIT_STABLEHEART))
 		return blood_volume
+	
 	if(!heart && needs_heart())
 		return 0.1 * apparent_blood_volume
 

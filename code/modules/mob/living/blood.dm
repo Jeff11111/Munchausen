@@ -124,7 +124,9 @@
 				adjustOxyLoss(10)
 		
 		if(get_blood_circulation() <= BLOOD_VOLUME_SURVIVE)
-			adjustOrganLoss(ORGAN_SLOT_HEART, rand(1, 2))
+			var/obj/item/organ/heart/bingus = getorganslot(ORGAN_SLOT_HEART)
+			if(bingus && !CHECK_BITFIELD(bingus.status, ORGAN_ROBOTIC))
+				adjustOrganLoss(ORGAN_SLOT_HEART, rand(1, 2))
 
 		var/temp_bleed = 0
 		//Bleeding out
