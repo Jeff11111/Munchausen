@@ -387,15 +387,15 @@
 
 //Rejection
 /obj/item/bodypart/proc/handle_rejection()
+	if(is_robotic_limb() || is_synthetic_limb())
+		return
+	
 	// Process unsuitable transplants. TODO: consider some kind of
 	// immunosuppressant that changes transplant data to make it match.
 	if(owner.virus_immunity() < 10) //for now just having shit immunity will suppress it
 		original_dna = owner.dna
 		original_species = owner.dna?.species
 		rejecting = 0
-		return
-
-	if(is_robotic_limb() || is_synthetic_limb())
 		return
 
 	if(original_dna)

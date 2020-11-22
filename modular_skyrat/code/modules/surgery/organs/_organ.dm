@@ -275,8 +275,8 @@
 
 /obj/item/organ/proc/handle_germ_effects()
 	//Handle infection effects
-	var/virus_immunity = owner.virus_immunity()
-	var/antibiotics = owner.get_antibiotics()
+	var/virus_immunity = owner?.virus_immunity()
+	var/antibiotics = owner?.get_antibiotics()
 
 	if(germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(virus_immunity*0.3))
 		germ_level--
@@ -299,10 +299,10 @@
 			//Spread germs
 			if(antibiotics < 5 && bodypart.germ_level < germ_level && (bodypart.germ_level < INFECTION_LEVEL_ONE*2 || prob(owner.immunity_weakness() * 0.3)))
 				bodypart.germ_level++
-			//Cause organ damage about once every ~30 seconds
-			//The bodypart deals with dealing raw toxin damage, let's not stack onto the problem now
-			if(prob(3))
-				applyOrganDamage(2)
+		//Cause organ damage about once every ~30 seconds
+		//The bodypart deals with dealing raw toxin damage, let's not stack onto the problem now
+		if(prob(3))
+			applyOrganDamage(2)
 	
 	//Organ is just completely dead by this point
 	if(germ_level >= INFECTION_LEVEL_THREE)
@@ -313,10 +313,14 @@
 			if(antibiotics < 10 && bodypart.germ_level < germ_level && (bodypart.germ_level < INFECTION_LEVEL_THREE))
 				bodypart.germ_level++
 			//Cause toxin damage
-			bodypart.receive_damage(toxin = rand(1,2))
+			if(bodypart.owner)
+				bodypart.receive_damage(toxin = rand(1,2))
 
 //Rejection
 /obj/item/organ/proc/handle_rejection()
+	if(is_robotic() || is_synthetic())
+		return
+	
 	// Process unsuitable transplants. TODO: consider some kind of
 	// immunosuppressant that changes transplant data to make it match.
 	var/antibiotics = owner.get_antibiotics()
@@ -326,8 +330,7 @@
 			original_dna = owner.dna
 			original_species = owner.dna?.species
 		return
-	if(is_robotic() || is_synthetic())
-		return
+	
 	if(original_dna)
 		if(!rejecting)
 			if(original_dna && !(owner.dna.blood_type in get_safe_blood(original_dna?.blood_type)))
