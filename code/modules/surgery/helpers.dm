@@ -80,14 +80,13 @@
 				if(current_surgery.steps[stoop] in S.steps)
 					steps_done |= current_surgery.steps[stoop]
 			qdel(current_surgery)
-			break
 		
 		if(affecting)
 			if(!S.requires_bodypart)
 				return
 			if(S.requires_bodypart_type && !(affecting.status & S.requires_bodypart_type))
 				return
-		
+
 		else if(C && S.requires_bodypart)
 			return
 		
