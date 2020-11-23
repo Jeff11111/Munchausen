@@ -138,7 +138,7 @@
 	if(.)
 		return TRUE
 	else if(surgery.operated_bodypart?.is_broken())
-		to_chat(user, "<span class='notice'>[target]'s [parse_zone(check_zone(target_zone)] was already broken! I can move on to the next step.</span>")
+		to_chat(user, "<span class='notice'>[target]'s [parse_zone(check_zone(target_zone))] was already broken! I can move on to the next step.</span>")
 		surgery.status++
 		return TRUE
 
