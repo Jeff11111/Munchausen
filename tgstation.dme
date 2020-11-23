@@ -3945,6 +3945,7 @@
 #include "modular_skyrat\code\modules\jobs\job_types\atmos_tech.dm"
 #include "modular_skyrat\code\modules\jobs\job_types\bartender.dm"
 #include "modular_skyrat\code\modules\jobs\job_types\blueshield.dm"
+#include "modular_skyrat\code\modules\jobs\job_types\botanist.dm"
 #include "modular_skyrat\code\modules\jobs\job_types\brig_physician.dm"
 #include "modular_skyrat\code\modules\jobs\job_types\captain.dm"
 #include "modular_skyrat\code\modules\jobs\job_types\chaplain.dm"
