@@ -731,8 +731,8 @@
 
 //HoS sabre
 /obj/item/melee/sabre/hos
-	name = "soulbreaker sabre"
-	desc = "An elegant weapon, fit for the execution of those who break (sharia) law."
+	name = "arabic sabre"
+	desc = "An elegant weapon, fit for the execution of those who break the (sharia) law."
 	icon = 'modular_skyrat/icons/obj/bobstation/melee/sabre.dmi'
 	icon_state = "sabre"
 	item_state = "sabre"
