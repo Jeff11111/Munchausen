@@ -9,7 +9,7 @@
 	severity = WOUND_SEVERITY_CRITICAL
 	viable_zones = ALL_BODYPARTS
 	wound_type = WOUND_LIST_INCISION
-	initial_flow = 1
+	initial_flow = 0.5 //on most surgeries this means 3.5 blood flow without clamping bleeders, 0.5 if clamping
 	minimum_flow = 0
 	clot_rate = 0
 	max_per_type = 5

@@ -3,7 +3,8 @@
 
 /datum/surgery_step/replace_limb
 	name = "Replace limb"
-	implements = list(/obj/item/bodypart = 100, /obj/item/organ_storage = 100)
+	implements = list(/obj/item/bodypart = 100,
+					/obj/item/organ_storage = 100)
 	time = 32
 
 /datum/surgery_step/replace_limb/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)

@@ -13,3 +13,7 @@
 // death rattle
 /mob/living/carbon/human/death_rattle()
 	return dna?.species?.death_rattle(src)
+
+// death scream
+/mob/living/carbon/human/death_scream()
+	return dna?.species?.death_scream(src)

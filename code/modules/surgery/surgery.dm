@@ -10,19 +10,18 @@
 	var/requires_bodypart_type = BODYPART_ORGANIC			//Prevents you from performing an operation on incorrect limbs. 0 for any limb type
 	var/list/possible_locs = list() 						//Multiple locations
 	var/ignore_clothes = 0									//This surgery ignores clothes
+	var/obj/item/retractor_tool								//Tool currently retracting the limb open
 	var/mob/living/carbon/target							//Operation target mob
 	var/obj/item/bodypart/operated_bodypart					//Operable body part
 	var/obj/item/organ/operated_organ						//Operable organ
+	var/datum/wound/operated_wound							//The actual wound datum instance we're targeting
+	var/datum/wound/targetable_wound						//The wound type this surgery targets
 	var/requires_bodypart = TRUE							//Surgery available only when a bodypart is present, or only when it is missing.
 	var/success_multiplier = 0								//Step success probability multiplier
 	var/requires_real_bodypart = 0							//Some surgeries don't work on limbs that don't really exist
 	var/lying_required = FALSE								//Does the victim needs to be lying down.
 	var/requires_tech = FALSE
 	var/replaced_by
-	//skyrat edit
-	var/datum/wound/operated_wound								//The actual wound datum instance we're targeting
-	var/datum/wound/targetable_wound							//The wound type this surgery targets
-	//
 
 /datum/surgery/New(surgery_target, surgery_location, surgery_bodypart)
 	..()
@@ -33,23 +32,18 @@
 			location = surgery_location
 		if(surgery_bodypart)
 			operated_bodypart = surgery_bodypart
-			//skyrat edit
 			if(targetable_wound)
 				operated_wound = operated_bodypart.get_wound_type(targetable_wound)
 				operated_wound.attached_surgery = src
-			//
 
 /datum/surgery/Destroy()
-	//skyrat edit
 	if(operated_wound)
 		operated_wound.attached_surgery = null
-	//
 	if(target)
 		target.surgeries -= src
 	target = null
 	operated_bodypart = null
 	return ..()
-
 
 /datum/surgery/proc/can_start(mob/user, mob/living/patient, obj/item/tool) //FALSE to not show in list
 	. = TRUE
@@ -96,7 +90,7 @@
 
 /datum/surgery/proc/next_step(mob/user, intent)
 	if(step_in_progress)
-		return 1
+		return TRUE
 
 	var/try_to_fail = FALSE
 	if(intent == INTENT_DISARM)
@@ -109,7 +103,7 @@
 			return TRUE
 		if(iscyborg(user) && user.a_intent != INTENT_HARM) //to save asimov borgs a LOT of heartache
 			return TRUE
-		if(tool && tool.item_flags & SURGICAL_TOOL) //Just because you used the wrong tool it doesn't mean you meant to whack the patient with it
+		if(tool && (tool.item_flags & SURGICAL_TOOL)) //Just because you used the wrong tool it doesn't mean you meant to whack the patient with it
 			to_chat(user, "<span class='warning'>This step requires a different tool!</span>")
 			return TRUE
 

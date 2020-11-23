@@ -16,73 +16,127 @@
 		if(S.location == selected_zone)
 			current_surgery = S
 
-	if(!current_surgery)
-		var/list/all_surgeries = GLOB.surgeries_list.Copy()
-		var/list/available_surgeries = list()
+	var/choose = FALSE
+	if(current_surgery)
+		choose = TRUE
+	
+	var/list/all_surgeries = GLOB.surgeries_list.Copy()
+	var/list/available_surgeries = list()
 
-		for(var/datum/surgery/S in all_surgeries)
-			if(!S.possible_locs.Find(selected_zone))
+	for(var/datum/surgery/S in all_surgeries)
+		if(!S.possible_locs.Find(selected_zone))
+			continue
+		if(affecting)
+			if(!S.requires_bodypart)
 				continue
-			if(affecting)
-				if(!S.requires_bodypart)
-					continue
-				if(S.requires_bodypart_type && !(affecting.status & S.requires_bodypart_type))
-					continue
-				if(S.requires_real_bodypart && affecting.is_pseudopart)
-					continue
-			else if(C && S.requires_bodypart) //mob with no limb in surgery zone when we need a limb
+			if(S.requires_bodypart_type && !(affecting.status & S.requires_bodypart_type))
 				continue
-			if(S.lying_required && !(M.lying))
+			if(S.requires_real_bodypart && affecting.is_pseudopart)
 				continue
-			if(!S.can_start(user, M, I))
-				continue
-			for(var/path in S.target_mobtypes)
-				if(istype(M, path))
-					available_surgeries[S.name] = S
+		else if(C && S.requires_bodypart) //mob with no limb in surgery zone when we need a limb
+			continue
+		if(S.lying_required && !(M.lying))
+			continue
+		if(!S.can_start(user, M, I))
+			continue
+		for(var/path in S.target_mobtypes)
+			if(istype(M, path))
+				available_surgeries[S.name] = S
+				break
+
+	if(!length(available_surgeries))
+		return
+
+	var/P
+	if(choose)
+		P = input("Switch to what procedure?", "Surgery", null, null) as null|anything in available_surgeries
+	else if(!affecting)
+		P = "Prosthetic replacement"
+	else if(affecting.is_broken())
+		if(affecting.is_organic_limb())
+			var/datum/wound/blunt/W = locate() in affecting.wounds
+			if(W.severity >= WOUND_SEVERITY_CRITICAL)
+				P = "Repair bone fracture (Compound)"
+			else
+				P = "Repair bone fracture (Hairline)"
+		else
+			var/datum/wound/mechanical/W = locate() in affecting.wounds
+			if(W.severity >= WOUND_SEVERITY_CRITICAL)
+				P = "Repair endoskeleton damage (Broken)"
+			else
+				P = "Repair endoskeleton damage (Malfunctioning)"
+	else if((affecting.body_zone in ORGAN_BODYPARTS) || !affecting.is_broken())
+		if(affecting.is_organic_limb())
+			P = "Organ manipulation"
+		else
+			P = "Prosthesis organ manipulation"
+
+	if(P && user && user.Adjacent(M) && (I in user))
+		var/datum/surgery/S = available_surgeries[P]
+		var/list/steps_done = list()
+		for(var/datum/surgery/other in M.surgeries)
+			for(var/stoop in other.steps)
+				if(stoop > (other.status - 1))
 					break
-
-		if(!available_surgeries.len)
+				if(other.steps[stoop] in S.steps)
+					steps_done |= other.steps[stoop]
+			if(other.location == S.location)
+				qdel(S)
+			break
+		
+		if(C)
+			affecting = C.get_bodypart(check_zone(selected_zone))
+		
+		if(affecting)
+			if(!S.requires_bodypart)
+				return
+			if(S.requires_bodypart_type && !(affecting.status & S.requires_bodypart_type))
+				return
+		else if(C && S.requires_bodypart)
+			return
+		
+		if(S.lying_required && !(M.lying))
 			return
 
-		var/P = input("Begin which procedure?", "Surgery", null, null) as null|anything in available_surgeries
-		if(P && user && user.Adjacent(M) && (I in user))
-			var/datum/surgery/S = available_surgeries[P]
+		if(!S.can_start(user, M, I))
+			return
 
-			for(var/datum/surgery/other in M.surgeries)
-				if(other.location == S.location)
-					return //during the input() another surgery was started at the same location.
-
-			//we check that the surgery is still doable after the input() wait.
-			if(C)
-				affecting = C.get_bodypart(check_zone(selected_zone))
-			if(affecting)
-				if(!S.requires_bodypart)
-					return
-				if(S.requires_bodypart_type && !(affecting.status & S.requires_bodypart_type))
-					return
-			else if(C && S.requires_bodypart)
-				return
-			if(S.lying_required && !(M.lying))
-				return
-			if(!S.can_start(user, M, I))
-				return
-
-			if(S.ignore_clothes || get_location_accessible(M, selected_zone))
-				var/datum/surgery/procedure = new S.type(M, selected_zone, affecting)
-				if(istype(I, /obj/item/surgical_drapes) || istype(I, /obj/item/bedsheet))
-					user.visible_message("[user] drapes [I] over [M]'s [parse_zone(selected_zone)] to prepare for surgery.", \
-						"<span class='notice'>You drape [I] over [M]'s [parse_zone(selected_zone)] to prepare for \an [procedure.name].</span>")
-				else
-					user.visible_message("[user] prepares [M]'s [parse_zone(selected_zone)] for surgery with [I].", \
-						"<span class='notice'>You prepare [M]'s [parse_zone(selected_zone)] for \an [procedure.name] with [I].</span>")
-				log_combat(user, M, "operated on", null, "(OPERATION TYPE: [procedure.name]) (TARGET AREA: [selected_zone])")
+		if(S.ignore_clothes || get_location_accessible(M, selected_zone))
+			var/datum/surgery/procedure = new S.type(M, selected_zone, affecting)
+			if(istype(I, /obj/item/surgical_drapes) || istype(I, /obj/item/bedsheet))
+				user.visible_message("[user] drapes [I] over [M]'s [parse_zone(selected_zone)] to prepare for surgery.", \
+					"<span class='notice'>You drape [I] over [M]'s [parse_zone(selected_zone)] to prepare for \an [procedure.name].</span>")
 			else
-				to_chat(user, "<span class='warning'>You need to expose [M]'s [parse_zone(selected_zone)] first!</span>")
+				user.visible_message("[user] prepares [M]'s [parse_zone(selected_zone)] for surgery with [I].", \
+					"<span class='notice'>You prepare [M]'s [parse_zone(selected_zone)] for \an [procedure.name] with [I].</span>")
+			log_combat(user, M, "operated on", null, "(OPERATION TYPE: [procedure.name]) (TARGET AREA: [selected_zone])")
+			while((procedure.status <= length(procedure.steps)) && (surgery_step_in_list(procedure.steps[procedure.status], steps_done)))
+				procedure.status++
+			if(procedure.status > length(procedure.steps))
+				procedure.complete()
+			else if(I.get_sharpness() && (procedure.steps[procedure.status] == /datum/surgery_step/incise))
+				procedure.next_step(user, user.a_intent)
+		else
+			to_chat(user, "<span class='warning'>You need to expose [M]'s [parse_zone(selected_zone)] first!</span>")
 
-	else if(!current_surgery.step_in_progress)
+	else if(!current_surgery.step_in_progress && (find_cauterizing_tool(user.held_items)))
 		attempt_cancel_surgery(current_surgery, I, M, user)
 
-	return 1
+	return TRUE
+
+/proc/find_cauterizing_tool(list/item_list)
+	for(var/obj/item/I in item_list)
+		if(I.tool_behaviour == TOOL_CAUTERY || I.get_temperature() > 300)
+			return TRUE
+		else if(istype(I, /obj/item/stack/medical/suture) || istype(I, /obj/item/stack/medical/gauze))
+			return TRUE
+	return FALSE
+
+/proc/surgery_step_in_list(step_path, list/step_list)
+	for(var/pogchamp in step_list)
+		if(istype(step_path, pogchamp))
+			return TRUE
+	return FALSE
 
 /proc/attempt_cancel_surgery(datum/surgery/S, obj/item/I, mob/living/M, mob/user)
 	var/selected_zone = user.zone_selected
@@ -105,15 +159,17 @@
 		else if(!close_tool || close_tool.tool_behaviour != required_tool_type)
 			to_chat(user, "<span class='warning'>You need to hold a [is_robotic ? "screwdriver" : "cautery"] in your inactive hand to stop [M]'s surgery!</span>")
 			return
-		//skyrat edit
-		if(S.operated_bodypart)
-			S.operated_bodypart.generic_bleedstacks -= 5
-		//
+		else if(!do_mob(user, M, 1 SECONDS))
+			to_chat(user, "<span class='warning'>You need to stay still to cancel \the [S.name]!</span>")
+			return
+		
 		M.surgeries -= S
 		for(var/datum/wound/slash/critical/incision/inch in S.operated_bodypart.wounds)
-			inch.remove_wound()
+			if(!istype(inch, /datum/wound/slash/critical/incision/disembowel))
+				inch.remove_wound()
 		for(var/datum/wound/mechanical/slash/critical/incision/inch in S.operated_bodypart.wounds)
-			inch.remove_wound()
+			if(!istype(inch, /datum/wound/mechanical/slash/critical/incision/disembowel))
+				inch.remove_wound()
 		user.visible_message("<span class='notice'>[user] closes [M]'s [parse_zone(selected_zone)] with [close_tool] and removes [I].</span>", \
 			"<span class='notice'>You close [M]'s [parse_zone(selected_zone)] with [close_tool] and remove [I].</span>")
 		qdel(S)

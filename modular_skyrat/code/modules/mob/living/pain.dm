@@ -17,6 +17,9 @@
 /mob/living/proc/death_rattle()
 	return
 
+/mob/living/proc/death_scream()
+	return
+
 // Called on Life()
 /mob/living/proc/handle_pain()
 	return

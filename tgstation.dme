@@ -4249,6 +4249,7 @@
 #include "modular_skyrat\code\modules\spells\spell_types\shapeshift.dm"
 #include "modular_skyrat\code\modules\surgery\bone_mending.dm"
 #include "modular_skyrat\code\modules\surgery\debride.dm"
+#include "modular_skyrat\code\modules\surgery\helpers.dm"
 #include "modular_skyrat\code\modules\surgery\mechanic_steps.dm"
 #include "modular_skyrat\code\modules\surgery\organ_manipulation.dm"
 #include "modular_skyrat\code\modules\surgery\repair_puncture.dm"

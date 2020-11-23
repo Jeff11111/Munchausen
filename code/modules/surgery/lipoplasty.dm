@@ -11,6 +11,7 @@
 	if(HAS_TRAIT(target, TRAIT_FAT))
 		return 1
 	return 0
+
 //cut fat
 /datum/surgery_step/cut_fat
 	name = "Cut excess fat"

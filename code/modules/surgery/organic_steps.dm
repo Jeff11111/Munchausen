@@ -27,14 +27,12 @@
 			display_results(user, target, "<span class='notice'>Blood pools around the incision in [H]'s [parse_zone(target_zone)].</span>",
 				"Blood pools around the incision in [H]'s [parse_zone(target_zone)].",
 				"")
-			//skyrat edit
 			var/obj/item/bodypart/BP = target.get_bodypart(target_zone)
 			if(istype(BP))
 				var/datum/wound/slash/critical/incision/inch = new()
 				inch.apply_wound(BP, TRUE)
-				BP.generic_bleedstacks += 5
+				inch.blood_flow += 3
 				target.wound_message = ""
-			//
 	return TRUE
 
 /datum/surgery_step/incise/nobleed //silly friendly!
@@ -48,10 +46,33 @@
 	return TRUE
 
 //clamp bleeders
+//Not a hard requirement, just needed if you don't want your patient to bleed out
 /datum/surgery_step/clamp_bleeders
 	name = "Clamp bleeders"
 	implements = list(TOOL_HEMOSTAT = 100, TOOL_WIRECUTTER = 60, /obj/item/stack/packageWrap = 35, /obj/item/stack/cable_coil = 15)
 	time = 24
+
+/datum/surgery_step/clamp_bleeders/try_op(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail)
+	. = ..()
+	if(.)
+		return TRUE
+	else
+		var/datum/surgery_step/pogchamp = surgery.get_surgery_next_step()
+		if(pogchamp)
+			var/yes = FALSE
+			for(var/poggers in pogchamp.implements)
+				if(istype(tool, poggers) || (tool.tool_behaviour == poggers))
+					yes = TRUE
+					break
+			qdel(pogchamp)
+			if(yes)
+				surgery.status++
+				if(surgery.status > length(surgery.steps))
+					surgery.complete()
+				return TRUE
+			else
+				return FALSE
+		return FALSE
 
 /datum/surgery_step/clamp_bleeders/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, "<span class='notice'>You begin to clamp bleeders in [target]'s [parse_zone(target_zone)]...</span>",
@@ -59,14 +80,15 @@
 		"[user] begins to clamp bleeders in [target]'s [parse_zone(target_zone)].")
 
 /datum/surgery_step/clamp_bleeders/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	if (ishuman(target))
+	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
-		//skyrat edit
 		var/obj/item/bodypart/BP = H.get_bodypart(target_zone)
 		if(BP)
-			BP.generic_bleedstacks -= 3
-		//
+			var/datum/wound/slash/critical/incision/incision = locate() in BP.wounds
+			if(incision)
+				incision.blood_flow -= 3
 	return ..()
+
 //retract skin
 /datum/surgery_step/retract_skin
 	name = "Retract skin"
@@ -77,8 +99,6 @@
 	display_results(user, target, "<span class='notice'>You begin to retract the skin in [target]'s [parse_zone(target_zone)]...</span>",
 		"[user] begins to retract the skin in [target]'s [parse_zone(target_zone)].",
 		"[user] begins to retract the skin in [target]'s [parse_zone(target_zone)].")
-
-
 
 //close incision
 /datum/surgery_step/close
@@ -97,22 +117,29 @@
 	return TRUE
 
 /datum/surgery_step/close/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	if (ishuman(target))
+	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
-		//skyrat edit
 		var/obj/item/bodypart/BP = H.get_bodypart(target_zone)
 		if(istype(BP))
 			for(var/datum/wound/slash/critical/incision/inch in BP.wounds)
 				inch.remove_wound()
 			for(var/datum/wound/mechanical/slash/critical/incision/inch in BP.wounds)
 				inch.remove_wound()
-		//
 	return ..()
+
 //saw bone
 /datum/surgery_step/saw
 	name = "Saw bone"
 	implements = list(TOOL_SAW = 100, /obj/item/melee/arm_blade = 75, /obj/item/fireaxe = 50, /obj/item/hatchet = 35, /obj/item/kitchen/knife/butcher = 25)
 	time = 54
+
+/datum/surgery_step/saw/try_op(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail)
+	. = ..()
+	if(.)
+		return TRUE
+	else if(surgery.operated_bodypart?.is_broken())
+		surgery.status++
+		return TRUE
 
 /datum/surgery_step/saw/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, "<span class='notice'>You begin to saw through the bone in [target]'s [parse_zone(target_zone)]...</span>",

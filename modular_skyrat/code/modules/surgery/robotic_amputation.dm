@@ -1,9 +1,6 @@
 /datum/surgery/amputation/mechanic
 	name = "Mechanic amputation"
 	steps = list(/datum/surgery_step/mechanic_open,
-				/datum/surgery_step/mechanic_unwrench,
-				/datum/surgery_step/open_hatch,
-				/datum/surgery_step/pry_off_plating,
 				/datum/surgery_step/cut_wires,
 				/datum/surgery_step/mechanic_sever_limb)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
@@ -45,9 +42,7 @@
 /datum/surgery/disembowelment/mechanic
 	name = "Disembowelment"
 	steps = list(/datum/surgery_step/mechanic_open,
-				/datum/surgery_step/mechanic_unwrench,
 				/datum/surgery_step/open_hatch,
-				/datum/surgery_step/pry_off_plating,
 				/datum/surgery_step/mechanic_disembowel)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	possible_locs = ALL_BODYPARTS

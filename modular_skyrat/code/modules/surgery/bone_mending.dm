@@ -3,7 +3,7 @@
 
 ///// Repair Hairline Fracture (Severe)
 /datum/surgery/repair_bone_hairline
-	name = "Repair bone fracture (hairline)"
+	name = "Repair bone fracture (Hairline)"
 	steps = list(/datum/surgery_step/incise,
 				/datum/surgery_step/repair_bone_hairline,
 				/datum/surgery_step/close)
@@ -20,7 +20,7 @@
 
 ///// Repair Compound Fracture (Critical)
 /datum/surgery/repair_bone_compound
-	name = "Repair bone fracture (compound)"
+	name = "Repair bone fracture (Compound)"
 	steps = list(/datum/surgery_step/incise,
 				/datum/surgery_step/retract_skin,
 				/datum/surgery_step/clamp_bleeders,

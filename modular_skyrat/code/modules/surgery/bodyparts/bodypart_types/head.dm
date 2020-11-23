@@ -294,3 +294,8 @@
 		else
 			O.drop_limb(special, TRUE, FALSE, FALSE)
 	attach_limb(C, special)
+
+/obj/item/bodypart/head/can_dismember(obj/item/I)
+	. = ..()
+	if(owner && HAS_TRAIT(owner, TRAIT_NODECAP))
+		return FALSE

@@ -141,6 +141,16 @@
 	var/static/list/death_rattles_female = list(
 	'modular_skyrat/sound/gore/deathgasp_male1.ogg',
 	)
+	var/static/list/death_screams_male = list(
+	'modular_skyrat/sound/gore/death_male1.ogg',
+	'modular_skyrat/sound/gore/death_male2.ogg',
+	'modular_skyrat/sound/gore/death_male3.ogg',
+	)
+	var/static/list/death_screams_female = list(
+	'modular_skyrat/sound/gore/death_female1.ogg',
+	'modular_skyrat/sound/gore/death_female2.ogg',
+	'modular_skyrat/sound/gore/death_female3.ogg',
+	)
 	var/kick_verb = "kick"
 	var/kick_verb_continuous = "kicks"
 	var/bite_verb = "bite"
@@ -267,6 +277,11 @@
 	if(!istype(H))
 		return FALSE
 	H.emote("deathrattle")
+
+/datum/species/proc/death_scream(var/mob/living/carbon/human/H)
+	if(!istype(H))
+		return FALSE
+	H.emote("deathscream")
 
 //Kicking
 /datum/species/proc/kick(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)

@@ -1,6 +1,7 @@
 /datum/surgery/dental_implant
 	name = "Dental implant"
-	steps = list(/datum/surgery_step/drill, /datum/surgery_step/insert_pill)
+	steps = list(/datum/surgery_step/drill,
+				/datum/surgery_step/insert_pill)
 	possible_locs = list(BODY_ZONE_PRECISE_MOUTH)
 	requires_bodypart_type = BODYPART_ORGANIC //Skyrat change
 

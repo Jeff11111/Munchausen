@@ -215,3 +215,25 @@
 			sound = pick(H.dna.species.death_rattles_male)
 			if((H.gender == FEMALE) && length(H.dna.species.death_rattles_female))
 				sound = pick(H.dna.species.death_rattles_female)
+
+// Death scream
+/datum/emote/living/deathrattle
+	key = "deathscream"
+	key_third_person = "deathscreams"
+	message = "screams!"
+	emote_type = EMOTE_AUDIBLE
+	muzzle_ignore = TRUE
+	restraint_check = FALSE
+	stat_allowed = UNCONSCIOUS
+	mob_type_allowed_typecache = list(/mob/living/carbon/human)
+
+/datum/emote/living/deathrattle/run_emote(mob/user, params)
+	. = ..()
+	//emotes are singletons so we need to clear out the sound
+	sound = null
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(length(H.dna?.species?.death_rattles_male))
+			sound = pick(H.dna.species.death_rattles_male)
+			if((H.gender == FEMALE) && length(H.dna.species.death_rattles_female))
+				sound = pick(H.dna.species.death_rattles_female)

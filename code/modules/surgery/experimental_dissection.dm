@@ -7,7 +7,6 @@
 				/datum/surgery_step/retract_skin,
 				/datum/surgery_step/clamp_bleeders,
 				/datum/surgery_step/dissection,
-				/datum/surgery_step/clamp_bleeders,
 				/datum/surgery_step/close)
 	possible_locs = TORSO_BODYPARTS //skyrat edit
 	requires_bodypart_type = BODYPART_ORGANIC

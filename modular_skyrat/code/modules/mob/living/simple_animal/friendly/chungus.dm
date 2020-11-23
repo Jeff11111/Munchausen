@@ -72,6 +72,7 @@
 								possible_messages |= bingus[i]
 		if(length(possible_messages))
 			message = pick(possible_messages)
+		message = copytext(message, 1, findtext(message, "FORCED") || length(message))
 		message = replacetext(message, "\"", "")
 		if(config.punctuation_filter && !findtext(message, config.punctuation_filter, length(message)) && !(config.bingus_filter && findtext(message, config.bingus_filter, 1, 2)))
 			message += "."

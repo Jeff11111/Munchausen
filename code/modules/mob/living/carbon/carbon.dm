@@ -94,12 +94,11 @@
 		if(user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM)
 			for(var/datum/surgery/S in surgeries)
 				if(!S.lying_required || (S.lying_required && lying))
-					if(S.next_step(user,user.a_intent))
-						return 1
+					if(S.next_step(user, user.a_intent))
+						return TRUE
 	//skyrat edit
-	if(!all_wounds || !all_wounds.len || !(user.a_intent == INTENT_HELP || user == src))
+	if(!length(all_wounds) || !(user.a_intent == INTENT_HELP || user == src))
 		return ..()
-	//
 
 	// The following priority/nonpriority searching is so that if we have two wounds on a limb that use the same item for treatment,
 	// we prefer whichever wound is not already treated. If there's no priority wounds that this can treat, go through the
@@ -115,7 +114,6 @@
 		if(W.try_treating(I, user))
 			return 1
 
-	//
 	return ..()
 
 /mob/living/carbon/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)

@@ -3,7 +3,7 @@
 
 ///// Repair Hairline Fracture (Severe)
 /datum/surgery/mechanic_repair_bone_hairline
-	name = "Repair endoskeleton damage (malfunctioning)"
+	name = "Repair endoskeleton damage (Malfunctioning)"
 	steps = list(/datum/surgery_step/mechanic_open,
 				/datum/surgery_step/mechanic_repair_bone_hairline,
 				/datum/surgery_step/mechanic_close)
@@ -20,7 +20,7 @@
 
 ///// Repair Compound Fracture (Critical)
 /datum/surgery/mechanic_repair_bone_compound
-	name = "Repair endoskeleton damage (broken)"
+	name = "Repair endoskeleton damage (Broken)"
 	steps = list(/datum/surgery_step/mechanic_open,
 				/datum/surgery_step/mechanic_unwrench,
 				/datum/surgery_step/open_hatch,

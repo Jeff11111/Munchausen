@@ -218,7 +218,7 @@
 //open hatch
 /datum/surgery_step/open_hatch
 	name = "Open the hatch"
-	accept_hand = 1
+	accept_hand = TRUE
 	time = 10
 
 /datum/surgery_step/open_hatch/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)

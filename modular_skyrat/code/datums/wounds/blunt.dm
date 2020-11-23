@@ -79,14 +79,16 @@
 				//Paralyze a bit
 				if(DICE_FAILURE)
 					victim.DefaultCombatKnockdown(250)
-					victim.agony_scream()
+					victim.death_scream()
 				//Paralyze and knockdown
 				if(DICE_CRIT_FAILURE)
 					victim.DefaultCombatKnockdown(400)
 					victim.Paralyze(350)
-					victim.agony_scream()
+					victim.death_scream()
 		else
-			victim.DefaultCombatKnockdown(200)
+			victim.DefaultCombatKnockdown(400)
+			victim.Paralyze(350)
+			victim.death_scream()
 	
 	update_inefficiencies()
 

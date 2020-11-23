@@ -25,7 +25,7 @@
 	if(!silent)
 		C.visible_message("<span class='danger'><B>[C]'s [src.name] has been violently dismembered!</B></span>")
 	if(body_zone != BODY_ZONE_HEAD)
-		C.emote("scream")
+		C.death_scream()
 	if(!silent)
 		playsound(get_turf(C), 'modular_skyrat/sound/effects/dismember.ogg', 80, TRUE)
 	SEND_SIGNAL(C, COMSIG_ADD_MOOD_EVENT, "dismembered", /datum/mood_event/dismembered)
@@ -78,8 +78,11 @@
 		cavity_item.forceMove(T)
 		. += cavity_item
 		cavity_item = null
-		organ_spilled = 1
+		organ_spilled = TRUE
 
+	if(body_zone != BODY_ZONE_HEAD)
+		C.death_scream()
+	
 	if(organ_spilled)
 		if(!silent && !wound)
 			playsound(get_turf(C), 'sound/misc/splort.ogg', 80, 1)
@@ -96,11 +99,6 @@
 		return TRUE
 	
 	return FALSE
-
-/obj/item/bodypart/head/dismember(dam_type = BRUTE, silent = FALSE, destroy = FALSE, wounding_type = WOUND_SLASH)
-	. = ..()
-	if(owner && (HAS_TRAIT(owner, TRAIT_NODECAP) || HAS_TRAIT(owner, TRAIT_NODISMEMBER)))
-		return FALSE
 
 //Limb removal. The "special" argument is used for swapping a limb with a new one without the effects of losing a limb kicking in.
 //Destroyed just qdels the limb.
@@ -271,7 +269,7 @@
 /obj/item/bodypart/proc/damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	if(!owner)
 		return FALSE
-	if(!can_dismember() || !dismemberable || (wounding_dmg < DISMEMBER_MINIMUM_DAMAGE) || ((wounding_dmg + wound_bonus) < DISMEMBER_MINIMUM_DAMAGE) || wound_bonus <= CANT_WOUND)
+	if(!can_dismember() || (wounding_dmg < DISMEMBER_MINIMUM_DAMAGE) || ((wounding_dmg + wound_bonus) < DISMEMBER_MINIMUM_DAMAGE) || wound_bonus <= CANT_WOUND)
 		return FALSE
 	
 	//High endurance - less dismemberment
@@ -290,7 +288,7 @@
 /obj/item/bodypart/proc/try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	if(!owner)
 		return FALSE
-	if(!can_dismember() || !dismemberable || (wounding_dmg < DISMEMBER_MINIMUM_DAMAGE) || ((wounding_dmg + wound_bonus) < DISMEMBER_MINIMUM_DAMAGE) || wound_bonus <= CANT_WOUND)
+	if(!can_dismember() || (wounding_dmg < DISMEMBER_MINIMUM_DAMAGE) || ((wounding_dmg + wound_bonus) < DISMEMBER_MINIMUM_DAMAGE) || wound_bonus <= CANT_WOUND)
 		return FALSE
 
 	if(!(limb_integrity <= 0))

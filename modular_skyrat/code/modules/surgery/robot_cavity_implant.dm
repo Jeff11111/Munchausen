@@ -13,8 +13,8 @@
 //handle cavity
 /datum/surgery_step/mechanic_handle_cavity
 	name = "Implant item"
-	accept_hand = 1
-	accept_any_item = 1
+	accept_hand = TRUE
+	accept_any_item = TRUE
 	implements = list(/obj/item = 100)
 	repeatable = TRUE
 	time = 32

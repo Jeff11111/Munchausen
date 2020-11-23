@@ -37,12 +37,12 @@
 		/datum/surgery_step/close
 		)
 
-
 /datum/surgery_step/manipulate_organs
 	time = 64
 	name = "Manipulate organs"
-	repeatable = 1
+	repeatable = TRUE
 	implements = list(/obj/item/organ = 100, /obj/item/organ_storage = 100)
+	accept_hand = TRUE
 	var/implements_extract = list(TOOL_HEMOSTAT = 100, TOOL_CROWBAR = 55)
 	var/current_type
 	var/obj/item/organ/I = null
@@ -120,6 +120,16 @@
 				"[user] successfully extracts [I] from [target]'s [parse_zone(target_zone)]!",
 				"[user] successfully extracts something from [target]'s [parse_zone(target_zone)]!")
 			log_combat(user, target, "surgically removed [I.name] from", addition="INTENT: [uppertext(user.a_intent)]")
+			if(!tool && !target.IsUnconscious() && target.chem_effects[CE_PAINKILLER] < 30)
+				target.death_scream()
+				target.custom_pain("MY [capitalize(I.name)] HURTS!", rand(30, 40))
+				var/obj/item/bodypart/fuckhelpmefuck = target.get_bodypart(check_zone(target_zone))
+				if(fuckhelpmefuck)
+					fuckhelpmefuck.generic_bleedstacks += 5
+					for(var/datum/wound/slash/fucked in fuckhelpmefuck.wounds)
+						fucked.blood_flow += rand(2, 3)
+					for(var/datum/wound/pierce/shitted in fuckhelpmefuck.wounds)
+						shitted.blood_flow += rand(2, 3)
 			I.Remove()
 			I.forceMove(get_turf(target))
 		else
