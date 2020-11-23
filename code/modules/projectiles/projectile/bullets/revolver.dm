@@ -65,8 +65,8 @@
 /obj/item/projectile/bullet/c38/rubber
 	name = ".38 rubber bullet"
 	damage = 12      //Skyrat edit: A rubber pistol bullet of this caliber should NOT deal 15 brute.
-	stamina = 10
-	pain = 42
+	stamina = 15
+	pain = 56
 	embedding = EMBED_NONE
 
 /obj/item/projectile/bullet/c38/trac
