@@ -322,7 +322,7 @@
 		if(user.nutrition < NUTRITION_LEVEL_STARVING - 50)
 			msg += "[t_He] [t_is] plump and delicious looking - Like a fat little piggy. A tasty piggy."
 		else
-			msg += "[t_He] [t_is] quite chubby.\n"
+			msg += "[t_He] [t_is] quite chubby."
 
 	//ok lets follow the same pattern of the previous insane coder
 	if(hydration < HYDRATION_LEVEL_DEHYDRATED - 50)
@@ -437,7 +437,7 @@
 		var/mob/living/L = user
 		if(src != user && HAS_TRAIT(L, TRAIT_EMPATH) && (stat == CONSCIOUS))
 			if (a_intent != INTENT_HELP)
-				msg += "[t_He] seem[p_s()] to be on guard.\n"
+				msg += "[t_He] seem[p_s()] to be on guard."
 			if (getOxyLoss() >= 10)
 				msg += "[t_He] seem[p_s()] winded."
 			if (getToxLoss() >= 10)
@@ -524,20 +524,20 @@
 		
 		if((consciousness != LOOKS_DEAD) && getorgan(/obj/item/organ/brain))
 			if(!key)
-				msg += "<span class='deadsay'>[t_He] [t_is] totally catatonic. The stresses of life in deep-space must have been too much for [t_him]. Any recovery is unlikely.</span>\n"
+				msg += "<span class='deadsay'>[t_He] [t_is] totally catatonic. The stresses of life in deep-space must have been too much for [t_him]. Any recovery is unlikely.</span>"
 			else if(!client)
-				msg += "[t_He] [t_has] a blank, absent-minded stare and [t_has] been completely unresponsive to anything for [round(((world.time - lastclienttime) / (1 MINUTES)),1)] minutes. [t_He] may snap out of it soon.\n"
+				msg += "[t_He] [t_has] a blank, absent-minded stare and [t_has] been completely unresponsive to anything for [round(((world.time - lastclienttime) / (1 MINUTES)),1)] minutes. [t_He] may snap out of it soon."
 		
 		if(consciousness_msg)
-			msg += "[consciousness_msg]\n"
+			msg += "[consciousness_msg]"
 	//
 
 	//Skyrat changes begin
 	if(gunpointing)
-		msg += "<b>[t_He] [t_is] holding [gunpointing.target.name] at gunpoint with [gunpointing.aimed_gun.name]!</b>\n"
+		msg += "<b>[t_He] [t_is] holding [gunpointing.target.name] at gunpoint with [gunpointing.aimed_gun.name]!</b>"
 	if(gunpointed.len)
 		for(var/datum/gunpoint/GP in gunpointed)
-			msg += "<b>[GP.source.name] [GP.source.p_are()] holding [t_him] at gunpoint with [GP.aimed_gun.name]!</b>\n"
+			msg += "<b>[GP.source.name] [GP.source.p_are()] holding [t_him] at gunpoint with [GP.aimed_gun.name]!</b>"
 	//Skyrat changes end
 
 	//Strength message
@@ -566,7 +566,7 @@
 			yeah += "[t_He] [t_is] weaker than me."
 		if(3 to INFINITY)
 			yeah += "<b>[t_He] [t_is] much weaker than me.</b>"
-	yeah += "</span>\n"
+	yeah += "</span>"
 	msg += yeah
 	
 	//descriptors
@@ -586,13 +586,13 @@
 
 		switch(scar_severity)
 			if(WOUND_SEVERITY_TRIVIAL)
-				msg += "<span class='smallnotice'><i>[t_He] [t_has] visible scarring, you can look again to take a closer look...</i></span>\n"
+				msg += "<span class='smallnotice'><i>[t_He] [t_has] visible scarring, you can look again to take a closer look...</i></span>"
 			if(WOUND_SEVERITY_MODERATE to WOUND_SEVERITY_SEVERE)
-				msg += "<span class='notice'><i>[t_He] [t_has] several bad scars, you can look again to take a closer look...</i></span>\n"
+				msg += "<span class='notice'><i>[t_He] [t_has] several bad scars, you can look again to take a closer look...</i></span>"
 			if(WOUND_SEVERITY_CRITICAL to WOUND_SEVERITY_PERMANENT)
-				msg += "<span class='notice'><b><i>[t_He] [t_has] significantly disfiguring scarring, you can look again to take a closer look...</i></b></span>\n"
+				msg += "<span class='notice'><b><i>[t_He] [t_has] significantly disfiguring scarring, you can look again to take a closer look...</i></b></span>"
 			if(WOUND_SEVERITY_LOSS to INFINITY)
-				msg += "<span class='notice'><b><i>[t_He] [t_is] just absolutely fucked up, you can look again to take a closer look...</i></b></span>\n"
+				msg += "<span class='notice'><b><i>[t_He] [t_is] just absolutely fucked up, you can look again to take a closer look...</i></b></span>"
 	
 	if(is_dreamer(user))
 		var/obj/item/organ/heart = getorganslot(ORGAN_SLOT_HEART)

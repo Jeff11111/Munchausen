@@ -11,7 +11,6 @@
 		affecting = C.get_bodypart(check_zone(selected_zone))
 
 	var/datum/surgery/current_surgery
-
 	for(var/datum/surgery/S in M.surgeries)
 		if(S.location == selected_zone)
 			current_surgery = S
@@ -70,28 +69,25 @@
 			P = "Organ manipulation"
 		else
 			P = "Prosthesis organ manipulation"
-
+	
 	if(P && user && user.Adjacent(M) && (I in user))
 		var/datum/surgery/S = available_surgeries[P]
 		var/list/steps_done = list()
-		for(var/datum/surgery/other in M.surgeries)
-			for(var/stoop in other.steps)
-				if(stoop > (other.status - 1))
+		if(current_surgery)
+			for(var/stoop in current_surgery.steps)
+				if(stoop > (current_surgery.status - 1))
 					break
-				if(other.steps[stoop] in S.steps)
-					steps_done |= other.steps[stoop]
-			if(other.location == S.location)
-				qdel(S)
+				if(current_surgery.steps[stoop] in S.steps)
+					steps_done |= current_surgery.steps[stoop]
+			qdel(current_surgery)
 			break
-		
-		if(C)
-			affecting = C.get_bodypart(check_zone(selected_zone))
 		
 		if(affecting)
 			if(!S.requires_bodypart)
 				return
 			if(S.requires_bodypart_type && !(affecting.status & S.requires_bodypart_type))
 				return
+		
 		else if(C && S.requires_bodypart)
 			return
 		
@@ -105,10 +101,10 @@
 			var/datum/surgery/procedure = new S.type(M, selected_zone, affecting)
 			if(istype(I, /obj/item/surgical_drapes) || istype(I, /obj/item/bedsheet))
 				user.visible_message("[user] drapes [I] over [M]'s [parse_zone(selected_zone)] to prepare for surgery.", \
-					"<span class='notice'>You drape [I] over [M]'s [parse_zone(selected_zone)] to prepare for \an [procedure.name].</span>")
+					"<span class='notice'>You drape [I] over [M]'s [parse_zone(selected_zone)] to prepare for \an [lowertext(procedure.name)].</span>")
 			else
 				user.visible_message("[user] prepares [M]'s [parse_zone(selected_zone)] for surgery with [I].", \
-					"<span class='notice'>You prepare [M]'s [parse_zone(selected_zone)] for \an [procedure.name] with [I].</span>")
+					"<span class='notice'>You prepare [M]'s [parse_zone(selected_zone)] for \an [lowertext(procedure.name)] with [I].</span>")
 			log_combat(user, M, "operated on", null, "(OPERATION TYPE: [procedure.name]) (TARGET AREA: [selected_zone])")
 			while((procedure.status <= length(procedure.steps)) && (surgery_step_in_list(procedure.steps[procedure.status], steps_done)))
 				procedure.status++
@@ -118,9 +114,6 @@
 				procedure.next_step(user, user.a_intent)
 		else
 			to_chat(user, "<span class='warning'>You need to expose [M]'s [parse_zone(selected_zone)] first!</span>")
-
-	else if(!current_surgery.step_in_progress && (find_cauterizing_tool(user.held_items)))
-		attempt_cancel_surgery(current_surgery, I, M, user)
 
 	return TRUE
 
