@@ -3900,6 +3900,7 @@
 #include "modular_skyrat\code\modules\clothing\under\jobs\medsci.dm"
 #include "modular_skyrat\code\modules\clothing\under\jobs\miningexpanded.dm"
 #include "modular_skyrat\code\modules\clothing\under\jobs\security.dm"
+#include "modular_skyrat\code\modules\clothing\under\jobs\stowaway.dm"
 #include "modular_skyrat\code\modules\clothing\under\jobs\Plasmaman\civilian_service.dm"
 #include "modular_skyrat\code\modules\clothing\under\jobs\Plasmaman\medsci.dm"
 #include "modular_skyrat\code\modules\clothing\under\jobs\Plasmaman\security.dm"
