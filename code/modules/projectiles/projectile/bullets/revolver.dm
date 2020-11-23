@@ -16,14 +16,14 @@
 
 /obj/item/projectile/bullet/c38
 	name = ".38 bullet"
-	damage = 25
+	damage = 30
 	ricochets_max = 2
 	ricochet_chance = 50
 	ricochet_auto_aim_angle = 10
 	ricochet_auto_aim_range = 3
 	bare_wound_bonus = 10
 	embedding = list(embed_chance=15, fall_chance=2, jostle_chance=2, ignore_throwspeed_threshold=TRUE, pain_stam_pct=0.4, pain_mult=3, jostle_pain_mult=5, rip_time=10)
-	sharpness = TRUE
+	sharpness = SHARP_POINTY
 
 /obj/item/projectile/bullet/c38/match
 	name = ".38 Match bullet"
@@ -68,6 +68,7 @@
 	stamina = 15
 	pain = 56
 	embedding = EMBED_NONE
+	sharpness = SHARP_NONE
 
 /obj/item/projectile/bullet/c38/trac
 	name = ".38 TRAC bullet"
