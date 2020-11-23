@@ -149,7 +149,7 @@
 		if(is_robotic)
 			required_tool_type = TOOL_SCREWDRIVER
 		if(iscyborg(user))
-			close_tool = find_cauterizing_tool(user.items)
+			close_tool = find_cauterizing_tool(user.held_items)
 			if(!close_tool)
 				to_chat(user, "<span class='warning'>You need to equip a cautery in an inactive slot to stop [M]'s surgery!</span>")
 				return
