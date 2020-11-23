@@ -127,8 +127,9 @@
 	return FALSE
 
 /proc/surgery_step_in_list(step_path, list/step_list)
+	var/list/pog = typesof(step_path)
 	for(var/pogchamp in step_list)
-		if(istype(step_path, pogchamp))
+		if(pogchamp in pog)
 			return TRUE
 	return FALSE
 
