@@ -64,7 +64,7 @@
 				P = "Repair endoskeleton damage (Broken)"
 			else
 				P = "Repair endoskeleton damage (Malfunctioning)"
-	else if((affecting.body_zone in ORGAN_BODYPARTS) || !affecting.is_broken())
+	else
 		if(affecting.is_organic_limb())
 			P = "Organ manipulation"
 		else
