@@ -18,7 +18,6 @@
 	if(current_surgery)
 		choose = TRUE
 		if(C && find_cauterizing_tool(list(user.get_inactive_held_item())))
-			var/obj/item/offhand = user
 			return attempt_cancel_surgery(current_surgery, I, M, user)
 	
 	var/list/all_surgeries = GLOB.surgeries_list.Copy()
