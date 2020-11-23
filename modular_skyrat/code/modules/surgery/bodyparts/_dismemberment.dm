@@ -188,6 +188,8 @@
 			if(org_zone != body_zone)
 				continue
 			O.transfer_to_limb(src, C)
+		if(vital)
+			C.death()
 
 	update_icon_dropped()
 	if(destroyed)

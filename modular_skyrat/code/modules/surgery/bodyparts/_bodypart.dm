@@ -194,6 +194,8 @@
 	var/zone_prob = 50
 	//Extra prob, multiplied by dexterity/MAX_STAT
 	var/extra_zone_prob = 50
+	//Vital bodyparts kill the owner when removed
+	var/vital = FALSE
 
 /obj/item/bodypart/Initialize()
 	. = ..()
