@@ -3606,6 +3606,7 @@
 #include "modular_skyrat\code\datums\wounds\burn.dm"
 #include "modular_skyrat\code\datums\wounds\disembowel.dm"
 #include "modular_skyrat\code\datums\wounds\dismember.dm"
+#include "modular_skyrat\code\datums\wounds\incision.dm"
 #include "modular_skyrat\code\datums\wounds\pierce.dm"
 #include "modular_skyrat\code\datums\wounds\slash.dm"
 #include "modular_skyrat\code\datums\wounds\tendons.dm"

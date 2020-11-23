@@ -4,7 +4,9 @@
 ///// Repair Hairline Fracture (Severe)
 /datum/surgery/repair_bone_hairline
 	name = "Repair bone fracture (hairline)"
-	steps = list(/datum/surgery_step/incise, /datum/surgery_step/repair_bone_hairline, /datum/surgery_step/close)
+	steps = list(/datum/surgery_step/incise,
+				/datum/surgery_step/repair_bone_hairline,
+				/datum/surgery_step/close)
 	target_mobtypes = list(/mob/living/carbon/human)
 	possible_locs = ALL_BODYPARTS
 	requires_real_bodypart = TRUE
@@ -19,7 +21,12 @@
 ///// Repair Compound Fracture (Critical)
 /datum/surgery/repair_bone_compound
 	name = "Repair bone fracture (compound)"
-	steps = list(/datum/surgery_step/incise, /datum/surgery_step/clamp_bleeders, /datum/surgery_step/retract_skin, /datum/surgery_step/reset_compound_fracture, /datum/surgery_step/repair_bone_compound, /datum/surgery_step/close)
+	steps = list(/datum/surgery_step/incise,
+				/datum/surgery_step/retract_skin,
+				/datum/surgery_step/clamp_bleeders,
+				/datum/surgery_step/reset_compound_fracture,
+				/datum/surgery_step/repair_bone_compound,
+				/datum/surgery_step/close)
 	target_mobtypes = list(/mob/living/carbon/human)
 	possible_locs = ALL_BODYPARTS
 	requires_real_bodypart = TRUE

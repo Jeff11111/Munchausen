@@ -1,7 +1,6 @@
 /datum/surgery/healing
 	steps = list(/datum/surgery_step/incise,
 				/datum/surgery_step/retract_skin,
-				/datum/surgery_step/incise,
 				/datum/surgery_step/clamp_bleeders,
 				/datum/surgery_step/heal,
 				/datum/surgery_step/close)

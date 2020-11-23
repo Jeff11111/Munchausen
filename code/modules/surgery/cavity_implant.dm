@@ -1,6 +1,10 @@
 /datum/surgery/cavity_implant
 	name = "Cavity implant"
-	steps = list(/datum/surgery_step/incise, /datum/surgery_step/clamp_bleeders, /datum/surgery_step/retract_skin, /datum/surgery_step/incise, /datum/surgery_step/handle_cavity, /datum/surgery_step/close)
+	steps = list(/datum/surgery_step/incise,
+				/datum/surgery_step/clamp_bleeders,
+				/datum/surgery_step/retract_skin,
+				/datum/surgery_step/handle_cavity,
+				/datum/surgery_step/close)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	possible_locs = ALL_BODYPARTS //skyrat edit
 	requires_bodypart_type = BODYPART_ORGANIC

@@ -7,7 +7,10 @@
 ///// Repair puncture wounds
 /datum/surgery/repair_puncture
 	name = "Repair puncture"
-	steps = list(/datum/surgery_step/incise, /datum/surgery_step/repair_innards, /datum/surgery_step/seal_veins, /datum/surgery_step/close) // repeat between steps 2 and 3 until healed
+	steps = list(/datum/surgery_step/incise,
+				/datum/surgery_step/repair_innards,
+				/datum/surgery_step/seal_veins,
+				/datum/surgery_step/close) // repeat between steps 2 and 3 until healed
 	target_mobtypes = list(/mob/living/carbon)
 	possible_locs = ALL_BODYPARTS
 	requires_real_bodypart = TRUE
@@ -17,7 +20,10 @@
 //// Repair slash wounds
 /datum/surgery/repair_puncture/repair_slash
 	name = "Repair slash"
-	steps = list(/datum/surgery_step/incise, /datum/surgery_step/repair_innards, /datum/surgery_step/seal_veins, /datum/surgery_step/close) // repeat between steps 2 and 3 until healed
+	steps = list(/datum/surgery_step/incise,
+				/datum/surgery_step/repair_innards,
+				/datum/surgery_step/seal_veins,
+				/datum/surgery_step/close) // repeat between steps 2 and 3 until healed
 	target_mobtypes = list(/mob/living/carbon)
 	possible_locs = ALL_BODYPARTS
 	requires_real_bodypart = TRUE

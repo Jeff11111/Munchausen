@@ -1,6 +1,10 @@
 /datum/surgery/implant_removal
 	name = "implant removal"
-	steps = list(/datum/surgery_step/incise, /datum/surgery_step/clamp_bleeders, /datum/surgery_step/retract_skin, /datum/surgery_step/extract_implant, /datum/surgery_step/close)
+	steps = list(/datum/surgery_step/incise,
+				/datum/surgery_step/clamp_bleeders,
+				/datum/surgery_step/retract_skin,
+				/datum/surgery_step/extract_implant,
+				/datum/surgery_step/close)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	possible_locs = TORSO_BODYPARTS //SKYRAT EDIT
 	requires_bodypart_type = BODYPART_ORGANIC

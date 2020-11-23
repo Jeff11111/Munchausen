@@ -7,10 +7,10 @@
 				/datum/surgery_step/clamp_bleeders,
 				/datum/surgery_step/pacify,
 				/datum/surgery_step/close)
-
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	possible_locs = list(BODY_ZONE_HEAD)
 	requires_bodypart_type = 0
+
 /datum/surgery/advanced/pacify/can_start(mob/user, mob/living/carbon/target, obj/item/tool)
 	. = ..()
 	var/obj/item/organ/brain/B = target.getorganslot(ORGAN_SLOT_BRAIN)

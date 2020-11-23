@@ -2,11 +2,8 @@
 	name = "Body Rejuvenation"
 	desc = "A surgical procedure that helps deal with oxygen  deprivation, and treats parts damaged due to toxic compounds. Works on corpses and alive alike without chemicals."
 	steps = list(/datum/surgery_step/incise,
-				/datum/surgery_step/incise,
 				/datum/surgery_step/retract_skin,
-				/datum/surgery_step/incise,
 				/datum/surgery_step/clamp_bleeders,
-				/datum/surgery_step/incise,
 				/datum/surgery_step/retract_skin,
 				/datum/surgery_step/toxichealing,
 				/datum/surgery_step/close)
