@@ -117,7 +117,7 @@
 //not a shuttle, a remnant of a darker age
 /area/shuttle/arrival
 	name = "Cryodorms"
-	dynamic_lighting = DYNAMIC_LIGHTING_ENABLED
+	dynamic_lighting = DYNAMIC_LIGHTING_FORCED
 	unique = TRUE  // SSjob refers to this area for latejoiners
 
 /area/shuttle/pod_1
