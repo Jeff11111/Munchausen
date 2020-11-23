@@ -149,11 +149,12 @@
  * Scrambles UIs for low intelligence niggers
  **/
 /datum/tgui/proc/scramble_data(list/ui_data)
-	for(var/data in ui_data)
+	for(var/chungus in ui_data)
+		var/data = ui_data[chungus]
 		if(istext(data))
 			data = pick("Uhhhhhh", "Huuuuuuuuhhhh", "Fnord", "Uhm", "Hm?", "Ooh", "Ooooooooooo", "Uuuuuuuuuuuu", "Aaaaaaaaaa", "Ahhhhhhhhh")
 		else if(islist(data))
-			data = list("UUUUUUUUUUUUUUU")
+			data = scramble_data(data)
 		else if(ispath(data))
 			data = pick(subtypesof(/obj/item/melee))
 		else if(isatom(data))
