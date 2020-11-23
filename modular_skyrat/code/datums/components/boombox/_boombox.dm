@@ -19,6 +19,8 @@
 /datum/component/boombox/proc/check_for_cassete(datum/source, obj/item/device/cassette/tuner, mob/user, params)
 	if(!istype(tuner))
 		return FALSE
+	if(current_cassette)
+		return FALSE
 	playsound(parent, 'modular_skyrat/sound/misc/cassette.ogg', 60)
 	tuner.forceMove(parent)
 	current_cassette = tuner
