@@ -5,7 +5,6 @@
 	var/mob/living/carbon/C
 	var/obj/item/bodypart/affecting
 	var/selected_zone = user.zone_selected
-
 	if(iscarbon(M))
 		C = M
 		affecting = C.get_bodypart(check_zone(selected_zone))
@@ -18,6 +17,9 @@
 	var/choose = FALSE
 	if(current_surgery)
 		choose = TRUE
+		if(C && find_cauterizing_tool(list(user.get_inactive_held_item())))
+			var/obj/item/offhand = user
+			return attempt_cancel_surgery(current_surgery, I, M, user)
 	
 	var/list/all_surgeries = GLOB.surgeries_list.Copy()
 	var/list/available_surgeries = list()
@@ -121,9 +123,9 @@
 /proc/find_cauterizing_tool(list/item_list)
 	for(var/obj/item/I in item_list)
 		if(I.tool_behaviour == TOOL_CAUTERY || I.get_temperature() > 300)
-			return TRUE
+			return I
 		else if(istype(I, /obj/item/stack/medical/suture) || istype(I, /obj/item/stack/medical/gauze))
-			return TRUE
+			return I
 	return FALSE
 
 /proc/surgery_step_in_list(step_path, list/step_list)
@@ -147,7 +149,7 @@
 		if(is_robotic)
 			required_tool_type = TOOL_SCREWDRIVER
 		if(iscyborg(user))
-			close_tool = locate(/obj/item/cautery) in user.held_items
+			close_tool = find_cauterizing_tool(user.items)
 			if(!close_tool)
 				to_chat(user, "<span class='warning'>You need to equip a cautery in an inactive slot to stop [M]'s surgery!</span>")
 				return
