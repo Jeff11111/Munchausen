@@ -74,11 +74,13 @@
 		var/datum/surgery/S = available_surgeries[P]
 		var/list/steps_done = list()
 		if(current_surgery)
+			var/counter = 0
 			for(var/stoop in current_surgery.steps)
-				if(stoop > (current_surgery.status - 1))
+				counter++
+				if(counter > (current_surgery.status - 1))
 					break
-				if(current_surgery.steps[stoop] in S.steps)
-					steps_done |= current_surgery.steps[stoop]
+				if(stoop in S.steps)
+					steps_done |= stoop
 			qdel(current_surgery)
 		
 		if(affecting)
