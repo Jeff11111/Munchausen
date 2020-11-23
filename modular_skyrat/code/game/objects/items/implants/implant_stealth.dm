@@ -7,6 +7,6 @@
 	for(var/mob/living/carbon/human/H in src.loc)
 		if(H.w_uniform)
 			var/obj/item/clothing/under/U = H.w_uniform
-			if(U == /obj/item/clothing/under/syndicate/stealthsuit)
+			if(istype(U, /obj/item/clothing/under/syndicate/stealthsuit))
 				H.alpha = 255
 				U.ui_action_click(H, /datum/action/item_action/activatestealth)
