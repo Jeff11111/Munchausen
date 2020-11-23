@@ -1,6 +1,6 @@
 /obj/item/bodypart/chest
 	name = "chest"
-	desc = "It's impolite to stare at a person's chest."
+	desc = "The very base of a human body - The torso, or chest. This one has lost all appendages..."
 	icon_state = "default_human_chest"
 	max_damage = 100
 	max_stamina_damage = 100

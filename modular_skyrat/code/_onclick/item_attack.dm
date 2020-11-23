@@ -23,18 +23,48 @@
 		else if(user.mind && iscarbon(target))
 			var/mob/living/carbon/victim = target
 			var/obj/item/bodypart/BP = victim.get_bodypart(check_zone(user.zone_selected))
-			if(!BP || !BP.can_dismember())
+			if(!BP)
 				return FALSE
 			var/datum/skills/surgery/choppa = GET_SKILL_LEVEL(user, surgery)
 			var/time = 1 SECONDS
 			if(!victim.IsUnconscious())
 				time *= 4
 			time *= min(2, (MAX_STAT/2)/choppa)
-			to_chat(user, "<span class='warning'>I start severing \the [target]'s [BP]...</span>")
-			if(!do_mob(user, victim, time))
-				to_chat(user, "<span class='warning'>I must stand still!</span>")
-				return FALSE
-			BP.dismember_wound(WOUND_SLASH)
+			var/diceroll = user.mind.diceroll(skills = SKILL_DATUM(surgery))
+			if(BP.can_dismember())
+				to_chat(user, "<span class='warning'>I start severing \the [target]'s [BP]...</span>")
+				if(!do_mob(user, victim, time))
+					to_chat(user, "<span class='warning'>I must stand still!</span>")
+					return FALSE
+				if(diceroll <= DICE_FAILURE)
+					to_chat(user, "<span class='danger'>Oh no - I fucked up...</span>")
+					if(prob(40))
+						BP.painless_wound_roll(WOUND_SLASH, force, wound_bonus, bare_wound_bonus)
+					return FALSE
+				BP.dismember_wound(WOUND_SLASH)
+			else if(BP.can_disembowel())
+				to_chat(user, "<span class='warning'>I start slicing \the [target]'s [BP] open...</span>")
+				if(!do_mob(user, victim, time))
+					to_chat(user, "<span class='warning'>I must stand still!</span>")
+					return FALSE
+				if(diceroll <= DICE_FAILURE)
+					to_chat(user, "<span class='danger'>Oh no - I fucked up...</span>")
+					if(prob(40))
+						BP.painless_wound_roll(WOUND_SLASH, force, wound_bonus, bare_wound_bonus)
+					return FALSE
+				BP.disembowel_wound(WOUND_SLASH)
+			else if((BP.body_zone == BODY_ZONE_CHEST) && (length(victim.bodyparts) <= 1))
+				to_chat(user, "<span class='warning'>I begin dissecting \the [target]'s [BP] open...</span>")
+				if(!do_mob(user, victim, time))
+					to_chat(user, "<span class='warning'>I must stand still!</span>")
+					return FALSE
+				if(diceroll <= DICE_FAILURE)
+					to_chat(user, "<span class='danger'>Oh no - I fucked up...</span>")
+					if(prob(40))
+						BP.painless_wound_roll(WOUND_SLASH, force, wound_bonus, bare_wound_bonus)
+					return FALSE
+				BP.drop_limb()
+				qdel(victim)
 		return TRUE
 	return FALSE
 

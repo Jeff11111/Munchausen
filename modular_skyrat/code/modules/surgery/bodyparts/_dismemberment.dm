@@ -5,7 +5,7 @@
 
 //Check if the limb is disembowable
 /obj/item/bodypart/proc/can_disembowel(obj/item/I)
-	if(disembowable && get_organs())
+	if(disembowable && get_organs() && !(locate(/datum/wound/slash/critical/incision/disembowel) in wounds) && !(locate(/datum/wound/mechanical/slash/critical/incision/disembowel) in wounds))
 		return TRUE
 
 //Dismember a limb

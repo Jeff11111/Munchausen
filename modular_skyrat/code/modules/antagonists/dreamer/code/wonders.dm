@@ -24,7 +24,7 @@
 /datum/crafting_recipe/wonder/second
 	result = /obj/structure/wonder
 	reqs = list(
-				/obj/item/bodypart/groin = 1,
+				/obj/item/bodypart/chest = 1,
 				/obj/item/bodypart = 2,
 				/obj/item/organ/lungs = 1,
 				)
