@@ -55,7 +55,7 @@
 			I.trigger(key, L)
 
 	if(!msg)
-		return
+		return FALSE
 
 	user.log_message(msg, LOG_EMOTE)
 	//msg = "<b>[user]</b> " + msg //SKYRAT CHANGE
