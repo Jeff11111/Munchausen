@@ -287,7 +287,10 @@
 
 	switch(action)
 		if("tgui:initialize")
-			user << output(url_encode(get_json(initial_data, initial_static_data)), "[custom_browser_id ? window_id : "[window_id].browser"]:initialize")
+			if(scrambled)
+				user << output(url_encode(get_json(scramble_data(initial_data), scramble_data(initial_static_data))), "[custom_browser_id ? window_id : "[window_id].browser"]:initialize")
+			else
+				user << output(url_encode(get_json(initial_data, initial_static_data)), "[custom_browser_id ? window_id : "[window_id].browser"]:initialize")
 			initialized = TRUE
 		if("tgui:view")
 			if(params["screen"])
