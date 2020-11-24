@@ -44,6 +44,8 @@
 	var/list/datum/tgui/children = list()
 	var/custom_browser_id = FALSE
 	var/ui_screen = "home"
+	/// Does intelligence affect this UI's behavior?
+	var/affected_by_int = FALSE
 	/// Is this UI scrambled?
 	var/scrambled = FALSE
 
@@ -99,7 +101,11 @@
 /datum/tgui/proc/open()
 	if(!user.client)
 		return // Bail if there is no client.
-
+	
+	if(affected_by_int && user.mind && (GET_STAT_LEVEL(user, int) <= JOB_STATPOINTS_WORTHLESS))
+		to_chat(user, "<span class='warning'>I am too stupid to do this!</span>")
+		return
+	
 	update_status(push = FALSE) // Update the window status.
 	if(status < UI_UPDATE)
 		return // Bail if we're not supposed to open.
@@ -395,4 +401,3 @@
 
 /datum/tgui/proc/log_message(message)
 	log_tgui("[user] ([user.ckey]) using \"[title]\":\n[message]")
-
