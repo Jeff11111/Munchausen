@@ -513,7 +513,7 @@
 	else if(owner && I.is_drainable())
 		if(!germ_level)
 			return
-		if(I.reagents.remove_reagent(/datum/reagent/medicine/synthflesh, 20)))
+		if(I.reagents.remove_reagent(/datum/reagent/medicine/synthflesh, 20))
 			to_chat(user, "<span class='notice'>I heal \the [src] with [I].</span>")
 			applyOrganDamage(-min(50, maxHealth/2))
 		else if(I.reagents.remove_reagent(/datum/reagent/medicine/spaceacillin, 10) \
