@@ -286,7 +286,6 @@
 /atom/proc/is_drainable()
 	return reagents && (reagents.reagents_holder_flags & DRAINABLE)
 
-
 /atom/proc/AllowDrop()
 	return FALSE
 

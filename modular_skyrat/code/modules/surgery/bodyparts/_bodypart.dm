@@ -522,7 +522,7 @@
 			"<span class='notice'>You begin to cut open [src]...</span>")
 		if(do_after(user, 54, target = src))
 			drop_organs(user)
-	else if(istype(W, /obj/item/pen) && user.a_intent == INTENT_HELP)
+	else if(istype(W, /obj/item/pen))
 		var/badboy = input(user, "What do you want to inscribe on [src]?", "Malpractice", "") as text
 		if(badboy)
 			badboy = strip_html_simple(badboy)

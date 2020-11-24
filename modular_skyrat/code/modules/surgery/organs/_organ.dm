@@ -453,7 +453,16 @@
 
 /obj/item/organ/attackby(obj/item/I, mob/living/user, params)
 	. = ..()
-	if(!owner && I.get_sharpness() && (user.a_intent == INTENT_HARM))
+	if(istype(I, /obj/item/pen))
+		var/badboy = input(user, "What do you want to etch on [src]?", "Malpractice", "") as text
+		if(badboy)
+			badboy = strip_html_simple(badboy)
+			etching = "[badboy]"
+			user.visible_message("<span class='notice'>[user] etches something on \the [src] with \the [I].</span>", " <span class='notice'>You etch <b>\"[badboy]\"</b> on [src] with \the [I]. Hehe.</span>")
+			return TRUE		
+		else
+			return ..()
+	else if(!owner && I.get_sharpness() && (user.a_intent == INTENT_HARM))
 		user.visible_message("<span class='warning'>[user] begins to butcher [src].</span>",\
 			"<span class='notice'>You begin butchering [src]...</span>")
 		if(do_after(user, 54, target = src))
@@ -462,17 +471,59 @@
 			new /obj/item/reagent_containers/food/snacks/meat/slab/human(get_turf(src))
 			if(prob(50))
 				new /obj/item/reagent_containers/food/snacks/meat/slab/human(get_turf(src))
-			return qdel(src)
-	else if(owner && I.get_sharpness())
-		to_chat(user, "<span class='notice'>You start severing [src] from \the [owner]...</span>")
-	else if(istype(I, /obj/item/pen) && user.a_intent == INTENT_HELP)
-		var/badboy = input(user, "What do you want to etch on [src]?", "Malpractice", "") as text
-		if(badboy)
-			badboy = strip_html_simple(badboy)
-			etching = "[badboy]"
-			user.visible_message("<span class='notice'>[user] etches something on \the [src] with \the [I].</span>", " <span class='notice'>You etch <b>\"[badboy]\"</b> on [src] with \the [I]. Hehe.</span>")
+			qdel(src)
+			return TRUE
+	else if(owner && I.get_sharpness() && !CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
+		to_chat(user, "<span class='notice'>You start severing \the [src] from \the [owner]...</span>")
+		var/heymedic = GET_SKILL_LEVEL(user, surgery)
+		if(!do_mob(user, owner, 3 - (heymedic/MAX_SKILL)))
+			to_chat(user, "<span class='warning'>I must stand still!</span>")
+			return TRUE
+		to_chat(user, "<span class='notice'>I sever \the [src] away safely.</span>")
+		organ_flags |= ORGAN_CUT_AWAY
+		return TRUE
+	else if(owner && (istype(I, /obj/item/stack/medical/suture)))
+		var/obj/item/stack/medical/bingus = I
+		if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
+			to_chat(user, "<span class='notice'>You start stitching \the [src] on \the [owner]...</span>")
+			var/heymedic = GET_SKILL_LEVEL(user, surgery)
+			if(!do_mob(user, owner, 3 - (heymedic/MAX_SKILL)))
+				to_chat(user, "<span class='warning'>I must stand still!</span>")
+				return TRUE
+			if(!bingus.use(2))
+				to_chat(user, "<span class='warning'>I don't have enough to stitch \the [src]!</span>")
+				return TRUE
+			to_chat(user, "<span class='notice'>I stitch \the [src] safely.</span>")
+			organ_flags |= ~ORGAN_CUT_AWAY
 		else
-			return ..()
+			if(is_dead())
+				to_chat(user, "<span class='warning'>\The [src] is unsalvageable! I can't suture it!</span>")
+				return TRUE
+			to_chat(user, "<span class='notice'>You start suturing \the [src]...</span>")
+			var/heymedic = GET_SKILL_LEVEL(user, surgery)
+			if(!do_mob(user, owner, 3 - (heymedic/MAX_SKILL)))
+				to_chat(user, "<span class='warning'>I must stand still!</span>")
+				return TRUE
+			if(!bingus.use(1))
+				to_chat(user, "<span class='warning'>I don't have enough to heal \the [src]!</span>")
+				return TRUE
+			to_chat(user, "<span class='notice'>I suture \the [src] safely.</span>")
+			applyOrganDamage(-min(50, maxHealth/2))
+		return TRUE
+	else if(owner && I.is_drainable())
+		if(!germ_level)
+			return
+		if(I.reagents.remove_reagent(/datum/reagent/medicine/synthflesh, 20)))
+			to_chat(user, "<span class='notice'>I heal \the [src] with [I].</span>")
+			applyOrganDamage(-min(50, maxHealth/2))
+		else if(I.reagents.remove_reagent(/datum/reagent/medicine/spaceacillin, 10) \
+			|| I.reagents.remove_reagent(/datum/reagent/medicine/nalidixic_acid, 15) \
+			|| I.reagents.remove_reagent(/datum/reagent/space_cleaner/sterilizine, 20) \
+			|| I.reagents.remove_reagent(/datum/reagent/space_cleaner, 40))
+			to_chat(user, "<span class='notice'>I disinfect \the [src] with [I].</span>")
+			applyOrganDamage(-10)
+			janitize(-WOUND_SANITIZATION_STERILIZER)
+		return TRUE
 
 /obj/item/organ/item_action_slot_check(slot,mob/user)
 	return //so we don't grant the organ's action to mobs who pick up the organ.
