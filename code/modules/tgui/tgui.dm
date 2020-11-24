@@ -142,6 +142,8 @@
 			initial_data = scramble_data(initial_data)
 	if(!initial_static_data)
 		initial_static_data = src_object.ui_static_data(user)
+		if(scrambled)
+			initial_static_data = scramble_data(initial_static_data)
 
 	SStgui.on_open(src)
 
@@ -177,8 +179,12 @@
 		set_interface(interface) // Set a new interface.
 	if(data)
 		initial_data = data
+		if(scrambled)
+			initial_data = scramble_data(data)
 	if(static_data)
 		initial_static_data = static_data
+		if(scrambled)
+			initial_static_data = scramble_data(static_data)
 	open()
 
  /**
