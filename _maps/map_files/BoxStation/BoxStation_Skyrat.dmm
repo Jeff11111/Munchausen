@@ -3784,8 +3784,6 @@
 	dir = 4
 	},
 /obj/effect/turf_decal/tile/red,
-/obj/vehicle/ridden/secway,
-/obj/item/key/security,
 /obj/machinery/light{
 	dir = 4
 	},

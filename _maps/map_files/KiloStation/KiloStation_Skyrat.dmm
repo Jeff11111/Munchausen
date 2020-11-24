@@ -5080,8 +5080,6 @@
 	dir = 8;
 	pixel_x = 24
 	},
-/obj/item/key/security,
-/obj/item/key/security,
 /turf/open/floor/plasteel/dark,
 /area/security/brig)
 "akR" = (
@@ -5490,7 +5488,6 @@
 /obj/effect/turf_decal/tile/red{
 	dir = 8
 	},
-/obj/vehicle/ridden/secway,
 /turf/open/floor/plasteel/showroomfloor,
 /area/security/brig)
 "alJ" = (
@@ -5955,7 +5952,6 @@
 /obj/effect/turf_decal/tile/red{
 	dir = 8
 	},
-/obj/vehicle/ridden/secway,
 /turf/open/floor/plasteel/showroomfloor,
 /area/security/brig)
 "amJ" = (
