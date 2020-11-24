@@ -48,8 +48,6 @@
 	duffelbag = /obj/item/storage/backpack/duffelbag/sec
 	box = /obj/item/storage/box/security
 
-	implants = list(/obj/item/implant/mindshield)
-
 	chameleon_extras = list(/obj/item/gun/energy/disabler, /obj/item/clothing/glasses/hud/security/sunglasses, /obj/item/clothing/head/helmet)
 
 /datum/outfit/plasmaman/blueshield
