@@ -5577,7 +5577,7 @@
 /turf/open/floor/plating,
 /area/fabric_of_reality)
 "fdx" = (
-/obj/item/gun/energy/pulse/carbine/loyalpin,
+/obj/item/gun/energy/pulse/carbine,
 /obj/item/flashlight/seclite,
 /obj/structure/table/reinforced,
 /obj/machinery/airalarm{

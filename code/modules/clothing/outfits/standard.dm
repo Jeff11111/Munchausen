@@ -380,7 +380,7 @@
 	r_pocket = /obj/item/shield/energy
 	suit_store = /obj/item/tank/internals/emergency_oxygen
 	belt = /obj/item/gun/ballistic/revolver/mateba
-	r_hand = /obj/item/gun/energy/pulse/loyalpin
+	r_hand = /obj/item/gun/energy/pulse
 	id = /obj/item/card/id
 	ears = /obj/item/radio/headset/headset_cent/alt
 
@@ -398,10 +398,6 @@
 	var/obj/item/radio/R = H.ears
 	R.set_frequency(FREQ_CENTCOM)
 	R.freqlock = TRUE
-
-	var/obj/item/implant/mindshield/L = new //Here you go Deuryn
-	L.implant(H, null, 1)
-
 
 	var/obj/item/card/id/W = H.wear_id
 	W.icon_state = "centcom"

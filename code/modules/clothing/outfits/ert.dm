@@ -10,9 +10,6 @@
 	if(visualsOnly)
 		return
 
-	var/obj/item/implant/mindshield/L = new
-	L.implant(H, null, 1)
-
 	var/obj/item/radio/R = H.ears
 	R.set_frequency(FREQ_CENTCOM)
 	R.freqlock = TRUE
@@ -61,7 +58,7 @@
 	backpack_contents = list(/obj/item/storage/box/engineer=1,\
 		/obj/item/melee/baton/loaded=1,\
 		/obj/item/clothing/mask/gas/sechailer/swat=1,\
-		/obj/item/gun/energy/pulse/pistol/loyalpin=1)
+		/obj/item/gun/energy/pulse/pistol=1)
 
 /datum/outfit/ert/security
 	name = "ERT Security"
@@ -103,7 +100,7 @@
 		/obj/item/storage/box/handcuffs=1,\
 		/obj/item/clothing/mask/gas/sechailer/swat=1,\
 		/obj/item/melee/baton/loaded=1,\
-		/obj/item/gun/energy/pulse/carbine/loyalpin=1)
+		/obj/item/gun/energy/pulse/carbine=1)
 
 /datum/outfit/ert/medic
 	name = "ERT Medic"
@@ -147,7 +144,7 @@
 	backpack_contents = list(/obj/item/storage/box/engineer=1,\
 		/obj/item/melee/baton/loaded=1,\
 		/obj/item/clothing/mask/gas/sechailer/swat=1,\
-		/obj/item/gun/energy/pulse/pistol/loyalpin=1,\
+		/obj/item/gun/energy/pulse/pistol=1,\
 		/obj/item/reagent_containers/hypospray/combat/nanites=1,\
 		/obj/item/gun/medbeam=1)
 
@@ -194,7 +191,7 @@
 	backpack_contents = list(/obj/item/storage/box/engineer=1,\
 		/obj/item/melee/baton/loaded=1,\
 		/obj/item/clothing/mask/gas/sechailer/swat=1,\
-		/obj/item/gun/energy/pulse/pistol/loyalpin=1,\
+		/obj/item/gun/energy/pulse/pistol=1,\
 		/obj/item/pipe_dispenser/bluespace=1, \
 		/obj/item/construction/rcd/combat=1)
 
@@ -250,9 +247,6 @@
 	pda.owner = H.real_name
 	pda.ownjob = "CentCom Official"
 	pda.update_label()
-
-	var/obj/item/implant/mindshield/L = new
-	L.implant(H, null, 1)
 
 	var/obj/item/card/id/W = H.wear_id
 	W.icon_state = "centcom"
