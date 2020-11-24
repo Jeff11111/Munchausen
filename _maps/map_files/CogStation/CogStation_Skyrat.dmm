@@ -10766,9 +10766,7 @@
 /turf/open/floor/plasteel,
 /area/security/brig)
 "ayU" = (
-/obj/vehicle/ridden/secway,
 /obj/effect/turf_decal/bot,
-/obj/item/key/security,
 /turf/open/floor/plasteel,
 /area/security/brig)
 "ayV" = (

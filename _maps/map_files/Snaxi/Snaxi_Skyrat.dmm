@@ -3993,7 +3993,7 @@
 "tLA" = (/obj/machinery/atmospherics/pipe/simple/supply/hidden{dir = 4},/turf/closed/wall/r_wall,/area/security/brig)
 "tLF" = (/obj/structure/cable{icon_state = "0-4"},/obj/structure/cable{icon_state = "4-8"},/obj/machinery/door/poddoor/shutters/radiation/preopen{id = "engsm"; name = "Radiation Chamber Shutters"},/turf/open/floor/plasteel/dark,/area/engine/supermatter)
 "tLI" = (/obj/structure/table/reinforced,/obj/machinery/button/door{id = "Secure Gate"; name = "Cell Shutters"; pixel_x = 6; pixel_y = -3; req_access_txt = "2"},/obj/machinery/button/door{id = "Secure Brig Control"; name = "Brig Control Shutters"; pixel_x = -6; pixel_y = -3; req_access_txt = "2"},/turf/open/floor/plasteel/dark,/area/security/warden)
-"tLV" = (/obj/effect/turf_decal/bot_white,/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 4},/obj/vehicle/ridden/secway,/obj/item/key/security,/obj/structure/window/reinforced{dir = 1},/turf/open/floor/plasteel/dark,/area/ai_monitored/security/armory)
+"tLV" = (/obj/effect/turf_decal/bot_white,/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{dir = 4},/obj/structure/window/reinforced{dir = 1},/turf/open/floor/plasteel/dark,/area/ai_monitored/security/armory)
 "tMk" = (/obj/machinery/newscaster{pixel_y = 32},/obj/structure/light_construct/small{dir = 1},/obj/structure/barricade/wooden/snowed{max_integrity = 10; obj_integrity = 10},/turf/open/floor/wood,/area/maintenance/bar)
 "tMn" = (/obj/effect/turf_decal/tile/red{dir = 1},/obj/effect/turf_decal/tile/red{dir = 8},/obj/machinery/space_heater,/turf/open/floor/plasteel/dark,/area/hallway/secondary/exit/departure_lounge)
 "tML" = (/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,/turf/closed/wall,/area/crew_quarters/kitchen)
