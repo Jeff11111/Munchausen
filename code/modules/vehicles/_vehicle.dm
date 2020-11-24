@@ -166,3 +166,10 @@
 	if(trailer && .)
 		var/dir_to_move = get_dir(trailer.loc, newloc)
 		step(trailer, dir_to_move)
+
+//shooting up a vehicle always fucks up the buckled mob instead
+/obj/vehicle/bullet_act(obj/item/projectile/P)
+	. = ..()
+	if(length(occupants))
+		for(var/mob/living/L in occupants)
+			return L.bullet_act(P, P.def_zone)

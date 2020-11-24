@@ -62,10 +62,3 @@
 	progressbars_by_rider.Cut()
 	STOP_PROCESSING(SSfastprocess, src)
 	return ..()
-
-//shooting up a secway always fucks up the buckled mob instead
-/obj/vehicle/ridden/secway/bullet_act(obj/item/projectile/P)
-	. = ..()
-	if(buckled_mobs)
-		for(var/mob/living/L in buckled_mobs)
-			return L.bullet_act(P, P.def_zone)
