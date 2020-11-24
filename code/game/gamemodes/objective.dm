@@ -72,9 +72,13 @@ GLOBAL_LIST_EMPTY(objectives)
 	if(!(SSshuttle.emergency.mode in list(SHUTTLE_ENDGAME, SHUTTLE_ESCAPE)))
 		return FALSE
 	var/turf/location = get_turf(M.current)
-	if(!location || istype(location, /turf/open/floor/plasteel/shuttle/red) || istype(location, /turf/open/floor/mineral/plastitanium/red/brig)) // Fails if they are in the shuttle brig
+	if(ishuman(M.owner?.current))
+		var/mob/living/carbon/human/H = M.owner.current
+		if(H.handcuffed)
+			return FALSE
+	if(!location)
 		return FALSE
-	return location.onCentCom() || location.onSyndieBase()
+	return location.onCentCom() || location.onSyndieBase() || istype(get_area(M.owner.current), /area/shuttle/escape)
 
 /datum/objective/proc/check_completion()
 	return completed

@@ -517,7 +517,6 @@
 					minor_announce("Corruption detected in \
 						shuttle navigation protocols. Please contact your \
 						supervisor.", "SYSTEM ERROR:", alert=TRUE)
-
 				dock_id(destination_dock)
 				mode = SHUTTLE_ENDGAME
 				timer = 0
