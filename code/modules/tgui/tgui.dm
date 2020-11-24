@@ -79,7 +79,7 @@
 		src.width = width
 	if(height)
 		src.height = height
-	//scromble if low IQ
+	
 	if(user?.mind && (GET_STAT_LEVEL(user, int) <= JOB_STATPOINTS_WORTHLESS))
 		src.scrambled = TRUE
 	
@@ -138,12 +138,12 @@
 
 	if(!initial_data)
 		initial_data = src_object.ui_data(user)
-		if(scrambled)
-			initial_data = scramble_data(initial_data)
+	if(scrambled)
+		initial_data = scramble_data(initial_data)
 	if(!initial_static_data)
 		initial_static_data = src_object.ui_static_data(user)
-		if(scrambled)
-			initial_static_data = scramble_data(initial_static_data)
+	if(scrambled)
+		initial_static_data = scramble_data(initial_static_data)
 
 	SStgui.on_open(src)
 
