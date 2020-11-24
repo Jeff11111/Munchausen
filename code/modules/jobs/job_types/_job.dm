@@ -264,6 +264,8 @@
 			C.update_label(C.registered_name, preference_source.prefs.alt_titles_preferences[J.title])
 		else
 			C.update_label()
+		if(J.title == "Stowaway")
+			C.update_label(null, "staff ID")
 		//End of skyrat change
 		for(var/A in SSeconomy.bank_accounts)
 			var/datum/bank_account/B = A
