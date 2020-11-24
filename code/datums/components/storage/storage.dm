@@ -491,7 +491,7 @@
 			if(A.loc != M)
 				return
 			if(rustle_sound)
-				playsound(A, rustle_sound, 50, 1, -5)
+				playsound(A, pick(rustle_sound), 50, 1, -5)
 			A.do_jiggle()
 			if(istype(over_object, /obj/screen/inventory/hand))
 				var/obj/screen/inventory/hand/H = over_object

@@ -79,11 +79,8 @@
 			procedure = new /datum/surgery/organ_manipulation/mechanic/soft(owner, body_zone, src)
 		else
 			procedure = new /datum/surgery/organ_manipulation/mechanic(owner, body_zone, src)
-	while(!(procedure.steps[status] in list(/datum/surgery_step/manipulate_organs, /datum/surgery_step/manipulate_organs/mechanic)) && !(procedure.status >= length(procedure.steps)))
-		procedure.status++
 	
-	if(procedure.status >= length(procedure.steps))
-		procedure.complete()
+	procedure.status = (length(procedure.steps) - 1)
 	
 	C.death_scream()
 	return TRUE

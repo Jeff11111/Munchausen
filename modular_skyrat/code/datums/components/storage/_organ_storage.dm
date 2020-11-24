@@ -226,6 +226,7 @@
 		O.Remove(FALSE)
 		O.organ_flags |= ORGAN_CUT_AWAY
 		refresh_mob_views()
+		playsound(A, pick(rustle_sound), 50, 1, -5)
 		return TRUE
 
 //Nullspace is a bitch
