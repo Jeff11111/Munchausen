@@ -221,8 +221,8 @@
 //Bladerunner
 /obj/item/gun/ballistic/revolver/dual_ammo
 	name = "\improper .357 revolver"
-	desc = "The NT Bladerunner revolver - A classic law enforcement firearm, for a lawless land."
-	icon_state = "bladerunner"
+	desc = "The NT Inspector revolver - A classic law enforcement firearm, for a lawless land."
+	icon_state = "inspector"
 
 /obj/item/gun/ballistic/revolver/dual_ammo/AltClick(mob/user)
 	. = ..()
