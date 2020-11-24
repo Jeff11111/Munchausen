@@ -443,7 +443,7 @@
 	var/force_mod = round(force/15, 0.1)
 	var/knockback_tiles = clamp(round((user_str - victim_str)/3 * force_mod * rand(1,2)), 0, 5)
 	//Slam time
-	if(knockback_tiles)
+	if((!weapon || (weapon.damtype == BRUTE)) && knockback_tiles)
 		if(knockback_tiles > 1)
 			Stumble(knockback_tiles * 10)
 			sound_hint(src, user)
