@@ -21,6 +21,10 @@
 		var/prob_chance = 100
 		if(implement_type)	//this means it isn't a require hand or any item step.
 			prob_chance = implements[implement_type]
+		else if(!tool)
+			prob_chance = accept_hand
+		else
+			prob_chance = accept_any_item
 		if(target == user) //self-surgery is hard
 			if(user.mind)
 				var/datum/skills/surgery/surgerye = GET_SKILL(user, surgery)

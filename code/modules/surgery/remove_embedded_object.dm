@@ -10,7 +10,7 @@
 /datum/surgery_step/remove_object
 	name = "Remove embedded objects"
 	time = 32
-	accept_hand = TRUE
+	accept_hand = 85
 	var/obj/item/bodypart/L = null
 
 /datum/surgery_step/remove_object/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)

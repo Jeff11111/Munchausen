@@ -11,7 +11,7 @@
 
 /datum/surgery_step/thread_veins
 	name = "Thread veins"
-	accept_hand = TRUE
+	accept_hand = 85
 	time = 125
 
 /datum/surgery_step/thread_veins/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)

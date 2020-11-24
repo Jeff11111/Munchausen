@@ -60,12 +60,13 @@
 			return
 
 	if(A.loc == user)
-		. = COMPONENT_NO_ATTACK_HAND
 		if(!check_locked(source, user, TRUE))
 			ui_show(user)
 			A.do_jiggle()
+		return COMPONENT_NO_ATTACK_HAND
 	else if(attack_hand_open)
 		ui_show(user)
+		return COMPONENT_NO_ATTACK_HAND
 
 //Return the proper organ list
 /datum/component/storage/concrete/organ/contents()

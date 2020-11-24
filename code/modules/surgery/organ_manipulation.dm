@@ -42,7 +42,7 @@
 	name = "Manipulate organs"
 	repeatable = TRUE
 	implements = list(TOOL_HEMOSTAT = 100, /obj/item/retractor = 100, TOOL_CROWBAR = 55)
-	accept_hand = TRUE
+	accept_hand = 100
 	var/current_type
 	var/obj/item/organ/I = null
 	var/mob/living/carbon/storage_man

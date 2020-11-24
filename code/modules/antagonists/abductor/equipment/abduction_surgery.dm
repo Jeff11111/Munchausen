@@ -18,10 +18,9 @@
 		return 1
 	return 0
 
-
 /datum/surgery_step/extract_organ
 	name = "remove heart"
-	accept_hand = 1
+	accept_hand = 100
 	time = 32
 	var/obj/item/organ/IC = null
 	var/list/organ_types = list(/obj/item/organ/heart)

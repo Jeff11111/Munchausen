@@ -11,7 +11,7 @@
 
 /datum/surgery_step/splice_nerves
 	name = "Splice nerves"
-	accept_hand = TRUE
+	accept_hand = 85
 	time = 155
 
 /datum/surgery_step/splice_nerves/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)

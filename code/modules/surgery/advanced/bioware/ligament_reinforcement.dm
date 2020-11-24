@@ -12,7 +12,7 @@
 
 /datum/surgery_step/reinforce_ligaments
 	name = "Reinforce ligaments"
-	accept_hand = TRUE
+	accept_hand = 85
 	time = 125
 
 /datum/surgery_step/reinforce_ligaments/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
