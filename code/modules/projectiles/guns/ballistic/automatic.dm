@@ -201,6 +201,7 @@
 			add_overlay("[initial(icon_state)]gren")
 	icon_state = "[initial(icon_state)][magazine ? "" : "-e"]"
 	return
+
 /obj/item/gun/ballistic/automatic/m90/burst_select()
 	var/mob/living/carbon/human/user = usr
 	switch(select)
