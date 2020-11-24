@@ -685,9 +685,8 @@
 		if(E.examine_text)
 			var/new_text = replacetext(E.examine_text, "SUBJECTPRONOUN", pronoun_replacement)
 			new_text = replacetext(new_text, "[pronoun_replacement] is", "[pronoun_replacement] [p_are()]") //To make sure something become "They are" or "She is", not "They are" and "She are"
-			dat += "[new_text]\n" //dat.Join("\n") doesn't work here, for some reason
 	if(dat.len)
-		return dat.Join()
+		return dat.Join("\n")
 
 //skyrat edit - baystation descriptors, examine more stuff
 /mob/living/carbon/human/proc/show_descriptors_to(mob/user)
