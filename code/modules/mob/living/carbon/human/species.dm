@@ -1528,10 +1528,8 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 	var/obj/item/organ/bladder/bladder = H.getorganslot(ORGAN_SLOT_BLADDER)
 	var/bladder_hydration_loss = 2 //This is the maximum loss multiplier you can get with a bladder, in case they don't have none
-	var/bladder_hydration_gain = 0
 	if(bladder)
 		bladder_hydration_loss = bladder.get_hydration_loss()
-		bladder_hydration_gain = bladder.get_hydration_gain()
 	// hydration decrease wowie
 	if(H.hydration > 0 && H.stat != DEAD && !HAS_TRAIT(H, TRAIT_NOHUNGER))
 		// THEY hydrate
@@ -1542,7 +1540,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 		dehydration_rate *= bladder_hydration_loss
 		dehydration_rate *= H.physiology.hunger_mod
-		dehydration_rate -= bladder_hydration_gain
 		H.adjust_hydration(-dehydration_rate)
 
 	switch(H.hydration)
