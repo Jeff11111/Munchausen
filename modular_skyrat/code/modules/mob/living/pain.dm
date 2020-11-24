@@ -89,5 +89,5 @@
 	// Briefly flash the pain overlay
 	flash_pain(min(round(power/30) * 255, 255), 0, rand(1,4), pick(5,10))
 	next_pain_time = world.time + (rand(100, 200) - power)
-	next_pain_message_time = next_pain_time
+	next_pain_message_time = world.time + (rand(200, 300) - power)
 	return TRUE
