@@ -41,99 +41,43 @@
 	time = 64
 	name = "Manipulate organs"
 	repeatable = TRUE
-	implements = list(/obj/item/organ = 100, /obj/item/organ_storage = 100)
+	implements = list(TOOL_HEMOSTAT = 100, /obj/item/retractor = 100, TOOL_CROWBAR = 55)
 	accept_hand = TRUE
-	var/implements_extract = list(TOOL_HEMOSTAT = 100, TOOL_CROWBAR = 55)
 	var/current_type
 	var/obj/item/organ/I = null
+	var/mob/living/carbon/storage_man
+	var/datum/component/storage/concrete/organ/our_component
 
-/datum/surgery_step/manipulate_organs/New()
-	..()
-	implements = implements + implements_extract
+/datum/surgery_step/manipulate_organs/Destroy(force, ...)
+	. = ..()
+	QDEL_NULL(our_component)
+	storage_man = null
 
 /datum/surgery_step/manipulate_organs/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	I = null
-	if(istype(tool, /obj/item/organ_storage))
-		if(!tool.contents.len)
-			to_chat(user, "<span class='notice'>There is nothing inside [tool]!</span>")
-			return -1
-		I = tool.contents[1]
-		if(!isorgan(I))
-			to_chat(user, "<span class='notice'>You cannot put [I] into [target]'s [parse_zone(target_zone)]!</span>")
-			return -1
-		tool = I
-	if(isorgan(tool))
-		current_type = "insert"
-		I = tool
-		if(target_zone != I.zone || target.getorganslot(I.slot))
-			to_chat(user, "<span class='notice'>There is no room for [I] in [target]'s [parse_zone(target_zone)]!</span>")
-			return -1
-		var/obj/item/organ/meatslab = tool
-		if(!meatslab.useable)
-			to_chat(user, "<span class='warning'>[I] seems to have been chewed on, you can't use this!</span>")
-			return -1
-		display_results(user, target, "<span class='notice'>You begin to insert [tool] into [target]'s [parse_zone(target_zone)]...</span>",
-			"[user] begins to insert [tool] into [target]'s [parse_zone(target_zone)].",
-			"[user] begins to insert something into [target]'s [parse_zone(target_zone)].")
-
-	else if(implement_type in implements_extract)
-		current_type = "extract"
-		var/list/organs = target.getorganszone(target_zone)
-		if(!organs.len)
-			to_chat(user, "<span class='notice'>There are no removable organs in [target]'s [parse_zone(target_zone)]!</span>")
-			return -1
-		else
-			for(var/obj/item/organ/O in organs)
-				O.on_find(user)
-				organs -= O
-				organs[O.name] = O
-			I = input("Remove which organ?", "Surgery", null, null) as null|anything in organs
-			if(I && user && target && user.Adjacent(target) && user.get_active_held_item() == tool)
-				I = organs[I]
-				if(!I)
-					return -1
-				display_results(user, target, "<span class='notice'>You begin to extract [I] from [target]'s [parse_zone(target_zone)]...</span>",
-					"[user] begins to extract [I] from [target]'s [parse_zone(target_zone)].",
-					"[user] begins to extract something from [target]'s [parse_zone(target_zone)].")
-			else
-				return -1
+	if(our_component && !tool)
+		our_component.user_show_to_mob(user, FALSE, FALSE)
+		return -1
+	else if(!our_component)
+		to_chat(user, "<span class='notice'>You prepare [target] for organ manipulation.</span>")
+		our_component = target.AddComponent(/datum/component/storage/concrete/organ)
+		our_component.attack_hand_open = TRUE
+		our_component.attack_hand_interact = TRUE
+		our_component.bodypart_affected = target.get_bodypart(user.zone_selected)
+		our_component.drop_all_on_deconstruct = FALSE
+		our_component.silent = TRUE
+		for(var/obj/item/organ/O in our_component.contents())
+			our_component.RegisterSignal(O, COMSIG_CLICK, /datum/component/storage/concrete/organ.proc/override_click)
+		return -1
+	else if(tool.tool_behaviour in list(TOOL_RETRACTOR, TOOL_CROWBAR))
+		display_results(user, target, "<span class='notice'>You begin closing up the incision in [target]'s [parse_zone(target_zone)]...</span>",
+			"[user] begins to close up the incision in [target]'s [parse_zone(target_zone)].",
+			"[user] begins to close up the incision in [target]'s [parse_zone(target_zone)].")
+		return 0
+	return -1
 
 /datum/surgery_step/manipulate_organs/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	if(current_type == "insert")
-		if(istype(tool, /obj/item/organ_storage))
-			I = tool.contents[1]
-			tool.icon_state = initial(tool.icon_state)
-			tool.desc = initial(tool.desc)
-			tool.cut_overlays()
-			tool = I
-		else
-			I = tool
-		user.temporarilyRemoveItemFromInventory(I, TRUE)
-		I.Insert(target)
-		display_results(user, target, "<span class='notice'>You insert [tool] into [target]'s [parse_zone(target_zone)].</span>",
-			"[user] inserts [tool] into [target]'s [parse_zone(target_zone)]!",
-			"[user] inserts something into [target]'s [parse_zone(target_zone)]!")
-
-	else if(current_type == "extract")
-		if(I && I.owner == target)
-			display_results(user, target, "<span class='notice'>You successfully extract [I] from [target]'s [parse_zone(target_zone)].</span>",
-				"[user] successfully extracts [I] from [target]'s [parse_zone(target_zone)]!",
-				"[user] successfully extracts something from [target]'s [parse_zone(target_zone)]!")
-			log_combat(user, target, "surgically removed [I.name] from", addition="INTENT: [uppertext(user.a_intent)]")
-			if(!tool && !target.IsUnconscious() && target.chem_effects[CE_PAINKILLER] < 30)
-				target.death_scream()
-				target.custom_pain("MY [capitalize(I.name)] HURTS!", rand(30, 40))
-				var/obj/item/bodypart/fuckhelpmefuck = target.get_bodypart(check_zone(target_zone))
-				if(fuckhelpmefuck)
-					fuckhelpmefuck.generic_bleedstacks += 5
-					for(var/datum/wound/slash/fucked in fuckhelpmefuck.wounds)
-						fucked.blood_flow += rand(2, 3)
-					for(var/datum/wound/pierce/shitted in fuckhelpmefuck.wounds)
-						shitted.blood_flow += rand(2, 3)
-			I.Remove()
-			I.forceMove(get_turf(target))
-		else
-			display_results(user, target, "<span class='notice'>You can't extract anything from [target]'s [parse_zone(target_zone)]!</span>",
-				"[user] can't seem to extract anything from [target]'s [parse_zone(target_zone)]!",
-				"[user] can't seem to extract anything from [target]'s [parse_zone(target_zone)]!")
-	return 0
+	display_results(user, target, "<span class='notice'>You close up [target]'s [parse_zone(target_zone)].</span>",
+		"[user] closes up [target]'s [parse_zone(target_zone)]!",
+		"[user] closes up [target]'s [parse_zone(target_zone)]!")
+	QDEL_NULL(our_component)
+	return TRUE

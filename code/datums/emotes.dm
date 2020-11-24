@@ -43,6 +43,7 @@
 	. = TRUE
 	if(!can_run_emote(user, TRUE, intentional))
 		return FALSE
+		
 	var/msg = select_message_type(user)
 	if(params && message_param)
 		msg = select_param(user, params)
@@ -74,6 +75,7 @@
 		user.audible_message(msg, user_msg = TRUE, runechat_popup = chat_popup) //SKYRAT CHANGE
 	else
 		user.visible_message(msg, user_msg = TRUE, runechat_popup = chat_popup) //SKYRAT CHANGE
+	
 	//Skyrat change
 	if(image_popup)
 		flick_emote_popup_on_mob(user, image_popup, 40)

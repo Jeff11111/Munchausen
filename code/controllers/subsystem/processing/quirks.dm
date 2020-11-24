@@ -78,7 +78,7 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 			Q = new fuck
 			if(length(Q.job_whitelist) && !(job.title in Q.job_whitelist))
 				Q = null
-			if(!Q.special_requirement_check(user))
+			else if(!Q.special_requirement_check(user))
 				Q = null
 		if(Q && (!length(Q.job_whitelist) || (job.title in Q.job_whitelist)))
 			user.add_quirk(Q.type, spawn_effects)

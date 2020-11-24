@@ -72,17 +72,12 @@
 	//Assistants have WACKY stats
 	stat_variance_negative = 4
 	stat_variance_positive = 4
-	stat_str = 9 //str needs to be limited because 13 str is already *very* good
-
-	//But they suck at pretty much every skill, save for a bit of
-	//construction, electronics and gaming
+	stat_str = 8 //str needs to be limited because 12 str is already *very* good
+	//But they suck at everything
 	skill_variance_negative = 2
 	skill_variance_positive = 2
 	skill_melee = JOB_SKILLPOINTS_NOVICE
-	skill_ranged = JOB_SKILLPOINTS_WORTHLESS
 	skill_gaming = JOB_STATPOINTS_AVERAGE
-	skill_construction = JOB_STATPOINTS_NOVICE
-	skill_electronics = JOB_STATPOINTS_NOVICE
 
 /datum/job/atmos
 	//Average stats all around, save for
@@ -118,12 +113,12 @@
 	//A fucking chad, stats are great all around
 	stat_variance_negative = 1
 	stat_str = 14
-	stat_end = 13
-	stat_dex = 14
+	stat_end = 14
+	stat_dex = 13
 	stat_int = 13
 	//Godlike melee, expert ranged and research, good first aid
 	//everything else the underlings will have to do
-	skill_melee = 18
+	skill_melee = JOB_STATPOINTS_EXPERT
 	skill_ranged = JOB_STATPOINTS_EXPERT
 	skill_research = JOB_STATPOINTS_EXPERT
 	skill_firstaid = JOB_STATPOINTS_TRAINED
@@ -165,7 +160,7 @@
 	stat_int = 14
 	//Godlike construction and electronics
 	skill_melee = 8
-	skill_ranged = 7
+	skill_ranged = 8
 	skill_construction = 18
 	skill_electronics = 18
 
@@ -183,12 +178,12 @@
 	stat_end = 14
 	stat_int = 6
 	//Uhhh... godlike gaming?...
+	skill_melee = JOB_SKILLPOINTS_WORTHLESS
 	skill_gaming = JOB_SKILLPOINTS_LEGENDARY
-	skill_melee = 6
 
 //Either gets ridiculously low or ridiculously high strength, no inbetween
 /datum/job/clown/special_assign_skills_stats(mob/living/carbon/human/H)
-	var/fiddy = prob(65)
+	var/fiddy = prob(66)
 	if(fiddy)
 		var/datum/stats/str/str = GET_STAT(H, str)
 		if(str)
@@ -210,9 +205,11 @@
 	stat_int = 16
 
 /datum/job/detective
-	//High endurance and int
-	stat_end = 14
-	stat_int = 14
+	//Low str and end, high int and dex
+	stat_str = 9
+	stat_end = 9
+	stat_dex = 14
+	stat_int = 11
 	//Expert ranged, average melee
 	skill_melee = JOB_SKILLPOINTS_AVERAGE
 	skill_ranged = JOB_SKILLPOINTS_EXPERT
@@ -230,10 +227,10 @@
 
 /datum/job/hop
 	//INTJ femboy head of staff, physically incapable but VERY smort
-	stat_str = 8
-	stat_end = 8
-	stat_dex = JOB_STATPOINTS_EXPERT
-	stat_int = JOB_STATPOINTS_EXPERT
+	stat_str = 9
+	stat_end = 9
+	stat_dex = 12
+	stat_int = 11
 	//Passing ranged, research and chemistry skills
 	skill_ranged = JOB_SKILLPOINTS_AVERAGE
 	skill_chemistry = JOB_SKILLPOINTS_AVERAGE
@@ -242,10 +239,11 @@
 /datum/job/hos
 	//Chad, high strength and endurance, little variance
 	stat_variance_negative = 1
+	stat_variance_positive = 1
 	stat_str = 14
 	stat_end = 14
-	//Godlike melee and ranged, novice firstaid
-	skill_melee = 17
+	//Godlike melee and ranged, average firstaid
+	skill_melee = 18
 	skill_ranged = JOB_SKILLPOINTS_EXPERT
 	skill_firstaid = JOB_SKILLPOINTS_AVERAGE
 
@@ -254,7 +252,7 @@
 	stat_str = 9
 	stat_end = 14
 	//Average construction and electronics i guess?
-	skill_melee = 8
+	skill_melee = JOB_SKILLPOINTS_WORTHLESS
 	skill_construction = JOB_SKILLPOINTS_AVERAGE
 	skill_electronics = JOB_SKILLPOINTS_AVERAGE
 
@@ -275,7 +273,7 @@
 	stat_end = 14
 	stat_int = 6
 	//Uhhh... godlike gaming?...
-	skill_ranged = 6
+	skill_melee = JOB_SKILLPOINTS_NOVICE
 	skill_gaming = JOB_SKILLPOINTS_LEGENDARY
 
 //Either gets ridiculously low or ridiculously high strength, no inbetween
@@ -293,16 +291,17 @@
 
 /datum/job/paramedic
 	//Good endurance and str
-	stat_str = 12
+	stat_str = 11
 	stat_end = 12
 	//Expert surgery and expert first aid
+	skill_melee = JOB_SKILLPOINTS_NOVICE
 	skill_firstaid = JOB_SKILLPOINTS_EXPERT
 	skill_surgery = JOB_SKILLPOINTS_EXPERT
 
 /datum/job/brig_physician
 	//Good endurance
 	stat_end = 12
-	//Average ranged, surgery and expert first aid
+	//Novice ranged, average surgery and expert first aid
 	skill_melee = JOB_SKILLPOINTS_NOVICE
 	skill_ranged = JOB_SKILLPOINTS_AVERAGE
 	skill_firstaid = JOB_SKILLPOINTS_EXPERT
@@ -314,42 +313,43 @@
 	stat_end = JOB_STATPOINTS_TRAINED
 	//Decent construction and electronics
 	skill_melee = 8
-	skill_ranged = 10
+	skill_ranged = JOB_SKILLPOINTS_AVERAGE
 	skill_construction = JOB_SKILLPOINTS_TRAINED
 	skill_electronics = JOB_SKILLPOINTS_TRAINED
 
 /datum/job/rd
 	//INTJ femboy head of staff, physically incapable but VERY smort
-	stat_str = 8
-	stat_end = 8
-	stat_dex = JOB_STATPOINTS_EXPERT
-	stat_int = JOB_STATPOINTS_EXPERT
+	stat_str = 9
+	stat_end = 9
+	stat_dex = 12
+	stat_int = 14
 	//Amazing research and chemistry
 	skill_ranged = 10
-	skill_chemistry = JOB_SKILLPOINTS_EXPERT
 	skill_research = 18
-	skill_electronics = JOB_SKILLPOINTS_TRAINED
+	skill_chemistry = JOB_SKILLPOINTS_EXPERT
+	skill_electronics = JOB_SKILLPOINTS_EXPERT
 	skill_surgery = JOB_SKILLPOINTS_TRAINED
 
 /datum/job/roboticist
 	//INTJ, physically incapable but smort
-	stat_str = 8
-	stat_end = 8
-	stat_dex = JOB_STATPOINTS_TRAINED
-	stat_int = JOB_STATPOINTS_EXPERT
+	stat_str = 9
+	stat_end = 9
+	stat_dex = 11
+	stat_int = 11
 	//Godlike electronics, expert research, trained surgery
-	skill_research = JOB_SKILLPOINTS_EXPERT
+	skill_ranged = JOB_SKILLPOINTS_NOVICE
 	skill_surgery = JOB_SKILLPOINTS_TRAINED
+	skill_research = 12
 	skill_electronics = 18
 
 /datum/job/scientist
 	//INTJ, physically incapable but smort
-	stat_str = 8
-	stat_end = 8
-	stat_dex = JOB_STATPOINTS_TRAINED
-	stat_int = JOB_STATPOINTS_EXPERT
-	//Godlike research, expert electronics
-	skill_research = 18
+	stat_str = 9
+	stat_end = 9
+	stat_dex = 11
+	stat_int = 11
+	//Good research, expert electronics
+	skill_research = 15
 	skill_electronics = JOB_SKILLPOINTS_EXPERT
 	skill_chemistry = JOB_SKILLPOINTS_AVERAGE
 
@@ -366,8 +366,8 @@
 
 /datum/job/mining
 	//Better str and end, at the cost of int and dex
-	stat_str = JOB_STATPOINTS_TRAINED
-	stat_end = 14
+	stat_str = 12
+	stat_end = 12
 	stat_dex = 8
 	stat_int = 8
 	//Average melee and ranged, novice first aid
@@ -386,10 +386,10 @@
 
 /datum/job/virologist
 	//INTJ, physically incapable but smort
-	stat_str = 8
-	stat_end = 8
-	stat_dex = JOB_STATPOINTS_TRAINED
-	stat_int = JOB_STATPOINTS_EXPERT
+	stat_str = 9
+	stat_end = 9
+	stat_dex = 11
+	stat_int = 11
 	//Expert research, good firstaid, novice surgery
 	skill_research = JOB_SKILLPOINTS_EXPERT
 	skill_firstaid = JOB_SKILLPOINTS_TRAINED
@@ -397,10 +397,10 @@
 
 /datum/job/psychologist
 	//INTJ, physically incapable but smort
-	stat_str = 8
-	stat_end = 8
-	stat_dex = JOB_STATPOINTS_TRAINED
-	stat_int = JOB_STATPOINTS_EXPERT
+	stat_str = 9
+	stat_end = 9
+	stat_dex = 11
+	stat_int = 13
 	//Expert research, good firstaid, novice surgery
 	skill_research = JOB_SKILLPOINTS_EXPERT
 	skill_firstaid = JOB_SKILLPOINTS_TRAINED
@@ -408,8 +408,8 @@
 
 /datum/job/warden
 	//Better str and end, at the cost of int
-	stat_str = JOB_STATPOINTS_TRAINED
-	stat_end = JOB_STATPOINTS_TRAINED
+	stat_str = 12
+	stat_end = 12
 	stat_int = 8
 	//Great melee, trained ranged
 	skill_melee = JOB_SKILLPOINTS_EXPERT

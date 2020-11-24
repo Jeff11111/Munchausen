@@ -464,7 +464,7 @@
 								'modular_skyrat/sound/gore/trauma2.ogg',
 								'modular_skyrat/sound/gore/trauma3.ogg')
 				playsound(src, tooth_sound, 60)
-				wound_message += " [src]'s teeth sail off in an arc!"
+				wound_message += " <b>[src]</b>'s teeth sail off in an arc!"
 				Stun(2 SECONDS)
 				Stumble(4 SECONDS)
 				did_something = TRUE

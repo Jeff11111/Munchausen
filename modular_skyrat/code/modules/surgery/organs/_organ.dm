@@ -45,10 +45,13 @@
 	var/datum/dna/original_dna
 	var/datum/species/original_species
 
-/obj/item/organ/Initialize()
+/obj/item/organ/ComponentInitialize()
 	. = ..()
 	if(organ_flags & ORGAN_EDIBLE)
 		AddComponent(/datum/component/edible, food_reagents, null, RAW | MEAT | GROSS, null, 10, null, null, null, CALLBACK(src, .proc/OnEatFrom))
+
+/obj/item/organ/Initialize()
+	. = ..()
 	START_PROCESSING(SSobj, src)
 
 /obj/item/organ/Destroy()
@@ -66,16 +69,16 @@
 		revive_organ()
 
 /obj/item/organ/proc/is_working()
-	return !CHECK_BITFIELD(organ_flags, ORGAN_FAILING | ORGAN_DEAD)
+	return (!CHECK_BITFIELD(organ_flags, ORGAN_FAILING | ORGAN_CUT_AWAY | ORGAN_DEAD))
 
 /obj/item/organ/proc/is_bruised()
-	return damage >= low_threshold
+	return (damage >= low_threshold)
 
 /obj/item/organ/proc/is_broken()
-	return ((organ_flags & ORGAN_FAILING) || (damage >= high_threshold))
+	return (CHECK_BITFIELD(organ_flags, ORGAN_FAILING | ORGAN_CUT_AWAY) || (damage >= high_threshold))
 
 /obj/item/organ/proc/is_dead()
-	return (organ_flags & ORGAN_DEAD)
+	return (CHECK_BITFIELD(organ_flags, ORGAN_DEAD))
 
 /obj/item/organ/proc/bruise_organ()
 	damage = max(damage, low_threshold)
@@ -104,8 +107,11 @@
 	//Robotic organs do not feel pain, simply for balancing reasons
 	//Thus lowering the shock of IPCs and other synths is easier, as
 	//they don't have many painkillers
-	if(status & ORGAN_ROBOTIC)
-		damage_mult *= 0
+	if(CHECK_BITFIELD(status, ORGAN_ROBOTIC))
+		return 0
+	//Cut organs don't feel pain
+	if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
+		return 0
 	return (damage * damage_mult * pain_multiplier)
 
 /obj/item/organ/proc/is_robotic()
@@ -114,7 +120,7 @@
 /obj/item/organ/proc/is_synthetic()
 	return (organ_flags & ORGAN_SYNTHETIC)
 
-/obj/item/organ/proc/Insert(mob/living/carbon/M, special = 0, drop_if_replaced = TRUE)
+/obj/item/organ/proc/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE)
 	if(!iscarbon(M) || owner == M)
 		return FALSE
 
@@ -150,7 +156,7 @@
 		owner.internal_organs -= src
 		if(owner.internal_organs_slot[slot] == src)
 			owner.internal_organs_slot.Remove(slot)
-		if((organ_flags & ORGAN_VITAL) && !special && !(owner.status_flags & GODMODE))
+		if(!special && (organ_flags & ORGAN_VITAL) && !(owner.status_flags & GODMODE))
 			owner.death()
 		for(var/X in actions)
 			var/datum/action/A = X
@@ -360,12 +366,14 @@
 		. += do_tag ? "<span class='warning'>Mechanical</span>" : "Mechanical"
 	if(is_synthetic())
 		. += do_tag ? "<span class='warning'>Synthetic</span>" : "Synthetic"
-	if(organ_flags & ORGAN_DEAD)
+	if(CHECK_BITFIELD(organ_flags, ORGAN_DEAD))
 		if(can_recover())
 			. += do_tag ? "<span class='danger'>Decaying</span>" : "Decaying"
 		else
 			. += do_tag ? "<span class='deadsay'>Necrotic</span>" : "Necrotic"
-
+	if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
+		. += do_tag ? "<span class='danger'>Cut away</span>" : "Cut away"
+	
 	switch(germ_level)
 		if(INFECTION_LEVEL_ONE to INFECTION_LEVEL_ONE + ((INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3))
 			. +=  "Mild Infection"
@@ -433,7 +441,10 @@
 			if(INFECTION_LEVEL_THREE to INFINITY)
 				. += "<span class='deadsay'>[owner ? "[owner.p_their(TRUE)] " : ""][owner ? src.name : capitalize(src.name)] seems to be awfully necrotic and riddled with dead tissue!</span>"
 	if(etching)
-		. += "<span class='notice'>[owner ? "[owner.p_their(TRUE)] " : ""][src] has <b>\"[etching]\"</b> inscribed on it.</span>"
+		if(owner)
+			. += "<span class='warning'>Something is etched on [src], but i cannot see it clearly.</span>"
+		else
+			. += "<span class='notice'>[owner ? "[owner.p_their(TRUE)] " : ""][src] has <b>\"[etching]\"</b> inscribed on it.</span>"
 	if(!owner)
 		. += "<span class='notice'>This organ can be inserted into \the [parse_zone(zone)].</span>"
 
@@ -442,15 +453,7 @@
 
 /obj/item/organ/attackby(obj/item/I, mob/living/user, params)
 	. = ..()
-	if((istype(I, /obj/item/cautery) || istype(I, /obj/item/pen)) && user.a_intent == INTENT_HELP)
-		var/badboy = input(user, "What do you want to etch on [src]?", "Malpractice", "") as text
-		if(badboy)
-			badboy = strip_html_simple(badboy)
-			etching = "[badboy]"
-			user.visible_message("<span class='notice'>[user] etches something on \the [src] with \the [I].</span>", " <span class='notice'>You etch <b>\"[badboy]\"</b> on [src] with \the [I]. Hehe.</span>")
-		else
-			return ..()
-	else if(I.get_sharpness() && (user.a_intent == INTENT_HARM))
+	if(!owner && I.get_sharpness() && (user.a_intent == INTENT_HARM))
 		user.visible_message("<span class='warning'>[user] begins to butcher [src].</span>",\
 			"<span class='notice'>You begin butchering [src]...</span>")
 		if(do_after(user, 54, target = src))
@@ -460,6 +463,16 @@
 			if(prob(50))
 				new /obj/item/reagent_containers/food/snacks/meat/slab/human(get_turf(src))
 			return qdel(src)
+	else if(owner && I.get_sharpness())
+		to_chat(user, "<span class='notice'>You start severing [src] from \the [owner]...</span>")
+	else if(istype(I, /obj/item/pen) && user.a_intent == INTENT_HELP)
+		var/badboy = input(user, "What do you want to etch on [src]?", "Malpractice", "") as text
+		if(badboy)
+			badboy = strip_html_simple(badboy)
+			etching = "[badboy]"
+			user.visible_message("<span class='notice'>[user] etches something on \the [src] with \the [I].</span>", " <span class='notice'>You etch <b>\"[badboy]\"</b> on [src] with \the [I]. Hehe.</span>")
+		else
+			return ..()
 
 /obj/item/organ/item_action_slot_check(slot,mob/user)
 	return //so we don't grant the organ's action to mobs who pick up the organ.

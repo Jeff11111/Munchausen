@@ -12,6 +12,7 @@
 	if(!E)
 		to_chat(src, "<span class='notice'>Unusable emote '[act]'. Say *help for a list.</span>")
 		return
+	
 	E.run_emote(src, param, m_type, intentional)
 
 /datum/emote/flip

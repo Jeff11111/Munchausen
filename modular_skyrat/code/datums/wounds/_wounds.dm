@@ -163,7 +163,7 @@
 	if(wound_overlay)
 		QDEL_NULL(wound_overlay)
 		limb?.update_limb(limb?.owner ? FALSE : TRUE)
-		victim?.update_body()
+		victim?.update_body_parts()
 	if(attached_surgery)
 		QDEL_NULL(attached_surgery)
 	if(src in victim?.all_wounds)

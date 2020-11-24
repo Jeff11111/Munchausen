@@ -183,9 +183,8 @@
 	if(is_dreamer(user))
 		var/obj/item/organ/heart = getorganslot(ORGAN_SLOT_HEART)
 		if(heart && heart.etching && findtext(heart.etching, "<b>INRL</b> - "))
-			var/key_text = copytext(heart.etching, 14, 18)
+			var/key_text = copytext(heart.etching, 14, 19)
 			msg += "<span class='userdanger'>They KNOW the [key_text], i am sure of it!</span>"
-	
 	if(msg.len)
 		. += "<span class='warning'>[msg.Join("\n")]</span>"
 	

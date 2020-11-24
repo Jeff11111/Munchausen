@@ -31,7 +31,7 @@
 		if(!target.lying) //doing surgery on someone who's not even lying down is VERY hard
 			if(user.mind)
 				var/datum/skills/surgery/surgerye = GET_SKILL(user, surgery)
-				if(surgerye && surgerye.level <= 10)
+				if(surgerye && surgerye.level < 10)
 					prob_chance *= 0.5
 			else
 				prob_chance *= 0.5
@@ -52,7 +52,7 @@
 			target.emote("scream")
 			target.blood_volume -= 5
 			target.add_splatter_floor(get_turf(target))
-			target.apply_damage(rand(3,6), damagetype = BRUTE, def_zone = target_zone, blocked = FALSE, forced = FALSE)
+			target.apply_damage(rand(3,6), damagetype = BRUTE, def_zone = target_zone, blocked = FALSE, forced = FALSE, wound_bonus = CANT_WOUND)
 
 		//Dice roll
 		var/didntfuckup = TRUE

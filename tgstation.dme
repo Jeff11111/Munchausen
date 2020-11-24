@@ -3559,6 +3559,7 @@
 #include "modular_skyrat\code\datums\components\crafting\recipes\recipes_misc.dm"
 #include "modular_skyrat\code\datums\components\crafting\recipes\recipes_weapon_and_ammo.dm"
 #include "modular_skyrat\code\datums\components\crafting\recipes\recipeswhat.dm"
+#include "modular_skyrat\code\datums\components\storage\_organ_storage.dm"
 #include "modular_skyrat\code\datums\descriptors\_descriptor.dm"
 #include "modular_skyrat\code\datums\descriptors\descriptor_types\build.dm"
 #include "modular_skyrat\code\datums\descriptors\descriptor_types\height.dm"

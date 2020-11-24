@@ -76,7 +76,6 @@
 
 	var/mutable_appearance/damage_overlay = mutable_appearance('modular_skyrat/icons/mob/dam_mob.dmi', "blank", -DAMAGE_LAYER, color = dam_colors)
 	overlays_standing[DAMAGE_LAYER] = damage_overlay
-
 	for(var/X in bodyparts)
 		var/obj/item/bodypart/BP = X
 		if(BP.dmg_overlay_type)

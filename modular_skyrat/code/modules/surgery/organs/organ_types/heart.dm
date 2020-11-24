@@ -35,6 +35,52 @@
 	var/heartbeat = 0
 	var/open = 0
 
+/obj/item/organ/heart/surgical_examine(mob/user)
+	. = list()
+	var/failing = FALSE
+	var/decayed = FALSE
+	var/damaged = FALSE
+	if(organ_flags & ORGAN_DEAD)
+		decayed = TRUE
+	if(organ_flags & ORGAN_FAILING)
+		failing = TRUE
+		if(status & ORGAN_ROBOTIC)
+			. += "<span class='warning'>[owner ? "[owner.p_their(TRUE)] " : ""][owner ? src.name : capitalize(src.name)] seems to be broken!</span>"
+		else
+			. += "<span class='warning'>[owner ? "[owner.p_their(TRUE)] " : ""][owner ? src.name : capitalize(src.name)] is severely damaged, and doesn't seem like it will work anymore!</span>"
+	if(damage > high_threshold)
+		if(!failing)
+			damaged = TRUE
+			. += "<span class='warning'>[owner ? "[owner.p_their(TRUE)] " : ""][owner ? src.name : capitalize(src.name)] is starting to look discolored.</span>"
+	if(!failing && !damaged)
+		. += "<span class='notice'>[owner ? "[owner.p_their(TRUE)] " : ""][owner ? src.name : capitalize(src.name)] seems to be quite healthy.</span>"
+	if(decayed)
+		. += "<span class='deadsay'>[owner ? "[owner.p_their(TRUE)] " : ""][owner ? src.name : capitalize(src.name)] seems to have decayed, reaching a non-functional state...</span>"
+	if(germ_level)
+		switch(germ_level)
+			if(INFECTION_LEVEL_ONE to INFECTION_LEVEL_TWO)
+				. +=  "<span class='deadsay'>[owner ? "[owner.p_their(TRUE)] " : ""][owner ? src.name : capitalize(src.name)] seems to be mildly infected.</span>"
+			if(INFECTION_LEVEL_TWO to INFECTION_LEVEL_THREE)
+				. +=  "<span class='deadsay'>[owner ? "[owner.p_their(TRUE)] " : ""][owner ? src.name : capitalize(src.name)] seems to be oozing some foul pus...</span>"
+			if(INFECTION_LEVEL_THREE to INFINITY)
+				. += "<span class='deadsay'>[owner ? "[owner.p_their(TRUE)] " : ""][owner ? src.name : capitalize(src.name)] seems to be awfully necrotic and riddled with dead tissue!</span>"
+	if(etching)
+		if(!is_dreamer(user))
+			if(!findtext(etching, "<b>INRL</b> - "))
+				if(owner)
+					. += "<span class='warning'>Something is etched on [src], but i cannot see it clearly.</span>"
+				else
+					. += "<span class='notice'>[owner ? "[owner.p_their(TRUE)] " : ""][src] has <b>\"[etching]\"</b> inscribed on it.</span>"
+		else
+			if(owner)
+				. += "<span class='userdanger'>I must inspect it CLOSELY.</span>"
+			else
+				. += "<b>There's something CUT on this HEART. \"[etching]. Add it to the other keys to exit INRL.\"</b>"
+	else if(is_dreamer(user) && !findtext(etching, "<b>INRL</b> - "))
+		. += "<b>There is NOTHING on his heart. Should be? Following the TRUTH - not here. I need to keep LOOKING. Keep FOLLOWING my heart.</b>"
+	if(!owner)
+		. += "<span class='notice'>This organ can be inserted into \the [parse_zone(zone)].</span>"
+
 /obj/item/organ/heart/on_death()
 	. = ..()
 	stop_if_unowned()

@@ -372,15 +372,19 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 		if(!do_mob(user,src,30*grav_power))
 			return
 
-
 	//If the item is in a storage item, take it out
-	SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user.loc, TRUE)
-
+	if(stored_in)
+		SEND_SIGNAL(stored_in, COMSIG_TRY_STORAGE_TAKE, src, user.loc, TRUE)
+	else
+		SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user.loc, TRUE)
+	
 	if(throwing)
 		throwing.finalize(FALSE)
+	
 	if(loc == user)
 		if(!user.temporarilyRemoveItemFromInventory(I = src, ignore_strip_self = FALSE))
 			return
+	
 	pickup(user)
 	add_fingerprint(user)
 	if(!user.put_in_active_hand(src, FALSE, FALSE))
@@ -396,7 +400,6 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 		return
 
 	SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user.loc, TRUE)
-
 	if(throwing)
 		throwing.finalize(FALSE)
 	if(loc == user)

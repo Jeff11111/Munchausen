@@ -349,7 +349,6 @@
 /datum/component/mood/proc/hud_click(datum/source, location, control, params, mob/user)
 	print_mood(user)
 
-
 /datum/component/mood/proc/HandleNutrition(mob/living/L)
 	switch(L.nutrition)
 		if(NUTRITION_LEVEL_FULL to INFINITY)

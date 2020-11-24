@@ -12,7 +12,7 @@
 	var/mob/living/carbon/original_owner = null
 	var/needs_processing = FALSE
 
-	var/body_zone //BODY_ZONE_CHEST, BODY_ZONE_L_ARM, etc , used for def_zone
+	var/body_zone //BODY_ZONE_CHEST, BODY_ZONE_L_ARM, etc, used for def_zone
 	var/list/aux_icons // associative list, currently used on hands
 	var/body_part = null //bitflag used to check which clothes cover this bodypart
 	var/use_digitigrade = NOT_DIGITIGRADE //Used for alternate legs, useless elsewhere
@@ -82,7 +82,6 @@
 	var/list/heal_zones = list() //body zones that are healed in "multiple" mode on medical items
 	var/amputation_point //descriptive string used in amputation.
 	var/obj/item/cavity_item
-	var/cremation_progress = 0 //Gradually increases while burning when at full damage, destroys the limb when at 100
 	/// The wounds currently afflicting this body part
 	var/list/wounds = list()
 	/// The scars currently afflicting this body part
@@ -523,7 +522,7 @@
 			"<span class='notice'>You begin to cut open [src]...</span>")
 		if(do_after(user, 54, target = src))
 			drop_organs(user)
-	else if((istype(W, /obj/item/cautery) || istype(W, /obj/item/pen)) && user.a_intent == INTENT_HELP)
+	else if(istype(W, /obj/item/pen) && user.a_intent == INTENT_HELP)
 		var/badboy = input(user, "What do you want to inscribe on [src]?", "Malpractice", "") as text
 		if(badboy)
 			badboy = strip_html_simple(badboy)
@@ -831,16 +830,10 @@
 
 		if(mangled_state & BODYPART_MANGLED_BONE)
 			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
-			if(prob(50))
-				if(try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-				else if(try_disembowel(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-			else
-				if(try_disembowel(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-				else if(try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
+			if(try_disembowel(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
+				return
+			else if(try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
+				return
 
 	// slime people p much they dont have bone
 	else if((bio_state & BIO_FLESH) && !(bio_state & BIO_BONE))
@@ -853,16 +846,10 @@
 
 		if(mangled_state & BODYPART_MANGLED_MUSCLE)
 			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
-			if(prob(50))
-				if(try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-				else if(try_disembowel(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-			else
-				if(try_disembowel(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-				else if(try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
+			if(try_disembowel(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
+				return
+			else if(try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
+				return
 	// nothing uses only skin just yet
 
 	// standard humanoids
@@ -894,16 +881,10 @@
 
 		if(mangled_state & BODYPART_MANGLED_BOTH)
 			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
-			if(prob(50))
-				if(try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-				else if(try_disembowel(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-			else
-				if(try_disembowel(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-				else if(try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
+			if(try_disembowel(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
+				return
+			else if(try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
+				return
 	/*
 	// END WOUND HANDLING
 	*/
@@ -1076,16 +1057,10 @@
 
 		if(mangled_state & BODYPART_MANGLED_BONE)
 			damage_integrity(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus)
-			if(prob(50))
-				if(try_dismember(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-				else if(try_disembowel(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-			else
-				if(try_disembowel(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-				else if(try_dismember(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
+			if(try_disembowel(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
+				return
+			else if(try_dismember(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
+				return
 		
 	// slime people p much, they dont have bone
 	else if((bio_state & BIO_FLESH) && !(bio_state & BIO_BONE))
@@ -1097,16 +1072,10 @@
 			phantom_wounding_dmg *= 1.5 // it's easy to puncture into plain flesh
 		if(mangled_state & BODYPART_MANGLED_MUSCLE)
 			damage_integrity(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus)
-			if(prob(50))
-				if(try_dismember(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-				else if(try_disembowel(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-			else
-				if(try_disembowel(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-				else if(try_dismember(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
+			if(try_disembowel(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
+				return
+			else if(try_dismember(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
+				return
 
 	// nothing uses only skin just yet
 	else if((bio_state & BIO_SKIN) && !(bio_state & BIO_FLESH) && !(bio_state & BIO_BONE))
@@ -1141,16 +1110,10 @@
 
 		if(mangled_state & BODYPART_MANGLED_BOTH)
 			damage_integrity(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus)
-			if(prob(50))
-				if(try_dismember(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-				else if(try_disembowel(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-			else
-				if(try_disembowel(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
-				else if(try_dismember(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
-					return
+			if(try_disembowel(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
+				return
+			else if(try_dismember(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
+				return
 
 	check_wounding(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus, silent = silent)
 

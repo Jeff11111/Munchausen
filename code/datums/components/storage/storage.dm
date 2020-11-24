@@ -37,7 +37,7 @@
 
 	var/silent = FALSE								//whether this makes a message when things are put in.
 	var/click_gather = FALSE						//whether this can be clicked on items to pick it up rather than the other way around.
-	var/rustle_sound = TRUE							//play rustle sound on interact.
+	var/rustle_sound = "rustle"						//play this rustle sound on interact.
 	var/allow_quick_empty = FALSE					//allow empty verb which allows dumping on the floor of everything inside quickly.
 	var/allow_quick_gather = FALSE					//allow toggle mob verb which toggles collecting all items from a tile.
 
@@ -62,6 +62,7 @@
 
 	var/allow_big_nesting = FALSE					//allow storage objects of the same or greater size.
 
+	var/attack_hand_open = FALSE
 	var/attack_hand_interact = TRUE					//interact on attack hand.
 	var/quickdraw = FALSE							//altclick interact
 
@@ -83,6 +84,7 @@
 /datum/component/storage/Initialize(datum/component/storage/concrete/master)
 	if(!isatom(parent))
 		return COMPONENT_INCOMPATIBLE
+	
 	if(master)
 		change_master(master)
 
@@ -99,9 +101,7 @@
 	RegisterSignal(parent, COMSIG_TRY_STORAGE_HIDE_FROM, .proc/signal_hide_attempt)
 	RegisterSignal(parent, COMSIG_TRY_STORAGE_HIDE_ALL, .proc/close_all)
 	RegisterSignal(parent, COMSIG_TRY_STORAGE_RETURN_INVENTORY, .proc/signal_return_inv)
-
 	RegisterSignal(parent, COMSIG_PARENT_ATTACKBY, .proc/attackby)
-
 	RegisterSignal(parent, COMSIG_ATOM_ATTACK_HAND, .proc/on_attack_hand)
 	RegisterSignal(parent, COMSIG_ATOM_ATTACK_PAW, .proc/on_attack_hand)
 	RegisterSignal(parent, COMSIG_ATOM_EMP_ACT, .proc/emp_act)
@@ -490,7 +490,8 @@
 				return
 			if(A.loc != M)
 				return
-			playsound(A, "rustle", 50, 1, -5)
+			if(rustle_sound)
+				playsound(A, rustle_sound, 50, 1, -5)
 			A.do_jiggle()
 			if(istype(over_object, /obj/screen/inventory/hand))
 				var/obj/screen/inventory/hand/H = over_object
@@ -616,7 +617,7 @@
 	if(silent && !override)
 		return
 	if(rustle_sound)
-		playsound(parent, "rustle", 50, 1, -5)
+		playsound(parent, pick(rustle_sound), 50, 1, -5)
 	to_chat(user, "<span class='notice'>You put [I] [insert_preposition]to [parent].</span>")
 	for(var/mob/viewing in fov_viewers(world.view, user)-M)
 		if(in_range(M, viewing)) //If someone is standing close enough, they can tell what it is...
@@ -685,14 +686,14 @@
 	var/atom/A = parent
 	if(!attack_hand_interact)
 		return
+	
 	if(user.active_storage == src && A.loc == user) //if you're already looking inside the storage item
 		user.active_storage.close(user)
 		close(user)
-		. = COMPONENT_NO_ATTACK_HAND
-		return
+		return COMPONENT_NO_ATTACK_HAND
 
 	if(rustle_sound)
-		playsound(A, "rustle", 50, 1, -5)
+		playsound(A, pick(rustle_sound), 50, 1, -5)
 	
 	if(isitem(A))
 		var/obj/item/I = A
@@ -717,6 +718,8 @@
 		if(!check_locked(source, user, TRUE))
 			ui_show(user)
 			A.do_jiggle()
+	else if(attack_hand_open)
+		ui_show(user)
 
 /datum/component/storage/proc/signal_on_pickup(datum/source, mob/user)
 	var/atom/A = parent
@@ -751,7 +754,7 @@
 		A.add_fingerprint(user)
 		user_show_to_mob(user)
 		if(rustle_sound)
-			playsound(A, "rustle", 50, 1, -5)
+			playsound(A, pick(rustle_sound), 50, 1, -5)
 		return TRUE
 
 	if(user.can_hold_items() && !user.incapacitated())

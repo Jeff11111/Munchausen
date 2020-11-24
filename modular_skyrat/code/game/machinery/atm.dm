@@ -23,6 +23,14 @@
 	else
 		icon_state = "[initial(icon_state)]-borked"
 
+/obj/machinery/atm/attack_ghost(mob/user)
+	. = ..()
+	to_chat(user, "<b>Station decrees:</b>")
+	for(var/i in SScommunications.decrees)
+		to_chat(user, "• [i]")
+	if(!length(SScommunications.decrees))
+		to_chat(user, "• None.")
+
 /obj/machinery/atm/attack_hand(mob/living/user)
 	. = ..()
 	if(user.canUseTopic(src, TRUE))

@@ -17,6 +17,10 @@
 	response_harm_continuous = "kicks"
 	response_harm_simple = "kick"
 
+/mob/living/simple_animal/pet/caracal/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/mob_holder)
+
 /mob/living/simple_animal/pet/caracal/floppa
 	name = "big floppa"
 	desc = "Flops for no hoe."

@@ -921,6 +921,11 @@ use_mob_overlay_icon: if FALSE, it will always use the default_icon_file even if
 			. += "-[BP.body_markings]"
 		else
 			. += "-no_marking"
+		if(BP.custom_overlay)
+			. += "-custom-[BP.custom_overlay.icon_state]"
+		for(var/datum/wound/W in BP.wounds)
+			if(W.wound_overlay)
+				. += "-wound-[lowertext(replacetext(W.name, " ", ""))]"
 
 	if(HAS_TRAIT(src, TRAIT_HUSK))
 		. += "-husk"

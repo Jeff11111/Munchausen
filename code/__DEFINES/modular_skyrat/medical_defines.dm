@@ -165,6 +165,7 @@
 #define ORGAN_NO_SPOIL			(1<<6)	//Do not spoil under any circumstances
 #define ORGAN_NO_DISMEMBERMENT	(1<<7)	//Immune to disembowelment.
 #define ORGAN_EDIBLE			(1<<8)	//is a snack? :D
+#define ORGAN_CUT_AWAY			(1<<9)	//Required for ogan manipulation
 
 // Pulse levels, very simplified.
 #define PULSE_NONE    0   // So !M.pulse checks would be possible.

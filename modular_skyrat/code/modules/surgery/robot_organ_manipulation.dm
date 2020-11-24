@@ -19,4 +19,4 @@
 		)
 
 /datum/surgery_step/manipulate_organs/mechanic
-	implements_extract = list(TOOL_HEMOSTAT = 55, TOOL_CROWBAR = 100)
+	implements = list(TOOL_RETRACTOR = 55, TOOL_CROWBAR = 100)

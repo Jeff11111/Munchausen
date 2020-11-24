@@ -50,7 +50,7 @@
 	throw_at(target_turf, throw_range, throw_speed)
 	return TRUE
 
-//Disembowel a limb
+//Disembowel a limb (opens up organ manipulation instantaneously)
 /obj/item/bodypart/proc/disembowel(dam_type = BRUTE, silent = FALSE, wound = FALSE, wounding_type = WOUND_SLASH)
 	if(!owner)
 		return FALSE
@@ -61,44 +61,32 @@
 		return FALSE
 	if(HAS_TRAIT(C, TRAIT_NOGUT)) //Just for not allowing disembowelment
 		return FALSE
-	. = list()
-	var/organ_spilled = 0
-	var/turf/T = get_turf(C)
-	for(var/X in C.internal_organs)
-		var/obj/item/organ/O = X
-		var/org_zone = check_zone(O.zone)
-		if((org_zone != body_zone) || (O.organ_flags & ORGAN_NO_DISMEMBERMENT))
-			continue
-		O.Remove()
-		O.forceMove(T)
-		organ_spilled = 1
-		. += X
-	
-	if(cavity_item)
-		cavity_item.forceMove(T)
-		. += cavity_item
-		cavity_item = null
-		organ_spilled = TRUE
 
-	if(body_zone != BODY_ZONE_HEAD)
-		C.death_scream()
+	//Destroy active surgeries on the bodypart
+	for(var/datum/surgery/other in owner.surgeries)
+		if(other.location == body_zone)
+			qdel(other)
 	
-	if(organ_spilled)
-		if(!silent && !wound)
-			playsound(get_turf(C), 'sound/misc/splort.ogg', 80, 1)
-			C.visible_message("<span class='danger'><B>[C]'s [parse_zone(body_zone)] organs spill out onto the floor!</B></span>")
-		if(wound)
-			if(is_organic_limb())
-				var/datum/wound/slash/critical/incision/disembowel/D = new()
-				D.apply_wound(src, TRUE)
-			else
-				var/datum/wound/mechanical/slash/critical/incision/disembowel/D = new()
-				D.apply_wound(src, TRUE)
-
-		C.bleed(12)
-		return TRUE
+	//Start an organ manipulation surgery right at the manipulate step
+	var/datum/surgery/procedure
+	if(is_organic_limb())
+		if(body_zone in ORGAN_BODYPARTS)
+			procedure = new /datum/surgery/organ_manipulation/soft(owner, body_zone, src)
+		else
+			procedure = new /datum/surgery/organ_manipulation(owner, body_zone, src)
+	else
+		if(body_zone in ORGAN_BODYPARTS)
+			procedure = new /datum/surgery/organ_manipulation/mechanic/soft(owner, body_zone, src)
+		else
+			procedure = new /datum/surgery/organ_manipulation/mechanic(owner, body_zone, src)
+	while(!(procedure.steps[status] in list(/datum/surgery_step/manipulate_organs, /datum/surgery_step/manipulate_organs/mechanic)) && !(procedure.status >= length(procedure.steps)))
+		procedure.status++
 	
-	return FALSE
+	if(procedure.status >= length(procedure.steps))
+		procedure.complete()
+	
+	C.death_scream()
+	return TRUE
 
 //Limb removal. The "special" argument is used for swapping a limb with a new one without the effects of losing a limb kicking in.
 //Destroyed just qdels the limb.

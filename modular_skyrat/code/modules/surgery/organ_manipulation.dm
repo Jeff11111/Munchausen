@@ -1,3 +1,4 @@
+/* e
 /datum/surgery_step/manipulate_organs
 	implements = list(/obj/item/organ = 100,
 					/obj/item/organ_storage = 100,
@@ -329,3 +330,4 @@
 				"[user] couldn't disinfect [target]'s [parse_zone(target_zone)] organs!",
 				"[user] couldn't disinfect [target]'s [parse_zone(target_zone)] organs!")
 	return TRUE
+*/

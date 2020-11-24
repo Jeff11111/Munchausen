@@ -1,3 +1,7 @@
+//Organ storage component
+/obj/item
+	var/atom/stored_in
+
 //Hiding underwear
 /obj/item
 	hide_underwear_examine = TRUE
