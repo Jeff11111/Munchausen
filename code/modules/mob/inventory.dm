@@ -285,7 +285,7 @@
 /mob/proc/putItemFromInventoryInHandIfPossible(obj/item/I, hand_index, force_removal = FALSE)
 	if(!can_put_in_hand(I, hand_index))
 		return FALSE
-	if(!temporarilyRemoveItemFromInventory(I, force_removal))
+	if(!temporarilyRemoveItemFromInventory(I, force_removal, ignore_strip_self = FALSE))
 		return FALSE
 	I.remove_item_from_storage(src)
 	if(!put_in_hand(I, hand_index))
