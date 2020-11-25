@@ -496,7 +496,7 @@
 			to_chat(user, "<span class='notice'>I stitch \the [src] safely.</span>")
 			organ_flags |= ~ORGAN_CUT_AWAY
 		else
-			if(is_dead())
+			if(is_dead() || is_broken())
 				to_chat(user, "<span class='warning'>\The [src] is unsalvageable! I can't suture it!</span>")
 				return TRUE
 			to_chat(user, "<span class='notice'>You start suturing \the [src]...</span>")
@@ -510,7 +510,35 @@
 			to_chat(user, "<span class='notice'>I suture \the [src] safely.</span>")
 			applyOrganDamage(-min(50, maxHealth/2))
 		return TRUE
-	else if(owner && I.is_drainable())
+	else if(owner && (I.tool_behaviour == TOOL_WELDER) && is_robotic())
+		var/obj/item/weldingtool/welder = I
+		if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
+			to_chat(user, "<span class='notice'>You start welding \the [src] on \the [owner]...</span>")
+			var/heymedic = GET_SKILL_LEVEL(user, electronics)
+			if(!do_mob(user, owner, 3 - (heymedic/MAX_SKILL)))
+				to_chat(user, "<span class='warning'>I must stand still!</span>")
+				return TRUE
+			if(!welder.use(4))
+				to_chat(user, "<span class='warning'>I don't have enough to weld \the [src] in place!</span>")
+				return TRUE
+			to_chat(user, "<span class='notice'>I weld \the [src] safely.</span>")
+			organ_flags |= ~ORGAN_CUT_AWAY
+		else
+			if(is_dead() || is_broken())
+				to_chat(user, "<span class='warning'>\The [src] is unsalvageable! I can't suture it!</span>")
+				return TRUE
+			to_chat(user, "<span class='notice'>You start welding \the [src]...</span>")
+			var/heymedic = GET_SKILL_LEVEL(user, electronics)
+			if(!do_mob(user, owner, 3 - (heymedic/MAX_SKILL)))
+				to_chat(user, "<span class='warning'>I must stand still!</span>")
+				return TRUE
+			if(!welder.use(2))
+				to_chat(user, "<span class='warning'>I don't have enough to heal \the [src]!</span>")
+				return TRUE
+			to_chat(user, "<span class='notice'>I weld \the [src] safely.</span>")
+			applyOrganDamage(-min(50, maxHealth/2))
+		return TRUE
+	else if(owner && I.is_drainable() && !is_robotic())
 		if(!germ_level)
 			return
 		if(I.reagents.remove_reagent(/datum/reagent/medicine/synthflesh, 20))
