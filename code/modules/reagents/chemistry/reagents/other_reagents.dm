@@ -248,7 +248,7 @@
 	glass_desc = "The father of all refreshments."
 	shot_glass_icon_state = "shotglassclear"
 	var/cooling_temperature = 2
-	var/hydration_gain = 3 * REAGENTS_METABOLISM
+	var/hydration_gain = 8 * REAGENTS_METABOLISM
 
 /datum/reagent/water/on_mob_life(mob/living/carbon/M)
 	. = ..()

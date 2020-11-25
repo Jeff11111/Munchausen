@@ -23,7 +23,7 @@
 		else if(user.mind && iscarbon(target))
 			var/mob/living/carbon/victim = target
 			var/obj/item/bodypart/BP = victim.get_bodypart(check_zone(user.zone_selected))
-			if(!BP)
+			if(!BP || INTERACTING_WITH(user, victim))
 				return FALSE
 			var/datum/skills/surgery/choppa = GET_SKILL_LEVEL(user, surgery)
 			var/time = 1.5 SECONDS

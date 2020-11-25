@@ -13,7 +13,7 @@
 	taste_mult = 4
 	value = REAGENT_VALUE_VERY_COMMON
 	var/nutriment_factor = 1 * REAGENTS_METABOLISM
-	var/worter_factor = 2 * REAGENTS_METABOLISM
+	var/worter_factor = 4 * REAGENTS_METABOLISM
 	var/max_nutrition = INFINITY
 	var/max_worter = INFINITY
 	var/quality = 0	//affects mood, typically higher for mixed drinks with more complex recipes

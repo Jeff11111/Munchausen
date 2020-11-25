@@ -55,7 +55,7 @@
 	if(!owner)
 		return FALSE
 	var/mob/living/carbon/C = owner
-	if(!disembowable)
+	if(!can_disembowel())
 		return FALSE
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
 		return FALSE
@@ -81,7 +81,13 @@
 			procedure = new /datum/surgery/organ_manipulation/mechanic(owner, body_zone, src)
 	
 	procedure.status = procedure.steps.len - 1
+	var/datum/wound/disembowel
+	if(is_organic_limb())
+		disembowel = new /datum/wound/slash/critical/incision/disembowel()
+	else
+		disembowel = new /datum/wound/mechanical/slash/critical/incision/disembowel()
 	
+	disembowel.apply_wound(src, TRUE)
 	C.death_scream()
 	return TRUE
 
