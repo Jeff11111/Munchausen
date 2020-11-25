@@ -60,7 +60,6 @@
 			L.adjustStaminaLoss(25)
 
 // .32 ACP (Improvised Pistol)
-
 /obj/item/projectile/bullet/c32acp
 	name = ".32 bullet"
 	damage = 15

@@ -53,7 +53,6 @@
 	projectile_type = /obj/item/projectile/bullet/a50AE
 
 // .32 ACP (Improvised Pistol)
-
 /obj/item/ammo_casing/c32acp
 	name = ".32 bullet casing"
 	desc = "A .32 bullet casing."
