@@ -63,7 +63,7 @@
 					if(prob(40))
 						BP.painless_wound_roll(WOUND_SLASH, force, wound_bonus, bare_wound_bonus)
 					return FALSE
-				BP.drop_limb()
+				BP.drop_limb(TRUE)
 				qdel(victim)
 		return TRUE
 	return FALSE

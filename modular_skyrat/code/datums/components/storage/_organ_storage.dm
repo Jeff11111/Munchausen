@@ -32,8 +32,9 @@
 //Only open this if aiming at the correct limb
 /datum/component/storage/concrete/organ/on_attack_hand(datum/source, mob/user)
 	var/atom/A = parent
+
 	if(!attack_hand_interact)
-		return
+		return FALSE
 	
 	if(user.active_storage == src && A.loc == user) //if you're already looking inside the storage item
 		user.active_storage.close(user)
@@ -41,7 +42,7 @@
 		return COMPONENT_NO_ATTACK_HAND
 
 	if(bodypart_affected && (user.zone_selected != bodypart_affected.body_zone))
-		return COMPONENT_NO_ATTACK_HAND
+		return FALSE
 	
 	if(rustle_sound)
 		playsound(A, pick(rustle_sound), 50, 1, -5)
