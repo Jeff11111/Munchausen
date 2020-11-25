@@ -15,4 +15,4 @@ CRYO_MIN_SSD_TIME 15
 WOUND_THRESHOLD_MULTIPLIER 1
 
 ## Link to our wiki
-WIKIURLSKYRAT https://skyrat13.tk/wiki/index.php
+#WIKIURLSKYRAT https://skyrat13.tk/wiki/index.php
