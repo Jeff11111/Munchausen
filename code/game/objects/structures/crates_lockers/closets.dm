@@ -643,7 +643,7 @@
 	var/electronic_level = electronics.level
 	var/fail_chance = ((20 - electronic_level) * 10) + 1
 	if(electronic_level < JOB_SKILLPOINTS_EXPERT)
-		to_chat(livingUser, "<span class='warning'>I are incapable of doing this.</span>")
+		to_chat(livingUser, "<span class='warning'>I am incapable of doing this.</span>")
 		return
 	audible_message("<span class='warning'>[src] starts to beep sporadically!</span>")
 	to_chat(livingUser, "<span class='warning'>I start to hack [src].</span>")
