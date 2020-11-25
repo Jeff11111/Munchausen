@@ -474,7 +474,7 @@
 			qdel(src)
 			return TRUE
 	else if(owner && I.get_sharpness() && !CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
-		to_chat(user, "<span class='notice'>You start severing \the [src] from \the [owner]...</span>")
+		to_chat(user, "<span class='notice'>I start severing \the [src] from \the [owner]...</span>")
 		var/heymedic = GET_SKILL_LEVEL(user, surgery)
 		if(!do_mob(user, owner, 3 - (heymedic/MAX_SKILL)))
 			to_chat(user, "<span class='warning'>I must stand still!</span>")

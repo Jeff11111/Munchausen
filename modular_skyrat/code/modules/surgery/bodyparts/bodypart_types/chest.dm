@@ -21,3 +21,6 @@
 	miss_entirely_prob = 5
 	zone_prob = 80
 	extra_zone_prob = 20
+
+/obj/item/bodypart/chest/can_dismember(obj/item/I)
+	return FALSE
