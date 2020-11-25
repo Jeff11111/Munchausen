@@ -3576,6 +3576,7 @@
 #include "modular_skyrat\code\datums\diseases\advance\symptoms\viral.dm"
 #include "modular_skyrat\code\datums\elements\embed.dm"
 #include "modular_skyrat\code\datums\elements\item_info.dm"
+#include "modular_skyrat\code\datums\elements\multitool_emaggable.dm"
 #include "modular_skyrat\code\datums\interactions\_interaction.dm"
 #include "modular_skyrat\code\datums\interactions\interaction_definitions.dm"
 #include "modular_skyrat\code\datums\interactions\interaction_interface.dm"
