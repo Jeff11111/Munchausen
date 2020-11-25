@@ -26,10 +26,10 @@
 			if(!BP)
 				return FALSE
 			var/datum/skills/surgery/choppa = GET_SKILL_LEVEL(user, surgery)
-			var/time = 1 SECONDS
+			var/time = 1.5 SECONDS
 			if(!victim.IsUnconscious())
-				time *= 4
-			time *= min(2, (MAX_STAT/2)/choppa)
+				time *= 5
+			time *= clamp((MAX_STAT/2)/choppa, 0.25, 2)
 			var/diceroll = user.mind.diceroll(skills = SKILL_DATUM(surgery))
 			if(BP.can_dismember())
 				to_chat(user, "<span class='warning'>I start severing \the [target]'s [BP]...</span>")
