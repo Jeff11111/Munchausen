@@ -47,4 +47,4 @@
 	else if((user.hal_screwyhud == SCREWYHUD_HEALTHY) || HAS_TRAIT(hud?.mymob, TRAIT_SCREWY_CHECKSELF))
 		overfatigue_appearance.icon_state = "overfatigue16"
 	else
-		overfatigue_appearance.icon_state = "overfatigue[clamp(CEILING((user.bufferedstam / user.stambuffer) * 16, 1), 0, 16)]"
+		overfatigue_appearance.icon_state = "overfatigue[clamp(CEILING((user.stambuffer - (user.bufferedstam / user.stambuffer)) * 16, 1), 0, 16)]"
