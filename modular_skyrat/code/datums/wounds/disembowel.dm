@@ -178,7 +178,6 @@
 		our_component.drop_all_on_deconstruct = FALSE
 		our_component.silent = TRUE
 		our_component.update_insides()
-		mob_prepared = TRUE
 
 /datum/wound/mechanical/slash/critical/incision/disembowel
 	name = "Disemboweled"
@@ -257,4 +256,3 @@
 		our_component.drop_all_on_deconstruct = FALSE
 		our_component.silent = TRUE
 		our_component.update_insides()
-		mob_prepared = TRUE
