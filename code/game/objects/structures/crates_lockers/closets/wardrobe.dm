@@ -54,19 +54,23 @@
 	new /obj/item/clothing/mask/bandana/green(src)
 	new /obj/item/clothing/mask/bandana/green(src)
 	return
+
 /obj/structure/closet/wardrobe/orange
 	name = "prison wardrobe"
 	desc = "It's a storage unit for Nanotrasen-regulation prisoner attire."
 	icon_door = "orange"
+
 /obj/structure/closet/wardrobe/orange/PopulateContents()
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/under/rank/prisoner(src)
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/shoes/sneakers/orange(src)
 	return
+
 /obj/structure/closet/wardrobe/yellow
 	name = "yellow wardrobe"
 	icon_door = "yellow"
+
 /obj/structure/closet/wardrobe/yellow/PopulateContents()
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/under/color/yellow(src)
