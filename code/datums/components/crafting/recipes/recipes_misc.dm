@@ -32,6 +32,14 @@
 	subcategory = CAT_MISCELLANEOUS
 	category = CAT_MISC
 
+/datum/crafting_recipe/noose
+	name = "Noose"
+	result = /obj/structure/chair/noose
+	reqs = list(/obj/item/stack/cable_coil = 20)
+	time = 70
+	subcategory = CAT_MISCELLANEOUS
+	category = CAT_MISC 
+
 // Blood Sucker stuff //
 /datum/crafting_recipe/bloodsucker/blackcoffin
 	name = "Black Coffin"
