@@ -108,7 +108,7 @@
 			parent.add_fingerprint(M)
 			if(!prevent_warning)
 				mob_item_insertion_feedback(usr, M, I)
-	playsound(O, pick(rustle_sound), 50, 1, -5)
+	playsound(I, pick(rustle_sound), 50, 1, -5)
 	update_icon()
 	return TRUE
 
