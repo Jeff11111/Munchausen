@@ -65,8 +65,6 @@
 		our_component.bodypart_affected = target.get_bodypart(user.zone_selected)
 		our_component.drop_all_on_deconstruct = FALSE
 		our_component.silent = TRUE
-		for(var/obj/item/organ/O in our_component.contents())
-			our_component.RegisterSignal(O, COMSIG_CLICK, /datum/component/storage/concrete/organ.proc/override_click)
 		return -1
 	else if(tool.tool_behaviour in list(TOOL_RETRACTOR, TOOL_CROWBAR))
 		display_results(user, target, "<span class='notice'>You begin closing up the incision in [target]'s [parse_zone(target_zone)]...</span>",

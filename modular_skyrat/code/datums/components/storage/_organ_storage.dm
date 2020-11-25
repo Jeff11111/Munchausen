@@ -9,10 +9,15 @@
 	. = ..()
 	if(!iscarbon(parent))
 		return COMPONENT_INCOMPATIBLE
-	for(var/obj/item/I in contents())
-		I.stored_in = parent
 	can_hold = typecacheof(/obj/item/organ)
 	UnregisterSignal(parent, list(COMSIG_MOUSEDROP_ONTO, COMSIG_MOUSEDROPPED_ONTO, COMSIG_CLICK_ALT))
+	addtimer(CALLBACK(src, /datum/component/storage/concrete/organ.proc/update_insides), 1)
+
+//Gives all organs parent as stored_in
+/datum/component/storage/concrete/organ/proc/update_insides()
+	for(var/obj/item/organ/O in contents())
+		O.stored_in = parent
+		RegisterSignal(O, COMSIG_CLICK, /datum/component/storage/concrete/organ.proc/override_click)
 
 //Revert the opacity proper
 /datum/component/storage/concrete/organ/Destroy()
@@ -211,6 +216,7 @@
 			O.forceMove(carbon_parent)
 			O.Insert(carbon_parent)
 			O.stored_in = carbon_parent
+			RegisterSignal(O, COMSIG_CLICK, /datum/component/storage/concrete/organ.proc/override_click)
 		refresh_mob_views()
 		return TRUE
 
@@ -252,6 +258,7 @@
 /datum/component/storage/concrete/organ/emp_act(datum/source, severity)
 	return FALSE
 
+//Bla bla
 /datum/component/storage/concrete/organ/remove_from_storage(atom/movable/AM, atom/new_location)
 	. = ..()
 	if(.)
