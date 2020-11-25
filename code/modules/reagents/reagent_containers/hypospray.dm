@@ -245,6 +245,10 @@
 	var/quickload = FALSE
 	var/penetrates = FALSE
 
+/obj/item/hypospray/mkii/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/multitool_emaggable)
+
 /obj/item/hypospray/mkii/brute
 	start_vial = /obj/item/reagent_containers/glass/bottle/vial/small/bicaridine
 

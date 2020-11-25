@@ -13,6 +13,10 @@
 	var/pin_removeable = 0 // Can be replaced by any pin.
 	var/obj/item/gun/gun
 
+/obj/item/firing_pin/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/multitool_emaggable)
+
 /obj/item/firing_pin/Initialize(newloc)
 	. = ..()
 	if(istype(newloc, /obj/item/gun))

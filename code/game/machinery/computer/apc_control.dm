@@ -13,6 +13,10 @@
 	var/list/logs
 	var/auth_id = "\[NULL\]"
 
+/obj/machinery/computer/apc_control/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/multitool_emaggable)
+
 /obj/machinery/computer/apc_control/Initialize()
 	. = ..()
 	result_filters = list("Name" = null, "Charge Above" = null, "Charge Below" = null, "Responsive" = null)

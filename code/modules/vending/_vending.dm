@@ -201,6 +201,10 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	else if(circuit && (circuit.onstation != onstation)) //check if they're not the same to minimize the amount of edited values.
 		onstation = circuit.onstation //if it was constructed outside mapload, sync the vendor up with the circuit's var so you can't bypass price requirements by moving / reconstructing it off station.
 
+/obj/machinery/vending/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/multitool_emaggable)
+
 /obj/machinery/vending/Destroy()
 	QDEL_NULL(wires)
 	return ..()

@@ -154,6 +154,10 @@
 	. = ..()
 	src.updateUsrDialog()
 
+/obj/machinery/computer/rdservercontrol/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/multitool_emaggable)
+
 /obj/machinery/computer/rdservercontrol/emag_act(mob/user)
 	. = ..()
 	if(obj_flags & EMAGGED)
