@@ -10,7 +10,6 @@
 	multiple_sprites = 2
 
 /obj/item/ammo_box/magazine/m10mm/makeshift/update_icon()
-	()
 	..()
 	icon_state = "[initial(icon_state)]-[ammo_count() ? "3" : "0"]"
 
