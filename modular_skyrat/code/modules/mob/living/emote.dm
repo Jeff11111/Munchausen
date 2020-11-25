@@ -20,7 +20,7 @@
 
 /datum/emote/living/run_emote(mob/user, params)
 	. = ..()
-	if(. && sound && (user.nextsoundemote < world.time))
+	if(can_run_emote(user, TRUE) && sound && (user.nextsoundemote < world.time))
 		user.nextsoundemote = world.time + cooldown
 		playsound(user.loc, sound, volume, vary)
 
