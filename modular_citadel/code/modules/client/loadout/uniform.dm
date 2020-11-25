@@ -261,7 +261,7 @@
 	cost = 2
 	
 /datum/gear/polyskirt
-	name = "Polychromic Jumpskirt"
+	name = "Polychromic Skirt"
 	category = SLOT_W_UNIFORM
 	path = /obj/item/clothing/under/dress/skirt/polychromic
 	cost = 2

@@ -7,8 +7,6 @@
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/under/color/blue(src)
 	for(var/i in 1 to 3)
-		new /obj/item/clothing/under/color/jumpskirt/blue(src)
-	for(var/i in 1 to 3)
 		new /obj/item/clothing/shoes/sneakers/brown(src)
 	return
 /obj/structure/closet/wardrobe/pink
@@ -17,8 +15,6 @@
 /obj/structure/closet/wardrobe/pink/PopulateContents()
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/under/color/pink(src)
-	for(var/i in 1 to 3)
-		new /obj/item/clothing/under/color/jumpskirt/pink(src)
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/shoes/sneakers/brown(src)
 	return
@@ -32,8 +28,6 @@
 	for(var/i in 1 to 3)
 		new /obj/item/storage/backpack/courier/black(src)
 // SKYRAT EDIT CLOSE
-	for(var/i in 1 to 3)
-		new /obj/item/clothing/under/color/jumpskirt/black(src)
 	if(prob(25))
 		new /obj/item/clothing/suit/jacket/leather(src)
 	if(prob(20))
@@ -55,8 +49,6 @@
 /obj/structure/closet/wardrobe/green/PopulateContents()
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/under/color/green(src)
-	for(var/i in 1 to 3)
-		new /obj/item/clothing/under/color/jumpskirt/green(src)
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/shoes/sneakers/black(src)
 	new /obj/item/clothing/mask/bandana/green(src)
@@ -81,8 +73,6 @@
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/under/color/yellow(src)
 	for(var/i in 1 to 3)
-		new /obj/item/clothing/under/color/jumpskirt/yellow(src)
-	for(var/i in 1 to 3)
 		new /obj/item/clothing/shoes/sneakers/orange(src)
 	new /obj/item/clothing/mask/bandana/gold(src)
 	new /obj/item/clothing/mask/bandana/gold(src)
@@ -93,8 +83,6 @@
 /obj/structure/closet/wardrobe/white/PopulateContents()
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/under/color/white(src)
-	for(var/i in 1 to 3)
-		new /obj/item/clothing/under/color/jumpskirt/white(src)
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/shoes/sneakers/white(src)
 	for(var/i in 1 to 3)
@@ -121,8 +109,6 @@
 	for(var/i in 1 to 3)
 		new /obj/item/storage/backpack/courier(src)
 // SKYRAT EDIT CLOSE
-	for(var/i in 1 to 3)
-		new /obj/item/clothing/under/color/jumpskirt/grey(src)
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/shoes/sneakers/black(src)
 	for(var/i in 1 to 3)
