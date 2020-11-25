@@ -228,6 +228,7 @@
 	if(damage >= BRAIN_DAMAGE_DEATH) //rip
 		if(owner.stat != DEAD)
 			to_chat(owner, "<span class='userdanger'>The last spark of life in your brain fizzles out...</span>")
+			owner.stop_sound_channel(CHANNEL_EAR_RING)
 			owner.death()
 		brain_death = TRUE
 	else
