@@ -102,7 +102,7 @@
 	name = "Disembowelment"
 	desc = "Patient's limb has been violently avulsioned, to the point of large chunks of flesh and organs getting lost."
 	treat_text = "Immediate surgical closure of the wound, as well as reimplantation of lost organs."
-	examine_desc = "has a wide and gaping wound, enough to see through the flesh"
+	examine_desc = "has a wide and gaping wound"
 	viable_zones = ALL_BODYPARTS
 	severity = WOUND_SEVERITY_CRITICAL
 	wound_type = WOUND_LIST_DISEMBOWEL
@@ -166,7 +166,7 @@
 	name = "Disemboweled"
 	desc = "Patient's limb has been violently shredded, to the point of large chunks of metal and components getting lost."
 	treat_text = "Immediate welding of the wound, as well as reattachment of lost components."
-	examine_desc = "has a wide and gaping tear, enough to see through the exoskeleton"
+	examine_desc = "has a wide and gaping tear"
 	viable_zones = ALL_BODYPARTS
 	severity = WOUND_SEVERITY_CRITICAL
 	wound_type = WOUND_LIST_DISEMBOWEL
