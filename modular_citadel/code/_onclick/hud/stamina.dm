@@ -16,7 +16,7 @@
 
 /obj/screen/staminas/Click(location,control,params)
 	var/list/paramslist = params2list(params)
-	if(params["shift"])
+	if(paramslist["shift"])
 		overfatigue = !overfatigue
 		to_chat(usr, "<span class='notice'>Your overfatigue is now [overfatigue ? "visible" : "hidden"].</span>")
 		update_icon()
