@@ -769,6 +769,7 @@
 	name = "departmental card (FUCK)"
 	desc = "Provides access to the departmental budget."
 	icon_state = "budgetcard"
+	can_withdraw = TRUE
 	var/department_ID = ACCOUNT_CIV
 	var/department_name = ACCOUNT_CIV_NAME
 
