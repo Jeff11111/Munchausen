@@ -123,6 +123,16 @@
 	minimum_flow = 4
 	clot_rate = 0
 	descriptive = "The limb is disemboweled!"
+	var/datum/component/storage/concrete/organ/our_component
+
+/datum/wound/slash/critical/incision/disembowel/get_examine_description(mob/user)
+	. = ..()
+	if(limb.body_zone == BODY_ZONE_HEAD)
+		return "<span class='deadsay'>[..()]</span>"
+
+/datum/wound/slash/critical/incision/disembowel/Destroy()
+	. = ..()
+	QDEL_NULL(our_component)
 
 /datum/wound/slash/critical/incision/disembowel/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
 	. = ..()
@@ -161,6 +171,14 @@
 		if(BODY_ZONE_PRECISE_R_FOOT)
 			initial_flow *= (1/2)
 			minimum_flow *= (1/3)
+		our_component = target.AddComponent(/datum/component/storage/concrete/organ)
+		our_component.attack_hand_open = TRUE
+		our_component.attack_hand_interact = TRUE
+		our_component.bodypart_affected = target.get_bodypart(user.zone_selected)
+		our_component.drop_all_on_deconstruct = FALSE
+		our_component.silent = TRUE
+		our_component.update_insides()
+		mob_prepared = TRUE
 
 /datum/wound/mechanical/slash/critical/incision/disembowel
 	name = "Disemboweled"
@@ -184,11 +202,16 @@
 	pain_amount = 40 //Just absolutely unbearable. Will send you into shock most of the time.
 	occur_text = null
 	descriptive = "The limb is disemboweled!"
+	var/datum/component/storage/concrete/organ/our_component
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/get_examine_description(mob/user)
 	. = ..()
 	if(limb.body_zone == BODY_ZONE_HEAD)
 		return "<span class='deadsay'>[..()]</span>"
+
+/datum/wound/mechanical/slash/critical/incision/disembowel/Destroy()
+	. = ..()
+	QDEL_NULL(our_component)
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
 	. = ..()
@@ -227,3 +250,11 @@
 		if(BODY_ZONE_PRECISE_R_FOOT)
 			initial_flow *= (1/2)
 			minimum_flow *= (1/3)
+		our_component = target.AddComponent(/datum/component/storage/concrete/organ)
+		our_component.attack_hand_open = TRUE
+		our_component.attack_hand_interact = TRUE
+		our_component.bodypart_affected = target.get_bodypart(user.zone_selected)
+		our_component.drop_all_on_deconstruct = FALSE
+		our_component.silent = TRUE
+		our_component.update_insides()
+		mob_prepared = TRUE
