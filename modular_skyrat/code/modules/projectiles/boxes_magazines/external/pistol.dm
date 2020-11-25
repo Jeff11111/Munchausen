@@ -9,7 +9,8 @@
 	max_ammo = 3
 	multiple_sprites = 2
 
-/obj/item/ammo_box/magazine/m10mm/makeshift/update_icon_state()
+/obj/item/ammo_box/magazine/m10mm/makeshift/update_icon()
+	()
 	..()
 	icon_state = "[initial(icon_state)]-[ammo_count() ? "3" : "0"]"
 
