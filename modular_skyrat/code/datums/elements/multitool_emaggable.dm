@@ -11,7 +11,7 @@
 	UnregisterSignal(source, COMSIG_CLICK_MIDDLE)
 
 /datum/element/multitool_emaggable/proc/try_hacking(atom/source, mob/user)
-	if(!isliving(user) !user.canUseTopic(source))
+	if(!isliving(user) || !user.canUseTopic(source))
 		return FALSE
 	var/mob/living/livingUser = user
 	var/obj/item/userActiveItem = livingUser.get_active_held_item()
