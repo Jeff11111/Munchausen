@@ -171,10 +171,10 @@
 		if(BODY_ZONE_PRECISE_R_FOOT)
 			initial_flow *= (1/2)
 			minimum_flow *= (1/3)
-		our_component = target.AddComponent(/datum/component/storage/concrete/organ)
+		our_component = L.owner.AddComponent(/datum/component/storage/concrete/organ)
 		our_component.attack_hand_open = TRUE
 		our_component.attack_hand_interact = TRUE
-		our_component.bodypart_affected = target.get_bodypart(user.zone_selected)
+		our_component.bodypart_affected = L
 		our_component.drop_all_on_deconstruct = FALSE
 		our_component.silent = TRUE
 		our_component.update_insides()
@@ -250,10 +250,10 @@
 		if(BODY_ZONE_PRECISE_R_FOOT)
 			initial_flow *= (1/2)
 			minimum_flow *= (1/3)
-		our_component = target.AddComponent(/datum/component/storage/concrete/organ)
+		our_component = L.owner.AddComponent(/datum/component/storage/concrete/organ)
 		our_component.attack_hand_open = TRUE
 		our_component.attack_hand_interact = TRUE
-		our_component.bodypart_affected = target.get_bodypart(user.zone_selected)
+		our_component.bodypart_affected = L
 		our_component.drop_all_on_deconstruct = FALSE
 		our_component.silent = TRUE
 		our_component.update_insides()
