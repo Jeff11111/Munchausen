@@ -29,7 +29,7 @@
 	belt = /obj/item/pda/security
 	ears = /obj/item/radio/headset/headset_medsec
 	uniform = /obj/item/clothing/under/rank/brig_phys
-	shoes = /obj/item/clothing/shoes/sneakers/white
+	shoes = /obj/item/clothing/shoes/jackboots
 	glasses = /obj/item/clothing/glasses/hud/health/sunglasses
 	suit = /obj/item/clothing/suit/hazardvest/brig_phys
 	suit_store = /obj/item/flashlight/seclite
