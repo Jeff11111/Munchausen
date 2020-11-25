@@ -371,7 +371,7 @@
 	if(ismob(A))
 		//climbing on electrified low wall will fry your ass
 		shock(A, 100)
-	START_PROCESSING(SSobj, source)
+	START_PROCESSING(SSobj, src)
 
 // Frying mode activated
 /obj/structure/table/low_wall/process()
