@@ -68,6 +68,50 @@
 		ui_show(user)
 		return COMPONENT_NO_ATTACK_HAND
 
+/datum/component/storage/concrete/organ/handle_item_insertion(obj/item/I, prevent_warning = FALSE, mob/M, datum/component/storage/remote)		//Remote is null or the slave datum
+	var/datum/component/storage/concrete/master = master()
+	var/atom/parent = src.parent
+	var/moved = FALSE
+	if(!istype(I))
+		return FALSE
+	if(M)
+		if(!worn_check(parent, M))
+			return FALSE
+		if(!M.temporarilyRemoveItemFromInventory(I))
+			return FALSE
+		else
+			moved = TRUE			//At this point if the proc fails we need to manually move the object back to the turf/mob/whatever.
+	if(I.pulledby)
+		I.pulledby.stop_pulling()
+	if(silent)
+		prevent_warning = TRUE
+	if(!_insert_physical_item(I))
+		if(moved)
+			if(M)
+				if(!M.put_in_active_hand(I))
+					I.forceMove(parent.drop_location())
+			else
+				I.forceMove(parent.drop_location())
+		return FALSE
+	I.on_enter_storage(master)
+	refresh_mob_views()
+	I.mouse_opacity = MOUSE_OPACITY_OPAQUE //So you can click on the area around the item to equip it, instead of having to pixel hunt
+	if(M)
+		if(M.client && M.active_storage != src)
+			M.client.screen -= I
+		if(M.observers && M.observers.len)
+			for(var/i in M.observers)
+				var/mob/dead/observe = i
+				if(observe.client && observe.active_storage != src)
+					observe.client.screen -= I
+		if(!remote)
+			parent.add_fingerprint(M)
+			if(!prevent_warning)
+				mob_item_insertion_feedback(usr, M, I)
+	playsound(O, pick(rustle_sound), 50, 1, -5)
+	update_icon()
+	return TRUE
+
 //Return the proper organ list
 /datum/component/storage/concrete/organ/contents()
 	if(!bodypart_affected)
@@ -242,6 +286,7 @@
 	if(niggertwo.incapacitated() || !A.Adjacent(user) || niggertwo.lying)
 		return
 
+	playsound(A, pick(rustle_sound), 50, 1, -5)
 	if(niggertwo.get_active_held_item() == null)
 		nigger.attack_hand(niggertwo)
 	else

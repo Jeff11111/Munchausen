@@ -80,7 +80,7 @@
 		else
 			procedure = new /datum/surgery/organ_manipulation/mechanic(owner, body_zone, src)
 	
-	procedure.status = (length(procedure.steps) - 1)
+	procedure.status = procedure.steps.len - 1)
 	
 	C.death_scream()
 	return TRUE
