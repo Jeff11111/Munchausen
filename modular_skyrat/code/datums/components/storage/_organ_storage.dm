@@ -11,6 +11,7 @@
 		return COMPONENT_INCOMPATIBLE
 	can_hold = typecacheof(/obj/item/organ)
 	UnregisterSignal(parent, list(COMSIG_MOUSEDROP_ONTO, COMSIG_MOUSEDROPPED_ONTO, COMSIG_CLICK_ALT))
+	addtimer(CALLBACK(src, .proc/update_insides), 1 SECONDS)
 
 //Gives all organs parent as stored_in
 /datum/component/storage/concrete/organ/proc/update_insides()
