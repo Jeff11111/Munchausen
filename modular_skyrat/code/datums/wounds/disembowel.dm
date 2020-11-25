@@ -82,14 +82,7 @@
 	second_wind()
 	log_wound(victim, src)
 	qdel(src)
-	var/kaplosh_sound = pick(
-		'modular_skyrat/sound/gore/chop1.ogg',
-		'modular_skyrat/sound/gore/chop2.ogg',
-		'modular_skyrat/sound/gore/chop3.ogg',
-		'modular_skyrat/sound/gore/chop4.ogg',
-		'modular_skyrat/sound/gore/chop5.ogg',
-		'modular_skyrat/sound/gore/chop6.ogg',
-	)
+	var/kaplosh_sound = 'modular_skyrat/sound/gore/dissection.ogg'
 	if(length(L.dismember_sounds))
 		kaplosh_sound = pick(L.dismember_sounds)
 	if(L.is_robotic_limb())

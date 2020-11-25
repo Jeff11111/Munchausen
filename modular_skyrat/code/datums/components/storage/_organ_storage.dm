@@ -232,7 +232,7 @@
 		return
 	if(!can_be_inserted(I, FALSE, M))
 		var/list/not_a_location = contents()
-		if(length(not_a_location)) >= max_items)
+		if(length(not_a_location) >= max_items)
 			return TRUE
 		return FALSE
 	handle_item_insertion(I, FALSE, M)

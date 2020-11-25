@@ -37,7 +37,7 @@
 	specific_locations = list("left eyebrow", "right eyebrow", "cheekbone", "neck", "throat", "jawline", "entire face", "forehead")
 	scars_covered_by_clothes = FALSE
 	max_cavity_size = WEIGHT_CLASS_SMALL
-	parent_bodyzone = BODY_ZONE_CHEST
+	parent_bodyzone = BODY_ZONE_PRECISE_NECK
 	children_zones = list()
 	var/obj/item/stack/sticky_tape/tapered = null
 	dismember_mod = 0.7

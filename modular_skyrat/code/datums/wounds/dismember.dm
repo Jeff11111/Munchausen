@@ -144,7 +144,7 @@
 
 /datum/wound/slash/loss/get_examine_description(mob/user)
 	. = ..()
-	if(fake_body_zone == BODY_ZONE_HEAD)
+	if(fake_body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))
 		return "<span class='deadsay'>[..()]</span>"
 
 /datum/wound/slash/loss/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
@@ -211,7 +211,7 @@
 
 /datum/wound/mechanical/slash/loss/get_examine_description(mob/user)
 	. = ..()
-	if(fake_body_zone == BODY_ZONE_HEAD)
+	if(fake_body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))
 		return "<span class='deadsay'>[..()]</span>"
 
 /datum/wound/mechanical/slash/loss/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)

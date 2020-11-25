@@ -27,7 +27,7 @@
 	if(body_zone != BODY_ZONE_HEAD)
 		C.death_scream()
 	if(!silent)
-		playsound(get_turf(C), 'modular_skyrat/sound/effects/dismember.ogg', 80, TRUE)
+		playsound(get_turf(C), 'modular_skyrat/sound/gore/dismember.ogg', 80, TRUE)
 	SEND_SIGNAL(C, COMSIG_ADD_MOOD_EVENT, "dismembered", /datum/mood_event/dismembered)
 	drop_limb(dismembered = TRUE, destroyed = destroy, wounding_type = wounding_type)
 	C.update_equipment_speed_mods() // Update in case speed affecting item unequipped by dismemberment
