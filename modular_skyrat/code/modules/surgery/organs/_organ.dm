@@ -482,7 +482,7 @@
 		to_chat(user, "<span class='notice'>I sever \the [src] away safely.</span>")
 		organ_flags |= ORGAN_CUT_AWAY
 		return TRUE
-	else if(owner && (istype(I, /obj/item/stack/medical/suture)))
+	else if(owner && (istype(I, /obj/item/stack/medical/suture)) && !is_robotic())
 		var/obj/item/stack/medical/bingus = I
 		if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
 			to_chat(user, "<span class='notice'>You start stitching \the [src] on \the [owner]...</span>")
