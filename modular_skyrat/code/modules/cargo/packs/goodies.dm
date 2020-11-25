@@ -191,26 +191,26 @@
 /datum/supply_pack/goody/m1911
 	name = ".45 Pistol"
 	desc = "Contains one M1911 pistol. Never know when you need it."
-	cost = 8000
+	cost = 5000
 	contains = list(/obj/item/gun/ballistic/automatic/pistol/m1911)
 
 /datum/supply_pack/goody/m1911_ammo
 	name = ".45 Pistol Magazines"
 	desc = "Contains 2 .45 magazines. Never know when you need it."
-	cost = 2500
+	cost = 2000
 	contains = list(/obj/item/ammo_box/magazine/m45,
 					/obj/item/ammo_box/magazine/m45)
 
 /datum/supply_pack/goody/m10mm_pistol
 	name = "10mm Pistol"
 	desc = "Contains one generic 10mm pistol. Never know when you need it."
-	cost = 8000
+	cost = 5000
 	contains = list(/obj/item/gun/ballistic/automatic/pistol/modular)
 
 /datum/supply_pack/goody/m10mm_ammo
 	name = "10mm Pistol Magazines"
 	desc = "Contains 2 10mm magazines. Never know when you need it."
-	cost = 2500
+	cost = 2000
 	contains = list(/obj/item/ammo_box/magazine/m10mm,
 					/obj/item/ammo_box/magazine/m10mm)
 
