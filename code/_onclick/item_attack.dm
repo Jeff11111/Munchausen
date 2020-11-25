@@ -456,8 +456,6 @@
 		var/zone_mod = 1
 		if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
 			zone_mod *= 3
-		else if(user.zone_selected == BODY_ZONE_PRECISE_THROAT)
-			zone_mod *= 1.5
 		if(teeth_part && teeth_part.max_teeth && prob(force * zone_mod * 1.5))
 			if(teeth_part.knock_out_teeth(rand(1, 2) * max(round(force/10), 1), get_dir(user, src)))
 				var/tooth_sound = pick('modular_skyrat/sound/gore/trauma1.ogg',

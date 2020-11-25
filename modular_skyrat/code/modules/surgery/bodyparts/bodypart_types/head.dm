@@ -43,7 +43,7 @@
 	dismember_mod = 0.7
 	disembowel_mod = 0.7
 	encased = "skull"
-	amputation_point = "neck" 
+	amputation_point = "epiglotis"
 	max_teeth = 32
 	dismember_sounds = list(
 		'modular_skyrat/sound/gore/head_explodie1.ogg',
@@ -297,5 +297,5 @@
 
 /obj/item/bodypart/head/can_dismember(obj/item/I)
 	. = ..()
-	if(owner && HAS_TRAIT(owner, TRAIT_NODECAP))
+	if(owner && HAS_TRAIT(owner, TRAIT_NODECAP) || (owner && owner.get_bodypart(BODY_ZONE_PRECISE_NECK)))
 		return FALSE

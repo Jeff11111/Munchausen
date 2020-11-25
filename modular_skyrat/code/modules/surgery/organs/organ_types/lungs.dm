@@ -396,8 +396,6 @@
 
 		//-- TRACES --//
 
-		if(breath)	// If there's some other shit in the air lets deal with it here.
-
 		// N2O
 
 		var/SA_pp = breath.get_breath_partial_pressure(breath_gases[/datum/gas/nitrous_oxide])

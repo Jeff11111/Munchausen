@@ -127,7 +127,7 @@
 
 /datum/wound/slash/critical/incision/disembowel/get_examine_description(mob/user)
 	. = ..()
-	if(limb.body_zone == BODY_ZONE_HEAD)
+	if(limb.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))
 		return "<span class='deadsay'>[..()]</span>"
 
 /datum/wound/slash/critical/incision/disembowel/Destroy()
@@ -140,6 +140,9 @@
 	switch(L.body_zone)
 		if(BODY_ZONE_HEAD)
 			initial_flow *= 1
+			minimum_flow *= (1/4)
+		if(BODY_ZONE_PRECISE_NECK)
+			initial_flow *= (6/4)
 			minimum_flow *= (1/4)
 		if(BODY_ZONE_CHEST)
 			initial_flow *= (5/4)
@@ -205,7 +208,7 @@
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/get_examine_description(mob/user)
 	. = ..()
-	if(limb.body_zone == BODY_ZONE_HEAD)
+	if(limb.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))
 		return "<span class='deadsay'>[..()]</span>"
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/Destroy()
@@ -218,6 +221,9 @@
 	switch(L.body_zone)
 		if(BODY_ZONE_HEAD)
 			initial_flow *= 1
+			minimum_flow *= (1/4)
+		if(BODY_ZONE_PRECISE_NECK)
+			initial_flow *= (6/4)
 			minimum_flow *= (1/4)
 		if(BODY_ZONE_CHEST)
 			initial_flow *= (5/4)

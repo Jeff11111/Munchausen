@@ -19,8 +19,7 @@
 	spacewalk = TRUE
 	mob_size = MOB_SIZE_LARGE
 	held_items = list(null, null)
-	bodyparts = list(/obj/item/bodypart/chest/devil, /obj/item/bodypart/head/devil, /obj/item/bodypart/l_arm/devil,
-					 /obj/item/bodypart/r_arm/devil, /obj/item/bodypart/r_leg/devil, /obj/item/bodypart/l_leg/devil)
+	bodyparts = DEVIL_BODYPARTS_PATH
 	hud_type = /datum/hud/devil
 	var/ascended = FALSE
 	var/mob/living/oldform

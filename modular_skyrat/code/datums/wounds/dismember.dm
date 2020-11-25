@@ -153,6 +153,9 @@
 		if(BODY_ZONE_HEAD)
 			initial_flow *= 1
 			minimum_flow *= (1/4)
+		if(BODY_ZONE_PRECISE_NECK)
+			initial_flow *= (6/4)
+			minimum_flow *= (1/4)
 		if(BODY_ZONE_CHEST)
 			initial_flow *= (5/4)
 			minimum_flow *= (1/4)
@@ -216,6 +219,9 @@
 	switch(L.body_zone)
 		if(BODY_ZONE_HEAD)
 			initial_flow *= 1
+			minimum_flow *= (1/4)
+		if(BODY_ZONE_PRECISE_NECK)
+			initial_flow *= (6/4)
 			minimum_flow *= (1/4)
 		if(BODY_ZONE_CHEST)
 			initial_flow *= (5/4)

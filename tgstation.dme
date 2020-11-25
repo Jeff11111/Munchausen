@@ -4287,6 +4287,7 @@
 #include "modular_skyrat\code\modules\surgery\bodyparts\bodypart_types\l_foot.dm"
 #include "modular_skyrat\code\modules\surgery\bodyparts\bodypart_types\l_hand.dm"
 #include "modular_skyrat\code\modules\surgery\bodyparts\bodypart_types\l_leg.dm"
+#include "modular_skyrat\code\modules\surgery\bodyparts\bodypart_types\neck.dm"
 #include "modular_skyrat\code\modules\surgery\bodyparts\bodypart_types\r_arm.dm"
 #include "modular_skyrat\code\modules\surgery\bodyparts\bodypart_types\r_foot.dm"
 #include "modular_skyrat\code\modules\surgery\bodyparts\bodypart_types\r_hand.dm"

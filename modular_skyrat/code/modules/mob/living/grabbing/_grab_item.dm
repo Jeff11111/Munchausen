@@ -64,7 +64,7 @@
 /obj/item/grab/update_icon()
 	..()
 	switch(grasped_zone)
-		if(BODY_ZONE_PRECISE_THROAT)
+		if(BODY_ZONE_PRECISE_NECK)
 			icon_state = GM_STRANGLE
 		if(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN)
 			icon_state = GM_TAKEDOWN
