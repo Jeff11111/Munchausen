@@ -257,12 +257,13 @@
 		if(J.title == "Stowaway")
 			C.update_label(null, "staff ID")
 		//End of skyrat change
-		for(var/A in SSeconomy.bank_accounts)
-			var/datum/bank_account/B = A
-			if(B.account_id == H.account_id)
-				C.registered_account = B
-				B.bank_cards += C
-				break
+		if(J.title != "Stowaway")
+			for(var/A in SSeconomy.bank_accounts)
+				var/datum/bank_account/B = A
+				if(B.account_id == H.account_id)
+					C.registered_account = B
+					B.bank_cards += C
+					break
 		H.sec_hud_set_ID()
 
 	var/obj/item/pda/PDA = H.get_item_by_slot(pda_slot)
