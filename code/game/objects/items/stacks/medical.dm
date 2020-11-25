@@ -174,8 +174,8 @@
 	icon_state = "gauze"
 	self_delay = 50
 	other_delay = 20
-	amount = 15
-	max_amount = 15
+	amount = 16
+	max_amount = 16
 	custom_price = PRICE_EXPENSIVE
 	absorption_rate = 0.25
 	absorption_capacity = 5
@@ -303,8 +303,8 @@
 	icon_state = "suture"
 	self_delay = 30
 	other_delay = 10
-	amount = 15
-	max_amount = 15
+	amount = 16
+	max_amount = 16
 	repeating = TRUE
 	heal_brute = 10
 	stop_bleeding = 0.6
@@ -396,9 +396,9 @@
 	icon_state = "regen_mesh"
 	self_delay = 30
 	other_delay = 10
-	amount = 15
+	amount = 16
 	heal_burn = 10
-	max_amount = 15
+	max_amount = 16
 	repeating = TRUE
 	sanitization = 0.75
 	flesh_regeneration = 3
@@ -505,8 +505,8 @@
 	self_delay = 20
 	other_delay = 10
 	novariants = TRUE
-	amount = 15
-	max_amount = 15
+	amount = 16
+	max_amount = 16
 	var/heal = 3
 	grind_results = list(/datum/reagent/consumable/aloejuice = 1)
 
