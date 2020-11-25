@@ -1,3 +1,12 @@
+//wt550
+/obj/item/ammo_box/magazine/wt550m9
+	icon = 'modular_skyrat/icons/obj/bobstation/ammo/smg.dmi'
+	icon_state = "550"
+
+/obj/item/ammo_box/magazine/wt550m9/update_icon()
+	..()
+	icon_state = "[initial(icon_state)]-[ammo_count() ? "30" : "0"]"
+
 //9mm smg
 /obj/item/ammo_box/magazine/uzim9mm
 	icon = 'modular_skyrat/icons/obj/bobstation/ammo/smg.dmi'
