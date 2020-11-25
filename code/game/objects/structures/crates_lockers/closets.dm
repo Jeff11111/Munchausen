@@ -626,3 +626,44 @@
 
 /obj/structure/closet/canReachInto(atom/user, atom/target, list/next, view_only, obj/item/tool)
 	return ..() && opened
+
+/obj/structure/closet/AltClick(mob/user)
+	if(!isliving(user))
+		return ..()
+	var/mob/living/livingUser = user
+	var/obj/userActiveItem = livingUser.get_active_held_item()
+	if(!userActiveItem)
+		return ..()
+	if(!istype(userActiveItem, /obj/item/multitool))
+		return ..()
+	if(!in_range(src, livingUser))
+		return ..()
+	if(!livingUser.mind)
+		return
+	var/datum/skills/electronics/electronics = GET_SKILL(livingUser, electronics)
+	var/electronic_level = electronics.level
+	var/fail_chance = ((20 - electronic_level) * 10) + 1
+	if(electronic_level < JOB_SKILLPOINTS_EXPERT)
+		to_chat(livingUser, "<span class='warning'>You are incapable of completing this task... become more skilled in electronics!</span>")
+		return
+	audible_message("<span class='warning'>[src] starts to beep sporadically!</span>")
+	to_chat(livingUser, "<span class='warning'>You start to hack [src].</span>")
+	if(!do_after(livingUser, 10 SECONDS, target = src))
+		to_chat(livingUser, "<span class='warning'>You failed to hack [src] open!</span>")
+		return
+	if(prob(fail_chance))
+		audible_message("<span class='warning'>[src] pings successfully at defending the hack attempt!</span>")
+		to_chat(livingUser, "<span class='warning'>You fail to hack [src].</span>")
+		return
+	audible_message("<span class='warning'>[src] starts to beep even more frantically!</span>")
+	to_chat(livingUser, "<span class='warning'>You continue to hack [src].</span>")
+	if(!do_after(livingUser, 10 SECONDS, target = src))
+		to_chat(livingUser, "<span class='warning'>You failed to hack [src] open!</span>")
+		return
+	if(prob(fail_chance))
+		audible_message("<span class='warning'>[src] pings successfully at defending the hack attempt!</span>")
+		to_chat(livingUser, "<span class='warning'>You fail to hack [src].</span>")
+		return
+	audible_message("<span class='warning'>[src] beeps one last time...</span>")
+	to_chat(livingUser, "<span class='warning'>Success.</span>")
+	emag_act(user)
