@@ -73,3 +73,6 @@
 #define MOVESPEED_ID_ACTIVE_BLOCK						"ACTIVE_BLOCK"
 
 #define MOVESPEED_ID_MOB_WALK_RUN				"mob_walk_run"
+
+#define MOVESPEED_ID_MOB_HUNGER				"mob_hunger"
+#define MOVESPEED_ID_MOB_THIRST				"mob_thirst"
