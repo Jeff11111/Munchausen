@@ -218,7 +218,6 @@
 	LAZYREMOVE(antag_datums, instanced_datum)
 	if(. && !LAZYLEN(antag_datums))
 		ambitions = null
-		current.verbs -= /mob/proc/edit_objectives_and_ambitions
 //SKYRAT CHANGES END
 
 /datum/mind/proc/remove_all_antag_datums() //For the Lazy amongst us.
