@@ -71,7 +71,7 @@
 		our_component = target.AddComponent(/datum/component/storage/concrete/organ)
 		our_component.attack_hand_open = TRUE
 		our_component.attack_hand_interact = TRUE
-		our_component.bodypart_affected = target.get_bodypart(user.zone_selected)
+		our_component.bodypart_affected = target.get_bodypart(check_zone(user.zone_selected))
 		our_component.drop_all_on_deconstruct = FALSE
 		our_component.silent = TRUE
 		our_component.update_insides()
