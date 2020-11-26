@@ -18,4 +18,4 @@
 	. = ..()
 	var/obj/item/card/id/id = H.wear_id?.GetID()
 	if(id)
-		H.update_label(null, "staff ID")
+		id.update_label(null, "staff ID")
