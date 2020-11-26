@@ -76,6 +76,10 @@
 				. += "<span class='userdanger'>I must inspect it CLOSELY.</span>"
 			else
 				. += "<b>There's something CUT on this HEART. \"[etching]. Add it to the other keys to exit INRL.\"</b>"
+				var/datum/antagonist/dreamer/droomer = user.mind.has_antag_datum(/datum/antagonist/dreamer)
+				if(droomer && !(etching in droomer.hearts_seen))
+					user.playsound_local(get_turf(user), 'modular_skyrat/sound/effects/newheart.ogg', 75, 0)
+					droomer.hearts_seen |= etching
 	else if(is_dreamer(user) && !findtext(etching, "<b>INRL</b> - "))
 		. += "<b>There is NOTHING on his heart. Should be? Following the TRUTH - not here. I need to keep LOOKING. Keep FOLLOWING my heart.</b>"
 	if(!owner)

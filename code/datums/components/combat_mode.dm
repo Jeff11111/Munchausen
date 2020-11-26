@@ -210,7 +210,9 @@
 	if(!user)
 		return
 	if(combat_on)
-		icon_state = "combat"
+		icon_state = "combat_on"
+		if(is_dreamer(hud?.mymob))
+			icon_state = "combat_rage"
 	else if(HAS_TRAIT(user, TRAIT_COMBAT_MODE_LOCKED))
 		icon_state = "combat_locked"
 	else

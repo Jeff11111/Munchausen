@@ -8,6 +8,7 @@
 	var/list/recipe_progression = list(/datum/crafting_recipe/wonder, /datum/crafting_recipe/wonder/second, /datum/crafting_recipe/wonder/third, /datum/crafting_recipe/wonder/fourth)
 	var/list/heart_keys = list()
 	var/list/associated_keys = list()
+	var/list/hearts_seen = list()
 	var/current_wonder = 0
 	var/sum_keys = 0
 	silent = TRUE

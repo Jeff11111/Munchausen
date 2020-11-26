@@ -97,14 +97,14 @@
 						droomer.agony(H)
 				break
 			break
-	START_PROCESSING(SSobj, src)
+	START_PROCESSING(SSfastprocess, src)
 
 /obj/structure/wonder/process()
 	. = ..()
 	if(gazed_at)
-		STOP_PROCESSING(SSobj, src)
+		STOP_PROCESSING(SSfastprocess, src)
 		return
-	var/list/viewers = range(5, src)
+	var/list/viewers = view(7, src)
 	for(var/mob/living/carbon/human/H in viewers)
 		if(is_dreamer(H))
 			if(H.stat == DEAD)
