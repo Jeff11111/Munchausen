@@ -74,7 +74,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 			dreamer_radio |= last_words
 			var/speak = pick(dreamer_radio)
 			speak = replacetext_char(speak, "SRC", "[src.real_name]")
-			speak = replacetext_char(speak, "CAPITALIZEME", "[capitalize(src.real_name)]")
+			speak = replacetext_char(speak, "CAPITALIZEME", "[uppertext(src.real_name)]")
 			var/message = compose_message(person, language_holder?.selected_language, speak,"[FREQ_COMMON]", list(person.speech_span), face_name = TRUE, source = (person.ears ? person.ears : person.ears_extra))
 			to_chat(src, message)
 	//VERY rare mom/mob hallucination
@@ -106,7 +106,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 		dreamer_ahelps |= last_words
 		var/message = pick(dreamer_ahelps)
 		message = replacetext_char(message, "SRC", "[src.real_name]")
-		message = replacetext_char(message, "CAPITALIZEME", "[capitalize(src.real_name)]")
+		message = replacetext_char(message, "CAPITALIZEME", "[uppertext(src.real_name)]")
 		to_chat(src, "<font color='red' size='4'><b>-- Administrator private message --</b></font>")
 		to_chat(src, "<span class='danger'>Admin PM from-<b><a href='https://youtu.be/wJWksPWDKOc'>[fakemin]</a></b>: <span class='linkify'>[message]</span></span>")
 		to_chat(src, "<span class='danger'><i>Click on the administrator's name to reply, or see all of your tickets in the admin column.</i></span>")
@@ -123,7 +123,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 		dreamer_ban |= last_words
 		var/message = pick(dreamer_ban)
 		message = replacetext_char(message, "SRC", "[src.real_name]")
-		message = replacetext_char(message, "CAPITALIZEME", "[capitalize(src.real_name)]")
+		message = replacetext_char(message, "CAPITALIZEME", "[uppertext(src.real_name)]")
 		to_chat(src, "<span class='boldannounce'><BIG>You have been banned by [fakemin].\nReason: [message]</BIG></span>")
 		to_chat(src, "<span class='danger'>This is a permanent ban. The round ID is [GLOB.round_id].</span>")
 		var/bran = CONFIG_GET(string/banappeals)
@@ -145,7 +145,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 			else
 				message = last_words
 			message = replacetext_char(message, "SRC", "[src.real_name]")
-			message = replacetext_char(message, "CAPITALIZEME", "[capitalize(src.real_name)]")
+			message = replacetext_char(message, "CAPITALIZEME", "[uppertext(src.real_name)]")
 			var/obj/speaker = pick(objects)
 			if(speaker && message)
 				var/speak_sound = pick(
