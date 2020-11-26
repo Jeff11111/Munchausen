@@ -496,8 +496,6 @@
 
 /obj/item/gun/update_overlays()
 	. = ..()
-	if(safety_overlay)
-		. += safety_overlay
 	if(suppressed_overlay)
 		. += suppressed_overlay
 	if(flashlight_overlay)

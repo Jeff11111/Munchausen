@@ -9,8 +9,9 @@
 
 /obj/item/gun/ballistic/automatic/update_overlays()
 	. = ..()
-	if(safety_overlay)
-		QDEL_NULL(safety_overlay)
+	QDEL_NULL(safety_overlay)
 	safety_overlay = mutable_appearance(icon, "[initial(icon_state)]-[safety ? "safe" : "unsafe"]")
+	if(safety_overlay)
+		. += safety_overlay
 	if(magazine)
 		. += mutable_appearance(icon, "[initial(icon_state)]-[generic_magazine_overlays ? "mag" : initial(magazine.icon_state)]")
