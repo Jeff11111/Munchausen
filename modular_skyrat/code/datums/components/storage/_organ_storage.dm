@@ -301,7 +301,10 @@
 		return
 
 	playsound(A, pick(rustle_sound), 50, 1, -5)
-	if(niggertwo.get_active_held_item() == null)
+	var/list/params_list = params2list(params)
+	if(params["shift"])
+		nigger.examine(user)
+	else if(niggertwo.get_active_held_item() == null)
 		nigger.attack_hand(niggertwo)
 	else
 		nigger.attackby(niggertwo.get_active_held_item(), niggertwo)
