@@ -200,7 +200,7 @@
 	antag_datum = /datum/antagonist/traitor
 	antag_flag = ROLE_TRAITOR
 	restricted_roles = list("Cyborg", "Positronic Brain")
-	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer Engineer", "Senior Engineer Medical Officer", "Research Director", "Quartermaster", "Blueshield") ///Skyrat changes, makes heads of staff no longer traitors
+	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer Engineer", "Senior Engineer Medical Officer", "Research Director", "Logistics Officer", "Blueshield") ///Skyrat changes, makes heads of staff no longer traitors
 	required_candidates = 1
 	weight = 7
 	cost = 10

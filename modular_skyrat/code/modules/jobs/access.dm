@@ -1,5 +1,5 @@
 /proc/get_all_jobs()
-	return list("Stowaway", "Captain", "Head of Personnel", "Bartender", "Cook", "Botanist", "Quartermaster", "Cargo Technician",
+	return list("Stowaway", "Captain", "Head of Personnel", "Bartender", "Cook", "Botanist", "Logistics Officer", "Cargo Technician",
 				"Shaft Miner", "Mining Foreman", "Mining Technician", "Clown", "Mime", "Janitor", "Curator", "Lawyer", "Chaplain", "Senior Engineer", "Station Engineer",
 				"Atmospheric Technician", "Chief Medical Officer", "Medical Doctor", "Chemist", "Geneticist", "Virologist", "Paramedic", "Psychologist",
 				"Research Director", "Scientist", "Roboticist", "Chief Enforcer", "Lieutenant", "Detective", "Enforcer","Prisoner", "Brig Physician", "Blueshield")

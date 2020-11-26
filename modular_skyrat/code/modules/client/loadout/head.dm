@@ -132,7 +132,7 @@
 
 /datum/gear/trekcapsec
 	name = "EntCorp Officer's Cap (Red)"
-	restricted_roles = list("Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Research Director", "Chief Medical Officer", "Quartermaster", "Blueshield", "Brig Physician", "Lieutenant", "Detective", "Enforcer")
+	restricted_roles = list("Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Research Director", "Chief Medical Officer", "Logistics Officer", "Blueshield", "Brig Physician", "Lieutenant", "Detective", "Enforcer")
 
 /datum/gear/trekcapeng
 	name = "EntCorp Officer's Cap (Yellow)"

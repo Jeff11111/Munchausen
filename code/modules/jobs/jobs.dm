@@ -5,7 +5,7 @@ GLOBAL_LIST_INIT(command_positions, list(
 	"Senior Engineer",
 	"Research Director",
 	"Chief Medical Officer",
-	"Quartermaster"))
+	"Logistics Officer"))
 
 GLOBAL_LIST_INIT(engineering_positions, list(
 	"Senior Engineer",
@@ -33,7 +33,7 @@ GLOBAL_LIST_INIT(science_positions, list(
 
 //Added Mining Foreman, Mining Engineer SKYRAT EDIT
 GLOBAL_LIST_INIT(supply_positions, list(
-	"Quartermaster",
+	"Logistics Officer",
 	"Cargo Technician",
 	"Shaft Miner",
 	"Mining Foreman",
@@ -123,8 +123,8 @@ GLOBAL_PROTECT(exp_specialmap)
 	job = hos_expand.Replace(job, "chief enforcer")
 	job = hop_expand.Replace(job, "head of personnel")
 	job = rd_expand.Replace(job, "research director")
-	job = ce_expand.Replace(job, "Senior Engineer")
-	job = qm_expand.Replace(job, "quartermaster")
+	job = ce_expand.Replace(job, "senior engineer")
+	job = qm_expand.Replace(job, "logistics pfficer")
 	job = sec_expand.Replace(job, "enforcer")
 	job = engi_expand.Replace(job, "station engineer")
 	job = atmos_expand.Replace(job, "atmospheric technician")

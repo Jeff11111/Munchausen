@@ -797,7 +797,7 @@
 	icon_state = "winterhood_cargo"
 
 /obj/item/clothing/suit/hooded/wintercoat/qm
-	name = "quartermaster's winter coat"
+	name = "logistics officer's winter coat"
 	desc = "A dark brown winter coat that has a golden crate pin for its zipper pully."
 	icon_state = "coatqm"
 	item_state = "coatqm"

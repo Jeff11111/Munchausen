@@ -213,7 +213,7 @@
 	circuit = null
 
 /obj/machinery/computer/security/qm
-	name = "Quartermaster's camera console"
+	name = "Logistics Officer's camera console"
 	desc = "A console with access to the mining, auxillary base and vault camera networks."
 	network = list("mine", "auxbase", "vault")
 	circuit = null

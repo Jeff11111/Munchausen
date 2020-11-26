@@ -94,14 +94,14 @@
 	category = SLOT_HEAD
 	path = /obj/item/clothing/head/caphat/formal/fedcover/eng
 	restricted_desc = "Engineering, Security, and Cargo"
-	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Lieutenant","Detective","Enforcer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Quartermaster")
+	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Lieutenant","Detective","Enforcer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Logistics Officer")
 
 /datum/gear/trekcapsec
 	name = "Federation Officer's Cap (Red)"
 	category = SLOT_HEAD
 	path = /obj/item/clothing/head/caphat/formal/fedcover/sec
 	restricted_desc = "Engineering, Security, and Cargo"
-	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Lieutenant","Detective","Enforcer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Quartermaster")
+	restricted_roles = list("Senior Engineer","Atmospheric Technician","Station Engineer","Lieutenant","Detective","Enforcer","Chief Enforcer","Cargo Technician", "Shaft Miner", "Logistics Officer")
 
 // orvilike "original" kepi
 /datum/gear/orvkepicom
@@ -110,7 +110,7 @@
 	category = SLOT_HEAD
 	path = /obj/item/clothing/head/kepi/orvi/command
 	restricted_desc = "Heads of Staff"
-	restricted_roles = list("Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Research Director", "Chief Medical Officer", "Quartermaster")
+	restricted_roles = list("Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Research Director", "Chief Medical Officer", "Logistics Officer")
 
 /datum/gear/orvkepiops
 	name = "Federation Kepi, ops/sec"
@@ -118,7 +118,7 @@
 	category = SLOT_HEAD
 	path = /obj/item/clothing/head/kepi/orvi/engsec
 	restricted_desc = "Engineering, Security and Cargo"
-	restricted_roles = list("Senior Engineer", "Atmospheric Technician", "Station Engineer", "Lieutenant", "Detective", "Enforcer", "Chief Enforcer", "Cargo Technician", "Shaft Miner", "Quartermaster")
+	restricted_roles = list("Senior Engineer", "Atmospheric Technician", "Station Engineer", "Lieutenant", "Detective", "Enforcer", "Chief Enforcer", "Cargo Technician", "Shaft Miner", "Logistics Officer")
 
 /datum/gear/orvkepimedsci
 	name = "Federation Kepi, medsci"

@@ -367,7 +367,7 @@
 
 //Quartermaster
 /obj/item/clothing/head/beret/qm
-	name = "quartermaster's beret"
+	name = "logistics officer's beret"
 	desc = "This headwear shows off your Cargonian leadership"
 	icon_state = "qmberet"
 

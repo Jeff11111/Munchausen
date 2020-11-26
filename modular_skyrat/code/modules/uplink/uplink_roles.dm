@@ -6,7 +6,7 @@
 	item = /obj/item/kinetic_crusher/harm
 	cost = 15
 	limited_stock = 1
-	restricted_roles = list("Shaft Miner", "Quartermaster")
+	restricted_roles = list("Shaft Miner", "Logistics Officer")
 
 /datum/uplink_item/role_restricted/pka_tenmm
 	name = "10mm Proto-Kinetic Accelerator"
@@ -14,7 +14,7 @@
 	item = /obj/item/gun/energy/kinetic_accelerator/tenmm
 	cost = 15
 	limited_stock = 1
-	restricted_roles = list("Shaft Miner", "Quartermaster")
+	restricted_roles = list("Shaft Miner", "Logistics Officer")
 
 /datum/uplink_item/role_restricted/pka_nopenalty
 	name = "On-station Proto-Kinetic Accelerator"
@@ -22,7 +22,7 @@
 	item = /obj/item/gun/energy/kinetic_accelerator/nopenalty
 	cost = 15
 	limited_stock = 1
-	restricted_roles = list("Shaft Miner", "Quartermaster")
+	restricted_roles = list("Shaft Miner", "Logistics Officer")
 */
 //engineer/atmos tech exclusives
 /datum/uplink_item/role_restricted/powergloves

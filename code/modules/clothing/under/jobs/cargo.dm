@@ -1,7 +1,7 @@
 
 /obj/item/clothing/under/rank/cargo/qm
-	name = "quartermaster's turtleneck"
-	desc = "It's a turtleneck worn by the quartermaster. It's specially designed to prevent back injuries caused by carrying gold."
+	name = "logistics officer's turtleneck"
+	desc = "It's a turtleneck worn by the logistics officer. It's specially designed to prevent back injuries caused by carrying gold."
 	icon_state = "qm"
 	item_state = "lb_suit"
 

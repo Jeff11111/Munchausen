@@ -12,7 +12,7 @@
 	antag_flag = ROLE_TRAITOR
 	antag_datum = /datum/antagonist/traitor/
 	minimum_required_age = 0
-	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Quartermaster", "Cyborg", "Blueshield")
+	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Logistics Officer", "Cyborg", "Blueshield")
 	restricted_roles = list("Cyborg")
 	required_candidates = 1
 	weight = 5
@@ -55,7 +55,7 @@
 	antag_flag = ROLE_BROTHER
 	antag_datum = /datum/antagonist/brother
 	restricted_roles = list("AI", "Cyborg")
-	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Quartermaster")
+	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Logistics Officer")
 	required_candidates = 2
 	weight = 4
 	cost = 10
@@ -104,7 +104,7 @@
 	antag_flag = ROLE_CHANGELING
 	antag_datum = /datum/antagonist/changeling
 	restricted_roles = list("AI", "Cyborg")
-	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Quartermaster")
+	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Logistics Officer")
 	required_candidates = 1
 	weight = 3
 	cost = 15
@@ -221,7 +221,7 @@
 	antag_datum = /datum/antagonist/cult
 	minimum_required_age = 14
 	restricted_roles = list("AI", "Cyborg")
-	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Quartermaster")
+	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Logistics Officer")
 	required_candidates = 2
 	weight = 3
 	cost = 30
@@ -368,7 +368,7 @@
 	antag_flag_override = ROLE_REV
 	antag_datum = /datum/antagonist/rev/head
 	minimum_required_age = 14
-	restricted_roles = list("AI", "Cyborg", "Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Quartermaster")
+	restricted_roles = list("AI", "Cyborg", "Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Logistics Officer")
 	required_candidates = 3
 	weight = 2
 	delay = 7 MINUTES
@@ -517,7 +517,7 @@
 	config_tag = "clockwork_cult"
 	antag_flag = ROLE_SERVANT_OF_RATVAR
 	antag_datum = /datum/antagonist/clockcult
-	restricted_roles = list("AI", "Cyborg", "Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Quartermaster")
+	restricted_roles = list("AI", "Cyborg", "Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Logistics Officer")
 	required_candidates = 4
 	weight = 3
 	cost = 35
@@ -805,7 +805,7 @@
 	antag_flag = ROLE_BLOODSUCKER
 	antag_datum = ANTAG_DATUM_BLOODSUCKER
 	minimum_required_age = 0
-	protected_roles = list("Chaplain", "Enforcer", "Lieutenant", "Detective", "Brig Physician", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Quartermaster")
+	protected_roles = list("Chaplain", "Enforcer", "Lieutenant", "Detective", "Brig Physician", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Logistics Officer")
 	restricted_roles = list("Cyborg", "AI")
 	required_candidates = 1
 	weight = 2

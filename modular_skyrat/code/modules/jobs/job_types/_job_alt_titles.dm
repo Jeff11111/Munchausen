@@ -85,6 +85,9 @@
 	alt_titles = list("Security Medic", "Combat Medic")
 
 //Supply
+/datum/job/qm
+	alt_titles = list("Quartermaster")
+
 /datum/job/mining
 	alt_titles = list("Explorer", "Caver", "Cave Meat")
 

@@ -116,7 +116,7 @@
 	name = "cargonia banner"
 	desc = "The banner of the eternal Cargonia, with the mystical power of conjuring any object into existence."
 	icon_state = "banner_cargo"
-	job_loyalties = list("Cargo Technician", "Shaft Miner", "Quartermaster")
+	job_loyalties = list("Cargo Technician", "Shaft Miner", "Logistics Officer")
 	warcry = "Hail Cargonia!"
 
 /obj/item/banner/cargo/mundane

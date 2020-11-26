@@ -35,7 +35,7 @@
 {{#if data.disconnected}}
 	<ui-display>
 		<ui-section>
-			<b>Warning</b>: {{data.disconnected}}. Please contact the quartermaster.
+			<b>Warning</b>: {{data.disconnected}}. Please contact the logistics officer.
 		</ui-section>
 	</ui-display>
 {{/if}}

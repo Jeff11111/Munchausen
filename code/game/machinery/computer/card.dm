@@ -35,7 +35,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 		"Senior Engineer",
 		"Research Director",
 		"Chief Medical Officer",
-		"Quartermaster")
+		"Logistics Officer")
 
 	//The scaling factor of max total positions in relation to the total amount of people on board the station in %
 	var/max_relative_positions = 30 //30%: Seems reasonable, limit of 6 @ 20 players
@@ -423,7 +423,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 							get_subordinates("Senior Engineer")
 						if((ACCESS_QM in inserted_scan_id.access) && ((target_dept==6) || !target_dept))
 							region_access |= 6
-							get_subordinates("Quartermaster")
+							get_subordinates("Logistics Officer")
 						if(region_access)
 							authenticated = 1
 			else if ((!( authenticated ) && hasSiliconAccessInArea(usr)) && (!inserted_modify_id))

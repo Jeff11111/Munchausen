@@ -1464,7 +1464,7 @@ GLOBAL_LIST_INIT(valid_toy_paths, valid_toy_paths())
 	toysay = "Go ahead, make my day."
 
 /obj/item/toy/figure/qm
-	name = "Quartermaster action figure"
+	name = "Logistics Officer action figure"
 	icon_state = "qm"
 	toysay = "Please sign this form in triplicate and we will see about geting you a welding mask within 3 business days."
 

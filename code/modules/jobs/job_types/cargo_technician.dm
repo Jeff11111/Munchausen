@@ -1,12 +1,12 @@
 /datum/job/cargo_tech
 	title = "Cargo Technician"
 	flag = CARGOTECH
-	department_head = list("Quartermaster")
+	department_head = list("Logistics Officer")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 3
 	spawn_positions = 2
-	supervisors = "the quartermaster"
+	supervisors = "the logistics officer"
 	selection_color = "#ca8f55"
 
 	outfit = /datum/outfit/job/cargo_tech

@@ -398,7 +398,7 @@
 	build_path = /obj/item/toy/figure/roboticist
 
 /datum/design/autoylathe/figure/qm
-	name = "Quartermaster"
+	name = "Logistics Officer"
 	id = "qtmfigure"
 	materials = list(/datum/material/plastic = 500, /datum/material/iron = 50)
 	build_path = /obj/item/toy/figure/qm

@@ -10,7 +10,7 @@
 	restricted_roles = MEDSCI_ROLES
 
 /datum/gear/trekcmdmov
-	restricted_roles = list("Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Research Director", "Chief Medical Officer", "Quartermaster", "Blueshield", "Brig Physician", "Lieutenant", "Detective", "Enforcer")
+	restricted_roles = list("Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Research Director", "Chief Medical Officer", "Logistics Officer", "Blueshield", "Brig Physician", "Lieutenant", "Detective", "Enforcer")
 
 /datum/gear/trekmedscimod
 	name = "EntCorp uniform, Blue"
@@ -18,7 +18,7 @@
 
 /datum/gear/trekcmdmod
 	name = "EntCorp uniform, Red"
-	restricted_roles = list("Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Research Director", "Chief Medical Officer", "Quartermaster", "Blueshield", "Brig Physician", "Lieutenant", "Detective", "Enforcer")
+	restricted_roles = list("Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Research Director", "Chief Medical Officer", "Logistics Officer", "Blueshield", "Brig Physician", "Lieutenant", "Detective", "Enforcer")
 
 /datum/gear/trekcmdcapmod
 	name = "EntCorp uniform, White"

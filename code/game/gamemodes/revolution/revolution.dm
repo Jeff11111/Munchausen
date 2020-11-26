@@ -13,7 +13,7 @@
 	antag_flag = ROLE_REV
 	false_report_weight = 10
 	restricted_jobs = list("AI", "Cyborg")
-	protected_jobs = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Quartermaster")
+	protected_jobs = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Logistics Officer")
 	required_players = 20
 	required_enemies = 1
 	recommended_enemies = 3

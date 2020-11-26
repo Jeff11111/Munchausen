@@ -67,13 +67,13 @@
 		"Research Director",
 		"Senior Engineer",
 		"Chief Medical Officer",
-		"Quartermaster"
+		"Logistics Officer"
 	)
 	var/list/departs = list(
 		"Research Director",
 		"Senior Engineer",
 		"Chief Medical Officer",
-		"Quartermaster"
+		"Logistics Officer"
 	)
 
 
@@ -97,7 +97,7 @@
 				department_string = "Engineering"
 			if("Chief Medical Officer")
 				department_string = "Medical"
-			if("Quartermaster")
+			if("Logistics Officer")
 				department_string = "Cargo"
 		target_amount = rand(round(SSticker.mode.num_players() / 20), round(SSticker.mode.num_players() / 10))
 		target_amount = clamp(target_amount, 2, 4)

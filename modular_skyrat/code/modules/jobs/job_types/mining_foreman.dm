@@ -1,12 +1,12 @@
 /datum/job/mining_foreman
 	title = "Mining Foreman"
 	flag = MINER
-	department_head = list("Quartermaster")
+	department_head = list("Logistics Officer")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0
-	supervisors = "the quartermaster"
+	supervisors = "the logistics officer"
 	selection_color = "#ca8f55"
 	outfit = /datum/outfit/job/mining_foreman
 	access = list(ACCESS_CONSTRUCTION, ACCESS_MAINT_TUNNELS, ACCESS_MAILSORTING, ACCESS_CARGO, ACCESS_CARGO_BOT, ACCESS_MINING,
@@ -51,12 +51,12 @@
 /datum/job/mining_engineer
 	title = "Mining Technician"
 	flag = MINER
-	department_head = list("Quartermaster")
+	department_head = list("Logistics Officer")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0
-	supervisors = "the quartermaster and the mining foreman."
+	supervisors = "the logistics officer and the mining foreman."
 	selection_color = "#ca8f55"
 	outfit = /datum/outfit/job/miner_engineer
 	access = list(ACCESS_ENGINE, ACCESS_ENGINE_EQUIP, ACCESS_TECH_STORAGE, ACCESS_CONSTRUCTION, ACCESS_MAINT_TUNNELS, ACCESS_MAILSORTING, ACCESS_CARGO, ACCESS_CARGO_BOT, ACCESS_MINING,

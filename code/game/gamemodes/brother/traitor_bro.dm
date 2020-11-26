@@ -7,7 +7,7 @@
 	config_tag = "traitorbro"
 	required_players = 25
 	restricted_jobs = list("AI", "Cyborg")
-	protected_jobs = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Quartermaster")
+	protected_jobs = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Logistics Officer")
 
 	announce_span = "danger"
 	announce_text = "There are Syndicate agents and Blood Brothers on the station!\n\

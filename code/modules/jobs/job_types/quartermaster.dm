@@ -1,5 +1,5 @@
 /datum/job/qm
-	title = "Quartermaster"
+	title = "Logistics Officer"
 	flag = QUARTERMASTER
 	department_head = list("Captain")
 	department_flag = CIVILIAN
@@ -31,7 +31,7 @@
 	threat = 5 //Gun man
 
 /datum/outfit/job/quartermaster
-	name = "Quartermaster"
+	name = "Logistics Officer"
 	jobtype = /datum/job/qm
 
 	belt = /obj/item/pda/quartermaster

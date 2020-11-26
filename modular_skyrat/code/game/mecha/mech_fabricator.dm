@@ -69,7 +69,7 @@
 				output += " | \[<a href='?src=[REF(src)];remove_mat=50;material=[ref]'>50</a>\]</span>"
 			output += "<br>"
 	else
-		output += "<font color='red'>No material storage connected, please contact the quartermaster.</font><br>"
+		output += "<font color='red'>No material storage connected, please contact the logistics officer.</font><br>"
 	return output
 
 /obj/machinery/mecha_part_fabricator/proc/check_resources(datum/design/D)
@@ -85,10 +85,10 @@
 
 	var/datum/component/material_container/materials = rmat.mat_container
 	if (!materials)
-		say("No access to material storage, please contact the quartermaster.")
+		say("No access to material storage, please contact the logistics officer.")
 		return FALSE
 	if (rmat.on_hold())
-		say("Mineral access is on hold, please contact the quartermaster.")
+		say("Mineral access is on hold, please contact the logistics officer.")
 		return FALSE
 	if(!check_resources(D))
 		say("Not enough resources. Queue processing stopped.")
@@ -224,10 +224,10 @@
 /obj/machinery/mecha_part_fabricator/proc/eject_sheets(eject_sheet, eject_amt)
 	var/datum/component/material_container/mat_container = rmat.mat_container
 	if (!mat_container)
-		say("No access to material storage, please contact the quartermaster.")
+		say("No access to material storage, please contact the logistics officer.")
 		return 0
 	if (rmat.on_hold())
-		say("Mineral access is on hold, please contact the quartermaster.")
+		say("Mineral access is on hold, please contact the logistics officer.")
 		return 0
 	var/count = mat_container.retrieve_sheets(text2num(eject_amt), eject_sheet, drop_location())
 	var/list/matlist = list()

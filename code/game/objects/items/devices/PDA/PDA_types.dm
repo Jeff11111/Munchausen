@@ -152,7 +152,7 @@
 	icon_state = "pda-cargo"
 
 /obj/item/pda/quartermaster
-	name = "quartermaster PDA"
+	name = "logistics officer PDA"
 	default_cartridge = /obj/item/cartridge/quartermaster
 	inserted_item = /obj/item/pen/fountain
 	icon_state = "pda-qm"

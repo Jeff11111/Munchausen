@@ -90,7 +90,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "Mime"
 
 /obj/effect/landmark/start/quartermaster
-	name = "Quartermaster"
+	name = "Logistics Officer"
 	icon_state = "Quartermaster"
 
 /obj/effect/landmark/start/atmospheric_technician

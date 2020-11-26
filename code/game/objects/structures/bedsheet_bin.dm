@@ -151,10 +151,10 @@ LINEN BINS
 	dream_messages = list("authority", "a silvery ID", "the engine", "power tools", "an APC", "a parrot", "the senior engineer")
 
 /obj/item/bedsheet/qm
-	name = "quartermaster's bedsheet"
+	name = "logistics officer's bedsheet"
 	desc = "It is decorated with a crate emblem in silver lining.  It's rather tough, and just the thing to lie on after a hard day of pushing paper."
 	icon_state = "sheetqm"
-	dream_messages = list("a grey ID", "a shuttle", "a crate", "a sloth", "the quartermaster")
+	dream_messages = list("a grey ID", "a shuttle", "a crate", "a sloth", "the logistics officer")
 
 /obj/item/bedsheet/brown
 	icon_state = "sheetbrown"

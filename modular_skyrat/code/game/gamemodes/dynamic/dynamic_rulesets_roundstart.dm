@@ -65,7 +65,7 @@
  	config_tag = "overthrow"
  	antag_flag = ROLE_OVERTHROW
  	minimum_required_age = 0
- 	protected_roles = list("Chaplain", "Security Officer", "Lieutenant", "Detective", "Brig Physician", "Chief Enforcer", "Captain", "Head of Personnel", "Chief Engineer", "Chief Medical Officer", "Research Director", "Quartermaster", "Prisoner", "Brig Physician", "Blueshield") 
+ 	protected_roles = list("Chaplain", "Security Officer", "Lieutenant", "Detective", "Brig Physician", "Chief Enforcer", "Captain", "Head of Personnel", "Chief Engineer", "Chief Medical Officer", "Research Director", "Logistics Officer", "Prisoner", "Brig Physician", "Blueshield") 
  	restricted_roles = list("Cyborg", "AI")
  	required_candidates = 2
  	weight = 0 // Originally 3

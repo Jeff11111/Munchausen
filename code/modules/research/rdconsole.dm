@@ -273,7 +273,7 @@ Nothing else in the console has ID requirements.
 	if(linked_lathe.materials.mat_container)
 		l += "<A href='?src=[REF(src)];switch_screen=[RDSCREEN_PROTOLATHE_MATERIALS]'><B>Material Amount:</B> [linked_lathe.materials.format_amount()]</A>"
 	else
-		l += "<font color='red'>No material storage connected, please contact the quartermaster.</font>"
+		l += "<font color='red'>No material storage connected, please contact the logistics officer.</font>"
 	l += "<A href='?src=[REF(src)];switch_screen=[RDSCREEN_PROTOLATHE_CHEMICALS]'><B>Chemical volume:</B> [linked_lathe.reagents.total_volume] / [linked_lathe.reagents.maximum_volume]</A></div>"
 	return l
 
@@ -420,7 +420,7 @@ Nothing else in the console has ID requirements.
 	if (linked_imprinter.materials.mat_container)
 		l += "<A href='?src=[REF(src)];switch_screen=[RDSCREEN_IMPRINTER_MATERIALS]'><B>Material Amount:</B> [linked_imprinter.materials.format_amount()]</A>"
 	else
-		l += "<font color='red'>No material storage connected, please contact the quartermaster.</font>"
+		l += "<font color='red'>No material storage connected, please contact the logistics officer.</font>"
 	l += "<A href='?src=[REF(src)];switch_screen=[RDSCREEN_IMPRINTER_CHEMICALS]'><B>Chemical volume:</B> [linked_imprinter.reagents.total_volume] / [linked_imprinter.reagents.maximum_volume]</A></div>"
 	return l
 

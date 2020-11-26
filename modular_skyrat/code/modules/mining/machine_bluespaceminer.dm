@@ -28,7 +28,7 @@
 	if(!materials?.silo)
 		. += "<span class='notice'>No ore silo connected. Use a multi-tool to link an ore silo to this machine.</span>"
 	else if(materials?.on_hold())
-		. += "<span class='warning'>Ore silo access is on hold, please contact the quartermaster.</span>"
+		. += "<span class='warning'>Ore silo access is on hold, please contact the logistics officer.</span>"
 
 /obj/machinery/mineral/bluespace_miner/process()
 	if(!materials?.silo || materials?.on_hold())

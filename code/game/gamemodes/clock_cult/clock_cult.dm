@@ -137,7 +137,7 @@ Credit where due:
 	required_enemies = 3
 	recommended_enemies = 5
 	enemy_minimum_age = 7
-	protected_jobs = list("AI", "Cyborg", "Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Quartermaster") //Silicons can eventually be converted
+	protected_jobs = list("AI", "Cyborg", "Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Logistics Officer") //Silicons can eventually be converted
 	restricted_jobs = list("Chaplain", "Captain")
 	announce_span = "brass"
 	announce_text = "Servants of Ratvar are trying to summon the Justiciar!\n\

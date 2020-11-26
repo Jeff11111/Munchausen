@@ -35,7 +35,7 @@
 		if("Brig Physician")
 			O = new /datum/outfit/plasmaman/brigphys
 
-		if("Cargo Technician", "Quartermaster")
+		if("Cargo Technician", "Logistics Officer")
 			O = new /datum/outfit/plasmaman/cargo
 
 		if("Shaft Miner")

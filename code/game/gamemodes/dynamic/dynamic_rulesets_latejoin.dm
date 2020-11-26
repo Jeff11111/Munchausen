@@ -63,7 +63,7 @@
 	antag_datum = /datum/antagonist/traitor
 	antag_flag = ROLE_TRAITOR
 	restricted_roles = list("AI", "Cyborg")
-	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Quartermaster")
+	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Logistics Officer")
 	required_candidates = 1
 	weight = 7
 	cost = 5
@@ -87,7 +87,7 @@
 	antag_datum = /datum/antagonist/rev/head
 	antag_flag = ROLE_REV_HEAD
 	antag_flag_override = ROLE_REV
-	restricted_roles = list("AI", "Cyborg", "Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Quartermaster")
+	restricted_roles = list("AI", "Cyborg", "Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Logistics Officer")
 	enemy_roles = list("AI", "Cyborg", "Enforcer","Detective","Chief Enforcer", "Captain", "Lieutenant")
 	required_enemies = list(4,4,3,3,3,3,3,2,2,1)
 	required_candidates = 1
@@ -203,7 +203,7 @@
 	antag_datum = ANTAG_DATUM_BLOODSUCKER
 	antag_flag = ROLE_BLOODSUCKER
 	restricted_roles = list("AI", "Cyborg")
-	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Brig Physician", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Quartermaster")
+	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Brig Physician", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Logistics Officer")
 	required_candidates = 1
 	weight = 3
 	cost = 10
@@ -234,7 +234,7 @@
 	antag_flag = ROLE_CHANGELING
 	antag_datum = /datum/antagonist/changeling
 	restricted_roles = list("AI", "Cyborg")
-	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Quartermaster")
+	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Logistics Officer")
 	required_candidates = 1
 	weight = 3
 	cost = 15
@@ -254,7 +254,7 @@
 	antag_datum = /datum/antagonist/collector
 	antag_flag = ROLE_MINOR_ANTAG
 	restricted_roles = list("AI", "Cyborg")
-	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Quartermaster")
+	protected_roles = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Logistics Officer")
 	required_candidates = 1
 	weight = 5
 	cost = 1

@@ -261,7 +261,7 @@
 				return
 
 			if(materials.on_hold())
-				to_chat(usr, "<span class='warning'>Mineral access is on hold, please contact the quartermaster.</span>")
+				to_chat(usr, "<span class='warning'>Mineral access is on hold, please contact the logistics officer.</span>")
 			else if(!allowed(usr)) //Check the ID inside, otherwise check the user
 				to_chat(usr, "<span class='warning'>Required access not found.</span>")
 			else
