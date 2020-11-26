@@ -4,7 +4,7 @@
 	name = "tongue"
 	desc = "A fleshy muscle mostly used for lying."
 	icon_state = "tonguenormal"
-	zone = BODY_ZONE_PRECISE_MOUTH
+	zone = BODY_ZONE_HEAD
 	slot = ORGAN_SLOT_TONGUE
 	attack_verb = list("licked", "slobbered", "slapped", "frenched", "tongued")
 	var/list/languages_possible

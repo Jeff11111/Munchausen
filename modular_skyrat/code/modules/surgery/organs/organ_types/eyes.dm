@@ -3,10 +3,10 @@
 #define BLIND_VISION_THREE	3
 
 /obj/item/organ/eyes
-	name = BODY_ZONE_PRECISE_EYES
+	name = "eyes"
 	icon_state = "eyeballs"
 	desc = "I see you!"
-	zone = BODY_ZONE_PRECISE_EYES
+	zone = BODY_ZONE_HEAD
 	slot = ORGAN_SLOT_EYES
 	gender = PLURAL
 
