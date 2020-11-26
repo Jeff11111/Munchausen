@@ -622,3 +622,49 @@
 
 		//Clean the descriptive string
 		target.wound_message = ""
+
+/datum/species/handle_digestion(mob/living/carbon/human/H)
+	. = ..()
+	var/endurance_stat = 1
+	if(H.mind)
+		var/datum/stats/end/end = GET_STAT(H, end)
+		if(end)
+			endurance_stat = end.level
+	var/severity_level = endurance_stat + (100 - (5 * endurance_stat))
+	if(H.nutrition >= NUTRITION_LEVEL_HUNGRY)
+		H.remove_movespeed_modifier(MOVESPEED_ID_MOB_HUNGER)
+	if(H.nutrition < NUTRITION_LEVEL_HUNGRY)
+		if(prob(1))
+			to_chat(H, "<span class='warning'>You are feeling hungry...</span>")
+		H.add_movespeed_modifier(/datum/movespeed_modifier/hunger/small)
+		H.adjustStaminaLoss(5)
+	if(H.nutrition < NUTRITION_LEVEL_STARVING)
+		H.add_movespeed_modifier(/datum/movespeed_modifier/hunger/medium)
+		if(H.hallucination < severity_level)
+			H.hallucination += 2
+	if(H.nutrition < NUTRITION_LEVEL_CRITICAL)
+		H.add_movespeed_modifier(/datum/movespeed_modifier/hunger/large)
+		H.adjustOrganLoss(ORGAN_SLOT_STOMACH, 5, severity_level)
+	
+/datum/species/handle_hydration(mob/living/carbon/human/H)
+	. = ..()
+	var/endurance_stat = 1
+	if(H.mind)
+		var/datum/stats/end/end = GET_STAT(H, end)
+		if(end)
+			endurance_stat = end.level
+	var/severity_level = endurance_stat + (100 - (5 * endurance_stat))
+	if(H.hydration >= HYDRATION_LEVEL_THIRSTY)
+		H.remove_movespeed_modifier(MOVESPEED_ID_MOB_THIRST)
+	if(H.hydration < HYDRATION_LEVEL_THIRSTY)
+		if(prob(1))
+			to_chat(H, "<span class='warning'>You are feeling thirsty...</span>")
+		H.add_movespeed_modifier(/datum/movespeed_modifier/thirst/small)
+		H.adjustStaminaLoss(5)
+	if(H.hydration < HYDRATION_LEVEL_DEHYDRATED)
+		H.add_movespeed_modifier(/datum/movespeed_modifier/thirst/medium)
+		if(H.hallucination < severity_level)
+			H.hallucination += 2
+	if(H.hydration < HYDRATION_LEVEL_CRITICAL)
+		H.add_movespeed_modifier(/datum/movespeed_modifier/thirst/large)
+		H.adjustOrganLoss(ORGAN_SLOT_BLADDER, 5, severity_level)
