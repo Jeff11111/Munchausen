@@ -200,6 +200,8 @@
 		return FALSE
 	if(is_robotic())
 		return FALSE
+	if(owner?.reagents?.has_reagent(/datum/reagent/medicine/preservahyde) || owner?.reagents?.has_reagent(/datum/reagent/toxin/formaldehyde))
+		return FALSE
 	return TRUE
 
 //Checks to see if the organ is frozen from temperature

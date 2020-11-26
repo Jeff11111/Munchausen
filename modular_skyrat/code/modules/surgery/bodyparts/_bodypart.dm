@@ -619,6 +619,8 @@
 /obj/item/bodypart/proc/can_decay()
 	if(CHECK_BITFIELD(status, BODYPART_ROBOTIC | BODYPART_SYNTHETIC | BODYPART_DEAD))
 		return FALSE
+	if(owner?.reagents?.has_reagent(/datum/reagent/medicine/preservahyde) || owner?.reagents?.has_reagent(/datum/reagent/toxin/formaldehyde))
+		return FALSE
 	return TRUE
 
 //Medical scans
