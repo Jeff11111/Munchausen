@@ -16,7 +16,7 @@
 	//SKYRAT CHANGE - asthma quirk
 	if(HAS_TRAIT(src, TRAIT_ASTHMATIC))
 		if(prob(tiles * 5))
-			adjustOxyLoss(rand(1 * tiles,5 * tiles), TRUE)
+			adjustOxyLoss(rand(1 * tiles, 5 * tiles), TRUE)
 			if(prob(25))
 				to_chat(src, "<span class='danger'><i>You struggle to breathe.</i></span>")
 	//
