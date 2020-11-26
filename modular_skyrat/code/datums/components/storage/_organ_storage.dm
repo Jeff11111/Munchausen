@@ -34,6 +34,7 @@
 
 //Only open this if aiming at the correct limb
 /datum/component/storage/concrete/organ/on_attack_hand(datum/source, mob/user)
+	update_insides()
 	var/atom/A = parent
 
 	if(!attack_hand_interact)
@@ -121,6 +122,7 @@
 				mob_item_insertion_feedback(usr, M, I)
 	playsound(I, pick(rustle_sound), 50, 1, -5)
 	update_icon()
+	update_insides()
 	return TRUE
 
 //Return the proper organ list
@@ -221,8 +223,7 @@
 			var/mob/living/carbon/carbon_parent = parent
 			O.forceMove(carbon_parent)
 			O.Insert(carbon_parent)
-			O.stored_in = carbon_parent
-			RegisterSignal(O, COMSIG_CLICK, /datum/component/storage/concrete/organ.proc/override_click)
+			update_insides()
 		refresh_mob_views()
 		return TRUE
 
@@ -279,6 +280,7 @@
 		O.organ_flags |= ORGAN_CUT_AWAY
 		refresh_mob_views()
 		playsound(O, pick(rustle_sound), 50, 1, -5)
+		update_insides()
 		return TRUE
 
 //Nullspace is a bitch
@@ -317,4 +319,5 @@
 	if(!istype(L))
 		return FALSE
 	if(isliving(over_object) && (!bodypart_affected || (L.zone_selected == bodypart_affected.body_zone)))
+		update_insides()
 		user_show_to_mob(M)
