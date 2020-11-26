@@ -48309,7 +48309,6 @@
 	name = "security locker"
 	},
 /obj/item/clothing/gloves/color/black,
-/obj/item/clothing/under/rank/security/officer/skirt,
 /obj/item/clothing/shoes/jackboots,
 /obj/structure/grille/broken,
 /turf/open/floor/plating,
