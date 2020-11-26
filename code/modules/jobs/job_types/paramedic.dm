@@ -18,9 +18,7 @@
 	paycheck_department = ACCOUNT_MED
 
 	display_order = JOB_DISPLAY_ORDER_PARAMEDIC
-	blacklisted_quirks = list(/datum/quirk/mute, /datum/quirk/brainproblems, /datum/quirk/nonviolent, /datum/quirk/paraplegic, /datum/quirk/blindness)
-
-	threat = 0.5
+	threat = 1
 
 	starting_modifiers = list(/datum/skill_modifier/job/surgery, /datum/skill_modifier/job/affinity/surgery)
 
