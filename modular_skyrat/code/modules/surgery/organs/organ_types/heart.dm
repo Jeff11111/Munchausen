@@ -116,6 +116,8 @@
 		addtimer(CALLBACK(src, .proc/stop_if_unowned), 80)
 
 /obj/item/organ/heart/proc/Stop()
+	if(owner && CHECK_BITFIELD(organ_flags, ORGAN_VITAL))
+		owner.death()
 	pulse = PULSE_NONE
 	update_icon()
 	return 1
