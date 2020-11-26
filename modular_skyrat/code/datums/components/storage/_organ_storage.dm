@@ -306,7 +306,6 @@
 //AAAAAAAA
 /datum/component/storage/concrete/organ/mousedrop_onto(datum/source, atom/over_object, mob/M)
 	set waitfor = FALSE
-	. = COMPONENT_NO_MOUSEDROP
 	var/mob/A = parent
 	A.add_fingerprint(M)
 	if(!over_object)
