@@ -43,7 +43,7 @@
 /datum/supply_pack/goody/shotgun
 	name = "12g Hunting Shotgun"
 	desc = "Contains one hunting-grade shotgun. Never know when you need it."
-	cost = 2000
+	cost = 1500
 	contains = list(/obj/item/gun/ballistic/shotgun/lethal)
 
 /datum/supply_pack/goody/double_barreled_shotgun
@@ -73,14 +73,14 @@
 /datum/supply_pack/goody/shotgun_ammo
 	name = "12g Shotgun Slugs"
 	desc = "Contains 2 stripper clips of 12g slugs."
-	cost = 1500
+	cost = 1000
 	contains = list(/obj/item/ammo_box/shotgun/loaded,
 					/obj/item/ammo_box/shotgun/loaded)
 
 /datum/supply_pack/goody/buck_shotgun_ammo
 	name = "12g Buckshot Slugs"
 	desc = "Contains 2 stripper clips of 12g buckshot."
-	cost = 1500
+	cost = 1000
 	contains = list(/obj/item/ammo_box/shotgun/loaded/buckshot,
 					/obj/item/ammo_box/shotgun/loaded/buckshot)
 
@@ -106,40 +106,40 @@
 /datum/supply_pack/goody/sniper_ammo
 	name = ".50 Magazines"
 	desc = "Contains 2 .50 cal magazines."
-	cost = 15000
+	cost = 10000
 	contains = list(/obj/item/ammo_box/magazine/sniper_rounds,
 					/obj/item/ammo_box/magazine/sniper_rounds)
 
 /datum/supply_pack/goody/tactical_smg
 	name = "9mm Tactical Submachine Gun"
 	desc = "Contains one NT Saber SMG, chambered in 9mm. Never know when you need it."
-	cost = 12000
+	cost = 9000
 	contains = list(/obj/item/gun/ballistic/automatic/proto/unrestricted)
 
 /datum/supply_pack/goody/tactical_smg_ammo
 	name = "9mm Tactical SMG Magazines"
 	desc = "Contains 2 high capacity 9mm magazines."
-	cost = 4000
+	cost = 3500
 	contains = list(/obj/item/ammo_box/magazine/smgm9mm,
 					/obj/item/ammo_box/magazine/smgm9mm)
 
 /datum/supply_pack/goody/smg
 	name = "9mm Submachine Gun"
 	desc = "Contains one mini uzi, chambered in 9mm. Never know when you need it."
-	cost = 10000
+	cost = 8000
 	contains = list(/obj/item/gun/ballistic/automatic/mini_uzi)
 
 /datum/supply_pack/goody/smg_ammo
 	name = "9mm SMG Magazines"
 	desc = "Contains 2 high capacity 9mm magazines."
-	cost = 3500
+	cost = 3000
 	contains = list(/obj/item/ammo_box/magazine/uzim9mm,
 					/obj/item/ammo_box/magazine/uzim9mm)
 
 /datum/supply_pack/goody/wt550
 	name = "4.6x30mm Submachine Gun"
 	desc = "Contains one NT WT-550 SMG, chambered in 4.6x30mm. Never know when you need it."
-	cost = 4000
+	cost = 3500
 	contains = list(/obj/item/gun/ballistic/automatic/wt550)
 
 /datum/supply_pack/goody/wt550_ammo
@@ -152,26 +152,26 @@
 /datum/supply_pack/goody/mosin
 	name = "7.62 Bolt Action Rifle"
 	desc = "Contains one bolt action rifle, chambered in 7.62. Never know when you need it."
-	cost = 8000
+	cost = 6000
 	contains = list(/obj/item/gun/ballistic/shotgun/boltaction)
 
 /datum/supply_pack/goody/mosin_ammo
 	name = "7.62 Stripper Clips"
 	desc = "Contains 2 7.62mm stripper clips. Dink."
-	cost = 3000
+	cost = 2500
 	contains = list(/obj/item/ammo_box/a762,
 					/obj/item/ammo_box/a762)
 
 /datum/supply_pack/goody/revolver
 	name = ".357 Revolver"
 	desc = "Contains one generic .357 revolver. Never know when you need it."
-	cost = 8000
+	cost = 6000
 	contains = list(/obj/item/gun/ballistic/revolver)
 
 /datum/supply_pack/goody/revolver_ammo
 	name = ".357 Speedloaders"
 	desc = "Contains 2 .357 speedloaders. Never know when you need it."
-	cost = 3000
+	cost = 2000
 	contains = list(/obj/item/ammo_box/a357,
 					/obj/item/ammo_box/a357)
 
