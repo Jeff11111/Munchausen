@@ -274,6 +274,7 @@
 				fucked.blood_flow += rand(2, 3)
 			for(var/datum/wound/pierce/shitted in bodypart_affected.wounds)
 				shitted.blood_flow += rand(2, 3)
+		O.mouse_opacity = initial(O.mouse_opacity)
 		O.stored_in = null
 		O.Remove(FALSE)
 		O.organ_flags |= ORGAN_CUT_AWAY
