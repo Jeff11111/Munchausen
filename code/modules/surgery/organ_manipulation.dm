@@ -16,12 +16,14 @@
 
 /datum/surgery/organ_manipulation/complete()
 	. = ..()
-	for(var/datum/component/storage/concrete/organ/ST in target)
+	var/datum/component/storage/concrete/organ/ST = target.GetComponent(/datum/component/storage/concrete/organ)
+	if(ST)
 		qdel(ST)
 
 /datum/surgery/organ_manipulation/Destroy()
 	. = ..()
-	for(var/datum/component/storage/concrete/organ/ST in target)
+	var/datum/component/storage/concrete/organ/ST = target.GetComponent(/datum/component/storage/concrete/organ)
+	if(ST)
 		qdel(ST)
 
 /datum/surgery/organ_manipulation/soft
