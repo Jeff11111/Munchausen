@@ -50,6 +50,8 @@
 	for(var/i in 1 to 3)
 		new /obj/item/clothing/under/color/green(src)
 	for(var/i in 1 to 3)
+		new /obj/item/clothing/under/color/grey/staff(src)
+	for(var/i in 1 to 3)
 		new /obj/item/clothing/shoes/sneakers/black(src)
 	new /obj/item/clothing/mask/bandana/green(src)
 	new /obj/item/clothing/mask/bandana/green(src)
