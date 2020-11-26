@@ -18,7 +18,7 @@
 	paycheck_department = ACCOUNT_CAR
 
 	display_order = JOB_DISPLAY_ORDER_CARGO_TECHNICIAN
-	threat = 0.2
+	threat = 0.5
 
 /datum/outfit/job/cargo_tech
 	name = "Cargo Technician"
