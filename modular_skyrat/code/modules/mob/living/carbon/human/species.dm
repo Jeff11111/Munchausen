@@ -625,7 +625,7 @@
 
 /datum/species/handle_digestion(mob/living/carbon/human/H)
 	. = ..()
-	var/endurance_stat = 1
+	var/endurance_stat = 10
 	if(H.mind)
 		var/datum/stats/end/end = GET_STAT(H, end)
 		if(end)
@@ -637,18 +637,21 @@
 		if(prob(1))
 			to_chat(H, "<span class='warning'>You are feeling hungry...</span>")
 		H.add_movespeed_modifier(/datum/movespeed_modifier/hunger/small)
-		H.adjustStaminaLoss(5)
+		if(H.bufferedstam < H.stambuffer/4)
+			H.adjustStaminaLossBuffered(5)
 	if(H.nutrition < NUTRITION_LEVEL_STARVING)
 		H.add_movespeed_modifier(/datum/movespeed_modifier/hunger/medium)
 		if(H.hallucination < severity_level)
 			H.hallucination += 2
 	if(H.nutrition < NUTRITION_LEVEL_CRITICAL)
 		H.add_movespeed_modifier(/datum/movespeed_modifier/hunger/large)
-		H.adjustOrganLoss(ORGAN_SLOT_STOMACH, 5, severity_level)
-	
+		var/obj/item/organ/stomach/stomach = H.getorganslot(ORGAN_SLOT_STOMACH)
+		if(stomach)
+			stomach.applyOrganDamage(rand(1,5), stomach.maxHealth - 10)
+
 /datum/species/handle_hydration(mob/living/carbon/human/H)
 	. = ..()
-	var/endurance_stat = 1
+	var/endurance_stat = 10
 	if(H.mind)
 		var/datum/stats/end/end = GET_STAT(H, end)
 		if(end)
@@ -660,11 +663,14 @@
 		if(prob(1))
 			to_chat(H, "<span class='warning'>You are feeling thirsty...</span>")
 		H.add_movespeed_modifier(/datum/movespeed_modifier/thirst/small)
-		H.adjustStaminaLoss(5)
+		if(H.bufferedstam < H.stambuffer/4)
+			H.adjustStaminaLossBuffered(5)
 	if(H.hydration < HYDRATION_LEVEL_DEHYDRATED)
 		H.add_movespeed_modifier(/datum/movespeed_modifier/thirst/medium)
 		if(H.hallucination < severity_level)
 			H.hallucination += 2
 	if(H.hydration < HYDRATION_LEVEL_CRITICAL)
 		H.add_movespeed_modifier(/datum/movespeed_modifier/thirst/large)
-		H.adjustOrganLoss(ORGAN_SLOT_BLADDER, 5, severity_level)
+		var/obj/item/organ/kidneys/kidneys = H.getorganslot(ORGAN_SLOT_KIDNEYS)
+		if(kidneys)
+			kidneys.applyOrganDamage(rand(1,5), kidneys.maxHealth - 10)
