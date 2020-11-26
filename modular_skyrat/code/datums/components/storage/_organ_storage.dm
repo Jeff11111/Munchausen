@@ -318,5 +318,8 @@
 	if(ismecha(M.loc)) // stops inventory actions in a mech
 		return FALSE
 	// this must come before the screen objects only block, dunno why it wasn't before
-	if(ismob(over_object))
+	var/mob/living/L = M
+	if(!istype(L))
+		return FALSE
+	if(isliving(over_object) && (!bodypart_affected || (L.zone_selected == bodypart_affected.body_zone)))
 		user_show_to_mob(M)
