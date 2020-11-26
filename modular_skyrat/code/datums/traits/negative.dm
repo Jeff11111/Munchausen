@@ -99,7 +99,7 @@
 	lose_text = "<span class='notice'>You feel sturdy again.</span>"
 	medical_record_text = "Patient's body is fragile, and tends to suffer more damage from all sources."
 
-//paper skin
+//Paper skin
 /datum/quirk/paper_skin
 	name = "Paper skin"
 	desc = "<span class='warning'>My skin is fragile and breaks apart easily. I am susceptible to slash and puncture wounds.</span>"
@@ -107,7 +107,7 @@
 	mob_trait = TRAIT_EASYCUT
 	medical_record_text = "Patient's skin is frail, and  tends to be cut and punctured quite easily."
 
-//hollow bones
+//Hollow bones
 /datum/quirk/hollow_bones
 	name = "Hollow bones"
 	desc = "<span class='warning'>My bones are fragile, and break easily. I am susceptible to blunt wounds.</span>"
@@ -115,7 +115,7 @@
 	mob_trait = TRAIT_EASYBLUNT
 	medical_record_text = "Patient's bones are fragile, and tend to be easily fractured."
 
-//flammable skin
+//Flammable skin
 /datum/quirk/flammable_skin
 	name = "Flammable skin"
 	desc = "<span class='warning'>My skin is quite easy to set on fire. I am susceptible to burn wounds.</span>"
@@ -123,7 +123,7 @@
 	mob_trait = TRAIT_EASYBURN
 	medical_record_text = "Patient's skin is unnaturally flammable, and tends to be easily burnt."
 
-//xavleg
+//Xavleg
 /datum/quirk/xavlegbmaofffassssitimiwoamndutroabcwapwaeiippohfffx
 	name = "Xavlegbmaofffassssitimiwoamndutroabcwapwaeiippohfffx"
 	desc = "<span class='warning'>This is my name.</span>"
@@ -134,7 +134,7 @@
 	quirk_holder.real_name = "Xavlegbmaofffassssitimiwoamndutroabcwapwaeiippohfffx"
 	quirk_holder.name = "Xavlegbmaofffassssitimiwoamndutroabcwapwaeiippohfffx"
 
-//poor
+//Poor
 /datum/quirk/endebted
 	name = "Endebted"
 	desc = "<span class='warning'>I owe corporate a lot of money. They took everything out of my account.</span>"
@@ -148,7 +148,7 @@
 		var/datum/bank_account/B = id.registered_account
 		B.adjust_money(-B.account_balance)
 
-//hunted
+//Hunted
 /datum/quirk/hunted
 	name = "Hunted"
 	desc = "<span class='warning'>I have a secret enemy, I dread that I will know who they are soon...</span>"
@@ -177,7 +177,7 @@
 	lose_text = "<span class='notice'>You can feel your soul healing again.</span>"
 	mob_trait = TRAIT_DNR
 
-//fetal alcohol syndrome
+//Fetal alcohol syndrome
 /datum/quirk/fas
 	name = "Fetal Alcohol Syndrome"
 	desc = "<span class='warning'>I have fetal alcohol syndrome. My mother didn't care for me.</span>"
@@ -187,7 +187,7 @@
 	for(var/datum/stats/fuck in quirk_holder.mind.mob_stats)
 		fuck.level = clamp(fuck.level - 2, MIN_STAT, MAX_STAT)
 
-//nigger
+//Nigger
 /datum/quirk/nigger
 	name = "Nigger"
 	desc = "<span class='warning'>My skin is as dark as charcoal.</span>"
@@ -201,7 +201,7 @@
 	var/lastname = pick("Africa", "Africanus", "Niggerius", "Watermelon", "Watermelonium","Cottonpicker", "George Floyd", "Tupac", "Lamp", "Obama", "Matter")
 	H.fully_replace_character_name(H.real_name, "[firstname] [lastname]")
 
-//pure blooded aryan
+//Pure blooded aryan
 /datum/quirk/aryan
 	name = "Aryan"
 	desc = "<span class='warning'>My skin is as white as snow.</span>"
@@ -215,7 +215,7 @@
 	var/lastname = pick("Ethnicity", "Christchurch", "For-Chan", "Pol", "White Pride", "Steinhäuser", "Hitler", "Nietzsche", "Skyrim")
 	H.fully_replace_character_name(H.real_name, "[firstname] [lastname]")
 
-//british
+//British
 /datum/quirk/british
 	name = "British"
 	desc = "<span class='warning'>The tea has completely rotted away my gums.</span>"
@@ -225,11 +225,12 @@
 	. = ..()
 	var/mob/living/carbon/human/H = quirk_holder
 	var/obj/item/bodypart/feefh = H.get_bodypart(BODY_ZONE_HEAD)
-	feefh.knock_out_teeth(feefh.max_teeth)
+	QDEL_NULL(feefh.teeth_object)
+	feefh.update_teeth()
 
-//anemia
+//Anemia
 /datum/quirk/anemic
-	name = "Anemia stricken"
+	name = "Anemia Stricken"
 	desc = "<span class='warning'>I am anemic, my body cannot produce enough blood and I am lethargic.</span>"
 	lose_text = "<span class='info'>Oh good, I am no longer anemic.</span>"
 	medical_record_text = "Patient is anemic."

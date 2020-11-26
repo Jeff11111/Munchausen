@@ -1,6 +1,6 @@
 //fists of steel
 /datum/quirk/steel_fists
-	name = "Fists of steel"
+	name = "Fists of Steel"
 	desc = "<span class='info'>I am exceptionally good at unarmed combat. My punches hurt more.</span>"
 	medical_condition = FALSE
 
@@ -104,9 +104,9 @@
 	var/datum/stats/endurance = GET_STAT(quirk_holder, end)
 	var/datum/stats/dexterity = GET_STAT(quirk_holder, dex)
 	if(strength && endurance && dexterity)
-		strength.level = clamp(strength.level + 1, MIN_STAT, MAX_STAT)
-		endurance.level = clamp(endurance.level + 1, MIN_STAT, MAX_STAT)
-		dexterity.level = clamp(dexterity.level + 1, MIN_STAT, MAX_STAT)
+		strength.level = clamp(strength.level + 2, MIN_STAT, MAX_STAT)
+		endurance.level = clamp(endurance.level + 2, MIN_STAT, MAX_STAT)
+		dexterity.level = clamp(dexterity.level + 2, MIN_STAT, MAX_STAT)
 
 /datum/quirk/fitness/remove()
 	. = ..()
@@ -114,6 +114,6 @@
 	var/datum/stats/endurance = GET_STAT(quirk_holder, end)
 	var/datum/stats/dexterity = GET_STAT(quirk_holder, dex)
 	if(strength && endurance && dexterity)
-		strength.level = clamp(strength.level - 1, MIN_STAT, MAX_STAT)
-		endurance.level = clamp(endurance.level - 1, MIN_STAT, MAX_STAT)
-		dexterity.level = clamp(dexterity.level - 1, MIN_STAT, MAX_STAT)
+		strength.level = clamp(strength.level - 2, MIN_STAT, MAX_STAT)
+		endurance.level = clamp(endurance.level - 2, MIN_STAT, MAX_STAT)
+		dexterity.level = clamp(dexterity.level - 2, MIN_STAT, MAX_STAT)
