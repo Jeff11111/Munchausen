@@ -496,7 +496,7 @@
 				to_chat(user, "<span class='warning'>I don't have enough to stitch \the [src]!</span>")
 				return TRUE
 			to_chat(user, "<span class='notice'>I stitch \the [src] safely.</span>")
-			organ_flags |= ~ORGAN_CUT_AWAY
+			organ_flags &= ~ORGAN_CUT_AWAY
 		else
 			if(is_dead() || is_broken())
 				to_chat(user, "<span class='warning'>\The [src] is unsalvageable! I can't suture it!</span>")
@@ -524,7 +524,7 @@
 				to_chat(user, "<span class='warning'>I don't have enough to weld \the [src] in place!</span>")
 				return TRUE
 			to_chat(user, "<span class='notice'>I weld \the [src] safely.</span>")
-			organ_flags |= ~ORGAN_CUT_AWAY
+			organ_flags &= ~ORGAN_CUT_AWAY
 		else
 			if(is_dead() || is_broken())
 				to_chat(user, "<span class='warning'>\The [src] is unsalvageable! I can't suture it!</span>")

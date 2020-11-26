@@ -967,7 +967,7 @@
 		var/obj/item/organ/organ = O
 		organ.rejecting = FALSE
 		organ.setOrganDamage(0)
-		organ.organ_flags |= ~ORGAN_CUT_AWAY
+		organ.organ_flags &= ~ORGAN_CUT_AWAY
 		organ.janitize(0, 0, 0)
 	for(var/BP in bodyparts)
 		var/obj/item/bodypart/bodypart = BP

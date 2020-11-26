@@ -25,7 +25,7 @@
 		var/obj/item/organ/heart/my_heart = C.getorganslot(ORGAN_SLOT_HEART)
 		my_heart.organ_flags |= ORGAN_VITAL
 		var/obj/item/organ/brain/my_brain = C.getorganslot(ORGAN_SLOT_BRAIN)
-		my_brain.organ_flags |= ~ORGAN_VITAL
+		my_brain.organ_flags &= ~ORGAN_VITAL
 
 /datum/antagonist/dreamer/New()
 	. = ..()
