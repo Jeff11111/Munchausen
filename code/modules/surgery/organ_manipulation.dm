@@ -14,6 +14,11 @@
 		)
 	var/obj/item/mmi/mmi
 
+/datum/surgery/organ_manipulation/complete()
+	. = ..()
+	for(var/datum/component/storage/concrete/organ/ST in target)
+		qdel(ST)
+
 /datum/surgery/organ_manipulation/soft
 	possible_locs = list(BODY_ZONE_PRECISE_EYES, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_NECK, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_R_FOOT) //skyrat edit
 	steps = list(
@@ -36,6 +41,7 @@
 		/datum/surgery_step/manipulate_organs,
 		/datum/surgery_step/close
 		)
+
 /datum/surgery_step/manipulate_organs
 	time = 64
 	name = "Manipulate organs"
