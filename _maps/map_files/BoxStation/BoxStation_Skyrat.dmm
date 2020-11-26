@@ -481,9 +481,12 @@
 /turf/open/floor/plasteel/dark/corner,
 /area/security/prison)
 "aaV" = (
-/obj/structure/window/shuttle,
-/turf/open/space/basic,
-/area/space)
+/obj/structure/bodycontainer/crematorium{
+	dir = 8;
+	id = "crematoriumMorgue"
+	},
+/turf/open/floor/plasteel/dark,
+/area/medical/morgue)
 "aaW" = (
 /obj/effect/turf_decal/trimline/red/filled/line{
 	dir = 1
@@ -23802,9 +23805,7 @@
 /area/medical/morgue)
 "bho" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/obj/structure/bodycontainer/morgue{
-	dir = 8
-	},
+/obj/structure/table,
 /turf/open/floor/plasteel/dark,
 /area/medical/morgue)
 "bhp" = (
@@ -24894,6 +24895,9 @@
 	dir = 8;
 	network = list("ss13","medbay")
 	},
+/obj/structure/bodycontainer/morgue{
+	dir = 8
+	},
 /turf/open/floor/plasteel/dark,
 /area/medical/morgue)
 "bki" = (
@@ -25306,6 +25310,11 @@
 "blo" = (
 /obj/structure/cable{
 	icon_state = "2-4"
+	},
+/obj/machinery/button/crematorium{
+	id = "crematoriumMorgue";
+	pixel_y = 24;
+	req_access_txt = "5"
 	},
 /turf/open/floor/plasteel/dark,
 /area/medical/morgue)
@@ -38527,6 +38536,9 @@
 /obj/machinery/light/small{
 	dir = 4;
 	light_color = "#d8b1b1"
+	},
+/obj/structure/bodycontainer/morgue{
+	dir = 8
 	},
 /turf/open/floor/plasteel/dark,
 /area/medical/morgue)
@@ -53098,6 +53110,12 @@
 	},
 /turf/open/floor/plasteel/cafeteria,
 /area/security/prison)
+"ero" = (
+/obj/structure/bodycontainer/morgue{
+	dir = 8
+	},
+/turf/open/floor/plasteel/dark,
+/area/medical/morgue)
 "erB" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 9
@@ -75806,7 +75824,7 @@ gXs
 aaa
 aaa
 aaa
-aaV
+aaa
 aaa
 aaa
 aaa
@@ -108209,9 +108227,9 @@ aYV
 aYV
 bfL
 brD
-bQD
-bQD
-bQD
+bhm
+bhm
+bhm
 uyA
 mXe
 bpI
@@ -108465,10 +108483,10 @@ aYV
 aYV
 aYV
 bfL
-bhm
+aaV
 bRQ
 bkf
-bhm
+ero
 uyA
 mXe
 bpL
