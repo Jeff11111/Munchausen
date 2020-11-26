@@ -13,7 +13,6 @@
 	UnregisterSignal(parent, list(COMSIG_MOUSEDROPPED_ONTO, COMSIG_CLICK_ALT, COMSIG_CLICK_MIDDLE, \
 							COMSIG_ATOM_ATTACK_HAND, COMSIG_ITEM_PRE_ATTACK, COMSIG_ITEM_ATTACK_SELF, \
 							COMSIG_ITEM_PICKUP))
-	RegisterSignal(parent, COMSIG_CLICK_ALT, .proc/on_attack_hand)
 	addtimer(CALLBACK(src, .proc/update_insides), 1 SECONDS)
 
 //Gives all organs parent as stored_in
