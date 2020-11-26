@@ -41,6 +41,7 @@
 /obj/item/gun/ballistic/automatic/pistol/modular
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
 	icon_state = "modularpistol"
+	suppressed_pixel_x = 4
 
 //Nangler
 /obj/item/gun/ballistic/automatic/pistol/nangler
@@ -66,6 +67,7 @@
 	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/pistol_lefthand.dmi'
 	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/pistol_righthand.dmi'
 	fire_sound = 'modular_skyrat/sound/guns/pistol2.ogg'
+	suppressed_pixel_x = 8
 
 /obj/item/gun/ballistic/automatic/pistol/m1911/kitchengun
 	icon_state = "pistol45"
@@ -100,6 +102,7 @@
 	can_suppress = FALSE
 	burst_size = 2
 	fire_delay = 2
+	suppressed_pixel_x = 4
 	actions_types = list(/datum/action/item_action/toggle_firemode)
 	fire_sound = 'modular_skyrat/sound/guns/pistol1.ogg'
 
