@@ -203,9 +203,6 @@
 /datum/mind/proc/do_add_antag_datum(instanced_datum)
 	. = LAZYLEN(antag_datums)
 	LAZYADD(antag_datums, instanced_datum)
-	if(!.)
-		current.verbs += /mob/proc/edit_objectives_and_ambitions
-//SKYRAT CHANGES END
 
 /datum/mind/proc/remove_antag_datum(datum_type)
 	if(!datum_type)
