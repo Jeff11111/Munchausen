@@ -63,6 +63,12 @@
 	icon_state = "holdingsat"
 	item_state = "holdingsat"
 	species_exception = list(/datum/species/angel)
+	worn_access = TRUE
+
+/obj/item/storage/backpack/holding/satchel/ComponentInitialize()
+	. = ..()
+	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
+	STR.max_combined_w_class = 18
 
 /obj/item/storage/backpack/holding/duffel
 	name = "duffel bag of holding"

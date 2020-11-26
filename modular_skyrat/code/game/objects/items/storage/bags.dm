@@ -32,6 +32,13 @@
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/back.dmi'
 	icon_state = "courierbag"
 	item_state = "courierbag"
+	worn_access = TRUE
+
+/obj/item/storage/backpack/courier/ComponentInitialize()
+	..()
+	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
+	if(STR)
+		STR.max_combined_w_class = 12
 
 /obj/item/storage/backpack/courier/chem
 	name = "chemist courier bag"
