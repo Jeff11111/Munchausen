@@ -318,5 +318,5 @@
 	if(ismecha(M.loc)) // stops inventory actions in a mech
 		return FALSE
 	// this must come before the screen objects only block, dunno why it wasn't before
-	if(over_object == M)
+	if(ismob(over_object))
 		user_show_to_mob(M)
