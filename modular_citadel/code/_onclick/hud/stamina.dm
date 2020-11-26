@@ -2,60 +2,49 @@
 /datum/hud/var/obj/screen/staminabuffer/staminabuffer
 
 /obj/screen/staminas
-	icon = 'modular_citadel/icons/ui/screen_gen.dmi'
-	name = "stamina"
-	icon_state = "stamina0"
+	icon = 'modular_skyrat/icons/mob/screen_gen.dmi'
+	name = "fatigue"
+	icon_state = "fatigue16"
 	screen_loc = ui_stamina
 	mouse_opacity = 1
+	var/overfatigue = FALSE
+	var/mutable_appearance/overfatigue_appearance
+
+/obj/screen/staminas/Initialize()
+	. = ..()
+	overfatigue_appearance = mutable_appearance(icon, "overfatigue16")
 
 /obj/screen/staminas/Click(location,control,params)
+	var/list/paramslist = params2list(params)
+	if(paramslist["shift"])
+		overfatigue = !overfatigue
+		to_chat(usr, "<span class='notice'>Your overfatigue is now [overfatigue ? "visible" : "hidden"].</span>")
+		update_icon()
+		return
 	if(isliving(usr))
 		var/mob/living/L = usr
-		to_chat(L, "<span class='notice'>You have <b>[L.getStaminaLoss()]</b> stamina loss.<br>Your stamina buffer can take <b>[L.stambuffer]</b> stamina loss, and recharges at no cost.<br>Your stamina buffer is <b>[(L.stambuffer*(100/L.stambuffer))-(L.bufferedstam*(100/L.stambuffer))]%</b> full.</span>")
+		to_chat(L, "<span class='notice'>You have <b>[L.getStaminaLoss()]</b> fatigue loss.<br>Your overfatigue can take <b>[L.stambuffer]</b> fatigue loss.<br>Your overfatigue buffer is <b>[(L.stambuffer*(100/L.stambuffer))-(L.bufferedstam*(100/L.stambuffer))]%</b> full.</span>")
+
+/obj/screen/staminas/update_overlays()
+	. = ..()
+	if(overfatigue)
+		. += overfatigue_appearance
 
 /obj/screen/staminas/update_icon_state()
 	var/mob/living/carbon/user = hud?.mymob
 	if(!user)
 		return
+	//Fatigue
 	if(user.stat == DEAD || (user.combat_flags & COMBAT_FLAG_HARD_STAMCRIT) || (user.hal_screwyhud in 1 to 2))
-		icon_state = "staminacrit"
+		icon_state = "fatigue0"
 	else if((user.hal_screwyhud == SCREWYHUD_HEALTHY) || HAS_TRAIT(hud?.mymob, TRAIT_SCREWY_CHECKSELF))
-		icon_state = "stamina0"
+		icon_state = "fatigue16"
 	else
-		icon_state = "stamina[clamp(FLOOR(user.getStaminaLoss() /20, 1), 0, 6)]"
-
-//stam buffer
-/obj/screen/staminabuffer
-	icon = 'modular_citadel/icons/ui/screen_gen.dmi'
-	name = "stamina buffer"
-	icon_state = "stambuffer0"
-	screen_loc = ui_stamina
-	layer = ABOVE_HUD_LAYER + 0.1
-	mouse_opacity = 0
-
-/obj/screen/staminabuffer/update_icon_state()
-	var/mob/living/carbon/user = hud?.mymob
-	if(!user)
-		return
+		icon_state = "fatigue[clamp(16 - CEILING(user.getStaminaLoss() / 16, 1), 0, 16)]"
+	//Over fatigue
 	if(user.stat == DEAD || (user.combat_flags & COMBAT_FLAG_HARD_STAMCRIT) || (user.hal_screwyhud in 1 to 2))
-		icon_state = "stambuffer7"
-	else if(user.hal_screwyhud == 5)
-		icon_state = "stambuffer0"
+		overfatigue_appearance.icon_state = "overfatigue0"
+	else if((user.hal_screwyhud == SCREWYHUD_HEALTHY) || HAS_TRAIT(hud?.mymob, TRAIT_SCREWY_CHECKSELF))
+		overfatigue_appearance.icon_state = "overfatigue16"
 	else
-		switch(user.bufferedstam / user.stambuffer)
-			if(0.95 to INFINITY)
-				icon_state = "stambuffer7"
-			if(0.9 to 0.95)
-				icon_state = "stambuffer6"
-			if(0.8 to 0.9)
-				icon_state = "stambuffer5"
-			if(0.6 to 0.8)
-				icon_state = "stambuffer4"
-			if(0.4 to 0.6)
-				icon_state = "stambuffer3"
-			if(0.2 to 0.4)
-				icon_state = "stambuffer2"
-			if(0.05 to 0.2)
-				icon_state = "stambuffer1"
-			else
-				icon_state = "stambuffer0"
+		overfatigue_appearance.icon_state = "overfatigue[clamp(CEILING((1 - (user.bufferedstam / user.stambuffer)) * 16, 1), 0, 16)]"

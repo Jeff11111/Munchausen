@@ -255,22 +255,3 @@
 	scarring_descriptions = list("a winding path of very badly healed scar tissue", "a series of peaks and valleys along a gruesome line of cut scar tissue", "a grotesque snake of indentations and stitching scars")
 	pain_amount = 20
 	descriptive = "The hydraulics are slashed!"
-
-/datum/wound/mechanical/slash/critical/incision
-	name = "Open Hatch"
-	desc = "Patient has had his hatch opened for surgical purposes."
-	treat_text = "Finalization of surgical procedures on the affected limb."
-	examine_desc = "is mechanically opened, components visible from it's open hatches"
-	occur_text = "is mechanically breached"
-	sound_effect = 'modular_skyrat/sound/effects/blood1.ogg'
-	severity = WOUND_SEVERITY_CRITICAL
-	viable_zones = ALL_BODYPARTS
-	wound_type = WOUND_LIST_INCISION_MECHANICAL
-	initial_flow = 1.5
-	minimum_flow = 0.1
-	clot_rate = 0.02
-	max_per_type = 5
-	demotes_to = null
-	scarring_descriptions = list("a precise line of scarred tissue", "a long line of slightly darker tissue")
-	pain_amount = 15
-	descriptive = "The hatch is opened!"

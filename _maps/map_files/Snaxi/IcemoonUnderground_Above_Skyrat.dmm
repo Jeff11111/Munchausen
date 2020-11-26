@@ -1101,7 +1101,6 @@
 /turf/open/floor/plating,
 /area/mine/production)
 "zU" = (
-/obj/item/clothing/under/color/jumpskirt/random,
 /obj/structure/table,
 /turf/open/floor/plasteel,
 /area/mine/living_quarters)
@@ -1857,7 +1856,6 @@
 /turf/open/floor/plating,
 /area/mine/production)
 "Ow" = (
-/obj/item/clothing/under/color/jumpskirt/random,
 /obj/effect/turf_decal/tile/brown{
 	dir = 1
 	},

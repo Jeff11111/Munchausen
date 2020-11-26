@@ -138,8 +138,7 @@ GLOBAL_LIST_INIT(backbaglist, list(DBACKPACK, DSATCHEL, DDUFFELBAG, GBACKPACK, G
 
 //Suit/Skirt
 #define PREF_SUIT "Jumpsuit"
-#define PREF_SKIRT "Jumpskirt"
-GLOBAL_LIST_INIT(jumpsuitlist, list(PREF_SUIT, PREF_SKIRT))
+GLOBAL_LIST_INIT(jumpsuitlist, list(PREF_SUIT))
 
 //Uplink spawn loc
 #define UPLINK_PDA		"PDA"

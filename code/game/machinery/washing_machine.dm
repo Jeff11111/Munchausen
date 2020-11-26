@@ -22,17 +22,6 @@ GLOBAL_LIST_INIT(dye_registry, list(
 		DYE_CMO = /obj/item/clothing/under/rank/medical/chief_medical_officer,
 		DYE_REDCOAT = /obj/item/clothing/under/costume/redcoat
 	),
-	DYE_REGISTRY_JUMPSKIRT = list(
-		DYE_RED = /obj/item/clothing/under/color/jumpskirt/red,
-		DYE_ORANGE = /obj/item/clothing/under/color/jumpskirt/orange,
-		DYE_YELLOW = /obj/item/clothing/under/color/jumpskirt/yellow,
-		DYE_GREEN = /obj/item/clothing/under/color/jumpskirt/green,
-		DYE_BLUE = /obj/item/clothing/under/color/jumpskirt/blue,
-		DYE_PURPLE = /obj/item/clothing/under/color/jumpskirt/lightpurple,
-		DYE_BLACK = /obj/item/clothing/under/color/jumpskirt/black,
-		DYE_WHITE = /obj/item/clothing/under/color/jumpskirt/white,
-		DYE_RAINBOW = /obj/item/clothing/under/color/jumpskirt/rainbow
-	),
 	DYE_REGISTRY_GLOVES = list(
 		DYE_RED = /obj/item/clothing/gloves/color/red,
 		DYE_ORANGE = /obj/item/clothing/gloves/color/orange,

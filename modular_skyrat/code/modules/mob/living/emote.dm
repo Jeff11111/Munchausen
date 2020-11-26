@@ -20,7 +20,7 @@
 
 /datum/emote/living/run_emote(mob/user, params)
 	. = ..()
-	if(. && sound && (user.nextsoundemote < world.time))
+	if(can_run_emote(user, TRUE) && sound && (user.nextsoundemote < world.time))
 		user.nextsoundemote = world.time + cooldown
 		playsound(user.loc, sound, volume, vary)
 
@@ -215,7 +215,7 @@
 				sound = pick(H.dna.species.death_rattles_female)
 
 // Death scream
-/datum/emote/living/deathrattle
+/datum/emote/living/deathscream
 	key = "deathscream"
 	key_third_person = "deathscreams"
 	message = "screams!"
@@ -225,13 +225,13 @@
 	stat_allowed = UNCONSCIOUS
 	mob_type_allowed_typecache = list(/mob/living/carbon/human)
 
-/datum/emote/living/deathrattle/run_emote(mob/user, params)
+/datum/emote/living/deathscream/run_emote(mob/user, params)
 	. = ..()
 	//emotes are singletons so we need to clear out the sound
 	sound = null
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		if(length(H.dna?.species?.death_rattles_male))
-			sound = pick(H.dna.species.death_rattles_male)
+		if(length(H.dna?.species?.death_screams_male))
+			sound = pick(H.dna.species.death_screams_male)
 			if((H.gender == FEMALE) && length(H.dna.species.death_rattles_female))
-				sound = pick(H.dna.species.death_rattles_female)
+				sound = pick(H.dna.species.death_screams_female)

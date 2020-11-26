@@ -8,6 +8,7 @@
 	var/list/recipe_progression = list(/datum/crafting_recipe/wonder, /datum/crafting_recipe/wonder/second, /datum/crafting_recipe/wonder/third, /datum/crafting_recipe/wonder/fourth)
 	var/list/heart_keys = list()
 	var/list/associated_keys = list()
+	var/list/hearts_seen = list()
 	var/current_wonder = 0
 	var/sum_keys = 0
 	silent = TRUE
@@ -79,19 +80,19 @@
 	if(istype(fake) && istype(str))
 		fake.level = str.level
 	if(istype(str))
-		str.level = min(str.level + 15, 30)
+		str.level = min(str.level + rand(10, 15), 30)
 	var/datum/stats/end/end = GET_STAT(M, end)
 	if(istype(end))
-		end.level = min(end.level + 15, 30)
+		end.level = min(end.level + rand(10, 15), 30)
 	var/datum/skills/surgery/surgery = GET_SKILL(M, surgery)
 	if(istype(surgery))
-		surgery.level = min(surgery.level + 20, 30)
+		surgery.level = min(surgery.level + rand(15, 20), 30)
 	var/datum/skills/melee/melee = GET_SKILL(M, melee)
 	if(istype(melee))
-		melee.level = min(melee.level + 20, 30)
+		melee.level = min(melee.level + rand(15, 20), 30)
 	var/datum/skills/ranged/ranged = GET_SKILL(M, ranged)
 	if(istype(ranged))
-		ranged.level = min(ranged.level + 20, 30)
+		ranged.level = min(ranged.level + rand(15, 20), 30)
 	ADD_TRAIT(M, TRAIT_NOPAIN, "dreamer")
 	ADD_TRAIT(M.mind, TRAIT_NOPAIN, "dreamer")
 	ADD_TRAIT(M, TRAIT_BLOODLOSSIMMUNE, "dreamer")

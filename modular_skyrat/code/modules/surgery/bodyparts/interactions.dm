@@ -91,7 +91,7 @@
 // Trying to rip a limb off
 /obj/item/bodypart/proc/get_ripped_off(mob/living/carbon/user, mob/living/carbon/victim, silent = FALSE)
 	. = FALSE
-	if(!owner || !user)
+	if(!owner || !user || !can_dismember())
 		return
 	if(!victim)
 		victim = owner

@@ -97,6 +97,10 @@
 
 	var/list/saved_recipes = list()
 
+/obj/machinery/chem_dispenser/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/multitool_emaggable)
+
 /obj/machinery/chem_dispenser/Initialize()
 	. = ..()
 	dispensable_reagents = sortList(dispensable_reagents, /proc/cmp_reagents_asc)

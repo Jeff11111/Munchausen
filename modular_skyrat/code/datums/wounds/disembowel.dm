@@ -82,14 +82,7 @@
 	second_wind()
 	log_wound(victim, src)
 	qdel(src)
-	var/kaplosh_sound = pick(
-		'modular_skyrat/sound/gore/chop1.ogg',
-		'modular_skyrat/sound/gore/chop2.ogg',
-		'modular_skyrat/sound/gore/chop3.ogg',
-		'modular_skyrat/sound/gore/chop4.ogg',
-		'modular_skyrat/sound/gore/chop5.ogg',
-		'modular_skyrat/sound/gore/chop6.ogg',
-	)
+	var/kaplosh_sound = 'modular_skyrat/sound/gore/dissection.ogg'
 	if(length(L.dismember_sounds))
 		kaplosh_sound = pick(L.dismember_sounds)
 	if(L.is_robotic_limb())
@@ -102,7 +95,7 @@
 	name = "Disembowelment"
 	desc = "Patient's limb has been violently avulsioned, to the point of large chunks of flesh and organs getting lost."
 	treat_text = "Immediate surgical closure of the wound, as well as reimplantation of lost organs."
-	examine_desc = "has a wide and gaping wound, enough to see through the flesh"
+	examine_desc = "has a wide and gaping wound"
 	viable_zones = ALL_BODYPARTS
 	severity = WOUND_SEVERITY_CRITICAL
 	wound_type = WOUND_LIST_DISEMBOWEL
@@ -123,6 +116,16 @@
 	minimum_flow = 4
 	clot_rate = 0
 	descriptive = "The limb is disemboweled!"
+	var/datum/component/storage/concrete/organ/our_component
+
+/datum/wound/slash/critical/incision/disembowel/get_examine_description(mob/user)
+	. = ..()
+	if(limb.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))
+		return "<span class='deadsay'>[..()]</span>"
+
+/datum/wound/slash/critical/incision/disembowel/Destroy()
+	. = ..()
+	QDEL_NULL(our_component)
 
 /datum/wound/slash/critical/incision/disembowel/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
 	. = ..()
@@ -130,6 +133,9 @@
 	switch(L.body_zone)
 		if(BODY_ZONE_HEAD)
 			initial_flow *= 1
+			minimum_flow *= (1/4)
+		if(BODY_ZONE_PRECISE_NECK)
+			initial_flow *= (6/4)
 			minimum_flow *= (1/4)
 		if(BODY_ZONE_CHEST)
 			initial_flow *= (5/4)
@@ -161,12 +167,19 @@
 		if(BODY_ZONE_PRECISE_R_FOOT)
 			initial_flow *= (1/2)
 			minimum_flow *= (1/3)
+	our_component = L.owner.AddComponent(/datum/component/storage/concrete/organ)
+	our_component.attack_hand_open = TRUE
+	our_component.attack_hand_interact = TRUE
+	our_component.bodypart_affected = L
+	our_component.drop_all_on_deconstruct = FALSE
+	our_component.silent = TRUE
+	our_component.update_insides()
 
 /datum/wound/mechanical/slash/critical/incision/disembowel
 	name = "Disemboweled"
 	desc = "Patient's limb has been violently shredded, to the point of large chunks of metal and components getting lost."
 	treat_text = "Immediate welding of the wound, as well as reattachment of lost components."
-	examine_desc = "has a wide and gaping tear, enough to see through the exoskeleton"
+	examine_desc = "has a wide and gaping tear"
 	viable_zones = ALL_BODYPARTS
 	severity = WOUND_SEVERITY_CRITICAL
 	wound_type = WOUND_LIST_DISEMBOWEL
@@ -184,11 +197,16 @@
 	pain_amount = 40 //Just absolutely unbearable. Will send you into shock most of the time.
 	occur_text = null
 	descriptive = "The limb is disemboweled!"
+	var/datum/component/storage/concrete/organ/our_component
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/get_examine_description(mob/user)
 	. = ..()
-	if(limb.body_zone == BODY_ZONE_HEAD)
+	if(limb.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))
 		return "<span class='deadsay'>[..()]</span>"
+
+/datum/wound/mechanical/slash/critical/incision/disembowel/Destroy()
+	. = ..()
+	QDEL_NULL(our_component)
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
 	. = ..()
@@ -196,6 +214,9 @@
 	switch(L.body_zone)
 		if(BODY_ZONE_HEAD)
 			initial_flow *= 1
+			minimum_flow *= (1/4)
+		if(BODY_ZONE_PRECISE_NECK)
+			initial_flow *= (6/4)
 			minimum_flow *= (1/4)
 		if(BODY_ZONE_CHEST)
 			initial_flow *= (5/4)
@@ -227,3 +248,10 @@
 		if(BODY_ZONE_PRECISE_R_FOOT)
 			initial_flow *= (1/2)
 			minimum_flow *= (1/3)
+	our_component = L.owner.AddComponent(/datum/component/storage/concrete/organ)
+	our_component.attack_hand_open = TRUE
+	our_component.attack_hand_interact = TRUE
+	our_component.bodypart_affected = L
+	our_component.drop_all_on_deconstruct = FALSE
+	our_component.silent = TRUE
+	our_component.update_insides()

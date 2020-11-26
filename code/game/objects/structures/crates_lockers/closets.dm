@@ -38,6 +38,9 @@
 	var/eigen_teleport = FALSE //If the closet leads to Mr Tumnus.
 	var/obj/structure/closet/eigen_target //Where you go to.
 
+/obj/structure/closet/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/multitool_emaggable)
 
 /obj/structure/closet/Initialize(mapload)
 	. = ..()
@@ -598,7 +601,6 @@
 
 /obj/structure/closet/AllowDrop()
 	return TRUE
-
 
 /obj/structure/closet/return_temperature()
 	return

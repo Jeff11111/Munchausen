@@ -22,6 +22,10 @@
 
 	light_color = "#E2853D"//orange
 
+/obj/machinery/computer/cargo/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/multitool_emaggable)
+	
 /obj/machinery/computer/cargo/request
 	name = "supply request console"
 	desc = "Used to request supplies from cargo."

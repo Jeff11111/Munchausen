@@ -61,7 +61,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 // START LANDMARKS FOLLOW. Don't change the names unless
 // you are refactoring shitty landmark code.
 /obj/effect/landmark/start/assistant
-	name = "Assistant"
+	name = "Stowaway"
 	icon_state = "Assistant"
 	jobspawn_override = TRUE //Stowaways MUST spawn in maint etc
 

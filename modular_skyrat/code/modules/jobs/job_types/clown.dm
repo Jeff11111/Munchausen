@@ -7,4 +7,4 @@
 
 /datum/outfit/job/clown
 	uniform = /obj/item/clothing/under/color/grey/os13
-	shoes = /obj/item/clothing/shoes/sneakers/black
+	shoes = /obj/item/clothing/shoes/sneakers/rainbow

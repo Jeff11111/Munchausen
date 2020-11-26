@@ -412,24 +412,22 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	if (isnum(cached_player_age) && cached_player_age == -1) //first connection
 		player_age = 0
 	var/nnpa = CONFIG_GET(number/notify_new_player_age)
-	if (isnum(cached_player_age) && cached_player_age == -1) //first connection
-		if (nnpa >= 0)
+	if(isnum(cached_player_age) && cached_player_age == -1) //first connection
+		if(nnpa >= 0)
 			message_admins("New user: [key_name_admin(src)] is connecting here for the first time.")
-			if (CONFIG_GET(flag/irc_first_connection_alert))
+			if(CONFIG_GET(flag/irc_first_connection_alert))
 				send2irc_adminless_only("New-user", "[key_name(src)] is connecting for the first time!")
-	else if (isnum(cached_player_age) && cached_player_age < nnpa)
+	else if(isnum(cached_player_age) && cached_player_age < nnpa)
 		message_admins("New user: [key_name_admin(src)] just connected with an age of [cached_player_age] day[(player_age==1?"":"s")]")
+	
 	if(CONFIG_GET(flag/use_account_age_for_jobs) && account_age >= 0)
 		player_age = account_age
 
-	//SKYRAT CHANGE - account age lock, don't confuse with player age, admins and bunker passthrough allowed
 	if(!connecting_admin && CONFIG_GET(flag/age_lock) && account_age >= 0 && account_age < CONFIG_GET(number/age_lock_days) && !(ckey in GLOB.bunker_passthrough))
-		to_chat(src, "<span class='userdanger'>Hey! We have currently enabled safety measures and your connection has been dropped due to your accoutn being [account_age]'s days old.</span>")
-		to_chat(src, "<span class='userdanger'>Contact staff on our discord server if you wish to play.</span>")
+		to_chat(src, "<span class='userdanger'><span clas='big bold'>You are not invited.</span></span>")
 		message_admins("<span class='adminnotice'>[key_name(src)] logged in with their account being [account_age]'s days old. Connection rejected.</span>")
 		qdel(src)
 		return
-	//END OF SKYRAT CHANGE
 
 	if(account_age >= 0 && account_age < nnpa)
 		message_admins("[key_name_admin(src)] (IP: [address], ID: [computer_id]) is a new BYOND account [account_age] day[(account_age==1?"":"s")] old, created on [account_join_date].")
@@ -468,7 +466,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		tooltips = new /datum/tooltip(src)
 
 	var/list/topmenus = GLOB.menulist[/datum/verbs/menu]
-	for (var/thing in topmenus)
+	for(var/thing in topmenus)
 		var/datum/verbs/menu/topmenu = thing
 		var/topmenuname = "[topmenu]"
 		if (topmenuname == "[topmenu.type]")

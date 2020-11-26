@@ -146,7 +146,6 @@
 	pin = /obj/item/firing_pin/implant/pindicate
 
 ////////////Improvised Pistol////////////
-
 /obj/item/gun/ballistic/automatic/pistol/improvised
 	name = "Improvised Pistol"
 	desc = "An improvised pocket-sized pistol that fires .32 calibre rounds. It looks incredibly flimsy."

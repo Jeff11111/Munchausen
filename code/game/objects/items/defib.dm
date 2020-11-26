@@ -30,6 +30,10 @@
 	var/disarm_shock_time = 10
 	var/always_emagged = FALSE
 
+/obj/item/defibrillator/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/multitool_emaggable)
+
 /obj/item/defibrillator/get_cell()
 	return cell
 

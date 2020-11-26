@@ -53,6 +53,7 @@
 						BP.painless_wound_roll(WOUND_SLASH, force, wound_bonus, bare_wound_bonus)
 					return FALSE
 				BP.disembowel_wound(WOUND_SLASH)
+				user.put_in_hands(BP)
 			else if((BP.body_zone == BODY_ZONE_CHEST) && (length(victim.bodyparts) <= 1))
 				to_chat(user, "<span class='warning'>I begin dissecting \the [target]'s [BP] open...</span>")
 				if(!do_mob(user, victim, time))
@@ -63,7 +64,7 @@
 					if(prob(40))
 						BP.painless_wound_roll(WOUND_SLASH, force, wound_bonus, bare_wound_bonus)
 					return FALSE
-				BP.drop_limb()
+				BP.drop_limb(TRUE)
 				qdel(victim)
 		return TRUE
 	return FALSE

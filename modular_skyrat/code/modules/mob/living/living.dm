@@ -5,6 +5,7 @@
 	var/list/recent_embeds = list()
 	var/embed_timer
 	var/list/chem_effects = list()
+	var/list/chem_effect_sources = list()
 
 /mob/living/proc/wield_active_hand()
 	return

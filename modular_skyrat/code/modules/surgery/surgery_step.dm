@@ -42,7 +42,8 @@
 		
 		prob_chance *= surgery.get_probability_multiplier()
 
-		if((ishuman(target) || ismonkey(target)) && affecting && affecting.is_organic_limb() && (target.stat == CONSCIOUS) && (target.mob_biotypes & MOB_ORGANIC) && !target.IsUnconscious() && !target.InCritical() && !HAS_TRAIT(target, TRAIT_PAINKILLER) && !(target.chem_effects[CE_PAINKILLER] >= 50))
+		var/mob/living/carbon/C = target
+		if(istype(C) && C.can_feel_pain() && affecting && affecting.is_organic_limb() && (target.stat <= UNCONSCIOUS) && (target.mob_biotypes & MOB_ORGANIC) && !target.InFullCritical() && !HAS_TRAIT(target, TRAIT_PAINKILLER) && !(target.chem_effects[CE_PAINKILLER] >= 50))
 			if(user.mind)
 				var/datum/skills/surgery/surgerye = GET_SKILL(user, surgery)
 				if(surgerye && surgerye.level <= 10)
@@ -50,7 +51,6 @@
 			else
 				prob_chance *= 0.4
 			
-			to_chat(user, "<span class='notice'>You feel like anesthetics could make this much easier.</span>")
 			target.visible_message("<span class='warning'>[target] [pick("writhes in pain", "squirms and kicks in agony", "cries in pain as [target.p_their()] body violently jerks")], impeding the surgery!</span>", \
 			"<span class='warning'>You[pick(" writhe as agonizing pain surges throught your entire body", " feel burning pain sending your body into a convulsion", "r body squirms as sickening pain fills every part of it")]!</span>")
 			target.emote("scream")

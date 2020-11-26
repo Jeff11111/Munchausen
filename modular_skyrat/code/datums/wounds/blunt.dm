@@ -71,7 +71,9 @@
 			I = victim.get_inactive_held_item()
 
 		if(I && victim.dropItemToGround(I))
-			victim.visible_message("<span class='danger'>[victim] drops [I] in shock!</span>", "<span class='warning'><b>The force on your [limb.name] causes you to drop [I]!</b></span>", vision_distance=COMBAT_MESSAGE_RANGE)
+			victim.visible_message("<span class='danger'>[victim] drops [I] in shock!</span>", \
+								"<span class='warning'><b>The force on my [limb.name] causes me to drop [I]!</b></span>", \
+								vision_distance=COMBAT_MESSAGE_RANGE)
 	
 	if(severity >= WOUND_SEVERITY_SEVERE)
 		if(victim.mind)
@@ -118,7 +120,8 @@
 		regen_points_current += 0.2
 	
 	if(prob(severity * 1.5))
-		victim.custom_pain("I feel a sharp pain in nu body as my bones reform!", max(1, severity - WOUND_SEVERITY_TRIVIAL) * 15)
+		victim.custom_pain("I feel a sharp pain on my [limb] as my bones reform!", \
+					max(1, severity - WOUND_SEVERITY_TRIVIAL) * 15)
 
 	if(regen_points_current > regen_points_needed)
 		if(!victim || !limb)
@@ -136,11 +139,12 @@
 	if(prob((severity - WOUND_SEVERITY_TRIVIAL) * 20))
 		// And you have a 70% or 50% chance to actually land the blow, respectively
 		if(prob(70 - 20 * (severity - 1)))
-			to_chat(victim, "<span class='userdanger'>The fracture in your [limb.name] shoots with pain as you strike [target]!</span>")
+			to_chat(victim, "<span class='userdanger'>The fracture in my [limb.name] shoots with pain as i strike [target]!</span>")
 			limb.receive_damage(brute=rand(1,5), wound_bonus = CANT_WOUND)
 		else
 			victim.visible_message("<span class='danger'>[victim] weakly strikes [target] with [victim.p_their()] broken [limb.name], recoiling from pain!</span>", \
-			"<span class='userdanger'>You fail to strike [target] as the fracture in your [limb.name] lights up in unbearable pain!</span>", vision_distance=COMBAT_MESSAGE_RANGE)
+				"<span class='userdanger'>I fail to strike [target] as the fracture in my [limb.name] lights up in unbearable pain!</span>", \
+				vision_distance=COMBAT_MESSAGE_RANGE)
 			victim.agony_scream()
 			victim.Stun(0.5 SECONDS)
 			limb.receive_damage(brute=rand(2,7), wound_bonus = CANT_WOUND)
@@ -160,24 +164,30 @@
 			var/obj/item/oops = victim?.get_item_for_held_index(limb?.held_index)
 			if(oops)
 				victim?.dropItemToGround(oops)
-			to_chat(victim, "<span class='danger'>You drop [oops] in excruciating pain!</span>")
+			to_chat(victim, "<span class='danger'>I drop [oops] in excruciating pain!</span>")
 		if(prob(max(1, severity - WOUND_SEVERITY_TRIVIAL) * 10))
 			victim?.agony_scream()
 	
 	if(limb.body_zone == BODY_ZONE_PRECISE_GROIN && prob(15 * max(1, severity - WOUND_SEVERITY_TRIVIAL)))
 		victim?.Paralyze(severity * 3)
-		to_chat(victim, "<span class='danger'>The excruciating pain on your [limb] paralyzes you for a moment!</span>")
+		to_chat(victim, "<span class='danger'>The excruciating pain on my [limb] paralyzes me!</span>")
 	
 	if(limb.body_zone == BODY_ZONE_CHEST && !HAS_TRAIT(victim, TRAIT_NOBREATH) && severity >= WOUND_SEVERITY_MODERATE)
 		var/oxy_dmg = round(rand(1, (wounding_dmg/5) * (max(1, severity - WOUND_SEVERITY_TRIVIAL))))
 		victim.adjustOxyLoss(oxy_dmg)
 
 	if(limb.body_zone == BODY_ZONE_HEAD && prob((severity - WOUND_SEVERITY_TRIVIAL + 1) * 12))
-		to_chat(victim, "<span class='userdanger'>The strike on your [severity >= WOUND_SEVERITY_SEVERE ? "broken" : (severity >= WOUND_SEVERITY_MODERATE ? "dislocated" : "damaged")] [limb.name] hurts like hell!</span>")
+		to_chat(victim, "<span class='userdanger'>The strike on my [severity >= WOUND_SEVERITY_SEVERE ? "broken" : (severity >= WOUND_SEVERITY_MODERATE ? "dislocated" : "damaged")] [limb.name] hurts like hell!</span>")
 		victim.adjust_blurriness(rand(1 * (severity - WOUND_SEVERITY_TRIVIAL), 10 * (severity - WOUND_SEVERITY_TRIVIAL)))
 		victim.confused += max(25, rand(1 * (severity - WOUND_SEVERITY_TRIVIAL), 10 * (severity - WOUND_SEVERITY_TRIVIAL)))
 		if(prob(wounding_dmg))
 			victim.adjustBrainLoss(rand(1, 4) * (severity - WOUND_SEVERITY_TRIVIAL))
+	
+	//George floyd says: I CAN'T BREATHE!
+	if(limb.body_zone == BODY_ZONE_PRECISE_NECK && prob((severity - WOUND_SEVERITY_TRIVIAL + 1) * 20))
+		if(wounding_dmg >= 10)
+			to_chat(victim, "<span class='userdanger'>I can't breathe!</span>")
+		victim.adjustOxyLoss(min(15, wounding_dmg))
 
 /datum/wound/blunt/get_examine_description(mob/user)
 	if(!limb.current_gauze && !gelled && !taped)
@@ -762,6 +772,12 @@
 	else if(L.body_zone == BODY_ZONE_PRECISE_GROIN)
 		occur_text = "cracks apart, exposing fragments of the pelvis to open air"
 		examine_desc = "looks mushy and mangled, parts of it exposed to the elements"
+	else if(L.body_zone == BODY_ZONE_PRECISE_NECK)
+		// A compound fractured neck will always instantly kill you
+		// (unless you're dreamer!)
+		if(!is_dreamer(L.owner))
+			L.owner.death_scream()
+			L.owner.death()
 	. = ..()
 
 /// if someone is using bone gel on our wound
@@ -843,7 +859,7 @@
 		return
 	
 	regen_points_current = 0
-	regen_points_needed = 15 * (user == victim ? 2 : 1) * severity
+	regen_points_needed = 15 * (user == victim ? 2 : 1) * (severity - WOUND_SEVERITY_TRIVIAL)
 	if(user != victim)
 		user.visible_message("<span class='notice'>[user] finishes applying [I] to [victim]'s [limb.name], emitting a fizzing noise!</span>", "<span class='notice'>You finish applying [I] to [victim]'s [limb.name]!</span>", ignored_mobs=victim)
 		to_chat(victim, "<span class='green'>[user] finishes applying [I] to your [limb.name], you immediately begin to feel your bones start to reform!</span>")

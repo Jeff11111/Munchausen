@@ -10,7 +10,7 @@
 	px_y = 0
 	stam_damage_coeff = 1
 	amputation_point = "spine"
-	children_zones = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM)
+	children_zones = list(BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM)
 	heal_zones = list(BODY_ZONE_PRECISE_GROIN)
 	dismember_bodyzone = null
 	specific_locations = list("upper chest", "lower abdomen", "midsection", "collarbone", "lower back")
@@ -21,3 +21,6 @@
 	miss_entirely_prob = 5
 	zone_prob = 80
 	extra_zone_prob = 20
+
+/obj/item/bodypart/chest/can_dismember(obj/item/I)
+	return FALSE

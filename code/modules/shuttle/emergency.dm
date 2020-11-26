@@ -30,6 +30,10 @@
 	var/hijack_hacking = FALSE
 	var/hijack_announce = TRUE
 
+/obj/machinery/computer/emergency_shuttle/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/multitool_emaggable)
+
 /obj/machinery/computer/emergency_shuttle/examine(mob/user)
 	. = ..()
 	if(hijack_announce)
@@ -240,7 +244,6 @@
 
 /obj/machinery/computer/emergency_shuttle/emag_act(mob/user)
 	. = ..()
-
 	// How did you even get on the shuttle before it go to the station?
 	if(!IS_DOCKED)
 		return

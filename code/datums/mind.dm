@@ -203,9 +203,6 @@
 /datum/mind/proc/do_add_antag_datum(instanced_datum)
 	. = LAZYLEN(antag_datums)
 	LAZYADD(antag_datums, instanced_datum)
-	if(!.)
-		current.verbs += /mob/proc/edit_objectives_and_ambitions
-//SKYRAT CHANGES END
 
 /datum/mind/proc/remove_antag_datum(datum_type)
 	if(!datum_type)
@@ -221,7 +218,6 @@
 	LAZYREMOVE(antag_datums, instanced_datum)
 	if(. && !LAZYLEN(antag_datums))
 		ambitions = null
-		current.verbs -= /mob/proc/edit_objectives_and_ambitions
 //SKYRAT CHANGES END
 
 /datum/mind/proc/remove_all_antag_datums() //For the Lazy amongst us.
@@ -511,19 +507,10 @@
 	output += "</ul><br>(<a href='?src=[REF(src)];refresh_obj_amb=1'>Refresh</a>)"
 	return output.Join()
 
-
-/mob/proc/edit_objectives_and_ambitions()
-	set name = "Objectives and Ambitions"
-	set category = "IC"
-	set desc = "View and edit your character's objectives and ambitions."
-	mind.do_edit_objectives_ambitions()
-
-
 /datum/mind/proc/do_edit_objectives_ambitions()
 	var/datum/browser/popup = new(usr, "objectives and ambitions", "Objectives and Ambitions")
 	popup.set_content(show_editable_objectives_and_ambitions())
 	popup.open()
-
 
 GLOBAL_VAR_INIT(requested_objective_uid, 0)
 

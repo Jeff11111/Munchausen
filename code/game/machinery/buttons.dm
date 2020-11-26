@@ -16,6 +16,10 @@
 	idle_power_usage = 2
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 
+/obj/machinery/button/ComponentInitialize()
+	. = ..()
+	AddElement(/datum/element/multitool_emaggable)
+
 /obj/machinery/button/Initialize(mapload, ndir = 0, built = 0)
 	if(istext(id) && mapload && id[1] == "!")
 		id = SSmapping.get_obfuscated_id(id)

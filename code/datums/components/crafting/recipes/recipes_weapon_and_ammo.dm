@@ -276,19 +276,6 @@
 	category = CAT_WEAPONRY
 	subcategory = CAT_WEAPON
 
-/datum/crafting_recipe/ipistol
-	name = "Improvised Pistol (.32)"
-	result = /obj/item/gun/ballistic/automatic/pistol/improvised/nomag
-	reqs = list(/obj/item/pipe = 1,
-				/obj/item/weaponcrafting/improvised_parts/pistol_receiver = 1,
-				/obj/item/weaponcrafting/improvised_parts/trigger_assembly = 1,
-				/obj/item/weaponcrafting/improvised_parts/wooden_grip = 1,
-				/obj/item/stack/sheet/plasteel = 1)
-	tools = list(TOOL_SCREWDRIVER, TOOL_WELDER, TOOL_WIRECUTTER)
-	time = 100
-	category = CAT_WEAPONRY
-	subcategory = CAT_WEAPON
-
 /datum/crafting_recipe/irevolvingrifle
 	name = "Improvised Revolving Rifle"
 	result = /obj/item/gun/ballistic/revolver/rifle/improvised

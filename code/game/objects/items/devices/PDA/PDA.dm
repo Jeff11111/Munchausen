@@ -21,7 +21,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 /obj/item/pda
 	name = "\improper PDA"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. Functionality determined by a preprogrammed ROM cartridge."
-	icon = 'icons/obj/pda_alt.dmi'
+	icon = 'icons/obj/pda_minimal.dmi'
 	icon_state = "pda"
 	item_state = "electronic"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
@@ -112,8 +112,6 @@ GLOBAL_LIST_EMPTY(PDAs)
 	. += id ? "<span class='notice'>Alt-click to remove the id.</span>" : ""
 	if(inserted_item && (!isturf(loc)))
 		. += "<span class='notice'>Ctrl-click to remove [inserted_item].</span>"
-	if(LAZYLEN(GLOB.pda_reskins))
-		. += "<span class='notice'>Ctrl-shift-click it to reskin it.</span>"
 
 /obj/item/pda/Initialize()
 	. = ..()
@@ -131,11 +129,6 @@ GLOBAL_LIST_EMPTY(PDAs)
 		inserted_item =	new /obj/item/pen(src)
 	new_overlays = TRUE
 	update_icon()
-
-/obj/item/pda/CtrlShiftClick(mob/living/user)
-	. = ..()
-	if(GLOB.pda_reskins && user.canUseTopic(src, BE_CLOSE, NO_DEXTERY))
-		reskin_obj(user)
 
 /obj/item/pda/reskin_obj(mob/M)
 	if(!LAZYLEN(GLOB.pda_reskins))

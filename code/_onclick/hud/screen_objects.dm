@@ -499,7 +499,7 @@
 				if(12 to 14)
 					return BODY_ZONE_CHEST
 				if(15 to 17)
-					return BODY_ZONE_PRECISE_THROAT
+					return BODY_ZONE_PRECISE_NECK
 				if(18 to 20)
 					return BODY_ZONE_CHEST
 				if(21 to 24)
@@ -511,7 +511,7 @@
 				if(12 to 13)
 					return BODY_ZONE_CHEST
 				if(14 to 18)
-					return BODY_ZONE_PRECISE_THROAT
+					return BODY_ZONE_PRECISE_NECK
 				if(19 to 20)
 					return BODY_ZONE_CHEST
 				if(21 to 24)
@@ -521,7 +521,7 @@
 				switch(icon_y)
 					if(23)
 						if(icon_x == 14 || icon_x == 18)
-							return BODY_ZONE_PRECISE_THROAT
+							return BODY_ZONE_PRECISE_NECK
 						if(icon_x in 15 to 17)
 							return BODY_ZONE_PRECISE_MOUTH
 					if(24)

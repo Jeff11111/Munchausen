@@ -240,10 +240,17 @@
 	germ_level += rand(MIN_ORGAN_DECAY_INFECTION,MAX_ORGAN_DECAY_INFECTION)
 	if(germ_level >= INFECTION_LEVEL_TWO)
 		germ_level += rand(MIN_ORGAN_DECAY_INFECTION,MAX_ORGAN_DECAY_INFECTION)
+		for(var/obj/item/bodypart/BP in src)
+			BP.update_limb(FALSE)
+			BP.update_icon_dropped()
 		update_limb(owner ? FALSE : TRUE)
 		update_icon_dropped()
 	if(germ_level >= INFECTION_LEVEL_THREE)
 		kill_limb()
+		for(var/obj/item/bodypart/BP in src)
+			BP.update_limb(FALSE)
+			BP.update_icon_dropped()
+		update_limb(owner ? FALSE : TRUE)
 		update_icon_dropped()
 	if(owner)
 		tox_dam = min(max_tox_damage, tox_dam + (max_tox_damage * decay_factor))
@@ -611,6 +618,8 @@
 //The bodypart can rot and get infected
 /obj/item/bodypart/proc/can_decay()
 	if(CHECK_BITFIELD(status, BODYPART_ROBOTIC | BODYPART_SYNTHETIC | BODYPART_DEAD))
+		return FALSE
+	if(owner?.reagents?.has_reagent(/datum/reagent/medicine/preservahyde) || owner?.reagents?.has_reagent(/datum/reagent/toxin/formaldehyde))
 		return FALSE
 	return TRUE
 
@@ -1344,7 +1353,7 @@
 			return BODYPART_DISABLED_WOUND
 	if(can_dismember() && !HAS_TRAIT(owner, TRAIT_NODISMEMBER))
 		. = disabled //inertia, to avoid limbs healing 0.1 damage and being re-enabled
-		if(parent_bodyzone && !istype(src, /obj/item/bodypart/groin) && !istype(src, /obj/item/bodypart/head))
+		if(parent_bodyzone && !istype(src, /obj/item/bodypart/groin) && !istype(src, /obj/item/bodypart/neck))
 			if(!(owner.get_bodypart(parent_bodyzone)))
 				return BODYPART_DISABLED_DAMAGE
 			else

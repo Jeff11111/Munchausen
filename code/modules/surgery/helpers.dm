@@ -73,6 +73,10 @@
 	
 	if(P && user && user.Adjacent(M) && (I in user))
 		var/datum/surgery/S = available_surgeries[P]
+		if(!S)
+			P = input("Switch to what procedure?", "Surgery", null, null) as null|anything in available_surgeries
+			return
+		
 		var/list/steps_done = list()
 		if(current_surgery)
 			var/counter = 0

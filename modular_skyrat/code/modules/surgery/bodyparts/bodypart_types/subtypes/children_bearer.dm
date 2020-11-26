@@ -12,3 +12,6 @@
 
 /obj/item/bodypart/groin/children
 	starting_children = list(/obj/item/bodypart/r_leg/children, /obj/item/bodypart/l_leg/children)
+
+/obj/item/bodypart/neck/children
+	starting_children = list(/obj/item/bodypart/head)

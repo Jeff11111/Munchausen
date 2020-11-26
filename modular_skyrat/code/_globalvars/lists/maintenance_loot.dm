@@ -4,7 +4,6 @@ GLOBAL_LIST_INIT(maintenance_loot, list(
 	/obj/item/poster/random_official = 25,
 	/obj/item/book/random/triple = 5,
 	/obj/item/clothing/head/wig/random = 5,
-	/obj/item/clothing/under/color/jumpskirt/random = 5,
 	/obj/item/clothing/under/color/random = 10,
 	/obj/item/dildo/random = 5,
 	/obj/item/lipstick/random = 3,

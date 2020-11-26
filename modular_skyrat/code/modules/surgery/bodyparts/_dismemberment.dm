@@ -27,7 +27,7 @@
 	if(body_zone != BODY_ZONE_HEAD)
 		C.death_scream()
 	if(!silent)
-		playsound(get_turf(C), 'modular_skyrat/sound/effects/dismember.ogg', 80, TRUE)
+		playsound(get_turf(C), 'modular_skyrat/sound/gore/dismember.ogg', 80, TRUE)
 	SEND_SIGNAL(C, COMSIG_ADD_MOOD_EVENT, "dismembered", /datum/mood_event/dismembered)
 	drop_limb(dismembered = TRUE, destroyed = destroy, wounding_type = wounding_type)
 	C.update_equipment_speed_mods() // Update in case speed affecting item unequipped by dismemberment
@@ -62,25 +62,6 @@
 	if(HAS_TRAIT(C, TRAIT_NOGUT)) //Just for not allowing disembowelment
 		return FALSE
 
-	//Destroy active surgeries on the bodypart
-	for(var/datum/surgery/other in owner.surgeries)
-		if(other.location == body_zone)
-			qdel(other)
-	
-	//Start an organ manipulation surgery right at the manipulate step
-	var/datum/surgery/procedure
-	if(is_organic_limb())
-		if(body_zone in ORGAN_BODYPARTS)
-			procedure = new /datum/surgery/organ_manipulation/soft(owner, body_zone, src)
-		else
-			procedure = new /datum/surgery/organ_manipulation(owner, body_zone, src)
-	else
-		if(body_zone in ORGAN_BODYPARTS)
-			procedure = new /datum/surgery/organ_manipulation/mechanic/soft(owner, body_zone, src)
-		else
-			procedure = new /datum/surgery/organ_manipulation/mechanic(owner, body_zone, src)
-	
-	procedure.status = procedure.steps.len - 1
 	var/datum/wound/disembowel
 	if(is_organic_limb())
 		disembowel = new /datum/wound/slash/critical/incision/disembowel()

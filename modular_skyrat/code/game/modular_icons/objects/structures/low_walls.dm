@@ -371,13 +371,18 @@
 	if(ismob(A))
 		//climbing on electrified low wall will fry your ass
 		shock(A, 100)
-		if(prob(50))
-			shock(A, 100)
-		if(prob(50))
-			shock(A, 100)
+	START_PROCESSING(SSobj, src)
 
-// shock user with probability prb (if all connections & power are working)
-// returns 1 if shocked, 0 otherwise
+// Frying mode activated
+/obj/structure/table/low_wall/process()
+	. = ..()
+	if(!locate(/mob/living) in get_turf(src))
+		STOP_PROCESSING(SSobj, src)
+	for(var/mob/living/M in get_turf(src))
+		shock(M, 100)
+
+// Shock user with probability prb (if all connections & power are working)
+// Returns 1 if shocked, 0 otherwise
 
 /obj/structure/table/low_wall/proc/shock(mob/user, prb)
 	if(!anchored || broken)		// anchored/broken low walls are never connected

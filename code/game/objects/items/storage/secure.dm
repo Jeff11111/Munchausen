@@ -26,6 +26,10 @@
 
 /obj/item/storage/secure/ComponentInitialize()
 	. = ..()
+	AddElement(/datum/element/multitool_emaggable)
+
+/obj/item/storage/secure/ComponentInitialize()
+	. = ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.max_w_class = WEIGHT_CLASS_SMALL
 	STR.max_combined_w_class = 14

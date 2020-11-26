@@ -30,16 +30,6 @@
 	icon_state = "security"
 	item_state = "gy_suit"
 
-/obj/item/clothing/under/rank/security/officer/skirt
-	name = "security jumpskirt"
-	desc = "A \"tactical\" security jumpsuit with the legs replaced by a skirt."
-	icon_state = "secskirt"
-	item_state = "r_suit"
-	body_parts_covered = CHEST|GROIN|ARMS
-	can_adjust = FALSE //you know now that i think of it if you adjust the skirt and the sprite disappears isn't that just like flashing everyone
-	fitted = FEMALE_UNIFORM_TOP
-	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
-
 /obj/item/clothing/under/rank/security/officer/formal
 	name = "enforcer's formal uniform"
 	desc = "The latest in fashionable security outfits."
@@ -143,16 +133,6 @@
 	item_state = "r_suit"
 	armor = list("melee" = 10, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50, "wound" = 15) //skyrat edit
 	strip_delay = 60
-
-/obj/item/clothing/under/rank/security/head_of_security/skirt
-	name = "Chief Enforcer's jumpskirt"
-	desc = "A security jumpskirt decorated for those few with the dedication to achieve the position of Chief Enforcer."
-	icon_state = "rhos_skirt"
-	item_state = "r_suit"
-	body_parts_covered = CHEST|GROIN|ARMS
-	can_adjust = FALSE
-	fitted = FEMALE_UNIFORM_TOP
-	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 
 /obj/item/clothing/under/rank/security/head_of_security/grey
 	name = "Chief Enforcer's grey jumpsuit"

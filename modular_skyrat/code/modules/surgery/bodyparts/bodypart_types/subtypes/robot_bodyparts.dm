@@ -336,7 +336,6 @@
 	var/obj/item/assembly/flash/handheld/flash1 = null
 	var/obj/item/assembly/flash/handheld/flash2 = null
 
-
 /obj/item/bodypart/head/robot/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/assembly/flash/handheld))
 		var/obj/item/assembly/flash/handheld/F = W
@@ -389,7 +388,14 @@
 		flash2 = null
 	..()
 
-
+/obj/item/bodypart/neck/robot
+	name = "cyborg neck"
+	desc = "A standard reinforced vocal cord case, with spine-plugged neural socket and sensor gimbals."
+	item_state = "buildpipe"
+	icon = 'modular_skyrat/icons/mob/augments/augments.dmi'
+	flags_1 = CONDUCT_1
+	icon_state = "borg_neck"
+	status = BODYPART_ROBOTIC | BODYPART_NOBLEED
 
 // Surplus limbs
 /obj/item/bodypart/l_arm/robot/surplus

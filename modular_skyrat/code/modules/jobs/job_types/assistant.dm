@@ -1,5 +1,7 @@
 /datum/job/assistant
 	title = "Stowaway"
+	paycheck = 0
+	paycheck_department = null
 	var/commieprob = 15
 
 /datum/job/assistant/equip(mob/living/carbon/human/H, visualsOnly, announce, latejoin, datum/outfit/outfit_override, client/preference_source)

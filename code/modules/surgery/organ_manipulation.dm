@@ -14,8 +14,18 @@
 		)
 	var/obj/item/mmi/mmi
 
+/datum/surgery/organ_manipulation/complete()
+	. = ..()
+	for(var/datum/component/storage/concrete/organ/ST in target)
+		qdel(ST)
+
+/datum/surgery/organ_manipulation/Destroy()
+	. = ..()
+	for(var/datum/component/storage/concrete/organ/ST in target)
+		qdel(ST)
+
 /datum/surgery/organ_manipulation/soft
-	possible_locs = list(BODY_ZONE_PRECISE_EYES, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_THROAT, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_R_FOOT) //skyrat edit
+	possible_locs = list(BODY_ZONE_PRECISE_EYES, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_NECK, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_R_FOOT) //skyrat edit
 	steps = list(
 		/datum/surgery_step/incise,
 		/datum/surgery_step/retract_skin,
@@ -43,8 +53,7 @@
 	repeatable = TRUE
 	implements = list(TOOL_HEMOSTAT = 100, /obj/item/retractor = 100, TOOL_CROWBAR = 55)
 	accept_hand = 100
-	var/current_type
-	var/obj/item/organ/I = null
+	var/mob_prepared = FALSE
 	var/mob/living/carbon/storage_man
 	var/datum/component/storage/concrete/organ/our_component
 
@@ -54,10 +63,10 @@
 	storage_man = null
 
 /datum/surgery_step/manipulate_organs/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	if(our_component && !tool)
+	if(mob_prepared && our_component && !tool)
 		our_component.user_show_to_mob(user, FALSE, FALSE)
 		return -1
-	else if(!our_component)
+	else if(!mob_prepared)
 		to_chat(user, "<span class='notice'>You prepare [target] for organ manipulation.</span>")
 		our_component = target.AddComponent(/datum/component/storage/concrete/organ)
 		our_component.attack_hand_open = TRUE
@@ -65,6 +74,8 @@
 		our_component.bodypart_affected = target.get_bodypart(user.zone_selected)
 		our_component.drop_all_on_deconstruct = FALSE
 		our_component.silent = TRUE
+		our_component.update_insides()
+		mob_prepared = TRUE
 		return -1
 	else if(tool.tool_behaviour in list(TOOL_RETRACTOR, TOOL_CROWBAR))
 		display_results(user, target, "<span class='notice'>You begin closing up the incision in [target]'s [parse_zone(target_zone)]...</span>",

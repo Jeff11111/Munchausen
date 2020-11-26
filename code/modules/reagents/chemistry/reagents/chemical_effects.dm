@@ -3,7 +3,7 @@ GLOBAL_LIST_INIT(chem_effect_caps, list(
 ))
 
 //Add a chemical effect
-/mob/living/carbon/proc/add_chem_effect(effect, magnitude = 1)
+/mob/living/carbon/proc/add_chem_effect(effect, magnitude = 1, source = null)
 	if(effect in chem_effects)
 		chem_effects[effect] += magnitude
 		if(GLOB.chem_effect_caps[effect])
@@ -12,8 +12,13 @@ GLOBAL_LIST_INIT(chem_effect_caps, list(
 		chem_effects[effect] = magnitude
 		if(GLOB.chem_effect_caps[effect])
 			chem_effects[effect] = min(GLOB.chem_effect_caps[effect], chem_effects[effect])
+	if(source)
+		if(chem_effect_sources[source])
+			chem_effect_sources[source] += magnitude
+		else
+			chem_effect_sources[source] = magnitude
 
-/mob/living/carbon/proc/add_up_to_chem_effect(effect, magnitude = 1)
+/mob/living/carbon/proc/add_up_to_chem_effect(effect, magnitude = 1, source)
 	if(effect in chem_effects)
 		chem_effects[effect] = max(magnitude, chem_effects[effect])
 		if(GLOB.chem_effect_caps[effect])
@@ -22,7 +27,17 @@ GLOBAL_LIST_INIT(chem_effect_caps, list(
 		chem_effects[effect] = magnitude
 		if(GLOB.chem_effect_caps[effect])
 			chem_effects[effect] = min(GLOB.chem_effect_caps[effect], chem_effects[effect])
+	if(source)
+		if(chem_effect_sources[source])
+			chem_effect_sources[source] += magnitude
+		else
+			chem_effect_sources[source] = magnitude
 
-/mob/living/carbon/proc/remove_chem_effect(effect, magnitude = 1)
+/mob/living/carbon/proc/remove_chem_effect(effect, magnitude = 1, source)
 	if(effect in chem_effects)
 		chem_effects[effect] = max(0, chem_effects[effect] - magnitude)
+	if(source)
+		if(chem_effect_sources[source])
+			chem_effect_sources[source] = max(0, chem_effect_sources[source] - magnitude)
+		else
+			chem_effect_sources[source] = magnitude

@@ -10,8 +10,11 @@
 	if(!iscarbon(parent))
 		return COMPONENT_INCOMPATIBLE
 	can_hold = typecacheof(/obj/item/organ)
-	UnregisterSignal(parent, list(COMSIG_MOUSEDROP_ONTO, COMSIG_MOUSEDROPPED_ONTO, COMSIG_CLICK_ALT))
-	addtimer(CALLBACK(src, /datum/component/storage/concrete/organ.proc/update_insides), 1)
+	UnregisterSignal(parent, list(COMSIG_MOUSEDROPPED_ONTO, COMSIG_CLICK_ALT, COMSIG_CLICK_MIDDLE, \
+							COMSIG_ATOM_ATTACK_HAND, COMSIG_ITEM_PRE_ATTACK, COMSIG_ITEM_ATTACK_SELF, \
+							COMSIG_ITEM_PICKUP))
+	RegisterSignal(parent, COMSIG_CLICK_ALT, .proc/on_attack_hand)
+	addtimer(CALLBACK(src, .proc/update_insides), 1 SECONDS)
 
 //Gives all organs parent as stored_in
 /datum/component/storage/concrete/organ/proc/update_insides()
@@ -31,9 +34,14 @@
 
 //Only open this if aiming at the correct limb
 /datum/component/storage/concrete/organ/on_attack_hand(datum/source, mob/user)
+	update_insides()
 	var/atom/A = parent
+
 	if(!attack_hand_interact)
-		return
+		return FALSE
+	
+	if(user.a_intent != INTENT_GRAB)
+		return FALSE
 	
 	if(user.active_storage == src && A.loc == user) //if you're already looking inside the storage item
 		user.active_storage.close(user)
@@ -41,7 +49,7 @@
 		return COMPONENT_NO_ATTACK_HAND
 
 	if(bodypart_affected && (user.zone_selected != bodypart_affected.body_zone))
-		return COMPONENT_NO_ATTACK_HAND
+		return FALSE
 	
 	if(rustle_sound)
 		playsound(A, pick(rustle_sound), 50, 1, -5)
@@ -67,7 +75,6 @@
 	if(A.loc == user)
 		if(!check_locked(source, user, TRUE))
 			ui_show(user)
-			A.do_jiggle()
 		return COMPONENT_NO_ATTACK_HAND
 	else if(attack_hand_open)
 		ui_show(user)
@@ -104,7 +111,7 @@
 	if(M)
 		if(M.client && M.active_storage != src)
 			M.client.screen -= I
-		if(M.observers && M.observers.len)
+		if(M.observers && length(M.observers))
 			for(var/i in M.observers)
 				var/mob/dead/observe = i
 				if(observe.client && observe.active_storage != src)
@@ -115,6 +122,7 @@
 				mob_item_insertion_feedback(usr, M, I)
 	playsound(I, pick(rustle_sound), 50, 1, -5)
 	update_icon()
+	update_insides()
 	return TRUE
 
 //Return the proper organ list
@@ -169,7 +177,7 @@
 			return FALSE
 		// STORAGE LIMITS
 	if(storage_flags & STORAGE_LIMIT_MAX_ITEMS)
-		if(not_a_location.len >= max_items)
+		if(length(not_a_location) >= max_items)
 			if(!stop_messages)
 				to_chat(M, "<span class='warning'>[host] has too many things in it, make some space!</span>")
 			return FALSE //Storage item is full
@@ -215,31 +223,23 @@
 			var/mob/living/carbon/carbon_parent = parent
 			O.forceMove(carbon_parent)
 			O.Insert(carbon_parent)
-			O.stored_in = carbon_parent
-			RegisterSignal(O, COMSIG_CLICK, /datum/component/storage/concrete/organ.proc/override_click)
+			update_insides()
 		refresh_mob_views()
 		return TRUE
 
 //No real location
 /datum/component/storage/concrete/organ/attackby(datum/source, obj/item/I, mob/M, params)
-	if(istype(I, /obj/item/hand_labeler))
-		var/obj/item/hand_labeler/labeler = I
-		if(labeler.mode)
-			return FALSE
 	. = TRUE //no afterattack
 	if(iscyborg(M))
-		return
+		return FALSE
 	if(!can_be_inserted(I, FALSE, M))
-		var/list/not_a_location = contents()
-		if(not_a_location.len >= max_items)
-			return TRUE
 		return FALSE
 	handle_item_insertion(I, FALSE, M)
 
 //No real location
 /datum/component/storage/concrete/organ/remaining_space_items()
 	var/list/not_a_location = contents()
-	return max(0, max_items - not_a_location.len)
+	return max(0, max_items - length(not_a_location))
 
 //No real location
 /datum/component/storage/concrete/organ/signal_take_obj(datum/source, atom/movable/AM, new_loc, force = FALSE)
@@ -280,6 +280,7 @@
 		O.organ_flags |= ORGAN_CUT_AWAY
 		refresh_mob_views()
 		playsound(O, pick(rustle_sound), 50, 1, -5)
+		update_insides()
 		return TRUE
 
 //Nullspace is a bitch
@@ -294,8 +295,29 @@
 		return
 
 	playsound(A, pick(rustle_sound), 50, 1, -5)
-	if(niggertwo.get_active_held_item() == null)
+	var/list/params_list = params2list(params)
+	if(params_list["shift"])
+		nigger.examine(user)
+	else if(niggertwo.get_active_held_item() == null)
 		nigger.attack_hand(niggertwo)
 	else
 		nigger.attackby(niggertwo.get_active_held_item(), niggertwo)
 	return TRUE
+
+//AAAAAAAA
+/datum/component/storage/concrete/organ/mousedrop_onto(datum/source, atom/over_object, mob/M)
+	set waitfor = FALSE
+	. = COMPONENT_NO_MOUSEDROP
+	var/mob/A = parent
+	A.add_fingerprint(M)
+	if(!over_object)
+		return FALSE
+	if(ismecha(M.loc)) // stops inventory actions in a mech
+		return FALSE
+	// this must come before the screen objects only block, dunno why it wasn't before
+	var/mob/living/L = M
+	if(!istype(L))
+		return FALSE
+	if(isliving(over_object) && (!bodypart_affected || (L.zone_selected == bodypart_affected.body_zone)))
+		update_insides()
+		user_show_to_mob(M)

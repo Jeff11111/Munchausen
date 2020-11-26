@@ -683,17 +683,10 @@
 
 /datum/outfit/ghostcafe
 	name = "ID, jumpsuit and shoes"
-	uniform = /obj/item/clothing/under/color/random
+	uniform = /obj/item/clothing/under/color/grey/os13
 	shoes = /obj/item/clothing/shoes/sneakers/black
 	id = /obj/item/card/id/no_banking
 	r_hand = /obj/item/storage/box/syndie_kit/chameleon/ghostcafe
-
-
-/datum/outfit/ghostcafe/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source)
-	..()
-	var/suited = !preference_source || preference_source.prefs.jumpsuit_style == PREF_SUIT
-	if(CONFIG_GET(flag/grey_assistants))
-		uniform = suited ? /obj/item/clothing/under/color/grey : /obj/item/clothing/under/color/jumpskirt/grey
 
 /obj/item/storage/box/syndie_kit/chameleon/ghostcafe
 	name = "cafe costuming kit"
