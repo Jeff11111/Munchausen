@@ -10,7 +10,10 @@
 	if(!iscarbon(parent))
 		return COMPONENT_INCOMPATIBLE
 	can_hold = typecacheof(/obj/item/organ)
-	UnregisterSignal(parent, list(COMSIG_MOUSEDROP_ONTO, COMSIG_MOUSEDROPPED_ONTO, COMSIG_CLICK_ALT))
+	UnregisterSignal(parent, list(COMSIG_MOUSEDROPPED_ONTO, COMSIG_CLICK_ALT, COMSIG_CLICK_MIDDLE, \
+							COMSIG_ATOM_ATTACK_HAND, COMSIG_ITEM_PRE_ATTACK, COMSIG_ITEM_ATTACK_SELF, \
+							COMSIG_ITEM_PICKUP))
+	RegisterSignal(parent, COMSIG_CLICK_ALT, .proc/on_attack_hand)
 	addtimer(CALLBACK(src, .proc/update_insides), 1 SECONDS)
 
 //Gives all organs parent as stored_in
@@ -34,6 +37,9 @@
 	var/atom/A = parent
 
 	if(!attack_hand_interact)
+		return FALSE
+	
+	if(user.a_intent != INTENT_GRAB)
 		return FALSE
 	
 	if(user.active_storage == src && A.loc == user) //if you're already looking inside the storage item
