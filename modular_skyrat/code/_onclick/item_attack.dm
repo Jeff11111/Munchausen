@@ -26,7 +26,7 @@
 			if(!BP || INTERACTING_WITH(user, victim))
 				return FALSE
 			var/datum/skills/surgery/choppa = GET_SKILL_LEVEL(user, surgery)
-			var/time = 1.5 SECONDS
+			var/time = 3 SECONDS
 			if(!victim.IsUnconscious())
 				time *= 5
 			time *= clamp((MAX_STAT/2)/choppa, 0.25, 2)
