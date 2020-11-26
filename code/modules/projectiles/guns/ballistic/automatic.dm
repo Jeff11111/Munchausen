@@ -140,11 +140,6 @@
 /obj/item/gun/ballistic/automatic/wt550/nopin //Skyrat change
 	pin = null
 
-/* moved to modular_skyrat
-/obj/item/gun/ballistic/automatic/wt550/update_icon()
-	..()
-	icon_state = "wt550[magazine ? "-[CEILING((	(get_ammo(FALSE) / magazine.max_ammo) * 20) /4, 1)*4]" : "-0"]"	//Sprites only support up to 20.
-*/
 /obj/item/gun/ballistic/automatic/mini_uzi
 	name = "\improper Type U3 Uzi"
 	desc = "A lightweight, burst-fire submachine gun, for when you really want someone dead. Uses 9mm rounds."

@@ -97,6 +97,19 @@
 	contains = list(/obj/item/ammo_box/magazine/m556,
 					/obj/item/ammo_box/magazine/m556)
 
+/datum/supply_pack/goody/lmg
+	name = "1.95x129mm Light Machine Gun"
+	desc = "Contains one LMG, chambered in 1.95x129mm. Never know when you need it."
+	cost = 40000
+	contains = list(/obj/item/gun/ballistic/automatic/l6_saw)
+
+/datum/supply_pack/goody/sniper_ammo
+	name = "1.95x129mm Ammo Boxes"
+	desc = "Contains 2 high capacity 1.95x129mm ammo boxes."
+	cost = 10000
+	contains = list(/obj/item/ammo_box/magazine/mm195x129,
+					/obj/item/ammo_box/magazine/mm195x129)
+
 /datum/supply_pack/goody/sniper
 	name = ".50 Sniper Rifle"
 	desc = "Contains one anti-material sniper rifle, chambered in .50 cal. Never know when you need it."
@@ -135,6 +148,19 @@
 	cost = 3000
 	contains = list(/obj/item/ammo_box/magazine/uzim9mm,
 					/obj/item/ammo_box/magazine/uzim9mm)
+
+/datum/supply_pack/goody/smg45
+	name = ".45 Submachine Gun"
+	desc = "Contains one C20R, chambered in 9mm. Never know when you need it."
+	cost = 12000
+	contains = list(/obj/item/gun/ballistic/automatic/c20r/unrestricted)
+
+/datum/supply_pack/goody/smg45_ammo
+	name = ".45 SMG Magazines"
+	desc = "Contains 2 high capacity .45 magazines."
+	cost = 4000
+	contains = list(/obj/item/ammo_box/magazine/smgm45,
+					/obj/item/ammo_box/magazine/smgm45)
 
 /datum/supply_pack/goody/wt550
 	name = "4.6x30mm Submachine Gun"
