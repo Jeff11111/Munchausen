@@ -156,8 +156,9 @@
 
 /datum/job/chief_engineer
 	//Decent endurance and intellect
-	stat_end = 14
-	stat_int = 14
+	stat_end = 13
+	stat_int = 12
+	stat_dex = 8
 	//Godlike construction and electronics
 	skill_melee = 8
 	skill_ranged = 8
@@ -166,7 +167,7 @@
 
 /datum/job/cmo
 	//High intellect, average everything else
-	stat_int = JOB_STATPOINTS_EXPERT
+	stat_int = 12
 	//Godlike surgery, expert chemistry and firstaid
 	skill_melee = 8
 	skill_surgery = 18
@@ -324,7 +325,7 @@
 	stat_str = 9
 	stat_end = 9
 	stat_dex = 12
-	stat_int = 14
+	stat_int = 15
 	//Amazing research and chemistry
 	skill_ranged = 10
 	skill_research = 18
