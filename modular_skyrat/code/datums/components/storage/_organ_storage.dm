@@ -9,7 +9,7 @@
 	. = ..()
 	if(!iscarbon(parent))
 		return COMPONENT_INCOMPATIBLE
-	can_hold = typecacheof(/obj/item/organ)
+	can_hold = (typecacheof(/obj/item/organ) | typecacheof(/obj/item/mmi))
 	UnregisterSignal(parent, list(COMSIG_MOUSEDROPPED_ONTO, COMSIG_CLICK_ALT, COMSIG_CLICK_MIDDLE, \
 							COMSIG_ATOM_ATTACK_HAND, COMSIG_ITEM_PRE_ATTACK, COMSIG_ITEM_ATTACK_SELF, \
 							COMSIG_ITEM_PICKUP))
@@ -216,6 +216,13 @@
 /datum/component/storage/concrete/organ/_insert_physical_item(obj/item/I, override)
 	. = FALSE
 	var/obj/item/organ/O = I
+	if(istype(I, /obj/item/mmi))
+		var/obj/item/mmi/meme = I
+		if(meme.brain)
+			O = meme.brain
+			meme.brain = null
+			qdel(meme)
+			O.forceMove(carbon_parent)
 	if(istype(O))
 		var/list/not_a_location = contents()
 		if(!(O in not_a_location))
