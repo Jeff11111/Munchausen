@@ -306,3 +306,17 @@
 	else
 		nigger.attackby(niggertwo.get_active_held_item(), niggertwo)
 	return TRUE
+
+//AAAAAAAA
+/datum/component/storage/concrete/organ/mousedrop_onto(datum/source, atom/over_object, mob/M)
+	set waitfor = FALSE
+	. = COMPONENT_NO_MOUSEDROP
+	var/mob/A = parent
+	A.add_fingerprint(M)
+	if(!over_object)
+		return FALSE
+	if(ismecha(M.loc)) // stops inventory actions in a mech
+		return FALSE
+	// this must come before the screen objects only block, dunno why it wasn't before
+	if(over_object == M)
+		user_show_to_mob(M)
