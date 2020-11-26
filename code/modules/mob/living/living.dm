@@ -623,13 +623,6 @@
 	fire_stacks = 0
 	confused = 0
 	update_mobility()
-	//Heal all organs
-	if(iscarbon(src))
-		var/mob/living/carbon/C = src
-		if(C.internal_organs)
-			for(var/organ in C.internal_organs)
-				var/obj/item/organ/O = organ
-				O.setOrganDamage(0)
 
 //proc called by revive(), to check if we can actually ressuscitate the mob (we don't want to revive him and have him instantly die again)
 /mob/living/proc/can_be_revived()

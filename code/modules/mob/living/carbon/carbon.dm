@@ -962,20 +962,22 @@
 	var/obj/item/organ/brain/B = getorgan(/obj/item/organ/brain)
 	if(B)
 		B.brain_death = FALSE
+	remove_all_embedded_objects()
 	for(var/O in internal_organs)
 		var/obj/item/organ/organ = O
 		organ.rejecting = FALSE
 		organ.setOrganDamage(0)
+		organ.organ_flags |= ~ORGAN_CUT_AWAY
 		organ.janitize(0, 0, 0)
 	for(var/BP in bodyparts)
 		var/obj/item/bodypart/bodypart = BP
 		bodypart.rejecting = FALSE
 		bodypart.janitize(0, 0, 0)
+		bodypart.fill_teeth()
 	for(var/thing in diseases)
 		var/datum/disease/D = thing
 		if(D.severity != DISEASE_SEVERITY_POSITIVE)
 			D.cure(FALSE)
-	//skyrat edit
 	for(var/i in all_wounds)
 		var/datum/wound/w = i
 		if(istype(w))
@@ -983,8 +985,7 @@
 	for(var/i in all_scars)
 		var/datum/scar/s = i
 		if(istype(s) && !s.permanent)
-			s.Destroy()
-	//
+			qdel(s)
 	if(admin_revive)
 		regenerate_limbs()
 		regenerate_organs()
