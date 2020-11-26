@@ -211,7 +211,7 @@
 /obj/item/pda/neko
 	name = "neko PDA"
 	icon_state = "pda-neko"
-	overlays_icons = list('icons/obj/pda_alt.dmi' = list("pda-r", "screen_neko", "id_overlay", "insert_overlay", "light_overlay", "pai_overlay"))
+	overlays_icons = list('icons/obj/pda_minimal.dmi' = list("pda-r", "screen_neko", "id_overlay", "insert_overlay", "light_overlay", "pai_overlay"))
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. This model is a special feline edition."
 	note = "Congratulations, you have chosen the Thinktronic 5230 Personal Data Assistant Deluxe Special Mew Turbo Limited Edition NYA~! To help with navigation, we have provided the following definitions. North: Fore. South: Aft. West: Port. East: Starboard. Quarter is either side of aft."
 
