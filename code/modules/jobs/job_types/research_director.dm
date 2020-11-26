@@ -32,7 +32,6 @@
 	paycheck_department = ACCOUNT_SCI
 
 	display_order = JOB_DISPLAY_ORDER_RESEARCH_DIRECTOR
-	blacklisted_quirks = list(/datum/quirk/mute, /datum/quirk/brainproblems, /datum/quirk/nonviolent, /datum/quirk/paraplegic, /datum/quirk/blindness, /datum/quirk/monophobia)
 	threat = 5
 
 /datum/outfit/job/rd

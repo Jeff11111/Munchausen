@@ -26,7 +26,6 @@
 			            ACCESS_RC_ANNOUNCE, ACCESS_HEADS, ACCESS_BLUESHIELD, ACCESS_WEAPONS)
 	display_order = JOB_DISPLAY_ORDER_BLUESHIELD
 	outfit = /datum/outfit/job/blueshield
-	blacklisted_quirks = list(/datum/quirk/mute, /datum/quirk/nonviolent, /datum/quirk/paraplegic)
 	custom_spawn_text = "Your priority is to protect the heads of staff - Although you do have the power to arrest criminals, do not resort to such unless no one else is capable."
 
 /datum/outfit/job/blueshield

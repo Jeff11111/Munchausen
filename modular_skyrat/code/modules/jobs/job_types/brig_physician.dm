@@ -21,7 +21,6 @@
 	minimal_access = list(ACCESS_SEC_DOORS, ACCESS_BRIG, ACCESS_COURT, ACCESS_MAINT_TUNNELS, ACCESS_LEAVE_GENPOP, ACCESS_ENTER_GENPOP, ACCESS_MEDICAL, ACCESS_MORGUE, ACCESS_SURGERY, ACCESS_CLONING, ACCESS_MINERAL_STOREROOM)
 
 	display_order = JOB_DISPLAY_ORDER_BRIG_PHYSICIAN
-	blacklisted_quirks = list(/datum/quirk/mute, /datum/quirk/brainproblems, /datum/quirk/nonviolent, /datum/quirk/paraplegic, /datum/quirk/blindness, /datum/quirk/monophobia)
 
 /datum/outfit/job/brig_phys
 	name = "Brig Physician"
