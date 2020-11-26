@@ -17,7 +17,7 @@
 					/obj/item/clothing/suit/jacket/puffer/vest = 4,
 					/obj/item/clothing/suit/jacket/puffer = 4,
 					/obj/item/clothing/suit/hooded/cloak/david = 4,
-					/obj/item/clothing/under/color/os13 = 4,
+					/obj/item/clothing/under/color/grey/os13 = 4,
 					/obj/item/clothing/under/suit/navy = 3,
 					/obj/item/clothing/under/suit/black_really = 3,
 					/obj/item/clothing/under/suit/burgundy = 3,
