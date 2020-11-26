@@ -74,7 +74,6 @@
 	if(A.loc == user)
 		if(!check_locked(source, user, TRUE))
 			ui_show(user)
-			A.do_jiggle()
 		return COMPONENT_NO_ATTACK_HAND
 	else if(attack_hand_open)
 		ui_show(user)
@@ -229,17 +228,10 @@
 
 //No real location
 /datum/component/storage/concrete/organ/attackby(datum/source, obj/item/I, mob/M, params)
-	if(istype(I, /obj/item/hand_labeler))
-		var/obj/item/hand_labeler/labeler = I
-		if(labeler.mode)
-			return FALSE
 	. = TRUE //no afterattack
 	if(iscyborg(M))
-		return
+		return FALSE
 	if(!can_be_inserted(I, FALSE, M))
-		var/list/not_a_location = contents()
-		if(length(not_a_location) >= max_items)
-			return TRUE
 		return FALSE
 	handle_item_insertion(I, FALSE, M)
 
