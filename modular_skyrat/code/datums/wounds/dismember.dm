@@ -69,9 +69,7 @@
 
 	if(!silent)
 		victim.visible_message(msg, "<span class='userdanger'>Your [L.name] [occur_text]!</span>")
-	else
-		victim.wound_message += " \The [L.name] is [wounding_type == WOUND_SLASH ? "dismembered" : "gored"]!"
-	
+
 	if(wounding_type == WOUND_BURN)
 		if(L.is_organic_limb())
 			new /obj/effect/decal/cleanable/ash(get_turf(L))
