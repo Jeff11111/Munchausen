@@ -244,29 +244,6 @@
 	var/facial_hair_style
 	var/skin_tone
 
-	//Stat defines
-	var/stat_variance_positive = 2 //How much we can vary positively
-	var/stat_variance_negative = 2 //How much we can vary negatively
-	var/stat_str = JOB_STATPOINTS_AVERAGE
-	var/stat_end = JOB_STATPOINTS_AVERAGE
-	var/stat_dex = JOB_STATPOINTS_AVERAGE
-	var/stat_int = JOB_STATPOINTS_AVERAGE
-
-	//Skill defines
-	var/skill_variance_positive = 2 //How much we can vary positively
-	var/skill_variance_negative = 2 //How much we can vary negatively
-	var/skill_melee = JOB_SKILLPOINTS_HORRENDOUS
-	var/skill_ranged = JOB_SKILLPOINTS_HORRENDOUS
-	var/skill_firstaid = JOB_SKILLPOINTS_HORRENDOUS
-	var/skill_surgery = JOB_SKILLPOINTS_HORRENDOUS
-	var/skill_chemistry = JOB_SKILLPOINTS_HORRENDOUS
-	var/skill_construction = JOB_SKILLPOINTS_HORRENDOUS
-	var/skill_electronics = JOB_SKILLPOINTS_HORRENDOUS
-	var/skill_research = JOB_SKILLPOINTS_HORRENDOUS
-	var/skill_cooking = JOB_SKILLPOINTS_HORRENDOUS
-	var/skill_agriculture = JOB_SKILLPOINTS_HORRENDOUS
-	var/skill_gaming = JOB_SKILLPOINTS_HORRENDOUS
-
 /obj/effect/mob_spawn/human/Initialize()
 	if(ispath(outfit))
 		outfit = new outfit()
