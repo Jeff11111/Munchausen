@@ -1,6 +1,6 @@
 /obj/structure/window
 	icon = 'modular_skyrat/icons/eris/obj/structures/windows.dmi'
-	//overlay of the brim
+	//Overlay of the brim
 	var/mutable_appearance/mutable_overlay
 	//change the shit below appropriately please
 	var/wall_icon = 'modular_skyrat/icons/eris/obj/structures/windows.dmi'
