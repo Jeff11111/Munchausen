@@ -17,9 +17,7 @@
 	id = "ipc_construction"
 	display_name = "Sapient Synthetic Fabrication"
 	description = "With enhanced artificial intelligence and mechatronic technology, we are able to build sapient synthetics from scratch."
-	prereq_ids = list("ai", "posibrain", "adv_robotics", "mmi", "cyborg")
-	design_ids = list("ipc_chassis", "synthliz_chassis", "synth_chassis", "ipc_heart", "ipc_lungs", "ipc_tongue", "ipc_stomach", "ipc_liver", "ipc_eyes", "ipc_ears", "cyborg_penis", "cyborg_testicles", "cyborg_breasts", "cyborg_vagina", "cyborg_womb")
-	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 8000)
+	starting_node = TRUE
 
 /datum/techweb_node/adv_robotics/New()
 	design_ids += "borg_upgrade_premiumka"
@@ -28,5 +26,4 @@
 /datum/techweb_node/cyborg_upg_util/New()
 	design_ids += "borg_upgrade_xwelding"
 	design_ids += "borg_upgrade_shrink"
-	//design_ids += "borg_upgrade_plasma"
 	. = ..()
