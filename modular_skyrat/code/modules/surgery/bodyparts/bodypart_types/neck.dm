@@ -25,4 +25,8 @@
 	extra_zone_prob = 30
 	max_cavity_size = WEIGHT_CLASS_TINY
 
-/obj/item/bodypart/neck
+/obj/item/bodypart/neck/get_limb_icon(dropped)
+	. = ..()
+	if(dropped)
+		for(var/obj/item/bodypart/head/nohead in src)
+			. |= nohead.get_limb_icon(TRUE)
