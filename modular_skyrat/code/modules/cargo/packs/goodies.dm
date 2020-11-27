@@ -254,7 +254,7 @@
 
 /datum/supply_pack/goody/m10mm_pistol
 	name = "10mm Pistol"
-	desc = "Contains one generic 10mm pistol. Never know when you need it."
+	desc = "Contains one 10mm pistol. Never know when you need it."
 	cost = 5000
 	contains = list(/obj/item/gun/ballistic/automatic/pistol/modular)
 
