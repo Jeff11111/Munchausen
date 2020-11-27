@@ -271,7 +271,7 @@
 //Bobox db shotgun
 /obj/item/gun/ballistic/revolver/doublebarrel/bobox
 	icon_state = "bobox"
-	desc = "The Bobox double barreled shotgun - The double barrel you know and love, but now polymerized and horrifying."
+	desc = "The BobCo. Bobox double barreled shotgun - The double barrel you know and love, but now polymerized and horrifying."
 	sawn_off = TRUE
 	w_class = WEIGHT_CLASS_NORMAL
 	unique_reskin = null

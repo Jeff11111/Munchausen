@@ -20,12 +20,39 @@
 	..()
 	icon_state = "[initial(icon_state)][bolt_open ? "" : "-e"]"
 
-//AR
+//AR-15
 /obj/item/gun/ballistic/automatic/ar
+	name = "5.56 assault rifle"
+	desc = "NT-ARG - A robust assault rifle used by Nanotrasen fighting forces."
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/rifle.dmi'
 	icon_state = "arg"
 	safety_sound = 'modular_skyrat/sound/guns/safety2.ogg'
 	fire_sound = 'modular_skyrat/sound/guns/smg1.ogg'
 
-//AK
-/obj/item/gun/ballistic/automatic/ar/ak
+//AK-47
+/obj/item/gun/ballistic/automatic/ak
+	name = "7.62 assault rifle"
+	desc = "The Tiger Cooperative NCK-7.62 assault rifle, favored by Tiger Cooperative operatives and mass shooters."
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/rifle.dmi'
+	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/rifle_righthand.dmi'
+	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/rifle_lefthand.dmi'
+	icon_state = "ak"
+	item_state = "ak"
+	safety_sound = 'modular_skyrat/sound/guns/safety2.ogg'
+	fire_sound = 'modular_skyrat/sound/guns/smg1.ogg'
+	mag_type = /obj/item/ammo_box/magazine/m762
+	slot_flags = 0
+	can_suppress = FALSE
+	burst_size = 3
+	burst_shot_delay = 1
+
+/obj/item/gun/ballistic/automatic/ak/update_icon()
+	..()
+	item_state = "[initial(item_state)][magazine ? "" : "-e"]"
+
+/obj/item/gun/ballistic/automatic/ak/build_magazine_overlay()
+	. = mutable_appearance(icon, "[initial(icon_state)]-[generic_magazine_overlays ? "mag[magazine.max_ammo]" : initial(magazine.icon_state)]")
+
+/obj/item/gun/ballistic/automatic/ak/polymer
+	icon_state = "ak_polymer"
+	item_state = "ak_polymer"

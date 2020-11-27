@@ -16,3 +16,16 @@
 /obj/item/ammo_box/magazine/m556/update_icon()
 	..()
 	icon_state = "[initial(icon_state)]-[ammo_count() ? "30" : "0"]"
+
+//AK-47
+/obj/item/ammo_box/magazine/m762
+	name = "rifle magazine (7.62mm)"
+	icon = 'modular_skyrat/icons/obj/bobstation/ammo/rifle.dmi'
+	icon_state = "lrifle"
+	caliber = "a762"
+	ammo_type = /obj/item/ammo_casing/a762
+	max_ammo = 30
+
+/obj/item/ammo_box/magazine/m762/update_icon()
+	..()
+	icon_state = "[initial(icon_state)]-[ammo_count() ? "30" : "0"]"

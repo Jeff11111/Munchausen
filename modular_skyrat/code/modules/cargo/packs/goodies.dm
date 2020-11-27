@@ -97,6 +97,19 @@
 	contains = list(/obj/item/ammo_box/magazine/m556,
 					/obj/item/ammo_box/magazine/m556)
 
+/datum/supply_pack/goody/arg
+	name = "7.62 Assault Rifle"
+	desc = "Contains one NCK-7.62 assault rifle, chambered in 7.62mm. Never know when you need it."
+	cost = 30000
+	contains = list(/obj/item/gun/ballistic/automatic/ak)
+
+/datum/supply_pack/goody/arg_ammo
+	name = "7.62 Magazines"
+	desc = "Contains 2 high capacity 7.62mm magazines."
+	cost = 7500
+	contains = list(/obj/item/ammo_box/magazine/m762,
+					/obj/item/ammo_box/magazine/m762)
+
 /datum/supply_pack/goody/lmg
 	name = "1.95x129mm Light Machine Gun"
 	desc = "Contains one LMG, chambered in 1.95x129mm. Never know when you need it."
