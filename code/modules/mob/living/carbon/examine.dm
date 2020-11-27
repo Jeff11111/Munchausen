@@ -73,7 +73,7 @@
 	var/r_limbs_missing = 0
 	for(var/t in missing)
 		var/should_msg = "<B>[capitalize(t_his)] [parse_zone(t)] is missing!</B>"
-		if(t==BODY_ZONE_HEAD)
+		if((t==BODY_ZONE_HEAD) || (t=BODY_ZONE_PRECISE_NECK))
 			should_msg = "<span class='deadsay'><B>[t_His] [parse_zone(t)] is missing!</B></span>"
 		else if(t == BODY_ZONE_L_ARM || t == BODY_ZONE_L_LEG || t == BODY_ZONE_PRECISE_L_FOOT || t == BODY_ZONE_PRECISE_R_FOOT)
 			l_limbs_missing++
