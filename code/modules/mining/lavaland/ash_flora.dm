@@ -305,6 +305,8 @@
 	result = /obj/item/reagent_containers/glass/bowl/mushroom_bowl
 	reqs = list(/obj/item/reagent_containers/food/snacks/grown/ash_flora/shavings = 5)
 	time = 30
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /obj/item/reagent_containers/food/snacks/customizable/salad/ashsalad

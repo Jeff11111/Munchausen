@@ -4,6 +4,8 @@
 	time = 20
 	reqs = list(/obj/item/stack/sheet/bone = 2,
 				 /obj/item/stack/sheet/sinew = 1)
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/bonecodpiece
@@ -12,6 +14,8 @@
 	time = 20
 	reqs = list(/obj/item/stack/sheet/bone = 2,
 				 /obj/item/stack/sheet/animalhide/goliath_hide = 1)
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/bracers
@@ -20,6 +24,8 @@
 	time = 20
 	reqs = list(/obj/item/stack/sheet/bone = 2,
 				 /obj/item/stack/sheet/sinew = 1)
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/goliathcloak
@@ -29,6 +35,8 @@
 	reqs = list(/obj/item/stack/sheet/leather = 2,
 				/obj/item/stack/sheet/sinew = 2,
 				/obj/item/stack/sheet/animalhide/goliath_hide = 2) //it takes 4 goliaths to make 1 cloak if the plates are skinned
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/drakecloak
@@ -38,6 +46,8 @@
 	reqs = list(/obj/item/stack/sheet/bone = 10,
 				/obj/item/stack/sheet/sinew = 2,
 				/obj/item/stack/sheet/animalhide/ashdrake = 5)
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/bonebag
@@ -46,6 +56,8 @@
 	time = 30
 	reqs = list(/obj/item/stack/sheet/bone = 3,
 				/obj/item/stack/sheet/sinew = 2)
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/bonespear
@@ -54,6 +66,8 @@
 	time = 30
 	reqs = list(/obj/item/stack/sheet/bone = 4,
 				 /obj/item/stack/sheet/sinew = 1)
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/boneaxe
@@ -62,6 +76,8 @@
 	time = 50
 	reqs = list(/obj/item/stack/sheet/bone = 6,
 				 /obj/item/stack/sheet/sinew = 3)
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/bonfire
@@ -69,6 +85,8 @@
 	time = 60
 	reqs = list(/obj/item/grown/log = 5)
 	result = /obj/structure/bonfire
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/headpike
@@ -79,6 +97,8 @@
 	parts = list(/obj/item/bodypart/head = 1,
 			/obj/item/spear = 1)
 	result = /obj/structure/headpike
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/headpikebone
@@ -89,6 +109,8 @@
 	parts = list(/obj/item/bodypart/head = 1,
 			/obj/item/spear/bonespear = 1)
 	result = /obj/structure/headpike/bone
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/quiver
@@ -98,6 +120,8 @@
 	time = 80
 	reqs = list(/obj/item/stack/sheet/leather = 3,
 				 /obj/item/stack/sheet/sinew = 4)
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/bone_bow
@@ -107,6 +131,8 @@
 	always_availible = FALSE
 	reqs = list(/obj/item/stack/sheet/bone = 8,
 				 /obj/item/stack/sheet/sinew = 4)
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/bow_tablet
@@ -116,6 +142,8 @@
 	always_availible = FALSE
 	reqs = list(/obj/item/stack/rods = 1,
 				 /obj/item/stack/sheet/mineral/sandstone = 4)
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/rib
@@ -125,7 +153,9 @@
             /obj/item/stack/sheet/bone = 10,
             /datum/reagent/oil = 5)
 	result = /obj/structure/statue/bone/rib
-	subcategory = CAT_PRIMAL
+	stat_required = null
+	skill_required = null
+	category = CAT_PRIMAL
 
 /datum/crafting_recipe/skull
 	name = "Skull Carving"
@@ -134,6 +164,8 @@
             /obj/item/stack/sheet/bone = 6,
             /datum/reagent/oil = 5)
 	result = /obj/structure/statue/bone/skull
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/halfskull
@@ -143,6 +175,8 @@
             /obj/item/stack/sheet/bone = 3,
             /datum/reagent/oil = 5)
 	result = /obj/structure/statue/bone/skull/half
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/boneshovel
@@ -153,4 +187,6 @@
             /datum/reagent/oil = 5,
             /obj/item/shovel/spade = 1)
 	result = /obj/item/shovel/serrated
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL

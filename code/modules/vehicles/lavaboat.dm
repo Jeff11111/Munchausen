@@ -32,6 +32,8 @@
 	result = /obj/item/oar
 	reqs = list(/obj/item/stack/sheet/bone = 2)
 	time = 15
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 /datum/crafting_recipe/boat
@@ -39,6 +41,8 @@
 	result = /obj/vehicle/ridden/lavaboat
 	reqs = list(/obj/item/stack/sheet/animalhide/goliath_hide = 3)
 	time = 50
+	stat_required = null
+	skill_required = null
 	category = CAT_PRIMAL
 
 //Dragon Boat
