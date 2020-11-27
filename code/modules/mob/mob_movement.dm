@@ -313,10 +313,12 @@
 		return
 	//skyrat edit
 	var/next_in_line
-	if(mob.zone_selected == BODY_ZONE_CHEST)
+	if(mob.zone_selected == BODY_ZONE_PRECISE_NECK)
+		next_in_line = BODY_ZONE_CHEST
+	else if(mob.zone_selected == BODY_ZONE_CHEST)
 		next_in_line = BODY_ZONE_PRECISE_GROIN
 	else
-		next_in_line = BODY_ZONE_CHEST
+		next_in_line = BODY_ZONE_PRECISE_NECK
 	//
 	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
 	selector.set_selected_zone(next_in_line, mob) //skyrat edit

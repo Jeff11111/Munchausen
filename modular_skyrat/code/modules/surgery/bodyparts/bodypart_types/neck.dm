@@ -30,3 +30,13 @@
 	if(dropped)
 		for(var/obj/item/bodypart/head/nohead in src)
 			. |= nohead.get_limb_icon(TRUE)
+			break
+
+/obj/item/bodypart/neck/update_limb(dropping_limb, mob/living/carbon/source)
+	. = ..()
+	if(!owner)
+		for(var/obj/item/bodypart/head/nohead in src)
+			name = nohead.name
+			break
+	else
+		name = initial(name)

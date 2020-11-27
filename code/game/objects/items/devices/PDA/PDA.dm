@@ -186,11 +186,6 @@ GLOBAL_LIST_EMPTY(PDAs)
 		else
 			font_index = MODE_MONO
 			font_mode = FONT_MONO
-	var/pref_skin = GLOB.pda_reskins[C.prefs.pda_skin]
-	if(icon != pref_skin)
-		icon = pref_skin
-		new_overlays = TRUE
-		update_icon()
 	equipped = TRUE
 
 /obj/item/pda/proc/update_label()

@@ -193,7 +193,7 @@ GLOBAL_VAR(posibrain_notify_cooldown)
 /obj/item/mmi/posibrain/attackby(obj/item/O, mob/user)
 	if(O.get_sharpness())
 		to_chat(user, "<span class='notice'>I start ripping away [src]'s carcass.</span>")
-		if(!do_after(user, 4 SECONDS, TRUE, SRC))
+		if(!do_after(user, 4 SECONDS, TRUE, src))
 			to_chat(user, "<span class='warning'>I must stand still!</span>")
 			return FALSE
 		brain.forceMove(get_turf(user))

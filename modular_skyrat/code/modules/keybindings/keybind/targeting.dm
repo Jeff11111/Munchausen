@@ -19,6 +19,8 @@
 				user.body_r_arm()
 			if(BODY_ZONE_PRECISE_R_HAND)
 				user.body_chest()
+			if(BODY_ZONE_PRECISE_NECK)
+				user.body_chest()
 			if(BODY_ZONE_CHEST)
 				user.body_chest()
 			if(BODY_ZONE_PRECISE_GROIN)
