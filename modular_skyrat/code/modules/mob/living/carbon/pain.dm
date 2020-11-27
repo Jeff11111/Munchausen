@@ -37,11 +37,11 @@
 		var/msg
 		switch(maxdam)
 			if(1 to 10)
-				msg =  "Your [damaged_bodypart.name] [burning ? "burns" : "hurts"]."
+				msg =  "My [damaged_bodypart.name] [burning ? "burns" : "hurts"]."
 			if(11 to 90)
-				msg = "Your [damaged_bodypart.name] [burning ? "burns" : "hurts"] badly!"
+				msg = "My [damaged_bodypart.name] [burning ? "burns" : "hurts"] badly!"
 			if(91 to INFINITY)
-				msg = "OH GOD! Your [damaged_bodypart.name] is [burning ? "on fire" : "hurting terribly"]!"
+				msg = "OH GOD! My [damaged_bodypart.name] is [burning ? "on fire" : "hurting terribly"]!"
 		custom_pain(msg, maxdam, FALSE, damaged_bodypart)
 	
 	// Damage to internal organs hurts a lot.
@@ -50,13 +50,13 @@
 			var/obj/item/bodypart/parent = get_bodypart(O.zone)
 			if(parent)
 				var/pain = 10
-				var/message = "You feel a dull pain in your [parent.name]"
+				var/message = "I feel a dull pain in my [parent.name]"
 				if(O.damage >= O.low_threshold)
 					pain = 25
-					message = "You feel a pain in your [parent.name]"
+					message = "I feel a pain in my [parent.name]"
 				if((O.damage >= O.high_threshold) || (O.organ_flags & ORGAN_FAILING))
 					pain = 50
-					message = "You feel a sharp pain in your [parent.name]"
+					message = "I feel a sharp pain in my [parent.name]"
 				custom_pain(message, pain, FALSE, parent)
 
 	var/toxDamageMessage = null
@@ -65,19 +65,19 @@
 	switch(toxin_damage)
 		if(1 to 5)
 			toxMessageProb = 1
-			toxDamageMessage = "Your body stings slightly."
+			toxDamageMessage = "My body stings slightly."
 		if(5 to 10)
 			toxMessageProb = 2
-			toxDamageMessage = "Your whole body hurts a little."
+			toxDamageMessage = "My whole body hurts a little."
 		if(10 to 20)
 			toxMessageProb = 2
-			toxDamageMessage = "Your whole body hurts."
+			toxDamageMessage = "My whole body hurts."
 		if(20 to 30)
 			toxMessageProb = 3
-			toxDamageMessage = "Your whole body hurts badly."
+			toxDamageMessage = "My whole body hurts badly."
 		if(30 to INFINITY)
 			toxMessageProb = 5
-			toxDamageMessage = "Your body aches all over, it's driving you mad!"
+			toxDamageMessage = "My body aches all over, it's driving me mad!"
 	
 	if(toxDamageMessage && prob(toxMessageProb))
 		custom_pain(toxDamageMessage, toxin_damage)
