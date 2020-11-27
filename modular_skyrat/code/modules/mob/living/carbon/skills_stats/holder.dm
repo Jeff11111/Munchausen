@@ -51,8 +51,3 @@
 			stat_string |= "[mystat.shorthand]: [mystat.level]"
 		if(length(stat_string))
 			stat(null, "\n\n[stat_string.Join("\n\n")]\n\n")
-
-//Remove the crappy citadel skills verb
-/mob/Initialize()
-	. = ..()
-	verbs -= /mob/verb/check_skills

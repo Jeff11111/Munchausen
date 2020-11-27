@@ -18,6 +18,12 @@
 	Your goal is to cultivate and spread life wherever it will go while waiting for contact from your creators. \
 	Estimated time of last contact: Deployment, 5000 millennia ago."
 	assignedrole = "Lifebringer"
+	stat_str = 8
+	stat_end = 9
+	stat_dex = 12
+	stat_int = 12
+	skill_cooking = 16
+	skill_agriculture = 16
 
 /obj/effect/mob_spawn/human/seed_vault/Destroy()
 	new/obj/structure/fluff/empty_terrarium(get_turf(src))
@@ -55,6 +61,15 @@
 	You have seen lights in the distance... they foreshadow the arrival of outsiders to your domain. \
 	Ensure your nest remains protected at all costs."
 	assignedrole = "Ash Walker"
+	stat_str = 13
+	stat_end = 12
+	stat_dex = 11
+	stat_int = 5
+	skill_melee = 13
+	skill_firstaid = 13
+	skill_construction = 6
+	skill_cooking = 8
+	skill_agriculture = 8
 
 /obj/effect/mob_spawn/human/ash_walker/special(mob/living/new_spawn)
 	new_spawn.real_name = random_unique_lizard_name(gender)
@@ -87,7 +102,6 @@
 	name ="Ashwalker"
 	head = /obj/item/clothing/head/helmet/gladiator
 	uniform = /obj/item/clothing/under/costume/gladiator/ash_walker
-
 
 //Timeless prisons: Spawns in Wish Granter prisons in lavaland. Ghosts become age-old users of the Wish Granter and are advised to seek repentance for their past.
 /obj/effect/mob_spawn/human/exile
@@ -206,13 +220,17 @@
 	name = "inert servant golem shell"
 	job_description = "Servant Golem"
 
-
 /obj/effect/mob_spawn/human/golem/adamantine
 	name = "dust-caked free golem shell"
 	desc = "A humanoid shape, empty, lifeless, and full of potential."
 	mob_name = "a free golem"
 	can_transfer = FALSE
 	mob_species = /datum/species/golem/adamantine
+	stat_str = 15
+	stat_end = 15
+	stat_dex = 8
+	stat_int = 5
+	skill_melee = 13
 
 //Malfunctioning cryostasis sleepers: Spawns in makeshift shelters in lavaland. Ghosts become hermits with knowledge of how they got to where they are now.
 /obj/effect/mob_spawn/human/hermit
@@ -231,6 +249,8 @@
 	the hostile creatures, and the ash drakes swooping down from the cloudless skies, all you can wish for is the feel of soft grass between your toes and \
 	the fresh air of Earth. These thoughts are dispelled by yet another recollection of how you got here... "
 	assignedrole = "Hermit"
+	skill_melee = 10
+	skill_ranged = 10
 
 /obj/effect/mob_spawn/human/hermit/Initialize(mapload)
 	. = ..()
@@ -283,6 +303,11 @@
 	you see them right now. So where is \
 	everyone? Where did they go? What happened to the hospital? And is that <i>smoke</i> you smell? You need to find someone else. Maybe they c	everyone's gone. One of the cats scratched you just a few minutes ago. That's why you were in the pod - to heal the scratch. The scabs are still fresh; an tell you what happened."
 	assignedrole = "Translocated Vet"
+	stat_str = 9
+	stat_int = 12
+	skill_melee = 8
+	skill_firstaid = 12
+	skill_surgery = 10
 
 /obj/effect/mob_spawn/human/doctor/alive/lavaland/Destroy()
 	var/obj/structure/fluff/empty_sleeper/S = new(drop_location())
@@ -409,7 +434,6 @@
 	objectives = "Be [owner.name]'s friend, and keep [owner.name] alive, so you don't get sent back to hell."
 	spell = summoning_spell
 
-
 /obj/effect/mob_spawn/human/demonic_friend/special(mob/living/L)
 	if(!QDELETED(owner.current) && owner.current.stat != DEAD)
 		L.real_name = "[owner.name]'s best friend"
@@ -517,7 +541,7 @@
 	death = FALSE
 	random = TRUE
 	mob_species = /datum/species/human
-	short_desc = "You are a security officer working for Nanotrasen, stationed onboard a state of the art research station."
+	short_desc = "You are a security officer working for NanoTrasen, stationed onboard a state of the art research station."
 	flavour_text = "You vaguely recall rushing into a cryogenics pod due to an oncoming radiation storm. \
 	The last thing you remember is the station's Artificial Program telling you that you would only be asleep for eight hours. As you open \
 	your eyes, everything seems rusted and broken, a dark feeling swells in your gut as you climb out of your pod."
@@ -659,7 +683,6 @@
 	else
 		ADD_TRAIT(M,TRAIT_SIXTHSENSE,GHOSTROLE_TRAIT)
 		to_chat(M,"<span class='notice'>You're once again longer hearing deadchat.</span>")
-
 
 /obj/effect/mob_spawn/human/ghostcafe/special(mob/living/carbon/human/new_spawn)
 	if(new_spawn.client)

@@ -1,5 +1,5 @@
 //Verb for checking your skills
-/mob/verb/check_skillset()
+/mob/verb/check_skills()
 	set name = "Check Skillset"
 	set category = "IC"
 	set desc = "Check your competence at various tasks."

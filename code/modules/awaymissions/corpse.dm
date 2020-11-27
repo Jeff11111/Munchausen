@@ -33,6 +33,29 @@
 	var/ghost_usable = TRUE
 	var/skip_reentry_check = FALSE //Skips the ghost role blacklist time for people who ghost/suicide/cryo
 
+	//Stat defines
+	var/stat_variance_positive = 2 //How much we can vary positively
+	var/stat_variance_negative = 2 //How much we can vary negatively
+	var/stat_str = JOB_STATPOINTS_AVERAGE
+	var/stat_end = JOB_STATPOINTS_AVERAGE
+	var/stat_dex = JOB_STATPOINTS_AVERAGE
+	var/stat_int = JOB_STATPOINTS_AVERAGE
+
+	//Skill defines
+	var/skill_variance_positive = 2 //How much we can vary positively
+	var/skill_variance_negative = 2 //How much we can vary negatively
+	var/skill_melee = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_ranged = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_firstaid = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_surgery = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_chemistry = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_construction = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_electronics = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_research = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_cooking = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_agriculture = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_gaming = JOB_SKILLPOINTS_HORRENDOUS
+
 //ATTACK GHOST IGNORING PARENT RETURN VALUE
 /obj/effect/mob_spawn/attack_ghost(mob/user, latejoinercalling)
 	if(!SSticker.HasRoundStarted() || !loc || !ghost_usable)
@@ -140,10 +163,46 @@
 			M.mind.assigned_role = assignedrole
 		special(M, name)
 		MM.name = M.real_name
+	
+	if(ishuman(M))
+		assign_skills_stats(M)
+	
 	if(uses > 0)
 		uses--
 	if(!permanent && !uses)
 		qdel(src)
+
+/obj/effect/mob_spawn/proc/assign_skills_stats(mob/living/carbon/human/H)
+	//Assign stats
+	var/list/all_stats = list(
+							STAT_DATUM(str) = stat_str,
+							STAT_DATUM(end) = stat_end,
+							STAT_DATUM(dex) = stat_dex,
+							STAT_DATUM(int) = stat_int,
+							)
+	for(var/currentpath in all_stats)
+		var/datum/stats/stat = H.mind.mob_stats[currentpath]
+		if(stat)
+			stat.level = clamp(rand(all_stats[currentpath] - stat_variance_negative, all_stats[currentpath] + stat_variance_positive), MIN_STAT, MAX_STAT)
+	
+	//Assign skills
+	var/list/all_skills = list(
+							SKILL_DATUM(melee) = skill_melee,
+							SKILL_DATUM(ranged) = skill_ranged,
+							SKILL_DATUM(firstaid) = skill_firstaid,
+							SKILL_DATUM(surgery) = skill_surgery,
+							SKILL_DATUM(chemistry) = skill_chemistry,
+							SKILL_DATUM(construction) = skill_construction,
+							SKILL_DATUM(electronics) = skill_electronics,
+							SKILL_DATUM(gaming) = skill_gaming,
+							SKILL_DATUM(cooking) = skill_cooking,
+							SKILL_DATUM(agriculture) = skill_agriculture,
+							SKILL_DATUM(research) = skill_research,
+							)
+	for(var/currentpath in all_skills)
+		var/datum/skills/skill = H.mind.mob_skills[currentpath]
+		if(skill)
+			skill.level = clamp(rand(all_skills[currentpath] - skill_variance_negative, all_skills[currentpath] + skill_variance_positive), MIN_SKILL, MAX_SKILL)
 
 // Base version - place these on maps/templates.
 /obj/effect/mob_spawn/human
@@ -184,6 +243,29 @@
 	var/hair_style
 	var/facial_hair_style
 	var/skin_tone
+
+	//Stat defines
+	var/stat_variance_positive = 2 //How much we can vary positively
+	var/stat_variance_negative = 2 //How much we can vary negatively
+	var/stat_str = JOB_STATPOINTS_AVERAGE
+	var/stat_end = JOB_STATPOINTS_AVERAGE
+	var/stat_dex = JOB_STATPOINTS_AVERAGE
+	var/stat_int = JOB_STATPOINTS_AVERAGE
+
+	//Skill defines
+	var/skill_variance_positive = 2 //How much we can vary positively
+	var/skill_variance_negative = 2 //How much we can vary negatively
+	var/skill_melee = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_ranged = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_firstaid = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_surgery = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_chemistry = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_construction = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_electronics = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_research = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_cooking = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_agriculture = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_gaming = JOB_SKILLPOINTS_HORRENDOUS
 
 /obj/effect/mob_spawn/human/Initialize()
 	if(ispath(outfit))

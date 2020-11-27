@@ -1,19 +1,4 @@
 // yeah yeah verbs suck whatever I suck at this fix this someone please - kevinz000
-
-/mob/verb/check_skills()
-	set name = "Check Skills"
-	set category = "IC"
-	set desc = "Check your skills (if you have any..)"
-
-	if(!mind)
-		to_chat(usr, "<span class='warning'>How do you check the skills of [(usr == src)? "yourself when you are" : "something"] without a mind?</span>")
-		return
-	if(!mind.skill_holder)
-		to_chat(usr, "<span class='warning'>How do you check the skills of [(usr == src)? "yourself when you are" : "something"] without the capability for skills? (PROBABLY A BUG, PRESS F1.)</span>")
-		return
-
-	mind.skill_holder.ui_interact(src)
-
 /datum/skill_holder/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, datum/tgui/master_ui = null, datum/ui_state/state = GLOB.always_state)
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
