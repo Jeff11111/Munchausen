@@ -514,7 +514,7 @@
 
 /mob/living/carbon/regenerate_limbs(noheal = FALSE, list/excluded_limbs = list(), ignore_parent_restriction = FALSE)
 	. = ..()
-	var/list/limb_list = ALL_BODYPARTS
+	var/list/limb_list = ALL_BODYPARTS_ORDERED //Can't use ALL_BODYPARTS because order matters
 	if(excluded_limbs.len)
 		limb_list -= excluded_limbs
 	for(var/Z in limb_list)

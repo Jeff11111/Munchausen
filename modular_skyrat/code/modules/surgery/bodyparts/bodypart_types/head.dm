@@ -274,6 +274,12 @@
 	//Handle teeth stuff
 	if(teeth_mod)
 		teeth_mod.add_speech_mod(C)
+	//Neck stuff
+	var/obj/item/bodypart/neck/neck = C.get_bodypart(BODY_ZONE_PRECISE_NECK)
+	if(neck)
+		neck.status = status
+		neck.synthetic = synthetic
+		neck.render_like_organic = render_like_organic
 
 /obj/item/bodypart/head/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
 	. = ..()
