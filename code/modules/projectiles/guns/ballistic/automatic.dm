@@ -286,11 +286,6 @@
 /obj/item/gun/ballistic/automatic/l6_saw/unrestricted
 	pin = /obj/item/firing_pin
 
-/obj/item/gun/ballistic/automatic/l6_saw/examine(mob/user)
-	. = ..()
-	if(cover_open && magazine)
-		. += "<span class='notice'>It seems like you could use an <b>empty hand</b> to remove the magazine.</span>"
-
 /obj/item/gun/ballistic/automatic/l6_saw/attack_self(mob/user)
 	cover_open = !cover_open
 	to_chat(user, "<span class='notice'>You [cover_open ? "open" : "close"] [src]'s cover.</span>")
@@ -300,33 +295,12 @@
 		playsound(user, 'sound/weapons/sawclose.ogg', 60, 1)
 	update_icon()
 
-/obj/item/gun/ballistic/automatic/l6_saw/update_icon()
-	icon_state = "l6[cover_open ? "open" : "closed"][magazine ? CEILING(get_ammo(0)/12.5, 1)*25 : "-empty"][suppressed ? "-suppressed" : ""]"
-	item_state = "l6[cover_open ? "openmag" : "closedmag"]"
-
 /obj/item/gun/ballistic/automatic/l6_saw/afterattack(atom/target as mob|obj|turf, mob/living/user as mob|obj, flag, params) //what I tried to do here is just add a check to see if the cover is open or not and add an icon_state change because I can't figure out how c-20rs do it with overlays
 	if(cover_open)
-		to_chat(user, "<span class='warning'>[src]'s cover is open! Close it before firing!</span>")
+		shoot_with_empty_chamber(user)
 	else
 		. = ..()
 		update_icon()
-
-//ATTACK HAND IGNORING PARENT RETURN VALUE
-/obj/item/gun/ballistic/automatic/l6_saw/attack_hand(mob/user)
-	if(loc != user)
-		..()
-		return	//let them pick it up
-	if(!cover_open || (cover_open && !magazine))
-		..()
-	else if(cover_open && magazine)
-		//drop the mag
-		magazine.update_icon()
-		magazine.forceMove(drop_location())
-		user.put_in_hands(magazine)
-		magazine = null
-		update_icon()
-		to_chat(user, "<span class='notice'>You remove the magazine from [src].</span>")
-		playsound(user, 'sound/weapons/magout.ogg', 60, 1)
 
 /obj/item/gun/ballistic/automatic/l6_saw/attackby(obj/item/A, mob/user, params)
 	if(!cover_open && istype(A, mag_type))

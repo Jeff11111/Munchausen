@@ -2,6 +2,10 @@
 /obj/item/gun/ballistic/automatic/pistol
 	generic_magazine_overlays = TRUE
 
+/obj/item/gun/ballistic/automatic/pistol/update_icon()
+	..()
+	item_state = "[initial(item_state)][suppressed ? "suppressed" : ""]"
+
 //Pipe pistol
 /obj/item/gun/ballistic/automatic/pistol/makeshift
 	name = "10mm pipe pistol"

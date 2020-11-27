@@ -496,14 +496,18 @@
 
 /obj/item/gun/update_overlays()
 	. = ..()
+	. += build_overlays()
+
+/obj/item/gun/proc/build_overlays()
+	. = list()
 	if(suppressed_overlay)
-		. += suppressed_overlay
+		. |= suppressed_overlay
 	if(flashlight_overlay)
-		. += flashlight_overlay
+		. |= flashlight_overlay
 	if(knife_overlay)
-		. += knife_overlay
+		. |= knife_overlay
 	if(sling_overlay)
-		. += sling_overlay
+		. |= sling_overlay
 
 /obj/item/gun/middle_attack_hand(mob/user)
 	. = ..()

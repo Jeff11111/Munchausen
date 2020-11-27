@@ -7,6 +7,10 @@
 	item_state = "uzi"
 	generic_magazine_overlays = FALSE
 
+/obj/item/gun/ballistic/automatic/mini_uzi/update_icon()
+	..()
+	item_state = "[initial(item_state)][magazine ? "" : "-e"]"
+
 //Saber should be an MP5 that would be cool i think
 /obj/item/gun/ballistic/automatic/proto
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/40x32.dmi'
@@ -15,7 +19,7 @@
 	desc = "A prototype three-round burst 9mm submachine gun, designated 'SABR'. Looks eerily similar to another submachine gun..."
 	can_suppress = FALSE
 
-//C20r
+//C20R
 /obj/item/gun/ballistic/automatic/c20r
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/smg.dmi'
 	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/smg_righthand.dmi'

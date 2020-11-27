@@ -184,7 +184,7 @@
 	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/shotgun_lefthand.dmi'
 	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/shotgun_righthand.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/obj/bobstation/guns/worn/back.dmi'
-	icon_state = "bo"
+	icon_state = "bulldog"
 	item_state = "shotgun"
 	fire_sound = 'modular_skyrat/sound/guns/shotgun.ogg'
 	generic_magazine_overlays = FALSE
