@@ -24,3 +24,5 @@
 	zone_prob = 40
 	extra_zone_prob = 30
 	max_cavity_size = WEIGHT_CLASS_TINY
+
+/obj/item/bodypart/neck

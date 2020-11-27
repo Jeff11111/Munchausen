@@ -160,6 +160,7 @@
 	. = ..()
 	if(.) //was the attack blocked?
 		return
+	
 	for(var/thing in diseases)
 		var/datum/disease/D = thing
 		if(D.spread_flags & DISEASE_SPREAD_CONTACT_SKIN)

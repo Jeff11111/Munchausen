@@ -93,9 +93,12 @@
 	if(surgeries.len)
 		if(user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM)
 			for(var/datum/surgery/S in surgeries)
-				if(!S.lying_required || (S.lying_required && lying))
+				if(!S.lying_required || (S.lying_required && lying) && (S.location == user.zone_selected))
 					if(S.next_step(user, user.a_intent))
 						return TRUE
+		if((user.a_intent == INTENT_HELP) && I.tool_behaviour)
+			return TRUE
+	
 	//skyrat edit
 	if(!length(all_wounds) || !(user.a_intent == INTENT_HELP || user == src))
 		return ..()

@@ -103,9 +103,6 @@
 			return TRUE
 		if(iscyborg(user) && user.a_intent != INTENT_HARM) //to save asimov borgs a LOT of heartache
 			return TRUE
-		if(tool) //Just because you used the wrong tool it doesn't mean you meant to whack the patient with it
-			to_chat(user, "<span class='warning'>This step requires a different tool!</span>")
-			return TRUE
 
 /datum/surgery/proc/get_surgery_step()
 	var/step_type = steps[status]

@@ -98,67 +98,6 @@
 		L.mind.transfer_to(brainmob)
 	to_chat(brainmob, "<span class='notice'>You feel slightly disoriented. That's normal when you're just a brain.</span>")
 
-/obj/item/organ/brain/attackby(obj/item/O, mob/user, params)
-	user.changeNext_move(CLICK_CD_MELEE)
-	if(brainmob)
-		O.attack(brainmob, user) //Oh noooeeeee
-
-	if(istype(O, /obj/item/organ_storage)) //BUG_PROBABLE_CAUSE
-		return //Borg organ bags shouldn't be killing brains
-
-	if((organ_flags & ORGAN_FAILING) && (O.is_drainable() || istype(O, /obj/item/reagent_containers)) && O.reagents.has_reagent(/datum/reagent/medicine/neurine)) //Neurine fixes dead brains
-		. = TRUE //don't do attack animation.
-		var/cached_Bdamage = brainmob?.health
-		var/datum/reagent/medicine/neurine/N = reagents.has_reagent(/datum/reagent/medicine/neurine)
-		var/datum/reagent/medicine/mannitol/M1 = reagents.has_reagent(/datum/reagent/medicine/mannitol)
-
-		if(O.reagents.has_reagent(/datum/reagent/medicine/mannitol))//Just a quick way to bolster the effects if someone mixes up a batch.
-			N.volume *= (M1.volume*0.5)
-
-		if(!O.reagents.has_reagent(/datum/reagent/medicine/neurine, 10))
-			to_chat(user, "<span class='warning'>There's not enough neurine in [O] to restore [src]!</span>")
-			return
-
-		user.visible_message("<span class='notice'>[user] starts to pour the contents of [O] onto [src].</span>", "<span class='notice'>You start to slowly pour the contents of [O] onto [src].</span>")
-		if(!do_after(user, 60, TRUE, src))
-			to_chat(user, "<span class='warning'>You failed to pour [O] onto [src]!</span>")
-			return
-
-		user.visible_message("<span class='notice'>[user] pours the contents of [O] onto [src], causing it to reform its original shape and turn a slightly brighter shade of pink.</span>", "<span class='notice'>You pour the contents of [O] onto [src], causing it to reform its original shape and turn a slightly brighter shade of pink.</span>")
-		setOrganDamage((damage - (0.10 * maxHealth)*(N.volume/10)))	//heals a small amount, and by using "setorgandamage", we clear the failing variable if that was up
-		O.reagents.clear_reagents()
-
-		if(cached_Bdamage <= HEALTH_THRESHOLD_DEAD) //Fixing dead brains yeilds a trauma
-			if((cached_Bdamage <= HEALTH_THRESHOLD_DEAD) && (brainmob.health > HEALTH_THRESHOLD_DEAD))
-				if(prob(80))
-					gain_trauma_type(BRAIN_TRAUMA_MILD, natural_gain = TRUE)
-				else if(prob(50))
-					gain_trauma_type(BRAIN_TRAUMA_SEVERE, natural_gain = TRUE)
-				else
-					gain_trauma_type(BRAIN_TRAUMA_SPECIAL, natural_gain = TRUE)
-		return
-
-	if((organ_flags & ORGAN_FAILING) && (O.is_drainable() || istype(O, /obj/item/reagent_containers)) && O.reagents.has_reagent(/datum/reagent/medicine/mannitol)) //attempt to heal the brain
-		. = TRUE //don't do attack animation.
-		var/datum/reagent/medicine/mannitol/M = reagents.has_reagent(/datum/reagent/medicine/mannitol)
-		if(brain_death || brainmob?.health <= HEALTH_THRESHOLD_DEAD) //if the brain is fucked anyway, do nothing
-			to_chat(user, "<span class='warning'>[src] is far too damaged, you'll have to use neurine on it!</span>")
-			return
-
-		if(!O.reagents.has_reagent(/datum/reagent/medicine/mannitol, 10))
-			to_chat(user, "<span class='warning'>There's not enough mannitol in [O] to restore [src]!</span>")
-			return
-
-		user.visible_message("<span class='notice'>[user] starts to pour the contents of [O] onto [src].</span>", "<span class='notice'>You start to slowly pour the contents of [O] onto [src].</span>")
-		if(!do_after(user, 60, TRUE, src))
-			to_chat(user, "<span class='warning'>You failed to pour [O] onto [src]!</span>")
-			return
-
-		user.visible_message("<span class='notice'>[user] pours the contents of [O] onto [src], causing it to reform its original shape and turn a slightly brighter shade of pink.</span>", "<span class='notice'>You pour the contents of [O] onto [src], causing it to reform its original shape and turn a slightly brighter shade of pink.</span>")
-		setOrganDamage((damage - (0.05 * maxHealth)*(M.volume/10)))	//heals a small amount, and by using "setorgandamage", we clear the failing variable if that was up
-		O.reagents.clear_reagents()
-		return
-
 /obj/item/organ/brain/surgical_examine(mob/user)
 	. = ..()
 	if(owner)
