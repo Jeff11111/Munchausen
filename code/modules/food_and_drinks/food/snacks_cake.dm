@@ -181,7 +181,7 @@
 
 /obj/item/reagent_containers/food/snacks/store/cake/birthday
 	name = "birthday cake"
-	desc = "Happy Birthday little clown..."
+	desc = "Happy Birthday little jester..."
 	icon_state = "birthdaycake"
 	slice_path = /obj/item/reagent_containers/food/snacks/cakeslice/birthday
 	slices_num = 5
@@ -361,8 +361,8 @@ obj/item/reagent_containers/food/snacks/store/cake/pound_cake
 	foodtype = GRAIN | SUGAR | DAIRY
 
 /obj/item/reagent_containers/food/snacks/store/cake/clown_cake
-	name = "clown cake"
-	desc = "A funny cake with a clown face on it."
+	name = "jester cake"
+	desc = "A funny cake with a jester face on it."
 	icon_state = "clowncake"
 	slice_path = /obj/item/reagent_containers/food/snacks/cakeslice/clown_slice
 	bonus_reagents = list(/datum/reagent/consumable/sugar = 15, /datum/reagent/consumable/laughter = 15)

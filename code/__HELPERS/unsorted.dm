@@ -179,7 +179,7 @@ Turf and target are separate in case you want to teleport some distance from a t
 			switch(role)
 				if("human")
 					newname = random_unique_name(gender)
-				if("clown")
+				if("jester")
 					newname = pick(GLOB.clown_names)
 				if("mime")
 					newname = pick(GLOB.mime_names)

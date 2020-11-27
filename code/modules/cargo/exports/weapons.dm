@@ -251,7 +251,7 @@
 
 /datum/export/weapon/clownstuff
 	cost = 500
-	unit_name = "clown war tech"
+	unit_name = "jester war tech"
 	export_types = list(/obj/item/pneumatic_cannon/pie/selfcharge, /obj/item/shield/energy/bananium, /obj/item/melee/transforming/energy/sword/bananium, )
 
 /datum/export/weapon/bulldog

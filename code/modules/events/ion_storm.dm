@@ -372,7 +372,7 @@
 								if(1) //Change to a specific random job
 									message = "ALL CREWMEMBERS ARE NOW [ionadjectiveshalf][ioncrew1]"
 								if(2) //Change to clowns (HONK)
-									message = "ALL CREWMEMBERS ARE NOW [ionadjectiveshalf]CLOWNS"
+									message = "ALL CREWMEMBERS ARE NOW [ionadjectiveshalf]JESTERS"
 
 								if(3) //Change to heads
 									message = "ALL CREWMEMBERS ARE NOW [ionadjectiveshalf]HEADS OF STAFF"
@@ -381,7 +381,7 @@
 								if(1) //Change to a specific random job
 									message = "THE [ioncrew1] ARE NOW [ionadjectiveshalf][ioncrew2]"
 								if(2) //Change to clowns (HONK)
-									message = "THE [ioncrew1] ARE NOW [ionadjectiveshalf]CLOWNS"
+									message = "THE [ioncrew1] ARE NOW [ionadjectiveshalf]JESTERS"
 								if(3) //Change to heads
 									message = "THE [ioncrew1] ARE NOW [ionadjectiveshalf]HEADS OF STAFF"
 

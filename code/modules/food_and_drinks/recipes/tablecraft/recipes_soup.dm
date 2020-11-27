@@ -56,7 +56,7 @@
 	subcategory = CAT_SOUP
 
 /datum/crafting_recipe/food/clownstears
-	name = "Clowns tears"
+	name = "Jester's tears"
 	reqs = list(
 		/datum/reagent/water = 10,
 		/obj/item/reagent_containers/glass/bowl = 1,

@@ -19,7 +19,7 @@
 
 /datum/bounty/item/medical/ears
 	name = "Ears"
-	description = "Multiple staff at Station 12 have been left deaf due to unauthorized clowning. Ship them new ears."
+	description = "Multiple staff at Station 12 have been left deaf due to unauthorized pranks. Ship them new ears."
 	reward = 5000
 	required_count = 3
 	wanted_types = list(/obj/item/organ/ears)

@@ -19,7 +19,7 @@
 		return
 	possible_appearances = sortList(list(
 		"Assistant" = image(icon = src.icon, icon_state = "cutout_greytide"),
-		"Clown" = image(icon = src.icon, icon_state = "cutout_clown"),
+		"Jester" = image(icon = src.icon, icon_state = "cutout_clown"),
 		"Mime" = image(icon = src.icon, icon_state = "cutout_mime"),
 		"Traitor" = image(icon = src.icon, icon_state = "cutout_traitor"),
 		"Nuke Op" = image(icon = src.icon, icon_state = "cutout_fluke"),
@@ -128,9 +128,9 @@
 			name = "[pick(GLOB.first_names_male)] [pick(GLOB.last_names)]"
 			desc = "A cardboat cutout of an assistant."
 			icon_state = "cutout_greytide"
-		if("Clown")
+		if("Jester")
 			name = pick(GLOB.clown_names)
-			desc = "A cardboard cutout of a clown. You get the feeling that it should be in a corner."
+			desc = "A cardboard cutout of a jester. You get the feeling that it should be in a corner."
 			icon_state = "cutout_clown"
 		if("Mime")
 			name = pick(GLOB.mime_names)

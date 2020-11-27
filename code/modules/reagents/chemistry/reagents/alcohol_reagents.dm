@@ -1147,7 +1147,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 
 /datum/reagent/consumable/ethanol/bananahonk
 	name = "Banana Honk"
-	description = "A drink from Clown Heaven."
+	description = "A drink from Jester Heaven."
 	nutriment_factor = 1 * REAGENTS_METABOLISM
 	color = "#FFFF91" // rgb: 255, 255, 140
 	boozepwr = 60
@@ -1155,10 +1155,10 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "a bad joke"
 	glass_icon_state = "bananahonkglass"
 	glass_name = "Banana Honk"
-	glass_desc = "A drink from Clown Heaven."
+	glass_desc = "A drink from Jester Heaven."
 
 /datum/reagent/consumable/ethanol/bananahonk/on_mob_life(mob/living/carbon/M)
-	if((ishuman(M) && M.job == "Clown") || ismonkey(M))
+	if((ishuman(M) && M.job == "Jester") || ismonkey(M))
 		M.heal_bodypart_damage(1,1)
 		. = 1
 	return ..() || .
@@ -1552,7 +1552,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "THE LAW"
 	glass_icon_state = "quintuple_sec"
 	glass_name = "Quintuple Sec"
-	glass_desc = "Now you are become law, destroyer of clowns."
+	glass_desc = "Now you are become law, destroyer of jesters."
 	value = REAGENT_VALUE_EXCEPTIONAL
 
 /datum/reagent/consumable/ethanol/quintuple_sec/on_mob_life(mob/living/carbon/M)

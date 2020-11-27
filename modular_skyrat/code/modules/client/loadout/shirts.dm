@@ -366,7 +366,7 @@
 	path = /obj/item/clothing/underwear/shirt/alien
 
 /datum/gear/shirt/clown
-	name = "Clown Shirt"
+	name = "Jester Shirt"
 	category = SLOT_W_SHIRT
 	has_colors = TRUE
 	path = /obj/item/clothing/underwear/shirt/clown

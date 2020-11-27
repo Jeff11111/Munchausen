@@ -204,9 +204,9 @@
 		H.physiology.siemens_coeff *= 0.75 	//base electrocution coefficient  1
 		S.punchdamagelow += 1       //lowest possible punch damage   0
 		S.punchdamagehigh += 1      //highest possible punch damage	 9
-		if(istype(H) && owner.assigned_role == "Clown")
+		if(istype(H) && owner.assigned_role == "Jester")
 			H.dna.remove_mutation(CLOWNMUT)
-			to_chat(H, "As a vampiric clown, you are no longer a danger to yourself. Your nature is subdued.")
+			to_chat(H, "As a vampiric jester, you are no longer a danger to yourself. Your nature is subdued.")
 	// Physiology
 	CheckVampOrgans() // Heart, Eyes
 	// Language

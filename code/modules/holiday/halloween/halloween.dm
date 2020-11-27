@@ -183,8 +183,8 @@
 ///////////////////////////
 
 /mob/living/simple_animal/hostile/retaliate/clown/insane
-	name = "insane clown"
-	desc = "Some clowns do not manage to be accepted, and go insane. This is one of them."
+	name = "insane jester"
+	desc = "Some jesters do not manage to be accepted, and go insane. This is one of them."
 	icon_state = "scary_clown"
 	icon_living = "scary_clown"
 	icon_dead = "scary_clown"

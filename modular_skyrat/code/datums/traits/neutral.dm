@@ -115,7 +115,7 @@
 
 //Mime
 /datum/quirk/french
-	name = "French Clown"
+	name = "French Jester"
 	desc = "Those frivolous jesters know not of true entertainment! You are the superior french man - A mime."
 	job_whitelist = list("Clown")
 	medical_condition = FALSE

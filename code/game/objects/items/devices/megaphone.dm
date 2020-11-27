@@ -59,7 +59,7 @@
 	icon_state = "megaphone-cargo"
 
 /obj/item/megaphone/clown
-	name = "clown's megaphone"
+	name = "jester's megaphone"
 	desc = "Something that should not exist."
 	icon_state = "megaphone-clown"
 	voicespan = list(SPAN_CLOWN)

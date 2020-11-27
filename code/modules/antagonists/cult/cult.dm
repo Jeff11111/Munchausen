@@ -85,8 +85,8 @@
 	var/mob/living/carbon/H = owner.current
 	if(!istype(H))
 		return
-	if (owner.assigned_role == "Clown")
-		to_chat(owner, "Your training has allowed you to overcome your clownish nature, allowing you to wield weapons without harming yourself.")
+	if (owner.assigned_role == "Jester")
+		to_chat(owner, "Your training has allowed you to overcome your hysteric nature, allowing you to wield weapons without harming yourself.")
 		H.dna.remove_mutation(CLOWNMUT)
 	. += cult_give_item(/obj/item/melee/cultblade/dagger, H)
 	if(metal)

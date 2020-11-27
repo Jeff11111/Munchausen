@@ -14,7 +14,7 @@
 
 /datum/bounty/item/security/practice
 	name = "Practice Laser Gun"
-	description = "Nanotrasen Military Academy is conducting routine marksmanship exercises. The clown hid all the practice lasers, and we're not using live weapons after last time."
+	description = "Nanotrasen Military Academy is conducting routine marksmanship exercises. The jester hid all the practice lasers, and we're not using live weapons after last time."
 	reward = 1500
 	required_count = 3
 	wanted_types = list(/obj/item/gun/energy/laser/practice)

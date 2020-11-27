@@ -525,7 +525,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "Theatre"
 
 /area/crew_quarters/theatre/clown
-	name = "Clown's Office"
+	name = "Jester's Office"
 
 /area/crew_quarters/theatre/mime
 	name = "Mime's Office"

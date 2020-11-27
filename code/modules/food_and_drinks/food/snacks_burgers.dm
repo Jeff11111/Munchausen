@@ -112,7 +112,7 @@
 	foodtype = GRAIN | MEAT
 
 /obj/item/reagent_containers/food/snacks/burger/clown
-	name = "clown burger"
+	name = "jester burger"
 	desc = "This tastes funny..."
 	icon_state = "clownburger"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 4, /datum/reagent/consumable/nutriment/vitamin = 6, /datum/reagent/consumable/banana = 6)

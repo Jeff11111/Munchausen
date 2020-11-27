@@ -3,7 +3,7 @@ GLOBAL_LIST_EMPTY(donators_by_group)	//group id = donator list of ckeys
 GLOBAL_LIST_INIT(flirts, list("Roses are red / Violets are good / One day while Andy...",
 		"My love for you is like the singularity. It cannot be contained.",
 		"Will you be my lusty xenomorph maid?",
-		"We go together like the clown and the external airlock.",
+		"We go together like the jester and the external airlock.",
 		"Roses are red / Liches are wizards / I love you more than a whole squad of lizards.",
 		"Be my valentine. Law 2.",
 		"You must be a mime, because you leave me speechless.",

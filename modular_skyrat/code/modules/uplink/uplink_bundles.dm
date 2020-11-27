@@ -15,7 +15,7 @@
 	item = /obj/item/storage/box/hug/angryclown
 	cost = 12
 	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
-	restricted_roles = list("Clown", "Mime", "Stowaway")
+	restricted_roles = list("Jester", "Mime", "Stowaway")
 
 /obj/item/clothing/mask/gas/clown_hat/joker
 	name = "\proper Society's Mask"
@@ -61,7 +61,7 @@
 	new /obj/item/clothing/under/rank/civilian/clown/green/armored(src)
 
 /obj/item/clothing/under/rank/civilian/clown/green/armored
-	name = "armored clown suit"
+	name = "armored jester suit"
 	desc = "<b>I'LL MAKE YOU HONK ALRIGHT.</b>"
 	armor = list("melee" = 10, "bullet" = 10, "laser" = 10,"energy" = 10, "bomb" = 100, "bio" = 100, "rad" = 100, "fire" = 100, "acid" = 100)
 

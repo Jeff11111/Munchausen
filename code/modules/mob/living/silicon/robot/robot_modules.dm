@@ -743,7 +743,7 @@
 	list_reagents = list(/datum/reagent/lube = 250)
 
 /obj/item/robot_module/clown
-	name = "Clown"
+	name = "Jester"
 	basic_modules = list(
 		/obj/item/assembly/flash/cyborg,
 		/obj/item/extinguisher/mini,

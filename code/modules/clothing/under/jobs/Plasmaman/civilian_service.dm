@@ -68,7 +68,7 @@
 	item_state = "mime_envirosuit"
 
 /obj/item/clothing/under/plasmaman/clown
-	name = "clown envirosuit"
+	name = "jester envirosuit"
 	desc = "<i>'HONK!'</i>"
 	icon_state = "clown_envirosuit"
 	item_state = "clown_envirosuit"

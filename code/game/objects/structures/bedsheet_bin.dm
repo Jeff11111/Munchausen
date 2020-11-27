@@ -97,10 +97,10 @@ LINEN BINS
 	dream_messages = list("silence", "gestures", "a pale face", "a gaping mouth", "the mime")
 
 /obj/item/bedsheet/clown
-	name = "clown's blanket"
-	desc = "A rainbow blanket with a clown mask woven in. It smells faintly of bananas."
+	name = "jester's blanket"
+	desc = "A rainbow blanket with a jester mask woven in. It smells faintly of bananas."
 	icon_state = "sheetclown"
-	dream_messages = list("honk", "laughter", "a prank", "a joke", "a smiling face", "the clown")
+	dream_messages = list("honk", "laughter", "a prank", "a joke", "a smiling face", "the jester")
 
 /obj/item/bedsheet/captain
 	name = "captain's bedsheet"

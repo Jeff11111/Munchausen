@@ -157,7 +157,7 @@
 	mask = /obj/item/clothing/mask/gas/mime
 
 /datum/outfit/plasmaman/clown
-	name = "Plasmaclown"
+	name = "Plasmajesters"
 
 	head = /obj/item/clothing/head/helmet/space/plasmaman/clown
 	uniform = /obj/item/clothing/under/plasmaman/clown

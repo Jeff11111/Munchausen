@@ -63,8 +63,8 @@
 	strip_delay = 60
 
 /obj/item/clothing/mask/gas/clown_hat
-	name = "clown wig and mask"
-	desc = "A true prankster's facial attire. A clown is incomplete without his wig and mask."
+	name = "jester's wig and mask"
+	desc = "A true prankster's facial attire. A jester is incomplete without his wig and mask."
 	clothing_flags = ALLOWINTERNALS
 	icon_state = "clown"
 	item_state = "clown_hat"
@@ -100,12 +100,12 @@
 		for(var/X in actions)
 			var/datum/action/A = X
 			A.UpdateButtonIcon()
-		to_chat(user, "<span class='notice'>Your Clown Mask has now morphed into [choice], all praise the Honkmother!</span>")
+		to_chat(user, "<span class='notice'>Your Jester Mask has now morphed into [choice], all praise the Honkmother!</span>")
 		return TRUE
 
 /obj/item/clothing/mask/gas/sexyclown
-	name = "sexy-clown wig and mask"
-	desc = "A feminine clown mask for the dabbling crossdressers or female entertainers."
+	name = "sexy-jester wig and mask"
+	desc = "A feminine jester mask for the dabbling crossdressers or female entertainers."
 	clothing_flags = ALLOWINTERNALS
 	icon_state = "sexyclown"
 	item_state = "sexyclown"

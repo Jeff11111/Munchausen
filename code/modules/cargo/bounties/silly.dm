@@ -20,8 +20,8 @@
 	wanted_types = list(/obj/item/toy/figure)
 
 /datum/bounty/item/silly/clown_box
-	name = "Clown Box"
-	description = "The universe needs laughter. Stamp cardboard with a clown stamp and ship it out."
+	name = "Jester Box"
+	description = "The universe needs laughter. Stamp cardboard with a jester stamp and ship it out."
 	reward = 1000
 	wanted_types = list(/obj/item/storage/box/clown)
 
@@ -34,7 +34,7 @@
 
 /datum/bounty/item/silly/shoes
 	name = "Shoes"
-	description = "An assistant stole a clown's shoes, the clown incinerated every pair we had. Send us some new footwear please."
+	description = "An assistant stole a jester's shoes, the jester incinerated every pair we had. Send us some new footwear please."
 	reward = 1200
 	required_count = 8
 	wanted_types = list(/obj/item/clothing/shoes)

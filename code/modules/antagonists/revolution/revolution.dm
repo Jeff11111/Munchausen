@@ -240,8 +240,8 @@
 	if(!istype(H))
 		return
 
-	if(remove_clumsy && owner.assigned_role == "Clown")
-		to_chat(owner, "Your training has allowed you to overcome your clownish nature, allowing you to wield weapons without harming yourself.")
+	if(remove_clumsy && owner.assigned_role == "Jester")
+		to_chat(owner, "Your training has allowed you to overcome your hysteric nature, allowing you to wield weapons without harming yourself.")
 		H.dna.remove_mutation(CLOWNMUT)
 
 	if(give_flash)

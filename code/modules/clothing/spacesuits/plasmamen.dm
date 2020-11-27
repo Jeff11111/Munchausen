@@ -224,7 +224,7 @@
 	light_overlay = "mime_envirohelm-light"
 
 /obj/item/clothing/head/helmet/space/plasmaman/clown
-	name = "clown envirosuit helmet"
+	name = "jester envirosuit helmet"
 	desc = "The make-up is painted on, it's a miracle it doesn't chip. <i>'HONK!'</i>"
 	icon_state = "clown_envirohelm"
 	item_state = "clown_envirohelm"

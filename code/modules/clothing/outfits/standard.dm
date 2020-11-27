@@ -111,7 +111,7 @@
 		W.update_label(H.real_name)
 
 /datum/outfit/tunnel_clown
-	name = "Tunnel Clown"
+	name = "Tunnel Jester"
 
 	uniform = /obj/item/clothing/under/rank/civilian/clown
 	shoes = /obj/item/clothing/shoes/clown_shoes
@@ -131,7 +131,7 @@
 
 	var/obj/item/card/id/W = H.wear_id
 	W.access = get_all_accesses()
-	W.assignment = "Tunnel Clown!"
+	W.assignment = "Tunnel Jester"
 	W.registered_name = H.real_name
 	W.update_label(H.real_name)
 

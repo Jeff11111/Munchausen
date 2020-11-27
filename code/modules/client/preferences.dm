@@ -2929,16 +2929,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				if("appear_in_round_end_report")
 					appear_in_round_end_report = !appear_in_round_end_report
 					user.mind?.appear_in_round_end_report = appear_in_round_end_report
-				if("pain_style")
-					switch(pain_style)
-						if("Pain Guy")
-							pain_style = "Marine Guy"
-						if("Marine Guy")
-							pain_style = "Clown Guy"
-						if("Clown Guy")
-							pain_style = "Mood Guy"
-						if("Mood Guy")
-							pain_style = "Pain Guy"
 				if("persistent_scars")
 					persistent_scars = !persistent_scars
 				if("clear_scars")
@@ -3195,7 +3185,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 			return pick(GLOB.ai_names)
 		if("cyborg")
 			return DEFAULT_CYBORG_NAME
-		if("clown")
+		if("jester")
 			return pick(GLOB.clown_names)
 		if("mime")
 			return pick(GLOB.mime_names)

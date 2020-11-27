@@ -67,7 +67,7 @@
 	foodtype = MEAT
 
 /obj/item/reagent_containers/food/snacks/soup/clownstears
-	name = "clown's tears"
+	name = "jester's tears"
 	desc = "Not very funny."
 	icon_state = "clownstears"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/banana = 5, /datum/reagent/consumable/nutriment/vitamin = 8, /datum/reagent/consumable/clownstears = 10)

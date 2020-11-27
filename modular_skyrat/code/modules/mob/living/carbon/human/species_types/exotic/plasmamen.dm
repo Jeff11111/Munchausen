@@ -86,7 +86,7 @@
 		if("Mime")
 			O = new /datum/outfit/plasmaman/mime
 
-		if("Clown")
+		if("Jester")
 			O = new /datum/outfit/plasmaman/clown
 
 		if("Blueshield")

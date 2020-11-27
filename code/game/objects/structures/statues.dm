@@ -229,7 +229,7 @@
 	impressiveness = 65
 
 /obj/structure/statue/bananium/clown
-	name = "statue of a clown"
+	name = "statue of a jester"
 	icon_state = "clown"
 
 /obj/structure/statue/bananium/Bumped(atom/movable/AM)

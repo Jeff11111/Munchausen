@@ -73,7 +73,7 @@
 	icon_state = "bee_shirt"
 
 /datum/sprite_accessory/underwear/top/clownshirt
-	name = "Shirt - Clown"
+	name = "Shirt - Jester"
 	icon_state = "shirt_clown"
 
 /datum/sprite_accessory/underwear/top/commie

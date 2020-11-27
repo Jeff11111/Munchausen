@@ -230,7 +230,7 @@
 
 ///Subtype used for the lavaland clown ruin.
 /obj/item/reagent_containers/spray/waterflower/superlube
-	name = "clown flower"
+	name = "jester flower"
 	desc = "A delightly devilish flower... you got a feeling where this is going."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "clownflower"

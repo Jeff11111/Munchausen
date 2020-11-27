@@ -20,7 +20,7 @@
 
 /obj/item/reagent_containers/food/snacks/honkdae
 	name = "honkdae"
-	desc = "The clown's favorite dessert."
+	desc = "The jester's favorite dessert."
 	icon_state = "honkdae"
 	bonus_reagents = list(/datum/reagent/consumable/nutriment = 2, /datum/reagent/consumable/nutriment/vitamin = 2)
 	list_reagents = list(/datum/reagent/consumable/nutriment = 6, /datum/reagent/consumable/banana = 10, /datum/reagent/consumable/nutriment/vitamin = 4)
@@ -209,7 +209,7 @@
 	tastes = list("ice" = 1, "water" = 1, "nothing" = 5)
 
 /obj/item/reagent_containers/food/snacks/snowcones/clown
-	name = "clown snowcone"
+	name = "jester snowcone"
 	desc = "Laughter drizzled over a snowball in a paper cup."
 	icon_state = "clown_sc"
 	list_reagents = list(/datum/reagent/consumable/nutriment = 1, /datum/reagent/consumable/laughter = 5)

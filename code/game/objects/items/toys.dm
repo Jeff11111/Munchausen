@@ -1423,7 +1423,7 @@ GLOBAL_LIST_INIT(valid_toy_paths, valid_toy_paths())
 	toysay = "Get your pills!"
 
 /obj/item/toy/figure/clown
-	name = "Clown action figure"
+	name = "Jester action figure"
 	icon_state = "clown"
 	toysay = "Honk!"
 	toysound = 'sound/items/bikehorn.ogg'

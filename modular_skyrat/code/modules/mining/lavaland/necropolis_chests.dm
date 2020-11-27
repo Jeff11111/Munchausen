@@ -489,7 +489,7 @@
 	icon_state = "bluecrystal"
 	w_class = WEIGHT_CLASS_SMALL
 	var/list/choices = list(
-	"Clown" = /obj/machinery/anomalous_crystal/honk,
+	"Jester" = /obj/machinery/anomalous_crystal/honk,
 	"Theme Warp" = /obj/machinery/anomalous_crystal/theme_warp,
 	"Bolter" = /obj/machinery/anomalous_crystal/emitter,
 	"Dark Revival" = /obj/machinery/anomalous_crystal/dark_reprise,

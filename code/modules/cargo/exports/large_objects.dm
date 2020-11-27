@@ -262,7 +262,7 @@
 
 /datum/export/large/clownstatue
 	cost = 2750
-	unit_name = "Clown statue"
+	unit_name = "Jester statue"
 	export_types = list(/obj/structure/statue/bananium/clown)
 
 /datum/export/large/sandstatue

@@ -244,7 +244,7 @@
 									 "Annoy the silicons as much as possible.", \
 									 "Ensure that any holy weapons are rendered unusable.", \
 									 "Hinder the crew while attempting to avoid being noticed.", \
-									 "Make the clown as miserable as possible.")
+									 "Make the jester as miserable as possible.")
 	explanation_text = pick(explanationTexts)
 	..()
 

@@ -246,7 +246,7 @@
 ////////////MYSTICAL////////////////
 
 /datum/crafting_recipe/food/clownburger
-	name = "Clown burger"
+	name = "Jester burger"
 	reqs = list(
 		/obj/item/clothing/mask/gas/clown_hat = 1,
 		/obj/item/reagent_containers/food/snacks/bun = 1

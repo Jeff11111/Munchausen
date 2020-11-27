@@ -87,6 +87,7 @@ GLOBAL_LIST_INIT(ai_core_display_screens, list(
 	"President",
 	"Rainbow",
 	"Clown",
+	"Jester",
 	"Random",
 	"Ravensdale",
 	"Red October",

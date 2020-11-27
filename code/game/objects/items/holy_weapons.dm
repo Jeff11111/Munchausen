@@ -593,7 +593,7 @@
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "clownrender"
 	item_state = "render"
-	name = "clown dagger"
+	name = "jester dagger"
 	desc = "Used for absolutely hilarious sacrifices."
 	hitsound = 'sound/items/bikehorn.ogg'
 	sharpness = SHARP_EDGED

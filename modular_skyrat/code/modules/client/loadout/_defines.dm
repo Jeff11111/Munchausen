@@ -13,7 +13,7 @@
 							"Atmospheric Technician", "Station Engineer", "Lieutenant", "Detective", "Enforcer", "Blueshield", "Brig Physician",\
 							"Cargo Technician", "Shaft Miner", "Mining Foreman", "Mining Technician",\
 							"Bartender", "Botanist", "Cook", "Curator", "Chaplain", "Janitor",\
-							"Clown", "Mime", "Lawyer", "Stowaway"\
+							"Jester", "Mime", "Lawyer", "Stowaway"\
 							)
 
 // Some of these might be left unused, but still it's nice to have them around.

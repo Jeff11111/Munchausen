@@ -232,8 +232,8 @@ GLOBAL_LIST_INIT(channel_tokens, list(
 	keyslot = new /obj/item/encryptionkey/headset_service
 
 /obj/item/radio/headset/headset_clown
-	name = "clown's headset"
-	desc = "A headset for the clown. Finally. A megaphone you can't take away."
+	name = "jester's headset"
+	desc = "A headset for the jester. Finally, a megaphone you can't take away."
 	icon_state = "srv_headset"
 	keyslot = new /obj/item/encryptionkey/headset_service
 	command = TRUE

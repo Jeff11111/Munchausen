@@ -340,7 +340,7 @@
 //Honkbot Assembly
 /obj/item/bot_assembly/honkbot
 	name = "incomplete honkbot assembly"
-	desc = "The clown's up to no good once more"
+	desc = "The jester's up to no good once more"
 	icon_state = "honkbot_arm"
 	created_name = "Honkbot"
 

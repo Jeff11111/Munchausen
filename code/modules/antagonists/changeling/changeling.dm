@@ -99,8 +99,8 @@
 /datum/antagonist/changeling/proc/remove_clownmut()
 	if (owner)
 		var/mob/living/carbon/human/H = owner.current
-		if(istype(H) && owner.assigned_role == "Clown")
-			to_chat(H, "You have evolved beyond your clownish nature, allowing you to wield weapons without harming yourself.")
+		if(istype(H) && owner.assigned_role == "Jester")
+			to_chat(H, "You have evolved beyond your hysterical nature, allowing you to wield weapons without harming yourself.")
 			H.dna.remove_mutation(CLOWNMUT)
 
 /datum/antagonist/changeling/proc/reset_properties(hardReset = FALSE)

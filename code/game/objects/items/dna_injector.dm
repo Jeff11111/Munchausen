@@ -142,12 +142,12 @@
 
 /obj/item/dnainjector/clumsymut
 	name = "\improper DNA injector (Clumsy)"
-	desc = "Makes clown minions."
+	desc = "Makes jester minions."
 	add_mutations = list(CLOWNMUT)
 
 /obj/item/dnainjector/anticlumsy
 	name = "\improper DNA injector (Anti-Clumsy)"
-	desc = "Apply this for Security Clown."
+	desc = "Apply this for Security Jester."
 	remove_mutations = list(CLOWNMUT)
 
 /obj/item/dnainjector/antitour

@@ -164,7 +164,7 @@
 	subcategory = CAT_CAKE
 
 /datum/crafting_recipe/food/clowncake
-	name = "Clown cake"
+	name = "Jester cake"
 	always_availible = FALSE
 	reqs = list(
 		/obj/item/reagent_containers/food/snacks/store/cake/plain = 1,

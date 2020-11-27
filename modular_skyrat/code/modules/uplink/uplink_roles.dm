@@ -35,8 +35,8 @@
 
 //clown
 /datum/uplink_item/role_restricted/clumsyDNA
-	name = "Clumsy Clown DNA"
-	desc = "A DNA injector that has been loaded with the clown gene that makes people clumsy.. \
+	name = "Clumsy Jester DNA"
+	desc = "A DNA injector that has been loaded with the jester gene that makes people clumsy.. \
 	Making someone clumsy will allow them to use clown firing pins as well as Reverse Revolvers. For a laugh try using this on the HOS to see how many times they shoot themselves in the foot!"
 	cost = 1
 	item = /obj/item/dnainjector/clumsymut

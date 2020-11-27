@@ -62,7 +62,7 @@
 	dye_color = DYE_REDCOAT
 
 /obj/item/stamp/clown
-	name = "clown's rubber stamp"
+	name = "jester's rubber stamp"
 	icon_state = "stamp-clown"
 	dye_color = DYE_CLOWN
 

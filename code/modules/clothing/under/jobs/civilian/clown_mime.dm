@@ -25,7 +25,7 @@
 	can_adjust = FALSE
 
 /obj/item/clothing/under/rank/civilian/clown
-	name = "clown suit"
+	name = "jester suit"
 	desc = "<i>'HONK!'</i>"
 	icon_state = "clown"
 	item_state = "clown"
@@ -34,7 +34,7 @@
 	mutantrace_variation = STYLE_DIGITIGRADE //The clown suit must look funny, no taur alpha masks where possible.
 
 /obj/item/clothing/under/rank/civilian/clown/blue
-	name = "blue clown suit"
+	name = "blue jester suit"
 	desc = "<i>'BLUE HONK!'</i>"
 	icon_state = "blueclown"
 	item_state = "blueclown"
@@ -43,7 +43,7 @@
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 
 /obj/item/clothing/under/rank/civilian/clown/green
-	name = "green clown suit"
+	name = "green jester suit"
 	desc = "<i>'GREEN HONK!'</i>"
 	icon_state = "greenclown"
 	item_state = "greenclown"
@@ -52,7 +52,7 @@
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 
 /obj/item/clothing/under/rank/civilian/clown/yellow
-	name = "yellow clown suit"
+	name = "yellow jester suit"
 	desc = "<i>'YELLOW HONK!'</i>"
 	icon_state = "yellowclown"
 	item_state = "yellowclown"
@@ -61,7 +61,7 @@
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 
 /obj/item/clothing/under/rank/civilian/clown/purple
-	name = "purple clown suit"
+	name = "purple jester suit"
 	desc = "<i>'PURPLE HONK!'</i>"
 	icon_state = "purpleclown"
 	item_state = "purpleclown"
@@ -70,7 +70,7 @@
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 
 /obj/item/clothing/under/rank/civilian/clown/orange
-	name = "orange clown suit"
+	name = "orange jester suit"
 	desc = "<i>'ORANGE HONK!'</i>"
 	icon_state = "orangeclown"
 	item_state = "orangeclown"
@@ -79,7 +79,7 @@
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
 
 /obj/item/clothing/under/rank/civilian/clown/rainbow
-	name = "rainbow clown suit"
+	name = "rainbow jester suit"
 	desc = "<i>'R A I N B O W HONK!'</i>"
 	icon_state = "rainbowclown"
 	item_state = "rainbowclown"
@@ -89,7 +89,7 @@
 
 /obj/item/clothing/under/rank/civilian/clown/jester
 	name = "jester suit"
-	desc = "A jolly dress, well suited to entertain your master, nuncle."
+	desc = "A jolly dress, well suited to entertain any ravenhearter."
 	icon_state = "jester"
 	can_adjust = FALSE
 	mutantrace_variation = STYLE_DIGITIGRADE|USE_TAUR_CLIP_MASK
@@ -98,7 +98,7 @@
 	icon_state = "jester2"
 
 /obj/item/clothing/under/rank/civilian/clown/sexy
-	name = "sexy-clown suit"
+	name = "sexy-jester suit"
 	desc = "It makes you look HONKable!"
 	icon_state = "sexyclown"
 	item_state = "sexyclown"

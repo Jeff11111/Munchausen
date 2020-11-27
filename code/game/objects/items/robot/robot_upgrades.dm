@@ -655,8 +655,8 @@
 		R.module.transform_to(new_module)
 
 /obj/item/borg/upgrade/transform/clown
-	name = "borg module picker (Clown)"
-	desc = "Allows you to to turn a cyborg into a clown, honk."
+	name = "borg module picker (Jester)"
+	desc = "Allows you to to turn a cyborg into a jester, honk."
 	icon_state = "cyborg_upgrade3"
 	new_module = /obj/item/robot_module/clown
 

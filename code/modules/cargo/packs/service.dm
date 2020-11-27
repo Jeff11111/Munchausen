@@ -15,7 +15,7 @@
 
 /datum/supply_pack/service/wrapping_paper
 	name = "Cargo Packaging Crate"
-	desc = "Want to mail your loved ones gift-wrapped chocolates, stuffed animals, or the Clown's severed head? You can do all that, with this crate full of festive (and normal) wrapping paper. Also contains a hand labeler and a destination tagger for easy shipping!"
+	desc = "Want to mail your loved ones gift-wrapped chocolates, stuffed animals, or the Jester's severed head? You can do all that, with this crate full of festive (and normal) wrapping paper. Also contains a hand labeler and a destination tagger for easy shipping!"
 	cost = 1000
 	contains = list(/obj/item/stack/wrapping_paper,
 					/obj/item/stack/wrapping_paper,
@@ -221,7 +221,7 @@
 
 /datum/supply_pack/service/janitor/janpimp
 	name = "Custodial Cruiser"
-	desc = "Clown steal your ride? Assistant lock it in the dorms? Order a new one and get back to cleaning in style!"
+	desc = "Jester steal your ride? Assistant lock it in the dorms? Order a new one and get back to cleaning in style!"
 	cost = 3000
 	access = ACCESS_JANITOR
 	contains = list(/obj/vehicle/ridden/janicart,

@@ -425,7 +425,7 @@ Difficulty: Very Hard
 	ActivationReaction(null, ACTIVATE_BOMB)
 
 /obj/machinery/anomalous_crystal/honk //Strips and equips you as a clown. I apologize for nothing
-	observer_desc = "This crystal strips and equips its targets as clowns."
+	observer_desc = "This crystal strips and equips its targets as jesters."
 	possible_methods = list(ACTIVATE_MOB_BUMP, ACTIVATE_SPEECH)
 	activation_sound = 'sound/items/bikehorn.ogg'
 

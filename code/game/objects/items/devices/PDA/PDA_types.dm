@@ -1,6 +1,6 @@
 //Clown PDA is slippery.
 /obj/item/pda/clown
-	name = "clown PDA"
+	name = "jester PDA"
 	default_cartridge = /obj/item/cartridge/virus/clown
 	inserted_item = /obj/item/toy/crayon/rainbow
 	icon_state = "pda-clown"

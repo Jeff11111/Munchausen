@@ -1,5 +1,5 @@
 /datum/job/clown
-	title = "Clown"
+	title = "Jester"
 	flag = CLOWN
 	department_head = list("Head of Personnel")
 	department_flag = CIVILIAN
@@ -20,13 +20,11 @@
 	paycheck = PAYCHECK_MINIMAL
 	paycheck_department = ACCOUNT_SRV
 
-	mind_traits = list(TRAIT_CLOWN_MENTALITY)
-
 	display_order = JOB_DISPLAY_ORDER_CLOWN
 	threat = 0 // honk
 
 /datum/outfit/job/clown
-	name = "Clown"
+	name = "Jester"
 	jobtype = /datum/job/clown
 
 	belt = /obj/item/pda/clown

@@ -259,7 +259,7 @@
 
 /datum/export/gear/clown
 	cost = 10
-	unit_name = "clown shoes"
+	unit_name = "jester shoes"
 	export_types = list(/obj/item/clothing/shoes/clown_shoes, /obj/item/clothing/shoes/clown_shoes/jester)
 
 /datum/export/gear/dressshoes

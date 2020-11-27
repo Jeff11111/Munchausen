@@ -96,7 +96,7 @@
 
 /datum/bounty/item/assistant/shard
 	name = "Shards"
-	description = "A killer clown has been stalking CentCom, and staff have been unable to catch her because she's not wearing shoes. Please ship some shards so that a booby trap can be constructed."
+	description = "A killer jester has been stalking CentCom, and staff have been unable to catch her because she's not wearing shoes. Please ship some shards so that a booby trap can be constructed."
 	reward = 750
 	required_count = 15
 	wanted_types = list(/obj/item/shard)
@@ -202,7 +202,7 @@
 
 /datum/bounty/item/assistant/metalshields
 	name = "Metal Shields" //I didnt realise how much work it was to make these, you need 2 Cloth, 3 Leather, Tools, 10 Metal, and a Cable Coil Stack for each one.
-	description = "NT is testing the effects of electricity on clowns wielding metal shields. We have clowns, and we have electricity. Send us the shields."
+	description = "NT is testing the effects of electricity on jesters wielding metal shields. We have jesters, and we have electricity. Send us the shields."
 	reward = 3000
 	required_count = 2
 	wanted_types = list(/obj/item/shield/makeshift)

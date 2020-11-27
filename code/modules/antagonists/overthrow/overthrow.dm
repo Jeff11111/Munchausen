@@ -64,11 +64,11 @@
 // CLOWNMUT removal and HUD creation/being given
 /datum/antagonist/overthrow/apply_innate_effects()
 	..()
-	if(owner.assigned_role == "Clown")
+	if(owner.assigned_role == "Jester")
 		var/mob/living/carbon/human/traitor_mob = owner.current
 		if(traitor_mob && istype(traitor_mob))
 			if(!silent)
-				to_chat(traitor_mob, "Your training has allowed you to overcome your clownish nature, allowing you to wield weapons without harming yourself.")
+				to_chat(traitor_mob, "Your training has allowed you to overcome your hysteric nature, allowing you to wield weapons without harming yourself.")
 			traitor_mob.dna.remove_mutation(CLOWNMUT)
 	update_overthrow_icons_added()
 
