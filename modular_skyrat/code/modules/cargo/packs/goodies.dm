@@ -68,13 +68,13 @@
 	name = "12g Combat Shotgun"
 	desc = "Contains one combat shotgun. Never know when you need it."
 	cost = 5000
-	contains = list(/obj/item/gun/ballistic/shotgun/combat)
+	contains = list(/obj/item/gun/ballistic/shotgun/automatic/combat)
 
 /datum/supply_pack/goody/combat_shotgun
 	name = "12g Compact Combat Shotgun"
 	desc = "Contains one compact combat shotgun. Never know when you need it."
 	cost = 6500
-	contains = list(/obj/item/gun/ballistic/shotgun/combat/compact)
+	contains = list(/obj/item/gun/ballistic/shotgun/automatic/combat/compact)
 
 /datum/supply_pack/goody/bulldog_shotgun
 	name = "12g Assault Shotgun"
