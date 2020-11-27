@@ -64,9 +64,10 @@
 	to_chat(user, "<span class='warning'>Considering the modifications, sawing it off probably would break it entirely.</span>")
 	return
 
-//Warden's combat shotgun
+//Warden's SPAS
 /obj/item/gun/ballistic/shotgun/automatic/combat/compact/warden
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/com/compact/warden
+
 //
 //
 //
@@ -177,6 +178,13 @@
 /obj/item/gun/ballistic/shotgun/automatic/combat
 	icon_state = "combatshotgun"
 	item_state = "combatshotgun"
+
+//SPAS
+/obj/item/gun/ballistic/shotgun/automatic/combat/compact
+	name = "compact combat shotgun"
+	desc = "A modified version of the semi-automatic combat shotgun with a collapsible stock. For close encounters."
+	icon_state = "spas"
+	item_state = "spas"
 
 //Bulldog
 /obj/item/gun/ballistic/automatic/shotgun
