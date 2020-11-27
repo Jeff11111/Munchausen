@@ -222,7 +222,7 @@
 			O = meme.brain
 			meme.brain = null
 			qdel(meme)
-			O.forceMove(carbon_parent)
+			O.forceMove(parent)
 	if(istype(O))
 		var/list/not_a_location = contents()
 		if(!(O in not_a_location))
