@@ -18,3 +18,8 @@
 	. = ..()
 	if(music_file && H.mind)
 		H.mind.combat_music = music_file
+
+//OS13 shit
+/datum/outfit/job
+	uniform = /obj/item/clothing/under/color/grey/os13
+	shoes = /obj/item/clothing/shoes/laceup

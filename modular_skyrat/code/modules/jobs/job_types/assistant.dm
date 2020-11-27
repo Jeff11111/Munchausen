@@ -10,9 +10,8 @@
 		var/datum/antagonist/communist/new_antag = new()
 		addtimer(CALLBACK(H.mind, /datum/mind.proc/add_antag_datum, new_antag), rand(100,200))
 
-/datum/outfit/job
-	uniform = /obj/item/clothing/under/color/grey/os13
-	shoes = /obj/item/clothing/shoes/sneakers/black
+/datum/outfit/job/assistant
+	belt = null
 
 /datum/outfit/job/assistant/post_equip(mob/living/carbon/human/H, visualsOnly, client/preference_source)
 	. = ..()
