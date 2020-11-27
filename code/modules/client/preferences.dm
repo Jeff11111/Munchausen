@@ -91,7 +91,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 	var/preferred_chaos = null
 	var/pda_style = MONO
 	var/pda_color = "#808000"
-	var/pda_skin = PDA_SKIN_ALT
 	// SKYRAT CHANGE START
 	var/show_credits = TRUE
 	var/event_participation = FALSE
@@ -990,7 +989,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 			dat += "<br>"
 			dat += "<b>PDA Color:</b> <span style='border:1px solid #161616; background-color: [pda_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=pda_color;task=input'>Change</a><BR>"
 			dat += "<b>PDA Style:</b> <a href='?_src_=prefs;task=input;preference=pda_style'>[pda_style]</a><br>"
-			dat += "<b>PDA Reskin:</b> <a href='?_src_=prefs;task=input;preference=pda_skin'>[pda_skin]</a><br>"
 			dat += "<br>"
 			dat += "<b>Ghost Ears:</b> <a href='?_src_=prefs;preference=ghost_ears'>[(chat_toggles & CHAT_GHOSTEARS) ? "All Speech" : "Nearest Creatures"]</a><br>"
 			dat += "<b>Ghost Radio:</b> <a href='?_src_=prefs;preference=ghost_radio'>[(chat_toggles & CHAT_GHOSTRADIO) ? "All Messages":"No Messages"]</a><br>"
@@ -2718,10 +2716,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					var/pickedPDAColor = input(user, "Choose your PDA Interface color.", "Character Preference",pda_color) as color|null
 					if(pickedPDAColor)
 						pda_color = pickedPDAColor
-				if("pda_skin")
-					var/pickedPDASkin = input(user, "Choose your PDA reskin.", "Character Preference", pda_skin) as null|anything in GLOB.pda_reskins
-					if(pickedPDASkin)
-						pda_skin = pickedPDASkin
 				if ("max_chat_length")
 					var/desiredlength = input(user, "Choose the max character length of shown Runechat messages. Valid range is 1 to [CHAT_MESSAGE_MAX_LENGTH] (default: [initial(max_chat_length)]))", "Character Preference", max_chat_length)  as null|num
 					if (!isnull(desiredlength))
