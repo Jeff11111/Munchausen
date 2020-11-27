@@ -10,32 +10,6 @@
 	var/hidden_undershirt = FALSE
 	var/hidden_socks = FALSE
 
-//Mob procs
-/mob/living/carbon/human/proc/underwear_toggle()
-	set name = "Toggle undergarments"
-	set category = "IC"
-
-	var/confirm = input(src, "Select what part of your form to alter", "Undergarment Toggling") as null|anything in list("Top", "Bottom", "Socks", "All")
-	if(!confirm)
-		return
-	if(confirm == "Top")
-		hidden_undershirt = !hidden_undershirt
-
-	if(confirm == "Bottom")
-		hidden_underwear = !hidden_underwear
-
-	if(confirm == "Socks")
-		hidden_socks = !hidden_socks
-
-	if(confirm == "All")
-		var/on_off = (hidden_undershirt || hidden_underwear || hidden_socks) ? FALSE : TRUE
-		hidden_undershirt = on_off
-		hidden_underwear = on_off
-		hidden_socks = on_off
-
-	update_body(TRUE)
-
-
 /mob/living/carbon/human/proc/adjust_arousal(strength,aphro = FALSE,maso = FALSE) // returns all genitals that were adjust
 	var/list/obj/item/organ/genital/genit_list = list()
 	for(var/obj/item/organ/genital/G in internal_organs)

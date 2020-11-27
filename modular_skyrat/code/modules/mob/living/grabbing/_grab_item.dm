@@ -32,13 +32,13 @@
 		if(grasped_mob)
 			playsound(get_turf(grasping_mob), 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			if(grasped_mob == grasping_mob)
-				grasped_mob.visible_message("<span class='warning'>[grasping_mob] stops grabbing [grasping_mob.p_themselves()][grasped_part ? " by [grasping_mob.p_their()] [grasped_part.name]" : ""]!</span>",\
+				grasped_mob.visible_message("<span class='warning'><b>[grasping_mob]</b> stops grabbing [grasping_mob.p_themselves()][grasped_part ? " by [grasping_mob.p_their()] [grasped_part.name]" : ""]!</span>",\
 											"<span class='notice'>You stop grabbing yourself[grasped_part ? " by your [grasped_part.name]" : ""]!</span>")
 			else
-				grasped_mob.visible_message("<span class='danger'>[grasping_mob] stops grabbing [grasped_mob][grasped_part ? " by [grasped_mob.p_their()] [grasped_part.name]": ""]!</span>",\
-										"<span class='userdanger'>[grasping_mob] stops grabbing you[grasped_part ? " by your [grasped_part.name]" : ""]!</span>",\
+				grasped_mob.visible_message("<span class='danger'><b>[grasping_mob]</b> stops grabbing <b>[grasped_mob]</b>[grasped_part ? " by [grasped_mob.p_their()] [grasped_part.name]": ""]!</span>",\
+										"<span class='userdanger'><b>[grasping_mob]</b> stops grabbing you[grasped_part ? " by your [grasped_part.name]" : ""]!</span>",\
 										ignored_mobs = grasping_mob)
-				to_chat(grasping_mob, "<span class='danger'>You stop grabbing [grasped_mob][grasped_part ? " by [grasped_mob.p_their()] [grasped_part.name]" : ""]!</span>")
+				to_chat(grasping_mob, "<span class='danger'>You stop grabbing <b>[grasped_mob]</b>[grasped_part ? " by [grasped_mob.p_their()] [grasped_part.name]" : ""]!</span>")
 		if(grasping_mob.pulling == grasped_mob)
 			grasping_mob.stop_pulling()
 		grasping_mob.setGrabState(GRAB_NOTGRABBING)
@@ -80,12 +80,12 @@
 	if(grasped_part)
 		name = "grasped [grasped_part.name]"
 		if(grasped_mob)
-			desc = "Grabbing [grasped_mob] by [grasped_mob.p_their()] [grasped_part.name]."
+			desc = "Grabbing <b>[grasped_mob]</b> by [grasped_mob.p_their()] [grasped_part.name]."
 		else
 			desc = "Grabbing [grasped_part.name]."
 	else if(grasped_mob)
-		name = "grasped [grasped_mob]"
-		desc = "Grabbing [grasped_mob]."
+		name = "grasped <b>[grasped_mob]</b>"
+		desc = "Grabbing <b>[grasped_mob]</b>."
 	else
 		name = initial(name)
 		desc = initial(desc)
@@ -104,7 +104,7 @@
 				if(istype(friend) && (friend.grasped_mob == grasped_mob) && (friend.actions_done > 0))
 					do_takedown(grasped_mob, grasped_part, grasping_mob)
 				else
-					to_chat(grasping_mob, "<span class='warning'>You need to grip and wrench [grasped_mob] with another hand to take [grasped_mob.p_them()] down!</span>")
+					to_chat(grasping_mob, "<span class='warning'>You need to grip and wrench <b>[grasped_mob]</b> with another hand to take [grasped_mob.p_them()] down!</span>")
 			if(GM_STRANGLE)
 				if((grasping_mob.a_intent != INTENT_HARM) || strangling)
 					do_strangle(grasped_mob, grasped_part, grasping_mob)
@@ -117,13 +117,13 @@
 	. = ..()
 	switch(grab_mode)
 		if(GM_SELF)
-			. += "<span class='info'>Keep holding to staunch the bleeding on [grasped_mob][grasped_part ? "'s [grasped_part.name]" : ""].</span>"
+			. += "<span class='info'>Keep holding to staunch the bleeding on <b>[grasped_mob]</b>[grasped_part ? "'s [grasped_part.name]" : ""].</span>"
 		if(GM_WRENCH)
-			. += "<span class='info'>Use to wrench [grasped_mob][grasped_part ? "'s [grasped_part.name]" : ""].</span>"
+			. += "<span class='info'>Use to wrench <b>[grasped_mob]</b>[grasped_part ? "'s [grasped_part.name]" : ""].</span>"
 		if(GM_STRANGLE)
-			. += "<span class='info'>Use to strangle [grasped_mob].</span>"
+			. += "<span class='info'>Use to strangle <b>[grasped_mob]</b>.</span>"
 		if(GM_TAKEDOWN)
-			. += "<span class='info'>Use to perform a takedown on [grasped_mob].</span>"
+			. += "<span class='info'>Use to perform a takedown on <b>[grasped_mob]</b>.</span>"
 
 /// Trying to grasp
 /obj/item/grab/proc/try_grasp(mob/living/attempted_grasped, obj/item/bodypart/attempted_part, mob/living/carbon/attempted_grasper)
@@ -151,12 +151,12 @@
 	RegisterSignal(grasping_mob, COMSIG_LIVING_STOP_GRABBING, .proc/qdel_void)
 
 	if(grasping_mob == grasped_mob)
-		grasped_mob.visible_message("<span class='danger'>[attempted_grasper] grasps at [attempted_grasper.p_their()] [grasped_part.name].</span>", "<span class='notice'>You grab hold of your [grasped_part.name] tightly.</span>", vision_distance=COMBAT_MESSAGE_RANGE)
+		grasped_mob.visible_message("<span class='danger'><b>[attempted_grasper]</b> grasps at [attempted_grasper.p_their()] [grasped_part.name].</span>", "<span class='notice'>You grab hold of your [grasped_part.name] tightly.</span>", vision_distance=COMBAT_MESSAGE_RANGE)
 	else
-		grasped_mob.visible_message("<span class='danger'>[attempted_grasper] grasps [grasped_mob][grasped_part ? " by [grasped_mob.p_their()] [grasped_part.name]" : ""]!</span>",\
-								"<span class='userdanger'>You are grasped [grasped_part ? "on your [grasped_part.name] " : ""]by [attempted_grasper]!</span>", "<span class='warning'>You hear a shuffling sound.</span>",\
+		grasped_mob.visible_message("<span class='danger'><b>[attempted_grasper]</b> grasps <b>[grasped_mob]</b>[grasped_part ? " by [grasped_mob.p_their()] [grasped_part.name]" : ""]!</span>",\
+								"<span class='userdanger'>You are grasped [grasped_part ? "on your [grasped_part.name] " : ""]by <b>[attempted_grasper]</b>!</span>", "<span class='warning'>You hear a shuffling sound.</span>",\
 								ignored_mobs = grasping_mob)
-		to_chat(grasping_mob, "<span class='danger'>You grab [grasped_mob][grasped_part ? "by [grasped_mob.p_their()] [grasped_part.name]" : ""]!</span>")
+		to_chat(grasping_mob, "<span class='danger'>You grab <b>[grasped_mob]</b>[grasped_part ? "by [grasped_mob.p_their()] [grasped_part.name]" : ""]!</span>")
 	if(grasping_mob != grasped_mob)
 		grasping_mob.setGrabState(GRAB_AGGRESSIVE)
 		grasping_mob.set_pull_offsets(grasped_mob, grasping_mob.grab_state)
@@ -188,7 +188,7 @@
 
 /obj/item/grab/proc/do_takedown(mob/living/carbon/victim, obj/item/bodypart/grasped_part, mob/living/carbon/user)
 	if(!takedown_check())
-		to_chat(grasping_mob, "<span class='warning'>You can't take [victim] down by [p_their()] [parse_zone(grasping_mob.zone_selected)] without grabbing and twisting another limb!</span>")
+		to_chat(grasping_mob, "<span class='warning'>You can't take <b>[victim]</b> down by [p_their()] [parse_zone(grasping_mob.zone_selected)] without grabbing and twisting another limb!</span>")
 		return FALSE
 	
 	var/user_str = 10
@@ -200,29 +200,29 @@
 	var/str_diff = user_str - victim_str
 	if(!grasped_mob.lying)
 		if(grasping_mob.mind?.diceroll(GET_STAT_LEVEL(grasping_mob, str)*0.75, GET_SKILL_LEVEL(grasping_mob, melee)*0.25, mod = 5*str_diff) >= DICE_SUCCESS)
-			grasped_mob.visible_message("<span class='danger'>[grasping_mob] takes [grasped_mob] down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
-										"<span class='userdanger'>[grasping_mob] takes you down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
+			grasped_mob.visible_message("<span class='danger'><b>[grasping_mob]</b> takes <b>[grasped_mob]</b> down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
+										"<span class='userdanger'><b>[grasping_mob]</b> takes you down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
 										ignored_mobs = grasping_mob)
-			to_chat(grasping_mob, "<span class='danger'>You take [grasped_mob] down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>")
+			to_chat(grasping_mob, "<span class='danger'>You take <b>[grasped_mob]</b> down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>")
 			grasped_mob.DefaultCombatKnockdown(clamp(str_diff, 1, 5) SECONDS)
 			grasped_mob.Stun(clamp(str_diff, 1, 5) SECONDS)
 		else
-			grasped_mob.visible_message("<span class='danger'>[grasping_mob] fails to take [grasped_mob] down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
-										"<span class='userdanger'>[grasping_mob] fails to take you down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
+			grasped_mob.visible_message("<span class='danger'><b>[grasping_mob]</b> fails to take <b>[grasped_mob]</b> down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
+										"<span class='userdanger'><b>[grasping_mob]</b> fails to take you down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
 										ignored_mobs = grasping_mob)
-			to_chat(grasping_mob, "<span class='danger'>You fail to take [grasped_mob] down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>")
+			to_chat(grasping_mob, "<span class='danger'>You fail to take <b>[grasped_mob]</b> down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>")
 	else
 		if(grasping_mob.mind?.diceroll(GET_STAT_LEVEL(grasping_mob, str)*0.25, GET_SKILL_LEVEL(grasping_mob, melee)*0.75, mod = 5*str_diff) >= DICE_SUCCESS)
-			grasped_mob.visible_message("<span class='danger'>[grasping_mob] pins [grasped_mob] down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
-										"<span class='userdanger'>[grasping_mob] pins you down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
+			grasped_mob.visible_message("<span class='danger'><b>[grasping_mob]</b> pins <b>[grasped_mob]</b> down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
+										"<span class='userdanger'><b>[grasping_mob]</b> pins you down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
 										ignored_mobs = grasping_mob)
-			to_chat(grasping_mob, "<span class='danger'>You pin [grasped_mob] down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>")
+			to_chat(grasping_mob, "<span class='danger'>You pin <b>[grasped_mob]</b> down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>")
 			grasped_mob.Stun(clamp(str_diff, 1, 5) SECONDS)
 		else
-			grasped_mob.visible_message("<span class='danger'>[grasping_mob] fails to pin [grasped_mob] down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
-										"<span class='userdanger'>[grasping_mob] fails to pin you down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
+			grasped_mob.visible_message("<span class='danger'><b>[grasping_mob]</b> fails to pin <b>[grasped_mob]</b> down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
+										"<span class='userdanger'><b>[grasping_mob]</b> fails to pin you down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
 										ignored_mobs = grasping_mob)
-			to_chat(grasping_mob, "<span class='danger'>You fail to pin [grasped_mob] down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>")
+			to_chat(grasping_mob, "<span class='danger'>You fail to pin <b>[grasped_mob]</b> down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>")
 	grasping_mob.changeNext_move(CLICK_CD_GRABBING)
 	return TRUE
 
@@ -232,18 +232,18 @@
 		strangling = FALSE
 		grasping_mob.setGrabState(GRAB_AGGRESSIVE)
 		grasping_mob.set_pull_offsets(grasped_mob, grasping_mob.grab_state)
-		grasped_mob.visible_message("<span class='danger'>[user] stops strangling [src]!</span>", \
-						"<span class='userdanger'>[user] stops strangling you!</span>", ignored_mobs = grasping_mob)
-		to_chat(grasping_mob, "<span class='danger'>You stop strangling [src]!</span>")
+		grasped_mob.visible_message("<span class='danger'><b>[user]</b> stops strangling <b>[victim]</b>!</span>", \
+						"<span class='userdanger'><b>[user]</b> stops strangling you!</span>", ignored_mobs = grasping_mob)
+		to_chat(grasping_mob, "<span class='danger'>You stop strangling <b>[victim]</b>!</span>")
 		grasped_mob.update_mobility()
 	else
 		log_combat(user, src, "strangled", addition="kill grab")
 		strangling = TRUE
 		grasping_mob.setGrabState(GRAB_KILL)
 		grasping_mob.set_pull_offsets(grasped_mob, grasping_mob.grab_state)
-		grasped_mob.visible_message("<span class='danger'>[user] starts strangling [src]!</span>", \
-						"<span class='userdanger'>[user] starts strangling you!</span>", ignored_mobs = grasping_mob)
-		to_chat(grasping_mob, "<span class='danger'>You start strangling [src]!</span>")
+		grasped_mob.visible_message("<span class='danger'><b>[user]</b> starts strangling <b>[victim]</b>!</span>", \
+						"<span class='userdanger'><b>[user]</b> starts strangling you!</span>", ignored_mobs = grasping_mob)
+		to_chat(grasping_mob, "<span class='danger'>You start strangling <b>[victim]</b>!</span>")
 		grasped_mob.update_mobility()
 	grasping_mob.changeNext_move(CLICK_CD_GRABBING)
 	return TRUE
