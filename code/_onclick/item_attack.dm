@@ -440,8 +440,8 @@
 	var/user_str = 10
 	if(GET_STAT_LEVEL(user, str))
 		user_str = GET_STAT_LEVEL(user, str)
-	var/force_mod = round(force/15, 0.1)
-	var/knockback_tiles = clamp(round((user_str - victim_str)/3 * force_mod * rand(1,2)), 0, 5)
+	var/force_mod = CEILING(force/15, 1)
+	var/knockback_tiles = clamp(round(max(0, user_str - victim_str)/3 * force_mod * rand(1,1.5)), 0, 5)
 	//Slam time
 	if((!weapon || (weapon.damtype == BRUTE)) && knockback_tiles)
 		if(knockback_tiles > 1)
