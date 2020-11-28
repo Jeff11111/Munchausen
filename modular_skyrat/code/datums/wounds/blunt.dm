@@ -278,7 +278,6 @@
 	
 	var/time = base_treat_time
 	var/time_mod = 2
-	var/prob_mod = 12.5
 	var/custom_location
 
 	if(limb.body_zone == BODY_ZONE_CHEST)
