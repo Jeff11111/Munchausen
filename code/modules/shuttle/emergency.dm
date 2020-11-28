@@ -522,7 +522,7 @@
 						supervisor.", "SYSTEM ERROR:", alert=TRUE)
 				dock_id(destination_dock)
 				mode = SHUTTLE_ENDGAME
-				timer = 0
+				setTimer(0)
 
 /obj/docking_port/mobile/emergency/transit_failure()
 	..()
