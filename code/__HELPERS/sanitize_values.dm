@@ -32,24 +32,13 @@
 	if(List && List.len)
 		return pick(List)
 
-
-
 //more specialised stuff
-/proc/sanitize_gender(gender,neuter=0,plural=0, default="male")
+/proc/sanitize_gender(gender,neuter=0,plural=0, default=MALE)
 	switch(gender)
 		if(MALE, FEMALE)
 			return gender
-		if(NEUTER)
-			if(neuter)
-				return gender
-			else
-				return default
-		if(PLURAL)
-			if(plural)
-				return gender
-			else
-				return default
-	return default
+		else
+			return default
 
 /proc/sanitize_hexcolor(color, desired_format=3, include_crunch=0, default)
 	var/crunch = include_crunch ? "#" : ""
