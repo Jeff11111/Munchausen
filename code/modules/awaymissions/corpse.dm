@@ -164,7 +164,7 @@
 		special(M, name)
 		MM.name = M.real_name
 	
-	if(ishuman(M))
+	if(ishuman(M) && M.mind)
 		assign_skills_stats(M)
 	
 	if(uses > 0)

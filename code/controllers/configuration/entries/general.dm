@@ -217,7 +217,10 @@
 	config_entry_value = "https://github.com/Skyrat-SS13/Skyrat13/pulls" // Skyrat Edit
 
 /datum/config_entry/string/notinvitedurl
-	config_entry_value = "https://github.com/Skyrat-SS13/Skyrat13/pulls"
+	config_entry_value = "https://cdn.discordapp.com/attachments/777928651156357171/782261445243961344/wedonthavemanydays.png"
+
+/datum/config_entry/string/bannedurl
+	config_entry_value = "https://cdn.discordapp.com/attachments/777928651156357171/782264391026212934/mailbox.png"
 
 /datum/config_entry/string/roundstatsurl
 

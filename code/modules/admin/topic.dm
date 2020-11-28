@@ -1442,6 +1442,7 @@
 						var/datum/admin_help/AH = ticket
 						if(AH)
 							AH.Resolve()
+					M.client << link(CONFIG_GET(string/bannedurl))
 				// Skyrat change END
 
 				qdel(M.client)
