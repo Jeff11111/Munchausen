@@ -30,8 +30,8 @@
 
 /datum/bobux_reward/stat_boost/on_buy(client/noob)
 	. = ..()
-	for(var/datum/stats/stat in noob.mob.mind.mob_stats)
-		stat.level += 1
+	for(var/stat in noob.mob.mind.mob_stats)
+		noob.mob.mind.mob_stats[stat].level += 1
 
 /datum/bobux_reward/combat_boost
 	name = "Combat Boost"
@@ -47,24 +47,25 @@
 
 /datum/bobux_reward/combat_boost/on_buy(client/noob)
 	. = ..()
-	var/datum/skills/pog = GET_SKILL(noob.mob, melee)
-	pog.level += rand(4,7)
-	pog = GET_SKILL(noob.mob, ranged)
-	pog.level += rand(4,7)
+	var/list/poggers = list(SKILL_DATUM(melee), SKILL_DATUM(ranged))
+	for(var/fuck in poggers)
+		var/datum/skills/pogchamp = noob.mob.mind.mob_skills[fuck]
+		if(pogchamp)
+			pogchamp.level += rand(4,7)
 
-/datum/bobux_reward/posses_mob
+/datum/bobux_reward/possess_mob
 	name = "Possess Mob"
 	desc = "Possess a mindless mob, if you're a ghost."
 	buy_message = "<b>My mind seizes control over a soulless husk.</span>"
 	id = "possess"
 	cost = 2
 
-/datum/bobux_reward/posses_mob/can_buy(client/noob, silent, fail_message)
+/datum/bobux_reward/possess_mob/can_buy(client/noob, silent, fail_message)
 	. = ..()
 	if(. && noob.mob && (isobserver(noob.mob)) && length(GLOB.mob_living_list))
 		return TRUE
 
-/datum/bobux_reward/posses_mob/on_buy(client/noob)
+/datum/bobux_reward/possess_mob/on_buy(client/noob)
 	..()
 	var/list/husks = list()
 	for(var/mob/living/L in GLOB.mob_living_list)
