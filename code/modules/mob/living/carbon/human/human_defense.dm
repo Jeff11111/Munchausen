@@ -79,7 +79,7 @@
 			if(supposed_to_affect)
 				miss_entirely = supposed_to_affect.miss_entirely_prob
 			miss_entirely /= (lying ? 10 : 1)
-			switch(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex), GET_SKILL_LEVEL(fireboy, ranged), dicetype = "6d6", mod = -(miss_entirely/5)))
+			switch(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.75, GET_SKILL_LEVEL(fireboy, ranged)*1.25, dicetype = "6d6", mod = -(miss_entirely/5)))
 				//Missed shot
 				if(DICE_CRIT_FAILURE, DICE_FAILURE)
 					if(fireboy != src)
@@ -154,7 +154,7 @@
 			var/mob/living/carbon/carbon_mob = user
 			//Chance to miss the attack entirely, based on a diceroll
 			var/missed = FALSE
-			if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee), mod = -(miss_entirely/5)) <= DICE_FAILURE)
+			if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.75, GET_SKILL_LEVEL(user, melee)*1.25, dicetype = "6d6", mod = -(miss_entirely/5)) <= DICE_FAILURE)
 				missed = TRUE
 			c_intent = carbon_mob.combat_intent
 			if(carbon_mob.mind)

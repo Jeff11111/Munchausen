@@ -239,7 +239,7 @@
 		//
 		if(BODY_ZONE_PRECISE_NECK)
 			L = new /obj/item/bodypart/head()
-		if(BODY_ZONE_NECK)
+		if(BODY_ZONE_PRECISE_NECK)
 			L = new /obj/item/bodypart/neck()
 		if(BODY_ZONE_L_LEG)
 			L = new /obj/item/bodypart/l_leg()

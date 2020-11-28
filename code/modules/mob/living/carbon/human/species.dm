@@ -1761,7 +1761,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 		var/missed = FALSE
 		//Dice roll to see if we fuck up
-		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex), GET_SKILL_LEVEL(user, melee), dicetype = "6d6", mod = -(miss_entirely/5)) <= DICE_FAILURE)
+		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.75, GET_SKILL_LEVEL(user, melee)*1.25, dicetype = "6d6", mod = -(miss_entirely/5)) <= DICE_FAILURE)
 			missed = TRUE
 		
 		//Aimed combat intent means we never miss, at the cost of stamina

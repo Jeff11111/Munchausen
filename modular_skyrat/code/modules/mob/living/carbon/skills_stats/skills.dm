@@ -8,10 +8,7 @@
 /datum/skills/firstaid
 	name = "First Aid"
 
-/datum/skills/firstaid/proc/get_medicalstack_timemod()
-	return clamp(2 - level, 0.1, 2)
-
-/datum/skills/firstaid/proc/get_medicalstack_probmod()
+/datum/skills/firstaid/proc/get_medicalstack_mod()
 	return clamp(2 - level, 0.1, 2)
 
 /datum/skills/surgery

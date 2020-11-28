@@ -391,7 +391,7 @@
 			ran_zone_prob = supposed_to_affect.zone_prob * 0.75
 			extra_zone_prob = supposed_to_affect.extra_zone_prob * 0.5
 			miss_entirely = supposed_to_affect.miss_entirely_prob * 1.5
-		miss_entirely /= (target.lying ? 1 : 10)
+		miss_entirely /= (target.lying ? 10 : 1)
 		if(user.mind)
 			var/datum/stats/dex/dex = GET_STAT(user, dex)
 			if(dex)
@@ -403,7 +403,7 @@
 		var/missed = FALSE
 
 		//Dice roll to see if we fuck up
-		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*0.75, mod = -(miss_entirely/5)) <= DICE_FAILURE)
+		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.75, GET_SKILL_LEVEL(user, melee)*1.25, dicetype = "6d66", mod = -(miss_entirely/5)) <= DICE_FAILURE)
 			missed = TRUE
 		
 		if(!damage || !affecting || (missed && target != user))//future-proofing for species that have 0 damage/weird cases where no zone is targeted
@@ -573,7 +573,7 @@
 			ran_zone_prob = supposed_to_affect.zone_prob * 0.75
 			extra_zone_prob = supposed_to_affect.extra_zone_prob * 0.5
 			miss_entirely = supposed_to_affect.miss_entirely_prob * 1.5
-		miss_entirely /= (target.lying ? 1 : 10)
+		miss_entirely /= (target.lying ? 10 : 1)
 		if(user.mind)
 			var/datum/stats/dex/dex = GET_STAT(user, dex)
 			if(dex)
@@ -585,7 +585,7 @@
 		var/missed = FALSE
 
 		//Dice roll to see if we fuck up
-		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*0.75, mod = -(miss_entirely/5)) <= DICE_FAILURE)
+		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.75, GET_SKILL_LEVEL(user, melee)*1.25, dicetype = "6d6", mod = -(miss_entirely/5)) <= DICE_FAILURE)
 			missed = TRUE
 		
 		if(!damage || !affecting || (missed && target != user))//future-proofing for species that have 0 damage/weird cases where no zone is targeted
