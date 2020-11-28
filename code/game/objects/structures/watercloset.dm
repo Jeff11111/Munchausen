@@ -14,6 +14,10 @@
 	var/buildstacktype = /obj/item/stack/sheet/metal //they're metal now, shut up
 	var/buildstackamount = 1
 
+/obj/structure/toilet/ComponentInitialize()
+	. = ..()
+	AddComponent(/datum/component/boombox)
+
 /obj/structure/toilet/Initialize()
 	. = ..()
 	open = round(rand(0, 1))
