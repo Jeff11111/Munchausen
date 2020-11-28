@@ -573,9 +573,8 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		return
 	if(!query_client_in_db.NextRow())
 		if (CONFIG_GET(flag/panic_bunker) && !holder && !GLOB.deadmins[ckey] && !(ckey in GLOB.bunker_passthrough))
-			log_access("Failed Login: [key] - [address] - New account attempting to connect during panic bunker") //skyrat-edit
+			log_access("Failed Login: [key] - [address] - New account attempting to connect during panic bunker")
 			message_admins("<span class='adminnotice'>Failed Login: [key] - [address] - New account attempting to connect during panic bunker</span>") //skyrat-edit
-			to_chat(src, {"<span class='notice'>Hi! We have temporarily enabled safety measures that prevents new players from joining currently.<br>Please try again later, or contact a staff on Discord if you have any questions. <br> <br> To join our community, check out our Discord! To gain full access to our Discord, read the rules and post a request in the #access-requests channel under the \"Landing Zone\" category in the Discord server linked here: <a href='https://discord.gg/6RpdCgR'>https://discord.gg/6RpdCgR</a></span>"}) //skyrat-edit
 			var/list/connectiontopic_a = params2list(connectiontopic)
 			var/list/panic_addr = CONFIG_GET(string/panic_server_address)
 			if(panic_addr && !connectiontopic_a["redirect"])
@@ -583,6 +582,8 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 				to_chat(src, "<span class='notice'>Sending you to [panic_name ? panic_name : panic_addr].</span>")
 				winset(src, null, "command=.options")
 				src << link("[panic_addr]?redirect=1")
+			else
+				src << link(CONFIG_GET(string/notinvitedurl))
 			qdel(query_client_in_db)
 			qdel(src)
 			return

@@ -216,6 +216,9 @@
 /datum/config_entry/string/githuburl
 	config_entry_value = "https://github.com/Skyrat-SS13/Skyrat13/pulls" // Skyrat Edit
 
+/datum/config_entry/string/notinvitedurl
+	config_entry_value = "https://github.com/Skyrat-SS13/Skyrat13/pulls"
+
 /datum/config_entry/string/roundstatsurl
 
 /datum/config_entry/string/gamelogurl
