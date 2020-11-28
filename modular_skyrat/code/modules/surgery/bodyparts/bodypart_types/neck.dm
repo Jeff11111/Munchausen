@@ -36,7 +36,7 @@
 	. = ..()
 	if(!owner)
 		for(var/obj/item/bodypart/head/nohead in src)
-			name = nohead.name
+			name = "[nohead.name]'s neck"
 			break
 	else
 		name = initial(name)
