@@ -394,8 +394,8 @@ GLOBAL_LIST_INIT(pda_reskins, list(PDA_SKIN_CLASSIC = 'icons/obj/pda.dmi', PDA_S
 #define EXPLOSION_BLOCK_PROC -1
 
 //for determining which type of heartbeat sound is playing
-#define BEAT_FAST 1
 #define BEAT_SLOW 2
+#define BEAT_FAST 1
 #define BEAT_NONE 0
 
 //https://secure.byond.com/docs/ref/info.html#/atom/var/mouse_opacity
