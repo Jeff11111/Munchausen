@@ -141,12 +141,11 @@
 	descriptive = null
 
 /datum/wound/slash/loss/get_examine_description(mob/user)
-	. = ..()
 	if(fake_body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))
 		return "<span class='deadsay'>[..()]</span>"
+	. = ..()
 
 /datum/wound/slash/loss/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
-	. = ..()
 	switch(L.body_zone)
 		if(BODY_ZONE_HEAD)
 			initial_flow *= 1
@@ -184,6 +183,7 @@
 		if(BODY_ZONE_PRECISE_R_FOOT)
 			initial_flow *= (1/2)
 			minimum_flow *= (1/3)
+	. = ..()
 
 /datum/wound/mechanical/slash/loss
 	name = "Dismembered stump"
@@ -208,12 +208,11 @@
 	descriptive = null
 
 /datum/wound/mechanical/slash/loss/get_examine_description(mob/user)
-	. = ..()
 	if(fake_body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))
 		return "<span class='deadsay'>[..()]</span>"
+	. = ..()
 
 /datum/wound/mechanical/slash/loss/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
-	. = ..()
 	switch(L.body_zone)
 		if(BODY_ZONE_HEAD)
 			initial_flow *= 1
@@ -251,3 +250,4 @@
 		if(BODY_ZONE_PRECISE_R_FOOT)
 			initial_flow *= (1/2)
 			minimum_flow *= (1/3)
+	. = ..()

@@ -1818,8 +1818,7 @@
 	else if((owner && original_owner) && (owner != original_owner)) //Foreign limb
 		no_update = TRUE
 	else
-		C = owner
-		no_update = FALSE
+		no_update = TRUE
 
 	if(C && HAS_TRAIT(C, TRAIT_HUSK))
 		species_id = "husk" //overrides species_id

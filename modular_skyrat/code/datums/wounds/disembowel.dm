@@ -119,16 +119,15 @@
 	var/datum/component/storage/concrete/organ/our_component
 
 /datum/wound/slash/critical/incision/disembowel/get_examine_description(mob/user)
-	. = ..()
 	if(limb.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))
 		return "<span class='deadsay'>[..()]</span>"
+	. = ..()
 
 /datum/wound/slash/critical/incision/disembowel/Destroy()
 	. = ..()
 	QDEL_NULL(our_component)
 
 /datum/wound/slash/critical/incision/disembowel/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
-	. = ..()
 	descriptive = "\The [L.name] is disemboweled!"
 	switch(L.body_zone)
 		if(BODY_ZONE_HEAD)
@@ -174,6 +173,7 @@
 	our_component.drop_all_on_deconstruct = FALSE
 	our_component.silent = TRUE
 	our_component.update_insides()
+	. = ..()
 
 /datum/wound/mechanical/slash/critical/incision/disembowel
 	name = "Disemboweled"
@@ -200,16 +200,15 @@
 	var/datum/component/storage/concrete/organ/our_component
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/get_examine_description(mob/user)
-	. = ..()
 	if(limb.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))
 		return "<span class='deadsay'>[..()]</span>"
+	. = ..()
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/Destroy()
 	. = ..()
 	QDEL_NULL(our_component)
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
-	. = ..()
 	descriptive = "\The [L.name] is disemboweled!"
 	switch(L.body_zone)
 		if(BODY_ZONE_HEAD)
@@ -255,3 +254,4 @@
 	our_component.drop_all_on_deconstruct = FALSE
 	our_component.silent = TRUE
 	our_component.update_insides()
+	. = ..()
