@@ -1817,7 +1817,7 @@
 					original_species = source.dna.species
 	else if((owner && original_owner) && (owner != original_owner)) //Foreign limb
 		no_update = TRUE
-	else
+	else if(!owner)
 		no_update = TRUE
 
 	if(C && HAS_TRAIT(C, TRAIT_HUSK))
