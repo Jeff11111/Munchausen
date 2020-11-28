@@ -532,13 +532,14 @@
 			msg += "[consciousness_msg]"
 	//
 
-	//Skyrat changes begin
 	if(gunpointing)
 		msg += "<b>[t_He] [t_is] holding [gunpointing.target.name] at gunpoint with [gunpointing.aimed_gun.name]!</b>"
 	if(gunpointed.len)
 		for(var/datum/gunpoint/GP in gunpointed)
 			msg += "<b>[GP.source.name] [GP.source.p_are()] holding [t_him] at gunpoint with [GP.aimed_gun.name]!</b>"
-	//Skyrat changes end
+	
+	if(user.mind?.mob_skills[SKILL_DATUM(firstaid)] >= 12 && undergoing_cardiac_arrest())
+		msg += "<span class='danger'><b>[t_He] is having a heart attack!</b></span>"
 
 	//Strength message
 	var/our_str = 10
