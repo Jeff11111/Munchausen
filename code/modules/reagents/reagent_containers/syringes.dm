@@ -101,10 +101,12 @@
 		var/mob/living/carbon/monkey/M
 		M = target
 		M.retaliate(user)
-
+	
+	var/time_taken = 3 SECONDS
+	if(user.mind)
+		time_taken = max(5, 30 - (1.25 * GET_SKILL_LEVEL(user, firstaid)))
 	switch(mode)
 		if(SYRINGE_DRAW)
-
 			if(reagents.total_volume >= reagents.maximum_volume)
 				to_chat(user, "<span class='notice'>The syringe is full.</span>")
 				return
@@ -116,7 +118,7 @@
 						target.visible_message("<span class='danger'>[user] is trying to take a blood sample from [target]!</span>", \
 										"<span class='userdanger'>[user] is trying to take a blood sample from [target]!</span>")
 						busy = TRUE
-						if(!do_mob(user, target, extra_checks=CALLBACK(L, /mob/living/proc/can_inject,user,1)))
+						if(!do_mob(user, target, time = time_taken, extra_checks=CALLBACK(L, /mob/living/proc/can_inject,user,1)))
 							busy = FALSE
 							return
 						if(reagents.total_volume >= reagents.maximum_volume)
@@ -178,7 +180,7 @@
 					if(user.a_intent != INTENT_HARM)
 						L.visible_message("<span class='danger'>[user] is trying to inject [L]!</span>", \
 												"<span class='userdanger'>[user] is trying to inject [L]!</span>")
-						if(!do_mob(user, L, extra_checks=CALLBACK(L, /mob/living/proc/can_inject,user,1)))
+						if(!do_mob(user, L, time = time_taken, extra_checks=CALLBACK(L, /mob/living/proc/can_inject,user,1)))
 							return
 						if(!reagents.total_volume)
 							return
