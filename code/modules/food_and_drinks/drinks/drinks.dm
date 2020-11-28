@@ -23,7 +23,9 @@
 		gulp_size = max(round(reagents.total_volume / 5), 5)
 
 /obj/item/reagent_containers/food/drinks/attack(mob/living/M, mob/user, def_zone)
-
+	if(user.zone_selected != BODY_ZONE_PRECISE_MOUTH)
+		return ..()
+		
 	if(!reagents || !reagents.total_volume)
 		to_chat(user, "<span class='warning'>[src] is empty!</span>")
 		return 0
@@ -31,7 +33,7 @@
 	if(!canconsume(M, user))
 		return 0
 
-	if (!is_drainable())
+	if(!is_drainable())
 		to_chat(user, "<span class='warning'>[src]'s lid hasn't been opened!</span>")
 		return 0
 
