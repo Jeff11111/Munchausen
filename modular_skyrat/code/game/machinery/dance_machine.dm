@@ -2,6 +2,7 @@
 /obj/machinery/jukebox/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/boombox)
+	AddElement(/datum/element/multitool_emaggable)
 
 //Jukebox searching
 /obj/machinery/jukebox/Topic(href, href_list)
