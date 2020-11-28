@@ -2747,8 +2747,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					var/chosengender = input(user, "Select your character's gender.", "Gender Selection", gender) as null|anything in list(MALE,FEMALE)
 					if(!chosengender)
 						return
-					switch(chosengender)
-						features["body_model"] = chosengender
+					features["body_model"] = chosengender
 					gender = chosengender
 					facial_hair_style = random_facial_hair_style(gender)
 					hair_style = random_hair_style(gender)
