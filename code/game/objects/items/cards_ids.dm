@@ -104,7 +104,7 @@
 		playsound(src, 'sound/effects/light_flicker.ogg', 30, 1)	//Tiiiiiiny warning sound to let ya know your emag's almost dead
 	if(!A.emag_act(user))
 		return
-	if(!(user.mind?.diceroll(STAT_DATUM(int), SKILL_DATUM(electronics), dicetype = "6d6") >= DICE_SUCCESS))
+	if(!(user.mind?.diceroll(STAT_DATUM(int), SKILL_DATUM(electronics), dicetype = "6d6", crit = 20) >= DICE_SUCCESS))
 		uses = max(uses - 1, 0)
 	else
 		to_chat(user, "<span class='nicegreen'>You use \the [src]'s charge economically, not wasting it.</span>")

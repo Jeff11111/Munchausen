@@ -131,6 +131,7 @@
 		return H
 
 /datum/antagonist/dreamer/proc/wake_up()
+	STOP_PROCESSING(SSobj, src)
 	var/client/dreamer_client = owner // Trust me, we need it later
 	var/mob/living/carbon/dreamer = owner.current
 	dreamer.clear_fullscreen("dream")
@@ -205,6 +206,7 @@
 
 /datum/antagonist/dreamer/Destroy()
 	. = ..()
+	STOP_PROCESSING(SSobj, src)
 	if(owner?.current)
 		owner.current.client?.screen -= owner.current.hud_used?.dreamer
 		if(owner.current.hud_used?.dreamer)
@@ -219,8 +221,13 @@
 
 /datum/antagonist/dreamer/on_gain()
 	. = ..()
+	START_PROCESSING(SSobj, src)
 	give_wakeup_call()
 	give_hallucination_object(owner.current)
 	give_stats(owner.current)
 	grant_first_wonder_recipe(owner.current)
 	greet()
+
+/datum/antagonist/dreamer/on_removal()
+	. = ..()
+	STOP_PROCESSING(SSobj, src)
