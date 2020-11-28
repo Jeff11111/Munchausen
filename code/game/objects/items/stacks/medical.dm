@@ -16,7 +16,7 @@
 	novariants = FALSE
 	item_flags = NOBLUDGEON
 	germ_level = 0
-	var/self_delay = 50
+	var/self_delay = 15
 	var/other_delay = 10
 	var/repeating = TRUE
 	/// How much brute we heal per application
@@ -132,7 +132,7 @@
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 	heal_brute = 40
-	self_delay = 40
+	self_delay = 30
 	other_delay = 20
 	amount = 12
 	max_amount = 12
@@ -172,7 +172,7 @@
 	gender = PLURAL
 	singular_name = "medical gauze"
 	icon_state = "gauze"
-	self_delay = 50
+	self_delay = 30
 	other_delay = 20
 	amount = 16
 	max_amount = 16
@@ -270,7 +270,7 @@
 	name = "improvised gauze"
 	singular_name = "improvised gauze"
 	desc = "A roll of cloth roughly cut from something that does a decent job of stabilizing wounds, but less efficiently so than real medical gauze."
-	self_delay = 60
+	self_delay = 45
 	other_delay = 30
 	absorption_rate = 0.15
 	absorption_capacity = 4
@@ -287,7 +287,7 @@
 	icon = 'modular_skyrat/icons/obj/medical.dmi'
 	icon_state = "adv_gauze"
 	heal_brute = 6
-	self_delay = 40
+	self_delay = 22.5
 	other_delay = 15
 	absorption_rate = 0.4
 	absorption_capacity = 6
@@ -301,7 +301,7 @@
 	gender = PLURAL
 	singular_name = "suture"
 	icon_state = "suture"
-	self_delay = 30
+	self_delay = 15
 	other_delay = 10
 	amount = 16
 	max_amount = 16
@@ -366,7 +366,7 @@
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 	amount = 12
 	max_amount = 12
-	self_delay = 40
+	self_delay = 30
 	other_delay = 20
 	amount = 12
 	max_amount = 12
@@ -394,7 +394,7 @@
 	gender = PLURAL
 	singular_name = "regenerative mesh"
 	icon_state = "regen_mesh"
-	self_delay = 30
+	self_delay = 15
 	other_delay = 10
 	amount = 16
 	heal_burn = 10
@@ -502,7 +502,7 @@
 	desc = "A healing paste you can apply on wounds."
 
 	icon_state = "aloe_paste"
-	self_delay = 20
+	self_delay = 15
 	other_delay = 10
 	novariants = TRUE
 	amount = 16

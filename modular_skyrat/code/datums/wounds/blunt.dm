@@ -384,7 +384,7 @@
 	else
 		user.visible_message("<span class='danger'>[user] begins resetting <b>[victim]</b>'s [limb.name] with [I].</span>", "<span class='notice'>I begin resetting <b>[victim]</b>'s [limb.name] with [I]...</span>")
 
-	var/time_mod = (user == victim ? 2 : 1)
+	var/time_mod = (user == victim ? 1.5 : 1)
 	//Medical skill affects the speed of the do_mob
 	if(user.mind)
 		var/datum/skills/firstaid/firstaid = GET_SKILL(user, firstaid)
@@ -480,7 +480,7 @@
 		victim.visible_message("<span class='danger'>[user] begins resetting [victim.p_their()] ribs with [I].</span>", "<span class='warning'>I begin resetting my ribs with [I]...</span>")
 	else
 		user.visible_message("<span class='danger'>[user] begins resetting <b>[victim]</b>'s ribs with [I].</span>", "<span class='notice'>I begin resetting <b>[victim]</b>'s ribs with [I]...</span>")
-	var/time_mod = (user == victim ? 2 : 1)
+	var/time_mod = (user == victim ? 1.5 : 1)
 
 	//Medical skill affects the speed of the do_mob
 	if(user.mind)
@@ -578,7 +578,7 @@
 		user.visible_message("<span class='danger'>[user] begins resetting <b>[victim]</b>'s femur with [I].</span>", "<span class='notice'>I begin resetting <b>[victim]</b>'s femur with [I]...</span>")
 
 	//Medical skill affects the speed of the do_mob
-	var/time_mod = (user == victim ? 2 : 1)
+	var/time_mod = (user == victim ? 1.5 : 1)
 	if(user.mind)
 		var/datum/skills/firstaid/firstaid = GET_SKILL(user, firstaid)
 		if(firstaid)
@@ -675,7 +675,7 @@
 		user.visible_message("<span class='danger'>[user] begins resetting <b>[victim]</b>'s jaw with [I].</span>", "<span class='notice'>I begin resetting <b>[victim]</b>'s jaw with [I]...</span>")
 	
 	//Medical skill affects the speed of the do_mob
-	var/time_mod = (user == victim ? 2 : 1)
+	var/time_mod = (user == victim ? 1.5 : 1)
 	if(user.mind)
 		var/datum/skills/firstaid/firstaid = GET_SKILL(user, firstaid)
 		if(firstaid)
@@ -779,7 +779,7 @@
 	user.visible_message("<span class='danger'>[user] begins hastily applying [I] to <b>[victim]</b>'s' [limb.name]...</span>", "<span class='warning'>I begin hastily applying [I] to [user == victim ? "my" : "<b>[victim]</b>'s"] [limb.name], disregarding the warning label...</span>")
 
 	//Medical skill affects the speed of the do_mob
-	var/time_mod = (user == victim ? 2 : 1)
+	var/time_mod = (user == victim ? 1.5 : 1)
 	if(user.mind)
 		var/datum/skills/firstaid/firstaid = GET_SKILL(user, firstaid)
 		if(firstaid)
@@ -836,7 +836,7 @@
 	user.visible_message("<span class='danger'>[user] begins applying [I] to <b>[victim]</b>'s' [limb.name]...</span>", "<span class='warning'>I begin applying [I] to [user == victim ? "my" : "<b>[victim]</b>'s"] [limb.name]...</span>")
 
 	//aaaaaaaaaaaaaaaaaaa
-	var/time_mod = (user == victim ? 2 : 1)
+	var/time_mod = (user == victim ? 1.5 : 1)
 	if(user.mind)
 		var/datum/skills/firstaid/firstaid = GET_SKILL(user, firstaid)
 		if(firstaid)
@@ -849,7 +849,7 @@
 		return
 	
 	regen_points_current = 0
-	regen_points_needed = 15 * (user == victim ? 2 : 1) * (severity - WOUND_SEVERITY_TRIVIAL)
+	regen_points_needed = 15 * (user == victim ? 1.5 : 1) * (severity - WOUND_SEVERITY_TRIVIAL)
 	if(user != victim)
 		user.visible_message("<span class='notice'>[user] finishes applying [I] to <b>[victim]</b>'s [limb.name], emitting a fizzing noise!</span>", "<span class='notice'>I finish applying [I] to <b>[victim]</b>'s [limb.name]!</span>", ignored_mobs=victim)
 		to_chat(victim, "<span class='green'>[user] finishes applying [I] to my [limb.name], i immediately begin to feel my bones start to reform!</span>")

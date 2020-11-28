@@ -80,7 +80,7 @@
 /// If someone is using a suture to close this cut
 /datum/wound/pierce/proc/suture(obj/item/stack/medical/suture/I, mob/user)
 	user.visible_message("<span class='notice'>[user] begins stitching [victim]'s [limb.name] with [I]...</span>", "<span class='notice'>You begin stitching [user == victim ? "your" : "[victim]'s"] [limb.name] with [I]...</span>")
-	var/time_mod = (user == victim ? 2 : 1)
+	var/time_mod = (user == victim ? 1.5 : 1)
 
 	//Medical skill affects the speed of the do_mob
 	if(user.mind)
@@ -108,7 +108,7 @@
 /// If someone is using either a cautery tool or something with heat to cauterize this pierce
 /datum/wound/pierce/proc/tool_cauterize(obj/item/I, mob/user)
 	user.visible_message("<span class='danger'>[user] begins cauterizing [victim]'s [limb.name] with [I]...</span>", "<span class='danger'>You begin cauterizing [user == victim ? "your" : "[victim]'s"] [limb.name] with [I]...</span>")
-	var/time_mod = (user == victim ? 2 : 1)
+	var/time_mod = (user == victim ? 1.5 : 1)
 
 	//Medical skill affects the speed of the do_mob
 	if(user.mind)
@@ -132,7 +132,7 @@
 
 /// If someone's putting a laser gun up to our cut to cauterize it
 /datum/wound/pierce/proc/las_cauterize(obj/item/gun/energy/laser/lasgun, mob/user)
-	var/time_mod = (user == victim ? 2 : 1)
+	var/time_mod = (user == victim ? 1.5 : 1)
 
 	//Ranged skill affects the speed of the do_mob lol
 	if(user.mind)

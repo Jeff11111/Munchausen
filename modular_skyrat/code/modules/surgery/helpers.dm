@@ -38,11 +38,13 @@
 		var/diceroll = user.mind.diceroll(STAT_DATUM(int), SKILL_DATUM(surgery), "6d6")
 		switch(diceroll)
 			if(DICE_CRIT_SUCCESS)
+				our_germ_level *= 0
+			if(DICE_SUCCESS)
 				our_germ_level *= 0.5
 			if(DICE_FAILURE)
-				our_germ_level *= 2
+				our_germ_level *= 1
 			if(DICE_CRIT_FAILURE)
-				our_germ_level *= 3
+				our_germ_level *= 2
 
 	if(our_germ_level <= (WOUND_SANITIZATION_STERILIZER/2))
 		return

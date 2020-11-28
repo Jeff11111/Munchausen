@@ -134,7 +134,7 @@
 		user.visible_message("<span class='notice'>[user] begins welding \the [patch] on [victim]'s [limb.name] with \the [I]...</span>", "<span class='notice'>You begin welding \the [patch] [user == victim ? "your" : "[victim]'s"] [limb.name] with \the [I]...</span>")
 	else
 		user.visible_message("<span class='notice'>[user] begins welding \the [lowertext(name)] on [victim]'s [limb.name] with \the [I]...</span>", "<span class='notice'>You begin welding \the [lowertext(name)] on [user == victim ? "your" : "[victim]'s"] [limb.name] with \the [I]...</span>")
-	var/time_mod = (user == victim ? 2 : 1)
+	var/time_mod = (user == victim ? 1.5 : 1)
 
 	//Electronics skill affects the speed of the do_mob
 	if(user.mind)
@@ -171,7 +171,7 @@
 		to_chat(user, "<span class='warning'>The limb has already been patched!</span>")
 		return
 	user.visible_message("<span class='notice'>[user] begins wrapping [victim]'s [limb.name] with \the [I]...</span>", "<span class='notice'>You begin wrapping [user == victim ? "your" : "[victim]'s"] [limb.name] with \the [I]...</span>")
-	var/time_mod = (user == victim ? 2 : 1)
+	var/time_mod = (user == victim ? 1.5 : 1)
 
 	//Electronics skill affects the speed of the do_mob
 	if(user.mind)
