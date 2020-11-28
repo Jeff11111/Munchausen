@@ -715,7 +715,7 @@
 	var/owner_germ_level = 2*owner.germ_level
 	for(var/obj/item/embeddies in embedded_objects)
 		if(!embeddies.isEmbedHarmless())
-			owner_germ_level += (embeddies.germ_level/10)
+			owner_germ_level += (embeddies.germ_level/5)
 
 	for(var/datum/wound/W in wounds)
 		//Open wounds can become infected
@@ -1312,7 +1312,7 @@
 	for(var/obj/item/organ/O in get_organs())
 		extra_pain += O.get_pain()
 	for(var/obj/item/I in embedded_objects)
-		extra_pain += 7.5 * I.w_class
+		extra_pain += 5 * I.w_class
 	return clamp((pain_dam + extra_pain) * multiplier, 0, max_pain_damage)
 
 //Returns whether or not the bodypart can feel pain
