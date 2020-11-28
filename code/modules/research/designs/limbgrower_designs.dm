@@ -72,7 +72,7 @@
 	id = "head"
 	build_type = LIMBGROWER
 	reagents_list = list(/datum/reagent/medicine/synthflesh = 75)
-	build_path = /obj/item/bodypart/head
+	build_path = /obj/item/bodypart/neck/children
 	category = list("initial","human","lizard","fly","insect","plasmaman","mammal","xeno")
 
 /datum/design/lefthand
