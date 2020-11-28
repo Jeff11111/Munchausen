@@ -294,7 +294,6 @@
 		var/datum/skills/firstaid/firstaid = GET_SKILL(user, firstaid)
 		if(firstaid)
 			time_mod *= firstaid.get_medicalstack_mod()
-			prob_mod *= firstaid.get_medicalstack_mod()
 	
 	if(!do_after(user, time * time_mod, target = victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
@@ -331,14 +330,12 @@
 /datum/wound/blunt/moderate/proc/chiropractice(mob/living/carbon/human/user)
 	var/time = base_treat_time
 	var/time_mod = 1
-	var/prob_mod = 12.5
 
 	//Medical skill affects the speed of the do_mob
 	if(user.mind)
 		var/datum/skills/firstaid/firstaid = GET_SKILL(user, firstaid)
 		if(firstaid)
 			time_mod *= firstaid.get_medicalstack_mod()
-			prob_mod *= firstaid.get_medicalstack_mod()
 	
 	if(!do_after(user, time * time_mod, target = victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
@@ -457,14 +454,12 @@
 /datum/wound/blunt/moderate/ribcage/chiropractice(mob/living/carbon/human/user)
 	var/time = base_treat_time
 	var/time_mod = 1
-	var/prob_mod = 10
 
 	//Medical skill affects the speed of the do_mob
 	if(user.mind)
 		var/datum/skills/firstaid/firstaid = GET_SKILL(user, firstaid)
 		if(firstaid)
 			time_mod *= firstaid.get_medicalstack_mod()
-			prob_mod *= firstaid.get_medicalstack_mod()
 		
 	if(!do_after(user, time * time_mod, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
@@ -555,14 +550,12 @@
 /datum/wound/blunt/moderate/hips/chiropractice(mob/living/carbon/human/user)
 	var/time = base_treat_time
 	var/time_mod = 1
-	var/prob_mod = 12.5
 
 	//Medical skill affects the speed of the do_mob
 	if(user.mind)
 		var/datum/skills/firstaid/firstaid = GET_SKILL(user, firstaid)
 		if(firstaid)
 			time_mod *= firstaid.get_medicalstack_mod()
-			prob_mod *= firstaid.get_medicalstack_mod()
 	
 	if(!do_after(user, time * time_mod, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
@@ -654,14 +647,12 @@
 /datum/wound/blunt/moderate/jaw/chiropractice(mob/living/carbon/human/user)
 	var/time = base_treat_time
 	var/time_mod = 1
-	var/prob_mod = 10
 
 	//Medical skill affects the speed of the do_mob
 	if(user.mind)
 		var/datum/skills/firstaid/firstaid = GET_SKILL(user, firstaid)
 		if(firstaid)
 			time_mod *= firstaid.get_medicalstack_mod()
-			prob_mod *= firstaid.get_medicalstack_mod()
 	
 	if(!do_after(user, time * time_mod, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
