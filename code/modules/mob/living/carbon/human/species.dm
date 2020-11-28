@@ -2222,9 +2222,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				althelp(M, H, attacker_style)
 				return TRUE
 			return FALSE
-		if(INTENT_DISARM)
-			altdisarm(M, H, attacker_style)
-			return TRUE
 	return FALSE
 
 /datum/species/proc/althelp(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
