@@ -78,8 +78,8 @@
 			var/obj/item/bodypart/supposed_to_affect = get_bodypart(P.def_zone)
 			if(supposed_to_affect)
 				miss_entirely = supposed_to_affect.miss_entirely_prob
-			miss_entirely /= (lying ? 1 : 10)
-			switch(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex), GET_SKILL_LEVEL(fireboy, ranged), dicetype = "6d6", mod = -(miss_entirely/2.5)))
+			miss_entirely /= (lying ? 10 : 1)
+			switch(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex), GET_SKILL_LEVEL(fireboy, ranged), dicetype = "6d6", mod = -(miss_entirely/5)))
 				//Missed shot
 				if(DICE_CRIT_FAILURE, DICE_FAILURE)
 					if(fireboy != src)
