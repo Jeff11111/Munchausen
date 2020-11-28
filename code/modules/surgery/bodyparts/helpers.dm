@@ -237,8 +237,10 @@
 		if(BODY_ZONE_PRECISE_R_HAND)
 			L = new /obj/item/bodypart/r_hand()
 		//
-		if(BODY_ZONE_HEAD)
+		if(BODY_ZONE_PRECISE_NECK)
 			L = new /obj/item/bodypart/head()
+		if(BODY_ZONE_NECK)
+			L = new /obj/item/bodypart/neck()
 		if(BODY_ZONE_L_LEG)
 			L = new /obj/item/bodypart/l_leg()
 		//skyrat edit
@@ -281,6 +283,8 @@
 		//
 		if(BODY_ZONE_HEAD)
 			L = new /obj/item/bodypart/head/monkey()
+		if(BODY_ZONE_PRECISE_NECK)
+			L = new /obj/item/bodypart/neck/monkey()
 		if(BODY_ZONE_L_LEG)
 			L = new /obj/item/bodypart/l_leg/monkey()
 		//skyrat edit
@@ -310,6 +314,8 @@
 	switch(zone)
 		if(BODY_ZONE_HEAD)
 			L = new /obj/item/bodypart/head/larva()
+		if(BODY_ZONE_PRECISE_NECK)
+			L = new /obj/item/bodypart/neck/larva()
 		if(BODY_ZONE_CHEST)
 			L = new /obj/item/bodypart/chest/larva()
 	if(L)
@@ -335,6 +341,8 @@
 		//
 		if(BODY_ZONE_HEAD)
 			L = new /obj/item/bodypart/head/alien()
+		if(BODY_ZONE_PRECISE_NECK)
+			L = new /obj/item/bodypart/neck/alien()
 		if(BODY_ZONE_L_LEG)
 			L = new /obj/item/bodypart/l_leg/alien()
 		//skyrat edit
@@ -386,29 +394,6 @@
 /mob/living/carbon/proc/get_body_parts_flags()
 	for(var/X in bodyparts)
 		var/obj/item/bodypart/L = X
-		switch(L.body_part)
-			//skyrat edit on all of this pretty much
-			if(CHEST)
-				. |= CHEST
-			if(GROIN)
-				. |= GROIN
-			if(LEG_LEFT)
-				. |= LEG_LEFT
-			if(LEG_RIGHT)
-				. |= LEG_RIGHT
-			if(FOOT_LEFT)
-				. |= FOOT_LEFT
-			if(FOOT_RIGHT)
-				. |= FOOT_RIGHT
-			if(ARM_LEFT)
-				. |= ARM_LEFT
-			if(ARM_RIGHT)
-				. |= ARM_RIGHT
-			if(HAND_LEFT)
-				. |= HAND_LEFT
-			if(HAND_RIGHT)
-				. |= HAND_RIGHT
-			//
 		. |= L.body_part
 
 ///Get the bodypart for whatever hand we have active, Only relevant for carbons
