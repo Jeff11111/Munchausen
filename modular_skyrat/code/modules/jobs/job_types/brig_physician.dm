@@ -31,7 +31,7 @@
 	uniform = /obj/item/clothing/under/rank/brig_phys
 	shoes = /obj/item/clothing/shoes/jackboots
 	glasses = /obj/item/clothing/glasses/hud/health/sunglasses
-	suit = /obj/item/clothing/suit/hazardvest/brig_phys
 	suit_store = /obj/item/flashlight/seclite
 	l_hand = /obj/item/storage/firstaid/regular
-	head = /obj/item/clothing/head/soft/sec/brig_phys
+	suit = /obj/item/clothing/suit/armor/vest/combat_medic
+	head = /obj/item/clothing/head/helmet/combat_medic

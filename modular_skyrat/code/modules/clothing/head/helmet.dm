@@ -51,3 +51,12 @@
 			activated = !activated
 			user.see_in_dark = stored_nv
 			to_chat(user, "<span class='notice'>You deactivate [src]'s night vision.</span>")
+
+//fuck
+/obj/item/clothing/head/helmet/combat_medic
+	name = "brig physician's armored helmet"
+	desc = "Protects the head from circular saws."
+	icon = 'modular_skyrat/icons/obj/clothing/enforcer.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/enforcer.dmi'
+	icon_state = "medichelmet"
+	mutantrace_variation = STYLE_NO_ANTHRO_ICON

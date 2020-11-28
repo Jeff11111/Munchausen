@@ -84,3 +84,12 @@
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/enforcer.dmi'
 	icon_state = "cecarrier"
 	item_state = "cecarrier"
+
+//brig phys
+/obj/item/clothing/suit/armor/vest/combat_medic
+	name = "brig physician's armor vest"
+	desc = "An unremarkable red cross vest or something."
+	icon = 'modular_skyrat/icons/obj/clothing/enforcer.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/enforcer.dmi'
+	icon_state = "medic"
+	mutantrace_variation = STYLE_NO_ANTHRO_ICON
