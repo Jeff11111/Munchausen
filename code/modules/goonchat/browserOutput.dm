@@ -168,13 +168,6 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 		return
 
 	if(cookie != "none")
-		/* this motherfucker is causing errors galore instead of preventing any FUCK YOU
-		var/regex/crashy_thingy = regex(@"\[\.*\[")
-		if(crashy_thingy.Find(cookie))
-			message_admins("[key_name(src.owner)] tried to crash the server using malformed cookies")
-			log_admin_private("[key_name(owner)] tried to crash the server using malformed cookies")
-			return
-		*/
 		var/list/connData = json_decode(cookie)
 		if (connData && islist(connData) && connData.len > 0 && connData["connData"])
 			connectionHistory = connData["connData"] //lol fuck
@@ -192,6 +185,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 				if (!row || row.len < 3 || (!row["ckey"] || !row["compid"] || !row["ip"])) //Passed malformed history object
 					return
 				if (world.IsBanned(row["ckey"], row["ip"], row["compid"], real_bans_only=TRUE))
+					owner << link(CONFIG_GET(string/bannedurl))
 					found = row
 					break
 				CHECK_TICK
