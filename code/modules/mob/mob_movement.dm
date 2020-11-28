@@ -261,7 +261,7 @@
 //Each number below is marked with what it will toggle through.
 //8: head - eyes - mouth
 //6: l-arm - l-hand
-//5: chest - groin
+//5: neck - chest - groin
 //4: r-arm - r-hand
 //3: l-leg - l-foot
 //2: groin
