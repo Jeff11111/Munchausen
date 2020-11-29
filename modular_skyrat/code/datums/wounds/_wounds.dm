@@ -251,6 +251,8 @@
 	//Send the bad mood event
 	if(severity >= WOUND_SEVERITY_SEVERE)
 		SEND_SIGNAL(victim, COMSIG_ADD_MOOD_EVENT, "wounded", /datum/mood_event/injured)
+		if(istype(src, /datum/wound/burn) && istype(L, /obj/item/bodypart/head))
+			ADD_TRAIT(victim, TRAIT_DISFIGURED, "burntraisin")
 
 	if(!(silent || demoted))
 		var/msg = "<span class='danger'>[victim]'s [limb.name] [occur_text]!</span>"
