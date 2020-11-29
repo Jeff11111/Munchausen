@@ -274,7 +274,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 	if(caught_dreamer)
 		owner.current.Paralyze(rand(2, 5) SECONDS)
 		var/pain_msg = pick("NO!", "THEY GOT ME!", "AGH!")
-		to_chat(owner.current, "<span class='userdanger'>[pain_msg]</span>")
+		to_chat(owner.current, "<span class='userdanger'><b>[pain_msg]</b></span>")
 		owner.current.flash_pain(255, 0, 5, 10)
 
 /datum/antagonist/dreamer/proc/handle_dreamer_waking_up()
