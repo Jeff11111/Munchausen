@@ -47,8 +47,6 @@
 	item = /obj/item/gun/energy/kinetic_accelerator/crossbow
 	cost = 12
 	surplus = 50
-	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
-
 /datum/uplink_item/stealthy_weapons/traitor_chem_bottle
 	name = "Poison Kit"
 	desc = "An assortment of deadly chemicals packed into a compact box. Comes with a syringe for more precise application."
@@ -63,7 +61,6 @@
 			along with slurred speech, aggression, and the ability to infect others with this agent."
 	item = /obj/item/storage/box/syndie_kit/romerol
 	cost = 20
-	exclude_modes = list(/datum/game_mode/nuclear)
 
 /datum/uplink_item/stealthy_weapons/sleepy_pen
 	name = "Sleepy Pen"
@@ -73,7 +70,6 @@
 			falls asleep, they will be able to move and act."
 	item = /obj/item/pen/sleepy
 	cost = 4
-	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 
 /datum/uplink_item/stealthy_weapons/suppressor
 	name = "Suppressor"

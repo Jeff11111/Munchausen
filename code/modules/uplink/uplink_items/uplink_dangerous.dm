@@ -160,7 +160,6 @@
 	refundable = TRUE
 	cant_discount = TRUE
 	surplus = 0
-	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 	player_minimum = 25
 	restricted = TRUE
 	refund_path = /obj/item/guardiancreator/tech/choose/traitor

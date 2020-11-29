@@ -98,7 +98,6 @@
 	desc = "A robust seven-slot set of webbing that is capable of holding all manner of tactical equipment."
 	item = /obj/item/storage/belt/military
 	cost = 1
-	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 
 /datum/uplink_item/device_tools/ammo_pouch
 	name = "Ammo Pouch"
@@ -136,7 +135,6 @@
 	desc = "A cheap bottle of one use syndicate brand super glue. \
 			Use on any item to make it undroppable. \
 			Be careful not to glue an item you're already holding!"
-	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 	item = /obj/item/syndie_glue
 	cost = 2
 

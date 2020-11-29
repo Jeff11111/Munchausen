@@ -14,7 +14,6 @@
 	desc = "A crate with a .38 revolver with ammo, special knife and special clothing to enact revenge on society as a whole."
 	item = /obj/item/storage/box/hug/angryclown
 	cost = 12
-	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 	restricted_roles = list("Jester", "Mime", "Stowaway")
 
 /obj/item/clothing/mask/gas/clown_hat/joker
@@ -140,7 +139,6 @@
 	desc = "A box, coming with a mask and robes that render you completely unrecognizable when worn, and a special knife."
 	item = /obj/item/storage/box/syndie_kit/ghostface
 	cost = 6
-	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 
 /obj/item/storage/box/syndie_kit/ghostface
 	name = "Scary Box"
@@ -157,7 +155,6 @@
 	desc = "Ever found a cheap replica of one of these? Get to wear the real thing! Has slightly better protection than normal riot armor."
 	item = /obj/item/storage/box/syndie_kit/truedab
 	cost = 4
-	exclude_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 	restricted_roles = list("Stowaway")
 
 /obj/item/storage/box/syndie_kit/truedab
