@@ -239,7 +239,6 @@
 					if(!(bingus in dont_repeat_soaked))
 						msg += bingus
 						dont_repeat_soaked |= bingus
-						dont_repeat_yourself = TRUE
 			missing -= BP.body_zone
 
 	if(!screwy_self)
