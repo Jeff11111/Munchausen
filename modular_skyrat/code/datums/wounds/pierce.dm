@@ -96,8 +96,9 @@
 		return
 	
 	user.visible_message("<span class='green'>[user] stitches up some of the bleeding on [victim].</span>", "<span class='green'>You stitch up some of the bleeding on [user == victim ? "yourself" : "[victim]"].</span>")
-	var/blood_sutured = I.stop_bleeding / time_mod * 0.5
+	var/blood_sutured = I.stop_bleeding / max(1, time_mod)
 	blood_flow -= blood_sutured
+	sutured += blood_sutured
 	limb.heal_damage(I.heal_brute, I.heal_burn)
 
 	if(blood_flow > 0)
