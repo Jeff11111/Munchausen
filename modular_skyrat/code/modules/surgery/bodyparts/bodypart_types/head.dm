@@ -57,6 +57,21 @@
 	artery_name = "temporal artery"
 	cavity_name = "cranial"
 
+/obj/item/bodypart/head/kill_limb()
+	. = ..()
+	if(owner && !HAS_TRAIT_FROM(owner, TRAIT_DISFIGURED, "rotten"))
+		ADD_TRAIT(owner, TRAIT_DISFIGURED, "rotten")
+
+/obj/item/bodypart/head/revive_limb()
+	. = ..()
+	if(owner && HAS_TRAIT_FROM(owner, TRAIT_DISFIGURED, "rotten"))
+		REMOVE_TRAIT(owner, TRAIT_DISFIGURED, "rotten")
+
+/obj/item/bodypart/head/decay()
+	. = ..()
+	if(owner && (germ_level >= INFECTION_LEVEL_TWO) && !HAS_TRAIT_FROM(owner, TRAIT_DISFIGURED, "rotten"))
+		ADD_TRAIT(owner, TRAIT_DISFIGURED, "rotten")
+
 /obj/item/bodypart/head/Initialize()
 	. = ..()
 	//Add TEETH.

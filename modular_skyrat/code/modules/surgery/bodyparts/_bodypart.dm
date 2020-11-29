@@ -201,8 +201,8 @@
 	var/encased //descriptive string for the bones that encase the limb (skull, ribcage, pelvic bones)
 	var/amputation_point //descriptive string used in amputation (neck, spine, hips)
 	var/artery_name = "artery"//descriptive string used in arterial wounds (aorta)
-	var/tendon_name = "tendon" //descriptive string used in tendon wounds (palmaris longus)
-	var/cavity_name = "" //descriptive string used in cavity implant surgery (thoracic)
+	var/tendon_name //descriptive string used in tendon wounds (palmaris longus)
+	var/cavity_name //descriptive string used in cavity implant surgery (thoracic)
 	var/joint_name = "joint" //descriptive string used in dislocation.
 
 /obj/item/bodypart/Initialize()
