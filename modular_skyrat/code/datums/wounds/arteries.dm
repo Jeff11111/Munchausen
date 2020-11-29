@@ -71,10 +71,10 @@
 	else
 		cum_less(bleed_mod)
 
-/datum/wound/artery/proc/cum(bleed_mod = 1)
+/datum/wound/artery/proc/cum(bleed_mod = 1, force = FALSE)
 	//People with no pulse can't really squirt blood, can they?
 	//Nor can people with no blood
-	if(!(victim.stat < DEAD) && !(victim.pulse() < PULSE_NORM) && !(victim.blood_volume <= blood_loss_per_squirt) && (blood_loss_per_squirt >= 1))
+	if((!(victim.stat >= DEAD) && !(victim.pulse() < PULSE_NORM) && !(victim.blood_volume <= blood_loss_per_squirt) && (blood_loss_per_squirt >= 1)) || force)
 		playsound(victim, sound_effect, 75, 0)
 		victim.bleed(blood_loss_per_squirt * bleed_mod)
 		victim.visible_message("<span class='danger'>Blood squirts from [victim]'s [limb] [limb.artery_name]!</span>", \
