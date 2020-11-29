@@ -198,6 +198,7 @@
 
 	var/temp = getBruteLoss() //no need to calculate each of these twice
 
+	var/list/dont_repeat_soaked = list()
 	var/list/msg = list()
 	var/list/missing = ALL_BODYPARTS
 	var/list/disabled = list()
@@ -214,7 +215,6 @@
 				msg += "<span class='deadsay'><B>[t_His] [BP.name] is completely skeletonized!</B></span>"
 			if(BP.etching && !clothingonpart(BP))
 				msg += "<B>[t_His] [BP.name] has \"[BP.etching]\" etched on it!</B>"
-			var/dont_repeat_yourself = FALSE
 			for(var/datum/wound/W in BP.wounds)
 				var/list/clothing_items = list(head, wear_mask, wear_neck, wear_suit, w_uniform, belt, wrists, gloves, shoes)
 				var/obj/item/hidden
@@ -235,8 +235,11 @@
 						else
 							SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured/lesser)
 				else if(hidden && W.blood_flow && !CHECK_BITFIELD(hidden.item_flags, THICKMATERIAL) && !dont_repeat_yourself)
-					msg += "<span class='danger'>[t_He] has blood soaking through [t_his] [hidden]!</span>"
-					dont_repeat_yourself = TRUE
+					var/bingus = "<span class='danger'>[t_He] has blood soaking through [t_his] [hidden]!</span>"
+					if(!(bingus in dont_repeat_soaked))
+						msg += bingus
+						dont_repeat_soaked |= bingus
+						dont_repeat_yourself = TRUE
 			missing -= BP.body_zone
 
 	if(!screwy_self)
