@@ -102,6 +102,9 @@
 
 	var/static/list/airlock_overlays = list()
 
+	//bobstation - this variable deterimines on initialize a wire that will start cut
+	var/initialMalfunctionProb = 20
+
 /obj/machinery/door/airlock/Initialize()
 	. = ..()
 	wires = new wiretypepath(src) //CIT CHANGE - makes it possible for airlocks to have different wire datums
@@ -124,6 +127,9 @@
 	for(var/datum/atom_hud/data/diagnostic/diag_hud in GLOB.huds)
 		diag_hud.add_to_hud(src)
 	diag_hud_set_electrified()
+
+	if(prob(initialMalfunctionProb))
+		wires.cut_random()
 
 	return INITIALIZE_HINT_LATELOAD
 
