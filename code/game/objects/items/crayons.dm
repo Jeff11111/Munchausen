@@ -482,7 +482,7 @@
 
 
 /obj/item/toy/crayon/attack(mob/M, mob/user)
-	if(edible && (M == user))
+	if(edible && (M == user) && (user.zone_selected == BODY_ZONE_PRECISE_MOUTH))
 		to_chat(user, "You take a bite of the [src.name]. Delicious!")
 		var/eaten = use_charges(user, 5, FALSE)
 		if(check_empty(user)) //Prevents divsion by zero

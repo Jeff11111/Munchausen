@@ -372,7 +372,7 @@
 	max_amount = 12
 	heal_burn = 20
 	flesh_regeneration = 2.5
-	sanitization = 0.25
+	sanitization = 0.75
 	grind_results = list(/datum/reagent/medicine/silver_sulfadiazine = 10)
 
 /obj/item/stack/medical/ointment/one
@@ -400,7 +400,7 @@
 	heal_burn = 10
 	max_amount = 16
 	repeating = TRUE
-	sanitization = 0.75
+	sanitization = 1
 	flesh_regeneration = 3
 	var/is_open = TRUE ///This var determines if the sterile packaging of the mesh has been opened.
 	grind_results = list(/datum/reagent/medicine/spaceacillin = 2)
@@ -417,6 +417,7 @@
 	gender = PLURAL
 	singular_name = "advanced regenerative mesh"
 	icon_state = "aloe_mesh"
+	sanitization = 1.5
 	heal_burn = 15
 	grind_results = list(/datum/reagent/consumable/aloejuice = 1)
 
