@@ -42,8 +42,6 @@
 	var/obj/item/stack/sticky_tape/tapered = null
 	dismember_mod = 0.7
 	disembowel_mod = 0.7
-	encased = "skull"
-	amputation_point = "epiglotis"
 	max_teeth = 32
 	dismember_sounds = list(
 		'modular_skyrat/sound/gore/head_explodie1.ogg',
@@ -54,6 +52,10 @@
 	miss_entirely_prob = 25
 	zone_prob = 60
 	extra_zone_prob = 40
+	encased = "skull"
+	amputation_point = "epiglotis"
+	artery_name = "carotid artery"
+	cavity_name = "cranial"
 
 /obj/item/bodypart/head/Initialize()
 	. = ..()

@@ -11,7 +11,6 @@
 	stam_damage_coeff = 1
 	stam_heal_tick = 2
 	max_stamina_damage = 100
-	amputation_point = "lumbar"
 	parent_bodyzone = BODY_ZONE_CHEST
 	heal_zones = list(BODY_ZONE_CHEST)
 	dismember_bodyzone = BODY_ZONE_CHEST
@@ -20,7 +19,11 @@
 	max_cavity_size = WEIGHT_CLASS_NORMAL
 	dismember_mod = 0.7
 	disembowel_mod = 0.7
-	encased = "hips"
 	miss_entirely_prob = 10
 	zone_prob = 75
 	extra_zone_prob = 25
+	amputation_point = "lumbar"
+	joint = "hip"
+	encased = "pelvic bones"
+	artery_name = "iliac artery"
+	cavity_name = "abdominal"

@@ -22,6 +22,10 @@
 	miss_entirely_prob = 20
 	zone_prob = 70
 	extra_zone_prob = 30
+	amputation_point = "right wrist"
+	joint = "right wrist"
+	tendon_name = "carpal ligament"
+	artery_name = "deep palmar arch artery"
 
 /obj/item/bodypart/r_hand/is_disabled()
 	if(HAS_TRAIT(owner, TRAIT_PARALYSIS_L_ARM))

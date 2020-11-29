@@ -21,3 +21,7 @@
 	miss_entirely_prob = 20
 	zone_prob = 70
 	extra_zone_prob = 30
+	amputation_point = "left ankle"
+	joint = "left ankle"
+	tendon_name = "achilles tendon"
+	artery_name = "arcuate artery"

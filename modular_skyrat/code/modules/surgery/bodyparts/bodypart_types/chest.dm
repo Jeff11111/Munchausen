@@ -9,7 +9,6 @@
 	px_x = 0
 	px_y = 0
 	stam_damage_coeff = 1
-	amputation_point = "spine"
 	children_zones = list(BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM)
 	heal_zones = list(BODY_ZONE_PRECISE_GROIN)
 	dismember_bodyzone = null
@@ -17,10 +16,14 @@
 	max_cavity_size = WEIGHT_CLASS_BULKY
 	dismember_mod = 0.3
 	disembowel_mod = 0.6
-	encased = "ribs"
 	miss_entirely_prob = 5
 	zone_prob = 80
 	extra_zone_prob = 20
+	amputation_point = "spine"
+	joint = "neck"
+	encased = "ribcage"
+	artery_name = "aorta"
+	cavity_name = "thoracic"
 
 /obj/item/bodypart/chest/can_dismember(obj/item/I)
 	return FALSE

@@ -24,6 +24,10 @@
 	miss_entirely_prob = 15
 	zone_prob = 70
 	extra_zone_prob = 30
+	amputation_point = "left hip"
+	joint = "left knee"
+	tendon_name = "cruciate ligament"
+	artery_name = "femoral artery"
 
 /obj/item/bodypart/l_leg/is_disabled()
 	if(HAS_TRAIT(owner, TRAIT_PARALYSIS_L_LEG))

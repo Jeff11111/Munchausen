@@ -80,7 +80,6 @@
 	var/list/starting_children = list() //children that are already "inside" this limb on spawn. could be organs or limbs.
 	var/list/children_zones = list() //body zones that are considered "children" of this bodypart's zone
 	var/list/heal_zones = list() //body zones that are healed in "multiple" mode on medical items
-	var/amputation_point //descriptive string used in amputation.
 	var/obj/item/cavity_item
 	/// The wounds currently afflicting this body part
 	var/list/wounds = list()
@@ -172,8 +171,6 @@
 	// Max integrity
 	var/max_limb_integrity = 0
 
-	// The bones that encase us
-	var/encased
 	// Used to check if we can recover from complete sepsis
 	var/death_time = 0
 	// Used to handle rejection
@@ -181,20 +178,32 @@
 	var/decay_factor = 0.01 //Multiplier of max_tox_damage applied when rotting
 	var/datum/dna/original_dna
 	var/datum/species/original_species
+
 	//TEETH!
 	var/max_teeth = 0
 	var/datum/speech_mod/lisp/teeth_mod
 	var/obj/item/stack/teeth/teeth_object
+
 	//Specific dismemberment sounds
 	var/list/dismember_sounds
+
 	//Raw probability of missing entirely in melee attacks
 	var/miss_entirely_prob = 10
 	//Base prob of hitting this limb correctly in melee attacks
 	var/zone_prob = 50
 	//Extra prob, multiplied by dexterity/MAX_STAT
 	var/extra_zone_prob = 50
+
 	//Vital bodyparts kill the owner when removed
 	var/vital = FALSE
+
+	//Descriptive strings
+	var/encased //descriptive string for the bones that encase the limb (skull, ribcage, pelvic bones)
+	var/amputation_point //descriptive string used in amputation (neck, spine, hips)
+	var/artery_name = "artery"//descriptive string used in arterial wounds (aorta)
+	var/tendon_name = "tendon" //descriptive string used in tendon wounds (palmaris longus)
+	var/cavity_name = "cavity" //descriptive string used in cavity implant surgery (thoracic)
+	var/joint_name = "joint" //descriptive string used in dislocation.
 
 /obj/item/bodypart/Initialize()
 	. = ..()

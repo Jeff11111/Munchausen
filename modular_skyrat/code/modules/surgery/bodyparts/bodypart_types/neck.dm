@@ -13,7 +13,6 @@
 	px_x = 0
 	px_y = -8
 	wound_resistance = -15
-	amputation_point = "trachea"
 	dismember_sounds = list(
 		'modular_skyrat/sound/gore/head_explodie1.ogg',
 		'modular_skyrat/sound/gore/head_explodie2.ogg',
@@ -24,6 +23,10 @@
 	zone_prob = 40
 	extra_zone_prob = 30
 	max_cavity_size = WEIGHT_CLASS_TINY
+	amputation_point = "trachea"
+	joint = "cervical spine"
+	tendon_name = "vocal cords"
+	artery_name = "carotid artery"
 
 /obj/item/bodypart/neck/get_limb_icon(dropped)
 	. = ..()
