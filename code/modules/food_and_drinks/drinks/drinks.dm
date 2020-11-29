@@ -199,7 +199,7 @@
 	if(!iscarbon(M))
 		return
 	var/mob/living/carbon/carbonM = M
-	var/forced_time = 4 SECONDS * (CEILING(reagents.total_volume / 25)1)
+	var/forced_time = 4 SECONDS * (CEILING(reagents.total_volume / 25), 1)
 	var/self_forced = forced_time / 2
 	if(carbonM != carbonUser)
 		if(carbonUser.zone_selected != BODY_ZONE_PRECISE_MOUTH)
