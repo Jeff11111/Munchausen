@@ -182,5 +182,6 @@
 /obj/item/clothing/gloves/color/captain
 	icon = 'modular_skyrat/icons/obj/clothing/captain.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/captain.dmi'
-	icon_state = "gloves"
+	icon_state = "shiny_gloves"
 	desc = "Regal black gloves, with a nice silver trim, a diamond anti-shock coating, and an integrated thermal barrier. Swanky."
+	mutantrace_variation = STYLE_NO_ANTHRO_ICON
