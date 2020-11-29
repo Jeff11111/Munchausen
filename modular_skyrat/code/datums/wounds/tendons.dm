@@ -35,6 +35,7 @@
 				torn *= 1.5
 			if(BODY_ZONE_PRECISE_NECK)
 				torn *= 2.5
+				occur_text = "The vocal cords are torn!"
 				aughaughgblerg = new /datum/speech_mod/torn_vocal_cords()
 				aughaughgblerg.add_speech_mod(L.owner)
 			if(BODY_ZONE_CHEST)
