@@ -60,3 +60,13 @@
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/enforcer.dmi'
 	icon_state = "medichelmet"
 	mutantrace_variation = STYLE_NO_ANTHRO_ICON
+
+//doggy
+/obj/item/clothing/head/helmet/sec/HoS/cerberus
+	name = "cerberus' helmet"
+	desc = "For the chief enforcer that likes barking a lot."
+	icon = 'modular_skyrat/icons/obj/clothing/enforcer.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/enforcer.dmi'
+	icon_state = "doggy"
+	mutantrace_variation = STYLE_NO_ANTHRO_ICON
+	flags_inv = HIDEHAIR|HIDEFACIALHAIR|HIDEFACE|HIDESNOUT|HIDEMASK|HIDEEARS

@@ -57,6 +57,7 @@
 	name = "\proper chief enforcer's locker"
 	req_access = list(ACCESS_HOS)
 	icon_state = "hos"
+
 /obj/structure/closet/secure_closet/hos/PopulateContents()
 	..()
 	//SKYRAT EDIT - ATMS
@@ -65,10 +66,10 @@
 	new /obj/item/clothing/neck/cloak/hos(src)
 	new /obj/item/cartridge/hos(src)
 	new /obj/item/radio/headset/heads/hos(src)
+	new /obj/item/clothing/head/helmet/sec/HoS/cerberus(src)
+	new /obj/item/clothing/head/helmet/sec/HoS(src)
 	new /obj/item/clothing/suit/armor/hos(src)
-	new /obj/item/clothing/suit/armor/hos/trenchcoat(src)
-	new /obj/item/clothing/head/HoS/police(src)
-	new /obj/item/clothing/head/HoS/beret(src)
+	new /obj/item/clothing/suit/armor/hos/carrier(src)
 	new /obj/item/clothing/glasses/hud/security/sunglasses/eyepatch(src)
 	new /obj/item/storage/lockbox/medal/sec(src)
 	new /obj/item/megaphone/sec(src)
