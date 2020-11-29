@@ -7,7 +7,7 @@
 	sound_effect = 'modular_skyrat/sound/gore/artery.ogg'
 	severity = WOUND_SEVERITY_CRITICAL
 	wound_type = WOUND_LIST_ARTERY
-	threshold_minimum = 80
+	threshold_minimum = 100
 	threshold_penalty = 0
 	infection_chance = 0
 	infection_rate = 0
