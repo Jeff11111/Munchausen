@@ -190,7 +190,7 @@ GLOBAL_VAR(posibrain_notify_cooldown)
 
 	. += msg
 
-/obj/item/mmi/posibrain/attackedby(obj/item/O, mob/user)
+/obj/item/mmi/posibrain/attackby(obj/item/O, mob/user, params)
 	if(O.get_sharpness() && brainmob)
 		to_chat(user, "<span class='notice'>I start ripping away [src]'s carcass.</span>")
 		if(!do_after(user, 4 SECONDS, TRUE, src))
