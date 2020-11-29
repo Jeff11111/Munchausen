@@ -11,6 +11,8 @@
 	wiretypepath = /datum/wires/airlock/command
 	normal_integrity = 450
 
+	initialMalfunctionProb = 10
+
 /obj/machinery/door/airlock/security
 	icon = 'icons/obj/doors/airlocks/station/security.dmi'
 	assemblytype = /obj/structure/door_assembly/door_assembly_sec
@@ -35,6 +37,8 @@
 	icon = 'icons/obj/doors/airlocks/station/maintenance.dmi'
 	assemblytype = /obj/structure/door_assembly/door_assembly_mai
 	normal_integrity = 250
+
+	initialMalfunctionProb = 50
 
 /obj/machinery/door/airlock/maintenance/abandoned
 	abandoned = TRUE
