@@ -288,7 +288,7 @@
 	config_entry_value = 1
 
 /datum/config_entry/number/movedelay/sprint_buffer_max
-	config_entry_value = 42
+	config_entry_value = 7
 
 /datum/config_entry/number/movedelay/sprint_stamina_cost
 	config_entry_value = 0.7
