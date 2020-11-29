@@ -64,7 +64,7 @@
 				BP.disembowel_wound(WOUND_SLASH)
 			else if((BP.body_zone == BODY_ZONE_CHEST) && (length(victim.bodyparts) <= 1))
 				user.visible_message("<span class='danger'><b>[user]</b> starts slicing <b>[target]</b> into a bloody carcass!</span>", \
-									"<span class='warning'>I start slicing open <b>[target]</b> into a carccass...</span>", \
+									"<span class='warning'>I start slicing <b>[target]</b> into a carccass...</span>", \
 									target = target, \
 									target_message = "<span class='userdanger'><b>[user]</b> starts dissecting me into a carcass!</span>")
 				if(!do_mob(user, victim, time))
