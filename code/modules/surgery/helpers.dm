@@ -142,8 +142,8 @@
 	var/selected_zone = user.zone_selected
 	if(S.status == 1)
 		M.surgeries -= S
-		user.visible_message("[user] removes [I] from [M]'s [parse_zone(selected_zone)].", \
-			"<span class='notice'>You remove [I] from [M]'s [parse_zone(selected_zone)].</span>")
+		user.visible_message("[user] unprepare from [M]'s [parse_zone(selected_zone)].", \
+			"<span class='notice'>You unprepare [M]'s [parse_zone(selected_zone)].</span>")
 		qdel(S)
 	else if(S.can_cancel)
 		var/required_tool_type = TOOL_CAUTERY

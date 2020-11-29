@@ -63,7 +63,7 @@
 	/// Tools with the specified tool flag will also be able to try directly treating this wound
 	var/treatable_tool
 	/// Set to TRUE if we don't give a shit about the patient's comfort and are allowed to just use any random sharp thing on this wound. Will require an aggressive grab or more to perform
-	var/treatable_sharp
+	var/treatable_sharp = FALSE
 	/// Can we use a bandage/gauze on this wound in some kind of way?
 	var/accepts_gauze = TRUE
 	/// How long it will take to treat this wound with a standard effective tool, assuming it doesn't need surgery
@@ -363,7 +363,7 @@
 	var/allowed = FALSE
 
 	// check if we have a valid treatable tool (or, if cauteries are allowed, if we have something hot)
-	if((I.tool_behaviour == treatable_tool) || (treatable_tool == TOOL_CAUTERY && I.get_temperature()) || (treatable_sharp && I.sharpness))
+	if((I.tool_behaviour == treatable_tool) || (treatable_tool == TOOL_CAUTERY && I.get_temperature()) || (treatable_sharp && I.get_sharpness()))
 		allowed = TRUE
 	// failing that, see if we're aggro grabbing them and if we have an item that works for aggro grabs only
 	else if(user.pulling == victim && user.grab_state >= GRAB_AGGRESSIVE && check_grab_treatments(I, user))

@@ -3595,6 +3595,7 @@
 #include "modular_skyrat\code\datums\speech_mod\auto_hiss.dm"
 #include "modular_skyrat\code\datums\speech_mod\impediments.dm"
 #include "modular_skyrat\code\datums\speech_mod\lisp.dm"
+#include "modular_skyrat\code\datums\speech_mod\torn_vocal_cords.dm"
 #include "modular_skyrat\code\datums\status_effects\buffs.dm"
 #include "modular_skyrat\code\datums\status_effects\chems.dm"
 #include "modular_skyrat\code\datums\status_effects\debuffs.dm"

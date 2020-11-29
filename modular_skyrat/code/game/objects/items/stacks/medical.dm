@@ -97,6 +97,7 @@
 	max_amount = 10
 	self_delay = 80
 	other_delay = 40
+	stop_bleeding = 1.25
 	grind_results = list(/datum/reagent/medicine/fibrin = 10, /datum/reagent/medicine/coagulant = 10)
 	novariants = TRUE
 	merge_type = /obj/item/stack/medical/fixovein

@@ -910,6 +910,11 @@
 	// Now we have our wounding_type and are ready to carry on with wounds and dealing the actual damage
 	if(owner && wounding_dmg >= WOUND_MINIMUM_DAMAGE && wound_bonus > CANT_WOUND)
 		check_wounding(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+		if(sharpness)
+			if(wounding_dmg >= ARTERY_MINIMUM_DAMAGE)
+				check_wounding(WOUND_ARTERY, wounding_dmg * (wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
+			if(wounding_dmg >= TENDON_MINIMUM_DAMAGE)
+				check_wounding(WOUND_TENDON, wounding_dmg * (wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
 
 	//We add the pain values before we scale damage down
 	//Pain does not care about your feelings, nor if your limb was already damaged
@@ -1572,6 +1577,14 @@
 			if(!organic)
 				wounds_checking = WOUND_LIST_BURN_MECHANICAL
 			check_gauze = TRUE
+		if(WOUND_ARTERY)
+			wounds_checking = WOUND_LIST_ARTERY
+			if(!organic)
+				wounds_checking = null
+		if(WOUND_TENDON)
+			wounds_checking = WOUND_LIST_TENDON
+			if(!organic)
+				wounds_checking = null
 
 	if(!length(wounds_checking))
 		return
@@ -1617,6 +1630,7 @@
 		if(!(body_zone in possible_wound.viable_zones)) //Applying this wound won't even work, let's try the next one
 			qdel(possible_wound)
 			continue
+		
 		var/datum/wound/replaced_wound
 		for(var/i in wounds)
 			var/datum/wound/existing_wound = i
@@ -1755,15 +1769,16 @@
 
 	for(var/thing in wounds)
 		var/datum/wound/W = thing
+		//Arteries don't give a shit about gauze so we do them later
 		if(istype(W))
 			bleed_rate += W.blood_flow
 
 	if(current_gauze)
 		bleed_rate = max(0, bleed_rate - current_gauze.absorption_rate)
-
-	if(owner.mobility_flags & ~MOBILITY_STAND)
+	
+	if(!CHECK_BITFIELD(owner.mobility_flags, MOBILITY_STAND))
 		bleed_rate *= 0.75
-
+	
 	if(grasped_by)
 		bleed_rate *= 0.75
 

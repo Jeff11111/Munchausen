@@ -30,6 +30,11 @@
 	var/soundtext = ""
 	var/mob/living/carbon/affected_mob = null
 
+/datum/speech_mod/Destroy(force, ...)
+	. = ..()
+	if(affected_mob)
+		remove_speech_mod()
+
 /datum/speech_mod/proc/handle_speech(datum/source, list/speech_args)
 	return
 
