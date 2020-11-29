@@ -6,5 +6,6 @@
 	preference_source?.hover_tip?.clownify()
 
 /datum/outfit/job/clown
-	uniform = /obj/item/clothing/under/color/grey/os13
-	shoes = /obj/item/clothing/shoes/sneakers/rainbow
+	head = /obj/item/clothing/head/jester
+	uniform = /obj/item/clothing/under/rank/civilian/clown/jester
+	shoes = /obj/item/clothing/shoes/clown_shoes/jester
