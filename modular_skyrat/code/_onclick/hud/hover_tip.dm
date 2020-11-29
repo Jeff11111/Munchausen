@@ -11,5 +11,5 @@
 
 //OH NO NO NO
 /obj/screen/hover_tip/proc/clownify()
-	style_carbon = "text-shadow: 2px 2px 2px black;color: #7ea1ff;font-family: 'Comic Sans MS', 'Comic Sans', cursive;"
+	style_carbon = "text-shadow: 2px 2px 2px black;color: #7ea1ff;font-family: cursive, sans-serif;"
 	style_atom = "position: absolute;left: 0;right: 0;margin: 15px 0;padding: 0 5px;font-family: impact;color: white;text-shadow:2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 0px 2px 0 #000,2px 0px 0 #000,0px -2px 0 #000,-2px 0px 0 #000,2px 2px 5px #000;"
