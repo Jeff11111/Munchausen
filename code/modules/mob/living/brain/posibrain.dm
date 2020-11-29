@@ -196,7 +196,12 @@ GLOBAL_VAR(posibrain_notify_cooldown)
 		if(!do_after(user, 4 SECONDS, TRUE, src))
 			to_chat(user, "<span class='warning'>I must stand still!</span>")
 			return FALSE
-		var/obj/item/organ/brain/ipc_positron/braine = new(get_turf(user))
+		var/obj/item/organ/brain/ipc_positron/braine = new /obj/item/organ/brain/ipc_positron(get_turf(user))
+		brainmob.container = null
+		brainmob.stat = DEAD
+		brainmob.reset_perspective()
+		GLOB.alive_mob_list -= brainmob //Get outta here
+		GLOB.dead_mob_list += brainmob
 		brain.brainmob = brainmob
 		brainmob.forceMove(braine)
 		brainmob = null

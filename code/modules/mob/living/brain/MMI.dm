@@ -111,7 +111,6 @@
 	brain.organ_flags &= ~ORGAN_FROZEN
 	brain = null //No more brain in here
 
-
 /obj/item/mmi/proc/transfer_identity(mob/living/L) //Same deal as the regular brain proc. Used for human-->robot people.
 	if(!brainmob)
 		brainmob = new(src)
