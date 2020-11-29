@@ -159,7 +159,7 @@
 /obj/item/organ/heart/proc/handle_pulse()
 	// Pulse mod starts out as just the chemical effect amount
 	var/pulse_mod = owner.chem_effects[CE_PULSE]
-	var/is_stable = owner.chem_effects[CE_STABLE]
+	var/is_stable = owner.chem_effects[CE_STABLE] || (owner && HAS_TRAIT(owner, TRAIT_STABLEHEART))
 		
 	// If you have enough heart chemicals to be over 2, you're likely to take extra damage.
 	if(pulse_mod > 2 && !is_stable)
@@ -189,7 +189,7 @@
 	//And if it's beating, let's see if it should
 	else
 		var/should_stop = prob(50) && (owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE) //cardiovascular shock, not enough liquid to pump
-		should_stop = should_stop || prob(max(0, owner.getOrganLoss(ORGAN_SLOT_BRAIN) - owner.maxHealth * 0.75)) //brain failing to work heart properly
+		should_stop = should_stop || prob(max(0, owner.getBrainLoss() - owner.maxHealth * 0.75)) //brain failing to work heart properly
 		should_stop = should_stop || (pulse >= PULSE_THREADY && prob(2)) //erratic heart patterns, usually caused by oxyloss
 		if(should_stop && can_stop()) // The heart has stopped due to going into traumatic or cardiovascular shock.
 			Stop()
@@ -199,7 +199,7 @@
 	pulse = clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_2FAST)
 
 	// If fibrillation, then it can be PULSE_THREADY
-	var/fibrillation = (oxy <= BLOOD_VOLUME_SURVIVE) || (prob(3) && owner.shock_stage > SHOCK_STAGE_6)
+	var/fibrillation = (oxy <= BLOOD_VOLUME_SURVIVE) || (prob(5) && owner.shock_stage > SHOCK_STAGE_6)
 	if(pulse && fibrillation)	//I SAID MOAR OXYGEN
 		pulse = PULSE_THREADY
 
