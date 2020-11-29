@@ -427,6 +427,7 @@
 				mode = SHUTTLE_DOCKED
 				setTimer(SSshuttle.emergencyDockTime)
 				send2irc("Server", "The Emergency Shuttle is ready to depart the station.")
+				send2chat("The Emergency Shuttle is ready to depart the station.", CONFIG_GET(string/chat_announce_new_game))
 				priority_announce("The Emergency Shuttle is ready to depart the station. You have [timeLeft(600)] minutes to board the Emergency Shuttle.", null, "shuttledock", "Priority")
 				ShuttleDBStuff()
 
