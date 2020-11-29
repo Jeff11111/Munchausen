@@ -92,7 +92,7 @@
 		return
 	
 	if(!I.use(1))
-		to_chat(user, "<span class='warning'>There aren't enough stacks of [I.name] to heal \the [src.name]!</span>")
+		to_chat(user, "<span class='warning'>There aren't enough stacks of [I.name] to heal \the [lowertext(src.name)]!</span>")
 		return
 	
 	user.visible_message("<span class='green'>[user] stitches up some of the bleeding on [victim].</span>", "<span class='green'>You stitch up some of the bleeding on [user == victim ? "yourself" : "[victim]"].</span>")

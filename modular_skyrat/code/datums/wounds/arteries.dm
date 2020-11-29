@@ -23,7 +23,7 @@
 
 /datum/wound/artery/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
 	if(L)
-		name = "Torn [capitalize(L.artery_name)]"
+		name = "Torn [capitalize(L.artery_name, TRUE)]"
 		desc = "Patient's [L.artery_name] has been violently slashed open, causing severe hemorrhaging."
 		switch(L.body_zone)
 			if(BODY_ZONE_HEAD)

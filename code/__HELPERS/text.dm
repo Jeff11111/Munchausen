@@ -267,11 +267,18 @@
 	return trim_left(trim_right(text))
 
 //Returns a string with the first element of the string capitalized.
-/proc/capitalize(t as text)
+/proc/capitalize(t as text, jfk_mode = FALSE)
 	. = t
 	if(t)
-		. = t[1]
-		return uppertext(.) + copytext(t, 1 + length(.))
+		if(!jfk_mode)
+			. = t[1]
+			return uppertext(.) + copytext(t, 1 + length(.))
+		else
+			var/list/binguslist = splittext(t, " ")
+			for(var/bingus in binguslist)
+				var/chonker = bingus[1]
+				bingus = chonker + copytext(bingus, 1 + length(chonker))
+			return jointext(binguslist, " ")
 
 /proc/stringmerge(text,compare,replace = "*")
 //This proc fills in all spaces with the "replace" var (* by default) with whatever

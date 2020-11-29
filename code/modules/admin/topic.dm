@@ -2170,10 +2170,10 @@
 		//Job + antagonist
 		if(M.mind)
 			var/datum/antagonist/antag_datum = M.mind.has_antag_datum(/datum/antagonist)
-			var/antag_text = ""
-			if(antag_datum)
+			var/antag_text = capitalize(M.mind.special_role)
+			if(!length(antag_text) && antag_datum)
 				antag_text = antag_datum.name
-			special_role_description = "Role: <b>[M.mind.assigned_role]</b>; Antagonist: <font color='red'><b>[M.mind.special_role || antag_text]</b></font>"
+			special_role_description = "Role: <b>[M.mind.assigned_role]</b>; Antagonist: <font color='red'><b>[antag_text]</b></font>"
 		else
 			special_role_description = "Role: <i>Mind datum missing</i> Antagonist: <i>Mind datum missing</i>"
 
