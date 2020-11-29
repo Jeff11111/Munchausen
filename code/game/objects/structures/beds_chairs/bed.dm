@@ -64,13 +64,13 @@
 		if(has_buckled_mobs())
 			if(buckled_mobs.len > 1)
 				unbuckle_all_mobs()
-				user.visible_message("<span class='notice'>[user] unbuckles all creatures from [src].</span>")
+				user.visible_message("<span class='notice'><b>[user]</b> unbuckles all creatures from [src].</span>")
 			else
 				user_unbuckle_mob(buckled_mobs[1],user)
 		else
 			R.loaded = src
 			forceMove(R)
-			user.visible_message("[user] collects [src].", "<span class='notice'>You collect [src].</span>")
+			user.visible_message("<b>[user]</b> collects [src].", "<span class='notice'>You collect [src].</span>")
 		return 1
 	else
 		return ..()

@@ -118,13 +118,13 @@
 	if(.)
 		if(M == user)
 			M.visible_message(\
-				"<span class='notice'>[M] buckles [M.p_them()]self to [src].</span>",\
+				"<span class='notice'><b>[M]</b> buckles [M.p_them()]self to [src].</span>",\
 				"<span class='notice'>You buckle yourself to [src].</span>",\
 				"<span class='italics'>You hear metal clanking.</span>")
 		else
 			M.visible_message(\
-				"<span class='warning'>[user] buckles [M] to [src]!</span>",\
-				"<span class='warning'>[user] buckles you to [src]!</span>",\
+				"<span class='warning'><b>[user]</b> buckles <b>[M]</b> to [src]!</span>",\
+				"<span class='warning'><b>[user]</b> buckles you to [src]!</span>",\
 				"<span class='italics'>You hear metal clanking.</span>")
 
 /atom/movable/proc/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
@@ -132,12 +132,12 @@
 	if(M)
 		if(M != user)
 			M.visible_message(\
-				"<span class='notice'>[user] unbuckles [M] from [src].</span>",\
-				"<span class='notice'>[user] unbuckles you from [src].</span>",\
+				"<span class='notice'><b>[user]</b> unbuckles <b>[M]</b> from [src].</span>",\
+				"<span class='notice'><b>[user]</b> unbuckles you from [src].</span>",\
 				"<span class='italics'>You hear metal clanking.</span>")
 		else
 			M.visible_message(\
-				"<span class='notice'>[M] unbuckles [M.p_them()]self from [src].</span>",\
+				"<span class='notice'><b>[M]</b> unbuckles [M.p_them()]self from [src].</span>",\
 				"<span class='notice'>You unbuckle yourself from [src].</span>",\
 				"<span class='italics'>You hear metal clanking.</span>")
 		add_fingerprint(user)
