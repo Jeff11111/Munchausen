@@ -9,7 +9,7 @@
 	name = "First Aid"
 
 /datum/skills/firstaid/proc/get_medicalstack_mod()
-	return clamp(2 - level, 0.1, 2)
+	return clamp(2 - level/10, 0.1, 2)
 
 /datum/skills/surgery
 	name = "Surgery"

@@ -57,10 +57,9 @@
 	if(prob(30))
 		victim.vomit(50, 20, 25)
 
-	var/msg = "<b><span class='danger'>[victim]'s [L.name] [occur_text]!</span></b>"
-
+	var/msg = "<b><span class='danger'>[victim]'s [fake_body_zone ? parse_zone(fake_body_zone) : L.name] [occur_text]!</span></b>"
 	if(!silent)
-		victim.visible_message(msg, "<span class='userdanger'>Your [L.name] [occur_text]!</span>")
+		victim.visible_message(msg, "<span class='userdanger'>Your [fake_body_zone ? parse_zone(fake_body_zone) : L.name] [occur_text]!</span>")
 	
 	//apply the blood gush effect
 	if(wounding_type != WOUND_BURN && L.owner)

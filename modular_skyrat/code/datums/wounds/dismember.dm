@@ -65,10 +65,10 @@
 	if(prob(50 - GET_STAT_LEVEL(victim, end)))
 		victim.emote("scream")
 
-	var/msg = "<b><span class='danger'>[victim]'s [parse_zone(check_zone(fake_body_zone))] [occur_text]!</span></b>"
+	var/msg = "<b><span class='danger'>[victim]'s [fake_body_zone ? parse_zone(fake_body_zone) : L.name] [occur_text]!</span></b>"
 
 	if(!silent)
-		victim.visible_message(msg, "<span class='userdanger'>Your [parse_zone(check_zone(fake_body_zone))] [occur_text]!</span>")
+		victim.visible_message(msg, "<span class='userdanger'>Your [fake_body_zone ? parse_zone(fake_body_zone) : L.name] [occur_text]!</span>")
 
 	if(wounding_type == WOUND_BURN)
 		if(L.is_organic_limb())
