@@ -109,13 +109,13 @@
 	contains = list(/obj/item/ammo_box/magazine/m556,
 					/obj/item/ammo_box/magazine/m556)
 
-/datum/supply_pack/goody/arg
+/datum/supply_pack/goody/ak
 	name = "7.62 Assault Rifle"
 	desc = "Contains one NCK-7.62 assault rifle, chambered in 7.62mm. Never know when you need it."
 	cost = 30000
 	contains = list(/obj/item/gun/ballistic/automatic/ak)
 
-/datum/supply_pack/goody/arg_ammo
+/datum/supply_pack/goody/ak_ammo
 	name = "7.62 Magazines"
 	desc = "Contains 2 high capacity 7.62mm magazines."
 	cost = 7500
