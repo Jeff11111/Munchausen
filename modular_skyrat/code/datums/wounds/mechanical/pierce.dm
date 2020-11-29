@@ -84,7 +84,7 @@
 		if(electronics)
 			time_mod *= ((MAX_SKILL/2)/electronics.level)
 	
-	if(!do_after(user, base_treat_time * time_mod, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
+	if(!do_mob(user, victim, base_treat_time * time_mod, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 
 	limb.heal_damage(10, 10)
@@ -119,7 +119,7 @@
 		if(electronics)
 			time_mod *= ((MAX_SKILL/2)/electronics.level)
 	
-	if(!do_after(user, base_treat_time * time_mod, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
+	if(!do_mob(user, victim, base_treat_time * time_mod, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 	
 	if(!I.use(max(1, severity - WOUND_SEVERITY_TRIVIAL)))

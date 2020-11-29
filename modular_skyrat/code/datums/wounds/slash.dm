@@ -186,7 +186,7 @@
 			time_mod *= ((MAX_SKILL/2)/ranged.level)
 		
 	user.visible_message("<span class='warning'>[user] begins aiming [lasgun] directly at [victim]'s [fake_limb ? "[fake_limb] stump" : limb.name]...</span>", "<span class='userdanger'>You begin aiming [lasgun] directly at [user == victim ? "your" : "[victim]'s"] [fake_limb ? "[fake_limb] stump" : limb.name]...</span>")
-	if(!do_after(user, base_treat_time  * time_mod, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
+	if(!do_mob(user, victim, base_treat_time * time_mod, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 	
 	var/damage = lasgun.chambered.BB.damage
@@ -210,7 +210,7 @@
 		if(firstaid)
 			time_mod *= firstaid.get_medicalstack_mod()
 	
-	if(!do_after(user, base_treat_time * time_mod, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
+	if(!do_mob(user, victim, base_treat_time * time_mod, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 
 	user.visible_message("<span class='green'>[user] cauterizes some of the bleeding on [victim].</span>", "<span class='green'>You cauterize some of the bleeding on [victim].</span>")
@@ -237,7 +237,7 @@
 		if(firstaid)
 			time_mod *= firstaid.get_medicalstack_mod()
 	
-	if(!do_after(user, base_treat_time * time_mod, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
+	if(!do_mob(user, victim, base_treat_time * time_mod, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 	
 	if(!I.use(1))
