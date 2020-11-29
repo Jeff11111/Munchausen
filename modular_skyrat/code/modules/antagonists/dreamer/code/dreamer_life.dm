@@ -242,7 +242,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 	var/image/I = image('modular_skyrat/code/modules/antagonists/dreamer/icons/dreamer_mobs.dmi', turfie, hall_type, FLOAT_LAYER, get_dir(turfie, owner.current))
 	I.plane = FLOAT_PLANE
 	owner.current.client?.images += I
-	to_chat(owner.current, "<span class='danger'><big>[mob_msg]</big></span>")
+	to_chat(owner.current, "<span class='danger'><span class='big bold'>[mob_msg]</span></span>")
 	sleep(5)
 	var/hallsound = pick(
 						'modular_skyrat/code/modules/antagonists/dreamer/sound/hall_attack1.ogg',
