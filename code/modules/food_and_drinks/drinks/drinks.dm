@@ -191,13 +191,11 @@
 	user.visible_message("<span class='notice'>\The [user] expertly slides \the [src] down the table.</span>", "<span class='notice'>You slide \the [src] down the table. What a pro.</span>")
 	return
 
-/obj/item/reagent_containers/food/drinks/MouseDrop_T(mob/living/M, mob/living/user)
+/obj/item/reagent_containers/food/drinks/MouseDrop(atom/over, atom/src_location, atom/over_location, src_control, over_control, params)
 	. = ..()
-	if(!iscarbon(user))
+	if(!iscarbon(over) || !iscarbon(usr))
 		return
-	var/mob/living/carbon/carbonUser = user
-	if(!iscarbon(M))
-		return
+	var/mob/living/carbon/carbonUser = usr
 	var/mob/living/carbon/carbonM = M
 	var/forced_time = 4 SECONDS * CEILING(reagents.total_volume / 25, 1)
 	var/self_forced = forced_time / 2
@@ -219,8 +217,6 @@
 		reagents.reaction(carbonUser, INGEST)
 		addtimer(CALLBACK(reagents, /datum/reagents.proc/trans_to, carbonUser, reagents.total_volume, null, null, null, "fed by [carbonUser]"), 5)
 		playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
-	else
-		return
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Drinks. END
