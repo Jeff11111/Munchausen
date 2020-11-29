@@ -86,11 +86,11 @@
 						ignore_mobs |= H
 			if(!forced)
 				if(source.a_intent != INTENT_HELP)
-					source.visible_message("<span class='warning'>[source] [source.resting ? "tenses up" : "drops into a combative stance"].</span>", self_message, ignored_mobs = ignore_mobs)
+					source.visible_message("<span class='warning'><b>[source]</b> [source.resting ? "tenses up" : "drops into a combative stance"].</span>", self_message, ignored_mobs = ignore_mobs)
 				else
-					source.visible_message("<span class='notice'>[source] [pick("looks","seems","goes")] [pick("alert","attentive","vigilant")].</span>", ignored_mobs = ignore_mobs)
+					source.visible_message("<span class='notice'><b>[source]</b> [pick("looks","seems","goes")] [pick("alert","attentive","vigilant")].</span>", ignored_mobs = ignore_mobs)
 			else
-				source.visible_message("<span class='warning'>[source] drops into a combative stance!</span>", self_message, ignored_mobs = ignore_mobs)
+				source.visible_message("<span class='warning'><b>[source]</b> drops into a combative stance!</span>", self_message, ignored_mobs = ignore_mobs)
 		else
 			to_chat(source, self_message)
 		if(playsound)

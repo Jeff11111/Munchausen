@@ -34,7 +34,7 @@
 	ENABLE_BITFIELD(combat_flags, COMBAT_FLAG_COMBAT_ACTIVE)
 	SEND_SIGNAL(src, COMSIG_LIVING_COMBAT_ENABLED, was_forced)
 	if(visible)
-		visible_message("<span class='warning'>[src] drops into a combative stance!</span>", "<span class='warning'>You drop into a combative stance!</span>")
+		visible_message("<span class='warning'><b>[src]</b> drops into a combative stance!</span>", "<span class='warning'>You drop into a combative stance!</span>")
 	else if(!silent)
 		to_chat(src, was_forced? "<span class='warning'>Your muscles reflexively tighten!</span>" : "<span class='warning'>You tighten your muscles.</span>")
 	if(update_icon)
@@ -83,5 +83,5 @@
 				if(world.time >= combatmessagecooldown)
 					combatmessagecooldown = world.time + 10 SECONDS
 					//SKYRAT CHANGES - no more friendly message when help intent
-					visible_message("<span class='warning'>[src] [resting ? "tenses up" : (prob(95)? "drops into a combative stance" : (prob(95)? "poses aggressively" : "asserts dominance with their pose"))].</span>")
+					visible_message("<span class='warning'><b>[src]</b> [resting ? "tenses up" : (prob(95)? "drops into a combative stance" : (prob(95)? "poses aggressively" : "asserts dominance with their pose"))].</span>")
 					//END OF SKYRAT CHANGES
