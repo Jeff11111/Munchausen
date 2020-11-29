@@ -54,7 +54,7 @@
 	extra_zone_prob = 40
 	encased = "skull"
 	amputation_point = "epiglotis"
-	artery_name = "carotid artery"
+	artery_name = "temporal artery"
 	cavity_name = "cranial"
 
 /obj/item/bodypart/head/Initialize()
