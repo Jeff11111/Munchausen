@@ -75,11 +75,25 @@
 			to_chat(user, "<span class='warning'>ERROR: Insufficient funds to make transaction.</span>")
 			return
 	if(istype(W, /obj/item/stack/spacecash))
-		to_chat(user, "What is this, the 2000s? We only take card here.")
-		return
+		var/obj/item/stack/spacecash/cash = W
+		var/cashmoney = input(user, "How much would you like to deposit?", "Money Deposit") as null|num
+		if(cash.use(cashmoney/cash.value))
+			purchase(user, cashmoney)
+			to_chat(user, "Thanks for purchasing! The vendor has been informed.")
+			return
+		else
+			to_chat(user, "<span class='warning'>ERROR: Insufficient funds to make transaction.</span>")
+			return
 	if(istype(W, /obj/item/coin))
-		to_chat(user, "What is this, the 1800s? We only take card here.")
-		return
+		var/obj/item/coin/coin = W
+		if(coin.value > 0)
+			purchase(user, coin.value)
+			to_chat(user, "Thanks for purchasing! The vendor has been informed.")
+			qdel(coin)
+			return
+		else
+			to_chat(user, "<span class='warning'>ERROR: Insufficient monetary value to make transaction.</span>")
+			return
 	if(istype(W, /obj/item/assembly/signaler))
 		var/obj/item/assembly/signaler/S = W
 		if(S.secured)
