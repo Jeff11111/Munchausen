@@ -1,7 +1,7 @@
 /datum/wound/artery
 	name = "Torn Artery"
 	desc = "Patient's artery has been violently slashed open, causing severe hemorrhaging."
-	treat_text = "Immediate inciosioning of the limb followed by suturing or fix o' veining the torn artery."
+	treat_text = "Immediate inciosion of the limb followed by suturing or fix o' veining the torn artery."
 	examine_desc = "is bleeding profusely"
 	occur_text = "is violently torn, severing an artery"
 	sound_effect = 'modular_skyrat/sound/gore/artery.ogg'

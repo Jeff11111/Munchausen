@@ -1,7 +1,7 @@
 /datum/wound/tendon
 	name = "Torn Tendon"
 	desc = "Patient's tendon has been violently slashed open, disabling the affected limb."
-	treat_text = "Incisioning of the limb followed by suturing or fix o' veining of the tendon.."
+	treat_text = "Incision of the limb followed by suturing or fix o' veining of the tendon.."
 	examine_desc = null
 	occur_text = "is violently torn, severing a tendon"
 	severity = WOUND_SEVERITY_CRITICAL
