@@ -144,11 +144,11 @@
 
 /datum/reagent/medicine/cryoxadone/on_mob_metabolize(mob/living/L)
 	. = ..()
-	ADD_TRAIT(L, TRAIT_NOTEMPERATUREWOUDING, "cryoxadone")
+	ADD_TRAIT(L, TRAIT_NOTEMPERATUREWOUNDING, "cryoxadone")
 
 /datum/reagent/medicine/cryoxadone/on_mob_end_metabolize(mob/living/L)
 	. = ..()
-	REMOVE_TRAIT(L, TRAIT_NOTEMPERATUREWOUDING, "cryoxadone")
+	REMOVE_TRAIT(L, TRAIT_NOTEMPERATUREWOUNDING, "cryoxadone")
 
 /datum/reagent/medicine/cryoxadone/on_mob_life(mob/living/carbon/M)
 	var/power = (-0.00003 * (M.bodytemperature ** 2) + 3) * 6 //fuck it
@@ -196,11 +196,11 @@
 
 /datum/reagent/medicine/pyroxadone/on_mob_metabolize(mob/living/L)
 	. = ..()
-	ADD_TRAIT(L, TRAIT_NOTEMPERATUREWOUDING, "cryoxadone")
+	ADD_TRAIT(L, TRAIT_NOTEMPERATUREWOUNDING, "cryoxadone")
 
 /datum/reagent/medicine/pyroxadone/on_mob_end_metabolize(mob/living/L)
 	. = ..()
-	REMOVE_TRAIT(L, TRAIT_NOTEMPERATUREWOUDING, "cryoxadone")
+	REMOVE_TRAIT(L, TRAIT_NOTEMPERATUREWOUNDING, "cryoxadone")
 
 /datum/reagent/medicine/pyroxadone/on_mob_life(mob/living/carbon/M)
 	if(M.bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT)

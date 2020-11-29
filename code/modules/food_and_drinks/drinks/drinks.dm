@@ -196,7 +196,7 @@
 	if(!iscarbon(over) || !iscarbon(usr))
 		return
 	var/mob/living/carbon/carbonUser = usr
-	var/mob/living/carbon/carbonM = M
+	var/mob/living/carbon/carbonM = over
 	var/forced_time = 4 SECONDS * CEILING(reagents.total_volume / 25, 1)
 	var/self_forced = forced_time / 2
 	if(carbonM != carbonUser)
@@ -207,7 +207,7 @@
 			return
 		reagents.reaction(carbonM, INGEST)
 		addtimer(CALLBACK(reagents, /datum/reagents.proc/trans_to, carbonM, reagents.total_volume, null, null, null, "fed by [carbonUser]"), 5)
-		playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
+		playsound(carbonM.loc,'sound/items/drink.ogg', rand(10,50), 1)
 	else if(carbonM == carbonUser)
 		if(carbonUser.zone_selected != BODY_ZONE_PRECISE_MOUTH)
 			return
@@ -216,7 +216,7 @@
 			return
 		reagents.reaction(carbonUser, INGEST)
 		addtimer(CALLBACK(reagents, /datum/reagents.proc/trans_to, carbonUser, reagents.total_volume, null, null, null, "fed by [carbonUser]"), 5)
-		playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
+		playsound(carbonM.loc,'sound/items/drink.ogg', rand(10,50), 1)
 
 ////////////////////////////////////////////////////////////////////////////////
 /// Drinks. END
