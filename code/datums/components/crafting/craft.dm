@@ -197,7 +197,7 @@
 		if(check_tools(user, R, contents))
 			if(do_after(user, R.time, target = user))
 				contents = get_surroundings(user)
-				if((R.stat_required || R.skill_required) && (user.mind?.diceroll(R.stat_required, skill_required) <= DICE_FAILURE))
+				if((R.stat_required || R.skill_required) && (user.mind?.diceroll(R.stat_required, R.skill_required, dicetype = (R.stat_required && R.skill_required ? "6d6" : "3d6")) <= DICE_FAILURE))
 					return ", i fucked up."
 				if(!check_contents(user, R, contents))
 					return ", missing component."
