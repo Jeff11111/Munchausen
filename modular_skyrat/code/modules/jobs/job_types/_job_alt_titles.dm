@@ -47,7 +47,7 @@
 	alt_titles = list("Journalist", "Librarian")
 
 /datum/job/janitor
-	alt_titles = list("Custodian", "Sanitation Technician")
+	alt_titles = list("Custodian", "Sanitation Technician", "Admin")
 
 /datum/job/lawyer
 	alt_titles = list("Internal Affairs Agent", "Legal Advisor", "Attorney", "Consultant")
