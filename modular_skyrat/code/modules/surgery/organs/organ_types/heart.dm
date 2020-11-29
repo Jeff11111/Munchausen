@@ -123,7 +123,7 @@
 	if(owner)
 		if(CHECK_BITFIELD(organ_flags, ORGAN_VITAL))
 			owner.death()
-		to_chat(owner, "<span class='danger'>MY HEART HAS STOPPED!</span>")
+		to_chat(owner, "<span class='userdanger'><b>MY HEART HAS STOPPED!</b></span>")
 	pulse = PULSE_NONE
 	update_icon()
 	return 1
