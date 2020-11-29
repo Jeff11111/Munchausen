@@ -215,11 +215,11 @@
 			if(BP.etching && !clothingonpart(BP))
 				msg += "<B>[t_His] [BP.name] has \"[BP.etching]\" etched on it!</B>"
 			for(var/datum/wound/W in BP.wounds)
-				var/list/clothing_items = list(head, wear_mask, wear_neck, wear_suit, belt, w_uniform, gloves, wrists, shoes)
-				var/hidden = FALSE
+				var/list/clothing_items = list(head, wear_mask, wear_neck, wear_suit, w_uniform, belt, wrists, gloves, shoes)
+				var/obj/item/hidden
 				for(var/obj/item/I in clothing_items)
 					if(I && (I.body_parts_covered & BP.body_part))
-						hidden = TRUE
+						hidden = I
 						break
 				if(!hidden && W.get_examine_description(user))
 					msg += "[W.get_examine_description(user)]"
@@ -232,6 +232,8 @@
 							SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured)
 						else
 							SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured/lesser)
+				else if(hidden && W.blood_flow && !CHECK_BITFIELD(hidden.item_flags, THICKMATERIAL))
+					msg += "<span class='danger'>[t_He] has blood soaking through [t_his] [hidden]!</span>"
 			//
 			missing -= BP.body_zone
 
