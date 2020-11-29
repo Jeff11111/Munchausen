@@ -190,15 +190,18 @@ GLOBAL_VAR(posibrain_notify_cooldown)
 
 	. += msg
 
-/obj/item/mmi/posibrain/attackby(obj/item/O, mob/user)
-	if(O.get_sharpness())
+/obj/item/mmi/posibrain/attackedby(obj/item/O, mob/user)
+	if(O.get_sharpness() && brainmob)
 		to_chat(user, "<span class='notice'>I start ripping away [src]'s carcass.</span>")
 		if(!do_after(user, 4 SECONDS, TRUE, src))
 			to_chat(user, "<span class='warning'>I must stand still!</span>")
 			return FALSE
-		brain.forceMove(get_turf(user))
-		user.put_in_hands(brain)
-		to_chat(user, "<span class='notice'>I safely rip \the [brain] from \the [src].</span>")
+		var/obj/item/organ/brain/ipc_positron/braine = new(get_turf(user))
+		brain.brainmob = brainmob
+		brainmob.forceMove(braine)
+		brainmob = null
+		user.put_in_hands(braine)
+		to_chat(user, "<span class='notice'>I safely rip \the [braine] from \the [src].</span>")
 		qdel(src)
 		return TRUE
 	else
