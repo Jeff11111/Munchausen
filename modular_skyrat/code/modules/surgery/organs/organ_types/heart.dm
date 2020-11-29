@@ -120,8 +120,10 @@
 		addtimer(CALLBACK(src, .proc/stop_if_unowned), 80)
 
 /obj/item/organ/heart/proc/Stop()
-	if(owner && CHECK_BITFIELD(organ_flags, ORGAN_VITAL))
-		owner.death()
+	if(owner)
+		if(CHECK_BITFIELD(organ_flags, ORGAN_VITAL))
+			owner.death()
+		to_chat(owner, "<span class='danger'>MY HEART HAS STOPPED!</span>")
 	pulse = PULSE_NONE
 	update_icon()
 	return 1
@@ -186,12 +188,11 @@
 		return
 	//And if it's beating, let's see if it should
 	else
-		var/should_stop = prob(50) && owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE //cardiovascular shock, not enough liquid to pump
+		var/should_stop = prob(50) && (owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE) //cardiovascular shock, not enough liquid to pump
 		should_stop = should_stop || prob(max(0, owner.getOrganLoss(ORGAN_SLOT_BRAIN) - owner.maxHealth * 0.75)) //brain failing to work heart properly
-		should_stop = should_stop || (prob(5) && pulse == PULSE_THREADY) //erratic heart patterns, usually caused by oxyloss
+		should_stop = should_stop || (pulse >= PULSE_THREADY && prob(2)) //erratic heart patterns, usually caused by oxyloss
 		if(should_stop && can_stop()) // The heart has stopped due to going into traumatic or cardiovascular shock.
-			to_chat(owner, "<span class='danger'>Your heart has stopped!</span>")
-			pulse = PULSE_NONE
+			Stop()
 			return
 
 	// Pulse normally shouldn't go above PULSE_2FAST
@@ -225,7 +226,7 @@
 	
 	if(!is_working())	//heart broke, stopped beating, death imminent
 		if(owner.stat == CONSCIOUS)
-			owner.visible_message("<span class='danger'>[owner] clutches at [owner.p_their()] chest as if [owner.p_their()] heart is stopping!</span>", "<span class='userdanger'>MY HEART HAS STOPPED!</span>")
+			owner.visible_message("<span class='danger'><b>[owner]</b> clutches at [owner.p_their()] chest as if [owner.p_their()] heart is stopping!</span>")
 		owner.set_heartattack(TRUE)
 		failed = TRUE
 

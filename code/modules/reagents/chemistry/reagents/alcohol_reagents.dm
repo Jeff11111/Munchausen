@@ -1364,7 +1364,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 				if(!M.undergoing_cardiac_arrest() && M.can_heartattack())
 					M.set_heartattack(TRUE)
 					if(M.stat == CONSCIOUS)
-						M.visible_message("<span class='danger'>[M] clutches at [M.p_their()] chest as if [M.p_their()] heart is stopping!</span>", "<span class='userdanger'>MY HEART HAS STOPPED!</span>")
+						M.visible_message("<span class='danger'><b>[M]</b> clutches at [M.p_their()] chest as if [M.p_their()] heart is stopping!</span>")
 	. = TRUE
 	..()
 

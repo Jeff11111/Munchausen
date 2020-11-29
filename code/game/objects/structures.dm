@@ -68,7 +68,7 @@
 
 /obj/structure/proc/climb_structure(mob/living/user)
 	src.add_fingerprint(user)
-	user.visible_message("<span class='warning'>[user] starts climbing onto [src].</span>", \
+	user.visible_message("<span class='warning'><b>[user]</b> starts climbing onto [src].</span>", \
 								"<span class='notice'>You start climbing onto [src]...</span>")
 	var/adjusted_climb_time = climb_time
 	if(user.restrained()) //climbing takes twice as long when restrained.
