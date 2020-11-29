@@ -231,6 +231,7 @@
 #define TRAIT_LOOKSUNCONSCIOUS	"looks_unconscious" //fake fainting
 #define TRAIT_LOOKSVERYUNCONSCIOUS	"looks_very_unconscious" //fake shock
 #define TRAIT_LOOKSDEAD			"looks_dead" //fake death
+#define TRAIT_NOTEMPERATUREWOUNDING "no_temperature_wounding" //no temperature based wounds
 //
 
 // mobility flag traits

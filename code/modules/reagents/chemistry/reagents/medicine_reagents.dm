@@ -142,6 +142,14 @@
 	pH = 11
 	value = REAGENT_VALUE_COMMON
 
+/datum/reagent/medicine/cryoxadone/on_mob_metabolize(mob/living/L)
+	. = ..()
+	ADD_TRAIT(L, TRAIT_NOTEMPERATUREWOUDING, "cryoxadone")
+
+/datum/reagent/medicine/cryoxadone/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	REMOVE_TRAIT(L, TRAIT_NOTEMPERATUREWOUDING, "cryoxadone")
+
 /datum/reagent/medicine/cryoxadone/on_mob_life(mob/living/carbon/M)
 	var/power = (-0.00003 * (M.bodytemperature ** 2) + 3) * 6 //fuck it
 	if(M.bodytemperature < T0C)
@@ -185,6 +193,14 @@
 	taste_description = "spicy jelly"
 	pH = 12
 	value = REAGENT_VALUE_UNCOMMON
+
+/datum/reagent/medicine/pyroxadone/on_mob_metabolize(mob/living/L)
+	. = ..()
+	ADD_TRAIT(L, TRAIT_NOTEMPERATUREWOUDING, "cryoxadone")
+
+/datum/reagent/medicine/pyroxadone/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	REMOVE_TRAIT(L, TRAIT_NOTEMPERATUREWOUDING, "cryoxadone")
 
 /datum/reagent/medicine/pyroxadone/on_mob_life(mob/living/carbon/M)
 	if(M.bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT)
