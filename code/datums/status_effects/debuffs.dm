@@ -451,7 +451,6 @@
 
 /datum/status_effect/neck_slice/tick()
 	var/mob/living/carbon/human/H = owner
-	//skytrat edit heehoo
 	var/obj/item/bodypart/throat = H.get_bodypart(BODY_ZONE_HEAD)
 	if(H.stat == DEAD || !throat)
 		H.remove_status_effect(/datum/status_effect/neck_slice)
@@ -467,7 +466,6 @@
 
 	if(prob(10))
 		H.emote(pick("gasp", "gag", "choke"))
-	//
 
 /mob/living/proc/apply_necropolis_curse(set_curse, duration = 10 MINUTES)
 	var/datum/status_effect/necropolis_curse/C = has_status_effect(STATUS_EFFECT_NECROPOLIS_CURSE)
@@ -475,7 +473,6 @@
 		set_curse = pick(CURSE_BLINDING, CURSE_SPAWNING, CURSE_WASTING, CURSE_GRASPING)
 	if(QDELETED(C))
 		apply_status_effect(STATUS_EFFECT_NECROPOLIS_CURSE, set_curse, duration)
-
 	else
 		C.apply_curse(set_curse)
 		C.duration += duration * 0.5 //additional curses add half their duration

@@ -64,13 +64,13 @@
 		H.visible_message("<span class='danger'>[user] slits [H]'s throat!</span>", \
 					"<span class='userdanger'>[user] slits your throat...</span>")
 		log_combat(user, H, "finishes slicing the throat of")
-		//skyrat edit
 		H.apply_damage(source.force, BRUTE, BODY_ZONE_HEAD, wound_bonus=CANT_WOUND) // easy tiger, we'll get to that in a sec
-		var/obj/item/bodypart/slit_throat = H.get_bodypart(BODY_ZONE_HEAD)
+		var/obj/item/bodypart/slit_throat = H.get_bodypart(BODY_ZONE_PRECISE_NECK)
 		if(slit_throat)
-			var/datum/wound/slash/critical/screaming_through_a_slit_throat = new
+			var/datum/wound/artery/screaming_through_a_slit_throat = new()
 			screaming_through_a_slit_throat.apply_wound(slit_throat)
-		//
+			var/datum/wound/tendon/gargling_through_a_slit_throat = new()
+			gargling_through_a_slit_throat.apply_wound(slit_throat)
 		H.apply_status_effect(/datum/status_effect/neck_slice)
 
 /datum/component/butchering/proc/Butcher(mob/living/butcher, mob/living/meat)
