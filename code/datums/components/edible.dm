@@ -87,7 +87,7 @@ Behavior that's still missing from this component that original food items had t
 
 	var/atom/owner = parent
 
-	if(feeder.a_intent == INTENT_HARM)
+	if(feeder.zone_selected != BODY_ZONE_PRECISE_MOUTH)
 		return
 	if(!owner.reagents.total_volume)//Shouldn't be needed but it checks to see if it has anything left in it.
 		to_chat(feeder, "<span class='warning'>None of [owner] left, oh no!</span>")
