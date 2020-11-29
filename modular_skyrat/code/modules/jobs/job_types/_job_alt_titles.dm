@@ -47,7 +47,7 @@
 	alt_titles = list("Journalist", "Librarian")
 
 /datum/job/janitor
-	alt_titles = list("Custodian", "Sanitation Technician", "Maid")
+	alt_titles = list("Custodian", "Sanitation Technician")
 
 /datum/job/lawyer
 	alt_titles = list("Internal Affairs Agent", "Legal Advisor", "Attorney", "Consultant")
@@ -96,7 +96,7 @@
 
 //Security
 /datum/job/officer
-	alt_titles = list("Security Officer", "Security Guard", "Junior Officer", "Prison Guard")
+	alt_titles = list("Security Officer", "Security Guard", "Junior Officer")
 
 /datum/job/detective
 	alt_titles = list("Forensics Technician", "Private Investigator", "Investigator", "Inspector", "Detective")
