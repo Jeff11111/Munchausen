@@ -254,7 +254,7 @@
 				if(IsKnockdown())
 					AdjustKnockdown(35)
 				else
-					visible_message("<span class='danger'>[src] gives in to the pain!</span>", "<span class='userdanger'>I give in to the pain.</span>")
+					visible_message("<span class='danger'><b>[src]</b> gives in to the pain!</span>", "<span class='userdanger'>I give in to the pain.</span>")
 					//Cum blood on they screen
 					//(very quick)
 					flash_pain(255, 0, 1, 3)
@@ -269,7 +269,7 @@
 				if(!IsUnconscious())
 					AdjustUnconscious(35)
 				else
-					visible_message("<span class='danger'>[src] falls in to the pain!</span>", "<span class='userdanger'>I fall in to the pain.</span>")
+					visible_message("<span class='danger'><b>[src]</b> falls in to the pain!</span>", "<span class='userdanger'>I fall in to the pain.</span>")
 					//Cum blood on they screen
 					//(very quick)
 					flash_pain(255, 0, 1, 3)
@@ -374,7 +374,7 @@
 	
 	if(shock_stage >= SHOCK_STAGE_8)
 		if(!IsUnconscious())
-			visible_message("<span class='danger'>[src] [dna.species.painloss_message]</span>", "<span class='userdanger'>[dna.species.painloss_message_self]</span>")
+			visible_message("<span class='danger'><b>[src]</b> [dna.species.painloss_message]</span>", "<span class='userdanger'>[dna.species.painloss_message_self]</span>")
 		//We are fucking dying, do the rattle
 		if(prob(10))
 			death_rattle()

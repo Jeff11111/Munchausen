@@ -190,7 +190,7 @@
 				totitemdamage *= 0.25
 				pitiful = TRUE
 	if(totitemdamage)
-		visible_message("<span class='danger'>[user] has[pitiful ? " pitifully" : ""] hit [src] with [I]!</span>", null, null, COMBAT_MESSAGE_RANGE)
+		visible_message("<span class='danger'><b>[user]</b> has[pitiful ? " pitifully" : ""] hit [src] with [I]!</span>", null, null, COMBAT_MESSAGE_RANGE)
 		//only witnesses close by and the victim see a hit message.
 		log_combat(user, src, "attacked", I)
 	take_damage(totitemdamage, I.damtype, "melee", 1)
@@ -356,9 +356,9 @@
 	var/message_hit_area = ""
 	if(hit_area)
 		message_hit_area = " in the [hit_area]"
-	var/attack_message = "[src] has been [message_verb][message_hit_area] with [I]."
+	var/attack_message = "<b>[src]</b> has been [message_verb][message_hit_area] with [I]."
 	if(user in viewers(src, null))
-		attack_message = "[user] has [message_verb] [src][message_hit_area] with [I]!"
+		attack_message = "<b>[user]</b> has [message_verb] <b>[src]</b>[message_hit_area] with [I]!"
 	visible_message("<span class='danger'>[attack_message]</span>",\
 		"<span class='userdanger'>[attack_message]</span>", null, COMBAT_MESSAGE_RANGE)
 	if(hit_area == BODY_ZONE_HEAD)
