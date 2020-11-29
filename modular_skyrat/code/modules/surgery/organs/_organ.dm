@@ -321,7 +321,7 @@
 			if(antibiotics < 10 && bodypart.germ_level < germ_level && (bodypart.germ_level < INFECTION_LEVEL_THREE))
 				bodypart.germ_level++
 			//Cause toxin damage
-			if(bodypart.owner)
+			if(bodypart.owner && (owner.stat != DEAD))
 				bodypart.receive_damage(toxin = rand(1,2))
 
 //Rejection
@@ -358,7 +358,7 @@
 					if(REJECTION_LEVEL_4 to INFINITY)
 						germ_level += rand(3,5)
 						var/obj/item/bodypart/affected = owner.get_bodypart(zone)
-						if(affected)
+						if(affected && affected.owner && (affected.owner.stat != DEAD))
 							affected.receive_damage(toxin = rand(1,2))
 
 //Medical scans
