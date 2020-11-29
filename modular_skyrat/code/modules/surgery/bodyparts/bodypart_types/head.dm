@@ -121,7 +121,7 @@
 	return TRUE
 
 /obj/item/bodypart/head/update_limb(dropping_limb, mob/living/carbon/source)
-	..()
+	. = ..()
 	if(no_update)
 		return
 	
@@ -185,7 +185,7 @@
 /obj/item/bodypart/head/update_icon_dropped()
 	if(custom_head)
 		return
-	var/list/standing = get_limb_icon(1)
+	var/list/standing = get_limb_icon(TRUE)
 	if(!standing.len)
 		icon_state = initial(icon_state)//no overlays found, we default back to initial icon.
 		return
@@ -200,13 +200,20 @@
 	cut_overlays()
 	. = ..()
 	if(dropped) //certain overlays only appear when the limb is being detached from its owner.
-
 		if(!(status & BODYPART_ROBOTIC)) //having a robotic head hides certain features.
+			//hair
+			if(hair_style)
+				var/datum/sprite_accessory/S = GLOB.hair_styles_list[hair_style]
+				if(S)
+					var/image/hair_overlay = image(S.icon, "[S.icon_state]", -HAIR_LAYER, SOUTH)
+					hair_overlay.color = "#" + hair_color
+					hair_overlay.alpha = hair_alpha
+					. += hair_overlay
 			//facial hair
 			if(facial_hair_style)
-				var/datum/sprite_accessory/S = GLOB.facial_hair_styles_list[facial_hair_style]
-				if(S)
-					var/image/facial_overlay = image(S.icon, "[S.icon_state]", -HAIR_LAYER, SOUTH)
+				var/datum/sprite_accessory/S2 = GLOB.facial_hair_styles_list[facial_hair_style]
+				if(S2)
+					var/image/facial_overlay = image(S2.icon, "[S2.icon_state]", -HAIR_LAYER, SOUTH)
 					facial_overlay.color = "#" + facial_hair_color
 					facial_overlay.alpha = hair_alpha
 					. += facial_overlay
