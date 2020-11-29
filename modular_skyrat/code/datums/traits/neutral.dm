@@ -7,14 +7,19 @@
 	languagewhitelist = list("Encoded Audio Language")
 	var/list/blacklistedspecies = list(/datum/species/synth, /datum/species/android, /datum/species/ipc, /datum/species/synthliz, /datum/species/shadow, /datum/species/plasmaman, /datum/species/jelly, /datum/species/jelly/slime)
 
-/datum/quirk/synthetic/add()
-	sleep(10)
+/datum/quirk/synthetic/special_requirement_check(mob/living/carbon/human/imbecile)
+	. = ..()
+	if(imbecile?.dna?.species?.type in blacklistedspecies)
+		return FALSE
+
+/datum/quirk/synthetic/post_add()
+	sleep(1 SECONDS)
 	var/mob/living/carbon/human/H = quirk_holder
 	if(istype(H))
 		if(!(H.dna.species.type in blacklistedspecies))
 			H.set_species(/datum/species/synth) //the synth on_gain stuff handles everything, that's why i made this shit a quirk and not a roundstart race or whatever
 			return TRUE
-	addtimer(CALLBACK(src, .proc/remove), 10)
+	addtimer(CALLBACK(src, .proc/remove), 1 SECONDS)
 
 /datum/quirk/synthetic/remove()
 	var/mob/living/carbon/human/H = quirk_holder
@@ -27,7 +32,7 @@
 				H.set_species(oldspecies)
 			else
 				H.set_species(/datum/species/ipc) //we fall back on IPC if something stinky happens. Shouldn't happe but you know.
-				to_chat(H, "<span class='warning'>Uh oh, stinky! Something poopy happened to your fakespecies! You have been set to an IPC as a fallback.</span>") //shouldn't happen. if it does uh oh.
+				to_chat(H, "<span class='warning'>Uh oh, stinky! Something poopy happened to your fake species! You have been set to an IPC as a fallback.</span>") //shouldn't happen. if it does uh oh.
 		else
 			to_chat(H, "<span class='warning'>The [H.dna.species.name] species is blacklisted from being a synth. You will stay with the normal, non-synth race. It could mean that Bob Joga broke the code too.</span>")
 
