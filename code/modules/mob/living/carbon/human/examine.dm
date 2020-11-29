@@ -234,7 +234,7 @@
 							SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured)
 						else
 							SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured/lesser)
-				else if(hidden && W.blood_flow && !CHECK_BITFIELD(hidden.item_flags, THICKMATERIAL) && !dont_repeat_yourself)
+				else if(hidden && W.blood_flow && !CHECK_BITFIELD(hidden.item_flags, THICKMATERIAL))
 					var/bingus = "<span class='danger'>[t_He] has blood soaking through [t_his] [hidden]!</span>"
 					if(!(bingus in dont_repeat_soaked))
 						msg += bingus
