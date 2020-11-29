@@ -13,7 +13,7 @@
 	infection_rate = 0
 	treatable_by = list(/obj/item/stack/medical/suture, /obj/item/stack/medical/fixovein)
 	treat_priority = TRUE
-	base_treat_time = 2.5 SECONDS
+	base_treat_time = 2 SECONDS
 	descriptive = "A tendon is torn!"
 	disabling = TRUE
 	var/datum/speech_mod/aughaughgblerg
