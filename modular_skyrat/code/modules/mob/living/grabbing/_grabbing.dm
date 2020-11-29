@@ -28,7 +28,7 @@
 		var/mob/M = AM
 		log_combat(src, M, "grabbed", addition="passive grab")
 		if(!supress_message)
-			visible_message("<span class='warning'>[src] has pulled [M] passively!</span>")
+			visible_message("<span class='warning'><b>[src]</b> has pulled <b>[M]</b> passively!</span>")
 	return TRUE
 
 /atom/movable/proc/stop_pulling()
@@ -104,11 +104,11 @@
 		return user.start_pulling(src, supress_message = supress_message)
 
 	if(!(status_flags & CANPUSH) || HAS_TRAIT(src, TRAIT_PUSHIMMUNE))
-		to_chat(user, "<span class='warning'>[src] can't be grabbed more aggressively!</span>")
+		to_chat(user, "<span class='warning'><b>[src]</b> can't be grabbed more aggressively!</span>")
 		return FALSE
 
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
-		to_chat(user, "<span class='notice'>You don't want to risk hurting [src]!</span>")
+		to_chat(user, "<span class='notice'>You don't want to risk hurting <b>[src]</b>!</span>")
 		return FALSE
 
 	grippedby(user)
@@ -132,8 +132,8 @@
 	sound_hint(user, src)
 	var/obj/item/grab/graspy = new()
 	if(!user.put_in_active_hand(graspy) || !graspy.try_grasp(src, null, user))
-		visible_message("<span class='danger'>[user] fails to grab [src]!</span>", "<span class='userdanger'>[user] fails to grab you!</span>", ignored_mobs = user)
-		to_chat(user, "<span class='danger'>You fail to grab [src]!</span>")
+		visible_message("<span class='danger'><b>[user]</b> fails to grab <b>[src]</b>!</span>", "<span class='userdanger'><b>[user]</b> fails to grab you!</span>", ignored_mobs = user)
+		to_chat(user, "<span class='danger'>You fail to grab <b>[src]</b>!</span>")
 		qdel(graspy)
 		return FALSE
 	return TRUE
@@ -156,13 +156,13 @@
 		to_chat(user, "<span class='danger'>You can't grasp a missing bodypart!</span>")
 		return FALSE
 	if(user.lying && !lying && (grasped_part.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND)))
-		visible_message("<span class='danger'>[user] fails to grab [src][grasped_part ? " by [p_their()] [grasped_part.name]" : ""]!</span>", "<span class='userdanger'>[user] fails to grab you[grasped_part ? " by your [grasped_part.name]" : ""]!</span>", ignored_mobs = user)
-		to_chat(user, "<span class='danger'>You fail to grab [src][grasped_part ? " by [p_their()] [grasped_part.name]" : ""]! It's too high for you to reach it!</span>")
+		visible_message("<span class='danger'><b>[user]</b> fails to grab <b>[src]</b>[grasped_part ? " by [p_their()] [grasped_part.name]" : ""]!</span>", "<span class='userdanger'><b>[user]</b> fails to grab you[grasped_part ? " by your [grasped_part.name]" : ""]!</span>", ignored_mobs = user)
+		to_chat(user, "<span class='danger'>You fail to grab <b>[src]</b>[grasped_part ? " by [p_their()] [grasped_part.name]" : ""]! It's too high for you to reach it!</span>")
 		return FALSE
 	var/obj/item/grab/graspy = new()
 	if(!user.put_in_active_hand(graspy) || !graspy.try_grasp(src, grasped_part, user))
-		visible_message("<span class='danger'>[user] fails to grab [src][grasped_part ? " by [p_their()] [grasped_part.name]" : ""]!</span>", "<span class='userdanger'>[user] fails to grab you[grasped_part ? " by your [grasped_part.name]" : ""]!</span>", ignored_mobs = user)
-		to_chat(user, "<span class='danger'>You fail to grab [src][grasped_part ? " by [p_their()] [grasped_part.name]" : ""]!</span>")
+		visible_message("<span class='danger'><b>[user]</b> fails to grab <b>[src]</b>[grasped_part ? " by [p_their()] [grasped_part.name]" : ""]!</span>", "<span class='userdanger'><b>[user]</b> fails to grab you[grasped_part ? " by your [grasped_part.name]" : ""]!</span>", ignored_mobs = user)
+		to_chat(user, "<span class='danger'>You fail to grab <b>[src]</b>[grasped_part ? " by [p_their()] [grasped_part.name]" : ""]!</span>")
 		qdel(graspy)
 		return FALSE
 	return TRUE
@@ -207,15 +207,15 @@
 	if(pulledby.grab_state > GRAB_PASSIVE)
 		if(next_move < world.time)
 			if(CHECK_MOBILITY(src, MOBILITY_RESIST) && prob(30/pulledby.grab_state))
-				pulledby.visible_message("<span class='danger'>[src] has broken free of [pulledby]'s grip!</span>",
-					"<span class='danger'>[src] has broken free of your grip!</span>", target = src,
-					target_message = "<span class='danger'>You have broken free of [pulledby]'s grip!</span>")
+				pulledby.visible_message("<span class='danger'><b>[src]</b> has broken free of <b>[pulledby]</b>'s grip!</span>",
+					"<span class='danger'><b>[src]</b> has broken free of your grip!</span>", target = src,
+					target_message = "<span class='danger'>You have broken free of <b>[pulledby]</b>'s grip!</span>")
 				pulledby.stop_pulling()
 				return TRUE
 			changeNext_move(CLICK_CD_RESIST)
-			pulledby.visible_message("<span class='danger'>[src] resists against [pulledby]'s grip!</span>",
-				"<span class='danger'>[src] resists against your grip!</span>", target = src,
-				target_message = "<span class='danger'>You resist against [pulledby]'s grip!</span>")
+			pulledby.visible_message("<span class='danger'><b>[src]</b> resists against <b>[pulledby]</b>'s grip!</span>",
+				"<span class='danger'><b>[src]</b> resists against your grip!</span>", target = src,
+				target_message = "<span class='danger'>You resist against <b>[pulledby]</b>'s grip!</span>")
 	else
 		pulledby.stop_pulling()
 		return TRUE
@@ -234,15 +234,15 @@
 				var/str_diff = grabbed_str - grabber_str
 				if(mind?.diceroll(GET_STAT_LEVEL(src, str)*0.75, GET_SKILL_LEVEL(src, melee)*0.25, mod = 5*str_diff) >= DICE_SUCCESS)
 					changeNext_move(CLICK_CD_RESIST)
-					pulledby.visible_message("<span class='danger'>[src] has broken free of [pulledby]'s grip!</span>",
-						"<span class='danger'>[src] has broken free of your grip!</span>", target = src,
-						target_message = "<span class='danger'>You have broken free of [pulledby]'s grip!</span>")
+					pulledby.visible_message("<span class='danger'><b>[src]</b> has broken free of <b>[pulledby]</b>'s grip!</span>",
+						"<span class='danger'><b>[src]</b> has broken free of your grip!</span>", target = src,
+						target_message = "<span class='danger'>You have broken free of <b>[pulledby]</b>'s grip!</span>")
 					pulledby.stop_pulling()
 					return TRUE
 				changeNext_move(CLICK_CD_RESIST)
-				pulledby.visible_message("<span class='danger'>[src] resists against [pulledby]'s grip!</span>",
-					"<span class='danger'>[src] resists against your grip!</span>", target = src,
-					target_message = "<span class='danger'>You resist against [pulledby]'s grip!</span>")
+				pulledby.visible_message("<span class='danger'><b>[src]</b> resists against <b>[pulledby]</b>'s grip!</span>",
+					"<span class='danger'><b>[src]</b> resists against your grip!</span>", target = src,
+					target_message = "<span class='danger'>You resist against <b>[pulledby]</b>'s grip!</span>")
 	else
 		pulledby.stop_pulling()
 		return TRUE
