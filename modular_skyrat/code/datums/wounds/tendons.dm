@@ -36,7 +36,7 @@
 			if(BODY_ZONE_PRECISE_NECK)
 				torn *= 2.5
 				aughaughgblerg = new /datum/speech_mod/torn_vocal_cords()
-				aughaughgblerg.add_speech_mod(victim)
+				aughaughgblerg.add_speech_mod(L.owner)
 			if(BODY_ZONE_CHEST)
 				torn *= 1
 			if(BODY_ZONE_PRECISE_GROIN)
