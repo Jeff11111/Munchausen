@@ -75,7 +75,7 @@
 	//Nor can people with no blood
 	if(!(victim.stat < DEAD) && !(victim.pulse() < PULSE_NORM) && !(victim.blood_volume <= blood_loss_per_squirt) && (blood_loss_per_squirt >= 1))
 		playsound(victim, sound_effect, 75, 0)
-		victim.bleed(blood_loss_per_squirt)
+		victim.bleed(blood_loss_per_squirt * bleed_mod)
 		victim.visible_message("<span class='danger'>Blood squirts from [victim]'s [limb] [limb.artery_name]!</span>", \
 						"<span class='userdanger'>Blood squirts from my [limb]'s [limb.artery_name]!</span>")
 		var/spray_dir = pick(GLOB.alldirs)
