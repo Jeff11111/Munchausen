@@ -499,10 +499,10 @@ GENETICS SCANNER
 		var/cyberimp_detect
 		for(var/obj/item/organ/cyberimp/CI in C.internal_organs)
 			if(CI.status == ORGAN_ROBOTIC && !CI.syndicate_implant)
-				cyberimp_detect += "[C.name] is modified with a [CI.name].<br>"
+				cyberimp_detect += "\n[C.name] is modified with a [CI.name]."
 		if(cyberimp_detect)
-			msg += "<span class='notice'>Detected cybernetic modifications:</span>\n"
-			msg += "<span class='notice'>[cyberimp_detect]</span>\n"
+			msg += "<span class='notice'>Detected cybernetic modifications:</span>"
+			msg += "<span class='notice'>[cyberimp_detect]</span>"
 	msg += "<span class='notice'>*---------*</span>"
 	to_chat(user, msg)
 	SEND_SIGNAL(M, COMSIG_NANITE_SCAN, user, FALSE)
