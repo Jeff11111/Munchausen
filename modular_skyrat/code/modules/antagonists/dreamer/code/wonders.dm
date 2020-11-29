@@ -66,6 +66,7 @@
 /obj/structure/wonder/examine(mob/user)
 	. = ..()
 	process()
+	START_PROCESSING(SSobj, src)
 
 /obj/structure/wonder/Initialize()
 	. = ..()
@@ -97,12 +98,12 @@
 						droomer.agony(H)
 				break
 			break
-	START_PROCESSING(SSfastprocess, src)
+	START_PROCESSING(SSobj, src)
 
 /obj/structure/wonder/process()
 	. = ..()
 	if(gazed_at)
-		STOP_PROCESSING(SSfastprocess, src)
+		STOP_PROCESSING(SSobj, src)
 		return
 	var/list/viewers = view(7, src)
 	for(var/mob/living/carbon/human/H in viewers)
