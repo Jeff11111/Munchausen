@@ -172,7 +172,7 @@
 
 /datum/reagent/medicine/kerosene
 	name = "Kerosene"
-	description = "When injected or ingested by a synthetic, slowly regenerates oxygen damage. When applied with a patch, instantly regenerates some oxygen damage."
+	description = "When injected or ingested by a synthetic, slowly regenerates oxygen damage. When applied with a patch, instantly regenerates some oxygen damage along with the gradual healing."
 	reagent_state = LIQUID
 	pH = 7.2
 	color = "#cccccc"
@@ -180,14 +180,13 @@
 	metabolization_rate = 1
 
 /datum/reagent/medicine/kerosene/reaction_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
+	. = ..()
 	if(method == TOUCH)
-		M.adjustOxyLoss(min(-10, -reac_volume))
-	..()
+		M.adjustOxyLoss(clamp(-reac_volume, -100, -10))
 
 /datum/reagent/medicine/kerosene/on_mob_life(mob/living/L)
-	L.adjustOxyLoss(-1 * REM)
-	..()
-	. = 1
+	. = ..()
+	L.adjustOxyLoss(-rand(3, 6) * REM)
 
 //Repathed preservahyde
 /datum/reagent/medicine/preservahyde
