@@ -26,7 +26,7 @@
 	zone_prob = 70
 	extra_zone_prob = 30
 	amputation_point = "left shoulder"
-	joint = "left elbow"
+	joint_name = "left elbow"
 	tendon_name = "palmaris longus tendon"
 	artery_name = "basilic vein"
 

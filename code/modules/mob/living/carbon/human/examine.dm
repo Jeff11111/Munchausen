@@ -215,7 +215,13 @@
 			if(BP.etching && !clothingonpart(BP))
 				msg += "<B>[t_His] [BP.name] has \"[BP.etching]\" etched on it!</B>"
 			for(var/datum/wound/W in BP.wounds)
-				if(W.get_examine_description(user))
+				var/list/clothing_items = list(head, wear_mask, wear_neck, wear_suit, belt, w_uniform, gloves, wrists, shoes)
+				var/hidden = FALSE
+				for(var/obj/item/I in clothing_items)
+					if(I && (I.body_parts_covered & BP.body_part))
+						hidden = TRUE
+						break
+				if(!hidden && W.get_examine_description(user))
 					msg += "[W.get_examine_description(user)]"
 					if(istype(W, /datum/wound/slash/critical/incision))
 						for(var/obj/item/organ/O in getorganszone(BP.body_zone))

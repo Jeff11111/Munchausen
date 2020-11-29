@@ -22,7 +22,9 @@
 #define WOUND_BLUNT 1 // any brute weapon/attack that doesn't have sharpness. rolls for blunt bone wounds
 #define WOUND_SLASH 2 // any brute weapon/attack with sharpness = SHARP_EDGED. rolls for slash wounds
 #define WOUND_PIERCE 3 // any brute weapon/attack with sharpness = SHARP_POINTY. rolls for piercing wounds
-#define WOUND_BURN	4 // any concentrated burn attack (lasers really). rolls for burning wounds
+#define WOUND_ARTERY 4 // any sharp weapon, edged or pointy, can cause arteries to be torn
+#define WOUND_TENDON 5 // any sharp weapon, edged or pointy, can cause tendons to be torn
+#define WOUND_BURN	6 // any kind of burning attack rolls for burning wounds
 
 // How much determination reagent to add each time someone gains a new wound in [/datum/wound/proc/second_wind()]
 #define WOUND_DETERMINATION_MODERATE	2

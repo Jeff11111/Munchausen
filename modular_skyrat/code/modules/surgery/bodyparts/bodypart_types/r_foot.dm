@@ -22,6 +22,6 @@
 	zone_prob = 70
 	extra_zone_prob = 30
 	amputation_point = "right ankle"
-	joint = "right ankle"
+	joint_name = "right ankle"
 	tendon_name = "achilles tendon"
 	artery_name = "arcuate artery"

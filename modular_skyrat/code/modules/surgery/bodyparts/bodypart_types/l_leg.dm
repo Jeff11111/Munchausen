@@ -25,7 +25,7 @@
 	zone_prob = 70
 	extra_zone_prob = 30
 	amputation_point = "left hip"
-	joint = "left knee"
+	joint_name = "left knee"
 	tendon_name = "cruciate ligament"
 	artery_name = "femoral artery"
 

@@ -6,13 +6,16 @@
 #define HAS_BONE		54
 #define HAS_FLESH		55
 #define HAS_SKIN		56
-#define NOPAIN			57
-#define NOINFECTION		58
-#define NOAPPENDIX		59
-#define NOKIDNEYS		60
-#define NOINTESTINES	61
-#define NOSPLEEN		62
-#define NOBLADDER		63
+#define HAS_ARTERIES	57
+#define HAS_TENDONS		58
+#define HAS_JOINTS		59
+#define NOPAIN			60
+#define NOINFECTION		61
+#define NOAPPENDIX		62
+#define NOKIDNEYS		63
+#define NOINTESTINES	64
+#define NOSPLEEN		65
+#define NOBLADDER		66
 
 // Defines for processing reagents, for synths, IPC's and Vox
 #define PROCESS_ORGANIC (1<<0)		//Only processes reagents with "ORGANIC" or "ORGANIC | SYNTHETIC"

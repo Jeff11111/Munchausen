@@ -24,7 +24,7 @@
 	extra_zone_prob = 30
 	max_cavity_size = WEIGHT_CLASS_TINY
 	amputation_point = "trachea"
-	joint = "cervical spine"
+	joint_name = "cervical spine"
 	tendon_name = "vocal cords"
 	artery_name = "carotid artery"
 

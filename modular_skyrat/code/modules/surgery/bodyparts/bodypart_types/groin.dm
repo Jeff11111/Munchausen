@@ -23,7 +23,7 @@
 	zone_prob = 75
 	extra_zone_prob = 25
 	amputation_point = "lumbar"
-	joint = "hip"
+	joint_name = "hip"
 	encased = "pelvic bones"
 	artery_name = "iliac artery"
 	cavity_name = "abdominal"
