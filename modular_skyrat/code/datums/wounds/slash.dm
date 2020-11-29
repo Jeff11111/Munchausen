@@ -276,6 +276,7 @@
 	infection_chance = 35 //low, but possible
 	infection_rate = 4
 	descriptive = "The skin is slashed!"
+	wound_flags = (MANGLES_SKIN)
 
 /datum/wound/slash/severe
 	name = "Open Laceration"

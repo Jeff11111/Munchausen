@@ -173,6 +173,7 @@
 	infection_chance = 35 //low, but possible
 	infection_rate = 4
 	descriptive = "The skin is penetrated!"
+	wound_flags = (MANGLES_SKIN)
 
 /datum/wound/pierce/severe
 	name = "Open Puncture"
