@@ -1824,11 +1824,13 @@
 				original_dna = source.dna
 				if(!original_species && source.dna.species)
 					original_species = source.dna.species
+		no_update = FALSE
 	else if((owner && original_owner) && (owner != original_owner)) //Foreign limb
 		C = owner
 		no_update = TRUE
 	else if(owner)
 		C = owner
+		no_update = FALSE
 	else if(!owner)
 		no_update = TRUE
 
