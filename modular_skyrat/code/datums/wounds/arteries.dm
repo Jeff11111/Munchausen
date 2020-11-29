@@ -7,6 +7,7 @@
 	sound_effect = 'modular_skyrat/sound/gore/artery.ogg'
 	severity = WOUND_SEVERITY_CRITICAL
 	wound_type = WOUND_LIST_ARTERY
+	viable_zones = ALL_BODYPARTS
 	threshold_minimum = 100
 	threshold_penalty = 0
 	infection_chance = 0
@@ -49,8 +50,8 @@
 				blood_loss_per_squirt *= 0.5
 			if(BODY_ZONE_PRECISE_R_FOOT)
 				blood_loss_per_squirt *= 0.5
-	victim.bleed(blood_loss_per_squirt)
-	victim.add_splatter_floor(get_turf(victim))
+	L.owner.bleed(blood_loss_per_squirt)
+	L.owner.add_splatter_floor(get_turf(victim))
 	. = ..()
 
 /datum/wound/artery/handle_process()
