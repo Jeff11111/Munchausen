@@ -149,9 +149,9 @@
 	if(pulse)
 		handle_heartbeat()
 		if(pulse == PULSE_2FAST && prob(1))
-			applyOrganDamage(0.5)
-		if(pulse == PULSE_THREADY && prob(5))
-			applyOrganDamage(0.5)
+			applyOrganDamage(1)
+		else if(pulse >= PULSE_THREADY && prob(5))
+			applyOrganDamage(1)
 
 /obj/item/organ/heart/proc/can_stop() //Can the heart stop beating? Used to prevent bloodsucker hearts from failing under normal circumstances
 	return TRUE
@@ -165,7 +165,7 @@
 	if(pulse_mod > 2 && !is_stable)
 		var/damage_chance = (pulse_mod - 2) ** 2
 		if(prob(damage_chance))
-			applyOrganDamage(0.5)
+			applyOrganDamage(1)
 	
 	// Now pulse mod is impacted by shock stage and other things too
 	if(owner.shock_stage > SHOCK_STAGE_2)

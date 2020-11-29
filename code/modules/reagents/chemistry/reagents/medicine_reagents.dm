@@ -1459,12 +1459,16 @@
 
 /datum/reagent/medicine/corazone/on_mob_metabolize(mob/living/M)
 	..()
-	ADD_TRAIT(M, TRAIT_STABLEHEART, type)
 	ADD_TRAIT(M, TRAIT_STABLELIVER, type)
+	if(iscarbon(M))
+		var/mob/living/carbon/C = M
+		C.add_chem_effect(CE_STABLE)
 
 /datum/reagent/medicine/corazone/on_mob_end_metabolize(mob/living/M)
-	REMOVE_TRAIT(M, TRAIT_STABLEHEART, type)
 	REMOVE_TRAIT(M, TRAIT_STABLELIVER, type)
+	if(iscarbon(M))
+		var/mob/living/carbon/C = M
+		C.remove_chem_effect(CE_STABLE)
 	..()
 
 /datum/reagent/medicine/muscle_stimulant
