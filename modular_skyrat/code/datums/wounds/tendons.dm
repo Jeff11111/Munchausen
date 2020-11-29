@@ -7,7 +7,7 @@
 	severity = WOUND_SEVERITY_CRITICAL
 	wound_type = WOUND_LIST_TENDON
 	viable_zones =	list(BODY_ZONE_PRECISE_NECK, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT)
-	threshold_minimum = 100
+	threshold_minimum = 115
 	threshold_penalty = 15
 	infection_chance = 0
 	infection_rate = 0
