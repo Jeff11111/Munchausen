@@ -102,5 +102,5 @@
 	icon_state = "random_wallet"
 
 /obj/item/storage/wallet/random/PopulateContents()
-	new /obj/item/holochip(src, rand(5,30))
+	new /obj/item/stack/spacecash/c1(src, rand(5,30))
 	icon_state = "wallet"

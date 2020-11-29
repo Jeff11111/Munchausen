@@ -98,10 +98,9 @@
 					invalid_number()
 					return
 				CID.registered_account.account_balance -= withdrawfund
-				var/obj/item/holochip/HC = new /obj/item/holochip(get_turf(src))
-				user.put_in_inactive_hand(HC)
+				var/obj/item/stack/spacecash/c1/cash = new (get_turf(src), withdrawfund)
+				user.put_in_inactive_hand(cash)
 				successful_transaction()
-				HC.credits = withdrawfund
 			if("change password")
 				var/passchoicenew = input(user, "Please select a password:", "Password Selection") as null|text
 				if(!passchoicenew)

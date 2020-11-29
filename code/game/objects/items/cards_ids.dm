@@ -127,8 +127,9 @@
 			var/datum/bank_account/D = SSeconomy.get_dep_account(registered_account.account_job.paycheck_department)
 			if(D)
 				msg += "The [D.account_holder] reports a balance of [D.account_balance] cr."
-		msg += "<span class='info'>Alt-Click the ID to pull money from the linked account in the form of holochips.</span>"
-		msg += "<span class='info'>You can insert credits into the linked account by pressing holochips, cash, or coins against the ID.</span>"
+		if(can_withdraw)
+			msg += "<span class='info'>Alt-Click the ID to pull money from the linked account in the form of space cash.</span>"
+			msg += "<span class='info'>You can insert credits into the linked account by pressing holochips, cash, or coins against the ID.</span>"
 		if(registered_account.account_holder == user.real_name)
 			msg += "<span class='boldnotice'>If you lose this ID card, you can reclaim your account by Alt-Clicking a blank ID card while holding it and entering your account ID number.</span>"
 	else
@@ -364,8 +365,8 @@
 		return
 	amount_to_remove = FLOOR(min(amount_to_remove, registered_account.account_balance), 1)
 	if(amount_to_remove && registered_account.adjust_money(-amount_to_remove))
-		var/obj/item/holochip/holochip = new (user.drop_location(), amount_to_remove)
-		user.put_in_hands(holochip)
+		var/obj/item/stack/spacecash/c1/cash = new (user.drop_location(), amount_to_remove)
+		user.put_in_hands(cash)
 		to_chat(user, "<span class='notice'>You withdraw [amount_to_remove] credits into a holochip.</span>")
 		return
 	registered_account.bank_card_talk("<span class='warning'>ERROR: The linked account has no sufficient credits to perform that withdrawal.</span>", TRUE)
