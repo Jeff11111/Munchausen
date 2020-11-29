@@ -99,6 +99,7 @@
 #define MANGLES_SKIN (1<<0)
 #define MANGLES_MUSCLE (1<<1)
 #define MANGLES_BONE (1<<2)
+#define VISIBLE_THROUGH_CLOTHING (1<<3)
 
 //Organ status flags
 #define ORGAN_ORGANIC   (1<<0)
