@@ -103,7 +103,7 @@
 		if(L.pulledby && L.pulledby != src && L.restrained())
 			if(!(world.time % 5))
 				to_chat(src, "<span class='warning'>[L] is restrained, you cannot push past.</span>")
-			return 1
+			return TRUE
 
 		if(L.pulling)
 			if(ismob(L.pulling))
@@ -111,7 +111,7 @@
 				if(P.restrained())
 					if(!(world.time % 5))
 						to_chat(src, "<span class='warning'>[L] is restraining [P], you cannot push past.</span>")
-					return 1
+					return TRUE
 
 		//SKYRAT CHANGES START
 		if(L.gunpointed.len)
@@ -155,24 +155,23 @@
 	//END OF CIT CHANGES
 
 	if(moving_diagonally)//no mob swap during diagonal moves.
-		return 1
-
+		return TRUE
+	
+	var/mob_swap = FALSE
+	var/too_strong = (M.move_resist > move_force) //can't swap with immovable objects
 	if(!M.buckled && !M.has_buckled_mobs())
-		var/mob_swap = FALSE
-		var/too_strong = (M.move_resist > move_force) //can't swap with immovable objects unless they help us
 		if(!they_can_move) //we have to physically move them
 			if(!too_strong)
 				mob_swap = TRUE
 		else
-			if(M.pulledby == src && a_intent == INTENT_GRAB)
+			//Only mob swap people we are pulling or grabbing
+			if(M.pulledby == src && (a_intent == INTENT_GRAB || a_intent == INTENT_HELP))
 				mob_swap = TRUE
-			//restrained people act if they were on 'help' intent to prevent a person being pulled from being separated from their puller
-			else if((M.restrained() || M.a_intent == INTENT_HELP) && (restrained() || a_intent == INTENT_HELP))
-				mob_swap = TRUE
+		
 		if(mob_swap)
 			//switch our position with M
 			if(loc && !loc.Adjacent(M.loc))
-				return 1
+				return TRUE
 			now_pushing = 1
 			var/oldloc = loc
 			var/oldMloc = M.loc
@@ -196,24 +195,56 @@
 			now_pushing = 0
 
 			if(!move_failed)
-				return 1
+				return TRUE
 
-	//okay, so we didn't switch. but should we push?
+	//okay, so we didn't swap. but should we push?
 	//not if he's not CANPUSH of course
 	if(!(M.status_flags & CANPUSH))
-		return 1
+		return TRUE
+	//If they are stronger, can't do it
+	if(too_strong)
+		return TRUE
+	//If they are immune to pushing, can't do it
 	if(isliving(M))
 		var/mob/living/L = M
 		if(HAS_TRAIT(L, TRAIT_PUSHIMMUNE))
-			return 1
-	//If they're a human, and they're not in help intent, block pushing
-	if(ishuman(M) && (M.a_intent != INTENT_HELP))
-		return TRUE
-	//anti-riot equipment is also anti-push
+			return TRUE
+	//Anti-riot equipment is anti-push
 	for(var/obj/item/I in M.held_items)
 		if(!istype(M, /obj/item/clothing))
 			if(prob(I.block_chance*2))
-				return 1
+				return TRUE
+	//If they're a human, and we are human, let's try and compare our stats
+	if(ishuman(M) && ishuman(src) && mind)
+		var/mob/living/carbon/human/victim = M
+		var/mob/living/carbon/human/assailant = src
+		var/victim_str = 10
+		if(victim.mind)
+			victim_str = GET_STAT_LEVEL(victim, str)
+		var/assailant_str = GET_STAT_LEVEL(assailant, str)
+		if(!SEND_SIGNAL(assailant, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_ACTIVE) && GET_STAT_LEVEL(assailant, fakestr))
+			assailant_str = GET_STAT_LEVEL(assailant, fakestr)
+		var/str_diff = assailant_str - victim_str
+		var/diceroll = mind.diceroll(STAT_DATUM(str), mod = str_diff*2)
+		if(diceroll >= DICE_SUCCESS)
+			if((diceroll >= DICE_CRIT_SUCCESS) && (str_diff >= 7))
+				assailant.visible_message("<span class='warning'><b>[assailant]</b> violently shoves past <b>[victim]</b>!</span>", \
+									"<span class='userdanger'>I violently shove past <b>[victim]</b>!</span>", \
+									target = victim, \
+									target_message = "<span class='userdanger'>You are violently shoved down by <b>[assailant]</b>!</span>")
+				if(prob(assailant_str))
+					victim.DefaultCombatKnockdown(max(1, str_diff) SECONDS)
+				else
+					victim.Stumble(max(1, str_diff) SECONDS)
+				return FALSE
+			else
+				return FALSE
+		else
+			assailant.visible_message("<span class='warning'><b>[assailant]</b> tries pushing past <b>[victim]</b>!</span>", \
+									"<span class='userdanger'>I try pushing past <b>[victim]</b>!</span>", \
+									target = victim, \
+									target_message = "<span class='warning'><b>[assailant]</b> tries pushing past you.</span>")
+			return TRUE
 
 /mob/living/get_photo_description(obj/item/camera/camera)
 	var/list/mob_details = list()
