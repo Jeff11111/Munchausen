@@ -264,9 +264,7 @@ GLOBAL_LIST_EMPTY(crematoriums)
 			if(M.mind && !M.fraggot)
 				//GET BACK HERE NIGGA YOU'RE GETTING
 				//JEWED
-				if(M.can_reenter_round(TRUE)) //Check if you can reenter the round at all
-					//(set to false so peoople who "succumbed" get fucked)
-					M.mind.grab_ghost(FALSE)
+				M.mind.grab_ghost(FALSE)
 				//If we succeeded, back to the lobby
 				if(M.client)
 					var/mob/dead/new_player/NP = new()
