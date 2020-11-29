@@ -23,6 +23,9 @@
 	. = ..()
 	QDEL_NULL(aughaughgblerg)
 
+/datum/wound/tendon/get_examine_description(mob/user)
+	return null
+
 /datum/wound/tendon/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
 	if(L)
 		name = "Torn [capitalize(L.tendon_name)]"
