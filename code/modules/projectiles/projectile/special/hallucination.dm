@@ -49,10 +49,10 @@
 
 /obj/item/projectile/hallucination/proc/target_on_hit(mob/M)
 	if(M == hal_target)
-		to_chat(hal_target, "<span class='userdanger'>[M] is hit by \a [src] in the chest!</span>")
+		to_chat(hal_target, "<span class='userdanger'><b>[M]</b> is hit by \a [src] in the chest!</span>")
 		hal_apply_effect()
 	else if(M in hal_target.fov_view())
-		to_chat(hal_target, "<span class='danger'>[M] is hit by \a [src] in the chest!!</span>")
+		to_chat(hal_target, "<span class='danger'><b>[M]</b> is hit by \a [src] in the chest!!</span>")
 	if(damage_type == BRUTE)
 		var/splatter_dir = dir
 		if(starting)

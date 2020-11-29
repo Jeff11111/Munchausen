@@ -254,13 +254,13 @@
 		playsound(user, fire_sound, 50, 1)
 		if(message)
 			if(pointblank)
-				user.visible_message("<span class='danger'>[user] fires [src] point blank at [pbtarget]!</span>", null, null, COMBAT_MESSAGE_RANGE)
+				user.visible_message("<span class='danger'><b>[user]</b> fires [src] point blank at <b>[pbtarget]</b>!</span>", null, null, COMBAT_MESSAGE_RANGE)
 			else
-				user.visible_message("<span class='danger'>[user] fires [src]!</span>", null, null, COMBAT_MESSAGE_RANGE)
+				user.visible_message("<span class='danger'><b>[user]</b> fires [src]!</span>", null, null, COMBAT_MESSAGE_RANGE)
 
 	var/ranged = GET_SKILL_LEVEL(user, ranged)
 	if((weapon_weight >= WEAPON_HEAVY) && !is_wielded && !(ranged >= JOB_SKILLPOINTS_EXPERT))
-		user.visible_message("<span class='danger'>\The [src] falls out of [user]'s unskilled hands!</span>", "<span class='userdanger'>\The [src] falls out of my unskilled hands!</span>")
+		user.visible_message("<span class='danger'>\The [src] falls out of <b>[user]</b>'s unskilled hands!</span>", "<span class='userdanger'>\The [src] falls out of my unskilled hands!</span>")
 		user.dropItemToGround(src)
 
 /obj/item/gun/emp_act(severity)

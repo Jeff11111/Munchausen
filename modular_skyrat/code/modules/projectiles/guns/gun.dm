@@ -1,2 +1,2 @@
 /obj/item/gun
-	grabtext = "user grabs the src!"
+	grabtext = "<b>user</b> grabs the src!"

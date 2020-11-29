@@ -250,10 +250,10 @@
 			wound_message = C.wound_message
 			C.wound_message = ""
 		if(num_hits > 1)
-			target.visible_message("<span class='danger'>[target] is hit by [num_hits] [proj_name]s[hit_part ? " in the [hit_part.name]" : ""]![wound_message]</span>", null, null, COMBAT_MESSAGE_RANGE, target)
+			target.visible_message("<span class='danger'><b>[target]</b> is hit by [num_hits] [proj_name]s[hit_part ? " in the [hit_part.name]" : ""]![wound_message]</span>", null, null, COMBAT_MESSAGE_RANGE, target)
 			to_chat(target, "<span class='userdanger'>You're hit by [num_hits] [proj_name]s[hit_part ? " in the [hit_part.name]" : ""]![wound_message]</span>")
 		else
-			target.visible_message("<span class='danger'>[target] is hit by a [proj_name][hit_part ? " in the [hit_part.name]" : ""]![wound_message]</span>", null, null, COMBAT_MESSAGE_RANGE, target)
+			target.visible_message("<span class='danger'><b>[target]</b> is hit by a [proj_name][hit_part ? " in the [hit_part.name]" : ""]![wound_message]</span>", null, null, COMBAT_MESSAGE_RANGE, target)
 			to_chat(target, "<span class='userdanger'>You're hit by a [proj_name][hit_part ? " in the [hit_part.name]" : ""]![wound_message]</span>")
 	UnregisterSignal(parent, COMSIG_PARENT_PREQDELETED)
 	if(queued_delete)

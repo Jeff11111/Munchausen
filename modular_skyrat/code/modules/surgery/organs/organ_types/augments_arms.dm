@@ -85,7 +85,7 @@
 	if(. & EMP_PROTECT_SELF)
 		return
 	if(owner)
-		to_chat(owner, "<span class='warning'>[src] is hit by EMP!</span>")
+		to_chat(owner, "<span class='warning'>[src] is hit by an EMP!</span>")
 		// give the owner an idea about why his implant is glitching
 		Retract()
 

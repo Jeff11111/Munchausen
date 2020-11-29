@@ -85,8 +85,8 @@
 	user.do_attack_animation(src)
 
 	if(I.force)
-		user.visible_message("<span class='danger'>[user] has hit \
-			[src] with [I]!</span>", "<span class='danger'>You hit [src] \
+		user.visible_message("<span class='danger'><b>[user]</b> has hit \
+			<b>[src]</b> with [I]!</span>", "<span class='danger'>You hit <b>[src]</b> \
 			with [I]!</span>")
 
 		if(prob(I.force))

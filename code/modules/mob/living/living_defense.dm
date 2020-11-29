@@ -229,7 +229,7 @@
 			if(I.thrownby)
 				log_combat(I.thrownby, src, "threw and hit", I)
 			if(!nosell_hit)
-				visible_message("<span class='danger'>[src] is hit by [I]!</span>", \
+				visible_message("<span class='danger'><b>[src]</b> is hit by [I]!</span>", \
 								"<span class='userdanger'>You're hit by [I]!</span>")
 				if(!I.throwforce)
 					return
@@ -265,16 +265,16 @@
 			else
 				return
 		updatehealth()
-		visible_message("<span class='danger'>[M.name] has hit [src]!</span>", \
-						"<span class='userdanger'>[M.name] has hit you!</span>", null, COMBAT_MESSAGE_RANGE, null,
-						M.occupant, "<span class='danger'>You hit [src] with your [M.name]!</span>")
+		visible_message("<span class='danger'><b>[M.name]</b> has hit <b>[src]</b>!</span>", \
+						"<span class='userdanger'><b>[M.name]</b> has hit you!</span>", null, COMBAT_MESSAGE_RANGE, null,
+						M.occupant, "<span class='danger'>You hit <b>[src]</b> with your <b>[M.name]</b>!</span>")
 		log_combat(M.occupant, src, "attacked", M, "(INTENT: [uppertext(M.occupant.a_intent)]) (DAMTYPE: [uppertext(M.damtype)])")
 	else
 		step_away(src,M)
 		log_combat(M.occupant, src, "pushed", M)
-		visible_message("<span class='warning'>[M] pushes [src] out of the way.</span>", \
+		visible_message("<span class='warning'><b>[M]</b> pushes <b>[src]</b> out of the way.</span>", \
 			"<span class='warning'>[M] pushes you out of the way.</span>", null, COMBAT_MESSAGE_RANGE, null,
-			M.occupant, "<span class='warning'>You push [src] out of the way with your [M.name].</span>")
+			M.occupant, "<span class='warning'>You push <b>[src]</b> out of the way with your <b>[M.name]</b>.</span>")
 
 /mob/living/fire_act()
 	adjust_fire_stacks(3)

@@ -308,8 +308,8 @@
 			if(hitsound)
 				var/volume = vol_by_damage()
 				playsound(loc, hitsound, volume, 1, -1)
-			L.visible_message("<span class='danger'>[L] is hit by \a [src][organ_hit_text]![wound_message]</span>", \
-					"<span class='userdanger'>[L] is hit by \a [src][organ_hit_text]![wound_message]</span>", null, COMBAT_MESSAGE_RANGE)
+			L.visible_message("<span class='danger'><b>[L]</b> is hit by \a <b>[src]</b>[organ_hit_text]![wound_message]</span>", \
+					"<span class='userdanger'><b>[L]</b> is hit by \a <b>[src]</b>[organ_hit_text]![wound_message]</span>", null, COMBAT_MESSAGE_RANGE)
 		
 		if(candink && def_zone == BODY_ZONE_HEAD)
 			playsound(src, 'sound/weapons/dink.ogg', 30, 1)
