@@ -23,7 +23,6 @@
 	id = "limp"
 	status_type = STATUS_EFFECT_REPLACE
 	tick_interval = 10
-	alert_type = /obj/screen/alert/status_effect/limp
 	var/msg_stage = 0//so you dont get the most intense messages immediately
 	/// The left leg of the limping person
 	var/obj/item/bodypart/l_leg/left_leg
@@ -193,7 +192,7 @@
 	status_type = STATUS_EFFECT_MULTIPLE
 	var/obj/item/bodypart/linked_limb
 	var/datum/wound/linked_wound
-	alert_type = NONE
+	alert_type = null
 
 /datum/status_effect/wound/on_creation(mob/living/new_owner, incoming_wound)
 	. = ..()
