@@ -265,6 +265,7 @@
 	pain_amount = 10
 	flat_damage_roll_increase = 5
 	descriptive = "A bone is dislocated!"
+	wound_flags = (MANGLES_BONE|VISIBLE_THROUGH_CLOTHING)
 
 /datum/wound/blunt/moderate/crush()
 	if(prob(33))
