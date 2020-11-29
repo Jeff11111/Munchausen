@@ -199,7 +199,7 @@
 	pulse = clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_2FAST)
 
 	// If fibrillation, then it can be PULSE_THREADY
-	var/fibrillation = (oxy <= BLOOD_VOLUME_SURVIVE) || (prob(10) && owner.shock_stage > SHOCK_STAGE_6)
+	var/fibrillation = (oxy <= BLOOD_VOLUME_SURVIVE) || (prob(3) && owner.shock_stage > SHOCK_STAGE_6)
 	if(pulse && fibrillation)	//I SAID MOAR OXYGEN
 		pulse = PULSE_THREADY
 
@@ -211,7 +211,7 @@
 			pulse++
 
 /obj/item/organ/heart/proc/handle_heartbeat()
-	if(pulse >= PULSE_2FAST || owner.shock_stage >= SHOCK_STAGE_1)
+	if((pulse >= PULSE_2FAST) || (owner.shock_stage >= SHOCK_STAGE_1))
 		//PULSE_THREADY - maximum value for pulse, currently it's 5.
 		//High pulse value corresponds to a fast rate of heartbeat.
 		//Divided by 2, otherwise it is too slow.
