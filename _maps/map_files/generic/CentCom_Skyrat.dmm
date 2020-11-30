@@ -1422,7 +1422,6 @@
 "brP" = (
 /obj/structure/flora/biolumi/flower{
 	light_color = "#D9FF00";
-	light_range = 15;
 	random_light = null
 	},
 /turf/open/floor/plating/smooth/grass,
@@ -5035,10 +5034,7 @@
 /turf/open/floor/engine/cult,
 /area/wizard_station)
 "eBp" = (
-/obj/structure/flora/rock/pile/largejungle{
-	pixel_x = 0;
-	pixel_y = 0
-	},
+/obj/structure/flora/rock/pile/largejungle,
 /turf/open/floor/plating/smooth/grass,
 /area/centcom/holding/cafepark)
 "eBI" = (
@@ -7287,7 +7283,6 @@
 "gIN" = (
 /obj/structure/flora/biolumi/flower{
 	light_color = "#D9FF00";
-	light_range = 15;
 	random_light = null
 	},
 /turf/open/floor/plating/beach/sand,
@@ -25065,7 +25060,7 @@ vWE
 vWE
 vWE
 vWE
-eBp
+vWE
 wXN
 vEb
 vEb
@@ -25321,7 +25316,7 @@ bKS
 vWE
 vWE
 vWE
-vWE
+eBp
 vWE
 wXN
 qGZ

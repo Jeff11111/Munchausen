@@ -2641,7 +2641,6 @@
 	},
 /obj/effect/turf_decal/bot,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plasteel,
@@ -2668,7 +2667,6 @@
 "ael" = (
 /obj/structure/closet/crate,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -3071,8 +3069,7 @@
 	pixel_x = 26
 	},
 /obj/machinery/computer/card/minor/qm{
-	dir = 8;
-	icon_state = "computer"
+	dir = 8
 	},
 /obj/effect/turf_decal/tile/brown{
 	dir = 4
@@ -4297,8 +4294,7 @@
 	pixel_x = 30
 	},
 /obj/machinery/computer/security/hos{
-	dir = 8;
-	icon_state = "computer"
+	dir = 8
 	},
 /turf/open/floor/plasteel/grimy,
 /area/crew_quarters/heads/hos)
@@ -4830,8 +4826,7 @@
 	dir = 4
 	},
 /obj/machinery/computer/card/minor/hos{
-	dir = 4;
-	icon_state = "computer"
+	dir = 4
 	},
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/heads/hos)
@@ -9108,7 +9103,6 @@
 	},
 /obj/machinery/computer/security/telescreen/ce{
 	dir = 1;
-	icon_state = "telescreen";
 	pixel_y = -24
 	},
 /turf/open/floor/plasteel,
@@ -12688,8 +12682,7 @@
 	dir = 8
 	},
 /obj/machinery/computer/med_data/laptop{
-	dir = 4;
-	icon_state = "laptop"
+	dir = 4
 	},
 /obj/machinery/requests_console{
 	department = "Detective's Office";
@@ -13265,7 +13258,6 @@
 /obj/structure/table/wood,
 /obj/machinery/computer/secure_data/laptop{
 	dir = 1;
-	icon_state = "laptop";
 	pixel_y = 4
 	},
 /turf/open/floor/wood,
@@ -14144,7 +14136,6 @@
 /obj/item/radio,
 /obj/item/storage/secure/briefcase,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden,
@@ -15354,7 +15345,6 @@
 "axL" = (
 /obj/structure/rack,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -15593,7 +15583,6 @@
 	},
 /obj/structure/closet/crate,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plasteel,
@@ -18131,7 +18120,6 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/turnstile{
 	dir = 1;
-	icon_state = "turnstile_map";
 	name = "Genpop Exit Turnstile";
 	req_access_txt = "70"
 	},
@@ -22883,8 +22871,7 @@
 /obj/machinery/requests_console{
 	department = "Genetics";
 	name = "Genetics RC";
-	pixel_x = 28;
-	pixel_y = 0
+	pixel_x = 28
 	},
 /turf/open/floor/plasteel/white,
 /area/medical/genetics)
@@ -25597,8 +25584,7 @@
 	dir = 1
 	},
 /obj/machinery/computer/scan_consolenew{
-	dir = 1;
-	icon_state = "computer"
+	dir = 1
 	},
 /obj/effect/turf_decal/bot,
 /turf/open/floor/plasteel/dark,
@@ -26186,7 +26172,6 @@
 	},
 /obj/machinery/computer/security/telescreen/cmo{
 	dir = 1;
-	icon_state = "telescreen";
 	pixel_y = -32
 	},
 /turf/open/floor/plasteel/cafeteria,
@@ -26805,8 +26790,7 @@
 "aPC" = (
 /obj/machinery/computer/security/telescreen/entertainment,
 /obj/structure/bodycontainer/morgue{
-	dir = 2;
-	icon_state = "morgue1"
+	dir = 2
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
@@ -26849,8 +26833,7 @@
 /area/medical/medbay/zone3)
 "aPE" = (
 /obj/structure/bodycontainer/morgue{
-	dir = 2;
-	icon_state = "morgue1"
+	dir = 2
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
@@ -27798,8 +27781,7 @@
 /area/crew_quarters/heads/cmo)
 "aRp" = (
 /obj/structure/bodycontainer/morgue{
-	dir = 2;
-	icon_state = "morgue1"
+	dir = 2
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
@@ -27871,8 +27853,7 @@
 /area/science/research)
 "aRw" = (
 /obj/structure/bodycontainer/morgue{
-	dir = 2;
-	icon_state = "morgue1"
+	dir = 2
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
@@ -31894,7 +31875,6 @@
 /obj/machinery/shower{
 	desc = "From what you understand it was put in rather recently, but the design looks right out of the 2510's. Weird.";
 	dir = 1;
-	icon_state = "shower";
 	name = "Emergency Shower"
 	},
 /obj/effect/turf_decal/stripes/line{
@@ -31925,7 +31905,6 @@
 /obj/machinery/requests_console{
 	department = "Virology";
 	name = "Virology RC";
-	pixel_x = 0;
 	pixel_y = -32;
 	receive_ore_updates = 1
 	},
@@ -42255,7 +42234,6 @@
 	icon_state = "crateopen"
 	},
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/effect/turf_decal/stripes/line{
