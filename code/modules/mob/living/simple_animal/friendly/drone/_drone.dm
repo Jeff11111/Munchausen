@@ -16,6 +16,7 @@
 #define SCOUTDRONE_HACKED "drone_scout_hacked"
 
 /mob/living/simple_animal/drone
+	abandoned_code = TRUE
 	name = "Drone"
 	desc = "A maintenance drone, an expendable robot built to perform station repairs."
 	icon = 'icons/mob/drone.dmi'
