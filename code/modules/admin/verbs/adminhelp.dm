@@ -197,7 +197,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	//Humiliate the whiny ass for ahelping lole
 	if(!is_bwoink)
 		to_chat(world, "<span class='ooc'><span class='prefix'>OOC:</span> <EM>[C.key]:</EM> <span class='message linkify'>My ANUS is <span style='color: #DC143C'>BLEEDING!</span></span></span>")
-
+		to_chat(world, "<span class='ooc'><span class='prefix'>OOC:</span> <EM>[C.key]:</EM> <span class='message linkify'>[msg] - [emoji_parse(pick(":killher:", ":troll:", ":killhernow:"))]</span>")
 	//SKYRAT CHANGE
 	if(admin_C && is_bwoink)
 		handler = "[admin_C.ckey]"
