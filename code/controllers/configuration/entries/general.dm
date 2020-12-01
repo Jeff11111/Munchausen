@@ -202,25 +202,31 @@
 /datum/config_entry/string/banappeals
 
 /datum/config_entry/string/wikiurl
-	config_entry_value = "https://katlin.dog/citadel-wiki"
+	config_entry_value = "https://discord.gg/Ng5QenfzEh"
 
 /datum/config_entry/string/wikiurltg
-	config_entry_value = "http://www.tgstation13.org/wiki"
+	config_entry_value = "https://discord.gg/Ng5QenfzEh"
 
 /datum/config_entry/string/forumurl
-	config_entry_value = "http://tgstation13.org/phpBB/index.php"
+	config_entry_value = "https://discord.gg/Ng5QenfzEh"
 
 /datum/config_entry/string/rulesurl
-	config_entry_value = "https://skyrat13.tk/wiki/index.php/Rules" // Skyrat Edit
+	config_entry_value = "https://discord.gg/Ng5QenfzEh"
 
 /datum/config_entry/string/githuburl
-	config_entry_value = "https://github.com/Skyrat-SS13/Skyrat13/pulls" // Skyrat Edit
+	config_entry_value = "https://gitlab.com/bobstation/bobstation"
 
 /datum/config_entry/string/notinvitedurl
 	config_entry_value = "https://cdn.discordapp.com/attachments/777928651156357171/782261445243961344/wedonthavemanydays.png"
 
 /datum/config_entry/string/bannedurl
 	config_entry_value = "https://cdn.discordapp.com/attachments/777928651156357171/782264391026212934/mailbox.png"
+
+/datum/config_entry/string/notsafeurl
+	config_entry_value = "https://cdn.discordapp.com/attachments/760982213340299264/783382180314873936/notsafe.png"
+
+/datum/config_entry/string/downwardspiralurl
+	config_entry_value = "https://cdn.discordapp.com/attachments/757793833605136396/783384913202118666/downwardspiral.png"
 
 /datum/config_entry/string/roundstatsurl
 
