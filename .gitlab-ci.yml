@@ -1,0 +1,41 @@
+image: ubuntu:xenial
+
+stages:
+  - test
+
+before_script:
+  - echo "Install packages"
+  - dpkg --add-architecture i386
+  - apt update
+  - apt install -y python3 python3-pip python3-setuptools curl git wget libstdc++6:i386 unzip
+  - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+  - echo "Setup tools"
+  - ./tools/travis/install_build_tools.sh
+  - ./tools/travis/install_dreamchecker.sh
+
+
+run-linters:
+  stage: test
+  script:
+      - echo "Run linters"
+      - ./tools/travis/check_filedirs.sh tgstation.dme
+      - find . -name "*.json" -not -path "./tgui/node_modules/*" -print0 | xargs -0 python3 ./tools/json_verifier.py
+      - ./tools/travis/check_grep.sh
+      - python3 tools/travis/check_line_endings.py
+      - ~/dreamchecker
+
+build-tgui:
+  stage: test
+  script:
+      - echo "Build tgui"
+      - ./tools/travis/build_tgui.sh
+
+compile-all-maps:
+  stage: test
+  script:
+      - echo "Compile all maps"
+      - ./tools/travis/install_byond.sh
+      - source $HOME/BYOND/byond/bin/byondsetup
+      - python3 tools/travis/template_dm_generator.py
+      - ./tools/travis/dm.sh -DTRAVISBUILDING -DTRAVISTESTING -DALL_MAPS tgstation.dme
+  
