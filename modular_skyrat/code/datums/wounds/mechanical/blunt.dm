@@ -220,6 +220,7 @@
 	pain_amount = 10
 	flat_damage_roll_increase = 5
 	descriptive = "A joint is snapped!"
+	wound_flags = (VISIBLE_THROUGH_CLOTHING)
 
 /datum/wound/mechanical/blunt/moderate/self_treat(mob/living/carbon/user, first_time = FALSE)
 	. = ..()

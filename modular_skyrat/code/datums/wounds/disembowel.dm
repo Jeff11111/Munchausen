@@ -115,6 +115,7 @@
 	minimum_flow = 4
 	clot_rate = 0
 	descriptive = "The limb is disemboweled!"
+	wound_flags = (MANGLES_SKIN | MANGLES_MUSCLE | VISIBLE_THROUGH_CLOTHING)
 	var/datum/component/storage/concrete/organ/our_component
 
 /datum/wound/slash/critical/incision/disembowel/get_examine_description(mob/user)
@@ -196,6 +197,7 @@
 	pain_amount = 40 //Just absolutely unbearable. Will send you into shock most of the time.
 	occur_text = null
 	descriptive = "The limb is disemboweled!"
+	wound_flags = (MANGLES_SKIN | MANGLES_MUSCLE | VISIBLE_THROUGH_CLOTHING)
 	var/datum/component/storage/concrete/organ/our_component
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/get_examine_description(mob/user)
