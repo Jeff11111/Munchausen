@@ -4,14 +4,19 @@
 	path = /obj/item/clothing/shoes/laceup
 
 /datum/gear/workboots
-	name = "Work boots"
+	name = "Tan boots"
 	category = SLOT_SHOES
-	path = /obj/item/clothing/shoes/workboots
+	path = /obj/item/clothing/shoes/workboots/unarmored
 
 /datum/gear/jackboots
-	name = "Jackboots"
+	name = "Black boots"
 	category = SLOT_SHOES
-	path = /obj/item/clothing/shoes/jackboots
+	path = /obj/item/clothing/shoes/jackboots/unarmored
+
+/datum/gear/workboots/mining
+	name = "Hiking boots"
+	category = SLOT_SHOES
+	path = /obj/item/clothing/shoes/workboots/mining/unarmored
 
 /datum/gear/winterboots
 	name = "Winter boots"
