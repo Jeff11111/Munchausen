@@ -163,10 +163,12 @@ GLOBAL_LIST_EMPTY(objectives)
 	if(receiver && receiver.current)
 		if(ishuman(receiver.current))
 			var/mob/living/carbon/human/H = receiver.current
-			var/list/slots = list("backpack" = SLOT_IN_BACKPACK)
 			for(var/eq_path in special_equipment)
-				var/obj/O = new eq_path
-				H.equip_in_one_of_slots(O, slots)
+				var/obj/item/xiehuapiaopiao = new eq_path
+				var/obj/item/backcrap = H.get_item_by_slot(SLOT_BACK)
+				if(backcrap)
+					if(!SEND_SIGNAL(backcrap, COMSIG_TRY_STORAGE_INSERT, xiehuapiaopiao, null, TRUE, TRUE))
+						qdel(xiehuapiaopiao)
 
 /datum/objective/assassinate
 	name = "assasinate"
