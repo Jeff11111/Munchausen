@@ -73,3 +73,10 @@
 	ammo_type = /obj/item/ammo_casing/c9mm
 	caliber = "9mm"
 	max_ammo = 8
+
+//Deagle
+/obj/item/ammo_box/magazine/m50
+	name = "pistol magazine (.50 AE)"
+	desc = "A low capacity magazine for not-so-compact pistols."
+	icon = 'modular_skyrat/icons/obj/bobstation/ammo/pistol.dmi'
+	icon_state = "pistol50"

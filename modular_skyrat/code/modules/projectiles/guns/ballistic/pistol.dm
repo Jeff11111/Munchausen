@@ -115,3 +115,12 @@
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
 	icon_state = "antitank"
 	fire_sound = 'modular_skyrat/sound/weapons/rifle2.ogg'
+
+//Stechkin v2
+/obj/item/gun/ballistic/automatic/pistol/deagle
+	name = ".50 AE pistol"
+	desc = "The Gorlex Arms Deagle - A big fucking pistol for people with small fucking egos."
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
+	icon_state = "deagle"
+	fire_sound = 'modular_skyrat/sound/guns/pistol2.ogg'
+	suppressed_pixel_x = 4

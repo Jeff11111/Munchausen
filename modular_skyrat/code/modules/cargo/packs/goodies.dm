@@ -278,6 +278,19 @@
 	contains = list(/obj/item/ammo_box/magazine/m9mm/small,
 					/obj/item/ammo_box/magazine/m9mm/small)
 
+/datum/supply_pack/goody/m50ae_pistol
+	name = ".50 AE Pistol"
+	desc = "Contains one .50 AE pistol. Never know when you need it."
+	cost = 15000
+	contains = list(/obj/item/gun/ballistic/automatic/pistol/deagle)
+
+/datum/supply_pack/goody/m50ae_ammo
+	name = ".50 AE Magazines"
+	desc = "Contains 2 .50 AE magazines. Never know when you need it."
+	cost = 4000
+	contains = list(/obj/item/ammo_box/magazine/m50,
+					/obj/item/ammo_box/magazine/m50)
+
 /datum/supply_pack/goody/surplus
 	name = "10mm Surplus Rifle"
 	desc = "Contains one semi-auto surplus rifle. Never know when you need it."
