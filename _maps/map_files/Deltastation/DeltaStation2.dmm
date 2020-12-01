@@ -4013,7 +4013,6 @@
 "amB" = (
 /obj/structure/closet,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/effect/turf_decal/tile/neutral,
@@ -6819,7 +6818,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/rack,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -7578,7 +7576,6 @@
 	icon_state = "crateopen"
 	},
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -9060,8 +9057,7 @@
 /area/engine/atmospherics_engine)
 "avi" = (
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/visible{
-	dir = 8;
-	name = "scrubbers pipe"
+	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/stripes/line{
@@ -9115,7 +9111,6 @@
 "avo" = (
 /obj/structure/closet,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -10795,7 +10790,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/closet/cardboard,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -11084,7 +11078,6 @@
 "ayT" = (
 /obj/structure/closet/crate,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -12690,7 +12683,6 @@
 	icon_state = "crateopen"
 	},
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -12784,7 +12776,6 @@
 "aBX" = (
 /obj/structure/closet/crate,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/effect/turf_decal/bot,
@@ -13326,7 +13317,6 @@
 	icon_state = "4-8"
 	},
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/effect/turf_decal/bot,
@@ -17212,7 +17202,6 @@
 	icon_state = "crateopen"
 	},
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/effect/turf_decal/bot,
@@ -17664,7 +17653,6 @@
 "aKh" = (
 /obj/structure/rack,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/effect/turf_decal/tile/neutral,
@@ -35040,7 +35028,6 @@
 /obj/structure/rack,
 /obj/effect/spawner/lootdrop/costume,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/effect/turf_decal/bot,
@@ -62485,7 +62472,6 @@
 	},
 /obj/machinery/camera{
 	c_tag = "Library - Aft";
-	dir = 2;
 	name = "library camera"
 	},
 /turf/open/floor/wood,
@@ -63651,7 +63637,6 @@
 /area/library)
 "cel" = (
 /obj/structure/chair/sofa/right{
-	icon_state = "sofaend_right";
 	dir = 8
 	},
 /obj/structure/sign/painting/library{
@@ -64775,7 +64760,6 @@
 "cfR" = (
 /obj/structure/rack,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -64840,7 +64824,6 @@
 	pixel_x = -26
 	},
 /obj/structure/sign/painting/library{
-	pixel_x = 0;
 	pixel_y = -32
 	},
 /turf/open/floor/wood,
@@ -69921,7 +69904,6 @@
 "coC" = (
 /obj/structure/closet,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating{
@@ -69940,7 +69922,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/rack,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -73313,7 +73294,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -75885,7 +75865,6 @@
 	icon_state = "crateopen"
 	},
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -79380,7 +79359,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/rack,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/effect/turf_decal/tile/neutral,
@@ -81269,7 +81247,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/rack,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -81745,7 +81722,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/rack,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/effect/turf_decal/tile/neutral{
@@ -83545,7 +83521,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/closet/crate,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -84503,7 +84478,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/closet,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
@@ -85145,7 +85119,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/closet,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -90896,7 +90869,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/closet,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -94198,7 +94170,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/rack,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -94935,7 +94906,6 @@
 /obj/structure/rack,
 /obj/item/crowbar/red,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -100849,7 +100819,6 @@
 /obj/item/crowbar/red,
 /obj/item/wrench,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/effect/turf_decal/bot,
@@ -104221,7 +104190,6 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plasteel/dark,
@@ -108334,7 +108302,6 @@
 "dCT" = (
 /obj/structure/closet,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -113326,7 +113293,6 @@
 	icon_state = "crateopen"
 	},
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -113746,7 +113712,6 @@
 	},
 /obj/item/crowbar/red,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -114103,7 +114068,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/closet/crate,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -114574,7 +114538,6 @@
 "dNt" = (
 /obj/structure/rack,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -115227,7 +115190,6 @@
 "dOx" = (
 /obj/structure/rack,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
@@ -120408,7 +120370,6 @@
 /obj/structure/table/wood,
 /obj/item/clothing/under/rank/civilian/curator,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/wood,
@@ -125225,7 +125186,6 @@
 	},
 /obj/machinery/camera{
 	c_tag = "Library - Aft";
-	dir = 2;
 	name = "library camera"
 	},
 /turf/open/floor/plasteel/grimy,
@@ -125454,7 +125414,6 @@
 /area/chapel/office)
 "iNK" = (
 /obj/structure/sign/painting/library{
-	pixel_x = 0;
 	pixel_y = -32
 	},
 /turf/open/floor/wood,
@@ -127013,7 +126972,6 @@
 "vRV" = (
 /obj/structure/rack,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/effect/turf_decal/tile/neutral,
@@ -127182,7 +127140,6 @@
 /area/science/mixing)
 "xER" = (
 /obj/structure/chair/sofa/left{
-	icon_state = "sofaend_left";
 	dir = 8
 	},
 /turf/open/floor/wood,

@@ -197,12 +197,10 @@
 /obj/structure/closet/emcloset/anchored,
 /obj/structure/sign/directions/medical{
 	dir = 8;
-	icon_state = "direction_med";
 	pixel_y = 36
 	},
 /obj/structure/sign/directions/science{
 	dir = 8;
-	icon_state = "direction_sci";
 	pixel_y = 28
 	},
 /turf/open/floor/plasteel,
@@ -239,7 +237,6 @@
 	},
 /obj/structure/sign/directions/engineering{
 	dir = 4;
-	icon_state = "direction_eng";
 	pixel_x = 32;
 	pixel_y = -28
 	},
@@ -276,8 +273,6 @@
 	},
 /obj/structure/sign/directions/engineering{
 	dir = 4;
-	icon_state = "direction_eng";
-	pixel_x = 0;
 	pixel_y = 40
 	},
 /turf/open/floor/plasteel,
@@ -338,7 +333,6 @@
 /obj/structure/disposalpipe/segment,
 /obj/structure/sign/directions/engineering{
 	dir = 1;
-	icon_state = "direction_eng";
 	pixel_x = 32;
 	pixel_y = 32
 	},
@@ -373,12 +367,10 @@
 "aaC" = (
 /obj/structure/sign/directions/medical{
 	dir = 8;
-	icon_state = "direction_med";
 	pixel_y = 36
 	},
 /obj/structure/sign/directions/science{
 	dir = 8;
-	icon_state = "direction_sci";
 	pixel_y = 28
 	},
 /turf/open/floor/plasteel,
@@ -386,13 +378,10 @@
 "aaD" = (
 /obj/structure/sign/directions/engineering{
 	dir = 4;
-	icon_state = "direction_eng";
 	pixel_y = 36
 	},
 /obj/structure/sign/directions/supply{
 	dir = 4;
-	icon_state = "direction_supply";
-	pixel_x = 0;
 	pixel_y = 28
 	},
 /turf/open/floor/plasteel,
@@ -434,12 +423,10 @@
 	},
 /obj/structure/sign/directions/medical{
 	dir = 8;
-	icon_state = "direction_med";
 	pixel_y = 40
 	},
 /obj/structure/sign/directions/science{
 	dir = 8;
-	icon_state = "direction_sci";
 	pixel_y = 32
 	},
 /obj/structure/sign/directions/security{
@@ -460,13 +447,10 @@
 	},
 /obj/structure/sign/directions/engineering{
 	dir = 4;
-	icon_state = "direction_eng";
 	pixel_y = 40
 	},
 /obj/structure/sign/directions/supply{
 	dir = 4;
-	icon_state = "direction_supply";
-	pixel_x = 0;
 	pixel_y = 32
 	},
 /obj/structure/sign/directions/evac{
@@ -494,7 +478,6 @@
 	},
 /obj/structure/sign/directions/evac{
 	dir = 4;
-	pixel_x = 0;
 	pixel_y = 40
 	},
 /turf/open/floor/plasteel/white/corner{
@@ -523,12 +506,10 @@
 	},
 /obj/structure/sign/directions/medical{
 	dir = 8;
-	icon_state = "direction_med";
 	pixel_y = 36
 	},
 /obj/structure/sign/directions/science{
 	dir = 8;
-	icon_state = "direction_sci";
 	pixel_y = 28
 	},
 /turf/open/floor/plasteel,
@@ -552,13 +533,10 @@
 /obj/machinery/computer/shuttle/snow_taxi,
 /obj/structure/sign/directions/supply{
 	dir = 4;
-	icon_state = "direction_supply";
-	pixel_x = 0;
 	pixel_y = 36
 	},
 /obj/structure/sign/directions/engineering{
 	dir = 4;
-	icon_state = "direction_eng";
 	pixel_y = 28
 	},
 /turf/open/floor/plasteel,
@@ -591,18 +569,13 @@
 "aaV" = (
 /obj/structure/sign/directions/evac{
 	dir = 1;
-	icon_state = "direction_evac";
 	pixel_y = 8
 	},
 /obj/structure/sign/directions/security{
-	dir = 8;
-	icon_state = "direction_sec";
-	pixel_x = 0;
-	pixel_y = 0
+	dir = 8
 	},
 /obj/structure/sign/directions/command{
 	dir = 8;
-	icon_state = "direction_bridge";
 	pixel_y = -8
 	},
 /turf/closed/wall/r_wall,
@@ -679,7 +652,6 @@
 	},
 /obj/structure/sign/directions/supply{
 	dir = 4;
-	icon_state = "direction_supply";
 	pixel_x = 32;
 	pixel_y = -24
 	},
@@ -781,7 +753,6 @@
 	},
 /obj/structure/sign/directions/evac{
 	dir = 8;
-	icon_state = "direction_evac";
 	pixel_x = 32;
 	pixel_y = 32
 	},
@@ -1151,13 +1122,11 @@
 /obj/structure/disposalpipe/segment,
 /obj/structure/sign/directions/evac{
 	dir = 8;
-	icon_state = "direction_evac";
 	pixel_x = 32;
 	pixel_y = 40
 	},
 /obj/structure/sign/directions/engineering{
 	dir = 4;
-	icon_state = "direction_eng";
 	pixel_x = 32;
 	pixel_y = 24
 	},
@@ -4161,7 +4130,7 @@
 /area/engine/supermatter)
 "aOP" = (
 /obj/structure/table/wood,
-/obj/item/storage/box/dice,
+/obj/item/storage/pill_bottle/dice,
 /turf/open/floor/plasteel/dark,
 /area/security/prison)
 "aPw" = (
@@ -27699,7 +27668,7 @@
 "nIM" = (
 /obj/structure/table/wood/poker,
 /obj/item/toy/cards/deck,
-/obj/item/storage/box/dice{
+/obj/item/storage/pill_bottle/dice{
 	pixel_x = 8
 	},
 /obj/structure/sign/poster/contraband/random{
@@ -33093,7 +33062,7 @@
 /area/bridge)
 "qMN" = (
 /obj/structure/table,
-/obj/item/storage/box/dice,
+/obj/item/storage/pill_bottle/dice,
 /turf/open/floor/plasteel/grimy,
 /area/crew_quarters/fitness/recreation)
 "qNB" = (

@@ -1123,8 +1123,7 @@
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/machinery/door/poddoor/preopen{
-	id = "executionfireblast";
-	name = "blast door"
+	id = "executionfireblast"
 	},
 /obj/machinery/door/firedoor,
 /obj/effect/turf_decal/tile/red{
@@ -1142,8 +1141,7 @@
 "acB" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/door/poddoor/preopen{
-	id = "executionfireblast";
-	name = "blast door"
+	id = "executionfireblast"
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
@@ -1183,8 +1181,7 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/poddoor/preopen{
-	id = "executionfireblast";
-	name = "blast door"
+	id = "executionfireblast"
 	},
 /obj/effect/turf_decal/tile/red{
 	dir = 1
@@ -5326,7 +5323,6 @@
 /obj/structure/closet,
 /obj/item/clothing/gloves/color/fyellow,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -5601,7 +5597,6 @@
 /obj/item/mop,
 /obj/item/bikehorn/rubberducky,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/item/grenade/empgrenade,
@@ -9482,7 +9477,6 @@
 /obj/structure/closet,
 /obj/item/storage/box/lights/mixed,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating{
@@ -17568,7 +17562,6 @@
 /obj/structure/closet,
 /obj/item/storage/box/donkpockets,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -21450,7 +21443,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/effect/turf_decal/bot,
@@ -44937,7 +44929,6 @@
 /obj/structure/closet,
 /obj/item/clothing/shoes/jackboots,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -49557,7 +49548,6 @@
 /obj/structure/closet,
 /obj/item/storage/box/donkpockets,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -62646,7 +62636,6 @@
 /obj/item/grenade/chem_grenade,
 /obj/item/flashlight,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -62657,7 +62646,6 @@
 /obj/item/reagent_containers/spray/weedspray,
 /obj/item/paper,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -63563,8 +63551,7 @@
 "cvL" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/door/poddoor/preopen{
-	id = "researchrangeshutters";
-	name = "blast door"
+	id = "researchrangeshutters"
 	},
 /turf/open/floor/plating,
 /area/science/misc_lab/range)
@@ -66417,8 +66404,7 @@
 "cBm" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/door/poddoor/preopen{
-	id = "researchrangeshutters";
-	name = "blast door"
+	id = "researchrangeshutters"
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
@@ -67056,8 +67042,7 @@
 	layer = 4;
 	name = "Test Chamber Telescreen";
 	network = list("toxins");
-	pixel_x = -32;
-	pixel_y = 0
+	pixel_x = -32
 	},
 /turf/open/floor/plasteel,
 /area/science/mixing)
@@ -70752,7 +70737,6 @@
 /obj/item/clothing/gloves/color/fyellow,
 /obj/item/wrench,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -71104,7 +71088,6 @@
 /obj/structure/rack,
 /obj/effect/spawner/lootdrop/costume,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /obj/effect/turf_decal/stripes/line,
@@ -78833,7 +78816,6 @@
 /obj/item/poster/random_contraband,
 /obj/item/poster/random_contraband,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
@@ -78893,7 +78875,6 @@
 /obj/structure/closet/crate,
 /obj/item/poster/random_contraband,
 /obj/effect/spawner/lootdrop/maintenance{
-	lootcount = 2;
 	name = "2maintenance loot spawner"
 	},
 /turf/open/floor/plating,
