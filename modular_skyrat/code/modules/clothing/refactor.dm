@@ -733,3 +733,56 @@
 	icon = 'modular_skyrat/icons/obj/clothing/cargoutilit.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/cargoutil.dmi'
 	icon_state = "gorka_cargo"
+
+// Armored boots and gloves
+
+/obj/item/clothing/shoes/jackboots
+	name = "jackboots"
+	desc = "Nanotrasen-issue Security combat boots lined with kevlar, these are the real deal."
+	armor = list("melee" = 15, "bullet" = 15, "laser" = 10, "energy" = 10, "bomb" = 30, "bio" = 80, "rad" = 20, "fire" = 80, "acid" = 50, "wound" = 5)
+
+/obj/item/clothing/shoes/jackboots/unarmored
+	name = "black boots"
+	desc = "Nanotrasen brand black leather boots."
+	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0, "wound" = 0)
+
+/obj/item/clothing/shoes/workboots
+	name = "work boots"
+	desc = "Nanotrasen-issue Engineering lace-up work boots with plated soles and toes, for the especially blue-collar."
+	armor = list("melee" = 20, "bullet" = 5, "laser" = 10, "energy" = 10, "bomb" = 30, "bio" = 80, "rad" = 80, "fire" = 80, "acid" = 50, "wound" = 5)
+
+/obj/item/clothing/shoes/workboots/unarmored
+	name = "tan boots"
+	desc = "Nanotrasen brand lace up boots."
+	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0, "wound" = 0)
+
+/obj/item/clothing/shoes/workboots/mining
+	name = "mining boots"
+	armor = list("melee" = 30, "bullet" = 5, "laser" = 10, "energy" = 10, "bomb" = 30, "bio" = 80, "rad" = 20, "fire" = 100, "acid" = 50, "wound" = 10)
+
+/obj/item/clothing/shoes/workboots/mining/unarmored
+	name = "hiking boots"
+	desc = "Nanotrasen brand hiking boots."
+	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0, "wound" = 0)
+
+/obj/item/clothing/shoes/combat
+	armor = list("melee" = 30, "bullet" = 30, "laser" = 30, "energy" = 30, "bomb" = 50, "bio" = 80, "rad" = 80, "fire" = 100, "acid" = 50, "wound" = 10)
+	force = 5
+
+/obj/item/clothing/gloves/color/black
+	armor = list("melee" = 15, "bullet" = 15, "laser" = 10, "energy" = 10, "bomb" = 30, "bio" = 80, "rad" = 20, "fire" = 80, "acid" = 50, "wound" = 10)
+
+/obj/item/clothing/gloves/color/black/ce
+	name = "impact gloves"
+	desc = "Within these gloves shear thickening fluid hardens on impact for offense and defense."
+	armor = list("melee" = 20, "bullet" = 20, "laser" = 10, "energy" = 10, "bomb" = 30, "bio" = 80, "rad" = 20, "fire" = 80, "acid" = 50, "wound" = 10)
+	icon_state = "combat"
+	siemens_coefficient = 0.5
+	force = 5
+
+/obj/item/clothing/gloves/combat
+	armor = list("melee" = 30, "bullet" = 30, "laser" = 30, "energy" = 30, "bomb" = 50, "bio" = 80, "rad" = 80, "fire" = 100, "acid" = 50, "wound" = 10)
+	force = 5
+
+/obj/item/clothing/gloves/black
+
