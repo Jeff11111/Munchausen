@@ -98,3 +98,8 @@
 	name = "Cassette Vol. 5"
 	id = "cassette_irreversible"
 	build_path = /obj/item/device/cassette/irreversible
+
+/datum/design/cassette/clown
+	name = "Cassette Vol. 6"
+	id = "cassette_clown"
+	build_path = /obj/item/device/cassette/clown

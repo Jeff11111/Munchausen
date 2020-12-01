@@ -47,6 +47,16 @@
 					"Thomas Bangalter - Spinal Scratch" = 'modular_skyrat/sound/music/spinalscratch.ogg',
 					)
 
+/obj/item/device/cassette/clown
+	name = "cassette volume 6 - Clown"
+	desc = "Retard music."
+	icon_state = "vol_6"
+	all_tunes = list(
+					"Gangsta Rap - Nigga Nigga Nigga" = 'modular_skyrat/sound/music/nigganigganigga.ogg',
+					"FAttY SPiNS - Doin' Your Mom" = 'modular_skyrat/sound/music/doingyourmom.ogg',
+					"Yo Mama - Yo Mama Theme Song" = 'modular_skyrat/sound/music/yomama.ogg',
+					)
+
 /obj/item/device/cassette/dreamer
 	name = "cassette volume #$%&"
 	desc = "Sweet dreams."

@@ -48,4 +48,9 @@
 	display_name = "Cassettes"
 	description = "Everyone needs some music to dance to."
 	prereq_ids = list("telecomms")
-	design_ids = list("cassette_os13", "cassette_manwhosoldtheworld", "cassette_thecaretaker", "cassette_doom", "cassette_irreversible")
+	design_ids = list("cassette_os13", \
+					"cassette_manwhosoldtheworld", \
+					"cassette_thecaretaker", \
+					"cassette_doom", \
+					"cassette_irreversible", \
+					"cassette_clown")
