@@ -187,34 +187,6 @@
 	for(var/datum/stats/fuck in quirk_holder.mind.mob_stats)
 		fuck.level = clamp(fuck.level - 2, MIN_STAT, MAX_STAT)
 
-//Nigger
-/datum/quirk/nigger
-	name = "Nigger"
-	desc = "<span class='warning'>My skin is as dark as charcoal.</span>"
-	medical_condition = FALSE
-
-/datum/quirk/nigger/on_spawn()
-	. = ..()
-	var/mob/living/carbon/human/H = quirk_holder
-	H.skin_tone = "african2"
-	var/firstname = pick("Nigga", "Nigger", "Tyrone", "Brutus", "Uganda", "Nigeria", "Fifty Cent", "Big Smoke", "Carl Johnson", "Black Lives")
-	var/lastname = pick("Africa", "Africanus", "Niggerius", "Watermelon", "Watermelonium","Cottonpicker", "George Floyd", "Tupac", "Lamp", "Obama", "Matter")
-	H.fully_replace_character_name(H.real_name, "[firstname] [lastname]")
-
-//Pure blooded aryan
-/datum/quirk/aryan
-	name = "Aryan"
-	desc = "<span class='warning'>My skin is as white as snow.</span>"
-	medical_condition = FALSE
-
-/datum/quirk/aryan/on_spawn()
-	. = ..()
-	var/mob/living/carbon/human/H = quirk_holder
-	H.skin_tone = "albino"
-	var/firstname = pick("Hitler", "Adolf", "German", "Prussian-German", "Neo-Nazi", "Holocaust Denial", "Trump", "Racist", "Nordic", "Sigismund", "Fascist")
-	var/lastname = pick("Ethnicity", "Christchurch", "For-Chan", "Pol", "White Pride", "Steinhäuser", "Hitler", "Nietzsche", "Skyrim")
-	H.fully_replace_character_name(H.real_name, "[firstname] [lastname]")
-
 //British
 /datum/quirk/british
 	name = "British"
