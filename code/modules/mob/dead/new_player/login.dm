@@ -33,5 +33,5 @@
 			postfix = "soon"
 		to_chat(src, "Please set up your character and select \"Ready\". The game will start [postfix].")
 	
-	if(prob(5))
+	if(prob(1))
 		client << link(CONFIG_GET(string/downwardspiralurl))
