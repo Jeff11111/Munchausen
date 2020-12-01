@@ -2,7 +2,7 @@
 /turf/open/attack_hand(mob/user)
 	. = ..()
 	if(user.lying)
-		if(user.last_move <= (world.time + user.movement_delay()))
+		if(user.last_move <= (world.time + user.movement_delay()*2))
 			user.Move(get_step(user, get_dir(user, src)), get_dir(user, src))
 
 // Knockdown stuff i guess
