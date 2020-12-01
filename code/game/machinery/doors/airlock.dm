@@ -103,7 +103,7 @@
 	var/static/list/airlock_overlays = list()
 
 	//bobstation - this variable deterimines on initialize a wire that will start cut
-	var/initialMalfunctionProb = 20
+	var/initialMalfunctionProb = 10
 
 /obj/machinery/door/airlock/Initialize()
 	. = ..()
