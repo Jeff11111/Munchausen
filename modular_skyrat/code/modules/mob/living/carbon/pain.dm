@@ -50,13 +50,13 @@
 			var/obj/item/bodypart/parent = get_bodypart(O.zone)
 			if(parent)
 				var/pain = 10
-				var/message = "I feel a dull pain in my [parent.name]"
+				var/message = "I feel a dull pain in my [parent.name]."
 				if(O.damage >= O.low_threshold)
 					pain = 25
-					message = "I feel a pain in my [parent.name]"
+					message = "I feel a pain in my [parent.name]."
 				if((O.damage >= O.high_threshold) || (O.organ_flags & ORGAN_FAILING))
 					pain = 50
-					message = "I feel a sharp pain in my [parent.name]"
+					message = "I feel a sharp pain in my [parent.name]."
 				custom_pain(message, pain, FALSE, parent)
 
 	var/toxDamageMessage = null

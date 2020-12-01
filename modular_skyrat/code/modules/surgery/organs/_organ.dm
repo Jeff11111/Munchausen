@@ -187,11 +187,8 @@
 	if((organ_flags & ORGAN_FROZEN) || (organ_flags & ORGAN_DEAD))
 		return
 	germ_level += rand(MIN_ORGAN_DECAY_INFECTION,MAX_ORGAN_DECAY_INFECTION)
-	if(germ_level >= INFECTION_LEVEL_ONE)
-		applyOrganDamage((maxHealth * decay_factor)/2)
 	if(germ_level >= INFECTION_LEVEL_TWO)
 		germ_level += rand(MIN_ORGAN_DECAY_INFECTION,MAX_ORGAN_DECAY_INFECTION)
-		applyOrganDamage((maxHealth * decay_factor)/2)
 	if(germ_level >= INFECTION_LEVEL_THREE)
 		kill_organ()
 

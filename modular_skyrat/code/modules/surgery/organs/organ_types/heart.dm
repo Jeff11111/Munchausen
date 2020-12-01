@@ -188,9 +188,9 @@
 		return
 	//And if it's beating, let's see if it should
 	else
-		var/should_stop = prob(50) && (owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE) //cardiovascular shock, not enough liquid to pump
+		var/should_stop = (owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE) && prob(25) //cardiovascular shock, not enough liquid to pump
 		should_stop = should_stop || prob(max(0, owner.getBrainLoss() - owner.maxHealth * 0.75)) //brain failing to work heart properly
-		should_stop = should_stop || (pulse >= PULSE_THREADY && prob(2)) //erratic heart patterns, usually caused by oxyloss
+		should_stop = should_stop || ((pulse >= PULSE_THREADY) && prob(2)) //erratic heart patterns, usually caused by oxyloss
 		if(should_stop && can_stop()) // The heart has stopped due to going into traumatic or cardiovascular shock.
 			Stop()
 			return

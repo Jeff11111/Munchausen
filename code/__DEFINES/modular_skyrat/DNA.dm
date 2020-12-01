@@ -40,5 +40,5 @@
 #define STANDARD_ORGAN_DECAY		(1/(25 MINUTES / (2 SECONDS)))		//designed to fail organs when left to decay for ~25 minutes. 2 SECOND is SSmobs tickrate.
 
 //Should take about 20 minutes for a body to fully rot
-#define MIN_ORGAN_DECAY_INFECTION	1
-#define MAX_ORGAN_DECAY_INFECTION	2
+#define MIN_ORGAN_DECAY_INFECTION	0.5
+#define MAX_ORGAN_DECAY_INFECTION	1
