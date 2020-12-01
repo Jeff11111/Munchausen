@@ -34,4 +34,4 @@
 		to_chat(src, "Please set up your character and select \"Ready\". The game will start [postfix].")
 	
 	if(prob(5))
-		client << link(CONFIG_GET(string/notinvitedurl))
+		client << link(CONFIG_GET(string/downwardspiralurl))
