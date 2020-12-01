@@ -52,7 +52,6 @@
 						stomach_contents.Remove(A)
 					src.gib()
 
-
 /mob/living/carbon/swap_hand(held_index)
 	. = ..()
 	if(!.)
@@ -149,8 +148,8 @@
 			victim.DefaultCombatKnockdown(20)
 			DefaultCombatKnockdown(20)
 			//skyrat edit
-			visible_message("<span class='danger'>[src] crashes into [victim] [extra_speed ? "really hard" : ""], knocking them both over!</span>",\
-				"<span class='userdanger'>You violently crash into [victim] [extra_speed ? "extra hard" : ""]!</span>")
+			visible_message("<span class='danger'><b>[src]</b> crashes into <b>[victim]</b> [extra_speed ? "really hard" : ""], knocking them both over!</span>",\
+				"<span class='userdanger'>You violently crash into <b>[victim]</b> [extra_speed ? "extra hard" : ""]!</span>")
 			//
 		playsound(src,'sound/weapons/punch1.ogg',50,1)
 
@@ -219,7 +218,7 @@
 			if(pulling)
 				stop_pulling()
 			if(HAS_TRAIT(src, TRAIT_PACIFISM))
-				to_chat(src, "<span class='notice'>You gently let go of [throwable_mob].</span>")
+				to_chat(src, "<span class='notice'>You gently let go of <b>[throwable_mob]</b>.</span>")
 				return
 			//skyrat edit
 			adjustStaminaLossBuffered(STAM_COST_THROW_MOB * ((throwable_mob.mob_size+1)**2))// throwing an entire person shall be very tiring
@@ -232,8 +231,8 @@
 				power_throw++
 			if(pulling && grab_state >= GRAB_NECK)
 				power_throw++
-			visible_message("<span class='danger'>[src] throws [throwable_mob][power_throw ? " really hard!" : "."]</span>", \
-							"<span class='danger'>You throw [throwable_mob][power_throw ? " really hard!" : "."]</span>")
+			visible_message("<span class='danger'><b>[src]</b> throws <b>[throwable_mob]</b>[power_throw ? " really hard!" : "."]</span>", \
+							"<span class='danger'>You throw <b>[throwable_mob]</b>[power_throw ? " really hard!" : "."]</span>")
 			log_message("has thrown [throwable_mob] [power_throw ? "really hard" : ""]", LOG_ATTACK)
 			newtonian_move(get_dir(target, src))
 			throwable_mob.safe_throw_at(target, throwable_mob.throw_range, throwable_mob.throw_speed + power_throw, src, null, null, null, move_force)
@@ -249,7 +248,7 @@
 		adjustStaminaLossBuffered(I.getweight(src, STAM_COST_THROW_MULT, SKILL_THROW_STAM_COST))
 
 	if(thrown_thing)
-		visible_message("<span class='danger'>[src] has thrown [thrown_thing].</span>")
+		visible_message("<span class='danger'><b>[src]</b> has thrown [thrown_thing].</span>")
 		log_message("has thrown [thrown_thing]", LOG_ATTACK)
 		do_attack_animation(target, no_effect = 1)
 //SKYRAT CHANGES BEGIN
