@@ -67,7 +67,7 @@
 
 //Nangler
 /obj/item/ammo_box/magazine/m9mm/small
-	name = "nangler magazine (9mm)"
+	name = "pistol magazine (9mm)"
 	desc = "A low capacity magazine for compact pistols."
 	icon_state = "small9mm"
 	ammo_type = /obj/item/ammo_casing/c9mm
