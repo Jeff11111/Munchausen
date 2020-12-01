@@ -7,3 +7,4 @@
 							)
 	belt = /obj/item/storage/belt/sabre/hos
 	suit_store = /obj/item/gun/energy/e_gun/advtaser/large
+	gloves = /obj/item/clothing/gloves/color/black/ce

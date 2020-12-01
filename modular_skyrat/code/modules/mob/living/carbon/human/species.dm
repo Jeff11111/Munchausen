@@ -285,15 +285,21 @@
 
 //Kicking
 /datum/species/proc/kick(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
+	if(!user.get_bodypart(BODY_ZONE_PRECISE_L_FOOT) && !user.get_bodypart(BODY_ZONE_PRECISE_R_FOOT))
+		to_chat(user, "<span class='warning'>I can't kick without feet!</span>")
+		return FALSE // You need at least one foot to kick with. 
+	if(!target.resting && (user.zone_selected in list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_EYES)))
+		to_chat(user, "<span class='warning'>I can't kick above [target]'s waist!</span>")
+		return FALSE // You can't kick above their waist, should make this conditional based on skill but eh.
 	if(!attacker_style && HAS_TRAIT(user, TRAIT_PACIFISM))
-		to_chat(user, "<span class='warning'>You don't want to harm [target]!</span>")
+		to_chat(user, "<span class='warning'>I don't want to harm [target]!</span>")
 		return FALSE
 	if(IS_STAMCRIT(user))
-		to_chat(user, "<span class='warning'>You're too exhausted.</span>")
+		to_chat(user, "<span class='warning'>I'm too exhausted.</span>")
 		return FALSE
 	if(target.check_martial_melee_block())
 		target.visible_message("<span class='warning'><b>[target]</b> blocks <b>[user]</b>'s attack!</span>", target = user, \
-			target_message = "<span class='warning'><b>[target]</b> blocks your attack!</span>")
+			target_message = "<span class='warning'><b>[target]</b> blocks my attack!</span>")
 		return FALSE
 
 	if(target.mind?.handle_parry(target, null, 0, user))
@@ -342,6 +348,7 @@
 				user.do_attack_animation(target, ATTACK_EFFECT_PUNCH)
 
 		var/damage = (user.dna.species.punchdamagelow + user.dna.species.punchdamagehigh)/2
+		var/obj/item/clothing/shoes/S = user.shoes
 
 		//Kicks deal 2x the normal damage of punches
 		damage *= 2
@@ -380,6 +387,10 @@
 					damage *= 0.4
 					pitiful = TRUE
 		
+		//Shoes with the force var modify total damage
+		if(user.shoes)
+			damage += S.force
+
 		//The probability of hitting the correct zone depends on dexterity
 		//and also on which limb we aim at
 		//since this is a kick, chance to miss is almost doubled
@@ -409,8 +420,8 @@
 		if(!damage || !affecting || (missed && target != user))//future-proofing for species that have 0 damage/weird cases where no zone is targeted
 			playsound(target.loc, user.dna.species.miss_sound, 25, TRUE, -1)
 			target.visible_message("<span class='danger'><b>[user]</b>'s [atk_verb] misses <b>[target]</b>!</span>", \
-							"<span class='danger'>You avoid <b>[user]</b>'s [atk_verb]!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, null, \
-							user, "<span class='warning'>Your [atk_verb] misses [target]!</span>")
+							"<span class='danger'>I avoid <b>[user]</b>'s [atk_verb]!</span>", "<span class='hear'>I hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, null, \
+							user, "<span class='warning'>My [atk_verb] misses [target]!</span>")
 			log_combat(user, target, "attempted to punch")
 			return FALSE
 
@@ -436,8 +447,8 @@
 
 		//Attack message
 		target.visible_message("<span class='danger'><b>[user]</b>[pitiful ? " pitifully" : ""] [user.dna.species.kick_verb_continuous] <b>[target]</b> on their [affecting.name]![target.wound_message]</span>", \
-					"<span class='userdanger'><b>[user]</b>[pitiful ? " pitifully" : ""] [user.dna.species.kick_verb_continuous]s you on your [affecting.name]![target.wound_message]</span>", null, COMBAT_MESSAGE_RANGE, null, \
-					user, "<span class='danger'>You[pitiful ? " pitifully" : ""] [user.dna.species.kick_verb_continuous] <b>[target]</b> on their [affecting.name]![target.wound_message]</span>")
+					"<span class='userdanger'><b>[user]</b>[pitiful ? " pitifully" : ""] [user.dna.species.kick_verb_continuous]s me on my [affecting.name]![target.wound_message]</span>", null, COMBAT_MESSAGE_RANGE, null, \
+					user, "<span class='danger'>I[pitiful ? " pitifully" : ""] [user.dna.species.kick_verb] <b>[target]</b> on their [affecting.name]![target.wound_message]</span>")
 		
 		//Clean the descriptive string
 		target.wound_message = ""
@@ -445,9 +456,9 @@
 		if((target.stat != DEAD) && damage >= (user.dna.species.punchstunthreshold*1.5))
 			if((kickedstam > 50) && prob(kickedstam*0.5)) //If our punch victim has been hit above the threshold, and they have more than 50 stamina damage, roll for stun, probability of 1% per 2 stamina damage
 				target.visible_message("<span class='danger'><b>[user]</b> knocks [target] down!</span>", \
-								"<span class='userdanger'>You're knocked down by <b>[user]</b>!</span>",
-								"<span class='hear'>You hear aggressive shuffling followed by a loud thud!</span>", COMBAT_MESSAGE_RANGE, null,
-								user, "<span class='danger'>You knock <b>[target]</b> down!</span>")
+								"<span class='userdanger'>I'm knocked down by <b>[user]</b>!</span>",
+								"<span class='hear'>I hear aggressive shuffling followed by a loud thud!</span>", COMBAT_MESSAGE_RANGE, null,
+								user, "<span class='danger'>I knock <b>[target]</b> down!</span>")
 
 				var/knockdown_duration = 40 + (kickedstam + (kickedbrute*0.5))*0.8 - armor_block
 				target.DefaultCombatKnockdown(knockdown_duration)
@@ -468,19 +479,19 @@
 //Biting
 /datum/species/proc/bite(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
 	if(!attacker_style && HAS_TRAIT(user, TRAIT_PACIFISM))
-		to_chat(user, "<span class='warning'>You don't want to harm [target]!</span>")
+		to_chat(user, "<span class='warning'>I don't want to harm [target]!</span>")
 		return FALSE
 	if(IS_STAMCRIT(user))
-		to_chat(user, "<span class='warning'>You're too exhausted.</span>")
+		to_chat(user, "<span class='warning'>I'm too exhausted.</span>")
 		return FALSE
 	//British people don't bite
 	var/obj/item/bodypart/teeth_part = user.get_bodypart(BODY_ZONE_HEAD)
 	if(!teeth_part || !teeth_part.get_teeth_amount())
-		to_chat(user, "<span class='warning'>You can't bite without teeth!</span>")
+		to_chat(user, "<span class='warning'>I can't bite without teeth!</span>")
 		return FALSE
 	if(target.check_martial_melee_block())
 		target.visible_message("<span class='warning'><b>[target]</b> blocks <b>[user]</b>'s attack!</span>", target = user, \
-			target_message = "<span class='warning'><b>[target]</b> blocks your attack!</span>")
+			target_message = "<span class='warning'><b>[target]</b> blocks my attack!</span>")
 		return FALSE
 
 	if(target.mind?.handle_parry(target, null, 0, user))
@@ -591,8 +602,8 @@
 		if(!damage || !affecting || (missed && target != user))//future-proofing for species that have 0 damage/weird cases where no zone is targeted
 			playsound(target.loc, user.dna.species.miss_sound, 25, TRUE, -1)
 			target.visible_message("<span class='danger'><b>[user]</b>'s [atk_verb] misses <b>[target]</b>!</span>", \
-							"<span class='danger'>You avoid <b>[user]</b>'s [atk_verb]!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, null, \
-							user, "<span class='warning'>Your [atk_verb] misses <b>[target]</b>!</span>")
+							"<span class='danger'>I avoid <b>[user]</b>'s [atk_verb]!</span>", "<span class='hear'>I hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, null, \
+							user, "<span class='warning'>My [atk_verb] misses <b>[target]</b>!</span>")
 			log_combat(user, target, "attempted to punch")
 			return FALSE
 
@@ -617,8 +628,8 @@
 
 		//Attack message
 		target.visible_message("<span class='danger'><b>[user]</b>[pitiful ? " pitifully" : ""] [user.dna.species.bite_verb_continuous] <b>[target]</b> on their [affecting.name]![target.wound_message]</span>", \
-					"<span class='userdanger'><b>[user]</b>[pitiful ? " pitifully" : ""] [user.dna.species.bite_verb_continuous] you on your [affecting.name]![target.wound_message]</span>", null, COMBAT_MESSAGE_RANGE, null, \
-					user, "<span class='danger'>You[pitiful ? " pitifully" : ""] [user.dna.species.bite_verb_continuous] <b>[target]</b> on their [affecting.name]![target.wound_message]</span>")
+					"<span class='userdanger'><b>[user]</b>[pitiful ? " pitifully" : ""] [user.dna.species.bite_verb_continuous] me on my [affecting.name]![target.wound_message]</span>", null, COMBAT_MESSAGE_RANGE, null, \
+					user, "<span class='danger'>I[pitiful ? " pitifully" : ""] [user.dna.species.bite_verb] <b>[target]</b> on their [affecting.name]![target.wound_message]</span>")
 
 		//Clean the descriptive string
 		target.wound_message = ""
