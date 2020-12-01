@@ -198,12 +198,12 @@ GLOBAL_VAR(posibrain_notify_cooldown)
 			return FALSE
 		var/obj/item/organ/brain/ipc_positron/braine = new /obj/item/organ/brain/ipc_positron(get_turf(user))
 		brainmob.container = null
+		brainmob.forceMove(braine)
 		brainmob.stat = DEAD
 		brainmob.reset_perspective()
 		GLOB.alive_mob_list -= brainmob //Get outta here
 		GLOB.dead_mob_list += brainmob
-		brain.brainmob = brainmob
-		brainmob.forceMove(braine)
+		braine.brainmob = brainmob
 		brainmob = null
 		user.put_in_hands(braine)
 		to_chat(user, "<span class='notice'>I safely rip \the [braine] from \the [src].</span>")
