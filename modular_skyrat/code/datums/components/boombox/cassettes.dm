@@ -55,6 +55,7 @@
 					"Gangsta Rap - Nigga Nigga Nigga" = 'modular_skyrat/sound/music/nigganigganigga.ogg',
 					"FAttY SPiNS - Doin' Your Mom" = 'modular_skyrat/sound/music/doingyourmom.ogg',
 					"Yo Mama - Yo Mama Theme Song" = 'modular_skyrat/sound/music/yomama.ogg',
+					"Etnon feat Lyrical Son & Dj Blunt - Albanian" = 'modular_skyrat/sound/music/albanian.ogg',
 					)
 
 /obj/item/device/cassette/dreamer
