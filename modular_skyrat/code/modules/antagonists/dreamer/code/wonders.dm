@@ -94,7 +94,7 @@
 					key_text = dream_master.associated_keys[wonder_id]
 				if(wonder_id >= 4)
 					to_chat(H, "<span class='userdanger'>I must SUM the keys. I am WAKING up!</span>")
-					for(var/datum/antagonist/dreamer/droomer in H.mind?.antag_datums)
+					for(var/datum/antagonist/dreamer/droomer in H.mind.antag_datums)
 						droomer.agony(H)
 				break
 			break
