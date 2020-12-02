@@ -15,7 +15,8 @@
 			zone = BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_MOUTH)
 			zone = BODY_ZONE_HEAD
-	return zone
+		else
+			return zone
 
 
 /proc/ran_zone(zone, probability = 80)
