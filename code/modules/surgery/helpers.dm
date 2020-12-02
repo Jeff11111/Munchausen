@@ -172,6 +172,9 @@
 				inch.remove_wound()
 		user.visible_message("<span class='notice'>[user] closes [M]'s [parse_zone(selected_zone)] with [close_tool] and removes [I].</span>", \
 			"<span class='notice'>You close [M]'s [parse_zone(selected_zone)] with [close_tool] and remove [I].</span>")
+		var/datum/component/storage/concrete/organ/ST = M.GetComponent(/datum/component/storage/concrete/organ)
+		if(ST)
+			qdel(ST)
 		qdel(S)
 		return TRUE
 
