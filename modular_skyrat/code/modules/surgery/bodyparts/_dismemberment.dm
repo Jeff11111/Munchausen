@@ -13,7 +13,7 @@
 	if(!owner)
 		return FALSE
 	var/mob/living/carbon/C = owner
-	if(!dismemberable)
+	if(!can_dismember())
 		return FALSE
 	if(C.status_flags & GODMODE)
 		return FALSE
