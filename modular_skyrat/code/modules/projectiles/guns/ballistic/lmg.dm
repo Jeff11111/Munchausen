@@ -11,7 +11,7 @@
 
 /obj/item/gun/ballistic/automatic/l6_saw/update_icon()
 	..()
-	icon_state = "pk[cover-open ? "-e" : ""]"
+	icon_state = "pk[cover_open ? "-e" : ""]"
 	item_state = "pk[magazine ? "" : "-e"][is_wielded ? "-wielded" : ""]"
 
 /obj/item/gun/ballistic/automatic/l6_saw/build_magazine_overlay()

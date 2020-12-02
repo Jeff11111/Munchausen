@@ -2,7 +2,7 @@
 	name = "Ebony Blade"
 	desc = "An artifact that fits the literal description of a traitor, as it gets more powerful the more you kill your own."
 	item = /obj/item/ebonyblade
-	cost = 6
+	cost = 5
 
 /datum/uplink_item/dangerous/mehrunesrazor
 	name = "Serrated Blade"
@@ -14,13 +14,13 @@
 	name = "Blackened Dagger"
 	desc = "A dagger, capable of using your enemies' blood to heal your own ailments."
 	item = /obj/item/kitchen/knife/combat/woe
-	cost = 9
+	cost = 8
 
 /datum/uplink_item/dangerous/energybalisong
 	name = "Energy Balisong"
 	desc = "An advanced, energy tipped version of the classic knife design. Able to do massive backstab damage on targets."
 	item = /obj/item/melee/transforming/butterfly/energy
-	cost = 9
+	cost = 8
 
 /datum/uplink_item/dangerous/contender
 	name = "Contender Kit"
@@ -40,13 +40,13 @@
 	name = "Will Breaker"
 	desc = "A cursed artifact, capable of penetrating all armor and knocking down your targets senseless"
 	item = /obj/item/melee/cleric_mace/molagbal
-	cost = 9
+	cost = 8
 
 /datum/uplink_item/dangerous/morphcube
 	name = "Morph Cube"
 	desc = "Gives you the ability to shapeshift into the currrent scanned animal on the cube."
 	item = /obj/item/morphcube
-	cost = 9
+	cost = 8
 
 /datum/uplink_item/dangerous/cxneb
 	name = "Dragon's Tooth Non-Eutactic Blade"
@@ -56,4 +56,12 @@
 	 		This particular model has a polychromic hardlight generator, allowing you to murder in style! \
 	 		The illegal modifications bring this weapon up to par with the classic energy sword, and also gives it the energy sword's distinctive sounds."
 	item = /obj/item/melee/transforming/energy/sword/cx/traitor
-	cost = 8
+	cost = 7
+
+/datum/uplink_item/dangerous/vintorez
+	name = "9x39mm Riifle"
+	desc = "A fully-loaded MI13 Vintorez replica rifle. \
+			This rifle comes pre-installed with an internal suppressor for covert operations."
+	item = /obj/item/gun/ballistic/automatic/vintorez
+	cost = 12
+	include_modes = list(/datum/game_mode/nuclear)

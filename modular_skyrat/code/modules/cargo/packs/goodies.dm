@@ -213,6 +213,19 @@
 	contains = list(/obj/item/ammo_box/a762,
 					/obj/item/ammo_box/a762)
 
+/datum/supply_pack/goody/vintorez
+	name = "9x39mm Suppressed Rifle"
+	desc = "Contains one suppressed rifle, chambered in 9x39mm. Never know when you need it."
+	cost = 12000
+	contains = list(/obj/item/gun/ballistic/automatic/vintorez)
+
+/datum/supply_pack/goody/vintorez_ammo
+	name = "9x39mm Magazines"
+	desc = "Contains 2 9x39mm rifle magazines. Never know when you need it."
+	cost = 4000
+	contains = list(/obj/item/ammo_box/magazine/m9x39mm,
+					/obj/item/ammo_box/magazine/m9x39mm)
+
 /datum/supply_pack/goody/revolver
 	name = ".357 Revolver"
 	desc = "Contains one generic .357 revolver. Never know when you need it."

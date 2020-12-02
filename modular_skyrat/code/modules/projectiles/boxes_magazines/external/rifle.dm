@@ -29,3 +29,16 @@
 /obj/item/ammo_box/magazine/m762/update_icon()
 	..()
 	icon_state = "[initial(icon_state)]-[ammo_count() ? "30" : "0"]"
+
+//Vintorez
+/obj/item/ammo_box/magazine/m9x39mm
+	name = "rifle magazine (9x39mm)"
+	icon = 'modular_skyrat/icons/obj/bobstation/ammo/rifle.dmi'
+	icon_state = "srifle"
+	caliber = "9x39mm"
+	ammo_type = /obj/item/ammo_casing/m9x39mm
+	max_ammo = 20
+
+/obj/item/ammo_box/magazine/m9x39mm/update_icon()
+	..()
+	icon_state = "[initial(icon_state)]-[ammo_count() ? "20" : "0"]"
