@@ -99,7 +99,7 @@
 		W.remove_wound(TRUE)
 	
 	if(dismembered && dismember_bodyzone)
-		var/obj/item/bodypart/BP = owner.get_bodypart(dismember_bodyzone)
+		var/obj/item/bodypart/BP = owner.get_bodypart(check_zone(fake_body_zone))
 		if(istype(BP))
 			var/datum/wound/lost
 			if(BP.is_organic_limb())
