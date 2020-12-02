@@ -1355,7 +1355,7 @@
 	return dna?.species?.get_biological_state()
 
 /mob/living/carbon/human/needs_lungs()
-	return !(TRAIT_NOBREATH in dna?.species?.inherent_traits)
+	return !HAS_TRAIT(src, TRAIT_NOBREATH)
 
 //skyrat species
 /mob/living/carbon/human/species/humanoid

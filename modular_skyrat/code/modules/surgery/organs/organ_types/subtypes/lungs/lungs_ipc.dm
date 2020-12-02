@@ -15,7 +15,6 @@
 	cold_level_2_damage = 0
 	cold_level_3_damage = 0
 	status = ORGAN_ROBOTIC
-	organ_flags = ORGAN_SYNTHETIC
 
 /obj/item/organ/lungs/robot_ipc/emp_act(severity) //Should probably put it somewhere else later
 	. = ..()

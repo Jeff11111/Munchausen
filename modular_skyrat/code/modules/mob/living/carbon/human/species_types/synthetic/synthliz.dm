@@ -4,6 +4,7 @@
 	say_mod = "beeps"
 	default_color = "00FF00"
 	species_traits = list(MUTCOLORS,NOTRANSSTING,EYECOLOR,LIPS,HAIR,NOTRANSSTING,NOZOMBIE,REVIVESBYHEALING,NOHUSK,ROBOTIC_LIMBS,NO_DNA_COPY,HAS_SKIN,HAS_FLESH,HAS_BONE,NOAPPENDIX)
+	inherent_traits = list(TRAIT_NOBREATH,TRAIT_RADIMMUNE,TRAIT_TOXIMMUNE,TRAIT_CLONEIMMUNE,TRAIT_DNC)
 	inherent_biotypes = MOB_ROBOTIC|MOB_HUMANOID
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/ipc
 	gib_types = list(/obj/effect/gibspawner/ipc, /obj/effect/gibspawner/ipc/bodypartless)
@@ -28,7 +29,6 @@
 	mutantkidneys = /obj/item/organ/kidneys/robot_ipc
 	mutantspleen = /obj/item/organ/spleen/robot_ipc
 	exotic_bloodtype = "S"
-	inherent_traits = list(TRAIT_RADIMMUNE,TRAIT_TOXIMMUNE,TRAIT_CLONEIMMUNE,TRAIT_DNC)
 	languagewhitelist = list("Encoded Audio Language")
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/ipc/synthliz
 
