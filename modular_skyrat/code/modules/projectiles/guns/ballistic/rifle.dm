@@ -75,6 +75,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	can_unsuppress = FALSE
 	generic_magazine_overlays = TRUE
+	burst_size = 1 //no burst firing that's wacky
 
 /obj/item/gun/ballistic/automatic/vintorez/Initialize()
 	. = ..()
