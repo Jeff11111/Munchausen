@@ -7,11 +7,9 @@
 
 /datum/outfit/job/warden
 	backpack_contents = list(
-					/obj/item/ammo_box/magazine/m9mm/small=1,
-					/obj/item/gun/energy/e_gun/advtaser=1,
 					/obj/item/melee/classic_baton/black=1,
 					)
-	suit_store = /obj/item/gun/ballistic/automatic/pistol/nangler
+	suit_store = /obj/item/gun/energy/e_gun/advtaser/large
 
 /obj/item/choice_beacon/warden
 	name = "lieutenant's weapon beacon"
