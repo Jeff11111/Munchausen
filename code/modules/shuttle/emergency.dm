@@ -1,7 +1,7 @@
 #define TIME_LEFT (SSshuttle.emergency.timeLeft())
 #define ENGINES_START_TIME 100
 #define ENGINES_STARTED (SSshuttle.emergency.mode == SHUTTLE_IGNITING)
-#define IS_DOCKED ((SSshuttle.emergency.mode in list(SHUTTLE_DOCKED, SHUTTLE_FUELING, SHUTTLE_IDLE)) || (ENGINES_STARTED))
+#define IS_DOCKED (SSshuttle.emergency.mode in list(SHUTTLE_DOCKED, SHUTTLE_FUELING, SHUTTLE_IDLE))
 #define MAX_AUTH_INPUTS 6
 
 #define NOT_BEGUN 0
@@ -289,7 +289,6 @@
 /obj/docking_port/mobile/emergency
 	name = "emergency shuttle"
 	id = "emergency"
-
 	dwidth = 9
 	width = 22
 	height = 11
@@ -322,12 +321,10 @@
 				set_coefficient = 2
 			if(SEC_LEVEL_BLUE)
 				set_coefficient = 1.2
-			//Skyrat change start
 			if(SEC_LEVEL_VIOLET)
 				set_coefficient = 0.8
 			if(SEC_LEVEL_ORANGE)
 				set_coefficient = 0.8
-			//Skyrat change stop
 			if(SEC_LEVEL_AMBER)
 				set_coefficient = 0.8
 			else
@@ -388,11 +385,10 @@
 			if(initiate_docking(SSshuttle.getDock("emergency_home")) != DOCKING_SUCCESS)
 				setTimer(20)
 				return
-	
 	if(!timer)
 		return
+	
 	var/time_left = timeLeft(1)
-
 	// The emergency shuttle doesn't work like others so this
 	// ripple check is slightly different
 	if(!ripples.len && (time_left <= SHUTTLE_RIPPLE_TIME) && ((mode == SHUTTLE_IGNITING) || (mode == SHUTTLE_ESCAPE)))

@@ -8,7 +8,6 @@
 	invisibility = INVISIBILITY_ABSTRACT
 	icon = 'icons/obj/device.dmi'
 	icon_state = "pinonfar"
-
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	anchored = TRUE
 	/// The identifier of the port or ship.

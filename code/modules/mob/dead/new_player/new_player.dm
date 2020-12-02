@@ -144,7 +144,9 @@
 	if(href_list["manifest"])
 		ViewManifest()
 
-	if(href_list["SelectedJob"])
+	if(href_list["SelectedJob"] || href_list["JoinAsRandom"])
+		if(href_list["JoinAsRandom"])
+			href_list["SelectedJob"] = pick(SSjob.name_occupations)
 		if(!SSticker || !SSticker.IsRoundInProgress())
 			var/msg = "[key_name(usr)] attempted to join the round using a href that shouldn't be available at this moment!"
 			log_admin(msg)
@@ -476,7 +478,6 @@
 				var/command_bold = ""
 				if(job in GLOB.command_positions)
 					command_bold = " command"
-				//SKYRAT CHANGES
 				var/jobline = "[job_datum.title] ([job_datum.current_positions])"
 				if(job_datum in SSjob.prioritized_jobs)
 					jobline = "<span class='priority'>[jobline]</span>"
@@ -485,7 +486,6 @@
 
 				jobline = "<a class='job[command_bold]' style='display:block;width:170px' href='byond://?src=[REF(src)];SelectedJob=[job_datum.title]'>[jobline]</a>"
 				dept_dat += jobline
-				//END OF SKYRAT CHANGES
 		if(!dept_dat.len)
 			dept_dat += "<span class='nopositions'>No positions open.</span>"
 		dat += jointext(dept_dat, "")
@@ -537,6 +537,11 @@
 			dat += "</fieldset><br>"
 		dat += "</td></tr></table></center>"
 		dat += "</div></div>"
+	
+	dat += "<center><table><tr><td valign='top'>"
+	dat += "<a class='otherPosition' style='display:block;width:170px' href='byond://?src=[REF(src)];JoinAsRandom=1'>Join as Random Job</a>"
+	dat += "</td></tr></table></center>"
+	dat += "</div></div>"
 
 	var/datum/browser/popup = new(src, "latechoices", "Choose Profession", 720, 600)
 	popup.add_stylesheet("playeroptions", 'html/browser/playeroptions.css')
