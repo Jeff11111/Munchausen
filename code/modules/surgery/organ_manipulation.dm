@@ -10,7 +10,7 @@
 		/datum/surgery_step/saw,
 		/datum/surgery_step/clamp_bleeders,
 		/datum/surgery_step/manipulate_organs,
-		/datum/surgery_step/close
+		/datum/surgery_step/close,
 		)
 	var/obj/item/mmi/mmi
 

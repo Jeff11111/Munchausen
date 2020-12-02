@@ -125,6 +125,9 @@
 				inch.remove_wound()
 			for(var/datum/wound/mechanical/slash/critical/incision/inch in BP.wounds)
 				inch.remove_wound()
+		var/datum/component/storage/concrete/organ/ST = target.GetComponent(/datum/component/storage/concrete/organ)
+		if(ST)
+			qdel(ST)
 	return ..()
 
 //saw bone
