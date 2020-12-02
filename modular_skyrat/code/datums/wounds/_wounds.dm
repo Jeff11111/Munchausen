@@ -447,53 +447,54 @@
 		germ_level = max(0, germ_level - WOUND_INFECTION_SANITIZATION_RATE)
 		sanitization = max(0, sanitization - (WOUND_INFECTION_SANITIZATION_RATE * bandage_factor))
 		return
-
-	switch(germ_level)
-		if(WOUND_INFECTION_MODERATE to WOUND_INFECTION_SEVERE)
-			if(prob(30))
-				victim.adjustToxLoss(0.2)
-				if(prob(6))
-					to_chat(victim, "<span class='warning'>The [src.name] on your [limb.name] oozes a strange pus...</span>")
-		if(WOUND_INFECTION_SEVERE to WOUND_INFECTION_CRITICAL)
-			if(!disabling && prob(2))
-				to_chat(victim, "<span class='warning'><b>Your [limb.name] completely locks up, as you struggle for control against the infection!</b></span>")
-				disabling = TRUE
-			else if(disabling && prob(8))
-				to_chat(victim, "<span class='notice'>You regain sensation in your [limb.name], but it's still in terrible shape!</span>")
-				disabling = FALSE
-			else if(prob(20))
-				victim.adjustToxLoss(0.5)
-		if(WOUND_INFECTION_CRITICAL to WOUND_INFECTION_SEPTIC)
-			if(!disabling && prob(3))
-				to_chat(victim, "<span class='warning'><b>You suddenly lose all sensation of the festering infection in your [limb.name]!</b></span>")
-				disabling = TRUE
-				pain_amount += 2
-			else if(disabling && prob(3))
-				to_chat(victim, "<span class='notice'>You can barely feel your [limb.name] again, and you have to strain to retain motor control!</span>")
-				disabling = FALSE
-				pain_amount += 2
-			else if(prob(1))
-				to_chat(victim, "<span class='warning'>You contemplate life without your [limb.name]...</span>")
-				victim.adjustToxLoss(0.75)
-				pain_amount += 2
-			else if(prob(4))
-				victim.adjustToxLoss(1)
-		if(WOUND_INFECTION_SEPTIC to INFINITY)
-			if(prob((germ_level)/(WOUND_INFECTION_MODERATE * 10)))
-				switch(strikes_to_lose_limb)
-					if(3 to INFINITY)
-						to_chat(victim, "<span class='deadsay'>The skin on your [limb.name] is literally dripping off, you feel awful!</span>")
-					if(2)
-						to_chat(victim, "<span class='deadsay'><b>The infection in your [limb.name] is literally dripping off, you feel horrible!</b></span>")
-					if(1)
-						to_chat(victim, "<span class='deadsay'><b>Infection has just about completely claimed your [limb.name]!</b></span>")
-					if(0)
-						to_chat(victim, "<span class='deadsay'><b>The last of the nerve endings in your [limb.name] wither away, as the infection completely paralyzes your joint connector.</b></span>")
-						threshold_penalty = 120 // piss easy to destroy
-						var/datum/brain_trauma/severe/paralysis/sepsis = new (limb.body_zone)
-						victim.gain_trauma(sepsis)
-				pain_amount += 4
-				strikes_to_lose_limb--
+	
+	if(victim.stat < DEAD)
+		switch(germ_level)
+			if(WOUND_INFECTION_MODERATE to WOUND_INFECTION_SEVERE)
+				if(prob(30))
+					victim.adjustToxLoss(0.2)
+					if(prob(6))
+						to_chat(victim, "<span class='warning'>The [src.name] on your [limb.name] oozes a strange pus...</span>")
+			if(WOUND_INFECTION_SEVERE to WOUND_INFECTION_CRITICAL)
+				if(!disabling && prob(2))
+					to_chat(victim, "<span class='warning'><b>Your [limb.name] completely locks up, as you struggle for control against the infection!</b></span>")
+					disabling = TRUE
+				else if(disabling && prob(8))
+					to_chat(victim, "<span class='notice'>You regain sensation in your [limb.name], but it's still in terrible shape!</span>")
+					disabling = FALSE
+				else if(prob(20))
+					victim.adjustToxLoss(0.5)
+			if(WOUND_INFECTION_CRITICAL to WOUND_INFECTION_SEPTIC)
+				if(!disabling && prob(3))
+					to_chat(victim, "<span class='warning'><b>You suddenly lose all sensation of the festering infection in your [limb.name]!</b></span>")
+					disabling = TRUE
+					pain_amount += 2
+				else if(disabling && prob(3))
+					to_chat(victim, "<span class='notice'>You can barely feel your [limb.name] again, and you have to strain to retain motor control!</span>")
+					disabling = FALSE
+					pain_amount += 2
+				else if(prob(1))
+					to_chat(victim, "<span class='warning'>You contemplate life without your [limb.name]...</span>")
+					victim.adjustToxLoss(0.75)
+					pain_amount += 2
+				else if(prob(4))
+					victim.adjustToxLoss(1)
+			if(WOUND_INFECTION_SEPTIC to INFINITY)
+				if(prob((germ_level)/(WOUND_INFECTION_MODERATE * 10)))
+					switch(strikes_to_lose_limb)
+						if(3 to INFINITY)
+							to_chat(victim, "<span class='deadsay'>The skin on your [limb.name] is literally dripping off, you feel awful!</span>")
+						if(2)
+							to_chat(victim, "<span class='deadsay'><b>The infection in your [limb.name] is literally dripping off, you feel horrible!</b></span>")
+						if(1)
+							to_chat(victim, "<span class='deadsay'><b>Infection has just about completely claimed your [limb.name]!</b></span>")
+						if(0)
+							to_chat(victim, "<span class='deadsay'><b>The last of the nerve endings in your [limb.name] wither away, as the infection completely paralyzes your joint connector.</b></span>")
+							threshold_penalty = 120 // piss easy to destroy
+							var/datum/brain_trauma/severe/paralysis/sepsis = new (limb.body_zone)
+							victim.gain_trauma(sepsis)
+					pain_amount += 4
+					strikes_to_lose_limb--
 
 /// For use in do_after callback checks
 /datum/wound/proc/still_exists()
