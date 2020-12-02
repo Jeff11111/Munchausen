@@ -15,16 +15,16 @@
 	var/obj/item/mmi/mmi
 
 /datum/surgery/organ_manipulation/complete()
-	. = ..()
-	var/datum/component/storage/concrete/organ/ST = target.GetComponent(/datum/component/storage/concrete/organ)
+	var/datum/component/storage/concrete/organ/ST = target?.GetComponent(/datum/component/storage/concrete/organ)
 	if(ST)
 		qdel(ST)
+	. = ..()
 
 /datum/surgery/organ_manipulation/Destroy()
-	. = ..()
-	var/datum/component/storage/concrete/organ/ST = target.GetComponent(/datum/component/storage/concrete/organ)
+	var/datum/component/storage/concrete/organ/ST = target?.GetComponent(/datum/component/storage/concrete/organ)
 	if(ST)
 		qdel(ST)
+	. = ..()
 
 /datum/surgery/organ_manipulation/soft
 	possible_locs = list(BODY_ZONE_PRECISE_NECK, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, \
