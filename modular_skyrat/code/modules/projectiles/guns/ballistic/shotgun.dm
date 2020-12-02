@@ -182,7 +182,7 @@
 //SPAS
 /obj/item/gun/ballistic/shotgun/automatic/combat/compact
 	name = "compact combat shotgun"
-	desc = "A modified version of the semi-automatic combat shotgun with a collapsible stock. For close encounters."
+	desc = "The REMIS 12 - A modified version of the semi-automatic combat shotgun with a collapsible stock. For close encounters."
 	icon_state = "spas"
 	item_state = "spas"
 
