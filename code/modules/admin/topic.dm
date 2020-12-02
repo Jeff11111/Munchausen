@@ -2169,10 +2169,12 @@
 
 		//Job + antagonist
 		if(M.mind)
-			var/datum/antagonist/antag_datum = M.mind.has_antag_datum(/datum/antagonist)
-			var/antag_text = capitalize(M.mind.special_role)
-			if(!length(antag_text) && antag_datum)
-				antag_text = antag_datum.name
+			var/list/antag_shit = list()
+			var/antag_text = ""
+			for(var/datum/antagonist/antag in M.mind.antag_datums)
+				antag_shit |= capitalize(antag.name)
+			if(length(antag_datums))
+				antag_text = jointext(antag_shit, ", ")
 			special_role_description = "Role: <b>[M.mind.assigned_role]</b>; Antagonist: <font color='red'><b>[antag_text]</b></font>"
 		else
 			special_role_description = "Role: <i>Mind datum missing</i> Antagonist: <i>Mind datum missing</i>"
