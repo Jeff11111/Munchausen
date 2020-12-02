@@ -16,7 +16,7 @@
 		blood_DNA = blood.Copy()
 	prev_loc = loc //Just so we are sure prev_loc exists
 
-/obj/effect/decal/cleanable/blood/hitsplatter/proc/GoTo(turf/T, var/range)
+/obj/effect/decal/cleanable/blood/hitsplatter/proc/GoTo(turf/T, range)
 	//we need to return IMMEDIATELY to avoid bonkers stuff
 	spawn(0)
 		for(var/i in 1 to range)
