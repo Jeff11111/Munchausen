@@ -138,7 +138,7 @@
 		azoom = new (src)
 	RegisterSignal(src, COMSIG_TWOHANDED_WIELD, .proc/on_wield)
 	RegisterSignal(src, COMSIG_TWOHANDED_UNWIELD, .proc/on_unwield)
-	update_icon()
+	addtimer(CALLBACK(src, /atom.proc/update_icon), 2)
 
 /obj/item/gun/proc/on_wield(mob/living/carbon/user)
 	is_wielded = TRUE
