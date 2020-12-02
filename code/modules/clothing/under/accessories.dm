@@ -68,7 +68,7 @@
 		U.accessory_overlay = mutable_appearance('icons/mob/clothing/accessories.dmi', "blank", WRISTS_LAYER, U.plane)
 		for(var/obj/item/clothing/accessory/attached_accessory in U.attached_accessories)
 			attached_accessory.force_unto(U)
-			var/mutable_appearance/Y = mutable_appearance(attached_accessory.mob_overlay_icon, attached_accessory.icon_state, WRISTS_LAYER, U.plane)
+			var/mutable_appearance/Y = mutable_appearance(attached_accessory.mob_overlay_icon, attached_accessory.icon_state, U.plane, ID_LAYER)
 			Y.alpha = attached_accessory.alpha
 			Y.color = attached_accessory.color
 			U.accessory_overlay.add_overlay(Y)
