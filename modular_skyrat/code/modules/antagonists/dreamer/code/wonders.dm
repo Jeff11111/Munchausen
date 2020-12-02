@@ -71,7 +71,7 @@
 /obj/structure/wonder/Initialize()
 	. = ..()
 	playsound(src, 'modular_skyrat/code/modules/antagonists/dreamer/sound/wonder.ogg', 100, 0)
-	for(var/mob/living/carbon/human/H in range(src))
+	for(var/mob/living/carbon/human/H in range(4, src))
 		if(is_dreamer(H))
 			for(var/datum/antagonist/dreamer/dreammy in H.mind.antag_datums)
 				dream_master = dreammy
