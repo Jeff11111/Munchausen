@@ -762,7 +762,7 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 	else if(prob(10))
 		to_chat(src, "<span class='danger'>You feel a stabbing pain in your groin!</span>")
 		var/obj/item/bodypart/groin/groin = get_bodypart(BODY_ZONE_PRECISE_GROIN)
-		if(groin)
+		if(groin && groin.owner && (groin.owner.stat < DEAD))
 			groin.receive_damage(toxin = 8)
 	else if(prob(5))
 		var/obj/item/bodypart/groin/groin = get_bodypart(BODY_ZONE_PRECISE_GROIN)

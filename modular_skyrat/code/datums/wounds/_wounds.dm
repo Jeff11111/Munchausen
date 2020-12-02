@@ -428,7 +428,8 @@
 /// Handle the effects of infections
 /datum/wound/proc/handle_germs()
 	if(strikes_to_lose_limb <= 0)
-		limb.receive_damage(toxin = 1)
+		if(victim.stat < DEAD)
+			limb.receive_damage(toxin = 1)
 		if(prob(1))
 			victim.visible_message("<span class='danger'>The infection on the remnants of [victim]'s [limb.name] shift and bubble nauseatingly!</span>", "<span class='warning'>You can feel the infection on the remnants of your [limb.name] coursing through your veins!</span>")
 		disabling = TRUE

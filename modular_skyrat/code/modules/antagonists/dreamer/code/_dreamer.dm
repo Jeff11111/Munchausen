@@ -5,13 +5,16 @@
 	antagpanel_category = "Dreamer"
 	antag_memory = "<b>Recently I've been visited by a lot of VISIONS. They're all about another WORLD, ANOTHER life. I will do EVERYTHING to know the TRUTH, and return to the REAL world.</b><br>"
 	threat = 10
+	silent = TRUE
+	var/ambience = 'modular_skyrat/code/modules/antagonists/dreamer/sound/dreamer_is_still_asleep.ogg'
+	var/ambience_duration = 1620
+	var/last_ambience = 0
 	var/list/recipe_progression = list(/datum/crafting_recipe/wonder, /datum/crafting_recipe/wonder/second, /datum/crafting_recipe/wonder/third, /datum/crafting_recipe/wonder/fourth)
 	var/list/heart_keys = list()
 	var/list/associated_keys = list()
 	var/list/hearts_seen = list()
 	var/current_wonder = 0
 	var/sum_keys = 0
-	silent = TRUE
 
 //Transferring body unfucking.
 /datum/antagonist/dreamer/on_body_transfer(mob/living/old_body, mob/living/new_body)
@@ -218,6 +221,11 @@
 	to_chat(owner.current, "<span class='danger'><b>Recently I've been visited by a lot of VISIONS. They're all about another WORLD, ANOTHER life. I will do EVERYTHING to know the TRUTH, and return to the REAL world.</b></span>")
 	if(length(objectives))
 		owner.announce_objectives()
+	play_nice_noises()
+
+/datum/antagonist/dreamer/proc/play_nice_noises()
+	owner.current.playsound_local(owner.current, ambience, 65, 0, CHANNEL_AMBIENCE)
+	last_ambience = world.time
 
 /datum/antagonist/dreamer/on_gain()
 	. = ..()
