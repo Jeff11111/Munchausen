@@ -115,6 +115,7 @@
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
 	icon_state = "antitank"
 	fire_sound = 'modular_skyrat/sound/weapons/rifle2.ogg'
+	generic_magazine_overlays = TRUE
 
 //Stechkin v2
 /obj/item/gun/ballistic/automatic/pistol/deagle
