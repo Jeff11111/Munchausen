@@ -70,6 +70,7 @@
 	item_state = "vintorez"
 	safety_sound = 'modular_skyrat/sound/guns/safety2.ogg'
 	fire_sound = 'modular_skyrat/sound/weapons/vintorez.ogg'
+	sound_suppressed = 'modular_skyrat/sound/weapons/vintorez.ogg'
 	mag_type = /obj/item/ammo_box/magazine/m9x39mm
 	slot_flags = ITEM_SLOT_BACK
 	can_unsuppress = FALSE
