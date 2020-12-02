@@ -48,9 +48,7 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 	var/obj/item/bodypart/BP = SSquirks.associated_bodyparts[body_zone]
 	. |= BP.body_zone
 	for(var/i in BP.children_zones)
-		var/obj/item/bodypart/BoPa = SSquirks.associated_bodyparts[i]
-		. |= BoPa.body_zone
-		. |= BoPa.children_zones
+		. |= atomize_bodypart_heritage(i)
 
 /datum/controller/subsystem/processing/quirks/proc/SetupQuirks()
 // Sort by Positive, Negative, Neutral; and then by name
