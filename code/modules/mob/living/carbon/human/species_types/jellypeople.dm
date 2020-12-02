@@ -631,20 +631,11 @@
 	else if (select_alteration == "Penis Length")
 		for(var/obj/item/organ/genital/penis/X in H.internal_organs)
 			qdel(X)
-		var/min_D = CONFIG_GET(number/penis_min_inches_prefs)
-		var/max_D = CONFIG_GET(number/penis_max_inches_prefs)
-		//Skyrat edit
-		var/min_D_m = round(min_D * 2.54, 1)
-		var/max_D_m = round(max_D * 2.54, 1)
-		var/new_length
-		if(owner?.client?.prefs?.toggles & METRIC_OR_BUST)
-			new_length = input(owner, "Penis length in inches:\n([min_D_m]-[max_D_m])", "Genital Alteration") as num|null
-			if(new_length)
-				H.dna.features["cock_length"] = clamp(round(new_length/2.54, 0.1), min_D, max_D)
-		else
-			new_length = input(owner, "Penis length in inches:\n([min_D]-[max_D])", "Genital Alteration") as num|null
-			if(new_length)
-				H.dna.features["cock_length"] = clamp(round(new_length, 0.1), min_D, max_D)
+		var/min_D = CONFIG_GET(number/penis_min_centimeters_prefs)
+		var/max_D = CONFIG_GET(number/penis_max_centimeters_prefs)
+		var/new_length = input(owner, "Penis length in centimeters:\n([min_D]-[max_D])", "Genital Alteration") as num|null
+		if(new_length)
+			H.dna.features["cock_length"] = clamp(round(new_length, 0.1), min_D, max_D)
 		//Skyrat edit end
 		H.update_genitals()
 		H.apply_overlay()

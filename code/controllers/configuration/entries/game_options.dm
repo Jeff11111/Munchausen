@@ -486,12 +486,12 @@
 	value_mode = VALUE_MODE_FLAG
 	config_entry_value = list("a", "b", "c", "d", "e", "f", "g", "h", "i", "j") //keep these lowercase //Skyrat edit, added 5 new sizes
 
-/datum/config_entry/number/penis_min_inches_prefs
+/datum/config_entry/number/penis_min_centimeters_prefs
 	config_entry_value = 1
 	min_val = 0
 
-/datum/config_entry/number/penis_max_inches_prefs
-	config_entry_value = 20
+/datum/config_entry/number/penis_max_centimeters_prefs
+	config_entry_value = 50
 	min_val = 0
 
 //Body size configs, the feature will be disabled if both min and max have the same value.

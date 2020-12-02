@@ -928,12 +928,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						dat += "<b>Penis Color:</b></a><BR>"
 						dat += "<span style='border: 1px solid #161616; background-color: #[features["cock_color"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=cock_color;task=input'>Change</a><br>"
 					dat += "<b>Penis Shape:</b> <a style='display:block;width:120px' href='?_src_=prefs;preference=cock_shape;task=input'>[features["cock_shape"]]</a>"
-					//Skyrat edit - Metric measurements
-					if(toggles & METRIC_OR_BUST)
-						dat += "<b>Penis Length:</b> <a style='display:block;width:120px' href='?_src_=prefs;preference=cock_length;task=input'>[round(features["cock_length"] * 2.54, 1)] centimeter(s)</a>"
-					else
-						dat += "<b>Penis Length:</b> <a style='display:block;width:120px' href='?_src_=prefs;preference=cock_length;task=input'>[features["cock_length"]] inch(es)</a>"
-					//Skyrat edit end
+					dat += "<b>Penis Length:</b> <a style='display:block;width:120px' href='?_src_=prefs;preference=cock_length;task=input'>[round(features["cock_length"] * 2.54, 1)] centimeter(s)</a>"
 					dat += "<b>Has Testicles:</b><a style='display:block;width:50px' href='?_src_=prefs;preference=has_balls'>[(features["has_balls"] && pref_species.has_balls) ? "Yes" : "No"]</a>"
 					if(features["has_balls"] && pref_species.has_balls)
 						if(pref_species.use_skintones || features["genitals_use_skintone"])
@@ -1036,11 +1031,8 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 			else
 				p_chaos = preferred_chaos
 			dat += "<b>Preferred Chaos Amount:</b> <a href='?_src_=prefs;preference=preferred_chaos;task=input'>[p_chaos]</a><br>"
-//SKYRAT CHANGES
 			dat += "<h2>Skyrat Preferences</h2>"
 			dat += "<b>Show name at round-end report:</b> <a href='?_src_=prefs;preference=appear_in_round_end_report'>[appear_in_round_end_report ? "Yes" : "No"]</a><br>"
-			dat += "<b>Measurements:</b> <a href='?_src_=prefs;preference=metric_or_bust'>[toggles & METRIC_OR_BUST ? "Metric" : "Imperial"]</a><br>"
-//END OF SKYRAT CHANGES
 			dat += "<br>"
 			dat += "</td>"
 			dat += "</tr></table>"
@@ -2569,21 +2561,11 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 							to_chat(user,"<span class='danger'>Invalid color. Your color is not bright enough.</span>")
 
 				if("cock_length")
-					var/min_D = CONFIG_GET(number/penis_min_inches_prefs)
-					var/max_D = CONFIG_GET(number/penis_max_inches_prefs)
-					//Skyrat edit - Metric measurements
-					var/min_D_m = round(min_D * 2.54, 1)
-					var/max_D_m = round(max_D * 2.54, 1)
-					var/new_length
-					if(toggles & METRIC_OR_BUST)
-						new_length = input(user, "Penis length in centimeters:\n([min_D_m]-[max_D_m])", "Character Preference") as num|null
-						if(new_length)
-							features["cock_length"] = clamp(round(new_length/2.54, 0.1), min_D, max_D)
-					else
-						new_length = input(user, "Penis length in inches:\n([min_D]-[max_D])", "Character Preference") as num|null
-						if(new_length)
-							features["cock_length"] = clamp(round(new_length, 0.1), min_D, max_D)
-					//Skyrat edit end
+					var/min_D = CONFIG_GET(number/penis_min_centimeters_prefs)
+					var/max_D = CONFIG_GET(number/penis_max_centimeters_prefs)
+					var/new_length = input(user, "Penis length in centimeters:\n([min_D]-[max_D])", "Character Preference") as num|null
+					if(new_length)
+						features["cock_length"] = clamp(round(new_length, 0.1), min_D, max_D)
 
 				if("cock_shape")
 					var/new_shape
@@ -2941,10 +2923,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					toggles ^= SOUND_ADMINHELP
 				if("announce_login")
 					toggles ^= ANNOUNCE_LOGIN
-				// Skyrat Edit Start
-				if("metric_or_bust")
-					toggles ^= METRIC_OR_BUST
-				// Skyrat Edit End
 				if("combohud_lighting")
 					toggles ^= COMBOHUD_LIGHTING
 

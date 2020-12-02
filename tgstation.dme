@@ -3502,7 +3502,6 @@
 #include "modular_skyrat\_DEFINES\role_preferences.dm"
 #include "modular_skyrat\code\_DEFINES\access.dm"
 #include "modular_skyrat\code\_DEFINES\admin.dm"
-#include "modular_skyrat\code\_DEFINES\DNA.dm"
 #include "modular_skyrat\code\_DEFINES\machines.dm"
 #include "modular_skyrat\code\_DEFINES\melee.dm"
 #include "modular_skyrat\code\_DEFINES\status_effects.dm"

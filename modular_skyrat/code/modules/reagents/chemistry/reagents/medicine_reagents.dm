@@ -186,7 +186,7 @@
 
 /datum/reagent/medicine/kerosene/on_mob_life(mob/living/L)
 	. = ..()
-	L.adjustOxyLoss(-rand(3, 6) * REM)
+	L.adjustOxyLoss(-rand(3, 6))
 
 //Repathed preservahyde
 /datum/reagent/medicine/preservahyde

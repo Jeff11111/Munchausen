@@ -1174,7 +1174,7 @@
 			"roughly grinds their fat nutsack into <b>[partner]</b>'s mouth.",
 			"pulls out their saliva-covered nuts from <b>[partner]</b>'s violated mouth and then wipes off the slime onto their face."))
 	else
-		message = pick(list("wedges a digit into the side of <b>[partner]</b>'s jaw and pries it open before using their other hand to shove their whole nutsack inside!", "stands with their groin inches away from [partner]'s face, then thrusting their hips forward and smothering [partner]'s whole face with their heavy ballsack."))
+		message = pick(list("wedges a digit into the side of <b>[partner]</b>'s jaw and pries it open before using their other hand to shove their whole nutsack inside!", "stands with their groin centimeters away from [partner]'s face, then thrusting their hips forward and smothering [partner]'s whole face with their heavy ballsack."))
 		set_is_fucking(partner , NUTS_TO_FACE, getorganslot(ORGAN_SLOT_PENIS) ? getorganslot(ORGAN_SLOT_PENIS) : null)
 
 	/*playlewdinteractionsound(loc, pick('modular_skyrat/sound/interactions/nuts1.ogg',

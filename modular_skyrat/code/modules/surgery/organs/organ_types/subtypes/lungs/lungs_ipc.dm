@@ -9,7 +9,7 @@
 	safe_co2_max = 0
 	safe_toxins_min = 0
 	safe_toxins_max = 0
-	safe_oxygen_min = 0	//What are you doing man, dont breathe with those!
+	safe_oxygen_min = 0
 	safe_oxygen_max = 0
 	cold_level_1_damage = 0
 	cold_level_2_damage = 0

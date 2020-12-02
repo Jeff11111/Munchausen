@@ -14,11 +14,10 @@
 	shape = DEF_COCK_SHAPE
 	size = 2 //arbitrary value derived from length and diameter for sprites.
 	layer_index = PENIS_LAYER_INDEX
-	var/length = 6 //inches
-
-	var/prev_length = 6 //really should be renamed to prev_length
-	var/diameter = 4.38
-	var/diameter_ratio = COCK_DIAMETER_RATIO_DEF //0.25; check citadel_defines.dm
+	var/length = 15 //centimeters
+	var/prev_length = 15 //really should be renamed to prev_length
+	var/diameter = 10 //centimeters
+	var/diameter_ratio = COCK_DIAMETER_RATIO_DEF //check citadel_defines.dm
 
 /obj/item/organ/genital/penis/modify_size(modifier, min = -INFINITY, max = INFINITY)
 	var/new_value = clamp(length + modifier, min, max)
@@ -66,19 +65,9 @@
 
 	if(owner)
 		if (round(length) > round(prev_length))
-			//Skyrat edit
-			if(owner?.client?.prefs?.toggles & METRIC_OR_BUST)
-				to_chat(owner, "<span class='warning'>Your [pick(GLOB.dick_nouns)] [pick("swells up to", "flourishes into", "expands into", "bursts forth into", "grows eagerly into", "amplifys into")] a [round(length * 2.54, 0.1)] centimeter penis.</b></span>")
-			else
-				to_chat(owner, "<span class='warning'>Your [pick(GLOB.dick_nouns)] [pick("swells up to", "flourishes into", "expands into", "bursts forth into", "grows eagerly into", "amplifys into")] a [round(length, 0.1)] inch penis.</b></span>")
-			//
+			to_chat(owner, "<span class='warning'>Your [pick(GLOB.dick_nouns)] [pick("swells up to", "flourishes into", "expands into", "bursts forth into", "grows eagerly into", "amplifys into")] a [round(length, 0.1)] centimeter penis.</b></span>")
 		else if ((round(length) < round(prev_length)) && (length > 0.5))
-			//skyrat edit
-			if(owner?.client?.prefs?.toggles & METRIC_OR_BUST)
-				to_chat(owner, "<span class='warning'>Your [pick(GLOB.dick_nouns)] [pick("shrinks down to", "decreases into", "diminishes into", "deflates into", "shrivels regretfully into", "contracts into")] a [round(length * 2.54, 0.1)] centimeter penis.</b></span>")
-			else
-				to_chat(owner, "<span class='warning'>Your [pick(GLOB.dick_nouns)] [pick("shrinks down to", "decreases into", "diminishes into", "deflates into", "shrivels regretfully into", "contracts into")] a [round(length, 0.1)] inch penis.</b></span>")
-			//
+			to_chat(owner, "<span class='warning'>Your [pick(GLOB.dick_nouns)] [pick("shrinks down to", "decreases into", "diminishes into", "deflates into", "shrivels regretfully into", "contracts into")] a [round(length, 0.1)] centimeter penis.</b></span>")
 	icon_state = sanitize_text("penis_[shape]_[size]")
 	diameter = (length * diameter_ratio)//Is it just me or is this ludicous, why not make it exponentially decay?
 
@@ -101,10 +90,7 @@
 /obj/item/organ/genital/penis/genital_examine(mob/user)
 	. = list()
 	var/lowershape = lowertext(shape)
-	if(user?.client?.prefs?.toggles & METRIC_OR_BUST)
-		. |= "<span class='notice'>You see [aroused_state ? "an erect" : "a flaccid"] [lowershape] [name]. You estimate it's about [round(length * 2.54, 0.1)] centimeter[round(length * 2.54, 0.1) != 1 ? "s" : ""] long and [round(diameter, 0.1)] centimeter[round(diameter, 0.1) != 1 ? "s" : ""] in diameter.</span>"
-	else
-		. |= "<span class='notice'>You see [aroused_state ? "an erect" : "a flaccid"] [lowershape] [name]. You estimate it's about [round(length, 0.1)] inch[round(length, 0.1) != 1 ? "es" : ""] long and [round(diameter, 0.1)] inch[round(diameter, 0.1) != 1 ? "es" : ""] in diameter.</span>"
+	. |= "<span class='notice'>You see [aroused_state ? "an erect" : "a flaccid"] [lowershape] [name]. You estimate it's about [round(length, 0.1)] centimeter[round(length, 0.1) != 1 ? "s" : ""] long and [round(diameter, 0.1)] centimeter[round(diameter, 0.1) != 1 ? "s" : ""] in diameter.</span>"
 
 /obj/item/organ/genital/penis/get_features(mob/living/carbon/human/H)
 	var/datum/dna/D = H.dna

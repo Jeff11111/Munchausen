@@ -30,7 +30,7 @@
 				continue
 		//We'll assume that non-human mobs lack the ability to process synthetic-oriented reagents (adjust this if we need to change that assumption)
 		else
-			if(R.process_flags == REAGENT_SYNTHETIC)
+			if(!(R.process_flags & REAGENT_ORGANIC))
 				R.holder.remove_reagent(R.type, R.metabolization_rate)
 				continue
 

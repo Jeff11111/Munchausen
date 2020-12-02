@@ -5,7 +5,7 @@
 //	You do not need to raise this if you are adding new values that have sane defaults.
 //	Only raise this value when changing the meaning/format/name/layout of an existing value
 //	where you would want the updater procs below to run
-#define SAVEFILE_VERSION_MAX	33
+#define SAVEFILE_VERSION_MAX	34
 
 /*
 SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Carn
@@ -131,18 +131,21 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		S["horn_color"]			>> features["horns_color"]
 
 	if(current_version < 33)
-		//Skyrat changes
 		features["general_records"]			= strip_html_simple(features["general_records"], MAX_FLAVOR_LEN, TRUE)
 		features["security_records"]			= strip_html_simple(features["security_records"], MAX_FLAVOR_LEN, TRUE)
 		features["medical_records"]			= strip_html_simple(features["medical_records"], MAX_FLAVOR_LEN, TRUE)
 		features["flavor_background"]			= strip_html_simple(features["flavor_background"], MAX_FLAVOR_LEN, TRUE)
 		features["character_skills"]			= strip_html_simple(features["character_skills"], MAX_FLAVOR_LEN, TRUE)
 		features["exploitable_info"]			= strip_html_simple(features["exploitable_info"], MAX_FLAVOR_LEN, TRUE)
-		//End of skyrat changes
 
-	//No more digi nor taurs fuck you
-	features["taur"] = "None"
-	features["legs"] = "Plantigrade"
+	if(current_version < 34)
+		//No more digi nor taurs fuck you
+		features["taur"] = "None"
+		features["legs"] = "Plantigrade"
+
+		//Updates cock size and diameter do cm
+		features["cock_length"] = round(features["cock_length"] * 2.54, 0.1)
+		features["cock_diameter_ratio"] = round(features["cock_diameter_ratio"] * 2.54, 0.1)
 
 /datum/preferences/proc/load_path(ckey,filename="preferences.sav")
 	if(!ckey)
@@ -653,10 +656,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		B_sizes = L.Copy()
 	var/static/min_D
 	if(!min_D)
-		min_D = CONFIG_GET(number/penis_min_inches_prefs)
+		min_D = CONFIG_GET(number/penis_min_centimeters_prefs)
 	var/static/max_D
 	if(!max_D)
-		max_D = CONFIG_GET(number/penis_max_inches_prefs)
+		max_D = CONFIG_GET(number/penis_max_centimeters_prefs)
 	
 	features["breasts_size"]		= sanitize_inlist(features["breasts_size"], B_sizes, BREASTS_SIZE_DEF)
 	features["cock_length"]			= sanitize_integer(features["cock_length"], min_D, max_D, COCK_SIZE_DEF)

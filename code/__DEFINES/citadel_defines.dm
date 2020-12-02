@@ -1,6 +1,6 @@
 //Global defines for most of the unmentionables.
 //Be sure to update the min/max of these if you do change them.
-//Measurements are in imperial units. Inches, feet, yards, miles. Tsp, tbsp, cups, quarts, gallons, etc
+//Measurements are in metric, do not dare to use imperial
 
 //Filters
 #define CIT_FILTER_STAMINACRIT filter(type="drop_shadow", x=0, y=0, size=-3, color="#04080F")
@@ -28,11 +28,11 @@
 
 #define DEF_VAGINA_SHAPE	"Human"
 
-#define COCK_SIZE_DEF		6
+#define COCK_SIZE_DEF		15
 
-#define COCK_DIAMETER_RATIO_MAX		0.42
-#define COCK_DIAMETER_RATIO_DEF		0.25
-#define COCK_DIAMETER_RATIO_MIN		0.15
+#define COCK_DIAMETER_RATIO_MAX		1.1
+#define COCK_DIAMETER_RATIO_DEF		0.64
+#define COCK_DIAMETER_RATIO_MIN		0.38
 
 #define DEF_COCK_SHAPE		"Human"
 
