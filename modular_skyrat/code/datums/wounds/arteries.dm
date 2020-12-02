@@ -77,8 +77,8 @@
 	if((!(victim.stat >= DEAD) && !(victim.pulse() < PULSE_NORM) && !(victim.blood_volume <= blood_loss_per_squirt) && (blood_loss_per_squirt >= 1)) || force)
 		playsound(victim, sound_effect, 75, 0)
 		victim.bleed(blood_loss_per_squirt * bleed_mod)
-		victim.visible_message("<span class='danger'>Blood squirts from [victim]'s [limb] [limb.artery_name]!</span>", \
-						"<span class='userdanger'>Blood squirts from my [limb]'s [limb.artery_name]!</span>")
+		victim.visible_message("<span class='danger'><b>[victim]</b>'s [limb.name] [limb.artery_name] squirts blood!</span>", \
+						"<span class='userdanger'>Blood squirts from my [limb.name]'s [limb.artery_name]!</span>")
 		var/spray_dir = pick(GLOB.alldirs)
 		var/turf/uhoh = get_ranged_target_turf(victim, spray_dir, rand(1, 3))
 		var/obj/effect/decal/cleanable/blood/hitsplatter/B = new (get_turf(victim), victim.get_blood_dna_list())

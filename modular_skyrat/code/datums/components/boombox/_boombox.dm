@@ -28,6 +28,10 @@
 	return TRUE
 
 /datum/component/boombox/proc/options(datum/source, mob/user)
+	//only activate if there is nothing in the hands
+	if(user.get_active_held_item())
+		return
+	
 	var/option = input(user, "What do i want to do with [parent]'s cassette module?", "Cassette Options", null) as null|anything in list("Toggle Loudness", "Change Range", "Change Volume", "Take Cassette Out", "Smash the play button", "Smash the STOP button")
 	switch(option)
 		if("Toggle Loudness")
