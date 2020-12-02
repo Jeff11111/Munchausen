@@ -73,6 +73,11 @@
 	var/medium_burn_msg = "blistered"
 	var/heavy_burn_msg = "peeling away"
 
+	var/no_pain_msg = "no pain"
+	var/light_pain_msg = "sore"
+	var/medium_pain_msg = "pain"
+	var/heavy_pain_msg = "agonizing"
+
 	/// Bobmed variables
 	germ_level = 0 //Germs.
 	var/parent_bodyzone //body zone that is considered a "parent" of this bodypart's zone
