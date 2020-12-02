@@ -215,7 +215,7 @@
 //Snubnose
 /obj/item/gun/ballistic/revolver/detective
 	name = "\improper .38 snubnose revolver"
-	icon_state = "havelock"
+	icon_state = "snubnose_cooler"
 	unique_reskin = null
 
 //Bladerunner
