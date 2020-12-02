@@ -247,8 +247,9 @@
 	glass_name = "glass of water"
 	glass_desc = "The father of all refreshments."
 	shot_glass_icon_state = "shotglassclear"
+	metabolization_rate = REAGENTS_METABOLISM * 5 //nigga it's fucking water
 	var/cooling_temperature = 2
-	var/hydration_gain = 8 * REAGENTS_METABOLISM
+	var/hydration_gain = 6
 
 /datum/reagent/water/on_mob_life(mob/living/carbon/M)
 	. = ..()
@@ -260,7 +261,7 @@
 		if(isslimeperson(H) && spleen)
 			M.blood_volume += (spleen.get_blood()) // water is REALLY good for you!
 	//warter....
-	M.adjust_hydration(hydration_gain, INFINITY)
+	M.adjust_hydration(hydration_gain * metabolization_rate, INFINITY)
 
 /*
  *	Water reaction to turf
