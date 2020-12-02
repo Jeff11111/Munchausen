@@ -161,7 +161,7 @@
 			else
 				screen_obj.icon_state = "mood[mood_level]"
 			var/motherfucker = ""
-			switch(CEILING(mood_level/9, 1))
+			switch(CEILING(mood_level/3, 1))
 				if(2)
 					motherfucker = "j"
 				if(3)
