@@ -4181,6 +4181,7 @@
 #include "modular_skyrat\code\modules\projectiles\guns\energy\nuclear.dm"
 #include "modular_skyrat\code\modules\projectiles\guns\energy\toy.dm"
 #include "modular_skyrat\code\modules\projectiles\projectile\bullets\pistol.dm"
+#include "modular_skyrat\code\modules\projectiles\projectile\bullets\rifle.dm"
 #include "modular_skyrat\code\modules\projectiles\projectile\bullets\sniper.dm"
 #include "modular_skyrat\code\modules\projectiles\projectile\energy\laser.dm"
 #include "modular_skyrat\code\modules\projectiles\projectile\energy\misc.dm"
