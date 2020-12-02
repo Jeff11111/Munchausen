@@ -27,10 +27,11 @@
 						C.Stun(50)
 					//Failure - We get knocked down
 					if(DICE_FAILURE)
+						C.Stun(100)
 						C.DefaultCombatKnockdown(200)
 					//Critical failure - We get knocked unconscious
 					if(DICE_CRIT_FAILURE)
-						C.Unconscious(300)
+						C.Unconscious(150)
 				//Endurance roll
 				switch(C.mind.diceroll(STAT_DATUM(end)))
 					//Failure - We get minor brute damage on the head
