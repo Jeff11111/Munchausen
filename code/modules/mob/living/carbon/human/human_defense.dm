@@ -79,17 +79,17 @@
 			if(supposed_to_affect)
 				miss_entirely = supposed_to_affect.miss_entirely_prob
 			miss_entirely /= (lying ? 10 : 1)
-			switch(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.5, GET_SKILL_LEVEL(fireboy, ranged)*1.5, dicetype = "6d6", mod = -(miss_entirely/5), crit = 20))
+			switch(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.5, GET_SKILL_LEVEL(fireboy, ranged)*1.5, dicetype = "6d6", mod = -CEILING(miss_entirely/7 + get_dist(P.starting, src)/5, 1), crit = 20))
 				//Missed shot
 				if(DICE_CRIT_FAILURE, DICE_FAILURE)
 					if(fireboy != src)
-						visible_message("<span class='danger'><b>FAILURE!</b> [P] misses [src] entirely!</span>")
+						visible_message("<span class='danger'><b>FAILURE!</b>[P] misses <b>[src]</b> entirely!</span>")
 						return BULLET_ACT_FORCE_PIERCE
 	//Critical hits
 	if(mind)
 		switch(rand(1,100))
 			if(0 to 2)
-				visible_message("<span class='danger'><b>CRITICAL HIT!</b> [P] mauls [src]!")
+				visible_message("<span class='danger'><b>CRITICAL HIT!</b>[P] mauls <b>[src]</b>!")
 				P.damage *= 2
 	return ..()
 
@@ -162,9 +162,9 @@
 				if(dex)
 					ran_zone_prob = dex.get_ran_zone_prob(ran_zone_prob, extra_zone_prob)
 			if(missed && (user != src))
-				visible_message("<span class='danger'>[user]'s misses [src] with [I]!</span>", \
-							"<span class='danger'>You avoid [user]'s attack with [I]!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, null, \
-							user, "<span class='warning'>You miss [src] with [I]!</span>")
+				visible_message("<span class='danger'><b>[user]</b> misses <b>[src]</b> with [I]!</span>", \
+							"<span class='danger'>You avoid <b>[user]</b>'s attack with [I]!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, null, \
+							user, "<span class='warning'>You miss <b>[src]</b> with [I]!</span>")
 				var/swing_sound = pick('modular_skyrat/sound/attack/swing_01.ogg',
 									'modular_skyrat/sound/attack/swing_02.ogg',
 									'modular_skyrat/sound/attack/swing_03.ogg',
