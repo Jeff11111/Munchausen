@@ -144,11 +144,11 @@
 	var/message_hit_area = ""
 	if(hit_area)
 		message_hit_area = " in the [parse_zone(hit_area)]"
-	var/attack_message = "[src] is [message_verb][message_hit_area] with [I][extra_wound_details]![wound_message]"
+	var/attack_message = "<b>[src]</b> is [message_verb][message_hit_area] with [I][extra_wound_details]![wound_message]"
 	var/attack_message_local = "You're [message_verb][message_hit_area] with [I][extra_wound_details]![wound_message]"
-	if(user in viewers(src, null))
-		attack_message = "[user] [message_verb] [src][message_hit_area] with [I][extra_wound_details]![wound_message]"
-		attack_message_local = "[user] [message_verb] you[message_hit_area] with [I][extra_wound_details]![wound_message]"
+	if(user in viewers(src))
+		attack_message = "<b>[user]</b> [message_verb] <b>[src]</b>[message_hit_area] with [I][extra_wound_details]![wound_message]"
+		attack_message_local = "<b>[user]</b> [message_verb] you[message_hit_area] with [I][extra_wound_details]![wound_message]"
 	if(user == src)
 		attack_message_local = "You [message_verb] yourself[message_hit_area] with [I][extra_wound_details]![wound_message]"
 	visible_message("<span class='danger'>[attack_message]</span>",\
