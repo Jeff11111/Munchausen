@@ -16,10 +16,10 @@
 	name = "energy gun"
 	desc = "A basic energy-based gun."
 	icon = 'icons/obj/guns/energy.dmi'
-
+	ammo_x_offset = 2
 	var/obj/item/stock_parts/cell/cell //What type of power cell this uses
 	var/cell_type = /obj/item/stock_parts/cell
-	var/modifystate = 0
+	var/modifystate = FALSE
 	/// = TRUE/FALSE decides if the user can switch to it of their own accord
 	var/list/ammo_type = list(/obj/item/ammo_casing/energy = TRUE)
 	/// The index of the ammo_types/firemodes which we're using right now
@@ -27,7 +27,6 @@
 	var/can_charge = 1 //Can it be charged in a recharger?
 	var/automatic_charge_overlays = TRUE	//Do we handle overlays with base update_icon()?
 	var/charge_sections = 4
-	ammo_x_offset = 2
 	var/shaded_charge = FALSE //if this gun uses a stateful charge bar for more detail
 	var/old_ratio = 0 // stores the gun's previous ammo "ratio" to see if it needs an updated icon
 	var/selfcharge = EGUN_NO_SELFCHARGE // EGUN_SELFCHARGE if true, EGUN_SELFCHARGE_BORG drains the cyborg's cell to recharge its own

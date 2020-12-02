@@ -931,9 +931,9 @@
 			strip_mod = g.strip_mod
 			strip_silence = g.strip_silence
 	if (!strip_silence)
-		who.visible_message("<span class='danger'>[src] tries to remove [who]'s [what.name].</span>", \
-					"<span class='userdanger'>[src] tries to remove your [what.name].</span>", target = src,
-					target_message = "<span class='danger'>You try to remove [who]'s [what.name].</span>")
+		who.visible_message("<span class='danger'><b>[src]</b> tries to remove <b>[who]</b>'s [what.name].</span>", \
+					"<span class='userdanger'><b>[src]</b> tries to remove your [what.name].</span>", target = src,
+					target_message = "<span class='danger'>You try to remove <b>[who]</b>'s [what.name].</span>")
 		what.add_fingerprint(src)
 	else
 		to_chat(src,"<span class='notice'>You try to remove [who]'s [what.name].</span>")
