@@ -63,6 +63,7 @@
 /obj/item/gun/ballistic/automatic/vintorez
 	name = "9x39mm rifle"
 	desc = "A limited MI13 production run of replicas of the classic VSS Vintorez. This suppressed rifle has garnered a lot of fame among the stealthier boarding parties."
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/rifle.dmi'
 	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/rifle_righthand.dmi'
 	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/rifle_lefthand.dmi'
 	icon_state = "vintorez"
