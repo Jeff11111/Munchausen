@@ -99,7 +99,7 @@
 		W.remove_wound(TRUE)
 	
 	if(dismembered && dismember_bodyzone)
-		var/obj/item/bodypart/BP = owner.get_bodypart(check_zone(fake_body_zone))
+		var/obj/item/bodypart/BP = owner.get_bodypart(check_zone(dismember_bodyzone))
 		if(istype(BP))
 			var/datum/wound/lost
 			if(BP.is_organic_limb())
@@ -111,16 +111,16 @@
 			lost.fake_body_zone = body_zone
 			lost.desc = "Patient's [lowertext(name)] has been violently dismembered from [owner.p_their(FALSE)] [parse_zone(dismember_bodyzone)], leaving only a severely damaged stump in it's place."
 			lost.examine_desc = "has been violently severed from [owner.p_their(FALSE)] [parse_zone(dismember_bodyzone)]"
-			lost.descriptive = "\The [BP.name] is violently dismembered!"
+			lost.descriptive = "\The [name] is violently dismembered!"
 			switch(wounding_type)
 				if(WOUND_BLUNT)
-					lost.descriptive = "\The [BP.name] is shattered into gore!"
+					lost.descriptive = "\The [name] is shattered into gore!"
 				if(WOUND_BURN)
-					lost.descriptive = "\The [BP.name] is incinerated into dust!"
+					lost.descriptive = "\The [name] is incinerated into dust!"
 				if(WOUND_SLASH)
-					lost.descriptive = "\The [BP.name] is violently dismembered!"
+					lost.descriptive = "\The [name] is violently dismembered!"
 				if(WOUND_PIERCE)
-					lost.descriptive = "\The [BP.name] is punctured into gore!"
+					lost.descriptive = "\The [name] is punctured into gore!"
 			lost.apply_wound(BP, TRUE)
 	owner = null
 	if(!ignore_children)
