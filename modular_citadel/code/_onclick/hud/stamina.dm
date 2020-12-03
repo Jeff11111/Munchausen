@@ -26,7 +26,7 @@
 		var/mob/living/L = usr
 		var/msg = list("<span class='notice'>*---------*</span>")
 		msg += "<span class='info'><b>Fatigue:</b></span>"
-		msg += "<span class='notice'>I can stand <b>[L.staminaloss]</b> fatigue loss.</span>"
+		msg += "<span class='notice'>I can stand <b>[L.maxHealth]</b> fatigue loss.</span>"
 		msg += "<span class='notice'>I have <b>[L.getStaminaLoss()]</b> fatigue loss.</span>"
 		msg += "<span class='info'><b>Overfatigue:</b></span>"
 		msg += "<span class='notice'>My overfatigue can stand <b>[L.stambuffer]</b> overfatigue loss.</span>"
