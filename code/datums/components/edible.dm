@@ -113,33 +113,33 @@ Behavior that's still missing from this component that original food items had t
 			to_chat(eater, "<span class='warning'>You don't feel like eating any more junk food at the moment!</span>")
 			return
 		else if(fullness <= 50)
-			eater.visible_message("<span class='notice'>[eater] hungrily [eatverb]s \the [parent], gobbling it down!</span>", "<span class='notice'>You hungrily [eatverb] \the [parent], gobbling it down!</span>")
+			eater.visible_message("<span class='notice'><b>[eater]</b> hungrily [eatverb]s \the [parent], gobbling it down!</span>", "<span class='notice'>You hungrily [eatverb] \the [parent], gobbling it down!</span>")
 		else if(fullness > 50 && fullness < 150)
-			eater.visible_message("<span class='notice'>[eater] hungrily [eatverb]s \the [parent].</span>", "<span class='notice'>You hungrily [eatverb] \the [parent].</span>")
+			eater.visible_message("<span class='notice'><b>[eater]</b> hungrily [eatverb]s \the [parent].</span>", "<span class='notice'>You hungrily [eatverb] \the [parent].</span>")
 		else if(fullness > 150 && fullness < 500)
-			eater.visible_message("<span class='notice'>[eater] [eatverb]s \the [parent].</span>", "<span class='notice'>You [eatverb] \the [parent].</span>")
+			eater.visible_message("<span class='notice'><b>[eater]</b> [eatverb]s \the [parent].</span>", "<span class='notice'>You [eatverb] \the [parent].</span>")
 		else if(fullness > 500 && fullness < 600)
-			eater.visible_message("<span class='notice'>[eater] unwillingly [eatverb]s a bit of \the [parent].</span>", "<span class='notice'>You unwillingly [eatverb] a bit of \the [parent].</span>")
+			eater.visible_message("<span class='notice'><b>[eater]</b> unwillingly [eatverb]s a bit of \the [parent].</span>", "<span class='notice'>You unwillingly [eatverb] a bit of \the [parent].</span>")
 		else if(fullness > (600 * (1 + eater.overeatduration / 2000)))	// The more you eat - the more you can eat
-			eater.visible_message("<span class='warning'>[eater] cannot force any more of \the [parent] to go down [eater.p_their()] throat!</span>", "<span class='warning'>You cannot force any more of \the [parent] to go down your throat!</span>")
+			eater.visible_message("<span class='warning'><b>[eater]</b> cannot force any more of \the [parent] to go down [eater.p_their()] throat!</span>", "<span class='warning'>You cannot force any more of \the [parent] to go down your throat!</span>")
 			return
 	else //If you're feeding it to someone else.
 		if(isbrain(eater))
-			to_chat(feeder, "<span class='warning'>[eater] doesn't seem to have a mouth!</span>")
+			to_chat(feeder, "<span class='warning'><b>[eater]</b> doesn't seem to have a mouth!</span>")
 			return
 		if(fullness <= (600 * (1 + eater.overeatduration / 1000)))
-			eater.visible_message("<span class='danger'>[feeder] attempts to feed [eater] [parent].</span>", \
-									"<span class='userdanger'>[feeder] attempts to feed you [parent].</span>")
+			eater.visible_message("<span class='danger'><b>[feeder]</b> attempts to feed <b>[eater]</b> [parent].</span>", \
+									"<span class='userdanger'><b>[feeder]</b> attempts to feed you [parent].</span>")
 		else
-			eater.visible_message("<span class='warning'>[feeder] cannot force any more of [parent] down [eater]'s throat!</span>", \
-									"<span class='warning'>[feeder] cannot force any more of [parent] down your throat!</span>")
+			eater.visible_message("<span class='warning'><b>[feeder]</b> cannot force any more of [parent] down <b>[eater]</b>'s throat!</span>", \
+									"<span class='warning'><b>[feeder]</b> cannot force any more of [parent] down your throat!</span>")
 			return
 		if(!do_mob(feeder, eater)) //Wait 3 seconds before you can feed
 			return
 
 		log_combat(feeder, eater, "fed", owner.reagents.log_list())
-		eater.visible_message("<span class='danger'>[feeder] forces [eater] to eat [parent]!</span>", \
-									"<span class='userdanger'>[feeder] forces you to eat [parent]!</span>")
+		eater.visible_message("<span class='danger'><b>[feeder]</b> forces <b>[eater]</b> to eat [parent]!</span>", \
+									"<span class='userdanger'><b>[feeder]</b> forces you to eat [parent]!</span>")
 
 	TakeBite(eater, feeder)
 

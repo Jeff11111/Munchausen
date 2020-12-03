@@ -21,8 +21,8 @@
 
 	if(istype(M))
 		if(user.zone_selected != BODY_ZONE_PRECISE_MOUTH)
-			M.visible_message("<span class='danger'>[user] splashes the contents of [src] onto [M]!</span>", \
-							"<span class='userdanger'>[user] splashes the contents of [src] onto [M]!</span>")
+			M.visible_message("<span class='danger'><b>[user]</b> splashes the contents of [src] onto <b>[M]</b>!</span>", \
+							"<span class='userdanger'><b>[user]</b> splashes the contents of [src] onto <b>[M]</b>!</span>")
 			var/R = reagents?.log_list()
 			if(isturf(target) && reagents.reagent_list.len && thrownby)
 				log_combat(thrownby, target, "splashed (thrown) [english_list(reagents.reagent_list)]")
@@ -37,8 +37,8 @@
 		else
 			var/self_fed = M == user
 			if(!self_fed)
-				M.visible_message("<span class='danger'>[user] attempts to feed something to [M].</span>", \
-							"<span class='userdanger'>[user] attempts to feed something to you.</span>")
+				M.visible_message("<span class='danger'><b>[user]</b> attempts to feed something to <b>[M]</b>.</span>", \
+							"<span class='userdanger'><b>[user]</b> attempts to feed something to you.</span>")
 				log_combat(user, M, "is attempting to feed", reagents.log_list())
 				if(!do_mob(user, M))
 					return
@@ -46,7 +46,7 @@
 					return // The drink might be empty after the delay, such as by spam-feeding
 				var/turf/UT = get_turf(user)		// telekenesis memes
 				var/turf/MT = get_turf(M)
-				M.visible_message("<span class='danger'>[user] feeds something to [M].</span>", "<span class='userdanger'>[user] feeds something to you.</span>")
+				M.visible_message("<span class='danger'><b>[user]</b> feeds something to <b>[M]</b>.</span>", "<span class='userdanger'><b>[user]</b> feeds something to you.</span>")
 				log_combat(user, M, "fed", reagents.log_list())
 				log_reagent("INGESTION: FED BY: [key_name(user)] (loc [user.loc] at [AREACOORD(UT)]) -> [key_name(M)] (loc [M.loc] at [AREACOORD(MT)]) - [reagents.log_list()]")
 			else
@@ -55,7 +55,7 @@
 				log_reagent("INGESTION: SELF: [key_name(user)] (loc [user.loc] at [AREACOORD(T)]) - [reagents.log_list()]")
 			var/fraction = min(5/reagents.total_volume, 1)
 			reagents.reaction(M, INGEST, fraction)
-			addtimer(CALLBACK(reagents, /datum/reagents.proc/trans_to, M, 5, null, null, null, self_fed? "self swallowed" : "fed by [user]"), 5)
+			addtimer(CALLBACK(reagents, /datum/reagents.proc/trans_to, M, 5, null, null, null, self_fed? "self swallowed" : "fed by <b>[user]</b>"), 5)
 			playsound(M.loc,'sound/items/drink.ogg', rand(10,50), 1)
 
 /obj/item/reagent_containers/glass/afterattack(obj/target, mob/user, proximity)
@@ -89,7 +89,7 @@
 
 	else if(reagents.total_volume)
 		if(user.a_intent == INTENT_HARM)
-			user.visible_message("<span class='danger'>[user] splashes the contents of [src] onto [target]!</span>", \
+			user.visible_message("<span class='danger'><b>[user]</b> splashes the contents of [src] onto [target]!</span>", \
 								"<span class='notice'>You splash the contents of [src] onto [target].</span>")
 			reagents.reaction(target, TOUCH)
 			reagents.clear_reagents()
@@ -359,7 +359,7 @@
 		if(reagents.total_volume)
 			to_chat(user, "<span class='userdanger'>[src]'s contents spill all over you!</span>")
 			var/R = reagents.log_list()
-			log_reagent("SPLASH: [user] splashed [src] on their head via bucket/equipped(self, SLOT_HEAD) - [R]")
+			log_reagent("SPLASH: <b>[user]</b> splashed [src] on their head via bucket/equipped(self, SLOT_HEAD) - [R]")
 			reagents.reaction(user, TOUCH)
 			reagents.clear_reagents()
 		reagent_flags = NONE

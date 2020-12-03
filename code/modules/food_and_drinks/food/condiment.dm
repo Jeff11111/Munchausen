@@ -30,7 +30,7 @@
 	var/originalname = "condiment" //Can't use initial(name) for this. This stores the name set by condimasters.
 
 /obj/item/reagent_containers/food/condiment/suicide_act(mob/living/carbon/user)
-	user.visible_message("<span class='suicide'>[user] is trying to eat the entire [src]! It looks like [user.p_they()] forgot how food works!</span>")
+	user.visible_message("<span class='suicide'><b>[user]</b> is trying to eat the entire [src]! It looks like [user.p_they()] forgot how food works!</span>")
 	return OXYLOSS
 
 /obj/item/reagent_containers/food/condiment/attack(mob/M, mob/user, def_zone)
@@ -43,14 +43,14 @@
 		return 0
 
 	if(M == user)
-		user.visible_message("<span class='notice'>[user] swallows some of contents of \the [src].</span>", "<span class='notice'>You swallow some of contents of \the [src].</span>")
+		user.visible_message("<span class='notice'><b>[user]</b> swallows some of contents of \the [src].</span>", "<span class='notice'>You swallow some of contents of \the [src].</span>")
 	else
-		user.visible_message("<span class='warning'>[user] attempts to feed [M] from [src].</span>")
+		user.visible_message("<span class='warning'><b>[user]</b> attempts to feed <b>[M]</b> from [src].</span>")
 		if(!do_mob(user, M))
 			return
 		if(!reagents || !reagents.total_volume)
 			return // The condiment might be empty after the delay.
-		user.visible_message("<span class='warning'>[user] feeds [M] from [src].</span>")
+		user.visible_message("<span class='warning'><b>[user]</b> feeds <b>[M]</b> from [src].</span>")
 		log_combat(user, M, "fed", reagents.log_list())
 
 	var/fraction = min(10/reagents.total_volume, 1)
@@ -140,7 +140,7 @@
 		icon_state = "saltshakersmall"
 
 /obj/item/reagent_containers/food/condiment/saltshaker/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] begins to swap forms with the salt shaker! It looks like [user.p_theyre()] trying to commit suicide!</span>")
+	user.visible_message("<span class='suicide'><b>[user]</b> begins to swap forms with the salt shaker! It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	var/newname = "[name]"
 	name = "[user.name]"
 	user.name = newname
@@ -156,7 +156,7 @@
 		if(!reagents.has_reagent(/datum/reagent/consumable/sodiumchloride, 2))
 			to_chat(user, "<span class='warning'>You don't have enough salt to make a pile!</span>")
 			return
-		user.visible_message("<span class='notice'>[user] shakes some salt onto [target].</span>", "<span class='notice'>You shake some salt onto [target].</span>")
+		user.visible_message("<span class='notice'><b>[user]</b> shakes some salt onto [target].</span>", "<span class='notice'>You shake some salt onto [target].</span>")
 		reagents.remove_reagent(/datum/reagent/consumable/sodiumchloride, 2)
 		new/obj/effect/decal/cleanable/salt(target)
 		return

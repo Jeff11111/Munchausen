@@ -38,17 +38,17 @@
 		return 0
 
 	if(M == user)
-		user.visible_message("<span class='notice'>[user] swallows a gulp of [src].</span>", "<span class='notice'>You swallow a gulp of [src].</span>")
+		user.visible_message("<span class='notice'><b>[user]</b> swallows a gulp of [src].</span>", "<span class='notice'>You swallow a gulp of [src].</span>")
 		if(HAS_TRAIT(M, TRAIT_VORACIOUS))
 			M.changeNext_move(CLICK_CD_MELEE * 0.5) //chug! chug! chug!
 
 	else
-		M.visible_message("<span class='danger'>[user] attempts to feed the contents of [src] to [M].</span>", "<span class='userdanger'>[user] attempts to feed the contents of [src] to [M].</span>")
+		M.visible_message("<span class='danger'><b>[user]</b> attempts to feed the contents of [src] to <b>[M]</b>.</span>", "<span class='userdanger'><b>[user]</b> attempts to feed the contents of [src] to <b>[M]</b>.</span>")
 		if(!do_mob(user, M))
 			return
 		if(!reagents || !reagents.total_volume)
 			return // The drink might be empty after the delay, such as by spam-feeding
-		M.visible_message("<span class='danger'>[user] feeds the contents of [src] to [M].</span>", "<span class='userdanger'>[user] feeds the contents of [src] to [M].</span>")
+		M.visible_message("<span class='danger'><b>[user]</b> feeds the contents of [src] to <b>[M]</b>.</span>", "<span class='userdanger'><b>[user]</b> feeds the contents of [src] to <b>[M]</b>.</span>")
 		log_combat(user, M, "fed", reagents.log_list())
 
 	var/fraction = min(gulp_size/reagents.total_volume, 1)
@@ -156,10 +156,10 @@
 		if (!src_location.Adjacent(over_location)) // Regular users can only do short slides.
 			return
 		if (prob(10))
-			user.visible_message("<span class='warning'>\The [user] tries to slide \the [src] down the table, but fails miserably.</span>", "<span class='warning'>You <b>fail</b> to slide \the [src] down the table!</span>")
+			user.visible_message("<span class='warning'>\The <b>[user]</b> tries to slide \the [src] down the table, but fails miserably.</span>", "<span class='warning'>You <b>fail</b> to slide \the [src] down the table!</span>")
 			smash(over_location, user, FALSE)
 			return
-		user.visible_message("<span class='notice'>\The [user] slides \the [src] down the table.</span>", "<span class='notice'>You slide \the [src] down the table!</span>")
+		user.visible_message("<span class='notice'>\The <b>[user]</b> slides \the [src] down the table.</span>", "<span class='notice'>You slide \the [src] down the table!</span>")
 		forceMove(over_location)
 		return
 	var/distance = MANHATTAN_DISTANCE(over_location, src)
@@ -182,13 +182,13 @@
 		if (!locate(/obj/structure/table) in temp_turf)
 			var/datum/vector/V2 = atoms2vector(src, temp_turf)
 			vector_translate(V2, 0.1 SECONDS)
-			user.visible_message("<span class='warning'>\The [user] slides \the [src] down the table... and straight into the ground!</span>", "<span class='warning'>You slide \the [src] down the table, and straight into the ground!</span>")
+			user.visible_message("<span class='warning'>\The <b>[user]</b> slides \the [src] down the table... and straight into the ground!</span>", "<span class='warning'>You slide \the [src] down the table, and straight into the ground!</span>")
 			smash(over_location, user, FALSE)
 			return
 	while (temp_turf != dest)
 
 	vector_translate(V, 0.1 SECONDS)
-	user.visible_message("<span class='notice'>\The [user] expertly slides \the [src] down the table.</span>", "<span class='notice'>You slide \the [src] down the table. What a pro.</span>")
+	user.visible_message("<span class='notice'>\The <b>[user]</b> expertly slides \the [src] down the table.</span>", "<span class='notice'>You slide \the [src] down the table. What a pro.</span>")
 	return
 
 /obj/item/reagent_containers/food/drinks/MouseDrop(atom/over, atom/src_location, atom/over_location, src_control, over_control, params)
@@ -515,7 +515,7 @@
 	custom_price = PRICE_CHEAP_AS_FREE
 
 /obj/item/reagent_containers/food/drinks/soda_cans/suicide_act(mob/living/carbon/user)
-	user.visible_message("<span class='suicide'>[user] is trying to eat \the [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
+	user.visible_message("<span class='suicide'><b>[user]</b> is trying to eat \the [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	var/obj/item/trash/can/crushed_can = new /obj/item/trash/can(user.loc)
 	crushed_can.icon_state = icon_state
 	qdel(src)
@@ -523,7 +523,7 @@
 
 /obj/item/reagent_containers/food/drinks/soda_cans/attack(mob/M, mob/user)
 	if(M == user && !src.reagents.total_volume && user.a_intent == INTENT_HARM && user.zone_selected == BODY_ZONE_HEAD)
-		user.visible_message("<span class='warning'>[user] crushes the can of [src] on [user.p_their()] forehead!</span>", "<span class='notice'>You crush the can of [src] on your forehead.</span>")
+		user.visible_message("<span class='warning'><b>[user]</b> crushes the can of [src] on [user.p_their()] forehead!</span>", "<span class='notice'>You crush the can of [src] on your forehead.</span>")
 		playsound(user.loc,'sound/weapons/pierce.ogg', rand(10,50), 1)
 		var/obj/item/trash/can/crushed_can = new /obj/item/trash/can(user.loc)
 		//Skyrat edit

@@ -119,36 +119,36 @@ All foods are distributed among various categories. Use common sense.
 				to_chat(M, "<span class='notice'>You don't feel like eating any more junk food at the moment.</span>")
 				return 0
 			else if(fullness <= 50)
-				user.visible_message("<span class='notice'>[user] hungrily takes a [eatverb] from \the [src], gobbling it down!</span>", "<span class='notice'>You hungrily take a [eatverb] from \the [src], gobbling it down!</span>")
+				user.visible_message("<span class='notice'><b>[user]</b> hungrily takes a [eatverb] from \the [src], gobbling it down!</span>", "<span class='notice'>You hungrily take a [eatverb] from \the [src], gobbling it down!</span>")
 			else if(fullness > 50 && fullness < 150)
-				user.visible_message("<span class='notice'>[user] hungrily takes a [eatverb] from \the [src].</span>", "<span class='notice'>You hungrily take a [eatverb] from \the [src].</span>")
+				user.visible_message("<span class='notice'><b>[user]</b> hungrily takes a [eatverb] from \the [src].</span>", "<span class='notice'>You hungrily take a [eatverb] from \the [src].</span>")
 			else if(fullness > 150 && fullness < 500)
-				user.visible_message("<span class='notice'>[user] takes a [eatverb] from \the [src].</span>", "<span class='notice'>You take a [eatverb] from \the [src].</span>")
+				user.visible_message("<span class='notice'><b>[user]</b> takes a [eatverb] from \the [src].</span>", "<span class='notice'>You take a [eatverb] from \the [src].</span>")
 			else if(fullness > 500 && fullness < 600)
-				user.visible_message("<span class='notice'>[user] unwillingly takes a [eatverb] of a bit of \the [src].</span>", "<span class='warning'>You unwillingly take a [eatverb] of a bit of \the [src].</span>")
+				user.visible_message("<span class='notice'><b>[user]</b> unwillingly takes a [eatverb] of a bit of \the [src].</span>", "<span class='warning'>You unwillingly take a [eatverb] of a bit of \the [src].</span>")
 			else if(fullness > (600 * (1 + M.overeatduration / 2000)))	// The more you eat - the more you can eat
-				user.visible_message("<span class='warning'>[user] cannot force any more of \the [src] to go down [user.p_their()] throat!</span>", "<span class='danger'>You cannot force any more of \the [src] to go down your throat!</span>")
+				user.visible_message("<span class='warning'><b>[user]</b> cannot force any more of \the [src] to go down [user.p_their()] throat!</span>", "<span class='danger'>You cannot force any more of \the [src] to go down your throat!</span>")
 				return 0
 			if(HAS_TRAIT(M, TRAIT_VORACIOUS))
 				M.changeNext_move(CLICK_CD_MELEE * 0.5) //nom nom nom
 		else
 			if(!isbrain(M))		//If you're feeding it to someone else.
 				if(fullness <= (600 * (1 + M.overeatduration / 1000)))
-					M.visible_message("<span class='danger'>[user] attempts to feed [M] [src].</span>", \
-										"<span class='userdanger'>[user] attempts to feed [M] [src].</span>")
+					M.visible_message("<span class='danger'><b>[user]</b> attempts to feed <b>[M]</b> [src].</span>", \
+										"<span class='userdanger'><b>[user]</b> attempts to feed <b>[M]</b> [src].</span>")
 				else
-					M.visible_message("<span class='warning'>[user] cannot force any more of [src] down [M]'s throat!</span>", \
-										"<span class='warning'>[user] cannot force any more of [src] down [M]'s throat!</span>")
+					M.visible_message("<span class='warning'><b>[user]</b> cannot force any more of [src] down <b>[M]</b>'s throat!</span>", \
+										"<span class='warning'><b>[user]</b> cannot force any more of [src] down <b>[M]</b>'s throat!</span>")
 					return 0
 
 				if(!do_mob(user, M))
 					return
 				log_combat(user, M, "fed", reagents.log_list())
-				M.visible_message("<span class='danger'>[user] forces [M] to eat [src].</span>", \
-									"<span class='userdanger'>[user] forces [M] to eat [src].</span>")
+				M.visible_message("<span class='danger'><b>[user]</b> forces <b>[M]</b> to eat [src].</span>", \
+									"<span class='userdanger'><b>[user]</b> forces <b>[M]</b> to eat [src].</span>")
 
 			else
-				to_chat(user, "<span class='warning'>[M] doesn't seem to have a mouth!</span>")
+				to_chat(user, "<span class='warning'><b>[M]</b> doesn't seem to have a mouth!</span>")
 				return
 
 		if(reagents)								//Handle ingestion of the reagent.
@@ -247,7 +247,7 @@ All foods are distributed among various categories. Use common sense.
 		to_chat(user, "<span class='warning'>You cannot slice [src] here! You need a table or at least a tray.</span>")
 		return FALSE
 	
-	user.visible_message("[user] slices [src].", "<span class='notice'>You slice [src].</span>")
+	user.visible_message("<b>[user]</b> slices [src].", "<span class='notice'>You slice [src].</span>")
 
 	var/reagents_per_slice = reagents.total_volume/slices_num
 	for(var/i=1 to (slices_num))
@@ -353,13 +353,13 @@ All foods are distributed among various categories. Use common sense.
 		return
 	if(istype(M, /obj/item/reagent_containers/glass) || istype(M, /obj/item/reagent_containers/food/drinks))	//you can dunk dunkable snacks into beakers or drinks
 		if(!M.is_drainable())
-			to_chat(user, "<span class='warning'>[M] is unable to be dunked in!</span>")
+			to_chat(user, "<span class='warning'><b>[M]</b> is unable to be dunked in!</span>")
 			return
 		if(M.reagents.trans_to(src, dunk_amount))	//if reagents were transfered, show the message
-			to_chat(user, "<span class='notice'>You dunk the [M].</span>")
+			to_chat(user, "<span class='notice'>You dunk the <b>[M]</b>.</span>")
 			return
 		if(!M.reagents.total_volume)
-			to_chat(user, "<span class='warning'>[M] is empty!</span>")
+			to_chat(user, "<span class='warning'><b>[M]</b> is empty!</span>")
 		else
 			to_chat(user, "<span class='warning'>[src] is full!</span>")
 

@@ -209,7 +209,7 @@
 	wine_power = 80
 
 /obj/item/reagent_containers/food/snacks/grown/cherry_bomb/attack_self(mob/living/user)
-	user.visible_message("<span class='warning'>[user] plucks the stem from [src]!</span>", "<span class='userdanger'>You pluck the stem from [src], which begins to hiss loudly!</span>")
+	user.visible_message("<span class='warning'><b>[user]</b> plucks the stem from [src]!</span>", "<span class='userdanger'>You pluck the stem from [src], which begins to hiss loudly!</span>")
 	message_admins("[ADMIN_LOOKUPFLW(user)] primed a cherry bomb for detonation at [ADMIN_VERBOSEJMP(user)]")
 	log_game("[key_name(user)] primed a cherry bomb for detonation at [AREACOORD(user)].")
 	prime()
@@ -320,7 +320,7 @@
 	if(!fusedactive && fused)
 		var/lighting_text = W.ignition_effect(src, user)
 		if(lighting_text)
-			user.visible_message("<span class='warning'>[user] ignites [src]'s fuse!</span>", "<span class='userdanger'>You ignite the [src]'s fuse!</span>")
+			user.visible_message("<span class='warning'><b>[user]</b> ignites [src]'s fuse!</span>", "<span class='userdanger'>You ignite the [src]'s fuse!</span>")
 			fusedactive = TRUE
 			defused = FALSE
 			playsound(src, 'sound/effects/fuse.ogg', 100, 0)
@@ -384,11 +384,11 @@
 
 			//Display an attack message.
 			if(M != user)
-				M.visible_message("<span class='danger'>[user] has cracked open a [name] on [M]'s head!</span>", \
-						"<span class='userdanger'>[user] has cracked open a [name] on [M]'s head!</span>")
+				M.visible_message("<span class='danger'><b>[user]</b> has cracked open a [name] on <b>[M]</b>'s head!</span>", \
+						"<span class='userdanger'><b>[user]</b> has cracked open a [name] on <b>[M]</b>'s head!</span>")
 			else
-				user.visible_message("<span class='danger'>[M] cracks open a [name] on their [M.p_them()] head!</span>", \
-						"<span class='userdanger'>[M] cracks open a [name] on [M.p_their()] head!</span>")
+				user.visible_message("<span class='danger'><b>[M]</b> cracks open a [name] on their [M.p_them()] head!</span>", \
+						"<span class='userdanger'><b>[M]</b> cracks open a [name] on [M.p_their()] head!</span>")
 
 			//The coconut breaks open so splash its reagents
 			spillable = TRUE
@@ -415,8 +415,8 @@
 
 	if(user.a_intent == INTENT_HARM && spillable)
 		var/R
-		M.visible_message("<span class='danger'>[user] splashes the contents of [src] onto [M]!</span>", \
-						"<span class='userdanger'>[user] splashes the contents of [src] onto [M]!</span>")
+		M.visible_message("<span class='danger'><b>[user]</b> splashes the contents of [src] onto <b>[M]</b>!</span>", \
+						"<span class='userdanger'><b>[user]</b> splashes the contents of [src] onto <b>[M]</b>!</span>")
 		if(reagents)
 			for(var/datum/reagent/A in reagents.reagent_list)
 				R += A.type + " ("
@@ -429,13 +429,13 @@
 		reagents.clear_reagents()
 	else
 		if(M != user)
-			M.visible_message("<span class='danger'>[user] attempts to feed something to [M].</span>", \
-						"<span class='userdanger'>[user] attempts to feed something to you.</span>")
+			M.visible_message("<span class='danger'><b>[user]</b> attempts to feed something to <b>[M]</b>.</span>", \
+						"<span class='userdanger'><b>[user]</b> attempts to feed something to you.</span>")
 			if(!do_mob(user, M))
 				return
 			if(!reagents || !reagents.total_volume)
 				return // The drink might be empty after the delay, such as by spam-feeding
-			M.visible_message("<span class='danger'>[user] feeds something to [M].</span>", "<span class='userdanger'>[user] feeds something to you.</span>")
+			M.visible_message("<span class='danger'><b>[user]</b> feeds something to <b>[M]</b>.</span>", "<span class='userdanger'><b>[user]</b> feeds something to you.</span>")
 			log_combat(user, M, "fed", reagents.log_list())
 		else
 			to_chat(user, "<span class='notice'>You swallow a gulp of [src].</span>")
@@ -478,7 +478,7 @@
 
 	else if(reagents.total_volume)
 		if(user.a_intent == INTENT_HARM && spillable == TRUE)
-			user.visible_message("<span class='danger'>[user] splashes the contents of [src] onto [target]!</span>", \
+			user.visible_message("<span class='danger'><b>[user]</b> splashes the contents of [src] onto [target]!</span>", \
 								"<span class='notice'>You splash the contents of [src] onto [target].</span>")
 			reagents.reaction(target, TOUCH)
 			reagents.clear_reagents()
