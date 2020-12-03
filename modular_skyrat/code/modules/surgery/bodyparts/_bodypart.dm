@@ -1202,7 +1202,7 @@
 		if(damage_amt >= 1)
 			victim.applyOrganDamage(damage_amt)
 		if(owner && (damage_amt >= 10))
-			owner.custom_pain("MY [uppertext(victim.name)] HURTS!", 20, affecting = src)
+			owner.custom_pain("<b>MY [uppertext(victim.name)] HURTS!</b>", 20, affecting = src)
 		return TRUE
 
 //Heals brute, burn, stamina, pain, toxin and clone damage for the organ. Returns 1 if the damage-icon states changed at all.
