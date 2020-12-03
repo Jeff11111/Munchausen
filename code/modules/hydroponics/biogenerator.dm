@@ -7,6 +7,9 @@
 	use_power = IDLE_POWER_USE
 	idle_power_usage = 40
 	circuit = /obj/item/circuitboard/machine/biogenerator
+	light_color = LIGHT_COLOR_LIGHT_CYAN
+	light_power = 0.4
+	light_range = 1.4
 	var/processing = FALSE
 	var/obj/item/reagent_containers/glass/beaker = null
 	var/points = 0
