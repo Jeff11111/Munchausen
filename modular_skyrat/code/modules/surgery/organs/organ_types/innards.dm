@@ -14,4 +14,4 @@
 
 /obj/item/organ/innards/Initialize()
 	. = ..()
-	icon_state = "mysteryorgan[rand(1,10)]"
+	icon_state = "mysteryorgan[rand(1,9)]"

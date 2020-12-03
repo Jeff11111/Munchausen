@@ -23,9 +23,10 @@
 	owner.adjustToxLoss(4, TRUE, TRUE)	//forced to ensure people don't use it to gain tox as slime person
 
 /obj/item/organ/appendix/update_icon_state()
+	..()
 	if(inflamed)
-		icon_state = "appendixinflamed"
 		name = "inflamed appendix"
+		icon_state = "appendix-inflamed"
 	else
 		icon_state = "appendix"
 		name = "appendix"
