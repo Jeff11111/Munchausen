@@ -6,9 +6,8 @@
 				/datum/surgery_step/clamp_bleeders,
 				/datum/surgery_step/insert_teeth,
 				/datum/surgery_step/close)
-	target_mobtypes = list(/mob/living/carbon/human,
-						/mob/living/carbon/monkey)
 	possible_locs = list(BODY_ZONE_PRECISE_MOUTH)
+	requires_bodypart_type = 0
 
 /datum/surgery/teeth_repair/can_start(mob/living/user, mob/living/carbon/target)
 	if(..())
