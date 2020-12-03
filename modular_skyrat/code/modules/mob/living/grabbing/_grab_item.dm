@@ -228,6 +228,10 @@
 
 /// Strangling
 /obj/item/grab/proc/do_strangle(mob/living/carbon/victim, obj/item/bodypart/grasped_part, mob/living/carbon/user)
+	//You can't strangle yourself.
+	if(victim == user)
+		return FALSE
+	
 	if(strangling)
 		strangling = FALSE
 		grasping_mob.setGrabState(GRAB_AGGRESSIVE)

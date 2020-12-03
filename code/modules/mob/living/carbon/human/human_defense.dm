@@ -752,7 +752,7 @@
 		var/obj/item/bodypart/LB = get_bodypart(X)
 
 		if(!LB)
-			to_chat(src, "<span class='notice'>[parse_zone(X)]: <span class='deadsay'><b>MISSING</b></span> </span>")
+			to_chat(src, "<span class='notice'>[capitalize(parse_zone(X))]: <span class='deadsay'><b>MISSING</b></span> </span>")
 			continue
 
 		var/limb_max_damage = LB.max_damage
@@ -809,7 +809,7 @@
 				var/datum/wound/W = thing
 				var/woundmsg
 				if(W.can_self_treat)
-					woundmsg = "<a href='?src=[REF(W)];self_treat=1;' class='warning'>[uppertext(W.name)]</a>"
+					woundmsg = "<a href='?src=[REF(W)];self_treat=1;'>[uppertext(W.name)]</a>"
 				else
 					woundmsg = "[uppertext(W.name)]"
 				switch(W.severity)

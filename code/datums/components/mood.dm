@@ -49,7 +49,7 @@
 
 /datum/component/mood/proc/print_mood(mob/user)
 	var/msg = "<span class='info'>*---------*\n<EM>My thoughts</EM></span>\n"
-	msg += "<span class='notice'>My mental status: </span>" //Long term
+	msg += "<span class='notice'>My mental status: </span>\n" //Long term
 	if(!HAS_TRAIT(user, TRAIT_SCREWY_MOOD))
 		switch(sanity)
 			if(SANITY_GREAT to INFINITY)
@@ -67,7 +67,7 @@
 	else
 		msg += "<span class='notice'>I don't really know.</span>\n"
 
-	msg += "<span class='notice'>My current mood: </span>" //Short term
+	msg += "<span class='notice'>My current mood: </span>\n" //Short term
 	
 	if(!HAS_TRAIT(user, TRAIT_SCREWY_MOOD))
 		switch(mood_level)
