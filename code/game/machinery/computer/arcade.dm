@@ -80,6 +80,8 @@
 
 	light_color = LIGHT_COLOR_GREEN
 
+	connectable = FALSE
+
 /obj/machinery/computer/arcade/proc/Reset()
 	return
 

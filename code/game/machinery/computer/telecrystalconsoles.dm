@@ -13,6 +13,8 @@ GLOBAL_LIST_INIT(possible_uplinker_IDs, list("Alfa","Bravo","Charlie","Delta","E
 
 	light_color = LIGHT_COLOR_RED
 
+	connectable = FALSE
+
 /////////////////////////////////////////////
 /obj/machinery/computer/telecrystals/uplinker
 	name = "\improper telecrystal upload/receive station"
