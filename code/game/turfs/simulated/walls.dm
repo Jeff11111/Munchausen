@@ -34,6 +34,8 @@
 
 	var/list/dent_decals
 
+	var/cleaned_turf
+
 /turf/closed/wall/examine(mob/user)
 	. = ..()
 	deconstruction_hints(user)
@@ -183,6 +185,17 @@
 	//the istype cascade has been spread among various procs for easy overriding
 	var/srctype = type
 	if(try_clean(W, user, T) || try_wallmount(W, user, T) || try_decon(W, user, T) || (type == srctype && try_destroy(W, user, T)))
+		return
+
+	if(istype(W, /obj/item/soap))
+		var/obj/item/soap/soapW = W
+		if(!cleaned_turf)
+			return ..()
+		to_chat(user, "<span class='warning'>You begin to wipe off the rust.</span>")
+		if(!do_after(user, soapW.cleanspeed))
+			to_chat(user, "<span class='warning'>You moved, interrupting the cleaning process.</span>")
+		to_chat(user, "<span class='warning'>You clean the rust off [src].</span>")
+		ChangeTurf(cleaned_turf)
 		return
 
 	return ..()

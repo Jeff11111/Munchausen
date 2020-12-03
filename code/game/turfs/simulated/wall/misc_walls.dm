@@ -188,11 +188,15 @@
 	icon = 'icons/turf/walls/rusty_wall.dmi'
 	hardness = 45
 
+	cleaned_turf = /turf/closed/wall
+
 /turf/closed/wall/r_wall/rust
 	name = "rusted reinforced wall"
 	desc = "A huge chunk of rusted reinforced metal."
 	icon = 'icons/turf/walls/rusty_reinforced_wall.dmi'
 	hardness = 15
+
+	cleaned_turf = /turf/closed/wall/r_wall
 
 /turf/closed/wall/mineral/bronze
 	name = "clockwork wall"
