@@ -53,7 +53,7 @@
 	else if(!affecting)
 		P = "Prosthetic replacement"
 	else if((user.zone_selected == BODY_ZONE_PRECISE_MOUTH) && affecting.max_teeth && (affecting.get_teeth_amount() < affecting.max_teeth))
-		P = "Teeth Repair"
+		P = "Teeth repair"
 	else if(affecting.is_broken())
 		if(affecting.is_organic_limb())
 			var/datum/wound/blunt/W = locate() in affecting.wounds

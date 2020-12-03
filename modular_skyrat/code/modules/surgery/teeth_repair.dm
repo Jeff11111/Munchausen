@@ -1,6 +1,6 @@
 //British repair
 /datum/surgery/teeth_repair
-	name = "Teeth Repair"
+	name = "Teeth repair"
 	steps = list(/datum/surgery_step/incise,
 				/datum/surgery_step/retract_skin,
 				/datum/surgery_step/clamp_bleeders,
