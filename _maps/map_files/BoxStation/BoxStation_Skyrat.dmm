@@ -14197,6 +14197,7 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
 	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/nuke_storage)
 "aHH" = (
@@ -15353,6 +15354,12 @@
 	},
 /obj/structure/cable{
 	icon_state = "2-8"
+	},
+/obj/machinery/door/airlock/public/glass{
+	name = "Vault Storage"
+	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 1
 	},
 /turf/open/floor/plasteel,
 /area/ai_monitored/nuke_storage)
@@ -17999,9 +18006,10 @@
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
 	},
-/turf/open/floor/plasteel/white/corner{
+/obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
+/turf/open/floor/plasteel/white/corner,
 /area/hallway/secondary/entry)
 "aSa" = (
 /obj/machinery/light_switch{
@@ -29481,6 +29489,9 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
+/obj/structure/sign/warning/radiation/rad_area{
+	pixel_y = 32
+	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/central)
 "bwb" = (
@@ -29548,6 +29559,9 @@
 	},
 /obj/structure/cable{
 	icon_state = "4-8"
+	},
+/obj/structure/sign/warning/radiation/rad_area{
+	pixel_y = 32
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/central)
@@ -51960,6 +51974,12 @@
 	},
 /turf/open/floor/plating,
 /area/security/processing)
+"daZ" = (
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 6
+	},
+/turf/open/floor/engine,
+/area/hallway/secondary/entry)
 "dbx" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
 /obj/effect/spawner/lootdrop/maintenance{
@@ -52124,6 +52144,11 @@
 "dml" = (
 /obj/effect/turf_decal/stripes/line,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/structure/table,
+/obj/item/paper/guides/jobs/engi/gravity_gen,
+/obj/item/pen{
+	pixel_x = -4
+	},
 /turf/open/floor/plasteel,
 /area/engine/gravity_generator)
 "dmU" = (
@@ -53561,6 +53586,7 @@
 	name = "Gravity Generator";
 	req_access_txt = "11"
 	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /turf/open/floor/plasteel,
 /area/engine/gravity_generator)
 "fho" = (
@@ -55221,6 +55247,12 @@
 	dir = 8
 	},
 /area/security/prison)
+"gYz" = (
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 10
+	},
+/turf/open/floor/engine,
+/area/hallway/secondary/entry)
 "gYP" = (
 /obj/structure/chair/stool/bar,
 /obj/structure/spider/stickyweb/genetic,
@@ -55882,6 +55914,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/structure/chair/office/light,
 /turf/open/floor/plasteel,
 /area/engine/gravity_generator)
 "hJk" = (
@@ -56536,7 +56569,8 @@
 	map_pad_id = "toxenoarch";
 	map_pad_link_id = "tostation"
 	},
-/turf/open/floor/plasteel,
+/obj/effect/turf_decal/bot_white,
+/turf/open/floor/engine,
 /area/hallway/secondary/entry)
 "iEJ" = (
 /obj/machinery/door/airlock/external{
@@ -56723,6 +56757,13 @@
 	},
 /turf/open/floor/plating,
 /area/science/xenobiology)
+"iRg" = (
+/obj/effect/turf_decal/stripes/white/line,
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 1
+	},
+/turf/open/floor/plating,
+/area/hallway/secondary/entry)
 "iSW" = (
 /obj/structure/bed/dogbed{
 	desc = "A comfy-looking pet bed. You can even strap your pet in, in case the gravity turns off.";
@@ -57926,6 +57967,9 @@
 /obj/machinery/door/airlock/engineering{
 	name = "Gravity Generator";
 	req_access_txt = "11"
+	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 1
 	},
 /turf/open/floor/plasteel,
 /area/engine/gravity_generator)
@@ -60271,6 +60315,12 @@
 /obj/structure/cable,
 /turf/open/floor/plating,
 /area/science/xenobiology)
+"nDl" = (
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 5
+	},
+/turf/open/floor/engine,
+/area/hallway/secondary/entry)
 "nDL" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 9
@@ -60333,7 +60383,10 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/turf/open/floor/plasteel,
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 1
+	},
+/turf/open/floor/engine,
 /area/hallway/secondary/entry)
 "nGT" = (
 /obj/effect/turf_decal/stripes/line{
@@ -61093,6 +61146,12 @@
 	},
 /turf/open/floor/carpet,
 /area/crew_quarters/dorms)
+"oDJ" = (
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 8
+	},
+/turf/open/floor/engine,
+/area/hallway/secondary/entry)
 "oDN" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -61123,6 +61182,15 @@
 /obj/effect/spawner/lootdrop/keg,
 /turf/open/floor/plating,
 /area/maintenance/starboard/aft)
+"oFr" = (
+/obj/structure/chair/comfy/brown{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/open/floor/carpet,
+/area/crew_quarters/dorms)
 "oFI" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
@@ -61628,6 +61696,12 @@
 	dir = 1
 	},
 /area/crew_quarters/fitness)
+"puo" = (
+/obj/effect/turf_decal/stripes/white/line{
+	dir = 9
+	},
+/turf/open/floor/engine,
+/area/hallway/secondary/entry)
 "puX" = (
 /obj/structure/chair/sofa/left{
 	dir = 8
@@ -61946,7 +62020,12 @@
 "pUd" = (
 /obj/machinery/disposal/bin,
 /obj/structure/disposalpipe/trunk,
-/turf/open/floor/plasteel,
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
+/turf/open/floor/plasteel/white/corner{
+	dir = 1
+	},
 /area/hallway/secondary/entry)
 "pUC" = (
 /obj/machinery/camera{
@@ -64360,6 +64439,13 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/fore/secondary)
+"uhE" = (
+/obj/effect/turf_decal/stripes/white/corner,
+/obj/effect/turf_decal/stripes/white/corner{
+	dir = 8
+	},
+/turf/open/floor/engine,
+/area/hallway/secondary/entry)
 "uhX" = (
 /obj/machinery/airalarm{
 	pixel_y = 23
@@ -64979,6 +65065,7 @@
 	id = "telecap";
 	name = "Teleporter Room Shutters"
 	},
+/obj/effect/turf_decal/delivery,
 /turf/open/floor/plasteel,
 /area/teleporter)
 "vjJ" = (
@@ -66292,7 +66379,8 @@
 /area/hallway/secondary/exit)
 "xfS" = (
 /obj/machinery/light/small,
-/turf/open/floor/plasteel,
+/obj/effect/turf_decal/stripes/white/line,
+/turf/open/floor/engine,
 /area/hallway/secondary/entry)
 "xgk" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -73180,9 +73268,9 @@ aaa
 aaa
 aaa
 aaa
+ghq
 aaa
-aaa
-aaa
+ghq
 aaa
 aaa
 aaa
@@ -73437,9 +73525,9 @@ aaa
 aaa
 aaa
 aaa
+gXs
 aaa
-aaa
-aaa
+gXs
 aaa
 aaa
 aaa
@@ -73693,11 +73781,11 @@ aaa
 aaa
 aaa
 aaa
-aaa
-aaa
-aaa
-aaa
-aaa
+gJi
+gJi
+gXs
+gJi
+gJi
 aaa
 aaa
 aaa
@@ -73950,11 +74038,11 @@ aaa
 aaa
 aaa
 aaa
+gXs
 aaa
 aaa
 aaa
-aaa
-aaa
+gXs
 aaa
 aaa
 aaa
@@ -74207,11 +74295,11 @@ aaa
 aaa
 aaa
 aaa
+gXs
 aaa
 aaa
 aaa
-aaa
-aaa
+gXs
 aoV
 aaa
 aaa
@@ -74464,11 +74552,11 @@ aaa
 aaa
 aaa
 aaa
+gXs
 aaa
 aaa
 aaa
-aaa
-aaa
+gXs
 aaa
 aaa
 aaa
@@ -74979,9 +75067,9 @@ aaa
 aaa
 aaa
 awW
-ayl
-ayl
-ayl
+daZ
+oDJ
+nDl
 awW
 aaa
 aaa
@@ -75493,9 +75581,9 @@ aaa
 aaa
 aaa
 awW
-ayl
-ayl
-ayl
+gYz
+uhE
+puo
 awW
 aoV
 aaa
@@ -75751,7 +75839,7 @@ aaa
 aaa
 awW
 awW
-ayl
+iRg
 awW
 xQG
 kls
@@ -76007,7 +76095,7 @@ aaa
 aaa
 aaa
 awW
-ayl
+awZ
 ayl
 awW
 aaa
@@ -97062,7 +97150,7 @@ aqa
 atf
 arf
 aau
-aaA
+oFr
 aaA
 ghv
 arf
