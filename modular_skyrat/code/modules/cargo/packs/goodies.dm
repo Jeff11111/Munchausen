@@ -128,7 +128,7 @@
 	cost = 40000
 	contains = list(/obj/item/gun/ballistic/automatic/l6_saw)
 
-/datum/supply_pack/goody/sniper_ammo
+/datum/supply_pack/goody/lmg_ammo
 	name = "1.95x129mm Ammo Boxes"
 	desc = "Contains 2 high capacity 1.95x129mm ammo boxes."
 	cost = 10000
