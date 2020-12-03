@@ -24926,6 +24926,14 @@
 /obj/structure/disposalpipe/segment,
 /turf/open/floor/plasteel/white,
 /area/science/robotics/lab)
+"bkl" = (
+/obj/structure/chair/office/light,
+/obj/machinery/atmospherics/components/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/effect/landmark/start/scientist,
+/turf/open/floor/plasteel/white,
+/area/science/circuit)
 "bkm" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 10
@@ -25571,11 +25579,8 @@
 /turf/open/floor/plating,
 /area/maintenance/starboard)
 "blP" = (
-/obj/effect/mapping_helpers/airlock/cyclelink_helper{
-	dir = 4
-	},
-/obj/machinery/door/airlock/external{
-	req_access_txt = "13"
+/obj/machinery/light/small{
+	dir = 1
 	},
 /turf/open/floor/plating,
 /area/maintenance/starboard)
@@ -25586,10 +25591,12 @@
 /turf/open/floor/plating,
 /area/maintenance/starboard/aft)
 "blR" = (
-/obj/structure/sign/warning/vacuum/external{
-	pixel_y = 32
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 4
 	},
-/obj/item/cigbutt,
+/obj/machinery/door/airlock/external{
+	req_access_txt = "13"
+	},
 /turf/open/floor/plating,
 /area/maintenance/starboard)
 "blS" = (
@@ -27218,9 +27225,10 @@
 /turf/open/floor/plating,
 /area/maintenance/starboard)
 "bqh" = (
-/obj/machinery/light/small{
-	dir = 1
+/obj/structure/sign/warning/vacuum/external{
+	pixel_y = 32
 	},
+/obj/item/cigbutt,
 /turf/open/floor/plating,
 /area/maintenance/starboard)
 "bqi" = (
@@ -43800,11 +43808,11 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
-/obj/machinery/door/airlock/maintenance{
-	name = "Testing Lab Maintenance";
+/obj/machinery/door/airlock/research/glass{
+	name = "Circuit Lab";
 	req_access_txt = "47"
 	},
-/turf/open/floor/plating,
+/turf/open/floor/plasteel/white,
 /area/science/circuit)
 "cfu" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
@@ -44176,12 +44184,12 @@
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/supply/hidden{
-	dir = 9
-	},
 /obj/structure/disposalpipe/segment,
-/turf/open/floor/plating,
-/area/maintenance/starboard/aft)
+/obj/machinery/atmospherics/pipe/manifold/supply/hidden{
+	dir = 4
+	},
+/turf/open/floor/plasteel/white,
+/area/science/circuit)
 "cgt" = (
 /obj/structure/chair,
 /obj/effect/turf_decal/tile/blue{
@@ -44678,7 +44686,7 @@
 	},
 /obj/machinery/door/firedoor,
 /turf/open/floor/plating,
-/area/maintenance/starboard/aft)
+/area/science/circuit)
 "chy" = (
 /obj/structure/cable{
 	icon_state = "1-8"
@@ -44692,8 +44700,9 @@
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
 	},
-/turf/open/floor/plating,
-/area/maintenance/starboard/aft)
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/turf/open/floor/plasteel/white,
+/area/science/circuit)
 "chz" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/disposalpipe/segment{
@@ -44703,7 +44712,7 @@
 	icon_state = "4-8"
 	},
 /turf/open/floor/plating,
-/area/maintenance/starboard/aft)
+/area/science/circuit)
 "chA" = (
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -44714,8 +44723,8 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/turf/open/floor/plating,
-/area/maintenance/starboard/aft)
+/turf/open/floor/plasteel/white,
+/area/science/circuit)
 "chB" = (
 /obj/structure/cable/yellow{
 	icon_state = "4-8"
@@ -53012,6 +53021,11 @@
 	dir = 1
 	},
 /area/security/prison)
+"eoY" = (
+/obj/structure/table,
+/obj/item/integrated_circuit_printer,
+/turf/open/floor/plasteel/white,
+/area/science/circuit)
 "epC" = (
 /obj/machinery/door/airlock{
 	desc = "To keep the station within regulations, space IKEA requires one storage cupboard for their Nanotrasen partnership to continue.";
@@ -56108,6 +56122,10 @@
 	dir = 8
 	},
 /area/security/prison)
+"hYD" = (
+/obj/effect/spawner/structure/window/reinforced,
+/turf/open/floor/plating,
+/area/science/circuit)
 "iak" = (
 /obj/machinery/firealarm{
 	dir = 8;
@@ -56780,12 +56798,12 @@
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
-	dir = 4
-	},
 /obj/effect/landmark/event_spawn,
-/turf/open/floor/plating,
-/area/maintenance/starboard/aft)
+/obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
+	dir = 1
+	},
+/turf/open/floor/plasteel/white,
+/area/science/circuit)
 "iVT" = (
 /obj/effect/turf_decal/stripes/white/line{
 	dir = 4
@@ -57105,6 +57123,16 @@
 /obj/machinery/chem_master/condimaster,
 /turf/open/floor/plating,
 /area/maintenance/fore)
+"jur" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/obj/structure/table,
+/obj/machinery/cell_charger,
+/obj/item/stock_parts/cell/high,
+/obj/item/stock_parts/cell/high,
+/obj/item/stock_parts/cell/high,
+/obj/item/stock_parts/cell/high,
+/turf/open/floor/plasteel/white,
+/area/science/circuit)
 "juG" = (
 /obj/structure/table/reinforced,
 /obj/machinery/door/firedoor,
@@ -57652,8 +57680,8 @@
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
 	},
-/turf/open/floor/plating,
-/area/maintenance/starboard/aft)
+/turf/open/floor/plasteel/white,
+/area/science/circuit)
 "jWI" = (
 /obj/structure/disposalpipe/segment{
 	dir = 6
@@ -59006,8 +59034,12 @@
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/security/armory)
 "lOi" = (
-/turf/closed/wall/r_wall,
-/area/maintenance/starboard/aft)
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 4
+	},
+/obj/machinery/vending/assist,
+/turf/open/floor/plasteel/white,
+/area/science/circuit)
 "lOt" = (
 /obj/effect/turf_decal/trimline/red/filled/line{
 	dir = 8
@@ -60985,8 +61017,10 @@
 /obj/structure/sign/poster/official/random{
 	pixel_x = 32
 	},
-/turf/open/floor/plating,
-/area/maintenance/starboard/aft)
+/obj/structure/table,
+/obj/item/stack/sheet/metal/fifty,
+/turf/open/floor/plasteel/white,
+/area/science/circuit)
 "otA" = (
 /obj/machinery/button/door{
 	id = "visitation";
@@ -62872,8 +62906,11 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
-/turf/closed/wall/r_wall,
-/area/maintenance/starboard/aft)
+/obj/machinery/airalarm{
+	pixel_y = 23
+	},
+/turf/open/floor/plasteel/white,
+/area/science/circuit)
 "ruo" = (
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -62942,6 +62979,14 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/aft)
+"rCb" = (
+/obj/structure/table,
+/obj/item/integrated_electronics/analyzer,
+/obj/item/integrated_electronics/debugger,
+/obj/item/integrated_electronics/detailer,
+/obj/item/integrated_electronics/wirer,
+/turf/open/floor/plasteel/white,
+/area/science/circuit)
 "rCT" = (
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -64439,6 +64484,13 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/fore/secondary)
+"uhy" = (
+/obj/structure/chair/office/light,
+/obj/machinery/atmospherics/components/unary/vent_pump/on{
+	dir = 1
+	},
+/turf/open/floor/plasteel/white,
+/area/science/circuit)
 "uhE" = (
 /obj/effect/turf_decal/stripes/white/corner,
 /obj/effect/turf_decal/stripes/white/corner{
@@ -65669,6 +65721,11 @@
 /obj/structure/cable,
 /turf/open/space,
 /area/solar/starboard/aft)
+"vZC" = (
+/obj/structure/table,
+/obj/item/stack/sheet/metal/fifty,
+/turf/open/floor/plasteel/white,
+/area/science/circuit)
 "vZR" = (
 /obj/structure/chair/comfy/brown{
 	dir = 1
@@ -114177,11 +114234,11 @@ bQZ
 bQZ
 bQZ
 fzX
-rtZ
+bry
 chx
-lOi
-lOi
-lOi
+fzX
+fzX
+fzX
 clt
 cQw
 fup
@@ -114434,11 +114491,11 @@ ccR
 cdS
 ceP
 fzX
-clt
-jWz
-cOe
-cOe
 lOi
+jWz
+eoY
+vZC
+fzX
 clt
 cQw
 cNW
@@ -114691,11 +114748,11 @@ ccR
 cdS
 ceP
 fzX
-clt
+rtZ
 iTF
-cOe
-cOe
-cOT
+bkl
+rCb
+hYD
 clt
 cQw
 oEZ
@@ -114950,9 +115007,9 @@ ceQ
 cft
 cgs
 chy
-cOe
-cOe
-cOT
+uhy
+rCb
+hYD
 clt
 cQw
 ttL
@@ -115205,11 +115262,11 @@ ccT
 woy
 bSc
 cfu
-cOb
+jur
 chA
-cOe
+eoY
 oqN
-lOi
+fzX
 clt
 cQw
 cmo
@@ -115462,11 +115519,11 @@ bSl
 bQZ
 bQZ
 fzX
-lOi
+fzX
 chz
-lOi
-lOi
-lOi
+fzX
+fzX
+fzX
 clt
 cQw
 cCt
@@ -116193,7 +116250,7 @@ aPq
 aPq
 kOS
 bky
-bqh
+btp
 bme
 bnx
 btp
@@ -116450,7 +116507,7 @@ bRd
 aPq
 jvs
 bky
-blP
+btp
 bns
 boF
 btp
@@ -116707,8 +116764,8 @@ bRd
 aPq
 tvB
 bky
-blR
-bns
+btp
+bZi
 boF
 btp
 fzX
@@ -116964,8 +117021,8 @@ bRd
 aPq
 wJs
 bky
-cyC
-bns
+btp
+bZi
 boF
 btp
 fzX
@@ -117221,8 +117278,8 @@ bRd
 aPq
 aMZ
 vvx
-aaa
-bns
+blP
+bZi
 boF
 btp
 fzX
@@ -117478,7 +117535,7 @@ aPq
 jEU
 vvx
 gBf
-aaa
+blR
 bns
 boF
 btp
@@ -117735,7 +117792,7 @@ bAk
 brA
 vai
 gBf
-aaf
+bqh
 bns
 boH
 biY
@@ -117992,7 +118049,7 @@ ufq
 aNa
 aNa
 gBf
-aaf
+cyC
 bnu
 bhG
 bhG
