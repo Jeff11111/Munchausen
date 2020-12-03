@@ -362,21 +362,20 @@
 	stat_end = JOB_STATPOINTS_TRAINED
 	stat_dex = 8
 	stat_int = 8
-	//Decent melee and ranged
+	//Decent melee and ranged, novice firstaid
 	skill_melee = JOB_SKILLPOINTS_TRAINED
 	skill_ranged = JOB_SKILLPOINTS_TRAINED
-	skill_firstaid = JOB_SKILLPOINTS_NOVICE
-
-/datum/job/mining
-	//Better str and end, at the cost of int and dex
-	stat_str = 12
-	stat_end = 12
-	stat_dex = 8
-	stat_int = 8
-	//Average melee and ranged, novice first aid
 	skill_firstaid = 8
+
+/datum/job/officer
+	//Better str and end, at the cost of int
+	stat_str = 11
+	stat_end = 11
+	stat_int = 8
+	//Decent melee and ranged, novice firstaid
 	skill_melee = JOB_SKILLPOINTS_TRAINED
-	skill_ranged = JOB_SKILLPOINTS_AVERAGE
+	skill_ranged = JOB_SKILLPOINTS_TRAINED
+	skill_firstaid = 8
 
 /datum/job/engineer
 	//Average stats all around, save for

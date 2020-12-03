@@ -550,7 +550,7 @@
 		for(var/datum/gunpoint/GP in gunpointed)
 			msg += "<b>[GP.source.name] [GP.source.p_are()] holding [t_him] at gunpoint with [GP.aimed_gun.name]!</b>"
 	
-	if((stat < DEAD) && undergoing_cardiac_arrest() && (user.mind?.mob_skills[SKILL_DATUM(firstaid)].level >= 12))
+	if((stat < DEAD) && undergoing_cardiac_arrest() && (user.mind?.mob_skills[SKILL_DATUM(firstaid)]?.level >= 12))
 		msg += "<span class='danger'><b>[t_He] is having a heart attack!</b></span>"
 
 	//Strength message

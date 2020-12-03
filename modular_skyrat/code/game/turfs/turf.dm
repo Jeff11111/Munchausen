@@ -3,7 +3,8 @@
 	. = ..()
 	var/mob/living/living_user = user
 	if(istype(living_user) && living_user.lying && CHECK_MOBILITY(living_user, MOBILITY_USE) && !living_user.restrained())
-		if(living_user.last_move + living_user.movement_delay()*2 <= world.time)
+		if(living_user.last_move + 2 SECONDS <= world.time)
+			living_user.visible_message("<span class='danger'><b>[living_user]</b> crawls towards [src].</span>")
 			living_user.Move(get_step(living_user, get_dir(living_user, src)), get_dir(living_user, src))
 
 // Knockdown stuff i guess
