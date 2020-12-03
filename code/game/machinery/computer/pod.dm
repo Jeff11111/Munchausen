@@ -8,6 +8,8 @@
 	var/time = 30
 	var/range = 4
 
+	connectable = FALSE
+
 
 /obj/machinery/computer/pod/Initialize()
 	. = ..()

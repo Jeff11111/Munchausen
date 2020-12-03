@@ -36,6 +36,8 @@
 
 	var/allow_items = TRUE
 
+	connectable = FALSE
+
 /obj/machinery/computer/cryopod/attack_ai()
 	attack_hand()
 

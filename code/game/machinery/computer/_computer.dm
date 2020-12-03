@@ -1,6 +1,6 @@
 /obj/machinery/computer
 	name = "computer"
-	icon = 'icons/obj/computer.dmi'
+	icon = 'modular_skyrat/icons/obj/computer.dmi'
 	icon_state = "computer"
 	density = TRUE
 	use_power = IDLE_POWER_USE
@@ -15,6 +15,8 @@
 	var/clockwork = FALSE
 	var/authenticated = FALSE
 
+	var/connectable = TRUE
+
 /obj/machinery/computer/Initialize(mapload, obj/item/circuitboard/C)
 	. = ..()
 	power_change()
@@ -25,6 +27,8 @@
 
 /obj/machinery/computer/Destroy()
 	QDEL_NULL(circuit)
+	for(var/obj/machinery/computer/selected in range(1, src))
+		addtimer(CALLBACK(selected, .update_overlays), 5)
 	return ..()
 
 /obj/machinery/computer/process()
@@ -59,6 +63,29 @@
 	// This whole block lets screens ignore lighting and be visible even in the darkest room
 	// We can't do this for many things that emit light unfortunately because it layers over things that would be on top of it
 	var/overlay_state = icon_screen
+
+	if(connectable)
+		icon_state = initial(icon_state)
+		var/obj/machinery/computer/left_turf = null
+		var/obj/machinery/computer/right_turf = null
+		switch(dir)
+			if(NORTH)
+				left_turf = locate(/obj/machinery/computer) in get_step(src, WEST)
+				right_turf = locate(/obj/machinery/computer) in get_step(src, EAST)
+			if(EAST)
+				left_turf = locate(/obj/machinery/computer) in get_step(src, NORTH)
+				right_turf = locate(/obj/machinery/computer) in get_step(src, SOUTH)
+			if(SOUTH)
+				left_turf = locate(/obj/machinery/computer) in get_step(src, EAST)
+				right_turf = locate(/obj/machinery/computer) in get_step(src, WEST)
+			if(WEST)
+				left_turf = locate(/obj/machinery/computer) in get_step(src, SOUTH)
+				right_turf = locate(/obj/machinery/computer) in get_step(src, NORTH)
+		if(left_turf?.dir == dir && left_turf.connectable)
+			icon_state = "[icon_state]_L"
+		if(right_turf?.dir == dir && right_turf.connectable)
+			icon_state = "[icon_state]_R"
+	
 	if(stat & BROKEN)
 		overlay_state = "[icon_state]_broken"
 	SSvis_overlays.add_vis_overlay(src, icon, overlay_state, layer, plane, dir)
@@ -80,6 +107,8 @@
 		to_chat(user, "<span class='notice'>You start to disconnect the monitor...</span>")
 		if(I.use_tool(src, user, 20, volume=50))
 			deconstruct(TRUE, user)
+	for(var/obj/machinery/computer/selected in range(1,src))
+		selected.update_overlays()
 	return TRUE
 
 
@@ -137,5 +166,6 @@
 			circuit = null
 		for(var/obj/C in src)
 			C.forceMove(loc)
-
+	for(var/obj/machinery/computer/selected in range(1,src))
+		selected.update_overlays()
 	qdel(src)

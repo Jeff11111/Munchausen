@@ -28,6 +28,8 @@
 	var/SQLquery
 	clockwork = TRUE //it'd look weird
 
+	connectable = FALSE
+
 /obj/machinery/computer/libraryconsole/ui_interact(mob/user)
 	. = ..()
 	var/dat = "" // <META HTTP-EQUIV='Refresh' CONTENT='10'>
