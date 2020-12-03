@@ -13,13 +13,15 @@
 	hide_underwear_examine = TRUE
 
 /obj/item/pickup(mob/living/user)
+	var/was_in_hands = (src in user.held_items)
 	. = ..()
-	if(grabtext)
-		var/t = replacetext(grabtext,"user","[user]")
-		t = replacetext(t,"src","[src.name]")
-		user.visible_message("<span class='danger'>[t]</span>")
-	if(grabsound)
-		playsound(src, grabsound, 60, 1)
+	if(!was_in_hands)
+		if(grabtext)
+			var/t = replacetext(grabtext,"user","[user]")
+			t = replacetext(t,"src","[src.name]")
+			user.visible_message("<span class='danger'>[t]</span>")
+		if(grabsound)
+			playsound(src, grabsound, 60, 1)
 
 //Item info element
 /obj/item/ComponentInitialize()
