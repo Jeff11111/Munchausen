@@ -52,6 +52,7 @@
 				blood_loss_per_squirt *= 0.5
 	L.owner.bleed(blood_loss_per_squirt)
 	L.owner.add_splatter_floor(get_turf(victim))
+	L.owner.death_scream()
 	. = ..()
 
 /datum/wound/artery/handle_process()

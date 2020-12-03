@@ -58,6 +58,7 @@
 				torn *= 0.5
 			if(BODY_ZONE_PRECISE_R_FOOT)
 				torn *= 0.5
+	L.owner.death_scream()
 	. = ..()
 
 /datum/wound/tendon/treat(obj/item/I, mob/user)
