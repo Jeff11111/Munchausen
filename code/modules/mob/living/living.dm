@@ -704,7 +704,7 @@
 		connected_trail = nice
 		if(connected_trail.connected_trail && !QDELETED(connected_trail.connected_trail))
 			var/dire_straits = get_dir(connected_trail.connected_trail, target_turf)
-			if((target_turf.x >= connected_trail.connected_trail.x) || (target_turf.y >= connected_trail.connected_trail.y))
+			if((target_turf.x <= connected_trail.connected_trail.x) || (target_turf.y <= connected_trail.connected_trail.y))
 				dire_straits = get_dir(target_turf, connected_trail.connected_trail)
 			if(dire_straits in GLOB.diagonals)
 				connected_trail.cut_overlays()
