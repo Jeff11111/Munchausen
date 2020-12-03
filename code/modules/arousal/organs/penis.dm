@@ -40,16 +40,16 @@
 	var/new_size
 	var/enlargement = FALSE
 	switch(rounded_length)
-		if(0 to 6) //If modest size
+		if(0 to 15) //If modest size
 			new_size = 1
-		if(7 to 11) //If large
+		if(16 to 27) //If large
 			new_size = 2
-		if(12 to 20) //If massive
+		if(28 to 50) //If massive
 			new_size = 3
-		if(21 to 34) //If massive and due for large effects
+		if(51 to 85) //If massive and due for large effects
 			new_size = 3
 			enlargement = TRUE
-		if(35 to INFINITY) //If comical
+		if(86 to INFINITY) //If comical
 			new_size = 4 //no new sprites for anything larger yet
 			enlargement = TRUE
 	if(owner)
@@ -62,15 +62,13 @@
 		linked_organ.size = clamp(size + new_size, BALLS_SIZE_MIN, BALLS_SIZE_MAX)
 		linked_organ.update()
 	size = new_size
-
 	if(owner)
-		if (round(length) > round(prev_length))
+		if(round(length) > round(prev_length))
 			to_chat(owner, "<span class='warning'>Your [pick(GLOB.dick_nouns)] [pick("swells up to", "flourishes into", "expands into", "bursts forth into", "grows eagerly into", "amplifys into")] a [round(length, 0.1)] centimeter penis.</b></span>")
 		else if ((round(length) < round(prev_length)) && (length > 0.5))
 			to_chat(owner, "<span class='warning'>Your [pick(GLOB.dick_nouns)] [pick("shrinks down to", "decreases into", "diminishes into", "deflates into", "shrivels regretfully into", "contracts into")] a [round(length, 0.1)] centimeter penis.</b></span>")
 	icon_state = sanitize_text("penis_[shape]_[size]")
 	diameter = (length * diameter_ratio)//Is it just me or is this ludicous, why not make it exponentially decay?
-
 
 /obj/item/organ/genital/penis/update_appearance()
 	. = ..()

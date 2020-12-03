@@ -928,7 +928,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						dat += "<b>Penis Color:</b></a><BR>"
 						dat += "<span style='border: 1px solid #161616; background-color: #[features["cock_color"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=cock_color;task=input'>Change</a><br>"
 					dat += "<b>Penis Shape:</b> <a style='display:block;width:120px' href='?_src_=prefs;preference=cock_shape;task=input'>[features["cock_shape"]]</a>"
-					dat += "<b>Penis Length:</b> <a style='display:block;width:120px' href='?_src_=prefs;preference=cock_length;task=input'>[round(features["cock_length"] * 2.54, 1)] centimeter(s)</a>"
+					dat += "<b>Penis Length:</b> <a style='display:block;width:120px' href='?_src_=prefs;preference=cock_length;task=input'>[round(features["cock_length"], 1)] centimeter(s)</a>"
 					dat += "<b>Has Testicles:</b><a style='display:block;width:50px' href='?_src_=prefs;preference=has_balls'>[(features["has_balls"] && pref_species.has_balls) ? "Yes" : "No"]</a>"
 					if(features["has_balls"] && pref_species.has_balls)
 						if(pref_species.use_skintones || features["genitals_use_skintone"])

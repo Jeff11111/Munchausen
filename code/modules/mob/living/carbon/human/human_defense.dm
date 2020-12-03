@@ -752,7 +752,7 @@
 	for(var/X in ALL_BODYPARTS)
 		var/obj/item/bodypart/LB = get_bodypart(X)
 		if(!LB)
-			to_chat(src, "\t[parse_zone(X)]: <span class='deadsay'>MISSING</span>")
+			to_chat(src, "\t[parse_zone(X)]: <span class='deadsay'><b>MISSING</b></span>")
 			continue
 
 		var/limb_max_damage = LB.max_damage
@@ -777,23 +777,29 @@
 				status += "<span class='[burndamage >= 5 ? "danger" : "notice"]'>[burndamage] BURN</span>"
 				status += "<span class='[paindamage >= 10 ? "danger" : "notice"]'>[paindamage] PAIN</span>"
 		else
-			if(brutedamage > (limb_max_damage*0.75))
+			if(brutedamage >= (limb_max_damage*0.75))
 				status += "<span class='userdanger'>[uppertext(LB.heavy_brute_msg)]</span>"
-			else if(brutedamage > (limb_max_damage*0.25))
+			else if(brutedamage >= (limb_max_damage*0.5))
+				status += "<span class='userdanger'>[uppertext(LB.heavy_brute_msg)]</span>"
+			else if(brutedamage >= (limb_max_damage*0.25))
 				status += "<span class='danger'>[uppertext(LB.medium_brute_msg)]</span>"
 			else if(brutedamage > 0)
 				status += "<span class='warning'>[uppertext(LB.light_brute_msg)]</span>"
 
-			if(burndamage > (limb_max_damage*0.75))
+			if(burndamage >= (limb_max_damage*0.75))
+				status += "<span class='userdanger'><b>[uppertext(LB.heavy_burn_msg)]</b></span>"
+			else if(burndamage >= (limb_max_damage*0.5))
 				status += "<span class='userdanger'>[uppertext(LB.heavy_burn_msg)]</span>"
-			else if(burndamage > (limb_max_damage*0.25))
+			else if(burndamage >= (limb_max_damage*0.25))
 				status += "<span class='danger'>[uppertext(LB.medium_burn_msg)]</span>"
 			else if(burndamage > 0)
-				status += "<span class='warning'>[uppertext(LB.light_burn_msg)]</span>"
+				status += "<span class='warning'>[uppertext(LB.light_burn_msg)]</span>"	
 
-			if(paindamage > (limb_max_pain*0.75))
+			if(paindamage >= (limb_max_pain*0.75))
+				status += "<span class='userdanger'><b>[uppertext(LB.heavy_pain_msg)]</b></span>"
+			else if(paindamage >= (limb_max_pain*0.5))
 				status += "<span class='userdanger'>[uppertext(LB.heavy_pain_msg)]</span>"
-			else if(burndamage > (limb_max_pain*0.25))
+			else if(burndamage >= (limb_max_pain*0.25))
 				status += "<span class='danger'>[uppertext(LB.medium_pain_msg)]</span>"
 			else if(burndamage > 0)
 				status += "<span class='warning'>[uppertext(LB.light_pain_msg)]</span>"
@@ -812,20 +818,20 @@
 					if(WOUND_SEVERITY_MODERATE)
 						status += "<span class='warning'>[woundmsg]</span>"
 					if(WOUND_SEVERITY_SEVERE)
-						status += "<span class='danger'><b>[woundmsg]</b></span>"
+						status += "<span class='danger'>[woundmsg]</span>"
 					if(WOUND_SEVERITY_CRITICAL)
-						status += "<span class='userdanger'>[woundmsg]</span>"
+						status += "<span class='userdanger'><b>[woundmsg]</span>"
 					if(WOUND_SEVERITY_LOSS)
-						status += "<span class='deadsay'>[woundmsg]</span>"
+						status += "<span class='deadsay'><b>[woundmsg]</b></span>"
 					if(WOUND_SEVERITY_PERMANENT)
-						status += "<span class='userdanger'>[woundmsg]</span>"
+						status += "<span class='userdanger'><b>[woundmsg]</b></span>"
 		
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF) && length(LB.embedded_objects))
 			for(var/obj/item/I in LB.embedded_objects)
 				status += "<span class='warning'><a href='?src=[REF(src)];embedded_object=[REF(I)];embedded_limb=[REF(LB)]'>[I.isEmbedHarmless() ? "STUCK" : "EMBEDDED"] [uppertext(I.name)]</a></span>"
 
 		if(LB.get_bleed_rate())
-			status += "<span class='danger'><b>BLEEDING</b></span>"
+			status += "<span class='danger'>BLEEDING</span>"
 		
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF) && LB.is_disabled())
 			status += "<span class='danger'><b>DISABLED</b></span>"
@@ -834,7 +840,7 @@
 			var/obj/item/bodypart/head/HD = LB
 			if(HD.tapered)
 				if(!wear_mask)
-					status += "<span class='warning'><b><a href='?src=[REF(HD)];tape=[HD.tapered];'>TAPED</a></b></span>"
+					status += "<span class='warning'><a href='?src=[REF(HD)];tape=[HD.tapered];'>TAPED</a></span>"
 		
 		if(LB.current_gauze)
 			status += "<span class='notice'><a href='?src=[REF(LB)];gauze=1;'>GAUZED</a></span>"
@@ -843,7 +849,7 @@
 			status += "<span class='nicegreen'>OK</span>"
 		
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF))
-			to_chat(src, "<span class='notice'>[LB.name]: [jointext(status, " | ")] </span>")
+			to_chat(src, "<span class='notice'>[LB.name]: <span class='info'>[jointext(status, " | ")]</span> </span>")
 		else
 			to_chat(src, "<span class='notice'>[LB.name]: <span class='nicegreen'>OK</span> </span>")
 
