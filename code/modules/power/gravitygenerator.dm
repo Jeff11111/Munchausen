@@ -27,6 +27,7 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 	use_power = NO_POWER_USE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	var/sprite_number = 0
+	light_color = LIGHT_COLOR_GREEN
 
 /obj/machinery/gravity_generator/safe_throw_at()
 	return FALSE
@@ -331,6 +332,7 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 					overlay_state = "activating"
 				if(81 to 100)
 					overlay_state = "activated"
+			set_light(FLOOR(charge_count / 20, 0)) //glow increases depending on the charge
 
 			if(overlay_state != current_overlay)
 				if(middle)
