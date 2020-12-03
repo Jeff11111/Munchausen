@@ -83,13 +83,13 @@
 				//Missed shot
 				if(DICE_CRIT_FAILURE, DICE_FAILURE)
 					if(fireboy != src)
-						visible_message("<span class='danger'><b>FAILURE!</b>[P] misses <b>[src]</b> entirely!</span>")
+						visible_message("<span class='danger'><b>FAILURE!</b> [P] misses <b>[src]</b> entirely!</span>")
 						return BULLET_ACT_FORCE_PIERCE
 	//Critical hits
 	if(mind)
 		switch(rand(1,100))
 			if(0 to 2)
-				visible_message("<span class='danger'><b>CRITICAL HIT!</b>[P] mauls <b>[src]</b>!")
+				visible_message("<span class='danger'><b>CRITICAL SUCCESS!</b> [P] mauls <b>[src]</b>!")
 				P.damage *= 2
 	return ..()
 
