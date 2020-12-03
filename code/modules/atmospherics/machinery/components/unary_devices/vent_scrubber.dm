@@ -12,6 +12,9 @@
 	welded = FALSE
 	level = 1
 	layer = GAS_SCRUBBER_LAYER
+	light_color = LIGHT_COLOR_LIGHT_CYAN
+	light_power = 0.3
+	light_range = 1.4
 
 	var/id_tag = null
 	var/scrubbing = SCRUBBING //0 = siphoning, 1 = scrubbing
@@ -73,19 +76,24 @@
 
 	if(welded)
 		icon_state = "scrub_welded"
+		set_light(0)
 		return
 
 	if(!nodes[1] || !on || !is_operational())
 		icon_state = "scrub_off"
+		set_light(0)
 		return
 
 	if(scrubbing & SCRUBBING)
 		if(widenet)
 			icon_state = "scrub_wide"
+			set_light(1.4, 0.5, LIGHT_COLOR_LIGHT_CYAN)
 		else
 			icon_state = "scrub_on"
+			set_light(1.4, 0.3, LIGHT_COLOR_LIGHT_CYAN)
 	else //scrubbing == SIPHONING
 		icon_state = "scrub_purge"
+		set_light(1.4, 0.5, LIGHT_COLOR_RED)
 
 /obj/machinery/atmospherics/components/unary/vent_scrubber/proc/set_frequency(new_frequency)
 	SSradio.remove_object(src, frequency)

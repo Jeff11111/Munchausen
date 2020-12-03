@@ -272,7 +272,7 @@
 			to_chat(loc, "<span class='notice'>You prepare to extend a tentacle.</span>")
 
 
-/obj/item/gun/magic/tentacle/shoot_with_empty_chamber(mob/living/user as mob|obj)
+/obj/item/gun/magic/tentacle/shoot_with_empty_chamber(mob/living/user as mob|obj, no_message = TRUE)
 	to_chat(user, "<span class='warning'>The [name] is not ready yet.</span>")
 
 /obj/item/gun/magic/tentacle/process_chamber()

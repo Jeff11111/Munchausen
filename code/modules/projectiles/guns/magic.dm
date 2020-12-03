@@ -73,7 +73,7 @@
 		recharge_newshot()
 	return 1
 
-/obj/item/gun/magic/shoot_with_empty_chamber(mob/living/user as mob|obj)
+/obj/item/gun/magic/shoot_with_empty_chamber(mob/living/user as mob|obj, no_message = TRUE)
 	to_chat(user, "<span class='warning'>The [name] whizzles quietly.</span>")
 
 /obj/item/gun/magic/suicide_act(mob/user)

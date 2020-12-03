@@ -16,7 +16,7 @@
 	no_pin_required = TRUE
 	trigger_guard = TRIGGER_GUARD_NONE //so ashwalkers can use it
 
-/obj/item/gun/ballistic/bow/shoot_with_empty_chamber()
+/obj/item/gun/ballistic/bow/shoot_with_empty_chamber(no_message = TRUE)
 	return
 
 /obj/item/gun/ballistic/bow/chamber_round()

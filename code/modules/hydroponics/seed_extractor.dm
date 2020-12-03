@@ -46,6 +46,9 @@
 	icon_state = "sextractor"
 	density = TRUE
 	circuit = /obj/item/circuitboard/machine/seed_extractor
+	light_color = LIGHT_COLOR_LIGHT_CYAN
+	light_power = 0.4
+	light_range = 1.4
 	var/piles = list()
 	var/max_seeds = 1000
 	var/seed_multiplier = 1

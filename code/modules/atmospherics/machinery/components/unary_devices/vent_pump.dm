@@ -14,6 +14,9 @@
 	welded = FALSE
 	level = 1
 	layer = GAS_SCRUBBER_LAYER
+	light_color = LIGHT_COLOR_LIGHT_CYAN
+	light_power = 0.3
+	light_range = 1.4
 
 	var/id_tag = null
 	var/pump_direction = RELEASING
@@ -55,32 +58,40 @@
 
 	if(welded)
 		icon_state = "vent_welded"
+		set_light(0)
 		return
 
 	if(!nodes[1] || !on || !is_operational())
 		if(icon_state == "vent_welded")
 			icon_state = "vent_off"
+			set_light(0)
 			return
 
 		if(pump_direction & RELEASING)
 			icon_state = "vent_out-off"
+			set_light(0)
 		else // pump_direction == SIPHONING
 			icon_state = "vent_in-off"
+			set_light(0)
 		return
 
 	if(icon_state == ("vent_out-off" || "vent_in-off" || "vent_off"))
 		if(pump_direction & RELEASING)
 			icon_state = "vent_out"
 			flick("vent_out-starting", src)
+			set_light(1.4, 0.3, LIGHT_COLOR_LIGHT_CYAN)
 		else // pump_direction == SIPHONING
 			icon_state = "vent_in"
 			flick("vent_in-starting", src)
+			set_light(1.4, 0.3, LIGHT_COLOR_RED)
 		return
 
 	if(pump_direction & RELEASING)
 		icon_state = "vent_out"
+		set_light(1.4, 0.3, LIGHT_COLOR_LIGHT_CYAN)
 	else // pump_direction == SIPHONING
 		icon_state = "vent_in"
+		set_light(1.4, 0.3, LIGHT_COLOR_RED)
 
 /obj/machinery/atmospherics/components/unary/vent_pump/process_atmos()
 	..()
