@@ -107,7 +107,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 /obj/item/stack/ore/glass/attack(mob/living/M, mob/living/user)
 	if(!ishuman(M))
 		return ..()
-	if(user.zone_selected != BODY_ZONE_PRECISE_EYES && user.zone_selected != BODY_ZONE_HEAD)
+	if(!(user.zone_selected in list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)))
 		return ..()
 	var/mob/living/carbon/human/poorsod = M
 	visible_message("<span class='danger'>[user] throws the sand at [poorsod]'s face!</span>")

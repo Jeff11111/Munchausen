@@ -1,5 +1,5 @@
 /mob/living/carbon/examine(mob/user)
-	if(user.zone_selected == BODY_ZONE_PRECISE_EYES)
+	if(user.zone_selected in list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE))
 		handle_eye_contact(user, TRUE)
 	var/t_He = p_they(TRUE)
 	var/t_he = p_they()

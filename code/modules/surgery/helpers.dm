@@ -211,7 +211,7 @@
 		if(BODY_ZONE_HEAD)
 			if(covered_locations & HEAD)
 				return 0
-		if(BODY_ZONE_PRECISE_EYES)
+		if(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)
 			if(covered_locations & HEAD || face_covered & HIDEEYES || eyesmouth_covered & GLASSESCOVERSEYES)
 				return 0
 		if(BODY_ZONE_PRECISE_MOUTH)

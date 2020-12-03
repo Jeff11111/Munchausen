@@ -302,7 +302,7 @@
 				var/wgw =  sanitize(input(user, "What would you like the victim to say", "Voodoo", null)  as text)
 				target.say(wgw, forced = "voodoo doll")
 				log_game("[key_name(user)] made [key_name(target)] say [wgw] with a voodoo doll.")
-			if(BODY_ZONE_PRECISE_EYES)
+			if(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)
 				user.set_machine(src)
 				user.reset_perspective(target)
 				spawn(100)

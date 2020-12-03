@@ -147,7 +147,7 @@
 						H.dna.update_ui_block(DNA_FACIAL_HAIR_COLOR_BLOCK)
 				H.update_hair()
 
-		if(BODY_ZONE_PRECISE_EYES)
+		if("eyes")
 			var/new_eye_color = input(H, "Choose your eye color", "Eye Color","#"+H.eye_color) as color|null
 			if(!user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
 				return
@@ -233,7 +233,7 @@
 							H.dna.update_ui_block(DNA_FACIAL_HAIR_COLOR_BLOCK)
 					H.update_hair()
 
-			if(BODY_ZONE_PRECISE_EYES)
+			if("eyes")
 				var/new_eye_color = input(H, "Choose your eye color", "Eye Color","#"+H.eye_color) as color|null
 				if(!user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
 					return

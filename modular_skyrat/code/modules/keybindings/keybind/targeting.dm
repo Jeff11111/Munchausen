@@ -11,7 +11,7 @@
 		switch(M.zone_selected)
 			if(BODY_ZONE_HEAD)
 				user.body_toggle_head()
-			if(BODY_ZONE_PRECISE_EYES)
+			if(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)
 				user.body_toggle_head()
 			if(BODY_ZONE_PRECISE_MOUTH)
 				user.body_r_arm()

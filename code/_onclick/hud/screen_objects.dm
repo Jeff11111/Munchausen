@@ -529,10 +529,10 @@
 							return BODY_ZONE_PRECISE_MOUTH
 					if(26) //Eyeline, eyes are on 15 and 17
 						if(icon_x in 14 to 18)
-							return BODY_ZONE_PRECISE_EYES
+							return BODY_ZONE_PRECISE_LEFT_EYE
 					if(25 to 27)
 						if(icon_x in 15 to 17)
-							return BODY_ZONE_PRECISE_EYES
+							return BODY_ZONE_PRECISE_RIGHT_EYE
 				return BODY_ZONE_HEAD
 	//
 

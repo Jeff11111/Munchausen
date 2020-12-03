@@ -11,13 +11,12 @@
 	if(!zone)
 		return BODY_ZONE_CHEST
 	switch(zone)
-		if(BODY_ZONE_PRECISE_EYES)
-			zone = BODY_ZONE_HEAD
+		if(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)
+			return BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_MOUTH)
-			zone = BODY_ZONE_HEAD
+			return BODY_ZONE_HEAD
 		else
 			return zone
-
 
 /proc/ran_zone(zone, probability = 80)
 	if(prob(probability))
@@ -51,7 +50,7 @@
 	return zone
 
 /proc/above_neck(zone)
-	var/list/zones = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_EYES)
+	var/list/zones = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)
 	if(zones.Find(zone))
 		return 1
 	else

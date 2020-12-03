@@ -6,13 +6,14 @@
 			/datum/surgery_step/fix_eyes,
 			/datum/surgery_step/close)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	possible_locs = list(BODY_ZONE_PRECISE_EYES)
+	possible_locs = list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)
 	requires_bodypart_type = BODYPART_ORGANIC //Skyrat change
-//fix eyes
+
 /datum/surgery_step/fix_eyes
 	name = "Fix eyes"
 	implements = list(TOOL_HEMOSTAT = 100, TOOL_SCREWDRIVER = 45, /obj/item/pen = 25)
 	time = 64
+
 /datum/surgery/eye_surgery/can_start(mob/user, mob/living/carbon/target, obj/item/tool)
 	var/obj/item/organ/eyes/E = target.getorganslot(ORGAN_SLOT_EYES)
 	if(!E)

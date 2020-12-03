@@ -49,7 +49,7 @@
 		icon_state = "fork"
 		forkload = null
 
-	else if(user.zone_selected == BODY_ZONE_PRECISE_EYES)
+	else if(user.zone_selected in list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE))
 		return eyestab(M,user)
 	else
 		return ..()
@@ -90,7 +90,7 @@
 	AddComponent(/datum/component/butchering, 80 - force, 100, force - 10) //bonus chance increases depending on force
 
 /obj/item/kitchen/knife/attack(mob/living/carbon/M, mob/living/carbon/user)
-	if(user.zone_selected == BODY_ZONE_PRECISE_EYES)
+	if(user.zone_selected in list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE))
 		return eyestab(M,user)
 	else
 		return ..()

@@ -288,7 +288,7 @@
 	if(!user.get_bodypart(BODY_ZONE_PRECISE_L_FOOT) && !user.get_bodypart(BODY_ZONE_PRECISE_R_FOOT))
 		to_chat(user, "<span class='warning'>I can't kick without feet!</span>")
 		return FALSE // You need at least one foot to kick with. 
-	if(!target.resting && (user.zone_selected in list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_EYES)))
+	if(!target.resting && (user.zone_selected in list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)))
 		to_chat(user, "<span class='warning'>I can't kick above [target]'s waist!</span>")
 		return FALSE // You can't kick above their waist, should make this conditional based on skill but eh.
 	if(!attacker_style && HAS_TRAIT(user, TRAIT_PACIFISM))

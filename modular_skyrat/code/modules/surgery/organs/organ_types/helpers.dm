@@ -15,7 +15,8 @@
 	if(subzones)
 		// Include subzones - groin for chest, eyes and mouth for head
 		if(zone == BODY_ZONE_HEAD)
-			. |= getorganszone(BODY_ZONE_PRECISE_EYES)
+			. |= getorganszone(BODY_ZONE_PRECISE_LEFT_EYE)
+			. |= getorganszone(BODY_ZONE_PRECISE_RIGHT_EYE)
 			. |= getorganszone(BODY_ZONE_PRECISE_MOUTH)
 		
 	for(var/obj/item/organ/O in internal_organs)

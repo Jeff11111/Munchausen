@@ -6,7 +6,7 @@
 			/datum/surgery_step/mechanic_fix_eyes,
 			/datum/surgery_step/mechanic_close)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	possible_locs = list(BODY_ZONE_PRECISE_EYES)
+	possible_locs = list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)
 	requires_bodypart_type = BODYPART_ROBOTIC //Skyrat change
 //fix eyes
 /datum/surgery_step/mechanic_fix_eyes

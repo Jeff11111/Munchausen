@@ -229,7 +229,7 @@
 				playsound(user, fire_sound, 50, 1)
 				var/zone = check_zone(user.zone_selected)
 				var/obj/item/bodypart/affecting = H.get_bodypart(zone)
-				if(zone == BODY_ZONE_HEAD || zone == BODY_ZONE_PRECISE_EYES || zone == BODY_ZONE_PRECISE_MOUTH)
+				if(zone == BODY_ZONE_HEAD)
 					shoot_self(user, affecting)
 				else
 					user.visible_message("<span class='danger'><b>[user.name]</b> cowardly fires [src] at [user.p_their()] [affecting.name]!</span>", "<span class='userdanger'>You cowardly fire [src] at your [affecting.name]!</span>", "<span class='italics'>You hear a gunshot!</span>")
