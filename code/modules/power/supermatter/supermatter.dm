@@ -78,6 +78,7 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 	flags_1 = PREVENT_CONTENTS_EXPLOSION_1
 	var/uid = 1
 	var/static/gl_uid = 1
+	light_color = LIGHT_COLOR_YELLOW
 	light_range = 4
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 
@@ -399,10 +400,12 @@ GLOBAL_DATUM(main_supermatter_engine, /obj/machinery/power/supermatter_crystal)
 		if(gasmix_power_ratio > 0.8)
 			// with a perfect gas mix, make the power less based on heat
 			icon_state = "[base_icon_state]_glow"
+			set_light(l_color = LIGHT_COLOR_ORANGE)
 		else
 			// in normal mode, base the produced energy around the heat
 			temp_factor = 30
 			icon_state = base_icon_state
+			set_light(l_color = LIGHT_COLOR_YELLOW)
 
 		power = max( (removed.temperature * temp_factor / T0C) * gasmix_power_ratio + power, 0) //Total laser power plus an overload
 
