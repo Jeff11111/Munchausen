@@ -541,7 +541,7 @@
 		playsound(loc, 'sound/weapons/slice.ogg', 50, 1, -1)
 		user.visible_message("<span class='warning'>[user] begins to cut open [src].</span>",\
 			"<span class='notice'>You begin to cut open [src]...</span>")
-		if(do_after(user, 54, target = src))
+		if(do_after(user, 5 SECONDS, target = src))
 			drop_organs(user)
 	else if(istype(W, /obj/item/pen))
 		var/badboy = input(user, "What do you want to inscribe on [src]?", "Malpractice", "") as text
@@ -596,6 +596,7 @@
 	if(cavity_item)
 		cavity_item = null
 	update_limb(owner ? FALSE : TRUE)
+	update_icon_dropped()
 
 /obj/item/bodypart/proc/get_organs()
 	if(!owner)
