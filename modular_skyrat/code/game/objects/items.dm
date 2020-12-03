@@ -19,7 +19,7 @@
 		t = replacetext(t,"src","[src.name]")
 		user.visible_message("<span class='danger'>[t]</span>")
 	if(grabsound)
-		playsound(src,grabsound,50,1)
+		playsound(src, grabsound, 60, 1)
 
 //Item info element
 /obj/item/ComponentInitialize()
