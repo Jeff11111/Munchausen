@@ -73,7 +73,7 @@
 /obj/item/examine_more(mob/user)
 	. = ..()
 	if(. == DEFAULT_EXAMINE_MORE)
-		. = list("<span class='notice'><i>You examine [src] closer, and note the following...</i></span>")
+		. = list("<span class='notice'><i><b>You examine [src] closer, and note the following...</b></i></span>")
 	switch(germ_level)
 		if(-INFINITY to 0)
 			. += "<span class='info'>\The [src] is sterile.</span>"

@@ -117,7 +117,7 @@
 	. += "<span class='notice'>It has <b>[uses ? uses : "no"]</b> charges left.</span>"
 
 /obj/item/card/id/examine_more(mob/user)
-	var/list/msg = list("<span class='notice'><i>You examine [src] closer, and note the following...</i></span>")
+	var/list/msg = list("<span class='notice'><i><b>You examine [src] closer, and note the following...</b></i></span>")
 
 	if(mining_points)
 		msg += "There's [mining_points] mining equipment redemption point\s loaded onto this card."

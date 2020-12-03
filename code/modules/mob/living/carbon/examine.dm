@@ -301,7 +301,7 @@
 
 //skyrat edit
 /mob/living/carbon/examine_more(mob/user)
-	var/msg = list("<span class='notice'><i>You examine [src] closer, and note the following...</i></span>")
+	var/msg = list("<span class='notice'><i><b>You examine [src] closer, and note the following...</b></i></span>")
 	if((src == user) && HAS_TRAIT(user, TRAIT_SCREWY_CHECKSELF))
 		msg |= "\t<span class='smallnotice'>[p_they(TRUE)] [p_have()] no significantly damaged bodyparts.</span>"
 		msg |= "\t<span class='smallnotice'><i>[p_they(TRUE)] [p_have()] no visible scars.</i></span>"
