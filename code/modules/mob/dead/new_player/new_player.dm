@@ -38,7 +38,7 @@
 	output += "<center><p><a href='byond://?src=[REF(src)];show_preferences=1'>Setup Character</a></p>"
 	if(SSticker.current_state <= GAME_STATE_PREGAME)
 		if(CONFIG_GET(flag/roundstart_traits))
-			output += "<center><p><b>Be special:</b> <a href='?_src_=prefs;preference=trait'>[client?.prefs?.special_char ? "<b>Yes</b>" : "No"]</a></p></center>"
+			output += "<center><p><b>Be Special:</b> <a href='?_src_=prefs;preference=trait'>[client?.prefs?.special_char ? "<b>Yes</b>" : "No"]</a></p></center>"
 		switch(ready)
 			if(PLAYER_NOT_READY)
 				output += "<p>\[ [LINKIFY_READY("Ready", PLAYER_READY_TO_PLAY)] | <b>Not Ready</b> | [LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE)] \]</p>"
@@ -49,7 +49,7 @@
 	else
 		output += "<p><a href='byond://?src=[REF(src)];manifest=1'>View the Crew Manifest</a></p>"
 		if(CONFIG_GET(flag/roundstart_traits))
-			output += "<center><p><b>Be special:</b> <a href='?_src_=prefs;preference=trait'>[client?.prefs?.special_char ? "<b>Yes</b>" : "No"]</a></p></center>"
+			output += "<center><p><b>Be Special:</b> <a href='?_src_=prefs;preference=trait'>[client?.prefs?.special_char ? "<b>Yes</b>" : "No"]</a></p></center>"
 		output += "<p><a href='byond://?src=[REF(src)];late_join=1'>Join Game!</a></p>"
 		output += "<p>[LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE)]</p>"
 
