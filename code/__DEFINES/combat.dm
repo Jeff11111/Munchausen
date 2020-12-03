@@ -251,7 +251,7 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 #define BODY_ZONE_L_LEG		"l_leg"
 #define BODY_ZONE_R_LEG		"r_leg"
 #define BODY_ZONE_PRECISE_LEFT_EYE		"left_eye"
-#define BODY_ZONE_PRECISE_RIGHT_EYE		"left_eye"
+#define BODY_ZONE_PRECISE_RIGHT_EYE		"right_eye"
 #define BODY_ZONE_PRECISE_MOUTH		"mouth"
 #define BODY_ZONE_PRECISE_NECK		"neck"
 #define BODY_ZONE_PRECISE_GROIN		"groin"
