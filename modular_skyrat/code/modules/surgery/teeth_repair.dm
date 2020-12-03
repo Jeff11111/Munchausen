@@ -7,12 +7,7 @@
 				/datum/surgery_step/insert_teeth,
 				/datum/surgery_step/close)
 	possible_locs = list(BODY_ZONE_PRECISE_MOUTH)
-	requires_bodypart_type = 0
-
-/datum/surgery/teeth_repair/can_start(mob/living/user, mob/living/carbon/target)
-	if(..())
-		var/obj/item/bodypart/targeted_bodypart = target.get_bodypart(check_zone(user.zone_selected))
-		return (targeted_bodypart.max_teeth && targeted_bodypart.get_teeth_amount() < targeted_bodypart.max_teeth)
+	requires_bodypart_type = BODYPART_ORGANIC
 
 //Insert teeth
 /datum/surgery_step/insert_teeth
