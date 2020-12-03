@@ -704,8 +704,7 @@
 		connected_trail = nice
 		if(connected_trail.connected_trail && !QDELETED(connected_trail.connected_trail))
 			var/dire_straits = get_dir(connected_trail.connected_trail, target_turf)
-			if(dire_straits & SOUTH)
-				dire_straits = turn(dire_straits, 180)
+			dire_straits = turn(dire_straits, 180)
 			if(dire_straits in GLOB.diagonals)
 				connected_trail.cut_overlays()
 				connected_trail.existing_dirs -= connected_trail.existing_dirs[length(connected_trail.existing_dirs)]
