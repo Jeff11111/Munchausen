@@ -163,7 +163,7 @@
 			additional_info += "<span class='notice'>I am special: [living_user.get_trait_string()].</span>\n"
 
 		if(length(additional_info))
-			to_chat(living_user, "<span class='notice'><b>Additional:</b></span>")
+			to_chat(living_user, "<span class='info'><b>Additional:</b></span>")
 			additional_info += "<span class='info'>*---------*</span>"
 			to_chat(living_user, jointext(additional_info, ""))
 
