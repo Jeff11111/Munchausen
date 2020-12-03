@@ -717,11 +717,11 @@
 				. += "<span class='info'></b>[descriptor.get_comparative_value_descriptor(src, user, descriptor.current_value)]</b></span>"
 
 /mob/living/carbon/human/examine_more(mob/user)
-	var/msg = list("<span class='notice'><i>You examine [src] closer, and note the following...</i></span>")
+	. = list("<span class='notice'><i>You examine [src] closer, and note the following...</i></span>", "<span class='notice'>*---------*</span>")
 	if((src == user) && HAS_TRAIT(user, TRAIT_SCREWY_CHECKSELF))
-		msg |= "\t<span class='smallnotice'>[p_they(TRUE)] [p_have()] no significantly damaged bodyparts.</span>"
-		msg |= "\t<span class='smallnotice'><i>[p_they(TRUE)] [p_have()] no visible scars.</i></span>"
-		return msg
+		. |= "<span class='smallnotice'>[p_they(TRUE)] [p_have()] no significantly damaged bodyparts.</span>"
+		. |= "<span class='smallnotice'><i>[p_they(TRUE)] [p_have()] no visible scars.</i></span>"
+		return
 	
 	var/t_His = p_their(TRUE)
 	var/list/damaged_bodypart_text = list()
@@ -762,19 +762,19 @@
 			if(3)
 				styletext = "danger"
 		if(how_brute && how_burn)
-			text = "\t<span class='[styletext]'>[p_their(TRUE)] [BP.name] is [how_brute] and [how_burn][max_sev >= 2 ? "!" : "."]</span>"
+			text = "<span class='[styletext]'>[p_their(TRUE)] [BP.name] is [how_brute] and [how_burn][max_sev >= 2 ? "!" : "."]</span>"
 		else if(how_brute)
-			text = "\t<span class='[styletext]'>[p_their(TRUE)] [BP.name] is [how_brute][max_sev >= 2 ? "!" : "."]</span>"
+			text = "<span class='[styletext]'>[p_their(TRUE)] [BP.name] is [how_brute][max_sev >= 2 ? "!" : "."]</span>"
 		else if(how_burn)
-			text = "\t<span class='[styletext]'>[p_their(TRUE)] [BP.name] is [how_burn][max_sev >= 2 ? "!" : "."]</span>"
+			text = "<span class='[styletext]'>[p_their(TRUE)] [BP.name] is [how_burn][max_sev >= 2 ? "!" : "."]</span>"
 		
 		if(length(text))
 			damaged_bodypart_text |= text
 	
-	msg |= damaged_bodypart_text
+	. += damaged_bodypart_text
 
 	if(!length(damaged_bodypart_text))
-		msg |= "\t<span class='smallnotice'>[p_they(TRUE)] [p_have()] no significantly damaged bodyparts.</span>"
+		. += "<span class='smallnotice'>[p_they(TRUE)] [p_have()] no significantly damaged bodyparts.</span>"
 	
 	var/list/obj/item/bodypart/gauzed_limbs = list()
 	for(var/i in bodyparts)
@@ -782,7 +782,7 @@
 		if(BP.current_gauze)
 			gauzed_limbs += BP
 	var/num_gauze = LAZYLEN(gauzed_limbs)
-	var/gauze_text = "\t<span class='notice'>[t_His]"
+	var/gauze_text = "<span class='notice'>[t_His]"
 	switch(num_gauze)
 		if(1 to 2)
 			gauze_text += " <a href='?src=[REF(gauzed_limbs[1])];gauze=1;'>"
@@ -798,7 +798,7 @@
 	gauze_text += "[num_gauze == 1 ? " is gauzed" : " are gauzed"]"
 	gauze_text += ".</span>"
 	if(num_gauze)
-		msg += gauze_text
+		. |= gauze_text
 
 	var/list/obj/item/bodypart/suppress_limbs = list()
 	for(var/i in bodyparts)
@@ -807,7 +807,7 @@
 			suppress_limbs += BP
 
 	var/num_suppress = LAZYLEN(suppress_limbs)
-	var/suppress_text = "\t<span class='notice'><B>[t_His]"
+	var/suppress_text = "<span class='notice'><B>[t_His]"
 	switch(num_suppress)
 		if(1 to 2)
 			suppress_text += " [suppress_limbs[1].name][num_suppress == 2 ? " and [suppress_limbs[2].name]" : ""]"
@@ -820,7 +820,7 @@
 	suppress_text += "[num_suppress == 1 ? " is impervious to bleeding" : " are impervious to bleeding"]"
 	suppress_text += ".</B></span>\n"
 	if(num_suppress)
-		msg += suppress_text
+		. += suppress_text
 	
 	var/list/visible_scars = list()
 	for(var/i in all_scars)
@@ -832,10 +832,9 @@
 		var/datum/scar/S = i
 		var/scar_text = S.get_examine_description(user)
 		if(scar_text)
-			msg += "\t[scar_text]"
+			. += scar_text
 	
 	if(!length(visible_scars))
-		msg += "\t<span class='smallnotice'><i>[p_they(TRUE)] [p_have()] no visible scars.</i></span>"
-	
-	return msg
-//
+		. += "<span class='smallnotice'><i>[p_they(TRUE)] [p_have()] no visible scars.</i></span>"
+	. += "*---------*</span>"
+
