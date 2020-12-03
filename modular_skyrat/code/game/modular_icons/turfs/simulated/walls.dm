@@ -25,6 +25,12 @@
 
 /turf/closed/wall/Initialize(mapload)
 	. = ..()
+	if(src.type == /turf/closed/wall)
+		if(prob(5))
+			ChangeTurf(/turf/closed/wall/rust)
+	if(istype(src, /turf/closed/wall/r_wall))
+		if(prob(5))
+			ChangeTurf(/turf/closed/wall/r_wall/rust)
 	if(length(canSmoothWith))
 		canSmoothWith |= (typesof(/obj/machinery/door) - typesof(/obj/machinery/door/window) - typesof(/obj/machinery/door/firedoor) - typesof(/obj/machinery/door/poddoor))
 		canSmoothWith |= typesof(/turf/closed/wall)
