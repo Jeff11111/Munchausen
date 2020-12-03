@@ -118,6 +118,13 @@
 	name = "jester shoes"
 	desc = "A court jester's shoes, updated with modern squeaking technology."
 	icon_state = "jester_shoes"
+	slowdown = SHOES_SLOWDOWN
+
+/obj/item/clothing/shoes/clown_shoes/jester/ComponentInitialize()
+	. = ..()
+	var/datum/component/squeak/squeaky = GetComponent(/datum/component/squeak)
+	if(squeaky)
+		qdel(squeaky)
 
 /obj/item/clothing/shoes/jackboots
 	name = "jackboots"
