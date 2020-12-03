@@ -20,8 +20,8 @@
 	var/torn = 3
 
 /datum/wound/tendon/Destroy()
-	. = ..()
 	QDEL_NULL(aughaughgblerg)
+	. = ..()
 
 /datum/wound/tendon/get_examine_description(mob/user)
 	return null
