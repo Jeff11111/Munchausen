@@ -27,7 +27,6 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 	use_power = NO_POWER_USE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	var/sprite_number = 0
-	light_color = LIGHT_COLOR_GREEN
 
 /obj/machinery/gravity_generator/safe_throw_at()
 	return FALSE
@@ -50,6 +49,14 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 
 /obj/machinery/gravity_generator/proc/get_status()
 	return "off"
+
+/obj/machinery/gravity_generator/proc/update_intensity(l_range, l_power)
+	if(l_range == 0)
+		set_light(0)
+		return
+	if(l_range == light_range && l_power == light_power)
+		return
+	set_light(l_range, l_power)
 
 // You aren't allowed to move.
 /obj/machinery/gravity_generator/Move()
@@ -126,6 +133,9 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 	var/current_overlay = null
 	var/broken_state = 0
 	var/setting = 1	//Gravity value when on
+	light_color = LIGHT_COLOR_GREEN
+	light_power = 3
+	light_range = 6
 
 /obj/machinery/gravity_generator/main/Destroy() // If we somehow get deleted, remove all of our other parts.
 	investigate_log("was destroyed!", INVESTIGATE_GRAVITY)
@@ -324,15 +334,19 @@ GLOBAL_LIST_EMPTY(gravity_generators) // We will keep track of this by adding ne
 			switch(charge_count)
 				if(0 to 20)
 					overlay_state = null
+					update_intensity(0)
 				if(21 to 40)
 					overlay_state = "startup"
+					update_intensity(3, l_power = 1)
 				if(41 to 60)
 					overlay_state = "idle"
+					update_intensity(4, l_power = 1.5)
 				if(61 to 80)
 					overlay_state = "activating"
+					update_intensity(5, l_power = 2)
 				if(81 to 100)
 					overlay_state = "activated"
-			set_light(FLOOR(charge_count / 20, 0)) //glow increases depending on the charge
+					update_intensity(6, l_power = 3)
 
 			if(overlay_state != current_overlay)
 				if(middle)
