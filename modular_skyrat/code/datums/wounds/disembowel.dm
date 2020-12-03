@@ -124,8 +124,11 @@
 	. = ..()
 
 /datum/wound/slash/critical/incision/disembowel/Destroy()
-	. = ..()
+	var/datum/component/storage/concrete/organ/ST = victim?.GetComponent(/datum/component/storage/concrete/organ)
+	if(ST)
+		qdel(ST)
 	QDEL_NULL(our_component)
+	. = ..()
 
 /datum/wound/slash/critical/incision/disembowel/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
 	descriptive = "\The [L.name] is disemboweled!"
@@ -206,8 +209,11 @@
 	. = ..()
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/Destroy()
-	. = ..()
+	var/datum/component/storage/concrete/organ/ST = victim?.GetComponent(/datum/component/storage/concrete/organ)
+	if(ST)
+		qdel(ST)
 	QDEL_NULL(our_component)
+	. = ..()
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
 	descriptive = "\The [L.name] is disemboweled!"

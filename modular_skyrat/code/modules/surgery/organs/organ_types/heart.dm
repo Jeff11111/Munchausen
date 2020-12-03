@@ -3,7 +3,8 @@
 /obj/item/organ/heart
 	name = "heart"
 	desc = "I feel bad for the heartless bastard who lost this."
-	icon_state = "heart-on"
+	icon_state = "heart"
+	var/icon_base = "heart"
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_HEART
 
@@ -17,7 +18,6 @@
 
 	// Heart attack code is in code/modules/mob/living/carbon/human/life.dm
 	var/no_pump = FALSE
-	var/icon_base = "heart"
 	attack_verb = list("beat", "thumped")
 	var/beat = BEAT_NONE //is this mob having a heatbeat sound played? if so, which?
 
@@ -95,12 +95,6 @@
 		return FALSE
 	
 	return pulse > PULSE_NONE || (owner && HAS_TRAIT(owner, TRAIT_FAKEDEATH))
-
-/obj/item/organ/heart/update_icon_state()
-	if(is_working())
-		icon_state = "[icon_base]-on"
-	else
-		icon_state = "[icon_base]-off"
 
 /obj/item/organ/heart/Remove(special = FALSE)
 	if(!special)
