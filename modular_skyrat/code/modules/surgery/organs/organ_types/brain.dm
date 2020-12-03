@@ -328,8 +328,8 @@
 	. = ..()
 	if(!. || !owner)
 		return
-	if(damage >= BRAIN_DAMAGE_DEATH) //rip
-		if(owner.stat != DEAD)
+	if((damage >= BRAIN_DAMAGE_DEATH) && CHECK_BITFIELD(organ_flags, ORGAN_VITAL)) //rip
+		if(owner.stat < DEAD)
 			to_chat(owner, "<span class='userdanger'>The last spark of life in your brain fizzles out...</span>")
 			owner.stop_sound_channel(CHANNEL_EAR_RING)
 			owner.death()
