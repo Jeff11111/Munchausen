@@ -1,5 +1,7 @@
 //Israel gun
 /obj/item/gun/ballistic/automatic/mini_uzi
+	name = "9mm submachine gun"
+	desc = "The Type 3 UZI - A lightweight, burst-fire submachine gun, for when you really want someone dead. Uses 9mm rounds."
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/smg.dmi'
 	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/smg_righthand.dmi'
 	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/smg_lefthand.dmi'
@@ -13,14 +15,16 @@
 
 //Saber should be an MP5 that would be cool i think
 /obj/item/gun/ballistic/automatic/proto
+	name = "9mm submachine gun"
+	desc = "The NT SABR - A prototype three-round burst 9mm submachine gun. Looks eerily similar to another submachine gun..."
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/40x32.dmi'
 	icon_state = "mp5"
 	item_state = "arg"
-	desc = "A prototype three-round burst 9mm submachine gun, designated 'SABR'. Looks eerily similar to another submachine gun..."
-	can_suppress = FALSE
+	suppressed_pixel_x = 5
 
 //C20R
 /obj/item/gun/ballistic/automatic/c20r
+	name = ".45 submachine gun"
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/smg.dmi'
 	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/smg_righthand.dmi'
 	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/smg_lefthand.dmi'
@@ -30,8 +34,21 @@
 
 //WT550 augh
 /obj/item/gun/ballistic/automatic/wt550
-	name = "security semi-auto WT-550"
+	name = "4.6x30mm submachine gun"
 	desc = "An outdated personal defence weapon. Uses 4.6x30mm rounds."
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/smg.dmi'
 	icon_state = "wt550"
 	item_state = "arg"
+
+//P90 thing
+/obj/item/gun/ballistic/automatic/m90
+	name = "5.56 submachine gun"
+	desc = "A three-round burst 5.56 toploading carbine, designated 'M-90GL'. Has an attached underbarrel grenade launcher which can be toggled on and off."
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/smg.dmi'
+	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/smg_righthand.dmi'
+	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/smg_lefthand.dmi'
+	icon_state = "p90"
+	item_state = "p90"
+
+/obj/item/gun/ballistic/automatic/m90/build_magazine_overlay()
+	. = mutable_appearance(icon, "[initial(icon_state)]-[generic_magazine_overlays ? "mag" : initial(magazine.icon_state)][magazine.ammo_count() ? "30" : "0"]")
