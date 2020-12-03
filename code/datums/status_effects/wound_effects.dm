@@ -24,6 +24,7 @@
 	id = "limp"
 	status_type = STATUS_EFFECT_REPLACE
 	tick_interval = 10
+	alert_type = null
 	var/msg_stage = 0//so you dont get the most intense messages immediately
 	/// The left leg of the limping person
 	var/obj/item/bodypart/l_leg/left_leg
@@ -68,12 +69,12 @@
 	var/determined_mod = 1
 	if(owner.has_status_effect(STATUS_EFFECT_DETERMINED))
 		determined_mod = 0.65
-	if(next_leg == right_leg)
-		owner.client.move_delay += slowdown_left * determined_mod
+	if(next_leg == right_foot)
+		owner.client.move_delay += slowdown_right * determined_mod
 		next_leg = left_leg
-	else if(next_leg == left_leg)
+	else if(next_leg == left_foot)
 		owner.client.move_delay += slowdown_left * determined_mod
-		next_leg = right_leg
+		next_leg = right_foot
 
 /datum/status_effect/limp/proc/update_limp()
 	var/mob/living/carbon/C = owner
@@ -82,7 +83,7 @@
 	left_foot = C.get_bodypart(BODY_ZONE_PRECISE_L_FOOT)
 	right_foot = C.get_bodypart(BODY_ZONE_PRECISE_R_FOOT)
 
-	if((!left_leg && !right_leg) || (!left_foot && !right_foot))
+	if(!left_foot && !right_foot)
 		C.remove_status_effect(src)
 		return
 
@@ -112,7 +113,6 @@
 	if(!slowdown_left && !slowdown_right)
 		C.remove_status_effect(src)
 		return
-
 
 /////////////////////////
 //////// WOUNDS /////////

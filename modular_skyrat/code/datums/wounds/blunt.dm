@@ -254,7 +254,7 @@
 	severity = WOUND_SEVERITY_MODERATE
 	viable_zones = LIMB_BODYPARTS
 	interaction_efficiency_penalty = 1.5
-	limp_slowdown = 3
+	limp_slowdown = 5
 	threshold_minimum = 35
 	threshold_penalty = 15
 	treatable_tool = TOOL_BONESET
@@ -422,7 +422,7 @@
 	severity = WOUND_SEVERITY_MODERATE
 	viable_zones = list(BODY_ZONE_CHEST)
 	interaction_efficiency_penalty = 1.5
-	limp_slowdown = 3
+	limp_slowdown = 5
 	threshold_minimum = 35
 	threshold_penalty = 15
 	treatable_tool = TOOL_BONESET
@@ -518,7 +518,7 @@
 	severity = WOUND_SEVERITY_MODERATE
 	viable_zones = list(BODY_ZONE_PRECISE_GROIN)
 	interaction_efficiency_penalty = 1.5
-	limp_slowdown = 3
+	limp_slowdown = 10
 	threshold_minimum = 35
 	threshold_penalty = 15
 	treatable_tool = TOOL_BONESET
@@ -614,7 +614,7 @@
 	severity = WOUND_SEVERITY_MODERATE
 	viable_zones = list(BODY_ZONE_HEAD)
 	interaction_efficiency_penalty = 1.5
-	limp_slowdown = 3
+	limp_slowdown = 5
 	threshold_minimum = 35
 	threshold_penalty = 15
 	treatable_tool = TOOL_BONESET
@@ -711,7 +711,7 @@
 	severity = WOUND_SEVERITY_SEVERE
 	viable_zones = ALL_BODYPARTS
 	interaction_efficiency_penalty = 2
-	limp_slowdown = 6
+	limp_slowdown = 10
 	sound_effect = 'modular_skyrat/sound/gore/crack2.ogg'
 	threshold_minimum = 60
 	threshold_penalty = 30
@@ -737,7 +737,7 @@
 	severity = WOUND_SEVERITY_CRITICAL
 	viable_zones = ALL_BODYPARTS
 	interaction_efficiency_penalty = 4
-	limp_slowdown = 9
+	limp_slowdown = 15
 	sound_effect = 'modular_skyrat/sound/gore/crack3.ogg'
 	threshold_minimum = 115
 	threshold_penalty = 50
