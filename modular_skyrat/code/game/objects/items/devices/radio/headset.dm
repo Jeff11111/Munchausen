@@ -1,3 +1,7 @@
+//Le
+/obj/item/radio/headset
+	slot_flags = ITEM_SLOT_EARS
+
 /obj/item/radio/headset/headset_medsec
 	name = "medical-security radio headset"
 	desc = "Used to hear how many security officers need to be stiched back together."

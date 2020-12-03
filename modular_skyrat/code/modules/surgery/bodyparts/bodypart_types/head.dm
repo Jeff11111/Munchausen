@@ -327,5 +327,9 @@
 
 /obj/item/bodypart/head/can_dismember(obj/item/I)
 	. = ..()
-	if(owner && HAS_TRAIT(owner, TRAIT_NODECAP) || (owner && owner.get_bodypart(BODY_ZONE_PRECISE_NECK)))
-		return FALSE
+	if(. && owner)
+		if(HAS_TRAIT(owner, TRAIT_NODECAP))
+			return FALSE
+		var/obj/item/bodypart/neck/throat = owner.get_bodypart(BODY_ZONE_PRECISE_NECK)
+		if(throat)
+			return throat.can_dismember(I)

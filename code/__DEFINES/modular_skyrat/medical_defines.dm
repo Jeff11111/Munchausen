@@ -264,3 +264,6 @@
 
 //Pain required to do endurancce rolls with negative effects
 #define PAIN_GIVES_IN 60
+
+//Above or equal to this amount of pain, can't use radios
+#define PAIN_NO_RADIO PAIN_GIVES_IN * 2
