@@ -356,7 +356,7 @@
 	skill_electronics = JOB_SKILLPOINTS_EXPERT
 	skill_chemistry = JOB_SKILLPOINTS_AVERAGE
 
-/datum/job/officer
+/datum/job/mining
 	//Better str and end, at the cost of int and dex
 	stat_str = JOB_STATPOINTS_TRAINED
 	stat_end = JOB_STATPOINTS_TRAINED
