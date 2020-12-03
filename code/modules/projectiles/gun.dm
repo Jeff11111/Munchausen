@@ -230,7 +230,7 @@
 /obj/item/gun/proc/can_shoot()
 	return TRUE
 
-/obj/item/gun/proc/shoot_with_empty_chamber(mob/living/user as mob|obj, no_message)
+/obj/item/gun/proc/shoot_with_empty_chamber(mob/living/user as mob|obj, no_message = FALSE)
 	if(on_cooldown())
 		return FALSE
 	if(!no_message)

@@ -16,7 +16,7 @@
 	else
 		chambered = magazine.stored_ammo[1]
 
-/obj/item/gun/ballistic/revolver/shoot_with_empty_chamber(mob/living/user as mob|obj)
+/obj/item/gun/ballistic/revolver/shoot_with_empty_chamber(mob/living/user as mob|obj, no_message = TRUE)
 	..()
 	chamber_round(1)
 /*modular
@@ -388,7 +388,7 @@
 	. = ..()
 	. += "<span class='notice'>Alt-click to remove the magazine.</span>"
 
-/obj/item/gun/ballistic/revolver/mws/shoot_with_empty_chamber(mob/living/user as mob|obj)
+/obj/item/gun/ballistic/revolver/mws/shoot_with_empty_chamber(mob/living/user as mob|obj, no_message = TRUE)
 	process_chamber(user)
 	if(!chambered || !chambered.BB)
 		to_chat(user, "<span class='danger'>*click*</span>")
