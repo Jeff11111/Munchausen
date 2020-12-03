@@ -1,7 +1,7 @@
 // Crawling
 /turf/open/attack_hand(mob/user)
 	. = ..()
-	if(user.lying)
+	if(user.lying && CHECK_MOBILITY(user, MOBILITY_USE) && !user.restrained())
 		if(user.last_move <= (world.time + user.movement_delay()*2))
 			user.Move(get_step(user, get_dir(user, src)), get_dir(user, src))
 

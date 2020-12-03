@@ -70,14 +70,11 @@
 		..()
 
 /mob/living/carbon/human/check_breath(datum/gas_mixture/breath)
-	var/L = getorganslot(ORGAN_SLOT_LUNGS)
-	if(!(L || nervous_system_failure()))
-		if(InShock())
-			adjustOxyLoss(HUMAN_MAX_OXYLOSS + 1)
-		else if(!HAS_TRAIT(src, TRAIT_NOCRITDAMAGE) && InFullShock())
-			adjustOxyLoss(HUMAN_CRIT_MAX_OXYLOSS)
+	var/obj/item/organ/lungs/lungs = getorganslot(ORGAN_SLOT_LUNGS)
+	if(!lungs || (pulledby && pulledby.grab_state >= GRAB_KILL) || nervous_system_failure())
+		adjustOxyLoss(HUMAN_MAX_OXYLOSS)
 
-		failed_last_breath = 1
+		failed_last_breath = TRUE
 
 		var/datum/species/S = dna.species
 
@@ -92,9 +89,8 @@
 
 		return FALSE
 	else
-		if(istype(L, /obj/item/organ/lungs))
-			var/obj/item/organ/lungs/lun = L
-			lun.check_breath(breath,src)
+		if(istype(lungs))
+			lungs.check_breath(breath, src)
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
 	dna.species.handle_environment(environment, src)

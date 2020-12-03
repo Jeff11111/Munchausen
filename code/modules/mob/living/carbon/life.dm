@@ -92,19 +92,19 @@
 	var/datum/gas_mixture/breath
 
 	if(!getorganslot(ORGAN_SLOT_BREATHING_TUBE) && !chem_effects[CE_STABLE])
-		if(is_asystole() || nervous_system_failure() || (pulledby && pulledby.grab_state >= GRAB_KILL) || HAS_TRAIT(src, TRAIT_MAGIC_CHOKE) || (lungs && CHECK_BITFIELD(lungs.organ_flags, ORGAN_FAILING | ORGAN_DEAD)))
-			losebreath++  //You can't breath at all!
+		if(pulledby && pulledby.grab_state >= GRAB_KILL)
+			losebreath += 1.5  //You are being strangled!
+			visible_message("<span class='danger'>[pulledby] strangles [src]!</span>", "<span class='userdanger'>[pulledby] strangles you!</span>", ignored_mobs = pulledby)
+			to_chat(pulledby, "<span class='danger'>You strangle [src]!</span>")
+		else if(is_asystole() || nervous_system_failure() || HAS_TRAIT(src, TRAIT_MAGIC_CHOKE) || (lungs && CHECK_BITFIELD(lungs.organ_flags, ORGAN_FAILING | ORGAN_DEAD)))
+			losebreath += 1  //You can't breath at all!
 		else if(InShock())
 			losebreath += 0.25 //You're having trouble breathing.
-	
-	if(pulledby && pulledby.grab_state >= GRAB_KILL)
-		visible_message("<span class='danger'>[pulledby] strangles [src]!</span>", "<span class='userdanger'>[pulledby] strangles you!</span>", ignored_mobs = pulledby)
-		to_chat(pulledby, "<span class='danger'>You strangle [src]!</span>")
 	
 	//Suffocate
 	if(losebreath >= 1) //You've missed a breath, take oxy damage
 		losebreath--
-		if(prob(10) && !nervous_system_failure()) //Gasp per 10 ticks? Sounds about right.
+		if(prob(10) && !nervous_system_failure() && !is_asystole()) //1 gasp per 20 seconds? Sounds about right.
 			emote("gasp")
 	else
 		//Breathe from internal
@@ -147,6 +147,8 @@
 		return
 
 	var/obj/item/organ/lungs = getorganslot(ORGAN_SLOT_LUNGS)
+
+
 	if(!lungs)
 		adjustOxyLoss(2)
 
