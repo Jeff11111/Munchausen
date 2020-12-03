@@ -25,7 +25,6 @@
 			new_body.hud_used.dreamer.waking_up = old_body.hud_used.dreamer.waking_up
 	if(iscarbon(new_body))
 		var/mob/living/carbon/C = new_body
-
 		//Following my HEART
 		var/obj/item/organ/heart/my_heart = C.getorganslot(ORGAN_SLOT_HEART)
 		if(my_heart)
