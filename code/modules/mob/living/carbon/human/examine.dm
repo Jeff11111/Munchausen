@@ -718,6 +718,7 @@
 
 /mob/living/carbon/human/examine_more(mob/user)
 	. = list("<span class='notice'><i>You examine [src] closer, and note the following...</i></span>", "<span class='notice'>*---------*</span>")
+
 	if((src == user) && HAS_TRAIT(user, TRAIT_SCREWY_CHECKSELF))
 		. |= "<span class='smallnotice'>[p_they(TRUE)] [p_have()] no significantly damaged bodyparts.</span>"
 		. |= "<span class='smallnotice'><i>[p_they(TRUE)] [p_have()] no visible scars.</i></span>"

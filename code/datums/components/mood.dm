@@ -50,7 +50,6 @@
 /datum/component/mood/proc/print_mood(mob/user)
 	var/msg = "<span class='info'>*---------*\n<EM>My thoughts</EM></span>\n"
 	msg += "<span class='notice'>My mental status: </span>" //Long term
-	//skyrat edit - screwy mood
 	if(!HAS_TRAIT(user, TRAIT_SCREWY_MOOD))
 		switch(sanity)
 			if(SANITY_GREAT to INFINITY)
@@ -164,7 +163,7 @@
 			additional_info += "<span class='notice'>I am special: [living_user.get_trait_string()].</span>\n"
 
 		if(length(additional_info))
-			to_chat(living_user, "<span class='notice'><b>Additional:</b></span>\n")
+			to_chat(living_user, "<span class='notice'><b>Additional:</b></span>")
 			additional_info += "<span class='info'>*---------*</span>"
 			to_chat(living_user, jointext(additional_info, ""))
 
@@ -218,10 +217,12 @@
 				screen_obj.icon_state = "mood[mood_level]"
 			var/motherfucker = ""
 			switch(CEILING(mood_level/3, 1))
+				if(1)
+					motherfucker = "h"
 				if(2)
 					motherfucker = "j"
 				if(3)
-					motherfucker = "h"
+					motherfucker = ""
 			if(is_dreamer(owner))
 				motherfucker = "h"
 			owner.hud_used.noise_filter?.loggers = motherfucker

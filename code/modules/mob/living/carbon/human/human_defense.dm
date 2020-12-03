@@ -745,7 +745,7 @@
 /mob/living/carbon/human/check_self_for_injuries()
 	if(stat < UNCONSCIOUS)
 		visible_message("<span class='notice'><b>[src]</b> examines [p_themselves()].</span>", \
-			"<span class='notice'><i><b>I check myself for injuries.</b></i></span>")
+			"<span class='notice'><b>I check myself for injuries.</b></span>")
 	
 	to_chat(src, "<span class='info'>*---------*")
 	for(var/X in ALL_BODYPARTS)
