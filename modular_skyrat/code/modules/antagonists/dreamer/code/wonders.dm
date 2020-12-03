@@ -75,11 +75,11 @@
 		if(is_dreamer(H))
 			for(var/datum/antagonist/dreamer/dreammy in H.mind.antag_datums)
 				dream_master = dreammy
-				icon_state = "creation[clamp(dream_master.current_wonder, 1, 4)]"
-				name = "[dream_master.associated_keys[dream_master.current_wonder]] Wonder"
 				if(length(dream_master.recipe_progression) >= dream_master.current_wonder)
 					H.mind.learned_recipes -= dream_master.recipe_progression[dream_master.current_wonder]
 				dream_master.current_wonder++
+				icon_state = "creation[clamp(dream_master.current_wonder, 1, 4)]"
+				name = "[dream_master.associated_keys[clamp(dream_master.current_wonder, 1, 4)]] Wonder"
 				if(length(dream_master.recipe_progression) >= dream_master.current_wonder)
 					var/wonder = dream_master.recipe_progression[dream_master.current_wonder]
 					var/datum/crafting_recipe/wonder/wonderful = new wonder()
@@ -126,3 +126,4 @@
 				playsound(get_turf(H), 'modular_skyrat/code/modules/antagonists/dreamer/sound/seen_wonder.ogg', 80, 0)
 				H.Paralyze(5 SECONDS)
 				gazed_at = TRUE
+				break
