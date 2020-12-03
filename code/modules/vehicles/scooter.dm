@@ -106,7 +106,7 @@
 			if(!head_slot || !(istype(head_slot,/obj/item/clothing/head/helmet) || istype(head_slot,/obj/item/clothing/head/hardhat)))
 				H.adjustBrainLoss(5)
 				H.updatehealth()
-			visible_message("<span class='danger'>[src] crashes into [A], sending [H] flying!</span>")
+			visible_message("<span class='danger'>[src] crashes into [A], sending <b>[H]</b> flying!</span>")
 			H.Knockdown(80)
 		else
 			var/backdir = turn(dir, 180)
@@ -285,5 +285,5 @@
 		if(!head_slot || !(istype(head_slot,/obj/item/clothing/head/helmet) || istype(head_slot,/obj/item/clothing/head/hardhat)))
 			H.adjustBrainLoss(1)
 			H.updatehealth()
-		visible_message("<span class='danger'>[src] crashes into [A], sending [H] flying!</span>")
+		visible_message("<span class='danger'>[src] crashes into [A], sending <b>[H]</b> flying!</span>")
 		playsound(src, 'sound/effects/bang.ogg', 50, 1)

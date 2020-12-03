@@ -163,7 +163,10 @@
 		return
 	if(zFall(A, ++levels))
 		return FALSE
-	A.visible_message("<span class='danger'>[A] crashes into [src]!</span>")
+	if(ismob(A))
+		A.visible_message("<span class='danger'><b>[A]</b> crashes into [src]!</span>")
+	else
+		A.visible_message("<span class='danger'>[A] crashes into [src]!</span>")
 	A.onZImpact(src, levels)
 	return TRUE
 

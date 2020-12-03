@@ -148,8 +148,8 @@
 			victim.DefaultCombatKnockdown(20)
 			DefaultCombatKnockdown(20)
 			//skyrat edit
-			visible_message("<span class='danger'><b>[src]</b> crashes into <b>[victim]</b> [extra_speed ? "really hard" : ""], knocking them both over!</span>",\
-				"<span class='userdanger'>You violently crash into <b>[victim]</b> [extra_speed ? "extra hard" : ""]!</span>")
+			visible_message("<span class='danger'><b>[src]</b> crashes into <b>[victim]</b>[extra_speed ? " really hard" : ""], knocking them both over!</span>",\
+				"<span class='userdanger'>You violently crash into <b>[victim]</b>[extra_speed ? " extra hard" : ""]!</span>")
 			//
 		playsound(src,'sound/weapons/punch1.ogg',50,1)
 
