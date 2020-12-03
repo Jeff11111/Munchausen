@@ -52,6 +52,8 @@
 		P = input("Switch to what procedure?", "Surgery", null, null) as null|anything in available_surgeries
 	else if(!affecting)
 		P = "Prosthetic replacement"
+	else if((user.zone_selected == BODY_ZONE_PRECISE_MOUTH) && affecting.max_teeth && (affecting.get_teeth_amount() < affecting.max_teeth))
+		P = "Teeth Repair"
 	else if(affecting.is_broken())
 		if(affecting.is_organic_limb())
 			var/datum/wound/blunt/W = locate() in affecting.wounds
