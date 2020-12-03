@@ -231,10 +231,8 @@
 	return TRUE
 
 /obj/item/gun/proc/shoot_with_empty_chamber(mob/living/user as mob|obj, no_message = FALSE)
-	//skyrat edit
 	if(on_cooldown())
 		return FALSE
-	//
 	if(!no_message)
 		to_chat(user, "<span class='danger'>*click*</span>")
 	last_fire = world.time
@@ -321,8 +319,8 @@
 	if(user.mind)
 		switch(user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, ranged)))
 			if(DICE_CRIT_FAILURE)
-				to_chat(user, "<span class='userdanger'>CRITICAL FAILURE! You shoot yourself with [src]!</span>")
-				process_fire(user, user, FALSE, params, pick(ALL_BODYPARTS))
+				to_chat(user, "<span class='userdanger'><b>CRITICAL FAILURE!</b> Misfire!</span>")
+				shoot_with_empty_chamber(target, no_message = TRUE)
 				return
 
 	var/ranged = GET_SKILL_LEVEL(user, ranged)
