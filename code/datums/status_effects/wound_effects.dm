@@ -9,6 +9,7 @@
 
 /datum/status_effect/determined
 	id = "determined"
+	alert_type = null
 
 /datum/status_effect/determined/on_apply()
 	. = ..()
