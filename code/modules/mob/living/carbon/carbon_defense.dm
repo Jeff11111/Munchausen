@@ -312,7 +312,7 @@
 	if(on_fire)
 		to_chat(M, "<span class='warning'>You can't put [p_them()] out with just your bare hands!</span>")
 		return
-	
+
 	if(M == src)
 		check_self_for_injuries()
 		return
@@ -532,12 +532,12 @@
 			if(!embeds)
 				embeds = TRUE
 				// this way, we only visibly try to examine ourselves if we have something embedded, otherwise we'll still hug ourselves :)
-				visible_message("<span class='notice'>[src] examines [p_them()]self.</span>", \
+				visible_message("<span class='notice'><b>[src]</b> examines [p_themselves()].</span>", \
 					"<span class='notice'>You check yourself for shrapnel.</span>")
 			if(I.isEmbedHarmless())
-				to_chat(src, "\t <a href='?src=[REF(src)];embedded_object=[REF(I)];embedded_limb=[REF(LB)]' class='warning'>There is \a [I] stuck to your [LB.name]!</a>")
+				to_chat(src, "\t <a href='?src=[REF(src)];embedded_object=[REF(I)];embedded_limb=[REF(LB)]' class='warning'>There is \a [I] stuck to my [LB.name]!</a>")
 			else
-				to_chat(src, "\t <a href='?src=[REF(src)];embedded_object=[REF(I)];embedded_limb=[REF(LB)]' class='warning'>There is \a [I] embedded in your [LB.name]!</a>")
+				to_chat(src, "\t <a href='?src=[REF(src)];embedded_object=[REF(I)];embedded_limb=[REF(LB)]' class='warning'>There is \a [I] embedded in my [LB.name]!</a>")
 
 	return embeds
 

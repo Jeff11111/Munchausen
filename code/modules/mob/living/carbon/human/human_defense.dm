@@ -743,16 +743,14 @@
 
 //skyrat cum inflation
 /mob/living/carbon/human/check_self_for_injuries()
-	if(stat >= UNCONSCIOUS)
-		return
-
-	visible_message("<span class='notice'>[src] examines [p_themselves()].</span>", \
-		"<span class='notice'><i><b>I check myself for injuries.</b></i></span>")
+	if(stat < UNCONSCIOUS)
+		visible_message("<span class='notice'><b>[src]</b> examines [p_themselves()].</span>", \
+			"<span class='notice'><i><b>I check myself for injuries.</b></i></span>")
 	
 	to_chat(src, "<span class='info'>*---------*")
 	for(var/X in ALL_BODYPARTS)
 		var/obj/item/bodypart/LB = get_bodypart(X)
-		
+
 		if(!LB)
 			to_chat(src, "<span class='notice'>[parse_zone(X)]: <span class='deadsay'><b>MISSING</b></span> </span>")
 			continue

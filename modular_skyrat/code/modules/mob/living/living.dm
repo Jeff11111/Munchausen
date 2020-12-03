@@ -17,4 +17,7 @@
 	if(get_dist(src, examined) > EYE_CONTACT_RANGE)
 		return
 	
-	visible_message("<span class='notice'>\The [src] examines [examined].</span>", "<span class='notice'>I examine [examined].</span>", vision_distance = 4)
+	if(!ismob(examined))
+		visible_message("<span class='notice'>\The <b>[src]</b> examines [examined].</span>", "<span class='notice'>I examine [examined].</span>", vision_distance = 4)
+	else
+		visible_message("<span class='notice'>\The <b>[src]</b> examines <b>[examined]</b>.</span>", "<span class='notice'>I examine <b>[examined]</b>.</span>", vision_distance = 4)

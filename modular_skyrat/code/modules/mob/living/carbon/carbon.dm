@@ -209,4 +209,7 @@
 	if(CHECK_BITFIELD(wear_mask?.flags_inv, HIDEFACE) || CHECK_BITFIELD(head?.flags_inv, HIDEFACE) || CHECK_BITFIELD(glasses?.flags_inv, HIDEFACE))
 		return
 	
-	visible_message("<span class='notice'>\The [src] examines [examined].</span>", "<span class='notice'>I examine [examined].</span>", vision_distance = 4)
+	if(!ismob(examined))
+		visible_message("<span class='notice'>\The <b>[src]</b> examines [examined].</span>", "<span class='notice'>I examine [examined].</span>", vision_distance = 4)
+	else
+		visible_message("<span class='notice'>\The <b>[src]</b> examines <b>[examined]</b>.</span>", "<span class='notice'>I examine <b>[examined]</b>.</span>", vision_distance = 4)
