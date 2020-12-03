@@ -747,7 +747,7 @@
 		visible_message("<span class='notice'><b>[src]</b> examines [p_themselves()].</span>", \
 			"<span class='notice'><b>I check myself for injuries.</b></span>")
 	
-	to_chat(src, "<span class='info'>*---------*")
+	to_chat(src, "<span class='info'>*---------*</span>")
 	for(var/X in ALL_BODYPARTS)
 		var/obj/item/bodypart/LB = get_bodypart(X)
 
@@ -855,7 +855,7 @@
 			to_chat(src, "<span class='notice'>[capitalize(LB.name)]: <span class='info'>[jointext(status, " | ")]</span> </span>")
 		else
 			to_chat(src, "<span class='notice'>[capitalize(LB.name)]: <span class='nicegreen'><b>OK</b></span> </span>")
-	to_chat(src, "<span class='info'>*---------*")
+	to_chat(src, "<span class='info'>*---------*</span>")
 
 ///Get all the clothing on a specific body part
 /mob/living/carbon/human/proc/clothingonpart(obj/item/bodypart/def_zone)

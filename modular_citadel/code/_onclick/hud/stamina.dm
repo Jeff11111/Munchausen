@@ -18,12 +18,18 @@
 	var/list/paramslist = params2list(params)
 	if(paramslist["shift"])
 		overfatigue = !overfatigue
-		to_chat(usr, "<span class='notice'>Your overfatigue is now [overfatigue ? "visible" : "hidden"].</span>")
+		to_chat(usr, "<span class='notice'>My overfatigue is now [overfatigue ? "visible" : "hidden"].</span>")
 		update_icon()
 		return
+	
 	if(isliving(usr))
 		var/mob/living/L = usr
-		to_chat(L, "<span class='notice'>You have <b>[L.getStaminaLoss()]</b> fatigue loss.<br>Your overfatigue can take <b>[L.stambuffer]</b> fatigue loss.<br>Your overfatigue buffer is <b>[(L.stambuffer*(100/L.stambuffer))-(L.bufferedstam*(100/L.stambuffer))]%</b> full.</span>")
+		var/msg = list("<span class='notice'>*---------*</span>")
+		msg += "<span class='notice'>I have <b>[L.getStaminaLoss()]</b> fatigue loss.</span>"
+		msg += "<span class='notice'>My overfatigue can take <b>[L.stambuffer]</b> fatigue loss.</span>"
+		msg += "<span class='notice'>My overfatigue buffer is <b>[(L.stambuffer*(100/L.stambuffer))-(L.bufferedstam*(100/L.stambuffer))]%</b> full.</span>")
+		msg += "<span class='notice'>*---------*</span>"
+		to_chat(L, jointext(msg, "\n"))
 
 /obj/screen/staminas/update_overlays()
 	. = ..()
@@ -34,6 +40,7 @@
 	var/mob/living/carbon/user = hud?.mymob
 	if(!user)
 		return
+	
 	//Fatigue
 	if(user.stat == DEAD || (user.combat_flags & COMBAT_FLAG_HARD_STAMCRIT) || (user.hal_screwyhud in 1 to 2))
 		icon_state = "fatigue0"
@@ -41,6 +48,7 @@
 		icon_state = "fatigue16"
 	else
 		icon_state = "fatigue[clamp(16 - CEILING(user.getStaminaLoss() / 16, 1), 0, 16)]"
+
 	//Over fatigue
 	if(user.stat == DEAD || (user.combat_flags & COMBAT_FLAG_HARD_STAMCRIT) || (user.hal_screwyhud in 1 to 2))
 		overfatigue_appearance.icon_state = "overfatigue0"

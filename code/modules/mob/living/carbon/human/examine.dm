@@ -717,8 +717,8 @@
 				. += "<span class='info'></b>[descriptor.get_comparative_value_descriptor(src, user, descriptor.current_value)]</b></span>"
 
 /mob/living/carbon/human/examine_more(mob/user)
-	. = list("<span class='notice'><i>You examine [src] closer, and note the following...</i></span>", "<span class='notice'>*---------*</span>")
-
+	. = list("<span class='notice'><i>I examine [src] closer, and note the following...</i></span>", "<span class='notice'>*---------*</span>")
+	
 	if((src == user) && HAS_TRAIT(user, TRAIT_SCREWY_CHECKSELF))
 		. |= "<span class='smallnotice'>[p_they(TRUE)] [p_have()] no significantly damaged bodyparts.</span>"
 		. |= "<span class='smallnotice'><i>[p_they(TRUE)] [p_have()] no visible scars.</i></span>"
@@ -837,5 +837,5 @@
 	
 	if(!length(visible_scars))
 		. += "<span class='smallnotice'><i>[p_they(TRUE)] [p_have()] no visible scars.</i></span>"
-	. += "*---------*</span>"
+	. += "<span class='notice'>*---------*</span>"
 
