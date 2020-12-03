@@ -2173,7 +2173,7 @@
 			var/antag_text = ""
 			for(var/datum/antagonist/antag in M.mind.antag_datums)
 				antag_shit |= capitalize(antag.name)
-			if(length(antag_datums))
+			if(length(antag_shit))
 				antag_text = jointext(antag_shit, ", ")
 			special_role_description = "Role: <b>[M.mind.assigned_role]</b>; Antagonist: <font color='red'><b>[antag_text]</b></font>"
 		else
