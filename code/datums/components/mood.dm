@@ -48,7 +48,7 @@
 	STOP_PROCESSING(SSobj, src)
 
 /datum/component/mood/proc/print_mood(mob/user)
-	var/msg = "<span class='info'>*---------*\n<EM>My current mood</EM></span>\n"
+	var/msg = "<span class='info'>*---------*\n<EM>My thoughts</EM></span>\n"
 	msg += "<span class='notice'>My mental status: </span>" //Long term
 	//skyrat edit - screwy mood
 	if(!HAS_TRAIT(user, TRAIT_SCREWY_MOOD))
@@ -105,60 +105,68 @@
 			msg += "<span class='nicegreen'>I don't have much of a reaction to anything right now.</span>\n"
 	else
 		msg += "<span class='notice'>No idea.</span>\n"
+	msg += "<span class='info'>*---------*</span>"
 	to_chat(user || parent, msg)
 	var/mob/living/living_user = user
 	if(istype(living_user) && !HAS_TRAIT(living_user, TRAIT_SCREWY_CHECKSELF))
+		var/list/additional_info = list()
 		if(living_user.getStaminaLoss())
 			if(living_user.getStaminaLoss() > 30)
-				to_chat(living_user, "<span class='info'>I'm completely exhausted.</span>")
+				additional_info += "<span class='info'>I'm completely exhausted.</span>\n"
 			else
-				to_chat(living_user, "<span class='info'>I feel fatigued.</span>")
+				additional_info += "<span class='info'>I feel fatigued.</span>\n"
 		if(!HAS_TRAIT(living_user, TRAIT_NOHUNGER))
 			switch(living_user.nutrition)
 				if(NUTRITION_LEVEL_FULL to INFINITY)
-					to_chat(living_user, "<span class='info'>I'm completely stuffed!</span>")
+					additional_info += "<span class='info'>I'm completely stuffed!</span>\n"
 				if(NUTRITION_LEVEL_WELL_FED to NUTRITION_LEVEL_FULL)
-					to_chat(living_user, "<span class='info'>I'm well fed!</span>")
+					additional_info += "<span class='info'>I'm well fed!</span>\n"
 				if(NUTRITION_LEVEL_FED to NUTRITION_LEVEL_WELL_FED)
-					to_chat(living_user, "<span class='info'>I'm not hungry.</span>")
+					additional_info += "<span class='info'>I'm not hungry.</span>\n"
 				if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
-					to_chat(living_user, "<span class='info'>I could use a bite to eat.</span>")
+					additional_info += "<span class='info'>I could use a bite to eat.</span>\n"
 				if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
-					to_chat(living_user, "<span class='info'>I feel quite hungry.</span>")
+					additional_info += "<span class='info'>I feel quite hungry.</span>\n"
 				if(0 to NUTRITION_LEVEL_STARVING)
-					to_chat(living_user, "<span class='danger'>I'm starving!</span>")
+					additional_info += "<span class='danger'>I'm starving!</span>\n"
 			switch(living_user.hydration)
 				if(HYDRATION_LEVEL_FULL to INFINITY)
-					to_chat(living_user, "<span class='info'>I'm completely full!</span>")
+					additional_info += "<span class='info'>I'm completely full!</span>\n"
 				if(HYDRATION_LEVEL_WELL_HYDRATED to HYDRATION_LEVEL_FULL)
-					to_chat(living_user, "<span class='info'>I'm well hydrated!</span>")
+					additional_info += "<span class='info'>I'm well hydrated!</span>\n"
 				if(HYDRATION_LEVEL_HYDRATED to HYDRATION_LEVEL_WELL_HYDRATED)
-					to_chat(living_user, "<span class='info'>I'm not thirsty.</span>")
+					additional_info += "<span class='info'>I'm not thirsty.</span>\n"
 				if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_HYDRATED)
-					to_chat(living_user, "<span class='info'>I could use a drink.</span>")
+					additional_info += "<span class='info'>I could use a drink.</span>\n"
 				if(HYDRATION_LEVEL_DEHYDRATED to HYDRATION_LEVEL_THIRSTY)
-					to_chat(living_user, "<span class='info'>I feel quite thirsty.</span>")
+					additional_info += "<span class='info'>I feel quite thirsty.</span>\n"
 				if(0 to HYDRATION_LEVEL_DEHYDRATED)
-					to_chat(living_user, "<span class='danger'>I'm dehydrated!</span>")
+					additional_info += "<span class='danger'>I'm dehydrated!</span>\n"
 		if(HAS_TRAIT(living_user, TRAIT_SELF_AWARE))
 			var/toxloss = living_user.getToxLoss()
 			if(toxloss)
 				if(toxloss > 10)
-					to_chat(living_user, "<span class='danger'>I feel sick.</span>")
+					additional_info += "<span class='danger'>I feel sick.</span>\n"
 				else if(toxloss > 20)
-					to_chat(living_user, "<span class='danger'>I feel nauseated.</span>")
+					additional_info += "<span class='danger'>I feel nauseated.</span>\n"
 				else if(toxloss > 40)
-					to_chat(living_user, "<span class='danger'>I feel very unwell!</span>")
+					additional_info += "<span class='danger'>I feel very unwell!</span>\n"
 			var/oxyloss = living_user.getOxyLoss()
 			if(oxyloss)
 				if(oxyloss > 10)
-					to_chat(living_user, "<span class='danger'>I feel lightheaded.</span>")
+					additional_info += "<span class='danger'>I feel lightheaded.</span>\n"
 				else if(oxyloss > 20)
-					to_chat(living_user, "<span class='danger'>My thinking is clouded and distant.</span>")
+					additional_info += "<span class='danger'>My thinking is clouded and distant.</span>\n"
 				else if(oxyloss > 30)
-					to_chat(living_user, "<span class='danger'>I'm choking!</span>")
+					additional_info += "<span class='danger'>I'm choking!</span>\n"
+		
 		if(length(living_user.roundstart_quirks))
-			to_chat(living_user, "<span class='notice'>I am special: [living_user.get_trait_string()].</span>")
+			additional_info += "<span class='notice'>I am special: [living_user.get_trait_string()].</span>\n"
+
+		if(length(additional_info))
+			to_chat(living_user, "<span class='notice'>Additional:</span>\n")
+			additional_info += "<span class='info'>*---------*</span>"
+			to_chat(living_user, jointext(additional_info))
 
 ///Called after moodevent/s have been added/removed.
 /datum/component/mood/proc/update_mood()

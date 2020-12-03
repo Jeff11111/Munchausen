@@ -40,8 +40,10 @@
 	if(!. || owner.stat >= UNCONSCIOUS)
 		return
 	switch(disabled)
+		if(BODYPART_DISABLED_PAIN)
+			to_chat(owner, "<span class='userdanger'>The pain in my [name] is too agonizing!</span>")
 		if(BODYPART_DISABLED_DAMAGE)
 			owner.emote("scream")
-			to_chat(owner, "<span class='userdanger'>Your [name] is too damaged to function!</span>")
+			to_chat(owner, "<span class='userdanger'>My [name] is too damaged to function!</span>")
 		if(BODYPART_DISABLED_PARALYSIS)
-			to_chat(owner, "<span class='userdanger'>You can't feel your [name]!</span>")
+			to_chat(owner, "<span class='userdanger'>I can't feel my [name]!</span>")

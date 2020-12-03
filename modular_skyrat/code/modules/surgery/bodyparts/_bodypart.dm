@@ -71,12 +71,12 @@
 	var/no_burn_msg = "not burnt"
 	var/light_burn_msg = "numb"
 	var/medium_burn_msg = "blistered"
-	var/heavy_burn_msg = "peeling away"
+	var/heavy_burn_msg = "peeling"
 
 	var/no_pain_msg = "no pain"
 	var/light_pain_msg = "sore"
 	var/medium_pain_msg = "pain"
-	var/heavy_pain_msg = "agonizing"
+	var/heavy_pain_msg = "agony"
 
 	/// Bobmed variables
 	germ_level = 0 //Germs.

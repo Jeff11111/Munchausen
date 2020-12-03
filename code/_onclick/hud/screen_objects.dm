@@ -653,17 +653,13 @@
 /obj/screen/healthdoll
 	name = "health doll"
 	screen_loc = ui_healthdoll
-	//skyrat edit
 	icon = 'modular_skyrat/icons/mob/screen_gen.dmi'
-	//
 
-//skyrat edit
-/obj/screen/healthdoll/Click()
-	var/mob/living/carbon/C = usr
-	if(istype(C))
-		C.check_self_for_injuries()
-	C.update_health_hud()
-//
+/obj/screen/healthdoll/Click(location,control,params)
+	var/mob/living/L = usr
+	if(istype(L))
+		L.ClickOn(L, params)
+		L.update_health_hud()
 
 /obj/screen/mood
 	name = "mood"

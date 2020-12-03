@@ -312,13 +312,9 @@
 	if(on_fire)
 		to_chat(M, "<span class='warning'>You can't put [p_them()] out with just your bare hands!</span>")
 		return
-	//skyrat edit peepeepoopoo
+	
 	if(M == src)
 		check_self_for_injuries()
-		return
-	//
-
-	if(M == src && check_self_for_injuries())
 		return
 
 	if(health >= 0 && !(HAS_TRAIT(src, TRAIT_FAKEDEATH)))

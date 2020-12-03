@@ -743,20 +743,22 @@
 
 //skyrat cum inflation
 /mob/living/carbon/human/check_self_for_injuries()
-	if(stat == DEAD || stat == UNCONSCIOUS || !src.canUseTopic(src, TRUE, check_resting = FALSE))
+	if(stat >= UNCONSCIOUS)
 		return
 
 	visible_message("<span class='notice'>[src] examines [p_themselves()].</span>", \
-		"<span class='notice'><i><b>I check myself for injuries.</b><i></span>")
-
+		"<span class='notice'><i><b>I check myself for injuries.</b></i></span>")
+	
+	to_chat(src, "<span class='info'>*---------*")
 	for(var/X in ALL_BODYPARTS)
 		var/obj/item/bodypart/LB = get_bodypart(X)
+		
 		if(!LB)
-			to_chat(src, "\t[parse_zone(X)]: <span class='deadsay'><b>MISSING</b></span>")
+			to_chat(src, "<span class='notice'>[parse_zone(X)]: <span class='deadsay'><b>MISSING</b></span> </span>")
 			continue
 
 		var/limb_max_damage = LB.max_damage
-		var/limb_max_pain = min(100, LB.max_pain_damage)
+		var/limb_max_pain = min(100, LB.max_pain_damage)	
 		var/list/status = list()
 		var/brutedamage = LB.brute_dam
 		var/burndamage = LB.burn_dam
@@ -770,15 +772,15 @@
 				paindamage += rand(30,40)
 
 		if(HAS_TRAIT(src, TRAIT_SELF_AWARE))
-			if(!brutedamage && !burndamage)
-				status += "<span class='nicegreen'>OK</span>"
-			else
+			if(brutedamage)
 				status += "<span class='[brutedamage >= 5 ? "danger" : "notice"]'>[brutedamage] BRUTE</span>"
+			if(burndamage)
 				status += "<span class='[burndamage >= 5 ? "danger" : "notice"]'>[burndamage] BURN</span>"
+			if(paindamage)
 				status += "<span class='[paindamage >= 10 ? "danger" : "notice"]'>[paindamage] PAIN</span>"
 		else
 			if(brutedamage >= (limb_max_damage*0.75))
-				status += "<span class='userdanger'>[uppertext(LB.heavy_brute_msg)]</span>"
+				status += "<span class='userdanger'><b>[uppertext(LB.heavy_brute_msg)]</b></span>"
 			else if(brutedamage >= (limb_max_damage*0.5))
 				status += "<span class='userdanger'>[uppertext(LB.heavy_brute_msg)]</span>"
 			else if(brutedamage >= (limb_max_damage*0.25))
@@ -818,7 +820,7 @@
 					if(WOUND_SEVERITY_MODERATE)
 						status += "<span class='warning'>[woundmsg]</span>"
 					if(WOUND_SEVERITY_SEVERE)
-						status += "<span class='danger'>[woundmsg]</span>"
+						status += "<span class='danger'><b>[woundmsg]</b></span>"
 					if(WOUND_SEVERITY_CRITICAL)
 						status += "<span class='userdanger'><b>[woundmsg]</span>"
 					if(WOUND_SEVERITY_LOSS)
@@ -828,10 +830,13 @@
 		
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF) && length(LB.embedded_objects))
 			for(var/obj/item/I in LB.embedded_objects)
-				status += "<span class='warning'><a href='?src=[REF(src)];embedded_object=[REF(I)];embedded_limb=[REF(LB)]'>[I.isEmbedHarmless() ? "STUCK" : "EMBEDDED"] [uppertext(I.name)]</a></span>"
+				status += "<span class='warning'><a href='?src=[REF(src)];embedded_object=[REF(I)];embedded_limb=[REF(LB)]'><b>[I.isEmbedHarmless() ? "STUCK" : "EMBEDDED"] [uppertext(I.name)]</b></a></span>"
 
 		if(LB.get_bleed_rate())
-			status += "<span class='danger'>BLEEDING</span>"
+			if(LB.get_bleed_rate() >= 3) //Totally arbitrary value
+				status += "<span class='danger'><b>BLEEDING</b></span>"
+			else
+				status += "<span class='danger'>BLEEDING</span>"
 		
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF) && LB.is_disabled())
 			status += "<span class='danger'><b>DISABLED</b></span>"
@@ -843,15 +848,16 @@
 					status += "<span class='warning'><a href='?src=[REF(HD)];tape=[HD.tapered];'>TAPED</a></span>"
 		
 		if(LB.current_gauze)
-			status += "<span class='notice'><a href='?src=[REF(LB)];gauze=1;'>GAUZED</a></span>"
+			status += "<span class='info'><a href='?src=[REF(LB)];gauze=1;'><b>GAUZED</b></a></span>"
 		
 		if(!length(status))
-			status += "<span class='nicegreen'>OK</span>"
+			status += "<span class='nicegreen'><b>OK</b></span>"
 		
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF))
-			to_chat(src, "<span class='notice'>[LB.name]: <span class='info'>[jointext(status, " | ")]</span> </span>")
+			to_chat(src, "<span class='notice'>[capitalize(LB.name)]: <span class='info'>[jointext(status, " | ")]</span> </span>")
 		else
-			to_chat(src, "<span class='notice'>[LB.name]: <span class='nicegreen'>OK</span> </span>")
+			to_chat(src, "<span class='notice'>[capitalize(LB.name)]: <span class='nicegreen'><b>OK</b></span> </span>")
+	to_chat(src, "<span class='info'>*---------*")
 
 ///Get all the clothing on a specific body part
 /mob/living/carbon/human/proc/clothingonpart(obj/item/bodypart/def_zone)
