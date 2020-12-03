@@ -210,6 +210,6 @@
 		return
 	
 	if(!ismob(examined))
-		visible_message("<span class='notice'>\The <b>[src]</b> examines [examined].</span>", "<span class='notice'>I examine [examined].</span>", vision_distance = 4)
+		visible_message("<span class='notice'>\The <b>[src]</b> looks at [examined].</span>", "<span class='notice'>I look at [examined].</span>", vision_distance = 4)
 	else
-		visible_message("<span class='notice'>\The <b>[src]</b> examines <b>[examined]</b>.</span>", "<span class='notice'>I examine <b>[examined]</b>.</span>", vision_distance = 4)
+		visible_message("<span class='notice'>\The <b>[src]</b> looks at <b>[examined]</b>.</span>", "<span class='notice'>I look at <b>[examined]</b>.</span>", vision_distance = 4)
