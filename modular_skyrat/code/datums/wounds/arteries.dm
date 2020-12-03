@@ -76,8 +76,8 @@
 	//Nor can people with no blood
 	if((!(victim.stat >= DEAD) && !(victim.pulse() < PULSE_NORM) && !(victim.blood_volume <= blood_loss_per_squirt) && (blood_loss_per_squirt >= 1)) || force)
 		playsound(victim, sound_effect, 75, 0)
-		victim.bleed(blood_loss_per_squirt * bleed_mod)
-		victim.visible_message("<span class='danger'><b>[victim]</b>'s [limb.name] [limb.artery_name] squirts blood!</span>", \
+		victim.bleed(blood_loss_per_squirt * bleed_mod, FALSE)
+		victim.visible_message("<span class='danger'><b>[victim]</b>'s [limb.name]'s [limb.artery_name] squirts blood!</span>", \
 						"<span class='userdanger'>Blood squirts from my [limb.name]'s [limb.artery_name]!</span>")
 		var/spray_dir = pick(GLOB.alldirs)
 		var/turf/uhoh = get_edge_target_turf(victim, spray_dir)

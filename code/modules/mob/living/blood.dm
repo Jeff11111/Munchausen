@@ -137,30 +137,28 @@
 		bleed(temp_bleed)
 
 //Makes a blood drop, leaking amt units of blood from the mob
-/mob/living/carbon/proc/bleed(amt)
+/mob/living/carbon/proc/bleed(amt, splatter = TRUE)
 	if(!amt)
 		return
 	if(blood_volume)
 		blood_volume = max(blood_volume - amt, 0)
-		if(isturf(src.loc)) //Blood loss still happens in locker, floor stays clean
+		if(isturf(src.loc) && splatter) //Blood loss still happens in locker, floor stays clean
 			if(amt >= 10)
 				add_splatter_floor(src.loc)
 			else
 				add_splatter_floor(src.loc, TRUE)
 
-/mob/living/carbon/human/bleed(amt)
+/mob/living/carbon/human/bleed(amt, splatter = TRUE)
 	if(!amt)
 		return
 	amt *= physiology.bleed_mod
-	//skyrat edit - hemophilia quirk
 	if(HAS_TRAIT(src, TRAIT_HEMOPHILIA))
 		amt *= 2
-	//
 	if(!(NOBLOOD in dna.species.species_traits))
 		. = ..()
 		if(dna.species.exotic_blood && .) // Do we have exotic blood, and have we left any on the ground?
 			var/datum/reagent/R = GLOB.chemical_reagents_list[get_blood_id()]
-			if(istype(R) && isturf(loc))
+			if(istype(R) && isturf(loc) && splatter)
 				R.reaction_turf(get_turf(src), amt * EXOTIC_BLEED_MULTIPLIER)
 				if(amt >= 1)
 					var/bloodsound = pick('modular_skyrat/sound/gore/blood1.ogg',
