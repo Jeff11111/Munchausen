@@ -28,7 +28,7 @@
 /obj/machinery/computer/Destroy()
 	QDEL_NULL(circuit)
 	for(var/obj/machinery/computer/selected in range(1, src))
-		addtimer(CALLBACK(selected, .update_overlays), 5)
+		addtimer(CALLBACK(selected, /atom/.update_overlays), 5)
 	return ..()
 
 /obj/machinery/computer/process()
