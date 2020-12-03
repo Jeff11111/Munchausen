@@ -1755,7 +1755,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			ran_zone_prob = supposed_to_affect.zone_prob
 			extra_zone_prob = supposed_to_affect.extra_zone_prob
 			miss_entirely = supposed_to_affect.miss_entirely_prob
-		miss_entirely /= (target.lying ? 10 : 1)
+		miss_entirely /= (target.lying ? 5 : 1)
 		if(user.mind)
 			var/datum/stats/dex/dex = GET_STAT(user, dex)
 			if(dex)
@@ -1766,7 +1766,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 		var/missed = FALSE
 		//Dice roll to see if we fuck up
-		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.75, GET_SKILL_LEVEL(user, melee)*1.25, dicetype = "6d6", mod = -(miss_entirely/5), crit = 20) <= DICE_FAILURE)
+		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.75, GET_SKILL_LEVEL(user, melee)*1.25, dicetype = "6d6", mod = -(miss_entirely/(lying ? 10 : 5)), crit = 20) <= DICE_FAILURE)
 			missed = TRUE
 		
 		//Aimed combat intent means we never miss, at the cost of stamina
