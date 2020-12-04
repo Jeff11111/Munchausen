@@ -6,7 +6,7 @@
 	name = "Ranged Combat"
 
 /datum/skills/firstaid
-	name = "First Aid"
+	name = "Medicine"
 
 /datum/skills/firstaid/proc/get_medicalstack_mod()
 	return clamp(2 - level/10, 0.1, 2)
