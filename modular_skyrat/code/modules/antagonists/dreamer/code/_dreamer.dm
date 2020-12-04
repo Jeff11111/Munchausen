@@ -13,6 +13,7 @@
 	var/list/heart_keys = list()
 	var/list/associated_keys = list()
 	var/list/hearts_seen = list()
+	var/list/obj/structure/wonder/wonders_done = list()
 	var/current_wonder = 0
 	var/sum_keys = 0
 
@@ -147,6 +148,11 @@
 	var/mob/living/carbon/human/H = spawn_trey_liam()
 	if(H)
 		dreamer.transfer_ckey(H, TRUE)
+		//Explodie all our wonders
+		for(var/wond in wonders_done)
+			var/obj/structure/wonder/wondie = wond
+			if(istype(wondie))
+				explosion(wondie, 8, 16, 32, 64)
 		var/obj/item/organ/brain/brain = dreamer.getorganslot(ORGAN_SLOT_BRAIN)
 		var/obj/item/bodypart/head/head = dreamer.get_bodypart(BODY_ZONE_HEAD)
 		if(head)
