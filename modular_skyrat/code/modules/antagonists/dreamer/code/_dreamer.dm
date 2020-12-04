@@ -134,7 +134,7 @@
 
 /datum/antagonist/dreamer/proc/wake_up()
 	STOP_PROCESSING(SSobj, src)
-	var/client/dreamer_client = owner // Trust me, we need it later
+	var/client/dreamer_client = owner.current.client // Trust me, we need it later
 	var/mob/living/carbon/dreamer = owner.current
 	dreamer.clear_fullscreen("dream")
 	dreamer.clear_fullscreen("wakeup")
@@ -143,11 +143,6 @@
 	for(var/mob/M in GLOB.player_list)
 		if(M.client)
 			SEND_SOUND(M, sound(null))
-			var/client/C = M.client
-			if(C?.chatOutput && !C.chatOutput.broken && C.chatOutput.loaded)
-				C.chatOutput.stopMusic()
-	for(var/mob/M in GLOB.player_list)
-		if(M.client)
 			M.playsound_local(get_turf(M), 'modular_skyrat/code/modules/antagonists/dreamer/sound/dreamer_win.ogg', 100, 0)
 	var/mob/living/carbon/human/H = spawn_trey_liam()
 	if(H)
