@@ -2380,9 +2380,6 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
@@ -2873,9 +2870,6 @@
 /obj/effect/turf_decal/tile/red{
 	dir = 1
 	},
-/obj/structure/cable{
-	icon_state = "1-2"
-	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/security/armory)
@@ -3291,9 +3285,6 @@
 "ahw" = (
 /obj/effect/mapping_helpers/airlock/cyclelink_helper,
 /obj/machinery/door/firedoor,
-/obj/structure/cable{
-	icon_state = "1-4"
-	},
 /obj/machinery/door/airlock/security{
 	name = "Infirmary";
 	req_access_txt = "63"
@@ -12720,7 +12711,7 @@
 /turf/open/floor/plasteel/white/side{
 	dir = 4
 	},
-/area/crew_quarters/bar)
+/area/crew_quarters/theatre)
 "aDT" = (
 /obj/item/soap,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
@@ -12743,7 +12734,7 @@
 /turf/open/floor/plasteel/white/side{
 	dir = 4
 	},
-/area/crew_quarters/bar)
+/area/crew_quarters/theatre)
 "aDZ" = (
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -12776,7 +12767,7 @@
 /turf/open/floor/plasteel/white/side{
 	dir = 4
 	},
-/area/crew_quarters/bar)
+/area/crew_quarters/theatre)
 "aEd" = (
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -13170,7 +13161,7 @@
 /turf/open/floor/plasteel/white/side{
 	dir = 4
 	},
-/area/crew_quarters/bar)
+/area/crew_quarters/theatre)
 "aFl" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -13190,7 +13181,7 @@
 	icon_state = "0-4"
 	},
 /turf/open/floor/plasteel,
-/area/crew_quarters/bar)
+/area/crew_quarters/theatre)
 "aFm" = (
 /obj/structure/disposalpipe/segment{
 	dir = 6
@@ -13676,7 +13667,7 @@
 	dir = 1
 	},
 /turf/open/floor/plasteel,
-/area/crew_quarters/bar)
+/area/crew_quarters/theatre)
 "aGx" = (
 /obj/item/radio/intercom{
 	pixel_x = -25
@@ -14366,7 +14357,7 @@
 	},
 /obj/item/megaphone/clown,
 /turf/open/floor/plasteel,
-/area/crew_quarters/bar)
+/area/crew_quarters/theatre)
 "aIa" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -14870,7 +14861,7 @@
 	req_access_txt = "46"
 	},
 /turf/open/floor/plasteel/dark,
-/area/crew_quarters/bar)
+/area/crew_quarters/theatre)
 "aJl" = (
 /obj/structure/tank_dispenser/oxygen,
 /obj/machinery/light{
@@ -23688,7 +23679,7 @@
 /turf/open/floor/plasteel/white/side{
 	dir = 4
 	},
-/area/crew_quarters/bar)
+/area/crew_quarters/theatre)
 "bgQ" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on{
 	dir = 8
@@ -24212,7 +24203,7 @@
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/crew_quarters/bar)
+/area/crew_quarters/theatre)
 "bii" = (
 /obj/structure/sign/warning/securearea,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
@@ -24230,7 +24221,7 @@
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/crew_quarters/bar)
+/area/crew_quarters/theatre)
 "bik" = (
 /obj/item/radio/intercom{
 	dir = 8;
@@ -25244,7 +25235,7 @@
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/crew_quarters/bar)
+/area/crew_quarters/theatre)
 "blb" = (
 /obj/machinery/door/airlock/command{
 	name = "Captain's Quarters";
@@ -37233,11 +37224,11 @@
 	},
 /area/science/research)
 "bOB" = (
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
-	dir = 10
-	},
 /obj/effect/turf_decal/stripes/line{
 	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
+	dir = 4
 	},
 /turf/open/floor/plasteel/white,
 /area/science/misc_lab)
@@ -45774,9 +45765,11 @@
 /turf/open/floor/plasteel/white,
 /area/science/xenobiology)
 "cko" = (
-/obj/structure/disposalpipe/segment,
-/turf/closed/wall,
-/area/maintenance/starboard/aft)
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/turf/closed/wall/r_wall,
+/area/security/prison)
 "ckp" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
 /obj/effect/spawner/structure/window,
@@ -46832,11 +46825,8 @@
 /turf/open/floor/plating,
 /area/maintenance/starboard/aft)
 "cnJ" = (
-/obj/structure/disposalpipe/segment{
-	dir = 5
-	},
 /turf/closed/wall,
-/area/maintenance/starboard/aft)
+/area/crew_quarters/theatre)
 "cnK" = (
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -50006,9 +49996,6 @@
 /turf/open/floor/plating,
 /area/maintenance/starboard/aft)
 "cAb" = (
-/obj/structure/disposalpipe/segment{
-	dir = 10
-	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 4
 	},
@@ -52898,9 +52885,12 @@
 /turf/open/floor/plasteel,
 /area/crew_quarters/bar)
 "egU" = (
-/obj/structure/disposalpipe/segment,
+/obj/effect/spawner/structure/window/reinforced,
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	dir = 4
+	},
 /turf/open/floor/plating,
-/area/maintenance/starboard/aft)
+/area/maintenance/starboard)
 "eiD" = (
 /obj/machinery/door/window/northleft{
 	dir = 4;
@@ -57744,9 +57734,6 @@
 /turf/open/floor/carpet/black,
 /area/maintenance/bar)
 "kbp" = (
-/obj/structure/disposalpipe/segment{
-	dir = 6
-	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 6
 	},
@@ -58069,7 +58056,7 @@
 	dir = 8
 	},
 /turf/open/floor/plasteel,
-/area/crew_quarters/bar)
+/area/crew_quarters/theatre)
 "krR" = (
 /obj/machinery/door/airlock/maintenance/abandoned{
 	req_access_txt = "12"
@@ -58485,13 +58472,13 @@
 /turf/open/floor/plating,
 /area/maintenance/aft)
 "kUA" = (
-/obj/structure/disposalpipe/segment{
-	dir = 9
-	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 9
 	},
 /obj/structure/chair,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/open/floor/plating,
 /area/maintenance/starboard/aft)
 "kWj" = (
@@ -61134,7 +61121,7 @@
 	dir = 4
 	},
 /turf/closed/wall,
-/area/crew_quarters/bar)
+/area/crew_quarters/theatre)
 "oAf" = (
 /obj/effect/turf_decal/box,
 /obj/structure/closet/secure_closet/genpop,
@@ -61628,7 +61615,7 @@
 	dir = 4
 	},
 /turf/open/floor/plasteel/white,
-/area/crew_quarters/bar)
+/area/crew_quarters/theatre)
 "poc" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 5
@@ -62541,12 +62528,19 @@
 /turf/open/floor/engine,
 /area/science/xenobiology)
 "qSo" = (
-/obj/effect/turf_decal/tile/blue{
-	dir = 8
-	},
 /obj/structure/table,
-/turf/open/floor/plasteel/white/corner,
-/area/hallway/secondary/entry)
+/obj/item/integrated_circuit_printer,
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/camera{
+	c_tag = "Circuit Lab";
+	dir = 8;
+	network = list("ss13","rd");
+	pixel_y = -22
+	},
+/turf/open/floor/plasteel/white,
+/area/science/circuit)
 "qSS" = (
 /obj/machinery/light{
 	dir = 8
@@ -64997,12 +64991,6 @@
 /obj/item/target/syndicate,
 /turf/open/floor/plating,
 /area/security/range)
-"vaa" = (
-/obj/machinery/atmospherics/pipe/manifold/scrubbers/hidden{
-	dir = 8
-	},
-/turf/closed/wall,
-/area/maintenance/disposal/incinerator)
 "vae" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 4
@@ -77172,7 +77160,7 @@ dgz
 aOf
 ayl
 jHh
-qSo
+gAO
 awW
 aaa
 aaa
@@ -89437,7 +89425,7 @@ aaa
 aEv
 dvA
 aoq
-vdU
+cko
 dvA
 aoq
 dXM
@@ -95172,7 +95160,7 @@ aZR
 aZR
 bbm
 bec
-bfu
+aYx
 wql
 wql
 wql
@@ -96714,7 +96702,7 @@ aZR
 aZR
 bbm
 beh
-bfx
+aYz
 wql
 wql
 wql
@@ -101318,12 +101306,12 @@ axT
 axW
 aAl
 cHf
-aJC
+cnJ
 aDR
 aFl
 kqI
 aHZ
-aJC
+cnJ
 aKJ
 hIL
 fxe
@@ -101575,7 +101563,7 @@ axS
 azk
 aAk
 tvi
-aJC
+cnJ
 aDY
 bgO
 bih
@@ -101832,12 +101820,12 @@ awr
 awr
 aAn
 rqk
-aJC
+cnJ
 aEc
 aFk
 aGw
 bkZ
-aJC
+cnJ
 aKr
 fxe
 fxe
@@ -102089,12 +102077,12 @@ awr
 awr
 aAn
 jGW
-aJC
-aJC
+cnJ
+cnJ
 plC
 oAb
-aJC
-aJC
+cnJ
+cnJ
 aKq
 aNF
 aNF
@@ -103960,7 +103948,7 @@ cfj
 cfj
 ckf
 vhx
-vaa
+cfj
 vbp
 ctN
 caJ
@@ -112439,10 +112427,10 @@ bDb
 cOe
 cgm
 kbp
-tvE
-tvE
-tvE
-tvE
+cOb
+cOb
+cOb
+cOb
 kUA
 cOT
 aaa
@@ -112695,12 +112683,12 @@ bDb
 bDb
 cOe
 cgm
-czY
+cAb
 cOe
 cOe
 cOe
 cOe
-cOe
+cvO
 cNW
 aaa
 aaa
@@ -112953,11 +112941,11 @@ czG
 czR
 czW
 cAb
-egU
-cko
-cko
-cko
-cnJ
+cOe
+cNW
+cNW
+cNW
+cvO
 cNW
 cNW
 cOT
@@ -115264,7 +115252,7 @@ bSc
 cfu
 jur
 chA
-eoY
+qSo
 oqN
 fzX
 clt
@@ -116765,7 +116753,7 @@ aPq
 tvB
 bky
 btp
-bZi
+egU
 boF
 btp
 fzX
@@ -117022,7 +117010,7 @@ aPq
 wJs
 bky
 btp
-bZi
+egU
 boF
 btp
 fzX
@@ -117279,7 +117267,7 @@ aPq
 aMZ
 vvx
 blP
-bZi
+egU
 boF
 btp
 fzX
