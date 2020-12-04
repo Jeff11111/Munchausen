@@ -9,17 +9,27 @@
 
 //Bolt-action rifle
 /obj/item/gun/ballistic/shotgun/boltaction
-	icon = 'modular_skyrat/icons/obj/bobstation/guns/rifle.dmi'
-	name = "bolt action rifle"
-	desc = "A crappy 7.62mm chambered rifle. Although it has taken quite a beating, you can still make out the \"Gorlex Corporal\" logo."
-	icon_state = "baction"
+	name = "7.62 bolt action rifle"
+	desc = "A crappy 7.62mm chambered Mosin Nagant styled rifle. Although it has taken quite a beating, you can still make out the \"Bubba Arms\" logo."
+	icon = 'modular_skyrat/icons/obj/bobstation/guns/40x32.dmi'
+	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/rifle_lefthand.dmi'
+	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/rifle_righthand.dmi'
+	icon_state = "nugget"
+	item_state = "baction"
 	safety_sound = 'modular_skyrat/sound/guns/safety2.ogg'
 	fire_sound = 'modular_skyrat/sound/weapons/rifle2.ogg'
 
 /obj/item/gun/ballistic/shotgun/boltaction/update_icon()
 	..()
-	icon_state = "[initial(icon_state)][bolt_open ? "-open" : "-closed"]"
+	icon_state = "[initial(icon_state)][bolt_open ? "-open" : ""][chambered ? "" : "-e"]"
 	item_state = "[initial(item_state)][is_wielded ? "-wielded" : ""]"
+
+//Bubba-action rifle
+/obj/item/gun/ballistic/shotgun/boltaction/polymer
+	name = "7.62 bolt action bubba"
+	desc = "A crappy 7.62mm chambered mosin nagant styled rifle. Some psychopath has turned it into a polymerized mess."
+	icon_state = "nugget_bubba"
+	item_state = "baction_polymer"
 
 //AR-15
 /obj/item/gun/ballistic/automatic/ar
@@ -86,3 +96,5 @@
 /obj/item/gun/ballistic/automatic/vintorez/update_icon()
 	..()
 	item_state = "[initial(item_state)][magazine ? "" : "-e"][is_wielded ? "-wielded" : ""]"
+
+//Marlin 1894

@@ -100,7 +100,7 @@
 	desc = "The NT Lawman 17 - A decent and lightweight polymer firearm for general law enforcement use."
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
 	icon_state = "glock"
-	item_state = "pistol9mm"
+	item_state = "glock"
 	w_class = WEIGHT_CLASS_SMALL
 	mag_type = /obj/item/ammo_box/magazine/m9mm
 	can_suppress = FALSE
@@ -110,12 +110,15 @@
 	actions_types = list(/datum/action/item_action/toggle_firemode)
 	fire_sound = 'modular_skyrat/sound/guns/pistol1.ogg'
 
+/obj/item/gun/ballistic/automatic/pistol/APS/glock/bbc
+	icon_state = "glock_bbc"
+	item_state = "glock_bbc"
+
 //AT pistol
 /obj/item/gun/ballistic/automatic/pistol/antitank
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
 	icon_state = "antitank"
 	fire_sound = 'modular_skyrat/sound/weapons/rifle2.ogg'
-	generic_magazine_overlays = TRUE
 
 //Stechkin v2
 /obj/item/gun/ballistic/automatic/pistol/deagle
