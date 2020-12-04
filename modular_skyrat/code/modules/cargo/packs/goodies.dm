@@ -213,6 +213,12 @@
 	contains = list(/obj/item/ammo_box/a762,
 					/obj/item/ammo_box/a762)
 
+/datum/supply_pack/goody/marlin
+	name = ".357 Lever Action Rifle"
+	desc = "Contains one lever action rifle, chambered in .357. Never know when you need it."
+	cost = 7500
+	contains = list(/obj/item/gun/ballistic/shotgun/boltaction/marlin)
+
 /datum/supply_pack/goody/vintorez
 	name = "9x39mm Suppressed Rifle"
 	desc = "Contains one suppressed rifle, chambered in 9x39mm. Never know when you need it."

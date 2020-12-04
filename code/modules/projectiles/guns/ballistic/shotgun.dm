@@ -113,20 +113,22 @@
 ///////////////////////
 
 /obj/item/gun/ballistic/shotgun/boltaction
-	name = "\improper Mosin Nagant"
+	name = "\improper mosin nagant"
 	desc = "This piece of junk looks like something that could have been used 700 years ago. It feels slightly moist."
 	icon_state = "moistnugget"
 	item_state = "moistnugget"
 	slot_flags = 0 //no ITEM_SLOT_BACK sprite, alas
 	inaccuracy_modifier = 0.5
 	mag_type = /obj/item/ammo_box/magazine/internal/boltaction
-	var/bolt_open = FALSE
 	can_bayonet = TRUE
 	knife_x_offset = 27
 	knife_y_offset = 13
+	var/bolt_open = FALSE
+	var/bolt_in_sound = 'modular_skyrat/sound/guns/bolt_in.ogg'
+	var/bolt_out_sound = 'modular_skyrat/sound/guns/bolt_out.ogg'
 
 /obj/item/gun/ballistic/shotgun/boltaction/improvised
-	name = "Makeshift 7.62mm Rifle"
+	name = "makeshift 7.62mm bolt action rifle"
 	icon_state = "ishotgun"
 	icon_state = "irifle"
 	item_state = "shotgun"
@@ -136,17 +138,19 @@
 
 /obj/item/gun/ballistic/shotgun/boltaction/pump(mob/M)
 	if(bolt_open)
-		playsound(M, 'modular_skyrat/sound/guns/bolt_in.ogg', 60, 1)
+		if(bolt_in_sound)
+			playsound(M, bolt_in_sound, 60, 1)
 		pump_reload(M)
 	else
-		playsound(M, 'modular_skyrat/sound/guns/bolt_out.ogg', 60, 1)
+		if(bolt_out_sound)
+			playsound(M, bolt_out_sound, 60, 1)
 		pump_unload(M)
 	bolt_open = !bolt_open
-	update_icon()	//I.E. fix the desc
-	return 1
+	update_icon()
+	return TRUE
 
 /obj/item/gun/ballistic/shotgun/boltaction/attackby(obj/item/A, mob/user, params)
-	if(!bolt_open)
+	if(!bolt_open && (isammocasing(A) || isammobox(A)))
 		to_chat(user, "<span class='notice'>The bolt is closed!</span>")
 		return
 	. = ..()

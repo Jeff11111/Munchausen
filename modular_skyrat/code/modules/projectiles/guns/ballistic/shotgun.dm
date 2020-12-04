@@ -96,7 +96,7 @@
 	unique_reskin = null
 	weapon_weight = WEAPON_HEAVY	// It's big.
 	recoil = 4	// We're firing 12 gauge.
-	var/barrel_open
+	var/barrel_open = FALSE
 
 //	//	//	Weapon "animation" code block - We want the player to have visual feedback and to see the shotgun barrel is open.
 /obj/item/gun/ballistic/shotgun/improvised/pump(mob/M)

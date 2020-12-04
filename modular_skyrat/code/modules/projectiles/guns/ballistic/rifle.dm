@@ -6,6 +6,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	safety_sound = 'modular_skyrat/sound/guns/safety2.ogg'
 	sling_icon_state = "surplus-sling"
+	slot_flags = ITEM_SLOT_BACK
 
 //Bolt-action rifle
 /obj/item/gun/ballistic/shotgun/boltaction
@@ -18,6 +19,7 @@
 	item_state = "baction"
 	safety_sound = 'modular_skyrat/sound/guns/safety2.ogg'
 	fire_sound = 'modular_skyrat/sound/weapons/rifle2.ogg'
+	slot_flags = ITEM_SLOT_BACK
 
 /obj/item/gun/ballistic/shotgun/boltaction/update_icon()
 	..()
@@ -30,6 +32,13 @@
 	desc = "A crappy 7.62mm chambered mosin nagant styled rifle. Some psychopath has turned it into a polymerized mess."
 	icon_state = "nugget_bubba"
 	item_state = "baction_polymer"
+
+//Marlin model 1894
+/obj/item/gun/ballistic/shotgun/boltaction/marlin
+	name = ".357 lever action rifle"
+	desc = "Ye olde grandpa's rifle, but now mass-produced by \"Bubba Arms\". No matter what, it's still a good rifle."
+	icon_state = "marlin"
+	mag_type = /obj/item/ammo_box/magazine/internal/boltaction
 
 //AR-15
 /obj/item/gun/ballistic/automatic/ar
@@ -96,5 +105,3 @@
 /obj/item/gun/ballistic/automatic/vintorez/update_icon()
 	..()
 	item_state = "[initial(item_state)][magazine ? "" : "-e"][is_wielded ? "-wielded" : ""]"
-
-//Marlin 1894
