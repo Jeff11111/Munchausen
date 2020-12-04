@@ -301,10 +301,10 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 			current_intent = 1
 
 		a_intent = possible_a_intents[current_intent]
+		hand_index_to_intent[active_hand_index] = a_intent
 
 	if(hud_used && hud_used.action_intent)
 		hud_used.action_intent.icon_state = "[a_intent]"
-
 
 /proc/is_blind(A)
 	if(ismob(A))

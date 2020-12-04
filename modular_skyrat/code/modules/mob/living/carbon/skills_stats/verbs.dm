@@ -11,7 +11,10 @@
 	var/msg = "<span class='info'>Let's check my trained capabilities...</span><br>"
 	for(var/s in mind.mob_skills)
 		var/datum/skills/skill = mind.mob_skills[s]
-		msg += "<span class='info'>I am <b>[skill.skillnumtodesc(skill.level)] ([skill.level])</b> at <b>[lowertext(skill.name)]</b>.</span><br>"
+		//if we suck just ignore the skill entirely
+		//when the screen button is added, to check garbage skills it'll be rmb.
+		if(skill.level > 1)
+			msg += "<span class='info'>I am <b>[skill.skillnumtodesc(skill.level)] ([skill.level])</b> at <b>[lowertext(skill.name)]</b>.</span><br>"
 	
 	msg += "<br>"
 

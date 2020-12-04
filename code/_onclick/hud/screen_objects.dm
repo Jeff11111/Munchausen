@@ -50,15 +50,15 @@
 	// At this point in client Click() code we have passed the 1/10 sec check and little else
 	// We don't even know if it's a middle click
 	if(world.time <= usr.next_move)
-		return 1
+		return TRUE
 
 	if(usr.incapacitated())
-		return 1
+		return TRUE
 
 	if(ismob(usr))
 		var/mob/M = usr
 		M.swap_hand()
-	return 1
+	return TRUE
 
 /obj/screen/craft
 	name = "crafting menu"
@@ -199,7 +199,7 @@
 		return TRUE
 	if(user.incapacitated())
 		return TRUE
-	if (ismecha(user.loc)) // stops inventory actions in a mech
+	if(ismecha(user.loc)) // stops inventory actions in a mech
 		return TRUE
 
 	if(user.active_hand_index == held_index)
@@ -541,7 +541,13 @@
 		return
 
 	if(choice != hud.mymob.zone_selected)
+		//Change zone variable on mob
 		hud.mymob.zone_selected = choice
+
+		//Update the hand shit
+		hud.mymob.hand_index_to_zone[hud.mymob.active_hand_index] = hud.mymob.zone_selected
+		
+		//Fucking update
 		update_icon()
 
 	return TRUE

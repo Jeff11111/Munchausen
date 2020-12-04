@@ -78,7 +78,16 @@
 	//Hands
 	var/active_hand_index = 1
 	var/list/held_items = list() //len = number of hands, eg: 2 nulls is 2 empty hands, 1 item and 1 null is 1 full hand and 1 empty hand.
-	//held_items[active_hand_index] is the actively held item, but please use get_active_held_item() instead, because OOP
+	//Held_items[active_hand_index] is the actively held item, but please use get_active_held_item() instead, because OOP
+	
+	//Dominant hand index, should be pretty obvious
+	//1 by default since most people are right handed
+	var/dominant_hand_index = 1
+	
+	//Intents and selected zones are saved on a hand by hand basis
+	var/hand_index_to_intent = list(INTENT_HELP, INTENT_HELP)
+	var/hand_index_to_zone = list(BODY_ZONE_CHEST, BODDY_ZONE_CHEST)
+
 	var/bloody_hands = 0
 
 	var/datum/component/storage/active_storage = null//Carbon
