@@ -580,3 +580,102 @@
 	materials = list(/datum/material/iron = 2000, /datum/material/titanium = 500)
 	construction_time = 75
 	category = list("IPC")
+
+/datum/design/powerarmor_meleearmor
+	name = "Power Armor Melee Armor Upgrade"
+	id = "powerarmor_meleearmor"
+	build_type = MECHFAB
+	build_path = /obj/item/powerarmor_upgrade/melee_armor
+	materials = list(/datum/material/iron=2500, /datum/material/plasma=2500, /datum/material/titanium=2500,)
+	construction_time = 100
+	category = list("Misc")
+
+/datum/design/powerarmor_bulletarmor
+	name = "Power Armor Bullet Armor Upgrade"
+	id = "powerarmor_bulletarmor"
+	build_type = MECHFAB
+	build_path = /obj/item/powerarmor_upgrade/bullet_armor
+	materials = list(/datum/material/iron=2500, /datum/material/plasma=2500, /datum/material/titanium=2500,)
+	construction_time = 100
+	category = list("Misc")
+
+/datum/design/powerarmor_laserarmor
+	name = "Power Armor Laser Armor Upgrade"
+	id = "powerarmor_laserarmor"
+	build_type = MECHFAB
+	build_path = /obj/item/powerarmor_upgrade/laser_armor
+	materials = list(/datum/material/iron=2500, /datum/material/plasma=2500, /datum/material/titanium=2500,)
+	construction_time = 100
+	category = list("Misc")
+
+/datum/design/powerarmor_energyarmor
+	name = "Power Armor Energy Armor Upgrade"
+	id = "powerarmor_energyarmor"
+	build_type = MECHFAB
+	build_path = /obj/item/powerarmor_upgrade/energy_armor
+	materials = list(/datum/material/iron=2500, /datum/material/plasma=2500, /datum/material/titanium=2500,)
+	construction_time = 100
+	category = list("Misc")
+
+/datum/design/powerarmor_bombarmor
+	name = "Power Armor Bomb Armor Upgrade"
+	id = "powerarmor_bombarmor"
+	build_type = MECHFAB
+	build_path = /obj/item/powerarmor_upgrade/bomb_armor
+	materials = list(/datum/material/iron=2500, /datum/material/plasma=2500, /datum/material/titanium=2500,)
+	construction_time = 100
+	category = list("Misc")
+
+/datum/design/powerarmor_radarmor
+	name = "Power Armor Radiation Armor Upgrade"
+	id = "powerarmor_radarmor"
+	build_type = MECHFAB
+	build_path = /obj/item/powerarmor_upgrade/rad_armor
+	materials = list(/datum/material/iron=2500, /datum/material/plasma=2500, /datum/material/titanium=2500,)
+	construction_time = 100
+	category = list("Misc")
+
+/datum/design/powerarmor_firearmor
+	name = "Power Armor Fire Armor Upgrade"
+	id = "powerarmor_firearmor"
+	build_type = MECHFAB
+	build_path = /obj/item/powerarmor_upgrade/fire_armor
+	materials = list(/datum/material/iron=2500, /datum/material/plasma=2500, /datum/material/titanium=2500,)
+	construction_time = 100
+	category = list("Misc")
+
+/datum/design/powerarmor_spaceproof
+	name = "Power Armor Space-Proof Upgrade"
+	id = "powerarmor_spaceproof"
+	build_type = MECHFAB
+	build_path = /obj/item/powerarmor_upgrade/spaceproof
+	materials = list(/datum/material/iron=2500, /datum/material/plasma=2500, /datum/material/titanium=2500,)
+	construction_time = 100
+	category = list("Misc")
+
+/datum/design/powerarmor_tempproof
+	name = "Power Armor Temperature Resistant Upgrade"
+	id = "powerarmor_tempproof"
+	build_type = MECHFAB
+	build_path = /obj/item/powerarmor_upgrade/tempproof
+	materials = list(/datum/material/iron=2500, /datum/material/plasma=2500, /datum/material/titanium=2500,)
+	construction_time = 100
+	category = list("Misc")
+
+/datum/design/powerarmor_healing
+	name = "Power Armor Medical Assistant Upgrade"
+	id = "powerarmor_healing"
+	build_type = MECHFAB
+	build_path = /obj/item/powerarmor_upgrade/healing
+	materials = list(/datum/material/iron=2500, /datum/material/plasma=2500, /datum/material/titanium=2500,)
+	construction_time = 100
+	category = list("Misc")
+
+/datum/design/powerarmor_speed
+	name = "Power Armor Speed Upgrade"
+	id = "powerarmor_speed"
+	build_type = MECHFAB
+	build_path = /obj/item/powerarmor_upgrade/speed
+	materials = list(/datum/material/iron=2500, /datum/material/plasma=2500, /datum/material/titanium=2500,)
+	construction_time = 100
+	category = list("Misc")
