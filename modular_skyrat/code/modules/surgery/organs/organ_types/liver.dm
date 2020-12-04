@@ -19,14 +19,47 @@
 	high_threshold_passed = "<span class='warning'>You feel a stange ache in your abdomen, almost like a stitch. This pain is encumbering your movements.</span>"
 	high_threshold_cleared = "<span class='notice'>The stitching ache in your abdomen passes away, unencumbering your movements.</span>"
 	now_fixed = "<span class='notice'>The stabbing pain in your abdomen slowly calms down into a more tolerable ache.</span>"
+	food_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/iron = 5)
+	relative_size = 25
 
 	var/alcohol_tolerance = ALCOHOL_RATE//affects how much damage the liver takes from alcohol
+	var/tox_dam = 0 //How much toxin damage we have right now
+	var/max_tox_dam = 100
 	var/toxTolerance = LIVER_DEFAULT_TOX_TOLERANCE//maximum amount of toxins the liver can just shrug off
 	var/toxLethality = LIVER_DEFAULT_TOX_LETHALITY//affects how much damage toxins do to the liver
 	var/filterToxins = TRUE //whether to filter toxins
 	var/cachedmoveCalc = 1
-	food_reagents = list(/datum/reagent/consumable/nutriment = 5, /datum/reagent/iron = 5)
-	relative_size = 25
+
+/obj/item/organ/liver/get_pain()
+	var/damage_mult = 1
+	//Robotic organs do not feel pain, simply for balancing reasons
+	//Thus lowering the shock of IPCs and other synths is easier, as
+	//they don't have many painkillers
+	if(CHECK_BITFIELD(status, ORGAN_ROBOTIC))
+		return 0
+	//Cut organs don't feel pain
+	if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
+		return 0
+	//Failing organs always cause maxHealth pain
+	if(CHECK_BITFIELD(organ_flags, ORGAN_FAILING | ORGAN_DEAD))
+		return (maxHealth + get_toxins())
+	return ((get_toxins() + damage) * damage_mult * pain_multiplier)
+
+// Returns a percentage value for use by GetToxloss().
+/obj/item/organ/liver/proc/get_toxins()
+	if(!is_working())
+		return max_tox_dam
+	return round((tox_dam/owner.maxHealth)*max_tox_dam)
+
+/obj/item/organ/liver/proc/remove_toxins(amount)
+	var/last_tox = tox_dam
+	tox_dam = min(max_tox_dam, max(0, tox_dam - amount))
+	return -(tox_dam - last_tox)
+
+/obj/item/organ/liver/proc/add_toxins(amount)
+	var/last_tox = tox_dam
+	tox_dam = min(max_tox_dam ,max(0, tox_dam + amount))
+	return (tox_dam - last_tox)
 
 /obj/item/organ/liver/on_life()
 	. = ..()
@@ -37,15 +70,15 @@
 		//handle liver toxin filtration
 		for(var/datum/reagent/toxin/T in owner.reagents.reagent_list)
 			var/thisamount = owner.reagents.get_reagent_amount(T.type)
-			if (thisamount && thisamount <= toxTolerance)
+			if(thisamount && thisamount <= toxTolerance)
 				owner.reagents.remove_reagent(T.type, 1)
 			else
 				damage += (thisamount*toxLethality*T.toxpwr) //SKYRAT CHANGE - makes livers respect toxin power, as a lot of toxins should be harmless, and some extra deadly
+	
 	//metabolize reagents
 	owner.reagents.metabolize(owner, can_overdose=TRUE)
-
 	if(damage > 10 && prob(damage/3))//the higher the damage the higher the probability
-		to_chat(owner, "<span class='warning'>You feel a dull pain in your abdomen.</span>")
+		owner.custom_pain("You feel a dull pain in your abdomen.", 10)
 
 /obj/item/organ/liver/applyOrganDamage(d, maximum = maxHealth)
 	. = ..()

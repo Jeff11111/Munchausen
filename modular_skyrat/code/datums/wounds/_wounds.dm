@@ -428,10 +428,8 @@
 /// Handle the effects of infections
 /datum/wound/proc/handle_germs()
 	if(strikes_to_lose_limb <= 0)
-		if(victim.stat < DEAD)
-			limb.receive_damage(toxin = 1)
 		if(prob(1))
-			victim.visible_message("<span class='danger'>The infection on the remnants of [victim]'s [limb.name] shift and bubble nauseatingly!</span>", "<span class='warning'>You can feel the infection on the remnants of your [limb.name] coursing through your veins!</span>")
+			victim.visible_message("<span class='danger'>The infection on the remnants of [victim]'s [limb.name] shift and bubble nauseatingly!</span>", "<span class='userdanger'>I can feel the infection on the remnants of your [limb.name] coursing through my veins!</span>")
 		disabling = TRUE
 		return
 	
@@ -475,10 +473,7 @@
 					pain_amount += 2
 				else if(prob(1))
 					to_chat(victim, "<span class='warning'>You contemplate life without your [limb.name]...</span>")
-					victim.adjustToxLoss(0.75)
 					pain_amount += 2
-				else if(prob(4))
-					victim.adjustToxLoss(1)
 			if(WOUND_INFECTION_SEPTIC to INFINITY)
 				if(prob((germ_level)/(WOUND_INFECTION_MODERATE * 10)))
 					switch(strikes_to_lose_limb)

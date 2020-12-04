@@ -436,8 +436,6 @@
 						germ_level += rand(2,3)
 					if(REJECTION_LEVEL_4 to INFINITY)
 						germ_level += rand(3,5)
-						if(owner && (owner.stat != DEAD))
-							receive_damage(toxin = rand(1,2))
 
 /obj/item/bodypart/Topic(href, href_list)
 	. = ..()
@@ -642,10 +640,11 @@
 /obj/item/bodypart/proc/get_scan_results(do_tag = FALSE)
 	. = list()
 	if(is_robotic_limb())
-		. += do_tag ? "<span class='warning'>Mechanical</span>" : "Mechanical"
+		. += do_tag ? "<span class='info'>Mechanical</span>" : "Mechanical"
 	if(is_synthetic_limb())
-		. += do_tag ? "<span class='warning'>Synthetic</span>" : "Synthetic"
-	if(status & BODYPART_DEAD)
+		. += do_tag ? "<span class='info'>Synthetic</span>" : "Synthetic"
+	
+	if(CHECK_BITFIELD(status, BODYPART_DEAD))
 		if(can_recover())
 			. += do_tag ? "<span class='danger'>Decaying</span>" : "Decaying"
 		else
@@ -653,36 +652,22 @@
 
 	switch(germ_level)
 		if(INFECTION_LEVEL_ONE to INFECTION_LEVEL_ONE + ((INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3))
-			. +=  "Mild Infection"
+			. += do_tag ?  "<span class='green'>Mild Infection</span>" : "Mild Infection"
 		if(INFECTION_LEVEL_ONE + ((INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3) to INFECTION_LEVEL_ONE + (2 * (INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3))
-			. +=  "Mild Infection+"
+			. += do_tag ?  "<span class='green'>Mild Infection+</span>" : "Mild Infection+"
 		if(INFECTION_LEVEL_ONE + (2 * (INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3) to INFECTION_LEVEL_TWO)
-			. +=  "Mild Infection++"
+			. += do_tag ?  "<span class='green'>Mild Infection++</span>" : "Mild Infection++"
 		if(INFECTION_LEVEL_TWO to INFECTION_LEVEL_TWO + ((INFECTION_LEVEL_THREE - INFECTION_LEVEL_THREE) / 3))
-			if(do_tag)
-				. += "<span class='warning'>Acute Infection</span>"
-			else
-				. +=  "Acute Infection"
+			. += do_tag ? "<span class='green'><b>Acute Infection</b></span>" : "Acute Infection"
 		if(INFECTION_LEVEL_TWO + ((INFECTION_LEVEL_THREE - INFECTION_LEVEL_THREE) / 3) to INFECTION_LEVEL_TWO + (2 * (INFECTION_LEVEL_THREE - INFECTION_LEVEL_TWO) / 3))
-			if(do_tag)
-				. += "<span class='warning'>Acute Infection+</span>"
-			else
-				. +=  "Acute Infection+"
+			. += do_tag ? "<span class='green'>Acute Infection+</span>" : "Acute Infection+"
 		if(INFECTION_LEVEL_TWO + (2 * (INFECTION_LEVEL_THREE - INFECTION_LEVEL_TWO) / 3) to INFECTION_LEVEL_THREE)
-			if(do_tag)
-				. += "<span class='warning'>Acute Infection++</span>"
-			else
-				. +=  "Acute Infection++"
+			. += do_tag ? "<span class='deadsay'>Acute Infection++</span>" : "Acute Infection++"
 		if(INFECTION_LEVEL_THREE to INFINITY)
-			if(do_tag)
-				. += "<span class='danger'>Septic</span>"
-			else
-				. +=  "Septic"
+			. += do_tag ? "<span class='deadsay'><b>Septic</b></span>" : "Septic"
+	
 	if(rejecting)
-		if(do_tag)
-			. += "<span class='danger'>Genetic Rejection</span>"
-		else
-			. += "Genetic Rejection"
+		. += do_tag ? "<span class='danger'><b>Genetic Rejection</b></span>" : "Genetic Rejection"
 
 //Return TRUE to get whatever mob this is in to update health.
 /obj/item/bodypart/proc/on_life()

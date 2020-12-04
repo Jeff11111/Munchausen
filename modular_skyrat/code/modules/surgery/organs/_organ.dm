@@ -112,6 +112,9 @@
 	//Cut organs don't feel pain
 	if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
 		return 0
+	//Failing organs always cause maxHealth pain
+	if(CHECK_BITFIELD(organ_flags, ORGAN_FAILING | ORGAN_DEAD))
+		return maxHealth
 	return (damage * damage_mult * pain_multiplier)
 
 /obj/item/organ/proc/is_robotic()
@@ -317,9 +320,6 @@
 			//Spread germs
 			if(antibiotics < 10 && bodypart.germ_level < germ_level && (bodypart.germ_level < INFECTION_LEVEL_THREE))
 				bodypart.germ_level++
-			//Cause toxin damage
-			if(bodypart.owner && (owner.stat != DEAD))
-				bodypart.receive_damage(toxin = rand(1,2))
 
 //Rejection
 /obj/item/organ/proc/handle_rejection()
@@ -354,57 +354,42 @@
 						germ_level += rand(2,3)
 					if(REJECTION_LEVEL_4 to INFINITY)
 						germ_level += rand(3,5)
-						var/obj/item/bodypart/affected = owner.get_bodypart(zone)
-						if(affected && affected.owner && (affected.owner.stat != DEAD))
-							affected.receive_damage(toxin = rand(1,2))
 
 //Medical scans
 /obj/item/organ/proc/get_scan_results(do_tag = FALSE)
 	. = list()
 	if(is_robotic())
-		. += do_tag ? "<span class='warning'>Mechanical</span>" : "Mechanical"
+		. += do_tag ? "<span class='notice'>Mechanical</span>" : "Mechanical"
 	if(is_synthetic())
-		. += do_tag ? "<span class='warning'>Synthetic</span>" : "Synthetic"
+		. += do_tag ? "<span class='notice'>Synthetic</span>" : "Synthetic"
+	
 	if(CHECK_BITFIELD(organ_flags, ORGAN_DEAD))
 		if(can_recover())
 			. += do_tag ? "<span class='danger'>Decaying</span>" : "Decaying"
 		else
 			. += do_tag ? "<span class='deadsay'>Necrotic</span>" : "Necrotic"
-	if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
-		. += do_tag ? "<span class='danger'>Cut away</span>" : "Cut away"
 	
+	if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
+		. += do_tag ? "<span class='danger'>Severed</span>" : "Severed"
+
 	switch(germ_level)
 		if(INFECTION_LEVEL_ONE to INFECTION_LEVEL_ONE + ((INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3))
-			. +=  "Mild Infection"
+			. += do_tag ?  "<span class='green'>Mild Infection</span>" : "Mild Infection"
 		if(INFECTION_LEVEL_ONE + ((INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3) to INFECTION_LEVEL_ONE + (2 * (INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3))
-			. +=  "Mild Infection+"
+			. += do_tag ?  "<span class='green'>Mild Infection+</span>" : "Mild Infection+"
 		if(INFECTION_LEVEL_ONE + (2 * (INFECTION_LEVEL_TWO - INFECTION_LEVEL_ONE) / 3) to INFECTION_LEVEL_TWO)
-			. +=  "Mild Infection++"
+			. += do_tag ?  "<span class='green'>Mild Infection++</span>" : "Mild Infection++"
 		if(INFECTION_LEVEL_TWO to INFECTION_LEVEL_TWO + ((INFECTION_LEVEL_THREE - INFECTION_LEVEL_THREE) / 3))
-			if(do_tag)
-				. += "<span class='warning'>Acute Infection</span>"
-			else
-				. +=  "Acute Infection"
+			. += do_tag ? "<span class='green'><b>Acute Infection</b></span>" : "Acute Infection"
 		if(INFECTION_LEVEL_TWO + ((INFECTION_LEVEL_THREE - INFECTION_LEVEL_THREE) / 3) to INFECTION_LEVEL_TWO + (2 * (INFECTION_LEVEL_THREE - INFECTION_LEVEL_TWO) / 3))
-			if(do_tag)
-				. += "<span class='warning'>Acute Infection+</span>"
-			else
-				. +=  "Acute Infection+"
+			. += do_tag ? "<span class='green'>Acute Infection+</span>" : "Acute Infection+"
 		if(INFECTION_LEVEL_TWO + (2 * (INFECTION_LEVEL_THREE - INFECTION_LEVEL_TWO) / 3) to INFECTION_LEVEL_THREE)
-			if(do_tag)
-				. += "<span class='warning'>Acute Infection++</span>"
-			else
-				. +=  "Acute Infection++"
+			. += do_tag ? "<span class='deadsay'>Acute Infection++</span>" : "Acute Infection++"
 		if(INFECTION_LEVEL_THREE to INFINITY)
-			if(do_tag)
-				. += "<span class='danger'>Septic</span>"
-			else
-				. +=  "Septic"
+			. += do_tag ? "<span class='deadsay'><b>Septic</b></span>" : "Septic"
+	
 	if(rejecting)
-		if(do_tag)
-			. += "<span class='danger'>Genetic Rejection</span>"
-		else
-			. += "Genetic Rejection"
+		. += do_tag ? "<span class='danger'><b>Genetic Rejection</b></span>" : "Genetic Rejection"
 
 /obj/item/organ/examine(mob/user)
 	. = ..()

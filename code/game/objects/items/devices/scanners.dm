@@ -418,6 +418,19 @@ GENETICS SCANNER
 		if(mutant)
 			msg += "<span class='info'>Subject has mutations present.</span>\n"
 	msg += "<span class='info'>Body temperature: [round(M.bodytemperature-T0C,0.1)] &deg;C ([round(M.bodytemperature*1.8-459.67,0.1)] &deg;F)</span>\n"
+	
+	if(iscarbon(M))
+		var/mob/living/carbon/C = M
+		for(var/obj/item/bodypart/BP in C.bodyparts)
+			if(BP.germ_level)
+				msg += "<span class='green'>Subject has an infected limb. Perform a wellbeing scan for more information.</span>\n"
+				break
+		for(var/obj/item/organ/O in C.bodyparts)
+			if(O.germ_level)
+				msg += "<span class='green'>Subject has an infected organ. Perform a wellbeing scan for more information.</span>\n"
+				break
+		if(length(C.all_wounds))
+			msg += "<span class='danger'>Physical trauma[LAZYLEN(C.all_wounds) > 1? "s" : ""] detected. Perform first aid scan for more information.</span>\n"
 
 	// Time of death
 	if(M.tod && (M.stat == DEAD || ((HAS_TRAIT(M, TRAIT_FAKEDEATH)) && !advanced)))
@@ -436,32 +449,6 @@ GENETICS SCANNER
 			else
 				msg += "\n"
 	
-	//skyrat edit
-	// Wounds
-	if(iscarbon(M))
-		var/mob/living/carbon/C = M
-		var/list/wounded_parts = C.get_wounded_bodyparts()
-		for(var/i in wounded_parts)
-			var/obj/item/bodypart/wounded_part = i
-			msg += "<span class='alert ml-1'><b>Warning: Physical trauma[LAZYLEN(wounded_part.wounds) > 1? "s" : ""] detected in [wounded_part.name]</b>"
-			for(var/k in wounded_part.wounds)
-				var/datum/wound/W = k
-				msg += "\n"
-				var/infection_level = "None"
-				switch(W.germ_level)
-					if(WOUND_INFECTION_MODERATE to WOUND_INFECTION_SEVERE)
-						infection_level = "Moderate"
-					if(WOUND_INFECTION_SEVERE to WOUND_INFECTION_CRITICAL)
-						infection_level = "Severe"
-					if(WOUND_INFECTION_CRITICAL to WOUND_INFECTION_SEPTIC)
-						infection_level = "<span class='deadsay'>CRITICAL</span>"
-					if(WOUND_INFECTION_SEPTIC to INFINITY)
-						infection_level = "<span class='deadsay'>LOSS IMMINENT</span>"
-				msg += "<div class='ml-2'>Type: [W.name]\nSeverity: [W.severity_text()]\nRecommended Treatment: [W.treat_text]\nInfection Level: [infection_level]\n</div>" // less lines than in woundscan() so we don't overload people trying to get basic med info
-			msg += "</span>"
-			msg += "\n"
-	//
-
 	for(var/thing in M.diseases)
 		var/datum/disease/D = thing
 		if(!(D.visibility_flags & HIDDEN_SCANNER))
@@ -586,7 +573,7 @@ GENETICS SCANNER
 		msg += "<span class='info'>N/A</span>\n"
 	else
 		msg += organ_info.Join("")
-	msg += "<span class='info'><B>Total Pain:</B> [advanced ? C.get_shock() : round(C.get_shock(), 10)]</span>"
+	msg += "<span class='info'><B>Total Pain:</B> [advanced ? (C.get_shock() || "<span class='nicegren'>None</span>") : (round(C.get_shock(), 10) || "<span class='nicegren'>None</span>")]</span>"
 	msg += "\n"
 	msg += "*---------*</span>"
 	to_chat(user, msg)
@@ -600,7 +587,7 @@ GENETICS SCANNER
 		return
 
 	mode = !mode
-	switch (mode)
+	switch(mode)
 		if(1)
 			to_chat(usr, "The scanner now shows specific limb damage.")
 		if(0)

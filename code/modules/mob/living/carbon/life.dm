@@ -759,18 +759,16 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 
 /mob/living/carbon/proc/kidney_failure()
 	if(prob(10))
-		to_chat(src, "<span class='danger'>You feel a stabbing pain in your groin!</span>")
+		to_chat(src, "<span class='userdanger'><i>You feel a stabbing pain in your groin!</i></span>")
 		vomit(5, 5, TRUE)
 	else if(prob(10))
-		to_chat(src, "<span class='danger'>You feel a stabbing pain in your groin!</span>")
 		var/obj/item/bodypart/groin/groin = get_bodypart(BODY_ZONE_PRECISE_GROIN)
-		if(groin && groin.owner && (groin.owner.stat < DEAD))
-			groin.receive_damage(toxin = 8)
+		custom_pain("<i>You feel a stabbing pain in your groin!</i>", rand(20, 30), affecting = groin)
 	else if(prob(5))
 		var/obj/item/bodypart/groin/groin = get_bodypart(BODY_ZONE_PRECISE_GROIN)
 		if(groin)
 			//le kidney stones
-			groin.generic_bleedstacks += 5
+			groin.generic_bleedstacks += 3
 			to_chat(src, "<span class='danger'>Blood leaks from your [groin.name]...")
 
 ////////////////

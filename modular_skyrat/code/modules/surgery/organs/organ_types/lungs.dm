@@ -111,25 +111,25 @@
 		if(prob(2))
 			if(active_breathing)
 				owner.visible_message(
-					"<B>\The [owner]</B> coughs up blood!",
+					"<b>[owner]</b> coughs up blood!",
 					"<span class='warning'>You cough up blood!</span>",
 					"You hear someone coughing!",
 				)
 			else
 				var/obj/item/bodypart/parent = owner.get_bodypart(zone)
 				owner.visible_message(
-					"blood drips from <B>\the [owner]'s</B> [parent.name]!",
+					"blood drips from <b>[owner]'s</b> [parent.name]!",
 				)
 			owner.bleed(2)
 		if(prob(4))
 			if(active_breathing)
 				owner.visible_message(
-					"<B>\The [owner]</B> gasps for air!",
+					"<b>[owner]</b> gasps for air!",
 					"<span class='danger'>You can't breathe!</span>",
 					"You hear someone gasp for air!",
 				)
 			else
-				to_chat(owner, "<span class='danger'>You're having trouble getting enough air!</span>")
+				to_chat(owner, "<span class='userdanger'>You're having trouble getting enough air!</span>")
 
 			owner.losebreath += round(damage/2)
 
@@ -167,30 +167,30 @@
 //TODO: lung health affects lung function
 /obj/item/organ/lungs/onDamage(damage_mod) //damage might be too low atm.
 	var/cached_damage = damage
-	if (maxHealth == INFINITY)
+	if(maxHealth == INFINITY)
 		return
-	if(cached_damage+damage_mod < 0)
+	if(cached_damage+damage_mod <= 0)
 		cached_damage = 0
 		return
 
 	cached_damage += damage_mod
-	if ((cached_damage/ maxHealth) > 1)
+	if((cached_damage/maxHealth) > 1)
 		to_chat(owner, "<span class='userdanger'>You feel your lungs collapse within your chest as you gasp for air, unable to inflate them anymore!</span>")
 		if(!owner.nervous_system_failure())
 			owner.emote("gasp")
 		SSblackbox.record_feedback("tally", "fermi_chem", 1, "Lungs lost")
 		//qdel(src) - Handled elsewhere for now.
-	else if ((cached_damage / maxHealth) > 0.75)
+	else if((cached_damage / maxHealth) > 0.75)
 		to_chat(owner, "<span class='warning'>It's getting really hard to breathe!!</span>")
 		if(!owner.nervous_system_failure())
 			owner.emote("gasp")
 		owner.Dizzy(3)
-	else if ((cached_damage / maxHealth) > 0.5)
+	else if((cached_damage / maxHealth) > 0.5)
 		owner.Dizzy(2)
 		to_chat(owner, "<span class='notice'>Your chest is really starting to hurt.</span>")
 		if(!owner.nervous_system_failure())
 			owner.emote("cough")
-	else if ((cached_damage / maxHealth) > 0.2)
+	else if((cached_damage / maxHealth) > 0.2)
 		to_chat(owner, "<span class='notice'>You feel an ache within your chest.</span>")
 		if(!owner.nervous_system_failure())
 			owner.emote("cough")

@@ -33,11 +33,7 @@
 			else
 				adjustPainLoss(damage_amount, forced = forced)
 		if(TOX)
-			if(BP)
-				if(damage > 0 ? BP.receive_damage(toxin = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness) : BP.heal_damage(toxin = abs(damage_amount), only_robotic = FALSE, only_organic = FALSE))
-					update_damage_overlays()
-			else
-				adjustToxLoss(damage_amount, forced = forced)
+			adjustToxLoss(damage_amount, forced = forced)
 		if(CLONE)
 			if(BP)
 				if(damage > 0 ? BP.receive_damage(clone = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness) : BP.heal_damage(clone = abs(damage_amount), only_robotic = FALSE, only_organic = TRUE))
@@ -79,12 +75,6 @@
 		var/obj/item/bodypart/BP = X
 		. += max(0, BP.get_pain())
 
-/mob/living/carbon/getToxLoss()
-	. = 0
-	for(var/X in bodyparts)
-		var/obj/item/bodypart/BP = X
-		. += BP.tox_dam
-
 /mob/living/carbon/getCloneLoss()
 	. = 0
 	for(var/X in bodyparts)
@@ -101,6 +91,8 @@
 
 /mob/living/carbon/adjustOxyLoss(amount, updating_health = TRUE, forced = FALSE)
 	. = 0
+	if(!forced && (status_flags & GODMODE))
+		return FALSE
 	if(!needs_lungs())
 		return
 	var/obj/item/organ/lungs/breathe_organ = getorganslot(ORGAN_SLOT_LUNGS)
@@ -119,7 +111,47 @@
 	var/obj/item/organ/lungs/breathe_organ = getorganslot(ORGAN_SLOT_LUNGS)
 	if(breathe_organ)
 		breathe_organ.oxygen_deprivation = 0
-		breathe_organ.add_oxygen_deprivation(abs(amount))
+		if(amount > 0)
+			breathe_organ.add_oxygen_deprivation(abs(amount))
+	if(updating_health)
+		updatehealth()
+		update_health_hud()
+
+/mob/living/carbon/getToxLoss()
+	. = 0
+	var/obj/item/organ/liver/liver = getorganslot(ORGAN_SLOT_LIVER)
+	if(!liver)
+		return maxHealth/2
+	return liver
+
+/mob/living/carbon/adjustToxLoss(amount, updating_health = TRUE, forced = FALSE)
+	. = 0
+	if(!forced && (status_flags & GODMODE))
+		return FALSE
+	if(!forced && HAS_TRAIT(src, TRAIT_TOXINLOVER)) //damage becomes healing and healing becomes damage
+		amount = -amount
+		if(amount > 0)
+			bleed(3 * amount, FALSE) //5x was too much, this is punishing enough.
+		else
+			blood_volume -= amount
+	var/obj/item/organ/liver/tox_organ = getorganslot(ORGAN_SLOT_LIVER)
+	if(tox_organ)
+		if(amount > 0)
+			tox_organ.add_toxins(abs(amount))
+		else
+			tox_organ.remove_toxins(abs(amount))
+	if(updating_health)
+		updatehealth()
+		update_health_hud()
+
+/mob/living/carbon/setToxLoss(amount, updating, forced)
+	if(!needs_lungs() || (amount < 0))
+		return
+	var/obj/item/organ/liver/tox_organ = getorganslot(ORGAN_SLOT_LUNGS)
+	if(tox_organ)
+		tox_organ.tox_dam = 0
+		if(amount > 0)
+			tox_organ.add_toxins(abs(amount))
 	if(updating_health)
 		updatehealth()
 		update_health_hud()
@@ -164,21 +196,6 @@
 		heal_overall_damage(stamina = abs(amount), only_organic = FALSE, only_robotic = FALSE, updating_health = updating_health)
 	return amount
 
-/mob/living/carbon/adjustToxLoss(amount, updating_health = TRUE, forced = FALSE)
-	if(!forced && (status_flags & GODMODE))
-		return FALSE
-	if(!forced && HAS_TRAIT(src, TRAIT_TOXINLOVER)) //damage becomes healing and healing becomes damage
-		amount = -amount
-		if(amount > 0)
-			blood_volume -= 3 * amount		//5x was too much, this is punishing enough.
-		else
-			blood_volume -= amount
-	if(amount > 0)
-		take_overall_damage(toxin = amount, updating_health = updating_health)
-	else
-		heal_overall_damage(toxin = abs(amount), only_organic = FALSE, only_robotic = FALSE, updating_health = updating_health)
-	return amount
-
 /mob/living/carbon/adjustCloneLoss(amount, updating_health = TRUE, forced = FALSE)
 	if(!forced && (status_flags & GODMODE))
 		return FALSE
@@ -201,13 +218,6 @@
 	if(!diff)
 		return
 	adjustCloneLoss(diff, updating, forced)
-
-/mob/living/carbon/setToxLoss(amount, updating = TRUE, forced = FALSE)
-	var/current = getToxLoss()
-	var/diff = amount - current
-	if(!diff)
-		return
-	adjustToxLoss(diff, updating, forced)
 
 /mob/living/carbon/setPainLoss(amount, updating = TRUE, forced = FALSE)
 	var/current = getPainLoss()
@@ -389,5 +399,5 @@
 	for(var/X in bodyparts)
 		var/obj/item/bodypart/BP = X
 		if(LAZYLEN(BP.wounds))
-			parts += BP
+			parts |= BP
 	return parts

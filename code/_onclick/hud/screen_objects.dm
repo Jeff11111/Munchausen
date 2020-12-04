@@ -534,7 +534,6 @@
 						if(icon_x in 15 to 17)
 							return BODY_ZONE_PRECISE_RIGHT_EYE
 				return BODY_ZONE_HEAD
-	//
 
 /obj/screen/zone_sel/proc/set_selected_zone(choice, mob/user)
 	if(user != hud?.mymob)
