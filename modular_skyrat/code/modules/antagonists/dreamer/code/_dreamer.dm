@@ -134,8 +134,8 @@
 
 /datum/antagonist/dreamer/proc/wake_up()
 	STOP_PROCESSING(SSobj, src)
-	var/client/dreamer_client = owner.current.client // Trust me, we need it later
 	var/mob/living/carbon/dreamer = owner.current
+	var/client/dreamer_client = dreamer.client // Trust me, we need it later
 	dreamer.clear_fullscreen("dream")
 	dreamer.clear_fullscreen("wakeup")
 	for(var/datum/objective/objective in objectives)
