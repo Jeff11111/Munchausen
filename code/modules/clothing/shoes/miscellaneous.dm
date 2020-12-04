@@ -142,7 +142,7 @@
 	. = ..()
 	//We don't want it to squeak when attacked and stuff, but i don't think it warrants
 	//new code
-	var/datum/component/squeak/bingus = AddComponent(/datum/component/squeak, list('sound/effects/jackboot1.ogg'=1,'sound/effects/jackboot2.ogg'=1), 40)
+	var/datum/component/squeak/bingus = AddComponent(/datum/component/squeak, list('sound/effects/jackboot1.ogg'=1,'sound/effects/jackboot2.ogg'=1), 30)
 	bingus.UnregisterSignal(src, list(COMSIG_ITEM_ATTACK, COMSIG_ITEM_ATTACK_OBJ, COMSIG_ITEM_HIT_REACT, COMSIG_ITEM_ATTACK_SELF, COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_DROPPED))
 
 // yeet the component when taped
