@@ -3,13 +3,13 @@
 	rustle_sound = list('modular_skyrat/sound/gore/organ1.ogg', 'modular_skyrat/sound/gore/organ2.ogg')
 	var/obj/item/bodypart/bodypart_affected
 	storage_flags = 0
+	var/accessible = TRUE
 
 //Unregister signals we don't want
 /datum/component/storage/concrete/organ/Initialize()
 	. = ..()
 	if(!iscarbon(parent))
 		return COMPONENT_INCOMPATIBLE
-	can_hold = (typecacheof(/obj/item/organ) | typecacheof(/obj/item/mmi))
 	UnregisterSignal(parent, list(COMSIG_MOUSEDROPPED_ONTO, COMSIG_CLICK_ALT, COMSIG_CLICK_MIDDLE, \
 							COMSIG_ATOM_ATTACK_HAND, COMSIG_ITEM_PRE_ATTACK, COMSIG_ITEM_ATTACK_SELF, \
 							COMSIG_ITEM_PICKUP))
@@ -36,7 +36,7 @@
 	update_insides()
 	var/atom/A = parent
 
-	if(!attack_hand_interact)
+	if(!attack_hand_interact || !accessible)
 		return FALSE
 	
 	if(user.a_intent != INTENT_GRAB)
@@ -138,7 +138,7 @@
 
 //No real location
 /datum/component/storage/concrete/organ/can_be_inserted(obj/item/I, stop_messages = FALSE, mob/M)
-	if(!istype(I) || (I.item_flags & ABSTRACT))
+	if(!istype(I) || (I.item_flags & ABSTRACT) || !accessible)
 		return FALSE //Not an item
 	if(I == parent)
 		return FALSE	//no paradoxes for you
@@ -316,14 +316,14 @@
 	set waitfor = FALSE
 	var/mob/A = parent
 	A.add_fingerprint(M)
-	if(!over_object)
+	if(!over_object || !accessible)
 		return FALSE
 	if(ismecha(M.loc)) // stops inventory actions in a mech
 		return FALSE
 	// this must come before the screen objects only block, dunno why it wasn't before
 	var/mob/living/L = M
-	if(!istype(L))
+	if(!istype(L) || !(L.a_intent == INTENT_GRAB))
 		return FALSE
-	if(isliving(over_object) && (!bodypart_affected || (L.zone_selected == bodypart_affected.body_zone)))
+	if(isliving(over_object) && (L.zone_selected == bodypart_affected.body_zone))
 		update_insides()
 		user_show_to_mob(M)

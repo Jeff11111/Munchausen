@@ -267,3 +267,8 @@
 
 //Above or equal to this amount of pain, can't use radios
 #define PAIN_NO_RADIO PAIN_GIVES_IN * 2
+
+//Surgery defines for Newsurgery
+#define STEP_INCISE 1 //Incision step of course
+#define STEP_MANIPULATE 2 //Misc stuff
+#define CLOSE_STEP 3 //Cauterize or suture to close the surgery

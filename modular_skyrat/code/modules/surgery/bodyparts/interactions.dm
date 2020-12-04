@@ -70,10 +70,16 @@
 		//Clean the wound string too
 		victim.wound_message = ""
 	else
-		for(var/datum/wound/blunt/moderate/W in wounds)
-			return W.malpractice(user)
-		for(var/datum/wound/mechanical/blunt/moderate/W in wounds)
-			return W.malpractice(user)
+		if(user.a_intent != INTENT_HELP)
+			for(var/datum/wound/blunt/moderate/W in wounds)
+				return W.malpractice(user)
+			for(var/datum/wound/mechanical/blunt/moderate/W in wounds)
+				return W.malpractice(user)
+		else
+			for(var/datum/wound/blunt/moderate/W in wounds)
+				return W.chiropractice(user)
+			for(var/datum/wound/mechanical/blunt/moderate/W in wounds)
+				return W.chiropractice(user)		
 		var/str = GET_STAT_LEVEL(user, str)
 		if(str)
 			receive_damage(str*0.5, wound_bonus=CANT_WOUND)

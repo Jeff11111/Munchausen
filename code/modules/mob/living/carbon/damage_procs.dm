@@ -152,7 +152,7 @@
 		tox_organ.tox_dam = 0
 		if(amount > 0)
 			tox_organ.add_toxins(abs(amount))
-	if(updating_health)
+	if(updating)
 		updatehealth()
 		update_health_hud()
 
