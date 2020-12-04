@@ -251,6 +251,10 @@
 	if (slot == SLOT_HEAD)
 		var/datum/atom_hud/DHUD = GLOB.huds[DATA_HUD_MEDICAL_ADVANCED]
 		DHUD.add_hud_to(user)
+	if(suit)
+		clothing_flags = suit.clothing_flags
+		armor = suit.armor
+		max_heat_protection_temperature = suit.max_heat_protection_temperature
 
 /obj/item/clothing/head/helmet/space/hardsuit/powerarmor/dropped(mob/living/carbon/human/user)
 	..()
@@ -268,7 +272,8 @@
 	item_state = "hardsuit-powerarmor-1"
 	slowdown = -0.1
 	clothing_flags = THICKMATERIAL //Not spaceproof. No, it isn't Spaceproof in Rimworld either.
-	armor = list("melee" = 40, "bullet" = 35, "laser" = 30, "energy" = 20, "bomb" = 40, "bio" = 100, "rad" = 5, "fire" = 75, "acid" = 100, "wound" = 30) //I was asked to buff this again. Here, fine.
+	//armor = list("melee" = 40, "bullet" = 35, "laser" = 30, "energy" = 20, "bomb" = 40, "bio" = 100, "rad" = 5, "fire" = 75, "acid" = 100, "wound" = 30) //I was asked to buff this again. Here, fine.
+	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 100, "rad" = 0, "fire" = 0, "acid" = 100, "wound" = 30)
 	resistance_flags = ACID_PROOF
 	var/explodioprobemp = 1
 	var/stamdamageemp = 200
@@ -277,10 +282,64 @@
 	helmettype = /obj/item/clothing/head/helmet/space/hardsuit/powerarmor
 	mutantrace_variation = STYLE_DIGITIGRADE | STYLE_NO_ANTHRO_ICON
 
+	var/max_upgrades = 13
+	/*explanation
+	2 points from melee
+	2 points from bullet
+	2 points from laser
+	1 point from energy
+	2 points from bomb
+	0 points from rad
+	4 points from fire
+	*/
+
+	//armor upgrades
+	var/armor_melee_upgrade = 0
+	//costs 1: increases armor by 20. Max 5
+	var/armor_bullet_upgrade = 0
+	//costs 1: increases armor by 20. Max 5
+	var/armor_laser_upgrade = 0
+	//costs 1: increases armor by 20. Max 5
+	var/armor_energy_upgrade = 0
+	//costs 1: increases armor by 20. Max 5
+	var/armor_bomb_upgrade = 0
+	//costs 1: increases armor by 20. Max 5
+	var/armor_rad_upgrade = 0
+	//costs 1: increases armor by 20. Max 5
+	var/armor_fire_upgrade = 0
+	//costs 1: increases armor by 20. Max 5
+
+	//misc upgrades
+	var/spaceproof = FALSE
+	//costs 7: makes armor spaceproof. Max 1
+	var/speed_slowdown = 0
+	//costs 1: makes armor speed faster. Max 9
+	var/medical_upgrade = FALSE
+	//costs 7: makes armor dispense chemicals. Max 1
+	var/temperature_safe = FALSE
+	//costs 4: makes armor safe to low/high temps. Max 1
+
 /obj/item/clothing/suit/space/hardsuit/powerarmor/Initialize()
 	. = ..()
 	AddComponent(/datum/component/spraycan_paintable)
 	update_icon()
+
+/obj/item/clothing/suit/space/hardsuit/powerarmor/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
+
+/obj/item/clothing/suit/space/hardsuit/powerarmor/process()
+	if(medical_upgrade)
+		if(istype(loc, /mob/living/carbon))
+			var/mob/living/carbon/carbonLOC = loc
+			if(carbonLOC.stat == CONSCIOUS)
+				return
+			carbonLOC.adjustOxyLoss(-3)
+			carbonLOC.adjustBruteLoss(-3)
+			carbonLOC.adjustFireLoss(-3)
+			carbonLOC.adjustToxLoss(-3)
+			//I would have injected reagents instead, but that is way more operations required
+			//so this will just suffice. pretend the suit has nanobots that slowly repair the body back
 
 /obj/item/clothing/suit/space/hardsuit/powerarmor/update_overlays()
 	. = ..()
@@ -327,3 +386,214 @@
 	explosion(src.loc,0,0,3,flame_range = 3)
 	qdel(src)
 	return
+
+/obj/item/clothing/suit/space/hardsuit/powerarmor/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/powerarmor_upgrade))
+		var/obj/item/powerarmor_upgrade/chosenUpgrade = I
+		var/hypo_upgradeLeft = max_upgrades - chosenUpgrade.upgradecost
+		if(hypo_upgradeLeft < 0)
+			to_chat(user, "<span class='warning'>There is no more room for this upgrade!</span>")
+			return
+		var/chosen_number = chosenUpgrade.upgradetype
+		switch(chosen_number)
+			if(1)
+				if(armor_melee_upgrade >= 100)
+					to_chat(user, "<span class='warning'>You cannot install any more of this upgrade!</span>")
+					return
+				if(!user.transferItemToLoc(chosenUpgrade, src))
+					to_chat(user, "<span class='warning'>The upgrade is unable to leave your hand!</span>")
+					return
+				armor_melee_upgrade += 20
+				upgraded_armor()
+			if(2)
+				if(armor_bullet_upgrade >= 100)
+					to_chat(user, "<span class='warning'>You cannot install any more of this upgrade!</span>")
+					return
+				if(!user.transferItemToLoc(chosenUpgrade, src))
+					to_chat(user, "<span class='warning'>The upgrade is unable to leave your hand!</span>")
+					return
+				armor_bullet_upgrade += 20
+				upgraded_armor()
+			if(3)
+				if(armor_laser_upgrade >= 100)
+					to_chat(user, "<span class='warning'>You cannot install any more of this upgrade!</span>")
+					return
+				if(!user.transferItemToLoc(chosenUpgrade, src))
+					to_chat(user, "<span class='warning'>The upgrade is unable to leave your hand!</span>")
+					return
+				armor_laser_upgrade += 20
+				upgraded_armor()
+			if(4)
+				if(armor_energy_upgrade >= 100)
+					to_chat(user, "<span class='warning'>You cannot install any more of this upgrade!</span>")
+					return
+				if(!user.transferItemToLoc(chosenUpgrade, src))
+					to_chat(user, "<span class='warning'>The upgrade is unable to leave your hand!</span>")
+					return
+				armor_energy_upgrade += 20
+				upgraded_armor()
+			if(5)
+				if(armor_bomb_upgrade >= 100)
+					to_chat(user, "<span class='warning'>You cannot install any more of this upgrade!</span>")
+					return
+				if(!user.transferItemToLoc(chosenUpgrade, src))
+					to_chat(user, "<span class='warning'>The upgrade is unable to leave your hand!</span>")
+					return
+				armor_bomb_upgrade += 20
+				upgraded_armor()
+			if(6)
+				if(armor_rad_upgrade >= 100)
+					to_chat(user, "<span class='warning'>You cannot install any more of this upgrade!</span>")
+					return
+				if(!user.transferItemToLoc(chosenUpgrade, src))
+					to_chat(user, "<span class='warning'>The upgrade is unable to leave your hand!</span>")
+					return
+				armor_rad_upgrade += 20
+				upgraded_armor()
+			if(7)
+				if(armor_fire_upgrade >= 100)
+					to_chat(user, "<span class='warning'>You cannot install any more of this upgrade!</span>")
+					return
+				if(!user.transferItemToLoc(chosenUpgrade, src))
+					to_chat(user, "<span class='warning'>The upgrade is unable to leave your hand!</span>")
+					return
+				armor_fire_upgrade += 20
+				upgraded_armor()
+			if(8)
+				if(spaceproof)
+					to_chat(user, "<span class='warning'>You cannot install any more of this upgrade!</span>")
+					return
+				if(!user.transferItemToLoc(chosenUpgrade, src))
+					to_chat(user, "<span class='warning'>The upgrade is unable to leave your hand!</span>")
+					return
+				clothing_flags |= STOPSPRESSUREDAMAGE
+			if(9)
+				if(temperature_safe)
+					to_chat(user, "<span class='warning'>You cannot install any more of this upgrade!</span>")
+					return
+				if(!user.transferItemToLoc(chosenUpgrade, src))
+					to_chat(user, "<span class='warning'>The upgrade is unable to leave your hand!</span>")
+					return
+				max_heat_protection_temperature = FIRE_IMMUNITY_MAX_TEMP_PROTECT
+			if(10)
+				if(medical_upgrade)
+					to_chat(user, "<span class='warning'>You cannot install any more of this upgrade!</span>")
+					return
+				if(!user.transferItemToLoc(chosenUpgrade, src))
+					to_chat(user, "<span class='warning'>The upgrade is unable to leave your hand!</span>")
+					return
+				medical_upgrade = TRUE
+				START_PROCESSING(SSobj, src)
+			if(11)
+				if(speed_slowdown >= 9)
+					to_chat(user, "<span class='warning'>You cannot install any more of this upgrade!</span>")
+					return
+				if(!user.transferItemToLoc(chosenUpgrade, src))
+					to_chat(user, "<span class='warning'>The upgrade is unable to leave your hand!</span>")
+					return
+				slowdown -= 0.1
+		max_upgrades -= chosenUpgrade.upgradecost
+		to_chat(user, "<span class='warning'>You install [chosenUpgrade] into [src].</span>")
+		return
+	else if(istype(I, /obj/item/crowbar))
+		to_chat(user, "<span class='warning'>You pry off all the upgrades!</span>")
+		for(var/obj/item/powerarmor_upgrade/paUpgrade in contents)
+			paUpgrade.forceMove(drop_location())
+		max_upgrades = 13
+		medical_upgrade = FALSE
+		STOP_PROCESSING(SSobj, src)
+		slowdown = -0.1
+		clothing_flags &= ~STOPSPRESSUREDAMAGE
+		max_heat_protection_temperature = SPACE_SUIT_MAX_TEMP_PROTECT
+		speed_slowdown = 0
+		armor_fire_upgrade = 0
+		armor_rad_upgrade = 0
+		armor_bomb_upgrade = 0
+		armor_energy_upgrade = 0
+		armor_laser_upgrade = 0
+		armor_bullet_upgrade = 0
+		armor_melee_upgrade = 0
+		upgraded_armor()
+	else
+		..()
+	
+/obj/item/powerarmor_upgrade
+	name = "parent power armor upgrade"
+	desc = "you shouldn't see this, contact jake park"
+	icon = 'modular_skyrat/icons/obj/powerarmor_upgrades.dmi'
+	icon_state = "armor_upgrade"
+	var/upgradetype = 0
+	var/upgradecost = 0
+
+/obj/item/powerarmor_upgrade/melee_armor
+	name = "melee armor upgrade"
+	desc = "This upgrade increases melee armor by twenty. You can only install five of this upgrade. Costs one point."
+	upgradetype = 1
+	upgradecost = 1
+
+/obj/item/powerarmor_upgrade/bullet_armor
+	name = "bullet armor upgrade"
+	desc = "This upgrade increases bullet armor by twenty. You can only install five of this upgrade. Costs one point."
+	upgradetype = 2
+	upgradecost = 1
+
+/obj/item/powerarmor_upgrade/laser_armor
+	name = "laser armor upgrade"
+	desc = "This upgrade increases laser armor by twenty. You can only install five of this upgrade. Costs one point."
+	upgradetype = 3
+	upgradecost = 1
+
+/obj/item/powerarmor_upgrade/energy_armor
+	name = "energy armor upgrade"
+	desc = "This upgrade increases energy armor by twenty. You can only install five of this upgrade. Costs one point."
+	upgradetype = 4
+	upgradecost = 1
+
+/obj/item/powerarmor_upgrade/bomb_armor
+	name = "bomb armor upgrade"
+	desc = "This upgrade increases bomb armor by twenty. You can only install five of this upgrade. Costs one point."
+	upgradetype = 5
+	upgradecost = 1
+
+/obj/item/powerarmor_upgrade/rad_armor
+	name = "radiation armor upgrade"
+	desc = "This upgrade increases radiation armor by twenty. You can only install five of this upgrade. Costs one point."
+	upgradetype = 6
+	upgradecost = 1
+
+/obj/item/powerarmor_upgrade/fire_armor
+	name = "fire armor upgrade"
+	desc = "This upgrade increases fire armor by twenty. You can only install five of this upgrade. Costs one point."
+	upgradetype = 7
+	upgradecost = 1
+
+/obj/item/powerarmor_upgrade/spaceproof
+	name = "space-proof armor upgrade"
+	desc = "This upgrade makes the armor space-proof. You can only install one of this upgrade. Costs seven points."
+	icon_state = "space_upgrade"
+	upgradetype = 8
+	upgradecost = 7
+
+/obj/item/powerarmor_upgrade/tempproof
+	name = "temperature-resistant armor upgrade"
+	desc = "This upgrade makes the armor temperature-resistant. You can only install one of this upgrade. Costs four points."
+	icon_state = "temp_upgrade"
+	upgradetype = 9
+	upgradecost = 4
+
+/obj/item/powerarmor_upgrade/healing
+	name = "medical assistant armor upgrade"
+	desc = "This upgrade makes the armor slowly heal the unconscious wearer. You can only install one of this upgrade. Costs seven points."
+	icon_state = "heal_upgrade"
+	upgradetype = 10
+	upgradecost = 7
+
+/obj/item/powerarmor_upgrade/speed
+	name = "speed armor upgrade"
+	desc = "This upgrade makes the armor space-proof. You can only install nine of this upgrade. Costs one point."
+	icon_state = "speed_upgrade"
+	upgradetype = 11
+	upgradecost = 1
+
+/obj/item/clothing/suit/space/hardsuit/powerarmor/proc/upgraded_armor()
+	armor = list("melee" = armor_melee_upgrade, "bullet" = armor_bullet_upgrade, "laser" = armor_laser_upgrade, "energy" = armor_energy_upgrade, "bomb" = armor_bomb_upgrade, "bio" = 100, "rad" = armor_rad_upgrade, "fire" = armor_fire_upgrade, "acid" = 100, "wound" = 30)

@@ -11,7 +11,23 @@
 	description = "Utilizing fluctuations in bluespace crystals, we can draw small amounts of energy to create self-powered body enhancing suits."
 	prereq_ids = list("adv_biotech", "adv_bluespace", "adv_robotics")
 	design_ids = list("powerarmor_skeleton","powerarmor_torso","powerarmor_helmet","powerarmor_armR","powerarmor_armL","powerarmor_legR","powerarmor_legL")
-	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 7500)
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 5000)
+
+/datum/techweb_node/powerarmor_basic
+	id = "powerarmor_armorupgrades"
+	display_name = "Power Armor Basic Upgrades"
+	description = "We have found a way to upgrade the armor of the power armor."
+	prereq_ids = list("powerarmor")
+	design_ids = list("powerarmor_firearmor","powerarmor_radarmor","powerarmor_bombarmor","powerarmor_energyarmor","powerarmor_laserarmor","powerarmor_bulletarmor","powerarmor_meleearmor")
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 4000)
+
+/datum/techweb_node/powerarmor_advanced
+	id = "powerarmor_miscupgrades"
+	display_name = "Power Armor Advanced Upgrades"
+	description = "We have found a way to upgrade certain aspects of the power armor."
+	prereq_ids = list("powerarmor_armorupgrades")
+	design_ids = list("powerarmor_speed","powerarmor_healing","powerarmor_tempproof","powerarmor_spaceproof")
+	research_costs = list(TECHWEB_POINT_TYPE_GENERIC = 6000)
 
 /datum/techweb_node/ipc_construction
 	id = "ipc_construction"
