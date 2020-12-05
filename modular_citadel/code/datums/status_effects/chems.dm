@@ -209,7 +209,7 @@
 	//	owner.remove_status_effect(src)//At the moment, a user can enthrall themselves, toggle this back in if that should be removed.
 	RegisterSignal(owner, COMSIG_LIVING_RESIST, .proc/owner_resist) //Do resistance calc if resist is pressed#
 	RegisterSignal(owner, COMSIG_MOVABLE_HEAR, .proc/owner_hear)
-	mental_capacity = 500 - M.getOrganLoss(ORGAN_SLOT_BRAIN)//It's their brain!
+	mental_capacity = 500 - M.getBrainLoss()//It's their brain!
 	lewd = TRUE
 	var/message = "[(lewd ? "I am a good pet for [enthrallGender]." : "[master] is a really inspirational person!")]"
 	SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "enthrall", /datum/mood_event/enthrall, message)
@@ -307,7 +307,7 @@
 			if(lewd && prob(1) && !customEcho)
 				to_chat(owner, "<span class='love'><i>[pick("I belong to [enthrallGender].", "[enthrallGender] knows whats best for me.", "Obedence is pleasure.",  "I exist to serve [enthrallGender].", "[enthrallGender] is so dominant, it feels right to obey them.")].</i></span>")
 		if (4) //mindbroken
-			if (mental_capacity >= 499 && (owner.getOrganLoss(ORGAN_SLOT_BRAIN) <=0 || HAS_TRAIT(M, TRAIT_MINDSHIELD)) && !owner.reagents.has_reagent(/datum/reagent/fermi/enthrall))
+			if (mental_capacity >= 499 && (owner.getBrainLoss() <=0 || HAS_TRAIT(M, TRAIT_MINDSHIELD)) && !owner.reagents.has_reagent(/datum/reagent/fermi/enthrall))
 				phase = 2
 				mental_capacity = 500
 				customTriggers = list()
@@ -346,7 +346,7 @@
 			M.hallucination = max(0, M.hallucination - 5)
 			M.stuttering = max(0, M.stuttering - 5)
 			M.jitteriness = max(0, M.jitteriness - 5)
-			if(owner.getOrganLoss(ORGAN_SLOT_BRAIN) >=20)
+			if(owner.getBrainLoss() >= 20)
 				owner.adjustBrainLoss(-0.2)
 			if(withdrawal == TRUE)
 				REMOVE_TRAIT(owner, TRAIT_PACIFISM, "MKUltra")

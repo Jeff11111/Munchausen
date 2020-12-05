@@ -513,11 +513,8 @@
 			qdel(fl)
 		unattached_flesh.Cut()
 
-	//H.setOrganLoss(ORGAN_SLOT_BRAIN, CLONE_INITIAL_DAMAGE)
 	// In addition to being cellularly damaged and having barely any
-
 	// brain function, they also have no limbs or internal organs.
-
 	var/static/list/zones = LIMB_BODYPARTS
 	for(var/zone in zones)
 		var/obj/item/bodypart/BP = H.get_bodypart(zone)

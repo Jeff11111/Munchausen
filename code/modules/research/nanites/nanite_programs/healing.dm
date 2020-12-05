@@ -212,7 +212,7 @@
 		var/obj/item/organ/brain/B = C.getorganslot(ORGAN_SLOT_BRAIN)
 		if(length(B?.get_traumas_type(TRAUMA_RESILIENCE_SURGERY)))
 			problems = TRUE
-	if(host_mob.getOrganLoss(ORGAN_SLOT_BRAIN) > 0)
+	if(host_mob.getBrainLoss() > 0)
 		problems = TRUE
 	return problems ? ..() : FALSE
 

@@ -41,7 +41,7 @@
 		clone_loss = L.getCloneLoss()
 		tox_loss = L.getToxLoss()
 		oxy_loss = L.getOxyLoss()
-		brain_loss = L.getOrganLoss(ORGAN_SLOT_BRAIN)
+		brain_loss = L.getBrainLoss()
 		rewind_type = .proc/rewind_living
 
 	if(iscarbon(parent))
@@ -86,7 +86,7 @@
 	master.setCloneLoss(clone_loss)
 	master.setToxLoss(tox_loss)
 	master.setOxyLoss(oxy_loss)
-	master.setOrganLoss(ORGAN_SLOT_BRAIN, brain_loss)
+	master.setBrainLoss(brain_loss)
 	rewind()
 
 /datum/component/dejavu/proc/rewind_carbon()

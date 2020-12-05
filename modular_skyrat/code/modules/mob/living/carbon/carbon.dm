@@ -77,8 +77,8 @@
 /mob/living/carbon/revive(full_heal, admin_revive)
 	. = ..()
 	//Regardless of full heal or not, we cap brain damage to 150 max
-	if(getOrganLoss(ORGAN_SLOT_BRAIN) > 150)
-		setOrganLoss(ORGAN_SLOT_BRAIN, 150)
+	if(getBrainLoss() > 150)
+		setBrainLoss(150)
 
 /mob/living/carbon/succumb()
 	set name = "Succumb"

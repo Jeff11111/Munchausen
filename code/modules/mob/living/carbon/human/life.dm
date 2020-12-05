@@ -53,7 +53,7 @@
 		adjust_blurriness(-1)
 
 	//Skyrat changes - adjusts brain damage insanity
-	if (getOrganLoss(ORGAN_SLOT_BRAIN) >= 50) //Citadel change to make memes more often. //Back to a bit higher
+	if(getBrainLoss() >= 50) //Citadel change to make memes more often. //Back to a bit higher
 		SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "brain_damage", /datum/mood_event/brain_damage)
 		if(prob(1))
 			emote("drool")

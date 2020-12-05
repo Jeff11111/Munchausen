@@ -664,7 +664,7 @@
 		total_pain += (BP.tox_dam * BP.body_damage_coeff)
 	health = round(maxHealth - getOxyLoss() - getToxLoss() - getCloneLoss() - total_burn - total_brute, DAMAGE_PRECISION)
 	if(ishuman(src)) //Kind of terrible.
-		health = round(maxHealth - getOrganLoss(ORGAN_SLOT_BRAIN))
+		health = round(maxHealth - getBrainLoss())
 	staminaloss = round(total_stamina, DAMAGE_PRECISION)
 	painloss = round(total_pain, DAMAGE_PRECISION)
 	cloneloss = round(total_clone, DAMAGE_PRECISION)
@@ -1457,7 +1457,7 @@
 
 //Brain is fried.
 /mob/living/carbon/nervous_system_failure()
-	return (getOrganLoss(ORGAN_SLOT_BRAIN) >= maxHealth * 0.75)
+	return (getBrainLoss() >= maxHealth * 0.75)
 
 //Replaces crit with shock
 /mob/living/carbon/InCritical()

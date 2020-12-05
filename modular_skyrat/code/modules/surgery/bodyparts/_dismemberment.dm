@@ -10,17 +10,18 @@
 
 //Dismember a limb
 /obj/item/bodypart/proc/dismember(dam_type = BRUTE, silent = FALSE, destroy = FALSE, wounding_type = WOUND_SLASH)
-	if(!owner)
-		return FALSE
 	if(!can_dismember())
 		return FALSE
+	
+	var/mob/living/carbon/C = owner
 	var/obj/item/bodypart/affecting = C.get_bodypart(parent_bodyzone)
 	if(istype(affecting))
 		affecting.receive_damage(clamp(brute_dam/2 * affecting.body_damage_coeff, 15, 50), clamp(burn_dam/2 * affecting.body_damage_coeff, 0, 50), wound_bonus=CANT_WOUND) //Damage the parent bodyzone based on limb's existing damage
+	
 	if(!silent)
 		C.visible_message("<span class='danger'><B>[C]'s [src.name] has been violently dismembered!</B></span>")
-	if(!silent)
 		playsound(get_turf(C), 'modular_skyrat/sound/gore/dismember.ogg', 80, TRUE)
+	
 	SEND_SIGNAL(C, COMSIG_ADD_MOOD_EVENT, "dismembered", /datum/mood_event/dismembered)
 	drop_limb(dismembered = TRUE, destroyed = destroy, wounding_type = wounding_type)
 	C.update_equipment_speed_mods() // Update in case speed affecting item unequipped by dismemberment
@@ -28,6 +29,7 @@
 
 	if(QDELETED(src)) //Could have dropped into lava/explosion/chasm/whatever
 		return TRUE
+	
 	add_mob_blood(C)
 	var/direction = pick(GLOB.cardinals)
 	var/t_range = rand(2,max(throw_range/2, 2))
@@ -47,6 +49,16 @@
 	if(!can_disembowel())
 		return FALSE
 
+	var/mob/living/carbon/C = owner
+	if(!silent)
+		C.visible_message("<span class='danger'><B>[C]'s [src.name] has been violently disemboweled!</B></span>")
+		playsound(get_turf(C), 'modular_skyrat/sound/gore/dismember.ogg', 80, TRUE)
+	
+	SEND_SIGNAL(C, COMSIG_ADD_MOOD_EVENT, "dismembered", /datum/mood_event/dismembered)
+	C.bleed(12)
+	add_mob_blood(C)
+	
+	receive_damage(clamp(20 * body_damage_coeff, 15, 50), wound_bonus=CANT_WOUND)
 	var/datum/wound/disembowel
 	if(is_organic_limb())
 		disembowel = new /datum/wound/slash/critical/incision/disembowel()
@@ -61,6 +73,7 @@
 /obj/item/bodypart/proc/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
 	if(!owner)
 		return
+	
 	var/atom/Tsec = owner.drop_location()
 	var/mob/living/carbon/C = owner
 	SEND_SIGNAL(C, COMSIG_CARBON_REMOVE_LIMB, src, dismembered)

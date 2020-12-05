@@ -252,11 +252,11 @@ GENETICS SCANNER
 
 			//BRAIN
 			else if(istype(O, /obj/item/organ/brain))
-				if (C.getOrganLoss(ORGAN_SLOT_BRAIN) >= 200)
+				if(C.getBrainLoss() >= 200)
 					damage_message += "\n<span class='alert'>Subject's brain non-functional. Neurine injection recomended.</span>"
-				else if (C.getOrganLoss(ORGAN_SLOT_BRAIN) >= 120)
+				else if(C.getBrainLoss() >= 120)
 					damage_message += "\n<span class='alert'>Severe brain damage detected. Subject likely to have mental traumas.</span>"
-				else if (C.getOrganLoss(ORGAN_SLOT_BRAIN) >= 45)
+				else if(C.getBrainLoss() >= 45)
 					damage_message += "\n<span class='alert'>Brain damage detected.</span>"
 				if(advanced)
 					temp_message += " \n<span class='info'>Brain Activity Level: [(200 - M.getOrganLoss(ORGAN_SLOT_BRAIN))/2]%.</span>"

@@ -33,14 +33,14 @@
 /datum/surgery_step/fix_robot_brain/initiate(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail)
 	if(..() && iscarbon(target))
 		var/mob/living/carbon/C = target
-		while((C.getOrganLoss(ORGAN_SLOT_BRAIN)) || C.get_traumas())
+		while(C.getBrainLoss() || C.get_traumas())
 			if(!..())
 				break
 
 /datum/surgery_step/fix_robot_brain/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	if(target.mind && target.mind.has_antag_datum(/datum/antagonist/brainwashed))
 		target.mind.remove_antag_datum(/datum/antagonist/brainwashed)
-	target.setOrganLoss(ORGAN_SLOT_BRAIN, target.getOrganLoss(ORGAN_SLOT_BRAIN) - 60)	//we set damage in this case in order to clear the "failing" flag
+	target.setBrainLoss(target.getBrainLoss() - 60)	//we set damage in this case in order to clear the "failing" flag
 	target.cure_all_traumas(TRAUMA_RESILIENCE_LOBOTOMY) //Lobotomy tier fix cause you can't clone this!
 	display_results(user, target, "<span class='notice'>You succeed in fixing [target]'s posibrain.</span>",
 		"[user] successfully fixes [target]'s posibrain!",
