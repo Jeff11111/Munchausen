@@ -1,7 +1,7 @@
 /obj/item/organ/spleen/robot_ipc
 	name = "regulator"
 	icon = 'modular_skyrat/icons/obj/surgery.dmi'
-	icon_state = "regulator-ipc"
+	icon_state = "spleen-c"
 	desc = "Regulates hydraulic fluids."
 	status = ORGAN_ROBOTIC
 
