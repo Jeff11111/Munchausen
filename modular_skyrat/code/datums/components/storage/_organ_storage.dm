@@ -266,6 +266,8 @@
 
 //Bla bla
 /datum/component/storage/concrete/organ/remove_from_storage(atom/movable/AM, atom/new_location)
+	if(!accessible)
+		return FALSE
 	. = ..()
 	if(.)
 		var/obj/item/organ/O = AM
@@ -316,13 +318,13 @@
 	set waitfor = FALSE
 	var/mob/A = parent
 	A.add_fingerprint(M)
-	if(!over_object || !accessible)
+	if(!over_object)
 		return FALSE
 	if(ismecha(M.loc)) // stops inventory actions in a mech
 		return FALSE
 	// this must come before the screen objects only block, dunno why it wasn't before
 	var/mob/living/L = M
-	if(!istype(L) || !(L.a_intent == INTENT_GRAB))
+	if(!istype(L) || !(L.a_intent == INTENT_GRAB) || !accessible)
 		return FALSE
 	if(isliving(over_object) && (L.zone_selected == bodypart_affected.body_zone))
 		update_insides()
