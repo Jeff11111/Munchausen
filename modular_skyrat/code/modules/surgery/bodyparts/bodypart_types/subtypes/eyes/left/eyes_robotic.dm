@@ -1,6 +1,6 @@
 /obj/item/bodypart/left_eye/robotic
 	name = "robotic eyes"
-	icon_state = "cybernetic_eyeballs"
+	icon_state = "eye-c"
 	desc = "Your vision is augmented."
 	status = BODYPART_ROBOTIC | BODYPART_SYNTHETIC
 
