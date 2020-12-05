@@ -6,10 +6,11 @@
 	body_zone = BODY_ZONE_PRECISE_NECK
 	body_part = NECK
 	children_zones = list(BODY_ZONE_HEAD)
+	parent_bodyzone = BODY_ZONE_CHEST
 	w_class = WEIGHT_CLASS_BULKY
 	stam_heal_tick = 2
 	stam_damage_coeff = 1
-	throw_range = 5
+	throw_range = 4
 	px_x = 0
 	px_y = -8
 	wound_resistance = -15
