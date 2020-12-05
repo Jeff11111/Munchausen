@@ -1,11 +1,11 @@
 //Check if the limb is dismemberable
 /obj/item/bodypart/proc/can_dismember(obj/item/I)
-	if(dismemberable && !(owner && HAS_TRAIT(owner, TRAIT_NODISMEMBER)) && !(owner && (owner.status_flags & GODMODE)))
+	if(owner && dismemberable && !HAS_TRAIT(owner, TRAIT_NODISMEMBER) && !(owner.status_flags & GODMODE))
 		return TRUE
 
 //Check if the limb is disembowable
 /obj/item/bodypart/proc/can_disembowel(obj/item/I)
-	if(disembowable && !(owner && HAS_TRAIT(owner, TRAIT_NOGUT)) && get_organs() && !(locate(/datum/wound/slash/critical/incision/disembowel) in wounds) && !(locate(/datum/wound/mechanical/slash/critical/incision/disembowel) in wounds) && !(owner && (owner.status_flags & GODMODE)))
+	if(owner && disembowable && !HAS_TRAIT(owner, TRAIT_NOGUT) && get_organs() && !(locate(/datum/wound/slash/critical/incision/disembowel) in wounds) && !(locate(/datum/wound/mechanical/slash/critical/incision/disembowel) in wounds) && !(owner.status_flags & GODMODE))
 		return TRUE
 
 //Dismember a limb
@@ -47,8 +47,6 @@
 
 //Disembowel a limb (opens up organ manipulation instantaneously)
 /obj/item/bodypart/proc/disembowel(dam_type = BRUTE, silent = FALSE, wound = FALSE, wounding_type = WOUND_SLASH)
-	if(!owner)
-		return FALSE
 	if(!can_disembowel())
 		return FALSE
 
