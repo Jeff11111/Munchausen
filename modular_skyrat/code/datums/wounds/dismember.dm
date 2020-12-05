@@ -90,7 +90,7 @@
 		direction = turn(direction, bodypart_turn)
 		var/dist = rand(3, 5)
 		var/turf/targ = get_ranged_target_turf(L.owner, direction, dist)
-		if(targ)
+		if(istype(targ) && dist > 0 && ((L.owner.mob_biotypes & MOB_ORGANIC) || (L.owner.mob_biotypes & MOB_HUMANOID)) && L.owner.needs_heart() && !L.owner.is_asystole() && (ishuman(L.owner) ? !(NOBLOOD in L.owner.dna?.species?.species_traits) : TRUE))
 			var/obj/effect/decal/cleanable/blood/hitsplatter/B = new(L.owner.loc, L.owner.get_blood_dna_list())
 			B.add_blood_DNA(L.owner.get_blood_dna_list())
 			B.GoTo(targ, dist)

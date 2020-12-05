@@ -124,11 +124,13 @@
 				Paralyze(P.damage)
 				DefaultCombatKnockdown(P.damage*2)
 		if((P.damage_type == BRUTE) && ((mob_biotypes & MOB_ORGANIC) || (mob_biotypes & MOB_HUMANOID)) && (totaldamage >= 10) && !P.nodamage)
-			var/obj/effect/decal/cleanable/blood/hitsplatter/B = new(loc, get_blood_dna_list())
-			B.add_blood_DNA(get_blood_dna_list())
-			var/dist = rand(1,min(totaldamage/10, 5))
-			var/turf/targ = get_ranged_target_turf(src, get_dir(P.starting, src), dist)
-			B.GoTo(targ, dist)
+			var/mob/living/carbon/C = src
+			if(!istype(C) || (istype(C) && !C.is_asystole() && C.needs_heart() && (ishuman(C) ? !(NOBLOOD in C.dna?.species?.species_traits) : TRUE)))
+				var/obj/effect/decal/cleanable/blood/hitsplatter/B = new(loc, get_blood_dna_list())
+				B.add_blood_DNA(get_blood_dna_list())
+				var/dist = rand(1,min(totaldamage/10, 5))
+				var/turf/targ = get_ranged_target_turf(src, get_dir(P.starting, src), dist)
+				B.GoTo(targ, dist)
 	var/missing = 100 - final_percent
 	var/armor_ratio = armor * 0.01
 	if(missing > 0)

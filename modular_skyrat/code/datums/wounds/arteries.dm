@@ -82,7 +82,7 @@
 						"<span class='userdanger'>Blood squirts from my [limb.name]'s [limb.artery_name]!</span>")
 		var/spray_dir = pick(GLOB.alldirs)
 		var/turf/uhoh = get_edge_target_turf(victim, spray_dir)
-		if(istype(uhoh))
+		if(istype(uhoh) && ((victim.mob_biotypes & MOB_ORGANIC) || (victim.mob_biotypes & MOB_HUMANOID)) && victim.needs_heart() && !(NOBLOOD in victim.dna?.species?.species_traits))
 			var/obj/effect/decal/cleanable/blood/hitsplatter/B = new (get_turf(victim), victim.get_blood_dna_list())
 			B.GoTo(uhoh, rand(1,3))
 		next_squirt = world.time + FLOOR(rand(squirt_delay_min, squirt_delay_max), 10)
