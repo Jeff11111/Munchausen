@@ -19,6 +19,9 @@
 	var/overwrite_existing = FALSE
 
 /obj/item/stack/sticky_tape/afterattack(atom/target, mob/living/user)
+	if(istype(target, /obj/item/clothing/shoes) && !(user.a_intent == INTENT_GRAB))
+		return ..()
+	
 	if(!istype(target, /obj/item))
 		if(iscarbon(target) && user.a_intent == INTENT_GRAB && user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
 			var/mob/living/carbon/C = target
