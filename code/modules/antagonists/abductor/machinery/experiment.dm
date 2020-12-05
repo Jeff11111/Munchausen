@@ -70,9 +70,9 @@
 
 	var/icon/eyes
 	if(EYECOLOR in H.dna.species.species_traits)
-		eyes = icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = "left_eye")
+		eyes = icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = "eye-left")
 		eyes.Blend("#[H.left_eye_color]", ICON_MULTIPLY)
-		var/icon/right_eye = icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = "right_eye")
+		var/icon/right_eye = icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = "eye-right")
 		eyes.Blend(right_eye, ICON_MULTIPLY)
 
 	var/datum/sprite_accessory/S

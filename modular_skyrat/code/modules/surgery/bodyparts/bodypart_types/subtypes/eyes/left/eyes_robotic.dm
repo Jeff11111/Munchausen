@@ -87,7 +87,7 @@
 
 /obj/item/bodypart/left_eye/robotic/glow/Initialize()
 	. = ..()
-	mob_overlay = image('icons/mob/human_face.dmi', "eyes_glow_gs")
+	mob_overlay = image('icons/mob/human_face.dmi', "eyeglow_gs")
 
 /obj/item/bodypart/left_eye/robotic/glow/Destroy()
 	terminate_effects()

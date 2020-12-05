@@ -185,8 +185,6 @@
 	..()
 	user.remove_alt_appearance("standard_borg_disguise")
 
-
-
 /obj/item/clothing/head/wig
 	name = "wig"
 	desc = "A bunch of hair without a head attached."
