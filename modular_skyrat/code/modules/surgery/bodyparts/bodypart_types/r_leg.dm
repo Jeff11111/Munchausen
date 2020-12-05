@@ -33,7 +33,7 @@
 /obj/item/bodypart/r_leg/is_disabled()
 	if(HAS_TRAIT(owner, TRAIT_PARALYSIS_R_LEG))
 		return BODYPART_DISABLED_PARALYSIS
-	return ..()
+	. = ..()
 
 /obj/item/bodypart/r_leg/set_disabled(new_disabled)
 	. = ..()

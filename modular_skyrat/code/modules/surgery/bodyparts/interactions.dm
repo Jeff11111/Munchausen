@@ -99,6 +99,7 @@
 	. = FALSE
 	if(!owner || !user || !can_dismember())
 		return
+	
 	if(!victim)
 		victim = owner
 	

@@ -518,15 +518,14 @@
 
 	// brain function, they also have no limbs or internal organs.
 
-	if(!HAS_TRAIT(H, TRAIT_NODISMEMBER))
-		var/static/list/zones = list(BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
-		for(var/zone in zones)
-			var/obj/item/bodypart/BP = H.get_bodypart(zone)
-			if(BP)
-				BP.drop_limb()
-				BP.forceMove(src)
-				BP.status |= BODYPART_FROZEN
-				unattached_flesh += BP
+	var/static/list/zones = LIMB_BODYPARTS
+	for(var/zone in zones)
+		var/obj/item/bodypart/BP = H.get_bodypart(zone)
+		if(BP && BP.can_dismember())
+			BP.drop_limb()
+			BP.forceMove(src)
+			BP.status |= BODYPART_FROZEN
+			unattached_flesh += BP
 
 	for(var/o in H.internal_organs)
 		var/obj/item/organ/organ = o

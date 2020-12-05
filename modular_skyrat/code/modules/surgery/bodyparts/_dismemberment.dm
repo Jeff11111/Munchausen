@@ -1,11 +1,11 @@
 //Check if the limb is dismemberable
 /obj/item/bodypart/proc/can_dismember(obj/item/I)
-	if(dismemberable)
+	if(dismemberable && !(owner && HAS_TRAIT(owner, TRAIT_NODISMEMBER)))
 		return TRUE
 
 //Check if the limb is disembowable
 /obj/item/bodypart/proc/can_disembowel(obj/item/I)
-	if(disembowable && get_organs() && !(locate(/datum/wound/slash/critical/incision/disembowel) in wounds) && !(locate(/datum/wound/mechanical/slash/critical/incision/disembowel) in wounds))
+	if(disembowable && !(owner && HAS_TRAIT(owner, TRAIT_NOGUT)) && get_organs() && !(locate(/datum/wound/slash/critical/incision/disembowel) in wounds) && !(locate(/datum/wound/mechanical/slash/critical/incision/disembowel) in wounds))
 		return TRUE
 
 //Dismember a limb
@@ -16,8 +16,6 @@
 	if(!can_dismember())
 		return FALSE
 	if(C.status_flags & GODMODE)
-		return FALSE
-	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
 		return FALSE
 	var/obj/item/bodypart/affecting = C.get_bodypart(parent_bodyzone)
 	if(istype(affecting))
@@ -57,10 +55,6 @@
 	var/mob/living/carbon/C = owner
 	if(!can_disembowel())
 		return FALSE
-	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
-		return FALSE
-	if(HAS_TRAIT(C, TRAIT_NOGUT)) //Just for not allowing disembowelment
-		return FALSE
 
 	var/datum/wound/disembowel
 	if(is_organic_limb())
@@ -69,7 +63,6 @@
 		disembowel = new /datum/wound/mechanical/slash/critical/incision/disembowel()
 	
 	disembowel.apply_wound(src, TRUE)
-	C.death_scream()
 	return TRUE
 
 //Limb removal. The "special" argument is used for swapping a limb with a new one without the effects of losing a limb kicking in.

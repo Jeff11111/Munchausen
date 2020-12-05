@@ -122,6 +122,11 @@
 
 /obj/item/bodypart/head/update_limb(dropping_limb, mob/living/carbon/source)
 	. = ..()
+	
+	if(istype(loc, /obj/item/bodypart/neck))
+		var/obj/item/bodypart/neck/neck = loc
+		neck.update_limb(dropping_limb, source)
+	
 	if(no_update)
 		return
 	

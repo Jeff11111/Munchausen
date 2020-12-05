@@ -1353,7 +1353,7 @@
 		var/datum/wound/W = i
 		if(W.disabling)
 			return BODYPART_DISABLED_WOUND
-	if(can_dismember() && !HAS_TRAIT(owner, TRAIT_NODISMEMBER))
+	if(can_dismember())
 		. = disabled //inertia, to avoid limbs healing 0.1 damage and being re-enabled
 		if(parent_bodyzone && !istype(src, /obj/item/bodypart/groin) && !istype(src, /obj/item/bodypart/neck))
 			if(!(owner.get_bodypart(parent_bodyzone)))
@@ -1378,7 +1378,7 @@
 		return BODYPART_NOT_DISABLED
 
 /obj/item/bodypart/proc/check_disabled() //This might be depreciated and should be safe to remove.
-	if(!owner || !can_dismember() || HAS_TRAIT(owner, TRAIT_NODISMEMBER))
+	if(!owner || !can_dismember())
 		return
 	if(!disabled && (get_damage(TRUE) >= max_damage))
 		set_disabled(TRUE)
