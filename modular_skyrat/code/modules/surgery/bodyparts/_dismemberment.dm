@@ -126,6 +126,7 @@
 			if(thing)
 				thing.drop_limb(special, ignore_children, dismembered, destroyed)
 				thing.forceMove(src)
+				thing.on_transfer_to_limb(src)
 		C.updatehealth()
 	for(var/X in C.surgeries)
 		var/datum/surgery/S = X
@@ -296,6 +297,10 @@
 /obj/item/bodypart/proc/disembowel_wound(wounding_type, silent = FALSE)
 	var/datum/wound/disembowel/disemboweled = new()
 	return disemboweled.apply_disembowel(src, wounding_type, silent)
+
+//Stuff you do when you go inside a parent limb that was chopped off
+/obj/item/bodypart/proc/on_transfer_to_limb(obj/item/bodypart/BP)
+	return FALSE
 
 //Attach a limb to a human and drop any existing limb of that type.
 /obj/item/bodypart/proc/replace_limb(mob/living/carbon/C, special)
