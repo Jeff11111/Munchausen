@@ -1,9 +1,9 @@
 /obj/item/organ/tongue/robot_ipc
-	name = "robotic voicebox"
+	name = "ipc tongue"
 	desc = "A voice synthesizer that can interface with organic lifeforms."
 	status = ORGAN_ROBOTIC
 	icon = 'modular_skyrat/icons/obj/surgery.dmi'
-	icon_state = "tongue-ipc"
+	icon_state = "tongue-c"
 	say_mod = "beeps"
 	attack_verb = list("beeped", "booped")
 	modifies_speech = TRUE

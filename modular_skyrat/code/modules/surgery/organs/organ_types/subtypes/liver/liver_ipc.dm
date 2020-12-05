@@ -1,5 +1,5 @@
 /obj/item/organ/liver/robot_ipc
-	name = "reagent processing unit"
+	name = "ipc liver"
 	desc = "An electronic device that processes the beneficial chemicals for the synthetic user."
 	organ_flags = ORGAN_SYNTHETIC
 	status = ORGAN_ROBOTIC

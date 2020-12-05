@@ -1,5 +1,5 @@
 /obj/item/organ/spleen/robot_ipc
-	name = "regulator"
+	name = "ipc spleen"
 	icon = 'modular_skyrat/icons/obj/surgery.dmi'
 	icon_state = "spleen-c"
 	desc = "Regulates hydraulic fluids."
