@@ -231,7 +231,7 @@
 									"<span class='userdanger'>I violently shove past <b>[victim]</b>!</span>", \
 									target = victim, \
 									target_message = "<span class='userdanger'>You are violently shoved down by <b>[assailant]</b>!</span>")
-				if(prob(assailant_str))
+				if(prob(str_diff * 10))
 					victim.DefaultCombatKnockdown(max(1, str_diff) SECONDS)
 				else
 					victim.Stumble(max(1, str_diff) SECONDS)
