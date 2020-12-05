@@ -27,3 +27,7 @@
 
 /obj/item/bodypart/chest/can_dismember(obj/item/I)
 	return FALSE
+
+/obj/item/bodypart/chest/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
+	if(special)
+		. = ..()

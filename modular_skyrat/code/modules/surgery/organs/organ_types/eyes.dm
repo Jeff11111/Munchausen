@@ -101,6 +101,10 @@
 	else
 		owner.clear_fullscreen("eye_damage")
 
+/obj/item/organ/eyes/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
+	LB.eyes = src
+	. = ..()
+
 #undef BLURRY_VISION_ONE
 #undef BLURRY_VISION_TWO
 #undef BLIND_VISION_THREE

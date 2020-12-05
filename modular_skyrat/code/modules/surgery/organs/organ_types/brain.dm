@@ -504,3 +504,13 @@
 	var/list/traumas = get_traumas_type(resilience = resilience)
 	for(var/X in traumas)
 		qdel(X)
+
+/obj/item/organ/brain/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
+	Remove()	//Changeling brain concerns are now handled in Remove
+	forceMove(LB)
+	LB.brain = src
+	if(brainmob)
+		LB.brainmob = brainmob
+		brainmob = null
+		LB.brainmob.forceMove(LB)
+		LB.brainmob.stat = DEAD

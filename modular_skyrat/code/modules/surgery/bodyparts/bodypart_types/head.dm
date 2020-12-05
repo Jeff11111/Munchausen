@@ -333,3 +333,59 @@
 		var/obj/item/bodypart/neck/throat = owner.get_bodypart(BODY_ZONE_PRECISE_NECK)
 		if(throat)
 			return throat.can_dismember(I)
+
+/obj/item/bodypart/head/attach_limb(mob/living/carbon/C, special)
+	//Transfer some head appearance vars over
+	if(brain)
+		if(brainmob)
+			brainmob.container = null //Reset brainmob head var.
+			brainmob.forceMove(brain) //Throw mob into brain.
+			brain.brainmob = brainmob //Set the brain to use the brainmob
+			brainmob = null //Set head brainmob var to null
+		brain.Insert(C) //Now insert the brain proper
+		brain = null //No more brain in the head
+
+	if(ishuman(C))
+		var/mob/living/carbon/human/H = C
+		H.hair_color = hair_color
+		H.hair_style = hair_style
+		H.facial_hair_color = facial_hair_color
+		H.facial_hair_style = facial_hair_style
+		H.lip_style = lip_style
+		H.lip_color = lip_color
+	if(real_name)
+		C.real_name = real_name
+	real_name = ""
+	name = initial(name)
+
+	//Handle dental implants
+	for(var/obj/item/reagent_containers/pill/P in src)
+		for(var/datum/action/item_action/hands_free/activate_pill/AP in P.actions)
+			P.forceMove(C)
+			AP.Grant(C)
+			break
+	. = ..()
+
+/obj/item/bodypart/head/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
+	if(!special)
+		//Drop all worn head items
+		for(var/X in list(owner.glasses, owner.ears, owner.wear_mask, owner.head))
+			var/obj/item/I = X
+			owner.dropItemToGround(I, TRUE)
+
+	owner.wash_cream() //clean creampie overlay
+
+	//Handle dental implants
+	for(var/datum/action/item_action/hands_free/activate_pill/AP in owner.actions)
+		AP.Remove(owner)
+		var/obj/pill = AP.target
+		if(pill)
+			pill.forceMove(src)
+
+	//Make sure de-zombification happens before organ removal instead of during it
+	var/obj/item/organ/zombie_infection/ooze = owner.getorganslot(ORGAN_SLOT_ZOMBIE)
+	if(istype(ooze))
+		ooze.transfer_to_limb(src, owner)
+
+	name = "[owner.real_name]'s head"
+	..()

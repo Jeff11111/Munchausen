@@ -121,8 +121,14 @@
 	. = 0
 	var/obj/item/organ/liver/liver = getorganslot(ORGAN_SLOT_LIVER)
 	if(!liver)
-		return maxHealth/2
-	return liver.get_toxins()
+		. += maxHealth/2
+	else
+		. += liver.get_toxins()
+	var/obj/item/organ/kidneys/kidneys = getorganslot(ORGAN_SLOT_KIDNEYS)
+	if(!kidneys)
+		. += maxHealth/2
+	else
+		. += kidneys.get_toxins()
 
 /mob/living/carbon/adjustToxLoss(amount, updating_health = TRUE, forced = FALSE)
 	. = 0
@@ -133,25 +139,41 @@
 		if(amount > 0)
 			bleed(3 * amount, FALSE) //5x was too much, this is punishing enough.
 		else
-			blood_volume -= amount
-	var/obj/item/organ/liver/tox_organ = getorganslot(ORGAN_SLOT_LIVER)
-	if(tox_organ)
+			bleed(-abs(amount), FALSE) //gain the blood instead
+	var/obj/item/organ/liver/liver = getorganslot(ORGAN_SLOT_LIVER)
+	var/obj/item/organ/kidneys/kidneys = getorganslot(ORGAN_SLOT_KIDNEYS)
+	var/did_something = FALSE
+	if(liver && (liver.tox_dam < liver.max_tox_dam))
 		if(amount > 0)
-			tox_organ.add_toxins(abs(amount))
+			if(liver.add_toxins(abs(amount)))
+				did_something = TRUE
 		else
-			tox_organ.remove_toxins(abs(amount))
-	if(updating_health)
+			if(liver.remove_toxins(abs(amount)))
+				did_something = TRUE
+	else if(kidneys && (kidneys.tox_dam < kidneys.max_tox_dam))
+		if(amount > 0)
+			if(kidneys.add_toxins(abs(amount)))
+				did_something = TRUE
+		else
+			if(kidneys.remove_toxins(abs(amount)))
+				did_something = TRUE
+	if(updating_health && did_something)
 		updatehealth()
 		update_health_hud()
 
 /mob/living/carbon/setToxLoss(amount, updating, forced)
 	if(!needs_lungs() || (amount < 0))
 		return
-	var/obj/item/organ/liver/tox_organ = getorganslot(ORGAN_SLOT_LUNGS)
-	if(tox_organ)
-		tox_organ.tox_dam = 0
+	var/obj/item/organ/liver/liver = getorganslot(ORGAN_SLOT_LIVER)
+	if(liver)
+		liver.tox_dam = 0
 		if(amount > 0)
-			tox_organ.add_toxins(abs(amount))
+			amount -= liver.add_toxins(abs(amount))
+	var/obj/item/organ/kidneys/kidneys = getorganslot(ORGAN_SLOT_KIDNEYS)
+	if(kidneys)
+		kidneys.tox_dam = 0
+		if(amount > 0)
+			kidneys.add_toxins(abs(amount))
 	if(updating)
 		updatehealth()
 		update_health_hud()

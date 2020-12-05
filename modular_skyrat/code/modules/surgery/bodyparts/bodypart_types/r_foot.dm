@@ -25,3 +25,14 @@
 	joint_name = "right ankle"
 	tendon_name = "achilles tendon"
 	artery_name = "arcuate artery"
+
+/obj/item/bodypart/r_foot/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
+	if(owner && !special)
+		if(owner.legcuffed)
+			owner.legcuffed.forceMove(owner.drop_location()) //At this point bodypart is still in nullspace
+			owner.legcuffed.dropped(owner)
+			owner.legcuffed = null
+			owner.update_inv_legcuffed()
+		if(owner.shoes)
+			owner.dropItemToGround(owner.shoes, TRUE)
+	. = ..()

@@ -14,6 +14,40 @@
 		/datum/reagent/consumable/coffee = 0.1,
 	)
 	relative_size = 8
+	//Kidneys work as secondary toxin sacks
+	var/tox_dam = 0 //How much toxin damage we have right now
+	var/max_tox_dam = 50 //Maximum toxin we can achieve
+
+/obj/item/organ/kidneys/get_pain()
+	var/damage_mult = 1
+	//Robotic organs do not feel pain, simply for balancing reasons
+	//Thus lowering the shock of IPCs and other synths is easier, as
+	//they don't have many painkillers
+	if(CHECK_BITFIELD(status, ORGAN_ROBOTIC))
+		return 0
+	//Cut organs don't feel pain
+	if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
+		return 0
+	//Failing organs always cause maxHealth pain
+	if(CHECK_BITFIELD(organ_flags, ORGAN_FAILING | ORGAN_DEAD))
+		return (maxHealth + get_toxins())
+	return ((get_toxins() * 0.75 + damage) * damage_mult * pain_multiplier)
+
+//Returns a percentage value for use by GetToxloss().
+/obj/item/organ/kidneys/proc/get_toxins()
+	if(!is_working())
+		return max_tox_dam
+	return round((tox_dam/owner.maxHealth)*max_tox_dam)
+
+/obj/item/organ/kidneys/proc/remove_toxins(amount)
+	var/last_tox = tox_dam
+	tox_dam = min(max_tox_dam, max(0, tox_dam - amount))
+	return -(tox_dam - last_tox)
+
+/obj/item/organ/kidneys/proc/add_toxins(amount)
+	var/last_tox = tox_dam
+	tox_dam = min(max_tox_dam ,max(0, tox_dam + amount))
+	return (tox_dam - last_tox)
 
 /obj/item/organ/kidneys/proc/get_adrenaline_multiplier()
 	var/multiplier = 1

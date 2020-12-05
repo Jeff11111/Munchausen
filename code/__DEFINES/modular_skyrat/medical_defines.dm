@@ -250,6 +250,11 @@
 //How much time it takes for a dead organ to recover
 #define ORGAN_RECOVERY_THRESHOLD (5 MINUTES)
 
+//How much toxin the liver can handle
+#define LIVER_MAX_TOXIN 50
+//How much toxin the kidneys can handle
+#define KIDNEY_MAX_TOXIN 50
+
 //Rejection levels
 #define REJECTION_LEVEL_1 1
 #define REJECTION_LEVEL_2 50

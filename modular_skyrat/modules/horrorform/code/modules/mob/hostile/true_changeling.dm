@@ -90,7 +90,7 @@
 					else
 						var/vol = clamp(100-((dist-7)*5), 10, 100) //Every tile decreases sound volume by 5
 						M.playsound_local(src, 'modular_skyrat/master_files/sound/effects/horror_scream_reverb.ogg', vol, 1, frequency, falloff = 5)
-				if(M.stat == DEAD && (M.client.prefs.chat_toggles & CHAT_GHOSTSIGHT) && !(M in viewers(get_turf(src),null)))
+				if(M.stat == DEAD && (M.client.prefs?.chat_toggles & CHAT_GHOSTSIGHT) && !(M in viewers(get_turf(src),null)))
 					M.show_message(message)
 		audible_message(message)
 		spam_flag = 1

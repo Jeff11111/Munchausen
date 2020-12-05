@@ -51,3 +51,20 @@
 		var/obj/screen/inventory/hand/L = owner.hud_used.hand_slots["[held_index]"]
 		if(L)
 			L.update_icon()
+
+/obj/item/bodypart/r_hand/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
+	var/mob/living/carbon/C = owner
+	. = ..()
+	if(C && !special)
+		if(C.handcuffed)
+			C.handcuffed.forceMove(drop_location())
+			C.handcuffed.dropped(C)
+			C.handcuffed = null
+			C.update_handcuffed()
+		if(C.hud_used)
+			var/obj/screen/inventory/hand/R = C.hud_used.hand_slots["[held_index]"]
+			if(R)
+				R.update_icon()
+		if(C.gloves)
+			C.dropItemToGround(C.gloves, TRUE)
+		C.update_inv_gloves() //to remove the bloody hands overlay

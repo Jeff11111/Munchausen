@@ -99,6 +99,11 @@
 /obj/item/organ/proc/can_recover()
 	return ((maxHealth > 0) && !(organ_flags & ORGAN_DEAD)) || (death_time >= world.time - ORGAN_RECOVERY_THRESHOLD)
 
+//when a limb is dropped, the internal organs are removed from the mob and put into the limb
+/obj/item/organ/proc/transfer_to_limb(obj/item/bodypart/LB, mob/living/carbon/C)
+	Remove()
+	forceMove(LB)
+
 /obj/item/organ/proc/listen()
 	return
 

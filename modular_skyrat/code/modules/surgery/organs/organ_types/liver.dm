@@ -24,7 +24,7 @@
 
 	var/alcohol_tolerance = ALCOHOL_RATE//affects how much damage the liver takes from alcohol
 	var/tox_dam = 0 //How much toxin damage we have right now
-	var/max_tox_dam = 100
+	var/max_tox_dam = 50 //Maximum toxin we can achieve
 	var/toxTolerance = LIVER_DEFAULT_TOX_TOLERANCE//maximum amount of toxins the liver can just shrug off
 	var/toxLethality = LIVER_DEFAULT_TOX_LETHALITY//affects how much damage toxins do to the liver
 	var/filterToxins = TRUE //whether to filter toxins
@@ -43,9 +43,9 @@
 	//Failing organs always cause maxHealth pain
 	if(CHECK_BITFIELD(organ_flags, ORGAN_FAILING | ORGAN_DEAD))
 		return (maxHealth + get_toxins())
-	return ((get_toxins() + damage) * damage_mult * pain_multiplier)
+	return ((get_toxins() * 0.75 + damage) * damage_mult * pain_multiplier)
 
-// Returns a percentage value for use by GetToxloss().
+//Returns a percentage value for use by GetToxloss().
 /obj/item/organ/liver/proc/get_toxins()
 	if(!is_working())
 		return max_tox_dam
