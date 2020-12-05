@@ -55,6 +55,10 @@ GLOBAL_LIST_INIT(fraggots, world.file2list('config/fraggots.txt'))
 		//Screaming
 		if(prob(25))
 			agony_scream()
+		if(prob(15))
+			death_scream()
+		if(prob(5))
+			death_rattle()
 
 //Killing fraggots gives you bobux
 /mob/living/death(gibbed)

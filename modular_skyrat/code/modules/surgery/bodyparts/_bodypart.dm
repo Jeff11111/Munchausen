@@ -1385,7 +1385,6 @@
 	else if(disabled && (get_damage(TRUE) <= (max_damage * 0.5)))
 		set_disabled(FALSE)
 
-
 /obj/item/bodypart/proc/set_disabled(new_disabled)
 	if(disabled == new_disabled || !owner)
 		return FALSE

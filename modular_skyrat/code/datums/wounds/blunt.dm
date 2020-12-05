@@ -166,7 +166,7 @@
 				victim?.dropItemToGround(oops)
 			to_chat(victim, "<span class='danger'>I drop [oops] in excruciating pain!</span>")
 		if(prob(max(1, severity - WOUND_SEVERITY_TRIVIAL) * 10))
-			victim?.agony_scream()
+			victim.agony_scream()
 	
 	if(limb.body_zone == BODY_ZONE_PRECISE_GROIN && prob(15 * max(1, severity - WOUND_SEVERITY_TRIVIAL)))
 		victim?.Paralyze(severity * 3)

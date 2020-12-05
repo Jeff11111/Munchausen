@@ -19,14 +19,11 @@
 		affecting.receive_damage(clamp(brute_dam/2 * affecting.body_damage_coeff, 15, 50), clamp(burn_dam/2 * affecting.body_damage_coeff, 0, 50), wound_bonus=CANT_WOUND) //Damage the parent bodyzone based on limb's existing damage
 	if(!silent)
 		C.visible_message("<span class='danger'><B>[C]'s [src.name] has been violently dismembered!</B></span>")
-	if(body_zone != BODY_ZONE_HEAD)
-		C.death_scream()
 	if(!silent)
 		playsound(get_turf(C), 'modular_skyrat/sound/gore/dismember.ogg', 80, TRUE)
 	SEND_SIGNAL(C, COMSIG_ADD_MOOD_EVENT, "dismembered", /datum/mood_event/dismembered)
 	drop_limb(dismembered = TRUE, destroyed = destroy, wounding_type = wounding_type)
 	C.update_equipment_speed_mods() // Update in case speed affecting item unequipped by dismemberment
-
 	C.bleed(12)
 
 	if(QDELETED(src)) //Could have dropped into lava/explosion/chasm/whatever
@@ -186,7 +183,6 @@
   */
 /obj/item/bodypart/proc/get_mangled_state()
 	. = BODYPART_MANGLED_NONE
-
 	var/biological_state = owner?.get_biological_state()
 	var/required_bone_severity = WOUND_SEVERITY_SEVERE
 	var/required_muscle_severity = WOUND_SEVERITY_SEVERE
@@ -212,17 +208,14 @@
 			. |= BODYPART_MANGLED_BONE
 
 /**
-  * try_dismember() is used, once we've confirmed that a flesh and bone bodypart has both the skin, muscle and bone mangled, to actually roll for it
-  *
-  * Mangling is described in the above proc, [/obj/item/bodypart/proc/get_mangled_state()]. This simply makes the roll for whether we actually dismember or not
-  * using how damaged the limb already is, and how much damage this blow was for. If we have a critical bone wound instead of just a severe, we add +10% to the roll.
-  * Lastly, we choose which kind of dismember we want based on the wounding type we hit with
+  * damage_integrity() is used, once we've confirmed that a flesh and bone bodypart has both the skin, muscle and bone mangled,
+  * to try and damage it's integrity, which once it reaches 0... the bodypart is dismembered or gored.
   *
   * Arguments:
   * * wounding_type: Either WOUND_BLUNT, WOUND_SLASH, or WOUND_PIERCE, basically only matters for the dismember message
-  * * wounding_dmg: The damage of the strike that prompted this roll, higher damage = higher chance
+  * * wounding_dmg: The damage of the strike that prompted this roll, higher damage = higher integrity loss
   * * wound_bonus: Not actually used right now, but maybe someday
-  * * bare_wound_bonus: ditto above
+  * * bare_wound_bonus: Ditto above
   */
 
 /obj/item/bodypart/proc/damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
@@ -241,8 +234,23 @@
 	else if((locate(/datum/wound/slash/critical) in wounds) || (locate(/datum/wound/pierce/critical) in wounds) || \
 			(locate(/datum/wound/mechanical/slash/critical) in wounds) || (locate(/datum/wound/mechanical/pierce/critical) in wounds))
 		wounding_dmg *= 1.15
+	
 	//Damage the integrity with the wounding damage
 	limb_integrity = max(0, limb_integrity - wounding_dmg)
+
+/**
+  * try_dismember() is used, once we've confirmed that a flesh and bone bodypart has both the skin, muscle and bone mangled, to actually roll for it
+  *
+  * Mangling is described in the above proc, [/obj/item/bodypart/proc/get_mangled_state()]. This simply makes the roll for whether we actually dismember or not
+  * using how damaged the limb already is, and how much damage this blow was for. If we have a critical bone wound instead of just a severe, we add +10% to the roll.
+  * Lastly, we choose which kind of dismember we want based on the wounding type we hit with
+  *
+  * Arguments:
+  * * wounding_type: Either WOUND_BLUNT, WOUND_SLASH, or WOUND_PIERCE, basically only matters for the dismember message
+  * * wounding_dmg: The damage of the strike that prompted this roll, higher damage = higher chance
+  * * wound_bonus: Not actually used right now, but maybe someday
+  * * bare_wound_bonus: ditto above
+  */
 
 /obj/item/bodypart/proc/try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	if(!owner)

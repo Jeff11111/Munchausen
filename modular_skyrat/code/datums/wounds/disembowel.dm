@@ -52,14 +52,18 @@
 			if(L.is_robotic_limb())
 				occur_text = "gets a critical amount of metal molten, opening a gaping hole from which slightly components fall through"
 
-	var/mob/living/carbon/victim = L.owner
-	victim.confused += 10
-	if(prob(30))
-		victim.vomit(50, 20, 25)
-
-	var/msg = "<b><span class='danger'>[victim]'s [fake_body_zone ? parse_zone(fake_body_zone) : L.name] [occur_text]!</span></b>"
+	var/mob/living/carbon/poorsod = L.owner
+	if(prob(50 - GET_STAT_LEVEL(poorsod, end)))
+		poorsod.confused += max(0, 25 - GET_STAT_LEVEL(poorsod, end))
+	if(prob(35 - GET_STAT_LEVEL(poorsod, end)))
+		poorsod.vomit(15, 15, 25)
+	if(prob(60 - GET_STAT_LEVEL(poorsod, end)))
+		poorsod.death_scream()
+	
+	var/msg = "<b><span class='danger'>[poorsod]'s [fake_body_zone ? parse_zone(fake_body_zone) : L.name] [occur_text]!</span></b>"
+	
 	if(!silent)
-		victim.visible_message(msg, "<span class='userdanger'>Your [fake_body_zone ? parse_zone(fake_body_zone) : L.name] [occur_text]!</span>")
+		poorsod.visible_message(msg, "<span class='userdanger'>Your [fake_body_zone ? parse_zone(fake_body_zone) : L.name] [occur_text]!</span>")
 	
 	//apply the blood gush effect
 	if(wounding_type != WOUND_BURN && L.owner)
@@ -79,7 +83,7 @@
 			B.GoTo(targ, dist)
 
 	second_wind()
-	log_wound(victim, src)
+	log_wound(poorsod, src)
 	qdel(src)
 	var/kaplosh_sound = 'modular_skyrat/sound/gore/dissection.ogg'
 	if(length(L.dismember_sounds))

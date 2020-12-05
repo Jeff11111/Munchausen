@@ -59,16 +59,18 @@
 			if(L.is_robotic_limb())
 				occur_text = "is completely incinerated, falling to a puddle of debris"
 
-	var/mob/living/carbon/victim = L.owner
-	if(prob(40))
-		victim.confused += 5
-	if(prob(50 - GET_STAT_LEVEL(victim, end)))
-		victim.emote("scream")
+	var/mob/living/carbon/poorsod = L.owner
+	if(prob(50 - GET_STAT_LEVEL(poorsod, end)))
+		poorsod.confused += max(0, 15 - GET_STAT_LEVEL(poorsod, end))
+	if((fake_body_zone == BODY_ZONE_PRECISE_GROIN) && prob(35 - GET_STAT_LEVEL(poorsod, end)))
+		poorsod.vomit(15, 15, 25)
+	if(prob(60 - GET_STAT_LEVEL(poorsod, end)))
+		poorsod.death_scream()
 
-	var/msg = "<b><span class='danger'>[victim]'s [fake_body_zone ? parse_zone(fake_body_zone) : L.name] [occur_text]!</span></b>"
+	var/msg = "<b><span class='danger'>[poorsod]'s [fake_body_zone ? parse_zone(fake_body_zone) : L.name] [occur_text]!</span></b>"
 
 	if(!silent)
-		victim.visible_message(msg, "<span class='userdanger'>Your [fake_body_zone ? parse_zone(fake_body_zone) : L.name] [occur_text]!</span>")
+		poorsod.visible_message(msg, "<span class='userdanger'>Your [fake_body_zone ? parse_zone(fake_body_zone) : L.name] [occur_text]!</span>")
 
 	if(wounding_type == WOUND_BURN)
 		if(L.is_organic_limb())
@@ -94,7 +96,7 @@
 			B.GoTo(targ, dist)
 
 	second_wind()
-	log_wound(victim, src)
+	log_wound(poorsod, src)
 	var/should_kaplosh = FALSE
 	if(wounding_type in list(WOUND_BURN, WOUND_PIERCE, WOUND_BLUNT))
 		should_kaplosh = TRUE
