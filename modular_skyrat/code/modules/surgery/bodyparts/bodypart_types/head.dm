@@ -319,6 +319,13 @@
 		neck.status = status
 		neck.synthetic = synthetic
 		neck.render_like_organic = render_like_organic
+	left_eye = null
+	right_eye = null
+
+/obj/item/bodypart/head/drop_organs(mob/user, violent_removal)
+	. = ..()
+	left_eye = null
+	right_eye = null
 
 /obj/item/bodypart/head/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
 	. = ..()
