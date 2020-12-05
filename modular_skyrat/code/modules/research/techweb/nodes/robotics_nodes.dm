@@ -34,7 +34,7 @@
 	display_name = "Sapient Synthetic Fabrication"
 	description = "With enhanced artificial intelligence and mechatronic technology, we are able to build sapient synthetics from scratch."
 	prereq_ids = list()
-	design_ids = list("ipc_chassis", "synthliz_chassis", "synth_chassis", "ipc_heart", "ipc_lungs", "ipc_tongue", "ipc_stomach", "ipc_liver", "ipc_eyes", "ipc_ears", "cyborg_penis", "cyborg_testicles", "cyborg_breasts", "cyborg_vagina", "cyborg_womb")
+	design_ids = list("ipc_chassis", "synthliz_chassis", "synth_chassis", "ipc_heart", "ipc_lungs", "ipc_tongue", "ipc_stomach", "ipc_liver", "ipc_left_eye", "ipc_right_eye", "ipc_ears", "cyborg_penis", "cyborg_testicles", "cyborg_breasts", "cyborg_vagina", "cyborg_womb")
 	starting_node = TRUE
 
 /datum/techweb_node/adv_robotics/New()

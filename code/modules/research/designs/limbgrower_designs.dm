@@ -214,7 +214,7 @@
 
 /datum/design/lefteye
 	name = "Left Eye"
-	id = "eyes"
+	id = "left_eye"
 	build_type = LIMBGROWER
 	reagents_list = list(/datum/reagent/medicine/synthflesh = 15)
 	build_path = /obj/item/bodypart/left_eye
@@ -222,7 +222,7 @@
 
 /datum/design/righteye
 	name = "Right Eye"
-	id = "eyes"
+	id = "right_eye"
 	build_type = LIMBGROWER
 	reagents_list = list(/datum/reagent/medicine/synthflesh = 15)
 	build_path = /obj/item/bodypart/right_eye
