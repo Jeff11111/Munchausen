@@ -88,7 +88,7 @@
 	sound = 'modular_citadel/sound/voice/peep.ogg'
 
 /datum/emote/living/quietnoise
-	key = "quitenoise"
+	key = "quietnoise"
 	key_third_person = "quietnoises"
 	message = "makes a quiet noise."
 	emote_type = EMOTE_AUDIBLE

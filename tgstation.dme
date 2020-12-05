@@ -4019,6 +4019,7 @@
 #include "modular_skyrat\code\modules\mob\living\carbon\emote.dm"
 #include "modular_skyrat\code\modules\mob\living\carbon\life.dm"
 #include "modular_skyrat\code\modules\mob\living\carbon\pain.dm"
+#include "modular_skyrat\code\modules\mob\living\carbon\say.dm"
 #include "modular_skyrat\code\modules\mob\living\carbon\alien\pain.dm"
 #include "modular_skyrat\code\modules\mob\living\carbon\combat\combat_intent.dm"
 #include "modular_skyrat\code\modules\mob\living\carbon\combat\dodge_parry.dm"
