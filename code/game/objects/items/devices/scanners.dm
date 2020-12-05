@@ -114,7 +114,7 @@ GENETICS SCANNER
 /obj/item/healthanalyzer/attack(mob/living/M, mob/living/carbon/human/user)
 
 	// Clumsiness/brain damage check
-	if ((HAS_TRAIT(user, TRAIT_CLUMSY) || HAS_TRAIT(user, TRAIT_DUMB)) && prob(50))
+	if((HAS_TRAIT(user, TRAIT_CLUMSY) || HAS_TRAIT(user, TRAIT_DUMB)) && prob(50))
 		to_chat(user, "<span class='notice'>You stupidly try to analyze the floor's vitals!</span>")
 		user.visible_message("<span class='warning'>[user] has analyzed the floor's vitals!</span>")
 		var/msg = "<span class='info'>*---------*\nAnalyzing results for The floor:\nOverall status: <b>Healthy</b>\n"
@@ -144,6 +144,7 @@ GENETICS SCANNER
 /proc/healthscan(mob/user, mob/living/M, mode = 1, advanced = FALSE)
 	if(isliving(user) && (user.incapacitated() || user.eye_blind))
 		return
+	
 	//Damage specifics
 	var/oxy_loss = M.getOxyLoss()
 	var/tox_loss = M.getToxLoss()

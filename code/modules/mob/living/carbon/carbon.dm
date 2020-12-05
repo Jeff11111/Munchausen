@@ -63,9 +63,9 @@
 	var/oindex = active_hand_index
 	active_hand_index = held_index
 	//Update intent and zone selected according to the zone saved
-	var/woah = min(length(hand_index_to_intent))
+	var/woah = min(length(hand_index_to_intent), active_hand_index)
 	a_intent = hand_index_to_intent[woah]
-	woah = min(length(hand_index_to_zone))
+	woah = min(length(hand_index_to_zone), active_hand_index)
 	zone_selected = hand_index_to_zone[woah]
 	if(hud_used)
 		var/obj/screen/inventory/hand/H

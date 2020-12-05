@@ -19,6 +19,7 @@
 	infection_chance = 90
 	infection_rate = 6
 	descriptive = "The flesh is incised!"
+	wound_flags = (MANGLES_SKIN|MANGLES_MUSCLE|VISIBLE_THROUGH_CLOTHING)
 
 /datum/wound/slash/critical/incision/build_wound_overlay()
 	if(limb.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN))
