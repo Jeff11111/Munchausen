@@ -14,11 +14,12 @@
 		var/obj/item/clothing/mask/MFP = src.wear_mask
 		number += MFP.flash_protect
 
-	var/obj/item/organ/eyes/E = getorganslot(ORGAN_SLOT_EYES)
-	if(!E)
+	var/obj/item/bodypart/left_eye/LE = get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+	var/obj/item/bodypart/left_eye/RE = get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+	if(!LE && !RE)
 		number = INFINITY //Can't get flashed without eyes
 	else
-		number += E.flash_protect
+		number += LE?.flash_protect || RE?.flash_protect
 
 	return number
 
@@ -410,40 +411,42 @@
 
 	var/damage = intensity - get_eye_protection()
 	if(.) // we've been flashed
-		var/obj/item/organ/eyes/eyes = getorganslot(ORGAN_SLOT_EYES)
-		if (!eyes)
+		var/obj/item/bodypart/left_eye/LE = get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+		var/obj/item/bodypart/right_eye/RE = get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+		if(!LE && !RE)
 			return
+		
 		if(visual)
 			return
 
-		if (damage == 1)
+		var/obj/item/bodypart/chosen_eye = pick(LE || RE, RE || LE)
+		if(damage == 1)
 			to_chat(src, "<span class='warning'>Your eyes sting a little.</span>")
 			if(prob(40))
-				eyes.applyOrganDamage(1)
+				chosen_eye.receive_damage(burn=1)
 
-		else if (damage == 2)
+		else if(damage == 2)
 			to_chat(src, "<span class='warning'>Your eyes burn.</span>")
-			eyes.applyOrganDamage(rand(2, 4))
+			chosen_eye.receive_damage(burn=rand(2,4))
 
-		else if( damage >= 3)
+		else if(damage >= 3)
 			to_chat(src, "<span class='warning'>Your eyes itch and burn severely!</span>")
-			eyes.applyOrganDamage(rand(12, 16))
+			chosen_eye.receive_damage(burn=rand(12,16))
 
-		if(eyes.damage > 10)
+		if((LE?.get_damage() + RE?.get_damage()) > 10)
 			blind_eyes(damage)
 			blur_eyes(damage * rand(3, 6))
-
-			if(eyes.damage > 20)
-				if(prob(eyes.damage - 20))
+			if((LE?.get_damage() + RE?.get_damage()) > 20)
+				if(prob((LE?.get_damage() + RE?.get_damage()) - 20))
 					if(!HAS_TRAIT(src, TRAIT_NEARSIGHT))
 						to_chat(src, "<span class='warning'>Your eyes start to burn badly!</span>")
 					become_nearsighted(EYE_DAMAGE)
 
-				else if(prob(eyes.damage - 25))
+				else if(prob((LE?.get_damage() + RE?.get_damage()) - 25))
 					if(!HAS_TRAIT(src, TRAIT_BLIND))
 						to_chat(src, "<span class='warning'>You can't see anything!</span>")
-					eyes.applyOrganDamage(eyes.maxHealth)
-
+					LE?.kill_limb()
+					RE?.kill_limb()
 			else
 				to_chat(src, "<span class='warning'>Your eyes are really starting to hurt. This can't be good for you!</span>")
 		if(has_bane(BANE_LIGHT))

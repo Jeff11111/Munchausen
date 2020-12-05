@@ -22,8 +22,9 @@
 	. = ..()
 	if(!.)
 		return
-	if(!owner.getorganslot(ORGAN_SLOT_EYES))
-		if (display_error)
+	var/mob/living/carbon/C = owner
+	if(!istype(C) || (!C.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE) && !C.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)))
+		if(display_error)
 			to_chat(owner, "<span class='warning'>You have no eyes with which to mesmerize.</span>")
 		return FALSE
 	// Check: Eyes covered?
@@ -54,8 +55,9 @@
 			to_chat(owner, "<span class='warning'>Your victim is not [(target.stat == DEAD || HAS_TRAIT(target, TRAIT_FAKEDEATH))?"alive":"conscious"].</span>")
 		return FALSE
 	// Check: Target has eyes?
-	if(!target.getorganslot(ORGAN_SLOT_EYES))
-		if (display_error)
+	var/mob/living/carbon/C = target
+	if(!istype(C) || (!C.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE) && !C.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)))
+		if(display_error)
 			to_chat(owner, "<span class='warning'>They have no eyes!</span>")
 		return FALSE
 	// Check: Target blind?

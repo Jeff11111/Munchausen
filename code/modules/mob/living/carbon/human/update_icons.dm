@@ -954,12 +954,12 @@ use_mob_overlay_icon: if FALSE, it will always use the default_icon_file even if
 	if(!dna)
 		return
 
-	if (!dna.species)
+	if(!dna.species)
 		return
 
-	var/obj/item/bodypart/HD = get_bodypart("head")
+	var/obj/item/bodypart/HD = get_bodypart(BODY_ZONE_HEAD)
 
-	if (!istype(HD))
+	if(!istype(HD))
 		return
 
 	HD.update_limb()
@@ -977,20 +977,39 @@ use_mob_overlay_icon: if FALSE, it will always use the default_icon_file even if
 				lip_overlay.pixel_y += dna.species.offset_features[OFFSET_LIPS][2]
 			add_overlay(lip_overlay)
 
-		// eyes
+		// Eyes
 		if(!(NOEYES in dna.species.species_traits))
-			var/has_eyes = getorganslot(ORGAN_SLOT_EYES)
-			var/mutable_appearance/eye_overlay
-			if(!has_eyes)
-				eye_overlay = mutable_appearance(dna.species.icon_eyes, "eyes_missing", -BODY_LAYER) //SKYRAT change accounts for different sprites
+			var/obj/item/bodypart/left_eye/LE = get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+			var/obj/item/bodypart/right_eye/RE = get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+			var/mutable_appearance/eyes_overlay
+			var/mutable_appearance/left_eye_overlay
+			var/mutable_appearance/right_eye_overlay
+
+			eyes_overlay = mutable_appearance(dna.species.icon_eyes, "blank", -BODY_LAYER)
+			
+			if(LE)
+				left_eye_overlay = mutable_appearance(dna.species.icon_eyes, "eye-left", -BODY_LAYER)
 			else
-				eye_overlay = mutable_appearance(dna.species.icon_eyes, "eyes", -BODY_LAYER) //SKYRAT change accounts for different sprites
-			if((EYECOLOR in dna.species.species_traits) && has_eyes)
-				eye_overlay.color = "#" + eye_color
+				left_eye_overlay = mutable_appearance(dna.species.icon_eyes, "eye-left-missing", -BODY_LAYER)
+			eyes_overlay.add_overlay(left_eye_overlay)
+
+			if(RE)
+				right_eye_overlay = mutable_appearance(dna.species.icon_eyes, "eye-left", -BODY_LAYER)
+			else
+				right_eye_overlay = mutable_appearance(dna.species.icon_eyes, "eye-right-missing", -BODY_LAYER)
+			eyes_overlay.add_overlay(right_eye_overlay)
+
+			if(EYECOLOR in dna.species.species_traits)
+				if(left_eye_overlay)
+					left_eye_overlay.color = "#" + left_eye_color
+				if(right_eye_overlay)
+					left_eye_overlay.color = "#" + right_eye_color
+
 			if(OFFSET_EYES in dna.species.offset_features)
-				eye_overlay.pixel_x += dna.species.offset_features[OFFSET_EYES][1]
-				eye_overlay.pixel_y += dna.species.offset_features[OFFSET_EYES][2]
-			add_overlay(eye_overlay)
+				eyes_overlay.pixel_x += dna.species.offset_features[OFFSET_EYES][1]
+				eyes_overlay.pixel_y += dna.species.offset_features[OFFSET_EYES][2]
+
+			add_overlay(eyes_overlay)
 
 	dna.species.handle_hair(src)
 

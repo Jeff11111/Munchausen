@@ -11,8 +11,6 @@
 	if(!zone)
 		return BODY_ZONE_CHEST
 	switch(zone)
-		if(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)
-			return BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_MOUTH)
 			return BODY_ZONE_HEAD
 		else

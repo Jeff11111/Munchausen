@@ -1491,11 +1491,12 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 				to_chat(usr,"<span class='warning'>This must be used on a carbon mob.</span>")
 				return
 			var/mob/living/carbon/C = target
+			var/list/sensory_bodyparts = list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)
 			for(var/obj/item/bodypart/BP in C.bodyparts)
-				if(BP.body_zone in LIMB_BODYPARTS)
+				if(BP.body_zone in (LIMB_BODYPARTS | sensory_bodyparts))
 					BP.drop_limb(FALSE, FALSE, FALSE, TRUE)
-			var/list/sensory = list(ORGAN_SLOT_EYES, ORGAN_SLOT_TONGUE, ORGAN_SLOT_VOICE, ORGAN_SLOT_EARS)
-			for(var/i in sensory)
+			var/list/sensory_organs = list(ORGAN_SLOT_TONGUE, ORGAN_SLOT_VOICE, ORGAN_SLOT_EARS)
+			for(var/i in sensory_organs)
 				if(C.getorganslot(i))
 					var/obj/item/organ/O = C.getorganslot(i)
 					O.Remove()

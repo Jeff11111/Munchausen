@@ -127,7 +127,7 @@
 
 	var/mob/living/carbon/human/H = user
 
-	var/choice = input(user, "Something to change?", "Magical Grooming") as null|anything in list("name", "race", "gender", "hair", "eyes")
+	var/choice = input(user, "Something to change?", "Magical Grooming") as null|anything in list("name", "race", "gender", "hair", "left eye", "right eye")
 
 	if(!user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
 		return
@@ -234,17 +234,30 @@
 						H.dna.update_ui_block(DNA_FACIAL_HAIR_COLOR_BLOCK)
 				H.update_hair()
 
-		if("eyes")
-			var/new_eye_color = input(H, "Choose your eye color", "Eye Color","#"+H.eye_color) as color|null
+		if("left eye")
+			var/new_eye_color = input(H, "Choose your left eye color", "Left Eye Color","#"+H.left_eye_color) as color|null
 			if(!user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
 				return
 			if(new_eye_color)
 				var/n_color = sanitize_hexcolor(new_eye_color)
-				var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
-				if(eyes)
-					eyes.eye_color = n_color
-				H.eye_color = n_color
-				H.dna.update_ui_block(DNA_EYE_COLOR_BLOCK)
+				var/obj/item/bodypart/left_eye/LE = H.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+				if(LE)
+					LE.eye_color = n_color
+				H.left_eye_color = n_color
+				H.dna.update_ui_block(DNA_LEFT_EYE_COLOR_BLOCK)
+				H.dna.species.handle_body()
+		
+		if("right eye")
+			var/new_eye_color = input(H, "Choose your right eye color", "Right Eye Color","#"+H.right_eye_color) as color|null
+			if(!user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
+				return
+			if(new_eye_color)
+				var/n_color = sanitize_hexcolor(new_eye_color)
+				var/obj/item/bodypart/right_eye/RE = H.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+				if(RE)
+					RE.eye_color = n_color
+				H.right_eye_color = n_color
+				H.dna.update_ui_block(DNA_RIGHT_EYE_COLOR_BLOCK)
 				H.dna.species.handle_body()
 	if(choice)
 		curse(user)

@@ -52,7 +52,8 @@
 		features["facial_hair_style"] = "Shaved"
 		features["hair_color"] = "000"
 		features["facial_hair_color"] = "000"
-	features["eye_color"] = H.eye_color
+	features["left_eye_color"] = H.left_eye_color
+	features["right_eye_color"] = H.right_eye_color
 	features["blood_type"] = H.dna.blood_type
 	features["saved_underwear"] = H.underwear
 	features["saved_undershirt"] = H.undershirt
@@ -86,7 +87,8 @@
 		H.dna.features["insect_wings"] = features["insect_wings"]
 		H.dna.features["deco_wings"] = features["deco_wings"]
 	H.skin_tone = features["skin_tone"]
-	H.eye_color = features["eye_color"]
+	H.left_eye_color = features["left_eye_color"]
+	H.right_eye_color = features["right_eye_color"]
 	H.dna.blood_type = features["blood_type"]
 	H.underwear = features["saved_underwear"]
 	H.undershirt = features["saved_undershirt"]

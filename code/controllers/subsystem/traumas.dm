@@ -178,7 +178,7 @@ SUBSYSTEM_DEF(traumas)
 						/obj/structure/sign/poster/contraband/syndicate_pistol, /obj/structure/sign/poster/contraband/syndicate_recruitment, /obj/item/bedsheet/syndie, /obj/item/borg/upgrade/syndicate, /obj/item/tank/jetpack/oxygen/harness, /obj/item/firing_pin/implant/pindicate, /obj/item/reagent_containers/glass/bottle/traitor, /obj/item/storage/belt/military,
 						/obj/item/shockpaddles/syndicate, /obj/item/clothing/mask/cigarette/syndicate, /obj/item/toy/plush/nukeplushie)),
 
-					"eye" = typecacheof(list(/obj/item/organ/eyes, /obj/item/reagent_containers/syringe))
+					"eye" = typecacheof(list(/obj/item/bodypart/left_eye, /obj/item/bodypart/right_eye, /obj/item/reagent_containers/syringe))
 						)
 
 	phobia_turfs = list("space" = typecacheof(list(/turf/open/space, /turf/open/floor/holofloor/space, /turf/open/floor/fakespace)),

@@ -507,11 +507,20 @@
 	construction_time = 100
 	category = list("IPC")
 
-/datum/design/ipc_eyes
-	name = "IPC eyes"
-	id = "ipc_eyes"
+/datum/design/ipc_left_eye
+	name = "IPC left eye"
+	id = "ipc_left_eye"
 	build_type = MECHFAB
-	build_path = /obj/item/organ/eyes/robot_ipc
+	build_path = /obj/item/bodypart/left_eye/robot_ipc
+	materials = list(/datum/material/iron = 1000, /datum/material/gold = 1000, /datum/material/uranium = 2500, /datum/material/glass = 1000)
+	construction_time = 100
+	category = list("IPC")
+
+/datum/design/ipc_right_eye
+	name = "IPC right eye"
+	id = "ipc_right_eye"
+	build_type = MECHFAB
+	build_path = /obj/item/bodypart/right_eye/robot_ipc
 	materials = list(/datum/material/iron = 1000, /datum/material/gold = 1000, /datum/material/uranium = 2500, /datum/material/glass = 1000)
 	construction_time = 100
 	category = list("IPC")

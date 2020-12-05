@@ -79,14 +79,18 @@
 /datum/symptom/sensory_restoration/Activate(datum/disease/advance/A)
 	if(!..())
 		return
-	var/mob/living/M = A.affected_mob
-	var/obj/item/organ/eyes/eyes = M.getorganslot(ORGAN_SLOT_EYES)
-	if (!eyes)
+	var/mob/living/carbon/M = A.affected_mob
+	if(!istype(M))
 		return
+	
+	var/obj/item/bodypart/left_eye/LE = M.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+	var/obj/item/bodypart/right_eye/RE = M.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+	if(!LE && !RE)
+		return
+	
 	switch(A.stage)
 		if(4, 5)
 			M.restoreEars()
-
 			if(HAS_TRAIT_FROM(M, TRAIT_BLIND, EYE_DAMAGE))
 				if(prob(20))
 					to_chat(M, "<span class='notice'>Your vision slowly returns...</span>")
@@ -102,8 +106,10 @@
 				else if(M.eye_blind || M.eye_blurry)
 					M.set_blindness(0)
 					M.set_blurriness(0)
-				else if(eyes.damage > 0)
-					eyes.applyOrganDamage(-1)
+				else if(LE?.get_damage() > 0)
+					LE.heal_damage(1, 1)
+				else if(RE?.get_damage() > 0)
+					RE.heal_damage(1, 1)
 		else
 			if(prob(base_message_chance))
 				to_chat(M, "<span class='notice'>[pick("Your eyes feel great.","You feel like your eyes can focus more clearly.", "You don't feel the need to blink.","Your ears feel great.","Your healing feels more acute.")]</span>")

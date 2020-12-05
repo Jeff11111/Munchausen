@@ -94,7 +94,7 @@
 
 /datum/quirk/trandening/on_spawn()
 	var/mob/living/carbon/human/H = quirk_holder
-	var/obj/item/autosurgeon/gloweyes/gloweyes = new(get_turf(H))
+	var/obj/item/limbsurgeon/gloweyes/gloweyes = new(get_turf(H))
 	H.equip_to_slot(gloweyes, SLOT_IN_BACKPACK)
 	H.regenerate_icons()
 

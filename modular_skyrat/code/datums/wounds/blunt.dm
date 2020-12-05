@@ -709,7 +709,7 @@
 	examine_desc = "appears grotesquely swollen"
 	occur_text = "cracks audibly and develops a nasty looking bruise"
 	severity = WOUND_SEVERITY_SEVERE
-	viable_zones = ALL_BODYPARTS
+	viable_zones = ALL_BODYPARTS_MINUS_EYES
 	interaction_efficiency_penalty = 2
 	limp_slowdown = 10
 	sound_effect = 'modular_skyrat/sound/gore/crack2.ogg'
@@ -735,7 +735,7 @@
 	examine_desc = "is mangled and pulped, with exposed and shattered pieces of bone"
 	occur_text = "cracks apart, exposing broken bones to open air"
 	severity = WOUND_SEVERITY_CRITICAL
-	viable_zones = ALL_BODYPARTS
+	viable_zones = ALL_BODYPARTS_MINUS_EYES
 	interaction_efficiency_penalty = 4
 	limp_slowdown = 15
 	sound_effect = 'modular_skyrat/sound/gore/crack3.ogg'

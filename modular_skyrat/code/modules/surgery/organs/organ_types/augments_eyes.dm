@@ -3,7 +3,6 @@
 	desc = "artificial photoreceptors with specialized functionality"
 	icon_state = "eye_implant"
 	implant_overlay = "eye_implant_overlay"
-	slot = ORGAN_SLOT_EYES
 	zone = BODY_ZONE_PRECISE_LEFT_EYE
 	w_class = WEIGHT_CLASS_TINY
 

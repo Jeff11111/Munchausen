@@ -1,21 +1,15 @@
-/obj/item/organ/eyes/robot_ipc
+/obj/item/bodypart/left_eye/robot_ipc
 	name = "robotic eyes"
 	icon = 'modular_skyrat/icons/obj/surgery.dmi'
-	icon_state = "cybernetic_eyeballs"
+	icon_state = "eye-c"
 	desc = "A very basic set of optical sensors with no extra vision modes or functions."
-	status = ORGAN_ROBOTIC
-	organ_flags = ORGAN_SYNTHETIC
+	status = BODYPART_ROBOTIC | BODYPART_SYNTHETIC
 
-/obj/item/organ/eyes/robot_ipc/emp_act(severity)
+/obj/item/bodypart/left_eye/emp_act(severity)
 	. = ..()
 	if(!owner || . & EMP_PROTECT_SELF)
 		return
 	to_chat(owner, "<span class='warning'>Static obfuscates your vision!</span>")
 	owner.flash_act(visual = 1)
 	if(severity == EMP_HEAVY)
-		owner.adjustOrganLoss(ORGAN_SLOT_EYES, 20) 
-
-//citadel shit ones
-/obj/item/organ/eyes/ipc
-	name = "ipc eyes"
-	icon_state = "cybernetic_eyeballs"
+		receive_damage(brute=20)

@@ -82,16 +82,16 @@
 	uses = 1
 	starting_organ = /obj/item/organ/cyberimp/eyes/hud/medical
 
-/obj/item/autosurgeon/gloweyes
-	desc = "A single use autosurgeon that contains a set of Luminescent Eyes augments. A screwdriver can be used to remove it, but implants can't be placed back in."
+/obj/item/limbsurgeon/gloweyes
+	desc = "A single use autosurgeon that contains a luminiscent left eye. A screwdriver can be used to remove it, but implants can't be placed back in."
 	uses = 1
-	starting_organ = /obj/item/organ/eyes/robotic/glow
+	starting_bodypart = /obj/item/bodypart/left_eye/robotic/glow
 
-/obj/item/autosurgeon/thermal_eyes
-	starting_organ = /obj/item/organ/eyes/robotic/thermals
+/obj/item/limbsurgeon/thermal_eyes
+	starting_bodypart = /obj/item/bodypart/left_eye/robotic/thermals
 
-/obj/item/autosurgeon/xray_eyes
-	starting_organ = /obj/item/organ/eyes/robotic/xray
+/obj/item/limbsurgeon/xray_eyes
+	starting_bodypart = /obj/item/bodypart/left_eye/robotic/xray
 
 /obj/item/autosurgeon/anti_stun
 	starting_organ = /obj/item/organ/cyberimp/brain/anti_stun
@@ -110,8 +110,8 @@
 	icon_state = "syndiebox"
 	illustration = "cyber_implants"
 	var/list/boxed = list(
-		/obj/item/autosurgeon/thermal_eyes,
-		/obj/item/autosurgeon/xray_eyes,
+		/obj/item/limbsurgeon/thermal_eyes,
+		/obj/item/limbsurgeon/xray_eyes,
 		/obj/item/autosurgeon/anti_stun,
 		/obj/item/autosurgeon/reviver)
 	var/amount = 5

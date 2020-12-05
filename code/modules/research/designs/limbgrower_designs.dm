@@ -212,12 +212,20 @@
 	build_path = /obj/item/organ/ears
 	category = list("initial","human","lizard","fly","insect","plasmaman","mammal","xeno")
 
-/datum/design/eyes
-	name = "Eyes"
+/datum/design/lefteye
+	name = "Left Eye"
 	id = "eyes"
 	build_type = LIMBGROWER
-	reagents_list = list(/datum/reagent/medicine/synthflesh = 30)
-	build_path = /obj/item/organ/eyes
+	reagents_list = list(/datum/reagent/medicine/synthflesh = 15)
+	build_path = /obj/item/bodypart/left_eye
+	category = list("initial","human","lizard","fly","insect","plasmaman","mammal","xeno")
+
+/datum/design/righteye
+	name = "Right Eye"
+	id = "eyes"
+	build_type = LIMBGROWER
+	reagents_list = list(/datum/reagent/medicine/synthflesh = 15)
+	build_path = /obj/item/bodypart/right_eye
 	category = list("initial","human","lizard","fly","insect","plasmaman","mammal","xeno")
 
 /datum/design/tongue

@@ -30,13 +30,14 @@
 	if(visualsOnly)
 		return
 	H.fully_replace_character_name(null,"Waldo")
-	H.eye_color = "000"
+	H.left_eye_color = sanitize_hexcolor("000")
+	H.right_eye_color = sanitize_hexcolor("000")
 	H.gender = MALE
 	H.skin_tone = "caucasian3"
 	H.hair_style = "Business Hair 3"
 	H.facial_hair_style = "Shaved"
-	H.hair_color = "000"
-	H.facial_hair_color = H.hair_color
+	H.hair_color = sanitize_hexcolor("000")
+	H.facial_hair_color = sanitize_hexcolor(H.hair_color)
 	H.update_body()
 	if(H.mind)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/aoe_turf/knock(null))
@@ -59,8 +60,8 @@
 /datum/outfit/synthetic/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	if(visualsOnly)
 		return
-	var/obj/item/organ/eyes/robotic/glow/eyes = new()
-	eyes.Insert(src, drop_if_replaced = FALSE)
+	var/obj/item/bodypart/left_eye/robotic/glow/eyes = new()
+	eyes.attach_limb(H, TRUE)
 
 /datum/outfit/spacepol
 	name = "Spacepol Officer"

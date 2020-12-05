@@ -121,7 +121,7 @@
 					to_chat(user, "<span class='notice'>You're going to need to remove that [(M.head && M.head.flags_cover & HEADCOVERSEYES) ? "helmet" : (M.wear_mask && M.wear_mask.flags_cover & MASKCOVERSEYES) ? "mask": "glasses"] first.</span>")
 					return
 
-				var/obj/item/organ/eyes/E = M.getorganslot(ORGAN_SLOT_EYES)
+				var/obj/item/bodypart/E = M.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE) || M.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
 				if(!E)
 					to_chat(user, "<span class='danger'>[M] doesn't have any eyes!</span>")
 					return

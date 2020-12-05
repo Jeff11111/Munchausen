@@ -145,8 +145,6 @@ obj/item/dildo/custom
 		playsound(loc, 'sound/weapons/gagging.ogg', 50, 1, -1)
 		user.Stun(150)
 		user.adjust_blurriness(8)
-		var/obj/item/organ/eyes/eyes = user.getorganslot(ORGAN_SLOT_EYES)
-		eyes?.applyOrganDamage(10)
 	return MANUAL_SUICIDE
 
 /obj/item/dildo/flared/huge/suicide_act(mob/living/user)

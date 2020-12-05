@@ -14,4 +14,7 @@
 	starting_children = list(/obj/item/bodypart/r_leg/children, /obj/item/bodypart/l_leg/children)
 
 /obj/item/bodypart/neck/children
-	starting_children = list(/obj/item/bodypart/head)
+	starting_children = list(/obj/item/bodypart/head/children)
+
+/obj/item/bodypart/head/children
+	starting_children = list(/obj/item/bodypart/left_eye, /obj/item/bodypart/right_eye)

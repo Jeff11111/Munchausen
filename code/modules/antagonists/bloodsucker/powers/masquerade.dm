@@ -54,13 +54,14 @@
 	REMOVE_TRAIT(user, TRAIT_VIRUSIMMUNE, "bloodsucker")
 	REMOVE_TRAIT(user, TRAIT_NOBREATH, "bloodsucker")
 	var/obj/item/organ/heart/vampheart/H = user.getorganslot(ORGAN_SLOT_HEART)
-	var/obj/item/organ/eyes/vassal/bloodsucker/E = user.getorganslot(ORGAN_SLOT_EYES)
-	E.flash_protect = 0
+	var/obj/item/bodypart/left_eye/LE = user.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+	var/obj/item/bodypart/right_eye/RE = user.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+	LE?.flash_protect = 0
+	RE?.flash_protect = 0
 
 	// WE ARE ALIVE! //
 	bloodsuckerdatum.poweron_masquerade = TRUE
 	while(bloodsuckerdatum && ContinueActive(user))
-
 		// HEART
 		if(istype(H))
 			H.FakeStart()
@@ -98,9 +99,12 @@
 
 	// HEART
 	var/obj/item/organ/heart/H = user.getorganslot(ORGAN_SLOT_HEART)
-	var/obj/item/organ/eyes/vassal/bloodsucker/E = user.getorganslot(ORGAN_SLOT_EYES)
-	H.Stop()
+	if(H)
+		H.Stop()
 
-	E.flash_protect = 2
+	var/obj/item/bodypart/left_eye/LE = user.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+	var/obj/item/bodypart/right_eye/RE = user.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+	LE?.flash_protect = 2
+	RE?.flash_protect = 2
 
 	to_chat(user, "<span class='notice'>Your heart beats one final time, while your skin dries out and your icy pallor returns.</span>")

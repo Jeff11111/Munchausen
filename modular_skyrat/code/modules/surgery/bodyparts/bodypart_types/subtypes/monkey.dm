@@ -1,4 +1,10 @@
 //monky
+/obj/item/bodypart/left_eye/monkey
+	animal_origin = MONKEY_BODYPART
+
+/obj/item/bodypart/right_eye/monkey
+	animal_origin = MONKEY_BODYPART
+
 /obj/item/bodypart/head/monkey
 	icon = 'icons/mob/animal_parts.dmi'
 	icon_state = "default_monkey_head"

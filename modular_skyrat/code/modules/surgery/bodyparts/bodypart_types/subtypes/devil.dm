@@ -1,4 +1,16 @@
 //:smiling_imp:
+/obj/item/bodypart/left_eye/devil
+	dismemberable = 0
+	max_damage = 5000
+	animal_origin = DEVIL_BODYPART
+	status = BODYPART_ORGANIC | BODYPART_NOEMBED
+
+/obj/item/bodypart/right_eye/devil
+	dismemberable = 0
+	max_damage = 5000
+	animal_origin = DEVIL_BODYPART
+	status = BODYPART_ORGANIC | BODYPART_NOEMBED
+
 /obj/item/bodypart/head/devil
 	dismemberable = 0
 	max_damage = 5000

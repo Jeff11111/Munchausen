@@ -11,7 +11,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	stam_heal_tick = 2
 	stam_damage_coeff = 1
-	throw_range = 5
+	throw_range = 4
 	px_x = 0
 	px_y = -8
 
@@ -25,9 +25,9 @@
 	var/facial_hair_color = "000"
 	var/facial_hair_style = "Shaved"
 	//Eye Colouring
-
-	var/obj/item/organ/eyes/eyes = null
-
+	var/obj/item/bodypart/left_eye/left_eye
+	var/obj/item/bodypart/left_eye/right_eye
+	//Lips
 	var/lip_style = null
 	var/lip_color = "white"
 	//If the head is a special sprite
@@ -38,7 +38,7 @@
 	scars_covered_by_clothes = FALSE
 	max_cavity_size = WEIGHT_CLASS_SMALL
 	parent_bodyzone = BODY_ZONE_PRECISE_NECK
-	children_zones = list()
+	children_zones = list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)
 	var/obj/item/stack/sticky_tape/tapered = null
 	dismember_mod = 0.7
 	disembowel_mod = 0.7
@@ -230,13 +230,23 @@
 			. += lips_overlay
 
 		// eyes
-		var/image/eyes_overlay = image('icons/mob/human_face.dmi', "eyes", -BODY_LAYER, SOUTH)
-		. += eyes_overlay
-		if(!eyes)
-			eyes_overlay.icon_state = "eyes_missing"
+		var/mutable_appearance/eyes_overlay = mutable_appearance('icons/mob/human_face.dmi', "blank", -BODY_LAYER)
+		var/mutable_appearance/left_eye_overlay
+		var/mutable_appearance/right_eye_overlay
 
-		else if(eyes.eye_color)
-			eyes_overlay.color = "#" + eyes.eye_color
+		if(left_eye)
+			left_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-left", -BODY_LAYER)
+		else
+			left_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-left-missing", -BODY_LAYER)
+		eyes_overlay.add_overlay(left_eye_overlay)
+
+		if(right_eye)
+			right_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-right", -BODY_LAYER)
+		else
+			right_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-right-missing", -BODY_LAYER)
+		eyes_overlay.add_overlay(right_eye_overlay)
+		. += eyes_overlay
+		
 	// tape gag
 	if(tapered)
 		var/image/tape_overlay = image('modular_skyrat/icons/mob/tapegag.dmi', "tapegag", -BODY_LAYER, SOUTH)

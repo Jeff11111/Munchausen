@@ -23,9 +23,16 @@
 
 /datum/wound/artery/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
 	if(L)
+		if(!L.artery_name)
+			qdel(src)
+			return FALSE
 		name = "Torn [capitalize(L.artery_name, TRUE)]"
 		desc = "Patient's [L.artery_name] has been violently slashed open, causing severe hemorrhaging."
 		switch(L.body_zone)
+			if(BODY_ZONE_PRECISE_LEFT_EYE)
+				blood_loss_per_squirt *= 0.35
+			if(BODY_ZONE_PRECISE_RIGHT_EYE)
+				blood_loss_per_squirt *= 0.35
 			if(BODY_ZONE_HEAD)
 				blood_loss_per_squirt *= 1.5
 			if(BODY_ZONE_PRECISE_NECK)

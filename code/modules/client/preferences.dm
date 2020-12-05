@@ -162,7 +162,9 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 	var/facial_hair_color = "000"		//Facial hair color
 	var/skin_tone = "caucasian1"		//Skin color
 	var/use_custom_skin_tone = FALSE
-	var/eye_color = "000"				//Eye color
+	//Eye color
+	var/left_eye_color = "000000"
+	var/right_eye_color = "000000"
 	var/datum/species/pref_species = new /datum/species/human()	//Mutant race
 	var/list/features = list("mcolor" = "FFF",
 		"mcolor2" = "FFF",
@@ -540,7 +542,8 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 
 				dat += "<h3>Eye Color</h3>"
 
-				dat += "<span style='border: 1px solid #161616; background-color: #[eye_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=eyes;task=input'>Change</a><BR>"
+				dat += "<span style='border: 1px solid #161616; background-color: #[left_eye_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=left_eye;task=input'>Left Eye</a><BR>"
+				dat += "<span style='border: 1px solid #161616; background-color: #[right_eye_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=right_eye;task=input'>Right Eye</a><BR>"
 
 				dat += "</td>"
 			else if(use_skintones || mutant_colors)
@@ -1990,8 +1993,10 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					facial_hair_color = random_short_color()
 				if("facial_hair_style")
 					facial_hair_style = random_facial_hair_style(gender)
-				if("eyes")
-					eye_color = random_eye_color()
+				if("left_eye")
+					left_eye_color = random_eye_color()
+				if("right_eye")
+					right_eye_color = random_eye_color()
 				if("s_tone")
 					skin_tone = random_skin_tone()
 					use_custom_skin_tone = null
@@ -2150,10 +2155,15 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				if("cycle_bg")
 					bgstate = next_list_item(bgstate, bgstate_options)
 				
-				if("eyes")
-					var/new_eyes = input(user, "Choose your character's eye colour:", "Character Preference","#"+eye_color) as color|null
+				if("left_eye")
+					var/new_eyes = input(user, "Choose your character's left eye colour:", "Character Preference","#"+left_eye_color) as color|null
 					if(new_eyes)
-						eye_color = sanitize_hexcolor(new_eyes)
+						left_eye_color = sanitize_hexcolor(new_eyes)
+				
+				if("right_eye")
+					var/new_eyes = input(user, "Choose your character's right eye colour:", "Character Preference","#"+right_eye_color) as color|null
+					if(new_eyes)
+						right_eye_color = sanitize_hexcolor(new_eyes)
 
 				if("species")
 					var/result = input(user, "Select a species", "Species Selection") as null|anything in GLOB.roundstart_race_names
@@ -3092,12 +3102,18 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 
 	character.auto_hiss = auto_hiss
 
-	character.eye_color = eye_color
-	var/obj/item/organ/eyes/organ_eyes = character.getorgan(/obj/item/organ/eyes)
-	if(organ_eyes)
-		if(!initial(organ_eyes.eye_color))
-			organ_eyes.eye_color = eye_color
-		organ_eyes.old_eye_color = eye_color
+	character.left_eye_color = left_eye_color
+	character.right_eye_color = right_eye_color
+	var/obj/item/bodypart/left_eye/LE = character.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+	if(LE)
+		if(!initial(LE.eye_color))
+			LE.eye_color = left_eye_color
+		LE.old_eye_color = left_eye_color
+	var/obj/item/bodypart/right_eye/RE = character.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+	if(RE)
+		if(!initial(RE.eye_color))
+			RE.eye_color = right_eye_color
+		RE.old_eye_color = right_eye_color
 	character.hair_color = hair_color
 	character.facial_hair_color = facial_hair_color
 	character.skin_tone = skin_tone

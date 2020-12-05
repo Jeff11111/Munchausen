@@ -16,7 +16,6 @@
 	mutantstomach = /obj/item/organ/stomach/robot_ipc
 	mutantears = /obj/item/organ/ears/robot_ipc
 	mutanttongue = /obj/item/organ/tongue/robot_ipc
-	mutanteyes = /obj/item/organ/eyes/robot_ipc
 	mutantlungs = /obj/item/organ/lungs/robot_ipc
 	mutant_heart = /obj/item/organ/heart/robot_ipc
 	mutantliver = /obj/item/organ/liver/robot_ipc

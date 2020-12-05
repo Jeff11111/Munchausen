@@ -122,7 +122,7 @@
 	examine_desc = "is badly burnt and breaking out in blisters"
 	occur_text = "breaks out with violent red burns"
 	severity = WOUND_SEVERITY_MODERATE
-	viable_zones = ALL_BODYPARTS
+	viable_zones = ALL_BODYPARTS_MINUS_EYES
 	damage_multiplier_penalty = 1.1
 	threshold_minimum = 40
 	threshold_penalty = 30 // burns cause significant decrease in limb integrity compared to other wounds
@@ -141,7 +141,7 @@
 	examine_desc = "appears seriously charred, with aggressive red splotches"
 	occur_text = "chars rapidly, exposing ruined tissue and spreading angry red burns"
 	severity = WOUND_SEVERITY_SEVERE
-	viable_zones = ALL_BODYPARTS
+	viable_zones = ALL_BODYPARTS_MINUS_EYES
 	damage_multiplier_penalty = 1.2
 	threshold_minimum = 80
 	threshold_penalty = 40
@@ -161,7 +161,7 @@
 	examine_desc = "is a ruined mess of blanched bone, melted fat, and charred tissue"
 	occur_text = "vaporizes as flesh, bone, and fat melt together in a horrifying mess"
 	severity = WOUND_SEVERITY_CRITICAL
-	viable_zones = ALL_BODYPARTS
+	viable_zones = ALL_BODYPARTS_MINUS_EYES
 	damage_multiplier_penalty = 1.3
 	sound_effect = 'modular_skyrat/sound/effects/sizzle2.ogg'
 	threshold_minimum = 140

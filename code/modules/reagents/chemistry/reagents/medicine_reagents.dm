@@ -879,10 +879,12 @@
 	pH = 10
 
 /datum/reagent/medicine/oculine/on_mob_life(mob/living/carbon/M)
-	var/obj/item/organ/eyes/eyes = M.getorganslot(ORGAN_SLOT_EYES)
-	if (!eyes)
+	var/obj/item/bodypart/left_eye/LE = M.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+	var/obj/item/bodypart/right_eye/RE = M.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+	if(!LE && !RE)
 		return
-	eyes.applyOrganDamage(-2)
+	LE?.heal_damage(2, 2, 2)
+	RE?.heal_damage(2, 2, 2)
 	if(HAS_TRAIT_FROM(M, TRAIT_BLIND, EYE_DAMAGE))
 		if(prob(20))
 			to_chat(M, "<span class='warning'>Your vision slowly returns...</span>")

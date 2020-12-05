@@ -402,12 +402,23 @@
 	subcategory = CAT_MISCELLANEOUS
 	category = CAT_MISC
 
-/datum/crafting_recipe/flashlight_eyes
-	name = "Flashlight Eyes"
-	result = /obj/item/organ/eyes/robotic/flashlight
+/datum/crafting_recipe/left_flashlight_eyes
+	name = "Left Flashlight Eye"
+	result = /obj/item/bodypart/left_eye/robotic/flashlight
 	time = 10
 	reqs = list(
-		/obj/item/flashlight = 2,
+		/obj/item/flashlight = 1,
+		/obj/item/restraints/handcuffs/cable = 1
+	)
+	subcategory = CAT_MISCELLANEOUS
+	category = CAT_MISC
+
+/datum/crafting_recipe/right_flashlight_eyes
+	name = "Right Flashlight Eye"
+	result = /obj/item/bodypart/right_eye/robotic/flashlight
+	time = 10
+	reqs = list(
+		/obj/item/flashlight = 1,
 		/obj/item/restraints/handcuffs/cable = 1
 	)
 	subcategory = CAT_MISCELLANEOUS

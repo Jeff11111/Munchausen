@@ -674,7 +674,7 @@
 			if(!M.is_mouth_covered() && !M.is_eyes_covered())
 				unprotected = TRUE
 	if(unprotected)
-		if(!M.getorganslot(ORGAN_SLOT_EYES))	//can't blind somebody with no eyes
+		if(!M.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE) && !M.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE))	//can't blind somebody with no eyes
 			to_chat(M, "<span class = 'notice'>Your eye sockets feel wet.</span>")
 		else
 			if(!M.eye_blurry)

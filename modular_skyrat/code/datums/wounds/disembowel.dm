@@ -4,7 +4,7 @@
 /datum/wound/disembowel
 	name = "Disembowelment"
 	desc = "Patient's limb has been violently avulsioned, to the point of large chunks of flesh and organs getting lost."
-	viable_zones = ALL_BODYPARTS
+	viable_zones = ALL_BODYPARTS_MINUS_EYES
 	wound_type = WOUND_LIST_DISEMBOWEL
 	severity = WOUND_SEVERITY_LOSS
 	ignore_preexisting = TRUE
@@ -99,7 +99,7 @@
 	desc = "Patient's limb has been violently avulsioned, to the point of large chunks of flesh and organs getting lost."
 	treat_text = "Immediate surgical closure of the wound, as well as reimplantation of lost organs."
 	examine_desc = "has a wide and gaping wound"
-	viable_zones = ALL_BODYPARTS
+	viable_zones = ALL_BODYPARTS_MINUS_EYES
 	severity = WOUND_SEVERITY_CRITICAL
 	wound_type = WOUND_LIST_DISEMBOWEL
 	ignore_preexisting = TRUE
@@ -187,7 +187,7 @@
 	desc = "Patient's limb has been violently shredded, to the point of large chunks of metal and components getting lost."
 	treat_text = "Immediate welding of the wound, as well as reattachment of lost components."
 	examine_desc = "has a wide and gaping tear"
-	viable_zones = ALL_BODYPARTS
+	viable_zones = ALL_BODYPARTS_MINUS_EYES
 	severity = WOUND_SEVERITY_CRITICAL
 	wound_type = WOUND_LIST_DISEMBOWEL
 	initial_flow = 2

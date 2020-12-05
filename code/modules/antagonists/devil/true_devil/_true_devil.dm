@@ -34,7 +34,6 @@
 /mob/living/carbon/true_devil/create_internal_organs()
 	internal_organs += new /obj/item/organ/brain
 	internal_organs += new /obj/item/organ/tongue
-	internal_organs += new /obj/item/organ/eyes
 	internal_organs += new /obj/item/organ/ears/invincible //Prevents hearing loss from poorly aimed fireballs.
 	..()
 

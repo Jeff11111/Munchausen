@@ -79,7 +79,7 @@
 /datum/uplink_item/implants/thermals
 	name = "Thermal Eyes"
 	desc = "These cybernetic eyes will give you thermal vision. Comes with a free autosurgeon."
-	item = /obj/item/autosurgeon/thermal_eyes
+	item = /obj/item/limbsurgeon/thermal_eyes
 	cost = 8
 	include_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 
@@ -94,6 +94,6 @@
 /datum/uplink_item/implants/xray
 	name = "X-ray Vision Implant"
 	desc = "These cybernetic eyes will give you X-ray vision. Comes with an autosurgeon."
-	item = /obj/item/autosurgeon/xray_eyes
+	item = /obj/item/limbsurgeon/xray_eyes
 	cost = 10
 	include_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)

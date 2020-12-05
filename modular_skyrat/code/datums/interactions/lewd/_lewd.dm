@@ -114,7 +114,7 @@
 	lust = num
 	lastlusttime = world.time
 
-/mob/living/proc/has_penis(var/nintendo = REQUIRE_ANY)
+/mob/living/proc/has_penis(nintendo = REQUIRE_ANY)
 	var/mob/living/carbon/C = src
 	if(issilicon(src) && C.has_penis)
 		return TRUE
@@ -138,7 +138,7 @@
 					return TRUE
 	return FALSE
 
-/mob/living/proc/has_balls(var/nintendo = REQUIRE_ANY)
+/mob/living/proc/has_balls(nintendo = REQUIRE_ANY)
 	var/mob/living/carbon/C = src
 	if(istype(C))
 		var/obj/item/organ/genital/peepee = C.getorganslot(ORGAN_SLOT_TESTICLES)
@@ -160,7 +160,7 @@
 					return TRUE
 	return FALSE
 
-/mob/living/proc/has_vagina(var/nintendo = REQUIRE_ANY)
+/mob/living/proc/has_vagina(nintendo = REQUIRE_ANY)
 	var/mob/living/carbon/C = src
 	if(issilicon(src) && C.has_vagina)
 		return TRUE
@@ -184,7 +184,7 @@
 					return TRUE
 	return FALSE
 
-/mob/living/proc/has_breasts(var/nintendo = REQUIRE_ANY)
+/mob/living/proc/has_breasts(nintendo = REQUIRE_ANY)
 	var/mob/living/carbon/C = src
 	if(istype(C))
 		var/obj/item/organ/genital/peepee = C.getorganslot(ORGAN_SLOT_BREASTS)
@@ -206,7 +206,7 @@
 					return TRUE
 	return FALSE
 
-/mob/living/proc/has_anus(var/nintendo = REQUIRE_ANY)
+/mob/living/proc/has_anus(nintendo = REQUIRE_ANY)
 	if(issilicon(src))
 		return TRUE
 	switch(nintendo)
@@ -225,7 +225,7 @@
 		else
 			return TRUE
 
-/mob/living/proc/has_hand(var/nintendo = REQUIRE_ANY)
+/mob/living/proc/has_hand(nintendo = REQUIRE_ANY)
 	if(iscarbon(src))
 		var/mob/living/carbon/C = src
 		var/handcount = 0
@@ -257,7 +257,7 @@
 				return handcount
 	return FALSE
 
-/mob/living/proc/has_feet(var/nintendo = REQUIRE_ANY)
+/mob/living/proc/has_feet(nintendo = REQUIRE_ANY)
 	if(iscarbon(src))
 		var/mob/living/carbon/C = src
 		var/feetcount = 0
@@ -293,7 +293,7 @@
 	return has_feet(REQUIRE_ANY)
 */
 //weird procs go here
-/mob/living/proc/has_ears(var/nintendo = REQUIRE_ANY)
+/mob/living/proc/has_ears(nintendo = REQUIRE_ANY)
 	var/mob/living/carbon/C = src
 	if(istype(C))
 		var/obj/item/organ/peepee = C.getorganslot(ORGAN_SLOT_EARS)
@@ -315,7 +315,7 @@
 					return TRUE
 	return FALSE
 
-/mob/living/proc/has_earsockets(var/nintendo = REQUIRE_ANY)
+/mob/living/proc/has_earsockets(nintendo = REQUIRE_ANY)
 	var/mob/living/carbon/C = src
 	if(istype(C))
 		var/obj/item/organ/peepee = C.getorganslot(ORGAN_SLOT_EARS)
@@ -337,10 +337,10 @@
 					return TRUE
 	return FALSE
 
-/mob/living/proc/has_eyes(var/nintendo = REQUIRE_ANY)
+/mob/living/proc/has_eyes(nintendo = REQUIRE_ANY)
 	var/mob/living/carbon/C = src
 	if(istype(C))
-		var/obj/item/organ/peepee = C.getorganslot(ORGAN_SLOT_EYES)
+		var/obj/item/bodypart/peepee = C.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE) || C.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
 		if(peepee)
 			switch(nintendo)
 				if(REQUIRE_ANY)
@@ -359,10 +359,10 @@
 					return TRUE
 	return FALSE
 
-/mob/living/proc/has_eyesockets(var/nintendo = REQUIRE_ANY)
+/mob/living/proc/has_eyesockets(nintendo = REQUIRE_ANY)
 	var/mob/living/carbon/C = src
 	if(istype(C))
-		var/obj/item/organ/peepee = C.getorganslot(ORGAN_SLOT_EYES)
+		var/obj/item/bodypart/peepee = C.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE) || C.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
 		if(!peepee)
 			switch(nintendo)
 				if(REQUIRE_ANY)

@@ -45,8 +45,12 @@ Bonus
 	if(!..())
 		return
 	var/mob/living/carbon/M = A.affected_mob
-	var/obj/item/organ/eyes/eyes = M.getorganslot(ORGAN_SLOT_EYES)
-	if(eyes)
+	if(!istype(M))
+		return
+	
+	var/obj/item/bodypart/left_eye/LE = M.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+	var/obj/item/bodypart/right_eye/RE = M.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+	if(LE || RE)
 		switch(A.stage)
 			if(1, 2)
 				if(prob(base_message_chance) && !suppress_warning)
@@ -54,20 +58,23 @@ Bonus
 			if(3, 4)
 				to_chat(M, "<span class='warning'><b>Your eyes burn!</b></span>")
 				M.blur_eyes(10)
-				eyes.applyOrganDamage(1)
+				LE?.receive_damage(burn=1)
+				RE?.receive_damage(burn=1)
 			else
 				M.blur_eyes(20)
-				eyes.applyOrganDamage(5)
-				if(eyes.damage >= 10)
+				LE?.receive_damage(brute=1)
+				RE?.receive_damage(brute=1)
+				if((LE?.get_damage() + RE?.get_damage()) >= 10)
 					M.become_nearsighted(EYE_DAMAGE)
-				if(prob(eyes.damage - 10 + 1))
+				if(prob((LE?.get_damage() + RE?.get_damage()) - 10 + 1))
 					if(!remove_eyes)
 						if(!HAS_TRAIT(M, TRAIT_BLIND))
 							to_chat(M, "<span class='userdanger'>You go blind!</span>")
-							eyes.applyOrganDamage(eyes.maxHealth)
+							LE?.kill_limb()
+							RE?.kill_limb()
 					else
 						M.visible_message("<span class='warning'>[M]'s eyes fall off their sockets!</span>", "<span class='userdanger'>Your eyes fall off their sockets!</span>")
-						eyes.Remove()
-						eyes.forceMove(get_turf(M))
+						LE?.dismember_wound(WOUND_SLASH)
+						RE?.dismember_wound(WOUND_SLASH)
 				else
 					to_chat(M, "<span class='userdanger'>Your eyes burn horrifically!</span>")

@@ -14,15 +14,16 @@
 	//blocks_emissive = EMISSIVE_BLOCK_UNIQUE // Skyrat edit -- 512 compatibility
 
 	//Hair colour and style
-	var/hair_color = "000"
+	var/hair_color = "000000"
 	var/hair_style = "Bald"
 
 	//Facial hair colour and style
-	var/facial_hair_color = "000"
+	var/facial_hair_color = "000000"
 	var/facial_hair_style = "Shaved"
 
 	//Eye colour
-	var/eye_color = "000"
+	var/left_eye_color = "000000"
+	var/right_eye_color = "000000"
 
 	var/skin_tone = "caucasian1"	//Skin tone
 
@@ -46,19 +47,13 @@
 	var/obj/item/r_store = null
 	var/obj/item/l_store = null
 	var/obj/item/s_store = null
-	
-	//skyrat slots
 	var/obj/item/w_underwear = null
 	var/obj/item/w_socks = null
 	var/obj/item/w_shirt = null
 	var/obj/item/ears_extra = null
 	var/obj/item/wrists = null
-	//
 
 	var/special_voice = "" // For changing our voice. Used by a symptom.
-
-	//var/bleed_rate = 0 //how much are we bleeding //skyrat edit
-	//var/bleedsuppress = 0 //for stopping bloodloss, eventually this will be limb-based like bleeding //skyrat edit
 
 	var/blood_state = BLOOD_STATE_NOT_BLOODY
 	var/list/blood_smear = list(BLOOD_STATE_BLOOD = 0, BLOOD_STATE_OIL = 0, BLOOD_STATE_NOT_BLOODY = 0)

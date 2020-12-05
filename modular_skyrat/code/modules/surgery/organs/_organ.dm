@@ -748,18 +748,6 @@
 			qdel(oT)
 			T.Insert(src)
 
-	if(!getorganslot(ORGAN_SLOT_EYES))
-		var/obj/item/organ/eyes/E
-
-		if(dna && dna.species && dna.species.mutanteyes)
-			E = new dna.species.mutanteyes()
-
-		else
-			E = new()
-		E.Insert(src)
-		if(only_one)
-			return TRUE
-
 	if(!getorganslot(ORGAN_SLOT_EARS))
 		var/obj/item/organ/ears/ears
 		if(dna && dna.species && dna.species.mutantears)
@@ -785,7 +773,7 @@
 
 /obj/item/organ/random/Initialize()
 	..()
-	var/list = list(/obj/item/organ/tongue, /obj/item/organ/brain, /obj/item/organ/heart, /obj/item/organ/liver, /obj/item/organ/ears, /obj/item/organ/eyes, /obj/item/organ/tail, /obj/item/organ/stomach)
+	var/list = list(/obj/item/organ/tongue, /obj/item/organ/brain, /obj/item/organ/heart, /obj/item/organ/liver, /obj/item/organ/ears, /obj/item/bodypart/left_eye, /obj/item/bodypart/right_eye, /obj/item/organ/tail, /obj/item/organ/stomach)
 	var/newtype = pick(list)
 	new newtype(loc)
 	return INITIALIZE_HINT_QDEL

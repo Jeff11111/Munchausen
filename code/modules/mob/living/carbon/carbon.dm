@@ -699,15 +699,18 @@
 
 	sight = initial(sight)
 	lighting_alpha = initial(lighting_alpha)
-	var/obj/item/organ/eyes/E = getorganslot(ORGAN_SLOT_EYES)
-	if(!E)
+	var/obj/item/bodypart/left_eye/LE = get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+	var/obj/item/bodypart/right_eye/RE = get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+	if(!LE && !RE)
 		update_tint()
 	else
-		see_invisible = E.see_invisible
-		see_in_dark = E.see_in_dark
-		sight |= E.sight_flags
-		if(!isnull(E.lighting_alpha))
-			lighting_alpha = E.lighting_alpha
+		see_invisible = LE?.see_invisible || RE?.see_invisible
+		see_in_dark = LE?.see_in_dark || RE?.see_in_dark
+		sight |= LE?.sight_flags | RE?.sight_flags
+		if(!isnull(LE?.lighting_alpha))
+			lighting_alpha = LE?.lighting_alpha
+		else if(!isnull(RE?.lighting_alpha))
+			lighting_alpha = RE?.lighting_alpha
 		if(HAS_TRAIT(src, TRAIT_NIGHT_VISION))
 			lighting_alpha = min(LIGHTING_PLANE_ALPHA_NV_TRAIT, lighting_alpha)
 			see_in_dark = max(NIGHT_VISION_DARKSIGHT_RANGE, see_in_dark)
@@ -768,10 +771,12 @@
 	if(wear_mask)
 		. += wear_mask.tint
 
-	var/obj/item/organ/eyes/E = getorganslot(ORGAN_SLOT_EYES)
-	if(E)
-		. += E.tint
-
+	var/obj/item/bodypart/left_eye/LE = get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+	var/obj/item/bodypart/right_eye/RE = get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+	if(LE)
+		. += LE.tint
+	else if(RE)
+		. += RE.tint
 	else
 		. += INFINITY
 

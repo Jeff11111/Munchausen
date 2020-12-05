@@ -220,24 +220,8 @@ GENETICS SCANNER
 			var/damage_message
 			var/obj/item/organ/O = organ
 
-			//EYES
-			if(istype(O, /obj/item/organ/eyes))
-				var/obj/item/organ/eyes/eyes = O
-				if(advanced)
-					if(HAS_TRAIT(C, TRAIT_BLIND))
-						temp_message += "\n<span class='alert'>Subject is blind.</span>"
-					if(HAS_TRAIT(C, TRAIT_NEARSIGHT))
-						temp_message += "\n<span class='alert'>Subject is nearsighted.</span>"
-					if(eyes.damage > 30)
-						damage_message += "\n<span class='alert'>Subject has severe eye damage.</span>"
-					else if(eyes.damage > 20)
-						damage_message += "\n<span class='alert'>Subject has significant eye damage.</span>"
-					else if(eyes.damage)
-						damage_message += "\n<span class='alert'>Subject has minor eye damage.</span>"
-
-
 			//EARS
-			else if(istype(O, /obj/item/organ/ears))
+			if(istype(O, /obj/item/organ/ears))
 				var/obj/item/organ/ears/ears = O
 				if(advanced)
 					if(HAS_TRAIT_FROM(C, TRAIT_DEAF, GENETIC_MUTATION))
@@ -249,7 +233,6 @@ GENETICS SCANNER
 							damage_message += "\n<span class='alert'>Subject has [ears.damage > ears.maxHealth ? "permanent ": "temporary "]hearing damage.</span>"
 						if(ears.deaf)
 							damage_message += "\n<span class='alert'>Subject is [ears.damage > ears.maxHealth ? "permanently ": "temporarily "] deaf.</span>"
-
 
 			//BRAIN
 			else if(istype(O, /obj/item/organ/brain))
@@ -359,8 +342,10 @@ GENETICS SCANNER
 		var/has_spleen = C.dna && !(NOSPLEEN in C.dna.species.species_traits)
 		var/has_kidneys = C.dna && !(NOKIDNEYS in C.dna.species.species_traits)
 		var/has_bladder = C.dna && !(NOBLADDER in C.dna.species.species_traits)
-		if(!M.getorganslot(ORGAN_SLOT_EYES))
-			msg += "<span class='alert'><b>Subject does not have eyes.</b></span>\n"
+		if(!M.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE))
+			msg += "<span class='alert'><b>Subject's left eye is missing.</b></span>\n"
+		if(!M.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE))
+			msg += "<span class='alert'><b>Subject's right eye is missing.</b></span>\n"
 		if(!M.getorganslot(ORGAN_SLOT_EARS))
 			msg += "<span class='alert'><b>Subject does not have ears.</b></span>\n"
 		if(!M.getorganslot(ORGAN_SLOT_BRAIN))
@@ -399,8 +384,6 @@ GENETICS SCANNER
 			mutant = TRUE
 		else if (S.mutant_heart != initial(S.mutant_heart))
 			mutant = TRUE
-		else if (S.mutanteyes != initial(S.mutanteyes))
-			mutant = TRUE
 		else if (S.mutantears != initial(S.mutantears))
 			mutant = TRUE
 		else if (S.mutanthands != initial(S.mutanthands))
@@ -423,11 +406,11 @@ GENETICS SCANNER
 	if(iscarbon(M))
 		var/mob/living/carbon/C = M
 		for(var/obj/item/bodypart/BP in C.bodyparts)
-			if(BP.germ_level)
+			if(BP.germ_level || BP.is_dead())
 				msg += "<span class='green'>Subject has an infected limb. Perform a wellbeing scan for more information.</span>\n"
 				break
 		for(var/obj/item/organ/O in C.bodyparts)
-			if(O.germ_level)
+			if(O.germ_level || O.is_dead())
 				msg += "<span class='green'>Subject has an infected organ. Perform a wellbeing scan for more information.</span>\n"
 				break
 		if(length(C.all_wounds))

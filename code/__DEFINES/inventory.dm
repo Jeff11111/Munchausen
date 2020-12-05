@@ -154,6 +154,9 @@
 #define HAND_RIGHT	(1<<10)
 #define HANDS		(HAND_LEFT | HAND_RIGHT)
 #define NECK		(1<<11)
+#define LEFT_EYE	(1<<12)
+#define RIGHT_EYE	(1<<13)
+#define EYES		(LEFT_EYE | RIGHT_EYE)
 #define FULL_BODY	(~0)
 
 //flags for alternate styles: These are hard sprited so don't set this if you didn't put the effort in

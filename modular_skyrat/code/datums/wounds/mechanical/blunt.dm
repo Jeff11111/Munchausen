@@ -207,7 +207,7 @@
 	treat_text = "Recommended wrenching of the affected limb, though manual synchronization by applying an aggressive grab to the patient and helpfully interacting with afflicted limb may suffice.  Use of synthetic healing chemicals may also help."
 	examine_desc = "has visibly disconnected rotors"
 	occur_text = "snaps and becomes unseated"
-	severity = WOUND_SEVERITY_MODERATE
+	severity = ALL_BODYPARTS_MINUS_EYES
 	viable_zones = ALL_BODYPARTS
 	interaction_efficiency_penalty = 1.5
 	limp_slowdown = 3
@@ -367,7 +367,7 @@
 	occur_text = "loudly hums as some loose nuts and bolts fall out"
 
 	severity = WOUND_SEVERITY_SEVERE
-	viable_zones = ALL_BODYPARTS
+	viable_zones = ALL_BODYPARTS_MINUS_EYES
 	interaction_efficiency_penalty = 2
 	limp_slowdown = 6
 	threshold_minimum = 60
@@ -393,7 +393,7 @@
 	examine_desc = "is damaged at several spots, with protuding bits of metal"
 	occur_text = "loudly hums as it's rotors scrapes away bits of metal"
 	severity = WOUND_SEVERITY_CRITICAL
-	viable_zones = ALL_BODYPARTS
+	viable_zones = ALL_BODYPARTS_MINUS_EYES
 	interaction_efficiency_penalty = 4
 	limp_slowdown = 9
 	sound_effect = 'sound/effects/clang2.ogg'

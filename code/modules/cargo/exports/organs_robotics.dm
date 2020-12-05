@@ -85,8 +85,8 @@
 /datum/export/orgains/eyes
 	cost = 50 //So many things take your eyes out anyways
 	unit_name = "eyes"
-	export_types = list(/obj/item/organ/eyes)
-	exclude_types = list(/obj/item/organ/eyes/robotic)
+	export_types = list(/obj/item/bodypart/left_eye, /obj/item/bodypart/right_eye)
+	exclude_types = list(/obj/item/bodypart/left_eye/robotic, /obj/item/bodypart/right_eye/robotic)
 
 /datum/export/orgains/stomach
 	cost = 50 //can be replaced
@@ -108,7 +108,7 @@
 /datum/export/organs/cybernetic
 	cost = 225
 	unit_name = "cybernetic organ"
-	export_types = list(/obj/item/organ/liver/cybernetic, /obj/item/organ/lungs/cybernetic, /obj/item/organ/eyes/robotic, /obj/item/organ/heart/cybernetic)
+	export_types = list(/obj/item/organ/liver/cybernetic, /obj/item/organ/lungs/cybernetic, /obj/item/bodypart/right_eye/robotic, /obj/item/bodypart/left_eye/robotic, /obj/item/organ/heart/cybernetic)
 	exclude_types = list(/obj/item/organ/lungs/cybernetic/upgraded, /obj/item/organ/liver/cybernetic/upgraded)
 
 /datum/export/organs/upgraded

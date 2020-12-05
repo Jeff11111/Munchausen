@@ -27,8 +27,8 @@
 		replace_lungs(lungs)
 		return
 
-	var/obj/item/organ/eyes/eyes = owner.getorganslot(ORGAN_SLOT_EYES)
-	if(!eyes || (eyes && ((HAS_TRAIT_FROM(owner, TRAIT_NEARSIGHT, EYE_DAMAGE)) || (HAS_TRAIT_FROM(owner, TRAIT_BLIND, EYE_DAMAGE)) || (istype(eyes, /obj/item/organ/eyes/robotic)))))
+	var/obj/item/bodypart/eyes = owner.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE) || owner.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+	if(!eyes || (eyes && ((HAS_TRAIT_FROM(owner, TRAIT_NEARSIGHT, EYE_DAMAGE)) || (HAS_TRAIT_FROM(owner, TRAIT_BLIND, EYE_DAMAGE)) || eyes.is_robotic_limb())))
 		replace_eyes(eyes)
 		return
 
@@ -98,23 +98,21 @@
 	var/obj/item/organ/lungs/new_lungs = new lung_type()
 	new_lungs.Insert(owner)
 
-/obj/item/organ/heart/gland/heal/proc/replace_eyes(obj/item/organ/eyes/eyes)
-	if(eyes)
-		owner.visible_message("<span class='warning'>[owner]'s [eyes.name] fall out of their sockets!</span>", "<span class='userdanger'>Your [eyes.name] fall out of their sockets!</span>")
+/obj/item/organ/heart/gland/heal/proc/replace_eyes(obj/item/bodypart/eye)
+	if(eye)
+		owner.visible_message("<span class='warning'>[owner]'s [eye.name] fall out of their sockets!</span>", "<span class='userdanger'>Your [eye.name] fall out of their sockets!</span>")
 		playsound(owner, 'sound/effects/splat.ogg', 50, TRUE)
-		eyes.Remove()
-		eyes.forceMove(owner.drop_location())
+		eye.drop_limb()
 	else
 		to_chat(owner, "<span class='warning'>You feel a weird rumble behind your eye sockets...</span>")
 
 	addtimer(CALLBACK(src, .proc/finish_replace_eyes), rand(100, 200))
 
 /obj/item/organ/heart/gland/heal/proc/finish_replace_eyes()
-	var/eye_type = /obj/item/organ/eyes
-	if(owner.dna.species && owner.dna.species.mutanteyes)
-		eye_type = owner.dna.species.mutanteyes
-	var/obj/item/organ/eyes/new_eyes = new eye_type()
-	new_eyes.Insert(owner)
+	var/obj/item/bodypart/left_eye/LE = new()
+	var/obj/item/bodypart/right_eye/RE = new()
+	LE.attach_limb(owner, TRUE)
+	RE.attach_limb(owner, TRUE)
 	owner.visible_message("<span class='warning'>A pair of new eyes suddenly inflates into [owner]'s eye sockets!</span>", "<span class='userdanger'>A pair of new eyes suddenly inflates into your eye sockets!</span>")
 
 /obj/item/organ/heart/gland/heal/proc/replace_limb(body_zone, obj/item/bodypart/limb)

@@ -21,14 +21,11 @@
 	burnmod = 1.25
 	heatmod = 1.5
 
-	mutanteyes = /obj/item/organ/eyes/night_vision/mushroom
 	var/datum/martial_art/mushpunch/mush
-	//Skyrat change - blood
 	bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "SPOR")
 	exotic_bloodtype = "SPOR"
 	exotic_blood_color = BLOOD_COLOR_MUSHROOM
 	languagewhitelist = list("Mushroom")
-	//
 
 /datum/species/mush/after_equip_job(datum/job/J, mob/living/carbon/human/H)
 	//H.grant_language(/datum/language/mushroom) //pomf pomf

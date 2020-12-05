@@ -359,24 +359,24 @@
 /////////////////////////////////////////
 
 /datum/design/cyberimp_welding
-	name = "Welding Shield Eyes"
+	name = "Welding Shield Left Eye"
 	desc = "These reactive micro-shields will protect you from welders and flashes without obscuring your vision."
 	id = "ci-welding"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 40
 	materials = list(/datum/material/iron = 600, /datum/material/glass = 400)
-	build_path = /obj/item/organ/eyes/robotic/shield
+	build_path = /obj/item/bodypart/left_eye/robotic/shield
 	category = list("Misc", "Medical Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
 
 /datum/design/cyberimp_gloweyes
-	name = "Luminescent Eyes"
+	name = "Luminescent Left Eye"
 	desc = "A pair of cybernetic eyes that can emit multicolored light"
 	id = "ci-gloweyes"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 40
 	materials = list(/datum/material/iron = 600, /datum/material/glass = 1000)
-	build_path = /obj/item/organ/eyes/robotic/glow
+	build_path = /obj/item/bodypart/left_eye/robotic/glow
 	category = list("Misc", "Medical Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
 
@@ -469,24 +469,24 @@
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
 
 /datum/design/cyberimp_xray
-	name = "X-ray Eyes"
+	name = "X-ray Left Eye"
 	desc = "These cybernetic eyes will give you X-ray vision. Blinking is futile."
 	id = "ci-xray"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 60
 	materials = list(/datum/material/iron = 600, /datum/material/glass = 600, /datum/material/silver = 600, /datum/material/gold = 600, /datum/material/plasma = 1000, /datum/material/uranium = 1000, /datum/material/diamond = 1000, /datum/material/bluespace = 1000)
-	build_path = /obj/item/organ/eyes/robotic/xray
+	build_path = /obj/item/bodypart/left_eye/robotic/xray
 	category = list("Misc", "Medical Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
 
 /datum/design/cyberimp_thermals
-	name = "Thermal Eyes"
+	name = "Thermal Left Eye"
 	desc = "These cybernetic eyes will give you Thermal vision. Vertical slit pupil included."
 	id = "ci-thermals"
 	build_type = PROTOLATHE | MECHFAB
 	construction_time = 60
 	materials = list(/datum/material/iron = 600, /datum/material/glass = 600, /datum/material/silver = 600, /datum/material/gold = 600, /datum/material/plasma = 1000, /datum/material/diamond = 2000)
-	build_path = /obj/item/organ/eyes/robotic/thermals
+	build_path = /obj/item/bodypart/left_eye/robotic/thermals
 	category = list("Misc", "Medical Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
 

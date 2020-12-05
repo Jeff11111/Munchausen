@@ -54,12 +54,16 @@
 	. = ..()
 
 /datum/antagonist/vassal/proc/give_thrall_eyes()
-	var/obj/item/organ/eyes/vassal/E = new
-	E.Insert(owner.current)
+	var/obj/item/bodypart/left_eye/vassal/LE = new(owner.current)
+	var/obj/item/bodypart/right_eye/vassal/RE = new(owner.current)
+	LE.attach_limb(owner.current, TRUE, FALSE)
+	RE.attach_limb(owner.current, TRUE, FALSE)
 
 /datum/antagonist/vassal/proc/remove_thrall_eyes()
-	var/obj/item/organ/eyes/E = new
-	E.Insert(owner.current)
+	var/obj/item/bodypart/left_eye/LE = new(owner.current)
+	var/obj/item/bodypart/right_eye/RE = new(owner.current)
+	LE.attach_limb(owner.current, TRUE, FALSE)
+	RE.attach_limb(owner.current, TRUE, FALSE)
 
 /datum/antagonist/vassal/on_removal()
 	SSticker.mode.vassals -= owner // Add if not already in here (and you might be, if you were picked at round start)

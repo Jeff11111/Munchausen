@@ -7,7 +7,8 @@
 	activated = 1
 	var/toggled = FALSE
 	icon_state = "hijack"
-	var/eye_color
+	var/left_eye_color
+	var/right_eye_color
 	var/stealthmode = FALSE
 	var/stealthcooldown = 0
 	var/hijacking = FALSE
@@ -25,16 +26,19 @@
 		return
 	var/on = toggled && !stealthmode
 	var/mob/living/carbon/human/H = imp_in
-	H.eye_color = on ? "ff0" : eye_color
-	H.dna.update_ui_block(DNA_EYE_COLOR_BLOCK)
+	H.left_eye_color = on ? sanitize_hexcolor("ff0") : left_eye_color
+	H.right_eye_color = on ? sanitize_hexcolor("ff0") : right_eye_color
+	H.dna.update_ui_block(DNA_LEFT_EYE_COLOR_BLOCK)
+	H.dna.update_ui_block(DNA_RIGHT_EYE_COLOR_BLOCK)
 	H.update_body()
 
 /obj/item/implant/hijack/implant(mob/living/target, mob/user, silent = FALSE)
 	if(..())
 		ADD_TRAIT(target, TRAIT_HIJACKER, "implant")
-		if (ishuman(target))
+		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
-			eye_color = H.eye_color
+			left_eye_color = H.left_eye_color
+			right_eye_color = H.right_eye_color
 		return TRUE
 
 /obj/item/implant/hijack/removed(mob/living/source, silent = FALSE, special = 0)
@@ -47,9 +51,10 @@
 				apc.hijacker = null
 				apc.set_hijacked_lighting()
 				apc.update_icon()
-		if (ishuman(source))
+		if(ishuman(source))
 			var/mob/living/carbon/human/H = source
-			H.eye_color = eye_color
+			H.left_eye_color = left_eye_color
+			H.right_eye_color = right_eye_color
 		return TRUE
 
 /obj/item/implant/hijack/proc/InterceptClickOn(mob/living/user,params,atom/object)

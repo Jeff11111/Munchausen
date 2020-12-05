@@ -101,7 +101,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 	var/obj/item/organ/brain/mutant_brain = /obj/item/organ/brain
 	var/obj/item/organ/heart/mutant_heart = /obj/item/organ/heart
-	var/obj/item/organ/eyes/mutanteyes = /obj/item/organ/eyes
 	var/obj/item/organ/ears/mutantears = /obj/item/organ/ears
 	var/obj/item/organ/liver/mutantliver = /obj/item/organ/liver
 	var/obj/item/organ/kidneys/mutantkidneys = /obj/item/organ/kidneys
@@ -207,7 +206,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	var/obj/item/organ/heart/heart = C.getorganslot(ORGAN_SLOT_HEART)
 	var/obj/item/organ/lungs/lungs = C.getorganslot(ORGAN_SLOT_LUNGS)
 	var/obj/item/organ/appendix/appendix = C.getorganslot(ORGAN_SLOT_APPENDIX)
-	var/obj/item/organ/eyes/eyes = C.getorganslot(ORGAN_SLOT_EYES)
 	var/obj/item/organ/ears/ears = C.getorganslot(ORGAN_SLOT_EARS)
 	var/obj/item/organ/tongue/tongue = C.getorganslot(ORGAN_SLOT_TONGUE)
 	var/obj/item/organ/liver/liver = C.getorganslot(ORGAN_SLOT_LIVER)
@@ -222,7 +220,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	var/should_have_brain = TRUE
 	var/should_have_heart = !(NOBLOOD in species_traits)
 	var/should_have_lungs = !(TRAIT_NOBREATH in inherent_traits)
-	var/should_have_eyes = TRUE
 	var/should_have_ears = TRUE
 	var/should_have_tongue = TRUE
 	var/should_have_liver = !(NOLIVER in species_traits)
@@ -342,13 +339,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		tail.Insert(C)
 
 	if(C.get_bodypart(BODY_ZONE_HEAD))
-		if(eyes && (replace_current || !should_have_eyes))
-			eyes.Remove(TRUE)
-			QDEL_NULL(eyes)
-		if(should_have_eyes && !eyes)
-			eyes = new mutanteyes
-			eyes.Insert(C, TRUE)
-
 		if(ears && (replace_current || !should_have_ears))
 			ears.Remove(TRUE)
 			QDEL_NULL(ears)
@@ -640,68 +630,38 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 			standing += lip_overlay
 
-		// eyes
+		// Eyes
 		if(!(NOEYES in species_traits))
-			var/has_eyes = H.getorganslot(ORGAN_SLOT_EYES)
-			var/mutable_appearance/eye_overlay
-			if(!has_eyes)
-				eye_overlay = mutable_appearance(icon_eyes, "eyes_missing", -BODY_LAYER) //SKYRAT change accounts for different sprites
+			var/obj/item/bodypart/left_eye/LE = H.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+			var/obj/item/bodypart/right_eye/RE = H.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+			var/mutable_appearance/eyes_overlay = mutable_appearance(icon_eyes, "blank", -BODY_LAYER)
+			var/mutable_appearance/left_eye_overlay
+			var/mutable_appearance/right_eye_overlay
+			
+			if(LE)
+				left_eye_overlay = mutable_appearance(icon_eyes, "eye-left", -BODY_LAYER)
 			else
-				eye_overlay = mutable_appearance(icon_eyes, "eyes", -BODY_LAYER) //SKYRAT change accounts for different sprites
-			if((EYECOLOR in species_traits) && has_eyes)
-				eye_overlay.color = "#" + H.eye_color
+				left_eye_overlay = mutable_appearance(icon_eyes, "eye-left-missing", -BODY_LAYER)
+			eyes_overlay.add_overlay(left_eye_overlay)
+
+			if(RE)
+				right_eye_overlay = mutable_appearance(icon_eyes, "eye-left", -BODY_LAYER)
+			else
+				right_eye_overlay = mutable_appearance(icon_eyes, "eye-right-missing", -BODY_LAYER)
+			eyes_overlay.add_overlay(right_eye_overlay)
+
+			if(EYECOLOR in species_traits)
+				if(left_eye_overlay)
+					left_eye_overlay.color = "#" + H.left_eye_color
+				if(right_eye_overlay)
+					left_eye_overlay.color = "#" + H.right_eye_color
 
 			if(OFFSET_EYES in H.dna.species.offset_features)
-				eye_overlay.pixel_x += H.dna.species.offset_features[OFFSET_EYES][1]
-				eye_overlay.pixel_y += H.dna.species.offset_features[OFFSET_EYES][2]
+				eyes_overlay.pixel_x += H.dna.species.offset_features[OFFSET_EYES][1]
+				eyes_overlay.pixel_y += H.dna.species.offset_features[OFFSET_EYES][2]
 
-			standing += eye_overlay
-	/* skyrat edit
-	//Underwear, Undershirts & Socks
-	if(!(NO_UNDERWEAR in species_traits))
-		var/datum/sprite_accessory/taur/TA
-		if(mutant_bodyparts["taur"] && H.dna.features["taur"])
-			TA = GLOB.taur_list[H.dna.features["taur"]]
-		if(!(TA?.hide_legs) && H.socks && !H.hidden_socks && H.get_num_legs(FALSE) >= 2)
-			if(H.saved_socks)
-				H.socks = H.saved_socks
-				H.saved_socks = ""
-			var/datum/sprite_accessory/underwear/socks/S = GLOB.socks_list[H.socks]
-			if(S)
-				var/digilegs = ((DIGITIGRADE in species_traits) && S.has_digitigrade) ? "_d" : ""
-				var/mutable_appearance/MA = mutable_appearance(S.icon, "[S.icon_state][digilegs]", -BODY_LAYER)
-				if(S.has_color)
-					MA.color = "#[H.socks_color]"
-				standing += MA
+			standing += eyes_overlay
 
-		if(H.underwear && !H.hidden_underwear)
-			if(H.saved_underwear)
-				H.underwear = H.saved_underwear
-				H.saved_underwear = ""
-			var/datum/sprite_accessory/underwear/bottom/B = GLOB.underwear_list[H.underwear]
-			if(B)
-				var/digilegs = ((DIGITIGRADE in species_traits) && B.has_digitigrade) ? "_d" : ""
-				var/mutable_appearance/MA = mutable_appearance(B.icon, "[B.icon_state][digilegs]", -BODY_LAYER)
-				if(B.has_color)
-					MA.color = "#[H.undie_color]"
-				standing += MA
-
-		if(H.undershirt && !H.hidden_undershirt)
-			if(H.saved_undershirt)
-				H.undershirt = H.saved_undershirt
-				H.saved_undershirt = ""
-			var/datum/sprite_accessory/underwear/top/T = GLOB.undershirt_list[H.undershirt]
-			if(T)
-				var/state = "[T.icon_state][((DIGITIGRADE in species_traits) && T.has_digitigrade) ? "_d" : ""]"
-				var/mutable_appearance/MA
-				if(H.dna.species.sexes && H.dna.features["body_model"] == FEMALE)
-					MA = wear_alpha_masked_version(state, T.icon, BODY_LAYER, FEMALE_UNIFORM_TOP)
-				else
-					MA = mutable_appearance(T.icon, state, -BODY_LAYER)
-				if(T.has_color)
-					MA.color = "#[H.shirt_color]"
-				standing += MA
-	*/
 	if(standing.len)
 		H.overlays_standing[BODY_LAYER] = standing
 
@@ -981,7 +941,9 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 						if(FACEHAIR)
 							accessory_overlay.color = "#[H.facial_hair_color]"
 						if(EYECOLOR)
-							accessory_overlay.color = "#[H.eye_color]"
+							accessory_overlay.color = "#[H.left_eye_color]"
+						if(RIGHTEYECOLOR)
+							accessory_overlay.color = "#[H.right_eye_color]"
 						if(HORNCOLOR)
 							accessory_overlay.color = "#[H.dna.features["horns_color"]]"
 						if(WINGCOLOR)
@@ -1036,7 +998,9 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 					if(FACEHAIR)
 						extra_accessory_overlay.color = "#[H.facial_hair_color]"
 					if(EYECOLOR)
-						extra_accessory_overlay.color = "#[H.eye_color]"
+						extra_accessory_overlay.color = "#[H.left_eye_color]"
+					if(RIGHTEYECOLOR)
+						extra_accessory_overlay.color = "#[H.right_eye_color]"
 
 					if(HORNCOLOR)
 						extra_accessory_overlay.color = "#[H.dna.features["horns_color"]]"

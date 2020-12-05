@@ -438,7 +438,7 @@
 
 /obj/machinery/smartfridge/organ/preloaded/Initialize()
 	..()
-	var/list = list(/obj/item/organ/tongue, /obj/item/organ/brain, /obj/item/organ/heart, /obj/item/organ/liver, /obj/item/organ/ears, /obj/item/organ/eyes, /obj/item/organ/tail, /obj/item/organ/stomach)
+	var/list = list(/obj/item/organ/tongue, /obj/item/organ/brain, /obj/item/organ/heart, /obj/item/organ/liver, /obj/item/organ/ears, /obj/item/bodypart/left_eye, /obj/item/bodypart/right_eye, /obj/item/organ/tail, /obj/item/organ/stomach)
 	var/newtype = pick(list)
 	load(new newtype(src.loc))
 

@@ -603,12 +603,15 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 
 	log_combat(user, M, "attacked", "[src.name]", "(INTENT: [uppertext(user.a_intent)])")
 
-	var/obj/item/organ/eyes/eyes = M.getorganslot(ORGAN_SLOT_EYES)
-	if (!eyes)
+	var/obj/item/bodypart/left_eye/LE = M.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+	var/obj/item/bodypart/right_eye/RE = M.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+	if(!LE && !RE)
 		return
+	
 	M.adjust_blurriness(3)
-	eyes.applyOrganDamage(rand(2,4))
-	if(eyes.damage >= 10)
+	LE?.receive_damage(brute=rand(2,4))
+	RE?.receive_damage(brute=rand(2,4))
+	if((LE?.get_damage() + RE?.get_damage()) >= 10)
 		M.adjust_blurriness(15)
 		if(M.stat != DEAD)
 			to_chat(M, "<span class='danger'>Your eyes start to bleed profusely!</span>")
@@ -622,7 +625,7 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 			M.adjust_blurriness(10)
 			M.Unconscious(20)
 			M.DefaultCombatKnockdown(40)
-		if (prob(eyes.damage - 10 + 1))
+		if(prob(LE?.get_damage() + RE?.get_damage() - 10 + 1))
 			M.become_blind(EYE_DAMAGE)
 			to_chat(M, "<span class='danger'>You go blind!</span>")
 

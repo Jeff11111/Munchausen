@@ -7,7 +7,6 @@
 	mutant_bodyparts = list("tail_human" = "None", "ears" = "None", "deco_wings" = "None")
 	use_skintones = USE_SKINTONES_GRAYSCALE_CUSTOM
 	mutant_brain = /obj/item/organ/brain/dullahan
-	mutanteyes = /obj/item/organ/eyes/dullahan
 	mutanttongue = /obj/item/organ/tongue/dullahan
 	mutantears = /obj/item/organ/ears/dullahan
 	blacklisted = TRUE
@@ -46,8 +45,11 @@
 			head.throwforce = 25
 			myhead = new /obj/item/dullahan_relay (head, H)
 			H.put_in_hands(head)
-			var/obj/item/organ/eyes/E = H.getorganslot(ORGAN_SLOT_EYES)
-			for(var/datum/action/item_action/organ_action/OA in E.actions)
+			var/obj/item/bodypart/left_eye/LE = H.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+			var/obj/item/bodypart/right_eye/RE = H.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+			for(var/datum/action/item_action/organ_action/OA in LE?.actions)
+				OA.Trigger()
+			for(var/datum/action/item_action/organ_action/OA in RE?.actions)
 				OA.Trigger()
 
 /datum/species/dullahan/on_species_loss(mob/living/carbon/human/H)
@@ -71,13 +73,14 @@
 		H.gib()
 
 /datum/species/dullahan/proc/update_vision_perspective(mob/living/carbon/human/H)
-	var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
-	if(eyes)
-		H.update_tint()
-		if(eyes.tint)
+	var/obj/item/bodypart/left_eye/LE = H.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+	var/obj/item/bodypart/right_eye/RE = H.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+	if(LE || RE)
+		if(LE.tint || RE.tint)
 			H.reset_perspective(H)
 		else
 			H.reset_perspective(myhead)
+		H.update_tint()
 
 /obj/item/organ/brain/dullahan
 	decoy_override = TRUE
@@ -100,27 +103,29 @@
 /obj/item/organ/ears/dullahan
 	zone = "abstract"
 
-/obj/item/organ/eyes/dullahan
-	name = "head vision"
-	desc = "An abstraction."
-	actions_types = list(/datum/action/item_action/organ_action/dullahan)
-	zone = "abstract"
-	tint = INFINITY // used to switch the vision perspective to the head on species_gain().
-
 /datum/action/item_action/organ_action/dullahan
 	name = "Toggle Perspective"
 	desc = "Switch between seeing normally from your head, or blindly from your body."
 
 /datum/action/item_action/organ_action/dullahan/Trigger()
 	. = ..()
-	var/obj/item/organ/eyes/dullahan/DE = target
-	if(DE.tint)
-		DE.tint = 0
+	var/mob/living/carbon/C = owner
+	if(!istype(C))
+		return
+	var/obj/item/bodypart/left_eye/LE = C.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+	var/obj/item/bodypart/right_eye/RE = C.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+	if(LE?.tint)
+		LE?.tint = 0
 	else
-		DE.tint = INFINITY
+		LE?.tint = INFINITY
 
-	if(ishuman(owner))
-		var/mob/living/carbon/human/H = owner
+	if(RE?.tint)
+		RE?.tint = 0
+	else
+		RE?.tint = INFINITY
+
+	if(ishuman(C))
+		var/mob/living/carbon/human/H = C
 		if(isdullahan(H))
 			var/datum/species/dullahan/D = H.dna.species
 			D.update_vision_perspective(H)
