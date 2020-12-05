@@ -634,7 +634,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(!(NOEYES in species_traits))
 			var/obj/item/bodypart/left_eye/LE = H.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
 			var/obj/item/bodypart/right_eye/RE = H.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
-			var/mutable_appearance/eyes_overlay = mutable_appearance(icon_eyes, "blank", -BODY_LAYER)
 			var/mutable_appearance/left_eye_overlay
 			var/mutable_appearance/right_eye_overlay
 			
@@ -642,13 +641,11 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				left_eye_overlay = mutable_appearance(icon_eyes, "eye-left", -BODY_LAYER)
 			else
 				left_eye_overlay = mutable_appearance(icon_eyes, "eye-left-missing", -BODY_LAYER)
-			eyes_overlay.add_overlay(left_eye_overlay)
 
 			if(RE)
 				right_eye_overlay = mutable_appearance(icon_eyes, "eye-left", -BODY_LAYER)
 			else
 				right_eye_overlay = mutable_appearance(icon_eyes, "eye-right-missing", -BODY_LAYER)
-			eyes_overlay.add_overlay(right_eye_overlay)
 
 			if(EYECOLOR in species_traits)
 				if(left_eye_overlay)
@@ -657,10 +654,13 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 					left_eye_overlay.color = "#" + H.right_eye_color
 
 			if(OFFSET_EYES in H.dna.species.offset_features)
-				eyes_overlay.pixel_x += H.dna.species.offset_features[OFFSET_EYES][1]
-				eyes_overlay.pixel_y += H.dna.species.offset_features[OFFSET_EYES][2]
+				left_eye_overlay.pixel_x += H.dna.species.offset_features[OFFSET_EYES][1]
+				left_eye_overlay.pixel_y += H.dna.species.offset_features[OFFSET_EYES][2]
+				right_eye_overlay.pixel_x += H.dna.species.offset_features[OFFSET_EYES][1]
+				right_eye_overlay.pixel_y += H.dna.species.offset_features[OFFSET_EYES][2]
 
-			standing += eyes_overlay
+			standing += left_eye_overlay
+			standing += right_eye_overlay
 
 	if(standing.len)
 		H.overlays_standing[BODY_LAYER] = standing

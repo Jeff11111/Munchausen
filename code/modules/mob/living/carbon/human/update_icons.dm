@@ -981,23 +981,18 @@ use_mob_overlay_icon: if FALSE, it will always use the default_icon_file even if
 		if(!(NOEYES in dna.species.species_traits))
 			var/obj/item/bodypart/left_eye/LE = get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
 			var/obj/item/bodypart/right_eye/RE = get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
-			var/mutable_appearance/eyes_overlay
 			var/mutable_appearance/left_eye_overlay
 			var/mutable_appearance/right_eye_overlay
 
-			eyes_overlay = mutable_appearance(dna.species.icon_eyes, "blank", -BODY_LAYER)
-			
 			if(LE)
 				left_eye_overlay = mutable_appearance(dna.species.icon_eyes, "eye-left", -BODY_LAYER)
 			else
 				left_eye_overlay = mutable_appearance(dna.species.icon_eyes, "eye-left-missing", -BODY_LAYER)
-			eyes_overlay.add_overlay(left_eye_overlay)
 
 			if(RE)
 				right_eye_overlay = mutable_appearance(dna.species.icon_eyes, "eye-left", -BODY_LAYER)
 			else
 				right_eye_overlay = mutable_appearance(dna.species.icon_eyes, "eye-right-missing", -BODY_LAYER)
-			eyes_overlay.add_overlay(right_eye_overlay)
 
 			if(EYECOLOR in dna.species.species_traits)
 				if(left_eye_overlay)
@@ -1006,10 +1001,13 @@ use_mob_overlay_icon: if FALSE, it will always use the default_icon_file even if
 					left_eye_overlay.color = "#" + right_eye_color
 
 			if(OFFSET_EYES in dna.species.offset_features)
-				eyes_overlay.pixel_x += dna.species.offset_features[OFFSET_EYES][1]
-				eyes_overlay.pixel_y += dna.species.offset_features[OFFSET_EYES][2]
+				left_eye_overlay.pixel_x += dna.species.offset_features[OFFSET_EYES][1]
+				left_eye_overlay.pixel_y += dna.species.offset_features[OFFSET_EYES][2]
+				right_eye_overlay.pixel_x += dna.species.offset_features[OFFSET_EYES][1]
+				right_eye_overlay.pixel_y += dna.species.offset_features[OFFSET_EYES][2]
 
-			add_overlay(eyes_overlay)
+			add_overlay(left_eye_overlay)
+			add_overlay(right_eye_overlay)
 
 	dna.species.handle_hair(src)
 

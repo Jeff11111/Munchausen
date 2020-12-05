@@ -230,7 +230,6 @@
 			. += lips_overlay
 
 		// eyes
-		var/mutable_appearance/eyes_overlay = mutable_appearance('icons/mob/human_face.dmi', "blank", -BODY_LAYER)
 		var/mutable_appearance/left_eye_overlay
 		var/mutable_appearance/right_eye_overlay
 
@@ -238,14 +237,13 @@
 			left_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-left", -BODY_LAYER)
 		else
 			left_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-left-missing", -BODY_LAYER)
-		eyes_overlay.add_overlay(left_eye_overlay)
 
 		if(right_eye)
 			right_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-right", -BODY_LAYER)
 		else
 			right_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-right-missing", -BODY_LAYER)
-		eyes_overlay.add_overlay(right_eye_overlay)
-		. += eyes_overlay
+		. += left_eye_overlay
+		. += right_eye_overlay
 		
 	// tape gag
 	if(tapered)
