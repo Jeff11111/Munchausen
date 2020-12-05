@@ -212,7 +212,7 @@
 				else
 					msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] embedded in [t_his] [BP.name]!</B>"
 			if(BP.is_dead())
-				msg += "<span class='deadsay'><B>[t_His] [BP.name] is completely skeletonized!</B></span>"
+				msg += "<span class='deadsay'><B>[t_His] [BP.name] is completely necrotic!</B></span>"
 			if(BP.etching && !clothingonpart(BP))
 				msg += "<B>[t_His] [BP.name] has \"[BP.etching]\" etched on it!</B>"
 			for(var/datum/wound/W in BP.wounds)

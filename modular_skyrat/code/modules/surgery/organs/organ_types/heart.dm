@@ -55,7 +55,7 @@
 	if(!failing && !damaged)
 		. += "<span class='notice'>[owner ? "[owner.p_their(TRUE)] " : ""][owner ? src.name : capitalize(src.name)] seems to be quite healthy.</span>"
 	if(decayed)
-		. += "<span class='deadsay'>[owner ? "[owner.p_their(TRUE)] " : ""][owner ? src.name : capitalize(src.name)] seems to have decayed, reaching a non-functional state...</span>"
+		. += "<span class='deadsay'>[owner ? "[owner.p_their(TRUE)] " : ""][owner ? src.name : capitalize(src.name)] seems to have decayed, reaching a necrotic state...</span>"
 	if(germ_level)
 		switch(germ_level)
 			if(INFECTION_LEVEL_ONE to INFECTION_LEVEL_TWO)

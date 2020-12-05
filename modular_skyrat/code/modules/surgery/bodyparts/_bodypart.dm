@@ -482,7 +482,7 @@
 	if(status & BODYPART_NOBLEED)
 		. += "<span class='notice'>[src] is impervious to [status & BODYPART_ORGANIC ? "bleeding" : "leakage"].</span>"
 	if(status & BODYPART_DEAD)
-		. += "<span class='deadsay'>[src] seems to have decayed, reaching a non-functional state...</span>"
+		. += "<span class='deadsay'>[src] seems to have decayed, reaching a necrotic state...</span>"
 	if(germ_level)
 		switch(germ_level)
 			if(INFECTION_LEVEL_ONE to INFECTION_LEVEL_TWO)
@@ -490,7 +490,7 @@
 			if(INFECTION_LEVEL_TWO to INFECTION_LEVEL_THREE)
 				. +=  "<span class='deadsay'>[src] seems to be oozing some foul pus...</span>"
 			if(INFECTION_LEVEL_THREE to INFINITY)
-				. += "<span class='deadsay'>[src] seems to be completely skeletonized and riddled with dead tissue!</span>"
+				. += "<span class='deadsay'>[src] seems to be completely necrotic!</span>"
 	for(var/obj/item/bodypart/BP in src)
 		if(BP.body_zone in children_zones)
 			. += "<span class='notice'>[src] has \a [lowertext(BP.name)] attached. Use a sharp item to cut it off!</span>"
@@ -2004,10 +2004,11 @@
 		should_draw_gender = FALSE
 
 	if(is_organic_limb() || render_like_organic)
-		limb.icon = base_bp_icon || 'modular_skyrat/icons/mob/human_parts.dmi'
+		limb.icon = base_bp_icon || DEFAULT_BODYPART_ICON
 		if(is_dead())
-			limb.icon = 'modular_skyrat/icons/mob/human_parts.dmi'
-			species_id = "skeleton"
+			limb.icon = DEFAULT_BODYPART_ICON
+			base_bp_icon = DEFAULT_BODYPART_ICON
+			species_id = "rot"
 			limb.icon_state = "[species_id]_[body_zone]"
 			color_src = FALSE
 		else
