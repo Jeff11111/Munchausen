@@ -122,7 +122,7 @@
 	var/obj/item/organ/liver/liver = getorganslot(ORGAN_SLOT_LIVER)
 	if(!liver)
 		return maxHealth/2
-	return liver
+	return liver.get_toxins()
 
 /mob/living/carbon/adjustToxLoss(amount, updating_health = TRUE, forced = FALSE)
 	. = 0
