@@ -643,15 +643,15 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				left_eye_overlay = mutable_appearance(icon_eyes, "eye-left-missing", -BODY_LAYER)
 
 			if(RE)
-				right_eye_overlay = mutable_appearance(icon_eyes, "eye-left", -BODY_LAYER)
+				right_eye_overlay = mutable_appearance(icon_eyes, "eye-right", -BODY_LAYER)
 			else
 				right_eye_overlay = mutable_appearance(icon_eyes, "eye-right-missing", -BODY_LAYER)
 
 			if(EYECOLOR in species_traits)
 				if(left_eye_overlay)
-					left_eye_overlay.color = "#" + H.left_eye_color
+					left_eye_overlay.color = sanitize_hexcolor(H.left_eye_color)
 				if(right_eye_overlay)
-					left_eye_overlay.color = "#" + H.right_eye_color
+					right_eye_overlay.color = sanitize_hexcolor(H.right_eye_color)
 
 			if(OFFSET_EYES in H.dna.species.offset_features)
 				left_eye_overlay.pixel_x += H.dna.species.offset_features[OFFSET_EYES][1]

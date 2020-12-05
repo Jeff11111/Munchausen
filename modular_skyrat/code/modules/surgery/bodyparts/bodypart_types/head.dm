@@ -232,16 +232,18 @@
 		// eyes
 		var/mutable_appearance/left_eye_overlay
 		var/mutable_appearance/right_eye_overlay
-
 		if(left_eye)
 			left_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-left", -BODY_LAYER)
+			left_eye_overlay.color = left_eye.eye_color
 		else
 			left_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-left-missing", -BODY_LAYER)
 
 		if(right_eye)
 			right_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-right", -BODY_LAYER)
+			right_eye_overlay.color = right_eye.eye_color
 		else
 			right_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-right-missing", -BODY_LAYER)
+		
 		. += left_eye_overlay
 		. += right_eye_overlay
 		

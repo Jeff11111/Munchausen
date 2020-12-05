@@ -990,15 +990,15 @@ use_mob_overlay_icon: if FALSE, it will always use the default_icon_file even if
 				left_eye_overlay = mutable_appearance(dna.species.icon_eyes, "eye-left-missing", -BODY_LAYER)
 
 			if(RE)
-				right_eye_overlay = mutable_appearance(dna.species.icon_eyes, "eye-left", -BODY_LAYER)
+				right_eye_overlay = mutable_appearance(dna.species.icon_eyes, "eye-right", -BODY_LAYER)
 			else
 				right_eye_overlay = mutable_appearance(dna.species.icon_eyes, "eye-right-missing", -BODY_LAYER)
 
 			if(EYECOLOR in dna.species.species_traits)
 				if(left_eye_overlay)
-					left_eye_overlay.color = "#" + left_eye_color
+					left_eye_overlay.color = sanitize_hexcolor(left_eye_color)
 				if(right_eye_overlay)
-					left_eye_overlay.color = "#" + right_eye_color
+					right_eye_overlay.color = sanitize_hexcolor(right_eye_color)
 
 			if(OFFSET_EYES in dna.species.offset_features)
 				left_eye_overlay.pixel_x += dna.species.offset_features[OFFSET_EYES][1]

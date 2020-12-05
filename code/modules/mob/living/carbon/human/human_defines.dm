@@ -14,16 +14,16 @@
 	//blocks_emissive = EMISSIVE_BLOCK_UNIQUE // Skyrat edit -- 512 compatibility
 
 	//Hair colour and style
-	var/hair_color = "000000"
+	var/hair_color = "#000000"
 	var/hair_style = "Bald"
 
 	//Facial hair colour and style
-	var/facial_hair_color = "000000"
+	var/facial_hair_color = "#000000"
 	var/facial_hair_style = "Shaved"
 
 	//Eye colour
-	var/left_eye_color = "000000"
-	var/right_eye_color = "000000"
+	var/left_eye_color = "#000000"
+	var/right_eye_color = "#000000"
 
 	var/skin_tone = "caucasian1"	//Skin tone
 
