@@ -4,6 +4,7 @@
 
 /obj/item/bodypart/right_eye
 	name = "eye"
+	icon = 'modular_skyrat/icons/obj/surgery.dmi'
 	icon_state = "eye"
 	desc = "Sightless, until the eyes reappear."
 	body_zone = BODY_ZONE_PRECISE_RIGHT_EYE
