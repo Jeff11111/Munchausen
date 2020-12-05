@@ -553,6 +553,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["feature_vag_color"]				>> features["vag_color"]
 	//womb features
 	S["feature_has_womb"]				>> features["has_womb"]
+	//ipc features
+	S["feature_ipc_chassis"]			>> features["ipc_chassis"]
 
 	//gear loadout
 	var/text_to_load
@@ -760,6 +762,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["feature_insect_markings"]			, features["insect_markings"])
 	WRITE_FILE(S["feature_meat"]					, features["meat_type"])
 	//SKYRAT CHANGE
+	WRITE_FILE(S["feature_ipc_chassismeat"]		, features["ipc_chassis"])
 	WRITE_FILE(S["bloodtype"]					, bloodtype)
 	WRITE_FILE(S["bloodcolor"]					, bloodcolor)
 	WRITE_FILE(S["bloodreagent"]				, bloodreagent)
