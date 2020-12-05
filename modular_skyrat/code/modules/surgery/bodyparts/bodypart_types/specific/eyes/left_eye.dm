@@ -16,6 +16,8 @@
 	px_x = 0
 	px_y = 0
 	wound_resistance = -20
+	max_damage = 20
+	max_stamina_damage = 20
 	dismember_sounds = list(
 		'modular_skyrat/sound/gore/head_explodie1.ogg',
 		'modular_skyrat/sound/gore/head_explodie2.ogg',
@@ -30,8 +32,6 @@
 	amputation_point = "eyesocket"
 	tendon_name = "rectus"
 	artery_name = "central retinal artery"
-	max_damage = 20
-	max_stamina_damage = 20
 	var/sight_flags = 0
 	var/see_in_dark = 2
 	var/tint = 0
