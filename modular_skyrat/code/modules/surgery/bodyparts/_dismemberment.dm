@@ -1,21 +1,18 @@
 //Check if the limb is dismemberable
 /obj/item/bodypart/proc/can_dismember(obj/item/I)
-	if(dismemberable && !(owner && HAS_TRAIT(owner, TRAIT_NODISMEMBER)))
+	if(dismemberable && !(owner && HAS_TRAIT(owner, TRAIT_NODISMEMBER)) && !(owner && (owner.status_flags & GODMODE)))
 		return TRUE
 
 //Check if the limb is disembowable
 /obj/item/bodypart/proc/can_disembowel(obj/item/I)
-	if(disembowable && !(owner && HAS_TRAIT(owner, TRAIT_NOGUT)) && get_organs() && !(locate(/datum/wound/slash/critical/incision/disembowel) in wounds) && !(locate(/datum/wound/mechanical/slash/critical/incision/disembowel) in wounds))
+	if(disembowable && !(owner && HAS_TRAIT(owner, TRAIT_NOGUT)) && get_organs() && !(locate(/datum/wound/slash/critical/incision/disembowel) in wounds) && !(locate(/datum/wound/mechanical/slash/critical/incision/disembowel) in wounds) && !(owner && (owner.status_flags & GODMODE)))
 		return TRUE
 
 //Dismember a limb
 /obj/item/bodypart/proc/dismember(dam_type = BRUTE, silent = FALSE, destroy = FALSE, wounding_type = WOUND_SLASH)
 	if(!owner)
 		return FALSE
-	var/mob/living/carbon/C = owner
 	if(!can_dismember())
-		return FALSE
-	if(C.status_flags & GODMODE)
 		return FALSE
 	var/obj/item/bodypart/affecting = C.get_bodypart(parent_bodyzone)
 	if(istype(affecting))
@@ -52,7 +49,6 @@
 /obj/item/bodypart/proc/disembowel(dam_type = BRUTE, silent = FALSE, wound = FALSE, wounding_type = WOUND_SLASH)
 	if(!owner)
 		return FALSE
-	var/mob/living/carbon/C = owner
 	if(!can_disembowel())
 		return FALSE
 
