@@ -226,7 +226,7 @@
 		var/str_diff = assailant_str - victim_str
 		var/diceroll = mind.diceroll(STAT_DATUM(str), mod = str_diff*2)
 		if(diceroll >= DICE_SUCCESS)
-			if((diceroll >= DICE_CRIT_SUCCESS) && (str_diff >= 7))
+			if((diceroll >= DICE_CRIT_SUCCESS) && (str_diff >= 5))
 				assailant.visible_message("<span class='warning'><b>[assailant]</b> violently shoves past <b>[victim]</b>!</span>", \
 									"<span class='userdanger'>I violently shove past <b>[victim]</b>!</span>", \
 									target = victim, \

@@ -45,3 +45,5 @@ respawn
 bobux
 chad
 booba
+sus
+":3"

@@ -1,11 +1,11 @@
 /obj/item/organ/stomach
 	name = "stomach"
 	icon_state = "stomach"
+	desc = "You can't stomach to look at this."
 	w_class = WEIGHT_CLASS_NORMAL
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_STOMACH
 	attack_verb = list("gored", "squished", "slapped", "digested")
-	desc = "Onaka ga suite imasu."
 	var/disgust_metabolism = 1
 
 	maxHealth = 0.5 * STANDARD_ORGAN_THRESHOLD		//half the normal health max since we go blind at 30, a permanent blindness at 50 therefore makes sense unless medicine is administered
