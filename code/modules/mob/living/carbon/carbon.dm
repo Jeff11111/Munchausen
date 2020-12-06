@@ -75,10 +75,11 @@
 		H = hud_used.hand_slots["[held_index]"]
 		if(H)
 			H.update_icon()
-		if(hud_used.action_intent)
-			hud_used.action_intent.update_icon()
+		a_intent_change(a_intent)
 		if(hud_used.zone_select)
-			hud_used.zone_select.update_icon()
+			var/obj/screen/zone_sel/bingus = hud_used.zone_select
+			if(istype(bingus))
+				bingus.set_selected_zone(zone_selected)
 
 /mob/living/carbon/activate_hand(selhand) //l/r OR 1-held_items.len
 	if(!selhand)

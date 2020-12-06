@@ -354,7 +354,7 @@
 			return FALSE
 		var/obj/item/bodypart/neck/throat = owner.get_bodypart(BODY_ZONE_PRECISE_NECK)
 		if(throat)
-			return throat.can_dismember(I)
+			return (throat.can_dismember(I) && (throat.get_mangled_state() & BODYPART_MANGLED_BOTH))
 
 /obj/item/bodypart/head/attach_limb(mob/living/carbon/C, special)
 	//Transfer some head appearance vars over

@@ -155,7 +155,7 @@
 	if(!grasped_part)
 		to_chat(user, "<span class='danger'>You can't grasp a missing bodypart!</span>")
 		return FALSE
-	if(user.lying && !lying && (grasped_part.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND)))
+	if(user.lying && !lying && (grasped_part.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND)))
 		visible_message("<span class='danger'><b>[user]</b> fails to grab <b>[src]</b>[grasped_part ? " by [p_their()] [grasped_part.name]" : ""]!</span>", "<span class='userdanger'><b>[user]</b> fails to grab you[grasped_part ? " by your [grasped_part.name]" : ""]!</span>", ignored_mobs = user)
 		to_chat(user, "<span class='danger'>You fail to grab <b>[src]</b>[grasped_part ? " by [p_their()] [grasped_part.name]" : ""]! It's too high for you to reach it!</span>")
 		return FALSE

@@ -22,8 +22,6 @@
 	. = ..()
 	if(new_body.hud_used)
 		give_hallucination_object(new_body)
-		if(new_body.hud_used?.dreamer && old_body.hud_used?.dreamer)
-			new_body.hud_used.dreamer.waking_up = old_body.hud_used.dreamer.waking_up
 	if(iscarbon(new_body))
 		var/mob/living/carbon/C = new_body
 		//Following my HEART
@@ -205,7 +203,7 @@
 	M.playsound_local(turf_source = get_turf(M), S = im_sick, vol = 100, vary = 0)
 	M.overlay_fullscreen("dream", /obj/screen/fullscreen/dreaming, 1)
 	M.overlay_fullscreen("wakeup", /obj/screen/fullscreen/dreaming/waking_up, 1)
-	M.hud_used?.dreamer?.waking_up = TRUE
+	waking_up = TRUE
 
 /datum/antagonist/dreamer/Destroy()
 	. = ..()

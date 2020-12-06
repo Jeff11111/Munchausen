@@ -8,7 +8,6 @@
 	icon_state = "hall"
 	alpha = 0
 	var/mutable_appearance/black_underlay
-	var/waking_up = FALSE
 
 /obj/screen/fullscreen/dreamer/Initialize()
 	. = ..()
