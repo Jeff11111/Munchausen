@@ -64,10 +64,12 @@
 	active_hand_index = held_index
 	//Update intent and zone selected according to the zone saved
 	var/woah = min(length(hand_index_to_intent), active_hand_index)
-	a_intent = hand_index_to_intent[woah]
+	a_intent_change(hand_index_to_intent[woah])
 	woah = min(length(hand_index_to_zone), active_hand_index)
-	zone_selected = hand_index_to_zone[woah]
 	if(hud_used)
+		var/obj/screen/zone_sel/bingus = hud_used.zone_select
+		if(istype(bingus))
+			bingus.set_selected_zone(hand_index_to_zone[woah], user = src)
 		var/obj/screen/inventory/hand/H
 		H = hud_used.hand_slots["[oindex]"]
 		if(H)
@@ -75,11 +77,6 @@
 		H = hud_used.hand_slots["[held_index]"]
 		if(H)
 			H.update_icon()
-		a_intent_change(a_intent)
-		if(hud_used.zone_select)
-			var/obj/screen/zone_sel/bingus = hud_used.zone_select
-			if(istype(bingus))
-				bingus.set_selected_zone(zone_selected)
 
 /mob/living/carbon/activate_hand(selhand) //l/r OR 1-held_items.len
 	if(!selhand)

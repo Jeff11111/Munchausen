@@ -282,7 +282,6 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 		a_intent = input
 	else
 		var/current_intent = possible_a_intents.Find(a_intent)
-
 		if(!current_intent)
 			// Failsafe. Just in case some badmin was playing with VV.
 			current_intent = 1
