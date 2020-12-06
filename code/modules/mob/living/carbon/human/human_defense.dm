@@ -808,23 +808,20 @@
 			for(var/thing in LB.wounds)
 				var/datum/wound/W = thing
 				var/woundmsg
-				if(W.can_self_treat)
-					woundmsg = "<a href='?src=[REF(W)];self_treat=1;'>[uppertext(W.name)]</a>"
-				else
-					woundmsg = "[uppertext(W.name)]"
+				woundmsg = "[uppertext(W.name)]"
 				switch(W.severity)
 					if(WOUND_SEVERITY_TRIVIAL)
-						status += "<span class='warning'>[woundmsg]</span>"
+						status += "[W.can_self_treat ? "<a href='?src=[REF(W)];self_treat=1;'>" : ""]<span class='warning'>[woundmsg]</span>[W.can_self_treat ? "</a>" : ""]"
 					if(WOUND_SEVERITY_MODERATE)
-						status += "<span class='warning'>[woundmsg]</span>"
+						status += "[W.can_self_treat ? "<a href='?src=[REF(W)];self_treat=1;'>" : ""]<span class='warning'>[woundmsg]</span>[W.can_self_treat ? "</a>" : ""]"
 					if(WOUND_SEVERITY_SEVERE)
-						status += "<span class='danger'><b>[woundmsg]</b></span>"
+						status += "[W.can_self_treat ? "<a href='?src=[REF(W)];self_treat=1;'>" : ""]<span class='danger'><b>[woundmsg]</b></span>[W.can_self_treat ? "</a>" : ""]"
 					if(WOUND_SEVERITY_CRITICAL)
-						status += "<span class='userdanger'><b>[woundmsg]</span>"
+						status += "[W.can_self_treat ? "<a href='?src=[REF(W)];self_treat=1;'>" : ""]<span class='userdanger'><b>[woundmsg]</span>[W.can_self_treat ? "</a>" : ""]"
 					if(WOUND_SEVERITY_LOSS)
-						status += "<span class='deadsay'><b>[woundmsg]</b></span>"
+						status += "[W.can_self_treat ? "<a href='?src=[REF(W)];self_treat=1;'>" : ""]<span class='deadsay'><b>[woundmsg]</b></span>[W.can_self_treat ? "</a>" : ""]"
 					if(WOUND_SEVERITY_PERMANENT)
-						status += "<span class='userdanger'><b>[woundmsg]</b></span>"
+						status += "[W.can_self_treat ? "<a href='?src=[REF(W)];self_treat=1;'>" : ""]<span class='userdanger'><b>[woundmsg]</b></span>[W.can_self_treat ? "</a>" : ""]"
 		
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF) && length(LB.embedded_objects))
 			for(var/obj/item/I in LB.embedded_objects)
