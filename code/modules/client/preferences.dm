@@ -379,7 +379,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 
 
 			dat += "<h2>Special Names:</h2>"
-			old_group = null
+			var/old_group
 			for(var/custom_name_id in (GLOB.preferences_custom_names - list("religion", "deity"))) //skyrat edit
 				var/namedata = GLOB.preferences_custom_names[custom_name_id]
 				if(!old_group)

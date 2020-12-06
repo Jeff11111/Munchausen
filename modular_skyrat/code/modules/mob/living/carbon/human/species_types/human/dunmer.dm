@@ -43,7 +43,7 @@
 /obj/item/organ/ears/dunmer/Insert(mob/living/carbon/human/H, special = 0, drop_if_replaced = TRUE)
 	..()
 	if(istype(H))
-		color = "A0A0A0"
+		color = "#A0A0A0"
 		H.dna.species.mutant_bodyparts |= "ears"
 		H.dna.features["ears"] = "Elf, Grey"
 		H.update_body()
