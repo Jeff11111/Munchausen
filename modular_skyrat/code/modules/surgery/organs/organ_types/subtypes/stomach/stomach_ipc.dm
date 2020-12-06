@@ -1,7 +1,7 @@
 /obj/item/organ/stomach/robot_ipc
 	name = "IPC stomach"
 	icon = 'modular_skyrat/icons/obj/surgery.dmi'
-	icon_state = "stomach-ipc"
+	icon_state = "stomach-c"
 	w_class = WEIGHT_CLASS_NORMAL
 	zone = "chest"
 	slot = "stomach"
@@ -25,4 +25,4 @@
 //shitadel
 /obj/item/organ/stomach/ipc
 	name = "ipc stomach"
-	icon_state = "stomach-ipc"
+	icon_state = "stomach-c"
