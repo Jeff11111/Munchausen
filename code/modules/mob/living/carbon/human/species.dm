@@ -876,11 +876,11 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	var/g = (H.dna.features["body_model"] == FEMALE) ? "f" : "m"
 	var/list/colorlist = list()
 	var/husk = HAS_TRAIT(H, TRAIT_HUSK)
-	colorlist += husk ? ReadRGB("#a3a3a3") : ReadRGB("[H.dna.features["mcolor"]]")
-	colorlist += husk ? ReadRGB("#a3a3a3") : ReadRGB("[H.dna.features["mcolor2"]]")
-	colorlist += husk ? ReadRGB("#a3a3a3") : ReadRGB("[H.dna.features["mcolor3"]]")
+	colorlist += husk ? ReadRGB("#a3a3a3FF") : ReadRGB("[H.dna.features["mcolor"]]FF")
+	colorlist += husk ? ReadRGB("#a3a3a3FF") : ReadRGB("[H.dna.features["mcolor2"]]FF")
+	colorlist += husk ? ReadRGB("#a3a3a3FF") : ReadRGB("[H.dna.features["mcolor3"]]FF")
 	colorlist += list(0,0,0, hair_alpha)
-	for(var/index in 1 to colorlist.len)
+	for(var/index in 1 to length(colorlist))
 		colorlist[index] /= 255
 
 	for(var/layer in relevant_layers)
@@ -910,38 +910,39 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 							accessory_overlay.color = SKINTONE2HEX(H.skin_tone)
 						if(MUTCOLORS)
 							if(fixed_mut_color)
-								accessory_overlay.color = "fixed_mut_color]"
+								accessory_overlay.color = "[fixed_mut_color]"
 							else
-								accessory_overlay.color = "H.dna.features["mcolor"]]"
+								accessory_overlay.color = "[H.dna.features["mcolor"]]"
 						if(MUTCOLORS2)
 							if(fixed_mut_color2)
-								accessory_overlay.color = "fixed_mut_color2]"
+								accessory_overlay.color = "[fixed_mut_color2]"
 							else
-								accessory_overlay.color = "H.dna.features["mcolor2"]]"
+								accessory_overlay.color = "[H.dna.features["mcolor2"]]"
 						if(MUTCOLORS3)
 							if(fixed_mut_color3)
-								accessory_overlay.color = "fixed_mut_color3]"
+								accessory_overlay.color = "[fixed_mut_color3]"
 							else
-								accessory_overlay.color = "H.dna.features["mcolor3"]]"
+								accessory_overlay.color = "[H.dna.features["mcolor3"]]"
 
 						if(MATRIXED)
 							accessory_overlay.color = list(colorlist)
 
 						if(HAIR)
 							if(hair_color == "mutcolor")
-								accessory_overlay.color = "H.dna.features["mcolor"]]"
+								accessory_overlay.color = "[H.dna.features["mcolor"]]"
 							else
-								accessory_overlay.color = "H.hair_color]"
+								accessory_overlay.color = "[H.hair_color]"
+						
 						if(FACEHAIR)
-							accessory_overlay.color = "H.facial_hair_color]"
+							accessory_overlay.color = "[H.facial_hair_color]"
 						if(EYECOLOR)
-							accessory_overlay.color = "H.left_eye_color]"
+							accessory_overlay.color = "[H.left_eye_color]"
 						if(RIGHTEYECOLOR)
-							accessory_overlay.color = "H.right_eye_color]"
+							accessory_overlay.color = "[H.right_eye_color]"
 						if(HORNCOLOR)
-							accessory_overlay.color = "H.dna.features["horns_color"]]"
+							accessory_overlay.color = "[H.dna.features["horns_color"]]"
 						if(WINGCOLOR)
-							accessory_overlay.color = "H.dna.features["wings_color"]]"
+							accessory_overlay.color = "[H.dna.features["wings_color"]]"
 				else
 					accessory_overlay.color = forced_colour
 			else
@@ -971,35 +972,35 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				switch(S.extra_color_src) //change the color of the extra overlay
 					if(MUTCOLORS)
 						if(fixed_mut_color)
-							extra_accessory_overlay.color = "fixed_mut_color]"
+							extra_accessory_overlay.color = "[fixed_mut_color]"
 						else
-							extra_accessory_overlay.color = "H.dna.features["mcolor"]]"
+							extra_accessory_overlay.color = "[H.dna.features["mcolor"]]"
 					if(MUTCOLORS2)
 						if(fixed_mut_color2)
-							extra_accessory_overlay.color = "fixed_mut_color2]"
+							extra_accessory_overlay.color = "[fixed_mut_color2]"
 						else
-							extra_accessory_overlay.color = "H.dna.features["mcolor2"]]"
+							extra_accessory_overlay.color = "[H.dna.features["mcolor2"]]"
 					if(MUTCOLORS3)
 						if(fixed_mut_color3)
-							extra_accessory_overlay.color = "fixed_mut_color3]"
+							extra_accessory_overlay.color = "[fixed_mut_color3]"
 						else
-							extra_accessory_overlay.color = "H.dna.features["mcolor3"]]"
+							extra_accessory_overlay.color = "[H.dna.features["mcolor3"]]"
 					if(HAIR)
 						if(hair_color == "mutcolor")
-							extra_accessory_overlay.color = "H.dna.features["mcolor3"]]"
+							extra_accessory_overlay.color = "[H.dna.features["mcolor3"]]"
 						else
-							extra_accessory_overlay.color = "H.hair_color]"
+							extra_accessory_overlay.color = "[H.hair_color]"
 					if(FACEHAIR)
-						extra_accessory_overlay.color = "H.facial_hair_color]"
+						extra_accessory_overlay.color = "[H.facial_hair_color]"
 					if(EYECOLOR)
-						extra_accessory_overlay.color = "H.left_eye_color]"
+						extra_accessory_overlay.color = "[H.left_eye_color]"
 					if(RIGHTEYECOLOR)
-						extra_accessory_overlay.color = "H.right_eye_color]"
+						extra_accessory_overlay.color = "[H.right_eye_color]"
 
 					if(HORNCOLOR)
-						extra_accessory_overlay.color = "H.dna.features["horns_color"]]"
+						extra_accessory_overlay.color = "[H.dna.features["horns_color"]]"
 					if(WINGCOLOR)
-						extra_accessory_overlay.color = "H.dna.features["wings_color"]]"
+						extra_accessory_overlay.color = "[H.dna.features["wings_color"]]"
 
 				if(OFFSET_MUTPARTS in H.dna.species.offset_features)
 					extra_accessory_overlay.pixel_x += H.dna.species.offset_features[OFFSET_MUTPARTS][1]
@@ -1019,35 +1020,34 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				switch(S.extra2_color_src) //change the color of the extra overlay
 					if(MUTCOLORS)
 						if(fixed_mut_color)
-							extra2_accessory_overlay.color = "fixed_mut_color]"
+							extra2_accessory_overlay.color = "[fixed_mut_color]"
 						else
-							extra2_accessory_overlay.color = "H.dna.features["mcolor"]]"
+							extra2_accessory_overlay.color = "[H.dna.features["mcolor"]]"
 					if(MUTCOLORS2)
 						if(fixed_mut_color2)
-							extra2_accessory_overlay.color = "fixed_mut_color2]"
+							extra2_accessory_overlay.color = "[fixed_mut_color2]"
 						else
-							extra2_accessory_overlay.color = "H.dna.features["mcolor2"]]"
+							extra2_accessory_overlay.color = "[H.dna.features["mcolor2"]]"
 					if(MUTCOLORS3)
 						if(fixed_mut_color3)
-							extra2_accessory_overlay.color = "fixed_mut_color3]"
+							extra2_accessory_overlay.color = "[fixed_mut_color3]"
 						else
-							extra2_accessory_overlay.color = "H.dna.features["mcolor3"]]"
+							extra2_accessory_overlay.color = "[H.dna.features["mcolor3"]]"
 					if(HAIR)
 						if(hair_color == "mutcolor3")
-							extra2_accessory_overlay.color = "H.dna.features["mcolor"]]"
+							extra2_accessory_overlay.color = "[H.dna.features["mcolor"]]"
 						else
-							extra2_accessory_overlay.color = "H.hair_color]"
+							extra2_accessory_overlay.color = "[H.hair_color]"
 					if(HORNCOLOR)
-						extra2_accessory_overlay.color = "H.dna.features["horns_color"]]"
+						extra2_accessory_overlay.color = "[H.dna.features["horns_color"]]"
 					if(WINGCOLOR)
-						extra2_accessory_overlay.color = "H.dna.features["wings_color"]]"
+						extra2_accessory_overlay.color = "[H.dna.features["wings_color"]]"
 
 				if(OFFSET_MUTPARTS in H.dna.species.offset_features)
 					extra2_accessory_overlay.pixel_x += H.dna.species.offset_features[OFFSET_MUTPARTS][1]
 					extra2_accessory_overlay.pixel_y += H.dna.species.offset_features[OFFSET_MUTPARTS][2]
 
 				standing += extra2_accessory_overlay
-
 
 		H.overlays_standing[layernum] = standing
 

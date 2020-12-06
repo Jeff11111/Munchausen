@@ -1871,9 +1871,9 @@
 		//body marking memes
 		var/list/colorlist = list()
 		colorlist.Cut()
-		colorlist += ReadRGB("[H.dna.features["mcolor"]]")
-		colorlist += ReadRGB("[H.dna.features["mcolor2"]]")
-		colorlist += ReadRGB("[H.dna.features["mcolor3"]]")
+		colorlist += ReadRGB("[H.dna.features["mcolor"]]FF")
+		colorlist += ReadRGB("[H.dna.features["mcolor2"]]FF")
+		colorlist += ReadRGB("[H.dna.features["mcolor3"]]FF")
 		colorlist += list(0,0,0, S.hair_alpha)
 		for(var/index=1, index<=colorlist.len, index++)
 			colorlist[index] = colorlist[index]/255
@@ -1919,7 +1919,6 @@
 				body_markings = "plain"
 				aux_marking = "plain"
 			markings_color = list(colorlist)
-
 		else
 			body_markings = null
 			aux_marking = null
