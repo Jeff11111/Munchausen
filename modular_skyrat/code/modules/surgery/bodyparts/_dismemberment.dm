@@ -112,12 +112,18 @@
 			switch(wounding_type)
 				if(WOUND_BLUNT)
 					lost.descriptive = "\The [name] is shattered into gore!"
+					if(body_zone in list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE))
+						lost.descriptive = "\The [name] pops with a sickening clicking noise!"
 				if(WOUND_BURN)
 					lost.descriptive = "\The [name] is incinerated into dust!"
 				if(WOUND_SLASH)
 					lost.descriptive = "\The [name] is violently dismembered!"
+					if(body_zone in list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE))
+						lost.descriptive = "\The [name] is gouged out with a sickening clicking noise!"
 				if(WOUND_PIERCE)
 					lost.descriptive = "\The [name] is punctured into gore!"
+					if(body_zone in list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE))
+						lost.descriptive = "\The [name] pops with a sickening clicking noise!"
 			lost.apply_wound(BP, TRUE)
 	owner = null
 	if(!ignore_children)

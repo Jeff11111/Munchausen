@@ -19,12 +19,7 @@
 	wound_resistance = -20
 	max_damage = 20
 	max_stamina_damage = 20
-	dismember_sounds = list(
-		'modular_skyrat/sound/gore/head_explodie1.ogg',
-		'modular_skyrat/sound/gore/head_explodie2.ogg',
-		'modular_skyrat/sound/gore/head_explodie3.ogg',
-		'modular_skyrat/sound/gore/head_explodie4.ogg',
-	)
+	dismember_sounds = list('modular_skyrat/sound/gore/severed.ogg')
 	throw_range = 7
 	miss_entirely_prob = 50
 	zone_prob = 25
