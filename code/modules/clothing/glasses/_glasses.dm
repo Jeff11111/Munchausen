@@ -359,7 +359,7 @@
 
 /obj/item/clothing/glasses/sunglasses/blindfold/white/update_icon(mob/living/carbon/human/user)
 	if(ishuman(user) && !colored_before)
-		add_atom_colour("#[user.left_eye_color || user.right_eye_color]", FIXED_COLOUR_PRIORITY)
+		add_atom_colour("[user.left_eye_color || user.right_eye_color]", FIXED_COLOUR_PRIORITY)
 		colored_before = TRUE
 
 /obj/item/clothing/glasses/sunglasses/blindfold/white/worn_overlays(isinhands = FALSE, icon_file, used_state, style_flags = NONE)
@@ -368,7 +368,7 @@
 		var/mob/living/carbon/human/H = loc
 		var/mutable_appearance/M = mutable_appearance('icons/mob/clothing/eyes.dmi', "blindfoldwhite")
 		M.appearance_flags |= RESET_COLOR
-		M.color = "#[H.left_eye_color || H.right_eye_color]"
+		M.color = "[H.left_eye_color || H.right_eye_color]"
 		. += M
 
 /obj/item/clothing/glasses/sunglasses/big
