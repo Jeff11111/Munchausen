@@ -291,6 +291,13 @@
 				updateinfolinks()
 			show_content(usr)
 			update_icon()
+			if(is_dreamer(usr))
+				var/datum/antagonist/dreamer/dreamer
+				for(var/datum/antagonist/dreamer/dreammy in usr.mind.antag_datums)
+					dreamer = dreammy
+					break
+				if(dreamer && (text2num(t) == dreamer.sum_keys))
+					dreamer.wake_up()
 
 
 /obj/item/paper/attackby(obj/item/P, mob/living/carbon/human/user, params)
