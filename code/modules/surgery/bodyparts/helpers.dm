@@ -233,7 +233,7 @@
 			L = new /obj/item/bodypart/r_arm()
 		if(BODY_ZONE_PRECISE_R_HAND)
 			L = new /obj/item/bodypart/r_hand()
-		if(BODY_ZONE_PRECISE_HEAD)
+		if(BODY_ZONE_HEAD)
 			L = new /obj/item/bodypart/head()
 		if(BODY_ZONE_PRECISE_NECK)
 			L = new /obj/item/bodypart/neck()
