@@ -876,9 +876,9 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	var/g = (H.dna.features["body_model"] == FEMALE) ? "f" : "m"
 	var/list/colorlist = list()
 	var/husk = HAS_TRAIT(H, TRAIT_HUSK)
-	colorlist += husk ? "#a3a3a3" : "[H.dna.features["mcolor"]]")
-	colorlist += husk ? "#a3a3a3" : "[H.dna.features["mcolor2"]]")
-	colorlist += husk ? "#a3a3a3" : "[H.dna.features["mcolor3"]]")
+	colorlist += husk ? ReadRGB("#a3a3a3") :ReadRGB("[H.dna.features["mcolor"]]0")
+	colorlist += husk ? ReadRGB("#a3a3a3") :ReadRGB("[H.dna.features["mcolor2"]]0")
+	colorlist += husk ? ReadRGB("#a3a3a3") : ReadRGB("[H.dna.features["mcolor3"]]0")
 	colorlist += list(0,0,0, hair_alpha)
 	for(var/index in 1 to colorlist.len)
 		colorlist[index] /= 255
