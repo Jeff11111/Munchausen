@@ -613,8 +613,6 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 	RE?.receive_damage(brute=rand(2,4))
 	if((LE?.get_damage() + RE?.get_damage()) >= 10)
 		M.adjust_blurriness(15)
-		if(M.stat != DEAD)
-			to_chat(M, "<span class='danger'>Your eyes start to bleed profusely!</span>")
 		if(!(HAS_TRAIT(M, TRAIT_BLIND) || HAS_TRAIT(M, TRAIT_NEARSIGHT)))
 			to_chat(M, "<span class='danger'>You become nearsighted!</span>")
 		M.become_nearsighted(EYE_DAMAGE)

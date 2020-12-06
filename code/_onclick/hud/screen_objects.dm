@@ -529,14 +529,14 @@
 							return BODY_ZONE_PRECISE_MOUTH
 					if(26) //Eyeline, eyes are on 15 and 17
 						if(icon_x in 14 to 15)
-							return BODY_ZONE_PRECISE_LEFT_EYE
-						else if(icon_x in 17 to 18)
 							return BODY_ZONE_PRECISE_RIGHT_EYE
+						else if(icon_x in 17 to 18)
+							return BODY_ZONE_PRECISE_LEFT_EYE
 					if(25, 27)
 						if(icon_x == 15)
-							return BODY_ZONE_PRECISE_LEFT_EYE
-						else if(icon_x == 17)
 							return BODY_ZONE_PRECISE_RIGHT_EYE
+						else if(icon_x == 17)
+							return BODY_ZONE_PRECISE_LEFT_EYE
 				return BODY_ZONE_HEAD
 
 /obj/screen/zone_sel/proc/set_selected_zone(choice, mob/user)

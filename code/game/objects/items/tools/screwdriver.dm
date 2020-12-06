@@ -71,13 +71,6 @@
 	else
 		return mutable_appearance('icons/obj/clothing/belt_overlays.dmi', icon_state)
 
-/obj/item/screwdriver/attack(mob/living/carbon/M, mob/living/carbon/user)
-	if(!istype(M))
-		return ..()
-	if(!(user.zone_selected in list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)))
-		return ..()
-	return eyestab(M,user)
-
 /obj/item/screwdriver/brass
 	name = "brass screwdriver"
 	desc = "A screwdriver made of brass. The handle feels freezing cold."

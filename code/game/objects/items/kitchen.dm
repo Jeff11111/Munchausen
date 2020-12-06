@@ -48,11 +48,7 @@
 			M.reagents.add_reagent(forkload.type, 1)
 		icon_state = "fork"
 		forkload = null
-
-	else if(user.zone_selected in list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE))
-		return eyestab(M,user)
-	else
-		return ..()
+	. = ..()
 
 /obj/item/kitchen/fork/throwing
 	name = "throwing fork"
@@ -88,12 +84,6 @@
 /obj/item/kitchen/knife/Initialize()
 	. = ..()
 	AddComponent(/datum/component/butchering, 80 - force, 100, force - 10) //bonus chance increases depending on force
-
-/obj/item/kitchen/knife/attack(mob/living/carbon/M, mob/living/carbon/user)
-	if(user.zone_selected in list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE))
-		return eyestab(M,user)
-	else
-		return ..()
 
 /obj/item/kitchen/knife/suicide_act(mob/user)
 	user.visible_message(pick("<span class='suicide'>[user] is slitting [user.p_their()] wrists with the [src.name]! It looks like [user.p_theyre()] trying to commit suicide.</span>", \
