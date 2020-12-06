@@ -2213,35 +2213,17 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				if("mutant_color")
 					var/new_mutantcolor = input(user, "Choose your character's alien/mutant color:", "Character Preference","#"+features["mcolor"]) as color|null
 					if(new_mutantcolor)
-						var/temp_hsv = RGBtoHSV(new_mutantcolor)
-						if(new_mutantcolor == "#000000")
-							features["mcolor"] = pref_species.default_color
-						else if((MUTCOLORS_PARTSONLY in pref_species.species_traits) || ReadHSV(temp_hsv)[3] >= ReadHSV("#202020")[3]) // mutantcolors must be bright, but only if they affect the skin
-							features["mcolor"] = sanitize_hexcolor(new_mutantcolor)
-						else
-							to_chat(user, "<span class='danger'>Invalid color. Your color is not bright enough.</span>")
+						features["mcolor"] = pref_species.default_color
 
 				if("mutant_color2")
 					var/new_mutantcolor = input(user, "Choose your character's secondary alien/mutant color:", "Character Preference","#"+features["mcolor2"]) as color|null
 					if(new_mutantcolor)
-						var/temp_hsv = RGBtoHSV(new_mutantcolor)
-						if(new_mutantcolor == "#000000")
-							features["mcolor2"] = pref_species.default_color
-						else if((MUTCOLORS_PARTSONLY in pref_species.species_traits) || ReadHSV(temp_hsv)[3] >= ReadHSV("#202020")[3]) // mutantcolors must be bright, but only if they affect the skin
-							features["mcolor2"] = sanitize_hexcolor(new_mutantcolor)
-						else
-							to_chat(user, "<span class='danger'>Invalid color. Your color is not bright enough.</span>")
+						features["mcolor2"] = sanitize_hexcolor(new_mutantcolor)
 
 				if("mutant_color3")
 					var/new_mutantcolor = input(user, "Choose your character's tertiary alien/mutant color:", "Character Preference","#"+features["mcolor3"]) as color|null
 					if(new_mutantcolor)
-						var/temp_hsv = RGBtoHSV(new_mutantcolor)
-						if(new_mutantcolor == "#000000")
-							features["mcolor3"] = pref_species.default_color
-						else if((MUTCOLORS_PARTSONLY in pref_species.species_traits) || ReadHSV(temp_hsv)[3] >= ReadHSV("#202020")[3]) // mutantcolors must be bright, but only if they affect the skin
-							features["mcolor3"] = sanitize_hexcolor(new_mutantcolor)
-						else
-							to_chat(user, "<span class='danger'>Invalid color. Your color is not bright enough.</span>")
+						features["mcolor3"] = sanitize_hexcolor(new_mutantcolor)
 
 				if("mismatched_markings")
 					show_mismatched_markings = !show_mismatched_markings
@@ -2452,12 +2434,8 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 							var/default = use_custom_skin_tone ? skin_tone : null
 							var/custom_tone = input(user, "Choose your custom skin tone:", "Character Preference", default) as color|null
 							if(custom_tone)
-								var/temp_hsv = RGBtoHSV(custom_tone)
-								if(ReadHSV(temp_hsv)[3] < ReadHSV("#333333")[3]) // rgb(50,50,50)
-									to_chat(user,"<span class='danger'>Invalid color. Your color is not bright enough.</span>")
-								else
-									use_custom_skin_tone = TRUE
-									skin_tone = custom_tone
+								use_custom_skin_tone = TRUE
+								skin_tone = sanitize_hexcolor(custom_tone)
 						else
 							use_custom_skin_tone = FALSE
 							skin_tone = new_s_tone
@@ -2560,15 +2538,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				if("cock_color")
 					var/new_cockcolor = input(user, "Penis color:", "Character Preference","#"+features["cock_color"]) as color|null
 					if(new_cockcolor)
-						var/temp_hsv = RGBtoHSV(new_cockcolor)
-						if((new_cockcolor == "#000000") || pref_species.use_skintones)
-							features["cock_color"] = pref_species.default_color
-							if(pref_species.use_skintones)
-								features["cock_color"] = SKINTONE2HEX(skin_tone)	
-						else if(ReadHSV(temp_hsv)[3] >= ReadHSV("#202020")[3])
-							features["cock_color"] = sanitize_hexcolor(new_cockcolor)
-						else
-							to_chat(user,"<span class='danger'>Invalid color. Your color is not bright enough.</span>")
+						features["cock_color"] = sanitize_hexcolor(new_cockcolor)
 
 				if("cock_length")
 					var/min_D = CONFIG_GET(number/penis_min_centimeters_prefs)
@@ -2589,15 +2559,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				if("balls_color")
 					var/new_ballscolor = input(user, "Testicles Color:", "Character Preference","#"+features["balls_color"]) as color|null
 					if(new_ballscolor)
-						var/temp_hsv = RGBtoHSV(new_ballscolor)
-						if((new_ballscolor == "#000000") || pref_species.use_skintones)
-							features["balls_color"] = pref_species.default_color
-							if(pref_species.use_skintones)
-								features["balls_color"] = SKINTONE2HEX(skin_tone)
-						else if(ReadHSV(temp_hsv)[3] >= ReadHSV("#202020")[3])
-							features["balls_color"] = sanitize_hexcolor(new_ballscolor)
-						else
-							to_chat(user,"<span class='danger'>Invalid color. Your color is not bright enough.</span>")
+						features["balls_color"] = sanitize_hexcolor(new_ballscolor)
 
 				if("breasts_size")
 					var/new_size = input(user, "Breast Size", "Character Preference") as null|anything in CONFIG_GET(keyed_list/breasts_cups_prefs)
@@ -2616,15 +2578,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				if("breasts_color")
 					var/new_breasts_color = input(user, "Breast Color:", "Character Preference","#"+features["breasts_color"]) as color|null
 					if(new_breasts_color)
-						var/temp_hsv = RGBtoHSV(new_breasts_color)
-						if((new_breasts_color == "#000000") || pref_species.use_skintones)
-							features["breasts_color"] = pref_species.default_color
-							if(pref_species.use_skintones)
-								features["breasts_color"] = SKINTONE2HEX(skin_tone)
-						else if(ReadHSV(temp_hsv)[3] >= ReadHSV("#202020")[3])
-							features["breasts_color"] = sanitize_hexcolor(new_breasts_color)
-						else
-							to_chat(user,"<span class='danger'>Invalid color. Your color is not bright enough.</span>")
+						features["breasts_color"] = sanitize_hexcolor(new_breasts_color)
 
 				if("vag_shape")
 					var/new_shape
@@ -2638,15 +2592,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				if("vag_color")
 					var/new_vagcolor = input(user, "Vagina color:", "Character Preference","#"+features["vag_color"]) as color|null
 					if(new_vagcolor)
-						var/temp_hsv = RGBtoHSV(new_vagcolor)
-						if((new_vagcolor == "#000000") || pref_species.use_skintones)
-							features["vag_color"] = pref_species.default_color
-							if(pref_species.use_skintones)
-								features["vag_color"] = SKINTONE2HEX(skin_tone)
-						else if(ReadHSV(temp_hsv)[3] >= ReadHSV("#202020")[3])
-							features["vag_color"] = sanitize_hexcolor(new_vagcolor)
-						else
-							to_chat(user,"<span class='danger'>Invalid color. Your color is not bright enough.</span>")
+						features["vag_color"] = sanitize_hexcolor(new_vagcolor)
 
 				if("ooccolor")
 					var/new_ooccolor = input(user, "Choose your OOC colour:", "Game Preference",ooccolor) as color|null
@@ -2721,14 +2667,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				if("personal_chat_color")
 					var/new_chat_color = input(user, "Choose your character's runechat color:", "Character Preference",personal_chat_color) as color|null
 					if(new_chat_color)
-						var/list/temp_hsl = rgb2hsl(ReadRGB(new_chat_color)[1],ReadRGB(new_chat_color)[2],ReadRGB(new_chat_color)[3])
-						if(new_chat_color == "#000000")
-							personal_chat_color = "#FFFFFF"
-						else if(temp_hsl[3] >= 0.65 && temp_hsl[2] >= 0.15)
-							personal_chat_color = sanitize_hexcolor(new_chat_color)
-						else
-							to_chat(user, "<span class='danger'>Invalid color. Your color is not bright enough.</span>")
-				//End of skyrat changes
+						personal_chat_color = sanitize_hexcolor(new_chat_color)
 
 				if("hud_toggle_color")
 					var/new_toggle_color = input(user, "Choose your HUD toggle flash color:", "Game Preference",hud_toggle_color) as color|null
