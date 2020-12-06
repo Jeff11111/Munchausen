@@ -61,7 +61,7 @@
 		var/bingus = 0
 		while(bingus < mood_signs)
 			bingus++
-			left_symbols += mood_symbols
+			left_symbols += mood_symbol
 		if(left_symbols)
 			left_symbols = "[left_symbols] "
 	return left_symbols
@@ -80,12 +80,10 @@
 		var/bingus = 0
 		while(bingus < mood_signs)
 			bingus++
-			right_symbols += mood_symbols
+			right_symbols += mood_symbol
 		if(right_symbols)
 			right_symbols = " [right_symbols]"
 	return right_symbols
-
-/datum/component/mood/proc/get_right_signs_from_number(num)
 
 /datum/component/mood/proc/print_mood(mob/user)
 	var/msg = "<span class='info'>*---------*</span>\n"
