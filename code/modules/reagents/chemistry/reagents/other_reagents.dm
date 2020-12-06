@@ -589,7 +589,7 @@
 			else
 				break
 	if(ReadHSV(newcolor)[3] >= ReadHSV(limit)[3])
-		return newcolor
+		return sanitize_hexcolor(newcolor)
 	return color
 
 /datum/reagent/spraytan/overdose_start(mob/living/M)

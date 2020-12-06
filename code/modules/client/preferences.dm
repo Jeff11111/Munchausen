@@ -1838,12 +1838,11 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						features["mam_tail"] = "Cat"
 						features["mam_ears"] = "Cat"
 					//Now that we changed our species, we must verify that the mutant colour is still allowed.
-					var/temp_hsv = RGBtoHSV(features["mcolor"])
-					if(features["mcolor"] == "#000" || (!(MUTCOLORS_PARTSONLY in pref_species.species_traits) && ReadHSV(temp_hsv)[3] < ReadHSV("#202020")[3]))
+					if(features["mcolor"] == "#000" || (!(MUTCOLORS_PARTSONLY in pref_species.species_traits)))
 						features["mcolor"] = pref_species.default_color
-					if(features["mcolor2"] == "#000" || (!(MUTCOLORS_PARTSONLY in pref_species.species_traits) && ReadHSV(temp_hsv)[3] < ReadHSV("#202020")[3]))
+					if(features["mcolor2"] == "#000" || (!(MUTCOLORS_PARTSONLY in pref_species.species_traits)))
 						features["mcolor2"] = pref_species.default_color
-					if(features["mcolor3"] == "#000" || (!(MUTCOLORS_PARTSONLY in pref_species.species_traits) && ReadHSV(temp_hsv)[3] < ReadHSV("#202020")[3]))
+					if(features["mcolor3"] == "#000" || (!(MUTCOLORS_PARTSONLY in pref_species.species_traits)))
 						features["mcolor3"] = pref_species.default_color
 					//We reset the language if it's restricted
 					var/datum/language/L = SSlanguage.languages_by_name[language]
@@ -2186,12 +2185,11 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 							features["mam_ears"] = "Cat"
 
 						//Now that we changed our species, we must verify that the mutant colour is still allowed.
-						var/temp_hsv = RGBtoHSV(features["mcolor"])
-						if(features["mcolor"] == "#000" || (!(MUTCOLORS_PARTSONLY in pref_species.species_traits) && ReadHSV(temp_hsv)[3] < ReadHSV("#202020")[3]))
+						if(features["mcolor"] == "#000" || (!(MUTCOLORS_PARTSONLY in pref_species.species_traits)))
 							features["mcolor"] = pref_species.default_color
-						if(features["mcolor2"] == "#000" || (!(MUTCOLORS_PARTSONLY in pref_species.species_traits) && ReadHSV(temp_hsv)[3] < ReadHSV("#202020")[3]))
+						if(features["mcolor2"] == "#000" || (!(MUTCOLORS_PARTSONLY in pref_species.species_traits)))
 							features["mcolor2"] = pref_species.default_color
-						if(features["mcolor3"] == "#000" || (!(MUTCOLORS_PARTSONLY in pref_species.species_traits) && ReadHSV(temp_hsv)[3] < ReadHSV("#202020")[3]))
+						if(features["mcolor3"] == "#000" || (!(MUTCOLORS_PARTSONLY in pref_species.species_traits)))
 							features["mcolor3"] = pref_species.default_color
 
 						//skyrat edit - avoids picking species restricted stuff

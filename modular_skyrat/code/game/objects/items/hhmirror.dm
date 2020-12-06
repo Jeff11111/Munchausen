@@ -94,13 +94,7 @@
 			if(MUTCOLORS in H.dna.species.species_traits)
 				var/new_mutantcolor = input(user, "Choose your skin color:", "Race change","#"+H.dna.features["mcolor"]) as color|null
 				if(new_mutantcolor)
-					var/temp_hsv = RGBtoHSV(new_mutantcolor)
-
-					if(ReadHSV(temp_hsv)[3] >= ReadHSV("#7F7F7F")[3]) // mutantcolors must be bright
-						H.dna.features["mcolor"] = sanitize_hexcolor(new_mutantcolor)
-
-					else
-						to_chat(H, "<span class='notice'>Invalid color. Your color is not bright enough.</span>")
+					H.dna.features["mcolor"] = sanitize_hexcolor(new_mutantcolor)
 
 			H.update_body()
 			H.update_hair()
