@@ -51,7 +51,7 @@
 				if(!H.dna.skin_tone_override)
 					icon_state += "_s"
 		else
-			color = "#[owner.dna.features["balls_color"]]"
+			color = "[owner.dna.features["balls_color"]]"
 
 /obj/item/organ/genital/testicles/genital_examine(mob/user)
 	. = list()
@@ -69,7 +69,7 @@
 	if(D.species.use_skintones && D.features["genitals_use_skintone"])
 		color = SKINTONE2HEX(H.skin_tone)
 	else
-		color = "#[D.features["balls_color"]]"
+		color = "[D.features["balls_color"]]"
 	shape = D.features["balls_shape"]
 	fluid_rate = D.features["balls_cum_rate"]
 	fluid_mult = D.features["balls_cum_mult"]

@@ -83,7 +83,7 @@
 				if(!H.dna.skin_tone_override)
 					icon_state += "_s"
 		else
-			color = "#[owner.dna.features["cock_color"]]"
+			color = "[owner.dna.features["cock_color"]]"
 
 /obj/item/organ/genital/penis/genital_examine(mob/user)
 	. = list()
@@ -102,7 +102,7 @@
 	if(D.species.use_skintones && D.features["genitals_use_skintone"])
 		color = SKINTONE2HEX(H.skin_tone)
 	else
-		color = "#[D.features["cock_color"]]"
+		color = "[D.features["cock_color"]]"
 	length = D.features["cock_length"]
 	diameter_ratio = D.features["cock_diameter_ratio"]
 	shape = D.features["cock_shape"]

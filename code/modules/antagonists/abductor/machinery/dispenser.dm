@@ -19,7 +19,7 @@
 	gland_colors = new/list(gland_types.len)
 	amounts = new/list(gland_types.len)
 	for(var/i=1,i<=gland_types.len,i++)
-		gland_colors[i] = random_color()
+		gland_colors[i] = sanitize_hex_color(random_color())
 		amounts[i] = rand(1,5)
 
 /obj/machinery/abductor/gland_dispenser/attack_hand(mob/user)

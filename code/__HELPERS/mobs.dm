@@ -4,21 +4,22 @@
 /proc/random_eye_color()
 	switch(pick(20;"brown",20;"hazel",20;"grey",15;"blue",15;"green",1;"amber",1;"albino"))
 		if("brown")
-			return "630"
+			. = "630"
 		if("hazel")
-			return "542"
+			. = "542"
 		if("grey")
-			return pick("666","777","888","999","aaa","bbb","ccc")
+			. = pick("666","777","888","999","aaa","bbb","ccc")
 		if("blue")
-			return "36c"
+			. = "36c"
 		if("green")
-			return "060"
+			. = "060"
 		if("amber")
-			return "fc0"
+			. = "fc0"
 		if("albino")
-			return pick("c","d","e","f") + pick("0","1","2","3","4","5","6","7","8","9") + pick("0","1","2","3","4","5","6","7","8","9")
+			. = pick("c","d","e","f") + pick("0","1","2","3","4","5","6","7","8","9") + pick("0","1","2","3","4","5","6","7","8","9")
 		else
-			return "000"
+			. = "000"
+	return sanitize_hexcolor(.)
 
 /proc/random_underwear(gender)
 	if(!GLOB.underwear_list.len)
@@ -151,9 +152,9 @@
 				continue
 			if(!S.ckeys_allowed)
 				snowflake_ipc_antenna_list[S.name] = mspath
-	var/color1 = random_short_color()
-	var/color2 = random_short_color()
-	var/color3 = random_short_color()
+	var/color1 = sanitize_hexcolor(random_color())
+	var/color2 = sanitize_hexcolor(random_color())
+	var/color3 = sanitize_hexcolor(random_color())
 
 	var/body_model = MALE
 	switch(intended_gender)

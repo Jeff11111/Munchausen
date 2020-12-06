@@ -273,13 +273,13 @@
 			else
 				switch(S.color_src)
 					if("cock_color")
-						genital_overlay.color = "#[dna.features["cock_color"]]"
+						genital_overlay.color = "[dna.features["cock_color"]]"
 					if("balls_color")
-						genital_overlay.color = "#[dna.features["balls_color"]]"
+						genital_overlay.color = "[dna.features["balls_color"]]"
 					if("breasts_color")
-						genital_overlay.color = "#[dna.features["breasts_color"]]"
+						genital_overlay.color = "[dna.features["breasts_color"]]"
 					if("vag_color")
-						genital_overlay.color = "#[dna.features["vag_color"]]"
+						genital_overlay.color = "[dna.features["vag_color"]]"
 
 			genital_overlay.icon_state = "[G.slot]_[S.icon_state]_[size][(dna.species.use_skintones && !dna.skin_tone_override) ? "_s" : ""]_[aroused_state]_[layertext]"
 

@@ -47,7 +47,7 @@
 
 /obj/item/clothing/head/wig/random/Initialize(mapload)
 	hairstyle = pick(GLOB.hair_styles_list - "Bald") //Don't want invisible wig
-	add_atom_colour("#[random_short_color()]", FIXED_COLOUR_PRIORITY)
+	add_atom_colour("[sanitize_hexcolor(random_color())]", FIXED_COLOUR_PRIORITY)
 	. = ..()
 
 /obj/item/clothing/head/wig/natural
@@ -63,7 +63,7 @@
 /obj/item/clothing/head/wig/natural/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
 	if(ishuman(user) && slot == ITEM_SLOT_HEAD)
-		if (color != "#[user.hair_color]") // only update if necessary
-			add_atom_colour("#[user.hair_color]", FIXED_COLOUR_PRIORITY)
+		if (color != "[user.hair_color]") // only update if necessary
+			add_atom_colour("[user.hair_color]", FIXED_COLOUR_PRIORITY)
 			update_icon()
 		user.update_inv_head()

@@ -400,7 +400,7 @@ datum/reagent/fermi/nanite_b_gone/reaction_obj(obj/O, reac_volume)
 	H.mind.transfer_to(catto)
 	catto.name = H.name
 	catto.desc = "A cute catto! They remind you of [H] somehow."
-	catto.color = "#[H.dna.features["mcolor"]]"
+	catto.color = "[H.dna.features["mcolor"]]"
 	catto.pseudo_death = TRUE
 	H.forceMove(catto)
 	log_reagent("FERMICHEM: [H] ckey: [H.key] has been made into a cute catto.")

@@ -49,7 +49,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	if(current_version < 19)
 		pda_style = "mono"
 	if(current_version < 20)
-		pda_color = "#808000"
+		pda_color = sanitize_hexcolor("#808000")
 	if((current_version < 21) && features["meat_type"] && (features["meat_type"] == null))
 		features["meat_type"] = "Mammalian"
 	if(current_version < 22)

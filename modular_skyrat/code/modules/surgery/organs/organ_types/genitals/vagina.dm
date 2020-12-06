@@ -32,7 +32,7 @@
 				if(!H.dna.skin_tone_override)
 					icon_state += "_s"
 		else
-			color = "#[owner.dna.features["vag_color"]]"
+			color = "[owner.dna.features["vag_color"]]"
 		if(ishuman(owner))
 			var/mob/living/carbon/human/H = owner
 			H.update_genitals()

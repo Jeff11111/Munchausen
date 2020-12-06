@@ -86,7 +86,7 @@
 	H.skin_tone = random_skin_tone()
 	H.hair_style = random_hair_style(H.gender)
 	H.facial_hair_style = pick(random_facial_hair_style(H.gender),"Shaved")
-	H.hair_color = random_short_color()
+	H.hair_color = sanitize_hexcolor(random_color())
 	H.facial_hair_color = H.hair_color
 	H.underwear = random_underwear(H.gender)
 	H.undershirt = random_undershirt(H.gender)

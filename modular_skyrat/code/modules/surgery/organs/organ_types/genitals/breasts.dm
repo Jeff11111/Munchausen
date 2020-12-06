@@ -42,7 +42,7 @@
 				if(!H.dna.skin_tone_override)
 					icon_state += "_s"
 		else
-			color = "#[owner.dna.features["breasts_color"]]"
+			color = "[owner.dna.features["breasts_color"]]"
 
 /obj/item/organ/genital/breasts/genital_examine(mob/user)
 	. = list()
@@ -132,7 +132,7 @@
 	if(D.species.use_skintones && D.features["genitals_use_skintone"])
 		color = SKINTONE2HEX(H.skin_tone)
 	else
-		color = "#[D.features["breasts_color"]]"
+		color = "[D.features["breasts_color"]]"
 	size = D.features["breasts_size"]
 	shape = D.features["breasts_shape"]
 	if(!D.features["breasts_producing"])

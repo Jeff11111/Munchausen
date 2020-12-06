@@ -2093,7 +2093,7 @@
 			draw_color = SKINTONE2HEX(skin_tone)
 			grayscale = (color_src == CUSTOM_SKINTONE) //Cause human limbs have a very pale pink hue by def.
 		else
-			draw_color = "#[draw_color]"
+			draw_color = "[draw_color]"
 		if(draw_color)
 			if(grayscale)
 				limb.icon_state += "_g"
