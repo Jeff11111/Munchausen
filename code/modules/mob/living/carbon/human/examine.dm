@@ -230,7 +230,7 @@
 							for(var/i in O.surgical_examine(user))
 								msg += "<B>[icon2html(O.examine_icon ? O.examine_icon : O, user, O.examine_icon_state ? O.examine_icon_state : O.icon_state)] [i]</B>"
 					if((user != src) && W.severity >= WOUND_SEVERITY_CRITICAL)
-						if(GET_SKILL_LEVEL(user, firstaid) < JOB_SKILLPOINTS_NOVICE)
+						if(GET_SKILL_LEVEL(user, firstaid) <= JOB_SKILLPOINTS_NOVICE)
 							SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured)
 						else
 							SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured/lesser)

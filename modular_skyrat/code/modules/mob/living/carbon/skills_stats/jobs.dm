@@ -305,8 +305,8 @@
 	stat_str = 11
 	stat_end = 12
 	//Good melee and ranged, decent surgery and expert first aid
-	skill_melee = JOB_SKILLPOINTS_TRAINED
-	skill_ranged = JOB_SKILLPOINTS_AVERAGE
+	skill_melee = JOB_SKILLPOINTS_NOVICE
+	skill_ranged = JOB_SKILLPOINTS_NOVICE
 	skill_firstaid = JOB_SKILLPOINTS_EXPERT
 	skill_surgery = JOB_SKILLPOINTS_TRAINED
 
