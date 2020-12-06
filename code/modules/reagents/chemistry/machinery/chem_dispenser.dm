@@ -127,7 +127,7 @@
 	. = ..()
 	if(panel_open)
 		. += "<span class='notice'>[src]'s maintenance hatch is open!</span>"
-	if((in_range(user, src) && (GET_SKILL_LEVEL(user, chemistry) > JOB_SKILLPOINTS_NOVICE)) || isobserver(user))
+	if((in_range(user, src) && (GET_SKILL_LEVEL(user, chemistry) >= JOB_SKILLPOINTS_NOVICE)) || isobserver(user))
 		. += "<span class='notice'>The status display reads:\n\
 		Recharging <b>[recharge_amount]</b> power units per interval.\n\
 		Power efficiency increased by <b>[round((powerefficiency*1000)-100, 1)]%</b>.</span>"
