@@ -138,7 +138,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 	var/list/alt_titles_preferences = list()
 
 	/// If we have persistent scars enabled
-	var/persistent_scars = TRUE
+	var/persistent_scars = FALSE
 	/// We have 5 slots for persistent scars, if enabled we pick a random one to load (empty by default) and scars at the end of the shift if we survived as our original person
 	var/list/scars_list = list("1" = "", "2" = "", "3" = "", "4" = "", "5" = "")
 	/// Which of the 5 persistent scar slots we randomly roll to load for this round, if enabled. Actually rolled in [/datum/preferences/proc/load_character(slot)]
@@ -224,7 +224,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 		"body_size" = RESIZE_DEFAULT_SIZE
 		)
 	var/list/custom_names = list()
-	var/preferred_ai_core_display = "Blue"
 	var/prefered_security_department = SEC_DEPT_RANDOM
 	var/custom_species = ""
 
@@ -375,23 +374,11 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 			dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender;task=input'>[gender == MALE ? "Male" : "Female"]</a><BR>"
 			dat += "<b>Additional Language:</b> <a href='?_src_=prefs;preference=language;task=menu'><b>[language ? language : "None"]</b></a><BR>"
 			dat += "<b>Age:</b> <a style='display:block;width:30px' href='?_src_=prefs;preference=age;task=input'>[age]</a>"
-			//skyrat edit
-			dat += "<h2>Religion</h2>"
-			var/old_group
-			for(var/custom_name_id in list("religion", "deity"))
-				var/namedata = GLOB.preferences_custom_names[custom_name_id]
-				if(!old_group)
-					old_group = namedata["group"]
-				else if(old_group != namedata["group"])
-					old_group = namedata["group"]
-					dat += "<br>"
-				dat += "<b>[capitalize(custom_name_id)]:</b> <a href ='?_src_=prefs;preference=[custom_name_id];task=input'>[custom_names[custom_name_id]]</a><br>"
 			dat += "<h2>Additional Preferences</h2>"
 			dat += "<b>Auto-Hiss:</b> <a href='?_src_=prefs;preference=auto_hiss'>[auto_hiss ? "Yes" : "No"]</a>"
 
 
 			dat += "<h2>Special Names:</h2>"
-			//
 			old_group = null
 			for(var/custom_name_id in (GLOB.preferences_custom_names - list("religion", "deity"))) //skyrat edit
 				var/namedata = GLOB.preferences_custom_names[custom_name_id]
@@ -402,7 +389,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					dat += "<br>"
 				dat += "<b>[namedata["pref_name"]]:</b> <a href ='?_src_=prefs;preference=[custom_name_id];task=input'>[custom_names[custom_name_id]]</a> "
 			dat += "<h2>Job Preferences</h2>"
-			dat += "<b>Preferred AI Core Display:</b> <a href='?_src_=prefs;preference=ai_core_icon;task=input'>[preferred_ai_core_display]</a><br>"
 			dat += "<b>Preferred Security Department:</b> <a href='?_src_=prefs;preference=sec_dept;task=input'>[prefered_security_department]</a><BR></td>"
 			dat += "</tr></table>"
 
@@ -2606,11 +2592,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					if(new_backbag)
 						backbag = new_backbag
 
-				if("ai_core_icon")
-					var/ai_core_icon = input(user, "Choose your preferred AI core display screen:", "AI Core Display Screen Selection") as null|anything in GLOB.ai_core_display_screens
-					if(ai_core_icon)
-						preferred_ai_core_display = ai_core_icon
-
 				if("sec_dept")
 					var/department = input(user, "Choose your preferred security department:", "Security Departments") as null|anything in GLOB.security_depts_prefs
 					if(department)
@@ -2672,9 +2653,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						hud_toggle_color = sanitize_hexcolor(new_toggle_color)
 
 				if("gender")
-					var/chosengender = input(user, "Select your character's gender.", "Gender Selection", gender) as null|anything in list(MALE,FEMALE)
-					if(!chosengender)
-						return
+					var/chosengender = (gender == FEMALE ? MALE : FEMALE)
 					features["body_model"] = chosengender
 					gender = chosengender
 					facial_hair_style = random_facial_hair_style(gender)
@@ -2756,7 +2735,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						toggles ^= MEMBER_PUBLIC
 
 				if("body_model")
-					features["body_model"] = features["body_model"] == MALE ? FEMALE : MALE
+					features["body_model"] = (features["body_model"] == FEMALE ? MALE : FEMALE)
 
 				if("hotkeys")
 					hotkeys = !hotkeys
