@@ -961,7 +961,10 @@
 		if(parent_bodyzone)
 			spreadable_limbs |= parent_bodyzone
 		if(length(children_zones))
-			spreadable_limbs |= children_zones
+			spreadable_limbs |= children_zonesq
+			
+		//Hitting the head should not spread to the eyes
+		spreadable_limbs -= list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)
 
 		//We replace the body zones with the appropriate limbs
 		for(var/i in spreadable_limbs)
