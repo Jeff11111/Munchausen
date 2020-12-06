@@ -60,7 +60,7 @@
 /datum/species/jelly/handle_body(mob/living/carbon/human/H)
 	. = ..()
 	//update blood color to body color
-	exotic_blood_color = "#" + H.dna.features["mcolor"]
+	exotic_blood_color = sanitize_hexcolor(H.dna.features["mcolor"])
 
 /datum/species/jelly/spec_life(mob/living/carbon/human/H)
 	if(H.stat == DEAD || HAS_TRAIT(H, TRAIT_NOMARROW)) //can't farm slime jelly from a dead slime/jelly person indefinitely, and no regeneration for blooduskers

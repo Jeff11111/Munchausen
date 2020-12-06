@@ -99,7 +99,7 @@
 		return
 	if(!isturf(target) || isspaceturf(target))
 		return
-	var/newcolor = "#" + paint_color
+	var/newcolor = sanitize_hexcolor(paint_color)
 	target.add_atom_colour(newcolor, WASHABLE_COLOUR_PRIORITY)
 
 /obj/item/paint/paint_remover

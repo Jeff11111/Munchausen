@@ -211,7 +211,7 @@
 				var/datum/sprite_accessory/S = GLOB.hair_styles_list[hair_style]
 				if(S)
 					var/image/hair_overlay = image(S.icon, "[S.icon_state]", -HAIR_LAYER, SOUTH)
-					hair_overlay.color = "#" + hair_color
+					hair_overlay.color = sanitize_hexcolor(hair_color)
 					hair_overlay.alpha = hair_alpha
 					. += hair_overlay
 			//facial hair
@@ -219,7 +219,7 @@
 				var/datum/sprite_accessory/S2 = GLOB.facial_hair_styles_list[facial_hair_style]
 				if(S2)
 					var/image/facial_overlay = image(S2.icon, "[S2.icon_state]", -HAIR_LAYER, SOUTH)
-					facial_overlay.color = "#" + facial_hair_color
+					facial_overlay.color = sanitize_hexcolor(facial_hair_color)
 					facial_overlay.alpha = hair_alpha
 					. += facial_overlay
 

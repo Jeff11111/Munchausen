@@ -266,7 +266,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 				if(S)
 					facial_hair_overlay = mutable_appearance(S.icon, "[S.icon_state]", -HAIR_LAYER)
 					if(facial_hair_color)
-						facial_hair_overlay.color = "#" + facial_hair_color
+						facial_hair_overlay.color = sanitize_hexcolor(facial_hair_color)
 					facial_hair_overlay.alpha = 200
 					add_overlay(facial_hair_overlay)
 			if(hair_style)
@@ -274,7 +274,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 				if(S)
 					hair_overlay = mutable_appearance(S.icon, "[S.icon_state]", -HAIR_LAYER)
 					if(hair_color)
-						hair_overlay.color = "#" + hair_color
+						hair_overlay.color = sanitize_hexcolor(hair_color)
 					hair_overlay.alpha = 200
 					add_overlay(hair_overlay)
 	else

@@ -532,11 +532,11 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			if(!forced_colour)
 				if(hair_color)
 					if(hair_color == "mutcolor")
-						facial_overlay.color = "#" + H.dna.features["mcolor"]
+						facial_overlay.color = sanitize_hexcolor(H.dna.features["mcolor"])
 					else
-						facial_overlay.color = "#" + hair_color
+						facial_overlay.color = sanitize_hexcolor(hair_color)
 				else
-					facial_overlay.color = "#" + H.facial_hair_color
+					facial_overlay.color = sanitize_hexcolor(H.facial_hair_color)
 			else
 				facial_overlay.color = forced_colour
 
@@ -590,11 +590,11 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				if(!forced_colour)
 					if(hair_color)
 						if(hair_color == "mutcolor")
-							hair_overlay.color = "#" + H.dna.features["mcolor"]
+							hair_overlay.color = sanitize_hexcolor(H.dna.features["mcolor"])
 						else
-							hair_overlay.color = "#" + hair_color
+							hair_overlay.color = sanitize_hexcolor(hair_color)
 					else
-						hair_overlay.color = "#" + H.hair_color
+						hair_overlay.color = sanitize_hexcolor(H.hair_color)
 				else
 					hair_overlay.color = forced_colour
 				hair_overlay.alpha = hair_alpha
