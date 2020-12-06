@@ -176,8 +176,7 @@
 			"<span class='notice'>You close [M]'s [parse_zone(selected_zone)] with [close_tool] and remove [I].</span>")
 		var/datum/component/storage/concrete/organ/ST = M.GetComponent(/datum/component/storage/concrete/organ)
 		if(ST)
-			qdel(ST)
-		qdel(S)
+			ST.accessible = FALSE
 		return TRUE
 
 /proc/get_location_modifier(mob/M)

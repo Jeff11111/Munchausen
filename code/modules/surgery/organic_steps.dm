@@ -127,7 +127,7 @@
 				inch.remove_wound()
 		var/datum/component/storage/concrete/organ/ST = target?.GetComponent(/datum/component/storage/concrete/organ)
 		if(ST)
-			qdel(ST)
+			ST.accessible = FALSE
 	. = ..()
 
 //saw bone

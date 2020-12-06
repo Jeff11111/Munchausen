@@ -3,7 +3,7 @@
 	rustle_sound = list('modular_skyrat/sound/gore/organ1.ogg', 'modular_skyrat/sound/gore/organ2.ogg')
 	var/obj/item/bodypart/bodypart_affected
 	storage_flags = 0
-	var/accessible = TRUE
+	var/accessible = FALSE
 
 //Unregister signals we don't want
 /datum/component/storage/concrete/organ/Initialize()
@@ -79,6 +79,19 @@
 		ui_show(user)
 		return COMPONENT_NO_ATTACK_HAND
 
+//Only visible when acessible
+/datum/component/storage/concrete/organ/show_to_ghost(datum/source, mob/dead/observer/M)
+	if(!accessible)
+		return
+	. = ..()
+
+//Only visible when accessible
+/datum/component/storage/concrete/organ/user_show_to_mob(mob/M, force, ghost)
+	if(!accessible && !force)
+		return
+	. = ..()
+
+//Can only insert organs or cavity implants depending on a few conditions
 /datum/component/storage/concrete/organ/handle_item_insertion(obj/item/I, prevent_warning = FALSE, mob/M, datum/component/storage/remote)		//Remote is null or the slave datum
 	var/datum/component/storage/concrete/master = master()
 	var/atom/parent = src.parent
@@ -174,7 +187,7 @@
 			if(!stop_messages)
 				to_chat(M, "<span class='warning'>[I] is too long for [host]!</span>")
 			return FALSE
-		// STORAGE LIMITS
+	///STORAGE LIMITS
 	if(storage_flags & STORAGE_LIMIT_MAX_ITEMS)
 		if(length(not_a_location) >= max_items)
 			if(!stop_messages)
@@ -220,9 +233,9 @@
 		var/obj/item/mmi/meme = I
 		if(meme.brain)
 			O = meme.brain
+			O.forceMove(parent)
 			meme.brain = null
 			qdel(meme)
-			O.forceMove(parent)
 	
 	if(istype(O))
 		var/list/not_a_location = contents()
@@ -273,12 +286,13 @@
 /datum/component/storage/concrete/organ/emp_act(datum/source, severity)
 	return FALSE
 
-//Bla bla
+//Deal with cavity items and organs appropriately
 /datum/component/storage/concrete/organ/remove_from_storage(atom/movable/AM, atom/new_location)
 	if(!accessible)
 		return FALSE
 	. = ..()
 	if(.)
+		AM.mouse_opacity = initial(AM.mouse_opacity)
 		var/obj/item/organ/O = AM
 		if(!istype(O))
 			if(bodypart_affected.cavity_item == AM)
@@ -295,7 +309,6 @@
 				fucked.blood_flow += rand(2, 3)
 			for(var/datum/wound/pierce/shitted in bodypart_affected.wounds)
 				shitted.blood_flow += rand(2, 3)
-		O.mouse_opacity = initial(O.mouse_opacity)
 		O.stored_in = null
 		O.Remove(FALSE)
 		O.organ_flags |= ORGAN_CUT_AWAY

@@ -17,13 +17,13 @@
 /datum/surgery/organ_manipulation/complete()
 	var/datum/component/storage/concrete/organ/ST = target?.GetComponent(/datum/component/storage/concrete/organ)
 	if(ST)
-		qdel(ST)
+		ST.accessible = FALSE
 	. = ..()
 
 /datum/surgery/organ_manipulation/Destroy()
 	var/datum/component/storage/concrete/organ/ST = target?.GetComponent(/datum/component/storage/concrete/organ)
 	if(ST)
-		qdel(ST)
+		ST.accessible = FALSE
 	. = ..()
 
 /datum/surgery/organ_manipulation/soft
@@ -64,7 +64,7 @@
 
 /datum/surgery_step/manipulate_organs/Destroy(force, ...)
 	. = ..()
-	QDEL_NULL(our_component)
+	our_component = null
 	storage_man = null
 
 /datum/surgery_step/manipulate_organs/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
@@ -73,13 +73,13 @@
 		return -1
 	else if(!mob_prepared)
 		to_chat(user, "<span class='notice'>You prepare [target] for organ manipulation.</span>")
-		our_component = target.AddComponent(/datum/component/storage/concrete/organ)
-		our_component.attack_hand_open = TRUE
-		our_component.attack_hand_interact = TRUE
-		our_component.bodypart_affected = target.get_bodypart(check_zone(user.zone_selected))
-		our_component.drop_all_on_deconstruct = FALSE
-		our_component.silent = TRUE
-		our_component.update_insides()
+		our_component = target.GetComponent(/datum/component/storage/concrete/organ)
+		if(our_component)
+			our_component.bodypart_affected = target.get_bodypart(check_zone(surgery.location))
+			our_component.drop_all_on_deconstruct = FALSE
+			our_component.silent = TRUE
+			our_component.accessible = TRUE
+			our_component.update_insides()
 		mob_prepared = TRUE
 		return -1
 	else if(tool.tool_behaviour in list(TOOL_RETRACTOR, TOOL_CROWBAR))

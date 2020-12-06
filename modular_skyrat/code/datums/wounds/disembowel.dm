@@ -130,8 +130,8 @@
 /datum/wound/slash/critical/incision/disembowel/Destroy()
 	var/datum/component/storage/concrete/organ/ST = victim?.GetComponent(/datum/component/storage/concrete/organ)
 	if(ST)
-		qdel(ST)
-	QDEL_NULL(our_component)
+		ST.accessible = null
+	our_component = null
 	. = ..()
 
 /datum/wound/slash/critical/incision/disembowel/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
@@ -173,13 +173,13 @@
 		if(BODY_ZONE_PRECISE_R_FOOT)
 			initial_flow *= (1/2)
 			minimum_flow *= (1/3)
-	our_component = L.owner.AddComponent(/datum/component/storage/concrete/organ)
-	our_component.attack_hand_open = TRUE
-	our_component.attack_hand_interact = TRUE
-	our_component.bodypart_affected = L
-	our_component.drop_all_on_deconstruct = FALSE
-	our_component.silent = TRUE
-	our_component.update_insides()
+	our_component = L.owner.GetComponent(/datum/component/storage/concrete/organ)
+	if(our_component)
+		our_component.bodypart_affected = L
+		our_component.drop_all_on_deconstruct = FALSE
+		our_component.silent = TRUE
+		our_component.accessible = TRUE
+		our_component.update_insides()
 	. = ..()
 
 /datum/wound/mechanical/slash/critical/incision/disembowel
@@ -258,11 +258,11 @@
 		if(BODY_ZONE_PRECISE_R_FOOT)
 			initial_flow *= (1/2)
 			minimum_flow *= (1/3)
-	our_component = L.owner.AddComponent(/datum/component/storage/concrete/organ)
-	our_component.attack_hand_open = TRUE
-	our_component.attack_hand_interact = TRUE
-	our_component.bodypart_affected = L
-	our_component.drop_all_on_deconstruct = FALSE
-	our_component.silent = TRUE
-	our_component.update_insides()
+	our_component = L.owner.GetComponent(/datum/component/storage/concrete/organ)
+	if(our_component)
+		our_component.bodypart_affected = L
+		our_component.drop_all_on_deconstruct = FALSE
+		our_component.silent = TRUE
+		our_component.accessible = TRUE
+		our_component.update_insides()
 	. = ..()

@@ -3,6 +3,19 @@
 	var/immunity 		= 100		//current immune system strength
 	var/immunity_norm 	= 100		//it will regenerate to this value
 
+/mob/living/carbon/ComponentInitialize()
+	. = ..()
+	//Carbon mobs always have an organ storage component - it just becomes accessible when necessary.
+	var/datum/component/storage/concrete/organ/ST = AddComponent(/datum/component/storage/concrete/organ)
+	if(ST)
+		ST.accessible = FALSE
+
+/mob/living/carbon/Destroy()
+	. = ..()
+	var/datum/component/storage/concrete/organ/ST = GetComponent(/datum/component/storage/concrete/organ)
+	if(ST)
+		qdel(ST)
+
 /mob/living/carbon/proc/create_bodyparts()
 	var/l_hand_index_next = -1
 	var/r_hand_index_next = 0
