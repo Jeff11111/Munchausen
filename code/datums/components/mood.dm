@@ -47,42 +47,85 @@
 /datum/component/mood/proc/stop_processing()
 	STOP_PROCESSING(SSobj, src)
 
+/datum/component/mood/proc/get_left_signs_from_number(num)
+	var/mood_signs = num
+	var/mood_symbol = "<span class='green'><b>+</b></span>"
+	if(mood_signs == 0)
+		mood_symbol = ""
+	else if(mood_signs < 0)
+		mood_symbol = "<span class='red'><b>-</b></span>"
+	mood_signs = abs(mood_signs)
+	var/left_symbols = ""
+	if(mood_signs && mood_symbol)
+		mood_signs = CEILING(mood_signs/2, 1)
+		var/bingus = 0
+		while(bingus < mood_signs)
+			bingus++
+			left_symbols += mood_symbols
+		if(left_symbols)
+			left_symbols = "[left_symbols] "
+	return left_symbols
+
+/datum/component/mood/proc/get_right_signs_from_number(num)
+	var/mood_signs = num
+	var/mood_symbol = "<span class='green'><b>+</b></span>"
+	if(mood_signs == 0)
+		mood_symbol = ""
+	else if(mood_signs < 0)
+		mood_symbol = "<span class='red'><b>-</b></span>"
+	mood_signs = abs(mood_signs)
+	var/right_symbols = ""
+	if(mood_signs && mood_symbol)
+		mood_signs = FLOOR(mood_signs/2, 1)
+		var/bingus = 0
+		while(bingus < mood_signs)
+			bingus++
+			right_symbols += mood_symbols
+		if(right_symbols)
+			right_symbols = " [right_symbols]"
+	return right_symbols
+
+/datum/component/mood/proc/get_right_signs_from_number(num)
+
 /datum/component/mood/proc/print_mood(mob/user)
 	var/msg = "<span class='info'>*---------*</span>\n"
 	msg += "<span class='info'><EM>My thoughts</EM></span>\n"
 	msg += "<span class='notice'>My current mood: </span>\n" //Short term
-	
+	var/left_symbols = get_left_signs_from_number(mood_level - 5)
+	var/right_symbols = get_right_signs_from_number(mood_level - 5)
 	if(!HAS_TRAIT(user, TRAIT_SCREWY_MOOD))
 		switch(mood_level)
 			if(1)
-				msg += "<span class='boldwarning'>I wish I was dead!</span>\n"
+				msg += "<span class='boldwarning'>[left_symbols]I wish I was dead![right_symbols]</span>\n"
 			if(2)
-				msg += "<span class='boldwarning'>I feel terrible...</span>\n"
+				msg += "<span class='boldwarning'>[left_symbols]I feel terrible...[right_symbols]</span>\n"
 			if(3)
-				msg += "<span class='boldwarning'>I feel very upset.</span>\n"
+				msg += "<span class='boldwarning'>[left_symbols]I feel very upset.[right_symbols]</span>\n"
 			if(4)
-				msg += "<span class='boldwarning'>I'm a bit sad.</span>\n"
+				msg += "<span class='boldwarning'>[left_symbols]I'm a bit sad.[right_symbols]</span>\n"
 			if(5)
-				msg += "<span class='nicegreen'>I'm alright.</span>\n"
+				msg += "<span class='nicegreen'>[left_symbols]I'm alright.[right_symbols]</span>\n"
 			if(6)
-				msg += "<span class='nicegreen'>I feel pretty okay.</span>\n"
+				msg += "<span class='nicegreen'>[left_symbols]I feel pretty okay.[right_symbols]</span>\n"
 			if(7)
-				msg += "<span class='nicegreen'>I feel pretty good.</span>\n"
+				msg += "<span class='nicegreen'>[left_symbols]I feel pretty good.[right_symbols]</span>\n"
 			if(8)
-				msg += "<span class='nicegreen'>I feel amazing!</span>\n"
+				msg += "<span class='nicegreen'>[left_symbols]I feel amazing![right_symbols]</span>\n"
 			if(9)
-				msg += "<span class='nicegreen'>I love life!</span>\n"
+				msg += "<span class='nicegreen'>[left_symbols]I love life![right_symbols]</span>\n"
 			else
-				msg += "<span class='nicegreen'>I'm alright.</span>\n"
+				msg += "<span class='nicegreen'>[left_symbols]I'm alright.[right_symbols]</span>\n"
 	else
 		msg += "<span class='notice'>No clue.</span>\n"
 
 	msg += "<span class='notice'>Moodlets:\n</span>"//All moodlets
 	if(!HAS_TRAIT(user, TRAIT_SCREWY_MOOD))
-		if(mood_events.len)
+		if(length(mood_events))
 			for(var/i in mood_events)
 				var/datum/mood_event/event = mood_events[i]
-				msg += event.description
+				left_symbols = get_left_signs_from_number(event.mood_change)
+				right_symbols = get_right_signs_from_number(event.mood_change)
+				msg += "[left_symbols]event.description[right_symbols]"
 		else
 			msg += "<span class='nicegreen'>I don't have much of a reaction to anything right now.</span>\n"
 	else
