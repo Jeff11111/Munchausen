@@ -2216,7 +2216,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				if("mutant_color")
 					var/new_mutantcolor = input(user, "Choose your character's alien/mutant color:", "Character Preference","#"+features["mcolor"]) as color|null
 					if(new_mutantcolor)
-						features["mcolor"] = sanitize_hexcolor(pref_species.default_color)
+						features["mcolor"] = sanitize_hexcolor(new_mutantcolor)
 
 				if("mutant_color2")
 					var/new_mutantcolor = input(user, "Choose your character's secondary alien/mutant color:", "Character Preference","#"+features["mcolor2"]) as color|null
