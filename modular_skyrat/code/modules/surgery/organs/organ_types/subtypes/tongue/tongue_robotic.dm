@@ -3,7 +3,7 @@
 	desc = "A voice synthesizer that can interface with organic lifeforms."
 	status = ORGAN_ROBOTIC
 	organ_flags = ORGAN_NO_SPOIL
-	icon_state = "tonguerobot"
+	icon_state = "tongue-robot"
 	say_mod = "states"
 	attack_verb = list("beeped", "booped")
 	modifies_speech = TRUE

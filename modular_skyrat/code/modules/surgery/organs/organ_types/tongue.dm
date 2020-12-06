@@ -3,7 +3,7 @@
 /obj/item/organ/tongue
 	name = "tongue"
 	desc = "A fleshy muscle mostly used for lying."
-	icon_state = "tonguenormal"
+	icon_state = "tongue"
 	zone = BODY_ZONE_HEAD
 	slot = ORGAN_SLOT_TONGUE
 	attack_verb = list("licked", "slobbered", "slapped", "frenched", "tongued")

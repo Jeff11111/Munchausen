@@ -1,7 +1,7 @@
 /obj/item/organ/tongue/zombie
 	name = "rotting tongue"
 	desc = "Between the decay and the fact that it's just lying there you doubt a tongue has ever seemed less sexy."
-	icon_state = "tonguezombie"
+	icon_state = "tongue-zombie"
 	say_mod = "moans"
 	taste_sensitivity = 32
 	maxHealth = 65 //Stop! It's already dead...!

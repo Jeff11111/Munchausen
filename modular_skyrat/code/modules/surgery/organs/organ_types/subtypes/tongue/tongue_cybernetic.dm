@@ -2,7 +2,7 @@
 /obj/item/organ/tongue/cybernetic
 	name = "cybernetic tongue"
 	desc = "A state of the art robotic tongue that can detect the pH of anything drank."
-	icon_state = "tonguecybernetic"
+	icon_state = "tongue-c"
 	taste_sensitivity = 10
 	maxHealth = 60 //It's robotic!
 	organ_flags = ORGAN_SYNTHETIC

@@ -1,7 +1,8 @@
 /obj/item/organ/lungs/slime
 	name = "vacuole"
 	desc = "A large organelle designed to store oxygen and other important gasses."
-
+	icon_state = "lungs-s"
+	
 	safe_toxins_max = 0 //We breathe this to gain POWER.
 
 	cold_level_1_threshold = 285 // Remember when slimes used to be succeptable to cold? Well....

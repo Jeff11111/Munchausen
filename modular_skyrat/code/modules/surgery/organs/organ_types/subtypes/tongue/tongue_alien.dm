@@ -1,7 +1,7 @@
 /obj/item/organ/tongue/alien
 	name = "alien tongue"
 	desc = "According to leading xenobiologists the evolutionary benefit of having a second mouth in your mouth is \"that it looks badass\"."
-	icon_state = "tonguexeno"
+	icon_state = "tongue-x"
 	say_mod = "hisses"
 	taste_sensitivity = 10 // LIZARDS ARE ALIENS CONFIRMED
 	maxHealth = 500 //They've a little mouth for a tongue, so it's pretty rhobust

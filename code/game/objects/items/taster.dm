@@ -1,8 +1,8 @@
 /obj/item/taster
 	name = "taster"
 	desc = "Tastes things, so you don't have to!"
-	icon = 'icons/obj/surgery.dmi'
-	icon_state = "tonguenormal"
+	icon = 'modular_skyrat/icons/obj/surgery.dmi'
+	icon_state = "tongue"
 
 	w_class = WEIGHT_CLASS_TINY
 

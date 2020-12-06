@@ -1,7 +1,7 @@
 /obj/item/organ/tongue/fluffy
 	name = "fluffy tongue"
 	desc = "OwO what's this?"
-	icon_state = "tonguefluffy"
+	icon_state = "tongue-fluffy"
 	taste_sensitivity = 10 // extra sensitive and inquisitive uwu
 	maxHealth = 35 //Sensitive tongue!
 	modifies_speech = TRUE

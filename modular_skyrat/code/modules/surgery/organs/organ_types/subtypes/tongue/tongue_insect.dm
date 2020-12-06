@@ -1,7 +1,7 @@
 /obj/item/organ/tongue/fly
 	name = "proboscis"
 	desc = "A freakish looking meat tube that apparently can take in liquids."
-	icon_state = "tonguefly"
+	icon_state = "tongue-fly"
 	say_mod = "buzzes"
 	taste_sensitivity = 25 // you eat vomit, this is a mercy
 	maxHealth = 80 //years of eatting trash has made your tongue strong

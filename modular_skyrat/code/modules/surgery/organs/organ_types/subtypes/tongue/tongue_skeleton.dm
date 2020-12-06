@@ -2,7 +2,7 @@
 /obj/item/organ/tongue/bone
 	name = "bone \"tongue\""
 	desc = "Apparently skeletons alter the sounds they produce through oscillation of their teeth, hence their characteristic rattling."
-	icon_state = "tonguebone"
+	icon_state = "tongue-bone"
 	say_mod = "rattles"
 	organ_flags = ORGAN_NO_SPOIL
 	attack_verb = list("bitten", "chattered", "chomped", "enamelled", "boned")

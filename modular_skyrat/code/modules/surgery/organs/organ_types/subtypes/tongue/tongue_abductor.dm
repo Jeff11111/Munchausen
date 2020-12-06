@@ -2,7 +2,7 @@
 /obj/item/organ/tongue/abductor
 	name = "superlingual matrix"
 	desc = "A mysterious structure that allows for instant communication between users. Pretty impressive until you need to eat something."
-	icon_state = "tongueayylmao"
+	icon_state = "tongue-ayylmao"
 	say_mod = "gibbers"
 	taste_sensitivity = 101 // ayys cannot taste anything.
 	maxHealth = 120 //Ayys probe a lot
