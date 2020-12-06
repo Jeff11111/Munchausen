@@ -235,7 +235,7 @@ GLOBAL_LIST_INIT(admiral_messages, list("Do you know how expensive these station
 GLOBAL_LIST_INIT(redacted_strings, list("\[REDACTED\]", "\[CLASSIFIED\]", "\[ARCHIVED\]", "\[EXPLETIVE DELETED\]", "\[EXPUNGED\]", "\[INFORMATION ABOVE YOUR SECURITY CLEARANCE\]", "\[MOVE ALONG CITIZEN\]", "\[NOTHING TO SEE HERE\]", "\[ACCESS DENIED\]"))
 
 // Skyrat changes. Please, consult with loredevs if you want add faction(s) to this list.
-GLOBAL_LIST_INIT(factions_list, list("NanoTrasen", "Sol Federation", "Free Trade Union", "Letheia"))
+GLOBAL_LIST_INIT(factions_list, list("NanoTrasen", "Syndicate", "Free Trade Union"))
 // End of Skyrat changes
 
 GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/wisdoms.txt"))

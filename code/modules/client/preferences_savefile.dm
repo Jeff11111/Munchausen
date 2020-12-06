@@ -197,7 +197,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["event_participation"] >> event_participation
 	S["event_prefs"] >> event_prefs
 	S["appear_in_round_end_report"]	>> appear_in_round_end_report
-	S["pain_style"] >> pain_style
 	//SKYRAT CHANGES END
 
 
@@ -294,7 +293,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	appear_in_round_end_report	= sanitize_integer(appear_in_round_end_report, 0, 1, initial(appear_in_round_end_report))
 	scars_list = SANITIZE_LIST(scars_list)
 	cosmetic_scars = SANITIZE_LIST(cosmetic_scars)
-	pain_style = sanitize_text(pain_style, initial(pain_style))
 	//SKYRAT CHANGES END
 
 	verify_keybindings_valid()		// one of these days this will runtime and you'll be glad that i put it in a different proc so no one gets their saves wiped
@@ -518,7 +516,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		for(var/i in pref_species.descriptors) //of course some species might not have descriptors and this is uneccessary for them but
 			var/datum/mob_descriptor/md = pref_species.descriptors[i] //the hardest coding requires the strongest wills
 			body_descriptors[i] = md.current_value
-	//
 
 	//Citadel code
 	S["feature_genitals_use_skintone"]	>> features["genitals_use_skintone"]

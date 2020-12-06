@@ -108,6 +108,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 	var/be_random_body = 0				//whether we'll have a random body every round
 	var/gender = MALE					//gender of character (well duh)
 	var/age = 30						//age of character
+
 	//SKYRAT CHANGES
 	var/bloodtype = ""
 	var/bloodreagent = ""
@@ -116,9 +117,10 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 	var/security_records = ""
 	var/medical_records = ""
 	var/flavor_background = ""
-	var/flavor_faction = null
 	var/character_skills = ""
 	var/exploitable_info = ""
+	var/flavor_faction = "None (Freelancer)"
+	var/corporate_relations = "Neutral"
 	var/see_chat_emotes = TRUE
 	var/enable_personal_chat_color = FALSE
 	var/personal_chat_color = "#ffffff"
@@ -134,10 +136,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 	var/list/body_descriptors = list()
 
 	var/list/alt_titles_preferences = list()
-	
-	var/accept_ERG = FALSE
 
-	var/pain_style = "Pain Guy"
 	/// If we have persistent scars enabled
 	var/persistent_scars = TRUE
 	/// We have 5 slots for persistent scars, if enabled we pick a random one to load (empty by default) and scars at the end of the shift if we survived as our original person
@@ -162,7 +161,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 	var/facial_hair_color = "#FFFFFF"		//Facial hair color
 	var/skin_tone = "caucasian1"		//Skin color
 	var/use_custom_skin_tone = FALSE
-	//Eye color
+	//Eye colors
 	var/left_eye_color = "#FFFFFF"
 	var/right_eye_color = "#FFFFFF"
 	var/datum/species/pref_species = new /datum/species/human()	//Mutant race
@@ -227,7 +226,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 	var/list/custom_names = list()
 	var/preferred_ai_core_display = "Blue"
 	var/prefered_security_department = SEC_DEPT_RANDOM
-	var/custom_species = null
+	var/custom_species = ""
 
 	//Specials aka "QUIRKS"
 	var/special_char = FALSE
@@ -486,8 +485,9 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 			dat += "<BR><BR>"
 			if(length(pref_species.bloodtypes))
 				dat += "<b>Blood type :</b>"
-				dat += 	" <a href='?_src_=prefs;preference=bloodtype;task=input'>[bloodtype ? bloodtype : "Default"]</a><br>"
-			dat += "<b>Faction/Employer :</b> <a href='?_src_=prefs;preference=flavor_faction;task=input'>[flavor_faction ? flavor_faction : "Unset"]</a><br>"
+				dat += 	" <a href='?_src_=prefs;preference=bloodtype;task=input'>[bloodtype ? bloodtype : "Species Default"]</a><br>"
+			dat += "<b>Faction/Employer :</b> <a href='?_src_=prefs;preference=flavor_faction;task=input'>[flavor_faction ? flavor_faction : "None (Freelancer)"]</a><br>"
+			dat += "<b>Corporate Relations :</b> <a href='?_src_=prefs;preference=corporate_relations;task=input'>[corporate_relations ? corporate_relations : "Neutral"]</a><br>"
 			dat += "<b>Custom runechat color :</b> <a href='?_src_=prefs;preference=enable_personal_chat_color'>[enable_personal_chat_color ? "Enabled" : "Disabled"]</a> [enable_personal_chat_color ? "<span style='border: 1px solid #161616; background-color: [personal_chat_color];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=personal_chat_color;task=input'>Change</a>" : ""]<br>"
 			dat += "<h2>Body</h2>"
 			dat += "<b>Gender:</b><a style='display:block;width:100px' href='?_src_=prefs;preference=gender;task=input'>[gender == MALE ? "Male" : "Female"]</a><BR>"
@@ -2107,6 +2107,11 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 								flavor_faction = strip_html_simple(custom_faction, 30, TRUE)
 						else
 							flavor_faction = new_faction
+
+				if("corporate_relations")
+					var/new_faction = input(user, "Set your corporate relations", "Character Support") as null|anything in list("Loyal", "Supportive", "Neutral", "Skeptical", "Opposed")
+					if(new_faction)
+						corporate_relations = new_faction
 
 				if("character_skills")
 					var/msg = input(usr, "Set your skills or hobbies", "Character Skills", character_skills) as message|null
