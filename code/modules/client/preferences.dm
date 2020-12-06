@@ -920,7 +920,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				dat += "<b>Your species ([pref_species.name]) does not support genitals!</b><br>"
 			else
 				if(pref_species.use_skintones)
-					dat += "<b>Genitals use skintone:</b><a href='?_src_=prefs;preference=genital_colour'>[pref_species.use_skintones ? "Yes" : "No"]</a>"
+					dat += "<b>Genitals use skintone.</b>"
 				dat += "<h3>Penis</h3>"
 				dat += "<a style='display:block;width:50px' href='?_src_=prefs;preference=has_cock'>[(features["has_cock"] && pref_species.has_weiner) ? "Yes" : "No"]</a>"
 				if(features["has_cock"] && pref_species.has_weiner)
