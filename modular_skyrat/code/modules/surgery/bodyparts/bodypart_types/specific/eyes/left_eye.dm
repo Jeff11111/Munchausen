@@ -120,6 +120,29 @@
 	else
 		owner.clear_fullscreen("eye_damage")
 
+/obj/item/bodypart/left_eye/heal_damage(brute, burn, stamina, only_robotic, only_organic, updating_health, pain, toxin, clone)
+	. = ..()
+	var/old_damaged = eye_damaged
+	switch(brute_dam + burn_dam)
+		if(max_damage to INFINITY)
+			eye_damaged = BLIND_VISION_THREE
+		if(max_damage/2 to max_damage)
+			eye_damaged = BLURRY_VISION_TWO
+		if(max_damage/4 to max_damage/2)
+			eye_damaged = BLURRY_VISION_ONE
+		else
+			eye_damaged = FALSE
+	if(eye_damaged == old_damaged || !owner)
+		return
+	if(old_damaged == BLIND_VISION_THREE)
+		owner.cure_blind(EYE_DAMAGE)
+	else if(eye_damaged == BLIND_VISION_THREE)
+		owner.become_blind(EYE_DAMAGE)
+	if(eye_damaged && eye_damaged != BLIND_VISION_THREE)
+		owner.overlay_fullscreen("eye_damage", /obj/screen/fullscreen/impaired, eye_damaged)
+	else
+		owner.clear_fullscreen("eye_damage")
+
 /obj/item/bodypart/left_eye/on_transfer_to_limb(obj/item/bodypart/BP)
 	if(istype(BP, /obj/item/bodypart/head))
 		var/obj/item/bodypart/head/HD = BP
