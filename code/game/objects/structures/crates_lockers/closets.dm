@@ -1,7 +1,7 @@
 /obj/structure/closet
 	name = "closet"
 	desc = "It's a basic storage unit."
-	icon = 'icons/obj/closet.dmi'
+	icon = 'modular_skyrat/icons/eris/obj/closet.dmi'
 	icon_state = "generic"
 	density = TRUE
 	var/icon_door = null
@@ -86,9 +86,9 @@
 			. += "off"
 			. += "sparking"
 		else if(locked)
-			. += "locked"
+			. += "lock_locked"
 		else
-			. += "unlocked"
+			. += "lock_unlocked"
 	else
 		if(icon_door_override)
 			. += "[icon_door]_open"
