@@ -3,6 +3,7 @@
 	desc = "Whoever did this was a real cut-throat."
 	max_damage = 30
 	max_stamina_damage = 30
+	dismember_bodyzone = BODY_ZONE_CHEST
 	body_zone = BODY_ZONE_PRECISE_NECK
 	body_part = NECK
 	children_zones = list(BODY_ZONE_HEAD)

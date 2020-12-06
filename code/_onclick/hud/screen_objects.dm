@@ -419,7 +419,7 @@
 	var/icon_x = text2num(PL["icon-x"])
 	var/icon_y = text2num(PL["icon-y"])
 	var/choice = get_zone_at(icon_x, icon_y)
-	if (!choice)
+	if(!choice)
 		return 1
 
 	return set_selected_zone(choice, usr)
@@ -492,7 +492,7 @@
 					return BODY_ZONE_CHEST
 				if(21 to 24)
 					return BODY_ZONE_L_ARM
-		if(21)
+		if(21) //Chest, arms or throat
 			switch(icon_x)
 				if(8 to 11)
 					return BODY_ZONE_R_ARM
@@ -528,10 +528,14 @@
 						if(icon_x in 14 to 18)
 							return BODY_ZONE_PRECISE_MOUTH
 					if(26) //Eyeline, eyes are on 15 and 17
-						if(icon_x in 14 to 18)
+						if(icon_x in 14 to 15)
 							return BODY_ZONE_PRECISE_LEFT_EYE
-					if(25 to 27)
-						if(icon_x in 15 to 17)
+						else if(icon_x in 17 to 18)
+							return BODY_ZONE_PRECISE_RIGHT_EYE
+					if(25, 27)
+						if(icon_x == 15)
+							return BODY_ZONE_PRECISE_LEFT_EYE
+						else if(icon_x == 17)
 							return BODY_ZONE_PRECISE_RIGHT_EYE
 				return BODY_ZONE_HEAD
 

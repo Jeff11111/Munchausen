@@ -394,7 +394,7 @@
 	if(excluded_limbs.len)
 		limb_list -= excluded_limbs
 	for(var/Z in limb_list)
-		. += regenerate_limb(Z, noheal, ignore_parent_restriction)
+		. |= regenerate_limb(Z, noheal, ignore_parent_restriction)
 
 /mob/living/proc/regenerate_limb(limb_zone, noheal, ignore_parent_restriction)
 	return
@@ -402,7 +402,7 @@
 /mob/living/carbon/regenerate_limb(limb_zone, noheal, ignore_parent_restriction)
 	var/obj/item/bodypart/L
 	if(get_bodypart(limb_zone))
-		return 0
+		return
 	L = newBodyPart(limb_zone, 0, 0)
 	if(L)
 		if(!noheal)
@@ -416,9 +416,9 @@
 			L.change_bodypart_status(BODYPART_ROBOTIC)
 			L.render_like_organic = TRUE
 		
-		L.attach_limb(src, 1, ignore_parent_restriction)
+		L.attach_limb(src, TRUE, ignore_parent_restriction)
 		var/datum/scar/S = new
 		var/datum/wound/loss/phantom_loss = new
 		S.generate(L, phantom_loss)
 		QDEL_NULL(phantom_loss)
-		return 1
+		return L

@@ -2725,7 +2725,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						if(new_chat_color == "#000000")
 							personal_chat_color = "#FFFFFF"
 						else if(temp_hsl[3] >= 0.65 && temp_hsl[2] >= 0.15)
-							personal_chat_color = sanitize_hexcolor(new_chat_color, 6, 1)
+							personal_chat_color = sanitize_hexcolor(new_chat_color)
 						else
 							to_chat(user, "<span class='danger'>Invalid color. Your color is not bright enough.</span>")
 				//End of skyrat changes

@@ -579,7 +579,7 @@
 		var/energy_color_input = input(usr,"","Choose Energy Color",light_color) as color|null
 		if(!energy_color_input || !user.canUseTopic(src, BE_CLOSE, FALSE) || hacked)
 			return
-		light_color = sanitize_hexcolor(energy_color_input, desired_format=6, include_crunch=1)
+		light_color = sanitize_hexcolor(energy_color_input, desired_format=6, include_crunch=TRUE)
 		update_icon()
 		update_light()
 	return TRUE

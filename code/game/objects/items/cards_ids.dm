@@ -860,7 +860,7 @@
 		if(user.incapacitated() || !istype(user))
 			to_chat(user, "<span class='warning'>You can't do that right now!</span>")
 			return TRUE
-		id_color = sanitize_hexcolor(energy_color_input, desired_format=6, include_crunch=1)
+		id_color = sanitize_hexcolor(energy_color_input, desired_format=6, include_crunch=TRUE)
 		update_icon()
 		return TRUE
 

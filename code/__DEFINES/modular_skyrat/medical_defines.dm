@@ -177,7 +177,7 @@
 #define ORGAN_BODYPARTS list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN)
 
 #define SSPARTS	list(/obj/item/bodypart/chest, /obj/item/bodypart/groin, \
-					/obj/item/bodypart/head, /obj/item/bodypart/neck, \
+					/obj/item/bodypart/neck, /obj/item/bodypart/head, \
 					/obj/item/bodypart/left_eye, /obj/item/bodypart/right_eye, \
 					/obj/item/bodypart/r_arm, /obj/item/bodypart/r_hand, \
 					/obj/item/bodypart/l_arm, /obj/item/bodypart/l_hand, \

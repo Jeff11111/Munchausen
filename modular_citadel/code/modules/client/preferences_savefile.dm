@@ -10,8 +10,8 @@
 		features["mcolor2"] = pick("FFFFFF","7F7F7F", "7FFF7F", "7F7FFF", "FF7F7F", "7FFFFF", "FF7FFF", "FFFF7F")
 	if(!features["mcolor3"] || features["mcolor"] == "#000")
 		features["mcolor3"] = pick("FFFFFF","7F7F7F", "7FFF7F", "7F7FFF", "FF7F7F", "7FFFFF", "FF7FFF", "FFFF7F")
-	features["mcolor2"]	= sanitize_hexcolor(features["mcolor2"], 3, 0)
-	features["mcolor3"]	= sanitize_hexcolor(features["mcolor3"], 3, 0)
+	features["mcolor2"]	= sanitize_hexcolor(features["mcolor2"], 6, TRUE)
+	features["mcolor3"]	= sanitize_hexcolor(features["mcolor3"], 6, TRUE)
 	//SKYRAT CHANGES
 	S["enable_personal_chat_color"]			>> enable_personal_chat_color
 	S["personal_chat_color"]			>> personal_chat_color
@@ -33,7 +33,7 @@
 	character_skills = sanitize_text(S["character_skills"])
 	exploitable_info = sanitize_text(S["exploitable_info"])
 	enable_personal_chat_color	= sanitize_integer(enable_personal_chat_color, 0, 1, initial(enable_personal_chat_color))
-	personal_chat_color	= sanitize_hexcolor(personal_chat_color, 6, 1, "#FFFFFF")
+	personal_chat_color	= sanitize_hexcolor(personal_chat_color, 6, TRUE, "#FFFFFF")
 	foodlikes = SANITIZE_LIST(S["foodlikes"])
 	if(foodlikes.len > maxlikes)
 		foodlikes.Cut(maxlikes+1)

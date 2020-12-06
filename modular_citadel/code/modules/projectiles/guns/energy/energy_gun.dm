@@ -36,7 +36,7 @@ obj/item/gun/energy/e_gun/cx/AltClick(mob/living/user)
 	if(alert("Are you sure you want to repaint your gun?", "Confirm Repaint", "Yes", "No") == "Yes")
 		var/body_color_input = input(usr,"","Choose Body Color",body_color) as color|null
 		if(body_color_input)
-			body_color = sanitize_hexcolor(body_color_input, desired_format=6, include_crunch=1)
+			body_color = sanitize_hexcolor(body_color_input, desired_format=6, include_crunch=TRUE)
 		update_icon()
 
 obj/item/gun/energy/e_gun/cx/worn_overlays(isinhands, icon_file, used_state, style_flags = NONE)

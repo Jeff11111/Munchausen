@@ -3,13 +3,14 @@
 #define BLIND_VISION_THREE	3
 
 /obj/item/bodypart/left_eye
-	name = "eye"
+	name = "left eye"
 	icon = 'modular_skyrat/icons/obj/surgery.dmi'
 	icon_state = "eye"
 	desc = "Sightless, until the eyes reappear."
 	body_zone = BODY_ZONE_PRECISE_LEFT_EYE
 	body_part = LEFT_EYE
 	w_class = WEIGHT_CLASS_TINY
+	dismember_bodyzone = BODY_ZONE_HEAD
 	parent_bodyzone = BODY_ZONE_HEAD
 	stam_heal_tick = 0
 	stam_damage_coeff = 0

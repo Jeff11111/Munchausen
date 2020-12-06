@@ -185,12 +185,12 @@
 					penis.shape = features["cock_shape"]
 					penis.length = features["cock_shape"]
 					penis.diameter_ratio = features["cock_diameter_ratio"]
-					penis.color = sanitize_hexcolor(features["cock_color"], 6)
+					penis.color = sanitize_hexcolor(features["cock_color"], 6, TRUE)
 					penis.update_icon()
 			if(/obj/item/organ/genital/testicles)
 				var/obj/item/organ/genital/testicles/balls = new(loc)
 				if(features["has_balls"])
-					balls.color = sanitize_hexcolor(features["balls_color"], 6)
+					balls.color = sanitize_hexcolor(features["balls_color"], 6, TRUE)
 					balls.shape = features["balls_shape"]
 					balls.size = features["balls_size"]
 					balls.fluid_rate = features["balls_cum_rate"]
@@ -199,12 +199,12 @@
 			if(/obj/item/organ/genital/vagina)
 				var/obj/item/organ/genital/vagina/vegana = new(loc)
 				if(features["has_vagina"])
-					vegana.color = sanitize_hexcolor(features["vag_color"], 6)
+					vegana.color = sanitize_hexcolor(features["vag_color"], 6, TRUE)
 					vegana.shape = features["vag_shape"]
 			if(/obj/item/organ/genital/breasts)
 				var/obj/item/organ/genital/breasts/boobs = new(loc)
 				if(features["has_breasts"])
-					boobs.color = sanitize_hexcolor(features["breasts_color"], 6)
+					boobs.color = sanitize_hexcolor(features["breasts_color"], 6, TRUE)
 					boobs.size = features["breasts_size"]
 					boobs.shape = features["breasts_shape"]
 					if(!features["breasts_producing"])

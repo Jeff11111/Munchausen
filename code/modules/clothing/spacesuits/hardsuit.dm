@@ -965,7 +965,7 @@
 	if(alert("Are you sure you want to recolor your armor stripes?", "Confirm Repaint", "Yes", "No") == "Yes")
 		var/energy_color_input = input(usr,"","Choose Energy Color",energy_color) as color|null
 		if(energy_color_input)
-			energy_color = sanitize_hexcolor(energy_color_input, desired_format=6, include_crunch=1)
+			energy_color = sanitize_hexcolor(energy_color_input, desired_format=6, include_crunch=TRUE)
 			user.update_inv_wear_suit()
 			if(helmet)
 				var/obj/item/clothing/head/helmet/space/hardsuit/lavaknight/H = helmet

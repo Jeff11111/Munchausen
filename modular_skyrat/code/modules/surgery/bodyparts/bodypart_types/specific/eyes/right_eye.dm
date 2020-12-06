@@ -3,7 +3,7 @@
 #define BLIND_VISION_THREE	3
 
 /obj/item/bodypart/right_eye
-	name = "eye"
+	name = "right eye"
 	icon = 'modular_skyrat/icons/obj/surgery.dmi'
 	icon_state = "eye"
 	desc = "Sightless, until the eyes reappear."

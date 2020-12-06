@@ -227,38 +227,32 @@
 	switch(zone)
 		if(BODY_ZONE_L_ARM)
 			L = new /obj/item/bodypart/l_arm()
-		//skyrat edit
 		if(BODY_ZONE_PRECISE_L_HAND)
 			L = new /obj/item/bodypart/l_hand()
-		//
 		if(BODY_ZONE_R_ARM)
 			L = new /obj/item/bodypart/r_arm()
-		//skyrat edit
 		if(BODY_ZONE_PRECISE_R_HAND)
 			L = new /obj/item/bodypart/r_hand()
-		//
-		if(BODY_ZONE_PRECISE_NECK)
+		if(BODY_ZONE_PRECISE_HEAD)
 			L = new /obj/item/bodypart/head()
 		if(BODY_ZONE_PRECISE_NECK)
 			L = new /obj/item/bodypart/neck()
+		if(BODY_ZONE_PRECISE_LEFT_EYE)
+			L = new /obj/item/bodypart/left_eye()
+		if(BODY_ZONE_PRECISE_RIGHT_EYE)
+			L = new /obj/item/bodypart/right_eye()
 		if(BODY_ZONE_L_LEG)
 			L = new /obj/item/bodypart/l_leg()
-		//skyrat edit
 		if(BODY_ZONE_PRECISE_L_FOOT)
 			L = new /obj/item/bodypart/l_foot()
-		//
 		if(BODY_ZONE_R_LEG)
 			L = new /obj/item/bodypart/r_leg()
-		//skyrat edit
 		if(BODY_ZONE_PRECISE_R_FOOT)
 			L = new /obj/item/bodypart/r_foot()
-		//
 		if(BODY_ZONE_CHEST)
 			L = new /obj/item/bodypart/chest()
-		//skyrat edit
 		if(BODY_ZONE_PRECISE_GROIN)
 			L = new /obj/item/bodypart/groin()
-		//
 	if(L)
 		L.update_limb(fixed_icon, src)
 		if(robotic)

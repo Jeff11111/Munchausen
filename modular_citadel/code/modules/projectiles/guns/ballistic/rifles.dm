@@ -240,7 +240,7 @@
 	if(alert("Are you sure you want to recolor your gun?", "Confirm Repaint", "Yes", "No") == "Yes")
 		var/body_color_input = input(usr,"","Choose Shroud Color",body_color) as color|null
 		if(body_color_input)
-			body_color = sanitize_hexcolor(body_color_input, desired_format=6, include_crunch=1)
+			body_color = sanitize_hexcolor(body_color_input, desired_format=6, include_crunch=TRUE)
 		update_icon()
 
 /obj/item/gun/ballistic/automatic/AM4B/examine(mob/user)
