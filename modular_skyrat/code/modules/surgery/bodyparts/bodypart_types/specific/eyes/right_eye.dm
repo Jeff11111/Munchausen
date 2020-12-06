@@ -10,6 +10,7 @@
 	body_zone = BODY_ZONE_PRECISE_RIGHT_EYE
 	body_part = RIGHT_EYE
 	w_class = WEIGHT_CLASS_TINY
+	dismember_bodyzone = BODY_ZONE_HEAD
 	parent_bodyzone = BODY_ZONE_HEAD
 	stam_heal_tick = 0
 	stam_damage_coeff = 0
