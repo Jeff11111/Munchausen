@@ -298,7 +298,7 @@
 	skill_melee = JOB_SKILLPOINTS_NOVICE
 	skill_chemistry = JOB_SKILLPOINTS_AVERAGE
 	skill_firstaid = JOB_SKILLPOINTS_EXPERT
-	skill_surgery = JOB_SKILLPOINTS_EXPERT
+	skill_surgery = JOB_SKILLPOINTS_AVERAGE
 
 /datum/job/brig_physician
 	//Good endurance and str
@@ -308,7 +308,7 @@
 	skill_melee = JOB_SKILLPOINTS_NOVICE
 	skill_ranged = JOB_SKILLPOINTS_NOVICE
 	skill_firstaid = JOB_SKILLPOINTS_EXPERT
-	skill_surgery = JOB_SKILLPOINTS_TRAINED
+	skill_surgery = JOB_SKILLPOINTS_AVERAGE
 
 /datum/job/qm
 	//Better str and end, no int or dex cost
