@@ -17,9 +17,9 @@
 
 //Gives all organs parent as stored_in
 /datum/component/storage/concrete/organ/proc/update_insides()
-	for(var/obj/item/organ/O in contents())
-		O.stored_in = parent
-		RegisterSignal(O, COMSIG_CLICK, /datum/component/storage/concrete/organ.proc/override_click)
+	for(var/obj/item/I in contents())
+		I.stored_in = parent
+		RegisterSignal(I, COMSIG_CLICK, /datum/component/storage/concrete/organ.proc/override_click)
 
 //Revert the opacity proper
 /datum/component/storage/concrete/organ/Destroy()
@@ -130,7 +130,7 @@
 		var/mob/living/carbon/carbon_parent = parent
 		return carbon_parent.internal_organs
 	else
-		return bodypart_affected.get_organs()
+		return (bodypart_affected.get_organs() | (bodypart_affected.cavity_item))
 
 //Hide the organs proper
 /datum/component/storage/concrete/organ/get_ui_item_objects_hide(mob/M)
@@ -143,16 +143,16 @@
 	if(I == parent)
 		return FALSE	//no paradoxes for you
 	var/obj/item/organ/O = I
-	if(!istype(O))
+	if(!istype(O) || !(bodypart_affected && !bodypart_affected.cavity_item && (I.w_class <= bodypart_affected.max_cavity_size)))
 		return FALSE
-	if(bodypart_affected && (O.zone != bodypart_affected.body_zone))
+	if(istype(O) && bodypart_affected && (O.zone != bodypart_affected.body_zone))
 		return FALSE
 	var/mob/living/carbon/carbon_parent = parent
-	if(carbon_parent.getorganslot(O.slot))
+	if(istype(O) && carbon_parent.getorganslot(O.slot))
 		return FALSE
 	var/list/not_a_location = contents()
 	var/atom/host = parent
-	if(O in not_a_location)
+	if(I in not_a_location)
 		return FALSE //Means the item is already in the storage item
 	if(check_locked(null, M, !stop_messages))
 		if(M && !stop_messages)
@@ -161,18 +161,18 @@
 	if(!worn_check(parent, M))
 		host.add_fingerprint(M)
 		return FALSE
-	if(!length(can_hold_extra) || !is_type_in_typecache(O, can_hold_extra))
-		if(length(can_hold) && !is_type_in_typecache(O, can_hold))
+	if(!length(can_hold_extra) || !is_type_in_typecache(I, can_hold_extra))
+		if(length(can_hold) && !is_type_in_typecache(I, can_hold))
 			if(!stop_messages)
-				to_chat(M, "<span class='warning'>[host] cannot hold [O]!</span>")
+				to_chat(M, "<span class='warning'>[host] cannot hold [I]!</span>")
 			return FALSE
-		if(is_type_in_typecache(O, cant_hold)) //Check for specific items which this container can't hold.
+		if(is_type_in_typecache(I, cant_hold)) //Check for specific items which this container can't hold.
 			if(!stop_messages)
-				to_chat(M, "<span class='warning'>[host] cannot hold [O]!</span>")
+				to_chat(M, "<span class='warning'>[host] cannot hold [I]!</span>")
 			return FALSE
-		if(storage_flags & STORAGE_LIMIT_MAX_W_CLASS && O.w_class > max_w_class)
+		if(storage_flags & STORAGE_LIMIT_MAX_W_CLASS && I.w_class > max_w_class)
 			if(!stop_messages)
-				to_chat(M, "<span class='warning'>[O] is too long for [host]!</span>")
+				to_chat(M, "<span class='warning'>[I] is too long for [host]!</span>")
 			return FALSE
 		// STORAGE LIMITS
 	if(storage_flags & STORAGE_LIMIT_MAX_ITEMS)
@@ -199,8 +199,8 @@
 	/////////////////
 	if(isitem(host))
 		var/obj/item/IP = host
-		var/datum/component/storage/STR_I = O.GetComponent(/datum/component/storage)
-		if((O.w_class >= IP.w_class) && STR_I && !allow_big_nesting)
+		var/datum/component/storage/STR_I = I.GetComponent(/datum/component/storage)
+		if((I.w_class >= IP.w_class) && STR_I && !allow_big_nesting)
 			if(!stop_messages)
 				to_chat(M, "<span class='warning'>[IP] cannot hold [O] as it's a storage item of the same size!</span>")
 			return FALSE //To prevent the stacking of same sized storage items.
@@ -223,12 +223,21 @@
 			meme.brain = null
 			qdel(meme)
 			O.forceMove(parent)
+	
 	if(istype(O))
 		var/list/not_a_location = contents()
 		if(!(O in not_a_location))
 			var/mob/living/carbon/carbon_parent = parent
 			O.forceMove(carbon_parent)
 			O.Insert(carbon_parent)
+			update_insides()
+		refresh_mob_views()
+		return TRUE
+	else if(!bodypart_affected.cavity_item && (I.w_class <= bodypart_affected.max_cavity_size))
+		var/list/not_a_location = contents()
+		if(!(I in not_a_location))
+			var/mob/living/carbon/carbon_parent = parent
+			O.forceMove(carbon_parent)
 			update_insides()
 		refresh_mob_views()
 		return TRUE
@@ -272,6 +281,9 @@
 	if(.)
 		var/obj/item/organ/O = AM
 		if(!istype(O))
+			if(bodypart_affected.cavity_item == AM)
+				bodypart_affected.cavity_item = null
+				return
 			return FALSE
 		var/mob/living/carbon/carbon_parent = parent
 		if(!carbon_parent.IsUnconscious() && (carbon_parent.chem_effects[CE_PAINKILLER] < 30))
