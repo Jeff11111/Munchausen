@@ -37,7 +37,7 @@
 	var/flash_protect = 0
 	var/see_invisible = SEE_INVISIBLE_LIVING
 	var/lighting_alpha
-	var/eye_damaged	= FALSE	//indicates that our eyes are undergoing some level of negative effect
+	var/eye_damaged	= 0	//indicates that our eyes are undergoing some level of negative effect
 
 /obj/item/bodypart/right_eye/get_mangled_state()
 	return BODYPART_MANGLED_BOTH

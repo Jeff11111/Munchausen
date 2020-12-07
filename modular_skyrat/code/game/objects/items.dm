@@ -83,3 +83,13 @@
 			. += "<span class='info'>\The [src] is unclean.</span>"
 		if(WOUND_INFECTION_CRITICAL to WOUND_INFECTION_SEPTIC)
 			. += "<span class='info'>\The [src] is terribly dirty.</span>"
+
+//Cool pixel shifting on tables smiley face :)
+/obj/item/MouseDrop(atom/over, src_location, over_location, src_control, over_control, params)
+	. = ..()
+	var/list/params2list = params2list(params)
+	if(istype(over, /obj/structure/table) && Adjacent(over))
+		var/obj/structure/table/tranny = over
+		forceMove(tranny.loc)
+		pixel_x = initial(pixel_x) + params2list["icon-x"]
+		pixel_y = initial(pixel_y) + params2list["icon-y"]

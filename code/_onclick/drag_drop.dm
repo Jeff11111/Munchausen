@@ -23,7 +23,6 @@
 	SEND_SIGNAL(src, COMSIG_MOUSEDROPPED_ONTO, dropping, user)
 	return
 
-
 /client/MouseDown(object, location, control, params)
 	//Skyrat changes
 	if(mob)

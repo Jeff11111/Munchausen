@@ -37,7 +37,7 @@
 	var/flash_protect = 0
 	var/see_invisible = SEE_INVISIBLE_LIVING
 	var/lighting_alpha
-	var/eye_damaged	= FALSE	//indicates that our eyes are undergoing some level of negative effect
+	var/eye_damaged	= 0	//indicates that our eyes are undergoing some level of negative effect
 
 /obj/item/bodypart/left_eye/get_mangled_state()
 	return BODYPART_MANGLED_BOTH
@@ -97,51 +97,11 @@
 
 /obj/item/bodypart/left_eye/receive_damage(brute = 0, burn = 0, stamina = 0, blocked = 0, updating_health = TRUE, required_status = null, wound_bonus = 0, bare_wound_bonus = 0, sharpness = SHARP_NONE, spread_damage = TRUE, pain = 0, toxin = 0, clone = 0)
 	. = ..()
-	if(!.)
-		return
-	var/old_damaged = eye_damaged
-	switch(brute_dam + burn_dam)
-		if(max_damage to INFINITY)
-			eye_damaged = BLIND_VISION_THREE
-		if(max_damage/2 to max_damage)
-			eye_damaged = BLURRY_VISION_TWO
-		if(max_damage/4 to max_damage/2)
-			eye_damaged = BLURRY_VISION_ONE
-		else
-			eye_damaged = FALSE
-	if(eye_damaged == old_damaged || !owner)
-		return
-	if(old_damaged == BLIND_VISION_THREE)
-		owner.cure_blind(EYE_DAMAGE)
-	else if(eye_damaged == BLIND_VISION_THREE)
-		owner.become_blind(EYE_DAMAGE)
-	if(eye_damaged && eye_damaged != BLIND_VISION_THREE)
-		owner.overlay_fullscreen("eye_damage", /obj/screen/fullscreen/impaired, eye_damaged)
-	else
-		owner.clear_fullscreen("eye_damage")
+	check_damage()
 
 /obj/item/bodypart/left_eye/heal_damage(brute, burn, stamina, only_robotic, only_organic, updating_health, pain, toxin, clone)
 	. = ..()
-	var/old_damaged = eye_damaged
-	switch(brute_dam + burn_dam)
-		if(max_damage to INFINITY)
-			eye_damaged = BLIND_VISION_THREE
-		if(max_damage/2 to max_damage)
-			eye_damaged = BLURRY_VISION_TWO
-		if(max_damage/4 to max_damage/2)
-			eye_damaged = BLURRY_VISION_ONE
-		else
-			eye_damaged = FALSE
-	if(eye_damaged == old_damaged || !owner)
-		return
-	if(old_damaged == BLIND_VISION_THREE)
-		owner.cure_blind(EYE_DAMAGE)
-	else if(eye_damaged == BLIND_VISION_THREE)
-		owner.become_blind(EYE_DAMAGE)
-	if(eye_damaged && eye_damaged != BLIND_VISION_THREE)
-		owner.overlay_fullscreen("eye_damage", /obj/screen/fullscreen/impaired, eye_damaged)
-	else
-		owner.clear_fullscreen("eye_damage")
+	check_damage()
 
 /obj/item/bodypart/left_eye/on_transfer_to_limb(obj/item/bodypart/BP)
 	if(istype(BP, /obj/item/bodypart/head))
@@ -150,6 +110,28 @@
 		return TRUE
 	else
 		return ..()
+
+/obj/item/bodypart/left_eye/proc/check_damage()
+	var/old_damaged = eye_damaged
+	switch(get_damage())
+		if(max_damage to INFINITY)
+			eye_damaged = BLIND_VISION_THREE
+		if(max_damage/2 to max_damage)
+			eye_damaged = BLURRY_VISION_TWO
+		if(max_damage/4 to max_damage/2)
+			eye_damaged = BLURRY_VISION_ONE
+		else
+			eye_damaged = FALSE
+	if(eye_damaged == old_damaged || !owner)
+		return
+	if(old_damaged == BLIND_VISION_THREE)
+		owner.cure_blind(EYE_DAMAGE)
+	else if(eye_damaged == BLIND_VISION_THREE)
+		owner.become_blind(EYE_DAMAGE)
+	if(eye_damaged && eye_damaged != BLIND_VISION_THREE)
+		owner.overlay_fullscreen("eye_damage", /obj/screen/fullscreen/impaired, eye_damaged)
+	else
+		owner.clear_fullscreen("eye_damage")
 
 #undef BLURRY_VISION_ONE
 #undef BLURRY_VISION_TWO

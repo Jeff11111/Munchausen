@@ -42,8 +42,8 @@
 	for(var/casing in stored_ammo)
 		var/obj/item/ammo_casing/AC = casing
 		var/mutable_appearance/comicao = mutable_appearance(AC.icon, AC.icon_state)
-		comicao.pixel_x = rand(0, 16)
-		comicao.pixel_y = rand(0, 16)
+		comicao.pixel_x = rand(0, 8)
+		comicao.pixel_y = rand(0, 8)
 		comicao.transform = comicao.transform.Turn(rand(0, 360))
 		add_overlay(comicao)
 
@@ -53,25 +53,24 @@
 		var/obj/item/I = get_round()
 		I.forceMove(loc)
 		I.throw_at(loc)
-	if(!QDELETED(src))
-		qdel(src)
+	check_for_del()
 
 /obj/item/ammo_box/magazine/ammo_stack/get_round(keep)
-	var/i = ..()
+	. = ..()
 	update_icon()
-	return i
+	check_for_del()
 
 /obj/item/ammo_box/magazine/ammo_stack/give_round(obj/item/ammo_casing/R, replace_spent)
-	var/i = ..()
+	. = ..()
 	update_icon()
-	return i
+	check_for_del()
 
 /obj/item/ammo_box/magazine/ammo_stack/handle_atom_del(atom/A)
-	..()
+	. = ..()
 	check_for_del()
 
 /obj/item/ammo_box/magazine/ammo_stack/empty_magazine()
-	..()
+	. = ..()
 	check_for_del()
 
 /obj/item/ammo_box/magazine/ammo_stack/proc/check_for_del()
