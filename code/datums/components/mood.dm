@@ -123,7 +123,7 @@
 				var/datum/mood_event/event = mood_events[i]
 				left_symbols = get_left_signs_from_number(event.mood_change)
 				right_symbols = get_right_signs_from_number(event.mood_change)
-				msg += "[left_symbols]event.description[right_symbols]"
+				msg += "[left_symbols][event.description][right_symbols]"
 		else
 			msg += "<span class='nicegreen'>I don't have much of a reaction to anything right now.</span>\n"
 	else
