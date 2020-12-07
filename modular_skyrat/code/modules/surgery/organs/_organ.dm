@@ -493,8 +493,8 @@
 			if(is_dead() || is_broken())
 				to_chat(user, "<span class='warning'>\The [src] is unsalvageable! I can't heal it!</span>")
 				return TRUE
-			user.visible_message("<span class='notice'>[user] starts suturing \the [src]...</span>", \
-						"<span class='notice'>You start suturing \the [src]...</span>")
+			user.visible_message("<span class='notice'>[user] starts stitching \the [src]...</span>", \
+						"<span class='notice'>You start stitching \the [src]...</span>")
 			var/heymedic = GET_SKILL_LEVEL(user, surgery)
 			if(!do_mob(user, owner, 3 - (heymedic/MAX_SKILL)))
 				to_chat(user, "<span class='warning'>I must stand still!</span>")
@@ -502,8 +502,8 @@
 			if(!bingus.use(1))
 				to_chat(user, "<span class='warning'>I don't have enough to heal \the [src]!</span>")
 				return TRUE
-			user.visible_message("<span class='notice'>[user] sutures \the [src] safely.</span>", \
-							"<span class='notice'>I suture \the [src] safely.</span>")
+			user.visible_message("<span class='notice'>[user] stitches \the [src] safely.</span>", \
+							"<span class='notice'>I stitch \the [src] safely.</span>")
 			applyOrganDamage(-min(50, maxHealth/2))
 		return TRUE
 	else if(owner && (I.tool_behaviour == TOOL_SCREWDRIVER) && is_robotic())
