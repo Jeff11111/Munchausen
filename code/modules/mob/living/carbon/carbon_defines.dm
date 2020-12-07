@@ -59,7 +59,12 @@
 	var/obj/halitem
 	var/hal_screwyhud = SCREWYHUD_NONE
 	var/next_hallucination = 0
-	var/cpr_time = 1 //CPR cooldown.
+
+	var/last_mtom = 0//last time we got mouth to mouthed
+	var/mtom_cooldown = 1.5 SECONDS //mouth to mouth cooldown.
+	var/last_cpr = 0 //last time we got CPR'd
+	var/cpr_cooldown = 1.5 SECONDS //cpr cooldown
+	
 	var/damageoverlaytemp = 0
 
 	var/drunkenness = 0 //Overall drunkenness - check handle_alcohol() in life.dm for effects

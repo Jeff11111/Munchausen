@@ -712,46 +712,110 @@
 	if(mob_negates_gravity())
 		return
 
-/mob/living/carbon/human/proc/do_cpr(mob/living/carbon/C)
+/mob/living/carbon/human/proc/do_cpr(mob/living/carbon/C, cpr_type = CHEST_CPR)
 	CHECK_DNA_AND_SPECIES(C)
 
-	if(C.stat == DEAD || (HAS_TRAIT(C, TRAIT_FAKEDEATH)))
-		to_chat(src, "<span class='warning'>[C.name] is dead!</span>")
-		return
-	if(is_mouth_covered())
-		to_chat(src, "<span class='warning'>Remove your mask first!</span>")
-		return 0
-	if(C.is_mouth_covered())
-		to_chat(src, "<span class='warning'>Remove [p_their()] mask first!</span>")
-		return 0
+	var/heymedic = GET_SKILL_LEVEL(src, firstaid) || 10
+	var/heyheavy = GET_STAT_LEVEL(src, str) || 10
+	var/heyeinstein = GET_STAT_LEVEL(src, int) || 10
+	switch(cpr_type)
+		if(MOUTH_CPR)
+			if(is_mouth_covered())
+				to_chat(src, "<span class='warning'>I need to remove my mask first!</span>")
+				return FALSE
+			
+			if(C.is_mouth_covered())
+				to_chat(src, "<span class='warning'>I need to remove [p_their()] mask first!</span>")
+				return FALSE
 
-	if(C.cpr_time < world.time + 30)
-		visible_message("<span class='notice'>[src] is trying to perform CPR on [C.name]!</span>", \
-						"<span class='notice'>You try to perform CPR on [C.name]... Hold still!</span>")
-		if(!do_mob(src, C))
-			to_chat(src, "<span class='warning'>You fail to perform CPR on [C]!</span>")
-			return 0
+			if(INTERACTING_WITH(src, C))
+				return
+			
+			if(world.time >= C.last_mtom + C.mtom_cooldown)
+				visible_message("<span class='notice'>[src] is trying to perform mouth to mouth on [C.name]!</span>", \
+								"<span class='notice'>I try to perform mouth to mouth on [C.name]...</span>")
+				
+				if(!do_mob(src, C, time = (25 - heymedic)))
+					to_chat(src, "<span class='warning'>I fail to perform mouth to mouth on [C]!</span>")
+					return FALSE
 
-		var/they_breathe = !HAS_TRAIT(C, TRAIT_NOBREATH)
-		var/they_lung = C.getorganslot(ORGAN_SLOT_LUNGS)
+				var/they_breathe = !HAS_TRAIT(C, TRAIT_NOBREATH)
+				var/obj/item/organ/lungs/they_lung = C.getorganslot(ORGAN_SLOT_LUNGS)
 
-		if(!C.InFullShock())
-			return
+				src.visible_message("[src] performs mouth to mouth on [C.name]!", \
+								"<span class='notice'>You perform mouth to mouth on [C.name].</span>")
+				SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "perform_cpr", /datum/mood_event/perform_cpr)
+				C.last_mtom = world.time
+				log_combat(src, C, "M2Med")
 
-		src.visible_message("[src] performs CPR on [C.name]!", "<span class='notice'>You perform CPR on [C.name].</span>")
-		SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "perform_cpr", /datum/mood_event/perform_cpr)
-		C.cpr_time = world.time
-		log_combat(src, C, "CPRed")
+				if(they_breathe && they_lung)
+					C.adjustOxyLoss(-CEILING(heymedic/2, 1))
+					C.updatehealth()
+					to_chat(C, "<span class='unconscious'>I feel a breath of fresh air enter my lungs... It feels good...</span>")
+				else if(they_breathe && !they_lung)
+					to_chat(C, "<span class='unconscious'>I feel a breath of fresh air... But i don't feel any better...</span>")
+				else
+					to_chat(C, "<span class='unconscious'>I feel a breath of fresh air... Which is a sensation i don't recognise...</span>")
+		if(CHEST_CPR)
+			var/mob/living/carbon/human/H = C
+			if(istype(H))
+				var/obj/item/clothing/suit = H.wear_suit
+				var/obj/item/clothing/under = H.w_uniform
+				if(istype(under) && CHECK_BITFIELD(suit.clothing_flags, THICKMATERIAL))
+					to_chat(src, "<span class='warning'>I need to take [C.p_their()] [under] off!</span>")
+					return
+				else if(istype(suit) && CHECK_BITFIELD(suit.clothing_flags, THICKMATERIAL))
+					to_chat(src, "<span class='warning'>I need to take [C.p_their()] [suit] off!</span>")
+					return
+			
+			if(INTERACTING_WITH(src, C))
+				return
+			
+			if(world.time >= C.last_cpr + C.cpr_cooldown)
+				visible_message("<span class='notice'>[src] is trying to perform CPR on [C.name]!</span>", \
+								"<span class='notice'>I try to perform CPR on [C.name]...</span>")
+				if(!do_mob(src, C, time = (25 - heymedic)))
+					to_chat(src, "<span class='warning'>I fail to perform CPR on [C]!</span>")
+					return FALSE
+				var/they_beat = !HAS_TRAIT(C, TRAIT_NOPULSE)
+				var/obj/item/organ/heart/they_heart = C.getorganslot(ORGAN_SLOT_LUNGS)
 
-		if(they_breathe && they_lung)
-			var/suff = min(C.getOxyLoss(), 7)
-			C.adjustOxyLoss(-suff)
-			C.updatehealth()
-			to_chat(C, "<span class='unconscious'>You feel a breath of fresh air enter your lungs... It feels good...</span>")
-		else if(they_breathe && !they_lung)
-			to_chat(C, "<span class='unconscious'>You feel a breath of fresh air... but you don't feel any better...</span>")
-		else
-			to_chat(C, "<span class='unconscious'>You feel a breath of fresh air... which is a sensation you don't recognise...</span>")
+				src.visible_message("[src] performs CPR on [C.name]!", \
+								"<span class='notice'>You perform CPR on [C.name].</span>")
+				SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "perform_cpr", /datum/mood_event/perform_cpr)
+				C.last_cpr = world.time
+				log_combat(src, C, "CPRed")
+
+				if(they_beat && they_heart)
+					to_chat(C, "<span class='unconscious'>I feel my heart being pumped...span>")
+				else if(they_blood && !they_heart)
+					to_chat(C, "<span class='unconscious'>I feel my chest being pumped... But i don't feel any better...</span>")
+				else
+					to_chat(C, "<span class='unconscious'>I feel my chest being pushed on...</span>")
+				
+				var/diceroll = mind?.diceroll(heyeinstein, heymedic, "6d6", 20, mod = -(C.getOxyLoss()/2))
+				if((diceroll >= DICE_SUCCESS) || !mind)
+					if(prob(40) || (diceroll >= DICE_CRIT_SUCCESS))
+						they_heart.last_arrest = world.time
+						if(they_heart.Restart() && C.revive())
+							C.grab_ghost()
+							C.visible_message("<span class='warning'><b>[C]</b> limply spasms their muscles.</span>", \
+											"<span class='userdanger'>My muscles spasm as i am brought back to life!</span>")
+				else
+					if(diceroll <= DICE_CRIT_FAILURE)
+						visible_message("<span class='danger'><b>[src]</b> botches the CPR, cracking <b>[C]</b>'s ribs!</span>", \
+									"<span class='danger'>I botch the CPR, cracking <b>[C]</b>'s ribs!</span>",
+									target = C, target_message = "<span class='userdanger'><b>[src]</b> botches the CPR and cracks my ribs!</span>")
+						var/obj/item/bodypart/chest/affected = C.get_bodypart(BODY_ZONE_CHEST)
+						var/datum/wound/fracture
+						if(affected.is_organic_limb())
+							var/fucked_up = (prob(heyheavy*2) ? /datum/wound/blunt/critical : /datum/wound/blunt/severe)
+							fracture = new fucked_up()
+						else
+							var/fucked_up = (prob(heyheavy*2) ? /datum/wound/mechanical/blunt/critical : /datum/wound/mechanical/blunt/severe)
+							fracture = new fucked_up()
+						fracture.apply_wound(affected, TRUE)
+						C.wound_message = ""
 
 /mob/living/carbon/human/cuff_resist(obj/item/I)
 	if(dna && dna.check_mutation(HULK))

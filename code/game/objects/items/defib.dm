@@ -563,14 +563,16 @@
 		var/total_brute	= 0
 		var/obj/item/organ/heart = H.getorgan(/obj/item/organ/heart)
 		if(do_mob(user = user, target = H, time = primetimer2)) //placed on chest and short delay to shock for dramatic effect, revive time is 5sec total
-			for(var/obj/item/carried_item in H.contents)
-				if(istype(carried_item, /obj/item/clothing/suit/space))
-					if((!combat && !req_defib) || (req_defib && !defib.combat))
-						user.audible_message("<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Patient's chest is obscured. Operation aborted.</span>")
-						playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
-						busy = FALSE
-						update_icon()
-						return
+			var/mob/living/carbon/human/humie = H
+			if(istype(H))
+				var/obj/item/clothing/fucker = humie.wear_suit
+				var/obj/item/clothing/nigger = humie.w_uniform
+				if((istype(fucker) && CHECK_BITFIELD(fucker.clothing_flags, THICKMATERIAL)) || (istype(nigger) && CHECK_BITFIELD(nigger.clothing_flags, THICKMATERIAL)))
+					user.audible_message("<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Patient's chest is obscured. Operation aborted.</span>")
+					playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
+					busy = FALSE
+					update_icon()
+					return
 			if(H.stat == DEAD)
 				H.visible_message("<span class='warning'>[H]'s body convulses a bit.</span>")
 				playsound(src, "bodyfall", 50, 1)
@@ -580,18 +582,14 @@
 				shock_touching(30, H)
 				var/failed
 
-				if (H.suiciding || (HAS_TRAIT(H, TRAIT_NOCLONE)))
+				if(H.suiciding || HAS_TRAIT(H, TRAIT_NODEFIB) || (HAS_TRAIT(H, TRAIT_DNR))
 					failed = "<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Resuscitation failed - Recovery of patient impossible. Further attempts futile.</span>"
-				else if (H.hellbound)
+				else if(H.hellbound)
 					failed = "<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Resuscitation failed - Patient's soul appears to be on another plane of existence.  Further attempts futile.</span>"
-				else if (tplus > tlimit)
-					failed = "<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Resuscitation failed - Body has decayed for too long. Further attempts futile.</span>"
-				else if (!heart)
+				else if(!heart)
 					failed = "<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Resuscitation failed - Patient's heart is missing.</span>"
-				else if (heart.organ_flags & ORGAN_FAILING)
-					failed = "<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Resuscitation failed - Patient's heart too damaged.</span>"
-				else if(total_burn >= 180 || total_brute >= 180)
-					failed = "<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Resuscitation failed - Severe tissue damage makes recovery of patient impossible via defibrillator. Further attempts futile.</span>"
+				else if(heart.is_dead())
+					failed = "<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Resuscitation failed - Patient's heart has decayed.</span>"
 				else if(H.get_ghost())
 					failed = "<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Resuscitation failed - No activity in patient's brain. Further attempts may be successful.</span>"
 				else
@@ -605,7 +603,6 @@
 							failed = "<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Resuscitation failed - No intelligence pattern can be detected in patient's brain. Further attempts futile.</span>"
 					else
 						failed = "<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Resuscitation failed - Patient's brain is missing. Further attempts futile.</span>"
-
 
 				if(failed)
 					user.visible_message(failed)
@@ -654,8 +651,6 @@
 				else
 					user.visible_message("<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Resuscitation failed, heart damage detected.</span>")
 				playsound(src, 'sound/machines/defib_zap.ogg', 50, 1, -1)
-
-
 			else
 				user.visible_message("<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Patient is not in a valid state. Operation aborted.</span>")
 				playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)

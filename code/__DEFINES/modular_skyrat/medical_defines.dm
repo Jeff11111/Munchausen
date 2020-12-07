@@ -312,3 +312,7 @@
 #define STEP_INCISE 1 //Incision step of course
 #define STEP_MANIPULATE 2 //Misc stuff
 #define CLOSE_STEP 3 //Cauterize or suture to close the surgery
+
+//CPR types
+#define MOUTH_CPR "m2m"
+#define CHEST_CPR "cardio"

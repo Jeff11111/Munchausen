@@ -1553,23 +1553,32 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 /datum/species/proc/help(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
 	if(attacker_style && attacker_style.help_act(user,target)) // SKYRAT EDIT
-		return 1
+		return TRUE
 
-	if(target.health >= 0 && !HAS_TRAIT(target, TRAIT_FAKEDEATH))
+	var/we_breathe = !HAS_TRAIT(user, TRAIT_NOBREATH)
+	var/we_lung = user.getorganslot(ORGAN_SLOT_LUNGS)
+	if(!target.lying)
 		target.help_shake_act(user)
 		if(target != user)
 			log_combat(user, target, "shaked")
-		return 1
-	else
-		var/we_breathe = !HAS_TRAIT(user, TRAIT_NOBREATH)
-		var/we_lung = user.getorganslot(ORGAN_SLOT_LUNGS)
-
-		if(we_breathe && we_lung)
-			user.do_cpr(target)
-		else if(we_breathe && !we_lung)
-			to_chat(user, "<span class='warning'>I have no lungs to breathe with, so I cannot peform CPR.</span>")
+		return TRUE
+	switch(user.zone_selected)
+		if(BODY_ZONE_PRECISE_MOUTH)
+			if(we_breathe && we_lung)
+				user.do_cpr(target, MOUTH_CPR)
+			else if(we_breathe && !we_lung)
+				to_chat(user, "<span class='warning'>I have no lungs, i cannot peform mouth to mouth!</span>")
+			else if(!we_breathe)
+				to_chat(user, "<span class='notice'>I don't breathe, i cannot perform mouth to mouth!</span>")
+			return TRUE
+		if(BODY_ZONE_CHEST)
+			user.do_cpr(target, CHEST_CPR)
+			return TRUE
 		else
-			to_chat(user, "<span class='notice'>I do not breathe, so I cannot perform CPR.</span>")
+			target.help_shake_act(user)
+			if(target != user)
+				log_combat(user, target, "shaked")
+			return TRUE
 
 /datum/species/proc/grab(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
 	if(target.check_martial_melee_block())

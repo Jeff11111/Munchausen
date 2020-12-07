@@ -118,18 +118,20 @@
 		addtimer(CALLBACK(src, .proc/stop_if_unowned), 80)
 
 /obj/item/organ/heart/proc/Stop()
+	pulse = PULSE_NONE
 	if(owner)
 		if(CHECK_BITFIELD(organ_flags, ORGAN_VITAL))
 			owner.death()
 		to_chat(owner, "<span class='userdanger'><b>MY HEART HAS STOPPED!</b></span>")
-	pulse = PULSE_NONE
 	update_icon()
-	return 1
+	return TRUE
 
 /obj/item/organ/heart/proc/Restart()
 	pulse = PULSE_NORM
+	if(owner)
+		to_chat(owner, "<span class='userdanger'><b>My heart beats again!!</b></span>")
 	update_icon()
-	return 1
+	return TRUE
 
 /obj/item/organ/heart/proc/HeartStrengthMessage()
 	if(pulse >= PULSE_NORM)
