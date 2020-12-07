@@ -53,7 +53,7 @@
 	if(mood_signs == 0)
 		mood_symbol = ""
 	else if(mood_signs < 0)
-		mood_symbol = "<span class='red'><b>-</b></span>"
+		mood_symbol = "<span class='red'><b>-</b></span> "
 	mood_signs = abs(mood_signs)
 	var/left_symbols = ""
 	if(mood_signs && mood_symbol)
@@ -62,13 +62,11 @@
 		while(bingus < mood_signs)
 			bingus++
 			left_symbols += mood_symbol
-		if(left_symbols)
-			left_symbols = "[left_symbols] "
 	return left_symbols
 
 /datum/component/mood/proc/get_right_signs_from_number(num)
 	var/mood_signs = num
-	var/mood_symbol = "<span class='green'><b>+</b></span>"
+	var/mood_symbol = "<span class='green'><b>+</b></span> "
 	if(mood_signs == 0)
 		mood_symbol = ""
 	else if(mood_signs < 0)
