@@ -75,10 +75,9 @@
 			P = "Prosthesis organ manipulation"
 	
 	if(P && user && user.Adjacent(M) && (I in user))
-		var/datum/surgery/S = available_surgeries[P]
-		if(!S)
+		if(!P)
 			P = input("Switch to what procedure?", "Surgery", null, null) as null|anything in available_surgeries
-			return
+		var/datum/surgery/S = available_surgeries[P]
 		
 		var/list/steps_done = list()
 		if(current_surgery)
