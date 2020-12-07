@@ -4250,6 +4250,7 @@
 #include "modular_skyrat\code\modules\surgery\advanced\robot_brainwashing.dm"
 #include "modular_skyrat\code\modules\surgery\bodyparts\_bodypart.dm"
 #include "modular_skyrat\code\modules\surgery\bodyparts\_dismemberment.dm"
+#include "modular_skyrat\code\modules\surgery\bodyparts\_helpers.dm"
 #include "modular_skyrat\code\modules\surgery\bodyparts\_teeth.dm"
 #include "modular_skyrat\code\modules\surgery\bodyparts\interactions.dm"
 #include "modular_skyrat\code\modules\surgery\bodyparts\limbsurgeon.dm"
