@@ -14,9 +14,6 @@
 		resting = new_resting
 		if(!silent)
 			to_chat(src, "<span class='notice'>You are now [resting? "resting" : "getting up"].</span>")
-			var/fall_sound = pick('modular_skyrat/sound/effects/fall1.ogg', 'modular_skyrat/sound/effects/fall2.ogg')
-			playsound(src, fall_sound, 50)
-			sound_hint(src, src)
 		update_resting(updating)
 
 /mob/living/proc/update_resting(update_mobility = TRUE)
@@ -102,15 +99,11 @@
 		mobility_flags &= ~MOBILITY_STAND
 		setMovetype(movement_type | CRAWLING)
 		if(!lying) //force them on the ground
-			switch(dir)
-				if(NORTH, SOUTH)
-					lying = pick(90, 270)
-				if(EAST)
-					lying = 90
-				else //West
-					lying = 270
+			lying = 90
 			if(has_gravity() && !buckled)
-				playsound(src, "bodyfall", 20, 1)
+				var/fall_sound = pick('modular_skyrat/sound/effects/fall1.ogg', 'modular_skyrat/sound/effects/fall2.ogg')
+				playsound(src, fall_sound, 50)
+				sound_hint(src, src)
 	else
 		setMovetype(movement_type & ~CRAWLING)
 		mobility_flags |= MOBILITY_STAND

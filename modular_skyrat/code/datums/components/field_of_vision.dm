@@ -43,7 +43,7 @@
 	var/obj/screen/fov_holder/fov
 	///The current screen size this field of vision is meant to fit for.
 	var/current_fov_size = list(15, 15)
-	///How much is the cone rotated clockwise, purely backend. Please use rotate_shadow_cone() if you must.
+	/// How much is the cone rotated clockwise, purely backend. Please use rotate_shadow_cone() if you must.
 	var/angle = 0
 	/// Used to scale the shadow cone when rotating it to fit over the edges of the screen.
 	var/rot_scale = 1
@@ -116,11 +116,10 @@
   * Generates the holder and images (if not generated yet) and adds them to client.images.
   * Run when the component is registered to a player mob, or upon login.
   */
-/datum/component/field_of_vision/proc/generate_fov_holder(mob/M, _angle = 0)
+/datum/component/field_of_vision/proc/generate_fov_holder(mob/M, _angle = 0, _shadow_angle)
 	if(QDELETED(fov))
 		fov = new
 		fov.hud = M.hud_used
-		fov.icon_state = "[shadow_angle]"
 		fov.dir = M.dir
 		fov.screen_loc = ui_fov
 		shadow_mask = image('icons/misc/field_of_vision.dmi', null, "[shadow_angle]", FIELD_OF_VISION_LAYER)
@@ -139,7 +138,11 @@
 			fov.add_overlay(adj_mask)
 		if(_angle)
 			rotate_shadow_cone(_angle)
-	fov.alpha = M.stat == DEAD ? 0 : 255
+	else
+		angle = _angle
+	fov.alpha = (M.stat == DEAD) || (M.lying) ? 0 : 255
+	fov.icon_state = "[shadow_angle]"
+	RegisterSignal(M, COMSIG_LIVING_UPDATED_MOBILITY, .proc/update_lying)
 	RegisterSignal(M, COMSIG_MOB_DEATH, .proc/hide_fov)
 	RegisterSignal(M, COMSIG_LIVING_REVIVE, .proc/show_fov)
 	RegisterSignal(M, COMSIG_ATOM_DIR_CHANGE, .proc/on_dir_change)
@@ -189,6 +192,13 @@
 
 /datum/component/field_of_vision/proc/on_dir_change(mob/source, old_dir, new_dir)
 	fov.dir = new_dir
+
+//Updates the alpha depending on whether or not we are lying
+/datum/component/field_of_vision/proc/update_lying(mob/source, mobility_flags)
+	if(source.lying || (source.stat >= DEAD))
+		hide_fov(source)
+	else
+		show_fov(source)
 
 ///Hides the shadow, other visibility comsig procs will take it into account. Called when the mob dies.
 /datum/component/field_of_vision/proc/hide_fov(mob/source)
@@ -266,7 +276,7 @@
 	}\
 	var/dir = (mob.dir & (EAST|WEST)) || mob.dir;\
 	var/_degree = -angle;\
-	var/_half = shadow_angle/2;\
+	var/_half = text2num(shadow_angle)/2;\
 	switch(dir){\
 		if(EAST){\
 			_degree += 180;\

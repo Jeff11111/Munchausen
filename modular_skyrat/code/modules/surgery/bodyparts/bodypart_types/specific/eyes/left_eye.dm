@@ -33,7 +33,7 @@
 	var/see_in_dark = 2
 	var/tint = 0
 	var/eye_color = "" //set to a hex code to override a mob's eye color
-	var/old_eye_color = "FFF"
+	var/old_eye_color = "#000000"
 	var/flash_protect = 0
 	var/see_invisible = SEE_INVISIBLE_LIVING
 	var/lighting_alpha
@@ -60,11 +60,6 @@
 	. = ..()
 	if(!.)
 		return
-	switch(eye_damaged)
-		if(BLURRY_VISION_ONE, BLURRY_VISION_TWO)
-			owner.overlay_fullscreen("eye_damage", /obj/screen/fullscreen/impaired, eye_damaged)
-		if(BLIND_VISION_THREE)
-			owner.become_blind(EYE_DAMAGE)
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
 		old_eye_color = H.left_eye_color
@@ -73,6 +68,7 @@
 		else
 			eye_color = H.left_eye_color
 		H.dna?.species?.handle_body(H) //regenerate eyeballs overlays
+	check_damage()
 	C.update_tint()
 	owner.update_sight()
 
@@ -81,11 +77,8 @@
 	. = ..()
 	if(QDELETED(C) || !.)
 		return
-	switch(eye_damaged)
-		if(BLURRY_VISION_ONE, BLURRY_VISION_TWO)
-			C.clear_fullscreen("eye_damage")
-		if(BLIND_VISION_THREE)
-			C.cure_blind(EYE_DAMAGE)
+	C.clear_fullscreen("left_eye_damage")
+	C.cure_blind(EYE_DAMAGE)
 	if(ishuman(C) && eye_color && old_eye_color)
 		var/mob/living/carbon/human/H = C
 		H.left_eye_color = old_eye_color
@@ -94,12 +87,18 @@
 	if(!special)
 		C.update_tint()
 		C.update_sight()
+	var/obj/item/bodypart/right_eye/other_eye = C.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+	other_eye?.check_damage()
 
 /obj/item/bodypart/left_eye/receive_damage(brute = 0, burn = 0, stamina = 0, blocked = 0, updating_health = TRUE, required_status = null, wound_bonus = 0, bare_wound_bonus = 0, sharpness = SHARP_NONE, spread_damage = TRUE, pain = 0, toxin = 0, clone = 0)
 	. = ..()
 	check_damage()
 
 /obj/item/bodypart/left_eye/heal_damage(brute, burn, stamina, only_robotic, only_organic, updating_health, pain, toxin, clone)
+	. = ..()
+	check_damage()
+
+/obj/item/bodypart/left_eye/set_disabled(new_disabled)
 	. = ..()
 	check_damage()
 
@@ -112,7 +111,7 @@
 		return ..()
 
 /obj/item/bodypart/left_eye/proc/check_damage()
-	var/old_damaged = eye_damaged
+	var/obj/item/bodypart/right_eye/other_eye = owner.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
 	switch(get_damage())
 		if(max_damage to INFINITY)
 			eye_damaged = BLIND_VISION_THREE
@@ -122,16 +121,25 @@
 			eye_damaged = BLURRY_VISION_ONE
 		else
 			eye_damaged = FALSE
-	if(eye_damaged == old_damaged || !owner)
-		return
-	if(old_damaged == BLIND_VISION_THREE)
-		owner.cure_blind(EYE_DAMAGE)
-	else if(eye_damaged == BLIND_VISION_THREE)
-		owner.become_blind(EYE_DAMAGE)
-	if(eye_damaged && eye_damaged != BLIND_VISION_THREE)
-		owner.overlay_fullscreen("eye_damage", /obj/screen/fullscreen/impaired, eye_damaged)
+	var/datum/component/field_of_vision/fov = owner.GetComponent(/datum/component/field_of_vision)
+	if((eye_damaged >= BLIND_VISION_THREE) || is_disabled())
+		if(other_eye && (other_eye.eye_damaged < BLIND_VISION_THREE) && fov)
+			fov.generate_fov_holder(owner, 315, FOV_180MINUS45_DEGREES)
+		else
+			owner.become_blind(EYE_DAMAGE)
+	else if(eye_damaged)
+		owner.overlay_fullscreen("left_eye_damage", /obj/screen/fullscreen/impaired/left, eye_damaged)
+		if(!other_eye)
+			owner.overlay_fullscreen("right_eye_damage", /obj/screen/fullscreen/impaired, eye_damaged)
 	else
-		owner.clear_fullscreen("eye_damage")
+		owner.clear_fullscreen("left_eye_damage")
+		if(!other_eye)
+			owner.clear_fullscreen("right_eye_damage")
+			fov.generate_fov_holder(owner, 45, FOV_180PLUS45_DEGREES)
+	if(eye_damaged < BLIND_VISION_THREE)
+		owner.cure_blind(EYE_DAMAGE)
+		if(fov && fov.angle == 315)
+			fov.generate_fov_holder(owner, 0, FOV_180_DEGREES)
 
 #undef BLURRY_VISION_ONE
 #undef BLURRY_VISION_TWO

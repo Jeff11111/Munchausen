@@ -112,7 +112,13 @@
 	plane = FULLSCREEN_PLANE
 
 /obj/screen/fullscreen/impaired
-	icon_state = "impairedoverlay"
+	icon_state = "impairedoverlay1"
+
+/obj/screen/fullscreen/impaired/left
+	icon_state = "impairedoverlay1left"
+
+/obj/screen/fullscreen/impaired/right
+	icon_state = "impairedoverlay1right"
 
 /obj/screen/fullscreen/blurry
 	icon = 'icons/mob/screen_gen.dmi'
