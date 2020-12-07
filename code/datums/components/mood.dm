@@ -98,7 +98,7 @@
 			msg += "<span class='info'>I am \a <span class='red'>[H.mind.special_role]</span>.</span>\n"
 		msg += "<span class='info'>My blood type is [H.dna.blood_type].</span>\n"
 		if(length(H.roundstart_quirks))
-			msg += "<span class='info'>I am special: [H.get_trait_string()].</span>\n"
+			msg += "<span class='info'>I am special: [H.get_trait_string(FALSE, FALSE)].</span>\n"
 	msg += "<span class='notice'><b>My current mood: </b></span>\n" //Short term
 	var/left_symbols = get_left_signs_from_number(mood_level - 5)
 	var/right_symbols = get_right_signs_from_number(mood_level - 5)

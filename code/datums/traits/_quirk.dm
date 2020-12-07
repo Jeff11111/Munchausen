@@ -79,12 +79,12 @@
 		return
 	on_process()
 
-/mob/living/proc/get_trait_string(medical) //helper string. gets a string of all the traits the mob has
+/mob/living/proc/get_trait_string(medical, conditions_only = TRUE) //helper string. gets a string of all the traits the mob has
 	var/list/dat = list()
 	if(!medical)
 		for(var/V in roundstart_quirks)
 			var/datum/quirk/T = V
-			if(T.medical_condition)
+			if(T.medical_condition && conditions_only)
 				dat += T.name
 		if(!dat.len)
 			return "None"
