@@ -582,7 +582,7 @@
 				shock_touching(30, H)
 				var/failed
 
-				if(H.suiciding || HAS_TRAIT(H, TRAIT_NODEFIB) || (HAS_TRAIT(H, TRAIT_DNR))
+				if(H.suiciding || HAS_TRAIT(H, TRAIT_NODEFIB) || (HAS_TRAIT(H, TRAIT_DNR)))
 					failed = "<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Resuscitation failed - Recovery of patient impossible. Further attempts futile.</span>"
 				else if(H.hellbound)
 					failed = "<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Resuscitation failed - Patient's soul appears to be on another plane of existence.  Further attempts futile.</span>"
