@@ -88,6 +88,19 @@
 /datum/component/mood/proc/print_mood(mob/user)
 	var/msg = "<span class='info'>*---------*</span>\n"
 	msg += "<span class='info'><EM>My thoughts</EM></span>\n"
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		msg += "<span class='info'>I remember my name, it is [H.real_name].</span>\n"
+		msg += "<span class='info'>I am, chronologically, [H.age] years old.</span>\n"
+		if(H.mind.assigned_role)
+			msg += "<span class='info'>I'm \a [H.mind.assigned_role] by trade.</span>\n"
+			if(H.mind.special_role && !H.mind.objectives_hidden)
+				msg += "<span class='info'>I am also \a <span class='red'>[H.mind.special_role]</span>.</span>\n"
+		else if(H.mind.special_role && !H.mind.objectives_hidden)
+			msg += "<span class='info'>I a \a <span class='red'>[H.mind.special_role]</span>.</span>\n"
+		msg += "<span class='info'>My blood type is [H.dna.blood_type].</span>\n"
+		if(length(H.roundstart_quirks))
+			msg += "<span class='info'>I am special: [H.get_trait_string()].</span>\n"
 	msg += "<span class='notice'>My current mood: </span>\n" //Short term
 	var/left_symbols = get_left_signs_from_number(mood_level - 5)
 	var/right_symbols = get_right_signs_from_number(mood_level - 5)
@@ -182,9 +195,6 @@
 					additional_info += "<span class='danger'>My thinking is clouded and distant.</span>\n"
 				else if(oxyloss > 30)
 					additional_info += "<span class='danger'>I'm choking!</span>\n"
-		
-		if(length(living_user.roundstart_quirks))
-			additional_info += "<span class='notice'>I am special: [living_user.get_trait_string()].</span>\n"
 
 		if(length(additional_info))
 			to_chat(living_user, "<span class='info'><b>Additional:</b></span>")

@@ -375,12 +375,12 @@
 				. += "<span class='notice'>It has [reagents.total_volume] unit\s left.</span>"
 			else
 				. += "<span class='danger'>It's empty.</span>"
-
-	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
-	SEND_SIGNAL(src, COMSIG_MOB_EXAMINED, src)
 	if(isliving(user))
 		var/mob/living/L = user
 		L.on_examine_atom(src)
+	
+	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
+	SEND_SIGNAL(src, COMSIG_MOB_EXAMINED, src)
 
 /**
   * Called when a mob examines (shift click or verb) this atom twice (or more) within EXAMINE_MORE_TIME (default 1.5 seconds)

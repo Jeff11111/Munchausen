@@ -745,9 +745,13 @@
 /mob/living/carbon/human/check_self_for_injuries()
 	if(stat < UNCONSCIOUS)
 		visible_message("<span class='notice'><b>[src]</b> examines [p_themselves()].</span>", \
-			"<span class='notice'><b>I check myself for injuries.</b></span>")
+			"<span class='notice'><b>I check myself.</b></span>")
 	
 	to_chat(src, "<span class='info'>*---------*</span>")
+	if(stat < DEAD)
+		to_chat(src, "<span class='info'>I am still alive.</span>")
+	else
+		to_chat(src, "<span class='deadsay'>I am dead.</span>")
 	for(var/X in ALL_BODYPARTS)
 		var/obj/item/bodypart/LB = get_bodypart(X)
 
