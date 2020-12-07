@@ -47,9 +47,12 @@
 			switch(c_intent)
 				if(CI_DUAL)
 					var/obj/item/wap = get_inactive_held_item()
-					visible_message("<span class='warning'>\The [src]attacks with their offhand!</span>")
+					visible_message("<span class='warning'>\The [src] attacks with their offhand!</span>")
 					if(wap)
+						var/old_zone = zone_selected
+						zone_selected = hand_index_to_intent[get_inactive_hand_index()]
 						wap.melee_attack_chain(src, A, params, flags = ATTACKCHAIN_RIGHTCLICK)
+						zone_selected = old_zone
 					else
 						UnarmedAttack(A, TRUE, attackchain_flags = ATTACKCHAIN_RIGHTCLICK)
 					return
@@ -77,7 +80,10 @@
 					var/obj/item/wap = get_inactive_held_item()
 					visible_message("<span class='warning'>\The [src] attacks with their offhand!</span>")
 					if(wap)
+						var/old_zone = zone_selected
+						zone_selected = hand_index_to_intent[get_inactive_hand_index()]
 						wap.melee_attack_chain(src, A, params, flags = ATTACKCHAIN_RIGHTCLICK)
+						zone_selected = old_zone
 					else
 						UnarmedAttack(A, TRUE, attackchain_flags = ATTACKCHAIN_RIGHTCLICK)
 					return

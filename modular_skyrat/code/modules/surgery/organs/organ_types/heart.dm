@@ -17,8 +17,9 @@
 	high_threshold_cleared = "<span class='info'>The pain in your chest has died down, and your breathing becomes more relaxed.</span>"
 
 	// Heart attack code is in code/modules/mob/living/carbon/human/life.dm
-	var/no_pump = FALSE
 	attack_verb = list("beat", "thumped")
+
+	var/no_pump = FALSE
 	var/beat = BEAT_NONE //is this mob having a heatbeat sound played? if so, which?
 
 	var/failed = FALSE		//to prevent constantly running failing code
@@ -32,6 +33,9 @@
 	damage_reduction = 0.7
 	relative_size = 4 //Chance is low because getting shot in the chest once and going into crit ain't good
 	var/pulse = PULSE_NORM
+	var/last_arrest = world.time //last time we stopped beating
+	var/arrest_cooldown = 2 MINUTES //time it takes before we can stop again, so patients don't die over and over
+	//from heart failure
 	var/heartbeat = 0
 	var/open = 0
 
@@ -148,7 +152,9 @@
 			applyOrganDamage(1)
 
 /obj/item/organ/heart/proc/can_stop() //Can the heart stop beating? Used to prevent bloodsucker hearts from failing under normal circumstances
-	return TRUE
+	. = TRUE
+	if(world.time < last_arrest + arrest_cooldown)
+		return TRUE
 
 /obj/item/organ/heart/proc/handle_pulse()
 	// Pulse mod starts out as just the chemical effect amount
@@ -184,7 +190,7 @@
 	else
 		var/should_stop = (owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE) && prob(25) //cardiovascular shock, not enough liquid to pump
 		should_stop = should_stop || prob(max(0, owner.getBrainLoss() - owner.maxHealth * 0.75)) //brain failing to work heart properly
-		should_stop = should_stop || ((pulse >= PULSE_THREADY) && prob(2)) //erratic heart patterns, usually caused by oxyloss
+		should_stop = should_stop || ((pulse >= PULSE_THREADY) && prob(3)) //erratic heart patterns, usually caused by oxyloss
 		if(should_stop && can_stop()) // The heart has stopped due to going into traumatic or cardiovascular shock.
 			Stop()
 			return

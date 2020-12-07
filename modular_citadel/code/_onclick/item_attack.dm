@@ -9,7 +9,10 @@
 		if(CI_DUAL)
 			var/obj/item/W = user.get_inactive_held_item()
 			if(W)
+				var/old_zone = zone_selected
+				zone_selected = hand_index_to_intent[get_inactive_hand_index()]
 				W.melee_attack_chain(user, target, params, flags = ATTACKCHAIN_RIGHTCLICK)
+				zone_selected = old_zone
 			else
 				user.UnarmedAttack(target, attackchain_flags = ATTACKCHAIN_RIGHTCLICK)
 			return
