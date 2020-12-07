@@ -17,6 +17,7 @@
 #define TOOL_BLOW			"blowing_rod"
 #define TOOL_GLASS_CUT		"glasskit"
 #define TOOL_BONESET		"setter"
+#define TOOL_FORCEP			"forcep"
 
 // If delay between the start and the end of tool operation is less than MIN_TOOL_SOUND_DELAY,
 // tool sound is only played when op is started. If not, it's played twice.
