@@ -14,10 +14,10 @@
 	var/busy = FALSE		// needed for delayed drawing of blood
 	var/proj_piercing = 0 //does it pierce through thick clothes when shot with syringe gun
 	var/show_filling = TRUE
+	var/useless = FALSE // If we stabbed someone, yep, useless. No more.
 	custom_materials = list(/datum/material/iron=10, /datum/material/glass=20)
 	reagent_flags = TRANSPARENT
 	custom_price = PRICE_CHEAP_AS_FREE
-	var/useless = FALSE // If we stabbed someone, yep, useless. No more.
 	sharpness = SHARP_POINTY
 
 /obj/item/reagent_containers/syringe/Initialize()
