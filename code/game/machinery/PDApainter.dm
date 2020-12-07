@@ -47,7 +47,7 @@
 		var/obj/item/pda/P = A
 		var/PDA_name = initial(P.name)
 		colorlist += PDA_name
-		colorlist[PDA_name] = list(initial(P.icon_state), initial(P.desc), initial(P.overlays_offsets), initial(P.overlays_icons))
+		colorlist[PDA_name] = list(initial(P.icon_state), initial(P.desc), initial(P.overlays_offsets), initial(P.standard_overlays_icons))
 
 /obj/machinery/pdapainter/Destroy()
 	QDEL_NULL(storedpda)

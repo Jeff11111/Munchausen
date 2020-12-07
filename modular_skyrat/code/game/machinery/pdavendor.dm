@@ -32,7 +32,7 @@
 		var/obj/item/pda/P = A
 		var/PDA_name = initial(P.name)
 		colorlist += PDA_name
-		colorlist[PDA_name] = list(initial(P.icon_state), initial(P.desc), initial(P.overlays_offsets), initial(P.overlays_icons))
+		colorlist[PDA_name] = list(initial(P.icon_state), initial(P.desc), initial(P.overlays_offsets), initial(P.standard_overlays_icons))
 
 /obj/machinery/vending/pdavendor/attackby(obj/item/W, mob/user, params)
 	. = ..()
@@ -52,7 +52,7 @@
 		Z.icon_state = P[1]
 		Z.desc = P[2]
 		Z.overlays_offsets = P[3]
-		Z.overlays_icons = P[4]
+		Z.standard_overlays_icons = P[4]
 		Z.set_new_overlays()
 		Z.update_icon()
 
