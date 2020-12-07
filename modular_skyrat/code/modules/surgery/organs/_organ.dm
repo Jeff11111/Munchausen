@@ -506,37 +506,38 @@
 							"<span class='notice'>I suture \the [src] safely.</span>")
 			applyOrganDamage(-min(50, maxHealth/2))
 		return TRUE
-	else if(owner && (I.tool_behaviour == TOOL_WELDER) && is_robotic())
+	else if(owner && (I.tool_behaviour == TOOL_SCREWDRIVER) && is_robotic())
 		var/obj/item/weldingtool/welder = I
 		if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
-			user.visible_message("<span class='notice'>[user] starts welding \the [src] on \the [owner]...</span>", \
-						"<span class='notice'>You start welding \the [src] on \the [owner]...</span>")
+			user.visible_message("<span class='notice'>[user] starts screwing \the [src] on \the [owner]...</span>", \
+						"<span class='notice'>You start screwing \the [src] on \the [owner]...</span>")
 			var/heymedic = GET_SKILL_LEVEL(user, electronics)
 			if(!do_mob(user, owner, 3 - (heymedic/MAX_SKILL)))
 				to_chat(user, "<span class='warning'>I must stand still!</span>")
 				return TRUE
-			if(!welder.use(4))
-				to_chat(user, "<span class='warning'>I don't have enough fuel to weld \the [src] in place!</span>")
-				return TRUE
-			user.visible_message("<span class='notice'>[user] welds \the [src] safely on \the [owner].</span>", \
-							"<span class='notice'>I weld \the [src] safely on \the [owner].</span>")
+			user.visible_message("<span class='notice'>[user] screws \the [src] safely on \the [owner].</span>", \
+							"<span class='notice'>I screw \the [src] safely on \the [owner].</span>")
 			organ_flags &= ~ORGAN_CUT_AWAY
-		else
-			if(is_dead() || is_broken())
-				to_chat(user, "<span class='warning'>\The [src] is unsalvageable! I can't heal it!</span>")
-				return TRUE
-			user.visible_message("<span class='notice'>[user] starts welding \the [src]...</span>", \
-						"<span class='notice'>You start welding \the [src]...</span>")
-			var/heymedic = GET_SKILL_LEVEL(user, electronics)
-			if(!do_mob(user, owner, 3 - (heymedic/MAX_SKILL)))
-				to_chat(user, "<span class='warning'>I must stand still!</span>")
-				return TRUE
-			if(!welder.use(2))
-				to_chat(user, "<span class='warning'>I don't have enough to heal \the [src]!</span>")
-				return TRUE
-			user.visible_message("<span class='notice'>[user] welds \the [src] safely.</span>", \
-							"<span class='notice'>I weld \the [src] safely.</span>")
-			applyOrganDamage(-min(50, maxHealth/2))
+			return TRUE
+	else if(owner && I.tool_behaviour == TOOL_WELDER && is_robotic())
+		var/obj/item/weldingtool/welder = I
+		if(!istype(welder))
+			return TRUE
+		if(is_dead() || is_broken())
+			to_chat(user, "<span class='warning'>\The [src] is unsalvageable! I can't heal it!</span>")
+			return TRUE
+		user.visible_message("<span class='notice'>[user] starts welding \the [src]...</span>", \
+					"<span class='notice'>You start welding \the [src]...</span>")
+		var/heymedic = GET_SKILL_LEVEL(user, electronics)
+		if(!do_mob(user, owner, 3 - (heymedic/MAX_SKILL)))
+			to_chat(user, "<span class='warning'>I must stand still!</span>")
+			return TRUE
+		if(!welder.use(2))
+			to_chat(user, "<span class='warning'>I don't have enough fuel to heal \the [src]!</span>")
+			return TRUE
+		user.visible_message("<span class='notice'>[user] welds \the [src] safely.</span>", \
+						"<span class='notice'>I weld \the [src] safely.</span>")
+		applyOrganDamage(-min(50, maxHealth/2))
 		return TRUE
 	else if(owner && I.is_drainable() && !is_robotic())
 		if(!germ_level)
