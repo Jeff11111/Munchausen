@@ -130,7 +130,7 @@
 	var/old_pulse = pulse
 	pulse = PULSE_NORM
 	if(owner && (pulse != old_pulse))
-		to_chat(owner, "<span class='userdanger'><b>My heart beats again!!</b></span>")
+		to_chat(owner, "<span class='userdanger'><b>My heart beats again!</b></span>")
 	update_icon()
 	return TRUE
 

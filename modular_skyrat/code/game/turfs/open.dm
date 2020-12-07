@@ -6,6 +6,6 @@
 		var/cooldown = 3 SECONDS
 		if(get_dir(user, src) in GLOB.diagonals)
 			cooldown *= 2
-		if(living_user.last_move + cooldown <= world.time)
+		if(living_user.last_move_time + cooldown <= world.time)
 			living_user.visible_message("<span class='danger'><b>[living_user]</b> crawls towards [src].</span>", "<span class='danger'>You crawl towards [src].</span>")
 			living_user.Move(get_step(living_user, get_dir(living_user, src)), get_dir(living_user, src))
