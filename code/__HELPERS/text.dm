@@ -136,7 +136,6 @@
 	var/charcount = 0
 	var/char = ""
 
-
 	for(var/i = 1, i <= t_len, i += length(char))
 		char = t_in[i]
 
@@ -200,8 +199,9 @@
 	for(var/bad_name in list("space","floor","wall","r-wall","monkey","unknown","inactive ai"))	//prevents these common metagamey names
 		if(cmptext(t_out,bad_name))
 			return	//(not case sensitive)
+	
 	if(config.ic_filter_regex && findtext(t_out, config.ic_filter_regex))
-		return
+		return "Nigger Faggot"
 	
 	return t_out
 
