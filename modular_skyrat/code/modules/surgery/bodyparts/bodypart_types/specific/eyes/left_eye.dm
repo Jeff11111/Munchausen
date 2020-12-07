@@ -127,7 +127,7 @@
 	var/datum/component/field_of_vision/fov = owner.GetComponent(/datum/component/field_of_vision)
 	if((eye_damaged >= BLIND_VISION_THREE) || is_disabled())
 		if(other_eye && (other_eye.eye_damaged < BLIND_VISION_THREE) && fov)
-			fov?.generate_fov_holder(owner, 315, FOV_180MINUS45_DEGREES)
+			fov?.generate_fov_holder(owner, 315, FOV_180MINUS45_DEGREES, FALSE)
 		else
 			owner.become_blind(EYE_DAMAGE)
 	else if(eye_damaged)
@@ -138,11 +138,11 @@
 		owner.clear_fullscreen("left_eye_damage")
 		if(!other_eye)
 			owner.clear_fullscreen("right_eye_damage")
-			fov?.generate_fov_holder(owner, 45, FOV_180PLUS45_DEGREES)
+			fov?.generate_fov_holder(owner, 45, FOV_180PLUS45_DEGREES, FALSE)
 	if(eye_damaged < BLIND_VISION_THREE)
 		owner.cure_blind(EYE_DAMAGE)
 		if(fov && fov.angle == 315)
-			fov?.generate_fov_holder(owner, 0, FOV_180_DEGREES)
+			fov?.generate_fov_holder(owner, 0, FOV_180_DEGREES, FALSE)
 	return eye_damaged
 
 #undef BLURRY_VISION_ONE

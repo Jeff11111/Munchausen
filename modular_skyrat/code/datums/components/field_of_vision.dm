@@ -116,7 +116,7 @@
   * Generates the holder and images (if not generated yet) and adds them to client.images.
   * Run when the component is registered to a player mob, or upon login.
   */
-/datum/component/field_of_vision/proc/generate_fov_holder(mob/M, _angle = 0, _shadow_angle)
+/datum/component/field_of_vision/proc/generate_fov_holder(mob/M, _angle = 0, _shadow_angle, register = TRUE)
 	if(QDELETED(fov))
 		fov = new
 		fov.hud = M.hud_used
@@ -142,14 +142,15 @@
 		angle = _angle
 	fov.alpha = (M.stat == DEAD) || (M.lying) ? 0 : 255
 	fov.icon_state = "[shadow_angle]"
-	RegisterSignal(M, COMSIG_LIVING_UPDATED_MOBILITY, .proc/update_lying)
-	RegisterSignal(M, COMSIG_MOB_DEATH, .proc/hide_fov)
-	RegisterSignal(M, COMSIG_LIVING_REVIVE, .proc/show_fov)
-	RegisterSignal(M, COMSIG_ATOM_DIR_CHANGE, .proc/on_dir_change)
-	RegisterSignal(M, COMSIG_MOVABLE_MOVED, .proc/on_mob_moved)
-	RegisterSignal(M, COMSIG_ROBOT_UPDATE_ICONS, .proc/manual_centered_render_source)
+	if(register)
+		RegisterSignal(M, COMSIG_LIVING_UPDATED_MOBILITY, .proc/update_lying)
+		RegisterSignal(M, COMSIG_MOB_DEATH, .proc/hide_fov)
+		RegisterSignal(M, COMSIG_LIVING_REVIVE, .proc/show_fov)
+		RegisterSignal(M, COMSIG_ATOM_DIR_CHANGE, .proc/on_dir_change)
+		RegisterSignal(M, COMSIG_MOVABLE_MOVED, .proc/on_mob_moved)
+		RegisterSignal(M, COMSIG_ROBOT_UPDATE_ICONS, .proc/manual_centered_render_source)
 	var/atom/A = M
-	if(M.loc && !isturf(M.loc))
+	if(M.loc && !isturf(M.loc) && register)
 		REGISTER_NESTED_LOCS(M, nested_locs, COMSIG_MOVABLE_MOVED, .proc/on_loc_moved)
 		A = nested_locs[nested_locs.len]
 	CENTERED_RENDER_SOURCE(owner_mask, A, src)
