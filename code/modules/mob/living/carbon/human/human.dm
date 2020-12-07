@@ -788,7 +788,7 @@
 
 				if(they_beat && they_heart)
 					to_chat(C, "<span class='unconscious'>I feel my heart being pumped...span>")
-				else if(they_blood && !they_heart)
+				else if(they_beat && !they_heart)
 					to_chat(C, "<span class='unconscious'>I feel my chest being pumped... But i don't feel any better...</span>")
 				else
 					to_chat(C, "<span class='unconscious'>I feel my chest being pushed on...</span>")

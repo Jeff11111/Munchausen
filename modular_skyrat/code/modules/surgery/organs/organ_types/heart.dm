@@ -33,7 +33,7 @@
 	damage_reduction = 0.7
 	relative_size = 4 //Chance is low because getting shot in the chest once and going into crit ain't good
 	var/pulse = PULSE_NORM
-	var/last_arrest = world.time //last time we stopped beating
+	var/last_arrest = 0 //last time we stopped beating
 	var/arrest_cooldown = 2 MINUTES //time it takes before we can stop again, so patients don't die over and over
 	//from heart failure
 	var/heartbeat = 0

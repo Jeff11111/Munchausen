@@ -11,9 +11,12 @@
 		visible_message("<span class='warning'>\The [src] attacks with their offhand!</span>")
 		if(W)
 			var/old_zone = zone_selected
-			zone_selected = hand_index_to_intent[get_inactive_hand_index()]
+			var/old_intent = a_intent
+			a_intent = hand_index_to_intent[get_inactive_hand_index()]
+			zone_selected = hand_index_to_zone[get_inactive_hand_index()]
 			W.melee_attack_chain(src, A)
 			zone_selected = old_zone
+			a_intent = old_intent
 		else
 			UnarmedAttack(A, TRUE)
 		return TRUE

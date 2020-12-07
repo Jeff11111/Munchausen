@@ -559,8 +559,6 @@
 		// patients rot when they are killed, and die when they are dead
 		var/tplus = world.time - H.timeofdeath	//length of time spent dead
 		var/tloss = deathtimer
-		var/total_burn	= 0
-		var/total_brute	= 0
 		var/obj/item/organ/heart = H.getorgan(/obj/item/organ/heart)
 		if(do_mob(user = user, target = H, time = primetimer2)) //placed on chest and short delay to shock for dramatic effect, revive time is 5sec total
 			var/mob/living/carbon/human/humie = H
