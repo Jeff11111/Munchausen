@@ -1,6 +1,8 @@
 ## Munchausen Outpost
 Based from Skyrat's modification of /tg/station code.
 
+[![pipeline status](https://gitlab.com/bobstation/bobstation/badges/master/pipeline.svg)](https://gitlab.com/bobstation/bobstation/-/commits/master)
+
 [![forthebadge](http://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)](https://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/pretty-risque.svg)](https://forthebadge.com) [![forthebadge](http://forthebadge.com/images/badges/you-didnt-ask-for-this.svg)](http://forthebadge.com) [![forinfinityandbyond](https://user-images.githubusercontent.com/5211576/29499758-4efff304-85e6-11e7-8267-62919c3688a9.gif)](https://www.reddit.com/r/SS13/comments/5oplxp/what_is_the_main_problem_with_byond_as_an_engine/dclbu1a)
 
 **TG Station Information**  
