@@ -122,7 +122,7 @@
 	storedpda.icon_state = P[1]
 	storedpda.desc = P[2]
 	storedpda.overlays_offsets = P[3]
-	storedpda.overlays_icons = P[4]
+	storedpda.standard_overlays_icons = P[4]
 	storedpda.set_new_overlays()
 	storedpda.update_icon()
 	ejectpda()
