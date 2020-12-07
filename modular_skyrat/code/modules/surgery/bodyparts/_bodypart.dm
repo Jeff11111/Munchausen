@@ -1292,11 +1292,11 @@
 	if(include_stamina)
 		total += stamina_dam
 	if(include_pain)
-		total += total, pain_dam
+		total += pain_dam
 	if(include_clone)
-		total += total, clone_dam
+		total += clone_dam
 	if(include_tox)
-		total += total, tox_dam
+		total += tox_dam
 	return total
 
 //Returns pain damage
