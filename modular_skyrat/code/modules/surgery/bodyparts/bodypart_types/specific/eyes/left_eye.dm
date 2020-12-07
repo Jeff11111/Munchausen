@@ -72,7 +72,7 @@
 		H.dna?.species?.handle_body(H) //regenerate eyeballs overlays
 	check_damage()
 	C.update_tint()
-	owner.update_sight()
+	C.update_sight()
 
 /obj/item/bodypart/left_eye/drop_limb(special, ignore_children, dismembered, destroyed, wounding_type)
 	var/mob/living/carbon/C = owner
@@ -86,9 +86,8 @@
 		H.left_eye_color = old_eye_color
 		if(!special)
 			H.dna.species.handle_body(H)
-	if(!special)
-		C.update_tint()
-		C.update_sight()
+	C.update_tint()
+	C.update_sight()
 	var/obj/item/bodypart/right_eye/other_eye = C.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
 	other_eye?.check_damage()
 
@@ -115,12 +114,14 @@
 /obj/item/bodypart/left_eye/proc/check_damage()
 	var/obj/item/bodypart/right_eye/other_eye = owner.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
 	switch(get_damage())
-		if(max_damage to INFINITY)
-			eye_damaged = BLIND_VISION_THREE
-		if(max_damage/2 to max_damage)
-			eye_damaged = BLURRY_VISION_TWO
+		if(-INFINITY to max_damage/4)
+			eye_damaged = FALSE
 		if(max_damage/4 to max_damage/2)
 			eye_damaged = BLURRY_VISION_ONE
+		if(max_damage/2 to max_damage)
+			eye_damaged = BLURRY_VISION_TWO
+		if(max_damage to INFINITY)
+			eye_damaged = BLIND_VISION_THREE
 		else
 			eye_damaged = FALSE
 	var/datum/component/field_of_vision/fov = owner.GetComponent(/datum/component/field_of_vision)
@@ -142,6 +143,7 @@
 		owner.cure_blind(EYE_DAMAGE)
 		if(fov && fov.angle == 315)
 			fov.generate_fov_holder(owner, 0, FOV_180_DEGREES)
+	return eye_damaged
 
 #undef BLURRY_VISION_ONE
 #undef BLURRY_VISION_TWO

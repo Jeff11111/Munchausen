@@ -37,7 +37,6 @@ GLOBAL_LIST_EMPTY(PDAs)
 	var/default_cartridge = 0 // Access level defined by cartridge
 	var/obj/item/cartridge/cartridge = null //current cartridge
 	var/mode = 0 //Controls what menu the PDA will display. 0 is hub; the rest are either built in or based on cartridge.
-	var/list/overlays_icons = list('icons/obj/pda_rugged.dmi' = list("pda-r", "screen_default", "id_overlay", "insert_overlay", "light_overlay", "pai_overlay"))
 	var/static/list/standard_overlays_icons = list("pda-r", "blank", "id_overlay", "insert_overlay", "light_overlay", "pai_overlay")
 	var/list/current_overlays //set on Initialize.
 
@@ -157,10 +156,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 		if(new_offsets)
 			overlays_x_offset = new_offsets[1]
 			overlays_y_offset = new_offsets[2]
-	if(!(icon in overlays_icons))
-		current_overlays = standard_overlays_icons
-		return
-	current_overlays = overlays_icons[icon]
+	current_overlays = standard_overlays_icons
 
 /obj/item/pda/equipped(mob/user, slot)
 	. = ..()
@@ -217,7 +213,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	if(new_overlays)
 		set_new_overlays()
 	var/screen_state = new_alert ? current_overlays[PDA_OVERLAY_ALERT] : current_overlays[PDA_OVERLAY_SCREEN]
-	var/mutable_appearance/overlay = mutable_appearance(icon, screen_state)
+	var/mutable_appearance/overlay = mutable_appearance(icon, screen_state || "blank")
 	overlay.pixel_x = overlays_x_offset
 	overlay.pixel_y = overlays_y_offset
 	. += new /mutable_appearance(overlay)

@@ -1290,13 +1290,13 @@
 /obj/item/bodypart/proc/get_damage(include_stamina = FALSE, include_pain = FALSE, include_clone = FALSE, include_tox = FALSE)
 	var/total = brute_dam + burn_dam
 	if(include_stamina)
-		total = max(total, stamina_dam)
+		total += stamina_dam
 	if(include_pain)
-		total = max(total, pain_dam)
+		total += total, pain_dam
 	if(include_clone)
-		total = max(total, clone_dam)
+		total += total, clone_dam
 	if(include_tox)
-		total = max(total, tox_dam)
+		total += total, tox_dam
 	return total
 
 //Returns pain damage

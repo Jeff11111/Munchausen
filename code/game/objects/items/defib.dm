@@ -575,8 +575,6 @@
 				H.visible_message("<span class='warning'>[H]'s body convulses a bit.</span>")
 				playsound(src, "bodyfall", 50, 1)
 				playsound(src, 'sound/machines/defib_zap.ogg', 75, 1, -1)
-				total_brute	= H.getBruteLoss()
-				total_burn	= H.getFireLoss()
 				shock_touching(30, H)
 				var/failed
 

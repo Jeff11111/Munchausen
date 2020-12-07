@@ -97,11 +97,11 @@
 			if(H.mind.special_role && !H.mind.objectives_hidden)
 				msg += "<span class='info'>I am also \a <span class='red'>[H.mind.special_role]</span>.</span>\n"
 		else if(H.mind.special_role && !H.mind.objectives_hidden)
-			msg += "<span class='info'>I a \a <span class='red'>[H.mind.special_role]</span>.</span>\n"
+			msg += "<span class='info'>I am \a <span class='red'>[H.mind.special_role]</span>.</span>\n"
 		msg += "<span class='info'>My blood type is [H.dna.blood_type].</span>\n"
 		if(length(H.roundstart_quirks))
 			msg += "<span class='info'>I am special: [H.get_trait_string()].</span>\n"
-	msg += "<span class='notice'>My current mood: </span>\n" //Short term
+	msg += "<span class='notice'><b>My current mood: </b></span>\n" //Short term
 	var/left_symbols = get_left_signs_from_number(mood_level - 5)
 	var/right_symbols = get_right_signs_from_number(mood_level - 5)
 	if(!HAS_TRAIT(user, TRAIT_SCREWY_MOOD))
@@ -129,7 +129,7 @@
 	else
 		msg += "<span class='notice'>No clue.</span>\n"
 
-	msg += "<span class='notice'>Moodlets:\n</span>"//All moodlets
+	msg += "<span class='notice'><b>Moodlets:\n</b></span>"//All moodlets
 	if(!HAS_TRAIT(user, TRAIT_SCREWY_MOOD))
 		if(length(mood_events))
 			for(var/i in mood_events)

@@ -392,6 +392,7 @@
 
 //Regenerates all limbs. Returns amount of limbs regenerated
 /mob/living/proc/regenerate_limbs(noheal = FALSE, list/excluded_limbs = list())
+	. = list()
 	SEND_SIGNAL(src, COMSIG_LIVING_REGENERATE_LIMBS, noheal, excluded_limbs)
 
 /mob/living/carbon/regenerate_limbs(noheal = FALSE, list/excluded_limbs = list(), ignore_parent_restriction = FALSE)
@@ -400,7 +401,7 @@
 	if(excluded_limbs.len)
 		limb_list -= excluded_limbs
 	for(var/Z in limb_list)
-		. |= regenerate_limb(Z, noheal, ignore_parent_restriction)
+		. += regenerate_limb(Z, noheal, ignore_parent_restriction)
 
 /mob/living/proc/regenerate_limb(limb_zone, noheal, ignore_parent_restriction)
 	return
