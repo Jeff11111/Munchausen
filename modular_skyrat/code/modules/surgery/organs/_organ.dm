@@ -507,7 +507,6 @@
 			applyOrganDamage(-min(50, maxHealth/2))
 		return TRUE
 	else if(owner && (I.tool_behaviour == TOOL_SCREWDRIVER) && is_robotic())
-		var/obj/item/weldingtool/welder = I
 		if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
 			user.visible_message("<span class='notice'>[user] starts screwing \the [src] on \the [owner]...</span>", \
 						"<span class='notice'>You start screwing \the [src] on \the [owner]...</span>")
