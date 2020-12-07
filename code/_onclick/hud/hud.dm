@@ -7,21 +7,11 @@
 // The default UI style is the first one in the list
 GLOBAL_LIST_INIT(available_ui_styles, list(
 	"Midnight" = 'icons/mob/screen_midnight.dmi',
-	"Retro" = 'icons/mob/screen_retro.dmi',
-	"Plasmafire" = 'icons/mob/screen_plasmafire.dmi',
-	"Slimecore" = 'icons/mob/screen_slimecore.dmi',
-	"Operative" = 'icons/mob/screen_operative.dmi',
-	"Clockwork" = 'icons/mob/screen_clockwork.dmi'
 ))
 
 //skyrat edit
 GLOBAL_LIST_INIT(modular_ui_styles, list(
 	'icons/mob/screen_midnight.dmi' = 'modular_skyrat/icons/mob/screen_midnight.dmi',
-	'icons/mob/screen_retro.dmi' = 'modular_skyrat/icons/mob/screen_retro.dmi',
-	'icons/mob/screen_plasmafire.dmi' = 'modular_skyrat/icons/mob/screen_plasmafire.dmi',
-	'icons/mob/screen_slimecore.dmi' = 'modular_skyrat/icons/mob/screen_slimecore.dmi',
-	'icons/mob/screen_operative.dmi' = 'modular_skyrat/icons/mob/screen_operative.dmi',
-	'icons/mob/screen_clockwork.dmi' = 'modular_skyrat/icons/mob/screen_clockwork.dmi'
 ))
 //
 
@@ -93,7 +83,7 @@ GLOBAL_LIST_INIT(modular_ui_styles, list(
 
 	if (!ui_style)
 		// will fall back to the default if any of these are null
-		ui_style = ui_style2icon(owner.client && owner.client.prefs && owner.client.prefs.UI_style)
+		ui_style = 'icons/mob/screen_midnight.dmi'
 
 	hide_actions_toggle = new
 	hide_actions_toggle.InitialiseIcon(src)

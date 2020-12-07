@@ -104,12 +104,9 @@ Notes:
 /proc/openToolTip(mob/user = null, atom/movable/tip_src = null, params = null,title = "",content = "",theme = "")
 	if(istype(user))
 		if(user.client && user.client.tooltips)
-			if(!theme && user.client.prefs && user.client.prefs.UI_style)
-				theme = lowertext(user.client.prefs.UI_style)
 			if(!theme)
-				theme = "default"
+				theme = "midnight"
 			user.client.tooltips.show(tip_src, params,title,content,theme)
-
 
 //Arbitrarily close a user's tooltip
 //Includes sanity checks.
