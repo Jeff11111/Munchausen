@@ -114,7 +114,7 @@
 /mob/living/proc/handle_client_color()
 	if(!client)
 		return
-	if(stat >= DEAD && (client.color != MATRIX_GREYSCALE))
+	if((stat >= DEAD || HAS_TRAIT(src, TRAIT_BLIND)) && (client.color != MATRIX_GREYSCALE))
 		animate(client, color = MATRIX_GREYSCALE, time = 2 SECONDS)
 	else if(stat < DEAD && (client.color))
 		animate(client, color = null, time = 2 SECONDS)
