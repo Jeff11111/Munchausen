@@ -284,7 +284,6 @@
 	return (reagents.has_reagent(/datum/reagent/medicine/synthflesh, D.reagents_list[/datum/reagent/medicine/synthflesh]*prod_coeff)) //Return whether the machine has enough synthflesh to produce the design
 
 /obj/machinery/limbgrower/proc/get_design_cost(datum/design/D)
-	var/dat = ""
 	if(D.reagents_list["synthflesh"])
 		return D.reagents_list[/datum/reagent/medicine/synthflesh] * prod_coeff
 
