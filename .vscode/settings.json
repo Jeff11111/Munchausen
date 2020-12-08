@@ -8,5 +8,8 @@
 			"filenamePattern": "*.dmi",
 			"viewType": "imagePreview.previewEditor"
 		}
-	]
+	],
+	"files.exclude": {
+		"**/_maps": true
+	}
 }
