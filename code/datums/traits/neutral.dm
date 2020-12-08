@@ -1,6 +1,5 @@
 //traits with no real impact that can be taken freely
 //MAKE SURE THESE DO NOT MAJORLY IMPACT GAMEPLAY. those should be positive or negative traits.
-
 /datum/quirk/no_taste
 	name = "Ageusia"
 	desc = "You can't taste anything! Toxic food will still poison you."
@@ -19,46 +18,6 @@
 	medical_record_text = "Patient seems to be rather stuck up."
 	mob_trait = TRAIT_SNOB
 	medical_condition = FALSE
-
-/datum/quirk/pineapple_liker
-	name = "Ananas Affinity"
-	desc = "You find yourself greatly enjoying fruits of the ananas genus. You can't seem to ever get enough of their sweet goodness!"
-	value = 0
-	gain_text = "<span class='notice'>You feel an intense craving for pineapple.</span>"
-	lose_text = "<span class='notice'>Your feelings towards pineapples seem to return to a lukewarm state.</span>"
-	medical_record_text = "Patient demonstrates a pathological love of pineapple."
-	medical_condition = FALSE
-
-/datum/quirk/pineapple_liker/add()
-	var/mob/living/carbon/human/H = quirk_holder
-	var/datum/species/species = H.dna.species
-	species.liked_food |= PINEAPPLE
-
-/datum/quirk/pineapple_liker/remove()
-	var/mob/living/carbon/human/H = quirk_holder
-	if(H)
-		var/datum/species/species = H.dna.species
-		species.liked_food &= ~PINEAPPLE
-
-/datum/quirk/pineapple_hater
-	name = "Ananas Aversion"
-	desc = "You find yourself greatly detesting fruits of the ananas genus. Serious, how the hell can anyone say these things are good? And what kind of madman would even dare putting it on a pizza!?"
-	value = 0
-	gain_text = "<span class='notice'>You find yourself pondering what kind of idiot actually enjoys pineapples...</span>"
-	lose_text = "<span class='notice'>Your feelings towards pineapples seem to return to a lukewarm state.</span>"
-	medical_record_text = "Patient is correct to think that pineapple is disgusting."
-	medical_condition = FALSE
-
-/datum/quirk/pineapple_hater/add()
-	var/mob/living/carbon/human/H = quirk_holder
-	var/datum/species/species = H.dna.species
-	species.disliked_food |= PINEAPPLE
-
-/datum/quirk/pineapple_hater/remove()
-	var/mob/living/carbon/human/H = quirk_holder
-	if(H)
-		var/datum/species/species = H.dna.species
-		species.disliked_food &= ~PINEAPPLE
 
 /datum/quirk/deviant_tastes
 	name = "Deviant Tastes"
@@ -116,7 +75,6 @@
 	gain_text = "<span class='notice'>You desire to be hurt.</span>"
 	lose_text = "<span class='notice'>Pain has become less exciting for you.</span>"
 
-//Skyrat change start
 /datum/quirk/alcohol_lightweight  
 	name = "Alcoholic Lightweight"
 	desc = "Alcohol really goes straight to your head, gotta be careful with what you drink."
@@ -124,22 +82,3 @@
 	mob_trait = TRAIT_ALCOHOL_LIGHTWEIGHT
 	gain_text = "<span class='notice'>You feel woozy thinking of alcohol.</span>"
 	lose_text = "<span class='notice'>You regain your stomach for drinks.</span>"
-//Skyrat change stop
-
-/datum/quirk/alcohol_intolerance
-	name = "Alcohol Intolerance"
-	desc = "You take toxin damage from alcohol rather than getting drunk."
-	value = 0
-	mob_trait = TRAIT_NO_ALCOHOL
-	medical_record_text = "Patient's body does not react properly to ethyl alcohol."
-
-/datum/quirk/alcohol_intolerance/add()
-	var/mob/living/carbon/human/H = quirk_holder
-	var/datum/species/species = H.dna.species
-	species.disliked_food |= ALCOHOL
-
-/datum/quirk/alcohol_intolerance/remove()
-	var/mob/living/carbon/human/H = quirk_holder
-	if(H)
-		var/datum/species/species = H.dna.species
-		species.disliked_food &= ~ALCOHOL

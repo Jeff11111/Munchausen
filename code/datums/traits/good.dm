@@ -1,14 +1,5 @@
 //predominantly positive traits
 //this file is named weirdly so that positive traits are listed above negative ones
-/datum/quirk/alcohol_tolerance
-	name = "Alcohol Tolerance"
-	desc = "I become drunk more slowly and suffer fewer drawbacks from alcohol."
-	value = 1
-	mob_trait = TRAIT_ALCOHOL_TOLERANCE
-	gain_text = "<span class='notice'>I feel like i could drink a whole keg!</span>"
-	lose_text = "<span class='danger'>I don't feel as resistant to alcohol anymore. Somehow.</span>"
-	medical_record_text = "Patient demonstrates a high tolerance for alcohol."
-
 /datum/quirk/apathetic
 	name = "Apathetic"
 	desc = "I just don't care as much as other people. That's nice to have in a place like this, I guess."
@@ -19,7 +10,7 @@
 /datum/quirk/apathetic/add()
 	var/datum/component/mood/mood = quirk_holder.GetComponent(/datum/component/mood)
 	if(mood)
-		mood.mood_modifier = 0.75
+		mood.mood_modifier = 0.5
 
 /datum/quirk/apathetic/remove()
 	if(quirk_holder)
@@ -56,7 +47,7 @@
 	medical_condition = FALSE
 
 /datum/quirk/jolly/on_process()
-	if(prob(0.05))
+	if(prob(0.5))
 		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "jolly", /datum/mood_event/jolly)
 
 /datum/quirk/quick_step
@@ -85,13 +76,6 @@
 	medical_record_text = "Patient demonstrates a high aversion to danger and has described hiding in containers out of fear."
 	medical_condition = FALSE
 
-/datum/quirk/trandening
-	name = "High Luminosity Eyes"
-	desc = "When the next big fancy implant came out i bought one on impulse."
-	value = 1
-	gain_text = "<span class='notice'>I have to keep up with the next big thing!.</span>"
-	lose_text = "<span class='danger'>High-tech gizmos are a scam...</span>"
-
 /datum/quirk/trandening/on_spawn()
 	var/mob/living/carbon/human/H = quirk_holder
 	var/obj/item/limbsurgeon/gloweyes/gloweyes = new(get_turf(H))
@@ -114,15 +98,3 @@
 /datum/quirk/bloodpressure/remove()
 	if(quirk_holder)
 		quirk_holder.blood_ratio = 1
-
-/datum/quirk/night_vision
-	name = "Night Vision"
-	desc = "I can see slightly more clearly in full darkness than most people."
-	value = 1
-	mob_trait = TRAIT_NIGHT_VISION
-	gain_text = "<span class='notice'>The shadows seem a little less dark.</span>"
-	lose_text = "<span class='danger'>Everything seems a little darker.</span>"
-
-/datum/quirk/night_vision/on_spawn()
-	var/mob/living/carbon/human/H = quirk_holder
-	H.update_sight()

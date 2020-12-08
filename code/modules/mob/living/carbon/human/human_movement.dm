@@ -11,15 +11,16 @@
 
 /mob/living/carbon/human/movement_delay()
 	. = ..()
+	var/speedy_gonzalez = HAS_TRAIT(src, TRAIT_SPEEDY_STEP)
 	if(CHECK_MOBILITY(src, MOBILITY_STAND) && m_intent == MOVE_INTENT_RUN && (combat_flags & COMBAT_FLAG_SPRINT_ACTIVE))
 		var/static/datum/config_entry/number/movedelay/sprint_speed_increase/SSI
 		if(!SSI)
 			SSI = CONFIG_GET_ENTRY(number/movedelay/sprint_speed_increase)
 		if(!mind)
-			. -= SSI.config_entry_value
+			. -= (SSI.config_entry_value * (speedy_gonzalez ? 1.5 : 1))
 		else
-			. -= (SSI.config_entry_value * (GET_STAT_LEVEL(src, dex)/(MAX_STAT/2)))
-	if(m_intent == MOVE_INTENT_WALK && HAS_TRAIT(src, TRAIT_SPEEDY_STEP))
+			. -= (SSI.config_entry_value * (GET_STAT_LEVEL(src, dex)/(MAX_STAT/2)) * (speedy_gonzalez ? 1.5 : 1))
+	if(m_intent == MOVE_INTENT_WALK && speedy_gonzalez)
 		. -= 1.5
 
 /mob/living/carbon/human/slip(knockdown_amount, obj/O, lube)

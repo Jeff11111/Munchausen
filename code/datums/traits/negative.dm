@@ -10,7 +10,7 @@
 	mood_quirk = TRUE
 
 /datum/quirk/depression/on_process()
-	if(prob(0.05))
+	if(prob(0.25))
 		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "depression", /datum/mood_event/depression)
 
 /datum/quirk/family_heirloom
@@ -95,15 +95,6 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 /datum/quirk/family_heirloom/on_clone(data)
 	heirloom = data
 
-/datum/quirk/heavy_sleeper
-	name = "Heavy Sleeper"
-	desc = "I sleep like a rock! Whenever i am put to sleep, i sleep for a little bit longer."
-	value = -1
-	mob_trait = TRAIT_HEAVY_SLEEPER
-	gain_text = "<span class='danger'>I feel sleepy.</span>"
-	lose_text = "<span class='notice'>I feel awake again.</span>"
-	medical_record_text = "Patient has abnormal sleep study results and is difficult to wake up."
-
 /datum/quirk/nearsighted //t. errorage
 	name = "Nearsighted"
 	desc = "I are nearsighted without prescription glasses."
@@ -150,51 +141,6 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "brightlight", /datum/mood_event/brightlight)
 	else
 		SEND_SIGNAL(quirk_holder, COMSIG_CLEAR_MOOD_EVENT, "brightlight")
-
-/datum/quirk/nonviolent
-	name = "Pacifist"
-	desc = "The thought of violence makes me sick. So much so, in fact, that i can't hurt anyone."
-	value = -2
-	mob_trait = TRAIT_PACIFISM
-	gain_text = "<span class='danger'>I feel repulsed by the thought of violence!</span>"
-	lose_text = "<span class='notice'>I think i can defend myself again.</span>"
-	medical_record_text = "Patient is unusually pacifistic and cannot bring themselves to cause physical harm."
-	antag_removal_text = "My antagonistic nature has caused me to renounce my pacifism."
-
-/datum/quirk/paraplegic
-	name = "Paraplegic"
-	desc = "My legs do not function. Nothing will ever fix this."
-	value = -3
-	mob_trait = TRAIT_PARA
-	human_only = TRUE
-	gain_text = null // Handled by trauma.
-	lose_text = null
-	medical_record_text = "Patient has an untreatable impairment in motor function in the lower extremities."
-
-/datum/quirk/paraplegic/add()
-	var/datum/brain_trauma/severe/paralysis/paraplegic/T = new()
-	var/mob/living/carbon/human/H = quirk_holder
-	H.gain_trauma(T, TRAUMA_RESILIENCE_ABSOLUTE)
-
-/datum/quirk/paraplegic/on_spawn()
-	if(quirk_holder.buckled) // Handle late joins being buckled to arrival shuttle chairs.
-		quirk_holder.buckled.unbuckle_mob(quirk_holder)
-
-	var/turf/T = get_turf(quirk_holder)
-	var/obj/structure/chair/spawn_chair = locate() in T
-
-	var/obj/vehicle/ridden/wheelchair/wheels = new(T)
-	if(spawn_chair) // Makes spawning on the arrivals shuttle more consistent looking
-		wheels.setDir(spawn_chair.dir)
-
-	wheels.buckle_mob(quirk_holder)
-
-	// During the spawning process, they may have dropped what they were holding, due to the paralysis
-	// So put the things back in their hands.
-
-	for(var/obj/item/I in T)
-		if(I.fingerprintslast == quirk_holder.ckey)
-			quirk_holder.put_in_hands(I)
 
 /datum/quirk/poor_aim
 	name = "Poor Aim"
@@ -265,78 +211,6 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 /datum/quirk/insanity/proc/madness()
 	quirk_holder.hallucination += rand(10, 25)
 
-/datum/quirk/social_anxiety
-	name = "Social Anxiety"
-	desc = "Talking to people is very difficult for me, and i often stutter or even lock up."
-	value = -1
-	gain_text = "<span class='danger'>I start worrying about what i'm saying.</span>"
-	lose_text = "<span class='notice'>I feel easier about talking again.</span>" //if only it were that easy!
-	medical_record_text = "Patient is usually anxious in social encounters and prefers to avoid them."
-	var/dumb_thing = TRUE
-
-/datum/quirk/social_anxiety/add()
-	RegisterSignal(quirk_holder, COMSIG_MOB_EYECONTACT, .proc/eye_contact)
-	RegisterSignal(quirk_holder, COMSIG_MOB_EXAMINATE, .proc/looks_at_floor)
-
-/datum/quirk/social_anxiety/remove()
-	UnregisterSignal(quirk_holder, list(COMSIG_MOB_EYECONTACT, COMSIG_MOB_EXAMINATE))
-
-/datum/quirk/social_anxiety/on_process()
-	var/nearby_people = 0
-	if(HAS_TRAIT(quirk_holder, TRAIT_FEARLESS)) //Skyrat change
-		return //Skyrat change
-	for(var/mob/living/carbon/human/H in oview(3, quirk_holder))
-		if(H.client)
-			nearby_people++
-	var/mob/living/carbon/human/H = quirk_holder
-	if(prob(2 + nearby_people))
-		H.stuttering = max(3, H.stuttering)
-	else if(prob(min(3, nearby_people)) && !H.silent)
-		to_chat(H, "<span class='danger'>You retreat into yourself. You <i>really</i> don't feel up to talking.</span>")
-		H.silent = max(10, H.silent)
-	else if(prob(0.5) && dumb_thing)
-		to_chat(H, "<span class='userdanger'>You think of a dumb thing you said a long time ago and scream internally.</span>")
-		dumb_thing = FALSE //only once per life
-		if(prob(1))
-			new/obj/item/reagent_containers/food/snacks/pastatomato(get_turf(H)) //now that's what I call spaghetti code
-
-// small chance to make eye contact with inanimate objects/mindless mobs because of nerves
-/datum/quirk/social_anxiety/proc/looks_at_floor(datum/source, atom/A)
-	var/mob/living/mind_check = A
-	if(prob(85) || (istype(mind_check) && mind_check.mind))
-		return
-
-	addtimer(CALLBACK(GLOBAL_PROC, .proc/to_chat, quirk_holder, "<span class='smallnotice'>You make eye contact with [A].</span>"), 3)
-
-/datum/quirk/social_anxiety/proc/eye_contact(datum/source, mob/living/other_mob, triggering_examiner)
-	if(prob(75))
-		return
-	var/msg
-	if(triggering_examiner)
-		msg = "I make eye contact with [other_mob], "
-	else
-		msg = "[other_mob] makes eye contact with you, "
-
-	switch(rand(1,3))
-		if(1)
-			quirk_holder.Jitter(10)
-			msg += "causing you to start fidgeting!"
-		if(2)
-			quirk_holder.stuttering = max(3, quirk_holder.stuttering)
-			msg += "causing you to start stuttering!"
-		if(3)
-			quirk_holder.Stun(2 SECONDS)
-			msg += "causing you to freeze up!"
-
-	SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "anxiety_eyecontact", /datum/mood_event/anxiety_eyecontact)
-	addtimer(CALLBACK(GLOBAL_PROC, .proc/to_chat, quirk_holder, "<span class='userdanger'>[msg]</span>"), 3) // so the examine signal has time to fire and this will print after
-	return COMSIG_BLOCK_EYECONTACT
-
-/datum/mood_event/anxiety_eyecontact
-	description = "<span class='warning'>Sometimes eye contact makes me so nervous...</span>\n"
-	mood_change = -5
-	timeout = 3 MINUTES
-
 /datum/quirk/phobia
 	name = "Phobia"
 	desc = "I've had a traumatic past, one that has scarred you for life, and cripples you when dealing with your greatest fears."
@@ -390,21 +264,3 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	mob_trait = TRAIT_COLDBLOODED
 	gain_text = "<span class='notice'>I feel cold-blooded.</span>"
 	lose_text = "<span class='notice'>I feel more warm-blooded.</span>"
-
-/datum/quirk/monophobia
-	name = "Monophobia"
-	desc = "I will become increasingly stressed when not in company of others, triggering panic reactions ranging from sickness to heart attacks."
-	value = -3 // Might change it to 4.
-	gain_text = "<span class='danger'>I feel really lonely...</span>"
-	lose_text = "<span class='notice'>I feel like i could be safe on my own.</span>"
-	medical_record_text = "Patient feels sick and distressed when not around other people, leading to potentially lethal levels of stress."
-
-/datum/quirk/monophobia/post_add()
-	. = ..()
-	var/mob/living/carbon/human/H = quirk_holder
-	H.gain_trauma(/datum/brain_trauma/severe/monophobia, TRAUMA_RESILIENCE_ABSOLUTE)
-
-/datum/quirk/monophobia/remove()
-	. = ..()
-	var/mob/living/carbon/human/H = quirk_holder
-	H?.cure_trauma_type(/datum/brain_trauma/severe/monophobia, TRAUMA_RESILIENCE_ABSOLUTE)

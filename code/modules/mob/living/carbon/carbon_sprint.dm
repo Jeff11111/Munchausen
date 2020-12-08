@@ -22,6 +22,10 @@
 	//
 
 /mob/living/carbon/proc/doSprintBufferRegen(updating = TRUE)
+	//Cannot regen sprint buffer in combat mode
+	if(SEND_SIGNAL(src, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_ACTIVE))
+		return FALSE
+	
 	var/diff = world.time - sprint_buffer_regen_last
 	sprint_buffer_regen_last = world.time
 	//SKYRAT CHANGE - asthma
@@ -40,7 +44,7 @@
 								BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_R_FOOT,
 								BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_L_FOOT))
 		var/obj/item/bodypart/big_walka = get_bodypart(bodypart_check)
-		if(!big_walka)
+		if(!big_walka || big_walka.is_disabled())
 			to_chat(src, "<span class='danger'>I can't sprint without a [parse_zone(bodypart_check)]!</span>")
 			return FALSE
 		//If we are not under painkillers, add the pain
@@ -49,4 +53,8 @@
 	if(leg_pain >= SHOCK_STAGE_2)
 		to_chat(src, "<span class'danger'>It hurts to walk, let alone sprint!</span>")
 		return FALSE
+	if(SEND_SIGNAL(src, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_ACTIVE))
+		//Can't sprint while focused on combat
+		if(sprint_buffer <= 0)
+			return FALSE
 	return ..()

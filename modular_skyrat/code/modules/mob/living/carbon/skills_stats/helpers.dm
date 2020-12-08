@@ -125,12 +125,12 @@
 			return TRUE
 		//Normal successes will roll 50% * (level/MAX_SKILL) on melee
 		if(DICE_SUCCESS)
-			var/mod = GET_SKILL_LEVEL(victim, melee)/MAX_SKILL
+			var/mod = 1 - GET_SKILL_LEVEL(victim, melee)/MAX_SKILL
 			var/base_chance = 75
 			if(!victim.get_active_held_item())
 				base_chance = 50
 			if(victim.combat_intent == CI_DEFEND)
-				base_chance += 15 * mod
+				base_chance += 20 * mod
 			if(prob(base_chance * mod))
 				victim.changeNext_move(CLICK_CD_MELEE)
 				//We don't have an active hand item - just redirect damage to the active hand
@@ -180,10 +180,13 @@
 			return TRUE
 		//Normal successes will roll 40% * (level/MAX_SKILL) on melee
 		if(DICE_SUCCESS)
-			var/mod = GET_SKILL_LEVEL(victim, melee)/MAX_SKILL
+			var/mod = 1 - GET_SKILL_LEVEL(victim, melee)/MAX_SKILL
 			var/base_chance = 75
 			if(victim.combat_intent == CI_DEFEND)
-				base_chance += 15 * mod
+				base_chance += 20 * mod
+			//Victim is lying, halve the dodge chance
+			if(victim.lying)
+				base_chance *= 0.5
 			//Projectiles are hard to dodge for obvious reasons
 			if(isprojectile(weapon))
 				base_chance -= 25 * (1 - mod)
