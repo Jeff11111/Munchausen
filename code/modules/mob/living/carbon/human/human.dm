@@ -732,13 +732,6 @@
 				return
 			
 			if(world.time >= C.last_mtom + C.mtom_cooldown)
-				visible_message("<span class='notice'>[src] is trying to perform mouth to mouth on [C.name]!</span>", \
-								"<span class='notice'>I try to perform mouth to mouth on [C.name]...</span>")
-				
-				if(!do_mob(src, C, time = (25 - heymedic)))
-					to_chat(src, "<span class='warning'>I fail to perform mouth to mouth on [C]!</span>")
-					return FALSE
-
 				var/they_breathe = !HAS_TRAIT(C, TRAIT_NOBREATH)
 				var/obj/item/organ/lungs/they_lung = C.getorganslot(ORGAN_SLOT_LUNGS)
 
@@ -772,11 +765,6 @@
 				return
 			
 			if(world.time >= C.last_cpr + C.cpr_cooldown)
-				visible_message("<span class='notice'>[src] is trying to perform CPR on [C.name]!</span>", \
-								"<span class='notice'>I try to perform CPR on [C.name]...</span>")
-				if(!do_mob(src, C, time = (25 - heymedic)))
-					to_chat(src, "<span class='warning'>I fail to perform CPR on [C]!</span>")
-					return FALSE
 				var/they_beat = !HAS_TRAIT(C, TRAIT_NOPULSE)
 				var/obj/item/organ/heart/they_heart = C.getorganslot(ORGAN_SLOT_LUNGS)
 
@@ -795,7 +783,7 @@
 				
 				var/diceroll = mind?.diceroll(heyeinstein, heymedic, "6d6", 20, mod = -(C.getOxyLoss()/10))
 				if((diceroll >= DICE_SUCCESS) || !mind)
-					if(prob(40) || (diceroll >= DICE_CRIT_SUCCESS))
+					if(prob(35) || (diceroll >= DICE_CRIT_SUCCESS))
 						they_heart.last_arrest = world.time
 						if(they_heart.Restart() && C.revive())
 							C.grab_ghost()
