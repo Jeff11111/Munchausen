@@ -238,7 +238,7 @@
 	dat += "<table style='width:100%' align='center'><tr>"
 
 	for(var/C in categories)
-		dat += "<td><A href='?src=[REF(src)];category=[C];menu=[LIMBGROWER_CATEGORY_MENU]'>[C]</A></td>"
+		dat += "<td><A href='?src=[REF(src)];category=[C];menu=[LIMBGROWER_CATEGORY_MENU]'>[capitalize(C, TRUE)]</A></td>"
 		dat += "</tr><tr>"
 		//one category per line
 
@@ -255,10 +255,10 @@
 		if(!(selected_category in D.category))
 			continue
 		if(disabled || !can_build(D))
-			dat += "<span class='linkOff'>[D.name] ([get_design_cost(D)]u)</span>"
+			dat += "<span class='linkOff'>[capitalize(D.name, TRUE)] ([get_design_cost(D)]u)</span>"
 		else
-			dat += "<a href='?src=[REF(src)];make=[D.id];multiplier=1'>[D.name] ([get_design_cost(D)]u)</a>"
-		dat += "[get_design_cost(D)]<br>"
+			dat += "<a href='?src=[REF(src)];make=[D.id];multiplier=1'>[capitalize(D.name, TRUE)] ([get_design_cost(D)]u)</a>"
+		dat += "\n"
 
 	dat += "</div>"
 	return dat
