@@ -194,19 +194,7 @@
 	return perform_safety(user)
 
 /obj/item/gun/proc/perform_safety(mob/user)
-	if(iscarbon(user) && user.mind)
-		var/ranged_skill = GET_SKILL_LEVEL(user, ranged)
-		if(ranged_skill <= JOB_SKILLPOINTS_NOVICE)
-			to_chat(user, "<span class='warning'>Hnngh... How do i use this thing?</span>")
-			if(!do_after(user, (20 - ranged_skill) * 2, TRUE, src))
-				to_chat(user, "<span class='warning'>You must stand still to disable/enable [src]'s safety!</span>")
-				return
-		if(user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.25, GET_SKILL_LEVEL(user, ranged)*0.75) >= DICE_SUCCESS)
-			toggle_safety(user)
-		else
-			to_chat(user, "<span class='danger'>Damn it! I wasn't able to figure out how to toggle [src]'s safety features!</span>")
-	else
-		toggle_safety(user)
+	toggle_safety(user)
 	return TRUE
 
 /obj/item/gun/proc/toggle_safety(mob/user)
