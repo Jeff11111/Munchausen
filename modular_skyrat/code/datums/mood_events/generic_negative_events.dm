@@ -1,8 +1,3 @@
-//Mom get the epipen quirk
-/datum/mood_event/allergyshock
-	description = "<span class='userdanger'>WHERE IS THE EPI PEN?!?!</span>"
-	mood_change = -25
-	timeout = 10 SECONDS
 
 //Got cloned recently
 /datum/mood_event/clooned

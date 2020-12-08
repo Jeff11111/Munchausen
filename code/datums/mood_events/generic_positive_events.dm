@@ -163,8 +163,7 @@
 	mood_change = 8
 	timeout = 1200
 
-//Cursed stuff below.
-
+//Cursed stuff
 /datum/mood_event/orgasm
 	description = "<span class='userlove'>I came!</span>"
 	mood_change = 4

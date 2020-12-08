@@ -443,14 +443,50 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	desc = "I love sex."
 	value = 0
 	mob_trait = TRAIT_PERMABONER
-	gain_text = "<span class='notice'>You are feeling extra wild.</span>"
-	lose_text = "<span class='notice'>You don't feel that burning sensation anymore.</span>"
+	gain_text = "<span class='userlove'>You are feeling extra wild.</span>"
+	lose_text = "<span class='purple'>You don't feel that burning sensation anymore.</span>"
 	var/ineedsex = 0 //0-100
 	var/needsex_increase = 0.01 //how much we increase our need for sex per on_process
+
+/datum/quirk/libido/special_requirement_check(mob/living/carbon/human/imbecile)
+	. = ..()
+	if(!imbecile.has_penis() && !imbecile.has_vagina())
+		return FALSE
+
+/datum/quirk/libido/add()
+	. = ..()
+	RegisterSignal(quirk_holder, COMSIG_HUMAN_CUMMED, .proc/cummed)
+
+/datum/quirk/libido/remove()
+	. = ..()
+	UnregisterSignal(quirk_holder, COMSIG_HUMAN_CUMMED)
 
 /datum/quirk/libido/on_process()
 	. = ..()
 	if(quirk_holder.stat == CONSCIOUS)
 		ineedsex = min(100, ineedsex + needsex_increase)
 	if(ineedsex == 10)
-		to_chat(quirk_holder, "<span class='purple'>I can't stop thinking about hot single ladies in my area...</span>")
+		to_chat(quirk_holder, "<span class='userlove'>I can't stop thinking about hot single ladies in my area...</span>")
+	else if(ineedsex == 25)
+		if(quirk_holder.has_penis())
+			to_chat(quirk_holder, "<span class='userlove'>My cock is THROBBING.</span>")
+		else if(quirk_holder.has_vagina())
+			to_chat(quirk_holder, "<span class='userlove'>My vagina is WET.</span>")
+		else
+			to_chat(quirk_holder, "<span class='userlove'>I am in HEAT.</span>")
+	else if(ineedsex == 50)
+		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "orgasm", /datum/mood_event/blueballs)
+		to_chat(quirk_holder, "<span class='userlove'>I NEED TO CUM, JIZZ AND SPUNK.</span>")
+	else if(ineedsex == 75)
+		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "orgasm", /datum/mood_event/blueballs/bad)
+		to_chat(quirk_holder, "<span class='userlove'>EARTHLY PLEASURES CONSUME ME.</span>")
+	else if(ineedsex == 99)
+		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "orgasm", /datum/mood_event/blueballs/cbt)
+		to_chat(quirk_holder, "<span class='userlove'>I AM GOING TO FUCKING RAPE A CREWMEMBER.</span>")
+
+/datum/quirk/libido/proc/cummed(atom/target, obj/item/organ/genital/G, spill = TRUE)
+	//We can only sate our lust by actually having sex...
+	//However, masturbating does still give you a mood boost.
+	if(target)
+		ineedsex = 0
+	SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "orgasm", /datum/mood_event/orgasm/nympho)

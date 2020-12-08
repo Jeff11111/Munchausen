@@ -750,8 +750,7 @@
 	visible_message(message = "<span class='userlove'><b>\The [src]</b> [message]</span>", ignored_mobs = get_unconsenting())
 	multiorgasms += 1
 
-	/*if(multiorgasms == 1)
-		add_logs(partner, src, "came on")*/
+	add_logs(partner, src, "came on")
 
 	if(multiorgasms > (sexual_potency * 0.34)) //AAAAA, WE DONT WANT NEGATIVES HERE, RE
 		refractory_period = world.time + rand(300, 900) - sexual_potency//sex cooldown
@@ -767,12 +766,7 @@
 			else
 				H.mob_climax(TRUE, partner, !cumin)
 	set_lust(0)
-/*
-/mob/living/cum(mob/living/partner, target_orifice)
-	. = ..()
-	if(multiorgasms < sexual_potency)
-		cum_splatter((partner ? partner : src), src)
-*/
+
 /mob/living/proc/is_fucking(mob/living/partner, orifice)
 	if(partner == last_partner && orifice == last_orifice)
 		return TRUE
