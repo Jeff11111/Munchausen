@@ -750,7 +750,7 @@
 	visible_message(message = "<span class='userlove'><b>\The [src]</b> [message]</span>", ignored_mobs = get_unconsenting())
 	multiorgasms += 1
 
-	add_logs(partner, src, "came on")
+	message_admins("[src] came[partner && partner != src ?  " on [partner]" : ""].")
 
 	if(multiorgasms > (sexual_potency * 0.34)) //AAAAA, WE DONT WANT NEGATIVES HERE, RE
 		refractory_period = world.time + rand(300, 900) - sexual_potency//sex cooldown

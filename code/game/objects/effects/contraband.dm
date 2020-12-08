@@ -670,7 +670,6 @@
 	icon_state = "poster44_legit"
 
 // SKYRAT EDIT: More Posters.
-
 /obj/structure/sign/poster/contraband/goldstar
 	name = "Gold Star"
 	desc = "A poster of a golden star."
@@ -683,17 +682,17 @@
 
 /obj/structure/sign/poster/contraband/sorryhal
 	name = "Sorry"
-	desc = "A poster with a familar robot, sorry?"
+	desc = "A poster with a familar robot, i'm sorry Dave."
 	icon_state = "bsposter2"
 
 /obj/structure/sign/poster/contraband/eyesman
 	name = "Watching"
-	desc = "A poster with someone watching, creepy."
+	desc = "A poster with someone watching. Creepy."
 	icon_state = "bsposter3"
 
 /obj/structure/sign/poster/contraband/damnmeme
 	name = "Keep Calm"
-	desc = "A poster that features an outdated meme, keep calm?"
+	desc = "A poster that features an outdated meme. Keep calm?"
 	icon_state = "bsposter4"
 
 /obj/structure/sign/poster/contraband/ayyok
@@ -723,7 +722,7 @@
 
 /obj/structure/sign/poster/contraband/panik
 	name = "Panic"
-	desc = "A poster that says... Don't panic?"
+	desc = "A poster that says \"Don't panic?\"."
 	icon_state = "bsposter10"
 
 /obj/structure/sign/poster/contraband/camp
@@ -917,7 +916,7 @@
 	icon_state = "poster113"
 
 /obj/structure/sign/poster/contraband/dooom
-	name = "Doom"
+	name = "DooM"
 	desc = "A poster of a man who has a mission."
 	icon_state = "poster114"
 
