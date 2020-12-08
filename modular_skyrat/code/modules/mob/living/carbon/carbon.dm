@@ -216,7 +216,7 @@
 	if(!istype(examined) || !client || !examined.on_examined_check())
 		return
 
-	if(get_dist(src, examined) > EYE_CONTACT_RANGE)
+	if((get_dist(src, examined) > EYE_CONTACT_RANGE) || (stat > CONSCIOUS))
 		return
 	
 	if(CHECK_BITFIELD(wear_mask?.flags_inv, HIDEFACE) || CHECK_BITFIELD(head?.flags_inv, HIDEFACE) || CHECK_BITFIELD(glasses?.flags_inv, HIDEFACE))

@@ -14,7 +14,7 @@
 	if(!istype(examined) || !client || !examined.on_examined_check())
 		return
 
-	if(get_dist(src, examined) > EYE_CONTACT_RANGE)
+	if((get_dist(src, examined) > EYE_CONTACT_RANGE) || (stat > CONSCIOUS))
 		return
 	
 	if(!ismob(examined))
