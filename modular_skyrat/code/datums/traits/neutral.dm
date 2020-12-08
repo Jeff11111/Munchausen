@@ -1,6 +1,8 @@
 //traits with no real impact that can be taken freely
 //MAKE SURE THESE DO NOT MAJORLY IMPACT GAMEPLAY. those should be positive or negative traits.
 //to be quite honest most of these are very dubious in how "neutral" they are
+
+//no ratatouille
 /datum/quirk/no_taste
 	name = "Ageusia"
 	desc = "You can't taste anything! Toxic food will still poison you."
@@ -10,6 +12,7 @@
 	lose_text = "<span class='notice'>You can taste again!</span>"
 	medical_record_text = "Patient suffers from ageusia and is incapable of tasting food or reagents."
 
+//videogames are art
 /datum/quirk/snob
 	name = "Snob"
 	desc = "You care about the finer things, if a room doesn't look nice its just not really worth it, is it?"
@@ -20,6 +23,7 @@
 	mob_trait = TRAIT_SNOB
 	medical_condition = FALSE
 
+//likes feet
 /datum/quirk/deviant_tastes
 	name = "Deviant Tastes"
 	desc = "You dislike food that most people enjoy, and find delicious what they don't."
@@ -42,6 +46,7 @@
 		species.liked_food = initial(species.liked_food)
 		species.disliked_food = initial(species.disliked_food)
 
+//fucky
 /datum/quirk/monochromatic
 	name = "Monochromacy"
 	desc = "You suffer from full colorblindness, and perceive nearly the entire world in blacks and whites."
@@ -60,6 +65,7 @@
 	if(quirk_holder)
 		quirk_holder.remove_client_colour(/datum/client_colour/monochrome)
 
+//no like alcol
 /datum/quirk/alcohol_lightweight  
 	name = "Alcoholic Lightweight"
 	desc = "Alcohol really goes straight to your head, gotta be careful with what you drink."
