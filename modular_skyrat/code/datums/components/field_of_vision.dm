@@ -98,7 +98,7 @@
 	var/mob/M = parent
 	if(!QDELETED(fov))
 		if(M.client)
-			UnregisterSignal(M, list(COMSIG_ATOM_DIR_CHANGE, COMSIG_MOVABLE_MOVED, COMSIG_MOB_DEATH, COMSIG_LIVING_REVIVE))
+			UnregisterSignal(M, list(COMSIG_ATOM_DIR_CHANGE, COMSIG_MOVABLE_MOVED, COMSIG_MOB_DEATH, COMSIG_LIVING_REVIVE, COMSIG_LIVING_UPDATED_MOBILITY))
 		M.hud_used?.fov_holder = null
 		M.hud_used?.show_hud(HUD_STYLE_STANDARD)
 		qdel(fov, TRUE) // Forced.
@@ -187,7 +187,7 @@
 
 /datum/component/field_of_vision/proc/on_mob_logout(mob/source, client/client)
 	UnregisterSignal(source, list(COMSIG_ATOM_DIR_CHANGE, COMSIG_MOVABLE_MOVED, COMSIG_MOB_DEATH,
-								COMSIG_LIVING_REVIVE, COMSIG_ROBOT_UPDATE_ICONS))
+								COMSIG_LIVING_REVIVE, COMSIG_ROBOT_UPDATE_ICONS, COMSIG_LIVING_UPDATED_MOBILITY))
 	if(length(nested_locs))
 		UNREGISTER_NESTED_LOCS(nested_locs, COMSIG_MOVABLE_MOVED, 1)
 
