@@ -793,7 +793,7 @@
 				else
 					to_chat(C, "<span class='unconscious'>I feel my chest being pushed on...</span>")
 				
-				var/diceroll = mind?.diceroll(heyeinstein, heymedic, "6d6", 20, mod = -(C.getOxyLoss()/2))
+				var/diceroll = mind?.diceroll(heyeinstein, heymedic, "6d6", 20, mod = -(C.getOxyLoss()/10))
 				if((diceroll >= DICE_SUCCESS) || !mind)
 					if(prob(40) || (diceroll >= DICE_CRIT_SUCCESS))
 						they_heart.last_arrest = world.time
@@ -802,11 +802,11 @@
 							C.visible_message("<span class='warning'><b>[C]</b> limply spasms their muscles.</span>", \
 											"<span class='userdanger'>My muscles spasm as i am brought back to life!</span>")
 				else
-					if(diceroll <= DICE_CRIT_FAILURE)
+					var/obj/item/bodypart/chest/affected = C.get_bodypart(BODY_ZONE_CHEST)
+					if((diceroll <= DICE_CRIT_FAILURE) && !affected.is_broken())
 						visible_message("<span class='danger'><b>[src]</b> botches the CPR, cracking <b>[C]</b>'s ribs!</span>", \
 									"<span class='danger'>I botch the CPR, cracking <b>[C]</b>'s ribs!</span>",
 									target = C, target_message = "<span class='userdanger'><b>[src]</b> botches the CPR and cracks my ribs!</span>")
-						var/obj/item/bodypart/chest/affected = C.get_bodypart(BODY_ZONE_CHEST)
 						var/datum/wound/fracture
 						if(affected.is_organic_limb())
 							var/fucked_up = (prob(heyheavy*2) ? /datum/wound/blunt/critical : /datum/wound/blunt/severe)
