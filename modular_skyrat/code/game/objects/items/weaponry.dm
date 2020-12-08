@@ -270,7 +270,7 @@
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "shanked", "sliced", "cut")
 	siemens_coefficient = 0 //We are insulated
-	var/clickmodifier = 0.5
+	click_delay = CLICK_CD_MELEE/2
 
 /obj/item/shank/Initialize()
 	..()
@@ -283,18 +283,10 @@
 			force = 6
 			throwforce = 12
 			custom_materials = list(/datum/material/plasma=MINERAL_MATERIAL_AMOUNT * 0.5, /datum/material/glass=MINERAL_MATERIAL_AMOUNT)
-			clickmodifier = 0.4
+			click_delay *= 0.75
 		parts_list -= tip
 		qdel(tip)
 	return ..()
-
-/obj/item/shank/update_icon()
-	icon_state = "shank"
-
-/obj/item/shank/afterattack(atom/target, mob/living/user, proximity_flag)
-	. = ..()
-	if(proximity_flag)
-		user.changeNext_move(CLICK_CD_MELEE * clickmodifier)
 
 //"mace of molag bal"
 /obj/item/melee/cleric_mace/molagbal
@@ -308,7 +300,7 @@
 	material_flags = null
 	custom_materials = list(/datum/material/iron = 12000)
 	slot_flags = ITEM_SLOT_BELT
-	force = 15
+	force = 18
 	throwforce = 8
 	w_class = WEIGHT_CLASS_BULKY
 	block_chance = 30
