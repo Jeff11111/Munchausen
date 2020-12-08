@@ -787,7 +787,7 @@
 				log_combat(src, C, "CPRed")
 
 				if(they_beat && they_heart)
-					to_chat(C, "<span class='unconscious'>I feel my heart being pumped...span>")
+					to_chat(C, "<span class='unconscious'>I feel my heart being pumped...</span>")
 				else if(they_beat && !they_heart)
 					to_chat(C, "<span class='unconscious'>I feel my chest being pumped... But i don't feel any better...</span>")
 				else
