@@ -330,7 +330,7 @@
 			H.gain_trauma(/datum/brain_trauma/mild/concussion)
 		if(prob(67))
 			for(var/obj/item/organ/O in H.getorganszone(user.zone_selected))
-				O.damage += organdamage
+				O.applyOrganDamage(organdamage)
 		H.adjustStaminaLoss(stamdamage)
 		var/stamloss = H.getStaminaLoss()
 		if(stamloss > 100)

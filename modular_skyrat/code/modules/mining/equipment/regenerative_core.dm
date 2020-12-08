@@ -47,7 +47,7 @@
 		H.adjustBruteLoss(-25, 0)
 		H.adjustFireLoss(-25, 0)
 		for(var/obj/item/organ/O in H)
-			O.damage = 0
+			O.applyOrganDamage(-O.maxHealth)
 	else
 		H.reagents.remove_reagent(/datum/reagent/determination, 2000, TRUE, TRUE)
 		H.revive(full_heal = 1)

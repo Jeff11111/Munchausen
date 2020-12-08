@@ -149,9 +149,7 @@
 	handle_pulse()
 	if(pulse)
 		handle_heartbeat()
-		if(pulse == PULSE_2FAST && prob(1))
-			applyOrganDamage(1)
-		else if(pulse >= PULSE_THREADY && prob(5))
+		if(pulse >= PULSE_2FAST && prob(2))
 			applyOrganDamage(1)
 
 /obj/item/organ/heart/proc/can_stop() //Can the heart stop beating? Used to prevent bloodsucker hearts from failing under normal circumstances
