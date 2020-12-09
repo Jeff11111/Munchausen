@@ -87,7 +87,7 @@
 		return
 
 	var/obj/item/disk/diskette = user.get_active_held_item()
-	if(istype(diskette))
+	if(istype(diskette) && !dna_disk)
 		diskette.forceMove(src)
 		dna_disk = diskette
 
