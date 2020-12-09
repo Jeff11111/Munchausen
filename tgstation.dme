@@ -3812,6 +3812,7 @@
 #include "modular_skyrat\code\modules\clothing\outfits\plasmaman.dm"
 #include "modular_skyrat\code\modules\clothing\outfits\standard.dm"
 #include "modular_skyrat\code\modules\clothing\outfits\vox.dm"
+#include "modular_skyrat\code\modules\clothing\shoes\magboots.dm"
 #include "modular_skyrat\code\modules\clothing\shoes\miscellaneous.dm"
 #include "modular_skyrat\code\modules\clothing\spacesuits\chronosuit.dm"
 #include "modular_skyrat\code\modules\clothing\spacesuits\hardsuit.dm"

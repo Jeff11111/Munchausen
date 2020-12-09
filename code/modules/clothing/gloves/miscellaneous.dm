@@ -2,6 +2,8 @@
 /obj/item/clothing/gloves/fingerless
 	name = "fingerless gloves"
 	desc = "Plain black gloves without fingertips for the hard working."
+	icon = 'modular_skyrat/icons/obj/clothing/gloves.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/hands.dmi'
 	icon_state = "fingerless"
 	item_state = "fingerless"
 	transfer_prints = TRUE
@@ -15,6 +17,8 @@
 /obj/item/clothing/gloves/fingerless/pugilist
 	name = "armwraps"
 	desc = "A series of armwraps. Makes you pretty keen to start punching people."
+	icon = 'icons/obj/clothing/gloves.dmi'
+	mob_overlay_icon = 'icons/mob/clothing/hands.dmi'
 	icon_state = "armwraps"
 	item_state = "armwraps"
 	body_parts_covered = ARMS
@@ -168,7 +172,6 @@
 	resistance_flags = NONE
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 80, "acid" = 50, "wound" = 25)
 	strip_mod = 1.5
-
 
 /obj/item/clothing/gloves/bracer
 	name = "bone bracers"

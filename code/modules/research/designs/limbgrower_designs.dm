@@ -285,7 +285,7 @@
 	build_path = /obj/item/organ/genital/testicles
 	category = list("initial","human","lizard","fly","insect","plasmaman","mammal","xeno")
 
-/datum/design/penis
+/datum/design/breasts
 	name = "Breasts"
 	id = "breasts"
 	research_icon_state = "breasts_pair_e_s"

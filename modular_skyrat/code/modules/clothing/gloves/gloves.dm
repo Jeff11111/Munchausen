@@ -185,3 +185,48 @@
 	icon_state = "shiny_gloves"
 	desc = "Regal black gloves, with a nice silver trim, a diamond anti-shock coating, and an integrated thermal barrier. Swanky."
 	mutantrace_variation = STYLE_NO_ANTHRO_ICON
+
+//Leather gloves
+/obj/item/clothing/gloves/botanic_leather
+	name = "leather gloves"
+	desc = "Gloves that protect you against mundane objects."
+	icon = 'modular_skyrat/icons/obj/clothing/hydroponics.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/hydroponics.dmi'
+	icon_state = "leathery"
+
+//Krav maga gloves (no longer krav maga)
+/obj/item/clothing/gloves/krav_maga/sec
+	name = "fingerless combat gloves"
+	desc = "Kind of nullifies the point of being armored, doesn't it?"
+	icon = 'modular_skyrat/icons/obj/clothing/gloves.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/hands.dmi'
+	icon_state = "fingerlesscombat"
+
+//Black gloves
+/obj/item/clothing/gloves/color/black
+	icon = 'modular_skyrat/icons/obj/clothing/gloves.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/hands.dmi'
+	icon_state = "black"
+
+//Combat gloves plus
+/obj/item/clothing/gloves/krav_maga/combatglovesplus
+	icon = 'modular_skyrat/icons/obj/clothing/gloves.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/hands.dmi'
+	icon_state = "comfycombat"
+
+//Fingerless gloves
+/obj/item/clothing/gloves/fingerless
+	icon = 'modular_skyrat/icons/obj/clothing/gloves.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/hands.dmi'
+	icon_state = "fingerless"
+
+//CE gloves
+/obj/item/clothing/gloves/color/black/ce
+	name = "impact gloves"
+	desc = "Tough black leather gloves, for people who are not that tough."
+	armor = list("melee" = 20, "bullet" = 20, "laser" = 10, "energy" = 10, "bomb" = 30, "bio" = 80, "rad" = 20, "fire" = 80, "acid" = 50, "wound" = 10)
+	icon = 'modular_skyrat/icons/obj/clothing/gloves.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/hands.dmi'
+	icon_state = "comfy"
+	siemens_coefficient = 0.5
+	force = 5

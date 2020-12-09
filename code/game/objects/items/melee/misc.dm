@@ -241,9 +241,10 @@
 	item_state = "classic_baton"
 	lefthand_file = 'icons/mob/inhands/equipment/security_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/security_righthand.dmi'
-	slot_flags = ITEM_SLOT_BELT
+	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_SUITSTORE
 	force = 18
 	w_class = WEIGHT_CLASS_NORMAL
+	hitsound = 'modular_skyrat/sound/weapons/classic_baton.ogg'
 	var/stun_stam_cost_coeff = 1.25
 	var/hardstun_ds = TRUE
 	var/softstun_ds = 0
@@ -262,11 +263,7 @@
 	var/force_on // Damage when on - not stunning
 	var/force_off // Damage when off - not stunning
 	var/weight_class_on // What is the new size class when turned on
-
-	//skyrat edit
-	wound_bonus = 15
 	var/pain = 20 //Batons actually hurt a lot, there is a reason they stun
-	//
 
 /obj/item/melee/classic_baton/Initialize()
 	. = ..()

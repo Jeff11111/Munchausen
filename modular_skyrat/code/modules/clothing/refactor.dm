@@ -772,17 +772,6 @@
 /obj/item/clothing/gloves/color/black
 	armor = list("melee" = 15, "bullet" = 15, "laser" = 10, "energy" = 10, "bomb" = 30, "bio" = 80, "rad" = 20, "fire" = 80, "acid" = 50, "wound" = 10)
 
-/obj/item/clothing/gloves/color/black/ce
-	name = "impact gloves"
-	desc = "Within these gloves shear thickening fluid hardens on impact for offense and defense."
-	armor = list("melee" = 20, "bullet" = 20, "laser" = 10, "energy" = 10, "bomb" = 30, "bio" = 80, "rad" = 20, "fire" = 80, "acid" = 50, "wound" = 10)
-	icon_state = "combat"
-	siemens_coefficient = 0.5
-	force = 5
-
 /obj/item/clothing/gloves/combat
 	armor = list("melee" = 30, "bullet" = 30, "laser" = 30, "energy" = 30, "bomb" = 50, "bio" = 80, "rad" = 80, "fire" = 100, "acid" = 50, "wound" = 10)
 	force = 5
-
-/obj/item/clothing/gloves/black
-
