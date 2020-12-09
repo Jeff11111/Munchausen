@@ -79,8 +79,6 @@
 		while(bingus < mood_signs)
 			bingus++
 			right_symbols += mood_symbol
-		if(right_symbols)
-			right_symbols = " [right_symbols]"
 	return right_symbols
 
 /datum/component/mood/proc/print_mood(mob/user)
