@@ -28,6 +28,12 @@
 	icon = 'modular_skyrat/icons/obj/clothing/shoes.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/feet.dmi'
 
+//Mining boots
+/obj/item/clothing/shoes/workboots/mining
+	icon = 'modular_skyrat/icons/obj/clothing/shoes.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/feet.dmi'
+	icon_state = "ironboots"
+
 //Jackboots
 /obj/item/clothing/shoes/jackboots
 	icon = 'modular_skyrat/icons/obj/clothing/shoes.dmi'

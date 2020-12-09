@@ -164,14 +164,10 @@
 	var/obj/item/bodypart/limb
 	var/datum/species/selected = stored_species[selected_category]
 	limb = new buildpath(loc)
-	limb.icon = selected.icon_limbs
-	// Set this limb up using the species name and body zone
-	limb.icon_state = "[selected.limbs_id]_[limb.body_zone]"
-	if((limb.body_zone in ORGAN_BODYPARTS) && selected.sexes)
-		limb.icon_state += "[pick("_m", "_f")]"
+	limb.base_bp_icon = selected.icon_limbs
+	limb.species_id = selected_category
 	limb.name = "\improper synthetic [lowertext(selected.name)] [limb.name]"
 	limb.desc = "A synthetic [selected_category] limb that will morph on its first use in surgery. This one is for the [parse_zone(limb.body_zone)]."
-	limb.species_id = selected_category
 	limb.update_icon_dropped()
 
 /obj/machinery/limbgrower/proc/build_genital(buildpath)
@@ -284,7 +280,7 @@
 	return (reagents.has_reagent(/datum/reagent/medicine/synthflesh, D.reagents_list[/datum/reagent/medicine/synthflesh]*prod_coeff)) //Return whether the machine has enough synthflesh to produce the design
 
 /obj/machinery/limbgrower/proc/get_design_cost(datum/design/D)
-	if(D.reagents_list["synthflesh"])
+	if(D.reagents_list[/datum/reagent/medicine/synthflesh])
 		return D.reagents_list[/datum/reagent/medicine/synthflesh] * prod_coeff
 
 /obj/machinery/limbgrower/emag_act(mob/user)
