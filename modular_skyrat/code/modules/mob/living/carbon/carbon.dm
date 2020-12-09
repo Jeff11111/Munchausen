@@ -113,47 +113,51 @@
 		to_chat(src, "<span class='notice'>You have given up life and succumbed to death.</span>")
 		death()
 
-/mob/living/carbon/verb/check_pulse()
-	set category = "Object"
-	set name = "Check pulse"
-	set desc = "Approximately count somebody's pulse. Requires you to stand still at least 6 seconds."
-	set src in view(1)
+//Pulse
+/mob/living/carbon/middle_attack_hand(mob/user)
+	. = ..()
+	if(.)
+		return
+	if(user.zone_selected in list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND))
+		return check_pulse(user)
 
+/mob/living/carbon/proc/check_pulse(mob/living/carbon/user)
 	var/self = FALSE
-	if(usr == src)
+	if(user == src)
 		self = TRUE
 	
-	if(!usr.canUseTopic(src, TRUE) || INTERACTING_WITH(usr, src))
-		to_chat(usr, "<span class='warning'>You're unable to check [self ? "your" : "[src]'s"] pulse.</</span>")
+	if(!user.canUseTopic(src, TRUE) || INTERACTING_WITH(user, src))
+		to_chat(user, "<span class='warning'>You're unable to check [self ? "your" : "[src]'s"] pulse.</</span>")
 		return FALSE
 	
-	if((GET_SKILL_LEVEL(usr, firstaid) < 10) || (GET_STAT_LEVEL(usr, int) < 8))
-		to_chat(usr, "<span class='warning'>[pick("Uhh", "Ugh", "Hnngh", "Hmm")]... I don't know how to to that.</span>")
+	if((GET_SKILL_LEVEL(user, firstaid) < 10) || (GET_STAT_LEVEL(user, int) < 8))
+		to_chat(user, "<span class='warning'>[pick("Uhh", "Ugh", "Hnngh", "Hmm")]... I don't know how to to that.</span>")
 		return FALSE
 	
 	if(!self)
-		usr.visible_message("<span class='notice'>[usr] puts \his hand on [src]'s wrist and begins counting their pulse.</span>",\
+		user.visible_message("<span class='notice'>[user] puts \his hand on [src]'s wrist and begins counting their pulse.</span>",\
 		"<span class='notice'>You begin counting [src]'s pulse...</span>")
 	else
-		usr.visible_message("<span class='notice'>[usr] begins counting their own pulse.</span>",\
+		user.visible_message("<span class='notice'>[user] begins counting their own pulse.</span>",\
 		"<span class='notice'>You begin counting your pulse...</span>")
 
 	var/pogtime = max(0.35, (MAX_SKILL - GET_SKILL_LEVEL(src, firstaid))/10)
-	if(!do_mob(usr, src, pogtime SECONDS))
-		to_chat(usr, "<span class='warning'>You failed to check [self ? "your" : "[src]'s"] pulse.</span>")
+	if(!do_mob(user, src, pogtime SECONDS))
+		to_chat(user, "<span class='warning'>You failed to check [self ? "your" : "[src]'s"] pulse.</span>")
 		return FALSE
 
 	if(pulse())
-		to_chat(usr, "<span class='notice'>[self ? "You have a" : "[src] has a"] pulse! Counting...</span>")
+		to_chat(user, "<span class='notice'>[self ? "You have a" : "[src] has a"] pulse! Counting...</span>")
 	else
-		to_chat(usr, "<span class='danger'>[self ? "You have no" : "[src] has no"] pulse!</span>")
+		to_chat(user, "<span class='danger'>[self ? "You have no" : "[src] has no"] pulse!</span>")
 		return FALSE
 	
-	if(do_mob(usr, src, pogtime * 5 SECONDS))
-		to_chat(usr, "<span class='notice'>[self ? "Your" : "[src]'s"] pulse is approximately <b>[src.get_pulse(GETPULSE_BASIC)] BPM</b>.</span>")
+	if(do_mob(user, src, pogtime * 5 SECONDS))
+		to_chat(user, "<span class='notice'>[self ? "Your" : "[src]'s"] pulse is approximately <b>[src.get_pulse(GETPULSE_BASIC)] BPM</b>.</span>")
 	else
-		to_chat(usr, "<span class='warning'>You failed to check [self ? "your" : "[src]'s"] pulse.</span>")
+		to_chat(user, "<span class='warning'>You failed to check [self ? "your" : "[src]'s"] pulse.</span>")
 
+//zoomies
 /mob/living/carbon
 	var/default_zoomies = 4
 	var/default_zoomout = 0
