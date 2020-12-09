@@ -176,7 +176,7 @@
 
 	var/ranged_skill = GET_SKILL_LEVEL(src, ranged)
 	var/dist = get_dist(src, A)
-	var/zoomies = min(dist, round(default_zoomies * ranged_skill/(MAX_SKILL/2)))
+	var/zoomies = clamp(round(default_zoomies * ranged_skill/(MAX_SKILL/2)), 1, dist)
 	var/zoomout = default_zoomout
 
 	//Certain guns change our zoomies abilities
