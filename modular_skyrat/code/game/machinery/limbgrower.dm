@@ -164,7 +164,7 @@
 	var/obj/item/bodypart/limb
 	var/datum/species/selected = stored_species[selected_category]
 	limb = new buildpath(loc)
-	limb.base_bp_icon = selected.icon_limbs
+	limb.base_bp_icon = selected.icon_limbs || DEFAULT_BODYPART_ICON_ORGANIC
 	limb.species_id = selected.limbs_id
 	limb.color_src = (MUTCOLORS in selected.species_traits ? MUTCOLORS : (selected.use_skintones ? SKINTONE : FALSE))
 	limb.update_limb(TRUE)
