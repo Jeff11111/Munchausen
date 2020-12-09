@@ -108,7 +108,7 @@
 /datum/looping_sound/recycler
 	start_sound = 'modular_skyrat/sound/machinery/trashcompactor_start.ogg'
 	start_length = 2.45 SECONDS
-	mid_sounds = list('sound/machines/generator/trashcompactor_loop.ogg'=1)
+	mid_sounds = list('modular_skyrat/sound/machinery/trashcompactor_loop.ogg'=1)
 	mid_length = 10.8 SECONDS
-	end_sound = 'sound/machines/generator/trashcompactor_end.ogg'
+	end_sound = 'modular_skyrat/sound/machinery/trashcompactor_end.ogg'
 	volume = 60
