@@ -21,7 +21,6 @@
 		return
 	quirk_holder = quirk_mob
 	SSquirks.quirk_objects += src
-	to_chat(quirk_holder, "<span class='notice'>I am special!</span><br><span class='[value >= 0 ? "info" : "userdanger"]'><b>[name]:</b></span> [desc]")
 	quirk_holder.roundstart_quirks += src
 	if(mob_trait)
 		ADD_TRAIT(quirk_holder, mob_trait, ROUNDSTART_TRAIT)
@@ -63,6 +62,7 @@
 /datum/quirk/proc/on_process() //process() has some special checks, so this is the actual process
 
 /datum/quirk/proc/post_add() //for text, disclaimers etc. given after you spawn in with the trait
+	to_chat(quirk_holder, "<span class='notice'>I am special!</span><br><span class='[value >= 0 ? "info" : "userdanger"]'><b>[name]:</b></span> [desc]")
 
 /datum/quirk/proc/on_transfer() //code called when the trait is transferred to a new mob
 
@@ -84,7 +84,7 @@
 	if(!medical)
 		for(var/V in roundstart_quirks)
 			var/datum/quirk/T = V
-			if(T.medical_condition && conditions_only)
+			if((conditions_only && T.medical_condition) || !conditions_only)
 				dat += T.name
 		if(!dat.len)
 			return "None"

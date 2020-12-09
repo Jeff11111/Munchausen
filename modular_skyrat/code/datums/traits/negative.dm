@@ -88,6 +88,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	heirloom = null
 
 /datum/quirk/family_heirloom/post_add()
+	. = ..()
 	if(where == "in my backpack")
 		var/mob/living/carbon/human/H = quirk_holder
 		SEND_SIGNAL(H.back, COMSIG_TRY_STORAGE_SHOW, H)
@@ -209,10 +210,6 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	qdel(old_part)
 	H.regenerate_icons()
 
-/datum/quirk/prosthetic_limb/post_add()
-	to_chat(quirk_holder, "<span class='boldannounce'>My [slot_string] has been replaced with a surplus prosthetic. It is fragile and will easily come apart under duress. Additionally, \
-	i need to use a welding tool and cables to repair it, instead of sutures and mesh.</span>")
-
 //Blabla i'm crazy now
 /datum/quirk/insanity
 	name = "Reality Dissociation Syndrome"
@@ -244,6 +241,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	var/datum/brain_trauma/mild/phobia/phobia
 
 /datum/quirk/phobia/post_add()
+	. = ..()
 	var/mob/living/carbon/human/H = quirk_holder
 	phobia = new
 	H.gain_trauma(phobia, TRAUMA_RESILIENCE_ABSOLUTE)
