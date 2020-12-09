@@ -194,7 +194,7 @@
 	var/static_power_used = 0
 	var/brightness = 9			// luminosity when on, also used in power calculation
 	var/bulb_power = 0.75			// basically the alpha of the emitted light source
-	var/bulb_colour = "#FFF6ED"	// befault colour of the light.
+	var/bulb_colour = "#fff99f"	// befault colour of the light.
 	var/status = LIGHT_OK		// LIGHT_OK, _EMPTY, _BURNED or _BROKEN
 	var/flickering = FALSE
 	var/light_type = /obj/item/light/tube		// the type of light item
@@ -211,7 +211,7 @@
 	var/nightshift_allowed = TRUE	//Set to FALSE to never let this light get switched to night mode.
 	var/nightshift_brightness = 8
 	var/nightshift_light_power = 0.45
-	var/nightshift_light_color = "#FFDDCC"
+	var/nightshift_light_color = "#ffdacc"
 
 	var/emergency_mode = FALSE	// if true, the light is in emergency mode
 	var/no_emergency = FALSE	// if true, this light cannot ever have an emergency mode
@@ -220,6 +220,13 @@
 	var/bulb_emergency_pow_mul = 0.75	// the multiplier for determining the light's power in emergency mode
 	var/bulb_emergency_pow_min = 0.5	// the minimum value for the light's power in emergency mode
 	var/hijacked = FALSE	// if true, the light is in a hijacked area
+	var/broken_prob = 10 // this should be enough to make the station somewhat dingy
+
+/obj/machinery/light/Initialize(mapload)
+	. = ..()
+	if(mapload && prob(broken_prob))
+		status = LIGHT_BROKEN
+		update(FALSE)
 
 /obj/machinery/light/broken
 	status = LIGHT_BROKEN
@@ -519,9 +526,6 @@
 		if(prob(damage_amount * 5))
 			break_light_tube()
 
-
-
-
 /obj/machinery/light/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	switch(damage_type)
 		if(BRUTE)
@@ -787,11 +791,9 @@
 			icon_state = "[base_state]-broken"
 			desc = "A broken [name]."
 
-
 /obj/item/light/Initialize()
 	. = ..()
 	update()
-
 
 // attack bulb/tube with object
 // if a syringe, can inject plasma to make it explode
@@ -826,7 +828,6 @@
 		force = 5
 		playsound(src.loc, 'sound/effects/glasshit.ogg', 75, 1)
 		update()
-
 
 /obj/machinery/light/floor
 	name = "floor light"
