@@ -165,7 +165,7 @@
 	var/datum/species/selected = stored_species[selected_category]
 	limb = new buildpath(loc)
 	limb.base_bp_icon = selected.icon_limbs
-	limb.species_id = selected_category
+	limb.species_id = selected.limbs_id
 	limb.name = "\improper synthetic [lowertext(selected.name)] [limb.name]"
 	limb.desc = "A synthetic [selected_category] limb that will morph on its first use in surgery. This one is for the [parse_zone(limb.body_zone)]."
 	limb.update_icon_dropped()
