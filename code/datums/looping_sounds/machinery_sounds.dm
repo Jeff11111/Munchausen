@@ -97,3 +97,10 @@
 	mid_sounds = list('sound/machines/gravgen/gravgen_mid1.ogg'=1,'sound/machines/gravgen/gravgen_mid2.ogg'=1,'sound/machines/gravgen/gravgen_mid3.ogg'=1,'sound/machines/gravgen/gravgen_mid4.ogg'=1,)
 	mid_length = 1.8 SECONDS
 	volume = 70
+
+/datum/looping_sound/conveyor
+	start_sound = 'modular_skyrat/sound/machinery/conveyor_start.ogg'
+	start_length = 0.9 SECONDS
+	mid_sounds = list('sound/machines/generator/conveyor_loop.ogg'=1)
+	mid_length = 3.5 SECONDS
+	volume = 40

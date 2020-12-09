@@ -18,11 +18,15 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 	var/list/affecting	// the list of all items that will be moved this ptick
 	var/id = ""			// the control ID	- must match controller ID
 	var/verted = 1		// Inverts the direction the conveyor belt moves.
+	var/datum/looping_sound/conveyor_sound
 	speed_process = TRUE
+
+/obj/machinery/conveyor/Initialize(mapload, newdir, newid)
+	. = ..()
+	conveyor_sound = new(list(src), FALSE)
 
 /obj/machinery/conveyor/centcom_auto
 	id = "round_end_belt"
-
 
 /obj/machinery/conveyor/inverted //Directions inverted so you can use different corner peices.
 	icon_state = "conveyor_map_inverted"
@@ -44,13 +48,17 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 	if(stat & BROKEN)
 		icon_state = "conveyor-broken"
 		operating = FALSE
+		conveyor_sound.stop()
 		return
 	else if(!operable)
 		operating = FALSE
+		conveyor_sound.stop()
 	else if(stat & NOPOWER)
 		operating = FALSE
+		conveyor_sound.stop()
 	else
 		operating = TRUE
+		conveyor_sound.start()
 	icon_state = "conveyor[operating * verted]"
 
 // create a conveyor
