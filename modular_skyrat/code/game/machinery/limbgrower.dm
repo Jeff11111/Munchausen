@@ -259,7 +259,6 @@
 	dat += "</div>"
 	return dat
 
-
 /obj/machinery/limbgrower/proc/chemical_win(mob/user)
 	var/dat = "<A href='?src=[REF(src)];menu=[LIMBGROWER_MAIN_MENU]'>Return to main menu</A>"
 	dat += "<div class='statusDisplay'><h3>Browsing Chemical Storage:</h3><br>"
