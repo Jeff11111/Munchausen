@@ -16,6 +16,7 @@
 	var/crush_damage = 1000
 	var/eat_victim_items = TRUE
 	var/item_recycle_sound = 'sound/items/welder.ogg'
+	var/datum/looping_sound/recycler/recycler_sound
 
 /obj/machinery/recycler/Initialize()
 	AddComponent(/datum/component/butchering/recycler, 1, amount_produced,amount_produced/5)
@@ -23,6 +24,7 @@
 	. = ..()
 	update_icon()
 	req_one_access = get_all_accesses() + get_all_centcom_access()
+	recycler_sound = new(list(src), FALSE)
 
 /obj/machinery/recycler/deconstruct(disassembled = TRUE)
 	safety_mode = TRUE //to stop stock parts and circuit from being deleted.
@@ -51,9 +53,12 @@
 	The safety-sensors status light is [obj_flags & EMAGGED ? "off" : "on"]."}
 
 /obj/machinery/recycler/power_change()
-	..()
+	. = ..()
+	if(CHECK_BITFIELD(stat, NOPOWER))
+		recycler_sound.stop()
+	else
+		recycler_sound.start()
 	update_icon()
-
 
 /obj/machinery/recycler/attackby(obj/item/I, mob/user, params)
 	if(default_deconstruction_screwdriver(user, "grinder-oOpen", "grinder-o0", I))
