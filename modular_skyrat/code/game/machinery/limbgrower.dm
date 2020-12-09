@@ -75,7 +75,7 @@
 	..()
 
 /obj/machinery/limbgrower/attackby(obj/item/O, mob/user, params)
-	if (busy)
+	if(busy)
 		to_chat(user, "<span class=\"alert\">The Limb Grower is busy. Please wait for completion of previous operation.</span>")
 		return
 
@@ -85,6 +85,11 @@
 
 	if(panel_open && default_deconstruction_crowbar(O))
 		return
+
+	var/obj/item/disk/diskette = user.get_active_held_item()
+	if(istype(diskette))
+		diskette.forceMove(src)
+		dna_disk = diskette
 
 	if(user.a_intent == INTENT_HARM) //so we can hit the machine
 		return ..()
