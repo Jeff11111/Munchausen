@@ -43,7 +43,7 @@
 /datum/component/combat_mode/proc/on_mob_hud_created(mob/source)
 	hud_icon = new
 	hud_icon.hud = source.hud_used
-	hud_icon.icon = 'modular_skyrat/icons/mob/combat_intents.dmi'
+	hud_icon.icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	hud_icon.screen_loc = hud_loc
 	source.hud_used.static_inventory += hud_icon
 	hud_icon.update_icon()
@@ -197,8 +197,8 @@
 /// The screen button.
 /obj/screen/combattoggle
 	name = "combat mode"
-	icon = 'modular_skyrat/icons/mob/combat_intents.dmi'
-	icon_state = "combat_off"
+	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
+	icon_state = "combat"
 	var/combat_on = FALSE ///Wheter combat mode is enabled or not, so we don't have to store a reference.
 
 /obj/screen/combattoggle/Click()
@@ -216,7 +216,7 @@
 	else if(HAS_TRAIT(user, TRAIT_COMBAT_MODE_LOCKED))
 		icon_state = "combat_locked"
 	else
-		icon_state = "combat_off"
+		icon_state = "combat"
 
 /obj/screen/combattoggle/update_overlays()
 	. = ..()

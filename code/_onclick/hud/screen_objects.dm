@@ -62,13 +62,13 @@
 
 /obj/screen/craft
 	name = "crafting menu"
-	icon = 'icons/mob/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "craft"
 	screen_loc = ui_crafting
 
 /obj/screen/area_creator
 	name = "create new area"
-	icon = 'icons/mob/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "area_edit"
 	screen_loc = ui_building
 
@@ -83,7 +83,7 @@
 
 /obj/screen/language_menu
 	name = "language menu"
-	icon = 'icons/mob/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "talk_wheel"
 	screen_loc = ui_language_menu
 
@@ -212,7 +212,7 @@
 
 /obj/screen/drop
 	name = "drop"
-	icon = 'icons/mob/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "act_drop"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
@@ -324,7 +324,7 @@
 
 /obj/screen/mov_intent
 	name = "run/walk toggle"
-	icon = 'icons/mob/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "running"
 
 /obj/screen/mov_intent/Click()
@@ -344,7 +344,7 @@
 
 /obj/screen/pull
 	name = "stop pulling"
-	icon = 'icons/mob/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/scree/screen_nigga.dmi'
 	icon_state = "pull"
 
 /obj/screen/pull/Click()
@@ -355,14 +355,14 @@
 /obj/screen/pull/update_icon_state()
 	if(hud?.mymob?.pulling)
 		name = "stop pulling"
-		icon_state = "pull"
+		icon_state = "pull_on"
 	else
 		name = "pull"
-		icon_state = "pull0"
+		icon_state = "pull"
 
 /obj/screen/resist
 	name = "resist"
-	icon = 'icons/mob/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/scree/screen_nigga.dmi'
 	icon_state = "act_resist"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
@@ -374,7 +374,7 @@
 
 /obj/screen/rest
 	name = "rest"
-	icon = 'icons/mob/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/scree/screen_nigga.dmi'
 	icon_state = "act_rest"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
@@ -395,8 +395,8 @@
 
 /obj/screen/throw_catch
 	name = "throw/catch"
-	icon = 'icons/mob/screen_midnight.dmi'
-	icon_state = "act_throw_off"
+	icon = 'modular_skyrat/icons/mob/scree/screen_nigga.dmi'
+	icon_state = "act_throw"
 
 /obj/screen/throw_catch/Click()
 	if(iscarbon(usr))
@@ -405,9 +405,10 @@
 
 /obj/screen/zone_sel
 	name = "damage zone"
+	icon = 'modular_skyrat/icons/mob/screen/zone_sel.dmi'
+	var/overlay_icon = 'modular_skyrat/icons/mob/screen/zone_sel.dmi'
 	icon_state = "zone_sel"
 	screen_loc = ui_zonesel
-	var/overlay_icon = 'modular_skyrat/icons/mob/screen_gen.dmi' //skyrat edit
 	var/static/list/hover_overlays_cache = list()
 	var/hovering
 
@@ -449,7 +450,7 @@
 	vis_contents += overlay_object
 
 /obj/effect/overlay/zone_sel
-	icon = 'modular_skyrat/icons/mob/screen_gen.dmi' //skyrat edit
+	icon = 'modular_skyrat/icons/mob/screen/screen_gen.dmi' //skyrat edit
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	alpha = 128
 	anchored = TRUE
@@ -662,7 +663,7 @@
 /obj/screen/healthdoll
 	name = "health doll"
 	screen_loc = ui_healthdoll
-	icon = 'modular_skyrat/icons/mob/screen_gen.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_gen.dmi'
 
 /obj/screen/healthdoll/Click(location,control,params)
 	var/mob/living/L = usr
@@ -672,7 +673,7 @@
 
 /obj/screen/mood
 	name = "mood"
-	icon = 'modular_skyrat/icons/mob/mood.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/mood.dmi'
 	icon_state = "mood5"
 	screen_loc = ui_mood
 

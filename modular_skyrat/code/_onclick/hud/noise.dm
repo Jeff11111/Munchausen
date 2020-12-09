@@ -1,6 +1,6 @@
 //Noise holder
 /obj/screen/fullscreen/noise
-	icon = 'modular_skyrat/icons/mob/noise.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/noise.dmi'
 	icon_state = "1j"
 	screen_loc = "WEST,SOUTH to EAST,NORTH"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT

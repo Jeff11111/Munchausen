@@ -671,9 +671,6 @@
 		if(SLOT_IN_BACKPACK)
 			return "In backpack"
 
-/proc/tg_ui_icon_to_cit_ui(ui_style)
-	return 'modular_citadel/icons/ui/screen_midnight.dmi'
-
 //skyrat stuff
 /// For finding out what body parts a body zone covers, the inverse of the below basically
 /proc/zone2body_parts_covered(def_zone)
