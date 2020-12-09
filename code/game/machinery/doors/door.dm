@@ -37,9 +37,21 @@
 	var/red_alert_access = FALSE //if TRUE, this door will always open on red alert
 	var/poddoor = FALSE
 	var/unres_sides = 0 //Unrestricted sides. A bitflag for which direction (if any) can open the door with no access
-	//skyrat vars
 	ricochet_chance_mod = 0.8
-	//
+
+/obj/machinery/door/middle_attack_hand(mob/user)
+	. = ..()
+	if(allowed(user))
+		if(locked)
+			unlock()
+		else
+			lock()
+	else
+		if(density)
+			do_animate("deny")
+		else if(istype(src, /obj/machinery/door/airlock))
+			var/obj/machinery/door/airlock/lockboy = src
+			playsound(lockboy,lockboy.doorDeni,50,0,3)
 
 /obj/machinery/door/examine(mob/user)
 	. = ..()
@@ -157,16 +169,10 @@
 	add_fingerprint(user)
 	if(operating || (obj_flags & EMAGGED))
 		return
-	if(!requiresID())
-		user = null //so allowed(user) always succeeds
-	if(allowed(user))
-		if(density)
-			open()
-		else
-			close()
-		return
 	if(density)
-		do_animate("deny")
+		open()
+	else
+		close()
 
 /obj/machinery/door/allowed(mob/M)
 	if(emergency)

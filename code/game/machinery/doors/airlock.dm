@@ -49,7 +49,7 @@
 	var/normal_integrity = AIRLOCK_INTEGRITY_N
 	integrity_failure = 0.25
 	damage_deflection = AIRLOCK_DAMAGE_DEFLECTION_N
-	autoclose = TRUE
+	autoclose = FALSE
 	secondsElectrified = 0 //How many seconds remain until the door is no longer electrified. -1 if it is permanently electrified until someone fixes it.
 	assemblytype = /obj/structure/door_assembly
 	normalspeed = 1
@@ -76,17 +76,17 @@
 	var/obj/item/note //Any papers pinned to the airlock
 	var/detonated = FALSE
 	var/abandoned = FALSE
-	var/doorOpen = 'sound/machines/airlock.ogg'
-	var/doorClose = 'sound/machines/airlockclose.ogg'
-	var/doorDeni = 'sound/machines/deniedbeep.ogg' // i'm thinkin' Deni's
-	var/boltUp = 'sound/machines/boltsup.ogg'
-	var/boltDown = 'sound/machines/boltsdown.ogg'
-	var/noPower = 'sound/machines/doorclick.ogg'
+	var/doorOpen = 'modular_skyrat/sound/machinery/airlock_open.ogg'
+	var/doorClose = 'modular_skyrat/sound/machinery/airlock_close.ogg'
+	var/doorDeni = 'modular_skyrat/sound/machinery/airlock_deny.ogg' // i'm thinkin' Deni's
+	var/boltUp = 'modular_skyrat/sound/machinery/airlock_bolt.ogg'
+	var/boltDown = 'modular_skyrat/sound/machinery/airlock_bolt.ogg'
+	var/noPower = 'modular_skyrat/sound/machinery/airlock_nopower.ogg'
 	var/previous_airlock = /obj/structure/door_assembly //what airlock assembly mineral plating was applied to
 	var/wiretypepath = /datum/wires/airlock // which set of per round randomized wires this airlock type has.
 	var/airlock_material //material of inner filling; if its an airlock with glass, this should be set to "glass"
-	var/overlays_file = 'icons/obj/doors/airlocks/station/overlays.dmi'
-	var/note_overlay_file = 'icons/obj/doors/airlocks/station/overlays.dmi' //Used for papers and photos pinned to the airlock
+	var/overlays_file = 'modular_skyrat/icons/obj/doors/airlocks/station/overlays.dmi'
+	var/note_overlay_file = 'modular_skyrat/icons/obj/doors/airlocks/station/overlays.dmi' //Used for papers and photos pinned to the airlock
 
 	var/cyclelinkeddir = 0
 	var/obj/machinery/door/airlock/cyclelinkedairlock
@@ -99,10 +99,10 @@
 
 	rad_flags = RAD_PROTECT_CONTENTS | RAD_NO_CONTAMINATE
 	rad_insulation = RAD_MEDIUM_INSULATION
+	locked = TRUE
 
 	var/static/list/airlock_overlays = list()
 
-	//bobstation - this variable deterimines on initialize a wire that will start cut
 	var/initialMalfunctionProb = 10
 
 /obj/machinery/door/airlock/Initialize(mapload)
@@ -139,7 +139,7 @@
 	if(abandoned)
 		var/outcome = rand(1,100)
 		switch(outcome)
-			if(1 to 20)
+			if(1 to 15)
 				var/turf/here = get_turf(src)
 				for(var/turf/closed/T in range(2, src))
 					here.PlaceOnTop(T.type)
@@ -148,11 +148,11 @@
 				here.PlaceOnTop(/turf/closed/wall)
 				qdel(src)
 				return
-			if(20 to 35)
+			if(15 to 35)
 				lights = FALSE
-				locked = TRUE
+				locked = FALSE
 			if(35 to 60)
-				locked = TRUE
+				locked = FALSE
 			if(60 to 75)
 				welded = TRUE
 			if(75 to 100)
@@ -185,7 +185,7 @@
 			FoundDoor = null
 		limit--
 	while(!FoundDoor && limit)
-	if (!FoundDoor)
+	if(!FoundDoor)
 		log_mapping("[src] at [AREACOORD(src)] failed to find a valid airlock to cyclelink with!")
 		return
 	FoundDoor.cyclelinkedairlock = src
@@ -193,8 +193,8 @@
 
 /obj/machinery/door/airlock/vv_edit_var(var_name)
 	. = ..()
-	switch (var_name)
-		if (NAMEOF(src, cyclelinkeddir))
+	switch(var_name)
+		if(NAMEOF(src, cyclelinkeddir))
 			cyclelinkairlock()
 
 /obj/machinery/door/airlock/check_access_ntnet(datum/netdata/data)
@@ -1006,7 +1006,6 @@
 	else
 		return ..()
 
-
 /obj/machinery/door/airlock/try_to_weld(obj/item/weldingtool/W, mob/user)
 	if(!operating && density)
 		if(user.a_intent != INTENT_HELP)
@@ -1109,7 +1108,7 @@
 					to_chat(user, "<span class='warning'>Despite your attempts, [src] refuses to open.</span>")
 
 /obj/machinery/door/airlock/open(forced=0)
-	if( operating || welded || locked )
+	if(operating || welded || locked)
 		return FALSE
 	if(!forced)
 		if(!hasPower() || wires.is_cut(WIRE_OPEN))

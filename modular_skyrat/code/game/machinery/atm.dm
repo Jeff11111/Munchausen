@@ -45,7 +45,7 @@
 			if(!length(SScommunications.decrees))
 				to_chat(user, "• None.")
 		else
-			playsound(src, 'modular_skyrat/sound/machinery/atmbeep1.ogg', 50)
+			playsound(src, 'modular_skyrat/sound/machinery/atm_beep2.ogg', 50)
 			comicao_trading.interact(src, user)
 
 /obj/machinery/atm/middle_attack_hand(mob/user)
@@ -53,14 +53,14 @@
 	if(GLOB.uplink_purchase_logs_by_key[user.client?.key])
 		var/datum/uplink_purchase_log/purchase_log = GLOB.uplink_purchase_logs_by_key[user.client?.key]
 		if(purchase_log)
-			playsound(src, 'modular_skyrat/sound/machinery/atmbeep1.ogg', 50)
+			playsound(src, 'modular_skyrat/sound/machinery/atm_beep1.ogg', 50)
 			to_chat(src, "<span class='danger'>I start scrambling [src]'s electronics...</span>")
 			if(do_after(user, 15, target = src))
 				agent = user.name || "BINGUS"
 				comicao_trading.purchase_log = purchase_log
 				comicao_trading.telecrystals = max(0, 20 - purchase_log.total_spent)
 				comicao_trading.locked = FALSE
-				playsound(src, 'modular_skyrat/sound/machinery/atmbeep1.ogg', 50)
+				playsound(src, 'modular_skyrat/sound/machinery/atm_beep2.ogg', 50)
 				to_chat(user, "<span class='danger'><b>##&!&$% WELCOME, AGENT [uppertext(agent)] $$#@!%</b></span>")
 				user.mind?.announce_objectives()
 				var/datum/antagonist/traitor/bingus = user.mind.has_antag_datum(/datum/antagonist/traitor)
@@ -236,7 +236,7 @@
 	emagaccount = input("Choose which account to deposit to:", "Safety Protocols Disengaged") as null|num
 	if(!emagaccount)
 		to_chat(user, "<span class='warning'>You failed to select an account!</span>")
-	playsound(src, 'modular_skyrat/sound/machinery/atmbeep1.ogg', 50)
+	playsound(src, 'modular_skyrat/sound/machinery/atm_emag.ogg', 50)
 	flick("atm_emagging", src)
 	icon_state = "atm_emag"
 	return TRUE
