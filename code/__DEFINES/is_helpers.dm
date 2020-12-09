@@ -226,7 +226,7 @@ GLOBAL_LIST_INIT(pointed_types, typecacheof(list(
 
 #define isbodypart(A) (istype(A, /obj/item/bodypart))
 
-#define iseye(A) (istype(A, /obj/item/bodypart/left_eye || istype(A, /obj/item/bodypart/right_eye))
+#define iseye(A) (istype(A, /obj/item/bodypart/left_eye) || istype(A, /obj/item/bodypart/right_eye))
 
 #define isprojectile(A) (istype(A, /obj/item/projectile))
 

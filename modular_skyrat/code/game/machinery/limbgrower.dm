@@ -164,13 +164,15 @@
 	var/obj/item/bodypart/limb
 	var/datum/species/selected = stored_species[selected_category]
 	limb = new buildpath(loc)
-	limb.base_bp_icon = selected.icon_limbs || DEFAULT_BODYPART_ICON_ORGANIC
-	limb.species_id = selected.limbs_id
-	limb.color_src = (MUTCOLORS in selected.species_traits ? MUTCOLORS : (selected.use_skintones ? SKINTONE : FALSE))
-	limb.update_limb(TRUE)
-	limb.update_icon_dropped()
-	limb.name = "\improper synthetic [lowertext(selected.name)] [limb.name]"
-	limb.desc = "A synthetic [selected_category] limb that will morph on its first use in surgery. This one is for the [parse_zone(limb.body_zone)]."
+	for(var/obj/item/bodypart/BP in (limb.contents | limb))
+		BP.base_bp_icon = selected.icon_limbs || DEFAULT_BODYPART_ICON_ORGANIC
+		BP.species_id = selected.limbs_id
+		BP.color_src = (MUTCOLORS in selected.species_traits ? MUTCOLORS : (selected.use_skintones ? SKINTONE : FALSE))
+		BP.should_draw_gender = (selected.sexes && (limb.body_zone in ORGAN_BODYPARTS))
+		BP.update_limb(TRUE)
+		BP.update_icon_dropped()
+		BP.name = "\improper synthetic [lowertext(selected.name)] [limb.name]"
+		BP.desc = "A synthetic [selected_category] limb that will morph on its first use in surgery. This one is for the [parse_zone(limb.body_zone)]."
 
 /obj/machinery/limbgrower/proc/build_genital(buildpath)
 	//i needed to create a way to customize gene tools using dna
