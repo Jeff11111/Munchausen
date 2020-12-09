@@ -128,19 +128,19 @@
 		diag_hud.add_to_hud(src)
 	diag_hud_set_electrified()
 
-	if(prob(initialMalfunctionProb))
-		wires.cut_random()
+	if(prob(initialMalfunctionProb) && mapload && is_station_level(z))
+		abandoned = TRUE
 
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/door/airlock/LateInitialize()
 	. = ..()
-	if (cyclelinkeddir)
+	if(cyclelinkeddir)
 		cyclelinkairlock()
 	if(abandoned)
 		var/outcome = rand(1,100)
 		switch(outcome)
-			if(1 to 9)
+			if(1 to 20)
 				var/turf/here = get_turf(src)
 				for(var/turf/closed/T in range(2, src))
 					here.PlaceOnTop(T.type)
@@ -149,14 +149,14 @@
 				here.PlaceOnTop(/turf/closed/wall)
 				qdel(src)
 				return
-			if(9 to 11)
+			if(20 to 35)
 				lights = FALSE
 				locked = TRUE
-			if(12 to 15)
+			if(35 to 60)
 				locked = TRUE
-			if(16 to 23)
+			if(60 to 75)
 				welded = TRUE
-			if(24 to 30)
+			if(75 to 100)
 				panel_open = TRUE
 	update_icon()
 

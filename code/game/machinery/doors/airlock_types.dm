@@ -10,7 +10,6 @@
 	assemblytype = /obj/structure/door_assembly/door_assembly_com
 	wiretypepath = /datum/wires/airlock/command
 	normal_integrity = 450
-
 	initialMalfunctionProb = 5
 
 /obj/machinery/door/airlock/security
