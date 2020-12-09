@@ -606,50 +606,6 @@
 		return TRUE
 	return FALSE
 
-//called when... idk
-/mob/living/proc/dizzy_act(intensity = 3, duration = 1 SECONDS, \
-						min_offset_x = 16, min_offset_y = 16, \
-						max_offset_x = 128, max_offset_y = 128)
-	if(!hud_used || !client)
-		return
-	var/list/obj/screen/plane_master/dizzies = list()
-	var/obj/screen/plane_master/dizzy1 = new()
-	dizzy1.plane = 0
-	dizzy1.render_target = "dizzy"
-	dizzy1.hud = hud_used
-	dizzies |= dizzy1
-	for(var/i in 1 to min(8, intensity))
-		var/obj/screen/plane_master/dizzy = new()
-		dizzy.alpha = 256/(i+1)
-		dizzy.plane = 1
-		dizzy.render_source = "dizzy"
-		dizzy.hud = hud_used
-		hud_used.plane_masters |= dizzy
-		dizzies |= dizzy
-	client.screen |= dizzies
-	hud_used.plane_masters |= dizzies
-	var/maximum_wait = 5
-	for(var/obj/screen/plane_master/planar in (dizzies - dizzy1))
-		var/time_in = rand(5, 40)
-		var/time_out = rand(5, 40)
-		maximum_wait = max(time_in + time_out, maximum_wait)
-		spawn(0)
-			var/offset_x = rand(min_offset_x, max_offset_x)
-			if(prob(50))
-				offset_x = -offset_x
-			var/offset_y = rand(min_offset_y, max_offset_y)
-			if(prob(50))
-				offset_y = -offset_y
-			animate(planar, transform = transform.Translate(offset_x, offset_y), time = time_in)
-			sleep(time_in)
-			animate(planar, transform = transform.Translate(offset_x, offset_y), time = time_out)
-	spawn(maximum_wait)
-		client.screen -= dizzies
-		hud_used.plane_masters -= dizzies
-		for(var/dizzy in dizzies)
-			qdel(dizzy)
-	return TRUE
-
 //called when the mob receives a loud bang
 /mob/living/proc/soundbang_act()
 	return 0
