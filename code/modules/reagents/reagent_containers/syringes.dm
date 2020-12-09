@@ -19,6 +19,7 @@
 	reagent_flags = TRANSPARENT
 	custom_price = PRICE_CHEAP_AS_FREE
 	sharpness = SHARP_POINTY
+	slot_flags = ITEM_SLOT_POCKET | ITEM_SLOT_EARS
 
 /obj/item/reagent_containers/syringe/Initialize()
 	. = ..()

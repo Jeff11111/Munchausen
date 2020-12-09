@@ -9,6 +9,7 @@
 	possible_transfer_amounts = list()
 	volume = 50
 	grind_results = list()
+	slot_flags = ITEM_SLOT_POCKET | ITEM_SLOT_EARS
 	var/apply_type = INGEST
 	var/apply_method = "swallow"
 	var/roundstart = FALSE

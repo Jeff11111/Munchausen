@@ -10,6 +10,7 @@
 	apply_method = "apply"
 	self_delay = 30		// three seconds
 	dissolvable = FALSE
+	slot_flags = ITEM_SLOT_POCKET | ITEM_SLOT_EARS
 
 /obj/item/reagent_containers/pill/patch/attack(mob/living/L, mob/user)
 	if(ishuman(L))
