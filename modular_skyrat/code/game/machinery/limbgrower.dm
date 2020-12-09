@@ -166,9 +166,11 @@
 	limb = new buildpath(loc)
 	limb.base_bp_icon = selected.icon_limbs
 	limb.species_id = selected.limbs_id
+	limb.color_src = (MUTCOLORS in selected.species_traits ? MUTCOLORS : FALSE)
+	limb.update_limb(TRUE)
+	limb.update_icon_dropped()
 	limb.name = "\improper synthetic [lowertext(selected.name)] [limb.name]"
 	limb.desc = "A synthetic [selected_category] limb that will morph on its first use in surgery. This one is for the [parse_zone(limb.body_zone)]."
-	limb.update_icon_dropped()
 
 /obj/machinery/limbgrower/proc/build_genital(buildpath)
 	//i needed to create a way to customize gene tools using dna
@@ -254,7 +256,7 @@
 			dat += "<span class='linkOff'>[capitalize(D.name, TRUE)] ([get_design_cost(D)]u)</span>"
 		else
 			dat += "<a href='?src=[REF(src)];make=[D.id];multiplier=1'>[capitalize(D.name, TRUE)] ([get_design_cost(D)]u)</a>"
-		dat += "\n"
+		dat += "<br>"
 
 	dat += "</div>"
 	return dat
