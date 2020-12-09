@@ -166,7 +166,7 @@
 	limb = new buildpath(loc)
 	limb.base_bp_icon = selected.icon_limbs
 	limb.species_id = selected.limbs_id
-	limb.color_src = (MUTCOLORS in selected.species_traits ? MUTCOLORS : FALSE)
+	limb.color_src = (MUTCOLORS in selected.species_traits ? MUTCOLORS : (selected.use_skintones ? SKINTONE : FALSE))
 	limb.update_limb(TRUE)
 	limb.update_icon_dropped()
 	limb.name = "\improper synthetic [lowertext(selected.name)] [limb.name]"
