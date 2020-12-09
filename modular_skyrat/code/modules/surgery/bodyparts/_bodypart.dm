@@ -1495,6 +1495,8 @@
 		I.pixel_x = px_x
 		I.pixel_y = px_y
 	for(var/obj/item/bodypart/BP in src)
+		if(iseye(BP))
+			continue
 		var/list/substanding = BP.get_limb_icon(TRUE)
 		for(var/image/I in substanding)
 			I.pixel_x = px_x
