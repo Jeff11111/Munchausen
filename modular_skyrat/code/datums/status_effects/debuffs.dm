@@ -50,7 +50,7 @@
 /obj/screen/alert/cloneill
 	name = "Cloning Illness"
 	desc = "You still need to adapt to your new body... Your body feels frail, and you're more susceptible to damage and wounds."
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "cloneill"
 
 /datum/status_effect/cloneill

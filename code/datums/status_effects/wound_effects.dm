@@ -4,7 +4,7 @@
 /obj/screen/alert/status_effect/determined
 	name = "Determined"
 	desc = "The serious wounds you've sustained have put your body into fight-or-flight mode! Now's the time to look for an exit!"
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "determination"
 
 /datum/status_effect/determined
@@ -130,61 +130,61 @@
 /obj/screen/alert/status_effect/wound/blunt
 	name = "Bashed"
 	desc = "Your body has sustained serious bruises, click here to inspect yourself."
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "wound_blunt"
 
 /obj/screen/alert/status_effect/wound/slash
 	name = "Slashed"
 	desc = "Your body has sustained serious slashes, click here to inspect yourself."
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "wound_slash"
 
 /obj/screen/alert/status_effect/wound/pierce
 	name = "Pierced"
 	desc = "Your body has sustained serious piercing, click here to inspect yourself."
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "wound_pierce"
 
 /obj/screen/alert/status_effect/wound/burn
 	name = "Burned"
 	desc = "Your body has sustained serious burns, click here to inspect yourself."
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "wound_burn"
 
 /obj/screen/alert/status_effect/wound/loss
 	name = "Dismembered"
 	desc = "Your body has suffered the loss of one or more limbs, click here to inspect yourself."
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "wound_dismember"
 
 /obj/screen/alert/status_effect/wound/bleed
 	name = "Bleeding"
 	desc = "One or more of your limbs are bleeding profusely, click here to inspect yourself."
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "wound_bleeding"
 
 /obj/screen/alert/status_effect/wound/bleed/mechanical
 	name = "Leaking"
 	desc = "One or more of your limbs are leaking profusely, click here to inspect yourself."
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "wound_bleeding_metal"
 
 /obj/screen/alert/status_effect/wound/bone
 	name = "Bone Damage"
 	desc = "One or more of your limbs have suffered a bone injury, click here to inspect yourself."
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "wound_bone"
 
 /obj/screen/alert/status_effect/wound/bone/mechanical
 	name = "Bent"
 	desc = "One or more of your limbs have suffered bending, click here to inspect yourself."
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "wound_bone_metal"
 
 /obj/screen/alert/status_effect/wound/sepsis
 	name = "Sepsis"
 	desc = "One or more of your limbs are suffering with an infection, click here to inspect yourself."
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "wound_sepsis"
 
 // wound status effect base

@@ -13,30 +13,30 @@
 /obj/screen/alert/fat/synth
 	name = "Overcharged"
 	desc = "Unit's power cell has been overcharged. Excess supply of power is being redirected to submodules."
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "fat_synth"
 
 /obj/screen/alert/hungry/synth
 	name = "Low charge"
 	desc = "Unit's power cell is running low."
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "hungry_synth"
 
 /obj/screen/alert/starving/synth
 	name = "Out of charge"
 	desc = "Unit's power cell has no charge remaining, and is running on backup power. Please recharge as soon as possible."
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "starving_synth"
 
 //hydration alert
 /obj/screen/alert/thirsty
 	name = "Thirsty"
 	desc = "I could do with a cup of water."
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "thirsty"
 
 /obj/screen/alert/dehydrated
 	name = "Dehydrated"
 	desc = "I REALLY need a drink..."
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "dehydrated"

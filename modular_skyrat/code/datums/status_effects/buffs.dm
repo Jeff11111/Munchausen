@@ -8,7 +8,7 @@
 /obj/screen/alert/status_effect/argent
 	name = "Argent Energized"
 	desc = "Argent energy rushes through your body! You'll only take 10% damage for the duration of the energy rush!"
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "argent"
 
 //stealth suit
@@ -58,5 +58,5 @@
 /obj/screen/alert/status_effect/stealthsuit
 	name = "Stealth Suit"
 	desc = "You are one with the dark. You'll get more and more invisible over time, as long as you stay immobile. The invisibility effect is reset whenever you interact with something."
-	icon = 'modular_skyrat/icons/mob/screen/screen_alert.dmi'
+	icon = 'modular_skyrat/icons/mob/screen_alert.dmi'
 	icon_state = "stealth"

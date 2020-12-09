@@ -2,7 +2,7 @@
 /obj/item/grab
 	name = "grasp"
 	desc = "Used to hold hands and to strangle throats. Maybe both at once, even."
-	icon = 'modular_skyrat/icons/mob/screen/combat_intents.dmi'
+	icon = 'modular_skyrat/icons/mob/combat_intents.dmi'
 	icon_state = GM_SELF
 	item_state = "nothing"
 	force = 0

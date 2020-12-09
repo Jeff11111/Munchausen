@@ -23,10 +23,12 @@
 #define ITEM_SLOT_HANDS			(1<<14)
 #define ITEM_SLOT_BACKPACK		(1<<15)
 #define ITEM_SLOT_SUITSTORE		(1<<16)
+//skyrat edit
 #define ITEM_SLOT_UNDERWEAR		(1<<17)
 #define ITEM_SLOT_SOCKS			(1<<18)
 #define ITEM_SLOT_SHIRT			(1<<19)
 #define ITEM_SLOT_WRISTS		(1<<20)
+//
 
 //SLOTS
 #define SLOT_BACK			1

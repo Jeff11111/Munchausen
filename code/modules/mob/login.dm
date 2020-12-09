@@ -11,7 +11,7 @@
 		create_mob_hud()
 	if(hud_used)
 		hud_used.show_hud(hud_used.hud_version)
-		hud_used.update_ui_style('modular_skyrat/icons/mob/scree/screen_nigga.dmi')
+		hud_used.update_ui_style('icons/mob/screen_midnight.dmi')
 
 	next_move = 1
 

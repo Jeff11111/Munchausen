@@ -70,13 +70,13 @@
 /mob/living/carbon/proc/wield_ui_on()
 	if(hud_used)
 		hud_used.wielded.active = TRUE
-		hud_used.wielded.update_icon()
+		hud_used.wielded.update_overlays()
 		return TRUE
 
 /mob/living/carbon/proc/wield_ui_off()
 	if(hud_used)
 		hud_used.wielded.active = FALSE
-		hud_used.wielded.update_icon()
+		hud_used.wielded.update_overlays()
 		return TRUE
 
 //TGUI info menu

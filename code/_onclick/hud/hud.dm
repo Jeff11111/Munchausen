@@ -6,11 +6,25 @@
 
 // The default UI style is the first one in the list
 GLOBAL_LIST_INIT(available_ui_styles, list(
-	"Midnight" = 'modular_skyrat/icons/mob/scree/screen_nigga.dmi',
+	"Midnight" = 'icons/mob/screen_midnight.dmi',
 ))
+
+//skyrat edit
+GLOBAL_LIST_INIT(modular_ui_styles, list(
+	'icons/mob/screen_midnight.dmi' = 'modular_skyrat/icons/mob/screen_midnight.dmi',
+))
+//
 
 /proc/ui_style2icon(ui_style)
 	return GLOB.available_ui_styles[ui_style] || GLOB.available_ui_styles[GLOB.available_ui_styles[1]]
+
+//skyrat edit
+/proc/ui_style_modular(ui_style)
+	if(isfile(ui_style))
+		return GLOB.modular_ui_styles[ui_style] || GLOB.modular_ui_styles[GLOB.modular_ui_styles[1]]
+	else
+		return GLOB.modular_ui_styles[ui_style] || GLOB.modular_ui_styles[GLOB.modular_ui_styles[1]]
+//
 
 /datum/hud
 	var/mob/mymob
@@ -18,7 +32,9 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/hud_shown = TRUE			//Used for the HUD toggle (F12)
 	var/hud_version = HUD_STYLE_STANDARD	//Current displayed version of the HUD
 	var/inventory_shown = FALSE		//Equipped item inventory
-	var/extra_shown = FALSE			//Show underwear etc
+	//skyrat edit
+	var/extra_shown = FALSE
+	//
 	var/hotkey_ui_hidden = FALSE	//This is to hide the buttons that can be used via hotkeys. (hotkeybuttons list of buttons)
 
 	var/obj/screen/ling/chems/lingchemdisplay
@@ -32,9 +48,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/obj/screen/devil/soul_counter/devilsouldisplay
 
 	var/obj/screen/action_intent
-	var/obj/screen/combat_intent/combat_intents
 	var/obj/screen/zone_select
-	var/obj/screen/wield/wielded
 	var/obj/screen/pull_icon
 	var/obj/screen/rest_icon
 	var/obj/screen/throw_icon
@@ -57,8 +71,6 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/obj/screen/healthdoll
 	var/obj/screen/internals
 	var/obj/screen/pains
-	var/obj/screen/staminas/staminas
-	var/obj/screen/sprint_buffer/sprint_buffer
 	var/obj/screen/fullscreen/pain/redpains
 	var/obj/screen/fullscreen/noise/noise_filter
 	var/obj/screen/fov_holder/fov_holder
@@ -69,9 +81,9 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 /datum/hud/New(mob/owner)
 	mymob = owner
 
-	if(!ui_style)
+	if (!ui_style)
 		// will fall back to the default if any of these are null
-		ui_style = 'modular_skyrat/icons/mob/scree/screen_nigga.dmi'
+		ui_style = 'icons/mob/screen_midnight.dmi'
 
 	hide_actions_toggle = new
 	hide_actions_toggle.InitialiseIcon(src)
@@ -87,7 +99,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 
 	//All huds use the noise filter no matter what
 	noise_filter = new /obj/screen/fullscreen/noise()
-	noise_filter.icon = 'modular_skyrat/icons/mob/screen/noise.dmi'
+	noise_filter.icon = 'modular_skyrat/icons/mob/noise.dmi'
 	noise_filter.screen_loc = "WEST,SOUTH to EAST,NORTH"
 	noise_filter.hud = src
 	screenoverlays += noise_filter
@@ -106,7 +118,9 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	QDEL_NULL(pull_icon)
 
 	QDEL_LIST(toggleable_inventory)
+	//skyrat edit
 	QDEL_LIST(extra_inventory)
+	//
 	QDEL_LIST(hotkeybuttons)
 	QDEL_NULL(throw_icon)
 	QDEL_LIST(infodisplay)
@@ -162,6 +176,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 				screenmob.client.screen += static_inventory
 			if(toggleable_inventory.len && screenmob.hud_used && screenmob.hud_used.inventory_shown)
 				screenmob.client.screen += toggleable_inventory
+			//skyrat edit
 			if(extra_inventory.len && screenmob.hud_used && screenmob.hud_used.extra_shown)
 				screenmob.client.screen += extra_inventory
 			if(redpains)
@@ -172,6 +187,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 				screenmob.client.screen += noise_filter
 			if(fov_holder)
 				screenmob.client.screen += fov_holder
+			//
 			if(hotkeybuttons.len && !hotkey_ui_hidden)
 				screenmob.client.screen += hotkeybuttons
 			if(infodisplay.len)
@@ -188,6 +204,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 				screenmob.client.screen -= static_inventory
 			if(toggleable_inventory.len)
 				screenmob.client.screen -= toggleable_inventory
+			//skyrat edit
 			if(extra_inventory.len)
 				screenmob.client.screen -= extra_inventory
 			if(noise_filter)
@@ -195,6 +212,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 				screenmob.client.screen += noise_filter
 			if(fov_holder)
 				screenmob.client.screen += fov_holder
+			//
 			if(hotkeybuttons.len)
 				screenmob.client.screen -= hotkeybuttons
 			if(infodisplay.len)
@@ -215,6 +233,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 				screenmob.client.screen -= static_inventory
 			if(toggleable_inventory.len)
 				screenmob.client.screen -= toggleable_inventory
+			//skyrat edit
 			if(extra_inventory.len)
 				screenmob.client.screen -= extra_inventory
 			if(redpains)
@@ -224,6 +243,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 				screenmob.client.screen += noise_filter
 			if(fov_holder)
 				screenmob.client.screen += fov_holder
+			//
 			if(hotkeybuttons.len)
 				screenmob.client.screen -= hotkeybuttons
 			if(infodisplay.len)
@@ -274,8 +294,10 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 /datum/hud/proc/hidden_inventory_update()
 	return
 
+//skyrat edit
 /datum/hud/proc/extra_inventory_update()
 	return
+//
 
 /datum/hud/proc/persistent_inventory_update(mob/viewer)
 	if(!mymob)
@@ -286,7 +308,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	if (initial(ui_style) || ui_style == new_ui_style)
 		return
 
-	for(var/atom/item in static_inventory + toggleable_inventory + extra_inventory + hotkeybuttons + infodisplay + screenoverlays + inv_slots)
+	for(var/atom/item in static_inventory + toggleable_inventory + extra_inventory + hotkeybuttons + infodisplay + screenoverlays + inv_slots) //skyrat edit
 		if (item.icon == ui_style)
 			item.icon = new_ui_style
 

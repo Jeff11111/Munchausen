@@ -1,6 +1,6 @@
 //nice and gay
 /obj/screen/hover_tip
-	icon = 'modular_skyrat/icons/mob/screen/noise.dmi'
+	icon = 'modular_skyrat/icons/mob/noise.dmi'
 	icon_state = "blank"
 	screen_loc = "NORTH,CENTER-3"
 	maptext_width = 256

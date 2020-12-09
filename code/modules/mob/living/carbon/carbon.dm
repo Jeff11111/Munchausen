@@ -159,6 +159,7 @@
 			//
 		playsound(src,'sound/weapons/punch1.ogg',50,1)
 
+
 //Throwing stuff
 /mob/living/carbon/proc/toggle_throw_mode()
 	if(stat)
@@ -170,13 +171,13 @@
 
 
 /mob/living/carbon/proc/throw_mode_off()
-	in_throw_mode = FALSE
+	in_throw_mode = 0
 	if(client && hud_used)
-		hud_used.throw_icon.icon_state = "act_throw"
+		hud_used.throw_icon.icon_state = "act_throw_off"
 
 
 /mob/living/carbon/proc/throw_mode_on()
-	in_throw_mode = TRUE
+	in_throw_mode = 1
 	if(client && hud_used)
 		hud_used.throw_icon.icon_state = "act_throw_on"
 

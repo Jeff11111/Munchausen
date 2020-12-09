@@ -1,4 +1,3 @@
-//pain guy
 /obj/screen/human/pain
 	name = "pain"
 	icon_state = "pain0"

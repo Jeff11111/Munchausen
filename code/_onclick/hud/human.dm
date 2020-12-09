@@ -1,12 +1,14 @@
 /obj/screen/human
-	icon = 'modular_skyrat/icons/mob/scree/screen_nigga.dmi'
+	icon = 'icons/mob/screen_midnight.dmi'
 
 /obj/screen/human/toggle
 	name = "toggle"
 	icon_state = "toggle"
 
 /obj/screen/human/toggle/Click()
+
 	var/mob/targetmob = usr
+
 	if(isobserver(usr))
 		if(ishuman(usr.client.eye) && (usr.client.eye != usr))
 			var/mob/M = usr.client.eye
@@ -15,16 +17,23 @@
 	if(usr.hud_used.inventory_shown && targetmob.hud_used)
 		usr.hud_used.inventory_shown = FALSE
 		usr.client.screen -= targetmob.hud_used.toggleable_inventory
+		//SKYRAT EDIT
 		usr.client.screen -= targetmob.hud_used.extra_inventory
+		//SKYRAT EDIT END
 	else
 		usr.hud_used.inventory_shown = TRUE
 		usr.client.screen += targetmob.hud_used.toggleable_inventory
+		//SKYRAT EDIT
 		if(usr.hud_used.extra_shown)
 			usr.client.screen += targetmob.hud_used.extra_inventory
+		//SKYRAT EDIT END
 
 	targetmob.hud_used.hidden_inventory_update(usr)
+	//SKYRAT EDIT
 	targetmob.hud_used.extra_inventory_update(usr)
+	//SKYRAT EDIT END
 
+//skyrat edit
 /obj/screen/human/toggle/extra
 	name = "toggle extra"
 	icon_state = "toggle_extra"
@@ -136,6 +145,7 @@
 	static_inventory += action_intent
 
 	using = new /obj/screen/mov_intent
+	using.icon = tg_ui_icon_to_cit_ui(ui_style) // CIT CHANGE - overrides mov intent icon
 	using.icon_state = (mymob.m_intent == MOVE_INTENT_RUN ? "running" : "walking")
 	using.screen_loc = ui_movi
 	using.hud = src
@@ -143,6 +153,7 @@
 
 	//CITADEL CHANGES - sprint button
 	using = new /obj/screen/sprintbutton
+	using.icon = tg_ui_icon_to_cit_ui(ui_style)
 	using.icon_state = ((owner.combat_flags & COMBAT_FLAG_SPRINT_ACTIVE) ? "act_sprint_on" : "act_sprint")
 	using.screen_loc = ui_movi
 	using.hud = src
@@ -151,6 +162,8 @@
 
 	//SKYRAT CHANGES - Wield button
 	wielded = new /obj/screen/wield
+	wielded.icon = ui_style_modular(ui_style)
+	wielded.icon_state = "act_wield"
 	wielded.screen_loc = ui_wield
 	wielded.hud = src
 	static_inventory += wielded
@@ -210,13 +223,15 @@
 	using.hud = src
 	static_inventory += using
 
+	//Skyrat edit
 	using = new /obj/screen/info()
-	using.icon = 'modular_skyrat/icons/mob/screen/screen_gen.dmi'
+	using.icon = 'modular_skyrat/icons/mob/screen_gen.dmi'
 	using.icon_state = "info"
 	using.screen_loc = ui_swaphand_position(owner,2)
 	using.hud = src
-	using.layer += 0.1
+	using.layer += 0.1 //this is stupid
 	static_inventory += using
+	//
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "id"
@@ -316,11 +331,11 @@
 	toggleable_inventory += inv_box
 
 	inv_box = new /obj/screen/inventory()
-	inv_box.name = "left ear"
+	inv_box.name = "left ear" //skyrat edit
 	inv_box.icon = ui_style
 	inv_box.icon_state = "ears"
 	inv_box.screen_loc = ui_ears
-	inv_box.slot_id = SLOT_EARS_LEFT
+	inv_box.slot_id = SLOT_EARS_LEFT //skyrat edit
 	toggleable_inventory += inv_box
 
 	inv_box = new /obj/screen/inventory()
@@ -339,50 +354,59 @@
 	inv_box.slot_id = SLOT_SHOES
 	toggleable_inventory += inv_box
 
+	//skyrat edit
 	using = new /obj/screen/human/toggle/extra()
+	using.icon = ui_style_modular(ui_style)
 	using.screen_loc = ui_inventory_extra
 	using.hud = src
 	toggleable_inventory += using
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "underwear"
+	inv_box.icon = ui_style_modular(ui_style)
 	inv_box.icon_state = "underwear"
 	inv_box.screen_loc = ui_boxers
-	inv_box.slot_id = SLOT_W_UNDERWEAR
+	inv_box.slot_id = SLOT_W_UNDERWEAR //skyrat edit
 	extra_inventory += inv_box
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "socks"
+	inv_box.icon = ui_style_modular(ui_style)
 	inv_box.icon_state = "socks"
 	inv_box.screen_loc = ui_socks
-	inv_box.slot_id = SLOT_W_SOCKS
+	inv_box.slot_id = SLOT_W_SOCKS //skyrat edit
 	extra_inventory += inv_box
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "shirt"
+	inv_box.icon = ui_style_modular(ui_style)
 	inv_box.icon_state = "shirt"
 	inv_box.screen_loc = ui_shirt
-	inv_box.slot_id = SLOT_W_SHIRT
+	inv_box.slot_id = SLOT_W_SHIRT //skyrat edit
 	extra_inventory += inv_box
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "right ear"
+	inv_box.icon = ui_style_modular(ui_style)
 	inv_box.icon_state = "ears_extra"
 	inv_box.screen_loc = ui_ears_extra
-	inv_box.slot_id = SLOT_EARS_RIGHT
+	inv_box.slot_id = SLOT_EARS_RIGHT //skyrat edit
 	extra_inventory += inv_box
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "wrists"
+	inv_box.icon = ui_style_modular(ui_style)
 	inv_box.icon_state = "wrists"
 	inv_box.screen_loc = ui_wrists
 	inv_box.slot_id = SLOT_WRISTS
 	extra_inventory += inv_box
+	//
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "belt"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "belt"
+//	inv_box.icon_full = "template_small"
 	inv_box.screen_loc = ui_belt
 	inv_box.slot_id = SLOT_BELT
 	static_inventory += inv_box
@@ -405,23 +429,26 @@
 	staminas.hud = src
 	infodisplay += staminas
 
+	//END OF CIT CHANGES
+
 	healthdoll = new /obj/screen/healthdoll()
 	healthdoll.hud = src
 	infodisplay += healthdoll
 
 	pains = new /obj/screen/human/pain()
-	pains.icon = 'modular_skyrat/icons/mob/screen/screen_pain.dmi'
+	pains.icon = 'modular_skyrat/icons/mob/screen_pain.dmi'
 	pains.screen_loc = ui_pain
 	pains.hud = src
 	infodisplay += pains
 
 	redpains = new /obj/screen/fullscreen/pain()
-	redpains.icon = 'modular_skyrat/icons/mob/screen/screen_full.dmi'
+	redpains.icon = 'modular_skyrat/icons/mob/screen_full.dmi'
 	redpains.screen_loc = "CENTER-7,CENTER-7"
 	redpains.hud = src
 	screenoverlays += redpains
 
 	pull_icon = new /obj/screen/pull()
+	pull_icon.icon = ui_style_modular(ui_style) //SKYRAT EDIT
 	pull_icon.hud = src
 	pull_icon.update_icon()
 	pull_icon.screen_loc = ui_pull_resist
@@ -457,7 +484,7 @@
 	zone_select.update_icon()
 	static_inventory += zone_select
 
-	for(var/obj/screen/inventory/inv in (static_inventory + toggleable_inventory + extra_inventory))
+	for(var/obj/screen/inventory/inv in (static_inventory + toggleable_inventory + extra_inventory)) //skyrat edit
 		if(inv.slot_id)
 			inv.hud = src
 			inv_slots[inv.slot_id] = inv
@@ -472,7 +499,7 @@
 	if(!istype(H) || !H.dna.species)
 		return
 	var/datum/species/S = H.dna.species
-	for(var/obj/screen/inventory/inv in (static_inventory + toggleable_inventory + extra_inventory))
+	for(var/obj/screen/inventory/inv in (static_inventory + toggleable_inventory + extra_inventory)) //skyrat edit
 		if(inv.slot_id)
 			if(inv.slot_id in S.no_equip)
 				inv.alpha = 128
@@ -525,6 +552,7 @@
 		if(H.wear_neck)	screenmob.client.screen -= H.wear_neck
 		if(H.head)		screenmob.client.screen -= H.head
 
+//skyrat edit
 /datum/hud/human/extra_inventory_update(mob/viewer)
 	if(!mymob)
 		return
