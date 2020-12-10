@@ -107,11 +107,11 @@
 #define ui_borg_intents "EAST-2:26,SOUTH:5"
 
 //Upper-middle right (alerts)
-#define ui_alert1 "EAST-1,CENTER+5"
-#define ui_alert2 "EAST-1,CENTER+4"
-#define ui_alert3 "EAST-1,CENTER+3"
-#define ui_alert4 "EAST-1,CENTER+2"
-#define ui_alert5 "EAST-1,CENTER+1"
+#define ui_alert1 "EAST,NORTH"
+#define ui_alert2 "EAST,NORTH-1"
+#define ui_alert3 "EAST,NORTH-2"
+#define ui_alert4 "EAST,NORTH-3"
+#define ui_alert5 "EAST,NORTH-4"
 
 //Middle right (status indicators)
 #define ui_internal "EAST:-2,CENTER+2"

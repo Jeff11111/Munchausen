@@ -10,7 +10,7 @@
 /obj/screen/bite/update_icon()
 	. = ..()
 	var/mob/living/carbon/C = hud?.mymob
-	if(istype(C) && C?.special_attack == SPECIAL_ATK_BITE)
+	if(istype(C) && C.special_attack == SPECIAL_ATK_BITE)
 		icon_state = "[initial(icon_state)]_on"
 	else
 		icon_state = initial(icon_state)
