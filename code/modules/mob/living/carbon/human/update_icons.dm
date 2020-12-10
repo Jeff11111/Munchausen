@@ -777,7 +777,7 @@ There are several things that need to be remembered:
 	update_observer_view(I)
 
 //update whether our suit store item appears on our hud.
-/mob/living/carbon/human/update_hud_back(obj/item/I)
+/mob/living/carbon/human/update_hud_suit_store(obj/item/I)
 	I.screen_loc = ui_sstore1
 	if(client && hud_used && hud_used.hud_shown)
 		client.screen += I
