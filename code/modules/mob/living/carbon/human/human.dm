@@ -782,9 +782,9 @@
 				else
 					to_chat(C, "<span class='unconscious'>I feel my chest being pushed on...</span>")
 				
-				var/diceroll = mind?.diceroll(heyeinstein, heymedic, "6d6", 20, mod = -(C.getOxyLoss()/10))
+				var/diceroll = mind?.diceroll(heyeinstein, heymedic, "6d6", 20)
 				if((diceroll >= DICE_SUCCESS) || !mind)
-					if(prob(35) || (diceroll >= DICE_CRIT_SUCCESS))
+					if(prob(50) || (diceroll >= DICE_CRIT_SUCCESS))
 						they_heart.last_arrest = world.time
 						if(they_heart.Restart() && C.revive())
 							C.grab_ghost()
