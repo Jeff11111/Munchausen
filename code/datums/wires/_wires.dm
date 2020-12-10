@@ -269,7 +269,7 @@
 	// Station blueprints do that too, but only if the wires are not randomized.
 	else if(user.is_holding_item_of_type(/obj/item/areaeditor/blueprints) && !randomize)
 		reveal_wires = TRUE
-	else if(user.mind.diceroll(stats = STAT_DATUM(int), skills = SKILL_DATUM(electronics), dicetype = "6d6", crit = 20))
+	else if(GET_SKILL_LEVEL(user, electronics) >= MAX_STAT/2 && user.mind.diceroll(stats = STAT_DATUM(int), skills = SKILL_DATUM(electronics), dicetype = "6d6", crit = 20))
 		reveal_wires = TRUE
 
 	for(var/color in colors)
