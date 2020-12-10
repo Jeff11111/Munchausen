@@ -18,7 +18,7 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 	var/list/affecting	// the list of all items that will be moved this ptick
 	var/id = ""			// the control ID	- must match controller ID
 	var/verted = 1		// Inverts the direction the conveyor belt moves.
-	var/datum/looping_sound/conveyor_sound
+	var/datum/looping_sound/conveyor/conveyor_sound
 	speed_process = TRUE
 
 /obj/machinery/conveyor/Initialize(mapload, newdir, newid)
