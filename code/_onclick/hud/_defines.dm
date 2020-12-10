@@ -91,7 +91,7 @@
 #define ui_sprintbufferloc "EAST-2,SOUTH:13"
 #define ui_movi "EAST-2,SOUTH"
 #define ui_dodge_parry "EAST-1,SOUTH"
-#define ui_zonesel "EAST-1SOUTH"
+#define ui_zonesel "EAST,SOUTH"
 
 //lesser hud idk
 #define ui_acti_alt "EAST-1:28,SOUTH:5"
@@ -175,8 +175,8 @@
 #define ui_boxers "WEST,SOUTH+4"
 #define ui_socks "WEST,SOUTH+5"
 #define ui_shirt "WEST,SOUTH+6"
-#define ui_ears_extra "WEST+2:10,SOUTH+4:13"
-#define ui_wrists "WEST+1:8,SOUTH+4:13"
+#define ui_ears_extra "WEST+2,SOUTH+4"
+#define ui_wrists "WEST+1,SOUTH+4"
 
 //Ghosts
 #define ui_ghost_jumptomob "SOUTH:6,CENTER-2:24"

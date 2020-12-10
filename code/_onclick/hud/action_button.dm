@@ -232,11 +232,9 @@
 	var/col = ((number - 1)%(supportedcolumns)) + 1
 
 	var/coord_col = "+[col-1]"
-	var/coord_col_offset = 2 + 2 * col
-
 	var/coord_row = "[row ? -row : "+0"]"
-
-	return "WEST[coord_col]:[coord_col_offset],NORTH[coord_row]:-6"
+	
+	return "WEST[coord_col],NORTH[coord_row]"
 
 /datum/hud/proc/SetButtonCoords(obj/screen/button,number, supportedcolumns)
 	var/row = round((number-1)/supportedcolumns)

@@ -8,7 +8,9 @@
 	var/mob/living/carbon/C = usr
 	if(!istype(C))
 		return
-	C.toggle_dodge_parry()
+	var/list/PL = params2list(params)
+	var/what_we_chose == (icon_y > 16 ? DP_DODGE : DP_PARRY)
+	C.toggle_dodge_parry(what_we_chose)
 	update_icon()
 
 /obj/screen/dodge_parry/update_icon()

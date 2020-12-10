@@ -67,6 +67,8 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/obj/screen/healths
 	var/obj/screen/healthdoll
 	var/obj/screen/internals
+	var/obj/screen/nutrition/nutrition
+	var/obj/screen/hydration/hydration
 	var/obj/screen/pains
 	var/obj/screen/staminas/staminas
 	var/obj/screen/fullscreen/pain/redpains

@@ -70,7 +70,7 @@
 	if(mood_signs == 0)
 		mood_symbol = ""
 	else if(mood_signs < 0)
-		mood_symbol = "<span class='red'><b>-</b></span>"
+		mood_symbol = "<span class='red'><b>-</b></span> "
 	mood_signs = abs(mood_signs)
 	var/right_symbols = ""
 	if(mood_signs && mood_symbol)

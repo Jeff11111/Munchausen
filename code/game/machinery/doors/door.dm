@@ -29,7 +29,7 @@
 	var/closingLayer = CLOSED_DOOR_LAYER
 	var/autoclose = FALSE //does it automatically close after some time
 	var/safe = TRUE //whether the door detects things and mobs in its way and reopen or crushes them.
-	var/locked = TRUE //whether the door is bolted or not.
+	var/locked = FALSE //whether the door is bolted or not.
 	var/assemblytype //the type of door frame to drop during deconstruction
 	var/datum/effect_system/spark_spread/spark_system
 	var/damage_deflection = 10
@@ -83,7 +83,9 @@
 
 	//No access, no lock
 	if(!length(req_access))
-		locked = FALSE
+		unlock()
+	else
+		lock()
 
 /obj/machinery/door/proc/set_init_door_layer()
 	if(density)
@@ -152,10 +154,8 @@
 		user = null
 
 	if(density && !(obj_flags & EMAGGED))
-		if(allowed(user))
+		if(!locked)
 			open()
-		else
-			do_animate("deny")
 	return
 
 /obj/machinery/door/attack_hand(mob/user)

@@ -1,6 +1,6 @@
 //Sprint button shit
 /obj/screen/sprintbutton
-	name = "toggle sprint"
+	name = "sprint toggle"
 	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "act_sprint"
 	layer = ABOVE_HUD_LAYER - 0.1
