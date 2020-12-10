@@ -508,7 +508,6 @@ There are several things that need to be remembered:
 
 /mob/living/carbon/human/update_inv_s_store()
 	remove_overlay(SUIT_STORE_LAYER)
-
 	if(client && hud_used)
 		var/obj/screen/inventory/inv = hud_used.inv_slots[SLOT_S_STORE]
 		inv.update_icon()
@@ -516,7 +515,8 @@ There are several things that need to be remembered:
 	if(s_store)
 		s_store.screen_loc = ui_sstore1
 		if(client && hud_used && hud_used.hud_shown)
-			client.screen += s_store
+			if(hud_used.inventory_shown)
+				client.screen += s_store
 		update_observer_view(s_store)
 		var/t_state = s_store.item_state
 		if(!t_state)
@@ -683,7 +683,6 @@ There are several things that need to be remembered:
 				client.screen += r_store
 			update_observer_view(r_store)
 
-
 /mob/living/carbon/human/update_inv_wear_mask()
 	remove_overlay(FACEMASK_LAYER)
 
@@ -777,8 +776,12 @@ There are several things that need to be remembered:
 		client.screen += I
 	update_observer_view(I)
 
-
-
+//update whether our suit store item appears on our hud.
+/mob/living/carbon/human/update_hud_back(obj/item/I)
+	I.screen_loc = ui_sstore1
+	if(client && hud_used && hud_used.hud_shown)
+		client.screen += I
+	update_observer_view(I)
 
 /*
 Does everything in relation to building the /mutable_appearance used in the mob's overlays list

@@ -450,7 +450,7 @@
 	vis_contents += overlay_object
 
 /obj/effect/overlay/zone_sel
-	icon = 'modular_skyrat/icons/mob/screen/screen_gen.dmi' //skyrat edit
+	icon = 'modular_skyrat/icons/mob/screen/zone_sel32x64.dmi'
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	alpha = 128
 	anchored = TRUE

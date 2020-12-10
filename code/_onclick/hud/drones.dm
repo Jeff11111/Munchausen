@@ -6,7 +6,6 @@
 	inv_box.name = "internal storage"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "suit_storage"
-//	inv_box.icon_full = "template"
 	inv_box.screen_loc = ui_drone_storage
 	inv_box.slot_id = SLOT_GENERC_DEXTROUS_STORAGE
 	static_inventory += inv_box
@@ -15,7 +14,6 @@
 	inv_box.name = "head/mask"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "mask"
-//	inv_box.icon_full = "template"
 	inv_box.screen_loc = ui_drone_head
 	inv_box.slot_id = SLOT_HEAD
 	static_inventory += inv_box

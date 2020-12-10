@@ -214,6 +214,10 @@
 /mob/living/carbon/proc/update_hud_back(obj/item/I)
 	return
 
+//update whether our suit store item appears on our hud.
+/mob/living/carbon/proc/update_hud_suit_store(obj/item/I)
+	return
+
 /mob/living/carbon/update_body()
 	update_body_parts()
 

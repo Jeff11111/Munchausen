@@ -365,6 +365,7 @@
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "underwear"
+	inv_box.icon = ui_style
 	inv_box.icon_state = "underwear"
 	inv_box.screen_loc = ui_boxers
 	inv_box.slot_id = SLOT_W_UNDERWEAR
@@ -372,6 +373,7 @@
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "socks"
+	inv_box.icon = ui_style
 	inv_box.icon_state = "socks"
 	inv_box.screen_loc = ui_socks
 	inv_box.slot_id = SLOT_W_SOCKS
@@ -379,6 +381,7 @@
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "shirt"
+	inv_box.icon = ui_style
 	inv_box.icon_state = "shirt"
 	inv_box.screen_loc = ui_shirt
 	inv_box.slot_id = SLOT_W_SHIRT
@@ -386,6 +389,7 @@
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "right ear"
+	inv_box.icon = ui_style
 	inv_box.icon_state = "ears_extra"
 	inv_box.screen_loc = ui_ears_extra
 	inv_box.slot_id = SLOT_EARS_RIGHT
@@ -393,6 +397,7 @@
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "wrists"
+	inv_box.icon = ui_style
 	inv_box.icon_state = "wrists"
 	inv_box.screen_loc = ui_wrists
 	inv_box.slot_id = SLOT_WRISTS
@@ -471,7 +476,6 @@
 	infodisplay += sunlight_display
 
 	zone_select =  new /obj/screen/zone_sel()
-	zone_select.icon = ui_style
 	zone_select.hud = src
 	zone_select.update_icon()
 	static_inventory += zone_select
