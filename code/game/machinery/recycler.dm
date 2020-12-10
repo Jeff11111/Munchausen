@@ -26,6 +26,10 @@
 	req_one_access = get_all_accesses() + get_all_centcom_access()
 	recycler_sound = new(list(src), FALSE)
 
+/obj/machinery/recycler/Destroy()
+	. = ..()
+	QDEL_NULL(recycler_sound)
+
 /obj/machinery/recycler/deconstruct(disassembled = TRUE)
 	safety_mode = TRUE //to stop stock parts and circuit from being deleted.
 	return ..()
@@ -55,9 +59,9 @@
 /obj/machinery/recycler/power_change()
 	. = ..()
 	if(CHECK_BITFIELD(stat, NOPOWER))
-		recycler_sound.stop()
+		recycler_sound.stop(src)
 	else
-		recycler_sound.start()
+		recycler_sound.start(src)
 	update_icon()
 
 /obj/machinery/recycler/attackby(obj/item/I, mob/user, params)

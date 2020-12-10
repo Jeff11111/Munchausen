@@ -81,6 +81,10 @@
 	real_explosion_block = explosion_block
 	explosion_block = EXPLOSION_BLOCK_PROC
 
+	//No access, no lock
+	if(!length(req_access))
+		locked = FALSE
+
 /obj/machinery/door/proc/set_init_door_layer()
 	if(density)
 		layer = closingLayer

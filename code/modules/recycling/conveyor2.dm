@@ -48,17 +48,17 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 	if(stat & BROKEN)
 		icon_state = "conveyor-broken"
 		operating = FALSE
-		conveyor_sound.stop()
+		conveyor_sound.stop(src)
 		return
 	else if(!operable)
 		operating = FALSE
-		conveyor_sound.stop()
+		conveyor_sound.stop(src)
 	else if(stat & NOPOWER)
 		operating = FALSE
-		conveyor_sound.stop()
+		conveyor_sound.stop(src)
 	else
 		operating = TRUE
-		conveyor_sound.start()
+		conveyor_sound.start(src)
 	icon_state = "conveyor[operating * verted]"
 
 // create a conveyor
@@ -73,6 +73,7 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 
 /obj/machinery/conveyor/Destroy()
 	LAZYREMOVE(GLOB.conveyors_by_id[id], src)
+	QDEL_NULL(conveyor_sound)
 	. = ..()
 
 /obj/machinery/conveyor/vv_edit_var(var_name, var_value)
