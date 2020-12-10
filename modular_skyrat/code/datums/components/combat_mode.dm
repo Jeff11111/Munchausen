@@ -50,6 +50,7 @@
 	source.hud_used.combat_mode = hud_icon
 	source.hud_used.static_inventory += hud_icon
 	hud_icon.update_icon()
+	source.client?.screen |= hud_icon
 
 /// Combat mode can be locked out, forcibly disabled by a status trait.
 /datum/component/combat_mode/proc/update_combat_lock()

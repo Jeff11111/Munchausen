@@ -80,7 +80,7 @@
 #define ui_wield "EAST-3,SOUTH+1"
 #define ui_resist "EAST-3,SOUTH+1"
 #define ui_pull "EAST-2,SOUTH+1"
-#define ui_rest "EAST-2:24,SOUTH+1"
+#define ui_rest "EAST-2,SOUTH+1"
 #define ui_throw "EAST-1,SOUTH+1"
 #define ui_drop "EAST-1,SOUTH+1"
 #define ui_skills "EAST-6:-17,SOUTH:15"
@@ -110,11 +110,11 @@
 #define ui_borg_intents "EAST-2:26,SOUTH:5"
 
 //Upper-middle right (alerts)
-#define ui_alert1 "EAST-1:28,CENTER+5:27"
-#define ui_alert2 "EAST-1:28,CENTER+4:25"
-#define ui_alert3 "EAST-1:28,CENTER+3:23"
-#define ui_alert4 "EAST-1:28,CENTER+2:21"
-#define ui_alert5 "EAST-1:28,CENTER+1:19"
+#define ui_alert1 "EAST-1,CENTER+5"
+#define ui_alert2 "EAST-1,CENTER+4"
+#define ui_alert3 "EAST-1,CENTER+3"
+#define ui_alert4 "EAST-1,CENTER+2"
+#define ui_alert5 "EAST-1,CENTER+1"
 
 //Middle right (status indicators)
 #define ui_internal "EAST:-2,CENTER+2"

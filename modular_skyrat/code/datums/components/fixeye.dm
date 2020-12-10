@@ -30,6 +30,7 @@
 	source.hud_used.fixeye = hud_icon
 	source.hud_used.static_inventory += hud_icon
 	hud_icon.update_icon()
+	source.client?.screen |= hud_icon
 
 //Toggles intentionally between on and off
 /datum/component/fixeye/proc/user_toggle_fixeye(mob/living/source)

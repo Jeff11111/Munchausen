@@ -405,8 +405,8 @@
 
 /obj/screen/zone_sel
 	name = "damage zone"
-	icon = 'modular_skyrat/icons/mob/screen/zone_sel.dmi'
-	var/overlay_icon = 'modular_skyrat/icons/mob/screen/zone_sel.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/zone_sel32x64.dmi'
+	var/overlay_icon = 'modular_skyrat/icons/mob/screen/zone_sel32x64.dmi'
 	icon_state = "zone_sel"
 	screen_loc = ui_zonesel
 	var/static/list/hover_overlays_cache = list()

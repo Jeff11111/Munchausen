@@ -168,7 +168,7 @@
 	static_inventory += combat_intents
 
 	dodge_parry = new /obj/screen/dodge_parry
-	dodge_parry.icon = 'modular_skyrat/icons/mob/screen/combat_intents.dmi'
+	dodge_parry.icon = ui_style
 	dodge_parry.icon_state = DP_PARRY
 	dodge_parry.screen_loc = ui_dodge_parry
 	dodge_parry.hud = src
@@ -233,8 +233,7 @@
 	static_inventory += using
 
 	using = new /obj/screen/info()
-	using.icon = 'modular_skyrat/icons/mob/screen/screen_gen.dmi'
-	using.icon_state = "info"
+	using.icon = ui_style
 	using.screen_loc = ui_swaphand_position(owner,2)
 	using.hud = src
 	static_inventory += using

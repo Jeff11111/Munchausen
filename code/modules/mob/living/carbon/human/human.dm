@@ -40,6 +40,7 @@
 	if(!CONFIG_GET(flag/disable_human_mood))
 		AddComponent(/datum/component/mood)
 	AddComponent(/datum/component/combat_mode)
+	AddComponent(/datum/component/fixeye)
 
 /mob/living/carbon/human/Destroy()
 	QDEL_NULL(physiology)
