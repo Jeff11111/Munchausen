@@ -30,19 +30,16 @@
 #define ui_belt "CENTER-3,SOUTH"
 #define ui_back "CENTER-2,SOUTH"
 
-/proc/ui_hand_position(i) //values based on old hand ui positions (CENTER:-/+16,SOUTH:5)
-	var/x_off = -(!(i % 2))
-	var/y_off = round((i-1) / 2)
-	return"CENTER+[x_off],SOUTH+[y_off]"
+/proc/ui_hand_position(i)
+	var/x_off = !(i % 2)
+	return"CENTER-[x_off],SOUTH"
 
 /proc/ui_equip_position(mob/M)
-	var/y_off = round((M.held_items.len-1) / 2) //values based on old equip ui position (CENTER: +/-16,SOUTH+1:5)
-	return "CENTER,SOUTH+[y_off+1]"
+	return "CENTER-1,SOUTH+1"
 
-/proc/ui_swaphand_position(mob/M, which = 1) //values based on old swaphand ui positions (CENTER: +/-16,SOUTH+1:5)
-	var/x_off = which == 1 ? -1 : 0
-	var/y_off = round((M.held_items.len-1) / 2)
-	return "CENTER+[x_off],SOUTH+[y_off+1]"
+/proc/ui_swaphand_position(mob/M, which = 1)
+	var/x_off = which == 1 ? 1 : 0
+	return "CENTER-[x_off],SOUTH+1"
 
 #define ui_storage1 "CENTER+1,SOUTH"
 #define ui_storage2 "CENTER+2,SOUTH"
