@@ -3,8 +3,6 @@
 	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	name = "fatigue"
 	icon_state = "fatigue10"
-	screen_loc = ui_stamina
-	mouse_opacity = 1
 	var/overfatigue = FALSE
 	var/mutable_appearance/overfatigue_appearance
 
@@ -46,7 +44,7 @@
 	if(user.stat == DEAD || (user.combat_flags & COMBAT_FLAG_HARD_STAMCRIT) || (user.hal_screwyhud in 1 to 2))
 		icon_state = "fatigue0"
 	else if((user.hal_screwyhud == SCREWYHUD_HEALTHY) || HAS_TRAIT(hud?.mymob, TRAIT_SCREWY_CHECKSELF))
-		icon_state = "fatigue16"
+		icon_state = "fatigue10"
 	else
 		icon_state = "fatigue[clamp(10 - CEILING(user.getStaminaLoss() / 10, 1), 0, 10)]"
 
@@ -54,6 +52,6 @@
 	if(user.stat == DEAD || (user.combat_flags & COMBAT_FLAG_HARD_STAMCRIT) || (user.hal_screwyhud in 1 to 2))
 		overfatigue_appearance.icon_state = "overfatigue0"
 	else if((user.hal_screwyhud == SCREWYHUD_HEALTHY) || HAS_TRAIT(hud?.mymob, TRAIT_SCREWY_CHECKSELF))
-		overfatigue_appearance.icon_state = "overfatigue16"
+		overfatigue_appearance.icon_state = "overfatigue10"
 	else
 		overfatigue_appearance.icon_state = "overfatigue[clamp(CEILING((1 - (user.bufferedstam / user.stambuffer)) * 10, 1), 0, 16)]"

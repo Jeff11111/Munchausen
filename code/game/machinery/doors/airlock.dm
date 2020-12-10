@@ -99,7 +99,7 @@
 
 	rad_flags = RAD_PROTECT_CONTENTS | RAD_NO_CONTAMINATE
 	rad_insulation = RAD_MEDIUM_INSULATION
-	locked = TRUE
+	locked = FALSE
 
 	var/static/list/airlock_overlays = list()
 

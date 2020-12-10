@@ -9,7 +9,8 @@
 	if(!istype(C))
 		return
 	var/list/PL = params2list(params)
-	var/what_we_chose == (icon_y > 16 ? DP_DODGE : DP_PARRY)
+	var/icon_y = text2num(PL["icon-y"])
+	var/what_we_chose = (icon_y > 16 ? DP_DODGE : DP_PARRY)
 	C.toggle_dodge_parry(what_we_chose)
 	update_icon()
 

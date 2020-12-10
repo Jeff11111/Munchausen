@@ -114,7 +114,9 @@
 #define ui_alert5 "EAST,NORTH-4"
 
 //Middle right (status indicators)
-#define ui_internal "EAST:-2,CENTER+2"
+#define ui_internal "EAST:-2,CENTER+3"
+#define ui_nutrition "EAST:-2,CENTER+2"
+#define ui_hydration "EAST:-2,CENTER+2"
 #define ui_fixeye "EAST,CENTER+1"
 #define ui_stamina "EAST,CENTER"
 #define ui_mood "EAST,CENTER-1"

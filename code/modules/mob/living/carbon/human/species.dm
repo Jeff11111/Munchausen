@@ -1456,16 +1456,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				H.add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/hunger, multiplicative_slowdown = (hungry / 50))
 			else
 				H.remove_movespeed_modifier(/datum/movespeed_modifier/hunger)
-	
-	switch(H.nutrition)
-		if(NUTRITION_LEVEL_FULL to INFINITY)
-			H.throw_alert("nutrition", /obj/screen/alert/fat)
-		if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FULL)
-			H.clear_alert("nutrition")
-		if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
-			H.throw_alert("nutrition", /obj/screen/alert/hungry)
-		if(0 to NUTRITION_LEVEL_STARVING)
-			H.throw_alert("nutrition", /obj/screen/alert/starving)
+	H.hud_used?.nutrition?.update_icon()
 
 //copypasta from handle digestion lole!
 /datum/species/proc/handle_hydration(mob/living/carbon/human/H)
@@ -1487,14 +1478,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		dehydration_rate *= bladder_hydration_loss
 		dehydration_rate *= H.physiology.hunger_mod
 		H.adjust_hydration(-dehydration_rate)
-
-	switch(H.hydration)
-		if(HYDRATION_LEVEL_THIRSTY to INFINITY)
-			H.clear_alert("hydration")
-		if(HYDRATION_LEVEL_DEHYDRATED to HYDRATION_LEVEL_THIRSTY)
-			H.throw_alert("hydration", /obj/screen/alert/thirsty)
-		if(0 to HYDRATION_LEVEL_DEHYDRATED)
-			H.throw_alert("hydration", /obj/screen/alert/dehydrated)
+	H.hud_used?.hydration?.update_icon()
 
 /datum/species/proc/update_health_hud(mob/living/carbon/human/H)
 	return 0

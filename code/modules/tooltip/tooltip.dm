@@ -105,7 +105,7 @@ Notes:
 	if(istype(user))
 		if(user.client && user.client.tooltips)
 			if(!theme)
-				theme = "midnight"
+				theme = "niggerui"
 			user.client.tooltips.show(tip_src, params,title,content,theme)
 
 //Arbitrarily close a user's tooltip

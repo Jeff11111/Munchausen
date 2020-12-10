@@ -427,7 +427,18 @@
 
 	staminas = new /obj/screen/staminas()
 	staminas.hud = src
+	staminas.screen_loc = ui_stamina
 	infodisplay += staminas
+
+	nutrition = new /obj/screen/nutrition()
+	nutrition.hud = src
+	nutrition.screen_loc = ui_nutrition
+	infodisplay += nutrition
+
+	hydration = new /obj/screen/hydration()
+	hydration.hud = src
+	hydration.screen_loc = ui_hydration
+	infodisplay += hydration
 
 	healthdoll = new /obj/screen/healthdoll()
 	healthdoll.hud = src
