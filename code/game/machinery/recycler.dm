@@ -19,12 +19,12 @@
 	var/datum/looping_sound/recycler/recycler_sound
 
 /obj/machinery/recycler/Initialize()
+	recycler_sound = new(list(src), FALSE)
 	AddComponent(/datum/component/butchering/recycler, 1, amount_produced,amount_produced/5)
 	AddComponent(/datum/component/material_container, list(/datum/material/iron, /datum/material/glass, /datum/material/silver, /datum/material/plasma, /datum/material/gold, /datum/material/diamond, /datum/material/plastic, /datum/material/uranium, /datum/material/bananium, /datum/material/titanium, /datum/material/bluespace), INFINITY, FALSE, null, null, null, TRUE)
 	. = ..()
 	update_icon()
 	req_one_access = get_all_accesses() + get_all_centcom_access()
-	recycler_sound = new(list(src), FALSE)
 
 /obj/machinery/recycler/Destroy()
 	. = ..()

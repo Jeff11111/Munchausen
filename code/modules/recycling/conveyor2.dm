@@ -22,8 +22,8 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 	speed_process = TRUE
 
 /obj/machinery/conveyor/Initialize(mapload, newdir, newid)
-	. = ..()
 	conveyor_sound = new(list(src), FALSE)
+	. = ..()
 
 /obj/machinery/conveyor/centcom_auto
 	id = "round_end_belt"
