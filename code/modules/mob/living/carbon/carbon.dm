@@ -127,12 +127,10 @@
 /mob/living/carbon/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	. = ..()
 	var/hurt = TRUE
-	//skyrat edit
 	var/extra_speed = 0
 	if(throwingdatum.thrower != src)
 		extra_speed = min(max(0, throwingdatum.speed - initial(throw_speed)), 3)
-	//
-	if(GetComponent(/datum/component/tackler))
+	if(tackling)
 		return
 	if(throwingdatum?.thrower && iscyborg(throwingdatum.thrower))
 		var/mob/living/silicon/robot/R = throwingdatum.thrower
@@ -141,22 +139,18 @@
 	if(hit_atom.density && isturf(hit_atom))
 		if(hurt)
 			DefaultCombatKnockdown(20)
-			take_bodypart_damage(10 + 5 * extra_speed, check_armor = TRUE, wound_bonus = extra_speed) //skyrat edit
+			take_bodypart_damage(10 + 5 * extra_speed, check_armor = TRUE, wound_bonus = extra_speed)
 	if(iscarbon(hit_atom) && hit_atom != src)
 		var/mob/living/carbon/victim = hit_atom
 		if(victim.movement_type & FLYING)
 			return
 		if(hurt)
-			//skyrat edit
 			victim.take_bodypart_damage(10 + 5 * extra_speed, check_armor = TRUE, wound_bonus = extra_speed * 5)
 			take_bodypart_damage(10 + 5 * extra_speed, check_armor = TRUE, wound_bonus = extra_speed * 5)
-			//
 			victim.DefaultCombatKnockdown(20)
 			DefaultCombatKnockdown(20)
-			//skyrat edit
 			visible_message("<span class='danger'><b>[src]</b> crashes into <b>[victim]</b>[extra_speed ? " really hard" : ""], knocking them both over!</span>",\
-				"<span class='userdanger'>You violently crash into <b>[victim]</b>[extra_speed ? " extra hard" : ""]!</span>")
-			//
+				"<span class='userdanger'>I violently crash into <b>[victim]</b>[extra_speed ? " extra hard" : ""]!</span>")
 		playsound(src,'sound/weapons/punch1.ogg',50,1)
 
 //Throwing stuff

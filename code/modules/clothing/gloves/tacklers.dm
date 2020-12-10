@@ -23,19 +23,6 @@
 	/// See: [/datum/component/tackler/var/skill_mod]
 	var/skill_mod = 1
 
-/obj/item/clothing/gloves/tackler/equipped(mob/user, slot)
-	. = ..()
-	if(!ishuman(user))
-		return
-	if(slot == ITEM_SLOT_GLOVES)
-		var/mob/living/carbon/human/H = user
-		tackler = H.AddComponent(/datum/component/tackler, stamina_cost=tackle_stam_cost, base_knockdown = base_knockdown, range = tackle_range, speed = tackle_speed, skill_mod = skill_mod, min_distance = min_distance)
-
-/obj/item/clothing/gloves/tackler/dropped(mob/user)
-	. = ..()
-	if(tackler)
-		qdel(tackler)
-
 /obj/item/clothing/gloves/tackler/dolphin
 	name = "dolphin gloves"
 	desc = "Sleek, aerodynamic gripper gloves that are less effective at actually performing takedowns, but more effective at letting the user sail through the hallways and cause accidents."

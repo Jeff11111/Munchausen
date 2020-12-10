@@ -22,7 +22,7 @@
 				to_chat(src, "<span class='notice'>I will now try to bite my targets.</span>")
 			if(SPECIAL_ATK_JUMP)
 				H.special_attack = SPECIAL_ATK_JUMP
-				to_chat(src, "<span class='notice'>I will now attempt to jump at my targets.</span>")
+				to_chat(src, "<span class='notice'>I will now attempt to tackle at my targets.</span>")
 	if(hud_used)
 		hud_used.jump?.update_icon()
 		hud_used.kick?.update_icon()

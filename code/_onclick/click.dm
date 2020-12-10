@@ -365,6 +365,10 @@
 		RestrainedClickOn(A)
 		return
 
+	if(special_attack == SPECIAL_ATK_JUMP)
+		perform_jump(A, params)
+		return
+	
 	if(A.MiddleClick(src))
 		return
 	

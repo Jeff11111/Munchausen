@@ -112,7 +112,7 @@
 	user.throw_at(A, range, speed, user, FALSE)
 	user.toggle_throw_mode()
 	addtimer(CALLBACK(src, .proc/resetTackle), base_knockdown, TIMER_STOPPABLE)
-	return(COMSIG_MOB_CANCEL_CLICKON)
+	return (COMSIG_MOB_CANCEL_CLICKON)
 
 /**
  * sack()
@@ -240,8 +240,6 @@
 		defense_mod -= 2
 	if(HAS_TRAIT(target, TRAIT_FAT)) // chonkers are harder to knock over
 		defense_mod += 1
-	//if(HAS_TRAIT(target, TRAIT_GRABWEAKNESS)) Todo, port the pushover trait
-		//defense_mod -= 2
 	if(HAS_TRAIT(target, TRAIT_DWARF))
 		defense_mod -= 2
 	if(HAS_TRAIT(target, TRAIT_GIANT))
@@ -253,10 +251,8 @@
 
 		if(isnull(T.wear_suit) && isnull(T.w_uniform)) // who honestly puts all of their effort into tackling a naked guy?
 			defense_mod += 2
-			//skyrat edit
 			if(isnull(T.w_underwear) && isnull(T.w_socks) && isnull(T.w_shirt))
 				defense_mod += 1
-			//
 		if(suit_slot && (istype(suit_slot,/obj/item/clothing/suit/space/hardsuit)))
 			defense_mod += 1
 		if(T.is_shove_knockdown_blocked()) // riot armor and such
