@@ -14,10 +14,11 @@
 #define DP_PARRY "parry"
 #define DP_DODGE "dodge"
 
-//Special attacks (kicking and biting)
+//Special attacks (kicking, biting and jumping)
 #define SPECIAL_ATK_NONE "none"
 #define SPECIAL_ATK_BITE "bite"
 #define SPECIAL_ATK_KICK "kick"
+#define SPECIAL_ATK_JUMP "jump"
 
 //Grabbies
 #define GM_SELF "self"

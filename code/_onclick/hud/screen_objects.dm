@@ -62,13 +62,13 @@
 
 /obj/screen/craft
 	name = "crafting menu"
-	icon = 'icons/mob/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "craft"
 	screen_loc = ui_crafting
 
 /obj/screen/area_creator
 	name = "create new area"
-	icon = 'icons/mob/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "area_edit"
 	screen_loc = ui_building
 
@@ -83,7 +83,7 @@
 
 /obj/screen/language_menu
 	name = "language menu"
-	icon = 'icons/mob/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "talk_wheel"
 	screen_loc = ui_language_menu
 
@@ -212,7 +212,7 @@
 
 /obj/screen/drop
 	name = "drop"
-	icon = 'icons/mob/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "act_drop"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
@@ -324,7 +324,7 @@
 
 /obj/screen/mov_intent
 	name = "run/walk toggle"
-	icon = 'icons/mob/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "running"
 
 /obj/screen/mov_intent/Click()
@@ -344,7 +344,7 @@
 
 /obj/screen/pull
 	name = "stop pulling"
-	icon = 'icons/mob/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "pull"
 
 /obj/screen/pull/Click()
@@ -355,14 +355,14 @@
 /obj/screen/pull/update_icon_state()
 	if(hud?.mymob?.pulling)
 		name = "stop pulling"
-		icon_state = "pull"
+		icon_state = "pull_on"
 	else
 		name = "pull"
-		icon_state = "pull0"
+		icon_state = "pull"
 
 /obj/screen/resist
 	name = "resist"
-	icon = 'icons/mob/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "act_resist"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
@@ -374,7 +374,7 @@
 
 /obj/screen/rest
 	name = "rest"
-	icon = 'icons/mob/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "act_rest"
 	layer = HUD_LAYER
 	plane = HUD_PLANE
@@ -395,8 +395,8 @@
 
 /obj/screen/throw_catch
 	name = "throw/catch"
-	icon = 'icons/mob/screen_midnight.dmi'
-	icon_state = "act_throw_off"
+	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
+	icon_state = "act_throw"
 
 /obj/screen/throw_catch/Click()
 	if(iscarbon(usr))
@@ -405,9 +405,10 @@
 
 /obj/screen/zone_sel
 	name = "damage zone"
+	icon = 'modular_skyrat/icons/mob/screen/zone_sel.dmi'
+	var/overlay_icon = 'modular_skyrat/icons/mob/screen/zone_sel.dmi'
 	icon_state = "zone_sel"
 	screen_loc = ui_zonesel
-	var/overlay_icon = 'modular_skyrat/icons/mob/screen_gen.dmi' //skyrat edit
 	var/static/list/hover_overlays_cache = list()
 	var/hovering
 
@@ -449,7 +450,7 @@
 	vis_contents += overlay_object
 
 /obj/effect/overlay/zone_sel
-	icon = 'modular_skyrat/icons/mob/screen_gen.dmi' //skyrat edit
+	icon = 'modular_skyrat/icons/mob/screen/screen_gen.dmi' //skyrat edit
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	alpha = 128
 	anchored = TRUE
@@ -464,80 +465,290 @@
 /obj/screen/zone_sel/proc/get_zone_at(icon_x, icon_y)
 	//skyrat edit - more bodyparts
 	switch(icon_y)
-		if(1 to 3) //Feet
+		if(5) //Feet
 			switch(icon_x)
-				if(10 to 15)
+				if(8 to 11)
 					return BODY_ZONE_PRECISE_R_FOOT
-				if(17 to 22)
+				if(22 to 25)
 					return BODY_ZONE_PRECISE_L_FOOT
-		if(4 to 9) //Legs
+		if(6 to 7) //Feet
+			switch(icon_x)
+				if(7 to 12)
+					return BODY_ZONE_PRECISE_R_FOOT
+				if(21 to 26)
+					return BODY_ZONE_PRECISE_L_FOOT
+		if(8) //Feet and legs
+			switch(icon_x)
+				if(8 to 11)
+					return BODY_ZONE_PRECISE_R_FOOT
+				if(12)
+					return BODY_ZONE_R_LEG
+				if(21)
+					return BODY_ZONE_L_LEG
+				if(22 to 26)
+					return BODY_ZONE_PRECISE_L_FOOT
+		if(9) //Feet and legs
+			switch(icon_x)
+				if(9, 10)
+					return BODY_ZONE_PRECISE_R_FOOT
+				if(11, 12)
+					return BODY_ZONE_R_LEG
+				if(21, 22)
+					return BODY_ZONE_L_LEG
+				if(23, 24)
+					return BODY_ZONE_PRECISE_L_FOOT
+		if(10) //Legs
+			switch(icon_x)
+				if(9 to 12)
+					return BODY_ZONE_R_LEG
+				if(21 to 24)
+					return BODY_ZONE_L_LEG
+		if(11 to 16) //Legs
+			switch(icon_x)
+				if(9 to 13)
+					return BODY_ZONE_R_LEG
+				if(20 to 24)
+					return BODY_ZONE_L_LEG
+		if(17) //Legs
+			switch(icon_x)
+				if(10 to 13)
+					return BODY_ZONE_R_LEG
+				if(20 to 23)
+					return BODY_ZONE_L_LEG
+		if(18 to 22)
+			switch(icon_x)
+				if(10 to 14)
+					return BODY_ZONE_R_LEG
+				if(19 to 23)
+					return BODY_ZONE_L_LEG
+		if(23, 24) //Legs
 			switch(icon_x)
 				if(10 to 15)
 					return BODY_ZONE_R_LEG
-				if(17 to 22)
+				if(18 to 23)
 					return BODY_ZONE_L_LEG
-		if(10 to 13) //Hands and groin
+		if(25) //Legs, groin
 			switch(icon_x)
-				if(8 to 11)
-					return BODY_ZONE_PRECISE_R_HAND
-				if(12 to 20)
+				if(10 to 12)
+					return BODY_ZONE_R_LEG
+				if(13 to 20)
 					return BODY_ZONE_PRECISE_GROIN
-				if(21 to 24)
+				if(21 to 23)
+					return BODY_ZONE_L_LEG
+		if(26) //Legs, groin
+			switch(icon_x)
+				if(10)
+					return BODY_ZONE_R_LEG
+				if(11 to 22)
+					return BODY_ZONE_PRECISE_GROIN
+				if(23)
+					return BODY_ZONE_L_LEG
+		if(27) //Groin, hands
+			switch(icon_x)
+				if(7, 8)
+					return BODY_ZONE_PRECISE_R_HAND
+				if(10 to 23)
+					return BODY_ZONE_PRECISE_GROIN
+				if(24 to 27)
 					return BODY_ZONE_PRECISE_L_HAND
-		if(14 to 20) //Chest, arms or throat
+		if(28) //Groin, hands
 			switch(icon_x)
-				if(8 to 11)
-					return BODY_ZONE_R_ARM
-				if(12 to 20)
+				if(6 to 9)
+					return BODY_ZONE_PRECISE_R_HAND
+				if(10 to 23)
+					return BODY_ZONE_PRECISE_GROIN
+				if(24 to 27)
+					return BODY_ZONE_PRECISE_L_HAND
+		if(29) //Groin, hands
+			switch(icon_x)
+				if(5 to 9)
+					return BODY_ZONE_PRECISE_R_HAND
+				if(10 to 23)
+					return BODY_ZONE_PRECISE_GROIN
+				if(24 to 28)
+					return BODY_ZONE_PRECISE_L_HAND
+		if(30) //Groin, hands
+			switch(icon_x)
+				if(5 to 10)
+					return BODY_ZONE_PRECISE_R_HAND
+				if(11 to 22)
+					return BODY_ZONE_PRECISE_GROIN
+				if(23 to 28)
+					return BODY_ZONE_PRECISE_L_HAND
+		if(31) //Groin, chest, hands
+			switch(icon_x)
+				if(5 to 9)
+					return BODY_ZONE_PRECISE_R_HAND
+				if(11, 12)
+					return BODY_ZONE_PRECISE_GROIN
+				if(13 to 20)
 					return BODY_ZONE_CHEST
-				if(21 to 24)
+				if(21, 22)
+					return BODY_ZONE_PRECISE_L_HAND
+		if(32) //Chest, arms, hands
+			switch(icon_x)
+				if(5)
+					return BODY_ZONE_R_ARM
+				if(6 to 8)
+					return BODY_ZONE_PRECISE_R_HAND
+				if(11 to 22)
+					return BODY_ZONE_CHEST
+				if(25 to 27)
+					return BODY_ZONE_PRECISE_L_HAND
+				if(28)
 					return BODY_ZONE_L_ARM
-		if(21) //Chest, arms or throat
+		if(33 to 36) //Chest, arms
 			switch(icon_x)
-				if(8 to 11)
+				if(5 to 8)
 					return BODY_ZONE_R_ARM
-				if(12 to 14)
+				if(11 to 22)
 					return BODY_ZONE_CHEST
-				if(15 to 17)
+				if(25 to 28)
+					return BODY_ZONE_L_ARM
+		if(37, 38) //Chest, arms
+			switch(icon_x)
+				if(5 to 9)
+					return BODY_ZONE_R_ARM
+				if(11 to 22)
+					return BODY_ZONE_CHEST
+				if(24 to 28)
+					return BODY_ZONE_L_ARM
+		if(39 to 41) //Chest, arms
+			switch(icon_x)
+				if(6 to 10)
+					return BODY_ZONE_R_ARM
+				if(11 to 22)
+					return BODY_ZONE_CHEST
+				if(23 to 27)
+					return BODY_ZONE_L_ARM
+		if(42 to 44) //Chest, arms
+			switch(icon_x)
+				if(7 to 10)
+					return BODY_ZONE_R_ARM
+				if(11 to 22)
+					return BODY_ZONE_CHEST
+				if(23 to 26)
+					return BODY_ZONE_L_ARM
+		if(45) //Chest, arms
+			switch(icon_x)
+				if(8 to 10)
+					return BODY_ZONE_R_ARM
+				if(11 to 22)
+					return BODY_ZONE_CHEST
+				if(23 to 25)
+					return BODY_ZONE_L_ARM
+		if(46) //Chest, neck, arms
+			switch(icon_x)
+				if(9, 10)
+					return BODY_ZONE_R_ARM
+				if(11 to 13)
+					return BODY_ZONE_CHEST
+				if(14 to 19)
 					return BODY_ZONE_PRECISE_NECK
+				if(20 to 22)
+					return BODY_ZONE_CHEST
+				if(23 to 25)
+					return BODY_ZONE_L_ARM
+		if(47) //Chest, neck, arms
+			switch(icon_x)
+				if(10)
+					return BODY_ZONE_R_ARM
+				if(11 to 13)
+					return BODY_ZONE_CHEST
+				if(14 to 19)
+					return BODY_ZONE_PRECISE_NECK
+				if(20 to 22)
+					return BODY_ZONE_CHEST
+				if(23)
+					return BODY_ZONE_L_ARM
+		if(48) //Chest, neck
+			switch(icon_x)
+				if(12)
+					return BODY_ZONE_CHEST
+				if(13 to 20)
+					return BODY_ZONE_PRECISE_NECK
+				if(21)
+					return BODY_ZONE_CHEST
+		if(49) //Neck, head
+			switch(icon_x)
+				if(14, 15)
+					return BODY_ZONE_PRECISE_NECK
+				if(16, 17)
+					return BODY_ZONE_HEAD
+		if(50) //Neck, head
+			switch(icon_x)
+				if(14)
+					return BODY_ZONE_PRECISE_NECK
+				if(15)
+					return BODY_ZONE_HEAD
+				if(16, 17)
+					return BODY_ZONE_PRECISE_MOUTH
+				if(18)
+					return BODY_ZONE_HEAD
+				if(19)
+					return BODY_ZONE_PRECISE_NECK
+		if(51) //Head, mouth
+			switch(icon_x)
+				if(13 to 15)
+					return BODY_ZONE_HEAD
+				if(16, 17)
+					return BODY_ZONE_PRECISE_MOUTH
 				if(18 to 20)
-					return BODY_ZONE_CHEST
-				if(21 to 24)
-					return BODY_ZONE_L_ARM
-		if(22) //Chest, arms or throat
+					return BODY_ZONE_HEAD
+		if(52) //Head, mouth
 			switch(icon_x)
-				if(8 to 11)
-					return BODY_ZONE_R_ARM
-				if(12 to 13)
-					return BODY_ZONE_CHEST
-				if(14 to 18)
-					return BODY_ZONE_PRECISE_NECK
-				if(19 to 20)
-					return BODY_ZONE_CHEST
-				if(21 to 24)
-					return BODY_ZONE_L_ARM
-		if(23 to 30) //Head, but we need to check for eye, mouth or throat
-			if(icon_x in 12 to 20)
-				switch(icon_y)
-					if(23)
-						if(icon_x == 14 || icon_x == 18)
-							return BODY_ZONE_PRECISE_NECK
-						if(icon_x in 15 to 17)
-							return BODY_ZONE_PRECISE_MOUTH
-					if(24)
-						if(icon_x in 14 to 18)
-							return BODY_ZONE_PRECISE_MOUTH
-					if(26) //Eyeline, eyes are on 15 and 17
-						if(icon_x in 14 to 15)
-							return BODY_ZONE_PRECISE_RIGHT_EYE
-						else if(icon_x in 17 to 18)
-							return BODY_ZONE_PRECISE_LEFT_EYE
-					if(25, 27)
-						if(icon_x == 15)
-							return BODY_ZONE_PRECISE_RIGHT_EYE
-						else if(icon_x == 17)
-							return BODY_ZONE_PRECISE_LEFT_EYE
-				return BODY_ZONE_HEAD
+				if(13 to 15)
+					return BODY_ZONE_HEAD
+				if(16, 17)
+					return BODY_ZONE_PRECISE_MOUTH
+				if(18 to 20)
+					return BODY_ZONE_HEAD
+		if(53) //Head, eyes
+			switch(icon_x)
+				if(12 to 14)
+					return BODY_ZONE_HEAD
+				if(15)
+					return BODY_ZONE_PRECISE_RIGHT_EYE
+				if(16, 17)
+					return BODY_ZONE_HEAD
+				if(18)
+					return BODY_ZONE_PRECISE_LEFT_EYE
+				if(19 to 21)
+					return BODY_ZONE_HEAD
+		if(54) //Head, eyes
+			switch(icon_x)
+				if(12, 13)
+					return BODY_ZONE_HEAD
+				if(14 to 16)
+					return BODY_ZONE_PRECISE_RIGHT_EYE
+				if(17 to 19)
+					return BODY_ZONE_PRECISE_LEFT_EYE
+				if(20, 21)
+					return BODY_ZONE_HEAD
+		if(55) //Head, eyes
+			switch(icon_x)
+				if(13, 14)
+					return BODY_ZONE_HEAD
+				if(15)
+					return BODY_ZONE_PRECISE_RIGHT_EYE
+				if(16, 17)
+					return BODY_ZONE_HEAD
+				if(18)
+					return BODY_ZONE_PRECISE_LEFT_EYE
+				if(19, 20)
+					return BODY_ZONE_HEAD
+		if(56, 57) //Head, eyes
+			switch(icon_x)
+				if(13 to 20)
+					return BODY_ZONE_HEAD
+		if(58) //Head, eyes
+			switch(icon_x)
+				if(14 to 19)
+					return BODY_ZONE_HEAD
+		if(59) //Head, eyes
+			switch(icon_x)
+				if(15 to 18)
+					return BODY_ZONE_HEAD
 
 /obj/screen/zone_sel/proc/set_selected_zone(choice, mob/user)
 	if(user != hud?.mymob)
@@ -591,12 +802,10 @@
 	icon_state = "health0"
 	screen_loc = ui_pulse
 
-//skyrat edit
 /obj/screen/healths/Click(location, control, params)
 	var/mob/living/carbon/C = usr
 	if(istype(C))
 		C.check_pulse()
-//
 
 /obj/screen/healths/alien
 	icon = 'icons/mob/screen_alien.dmi'
@@ -662,7 +871,7 @@
 /obj/screen/healthdoll
 	name = "health doll"
 	screen_loc = ui_healthdoll
-	icon = 'modular_skyrat/icons/mob/screen_gen.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_gen.dmi'
 
 /obj/screen/healthdoll/Click(location,control,params)
 	var/mob/living/L = usr
@@ -672,7 +881,7 @@
 
 /obj/screen/mood
 	name = "mood"
-	icon = 'modular_skyrat/icons/mob/mood.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/mood.dmi'
 	icon_state = "mood5"
 	screen_loc = ui_mood
 

@@ -1,13 +1,13 @@
 /obj/screen/combat_intent
 	name = "combat intent"
-	icon = 'modular_skyrat/icons/mob/combat_intents.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/combat_intents.dmi'
 	icon_state = CI_DEFAULT
 	var/expanded = FALSE
 	var/mutable_appearance/switch_appearance
 
 /obj/screen/combat_intent/Initialize()
 	. = ..()
-	switch_appearance = mutable_appearance('modular_skyrat/icons/mob/combat_style.dmi', "combat_style", layer, plane)
+	switch_appearance = mutable_appearance('modular_skyrat/icons/mob/screen/combat_style.dmi', "combat_style", layer, plane)
 	switch_appearance.pixel_y = pixel_y + 32
 	switch_appearance.pixel_x = pixel_x - 16
 

@@ -1,14 +1,17 @@
 /obj/screen/wield
 	name = "wield"
+	icon_state = "act_wield"
 	layer = ABOVE_HUD_LAYER - 0.1
 	var/active = FALSE
 
-/obj/screen/wield/update_overlays()
+/obj/screen/wield/update_icon()
 	. = ..()
-	cut_overlays()
 	if(active)
-		var/mutable_appearance/overlay_wielded = mutable_appearance(icon, "selected_act", ABOVE_HUD_LAYER, plane)
-		add_overlay(overlay_wielded)
+		name = "unwield"
+		icon_state = "[initial(icon_state)]_on"
+	else
+		name = "wield"
+		icon_state = initial(icon_state)
 
 /obj/screen/wield/Click()
 	if(iscarbon(usr))

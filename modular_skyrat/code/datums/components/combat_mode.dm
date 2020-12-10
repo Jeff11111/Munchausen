@@ -9,7 +9,6 @@
 	var/lastmousedir
 	var/obj/screen/combattoggle/hud_icon
 	var/hud_loc
-	var/click_time = 0 //Skyrat change
 
 /datum/component/combat_mode/Initialize(hud_loc = ui_combat_toggle)
 	if(!isliving(parent))
@@ -36,6 +35,9 @@
 	if(parent)
 		safe_disable_combat_mode(parent)
 	if(hud_icon)
+		var/mob/living/L = parent
+		L?.hud_used?.combat_mode = null
+		L?.hud_used?.static_inventory -= hud_icon
 		QDEL_NULL(hud_icon)
 	return ..()
 
@@ -43,16 +45,17 @@
 /datum/component/combat_mode/proc/on_mob_hud_created(mob/source)
 	hud_icon = new
 	hud_icon.hud = source.hud_used
-	hud_icon.icon = 'modular_skyrat/icons/mob/combat_intents.dmi'
+	hud_icon.icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	hud_icon.screen_loc = hud_loc
+	source.hud_used.combat_mode = hud_icon
 	source.hud_used.static_inventory += hud_icon
 	hud_icon.update_icon()
 
 /// Combat mode can be locked out, forcibly disabled by a status trait.
 /datum/component/combat_mode/proc/update_combat_lock()
 	var/locked = HAS_TRAIT(parent, TRAIT_COMBAT_MODE_LOCKED)
-	var/desired = (mode_flags & COMBAT_MODE_TOGGLED)
-	var/actual = (mode_flags & COMBAT_MODE_ACTIVE)
+	var/desired = CHECK_BITFIELD(mode_flags, COMBAT_MODE_TOGGLED)
+	var/actual = CHECK_BITFIELD(mode_flags, COMBAT_MODE_ACTIVE)
 	if(actual)
 		if(locked)
 			disable_combat_mode(parent, FALSE, TRUE)
@@ -69,7 +72,7 @@
 			hud_icon.combat_on = TRUE
 			hud_icon.update_icon()
 		return
-	if(mode_flags & COMBAT_MODE_ACTIVE)
+	if(CHECK_BITFIELD(mode_flags, COMBAT_MODE_ACTIVE))
 		return
 	mode_flags |= COMBAT_MODE_ACTIVE
 	mode_flags &= ~COMBAT_MODE_INACTIVE
@@ -82,7 +85,7 @@
 			//Only INTJ boys can notice someone going combat
 			for(var/mob/living/carbon/human/H in view(src))
 				if(H != source)
-					if(H.mind?.diceroll(STAT_DATUM(int)) <= DICE_FAILURE)
+					if(H.mind?.diceroll(STAT_DATUM(int)) <= DICE_SUCCESS)
 						ignore_mobs |= H
 			if(!forced)
 				if(source.a_intent != INTENT_HELP)
@@ -99,12 +102,6 @@
 		if(source.mind?.combat_music)
 			var/sound/music = sound(get_sfx(source.mind.combat_music), TRUE)
 			source.playsound_local(turf_source = source, S = music, vol = 75, vary = 0, channel = CHANNEL_COMBAT, pressure_affected = FALSE)
-	//RegisterSignal(source, COMSIG_MOB_CLIENT_MOUSEMOVE, .proc/onMouseMove) //Skyrat change
-	RegisterSignal(source, COMSIG_MOVABLE_MOVED, .proc/on_move)
-	RegisterSignal(source, COMSIG_MOVABLE_BUMP, .proc/on_bump) //Skyrat change
-	RegisterSignal(source, COMSIG_MOB_CLIENT_MOUSEDOWN, .proc/onMouseUpDown) //Skyrat change
-	RegisterSignal(source, COMSIG_MOB_CLIENT_MOUSEUP, .proc/onMouseUpDown) //Skyrat change
-	//RegisterSignal(source, COMSIG_MOB_CLIENT_MOVE, .proc/on_client_move) //Skyrat change - no backwards delay
 	if(hud_icon)
 		hud_icon.combat_on = TRUE
 		hud_icon.update_icon()
@@ -116,7 +113,7 @@
 			hud_icon.combat_on = FALSE
 			hud_icon.update_icon()
 		return
-	if(!(mode_flags & COMBAT_MODE_ACTIVE))
+	if(!CHECK_BITFIELD(mode_flags, COMBAT_MODE_ACTIVE))
 		return
 	mode_flags &= ~COMBAT_MODE_ACTIVE
 	mode_flags |= COMBAT_MODE_INACTIVE
@@ -130,41 +127,22 @@
 		if(playsound)
 			source.playsound_local(source, 'sound/misc/ui_toggleoff.ogg', 50, FALSE, pressure_affected = FALSE) //Slightly modified version of the toggleon sound!
 		source.stop_sound_channel(CHANNEL_COMBAT)
-	UnregisterSignal(source, list(COMSIG_MOVABLE_MOVED, COMSIG_MOB_CLIENT_MOUSEDOWN, COMSIG_MOB_CLIENT_MOUSEUP, COMSIG_MOVABLE_BUMP)) //Skyrat change
 	if(hud_icon)
 		hud_icon.combat_on = FALSE
 		hud_icon.update_icon()
 	source.stop_active_blocking()
 	source.end_parry_sequence()
 
-///Changes the user direction to (try) keep match the pointer.
-/datum/component/combat_mode/proc/on_move(atom/movable/source, dir, atom/oldloc, forced)
-	var/mob/living/L = source
-	if(mode_flags & COMBAT_MODE_ACTIVE && L.client && lastmousedir && world.time < click_time && L.dir != lastmousedir) //Skyrat change
-		L.setDir(lastmousedir, ismousemovement = TRUE)
-
-/*/// Added movement delay if moving backward. //Skyrat change - unusued
-/datum/component/combat_mode/proc/on_client_move(mob/source, client/client, direction, n, oldloc, added_delay)
-	if(oldloc != n && direction == REVERSE_DIR(source.dir))
-		client.move_delay += added_delay*0.5*/
-
-/*///Changes the user direction to (try) match the pointer. Skyrat change - unused
-/datum/component/combat_mode/proc/onMouseMove(mob/source, object, location, control, params)
-	if(source.client.show_popup_menus)
-		return
-	source.face_atom(object, TRUE)
-	lastmousedir = source.dir*/
-
 /// Toggles whether the user is intentionally in combat mode. THIS should be the proc you generally use! Has built in visual/to other player feedback, as well as an audible cue to ourselves.
 /datum/component/combat_mode/proc/user_toggle_intentional_combat_mode(mob/living/source)
-	if(mode_flags & COMBAT_MODE_TOGGLED)
+	if(CHECK_BITFIELD(mode_flags, COMBAT_MODE_TOGGLED))
 		safe_disable_combat_mode(source)
-	else if(source.stat == CONSCIOUS && !(source.combat_flags & COMBAT_FLAG_HARD_STAMCRIT))
+	else if(source.stat == CONSCIOUS && !CHECK_BITFIELD(source.combat_flags, COMBAT_FLAG_HARD_STAMCRIT))
 		safe_enable_combat_mode(source)
 
 /// Enables intentionally being in combat mode. Please try to use the COMSIG_COMBAT_MODE_CHECK signal for feedback when possible.
 /datum/component/combat_mode/proc/safe_enable_combat_mode(mob/living/source, silent = FALSE, visible = TRUE)
-	if((mode_flags & COMBAT_MODE_TOGGLED) && (mode_flags & COMBAT_MODE_ACTIVE))
+	if(CHECK_BITFIELD(mode_flags, COMBAT_MODE_TOGGLED) && CHECK_BITFIELD(mode_flags, COMBAT_MODE_ACTIVE))
 		return TRUE
 	mode_flags |= COMBAT_MODE_TOGGLED
 	enable_combat_mode(source, silent, FALSE, visible, HAS_TRAIT(source, TRAIT_COMBAT_MODE_LOCKED), TRUE)
@@ -174,17 +152,17 @@
 
 /// Disables intentionally being in combat mode. Please try to use the COMSIG_COMBAT_MODE_CHECK signal for feedback when possible.
 /datum/component/combat_mode/proc/safe_disable_combat_mode(mob/living/source, silent = FALSE, visible = FALSE)
-	if(!(mode_flags & COMBAT_MODE_TOGGLED) && !(mode_flags & COMBAT_MODE_ACTIVE))
+	if(CHECK_BITFIELD(mode_flags, COMBAT_MODE_TOGGLED) && !CHECK_BITFIELD(mode_flags, COMBAT_MODE_ACTIVE))
 		return TRUE
 	mode_flags &= ~COMBAT_MODE_TOGGLED
-	disable_combat_mode(source, silent, FALSE, visible, !(mode_flags & COMBAT_MODE_ACTIVE), TRUE)
+	disable_combat_mode(source, silent, FALSE, visible, !CHECK_BITFIELD(mode_flags, COMBAT_MODE_ACTIVE), TRUE)
 	if(source.client)
 		source.client.show_popup_menus = TRUE
 	return TRUE
 
 /// Returns a field of flags that are contained in both the second arg and our bitfield variable.
 /datum/component/combat_mode/proc/check_flags(mob/living/source, flags)
-	return mode_flags & (flags)
+	return CHECK_BITFIELD(mode_flags, flags)
 
 /// Disables combat mode upon death.
 /datum/component/combat_mode/proc/on_death(mob/living/source)
@@ -197,8 +175,8 @@
 /// The screen button.
 /obj/screen/combattoggle
 	name = "combat mode"
-	icon = 'modular_skyrat/icons/mob/combat_intents.dmi'
-	icon_state = "combat_off"
+	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
+	icon_state = "combat"
 	var/combat_on = FALSE ///Wheter combat mode is enabled or not, so we don't have to store a reference.
 
 /obj/screen/combattoggle/Click()
@@ -216,22 +194,10 @@
 	else if(HAS_TRAIT(user, TRAIT_COMBAT_MODE_LOCKED))
 		icon_state = "combat_locked"
 	else
-		icon_state = "combat_off"
+		icon_state = "combat"
 
 /obj/screen/combattoggle/update_overlays()
 	. = ..()
 	var/mob/living/carbon/user = hud?.mymob
 	if(!(user?.client))
 		return
-
-//Skyrat changes down here
-/datum/component/combat_mode/proc/onMouseUpDown(mob/living/source, object, location, control, params)
-	if(source.client.show_popup_menus)
-		return
-	source.face_atom(location, TRUE)
-	lastmousedir = source.dir
-	click_time = world.time + 30
-
-/datum/component/combat_mode/proc/on_bump(mob/living/source, bumped)
-	on_move(source)
-//End of skyrat changes

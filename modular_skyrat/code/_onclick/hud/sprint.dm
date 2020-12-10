@@ -1,9 +1,7 @@
-/obj/screen/mov_intent
-	icon = 'modular_citadel/icons/ui/screen_midnight.dmi'
-
+//Sprint button shit
 /obj/screen/sprintbutton
 	name = "toggle sprint"
-	icon = 'modular_citadel/icons/ui/screen_midnight.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "act_sprint"
 	layer = ABOVE_HUD_LAYER - 0.1
 	var/mutable_appearance/flashy
@@ -18,11 +16,11 @@
 	if(!istype(user))
 		return
 	if(user.combat_flags & COMBAT_FLAG_SPRINT_ACTIVE)
-		icon_state = "act_sprint_on"
+		icon_state = "[initial(icon_state)]_on"
 	else if(HAS_TRAIT(user, TRAIT_SPRINT_LOCKED))
-		icon_state = "act_sprint_locked"
+		icon_state = "[initial(icon_state)]_locked"
 	else
-		icon_state = "act_sprint"
+		icon_state = initial(icon_state)
 
 /obj/screen/sprintbutton/update_overlays()
 	. = ..()
@@ -37,9 +35,7 @@
 			flashy.color = user.client.prefs.hud_toggle_color
 		. += flashy
 
-//Sprint buffer onscreen code.
-/datum/hud/var/obj/screen/sprint_buffer/sprint_buffer
-
+//Sprint buffer onscreen code
 /obj/screen/sprint_buffer
 	name = "sprint buffer"
 	icon = 'icons/effects/progessbar.dmi'

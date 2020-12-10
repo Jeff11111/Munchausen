@@ -2,12 +2,8 @@
 /mob/living/carbon
 	var/dodge_parry = DP_PARRY
 
-//Verb for switching between dodging and parrying
-/mob/verb/dodge_parry()
-	set name = "Dodge/Parry"
-	set category = "IC"
-	set desc = "Choose between dodging and parrying"
-
+//proc for switching between dodging and parrying
+/mob/proc/toggle_dodge_parry()
 	if(!ishuman(src))
 		to_chat(src, "<span class='warning'>My inhuman form is incapable of dodging or parrying.</span>")
 		return

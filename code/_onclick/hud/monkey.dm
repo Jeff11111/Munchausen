@@ -24,7 +24,7 @@
 
 	using = new /obj/screen/drop()
 	using.icon = ui_style
-	using.screen_loc = ui_drop_throw
+	using.screen_loc = ui_drop
 	using.hud = src
 	static_inventory += using
 
@@ -81,7 +81,7 @@
 
 	throw_icon = new /obj/screen/throw_catch()
 	throw_icon.icon = ui_style
-	throw_icon.screen_loc = ui_drop_throw
+	throw_icon.screen_loc = ui_throw
 	throw_icon.hud = src
 	hotkeybuttons += throw_icon
 
@@ -95,7 +95,7 @@
 
 	pull_icon = new /obj/screen/pull()
 	pull_icon.icon = ui_style
-	pull_icon.screen_loc = ui_pull_resist
+	pull_icon.screen_loc = ui_pull
 	pull_icon.hud = src
 	pull_icon.update_icon()
 	static_inventory += pull_icon
@@ -119,7 +119,7 @@
 
 	using = new /obj/screen/resist()
 	using.icon = ui_style
-	using.screen_loc = ui_pull_resist
+	using.screen_loc = ui_pull
 	using.hud = src
 	hotkeybuttons += using
 

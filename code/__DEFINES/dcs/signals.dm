@@ -402,6 +402,14 @@
 #define COMSIG_LIVING_COMBAT_DISABLED "combatmode_disabled"			//from base of datum/component/combat_mode/disable_combat_mode() (was_forced)
 #define COMSIG_COMBAT_MODE_CHECK "combatmode_check"					//called when checking the combat mode flags (enabled/disabled/forced)
 
+//Fix eye
+#define COMSIG_TOGGLE_FIXEYE "toggle_fixeye"
+#define COMSIG_ENABLE_FIXEYE "enable_fixeye"
+#define COMSIG_DISABLE_FIXEYE "disable_fixeye"
+#define COMSIG_LIVING_FIXEYE_ENABLED "fixeye_enabled"
+#define COMSIG_LIVING_FIXEYE_DISABLED "fixeye_disabled"
+#define COMSIG_FIXEYE_CHECK	"fixeye_check"
+
 //Nanites
 #define COMSIG_HAS_NANITES "has_nanites"						//() returns TRUE if nanites are found
 #define COMSIG_NANITE_IS_STEALTHY "nanite_is_stealthy"			//() returns TRUE if nanites have stealth

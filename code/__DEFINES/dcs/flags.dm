@@ -83,3 +83,11 @@
 #define COMBAT_MODE_ACTIVE					(1<<1)
 /// combat mode is not active
 #define COMBAT_MODE_INACTIVE				(1<<2)
+
+// Fixeye flags.
+/// The user wants fixeye on
+#define FIXEYE_TOGGLED					(1<<0)
+/// fixeye is active.
+#define FIXEYE_ACTIVE					(1<<1)
+/// fixeye is not active
+#define FIXEYE_INACTIVE				(1<<2)
