@@ -703,7 +703,7 @@
 	for(var/obj/effect/decal/cleanable/trail_holder/nice in start)
 		connected_trail = nice
 		if(connected_trail)
-			var/dire_straits = connected_trail.existing_dirs[length(connected_trail.existing_dirs)] | direction
+			var/dire_straits = turn(connected_trail.existing_dirs[length(connected_trail.existing_dirs)] | direction, 180)
 			connected_trail.existing_dirs -= connected_trail.existing_dirs[length(connected_trail.existing_dirs)]
 			connected_trail.existing_dirs |= dire_straits
 			connected_trail.cut_overlays()
