@@ -38,9 +38,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/obj/screen/combattoggle/combat_mode
 	var/obj/screen/fixeye/fixeye
 	var/obj/screen/dodge_parry/dodge_parry
-	var/obj/screen/kick/kick
-	var/obj/screen/jump/jump
-	var/obj/screen/bite/bite
+	var/obj/screen/kick_jump_bite/special_attacks
 	var/obj/screen/wield/wielded
 	var/obj/screen/resist/resist
 	var/obj/screen/sprintbutton/sprint
@@ -120,9 +118,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	QDEL_NULL(combat_mode)
 	QDEL_NULL(fixeye)
 	QDEL_NULL(dodge_parry)
-	QDEL_NULL(kick)
-	QDEL_NULL(bite)
-	QDEL_NULL(jump)
+	QDEL_NULL(special_attacks)
 	QDEL_NULL(wielded)
 	QDEL_NULL(resist)
 	QDEL_NULL(sprint)

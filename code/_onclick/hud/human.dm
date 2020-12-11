@@ -174,20 +174,10 @@
 	dodge_parry.hud = src
 	static_inventory += dodge_parry
 
-	kick = new /obj/screen/kick
-	kick.screen_loc = ui_kick
-	kick.hud = src
-	static_inventory += kick
-	
-	jump = new /obj/screen/jump
-	jump.screen_loc = ui_jump
-	jump.hud = src
-	static_inventory += jump
-
-	bite = new /obj/screen/bite
-	bite.screen_loc = ui_bite
-	bite.hud = src
-	static_inventory += bite
+	special_attacks = new /obj/screen/kick_jump_bite
+	special_attacks.screen_loc = ui_specialattack
+	special_attacks.hud = src
+	static_inventory += special_attacks
 
 	sprint_buffer = new /obj/screen/sprint_buffer
 	sprint_buffer.screen_loc = ui_sprintbufferloc
