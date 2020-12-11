@@ -49,7 +49,7 @@
 	var/normal_integrity = AIRLOCK_INTEGRITY_N
 	integrity_failure = 0.25
 	damage_deflection = AIRLOCK_DAMAGE_DEFLECTION_N
-	autoclose = FALSE
+	autoclose = TRUE
 	secondsElectrified = 0 //How many seconds remain until the door is no longer electrified. -1 if it is permanently electrified until someone fixes it.
 	assemblytype = /obj/structure/door_assembly
 	normalspeed = 1
