@@ -69,10 +69,10 @@
 	var/datum/action/item_action/storage_gather_mode/modeswitch_action
 
 	//Screen variables: Do not mess with these vars unless you know what you're doing. They're not defines so storage that isn't in the same location can be supported in the future.
-	var/screen_max_columns = 7							//These two determine maximum screen sizes.
+	var/screen_max_columns = 6							//These two determine maximum screen sizes.
 	var/screen_max_rows = INFINITY
-	var/screen_pixel_x = 16								//These two are pixel values for screen loc of boxes and closer
-	var/screen_pixel_y = 16
+	var/screen_pixel_x = 0								//These two are pixel values for screen loc of boxes and closer
+	var/screen_pixel_y = 12
 	var/screen_start_x = 4								//These two are where the storage starts being rendered, screen_loc wise.
 	var/screen_start_y = 2
 	//End
