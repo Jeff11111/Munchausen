@@ -32,7 +32,27 @@
 	to_chat(user, "<span class='notice'>You will now apply the medspray's contents in [squirt_mode ? "short bursts":"extended sprays"]. You'll now use [amount_per_transfer_from_this] units per use.</span>")
 
 /obj/item/reagent_containers/medspray/attack(mob/living/L, mob/user, def_zone)
-	INVOKE_ASYNC(src, .proc/attempt_spray, L, user, def_zone)		// this is shitcode because the params for attack aren't even right but i'm not in the mood to refactor right now.
+	if(user.a_intent == INTENT_HARM)
+		return ..()
+	INVOKE_ASYNC(src, .proc/attempt_spray, L, user, def_zone)
+
+/obj/item/reagent_containers/medspray/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	if(!ismob(target) && proximity_flag)
+		attempt_spray_atom(target, user)
+		return
+	. = ..()
+
+/obj/item/reagent_containers/medspray/proc/attempt_spray_atom(atom/target, mob/user)
+	if(!reagents || !reagents.total_volume)
+		to_chat(user, "<span class='warning'>[src] is empty!</span>")
+		return
+	if(!do_after(user, 2 SECONDS, TRUE, target))
+		to_chat(user, "<span class='warnin'>I need to stand still!</span>")
+		return
+	playsound(src, 'sound/effects/spray2.ogg', 50, 1, -6)
+	var/fraction = min(amount_per_transfer_from_this/reagents.total_volume, 1)
+	reagents.reaction(target, apply_type, fraction)
+	reagents.trans_to(target, amount_per_transfer_from_this)
 
 /obj/item/reagent_containers/medspray/proc/attempt_spray(mob/living/L, mob/user, def_zone)
 	if(!reagents || !reagents.total_volume)
