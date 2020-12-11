@@ -33,11 +33,11 @@
 	source.client?.screen |= hud_icon
 
 //Toggles intentionally between on and off
-/datum/component/fixeye/proc/user_toggle_fixeye(mob/living/source)
+/datum/component/fixeye/proc/user_toggle_fixeye(mob/living/source, silent = TRUE, forced = FALSE)
 	if(CHECK_BITFIELD(fixeye_flags, FIXEYE_TOGGLED))
-		safe_disable_fixeye(source)
+		safe_disable_fixeye(source, silent, forced)
 	else if(source.stat == CONSCIOUS && !(source.combat_flags & COMBAT_FLAG_HARD_STAMCRIT))
-		safe_enable_fixeye(source)
+		safe_enable_fixeye(source, silent, forced)
 
 //Intentionally toggling on
 /datum/component/fixeye/proc/safe_enable_fixeye(mob/living/source, silent = FALSE, forced = FALSE)

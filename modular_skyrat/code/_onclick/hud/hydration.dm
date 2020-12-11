@@ -3,6 +3,12 @@
 	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "hydration"
 
+/obj/screen/hydration/Click(location, control, params)
+	. = ..()
+	var/datum/component/mood/mood = usr.GetComponent(/datum/component/mood)
+	if(mood)
+		mood.print_mood(usr)
+
 /obj/screen/hydration/update_icon()
 	. = ..()
 	switch(hud?.mymob?.hydration)
