@@ -3733,6 +3733,9 @@
 /area/security/prison)
 "ahT" = (
 /obj/effect/turf_decal/bot,
+/obj/machinery/vending/kink{
+	premium = list(/obj/item/clothing/accessory/skullcodpiece/fake = 3, /obj/item/reagent_containers/glass/bottle/hexacrocin = 10, /obj/item/clothing/under/pants/chaps = 5, /obj/item/crowbar = 1, /obj/item/weldingtool = 1)
+	},
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -12104,6 +12107,7 @@
 /area/crew_quarters/dorms)
 "ayP" = (
 /obj/effect/turf_decal/bot,
+/obj/machinery/vending/kink,
 /obj/machinery/light/small{
 	dir = 1;
 	light_color = "#ffc1c1"
@@ -23159,6 +23163,7 @@
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/locker)
 "aUR" = (
+/obj/machinery/vending/kink,
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/locker)
 "aUS" = (

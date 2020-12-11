@@ -44870,6 +44870,7 @@
 	},
 /area/maintenance/bar)
 "bEN" = (
+/obj/machinery/vending/kink,
 /obj/effect/decal/cleanable/semen,
 /turf/open/floor/wood,
 /area/maintenance/bar)
@@ -72662,6 +72663,7 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/neutral,
+/obj/machinery/vending/kink,
 /obj/effect/turf_decal/trimline/neutral/filled/line{
 	dir = 1
 	},

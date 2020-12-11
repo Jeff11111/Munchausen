@@ -7188,6 +7188,7 @@
 /turf/open/floor/plasteel,
 /area/crew_quarters/locker)
 "arl" = (
+/obj/machinery/vending/kink,
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
@@ -28938,6 +28939,7 @@
 /turf/open/floor/plasteel,
 /area/maintenance/disposal)
 "bkO" = (
+/obj/machinery/vending/kink,
 /obj/effect/turf_decal/bot,
 /turf/open/floor/plasteel,
 /area/quartermaster/office)

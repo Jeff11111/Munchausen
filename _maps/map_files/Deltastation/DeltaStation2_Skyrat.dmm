@@ -61029,6 +61029,7 @@
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/locker)
 "cGM" = (
+/obj/machinery/vending/kink,
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/locker)
 "cGN" = (
@@ -99797,6 +99798,7 @@
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/heads/hos)
 "nyN" = (
+/obj/machinery/vending/kink,
 /turf/open/floor/plating,
 /area/crew_quarters/abandoned_gambling_den)
 "nAS" = (
@@ -103159,6 +103161,9 @@
 /area/security/prison)
 "wTn" = (
 /obj/effect/turf_decal/bot,
+/obj/machinery/vending/kink{
+	premium = list(/obj/item/clothing/accessory/skullcodpiece/fake = 3, /obj/item/reagent_containers/glass/bottle/hexacrocin = 10, /obj/item/clothing/under/pants/chaps = 5, /obj/item/crowbar = 1, /obj/item/weldingtool = 1)
+	},
 /obj/machinery/light/small{
 	dir = 1
 	},

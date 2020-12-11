@@ -54529,6 +54529,7 @@
 /turf/open/floor/plasteel/dark,
 /area/shuttle/arrival)
 "gcj" = (
+/obj/machinery/vending/kink,
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
 	},
@@ -58648,6 +58649,7 @@
 /obj/structure/cable{
 	icon_state = "1-4"
 	},
+/obj/machinery/vending/kink,
 /turf/open/floor/plasteel,
 /area/security/prison)
 "mHy" = (
@@ -58989,6 +58991,7 @@
 /turf/open/floor/plasteel/dark,
 /area/maintenance/department/crew_quarters/dorms)
 "noC" = (
+/obj/machinery/vending/kink,
 /turf/open/floor/wood,
 /area/maintenance/department/crew_quarters/dorms)
 "noM" = (
