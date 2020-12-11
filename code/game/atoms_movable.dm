@@ -297,9 +297,9 @@
 
 		user_momentum = 1 / user_momentum // convert from ds to the tiles per ds that throw_at uses.
 
-		if (get_dir(thrower, target) & last_move)
+		if(get_dir(thrower, target) & last_move)
 			user_momentum = user_momentum //basically a noop, but needed
-		else if (get_dir(target, thrower) & last_move)
+		else if(get_dir(target, thrower) & last_move)
 			user_momentum = -user_momentum //we are moving away from the target, lets slowdown the throw accordingly
 		else
 			user_momentum = 0
