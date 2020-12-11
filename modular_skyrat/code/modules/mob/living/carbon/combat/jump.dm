@@ -38,9 +38,9 @@
 
 	if(can_see(src, A, 7))
 		if(ismob(A))
-			visible_message("<span class='warning'><b>[src]>/b> leaps at <b>[A]</b>!</span>", "<span class='danger'>I leap at <b>[A]</b>!</span>")
+			visible_message("<span class='warning'><b>[src]</b> leaps at <b>[A]</b>!</span>", "<span class='danger'>I leap at <b>[A]</b>!</span>")
 		else
-			visible_message("<span class='warning'><b>[src]>/b> leaps at [A]!</span>", "<span class='danger'>I leap at [A]!</span>")
+			visible_message("<span class='warning'><b>[src]</b> leaps at [A]!</span>", "<span class='danger'>I leap at [A]!</span>")
 	else
 		visible_message("<span class='warning'><b>[src]<b> leaps!</span>", "<span class='danger'>I leap!</span>")
 
