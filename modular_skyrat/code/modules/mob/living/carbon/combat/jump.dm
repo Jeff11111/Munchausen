@@ -10,7 +10,7 @@
 
 //Jumping (tackling)
 /mob/living/carbon/proc/perform_jump(atom/A, params)
-	if(!in_throw_mode || buckling)
+	if(buckling)
 		return
 
 	if(HAS_TRAIT(src, TRAIT_HULK))
