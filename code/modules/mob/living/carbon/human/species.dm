@@ -1534,23 +1534,24 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(target != user)
 			log_combat(user, target, "shaked")
 		return TRUE
-	switch(user.zone_selected)
-		if(BODY_ZONE_PRECISE_MOUTH)
-			if(we_breathe && we_lung)
-				user.do_cpr(target, MOUTH_CPR)
-			else if(we_breathe && !we_lung)
-				to_chat(user, "<span class='warning'>I have no lungs, i cannot peform mouth to mouth!</span>")
-			else if(!we_breathe)
-				to_chat(user, "<span class='notice'>I don't breathe, i cannot perform mouth to mouth!</span>")
-			return TRUE
-		if(BODY_ZONE_CHEST)
-			user.do_cpr(target, CHEST_CPR)
-			return TRUE
-		else
-			target.help_shake_act(user)
-			if(target != user)
-				log_combat(user, target, "shaked")
-			return TRUE
+	if(user != target)
+		switch(user.zone_selected)
+			if(BODY_ZONE_PRECISE_MOUTH)
+				if(we_breathe && we_lung)
+					user.do_cpr(target, MOUTH_CPR)
+				else if(we_breathe && !we_lung)
+					to_chat(user, "<span class='warning'>I have no lungs, i cannot peform mouth to mouth!</span>")
+				else if(!we_breathe)
+					to_chat(user, "<span class='notice'>I don't breathe, i cannot perform mouth to mouth!</span>")
+				return TRUE
+			if(BODY_ZONE_CHEST)
+				user.do_cpr(target, CHEST_CPR)
+				return TRUE
+			else
+				target.help_shake_act(user)
+				if(target != user)
+					log_combat(user, target, "shaked")
+				return TRUE
 
 /datum/species/proc/grab(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
 	if(target.check_martial_melee_block())
