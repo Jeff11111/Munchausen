@@ -707,7 +707,6 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 		owner.update_inv_wear_suit()
 	if(flags & ITEM_SLOT_ICLOTHING)
 		owner.update_inv_w_uniform()
-	//skyrat edit
 	if(flags & ITEM_SLOT_UNDERWEAR)
 		owner.update_inv_w_underwear()
 	if(flags & ITEM_SLOT_SOCKS)
@@ -718,7 +717,6 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 		owner.update_inv_ears_extra()
 	if(flags & ITEM_SLOT_WRISTS)
 		owner.update_inv_wrists()
-	//
 	if(flags & ITEM_SLOT_GLOVES)
 		owner.update_inv_gloves()
 	if(flags & ITEM_SLOT_EYES)

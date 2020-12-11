@@ -776,13 +776,6 @@ There are several things that need to be remembered:
 		client.screen += I
 	update_observer_view(I)
 
-//update whether our suit store item appears on our hud.
-/mob/living/carbon/human/update_hud_suit_store(obj/item/I)
-	I.screen_loc = ui_sstore1
-	if(client && hud_used && hud_used.hud_shown)
-		client.screen += I
-	update_observer_view(I)
-
 /*
 Does everything in relation to building the /mutable_appearance used in the mob's overlays list
 covers:
