@@ -489,7 +489,6 @@
 /turf/open/floor/plasteel,
 /area/crew_quarters/fitness/recreation)
 "abe" = (
-/obj/machinery/vending/kink,
 /obj/machinery/status_display/evac{
 	pixel_x = 32;
 	pixel_y = 32
@@ -57621,7 +57620,6 @@
 /turf/open/floor/plasteel/dark,
 /area/maintenance/department/crew_quarters/dorms)
 "noC" = (
-/obj/machinery/vending/kink,
 /turf/open/floor/wood,
 /area/maintenance/department/crew_quarters/dorms)
 "noM" = (

@@ -8482,9 +8482,6 @@
 /area/security/detectives_office)
 "asX" = (
 /obj/effect/turf_decal/bot,
-/obj/machinery/vending/kink{
-	premium = list(/obj/item/clothing/accessory/skullcodpiece/fake = 3, /obj/item/reagent_containers/glass/bottle/hexacrocin = 10, /obj/item/clothing/under/pants/chaps = 5)
-	},
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -17466,7 +17463,6 @@
 /turf/open/floor/plasteel,
 /area/crew_quarters/locker)
 "aQU" = (
-/obj/machinery/vending/kink,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
@@ -59494,7 +59490,6 @@
 /turf/open/floor/plasteel/dark/side,
 /area/security/brig)
 "odx" = (
-/obj/machinery/vending/kink,
 /turf/open/floor/plating,
 /area/maintenance/bar)
 "oem" = (
@@ -61346,7 +61341,6 @@
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 4
 	},
-/obj/machinery/vending/kink,
 /obj/machinery/light{
 	dir = 4;
 	light_color = "#e8eaff"

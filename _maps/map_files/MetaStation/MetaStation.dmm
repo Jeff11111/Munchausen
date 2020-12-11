@@ -23738,7 +23738,6 @@
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/locker)
 "aUR" = (
-/obj/machinery/vending/kink,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 1
 	},
@@ -62229,7 +62228,6 @@
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
 "cto" = (
-/obj/machinery/vending/kink,
 /turf/open/floor/plating,
 /area/maintenance/port/aft)
 "ctq" = (

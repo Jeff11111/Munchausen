@@ -2900,16 +2900,6 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/centcom/ferry)
-"cMB" = (
-/obj/machinery/vending/kink{
-	custom_premium_price = 0;
-	custom_price = 0;
-	default_price = 0;
-	extended_inventory = 1;
-	extra_price = 0;
-	fair_market_price = 0;
-	product_slogans = "Hi, Captain. Want to call an ERT team? Yeah, we all know you get so little action that you'd rather call an ERP Team instead. Get help with that right here!;There's no cock like horsecock, send my asshole into shock!;There's no kinkshaming here. There's just poor performance shaming."
-	},
 /turf/open/floor/carpet/royalblack,
 /area/centcom/holding/cafedorms)
 "cML" = (
@@ -4596,16 +4586,6 @@
 	},
 /turf/open/floor/plating/abductor,
 /area/abductor_ship)
-"eiJ" = (
-/obj/machinery/vending/kink{
-	custom_premium_price = 0;
-	custom_price = 0;
-	default_price = 0;
-	extended_inventory = 1;
-	extra_price = 0;
-	fair_market_price = 0;
-	product_slogans = "Hi, Captain. Want to call an ERT team? Yeah, we all know you get so little action that you'd rather call an ERP Team instead. Get help with that right here!;There's no cock like horsecock, send my asshole into shock!;There's no kinkshaming here. There's just poor performance shaming."
-	},
 /turf/open/indestructible/hotelwood,
 /area/centcom/holding/cafe)
 "eiM" = (

@@ -13518,7 +13518,6 @@
 /turf/open/floor/plating,
 /area/hallway/primary/central)
 "fcU" = (
-/obj/machinery/vending/kink,
 /turf/open/floor/plasteel,
 /area/hallway/primary/fore)
 "fdu" = (
@@ -21179,7 +21178,6 @@
 /turf/open/floor/plasteel/white,
 /area/medical/paramedic)
 "jER" = (
-/obj/machinery/vending/kink,
 /turf/open/floor/plating,
 /area/maintenance/bar)
 "jFl" = (

@@ -18428,10 +18428,6 @@
 	},
 /turf/open/indestructible/hotelwood,
 /area/centcom/holding)
-"WE" = (
-/obj/machinery/vending/kink{
-	extended_inventory = 1
-	},
 /turf/open/floor/wood,
 /area/centcom/holding)
 "WH" = (

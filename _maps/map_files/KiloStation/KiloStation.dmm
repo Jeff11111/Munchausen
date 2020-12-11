@@ -23318,7 +23318,6 @@
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
 	},
-/obj/machinery/vending/kink,
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/locker)
 "aMG" = (
@@ -33594,7 +33593,6 @@
 /obj/structure/sign/poster/contraband/grey_tide{
 	pixel_y = 32
 	},
-/obj/machinery/vending/kink,
 /turf/open/floor/plating{
 	icon_state = "platingdmg3"
 	},
