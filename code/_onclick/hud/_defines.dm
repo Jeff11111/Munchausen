@@ -41,8 +41,13 @@
 	var/x_off = which == 1 ? 1 : 0
 	return "CENTER-[x_off],SOUTH+1"
 
+//Widescreen (default location) for pockets
 #define ui_storage1 "CENTER+1,SOUTH"
 #define ui_storage2 "CENTER+2,SOUTH"
+
+//Non-widescreen
+#define ui_boxstorage1 "CENTER-4,SOUTH+1"
+#define ui_boxstorage2 "CENTER-3,SOUTH+1"
 
 #define ui_borg_sensor "CENTER-3:15, SOUTH:5"		//borgs
 #define ui_borg_lamp "CENTER-4:15, SOUTH:5"			//borgs
@@ -80,8 +85,8 @@
 #define ui_drop "EAST-1,SOUTH+1"
 #define ui_skills "EAST-6:-16,SOUTH:15"
 #define ui_building "EAST-6:-16,SOUTH"
-#define ui_language_menu "EAST-6,SOUTH:15"
-#define ui_crafting	"EAST-6,SOUTH"
+#define ui_crafting "EAST-6,SOUTH:15"
+#define ui_language_menu	"EAST-6,SOUTH"
 #define ui_combatintent "EAST-5,SOUTH"
 #define ui_combat_toggle "EAST-4,SOUTH"
 #define ui_acti "EAST-3,SOUTH"
@@ -94,11 +99,6 @@
 //lesser hud idk
 #define ui_acti_alt "EAST-1:28,SOUTH:5"
 
-//Non-widescreen (not used nor supported properly!)
-#define ui_boxcraft "EAST-4:22,SOUTH+1:6"
-#define ui_boxarea "EAST-4:6,SOUTH+1:6"
-#define ui_boxlang "EAST-5:22,SOUTH+1:6"
-
 //Borg shit
 #define ui_borg_pull "EAST-2:26,SOUTH+1:7"
 #define ui_borg_radio "EAST-1:28,SOUTH+1:7"
@@ -106,10 +106,11 @@
 
 //Upper-middle right (alerts)
 #define ui_alert1 "EAST,NORTH"
-#define ui_alert2 "EAST,NORTH-1"
-#define ui_alert3 "EAST,NORTH-2"
-#define ui_alert4 "EAST,NORTH-3"
-#define ui_alert5 "EAST,NORTH-4"
+#define ui_alert2 "EAST-1,NORTH"
+#define ui_alert3 "EAST,NORTH-1"
+#define ui_alert4 "EAST-1,NORTH-1"
+#define ui_alert5 "EAST,NORTH-2"
+#define ui_alert6 "EAST-1,NORTH-2"
 
 //Middle right (status indicators)
 #define ui_internal "EAST:-2,CENTER+3"
@@ -125,19 +126,19 @@
 //Middle of the screen
 #define ui_fov "CENTER-7,CENTER-7"
 
-//living
+//Living
 #define ui_living_pull "EAST-1:28,CENTER-2:15"
 #define ui_living_health "EAST-1:28,CENTER:15"
 
-//borgs
+//Borgs
 #define ui_borg_health "EAST-1:28,CENTER-1:15"		//borgs have the health display where humans have the pressure damage indicator.
 
-//aliens
+//Aliens
 #define ui_alien_health "EAST,CENTER-1:15"	//aliens have the health display where humans have the pressure damage indicator.
 #define ui_alienplasmadisplay "EAST,CENTER-2:15"
 #define ui_alien_queen_finder "EAST,CENTER-3:15"
 
-//constructs
+//Constructs
 #define ui_construct_pull "EAST,CENTER-2:15"
 #define ui_construct_health "EAST,CENTER:15"  //same as borgs and humans
 

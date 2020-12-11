@@ -635,7 +635,9 @@ so as to remain in compliance with the most up-to-date laws."
 			if(4)
 				. = ui_alert4
 			if(5)
-				. = ui_alert5 // Right now there's 5 slots
+				. = ui_alert5
+			if(6)
+				. = ui_alert6 // Right now there's 6 slots
 			else
 				. = ""
 		alert.screen_loc = .

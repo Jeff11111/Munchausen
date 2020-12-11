@@ -671,16 +671,22 @@ There are several things that need to be remembered:
 		inv = hud_used.inv_slots[SLOT_R_STORE]
 		inv.update_icon()
 
+		var/widescreenlayout = FALSE
+		if(client?.prefs?.widescreenpref)
+			widescreenlayout = TRUE
+		
 		if(l_store)
 			l_store.screen_loc = ui_storage1
 			if(hud_used.hud_shown)
-				client.screen += l_store
+				if(widescreenlayout || hud_used.extra_shown)
+					client.screen += l_store
 			update_observer_view(l_store)
 
 		if(r_store)
 			r_store.screen_loc = ui_storage2
 			if(hud_used.hud_shown)
-				client.screen += r_store
+				if(widescreenlayout || hud_used.extra_shown)
+					client.screen += r_store
 			update_observer_view(r_store)
 
 /mob/living/carbon/human/update_inv_wear_mask()

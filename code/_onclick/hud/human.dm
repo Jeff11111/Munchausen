@@ -109,9 +109,9 @@
 	..()
 	owner.overlay_fullscreen("see_through_darkness", /obj/screen/fullscreen/see_through_darkness)
 
-	var/widescreenlayout = FALSE //CIT CHANGE - adds support for different hud layouts depending on widescreen pref
-	if(owner.client && owner.client.prefs && owner.client.prefs.widescreenpref) //CIT CHANGE - ditto
-		widescreenlayout = TRUE // CIT CHANGE - ditto
+	var/widescreenlayout = FALSE
+	if(owner?.client?.prefs?.widescreenpref)
+		widescreenlayout = TRUE
 
 	var/obj/screen/using
 	var/obj/screen/inventory/inv_box
@@ -264,17 +264,29 @@
 	inv_box.name = "pockets 1"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "pocket"
-	inv_box.screen_loc = ui_storage1
+	if(!widescreenlayout)
+		inv_box.screen_loc = ui_storage1
+	else
+		inv_box.screen_loc = ui_boxstorage1
 	inv_box.slot_id = SLOT_L_STORE
-	static_inventory += inv_box
+	if(!widescreenlayout)
+		static_inventory += inv_box
+	else
+		extra_inventory += inv_box
 
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "pockets 2"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "pocket"
-	inv_box.screen_loc = ui_storage2
+	if(!widescreenlayout)
+		inv_box.screen_loc = ui_storage2
+	else
+		inv_box.screen_loc = ui_boxstorage2
 	inv_box.slot_id = SLOT_R_STORE
-	static_inventory += inv_box
+	if(!widescreenlayout)
+		static_inventory += inv_box
+	else
+		extra_inventory += inv_box
 
 	resist = new /obj/screen/resist()
 	resist.icon = ui_style

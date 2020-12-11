@@ -19,7 +19,7 @@
 /datum/component/storage/concrete/organ/proc/update_insides()
 	for(var/obj/item/I in contents())
 		I.stored_in = parent
-		RegisterSignal(I, COMSIG_CLICK, /datum/component/storage/concrete/organ.proc/override_click)
+		RegisterSignal(I, COMSIG_CLICK, /datum/component/storage/concrete/organ.proc/override_click, TRUE)
 
 //Revert the opacity proper
 /datum/component/storage/concrete/organ/Destroy()
