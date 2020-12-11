@@ -33,15 +33,9 @@
 	var/list/msg = list()
 
 	var/list/missing = get_missing_limbs()
-	var/list/disabled = list()
 	for(var/X in bodyparts)
 		var/obj/item/bodypart/BP = X
-		//skyrat edit
-		if((BP.is_disabled()) && (BP.is_disabled() != BODYPART_DISABLED_PAIN))
-			disabled += BP
-		//
 		missing -= BP.body_zone
-		//skyrat edit
 		for(var/obj/item/I in BP.embedded_objects)
 			if(I.isEmbedHarmless())
 				msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] stuck to [t_his] [BP.name]!</B>"
@@ -58,14 +52,7 @@
 					for(var/obj/item/organ/O in getorganszone(BP.body_zone))
 						for(var/i in O.surgical_examine(user))
 							msg += "<B>[icon2html(O.examine_icon ? O.examine_icon : O, user, O.examine_icon_state ? O.examine_icon_state : O.icon_state)] [i]</B>"
-		//
 
-	var/list/disabled_names = list()
-	for(var/X in disabled)
-		var/obj/item/bodypart/BP = X
-		disabled_names |= BP.name
-	if(length(disabled_names))
-		msg += "<B>[capitalize(t_his)] [english_list(disabled_names)] [length(disabled_names) > 1 ? "are" : "is"] disabled!</B>"
 	//stores missing limbs
 	var/l_limbs_missing = 0
 	var/r_limbs_missing = 0

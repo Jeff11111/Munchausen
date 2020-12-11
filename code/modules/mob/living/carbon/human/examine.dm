@@ -201,11 +201,8 @@
 	var/list/dont_repeat_soaked = list()
 	var/list/msg = list()
 	var/list/missing = ALL_BODYPARTS
-	var/list/disabled = list()
 	if(!screwy_self)
 		for(var/obj/item/bodypart/BP in bodyparts)
-			if((BP.is_disabled()) && (BP.is_disabled() != BODYPART_DISABLED_PAIN))
-				disabled += BP
 			for(var/obj/item/I in BP.embedded_objects)
 				if(I.isEmbedHarmless())
 					msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] stuck to [t_his] [BP.name]!</B>"
@@ -240,14 +237,6 @@
 						msg += bingus
 						dont_repeat_soaked |= bingus
 			missing -= BP.body_zone
-
-	if(!screwy_self)
-		var/list/disabled_names = list()
-		for(var/X in disabled)
-			var/obj/item/bodypart/BP = X
-			disabled_names |= BP.name
-		if(length(disabled_names))
-			msg += "<B>[capitalize(t_his)] [english_list(disabled_names)] [length(disabled_names) > 1 ? "are" : "is"] disabled!</B>"
 
 	//Teeth
 	if(!screwy_self)
