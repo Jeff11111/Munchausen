@@ -18,6 +18,8 @@
 				H.dodge_parry = DP_DODGE
 				to_chat(src, "<span class='notice'>I will now dodge incoming attacks.</span>")
 	else
+		if(H.dodge_parry == new_dp)
+			return
 		H.dodge_parry = new_dp
 		switch(H.dodge_parry)
 			if(DP_PARRY)
