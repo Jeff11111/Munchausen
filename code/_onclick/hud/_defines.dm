@@ -113,15 +113,15 @@
 #define ui_alert6 "EAST-1,NORTH-2"
 
 //Middle right (status indicators)
-#define ui_internal "EAST:-2,CENTER+3"
-#define ui_nutrition "EAST:-2,CENTER+2"
-#define ui_hydration "EAST:-2,CENTER+2"
-#define ui_fixeye "EAST,CENTER+1"
-#define ui_stamina "EAST,CENTER"
-#define ui_mood "EAST,CENTER-1"
-#define ui_pulse "EAST,CENTER-2"
-#define ui_pain	"EAST,CENTER-3"
-#define ui_healthdoll "EAST,CENTER-4"
+#define ui_internal "EAST:-2,CENTER+2"
+#define ui_nutrition "EAST:-2,CENTER+1"
+#define ui_hydration "EAST:-2,CENTER+1"
+#define ui_fixeye "EAST,CENTER"
+#define ui_stamina "EAST,CENTER-1"
+#define ui_mood "EAST,CENTER-2"
+#define ui_pulse "EAST,CENTER-3"
+#define ui_pain	"EAST,CENTER-4"
+#define ui_healthdoll "EAST,CENTER-5"
 
 //Middle of the screen
 #define ui_fov "CENTER-7,CENTER-7"
