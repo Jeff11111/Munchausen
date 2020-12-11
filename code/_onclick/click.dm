@@ -109,7 +109,8 @@
 	if(incapacitated(ignore_restraints = 1))
 		return
 
-	face_atom(A)
+	if(!SEND_SIGNAL(src, COMSIG_FIXEYE_CHECK, FIXEYE_ACTIVE))
+		face_atom(A)
 
 	if(next_move > world.time) // in the year 2000...
 		return
