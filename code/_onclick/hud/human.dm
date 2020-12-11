@@ -119,16 +119,12 @@
 	using = new/obj/screen/language_menu
 	using.icon = ui_style
 	using.screen_loc = ui_language_menu
-	if(!widescreenlayout) // CIT CHANGE
-		using.screen_loc = ui_boxlang // CIT CHANGE
 	using.hud = src
 	static_inventory += using
 
 	using = new /obj/screen/area_creator
 	using.icon = ui_style
 	using.screen_loc = ui_building
-	if(!widescreenlayout) // CIT CHANGE
-		using.screen_loc = ui_boxarea // CIT CHANGE
 	using.hud = src
 	static_inventory += using
 
