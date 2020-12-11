@@ -103,7 +103,7 @@
 
 	var/static/list/airlock_overlays = list()
 
-	var/initialMalfunctionProb = 10
+	var/initialMalfunctionProb = 5
 
 /obj/machinery/door/airlock/Initialize(mapload)
 	. = ..()
