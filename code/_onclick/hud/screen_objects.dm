@@ -388,10 +388,10 @@
 	var/mob/living/user = hud?.mymob
 	if(!istype(user))
 		return
-	if(!user.resting)
-		icon_state = "act_rest"
+	if(user.resting)
+		icon_state = "act_rest_on"
 	else
-		icon_state = "act_rest0"
+		icon_state = "act_rest"
 
 /obj/screen/throw_catch
 	name = "throw/catch"
