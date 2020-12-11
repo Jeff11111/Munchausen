@@ -255,94 +255,94 @@
 
 	else if(istype(W, /obj/item/reagent_containers/syringe/piercing))
 		if(bot_core.allowed(user) && open && !CHECK_BITFIELD(upgrades,UPGRADE_MEDICAL_PIERERCING))
-			to_chat(user, "<span class='notice'>You replace \the [src] syringe with a diamond-tipped one!</span>")
+			to_chat(user, "<span class='notice'>You replace \the <b>[src]</b> syringe with a diamond-tipped one!</span>")
 			upgrades |= UPGRADE_MEDICAL_PIERERCING
 			qdel(W)
 		if(!open)
-			to_chat(user, "<span class='notice'>The [src] access pannel is not open!</span>")
+			to_chat(user, "<span class='notice'>The <b>[src]</b> access pannel is not open!</span>")
 			return
 		if(!bot_core.allowed(user))
-			to_chat(user, "<span class='notice'>The [src] access pannel locked off to you!</span>")
+			to_chat(user, "<span class='notice'>The <b>[src]</b> access pannel locked off to you!</span>")
 			return
 		else
-			to_chat(user, "<span class='notice'>The [src] already has a diamond-tipped syringe!</span>")
+			to_chat(user, "<span class='notice'>The <b>[src]</b> already has a diamond-tipped syringe!</span>")
 
 	else if(istype(W, /obj/item/hypospray/mkii))
 		if(bot_core.allowed(user) && open && !CHECK_BITFIELD(upgrades,UPGRADE_MEDICAL_HYPOSPRAY))
-			to_chat(user, "<span class='notice'>You replace \the [src] syringe base with a DeForest Medical MK.II Hypospray!</span>")
+			to_chat(user, "<span class='notice'>You replace \the <b>[src]</b> syringe base with a DeForest Medical MK.II Hypospray!</span>")
 			upgrades |= UPGRADE_MEDICAL_HYPOSPRAY
 			injection_time = 15 //Half the time half the death!
 			window_name = "Automatic Medical Unit v2.4 ALPHA"
 			qdel(W)
 		if(!open)
-			to_chat(user, "<span class='notice'>The [src] access pannel is not open!</span>")
+			to_chat(user, "<span class='notice'>The <b>[src]</b> access pannel is not open!</span>")
 			return
 		if(!bot_core.allowed(user))
-			to_chat(user, "<span class='notice'>The [src] access pannel locked off to you!</span>")
+			to_chat(user, "<span class='notice'>The <b>[src]</b> access pannel locked off to you!</span>")
 			return
 		else
-			to_chat(user, "<span class='notice'>The [src] already has a DeForest Medical Hypospray base!</span>")
+			to_chat(user, "<span class='notice'>The <b>[src]</b> already has a DeForest Medical Hypospray base!</span>")
 
 	else if(istype(W, /obj/item/circuitboard/machine/chem_dispenser))
 		if(bot_core.allowed(user) && open && !CHECK_BITFIELD(upgrades,UPGRADE_MEDICAL_CHEM_BOARD))
-			to_chat(user, "<span class='notice'>You add in the board upgrading \the [src] reagent banks!</span>")
+			to_chat(user, "<span class='notice'>You add in the board upgrading \the <b>[src]</b> reagent banks!</span>")
 			upgrades |= UPGRADE_MEDICAL_CHEM_BOARD
 			treatment_oxy = /datum/reagent/medicine/salbutamol //Replaces Dex with salbutamol "better" healing of o2
 			qdel(W)
 		if(!open)
-			to_chat(user, "<span class='notice'>The [src] access pannel is not open!</span>")
+			to_chat(user, "<span class='notice'>The <b>[src]</b> access pannel is not open!</span>")
 			return
 		if(!bot_core.allowed(user))
-			to_chat(user, "<span class='notice'>The [src] access pannel locked off to you!</span>")
+			to_chat(user, "<span class='notice'>The <b>[src]</b> access pannel locked off to you!</span>")
 			return
 		else
-			to_chat(user, "<span class='notice'>The [src] already has this upgrade!</span>")
+			to_chat(user, "<span class='notice'>The <b>[src]</b> already has this upgrade!</span>")
 
 	else if(istype(W, /obj/item/circuitboard/machine/cryo_tube))
 		if(bot_core.allowed(user) && open && !CHECK_BITFIELD(upgrades,UPGRADE_MEDICAL_CRYO_BOARD))
-			to_chat(user, "<span class='notice'>You add in the board upgrading \the [src] reagent banks!</span>")
+			to_chat(user, "<span class='notice'>You add in the board upgrading \the <b>[src]</b> reagent banks!</span>")
 			upgrades |= UPGRADE_MEDICAL_CRYO_BOARD
 			treatment_fire = /datum/reagent/medicine/oxandrolone //Replaces Kep with oxandrolone "better" healing of burns
 			qdel(W)
 		if(!open)
-			to_chat(user, "<span class='notice'>The [src] access pannel is not open!</span>")
+			to_chat(user, "<span class='notice'>The <b>[src]</b> access pannel is not open!</span>")
 			return
 		if(!bot_core.allowed(user))
-			to_chat(user, "<span class='notice'>The [src] access pannel locked off to you!</span>")
+			to_chat(user, "<span class='notice'>The <b>[src]</b> access pannel locked off to you!</span>")
 			return
 		else
-			to_chat(user, "<span class='notice'>The [src] already has this upgrade!</span>")
+			to_chat(user, "<span class='notice'>The <b>[src]</b> already has this upgrade!</span>")
 
 	else if(istype(W, /obj/item/circuitboard/machine/chem_master))
 		if(bot_core.allowed(user) && open && !CHECK_BITFIELD(upgrades,UPGRADE_MEDICAL_CHEM_MASTER))
-			to_chat(user, "<span class='notice'>You add in the board upgrading \the [src] reagent banks!</span>")
+			to_chat(user, "<span class='notice'>You add in the board upgrading \the <b>[src]</b> reagent banks!</span>")
 			upgrades |= UPGRADE_MEDICAL_CHEM_MASTER
 			treatment_brute = /datum/reagent/medicine/sal_acid //Replaces Bic with Sal Acid "better" healing of brute
 			qdel(W)
 		if(!open)
-			to_chat(user, "<span class='notice'>the [src] access pannel is not open!</span>")
+			to_chat(user, "<span class='notice'>the <b>[src]</b> access pannel is not open!</span>")
 			return
 		if(!bot_core.allowed(user))
-			to_chat(user, "<span class='notice'>the [src] access pannel locked off to you!</span>")
+			to_chat(user, "<span class='notice'>the <b>[src]</b> access pannel locked off to you!</span>")
 			return
 		else
-			to_chat(user, "<span class='notice'>the [src] already has this upgrade!</span>")
+			to_chat(user, "<span class='notice'>the <b>[src]</b> already has this upgrade!</span>")
 
 	else if(istype(W, /obj/item/circuitboard/machine/sleeper))
 		if(bot_core.allowed(user) && open && !CHECK_BITFIELD(upgrades,UPGRADE_MEDICAL_SLEEP_BOARD))
-			to_chat(user, "<span class='notice'>You add in the board upgrading \the [src] reagent banks!</span>")
+			to_chat(user, "<span class='notice'>You add in the board upgrading \the <b>[src]</b> reagent banks!</span>")
 			upgrades |= UPGRADE_MEDICAL_SLEEP_BOARD
 			treatment_tox = /datum/reagent/medicine/pen_acid //replaces charcoal with pen acid a "better" healing of toxins
 			treatment_tox_toxlover = /datum/reagent/medicine/pen_acid/pen_jelly //Injects pen jelly into people that heal via toxins
 			qdel(W)
 		if(!open)
-			to_chat(user, "<span class='notice'>The [src] access pannle is not open!</span>")
+			to_chat(user, "<span class='notice'>The <b>[src]</b> access pannle is not open!</span>")
 			return
 		if(!bot_core.allowed(user))
-			to_chat(user, "<span class='notice'>The [src] access pannel locked off to you!</span>")
+			to_chat(user, "<span class='notice'>The <b>[src]</b> access pannel locked off to you!</span>")
 			return
 		else
-			to_chat(user, "<span class='notice'>The [src] already has this upgrade!</span>")
+			to_chat(user, "<span class='notice'>The <b>[src]</b> already has this upgrade!</span>")
 
 	else
 		var/current_health = health
@@ -355,8 +355,8 @@
 	if(emagged == 2)
 		declare_crit = 0
 		if(user)
-			to_chat(user, "<span class='notice'>You short out [src]'s reagent synthesis circuits.</span>")
-		audible_message("<span class='danger'>[src] buzzes oddly!</span>")
+			to_chat(user, "<span class='notice'>You short out <b>[src]</b>'s reagent synthesis circuits.</span>")
+		audible_message("<span class='danger'><b>[src]</b> buzzes oddly!</span>")
 		flick("medibot_spark", src)
 		playsound(src, "sparks", 75, 1)
 		if(!CHECK_BITFIELD(upgrades,UPGRADE_MEDICAL_PIERERCING))
@@ -389,7 +389,7 @@
 /mob/living/simple_animal/bot/medbot/proc/tip_over(mob/user)
 	mobility_flags &= ~MOBILITY_MOVE
 	playsound(src, 'sound/machines/warning-buzzer.ogg', 50)
-	user.visible_message("<span class='danger'>[user] tips over [src]!</span>", "<span class='danger'>You tip [src] over!</span>")
+	user.visible_message("<span class='danger'>[user] tips over <b>[src]</b>!</span>", "<span class='danger'>You tip <b>[src]</b> over!</span>")
 	mode = BOT_TIPPED
 	tipper_name = user.name // Skyrat fix
 	var/matrix/mat = transform
@@ -399,13 +399,13 @@
 	mobility_flags &= MOBILITY_MOVE
 	var/list/messagevoice
 	if(user)
-		user.visible_message("<span class='notice'>[user] sets [src] right-side up!</span>", "<span class='green'>You set [src] right-side up!</span>")
+		user.visible_message("<span class='notice'>[user] sets <b>[src]</b> right-side up!</span>", "<span class='green'>You set <b>[src]</b> right-side up!</span>")
 		if(user.name == tipper_name)
 			messagevoice = list("I forgive you." = 'sound/voice/medbot/forgive.ogg')
 		else
 			messagevoice = list("Thank you!" = 'sound/voice/medbot/thank_you.ogg', "You are a good person." = 'sound/voice/medbot/youre_good.ogg')
 	else
-		visible_message("<span class='notice'>[src] manages to writhe wiggle enough to right itself.</span>")
+		visible_message("<span class='notice'><b>[src]</b> manages to writhe wiggle enough to right itself.</span>")
 		messagevoice = list("Fuck you." = 'sound/voice/medbot/fuck_you.ogg', "Your behavior has been reported, have a nice day." = 'sound/voice/medbot/reported.ogg')
 
 	tipper_name = null
@@ -607,7 +607,7 @@
 
 /mob/living/simple_animal/bot/medbot/attack_hand(mob/living/carbon/human/H)
 	if(H.a_intent == INTENT_DISARM && mode != BOT_TIPPED)
-		H.visible_message("<span class='danger'>[H] begins tipping over [src].</span>", "<span class='warning'>You begin tipping over [src]...</span>")
+		H.visible_message("<span class='danger'>[H] begins tipping over <b>[src]</b>.</span>", "<span class='warning'>You begin tipping over <b>[src]</b>...</span>")
 
 		if(world.time > last_tipping_action_voice + 15 SECONDS)
 			last_tipping_action_voice = world.time // message for tipping happens when we start interacting, message for righting comes after finishing
@@ -620,7 +620,7 @@
 			tip_over(H)
 
 	else if(H.a_intent == INTENT_HELP && mode == BOT_TIPPED)
-		H.visible_message("<span class='notice'>[H] begins righting [src].</span>", "<span class='notice'>You begin righting [src]...</span>")
+		H.visible_message("<span class='notice'>[H] begins righting <b>[src]</b>.</span>", "<span class='notice'>You begin righting <b>[src]</b>...</span>")
 		if(do_after(H, 3 SECONDS, target=src))
 			set_right(H)
 	else
@@ -719,8 +719,8 @@
 		if(!emagged && check_overdose(patient,reagent_id,injection_amount))
 			soft_reset()
 			return
-		C.visible_message("<span class='danger'>[src] is trying to inject [patient]!</span>", \
-			"<span class='userdanger'>[src] is trying to inject you!</span>")
+		C.visible_message("<span class='danger'><b>[src]</b> is trying to inject <b>[patient]</b>!</span>", \
+			"<span class='userdanger'><b>[src]</b> is trying to inject you!</span>")
 
 		var/failed = FALSE
 		if(do_mob(src, patient, injection_time))	//Is C == patient? This is so confusing
@@ -732,15 +732,15 @@
 						reagent_glass.reagents.trans_to(patient,injection_amount) //Inject from beaker instead.
 				else
 					patient.reagents.add_reagent(reagent_id,injection_amount)
-				C.visible_message("<span class='danger'>[src] injects [patient] with its syringe!</span>", \
-					"<span class='userdanger'>[src] injects you with its syringe!</span>")
+				C.visible_message("<span class='danger'><b>[src]</b> injects <b>[patient]</b> with its syringe!</span>", \
+					"<span class='userdanger'><b>[src]</b> injects you with its syringe!</span>")
 			else
 				failed = TRUE
 		else
 			failed = TRUE
 
 		if(failed)
-			visible_message("[src] retracts its syringe.")
+			visible_message("<b>[src]</b> retracts its syringe.")
 		update_icon()
 		soft_reset()
 		return
@@ -756,7 +756,7 @@
 
 /mob/living/simple_animal/bot/medbot/explode()
 	on = FALSE
-	visible_message("<span class='boldannounce'>[src] blows apart!</span>")
+	visible_message("<span class='boldannounce'><b>[src]</b> blows apart!</span>")
 	var/atom/Tsec = drop_location()
 
 	drop_part(firstaid, Tsec)

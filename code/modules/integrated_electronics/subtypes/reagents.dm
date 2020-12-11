@@ -137,7 +137,7 @@
 			//Always log attemped injections for admins
 			var/contained = reagents.log_list()
 			log_combat(src, L, "attempted to inject", addition="which had [contained]")
-			L.visible_message("<span class='danger'>[acting_object] is trying to inject [L]!</span>", \
+			L.visible_message("<span class='danger'>[acting_object] is trying to inject <b>[L]</b>!</span>", \
 								"<span class='userdanger'>[acting_object] is trying to inject you!</span>")
 			busy = TRUE
 			if(do_atom(src, L, extra_checks=CALLBACK(L, /mob/living/proc/can_inject,null,0)))
@@ -145,7 +145,7 @@
 				reagents.reaction(L, INJECT, fraction)
 				reagents.trans_to(L, transfer_amount)
 				log_combat(src, L, "injected", addition="which had [contained]")
-				L.visible_message("<span class='danger'>[acting_object] injects [L] with its needle!</span>", \
+				L.visible_message("<span class='danger'>[acting_object] injects <b>[L]</b> with its needle!</span>", \
 									"<span class='userdanger'>[acting_object] injects you with its needle!</span>")
 			else
 				busy = FALSE
@@ -166,15 +166,15 @@
 
 		if(isliving(AM))
 			var/mob/living/L = AM
-			L.visible_message("<span class='danger'>[acting_object] is trying to take a blood sample from [L]!</span>", \
+			L.visible_message("<span class='danger'>[acting_object] is trying to take a blood sample from <b>[L]</b>!</span>", \
 								"<span class='userdanger'>[acting_object] is trying to take a blood sample from you!</span>")
 			busy = TRUE
 			if(do_atom(src, L, extra_checks=CALLBACK(L, /mob/living/proc/can_inject,null,0)))
 				if(L.transfer_blood_to(src, tramount))
-					L.visible_message("<span class='danger'>[acting_object] takes a blood sample from [L]!</span>", \
+					L.visible_message("<span class='danger'>[acting_object] takes a blood sample from <b>[L]</b>!</span>", \
 					"<span class='userdanger'>[acting_object] takes a blood sample from you!</span>")
 				else
-					L.visible_message("<span class='warning'>[acting_object] fails to take a blood sample from [L].</span>", \
+					L.visible_message("<span class='warning'>[acting_object] fails to take a blood sample from <b>[L]</b>.</span>", \
 								"<span class='userdanger'>[acting_object] fails to take a blood sample from you!</span>")
 					busy = FALSE
 					activate_pin(3)

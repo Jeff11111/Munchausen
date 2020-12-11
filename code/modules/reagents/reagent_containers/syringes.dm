@@ -65,7 +65,7 @@
 			var/obj/item/weldingtool/welder = I
 			if(welder.isOn() && welder.use(2))
 				welder.play_attack_sound(welder.force)
-				user.visible_message("<span class='notice'>[user] fixes \the [src] with [user.p_their()] [welder].",\
+				user.visible_message("<span class='notice'><b>[user]</b> fixes \the [src] with [user.p_their()] [welder].",\
 									"<span class='notice'>You fix \the [src] with your [welder].")
 				name = initial(name)
 				useless = FALSE
@@ -116,8 +116,8 @@
 				var/drawn_amount = reagents.maximum_volume - reagents.total_volume
 				if(L != user)
 					if(user.a_intent != INTENT_HARM)
-						target.visible_message("<span class='danger'>[user] is trying to take a blood sample from [target]!</span>", \
-										"<span class='userdanger'>[user] is trying to take a blood sample from [target]!</span>")
+						target.visible_message("<span class='danger'><b>[user]</b> is trying to take a blood sample from [target]!</span>", \
+										"<span class='userdanger'><b>[user]</b> is trying to take a blood sample from [target]!</span>")
 						busy = TRUE
 						if(!do_mob(user, target, time = time_taken, extra_checks=CALLBACK(L, /mob/living/proc/can_inject,user,1)))
 							busy = FALSE
@@ -125,17 +125,17 @@
 						if(reagents.total_volume >= reagents.maximum_volume)
 							return
 					else
-						target.visible_message("<span class='danger'>[user] stabs [target] with \the [src]!</span>", \
-										"<span class='userdanger'>[user] stabs [target] with \the [src]!</span>")
+						target.visible_message("<span class='danger'><b>[user]</b> stabs [target] with \the [src]!</span>", \
+										"<span class='userdanger'><b>[user]</b> stabs [target] with \the [src]!</span>")
 				else if(L == user && user.a_intent == INTENT_HARM)
-					target.visible_message("<span class='danger'>[user] stabs themselves with \the [src]!</span>", \
+					target.visible_message("<span class='danger'><b>[user]</b> stabs themselves with \the [src]!</span>", \
 									"<span class='userdanger'>You stab yourself with \the [src]!</span>")
 
 				busy = FALSE
 				if(L.transfer_blood_to(src, drawn_amount))
-					user.visible_message("<span class='[user.a_intent == INTENT_HARM ? "danger" : "warning"]'>[user] [user.a_intent == INTENT_HARM ? "forcefully " : ""]takes a blood sample from [L][user.a_intent == INTENT_HARM ? "!" : "."]</span>")
+					user.visible_message("<span class='[user.a_intent == INTENT_HARM ? "danger" : "warning"]'><b>[user]</b> [user.a_intent == INTENT_HARM ? "forcefully " : ""]takes a blood sample from <b>[L]</b>[user.a_intent == INTENT_HARM ? "!" : "."]</span>")
 				else
-					to_chat(user, "<span class='warning'>You were unable to draw any blood from [L]!</span>")
+					to_chat(user, "<span class='warning'>You were unable to draw any blood from <b>[L]</b>!</span>")
 				
 				if(user.a_intent == INTENT_HARM)
 					useless = TRUE
@@ -179,21 +179,21 @@
 					return
 				if(L != user)
 					if(user.a_intent != INTENT_HARM)
-						L.visible_message("<span class='danger'>[user] is trying to inject [L]!</span>", \
-												"<span class='userdanger'>[user] is trying to inject [L]!</span>")
+						L.visible_message("<span class='danger'><b>[user]</b> is trying to inject <b>[L]</b>!</span>", \
+												"<span class='userdanger'><b>[user]</b> is trying to inject <b>[L]</b>!</span>")
 						if(!do_mob(user, L, time = time_taken, extra_checks=CALLBACK(L, /mob/living/proc/can_inject,user,1)))
 							return
 						if(!reagents.total_volume)
 							return
 						if(L.reagents.total_volume >= L.reagents.maximum_volume)
 							return
-						L.visible_message("<span class='danger'>[user] injects [L] with the syringe!", \
-										"<span class='userdanger'>[user] injects [L] with the syringe!</span>")
+						L.visible_message("<span class='danger'><b>[user]</b> injects <b>[L]</b> with the syringe!", \
+										"<span class='userdanger'><b>[user]</b> injects <b>[L]</b> with the syringe!</span>")
 					else
-						target.visible_message("<span class='danger'>[user] stabs [target] with \the [src]!</span>", \
-										"<span class='userdanger'>[user] stabs [target] with \the [src]!</span>")
+						target.visible_message("<span class='danger'><b>[user]</b> stabs [target] with \the [src]!</span>", \
+										"<span class='userdanger'><b>[user]</b> stabs [target] with \the [src]!</span>")
 				else if(L == user && user.a_intent == INTENT_HARM)
-					target.visible_message("<span class='danger'>[user] stabs themselves with \the [src]!</span>", \
+					target.visible_message("<span class='danger'><b>[user]</b> stabs themselves with \the [src]!</span>", \
 									"<span class='userdanger'>You stab yourself with \the [src]!</span>")
 
 				if(L != user)
