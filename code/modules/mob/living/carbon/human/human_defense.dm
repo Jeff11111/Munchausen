@@ -79,7 +79,7 @@
 			if(supposed_to_affect)
 				miss_entirely = supposed_to_affect.miss_entirely_prob
 			miss_entirely /= (lying ? 10 : 1)
-			switch(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.5, GET_SKILL_LEVEL(fireboy, ranged)*1.5, dicetype = "6d6", mod = -CEILING(miss_entirely/7 + get_dist(P.starting, src)/(lying ? 10 : 5), 1), crit = 20))
+			switch(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.5, GET_SKILL_LEVEL(fireboy, ranged)*1.5, dicetype = "6d6", mod = -CEILING(miss_entirely/10 + get_dist(P.starting, src)/(lying ? 10 : 5), 1), crit = 20))
 				//Missed shot
 				if(DICE_CRIT_FAILURE, DICE_FAILURE)
 					if(fireboy != src)
