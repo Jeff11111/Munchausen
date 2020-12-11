@@ -242,7 +242,7 @@
 	<A href='?src=[REF(user)];mach_close=mob[REF(src)]'>Close</A>
 	"}
 
-	var/datum/browser/popup = new(user, "mob[REF(src)]", "[src]", 440, 510)
+	var/datum/browser/popup = new(user, "mob[REF(src)]", "<b>[src]</b>", 440, 510)
 	popup.set_content(dat.Join())
 	popup.open()
 
@@ -270,18 +270,18 @@
 			if(!istype(head, /obj/item/clothing/head/helmet/space/hardsuit))
 				return
 			var/obj/item/clothing/head/helmet/space/hardsuit/hardsuit_head = head
-			visible_message("<span class='danger'>[usr] tries to [hardsuit_head ? "retract" : "extend"] [src]'s helmet.</span>", \
-								"<span class='userdanger'>[usr] tries to [hardsuit_head ? "retract" : "extend"] [src]'s helmet.</span>", \
-								target = usr, target_message = "<span class='danger'>You try to [hardsuit_head ? "retract" : "extend"] [src]'s helmet.</span>")
+			visible_message("<span class='danger'>[usr] tries to [hardsuit_head ? "retract" : "extend"] <b>[src]</b>'s helmet.</span>", \
+								"<span class='userdanger'>[usr] tries to [hardsuit_head ? "retract" : "extend"] <b>[src]</b>'s helmet.</span>", \
+								target = usr, target_message = "<span class='danger'>You try to [hardsuit_head ? "retract" : "extend"] <b>[src]</b>'s helmet.</span>")
 			if(!do_mob(usr, src, hardsuit_head ? head.strip_delay : POCKET_STRIP_DELAY))
 				return
 			if(!istype(wear_suit, /obj/item/clothing/suit/space/hardsuit) || (hardsuit_head ? (!head || head != hardsuit_head) : head))
 				return
 			var/obj/item/clothing/suit/space/hardsuit/hardsuit = wear_suit //This should be an hardsuit given all our checks
 			if(hardsuit.ToggleHelmet(FALSE))
-				visible_message("<span class='danger'>[usr] [hardsuit_head ? "retract" : "extend"] [src]'s helmet</span>", \
-										"<span class='userdanger'>[usr] [hardsuit_head ? "retract" : "extend"] [src]'s helmet</span>", \
-										target = usr, target_message = "<span class='danger'>You [hardsuit_head ? "retract" : "extend"] [src]'s helmet.</span>")
+				visible_message("<span class='danger'>[usr] [hardsuit_head ? "retract" : "extend"] <b>[src]</b>'s helmet</span>", \
+										"<span class='userdanger'>[usr] [hardsuit_head ? "retract" : "extend"] <b>[src]</b>'s helmet</span>", \
+										target = usr, target_message = "<span class='danger'>You [hardsuit_head ? "retract" : "extend"] <b>[src]</b>'s helmet.</span>")
 			return
 		if(href_list["item"])
 			var/slot = text2num(href_list["item"])
@@ -303,10 +303,10 @@
 			var/delay_denominator = 1
 			if(pocket_item && !(pocket_item.item_flags & ABSTRACT))
 				if(HAS_TRAIT(pocket_item, TRAIT_NODROP))
-					to_chat(usr, "<span class='warning'>You try to empty [src]'s [pocket_side] pocket, it seems to be stuck!</span>")
-				to_chat(usr, "<span class='notice'>You try to empty [src]'s [pocket_side] pocket.</span>")
+					to_chat(usr, "<span class='warning'>You try to empty <b>[src]</b>'s [pocket_side] pocket, it seems to be stuck!</span>")
+				to_chat(usr, "<span class='notice'>You try to empty <b>[src]</b>'s [pocket_side] pocket.</span>")
 			else if(place_item && place_item.mob_can_equip(src, usr, pocket_id, 1) && !(place_item.item_flags & ABSTRACT))
-				to_chat(usr, "<span class='notice'>You try to place [place_item] into [src]'s [pocket_side] pocket.</span>")
+				to_chat(usr, "<span class='notice'>You try to place [place_item] into <b>[src]</b>'s [pocket_side] pocket.</span>")
 				delay_denominator = 4
 			else
 				return
@@ -736,7 +736,7 @@
 				var/they_breathe = !HAS_TRAIT(C, TRAIT_NOBREATH)
 				var/obj/item/organ/lungs/they_lung = C.getorganslot(ORGAN_SLOT_LUNGS)
 
-				src.visible_message("[src] performs mouth to mouth on [C.name]!", \
+				src.visible_message("<b>[src]</b> performs mouth to mouth on [C.name]!", \
 								"<span class='notice'>You perform mouth to mouth on [C.name].</span>")
 				SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "perform_cpr", /datum/mood_event/perform_cpr)
 				C.last_mtom = world.time
@@ -769,7 +769,7 @@
 				var/they_beat = !HAS_TRAIT(C, TRAIT_NOPULSE)
 				var/obj/item/organ/heart/they_heart = C.getorganslot(ORGAN_SLOT_LUNGS)
 
-				src.visible_message("[src] performs CPR on [C.name]!", \
+				src.visible_message("<b>[src]</b> performs CPR on [C.name]!", \
 								"<span class='notice'>You perform CPR on [C.name].</span>")
 				SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "perform_cpr", /datum/mood_event/perform_cpr)
 				C.last_cpr = world.time
@@ -793,9 +793,9 @@
 				else
 					var/obj/item/bodypart/chest/affected = C.get_bodypart(BODY_ZONE_CHEST)
 					if((diceroll <= DICE_CRIT_FAILURE) && !affected.is_broken())
-						visible_message("<span class='danger'><b>[src]</b> botches the CPR, cracking <b>[C]</b>'s ribs!</span>", \
+						visible_message("<span class='danger'><b><b>[src]</b></b> botches the CPR, cracking <b>[C]</b>'s ribs!</span>", \
 									"<span class='danger'>I botch the CPR, cracking <b>[C]</b>'s ribs!</span>",
-									target = C, target_message = "<span class='userdanger'><b>[src]</b> botches the CPR and cracks my ribs!</span>")
+									target = C, target_message = "<span class='userdanger'><b><b>[src]</b></b> botches the CPR and cracks my ribs!</span>")
 						var/datum/wound/fracture
 						if(affected.is_organic_limb())
 							var/fucked_up = (prob(heyheavy*2) ? /datum/wound/blunt/critical : /datum/wound/blunt/severe)
@@ -967,7 +967,7 @@
 /mob/living/carbon/human/vomit(lost_nutrition = 10, blood = 0, stun = 1, distance = 0, message = 1, toxic = 0)
 	if(blood && dna?.species && (NOBLOOD in dna.species.species_traits))
 		if(message)
-			visible_message("<span class='warning'>[src] dry heaves!</span>", \
+			visible_message("<span class='warning'><b>[src]</b> dry heaves!</span>", \
 							"<span class='userdanger'>You try to throw up, but there's nothing in your stomach!</span>")
 		if(stun)
 			DefaultCombatKnockdown(200)
@@ -1043,7 +1043,7 @@
 		var/result = input(usr, "Please choose a new species","Species") as null|anything in GLOB.species_list
 		if(result)
 			var/newtype = GLOB.species_list[result]
-			admin_ticket_log("[key_name_admin(usr)] has modified the bodyparts of [src] to [result]")
+			admin_ticket_log("[key_name_admin(usr)] has modified the bodyparts of <b>[src]</b> to [result]")
 			set_species(newtype)
 	if(href_list[VV_HK_PURRBATION])
 		if(!check_rights(R_SPAWN))
@@ -1053,14 +1053,14 @@
 			return
 		var/success = purrbation_toggle(src)
 		if(success)
-			to_chat(usr, "Put [src] on purrbation.")
+			to_chat(usr, "Put <b>[src]</b> on purrbation.")
 			log_admin("[key_name(usr)] has put [key_name(src)] on purrbation.")
 			var/msg = "<span class='notice'>[key_name_admin(usr)] has put [key_name(src)] on purrbation.</span>"
 			message_admins(msg)
 			admin_ticket_log(src, msg)
 
 		else
-			to_chat(usr, "Removed [src] from purrbation.")
+			to_chat(usr, "Removed <b>[src]</b> from purrbation.")
 			log_admin("[key_name(usr)] has removed [key_name(src)] from purrbation.")
 			var/msg = "<span class='notice'>[key_name_admin(usr)] has removed [key_name(src)] from purrbation.</span>"
 			message_admins(msg)
@@ -1096,9 +1096,9 @@
 		carrydelay = 40
 		skills_space = "quickly"
 	if(can_be_firemanned(target) && !incapacitated(FALSE, TRUE))
-		visible_message("<span class='notice'>[src] starts [skills_space] lifting [target] onto their back..</span>",
+		visible_message("<span class='notice'><b>[src]</b> starts [skills_space] lifting <b>[target]</b> onto their back..</span>",
 		//Joe Medic starts quickly/expertly lifting Grey Tider onto their back..
-		"<span class='notice'>[carrydelay < 35 ? "Using your gloves' nanochips, you" : "You"] [skills_space] start to lift [target] onto your back[carrydelay == 40 ? ", while assisted by the nanochips in your gloves.." : "..."]</span>")
+		"<span class='notice'>[carrydelay < 35 ? "Using your gloves' nanochips, you" : "You"] [skills_space] start to lift <b>[target]</b> onto your back[carrydelay == 40 ? ", while assisted by the nanochips in your gloves.." : "..."]</span>")
 		//(Using your gloves' nanochips, you/You) ( /quickly/expertly) start to lift Grey Tider onto your back(, while assisted by the nanochips in your gloves../...)
 		if(do_after(src, carrydelay, TRUE, target))
 			//Second check to make sure they're still valid to be carried
@@ -1106,32 +1106,32 @@
 				target.set_resting(FALSE, TRUE)
 				buckle_mob(target, TRUE, TRUE, 90, 1, 0, TRUE)
 				return
-		visible_message("<span class='warning'>[src] fails to fireman carry [target]!")
+		visible_message("<span class='warning'><b>[src]</b> fails to fireman carry <b>[target]</b>!")
 	else
 		if (ishuman(target))
-			to_chat(src, "<span class='notice'>You can't fireman carry [target] while they're standing!</span>")
+			to_chat(src, "<span class='notice'>You can't fireman carry <b>[target]</b> while they're standing!</span>")
 		else
 			to_chat(src, "<span class='notice'>You can't seem to fireman carry that kind of species.</span>")
 
 /mob/living/carbon/human/proc/piggyback(mob/living/carbon/target)
 	if(can_piggyback(target))
-		visible_message("<span class='notice'>[target] starts to climb onto [src]...</span>")
+		visible_message("<span class='notice'><b>[target]</b> starts to climb onto <b>[src]</b>...</span>")
 		if(do_after(target, 15, target = src, required_mobility_flags = MOBILITY_STAND))
 			if(can_piggyback(target))
 				if(target.incapacitated(FALSE, TRUE) || incapacitated(FALSE, TRUE))
-					target.visible_message("<span class='warning'>[target] can't hang onto [src]!</span>")
+					target.visible_message("<span class='warning'><b>[target]</b> can't hang onto <b>[src]</b>!</span>")
 					return
 				buckle_mob(target, TRUE, TRUE, FALSE, 1, 2, FALSE)
 		else
-			visible_message("<span class='warning'>[target] fails to climb onto [src]!</span>")
+			visible_message("<span class='warning'><b>[target]</b> fails to climb onto <b>[src]</b>!</span>")
 	else
-		to_chat(target, "<span class='warning'>You can't piggyback ride [src] right now!</span>")
+		to_chat(target, "<span class='warning'>You can't piggyback ride <b>[src]</b> right now!</span>")
 
 /mob/living/carbon/human/buckle_mob(mob/living/target, force = FALSE, check_loc = TRUE, lying_buckle = FALSE, hands_needed = 0, target_hands_needed = 0, fireman = FALSE)
 	if(!force)//humans are only meant to be ridden through piggybacking and special cases
 		return
 	if(!is_type_in_typecache(target, can_ride_typecache))
-		target.visible_message("<span class='warning'>[target] really can't seem to mount [src]...</span>")
+		target.visible_message("<span class='warning'><b>[target]</b> really can't seem to mount <b>[src]</b>...</span>")
 		return
 	buckle_lying = lying_buckle
 	var/datum/component/riding/human/riding_datum = LoadComponent(/datum/component/riding/human)
@@ -1148,12 +1148,12 @@
 
 	if(hands_needed || target_hands_needed)
 		if(hands_needed && !equipped_hands_self)
-			src.visible_message("<span class='warning'>[src] can't get a grip on [target] because their hands are full!</span>",
-				"<span class='warning'>You can't get a grip on [target] because your hands are full!</span>")
+			src.visible_message("<span class='warning'><b>[src]</b> can't get a grip on <b>[target]</b> because their hands are full!</span>",
+				"<span class='warning'>You can't get a grip on <b>[target]</b> because your hands are full!</span>")
 			return
 		else if(target_hands_needed && !equipped_hands_target)
-			target.visible_message("<span class='warning'>[target] can't get a grip on [src] because their hands are full!</span>",
-				"<span class='warning'>You can't get a grip on [src] because your hands are full!</span>")
+			target.visible_message("<span class='warning'><b>[target]</b> can't get a grip on <b>[src]</b> because their hands are full!</span>",
+				"<span class='warning'>You can't get a grip on <b>[src]</b> because your hands are full!</span>")
 			return
 
 	stop_pulling()
