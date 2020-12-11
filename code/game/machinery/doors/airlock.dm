@@ -131,7 +131,7 @@
 		abandoned = TRUE
 
 	//No access, no lock
-	if(length(req_access))
+	if(length(text2access(req_access_txt)) || length(text2access(req_one_access_txt)) || length(req_access) || length(req_one_access))
 		lock()
 
 	return INITIALIZE_HINT_LATELOAD
