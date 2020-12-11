@@ -130,6 +130,10 @@
 	if(prob(initialMalfunctionProb) && mapload && is_station_level(z))
 		abandoned = TRUE
 
+	//No access, no lock
+	if(length(req_access))
+		lock()
+
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/door/airlock/LateInitialize()
