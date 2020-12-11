@@ -170,13 +170,13 @@
 
 	switch(scar_severity)
 		if(WOUND_SEVERITY_TRIVIAL)
-			msg += "<span class='smallnotice'><i>[t_He] [t_has] visible scarring, you can look again to take a closer look...</i></span>"
+			msg += "<span class='smallnotice'><i>[t_He] [t_has] visible scarring, i can look again to take a closer look...</i></span>"
 		if(WOUND_SEVERITY_MODERATE to WOUND_SEVERITY_SEVERE)
-			msg += "<span class='notice'><i>[t_He] [t_has] several bad scars, you can look again to take a closer look...</i></span>"
+			msg += "<span class='notice'><i>[t_He] [t_has] several bad scars, i can look again to take a closer look...</i></span>"
 		if(WOUND_SEVERITY_CRITICAL to WOUND_SEVERITY_PERMANENT)
-			msg += "<span class='notice'><b><i>[t_He] [t_has] significantly disfiguring scarring, you can look again to take a closer look...</i></b></span>"
+			msg += "<span class='notice'><b><i>[t_He] [t_has] significantly disfiguring scarring, i can look again to take a closer look...</i></b></span>"
 		if(WOUND_SEVERITY_LOSS to INFINITY)
-			msg += "<span class='notice'><b><i>[t_He] [t_is] just absolutely fucked up, you can look again to take a closer look...</i></b></span>"
+			msg += "<span class='notice'><b><i>[t_He] [t_is] just absolutely fucked up, i can look again to take a closer look...</i></b></span>"
 
 	if(is_dreamer(user))
 		var/obj/item/organ/heart = getorganslot(ORGAN_SLOT_HEART)
@@ -301,7 +301,7 @@
 
 //skyrat edit
 /mob/living/carbon/examine_more(mob/user)
-	var/msg = list("<span class='notice'><i><b>You examine [src] closer, and note the following...</b></i></span>")
+	var/msg = list("<span class='notice'><i><b>I examine [src] closer, and note the following...</b></i></span>")
 	if((src == user) && HAS_TRAIT(user, TRAIT_SCREWY_CHECKSELF))
 		msg |= "\t<span class='smallnotice'>[p_they(TRUE)] [p_have()] no significantly damaged bodyparts.</span>"
 		msg |= "\t<span class='smallnotice'><i>[p_they(TRUE)] [p_have()] no visible scars.</i></span>"

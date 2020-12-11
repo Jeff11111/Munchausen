@@ -26,7 +26,7 @@
 
 	if(!species_visible)
 		species_name_string = "!"
-	else if (dna.custom_species)
+	else if(dna.custom_species)
 		species_name_string = ", [prefix_a_or_an(dna.custom_species)] <EM>[dna.custom_species]</EM>!"
 	else
 		species_name_string = ", [prefix_a_or_an(dna.species.name)] <EM>[dna.species.name]</EM>!"
@@ -48,9 +48,9 @@
 	//Skyrat changes - edited that to only show the extra species tidbit if it's unknown or he's got a custom species
 	//and also underwear slots :)
 	if(skipface || get_visible_name() == "Unknown")
-		. += "You can't make out what species they are."
+		. += "I can't make out what species they are."
 	else if(dna.custom_species)
-		. += "[t_He] [t_is] [prefix_a_or_an(dna.species.name)] [dna.species.name]!"
+		. += "[t_He] [t_is] [prefix_a_or_an(dna.species.name)] <b>[dna.species.name]</b>!"
 
 	//Underwear
 	var/undies_hidden = underwear_hidden()
@@ -467,7 +467,7 @@
 	var/obj/item/organ/vocal_cords/Vc = user.getorganslot(ORGAN_SLOT_VOICE)
 	if(Vc)
 		if(istype(Vc, /obj/item/organ/vocal_cords/velvet))
-			msg += "<span class='velvet'><i>You feel your chords resonate looking at them.</i></span>"
+			msg += "<span class='velvet'><i>I feel my chords resonate looking at them.</i></span>"
 
 	//CONSCIOUSNESS
 	var/dist = get_dist(user, src)
@@ -599,13 +599,13 @@
 
 		switch(scar_severity)
 			if(WOUND_SEVERITY_TRIVIAL)
-				msg += "<span class='smallnotice'><i>[t_He] [t_has] visible scarring, you can look again to take a closer look...</i></span>"
+				msg += "<span class='smallnotice'><i>[t_He] [t_has] visible scarring, i can look again to take a closer look...</i></span>"
 			if(WOUND_SEVERITY_MODERATE to WOUND_SEVERITY_SEVERE)
-				msg += "<span class='notice'><i>[t_He] [t_has] several bad scars, you can look again to take a closer look...</i></span>"
+				msg += "<span class='notice'><i>[t_He] [t_has] several bad scars, i can look again to take a closer look...</i></span>"
 			if(WOUND_SEVERITY_CRITICAL to WOUND_SEVERITY_PERMANENT)
-				msg += "<span class='notice'><b><i>[t_He] [t_has] significantly disfiguring scarring, you can look again to take a closer look...</i></b></span>"
+				msg += "<span class='notice'><b><i>[t_He] [t_has] significantly disfiguring scarring, i can look again to take a closer look...</i></b></span>"
 			if(WOUND_SEVERITY_LOSS to INFINITY)
-				msg += "<span class='notice'><b><i>[t_He] [t_is] just absolutely fucked up, you can look again to take a closer look...</i></b></span>"
+				msg += "<span class='notice'><b><i>[t_He] [t_is] just absolutely fucked up, i can look again to take a closer look...</i></b></span>"
 	
 	if(is_dreamer(user))
 		var/obj/item/organ/heart = getorganslot(ORGAN_SLOT_HEART)
