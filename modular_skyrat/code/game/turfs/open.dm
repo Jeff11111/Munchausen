@@ -3,7 +3,7 @@
 	. = ..()
 	var/mob/living/living_user = user
 	if(istype(living_user) && living_user.lying && CHECK_MOBILITY(living_user, MOBILITY_USE) && !living_user.restrained() && !living_user.pinned())
-		var/cooldown = 3 SECONDS
+		var/cooldown = 2.5 SECONDS
 		if(get_dir(user, src) in GLOB.diagonals)
 			cooldown *= 2
 		if(living_user.last_move_time + cooldown <= world.time)
