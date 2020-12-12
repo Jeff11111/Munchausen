@@ -169,7 +169,7 @@
 	//High intellect, average everything else
 	stat_int = 12
 	//Godlike surgery, expert chemistry and firstaid
-	skill_melee = 8
+	skill_ranged = 8
 	skill_surgery = 18
 	skill_chemistry = JOB_SKILLPOINTS_EXPERT
 	skill_firstaid = JOB_SKILLPOINTS_EXPERT
