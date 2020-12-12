@@ -314,11 +314,10 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 	var/list/dat = list("<center>")
 
 	dat += "<a href='?_src_=prefs;preference=tab;tab=0' [current_tab == 0 ? "class='linkOn'" : ""]>Character Settings</a>"
-	dat += "<a href='?_src_=prefs;preference=tab;tab=2' [current_tab == 2 ? "class='linkOn'" : ""]>Character Appearance</a>"
-	dat += "<a href='?_src_=prefs;preference=tab;tab=3' [current_tab == 3 ? "class='linkOn'" : ""]>Loadout</a>"
-	dat += "<a href='?_src_=prefs;preference=tab;tab=1' [current_tab == 1 ? "class='linkOn'" : ""]>Game Preferences</a>"
-	dat += "<a href='?_src_=prefs;preference=tab;tab=4' [current_tab == 4 ? "class='linkOn'" : ""]>Content Preferences</a>"
-	dat += "<a href='?_src_=prefs;preference=tab;tab=5' [current_tab == 5 ? "class='linkOn'" : ""]>Keybindings</a>"
+	dat += "<a href='?_src_=prefs;preference=tab;tab=2' [current_tab == 1 ? "class='linkOn'" : ""]>Character Appearance</a>"
+	dat += "<a href='?_src_=prefs;preference=tab;tab=3' [current_tab == 2 ? "class='linkOn'" : ""]>Loadout</a>"
+	dat += "<a href='?_src_=prefs;preference=tab;tab=1' [current_tab == 3 ? "class='linkOn'" : ""]>Game Preferences</a>"
+	dat += "<a href='?_src_=prefs;preference=tab;tab=5' [current_tab == 4 ? "class='linkOn'" : ""]>Keybindings</a>"
 
 	if(!path)
 		dat += "<div class='notice'>Please create an account to save your preferences</div>"
@@ -328,7 +327,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 	dat += "<HR>"
 
 	switch(current_tab)
-		if (0) // Character Settings#
+		if(0) // Character Settings
 			if(path)
 				var/savefile/S = new /savefile(path)
 				if(S)
@@ -349,20 +348,16 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 
 			dat += "<center><h2>Occupation Choices</h2>"
 			dat += "<a href='?_src_=prefs;preference=job;task=menu'>Set Occupation Preferences</a><br></center>"
-			//Skyrat edit - food preferences
 			dat += "<center><h2>Food Setup</h2>"
 			dat += "<a href='?_src_=prefs;preference=food;task=menu'>Configure Foods</a></center>"
 			dat += "<center><b>Current Likings:</b> [foodlikes.len ? foodlikes.Join(", ") : "None"]</center>"
 			dat += "<center><b>Current Dislikings:</b> [fooddislikes.len ? fooddislikes.Join(", ") : "None"]</center>"
-			//
 			dat += "<table width='100%'><tr><td width='75%' valign='top'>"
 			dat += "<h2>Identity</h2>"
 			if(jobban_isbanned(user, "appearance"))
 				dat += "<b>You are banned from using custom names and appearances. You can continue to adjust your characters, but you will be randomised once you join the game.</b><br>"
 			dat += "<a style='display:block;width:100px' href='?_src_=prefs;preference=name;task=random'>Random Name</A> "
-//SKYRAT EDIT
 			dat += "<b>Always Random Name:</b> <a href='?_src_=prefs;preference=name'>[be_random_name ? "Yes" : "No"]</a><BR>"
-//END OF SKYRAT EDIT
 
 			dat += "<b>[nameless ? "Default designation" : "Name"]:</b>"
 			dat += " <a href='?_src_=prefs;preference=name;task=input'>[real_name]</a><BR>"
@@ -387,9 +382,8 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 			dat += "<h2>Job Preferences</h2>"
 			dat += "<b>Preferred Security Department:</b> <a href='?_src_=prefs;preference=sec_dept;task=input'>[prefered_security_department]</a><BR></td>"
 			dat += "</tr></table>"
-
-		//Character Appearance
-		if(2)
+	
+		if(1) //Character Appearance
 			if(path)
 				var/savefile/S = new /savefile(path)
 				if(S)
@@ -952,7 +946,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 			dat += "</td>"
 			dat += "</tr></table>"
 
-		if (1) // Game Preferences
+		if(3) // Game Preferences
 			dat += "<table><tr><td width='340px' height='300px' valign='top'>"
 			dat += "<h2>General Settings</h2>"
 			dat += "<b>tgui Monitors:</b> <a href='?_src_=prefs;preference=tgui_lock'>[(tgui_lock) ? "Primary" : "All"]</a><br>"
@@ -1110,7 +1104,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 
 			dat += "<br>"
 
-		if(3)
+		if(2) //Loadout
 			if(!gear_tab)
 				gear_tab = GLOB.loadout_items[1]
 			dat += "<table align='center' width='100%'>"
@@ -1169,13 +1163,8 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 							dat += "</font>"
 				dat += "</td><td><font size=2><i>[gear.description]</i></font></td></tr>"
 			dat += "</table>"
-		if(4) // Content preferences
-			dat += "<table><tr><td width='340px' height='300px' valign='top'>"
-			dat +="<td width='300px' height='300px' valign='top'>"
-			dat += "<h2>I literally do not give a shit about your preferences.</h2>"
-			dat += "</tr></table>"
-			dat += "<br>"
-		if(5) // Custom keybindings
+		
+		if(4) // Keybindings
 			dat += "<b>Keybindings:</b> <a href='?_src_=prefs;preference=hotkeys'>[(hotkeys) ? "Hotkeys" : "Input"]</a><br>"
 			dat += "Keybindings mode controls how the game behaves with tab and map/input focus.<br>If it is on <b>Hotkeys</b>, the game will always attempt to force you to map focus, meaning keypresses are sent \
 			directly to the map instead of the input. You will still be able to use the command bar, but you need to tab to do it every time you click on the game map.<br>\
@@ -2918,7 +2907,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						save_character()
 
 				if("tab")
-					if (href_list["tab"])
+					if(href_list["tab"])
 						current_tab = text2num(href_list["tab"])
 	if(href_list["preference"] == "gear")
 		if(href_list["clear_loadout"])
