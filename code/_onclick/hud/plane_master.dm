@@ -57,7 +57,7 @@
 
 /obj/screen/plane_master/wall/backdrop(mob/mymob)
 	if(mymob?.client?.prefs.ambientocclusion)
-		add_filter("ambient_occlusion", 0, AMBIENT_OCCLUSION(4, "#04080FAA"))
+		add_filter("ambient_occlusion", 0, EPIC_AMBIENT_OCCUSION)
 	else
 		remove_filter("ambient_occlusion")
 
@@ -72,7 +72,7 @@
 
 /obj/screen/plane_master/above_wall/backdrop(mob/mymob)
 	if(mymob?.client?.prefs.ambientocclusion)
-		add_filter("ambient_occlusion", 0, AMBIENT_OCCLUSION(3, "#04080F64"))
+		add_filter("ambient_occlusion", 0, EPIC_AMBIENT_OCCUSION)
 	else
 		remove_filter("ambient_occlusion")
 
@@ -89,7 +89,7 @@
 
 /obj/screen/plane_master/game_world/backdrop(mob/mymob)
 	if(mymob?.client?.prefs.ambientocclusion)
-		add_filter("ambient_occlusion", 0, AMBIENT_OCCLUSION(4, "#04080FAA"))
+		add_filter("ambient_occlusion", 0, EPIC_AMBIENT_OCCUSION)
 	else
 		remove_filter("ambient_occlusion")
 
