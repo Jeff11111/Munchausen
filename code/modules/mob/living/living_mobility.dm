@@ -16,8 +16,8 @@
 			to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"].</span>")
 		update_resting(updating)
 		var/datum/hud/bingus = hud_used
-		if(bingus?.rest_icon)
-			bingus.rest_icon.update_icon()
+		if(hud_used?.rest_icon)
+			hud_used.rest_icon.update_icon()
 
 /mob/living/proc/update_resting(update_mobility = TRUE)
 	if(update_mobility)

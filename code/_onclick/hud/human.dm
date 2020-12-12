@@ -290,11 +290,11 @@
 	resist.hud = src
 	hotkeybuttons += resist
 
-	using = new /obj/screen/rest()
-	using.icon = ui_style
-	using.screen_loc = ui_rest
-	using.hud = src
-	static_inventory += using
+	rest_icon = new /obj/screen/rest()
+	rest_icon.icon = ui_style
+	rest_icon.screen_loc = ui_rest
+	rest_icon.hud = src
+	static_inventory += rest_icon
 
 	using = new /obj/screen/human/toggle()
 	using.icon = ui_style

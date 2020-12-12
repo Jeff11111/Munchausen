@@ -389,9 +389,9 @@
 	if(!istype(user))
 		return
 	if(user.resting)
-		icon_state = "act_rest_on"
+		icon_state = "[initial(icon_state)]_on"
 	else
-		icon_state = "act_rest"
+		icon_state = initial(icon_state)
 
 /obj/screen/throw_catch
 	name = "throw/catch"
