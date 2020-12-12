@@ -495,17 +495,18 @@ GLOBAL_LIST_EMPTY(objectives)
 			return FALSE
 	return TRUE
 
-/datum/objective/martyr
+/datum/objective/christchurch
 	name = "mass murderer"
 	explanation_text = "Kill. Kill. Kill."
+	martyr_compatible = TRUE
 	var/christchurch_victims = 5
 
-/datum/objective/martyr/New(text)
+/datum/objective/christchurch/New(text)
 	. = ..()
 	christchurch_victims = min(christchurch_victims, length(GLOB.joined_player_list))
 	explanation_text = "My employers have decided that NanoTrasen has had enough chances, and sent me here on a suicide mission. I must kill at least [christchurch_victims] crewmembers."
 
-/datum/objective/martyr/check_completion()
+/datum/objective/christchurch/check_completion()
 	var/christchurch_counter = 0
 	for(var/mob/living/carbon/C in GLOB.carbon_list)
 		if(C.mind && !considered_alive(C.mind))

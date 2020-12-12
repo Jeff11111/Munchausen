@@ -840,11 +840,11 @@
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF) && LB.is_disabled())
 			status += "<span class='danger'><b>DISABLED</b></span>"
 		
-		if(LB.body_zone == BODY_ZONE_HEAD)
-			var/obj/item/bodypart/head/HD = LB
-			if(HD.tapered)
+		if(LB.body_zone == BODY_ZONE_PRECISE_MOUTH)
+			var/obj/item/bodypart/mouth/jaw = LB
+			if(jaw.tapered)
 				if(!wear_mask)
-					status += "<span class='warning'><a href='?src=[REF(HD)];tape=[HD.tapered];'>TAPED</a></span>"
+					status += "<span class='warning'><a href='?src=[REF(jaw)];tape=[jaw.tapered];'>TAPED</a></span>"
 		
 		if(LB.current_gauze)
 			status += "<span class='info'><a href='?src=[REF(LB)];gauze=1;'><b>GAUZED</b></a></span>"

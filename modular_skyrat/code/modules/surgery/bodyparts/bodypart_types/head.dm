@@ -27,6 +27,8 @@
 	//Eye Colouring
 	var/obj/item/bodypart/left_eye/left_eye
 	var/obj/item/bodypart/left_eye/right_eye
+	//Jaw
+	var/obj/item/bodypart/mouth/jaw
 	//Lips
 	var/lip_style = null
 	var/lip_color = "white"
@@ -38,11 +40,9 @@
 	scars_covered_by_clothes = FALSE
 	max_cavity_size = WEIGHT_CLASS_SMALL
 	parent_bodyzone = BODY_ZONE_PRECISE_NECK
-	children_zones = list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)
-	var/obj/item/stack/sticky_tape/tapered = null
+	children_zones = list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE, BODY_ZONE_PRECISE_MOUTH)
 	dismember_mod = 0.7
 	disembowel_mod = 0.7
-	max_teeth = 32
 	dismember_sounds = list(
 		'modular_skyrat/sound/gore/head_explodie1.ogg',
 		'modular_skyrat/sound/gore/head_explodie2.ogg',
@@ -71,54 +71,6 @@
 	. = ..()
 	if(owner && (germ_level >= INFECTION_LEVEL_TWO) && !HAS_TRAIT_FROM(owner, TRAIT_DISFIGURED, "rotten"))
 		ADD_TRAIT(owner, TRAIT_DISFIGURED, "rotten")
-
-/obj/item/bodypart/head/Initialize()
-	. = ..()
-	//Add TEETH.
-	fill_teeth()
-
-/obj/item/bodypart/head/get_teeth_amount()
-	. = 0
-	if(teeth_object)
-		. += teeth_object.amount
-
-/obj/item/bodypart/head/knock_out_teeth(amount = 1, throw_dir = SOUTH)
-	amount = clamp(amount, 0, 32)
-	if(!amount)
-		return
-	if(teeth_object && teeth_object.amount)
-		//No point in making many stacks because they get merged on the ground
-		var/drop = min(teeth_object.amount, amount)
-		if(!drop)
-			return
-		for(var/y in 1 to drop)
-			var/obj/item/stack/teeth/dropped_teeth = new teeth_object.type(get_turf(owner))
-			dropped_teeth.add_mob_blood(owner)
-			dropped_teeth.amount = 1
-			teeth_object.use(1)
-			var/range = clamp(round(amount/2), rand(0,1), 3)
-			var/turf/target_turf = get_ranged_target_turf(dropped_teeth, throw_dir, range)
-			dropped_teeth.throw_at(target_turf, range, rand(1,3))
-			spawn(0)
-				dropped_teeth.do_knock_out_animation()
-		if(teeth_mod)
-			teeth_mod.update_lisp()
-		else
-			teeth_mod = new()
-			if(owner)
-				teeth_mod.add_speech_mod(owner)
-		if(owner)
-			sound_hint(owner, owner)
-		return drop
-
-/obj/item/bodypart/head/update_teeth()
-	if(teeth_mod)
-		teeth_mod.update_lisp()
-	else
-		if(get_teeth_amount() < max_teeth)
-			teeth_mod = new()
-			teeth_mod.add_speech_mod(owner)
-	return TRUE
 
 /obj/item/bodypart/head/update_limb(dropping_limb, mob/living/carbon/source)
 	. = ..()
@@ -204,115 +156,72 @@
 		return
 	cut_overlays()
 	. = ..()
-	if(dropped) //certain overlays only appear when the limb is being detached from its owner.
-		if(!(status & BODYPART_ROBOTIC)) //having a robotic head hides certain features.
-			//hair
-			if(hair_style)
-				var/datum/sprite_accessory/S = GLOB.hair_styles_list[hair_style]
-				if(S)
-					var/image/hair_overlay = image(S.icon, "[S.icon_state]", -HAIR_LAYER, SOUTH)
-					hair_overlay.color = sanitize_hexcolor(hair_color)
-					hair_overlay.alpha = hair_alpha
-					. += hair_overlay
-			//facial hair
-			if(facial_hair_style)
-				var/datum/sprite_accessory/S2 = GLOB.facial_hair_styles_list[facial_hair_style]
-				if(S2)
-					var/image/facial_overlay = image(S2.icon, "[S2.icon_state]", -HAIR_LAYER, SOUTH)
-					facial_overlay.color = sanitize_hexcolor(facial_hair_color)
-					facial_overlay.alpha = hair_alpha
-					. += facial_overlay
+	var/obj/item/bodypart/mouth/cantscream = (owner?.get_bodypart(BODY_ZONE_PRECISE_MOUTH) || (locate(/obj/item/bodypart/mouth) in src))
+	if(!CHECK_BITFIELD(status, BODYPART_ROBOTIC)) //having a robotic head hides certain features.
+		//hair
+		if(hair_style)
+			var/datum/sprite_accessory/S = GLOB.hair_styles_list[hair_style]
+			if(S)
+				var/image/hair_overlay = image(S.icon, "[S.icon_state]", -HAIR_LAYER, SOUTH)
+				hair_overlay.color = sanitize_hexcolor(hair_color)
+				hair_overlay.alpha = hair_alpha
+				. += hair_overlay
+		//facial hair
+		if(facial_hair_style)
+			var/datum/sprite_accessory/S2 = GLOB.facial_hair_styles_list[facial_hair_style]
+			if(S2)
+				var/image/facial_overlay = image(S2.icon, "[S2.icon_state]", -HAIR_LAYER, SOUTH)
+				facial_overlay.color = sanitize_hexcolor(facial_hair_color)
+				facial_overlay.alpha = hair_alpha
+				. += facial_overlay
 
 		// lipstick
-		if(lip_style)
+		if(lip_style && cantscream)
 			var/image/lips_overlay = image('icons/mob/human_face.dmi', "lips_[lip_style]", -BODY_LAYER, SOUTH)
 			lips_overlay.color = lip_color
 			. += lips_overlay
 
-		// eyes
-		var/mutable_appearance/left_eye_overlay
-		var/mutable_appearance/right_eye_overlay
-		if(left_eye)
-			left_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-left", -BODY_LAYER)
-			left_eye_overlay.color = left_eye.eye_color
-		else
-			left_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-left-missing", -BODY_LAYER)
+	// eyes
+	var/mutable_appearance/left_eye_overlay
+	var/mutable_appearance/right_eye_overlay
+	if(left_eye)
+		left_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-left", -BODY_LAYER)
+		left_eye_overlay.color = left_eye.eye_color
+	else
+		left_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-left-missing", -BODY_LAYER)
 
-		if(right_eye)
-			right_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-right", -BODY_LAYER)
-			right_eye_overlay.color = right_eye.eye_color
-		else
-			right_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-right-missing", -BODY_LAYER)
-		
-		. += left_eye_overlay
-		. += right_eye_overlay
-		
-	// tape gag
-	if(tapered)
+	if(right_eye)
+		right_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-right", -BODY_LAYER)
+		right_eye_overlay.color = right_eye.eye_color
+	else
+		right_eye_overlay = mutable_appearance('icons/mob/human_face.dmi', "eye-right-missing", -BODY_LAYER)
+
+	if(ishuman(owner) && (OFFSET_EYES in owner.dna.species.offset_features))
+		left_eye_overlay.pixel_x += owner.dna.species.offset_features[OFFSET_EYES][1]
+		left_eye_overlay.pixel_y += owner.dna.species.offset_features[OFFSET_EYES][2]
+		right_eye_overlay.pixel_x += owner.dna.species.offset_features[OFFSET_EYES][1]
+		right_eye_overlay.pixel_y += owner.dna.species.offset_features[OFFSET_EYES][2]
+
+	. += left_eye_overlay
+	. += right_eye_overlay
+
+	//jaw
+	if(!cantscream)
+		. += mutable_appearance('icons/mob/human_face.dmi', "lips-missing", -BODY_LAYER)
+	
+	//tape gag
+	if(cantscream?.tapered)
 		var/image/tape_overlay = image('modular_skyrat/icons/mob/tapegag.dmi', "tapegag", -BODY_LAYER, SOUTH)
 		. += tape_overlay
 
-/obj/item/bodypart/head/proc/get_stickied(obj/item/stack/sticky_tape/tape, mob/user)
-	if(!tape || tapered)
-		return
-	if(tape.use(1))
-		if(user && owner)
-			owner.visible_message(message = "<span class='danger'>[user] tapes [owner]'s mouth closed with \the [tape]!</span>", self_message = "<span class='userdanger'>[user] tapes your mouth closed with \the [tape]!</span>", ignored_mobs = list(user))
-			to_chat(user, "<span class='warning'>You successfully gag [owner] with \the [src]!</span>")
-		else if(user)
-			user.visible_message("<span class='notice'>[user] tapes off [src]'s mouth.</span>")
-		tapered = new tape.type(owner)
-		tapered.amount = 1
-		if(owner)
-			ADD_TRAIT(owner, TRAIT_MUTE, "tape")
-	update_limb(!owner, owner)
-
-/obj/item/bodypart/head/Topic(href, href_list)
-	. = ..()
-	if(href_list["tape"])
-		var/mob/living/carbon/C = usr
-		if(!istype(C) || !C.canUseTopic(owner, TRUE, FALSE, FALSE) || owner?.wear_mask)
-			return
-		if(C == owner)
-			owner.visible_message("<span class='warning'>[owner] desperately tries to rip \the [tapered] from their mouth!</span>",
-								"<span class='warning'>You desperately try to rip \the [tapered] from your mouth!</span>")
-			if(do_mob(owner, owner, 3 SECONDS))
-				tapered.forceMove(get_turf(owner))
-				tapered = null
-				owner.visible_message("<span class='warning'>[owner] rips \the [tapered] from their mouth!</span>",
-									"<span class='warning'>You successfully remove \the [tapered] from your mouth!</span>")
-				playsound(owner, 'modular_skyrat/sound/effects/clothripping.ogg', 40, 0, -4)
-				owner.emote("scream")
-				REMOVE_TRAIT(owner, TRAIT_MUTE, "tape")
-			else
-				to_chat(owner, "<span class='warning'>You fail to take \the [tapered] off.</span>")
-		else
-			if(do_mob(usr, owner, 1.5 SECONDS))
-				owner.UnregisterSignal(tapered, COMSIG_MOB_SAY)
-				tapered.forceMove(get_turf(owner))
-				tapered = null
-				usr.visible_message("<span class='warning'>[usr] rips \the [tapered] from [owner]'s mouth!</span>",
-								"<span class='warning'>You rip \the [tapered] out of [owner]'s mouth!</span>")
-				playsound(owner, 'modular_skyrat/sound/effects/clothripping.ogg', 40, 0, -4)
-				if(owner)
-					owner.emote("scream")
-					REMOVE_TRAIT(owner, TRAIT_MUTE, "tape")
-			else
-				to_chat(usr, "<span class='warning'>You fail to take \the [tapered] off.</span>")
-		update_limb(!owner, owner)
-
 /obj/item/bodypart/head/examine(mob/user)
 	. = ..()
-	if(tapered)
-		. += "<span class='notice'>The mouth on [src] is taped shut with [tapered].</span>"
+	var/obj/item/bodypart/mouth/cantscream = (owner?.get_bodypart(BODY_ZONE_PRECISE_MOUTH) || (locate(/obj/item/bodypart/mouth) in src))
+	if(cantscream?.tapered)
+		. += "<span class='notice'>The mouth on [src] is taped shut with [cantscream.tapered].</span>"
 
 /obj/item/bodypart/head/attach_limb(mob/living/carbon/C, special)
 	. = ..()
-	if(. && tapered && owner)
-		ADD_TRAIT(owner, TRAIT_MUTE, "tape")
-	//Handle teeth stuff
-	if(teeth_mod)
-		teeth_mod.add_speech_mod(C)
 	//Neck stuff
 	var/obj/item/bodypart/neck/neck = C.get_bodypart(BODY_ZONE_PRECISE_NECK)
 	if(neck)
@@ -321,20 +230,13 @@
 		neck.render_like_organic = render_like_organic
 	left_eye = null
 	right_eye = null
+	jaw = null
 
 /obj/item/bodypart/head/drop_organs(mob/user, violent_removal)
 	. = ..()
 	left_eye = null
 	right_eye = null
-
-/obj/item/bodypart/head/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
-	. = ..()
-	var/mob/living/og_owner = owner
-	if(.)
-		REMOVE_TRAIT(og_owner, TRAIT_MUTE, "tape")
-	//Handle teeth stuff
-	if(teeth_mod)
-		teeth_mod.remove_speech_mod()
+	jaw = null
 
 /obj/item/bodypart/head/replace_limb(mob/living/carbon/C, special)
 	if(!istype(C))
@@ -410,4 +312,4 @@
 		ooze.transfer_to_limb(src, owner)
 
 	name = "[owner.real_name]'s head"
-	..()
+	. = ..()

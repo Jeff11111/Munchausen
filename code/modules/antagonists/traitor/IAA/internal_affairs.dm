@@ -101,20 +101,20 @@
 /datum/antagonist/traitor/proc/replace_escape_objective()
 	if(!owner || !objectives.len)
 		return
-	for (var/objective_ in objectives)
+	for(var/objective_ in objectives)
 		if(!(istype(objective_, /datum/objective/escape)||istype(objective_, /datum/objective/survive)))
 			continue
 		remove_objective(objective_)
 
-	var/datum/objective/martyr/martyr_objective = new
-	martyr_objective.owner = owner
-	add_objective(martyr_objective)
+	var/datum/objective/christchurch/samhyde = new
+	samhyde.owner = owner
+	add_objective(samhyde)
 
 /datum/antagonist/traitor/proc/reinstate_escape_objective()
 	if(!owner||!objectives.len)
 		return
 	for (var/objective_ in objectives)
-		if(!istype(objective_, /datum/objective/martyr))
+		if(!istype(objective_, /datum/objective/christchurch))
 			continue
 		remove_objective(objective_)
 

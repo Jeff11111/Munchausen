@@ -612,6 +612,8 @@ Turf and target are separate in case you want to teleport some distance from a t
 			return "left eye"
 		if(BODY_ZONE_PRECISE_RIGHT_EYE)
 			return "right eye"
+		if(BODY_ZONE_PRECISE_MOUTH)
+			return "jaw"
 		else
 			return zone
 

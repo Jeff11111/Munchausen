@@ -454,7 +454,7 @@
 	if(!weapon || !weapon.get_sharpness())
 		var/obj/item/bodypart/teeth_part = get_bodypart(user.zone_selected)
 		var/zone_mod = 1
-		if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
+		if(teeth_part.body_zone == BODY_ZONE_PRECISE_MOUTH)
 			zone_mod *= 3
 		if(teeth_part && teeth_part.max_teeth && prob(force * zone_mod * 1.5))
 			if(teeth_part.knock_out_teeth(rand(1, 2) * max(round(force/10), 1), get_dir(user, src)))

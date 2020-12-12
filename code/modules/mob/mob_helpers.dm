@@ -10,11 +10,6 @@
 /proc/check_zone(zone)
 	if(!zone)
 		return BODY_ZONE_CHEST
-	switch(zone)
-		if(BODY_ZONE_PRECISE_MOUTH)
-			return BODY_ZONE_HEAD
-		else
-			return zone
 
 /proc/ran_zone(zone, probability = 80)
 	if(prob(probability))
@@ -23,6 +18,10 @@
 		switch(zone)
 			if(BODY_ZONE_HEAD)
 				zone = pick(BODY_ZONE_CHEST)
+			if(BODY_ZONE_PRECISE_NECK)
+				zone = pick(BODY_ZONE_HEAD, BODY_ZONE_CHEST)
+			if(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE, BODY_ZONE_PRECISE_MOUTH)
+				zone = pick(BODY_ZONE_HEAD)
 			if(BODY_ZONE_CHEST)
 				zone = pick(BODY_ZONE_PRECISE_GROIN, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM)
 			if(BODY_ZONE_PRECISE_GROIN)

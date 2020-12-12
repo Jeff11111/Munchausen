@@ -728,7 +728,11 @@
 			if(C.is_mouth_covered())
 				to_chat(src, "<span class='warning'>I need to remove [p_their()] mask first!</span>")
 				return FALSE
-
+			
+			if(!C.get_bodypart(BODY_ZONE_PRECISE_MOUTH))
+				to_chat(src, "<span class='warning'>Mouth to mouth? They don't have a mouth!</span>")
+				return FALSE
+			
 			if(INTERACTING_WITH(src, C))
 				return
 			

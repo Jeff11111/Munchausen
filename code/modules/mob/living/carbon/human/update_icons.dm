@@ -862,14 +862,12 @@ use_mob_overlay_icon: if FALSE, it will always use the default_icon_file even if
 
 	return standing
 
-
 /obj/item/proc/get_held_offsets()
 	var/list/L
 	if(ismob(loc))
 		var/mob/M = loc
 		L = M.get_item_offsets_for_index(M.get_held_index_of_item(src))
 	return L
-
 
 //Can't think of a better way to do this, sadly
 /mob/proc/get_item_offsets_for_index(i)
@@ -880,8 +878,6 @@ use_mob_overlay_icon: if FALSE, it will always use the default_icon_file even if
 			return list("x" = 0, "y" = 16)
 		else //No offsets or Unwritten number of hands
 			return list("x" = 0, "y" = 0)
-
-
 
 //produces a key based on the human's limbs
 /mob/living/carbon/human/generate_icon_render_key()
@@ -957,65 +953,4 @@ use_mob_overlay_icon: if FALSE, it will always use the default_icon_file even if
 
 // Only renders the head of the human
 /mob/living/carbon/human/proc/update_body_parts_head_only()
-	if(!dna)
-		return
-
-	if(!dna.species)
-		return
-
-	var/obj/item/bodypart/HD = get_bodypart(BODY_ZONE_HEAD)
-
-	if(!istype(HD))
-		return
-
-	HD.update_limb()
-
-	add_overlay(HD.get_limb_icon())
-	update_damage_overlays()
-
-	if(HD && !(HAS_TRAIT(src, TRAIT_HUSK)))
-		// lipstick
-		if(lip_style && (LIPS in dna.species.species_traits))
-			var/mutable_appearance/lip_overlay = mutable_appearance('icons/mob/human_face.dmi', "lips_[lip_style]", -BODY_LAYER)
-			lip_overlay.color = lip_color
-			if(OFFSET_LIPS in dna.species.offset_features)
-				lip_overlay.pixel_x += dna.species.offset_features[OFFSET_LIPS][1]
-				lip_overlay.pixel_y += dna.species.offset_features[OFFSET_LIPS][2]
-			add_overlay(lip_overlay)
-
-		// Eyes
-		if(!(NOEYES in dna.species.species_traits))
-			var/obj/item/bodypart/left_eye/LE = get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
-			var/obj/item/bodypart/right_eye/RE = get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
-			var/mutable_appearance/left_eye_overlay
-			var/mutable_appearance/right_eye_overlay
-
-			if(LE)
-				left_eye_overlay = mutable_appearance(dna.species.icon_eyes, "eye-left", -BODY_LAYER)
-			else
-				left_eye_overlay = mutable_appearance(dna.species.icon_eyes, "eye-left-missing", -BODY_LAYER)
-
-			if(RE)
-				right_eye_overlay = mutable_appearance(dna.species.icon_eyes, "eye-right", -BODY_LAYER)
-			else
-				right_eye_overlay = mutable_appearance(dna.species.icon_eyes, "eye-right-missing", -BODY_LAYER)
-
-			if(EYECOLOR in dna.species.species_traits)
-				if(left_eye_overlay)
-					left_eye_overlay.color = sanitize_hexcolor(left_eye_color)
-				if(right_eye_overlay)
-					right_eye_overlay.color = sanitize_hexcolor(right_eye_color)
-
-			if(OFFSET_EYES in dna.species.offset_features)
-				left_eye_overlay.pixel_x += dna.species.offset_features[OFFSET_EYES][1]
-				left_eye_overlay.pixel_y += dna.species.offset_features[OFFSET_EYES][2]
-				right_eye_overlay.pixel_x += dna.species.offset_features[OFFSET_EYES][1]
-				right_eye_overlay.pixel_y += dna.species.offset_features[OFFSET_EYES][2]
-
-			add_overlay(left_eye_overlay)
-			add_overlay(right_eye_overlay)
-
-	dna.species.handle_hair(src)
-
-	update_inv_head()
-	update_inv_wear_mask()
+	return update_body_parts(TRUE)

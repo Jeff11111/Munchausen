@@ -36,7 +36,6 @@
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
 	starting_children = list(/obj/item/bodypart/l_hand/robot)
 
-//skyrat edit
 /obj/item/bodypart/l_hand/robot
 	name = "cyborg left hand"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
@@ -60,7 +59,6 @@
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
 	starting_children = list()
-//
 
 /obj/item/bodypart/r_arm/robot
 	name = "cyborg right arm"
@@ -84,11 +82,8 @@
 	light_burn_msg = ROBOTIC_LIGHT_BURN_MSG
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
-	//skyrat edit
 	starting_children = list(/obj/item/bodypart/r_hand/robot)
-	//
 
-//skyrat edit
 /obj/item/bodypart/r_hand/robot
 	name = "cyborg right hand"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
@@ -112,7 +107,6 @@
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
 	starting_children = list()
-//
 
 /obj/item/bodypart/l_leg/robot
 	name = "cyborg left leg"
@@ -136,11 +130,8 @@
 	light_burn_msg = ROBOTIC_LIGHT_BURN_MSG
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
-	//skyrat vars
 	starting_children = list(/obj/item/bodypart/l_foot/robot)
-	//
 
-//skyrat edit
 /obj/item/bodypart/l_foot/robot
 	name = "cyborg left foot"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
@@ -164,7 +155,6 @@
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
 	starting_children = list()
-//
 
 /obj/item/bodypart/r_leg/robot
 	name = "cyborg right leg"
@@ -188,11 +178,8 @@
 	light_burn_msg = ROBOTIC_LIGHT_BURN_MSG
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
-	//skyrat vars
 	starting_children = list(/obj/item/bodypart/r_foot/robot)
-	//
 
-//skyrat edit
 /obj/item/bodypart/r_foot/robot
 	name = "cyborg right foot"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
@@ -216,7 +203,6 @@
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
 	starting_children = list()
-//
 
 /obj/item/bodypart/chest/robot
 	name = "cyborg torso"
@@ -242,11 +228,8 @@
 
 	var/wired = 0
 	var/obj/item/stock_parts/cell/cell = null
-	//skyrat vars
 	starting_children = list(/obj/item/bodypart/groin/robot)
-	//
 
-//skyrat edit
 /obj/item/bodypart/groin/robot
 	name = "cyborg groin"
 	desc = "A heavily reinforced case containing cyborg logic boards."
@@ -269,7 +252,6 @@
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
 	starting_children = list()
-//
 
 /obj/item/bodypart/chest/robot/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/stock_parts/cell))
@@ -306,8 +288,7 @@
 	if(cell)
 		cell.forceMove(user.loc)
 		cell = null
-	..()
-
+	. = ..()
 
 /obj/item/bodypart/head/robot
 	name = "cyborg head"
@@ -333,7 +314,7 @@
 
 	var/obj/item/assembly/flash/handheld/flash1 = null
 	var/obj/item/assembly/flash/handheld/flash2 = null
-	starting_children = list(/obj/item/bodypart/left_eye/robotic, /obj/item/bodypart/right_eye/robotic)
+	starting_children = list(/obj/item/bodypart/left_eye/robotic, /obj/item/bodypart/right_eye/robotic, /obj/item/bodypart/mouth/robot)
 
 /obj/item/bodypart/head/robot/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/assembly/flash/handheld))
@@ -385,15 +366,24 @@
 	if(flash2)
 		flash2.forceMove(user.loc)
 		flash2 = null
-	..()
+	. = ..()
+
+/obj/item/bodypart/mouth/robot
+	name = "cyborg jaw"
+	desc = "A standard reinforced tongue case."
+	item_state = "buildpipe"
+	icon = 'modular_skyrat/icons/obj/surgery.dmi'
+	flags_1 = CONDUCT_1
+	icon_state = "jaw-c"
+	status = BODYPART_ROBOTIC | BODYPART_NOBLEED
 
 /obj/item/bodypart/neck/robot
 	name = "cyborg neck"
 	desc = "A standard reinforced vocal cord case, with spine-plugged neural socket and sensor gimbals."
 	item_state = "buildpipe"
-	icon = 'modular_skyrat/icons/mob/augments/augments.dmi'
+	icon = 'modular_skyrat/icons/obj/surgery.dmi'
 	flags_1 = CONDUCT_1
-	icon_state = "borg_neck"
+	icon_state = "vertebrae-c"
 	status = BODYPART_ROBOTIC | BODYPART_NOBLEED
 
 // Surplus limbs
@@ -405,11 +395,8 @@
 	burn_reduction = 0
 	max_damage = 20
 	status = BODYPART_ROBOTIC
-	//skyrat vars
 	starting_children = list(/obj/item/bodypart/l_hand/robot/surplus)
-	//
 
-//skyrat edit
 /obj/item/bodypart/l_hand/robot/surplus
 	name = "surplus prosthetic left hand"
 	desc = "A skeletal, robotic limb. Outdated and fragile, but it's still better than nothing."
@@ -418,7 +405,6 @@
 	burn_reduction = 0
 	max_damage = 20
 	status = BODYPART_ROBOTIC
-//
 
 /obj/item/bodypart/r_arm/robot/surplus
 	name = "surplus prosthetic right arm"
@@ -428,11 +414,8 @@
 	burn_reduction = 0
 	max_damage = 20
 	status = BODYPART_ROBOTIC
-	//skyrat vars
 	starting_children = list(/obj/item/bodypart/r_hand/robot/surplus)
-	//
 
-//skyrat edit
 /obj/item/bodypart/r_hand/robot/surplus
 	name = "surplus prosthetic right hand"
 	desc = "A skeletal, robotic limb. Outdated and fragile, but it's still better than nothing."
@@ -441,7 +424,6 @@
 	burn_reduction = 0
 	max_damage = 20
 	status = BODYPART_ROBOTIC
-//
 
 /obj/item/bodypart/l_leg/robot/surplus
 	name = "surplus prosthetic left leg"
@@ -451,11 +433,8 @@
 	burn_reduction = 0
 	max_damage = 20
 	status = BODYPART_ROBOTIC
-	//skyrat vars
 	starting_children = list(/obj/item/bodypart/l_foot/robot/surplus)
-	//
 
-//skyrat edit
 /obj/item/bodypart/l_foot/robot/surplus
 	name = "surplus prosthetic left foot"
 	desc = "A skeletal, robotic limb. Outdated and fragile, but it's still better than nothing."
@@ -464,7 +443,6 @@
 	burn_reduction = 0
 	max_damage = 20
 	status = BODYPART_ROBOTIC
-//
 
 /obj/item/bodypart/r_leg/robot/surplus
 	name = "surplus prosthetic right leg"
@@ -474,11 +452,8 @@
 	burn_reduction = 0
 	max_damage = 20
 	status = BODYPART_ROBOTIC
-	//skyrat vars
 	starting_children = list(/obj/item/bodypart/r_foot/robot/surplus)
-	//
 
-//skyrat edit
 /obj/item/bodypart/r_foot/robot/surplus
 	name = "surplus prosthetic right foot"
 	desc = "A skeletal, robotic limb. Outdated and fragile, but it's still better than nothing."
@@ -487,7 +462,6 @@
 	burn_reduction = 0
 	max_damage = 20
 	status = BODYPART_ROBOTIC
-//
 
 // Upgraded Surplus limbs - Better then robotic limbs
 /obj/item/bodypart/l_arm/robot/surplus_upgraded
@@ -498,11 +472,8 @@
 	burn_reduction = 2
 	max_damage = 55
 	status = BODYPART_ROBOTIC
-	//skyrat vars
 	starting_children = list(/obj/item/bodypart/l_hand/robot/surplus_upgraded)
-	//
 
-//skyrat edit
 /obj/item/bodypart/l_hand/robot/surplus_upgraded
 	name = "reinforced surplus prosthetic left hand"
 	desc = "A skeletal, robotic limb. This one is reinforced to provide better protection, and is made of stronger parts."
@@ -510,7 +481,6 @@
 	brute_reduction = 3
 	burn_reduction = 2
 	max_damage = 55
-//
 
 /obj/item/bodypart/r_arm/robot/surplus_upgraded
 	name = "reinforced surplus prosthetic right arm"
@@ -519,11 +489,8 @@
 	brute_reduction = 3
 	burn_reduction = 2
 	max_damage = 55
-	//skyrat vars
 	starting_children = list(/obj/item/bodypart/r_hand/robot/surplus_upgraded)
-	//
 
-//skyrat edit
 /obj/item/bodypart/r_hand/robot/surplus_upgraded
 	name = "reinforced surplus prosthetic right hand"
 	desc = "A skeletal, robotic limb. This one is reinforced to provide better protection, and is made of stronger parts."
@@ -531,7 +498,6 @@
 	brute_reduction = 3
 	burn_reduction = 2
 	max_damage = 55
-//
 
 /obj/item/bodypart/l_leg/robot/surplus_upgraded
 	name = "reinforced surplus prosthetic left leg"
@@ -540,11 +506,8 @@
 	brute_reduction = 3
 	burn_reduction = 2
 	max_damage = 55
-	//skyrat vars
 	starting_children = list(/obj/item/bodypart/l_foot/robot/surplus_upgraded)
-	//
 
-//skyrat edit
 /obj/item/bodypart/l_foot/robot/surplus_upgraded
 	name = "reinforced surplus prosthetic left foot"
 	desc = "A skeletal, robotic limb. This one is reinforced to provide better protection, and is made of stronger parts."
@@ -552,7 +515,6 @@
 	brute_reduction = 3
 	burn_reduction = 2
 	max_damage = 55
-//
 
 /obj/item/bodypart/r_leg/robot/surplus_upgraded
 	name = "reinforced surplus prosthetic right leg"
@@ -561,11 +523,8 @@
 	brute_reduction = 3
 	burn_reduction = 2
 	max_damage = 55
-	//skyrat vars
 	starting_children = list(/obj/item/bodypart/r_foot/robot/surplus_upgraded)
-	//
 
-//skyrat edit
 /obj/item/bodypart/r_foot/robot/surplus_upgraded
 	name = "reinforced surplus prosthetic right foot"
 	desc = "A skeletal, robotic limb. This one is reinforced to provide better protection, and is made of stronger parts."
@@ -573,7 +532,6 @@
 	brute_reduction = 3
 	burn_reduction = 2
 	max_damage = 55
-//
 
 #undef ROBOTIC_LIGHT_BRUTE_MSG
 #undef ROBOTIC_MEDIUM_BRUTE_MSG

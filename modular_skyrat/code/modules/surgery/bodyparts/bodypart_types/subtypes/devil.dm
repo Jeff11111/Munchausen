@@ -17,6 +17,12 @@
 	animal_origin = DEVIL_BODYPART
 	status = BODYPART_ORGANIC | BODYPART_NOEMBED
 
+/obj/item/bodypart/mouth/devil
+	dismemberable = 0
+	max_damage = 5000
+	animal_origin = DEVIL_BODYPART
+	status = BODYPART_ORGANIC | BODYPART_NOEMBED
+
 /obj/item/bodypart/neck/devil
 	dismemberable = 0
 	max_damage = 5000

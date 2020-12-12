@@ -19,7 +19,6 @@
 	update_inv_legcuffed()
 	update_fire()
 
-
 /mob/living/carbon/update_inv_hands()
 	remove_overlay(HANDS_LAYER)
 	if(handcuffed)
@@ -59,8 +58,6 @@
 		overlays_standing[FIRE_LAYER] = new_fire_overlay
 
 	apply_overlay(FIRE_LAYER)
-
-
 
 /mob/living/carbon/update_damage_overlays()
 	remove_overlay(DAMAGE_LAYER)
@@ -217,11 +214,11 @@
 /mob/living/carbon/update_body()
 	update_body_parts()
 
-/mob/living/carbon/proc/update_body_parts(force = FALSE) //skyrat edit - force bodypart updating
+/mob/living/carbon/proc/update_body_parts(force = FALSE)
 	//CHECK FOR UPDATE
 	var/oldkey = icon_render_key
 	icon_render_key = generate_icon_render_key()
-	if(oldkey == icon_render_key && !force) //skyrat edit
+	if(oldkey == icon_render_key && !force)
 		return
 
 	remove_overlay(BODYPARTS_LAYER)

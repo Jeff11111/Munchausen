@@ -9,6 +9,16 @@
 	animal_origin = LARVA_BODYPART
 	status = BODYPART_ORGANIC | BODYPART_NOEMBED
 
+/obj/item/bodypart/mouth/larva
+	icon = 'icons/mob/animal_parts.dmi'
+	icon_state = "larva_head"
+	px_x = 0
+	px_y = 0
+	dismemberable = 0
+	max_damage = 15
+	animal_origin = LARVA_BODYPART
+	status = BODYPART_ORGANIC | BODYPART_NOEMBED
+
 /obj/item/bodypart/neck/larva
 	icon = 'icons/mob/animal_parts.dmi'
 	icon_state = "larva_head"
@@ -53,6 +63,16 @@
 	px_y = 0
 	dismemberable = 0
 	max_damage = 250
+	animal_origin = ALIEN_BODYPART
+	status = BODYPART_ORGANIC | BODYPART_NOEMBED
+
+/obj/item/bodypart/mouth/alien
+	icon = 'icons/mob/animal_parts.dmi'
+	icon_state = "alien_head"
+	px_x = 0
+	px_y = 0
+	dismemberable = 0
+	max_damage = 100
 	animal_origin = ALIEN_BODYPART
 	status = BODYPART_ORGANIC | BODYPART_NOEMBED
 

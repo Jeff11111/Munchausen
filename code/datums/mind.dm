@@ -525,7 +525,7 @@ GLOBAL_LIST(objective_player_choices)
 		/datum/objective/protect,
 		/datum/objective/escape,
 		/datum/objective/survive,
-		/datum/objective/martyr,
+		/datum/objective/christchurch,
 		/datum/objective/steal,
 		/datum/objective/download,
 		/datum/objective/blackmail_implant //SKYRAT ADDITION
@@ -551,7 +551,7 @@ GLOBAL_LIST(objective_choices)
 		/datum/objective/hijack,
 		/datum/objective/escape,
 		/datum/objective/survive,
-		/datum/objective/martyr,
+		/datum/objective/christchurch,
 		/datum/objective/steal,
 		/datum/objective/download,
 		/datum/objective/nuclear,

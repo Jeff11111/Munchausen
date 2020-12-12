@@ -123,10 +123,8 @@
 #define HIDETAUR		(1<<11) //gotta hide that snowflake
 #define HIDESNOUT		(1<<12) //or do we actually hide our snoots
 #define HIDEACCESSORY	(1<<13) //hides the jumpsuit accessory.
-//skyrat edit
 #define HIDEUNDERWEAR	(1<<14) //hides underwear, socks and shirt
 #define HIDEWRISTS		(1<<15) //hides wrists
-//
 
 //bitflags for clothing coverage - also used for limbs
 #define HEAD		(1<<0)
@@ -148,6 +146,7 @@
 #define LEFT_EYE	(1<<12)
 #define RIGHT_EYE	(1<<13)
 #define EYES		(LEFT_EYE | RIGHT_EYE)
+#define	JAW			(1<<14)
 #define FULL_BODY	(~0)
 
 //flags for alternate styles: These are hard sprited so don't set this if you didn't put the effort in

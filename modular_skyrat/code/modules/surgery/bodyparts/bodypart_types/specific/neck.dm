@@ -1,6 +1,8 @@
 /obj/item/bodypart/neck
 	name = "neck"
 	desc = "Whoever did this was a real cut-throat."
+	icon = 'modular_skyrat/icons/obj/surgery.dmi'
+	icon_state = "vertebrae"
 	max_damage = 30
 	max_stamina_damage = 30
 	dismember_bodyzone = BODY_ZONE_CHEST
@@ -22,8 +24,8 @@
 		'modular_skyrat/sound/gore/head_explodie4.ogg',
 	)
 	miss_entirely_prob = 40
-	zone_prob = 40
-	extra_zone_prob = 30
+	zone_prob = 25
+	extra_zone_prob = 45
 	max_cavity_size = WEIGHT_CLASS_TINY
 	amputation_point = "trachea"
 	joint_name = "cervical spine"
@@ -35,7 +37,8 @@
 	if(dropped)
 		for(var/obj/item/bodypart/head/nohead in src)
 			. |= nohead.get_limb_icon(TRUE)
-			break
+			return
+		. |= mutable_appearance(icon, initial(icon_state), layer, plane, color)
 
 /obj/item/bodypart/neck/update_limb(dropping_limb, mob/living/carbon/source)
 	. = ..()

@@ -25,12 +25,12 @@
 	if(!istype(target, /obj/item))
 		if(iscarbon(target) && user.a_intent == INTENT_GRAB && user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
 			var/mob/living/carbon/C = target
-			var/obj/item/bodypart/head/shoeonhead = C.get_bodypart(BODY_ZONE_HEAD)
-			if(istype(shoeonhead) && !shoeonhead.tapered && !C.wear_mask)
+			var/obj/item/bodypart/mouth/blowie = C.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+			if(istype(blowie) && !blowie.tapered && !C.wear_mask)
 				C.visible_message(message = "<span class='danger'>[user] tries to tape [C]'s mouth shut with \the [src]!</span>", self_message = "<span class='userdanger'>[user] tries to tape your mouth shut with \the [src]!</span>", ignored_mobs = list(user))
 				to_chat(user, "<span class='warning'>You try to tape [C]'s mouth closed with \the [src]!</span>")
 				if(do_after_mob(user, C, apply_time * 1.5))
-					shoeonhead.get_stickied(src, user)
+					blowie.get_stickied(src, user)
 				else
 					to_chat(user, "<span class='warning'>You fail to gag \the [C] with \the [src].</span>")
 		return

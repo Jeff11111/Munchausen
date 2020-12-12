@@ -5,7 +5,7 @@
 	show_name_in_check_antagonists = TRUE
 
 /datum/antagonist/heartbreaker/proc/forge_objectives()
-	var/datum/objective/martyr/normiesgetout = new
+	var/datum/objective/christchurch/normiesgetout = new
 	normiesgetout.owner = owner
 	objectives += normiesgetout
 

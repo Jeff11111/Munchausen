@@ -10,6 +10,11 @@
 	icon_state = "default_monkey_head"
 	animal_origin = MONKEY_BODYPART
 
+/obj/item/bodypart/mouth/monkey
+	icon = 'icons/mob/animal_parts.dmi'
+	icon_state = "default_monkey_head"
+	animal_origin = MONKEY_BODYPART
+
 /obj/item/bodypart/neck/monkey
 	icon = 'icons/mob/animal_parts.dmi'
 	icon_state = "default_monkey_neck"

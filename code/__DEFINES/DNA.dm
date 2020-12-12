@@ -143,6 +143,7 @@
 #define HORNCOLOR		25
 #define WINGCOLOR		26
 #define RIGHTEYECOLOR	27
+#define NOJAW			28
 
 //organ slots
 #define ORGAN_SLOT_BRAIN "brain"
