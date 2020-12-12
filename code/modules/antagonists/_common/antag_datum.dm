@@ -49,7 +49,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 /datum/antagonist/proc/can_be_owned(datum/mind/new_owner)
 	. = TRUE
 	var/datum/mind/tested = new_owner || owner
-	if(!testedd || tested.has_antag_datum(type))
+	if(!tested || tested.has_antag_datum(type))
 		return FALSE
 	for(var/i in tested.antag_datums)
 		var/datum/antagonist/A = i
