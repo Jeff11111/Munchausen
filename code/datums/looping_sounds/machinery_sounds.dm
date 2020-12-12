@@ -103,7 +103,7 @@
 	start_length = 0.9 SECONDS
 	mid_sounds = list('modular_skyrat/sound/machinery/conveyor_loop.ogg'=1)
 	mid_length = 3.5 SECONDS
-	volume = 40
+	volume = 30
 
 /datum/looping_sound/recycler
 	start_sound = 'modular_skyrat/sound/machinery/trashcompactor_start.ogg'
