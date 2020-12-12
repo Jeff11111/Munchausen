@@ -171,15 +171,25 @@
 
 	// Then, continuous section.
 	ui_continuous = get_ui_continuous()
-	ui_continuous.screen_loc = "[screen_start_x]:[screen_pixel_x],[screen_start_y]:[screen_pixel_y] to [screen_start_x+maxcolumns-1]:[screen_pixel_x],[screen_start_y+rows-1]:[screen_pixel_y]"
+	var/widescreenlayout = user?.client?.prefs?.widescreenpref
+	if(widescreenlayout)
+		ui_continuous.screen_loc = "[screen_start_x]:[screen_pixel_x],[screen_start_y]:[screen_pixel_y] to [screen_start_x+maxcolumns-1]:[screen_pixel_x],[screen_start_y+rows-1]:[screen_pixel_y]"
+	else
+		ui_continuous.screen_loc = "[screen_start_x_box]:[screen_pixel_x_box],[screen_start_y_box]:[screen_pixel_y_box] to [screen_start_x_box+maxcolumns-1]:[screen_pixel_x_box],[screen_start_y_box+rows-1]:[screen_pixel_y_box]"
 	. += ui_continuous
 	// Then, left.
 	ui_left = get_ui_left()
-	ui_left.screen_loc = "[screen_start_x]:[screen_pixel_x - 2],[screen_start_y]:[screen_pixel_y] to [screen_start_x]:[screen_pixel_x - 2],[screen_start_y+rows-1]:[screen_pixel_y]"
+	if(widescreenlayout)
+		ui_left.screen_loc = "[screen_start_x]:[screen_pixel_x - 2],[screen_start_y]:[screen_pixel_y] to [screen_start_x]:[screen_pixel_x - 2],[screen_start_y+rows-1]:[screen_pixel_y]"
+	else
+		ui_left.screen_loc = "[screen_start_x_box]:[screen_pixel_x_box - 2],[screen_start_y_box]:[screen_pixel_y_box] to [screen_start_x_box]:[screen_pixel_x_box - 2],[screen_start_y_box+rows-1]:[screen_pixel_y_box]"
 	. += ui_left
 	// Then, closer, which is also our right element.
 	ui_close = get_ui_close()
-	ui_close.screen_loc = "[screen_start_x + maxcolumns]:[screen_pixel_x],[screen_start_y]:[screen_pixel_y] to [screen_start_x + maxcolumns]:[screen_pixel_x],[screen_start_y+rows-1]:[screen_pixel_y]"
+	if(widescreenlayout)
+		ui_close.screen_loc = "[screen_start_x_box + maxcolumns]:[screen_pixel_x],[screen_start_y]:[screen_pixel_y] to [screen_start_x + maxcolumns]:[screen_pixel_x],[screen_start_y+rows-1]:[screen_pixel_y]"
+	else
+		ui_close.screen_loc = "[screen_start_x_box + maxcolumns]:[screen_pixel_x_box],[screen_start_y_box]:[screen_pixel_y_box] to [screen_start_x_box + maxcolumns]:[screen_pixel_x_box],[screen_start_y_box+rows-1]:[screen_pixel_y_box]"
 	. += ui_close
 
 /**

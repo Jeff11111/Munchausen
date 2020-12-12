@@ -5,4 +5,4 @@
 
 /obj/item/ammo_box/magazine/mm195x129/update_icon()
 	..()
-	icon_state = "[initial(icon_state)]-[FLOOR(ammo_count(), 25)]"
+	icon_state = "[initial(icon_state)]-[CEILING(ammo_count(), 25)]"

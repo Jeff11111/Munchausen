@@ -692,9 +692,15 @@
 	onsound = 'modular_skyrat/sound/weapons/knifeopen.ogg'
 	offsound = 'modular_skyrat/sound/weapons/knifeclose.ogg'
 
-//black police baton
+//le police baton
+/obj/item/melee/classic_baton
+	name = "police baton"
+	desc = "A wooden truncheon for beating up niggers and trannies."
+	icon = 'modular_skyrat/icons/obj/items_and_weapons.dmi'
+	icon_state = "niggerbeater"
+
 /obj/item/melee/classic_baton/black
-	name = "Black Police Baton"
+	name = "black police baton"
 	desc = "The safeword is police brutality."
 	icon = 'modular_skyrat/icons/obj/items_and_weapons.dmi'
 	icon_state = "blackbaton"
