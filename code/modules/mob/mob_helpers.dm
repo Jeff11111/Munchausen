@@ -10,6 +10,8 @@
 /proc/check_zone(zone)
 	if(!zone)
 		return BODY_ZONE_CHEST
+	else
+		return zone
 
 /proc/ran_zone(zone, probability = 80)
 	if(prob(probability))
