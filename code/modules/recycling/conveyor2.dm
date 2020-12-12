@@ -125,12 +125,19 @@ GLOBAL_LIST_EMPTY(conveyors_by_id)
 	if(stat & BROKEN)
 		icon_state = "conveyor-broken"
 		operating = FALSE
+		conveyor_sound.stop(src)
 		return
 	if(!operable)
 		operating = FALSE
+		conveyor_sound.stop(src)
 	if(stat & NOPOWER)
 		operating = FALSE
+		conveyor_sound.stop(src)
 	icon_state = "conveyor[operating * verted]"
+	if(operating)
+		conveyor_sound.start(src)
+	else
+		conveyor_sound.stop(src)
 
 	// machine process
 	// move items to the target location

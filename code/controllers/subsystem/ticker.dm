@@ -159,7 +159,6 @@ SUBSYSTEM_DEF(ticker)
 			for(var/client/C in GLOB.clients)
 				window_flash(C, ignorepref = TRUE) //let them know lobby has opened up.
 			to_chat(world, "<span class='boldnotice'>Welcome to hell.</span>")
-			send2chat("New nightmare starting on [SSmapping.config.map_name].", CONFIG_GET(string/chat_announce_new_game))
 			current_state = GAME_STATE_PREGAME
 			//Everyone who wants to be an observer is now spawned
 			create_observers()
@@ -346,6 +345,7 @@ SUBSYSTEM_DEF(ticker)
 	var/list/adm = get_admin_counts()
 	var/list/allmins = adm["present"]
 	send2irc("Server", "Round [GLOB.round_id ? "#[GLOB.round_id]:" : "of"] [hide_mode ? "secret":"[mode.name]"] has started[allmins.len ? ".":" with no active admins online!"]")
+	send2chat("New nightmare starting on [SSmapping.config.map_name].", CONFIG_GET(string/chat_announce_new_game))
 	setup_done = TRUE
 
 	for(var/i in GLOB.start_landmarks_list)
