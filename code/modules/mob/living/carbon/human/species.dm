@@ -1754,7 +1754,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			log_combat(user, target, "punched")
 		
 		//Knockdown and stuff
-		target.do_stat_effects(user, null, damage)
+		target.do_stat_effects(user, null, damage, affecting)
 
 		//Attack message
 		target.visible_message("<span class='danger'><b>[user]</b>[pitiful ? " pitifully" : ""] [user.dna.species.attack_verb_continuous] <b>[target]</b> on their [affecting.name]![target.wound_message]</span>", \
@@ -2042,7 +2042,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 	//Mine is fucking better idc
 	if(H.mind || user.mind)
-		H.do_stat_effects(user, I, totitemdamage)
+		H.do_stat_effects(user, I, totitemdamage, affecting)
 
 	//Send item attack message
 	H.send_item_attack_message(I, user, hit_area, totitemdamage * weakness, affecting)

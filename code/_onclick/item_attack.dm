@@ -432,7 +432,7 @@
 	animate(pixel_x = -2, pixel_y = -2, time = 0.5, flags = ANIMATION_RELATIVE)
 
 //Do stuff depending on stats and skills etc
-/mob/living/carbon/proc/do_stat_effects(mob/living/carbon/user, obj/item/weapon, force)
+/mob/living/carbon/proc/do_stat_effects(mob/living/carbon/user, obj/item/weapon, force, obj/item/bodypart/affecting)
 	var/did_something = FALSE
 	var/victim_str = 10
 	if(GET_STAT_LEVEL(src, str))
@@ -452,7 +452,7 @@
 		did_something = TRUE
 	//Knock teeth out
 	if(!weapon || !weapon.get_sharpness())
-		var/obj/item/bodypart/teeth_part = get_bodypart(user.zone_selected)
+		var/obj/item/bodypart/teeth_part = affecting || get_bodypart(user.zone_selected)
 		var/zone_mod = 1
 		if(teeth_part.body_zone == BODY_ZONE_PRECISE_MOUTH)
 			zone_mod *= 3

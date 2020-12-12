@@ -443,7 +443,7 @@
 		log_combat(user, target, "kicked")
 		
 		//Knockdown and stuff
-		target.do_stat_effects(user, null, damage)
+		target.do_stat_effects(user, null, damage, affecting)
 
 		//Attack message
 		target.visible_message("<span class='danger'><b>[user]</b>[pitiful ? " pitifully" : ""] [user.dna.species.kick_verb_continuous] <b>[target]</b> on their [affecting.name]![target.wound_message]</span>", \
@@ -624,7 +624,7 @@
 		log_combat(user, target, "bitten")
 		
 		//Knockdown and stuff
-		target.do_stat_effects(user, null, damage)
+		target.do_stat_effects(user, null, damage, affecting)
 
 		//Attack message
 		target.visible_message("<span class='danger'><b>[user]</b>[pitiful ? " pitifully" : ""] [user.dna.species.bite_verb_continuous] <b>[target]</b> on their [affecting.name]![target.wound_message]</span>", \
