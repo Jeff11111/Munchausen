@@ -46,8 +46,8 @@
 #define ui_storage2 "CENTER+2,SOUTH"
 
 //Non-widescreen
-#define ui_boxstorage1 "CENTER-4,SOUTH+1"
-#define ui_boxstorage2 "CENTER-3,SOUTH+1"
+#define ui_boxstorage1 "WEST,SOUTH+7"
+#define ui_boxstorage2 "WEST,SOUTH+8"
 
 #define ui_borg_sensor "CENTER-3:15, SOUTH:5"		//borgs
 #define ui_borg_lamp "CENTER-4:15, SOUTH:5"			//borgs
