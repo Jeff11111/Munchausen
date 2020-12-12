@@ -15,7 +15,6 @@
 		if(!silent)
 			to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"].</span>")
 		update_resting(updating)
-		var/datum/hud/bingus = hud_used
 		if(hud_used?.rest_icon)
 			hud_used.rest_icon.update_icon()
 
