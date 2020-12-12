@@ -272,8 +272,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 	var/list/chosen_gear = list()
 	var/gear_tab
 
-	var/screenshake = 100
-	var/damagescreenshake = 2
 	var/arousable = TRUE
 	var/widescreenpref = TRUE
 	var/autostand = TRUE
@@ -1008,9 +1006,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 			dat += "<b>Auto stand:</b> <a href='?_src_=prefs;preference=autostand'>[autostand ? "Enabled" : "Disabled"]</a><br>"
 			dat += "<b>Auto OOC:</b> <a href='?_src_=prefs;preference=auto_ooc'>[auto_ooc ? "Enabled" : "Disabled"]</a><br>"
 			dat += "<b>Force Slot Storage HUD:</b> <a href='?_src_=prefs;preference=no_tetris_storage'>[no_tetris_storage ? "Enabled" : "Disabled"]</a><br>"
-			dat += "<b>Screen Shake:</b> <a href='?_src_=prefs;preference=screenshake'>[(screenshake==100) ? "Full" : ((screenshake==0) ? "None" : "[screenshake]")]</a><br>"
-			if (user && user.client && !user.client.prefs.screenshake==0)
-				dat += "<b>Damage Screen Shake:</b> <a href='?_src_=prefs;preference=damagescreenshake'>[(damagescreenshake==1) ? "On" : ((damagescreenshake==0) ? "Off" : "Only when down")]</a><br>"
 			var/p_chaos
 			if (!preferred_chaos)
 				p_chaos = "No preference"
@@ -2702,20 +2697,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					auto_ooc = !auto_ooc
 				if("no_tetris_storage")
 					no_tetris_storage = !no_tetris_storage
-				if ("screenshake")
-					var/desiredshake = input(user, "Set the amount of screenshake you want. \n(0 = disabled, 100 = full, 200 = maximum.)", "Character Preference", screenshake)  as null|num
-					if (!isnull(desiredshake))
-						screenshake = desiredshake
-				if("damagescreenshake")
-					switch(damagescreenshake)
-						if(0)
-							damagescreenshake = 1
-						if(1)
-							damagescreenshake = 2
-						if(2)
-							damagescreenshake = 0
-						else
-							damagescreenshake = 1
 				if("nameless")
 					nameless = !nameless
 				if("auto_hiss")

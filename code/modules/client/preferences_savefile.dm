@@ -233,8 +233,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	//citadel code
 	S["arousable"]			>> arousable
-	S["screenshake"]		>> screenshake
-	S["damagescreenshake"]	>> damagescreenshake
 	S["widescreenpref"]		>> widescreenpref
 	S["autostand"]			>> autostand
 	S["preferred_chaos"]	>> preferred_chaos
@@ -275,8 +273,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	pda_color		= sanitize_hexcolor(pda_color, 6, TRUE, initial(pda_color))
 	// SKYRAT EDIT: Credits
 	show_credits		= sanitize_integer(show_credits, 0, 1, initial(show_credits))
-	screenshake			= sanitize_integer(screenshake, 0, 800, initial(screenshake))
-	damagescreenshake	= sanitize_integer(damagescreenshake, 0, 2, initial(damagescreenshake))
 	widescreenpref		= sanitize_integer(widescreenpref, 0, 1, initial(widescreenpref))
 	autostand			= sanitize_integer(autostand, 0, 1, initial(autostand))
 	auto_ooc			= sanitize_integer(auto_ooc, 0, 1, initial(auto_ooc))
@@ -370,8 +366,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["modless_key_bindings"], modless_key_bindings)
 
 	//citadel code
-	WRITE_FILE(S["screenshake"], screenshake)
-	WRITE_FILE(S["damagescreenshake"], damagescreenshake)
 	WRITE_FILE(S["arousable"], arousable)
 	WRITE_FILE(S["widescreenpref"], widescreenpref)
 	WRITE_FILE(S["autostand"], autostand)

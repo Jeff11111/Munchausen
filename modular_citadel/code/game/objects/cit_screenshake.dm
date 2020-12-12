@@ -5,13 +5,10 @@
 	if(!M || !M.client || duration <= 0)
 		return
 	var/client/C = M.client
-	if (C.prefs.screenshake==0)
-		return
 	var/oldx = C.pixel_x
 	var/oldy = C.pixel_y
-	var/clientscreenshake = (C.prefs.screenshake * 0.01)
-	var/max = (strength*clientscreenshake) * world.icon_size
-	var/min = -((strength*clientscreenshake) * world.icon_size)
+	var/max = (strength*0.01) * world.icon_size
+	var/min = -((strength*0.01) * world.icon_size)
 
 	for(var/i in 0 to duration-1)
 		if (i == 0)
@@ -48,14 +45,10 @@
 /obj/item/attack(mob/living/M, mob/living/user)
 	. = ..()
 	if(force >= 15)
-		shake_camera(user, ((force - 10) * 0.01 + 1), ((force - 10) * 0.01))
+		if(user.client)
+			shake_camera(user, ((force - 10) * 0.01 + 1), ((force - 10) * 0.01))
 		if(M.client)
-			switch (M.client.prefs.damagescreenshake)
-				if (1)
-					shake_camera(M, ((force - 10) * 0.015 + 1), ((force - 10) * 0.015))
-				if (2)
-					if(!CHECK_MOBILITY(M, MOBILITY_MOVE))
-						shake_camera(M, ((force - 10) * 0.015 + 1), ((force - 10) * 0.015))
+			shake_camera(M, ((force - 10) * 0.015 + 1), ((force - 10) * 0.015))
 
 /obj/item/attack_obj(obj/O, mob/living/user)
 	. = ..()
