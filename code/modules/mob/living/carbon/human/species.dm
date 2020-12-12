@@ -621,7 +621,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	if(HD && !(HAS_TRAIT(H, TRAIT_HUSK)))
 		// lipstick
 		if(H.lip_style && (LIPS in species_traits))
-			var/mutable_appearance/lip_overlay = mutable_appearance('icons/mob/human_face.dmi', "lips_[H.lip_style]", -BODY_LAYER)
+			var/mutable_appearance/lip_overlay = mutable_appearance('icons/mob/human_face.dmi', "lips-[H.lip_style]", -BODY_LAYER)
 			lip_overlay.color = H.lip_color
 
 			if(OFFSET_LIPS in H.dna.species.offset_features)
@@ -655,6 +655,11 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 			standing += left_eye_overlay
 			standing += right_eye_overlay
+		
+		if(!(NOJAW in species_traits))
+			var/obj/item/bodypart/mouth/jaw = H.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+			if(!jaw)
+				standing += mutable_appearance(icon_eyes, "lips-missing", -BODY_LAYER)
 
 	if(standing.len)
 		H.overlays_standing[BODY_LAYER] = standing

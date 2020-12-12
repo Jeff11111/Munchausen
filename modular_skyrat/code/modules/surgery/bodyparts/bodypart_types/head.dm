@@ -156,6 +156,8 @@
 		return
 	cut_overlays()
 	. = ..()
+	if(!dropped)
+		return
 	var/obj/item/bodypart/mouth/cantscream = (owner?.get_bodypart(BODY_ZONE_PRECISE_MOUTH) || (locate(/obj/item/bodypart/mouth) in src))
 	if(!CHECK_BITFIELD(status, BODYPART_ROBOTIC)) //having a robotic head hides certain features.
 		//hair
