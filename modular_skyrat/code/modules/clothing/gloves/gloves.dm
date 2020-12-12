@@ -177,12 +177,18 @@
 //Sterile gloves
 /obj/item/clothing/gloves/color/latex
 	germ_level = 0
+	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 10, "bomb" = 0, "bio" = 100, "rad" = 60, "fire" = 0, "acid" = 100, "wound" = 0)
+
+//Insuls
+/obj/item/clothing/gloves/color/yellow
+	armor = list("melee" = 5, "bullet" = 0, "laser" = 30, "energy" = 30, "bomb" = 0, "bio" = 60, "rad" = 100, "fire" = 60, "acid" = 100, "wound" = 0)
 
 //Captin gloves
 /obj/item/clothing/gloves/color/captain
 	icon = 'modular_skyrat/icons/obj/clothing/captain.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/captain.dmi'
 	desc = "Regal black gloves, with a nice silver trim, a diamond anti-shock coating, and an integrated thermal barrier. Swanky."
+	armor = list("melee" = 20, "bullet" = 20, "laser" = 10, "energy" = 10, "bomb" = 30, "bio" = 80, "rad" = 20, "fire" = 100, "acid" = 100, "wound" = 10)
 	mutantrace_variation = STYLE_NO_ANTHRO_ICON
 	icon_state = "shiny_gloves"
 	item_state = "shiny_gloves"
@@ -191,6 +197,7 @@
 /obj/item/clothing/gloves/botanic_leather
 	name = "leather gloves"
 	desc = "Gloves that protect you against mundane objects."
+	armor = list("melee" = 15, "bullet" = 5, "laser" = 20, "energy" = 10, "bomb" = 30, "bio" = 40, "rad" = 60, "fire" = 80, "acid" = 80, "wound" = 5)
 	icon = 'modular_skyrat/icons/obj/clothing/hydroponics.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/hydroponics.dmi'
 	icon_state = "leathery"
@@ -200,6 +207,7 @@
 /obj/item/clothing/gloves/krav_maga/sec
 	name = "fingerless combat gloves"
 	desc = "Kind of nullifies the point of being armored, doesn't it?"
+	armor = list("melee" = 20, "bullet" = 20, "laser" = 10, "energy" = 10, "bomb" = 30, "bio" = 0, "rad" = 20, "fire" = 0, "acid" = 0, "wound" = 10)
 	icon = 'modular_skyrat/icons/obj/clothing/gloves.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/hands.dmi'
 	icon_state = "fingerlesscombat"
@@ -208,6 +216,7 @@
 //Black gloves
 /obj/item/clothing/gloves/color/black
 	icon = 'modular_skyrat/icons/obj/clothing/gloves.dmi'
+	armor = list("melee" = 20, "bullet" = 20, "laser" = 10, "energy" = 10, "bomb" = 30, "bio" = 60, "rad" = 20, "fire" = 100, "acid" = 50, "wound" = 10)
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/hands.dmi'
 	icon_state = "black"
 	item_state = "black"
@@ -215,6 +224,7 @@
 //Combat gloves plus
 /obj/item/clothing/gloves/krav_maga/combatglovesplus
 	icon = 'modular_skyrat/icons/obj/clothing/gloves.dmi'
+	armor = list("melee" = 20, "bullet" = 20, "laser" = 10, "energy" = 10, "bomb" = 30, "bio" = 60, "rad" = 20, "fire" = 100, "acid" = 50, "wound" = 10)
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/hands.dmi'
 	icon_state = "comfycombat"
 	item_state = "comfycombat"
@@ -230,7 +240,7 @@
 /obj/item/clothing/gloves/color/black/ce
 	name = "impact gloves"
 	desc = "Thick black leather gloves, for insecure doggies who keep changing this desc to be less insecure."
-	armor = list("melee" = 20, "bullet" = 20, "laser" = 10, "energy" = 10, "bomb" = 30, "bio" = 80, "rad" = 20, "fire" = 80, "acid" = 50, "wound" = 10)
+	armor = list("melee" = 20, "bullet" = 20, "laser" = 10, "energy" = 10, "bomb" = 30, "bio" = 60, "rad" = 20, "fire" = 100, "acid" = 50, "wound" = 10)
 	icon = 'modular_skyrat/icons/obj/clothing/gloves.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/hands.dmi'
 	icon_state = "comfy"

@@ -2033,12 +2033,6 @@
 "aeQ" = (
 /obj/structure/table,
 /obj/item/razor,
-/obj/item/toy/plush/borgplushie{
-	desc = "A horrible abomination to God in plushie form. Legends say this is used to torture prisoners by repeatedly beating them in the head with it.. ..It feels sorta heavy.";
-	force = 1;
-	name = "dogborg plushie";
-	throwforce = 1
-	},
 /obj/machinery/atmospherics/pipe/simple/general/hidden{
 	dir = 6
 	},
