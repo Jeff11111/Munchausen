@@ -904,7 +904,7 @@
 		if(hud_used.healthdoll)
 			hud_used.healthdoll.cut_overlays()
 			if(stat != DEAD)
-				hud_used.healthdoll.icon_state = "healthdoll_OVERLAY"
+				hud_used.healthdoll.icon_state = "healthdoll"
 				if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF) && (chem_effects[CE_PAINKILLER] < 100))
 					for(var/X in bodyparts)
 						var/obj/item/bodypart/BP = X
@@ -930,10 +930,8 @@
 					for(var/t in get_disabled_limbs()) //Disabled limbs
 						hud_used.healthdoll.add_overlay(mutable_appearance('modular_skyrat/icons/mob/screen/screen_gen.dmi', "[t]7"))
 			else
-				hud_used.healthdoll.icon_state = "healthdoll_DEAD"
-
+				hud_used.healthdoll.icon_state = "healthdoll_dead"
 		hud_used.staminas?.update_icon()
-		hud_used.staminas?.update_icon_state()
 
 /mob/living/carbon/human/fully_heal(admin_revive = FALSE)
 	if(admin_revive)
@@ -947,7 +945,7 @@
 			dna.remove_mutation(HM.name)
 	if(blood_volume < (BLOOD_VOLUME_NORMAL*blood_ratio))
 		blood_volume = (BLOOD_VOLUME_NORMAL*blood_ratio)
-	..()
+	. = ..()
 
 /mob/living/carbon/human/check_weakness(obj/item/weapon, mob/living/attacker)
 	. = ..()
@@ -960,7 +958,7 @@
 /mob/living/carbon/human/update_gravity(has_gravity,override = 0)
 	if(dna && dna.species) //prevents a runtime while a human is being monkeyfied
 		override = dna.species.override_float
-	..()
+	. = ..()
 
 /mob/living/carbon/human/vomit(lost_nutrition = 10, blood = 0, stun = 1, distance = 0, message = 1, toxic = 0)
 	if(blood && dna?.species && (NOBLOOD in dna.species.species_traits))
@@ -970,7 +968,7 @@
 		if(stun)
 			DefaultCombatKnockdown(200)
 		return 1
-	..()
+	. = ..()
 
 /mob/living/carbon/human/vv_get_dropdown()
 	. = ..()
@@ -1381,7 +1379,7 @@
 
 /mob/living/carbon/human/get_total_bleed_rate()
 	if(NOBLOOD in dna.species.species_traits)
-		return FALSE
+		return 0
 	return ..()
 
 /mob/living/carbon/human/get_biological_state()
