@@ -260,12 +260,12 @@
 	inv_box.name = "pockets 1"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "pocket"
-	if(!widescreenlayout)
+	if(widescreenlayout)
 		inv_box.screen_loc = ui_storage1
 	else
 		inv_box.screen_loc = ui_boxstorage1
 	inv_box.slot_id = SLOT_L_STORE
-	if(!widescreenlayout)
+	if(widescreenlayout)
 		static_inventory += inv_box
 	else
 		extra_inventory += inv_box
@@ -274,12 +274,12 @@
 	inv_box.name = "pockets 2"
 	inv_box.icon = ui_style
 	inv_box.icon_state = "pocket"
-	if(!widescreenlayout)
+	if(widescreenlayout)
 		inv_box.screen_loc = ui_storage2
 	else
 		inv_box.screen_loc = ui_boxstorage2
 	inv_box.slot_id = SLOT_R_STORE
-	if(!widescreenlayout)
+	if(widescreenlayout)
 		static_inventory += inv_box
 	else
 		extra_inventory += inv_box

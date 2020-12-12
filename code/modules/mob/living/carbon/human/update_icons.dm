@@ -678,7 +678,7 @@ There are several things that need to be remembered:
 		if(l_store)
 			l_store.screen_loc = ui_storage1
 			if(!widescreenlayout)
-				l_store.screen_loc =ui_boxstorage1
+				l_store.screen_loc = ui_boxstorage1
 			if(hud_used.hud_shown)
 				if(widescreenlayout || hud_used.extra_shown)
 					client.screen += l_store
@@ -687,7 +687,7 @@ There are several things that need to be remembered:
 		if(r_store)
 			r_store.screen_loc = ui_storage2
 			if(!widescreenlayout)
-				l_store.screen_loc =ui_boxstorage2
+				l_store.screen_loc = ui_boxstorage2
 			if(hud_used.hud_shown)
 				if(widescreenlayout || hud_used.extra_shown)
 					client.screen += r_store
