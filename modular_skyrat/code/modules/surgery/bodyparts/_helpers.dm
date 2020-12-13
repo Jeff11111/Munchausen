@@ -235,6 +235,8 @@
 			L = new /obj/item/bodypart/r_hand()
 		if(BODY_ZONE_HEAD)
 			L = new /obj/item/bodypart/head()
+		if(BODY_ZONE_PRECISE_MOUTH)
+			L = new /obj/item/bodypart/mouth()
 		if(BODY_ZONE_PRECISE_NECK)
 			L = new /obj/item/bodypart/neck()
 		if(BODY_ZONE_PRECISE_LEFT_EYE)
