@@ -738,7 +738,7 @@
 				to_chat(src, "<span class='warning'>I need to remove [p_their()] mask first!</span>")
 				return FALSE
 			
-			if(!)
+			if(!jaw)
 				to_chat(src, "<span class='warning'>Mouth to mouth? They don't have a mouth!</span>")
 				return FALSE
 			

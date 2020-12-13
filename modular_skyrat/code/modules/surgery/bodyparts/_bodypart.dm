@@ -1326,9 +1326,11 @@
 
 //Returns whether or not the bodypart can feel pain
 /obj/item/bodypart/proc/can_feel_pain()
-	if(owner && !owner.can_feel_pain())
-		return FALSE
-	return TRUE
+	if(owner)
+		if(!owner.can_feel_pain())
+			return FALSE
+		return TRUE
+	return FALSE
 
 //Checks disabled status thresholds
 /obj/item/bodypart/proc/update_disabled(upparent = TRUE, upchildren = TRUE)
