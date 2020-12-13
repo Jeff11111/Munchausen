@@ -25,8 +25,8 @@
 		msg += "<span class='notice'>I can stand <b>[L.maxHealth]</b> fatigue loss.</span>"
 		msg += "<span class='notice'>I have <b>[L.getStaminaLoss()]</b> fatigue loss.</span>"
 		msg += "<span class='info'><b>Overfatigue:</b></span>"
-		msg += "<span class='notice'>My overfatigue can stand <b>[L.stambuffer]</b> overfatigue loss.</span>"
-		msg += "<span class='notice'>My overfatigue buffer has <b>[L.bufferedstam]</b> overfatigue loss.</span>"
+		msg += "<span class='notice'>My overfatigue can stand <b>[L.stambuffer]</b> fatigue loss.</span>"
+		msg += "<span class='notice'>My overfatigue buffer has <b>[L.bufferedstam]</b> overfatigue left.</span>"
 		msg += "<span class='notice'>*---------*</span>"
 		to_chat(L, jointext(msg, "\n"))
 
