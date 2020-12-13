@@ -490,7 +490,7 @@
 							"<span class='notice'>I stitch \the [src] safely on \the [owner].</span>")
 			organ_flags &= ~ORGAN_CUT_AWAY
 		else
-			if(is_dead() || is_broken())
+			if((is_dead() || is_broken()) && !istype(src, /obj/item/organ/brain))
 				to_chat(user, "<span class='warning'>\The [src] is unsalvageable! I can't heal it!</span>")
 				return TRUE
 			user.visible_message("<span class='notice'>[user] starts stitching \the [src]...</span>", \
@@ -522,7 +522,7 @@
 		var/obj/item/weldingtool/welder = I
 		if(!istype(welder))
 			return TRUE
-		if(is_dead() || is_broken())
+		if((is_dead() || is_broken()) && !istype(src, /obj/item/organ/brain))
 			to_chat(user, "<span class='warning'>\The [src] is unsalvageable! I can't heal it!</span>")
 			return TRUE
 		user.visible_message("<span class='notice'>[user] starts welding \the [src]...</span>", \
