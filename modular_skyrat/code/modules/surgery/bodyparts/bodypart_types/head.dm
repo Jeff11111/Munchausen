@@ -49,9 +49,9 @@
 		'modular_skyrat/sound/gore/head_explodie3.ogg',
 		'modular_skyrat/sound/gore/head_explodie4.ogg',
 	)
-	miss_entirely_prob = 25
-	zone_prob = 60
-	extra_zone_prob = 40
+	miss_entirely_prob = 20
+	zone_prob = 40
+	extra_zone_prob = 60
 	encased = "skull"
 	amputation_point = "epiglotis"
 	artery_name = "temporal artery"

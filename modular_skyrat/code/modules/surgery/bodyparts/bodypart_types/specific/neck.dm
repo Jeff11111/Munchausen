@@ -23,9 +23,9 @@
 		'modular_skyrat/sound/gore/head_explodie3.ogg',
 		'modular_skyrat/sound/gore/head_explodie4.ogg',
 	)
-	miss_entirely_prob = 40
+	miss_entirely_prob = 30
 	zone_prob = 25
-	extra_zone_prob = 50
+	extra_zone_prob = 60
 	max_cavity_size = WEIGHT_CLASS_TINY
 	amputation_point = "trachea"
 	joint_name = "cervical spine"

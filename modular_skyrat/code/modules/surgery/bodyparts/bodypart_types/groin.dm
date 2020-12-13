@@ -20,8 +20,8 @@
 	dismember_mod = 0.7
 	disembowel_mod = 0.7
 	miss_entirely_prob = 10
-	zone_prob = 75
-	extra_zone_prob = 25
+	zone_prob = 40
+	extra_zone_prob = 60
 	amputation_point = "lumbar"
 	joint_name = "hip"
 	encased = "pelvic bones"

@@ -18,9 +18,9 @@
 	heal_zones = list(BODY_ZONE_L_LEG)
 	specific_locations = list("left sole", "left ankle", "left heel")
 	max_cavity_size = WEIGHT_CLASS_TINY
-	miss_entirely_prob = 20
-	zone_prob = 70
-	extra_zone_prob = 30
+	miss_entirely_prob = 15
+	zone_prob = 50
+	extra_zone_prob = 50
 	amputation_point = "left ankle"
 	joint_name = "left ankle"
 	tendon_name = "achilles tendon"

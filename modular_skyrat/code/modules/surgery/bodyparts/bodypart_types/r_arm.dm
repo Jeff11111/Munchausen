@@ -20,9 +20,9 @@
 	max_cavity_size = WEIGHT_CLASS_SMALL
 	dismember_mod = 0.8
 	disembowel_mod = 0.8
-	miss_entirely_prob = 15
-	zone_prob = 70
-	extra_zone_prob = 30
+	miss_entirely_prob = 12
+	zone_prob = 65
+	extra_zone_prob = 35
 	amputation_point = "right shoulder"
 	joint_name = "right elbow"
 	tendon_name = "palmaris longus tendon"

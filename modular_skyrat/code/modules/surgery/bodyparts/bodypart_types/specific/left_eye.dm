@@ -22,9 +22,9 @@
 	max_stamina_damage = 20
 	dismember_sounds = list('modular_skyrat/sound/gore/severed.ogg')
 	throw_range = 7
-	miss_entirely_prob = 50
-	zone_prob = 25
-	extra_zone_prob = 65
+	miss_entirely_prob = 40
+	zone_prob = 20
+	extra_zone_prob = 70
 	max_cavity_size = 0
 	amputation_point = "eyesocket"
 	tendon_name = "rectus"

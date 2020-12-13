@@ -19,9 +19,9 @@
 	children_zones = list()
 	specific_locations = list("right palm", "right back palm")
 	max_cavity_size = WEIGHT_CLASS_TINY
-	miss_entirely_prob = 20
-	zone_prob = 70
-	extra_zone_prob = 30
+	miss_entirely_prob = 15
+	zone_prob = 50
+	extra_zone_prob = 50
 	amputation_point = "right wrist"
 	joint_name = "right wrist"
 	tendon_name = "carpal ligament"

@@ -318,7 +318,7 @@ GLOBAL_LIST_INIT(pda_reskins, list(PDA_SKIN_CLASSIC = 'icons/obj/pda.dmi', PDA_S
 
 // Defib stats
 #define DEFIB_TIME_LIMIT 1500
-#define DEFIB_TIME_LOSS 60
+#define DEFIB_TIME_LOSS 85
 
 // Diagonal movement
 #define FIRST_DIAG_STEP 1

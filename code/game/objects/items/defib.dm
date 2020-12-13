@@ -615,7 +615,9 @@
 					log_combat(user, H, "revived", defib)
 					if(req_defib)
 						if(defib.healdisk)
-							H.heal_overall_damage(25, 25)
+							H.heal_overall_damage(40, 40)
+						else
+							H.heal_overall_damage(rand(10, 15), rand(10, 15))
 				if(req_defib)
 					defib.deductcharge(revivecost)
 					cooldown = 1

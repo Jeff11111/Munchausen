@@ -12,7 +12,7 @@
 	max_damage = 30
 	max_stamina_damage = 30
 	wound_resistance = -15
-	miss_entirely_prob = 30
+	miss_entirely_prob = 25
 	zone_prob = 35
 	extra_zone_prob = 65
 	var/obj/item/stack/sticky_tape/tapered = null
