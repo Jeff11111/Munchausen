@@ -79,16 +79,16 @@
 	. = ..()
 	if(QDELETED(C) || !.)
 		return
-	C.clear_fullscreen("left_eye_damage")
-	C.cure_blind(EYE_DAMAGE)
+	C?.clear_fullscreen("left_eye_damage")
+	C?.cure_blind(EYE_DAMAGE)
 	if(ishuman(C) && eye_color && old_eye_color)
 		var/mob/living/carbon/human/H = C
 		H.left_eye_color = old_eye_color
 		if(!special)
 			H.dna.species.handle_body(H)
-	C.update_tint()
-	C.update_sight()
-	var/obj/item/bodypart/right_eye/other_eye = C.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+	C?.update_tint()
+	C?.update_sight()
+	var/obj/item/bodypart/right_eye/other_eye = C?.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
 	other_eye?.check_damage()
 
 /obj/item/bodypart/left_eye/receive_damage(brute = 0, burn = 0, stamina = 0, blocked = 0, updating_health = TRUE, required_status = null, wound_bonus = 0, bare_wound_bonus = 0, sharpness = SHARP_NONE, spread_damage = TRUE, pain = 0, toxin = 0, clone = 0)
