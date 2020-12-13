@@ -95,10 +95,8 @@
 
 /obj/item/organ/heart/is_working()
 	. = ..()
-	if(!. || (damage >= high_threshold))
-		return FALSE
-	
-	return pulse > PULSE_NONE || (owner && HAS_TRAIT(owner, TRAIT_FAKEDEATH))
+	if(.)
+		return (pulse > PULSE_NONE) || (owner && HAS_TRAIT(owner, TRAIT_FAKEDEATH))
 
 /obj/item/organ/heart/Remove(special = FALSE)
 	if(!special)
