@@ -147,8 +147,6 @@
 		return TRUE
 	mode_flags |= COMBAT_MODE_TOGGLED
 	enable_combat_mode(source, silent, FALSE, visible, HAS_TRAIT(source, TRAIT_COMBAT_MODE_LOCKED), TRUE)
-	if(source.client)
-		source.client.show_popup_menus = FALSE
 	return TRUE
 
 /// Disables intentionally being in combat mode. Please try to use the COMSIG_COMBAT_MODE_CHECK signal for feedback when possible.
@@ -157,8 +155,6 @@
 		return TRUE
 	mode_flags &= ~COMBAT_MODE_TOGGLED
 	disable_combat_mode(source, silent, FALSE, visible, !CHECK_BITFIELD(mode_flags, COMBAT_MODE_ACTIVE), TRUE)
-	if(source.client)
-		source.client.show_popup_menus = TRUE
 	return TRUE
 
 /// Returns a field of flags that are contained in both the second arg and our bitfield variable.

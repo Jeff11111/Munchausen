@@ -53,7 +53,6 @@
 	if(!HAS_TRAIT(src, TRAIT_COMBAT_MODE_LOCKED) && !(combat_flags & COMBAT_FLAG_COMBAT_ACTIVE))
 		enable_combat_mode(silent, FALSE, visible, FALSE)
 	update_combat_mode_icon()
-	client?.show_popup_menus = FALSE
 	return TRUE
 
 /// Disables intentionally being in combat mode. Please try not to use this proc for feedback whenever possible.
@@ -64,7 +63,6 @@
 	if(combat_flags & COMBAT_FLAG_COMBAT_ACTIVE)
 		disable_combat_mode(silent, FALSE, visible, FALSE)
 	update_combat_mode_icon()
-	client?.show_popup_menus = TRUE
 	return TRUE
 
 /// Toggles whether the user is intentionally in combat mode. THIS should be the proc you generally use! Has built in visual/to other player feedback, as well as an audible cue to ourselves.

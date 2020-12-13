@@ -148,3 +148,6 @@
 	
 	//world.time of when the crew manifest can be accessed
 	var/crew_manifest_delay
+
+	//FUCK right click menu
+	show_popup_menus = FALSE
