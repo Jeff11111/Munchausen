@@ -354,3 +354,4 @@
 	if(isliving(over_object) && (L.zone_selected == bodypart_affected.body_zone))
 		update_insides()
 		user_show_to_mob(M)
+		return COMPONENT_NO_MOUSEDROP
