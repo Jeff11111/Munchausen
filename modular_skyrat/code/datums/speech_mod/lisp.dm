@@ -19,11 +19,11 @@
 	speech_args[SPEECH_MESSAGE] = message
 
 /datum/speech_mod/lisp/proc/update_lisp()
-	var/obj/item/bodypart/head/head = affected_mob.get_bodypart(BODY_ZONE_HEAD)
-	if(head)
-		lisp_force = (1 - head.get_teeth_amount()/head.max_teeth) * 100
+	var/obj/item/bodypart/mouth/jaw = affected_mob.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+	if(jaw)
+		lisp_force = (1 - jaw.get_teeth_amount()/head.max_teeth) * 100
 	else
 		lisp_force = 100
 	//Remove if we have teeth (aka stopped being british)
-	if(!lisp_force || (head.get_teeth_amount() >= head.max_teeth))
+	if(!lisp_force || (jaw.get_teeth_amount() >= jaw.max_teeth))
 		remove_speech_mod()
