@@ -11,8 +11,8 @@
 	max_stamina_damage = 30
 	wound_resistance = -15
 	miss_entirely_prob = 30
-	zone_prob = 25
-	extra_zone_prob = 45
+	zone_prob = 35
+	extra_zone_prob = 65
 	var/obj/item/stack/sticky_tape/tapered = null
 	amputation_point = "face"
 	joint_name = "ramus"

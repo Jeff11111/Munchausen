@@ -25,7 +25,7 @@
 	)
 	miss_entirely_prob = 40
 	zone_prob = 25
-	extra_zone_prob = 45
+	extra_zone_prob = 50
 	max_cavity_size = WEIGHT_CLASS_TINY
 	amputation_point = "trachea"
 	joint_name = "cervical spine"
