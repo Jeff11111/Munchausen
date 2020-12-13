@@ -26,6 +26,10 @@
 		. = list()
 		. += mutable_appearance('modular_skyrat/icons/obj/surgery.dmi', "[initial(icon_state)]", -BODYPARTS_LAYER, color = src.color)
 
+/obj/item/bodypart/mouth/update_icon_dropped()
+	cut_overlays()
+	icon_state = initial(icon_state)//default to dismembered sprite
+
 /obj/item/bodypart/mouth/attach_limb(mob/living/carbon/C, special, ignore_parent_restriction)
 	. = ..()
 	//Handle teeth and tape stuff

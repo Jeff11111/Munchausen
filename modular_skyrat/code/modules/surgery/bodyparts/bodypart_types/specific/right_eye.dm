@@ -54,7 +54,7 @@
 /obj/item/bodypart/right_eye/update_icon_dropped()
 	cut_overlays()
 	icon_state = initial(icon_state)//default to dismembered eye sprite
-	var/mutable_appearance/iris = mutable_appearance(icon, "eye-iris", layer, plane, eye_color || old_eye_color)
+	var/mutable_appearance/iris = mutable_appearance(icon, "eye-iris", -BODYPARTS_LAYER, plane, eye_color || old_eye_color)
 	add_overlay(iris)
 	return
 

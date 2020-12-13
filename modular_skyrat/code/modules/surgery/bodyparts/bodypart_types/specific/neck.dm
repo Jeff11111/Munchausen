@@ -40,6 +40,12 @@
 			return
 		. |= mutable_appearance(icon, initial(icon_state), -BODYPARTS_LAYER, color = src.color)
 
+/obj/item/bodypart/neck/update_icon_dropped()
+	if(locate(/obj/item/bodypart/head) in src)
+		return ..()
+	cut_overlays()
+	icon_state = initial(icon_state)//default to dismembered sprite
+
 /obj/item/bodypart/neck/update_limb(dropping_limb, mob/living/carbon/source)
 	. = ..()
 	if(!owner)
