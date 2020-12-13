@@ -21,7 +21,7 @@
 /datum/speech_mod/lisp/proc/update_lisp()
 	var/obj/item/bodypart/mouth/jaw = affected_mob.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
 	if(jaw)
-		lisp_force = (1 - jaw.get_teeth_amount()/head.max_teeth) * 100
+		lisp_force = (1 - jaw.get_teeth_amount()/jaw.max_teeth) * 100
 	else
 		lisp_force = 100
 	//Remove if we have teeth (aka stopped being british)
