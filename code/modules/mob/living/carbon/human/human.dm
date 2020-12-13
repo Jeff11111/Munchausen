@@ -559,12 +559,12 @@
 		if(above_neck(target_zone))
 			if(head && istype(head, /obj/item/clothing))
 				var/obj/item/clothing/CH = head
-				if (CH.clothing_flags & THICKMATERIAL)
+				if(CH.clothing_flags & THICKMATERIAL)
 					. = 0
 		else
 			if(wear_suit && istype(wear_suit, /obj/item/clothing))
 				var/obj/item/clothing/CS = wear_suit
-				if (CS.clothing_flags & THICKMATERIAL)
+				if(CS.clothing_flags & THICKMATERIAL)
 					. = 0
 	if(!. && error_msg && user)
 		// Might need re-wording.
@@ -768,7 +768,7 @@
 			if(istype(H))
 				var/obj/item/clothing/suit = H.wear_suit
 				var/obj/item/clothing/under = H.w_uniform
-				if(istype(under) && CHECK_BITFIELD(suit.clothing_flags, THICKMATERIAL))
+				if(istype(under) && CHECK_BITFIELD(under.clothing_flags, THICKMATERIAL))
 					to_chat(src, "<span class='warning'>I need to take [C.p_their()] [under] off!</span>")
 					return
 				else if(istype(suit) && CHECK_BITFIELD(suit.clothing_flags, THICKMATERIAL))
