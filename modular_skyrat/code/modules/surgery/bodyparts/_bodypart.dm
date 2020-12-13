@@ -617,7 +617,7 @@
 	if(stamina_dam > DAMAGE_PRECISION)
 		. = TRUE
 	//else if.. else if.. so on.
-	else if(max(0, (get_pain() - owner?.chem_effects[CE_PAINKILLER]) * (owner?.mind ? owner.mind.mob_stats[STAT_DATUM(end)].get_shock_mult() : 1)) > DAMAGE_PRECISION))
+	else if(max(0, (get_pain() - owner?.chem_effects[CE_PAINKILLER]) * (owner?.mind ? owner.mind.mob_stats[STAT_DATUM(end)].get_shock_mult() : 1)) > DAMAGE_PRECISION)
 		. = TRUE
 	else if(tox_dam > DAMAGE_PRECISION)
 		. = TRUE
