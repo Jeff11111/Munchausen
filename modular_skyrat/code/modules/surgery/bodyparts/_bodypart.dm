@@ -1215,7 +1215,7 @@
 	if(owner && updating_health)
 		owner.updatehealth()
 	if(owner.dna && owner.dna.species && (REVIVESBYHEALING in owner.dna.species.species_traits))
-		if(((owner.maxHealth - owner.get_damage_amount()) > owner.dna.species.revivesbyhealreq) && !owner.hellbound)
+		if(((owner.maxHealth - owner.get_physical_damage()) > owner.dna.species.revivesbyhealreq) && !owner.hellbound)
 			if((NOBLOOD in owner.dna.species.species_traits) || (owner.blood_volume >= BLOOD_VOLUME_OKAY))
 				owner.revive(0)
 				owner.cure_husk(0) // If it has REVIVESBYHEALING, it probably can't be cloned. No husk cure.
