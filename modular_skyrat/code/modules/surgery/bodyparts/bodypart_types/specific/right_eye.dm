@@ -112,6 +112,9 @@
 		return ..()
 
 /obj/item/bodypart/right_eye/proc/check_damage()
+	if(!owner)
+		return
+	
 	var/obj/item/bodypart/left_eye/other_eye = owner.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
 	switch(get_damage())
 		if(-INFINITY to max_damage/4)
