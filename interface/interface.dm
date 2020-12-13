@@ -101,7 +101,7 @@ Admin:
 /client/verb/changelog()
 	set name = "Changelog"
 	set category = "OOC"
-	to_chat(usr, "<span class='danger'>nah nigga just check our discord lmao!</span>")
+	to_chat(usr, "<span class='danger'><b>nah nigga just check our discord lmao!</b></span>")
 
 /mob/proc/hotkey_help()
 	var/hotkey_mode = {"<font color='purple'>
