@@ -24,7 +24,7 @@
 	. = ..()
 	if(dropped)
 		. = list()
-		. += mutable_appearance('modular_skyrat/icons/obj/surgery.dmi', "[initial(icon_state)]", layer, plane, color)
+		. += mutable_appearance('modular_skyrat/icons/obj/surgery.dmi', "[initial(icon_state)]", -BODYPARTS_LAYER, color = src.color)
 
 /obj/item/bodypart/mouth/attach_limb(mob/living/carbon/C, special, ignore_parent_restriction)
 	. = ..()

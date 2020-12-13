@@ -268,9 +268,7 @@ SUBSYSTEM_DEF(persistence)
 	SaveRandomizedRecipes()
 	SavePanicBunker()
 	SavePaintings()
-	//skyrat edit
 	SaveScars()
-	//
 
 /datum/controller/subsystem/persistence/proc/LoadPanicBunker()
 	var/bunker_path = file("data/bunker_passthrough.json")

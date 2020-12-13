@@ -38,7 +38,7 @@
 		for(var/obj/item/bodypart/head/nohead in src)
 			. |= nohead.get_limb_icon(TRUE)
 			return
-		. |= mutable_appearance(icon, initial(icon_state), layer, plane, color)
+		. |= mutable_appearance(icon, initial(icon_state), -BODYPARTS_LAYER, color = src.color)
 
 /obj/item/bodypart/neck/update_limb(dropping_limb, mob/living/carbon/source)
 	. = ..()

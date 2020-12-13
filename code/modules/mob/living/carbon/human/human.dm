@@ -771,7 +771,7 @@
 			
 			if(world.time >= C.last_cpr + C.cpr_cooldown)
 				var/they_beat = !HAS_TRAIT(C, TRAIT_NOPULSE)
-				var/obj/item/organ/heart/they_heart = C.getorganslot(ORGAN_SLOT_LUNGS)
+				var/obj/item/organ/heart/they_heart = C.getorganslot(ORGAN_SLOT_HEART)
 
 				src.visible_message("<b>[src]</b> performs CPR on [C.name]!", \
 								"<span class='notice'>You perform CPR on [C.name].</span>")
