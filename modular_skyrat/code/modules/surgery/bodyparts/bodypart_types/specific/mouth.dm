@@ -3,6 +3,8 @@
 	icon = 'modular_skyrat/icons/obj/surgery.dmi'
 	icon_state = "jaw"
 	desc = "I have no mouth and yet i must scream."
+	dismember_bodyzone = BODY_ZONE_HEAD
+	parent_bodyzone = BODY_ZONE_HEAD
 	body_zone = BODY_ZONE_PRECISE_MOUTH
 	body_part = JAW
 	max_teeth = 32
