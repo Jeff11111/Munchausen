@@ -533,7 +533,8 @@
 					"<span class='warning'>You butcher [src] into giblets!</span>")
 				new /obj/item/reagent_containers/food/snacks/meat/slab/human(get_turf(src))
 				new /obj/item/reagent_containers/food/snacks/meat/slab/human(get_turf(src))
-				new /obj/item/stack/sheet/bone(get_turf(src))
+				if(joint_name)
+					new /obj/item/stack/sheet/bone(get_turf(src))
 				return qdel(src)
 			return
 		playsound(loc, 'sound/weapons/slice.ogg', 50, 1, -1)
