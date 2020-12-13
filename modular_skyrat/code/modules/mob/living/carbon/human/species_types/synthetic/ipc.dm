@@ -21,6 +21,8 @@
 	mutantliver = /obj/item/organ/liver/robot_ipc
 	mutantkidneys = /obj/item/organ/kidneys/robot_ipc
 	mutantspleen = /obj/item/organ/spleen/robot_ipc
+	mutantintestines = /obj/item/organ/intestines/robot_ipc
+	mutantbladder = /obj/item/organ/intestines/robot_ipc
 	exotic_bloodtype = "HF"
 	icon_limbs = 'modular_skyrat/icons/mob/ipc/ipc_parts.dmi'
 	hair_alpha = 210
