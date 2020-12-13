@@ -38,7 +38,7 @@
 	name = ".357 lever action rifle"
 	desc = "Ye olde grandpa's rifle, but now mass-produced by \"Bubba Arms\". No matter what, it's still a good rifle."
 	icon_state = "marlin"
-	mag_type = /obj/item/ammo_box/magazine/internal/boltaction
+	mag_type = /obj/item/ammo_box/magazine/internal/boltaction/marlin
 
 //AR-15
 /obj/item/gun/ballistic/automatic/ar

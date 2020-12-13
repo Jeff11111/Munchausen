@@ -4097,6 +4097,7 @@
 #include "modular_skyrat\code\modules\projectiles\boxes_magazines\external\sniper.dm"
 #include "modular_skyrat\code\modules\projectiles\boxes_magazines\internal\internal.dm"
 #include "modular_skyrat\code\modules\projectiles\boxes_magazines\internal\misc.dm"
+#include "modular_skyrat\code\modules\projectiles\boxes_magazines\internal\rifle.dm"
 #include "modular_skyrat\code\modules\projectiles\boxes_magazines\internal\shotgun.dm"
 #include "modular_skyrat\code\modules\projectiles\guns\gun.dm"
 #include "modular_skyrat\code\modules\projectiles\guns\ballistic\automatic.dm"
