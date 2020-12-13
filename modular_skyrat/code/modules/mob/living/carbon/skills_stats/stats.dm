@@ -54,7 +54,7 @@
 	return round(1.5 - (level/MAX_STAT), 0.1)
 
 /datum/stats/dex/proc/get_disarm_mult()
-	return round(max(2 - (level/MAX_STAT * 2), 0.1))
+	return round(max(2 - (level/MAX_STAT * 2), 0.1), 0.1)
 
 //Intelligence
 /datum/stats/int
