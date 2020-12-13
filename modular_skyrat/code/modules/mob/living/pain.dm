@@ -53,7 +53,7 @@
 	if((!message && !robo_mesage) || (stat >= UNCONSCIOUS) || !can_feel_pain() || chem_effects[CE_PAINKILLER] > power)
 		return FALSE
 	
-	if(!affecting.can_feel_pain())
+	if(affecting && !affecting.can_feel_pain())
 		return FALSE
 
 	power -= chem_effects[CE_PAINKILLER]/2	//Take the edge off.
