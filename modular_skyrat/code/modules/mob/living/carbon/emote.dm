@@ -8,5 +8,5 @@
 		else
 			act = "loudnoise"
 	if(!shit || shit.is_disabled())
-		return agony_gargle()
+		act = "gargle"
 	return ..()
