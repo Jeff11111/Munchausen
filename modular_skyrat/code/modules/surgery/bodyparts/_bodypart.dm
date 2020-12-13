@@ -617,7 +617,7 @@
 	if(stamina_dam > DAMAGE_PRECISION)
 		. = TRUE
 	//else if.. else if.. so on.
-	else if(can_feel_pain() && max(0, (get_pain() - owner?.chem_effects[CE_PAINKILLER]) * (owner?.mind ? owner.mind.mob_stats[STAT_DATUM(end)].get_shock_mult() : 1) > DAMAGE_PRECISION))
+	else if(max(0, (get_pain() - owner?.chem_effects[CE_PAINKILLER]) * (owner?.mind ? owner.mind.mob_stats[STAT_DATUM(end)].get_shock_mult() : 1)) > DAMAGE_PRECISION))
 		. = TRUE
 	else if(tox_dam > DAMAGE_PRECISION)
 		. = TRUE
@@ -1375,7 +1375,7 @@
 			return BODYPART_DISABLED_DAMAGE
 		if(stamina_dam >= max_stamina_damage)
 			return BODYPART_DISABLED_DAMAGE
-		if((can_feel_pain()) && ((get_pain() - owner?.chem_effects[CE_PAINKILLER]) * (owner?.mind ? owner.mind.mob_stats[STAT_DATUM(end)].get_shock_mult() : 1) >= pain_disability_threshold))
+		if((get_pain() - owner?.chem_effects[CE_PAINKILLER]) * (owner?.mind ? owner.mind.mob_stats[STAT_DATUM(end)].get_shock_mult() : 1) >= pain_disability_threshold)
 			return BODYPART_DISABLED_PAIN
 		if(disabled && (get_damage(include_stamina = TRUE) <= (max_damage * 0.8)) && (pain_dam < pain_disability_threshold)) // reenabled at 80% now instead of 50% as of wounds update
 			last_maxed = FALSE
