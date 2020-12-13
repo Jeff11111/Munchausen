@@ -716,7 +716,16 @@
 /mob/living/carbon/human/proc/do_cpr(mob/living/carbon/C, cpr_type = CHEST_CPR)
 	CHECK_DNA_AND_SPECIES(C)
 
+	var/obj/item/bodypart/mouth/jaw = C.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+	var/obj/item/bodypart/chest/chest = C.get_bodypart(BODY_ZONE_CHEST)
 	var/heymedic = GET_SKILL_LEVEL(src, firstaid) || 10
+	switch(cpr_type)
+		if(CHEST_CPR)
+			if(chest?.is_robotic_limb())
+				heymedic = GET_SKILL_LEVEL(src, electronics) || 10
+		if(MOUTH_CPR)
+			if(jaw?.is_robotic_limb())
+				heymedic = GET_SKILL_LEVEL(src, electronics) || 10
 	var/heyheavy = GET_STAT_LEVEL(src, str) || 10
 	var/heyeinstein = GET_STAT_LEVEL(src, int) || 10
 	switch(cpr_type)
@@ -729,7 +738,7 @@
 				to_chat(src, "<span class='warning'>I need to remove [p_their()] mask first!</span>")
 				return FALSE
 			
-			if(!C.get_bodypart(BODY_ZONE_PRECISE_MOUTH))
+			if(!)
 				to_chat(src, "<span class='warning'>Mouth to mouth? They don't have a mouth!</span>")
 				return FALSE
 			
