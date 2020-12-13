@@ -61,9 +61,9 @@
 	var/next_hallucination = 0
 
 	var/last_mtom = 0//last time we got mouth to mouthed
-	var/mtom_cooldown = 1 SECONDS //mouth to mouth cooldown.
+	var/mtom_cooldown = 0.3 SECONDS //mouth to mouth cooldown.
 	var/last_cpr = 0 //last time we got CPR'd
-	var/cpr_cooldown = 1 SECONDS //cpr cooldown
+	var/cpr_cooldown = 0.3 SECONDS //cpr cooldown
 	
 	var/damageoverlaytemp = 0
 
