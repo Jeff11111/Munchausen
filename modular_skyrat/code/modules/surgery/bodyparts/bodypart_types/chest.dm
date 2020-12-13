@@ -20,7 +20,7 @@
 	zone_prob = 80
 	extra_zone_prob = 20
 	amputation_point = "spine"
-	joint_name = "neck"
+	joint_name = "ribs"
 	encased = "ribcage"
 	artery_name = "aorta"
 	cavity_name = "thoracic"
