@@ -114,8 +114,6 @@
 	var/status_effect_type
 	/// The status effect we're linked to
 	var/datum/status_effect/linked_status_effect
-	/// If we're operating on this wound and it gets healed, we'll nix the surgery too
-	var/datum/surgery/attached_surgery
 	/// if you're a lazy git and just throw them in cryo, the wound will go away after accumulating severity * 25 power
 	var/cryo_progress
 
@@ -162,8 +160,6 @@
 		QDEL_NULL(wound_overlay)
 		limb?.update_limb(limb?.owner ? FALSE : TRUE)
 		victim?.update_body_parts()
-	if(attached_surgery)
-		QDEL_NULL(attached_surgery)
 	if(src in victim?.all_wounds)
 		victim.all_wounds -= src
 	if(limb?.wounds && (src in limb.wounds)) // destroy can call remove_wound() and remove_wound() calls qdel, so we check to make sure there's anything to remove first
@@ -264,7 +260,7 @@
 	if(!demoted)
 		if(sound_effect)
 			playsound(L.owner, sound_effect, 60 + 10 * (severity - WOUND_SEVERITY_TRIVIAL))
-		if(wound_flags & WOUND_DO_SOUND_HINT)
+		if(wound_flags & WOUND_SOUND_HINTS)
 			sound_hint(L.owner, L.owner)
 
 	if(!demoted)
