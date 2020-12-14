@@ -500,7 +500,7 @@ var/horse_stance_effects = FALSE // ensures the horse stance gains it effect
 	invocation_type = "none"
 	range = -1
 	include_user = 1
-	action_icon = 'modular_skyrat/icons/mob/actions_hippie.dmi'
+	action_icon = 'modular_skyrat/icons/mob/actions/actions_hippie.dmi'
 	action_icon_state = "horse_stance"
 
 //Horse Stance Status Effect
