@@ -215,7 +215,7 @@
 			for(var/datum/wound/W in BP.wounds)
 				var/list/clothing_items = list(head, wear_mask, wear_neck, wear_suit, w_uniform, belt, wrists, gloves, shoes)
 				var/obj/item/hidden
-				if(!CHECK_BITFIELD(W.wound_flags, VISIBLE_THROUGH_CLOTHING))
+				if(!CHECK_BITFIELD(W.wound_flags, WOUND_VISIBLE_THROUGH_CLOTHING))
 					for(var/obj/item/I in clothing_items)
 						if(I && (I.body_parts_covered & BP.body_part))
 							hidden = I
