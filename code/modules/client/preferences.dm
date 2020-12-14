@@ -1302,7 +1302,8 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 		var/datum/job/lastJob
 
 		for(var/datum/job/job in sortList(SSjob.occupations, /proc/cmp_job_display_asc))
-
+			if(!job.total_positions && !job.spawn_positions && !job.current_positions)
+				continue
 			index += 1
 			if((index >= limit) || (job.title in splitJobs))
 				width += widthPerColumn
