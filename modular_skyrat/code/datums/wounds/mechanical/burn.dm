@@ -62,6 +62,7 @@
 	base_treat_time = 3 SECONDS
 	biology_required = list(HAS_FLESH)
 	required_status = BODYPART_ROBOTIC
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE)
 	pain_amount = 5 //Burns are awful
 
 /datum/wound/mechanical/burn/remove_wound(ignore_limb, replaced, forced)
@@ -337,6 +338,7 @@
 	scarring_descriptions = list("small amoeba-shaped skinmarks", "a faded streak of depressed skin")
 	pain_amount = 15 //Burns are awful
 	descriptive = "The wires are molten!"
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN)
 
 /datum/wound/mechanical/burn/severe
 	name = "Burnt Transistors"

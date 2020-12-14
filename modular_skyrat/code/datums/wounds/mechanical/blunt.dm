@@ -220,7 +220,7 @@
 	pain_amount = 10
 	flat_damage_roll_increase = 5
 	descriptive = "A joint is snapped!"
-	wound_flags = (VISIBLE_THROUGH_CLOTHING)
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_VISIBLE_THROUGH_CLOTHING)
 
 /datum/wound/mechanical/blunt/moderate/self_treat(mob/living/carbon/user, first_time = FALSE)
 	. = ..()
@@ -408,7 +408,7 @@
 	shock_chance = 45
 	pain_amount = 30
 	flat_damage_roll_increase = 15
-	wound_flags = (MANGLES_BONE)
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_BONE)
 	descriptive = "A joint is shattered!"
 
 /// if someone is using a reagent container

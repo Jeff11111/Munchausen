@@ -28,7 +28,7 @@
 	biology_required = list(HAS_FLESH)
 	required_status = BODYPART_ROBOTIC
 	can_self_treat = TRUE
-	wound_flags = (MANGLES_SKIN | MANGLES_MUSCLE)
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE)
 
 /datum/wound/mechanical/pierce/self_treat(mob/living/carbon/user, first_time = FALSE)
 	. = ..()
@@ -166,6 +166,7 @@
 	scarring_descriptions = list("a small, faded bruise", "a small twist of reformed skin", "a thumb-sized puncture scar")
 	pain_amount = 8
 	descriptive = "The exoskeleton is penetrated!"
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN)
 
 /datum/wound/mechanical/pierce/severe
 	name = "Open Dent"

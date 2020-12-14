@@ -20,6 +20,7 @@
 	pain_amount = 10 //Burns are awful
 	infection_chance = 30
 	infection_rate = 2
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE)
 
 /datum/wound/burn/handle_process()
 	. = ..()
@@ -133,6 +134,7 @@
 	infection_chance = 40
 	infection_rate = 4
 	descriptive = "The skin is seared!"
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN)
 
 /datum/wound/burn/severe
 	name = "Third Degree Burns"

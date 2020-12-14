@@ -220,11 +220,11 @@
 	// we can (generally) only have one wound per type, but remember there's multiple types
 	for(var/i in wounds)
 		var/datum/wound/W = i
-		if((W.wound_flags & MANGLES_SKIN) && (W.severity >= required_skin_severity))
+		if((W.wound_flags & WOUND_MANGLES_SKIN) && (W.severity >= required_skin_severity))
 			. |= BODYPART_MANGLED_SKIN
-		if((W.wound_flags & MANGLES_MUSCLE) && (W.severity >= required_muscle_severity))
+		if((W.wound_flags & WOUND_MANGLES_MUSCLE) && (W.severity >= required_muscle_severity))
 			. |= BODYPART_MANGLED_MUSCLE
-		if((W.wound_flags & MANGLES_BONE) && (W.severity >= required_bone_severity))
+		if((W.wound_flags & WOUND_MANGLES_BONE) && (W.severity >= required_bone_severity))
 			. |= BODYPART_MANGLED_BONE
 
 /**

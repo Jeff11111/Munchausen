@@ -30,7 +30,8 @@
 	var/cauterized
 	/// How much flow we've already sutured
 	var/sutured
-	
+	/// Does our blood flow get affected by gauze?
+	var/cares_about_gauze = TRUE
 	/// A bad system I'm using to track the worst scar we earned (since we can demote, we want the biggest our wound has been, not what it was when it was cured (probably moderate))
 	var/datum/scar/highest_scar
 
@@ -38,7 +39,7 @@
 	biology_required = list(HAS_FLESH)
 	required_status = BODYPART_ORGANIC
 	can_self_treat = TRUE
-	wound_flags = (MANGLES_SKIN | MANGLES_MUSCLE)
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE)
 
 /datum/wound/slash/self_treat(mob/living/carbon/user, first_time = FALSE)
 	. = ..()
@@ -108,7 +109,7 @@
 	// compare with being at 100 brute damage before, where you bled (brute/100 * 2), = 2 blood per tile
 	var/bleed_amt = min(blood_flow * 0.1, 1) // 3 * 3 * 0.1 = 0.9 blood total, less than before! the share here is .6 blood of course.
 
-	if(limb.current_gauze) // gauze stops all bleeding from dragging on this limb, but wears the gauze out quicker
+	if(limb.current_gauze && CHECK_BITFIELD(wound_flags, WOUND_SEEPS_GAUZE)) // gauze stops all bleeding from dragging on this limb, but wears the gauze out quicker
 		limb.seep_gauze(bleed_amt * 0.33)
 		return
 	testing("blood from drag [name]: [bleed_amt]")
@@ -131,13 +132,14 @@
 	else if(victim.reagents && victim.reagents.has_reagent(/datum/reagent/medicine/coagulant))
 		blood_flow -= 0.25
 
-	if(limb.current_gauze)
-		if(clot_rate > 0)
+	if(cares_about_gauze)
+		if(limb.current_gauze && CHECK_BITFIELD(wound_flags, WOUND_SEEPS_GAUZE))
+			if(clot_rate > 0)
+				blood_flow -= clot_rate
+			blood_flow -= limb.current_gauze.absorption_rate
+			limb.seep_gauze(limb.current_gauze.absorption_rate)
+		else
 			blood_flow -= clot_rate
-		blood_flow -= limb.current_gauze.absorption_rate
-		limb.seep_gauze(limb.current_gauze.absorption_rate)
-	else
-		blood_flow -= clot_rate
 
 	if(blood_flow > highest_flow)
 		highest_flow = blood_flow
@@ -276,7 +278,7 @@
 	infection_chance = 35 //low, but possible
 	infection_rate = 4
 	descriptive = "The skin is slashed!"
-	wound_flags = (MANGLES_SKIN)
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN)
 
 /datum/wound/slash/severe
 	name = "Open Laceration"

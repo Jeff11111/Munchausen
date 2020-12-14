@@ -13,7 +13,7 @@
 #define TENDON_MINIMUM_DAMAGE		12 // ditto but for tendon wounds
 
 #define WOUND_SEVERITY_NONE		0
-#define WOUND_SEVERITY_TRIVIAL	1 // for jokey/meme wounds like stubbed toe, no standard messages/sounds or second winds
+#define WOUND_SEVERITY_TRIVIAL	1 // for jokey/memey wounds like stubbed toe, no standard messages/sounds or second winds
 #define WOUND_SEVERITY_MODERATE	2
 #define WOUND_SEVERITY_SEVERE	3
 #define WOUND_SEVERITY_CRITICAL	4
@@ -100,10 +100,13 @@
 #define BIO_FULL	(BIO_BONE | BIO_FLESH | BIO_SKIN) // standard humanoids, can suffer all wounds, needs mangled bone and flesh to dismember
 
 // Wound flags
-#define MANGLES_SKIN (1<<0)
-#define MANGLES_MUSCLE (1<<1)
-#define MANGLES_BONE (1<<2)
-#define VISIBLE_THROUGH_CLOTHING (1<<3)
+#define WOUND_MANGLES_SKIN (1<<0)
+#define WOUND_MANGLES_MUSCLE (1<<1)
+#define WOUND_MANGLES_BONE (1<<2)
+#define WOUND_VISIBLE_THROUGH_CLOTHING (1<<3)
+#define WOUND_SEEPS_GAUZE (1<<5)
+#define WOUND_SOUND_HINTS (1<<6)
+#define WOUND_RETRACTED_SKIN	(1<<7)
 
 //Organ status flags
 #define ORGAN_ORGANIC   (1<<0)
@@ -325,11 +328,6 @@
 
 //Above or equal to this amount of pain, can't use radios
 #define PAIN_NO_RADIO PAIN_GIVES_IN * 2
-
-//Surgery defines for Newsurgery
-#define STEP_INCISE 1 //Incision step of course
-#define STEP_MANIPULATE 2 //Misc stuff
-#define CLOSE_STEP 3 //Cauterize or suture to close the surgery
 
 //CPR types
 #define MOUTH_CPR "m2m"

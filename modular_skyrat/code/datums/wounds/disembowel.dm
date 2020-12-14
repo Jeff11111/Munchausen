@@ -119,8 +119,7 @@
 	minimum_flow = 4
 	clot_rate = 0
 	descriptive = "The limb is disemboweled!"
-	wound_flags = (MANGLES_SKIN | MANGLES_MUSCLE | VISIBLE_THROUGH_CLOTHING)
-	var/datum/component/storage/concrete/organ/our_component
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE | WOUND_VISIBLE_THROUGH_CLOTHING)
 
 /datum/wound/slash/critical/incision/disembowel/get_examine_description(mob/user)
 	if(limb.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))
@@ -130,8 +129,7 @@
 /datum/wound/slash/critical/incision/disembowel/Destroy()
 	var/datum/component/storage/concrete/organ/ST = victim?.GetComponent(/datum/component/storage/concrete/organ)
 	if(ST)
-		ST.accessible = null
-	our_component = null
+		ST.accessible = FALSE
 	. = ..()
 
 /datum/wound/slash/critical/incision/disembowel/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
@@ -173,7 +171,7 @@
 		if(BODY_ZONE_PRECISE_R_FOOT)
 			initial_flow *= (1/2)
 			minimum_flow *= (1/3)
-	our_component = L.owner.GetComponent(/datum/component/storage/concrete/organ)
+	var/datum/component/storage/concrete/organ/our_component = L.owner.GetComponent(/datum/component/storage/concrete/organ)
 	if(our_component)
 		our_component.bodypart_affected = L
 		our_component.drop_all_on_deconstruct = FALSE
@@ -204,8 +202,7 @@
 	pain_amount = 40 //Just absolutely unbearable. Will send you into shock most of the time.
 	occur_text = null
 	descriptive = "The limb is disemboweled!"
-	wound_flags = (MANGLES_SKIN | MANGLES_MUSCLE | VISIBLE_THROUGH_CLOTHING)
-	var/datum/component/storage/concrete/organ/our_component
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE | WOUND_VISIBLE_THROUGH_CLOTHING)
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/get_examine_description(mob/user)
 	if(limb.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))
@@ -215,8 +212,7 @@
 /datum/wound/mechanical/slash/critical/incision/disembowel/Destroy()
 	var/datum/component/storage/concrete/organ/ST = victim?.GetComponent(/datum/component/storage/concrete/organ)
 	if(ST)
-		qdel(ST)
-	QDEL_NULL(our_component)
+		ST.accessible = FALSE
 	. = ..()
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
@@ -258,7 +254,7 @@
 		if(BODY_ZONE_PRECISE_R_FOOT)
 			initial_flow *= (1/2)
 			minimum_flow *= (1/3)
-	our_component = L.owner.GetComponent(/datum/component/storage/concrete/organ)
+	var/datum/component/storage/concrete/organ/our_component = L.owner.GetComponent(/datum/component/storage/concrete/organ)
 	if(our_component)
 		our_component.bodypart_affected = L
 		our_component.drop_all_on_deconstruct = FALSE

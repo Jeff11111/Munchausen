@@ -54,7 +54,7 @@
 	/// The body zone of the phantom limb
 	var/fake_body_zone = null
 	/// Wound flags, mostly used to handle mangling
-	var/wound_flags = 0
+	var/wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE)
 
 	/// Specific items such as bandages or sutures that can try directly treating this wound
 	var/list/treatable_by
@@ -138,8 +138,6 @@
 	var/sanitization = 0
 	/// Once we reach germ_level beyond WOUND_germ_level_SEPSIS, we get this many warnings before the limb is completely paralyzed (you'd have to ignore a really bad burn for a really long time for this to happen)
 	var/strikes_to_lose_limb = 3
-	/// Should we display a sound hint on being acquired?
-	var/do_sound_hint = TRUE
 	/// What we add to the carbon mob's descriptive wound string once acquired
 	var/descriptive = ""
 	/// Overlay we apply on a limb when acquired
@@ -266,7 +264,7 @@
 	if(!demoted)
 		if(sound_effect)
 			playsound(L.owner, sound_effect, 60 + 10 * (severity - WOUND_SEVERITY_TRIVIAL))
-		if(do_sound_hint)
+		if(wound_flags & WOUND_DO_SOUND_HINT)
 			sound_hint(L.owner, L.owner)
 
 	if(!demoted)
@@ -436,7 +434,7 @@
 	var/antibiotics = victim.get_antibiotics()
 	sanitization += (antibiotics * WOUND_SANITIZATION_PER_ANTIBIOTIC)
 
-	if(limb.current_gauze)
+	if(limb.current_gauze && CHECK_BITFIELD(wound_flags, WOUND_SEEPS_GAUZE))
 		limb.seep_gauze(WOUND_INFECTION_SEEP_RATE)
 
 	// sanitization is checked after the clearing check but before the rest, because we freeze the effects of infection while we have sanitization

@@ -15,11 +15,12 @@
 	treatable_by = list(/obj/item/stack/medical/suture, /obj/item/stack/medical/fixovein)
 	treat_priority = TRUE
 	base_treat_time = 2 SECONDS
+	descriptive = "An artery is torn!"
+	wound_flags = (WOUND_SOUND_HINTS)
 	var/next_squirt = 0 //kinky.
 	var/squirt_delay_min = 8 SECONDS
 	var/squirt_delay_max = 12 SECONDS
 	var/blood_loss_per_squirt = 3
-	descriptive = "An artery is torn!"
 
 /datum/wound/artery/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
 	if(L)

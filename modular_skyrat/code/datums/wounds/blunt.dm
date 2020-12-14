@@ -36,7 +36,7 @@
 	biology_required = list(HAS_BONE)
 	required_status = BODYPART_ORGANIC
 	pain_amount = 3
-	wound_flags = (MANGLES_BONE)
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_BONE)
 
 /*
 	Overwriting of base procs
@@ -265,7 +265,7 @@
 	pain_amount = 10
 	flat_damage_roll_increase = 5
 	descriptive = "A bone is dislocated!"
-	wound_flags = (VISIBLE_THROUGH_CLOTHING)
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_VISIBLE_THROUGH_CLOTHING)
 
 /datum/wound/blunt/moderate/crush()
 	if(prob(33))

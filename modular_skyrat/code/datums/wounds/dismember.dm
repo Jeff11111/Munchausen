@@ -141,7 +141,7 @@
 	minimum_flow = 4
 	clot_rate = 0
 	descriptive = null
-	wound_flags = (MANGLES_SKIN | MANGLES_MUSCLE | VISIBLE_THROUGH_CLOTHING)
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE | WOUND_VISIBLE_THROUGH_CLOTHING)
 
 /datum/wound/slash/loss/get_examine_description(mob/user)
 	if(fake_body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))
@@ -209,7 +209,7 @@
 	pain_amount = 40
 	occur_text = null
 	descriptive = null
-	wound_flags = (MANGLES_SKIN | MANGLES_MUSCLE | VISIBLE_THROUGH_CLOTHING)
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE | WOUND_VISIBLE_THROUGH_CLOTHING)
 
 /datum/wound/mechanical/slash/loss/get_examine_description(mob/user)
 	if(fake_body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))

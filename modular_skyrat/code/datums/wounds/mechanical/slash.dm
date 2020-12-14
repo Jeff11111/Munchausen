@@ -25,6 +25,8 @@
 	var/max_per_type
 	/// The maximum flow we've had so far
 	var/highest_flow
+	/// Does gauze (tape) affect us at all?
+	var/cares_about_gauze = TRUE
 
 	requires_patch = FALSE
 	repeat_patch = TRUE
@@ -34,7 +36,7 @@
 	biology_required = list(HAS_FLESH)
 	required_status = BODYPART_ROBOTIC
 	can_self_treat = TRUE
-	wound_flags = (MANGLES_SKIN | MANGLES_MUSCLE)
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE)
 
 /datum/wound/mechanical/slash/self_treat(mob/living/carbon/user, first_time = FALSE)
 	. = ..()
@@ -73,7 +75,7 @@
 	// compare with being at 100 brute damage before, where you bled (brute/100 * 2), = 2 blood per tile
 	var/bleed_amt = min(blood_flow * 0.1, 1) // 3 * 3 * 0.1 = 0.9 blood total, less than before! the share here is .6 blood of course.
 
-	if(limb.current_gauze) // gauze stops all bleeding from dragging on this limb, but wears the gauze out quicker
+	if(limb.current_gauze && CHECK_BITFIELD(wound_flags, WOUND_SEEPS_GAUZE)) // gauze stops all bleeding from dragging on this limb, but wears the gauze out quicker
 		limb.seep_gauze(bleed_amt * 0.33)
 		return
 	testing("blood from drag [name]: [bleed_amt]")
@@ -82,13 +84,14 @@
 /datum/wound/mechanical/slash/handle_process()
 	blood_flow = min(blood_flow, WOUND_SLASH_MAX_BLOODFLOW)
 
-	if(limb.current_gauze)
-		if(clot_rate > 0)
+	if(cares_about_gauze)
+		if(limb.current_gauze && CHECK_BITFIELD(wound_flags, WOUND_SEEPS_GAUZE))
+			if(clot_rate > 0)
+				blood_flow -= clot_rate
+			blood_flow -= limb.current_gauze.absorption_rate
+			limb.seep_gauze(limb.current_gauze.absorption_rate)
+		else
 			blood_flow -= clot_rate
-		blood_flow -= limb.current_gauze.absorption_rate
-		limb.seep_gauze(limb.current_gauze.absorption_rate)
-	else
-		blood_flow -= clot_rate
 
 	if(blood_flow > highest_flow)
 		highest_flow = blood_flow
@@ -213,6 +216,7 @@
 	scarring_descriptions = list("light, faded lines", "minor cut marks", "a small faded slit", "a series of small scars")
 	pain_amount = 8
 	descriptive = "The exoskeleton is torn!"
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN)
 
 /datum/wound/mechanical/slash/severe
 	name = "Jagged Tear"

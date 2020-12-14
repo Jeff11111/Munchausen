@@ -1606,7 +1606,7 @@
 			owner.visible_message("<span class='boldwarning'>\The [current_gauze] on [owner]'s [src.name] tears up a bit!</span>", "<span class='danger'>\The [current_gauze] on your [src.name] tears up a bit!</span>")
 			for(var/i in wounds)
 				var/datum/wound/woundie = i
-				if(istype(woundie))
+				if(istype(woundie) && CHECK_BITFIELD(woundie.wound_flags, WOUND_SEEPS_GAUZE))
 					seep_gauze(current_gauze.absorption_rate * (0.25 * woundie.severity))
 			seep_gauze(current_gauze.absorption_rate * round(damage/25, 1))
 
