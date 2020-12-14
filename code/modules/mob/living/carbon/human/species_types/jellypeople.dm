@@ -163,7 +163,6 @@
 		mutant_bodyparts -= "mam_waggingtail"
 	H.update_body()
 
-
 ////////////////////////////////////////////////////////SLIMEPEOPLE///////////////////////////////////////////////////////////////////
 
 //Slime people are able to split like slimes, retaining a single mind that can swap between bodies at will, even after death.
