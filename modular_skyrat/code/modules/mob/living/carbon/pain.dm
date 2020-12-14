@@ -156,32 +156,32 @@
 			if(DICE_FAILURE)
 				blur_eyes(2)
 				if(IsKnockdown())
-					AdjustKnockdown(35)
+					AdjustKnockdown(3 SECONDS)
 				else
 					visible_message("<span class='danger'><b>[src]</b> gives in to the pain!</span>", "<span class='userdanger'>I give in to the pain.</span>")
 					//Cum blood on they screen
 					//(very quick)
 					flash_pain(255, 0, 1, 3)
-					//Immobilize for half a second
-					Stun(5)
+					//Immobilize for a second
+					Stun(1 SECONDS)
 					//Fall down
-					spawn(5)
-						AdjustKnockdown(35)
+					spawn(1 SECONDS)
+						AdjustKnockdown(3 SECONDS)
 			//Crit failure - unconsciousness
 			if(DICE_CRIT_FAILURE)
 				blur_eyes(2)
 				if(!IsUnconscious())
-					AdjustUnconscious(35)
+					AdjustUnconscious(3 SECONDS)
 				else
 					visible_message("<span class='danger'><b>[src]</b> falls in to the pain!</span>", "<span class='userdanger'>I fall in to the pain.</span>")
 					//Cum blood on they screen
 					//(very quick)
 					flash_pain(255, 0, 1, 3)
-					//Immobilize for half a second
-					Stun(5)
+					//Immobilize for a second
+					Stun(1 SECONDS)
 					//Fall down
-					spawn(5)
-						AdjustUnconscious(35)
+					spawn(1 SECONDS)
+						AdjustUnconscious(3 SECONDS)
 
 	//Start handling shock
 	if(is_asystole())
