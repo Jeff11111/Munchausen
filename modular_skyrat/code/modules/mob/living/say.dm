@@ -9,10 +9,12 @@
 		message += "."
 	if(!forced && (GET_SKILL_LEVEL(src, gaming) < JOB_SKILLPOINTS_TRAINED) && config.ic_filter_regex && findtext(message, config.ic_filter_regex))
 		// let's try to be a bit more informative!
-		var/warning_message = "A splitting spike of headache prevents you from saying whatever vile words you planned to say! You think better of saying such nonsense again. The following terms repulse you: \""
+		var/warning_message = "A splitting headache prevents me from uttering whatever vile words i planned to! The following terms repulse me: \""
 		var/list/words = splittext(message, " ")
 		var/cringe = ""
 		for(var/word in words)
+			if(words.Find(word) == 1)
+				word = capitalize(word)
 			if(findtext(word, config.ic_filter_regex))
 				warning_message = "[warning_message]<b>[word]</b> "
 				cringe += "<b>[word]</b>"
