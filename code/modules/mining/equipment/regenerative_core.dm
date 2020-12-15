@@ -21,7 +21,7 @@
 /obj/item/organ/regenerative_core
 	name = "regenerative core"
 	desc = "All that remains of a hivelord. It can be used to heal completely, but it will rapidly decay into uselessness."
-	icon_state = "roro core 2"
+	icon_state = "roro_core"
 	item_flags = NOBLUDGEON
 	slot = "hivecore"
 	force = 0
@@ -68,36 +68,6 @@
 	. = ..()
 	if(owner.is_asystole())
 		ui_action_click()
-/*
-/obj/item/organ/regenerative_core/afterattack(atom/target, mob/user, proximity_flag)
-	. = ..()
-	if(proximity_flag)
-		apply_healing_core(target, user)
-
-/obj/item/organ/regenerative_core/proc/apply_healing_core(atom/target, mob/user)
-	if(!user || !ishuman(target))
-		return
-	var/mob/living/carbon/human/H = target
-	if(inert)
-		to_chat(user, "<span class='notice'>[src] has decayed and can no longer be used to heal.</span>")
-		return
-	if(H.stat == DEAD)
-		to_chat(user, "<span class='notice'>[src] are useless on the dead.</span>")
-		return
-	if(H != user)
-		H.visible_message("[user] forces [H] to apply [src]... Black tendrils entangle and reinforce [H.p_them()]!")
-		SSblackbox.record_feedback("nested tally", "hivelord_core", 1, list("[type]", "used", "other"))
-	else
-		to_chat(user, "<span class='notice'>You start to smear [src] on yourself. Disgusting tendrils hold you together and allow you to keep moving, but for how long?</span>")
-		SSblackbox.record_feedback("nested tally", "hivelord_core", 1, list("[type]", "used", "self"))
-	H.apply_status_effect(STATUS_EFFECT_REGENERATIVE_CORE)
-	qdel(src)
-	user.log_message("[user] used [src] to heal [H == user ? "[H.p_them()]self" : H]! Wake the fuck up, Samurai!", LOG_ATTACK, color="green") //Logging for 'old' style legion core use, when clicking on a sprite of yourself or another.
-
-/obj/item/organ/regenerative_core/attack_self(mob/user) //Knouli's first hack! Allows for the use of the core in hand rather than needing to click on the target, yourself, to selfheal. Its a rip of the proc just above - but skips on distance check and only uses 'user' rather than 'target'
-	. = ..()
-	apply_healing_core(user, user)
-*/
 
 /obj/item/organ/regenerative_core/Insert(mob/living/carbon/M, special = 0, drop_if_replaced = TRUE)
 	. = ..()
@@ -114,19 +84,19 @@
 /*************************Legion core********************/
 /obj/item/organ/regenerative_core/legion
 	desc = "A strange rock that crackles with power. It can be used to heal completely, but it will rapidly decay into uselessness."
-	icon_state = "legion_soul"
+	icon_state = "legion_core"
 
 /obj/item/organ/regenerative_core/legion/Initialize()
 	. = ..()
 	update_icon()
 
 /obj/item/organ/regenerative_core/update_icon_state()
-	icon_state = inert ? "legion_soul_inert" : "legion_soul"
+	icon_state = inert ? "[initial(icon_state)]-inert" : initial(icon_state)
 
 /obj/item/organ/regenerative_core/update_overlays()
 	. = ..()
 	if(!inert && !preserved)
-		. += "legion_soul_crackle"
+		. += "[initial(icon_state)]-crackle"
 
 /obj/item/organ/regenerative_core/legion/go_inert()
 	..()
