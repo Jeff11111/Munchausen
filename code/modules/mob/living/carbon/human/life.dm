@@ -298,7 +298,7 @@
 /mob/living/carbon/needs_heart()
 	if(HAS_TRAIT(src, TRAIT_STABLEHEART))
 		return FALSE
-	if(dna?.species && (NOBLOOD in dna.species.species_traits)) //not all carbons have species!
+	if(NOBLOOD in dna?.species?.species_traits)
 		return FALSE
 	return TRUE
 
