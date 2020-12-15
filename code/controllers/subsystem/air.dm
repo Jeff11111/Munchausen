@@ -68,7 +68,6 @@ SUBSYSTEM_DEF(air)
 	gas_reactions = init_gas_reactions()
 	return ..()
 
-
 /datum/controller/subsystem/air/fire(resumed = 0)
 	var/timer = TICK_USAGE_REAL
 
@@ -181,7 +180,6 @@ SUBSYSTEM_DEF(air)
 		if(MC_TICK_CHECK)
 			return
 
-
 /datum/controller/subsystem/air/proc/process_react_queue(resumed = 0)
 	if(!resumed)
 		src.currentrun = turf_react_queue.Copy()
@@ -201,6 +199,8 @@ SUBSYSTEM_DEF(air)
 	var/list/currentrun = src.currentrun
 	while(currentrun.len)
 		var/turf/T = currentrun[currentrun.len]
+		if(!istype(T))
+			continue
 		currentrun.len--
 		T.super_conduct()
 		if(MC_TICK_CHECK)
@@ -214,7 +214,7 @@ SUBSYSTEM_DEF(air)
 	while(currentrun.len)
 		var/obj/effect/hotspot/H = currentrun[currentrun.len]
 		currentrun.len--
-		if (H)
+		if(istype(H))
 			H.process()
 		else
 			hotspots -= H
