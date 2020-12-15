@@ -2,16 +2,16 @@
 /datum/surgery_step/insert_teeth
 	name = "Fix teeth"
 	implements = list(/obj/item/stack/teeth = 100)
-	time = 40
+	base_time = 40
 	possible_locs = list(BODY_ZONE_PRECISE_MOUTH)
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED)
 
-/datum/surgery_step/insert_teeth/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_step/insert_teeth/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	display_results(user, target, "<span class='notice'>You begin to put the [tool] inside [target]'s mouth...</span>",
 		"[user] begins to fix [target]'s teeth.",
 		"[user] begins to perform surgery on [target]'s mouth.")
 
-/datum/surgery_step/insert_teeth/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_step/insert_teeth/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	var/obj/item/bodypart/teeth_part = target.get_bodypart(check_zone(user.zone_selected))
 	var/obj/item/stack/our_teeth = tool
 	var/obj/item/stack/target_teeth = teeth_part.teeth_object
@@ -26,7 +26,7 @@
 		"[user] completes the surgery on [target]'s mouth.")
 	return TRUE
 
-/datum/surgery_step/insert_teeth/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_step/insert_teeth/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	var/obj/item/bodypart/teeth_part = target.get_bodypart(check_zone(user.zone_selected))
 	if(teeth_part.get_teeth_amount())
 		if(target.chem_effects[CE_PAINKILLER] < 30)
