@@ -189,7 +189,7 @@
 	to_chat(victim, "<span class='deadsay'><span class='big bold'>[message]</span></span>")
 
 /obj/item/organ/brain/Insert(mob/living/carbon/C, special = 0,no_id_transfer = FALSE, drop_if_replaced = TRUE)
-	..()
+	. = ..()
 
 	name = "brain"
 
@@ -506,8 +506,7 @@
 		qdel(X)
 
 /obj/item/organ/brain/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
-	Remove()	//Changeling brain concerns are now handled in Remove
-	forceMove(LB)
+	. = ..()
 	LB.brain = src
 	if(brainmob)
 		LB.brainmob = brainmob

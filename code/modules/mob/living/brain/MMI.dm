@@ -107,8 +107,12 @@
 	if(user)
 		user.put_in_hands(brain) //puts brain in the user's hand or otherwise drops it on the user's turf
 	else
-		brain.forceMove(get_turf(src))
-	brain.organ_flags &= ~ORGAN_FROZEN
+		if(get_turf(src))
+			brain.forceMove(get_turf(src))
+		else
+			qdel(brain)
+	if(brain && !QDELETED(brain))
+		brain.organ_flags &= ~ORGAN_FROZEN
 	brain = null //No more brain in here
 
 /obj/item/mmi/proc/transfer_identity(mob/living/L) //Same deal as the regular brain proc. Used for human-->robot people.

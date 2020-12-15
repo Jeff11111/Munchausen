@@ -189,11 +189,10 @@ SUBSYSTEM_DEF(air)
 	while(currentrun.len)
 		var/turf/open/T = currentrun[currentrun.len]
 		currentrun.len--
-		if(T)
+		if(istype(T))
 			T.process_cell_reaction()
 		if(MC_TICK_CHECK)
 			return
-
 
 /datum/controller/subsystem/air/proc/process_super_conductivity(resumed = 0)
 	if (!resumed)
