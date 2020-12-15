@@ -2174,9 +2174,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(IS_STAMCRIT(user))
 			to_chat(user, "<span class='warning'>I'm too exhausted for that.</span>")
 			return
-		if(SEND_SIGNAL(user, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
-			to_chat(user, "<span class='warning'>I need combat mode to be active to that!</span>")
-			return
 		if(user.IsKnockdown() || user.IsParalyzed() || user.IsStun())
 			to_chat(user, "<span class='warning'>I can't seem to force myself up right now!</span>")
 			return
