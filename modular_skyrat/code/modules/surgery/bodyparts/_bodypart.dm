@@ -578,14 +578,16 @@
 				brainmob.forceMove(brain)
 				brain.brainmob = brainmob
 				brainmob = null
-			brain.forceMove(T)
+			if(T)
+				brain.forceMove(T)
 			brain = null
 			update_icon_dropped()
 		else
 			if(istype(I, /obj/item/reagent_containers/pill))
 				for(var/datum/action/item_action/hands_free/activate_pill/AP in I.actions)
 					qdel(AP)
-			I.forceMove(T)
+			if(T)
+				I.forceMove(T)
 		if(istype(I, /obj/item/bodypart))
 			var/obj/item/bodypart/BP = I
 			BP.update_limb(TRUE)
