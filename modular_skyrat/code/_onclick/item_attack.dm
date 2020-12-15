@@ -18,17 +18,15 @@
 	if(SEND_SIGNAL(src, COMSIG_ITEM_MIDDLE_AFTERATTACK, target, user, proximity_flag, click_parameters))
 		return TRUE
 	if(get_sharpness())
-		if(user.a_intent == INTENT_HELP)
-			attempt_initiate_surgery(src, target, user)
-		else if(user.mind && iscarbon(target))
+		if(user.mind && iscarbon(target))
 			var/mob/living/carbon/victim = target
 			var/obj/item/bodypart/BP = victim.get_bodypart(check_zone(user.zone_selected))
 			if(!BP || INTERACTING_WITH(user, victim))
 				return FALSE
 			var/datum/skills/surgery/choppa = GET_SKILL_LEVEL(user, surgery)
 			var/time = 2 SECONDS
-			if(!victim.IsUnconscious() || (victim.stat >= UNCONSCIOUS))
-				time *= 4
+			if(victim.stat >= UNCONSCIOUS)
+				time *= 3
 			time *= clamp((MAX_STAT/2)/choppa, 0.25, 2)
 			var/diceroll = user.mind.diceroll(skills = SKILL_DATUM(surgery))
 			if(BP.can_dismember())
@@ -39,7 +37,7 @@
 				if(!do_mob(user, victim, time))
 					to_chat(user, "<span class='warning'>I must stand still!</span>")
 					return FALSE
-				if(diceroll <= DICE_FAILURE)
+				if(diceroll <= DICE_CRIT_FAILURE)
 					user.visible_message("<span class='danger'><b>[user]</b> botches the dismemberment!</span>", 
 										"<span class='warning'>Oh no - I fucked up...</span>")
 					if(prob(40))

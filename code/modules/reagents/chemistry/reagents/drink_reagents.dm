@@ -604,35 +604,27 @@
 	M.reagents.add_reagent(/datum/reagent/consumable/sugar,1)
 	if(prob(5))
 		M.reagents.add_reagent(/datum/reagent/consumable/honey,1)
-	..()
-
-/datum/reagent/consumable/buzz_fuzz/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
-	if(iscarbon(M) && (method in list(TOUCH, VAPOR, PATCH)))
-		var/mob/living/carbon/C = M
-		for(var/s in C.surgeries)
-			var/datum/surgery/S = s
-			S.success_multiplier = max(0.1, S.success_multiplier) // +10% success probability on each step, compared to bacchus' blessing's ~46%
-	..()
+	. = ..()
 
 /datum/reagent/consumable/buzz_fuzz/addiction_act_stage1(mob/living/M)
 	if(prob(5))
 		to_chat(M, "<span class = 'notice'>[pick("Buzz Buzz.", "Stinging with flavour.", "A Hive of Flavour")]</span>")
-	..()
+	. = ..()
 
 /datum/reagent/consumable/buzz_fuzz/addiction_act_stage2(mob/living/M)
 	if(prob(10))
 		to_chat(M, "<span class = 'notice'>[pick("Buzz Buzz.", "Stinging with flavour.", "A Hive of Flavour", "The Queen approved it!")]</span>")
-	..()
+	. = ..()
 
 /datum/reagent/consumable/buzz_fuzz/addiction_act_stage3(mob/living/M)
 	if(prob(15))
 		to_chat(M, "<span class = 'notice'>[pick("Buzz Buzz.", "Stinging with flavour.", "Ideal of the worker drone", "A Hive of Flavour", "The Queen approved it!")]</span>")
-	..()
+	. = ..()
 
 /datum/reagent/consumable/buzz_fuzz/addiction_act_stage4(mob/living/M)
 	if(prob(25))
 		to_chat(M, "<span class = 'notice'>[pick("Buzz Buzz.", "Stinging with flavour.", "Ideal of the worker drone", "A Hive of Flavour", "Sap back that missing energy!", "Got Honey?", "The Queen approved it!")]</span>")
-	..()
+	. = ..()
 
 /datum/reagent/consumable/grey_bull
 	name = "Grey Bull"
@@ -646,12 +638,12 @@
 	value = REAGENT_VALUE_COMMON
 
 /datum/reagent/consumable/grey_bull/on_mob_metabolize(mob/living/L)
-	..()
+	. = ..()
 	ADD_TRAIT(L, TRAIT_SHOCKIMMUNE, type)
 
 /datum/reagent/consumable/grey_bull/on_mob_end_metabolize(mob/living/L)
 	REMOVE_TRAIT(L, TRAIT_SHOCKIMMUNE, type)
-	..()
+	. = ..()
 
 /datum/reagent/consumable/grey_bull/on_mob_life(mob/living/carbon/M)
 	M.Jitter(20)
@@ -659,7 +651,7 @@
 	M.drowsyness = 0
 	M.AdjustSleeping(-40, FALSE)
 	M.adjust_bodytemperature(-5 * TEMPERATURE_DAMAGE_COEFFICIENT, BODYTEMP_NORMAL)
-	..()
+	. = ..()
 
 /datum/reagent/consumable/sodawater
 	name = "Soda Water"
@@ -675,7 +667,7 @@
 	M.dizziness = max(0,M.dizziness-5)
 	M.drowsyness = max(0,M.drowsyness-3)
 	M.adjust_bodytemperature(-5 * TEMPERATURE_DAMAGE_COEFFICIENT, BODYTEMP_NORMAL)
-	..()
+	. = ..()
 
 /datum/reagent/consumable/tonic
 	name = "Tonic Water"

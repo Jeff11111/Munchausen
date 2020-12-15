@@ -1,9 +1,8 @@
 //Organ storage component, used in organ manipulation
 /datum/component/storage/concrete/organ
 	rustle_sound = list('modular_skyrat/sound/gore/organ1.ogg', 'modular_skyrat/sound/gore/organ2.ogg')
-	var/obj/item/bodypart/bodypart_affected
 	storage_flags = 0
-	var/accessible = FALSE
+	var/obj/item/bodypart/bodypart_affected
 
 //Unregister signals we don't want
 /datum/component/storage/concrete/organ/Initialize()
@@ -31,12 +30,22 @@
 	bodypart_affected = null
 	return ..()
 
+//Check if we are accessible
+/datum/component/storage/concrete/organ/proc/is_accessible(mob/living/carbon/nigger)
+	var/how_open = bodypart_affected?.how_open()
+	if(CHECK_BITFIELD(how_open, SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_BROKEN))
+		return TRUE
+	else if(locate(/datum/wound/slash/critical/incision/disembowel) in bodypart_affected?.wounds)
+		return TRUE
+	else if(locate(/datum/wound/mechanical/slash/critical/incision/disembowel) in bodypart_affected?.wounds)
+		return TRUE
+
 //Only open this if aiming at the correct limb
 /datum/component/storage/concrete/organ/on_attack_hand(datum/source, mob/user)
 	update_insides()
 	var/atom/A = parent
 
-	if(!attack_hand_interact || !accessible)
+	if(!attack_hand_interact || !is_accessible(parent))
 		return FALSE
 	
 	if(user.a_intent != INTENT_GRAB)
@@ -81,13 +90,13 @@
 
 //Only visible when acessible
 /datum/component/storage/concrete/organ/show_to_ghost(datum/source, mob/dead/observer/M)
-	if(!accessible)
+	if(!is_accessible(parent))
 		return
 	. = ..()
 
 //Only visible when accessible
 /datum/component/storage/concrete/organ/user_show_to_mob(mob/M, force, ghost)
-	if(!accessible && !force)
+	if(!is_accessible(parent) && !force)
 		return
 	. = ..()
 
@@ -151,7 +160,7 @@
 
 //No real location
 /datum/component/storage/concrete/organ/can_be_inserted(obj/item/I, stop_messages = FALSE, mob/M)
-	if(!istype(I) || (I.item_flags & ABSTRACT) || !accessible)
+	if(!istype(I) || (I.item_flags & ABSTRACT) || !is_accessible(parent))
 		return FALSE //Not an item
 	if(I == parent)
 		return FALSE	//no paradoxes for you
@@ -288,7 +297,7 @@
 
 //Deal with cavity items and organs appropriately
 /datum/component/storage/concrete/organ/remove_from_storage(atom/movable/AM, atom/new_location)
-	if(!accessible)
+	if(!is_accessible(parent))
 		return FALSE
 	. = ..()
 	if(.)
@@ -349,7 +358,7 @@
 		return FALSE
 	// this must come before the screen objects only block, dunno why it wasn't before
 	var/mob/living/L = M
-	if(!istype(L) || !(L.a_intent == INTENT_GRAB) || !accessible)
+	if(!istype(L) || !(L.a_intent == INTENT_GRAB) || !is_accessible(parent))
 		return FALSE
 	if(isliving(over_object) && (L.zone_selected == bodypart_affected.body_zone))
 		update_insides()

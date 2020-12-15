@@ -134,12 +134,6 @@
 				thing.forceMove(src)
 				thing.on_transfer_to_limb(src)
 		C.updatehealth()
-	for(var/X in C.surgeries)
-		var/datum/surgery/S = X
-		if(S.operated_bodypart == src)
-			C.surgeries -= S
-			qdel(S)
-			break
 
 	for(var/obj/item/I in embedded_objects)
 		embedded_objects -= I
@@ -344,15 +338,6 @@
 			if(hand)
 				hand.update_icon()
 		C.update_inv_gloves()
-
-	if(special) //non conventional limb attachment
-		for(var/X in C.surgeries) //if we had an ongoing surgery to attach a new limb, we stop it.
-			var/datum/surgery/S = X
-			var/surgery_zone = check_zone(S.location)
-			if(surgery_zone == body_zone)
-				C.surgeries -= S
-				qdel(S)
-				break
 	
 	//Stored limbs. in normal circumstances, this will be either nothing or just the children.
 	for(var/obj/item/bodypart/BP in src)

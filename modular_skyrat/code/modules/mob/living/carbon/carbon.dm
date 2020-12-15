@@ -7,8 +7,6 @@
 	. = ..()
 	//Carbon mobs always have an organ storage component - it just becomes accessible when necessary.
 	var/datum/component/storage/concrete/organ/ST = AddComponent(/datum/component/storage/concrete/organ)
-	if(ST)
-		ST.accessible = FALSE
 
 /mob/living/carbon/Destroy()
 	. = ..()

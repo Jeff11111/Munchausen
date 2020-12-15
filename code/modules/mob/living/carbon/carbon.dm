@@ -95,14 +95,15 @@
 		mode() // Activate held item
 
 /mob/living/carbon/attackby(obj/item/I, mob/user, params)
-	if(surgeries.len)
-		if(user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM)
-			for(var/datum/surgery/S in surgeries)
-				if(!S.lying_required || (S.lying_required && lying) && (S.location == user.zone_selected))
-					if(S.next_step(user, user.a_intent))
-						return TRUE
-		if((user.a_intent == INTENT_HELP) && I.tool_behaviour)
-			return TRUE
+	//attempt surgery if on help or disarm intent
+	if(user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM)
+		for(var/datum/surgery_step/S in GLOB.surgery_steps)
+			if(S.try_op(user, src, user.zone_selected, user.get_active_held_item()))
+				return TRUE
+	
+	//do not fuck someone up with tools if help intent
+	if((user.a_intent == INTENT_HELP) && I.tool_behaviour)
+		return TRUE
 	
 	//skyrat edit
 	if(!length(all_wounds) || !(user.a_intent == INTENT_HELP || user == src))
@@ -116,11 +117,11 @@
 		if(!W.treat_priority)
 			nonpriority_wounds += W
 		else if(W.treat_priority && W.try_treating(I, user))
-			return 1
+			return TRUE
 
 	for(var/datum/wound/W in shuffle(nonpriority_wounds))
 		if(W.try_treating(I, user))
-			return 1
+			return TRUE
 
 	return ..()
 
@@ -575,13 +576,13 @@
 
 	if(is_mouth_covered()) //make this add a blood/vomit overlay later it'll be hilarious
 		if(message)
-			visible_message("<span class='danger'>[src] throws up all over [p_them()]self!</span>", \
-							"<span class='userdanger'>You throw up all over yourself!</span>")
+			visible_message("<span class='danger'><b>[src]</b> throws up all over [p_them()]self!</span>", \
+							"<span class='userdanger'>I throw up all over myself!</span>")
 			SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "vomit", /datum/mood_event/vomitself)
 		distance = 0
 	else
 		if(message)
-			visible_message("<span class='danger'>[src] throws up!</span>", "<span class='userdanger'>You throw up!</span>")
+			visible_message("<span class='danger'><b>[src]</b> throws up!</span>", "<span class='userdanger'>I throw up!</span>")
 			if(!isflyperson(src))
 				SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "vomit", /datum/mood_event/vomit)
 	if(stun)

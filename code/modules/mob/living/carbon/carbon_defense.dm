@@ -173,12 +173,10 @@
 			ContactContractDisease(D)
 
 	//surgeries have higher priority than wounds due to incision wounds.
-	if(surgeries.len)
-		if(user.a_intent == INTENT_HELP)
-			for(var/datum/surgery/S in surgeries)
-				if(!S.lying_required || (S.lying_required && lying) && (S.location == user.zone_selected))
-					if(S.next_step(user, user.a_intent))
-						return TRUE
+	if(user.a_intent == INTENT_HELP)
+		for(var/datum/surgery_step/S in GLOB.surgery_steps)
+			if(S.try_op(user, src, user.zone_selected, user.get_active_held_item(), (user.a_intent == INTENT_DISARM)))
+				return TRUE
 	
 	for(var/datum/wound/W in all_wounds)
 		if(W.try_handling(user))

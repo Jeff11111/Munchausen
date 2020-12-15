@@ -1,70 +1,17 @@
 //I fuck sex
 /datum/surgery_step
-	var/name = "NIGGER FAGGOT TRANNY"
+	var/name
 	var/list/implements = list()	//format is path = probability of success. alternatively
 	var/implement_type = null		//the current type of implement used. This has to be stored, as the actual typepath of the tool may not match the list type.
 	var/accept_hand = 0				//does the surgery step require an open hand? If true, ignores implements. Compatible with accept_any_item.
 	var/accept_any_item = 0			//does the surgery step accept any item? If true, ignores implements. Compatible with require_hand.
-	var/base_time = 10					//how long does the step take for the average niggerr?
-	var/repeatable = FALSE			//can this step be repeated?
-	var/step_in_progress = FALSE		//are we being done, right now?
+	var/time = 10					//how long does the step take?
+	var/repeatable = FALSE				//can this step be repeated? Make shure it isn't last step, or it used in surgery with `can_cancel = 1`. Or surgion will be stuck in the loop
 	var/list/chems_needed = list()  //list of chems needed to complete the step. Even on success, the step will have no effect if there aren't the chems required in the mob.
 	var/require_all_chems = TRUE    //any on the list or all on the list?
-	var/silicons_obey_prob = FALSE	//do silicons care about probability of success?
-	var/surgery_flags = (STEP_NEEDS_INCISED) //fucking flags
-	var/success_multiplier = 1
-	var/ignore_clothes = FALSE //Do we check for clothes covering the location?
-	var/requires_bodypart = TRUE //Most surgeries need a bodypart to work
-	var/requires_bodypart_type = BODYPART_ORGANIC //Prevents you from performing an operation on incorrect limbs. 0 for any limb type
-	var/requires_real_bodypart = FALSE	//Some surgeries don't work on limbs that are fake (AKA le item limb)
-	var/lying_required = FALSE	//Does the victim need to be lying down?
-	var/list/possible_locs = ALL_BODYPARTS //Where this can be performed on
-	var/list/target_mobtypes = list(/mob/living/carbon)	//Acceptable mob types
-	var/requires_tech //Tech tree datum required to unlock this nigger, will be implemented later
+	var/silicons_obey_prob = FALSE
 
-/datum/surgery_step/proc/validate_user(mob/user)
-	. = TRUE
-	if(!(user.zone_selected in possible_locs))
-		. = FALSE
-
-/datum/surgery_step/proc/validate_target(mob/living/target, mob/user)
-	. = TRUE
-	if(length(target_mobtypes))
-		. = FALSE
-		for(var/bingus in target_mobtypes)
-			if(istype(target, bingus))
-				. = TRUE
-	if(lying_required && !target.lying)
-		. = FALSE
-	if(iscarbon(target))
-		var/mob/living/carbon/C = target
-		var/mob/living/carbon/human/H = C
-		var/obj/item/bodypart/BP = C.get_bodypart(user.zone_selected)
-		if(requires_bodypart && !BP)
-			. = FALSE
-		if(istype(H) && !ignore_clothes && H.clothingonpart(BP?.body_zone))
-			. = FALSE
-		if(!CHECK_BITFIELD(BP?.status, requires_bodypart_type))
-			. = FALSE
-		if(CHECK_BITFIELD(surgery_flags, STEP_NEEDS_INCISED) && !BP?.encased)
-			. = FALSE
-		var/how_open = BP?.how_open()
-		if(CHECK_BITFIELD(surgery_flags, STEP_NEEDS_INCISED) && !CHECK_BITFIELD(how_open, SURGERY_INCISED))
-			. = FALSE
-		if(CHECK_BITFIELD(surgery_flags, STEP_NEEDS_RETRACTED) && !CHECK_BITFIELD(how_open, SURGERY_RETRACTED))
-			. = FALSE
-		if(CHECK_BITFIELD(surgery_flags, STEP_NEEDS_BROKEN) && !CHECK_BITFIELD(how_open, SURGERY_BROKEN))
-			. = FALSE
-		if(CHECK_BITFIELD(surgery_flags, STEP_NEEDS_SET_BONES) && !CHECK_BITFIELD(how_open, SURGERY_SET_BONES))
-			. = FALSE
-		if(user == target)
-			var/obj/item/bodypart/active_hand = user.get_active_hand()
-			if((active_hand?.body_zone in list(BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_R_HAND)) && (user.zone_selected in list(BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_R_HAND)))
-				return FALSE
-			if((active_hand?.body_zone in list(BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_L_HAND)) && (user.zone_selected in list(BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_L_HAND)))
-				return FALSE
-
-/datum/surgery_step/proc/try_op(mob/user, mob/living/target, target_zone, obj/item/tool, try_to_fail = FALSE)
+/datum/surgery_step/proc/try_op(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail = FALSE)
 	var/success = FALSE
 	if(accept_hand)
 		if(!tool)
@@ -86,55 +33,69 @@
 				if(tool_check(user, tool, target))
 					success = TRUE
 					break
-	if(!validate_user(user))
-		success = FALSE
-	if(!validate_target(target, user))
-		success = FALSE
-	if(target.surgery_steps_in_progress[target_zone])
-		success = FALSE
 	if(success)
-		if(get_location_accessible(target, target_zone) || ignore_clothes)
-			return initiate(user, target, target_zone, tool, try_to_fail)
+		if(target_zone == surgery.location)
+			if(get_location_accessible(target, target_zone) || surgery.ignore_clothes)
+				return initiate(user, target, target_zone, tool, surgery, try_to_fail)
+			else
+				to_chat(user, "<span class='warning'>You need to expose [target]'s [parse_zone(target_zone)] to perform surgery on it!</span>")
+				return TRUE	//returns TRUE so we don't stab the guy in the dick or wherever.
+	if(repeatable)
+		var/datum/surgery_step/next_step = surgery.get_surgery_next_step()
+		if(next_step)
+			surgery.status++
+			if(next_step.try_op(user, target, user.zone_selected, user.get_active_held_item(), surgery))
+				return TRUE
+			else
+				surgery.status--
 	return FALSE
 
-/datum/surgery_step/proc/initiate(mob/user, mob/living/target, target_zone, obj/item/tool, try_to_fail = FALSE)
-	target.surgery_steps_in_progress[target_zone] = src
+/datum/surgery_step/proc/initiate(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail = FALSE)
+	surgery.step_in_progress = TRUE
 	var/speed_mod = 1
 	var/advance = FALSE
-	if(preop(user, target, target_zone, tool) == -1)
-		target.surgery_steps_in_progress -= target_zone
+	if(preop(user, target, target_zone, tool, surgery) == -1)
+		surgery.step_in_progress = FALSE
 		return FALSE
 	if(tool)
 		speed_mod = tool.toolspeed //faster tools mean faster surgeries, but also less experience.
 	
-	var/delay = base_time * speed_mod
+	var/delay = time * speed_mod
 	if(do_after(user, delay, target = target))
 		var/prob_chance = 100
 		if(implement_type)	//this means it isn't a require hand or any item step.
 			prob_chance = implements[implement_type]
-		prob_chance *= get_surgery_probability_multiplier(src, target, user)
+		prob_chance *= surgery.get_probability_multiplier()
 
 		if((prob(prob_chance) || (iscyborg(user) && !silicons_obey_prob)) && chem_check(target) && !try_to_fail)
-			if(success(user, target, target_zone, tool))
+			if(success(user, target, target_zone, tool, surgery))
+				var/multi = (delay/SKILL_GAIN_DELAY_DIVISOR)
+				if(repeatable)
+					multi *= 0.5 //Spammable surgeries award less experience.
+				user.mind?.auto_gain_experience(/datum/skill/numerical/surgery, SKILL_GAIN_SURGERY_PER_STEP * multi)
 				advance = TRUE
 		else
-			if(failure(user, target, target_zone, tool))
+			if(failure(user, target, target_zone, tool, surgery))
 				advance = TRUE
-	target.surgery_steps_in_progress -= target_zone
+		if(advance && !repeatable)
+			surgery.status++
+			if(surgery.status > surgery.steps.len)
+				surgery.complete()
+	surgery.step_in_progress = FALSE
 	return advance
 
-/datum/surgery_step/proc/preop(mob/user, mob/living/target, target_zone, obj/item/tool)
+/datum/surgery_step/proc/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, "<span class='notice'>You begin to perform surgery on [target]...</span>",
 		"[user] begins to perform surgery on [target].",
 		"[user] begins to perform surgery on [target].")
 
-/datum/surgery_step/proc/success(mob/user, mob/living/target, target_zone, obj/item/tool)
+/datum/surgery_step/proc/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, "<span class='notice'>You succeed.</span>",
 		"[user] succeeds!",
 		"[user] finishes.")
 	return TRUE
 
-/datum/surgery_step/proc/failure(mob/user, mob/living/target, target_zone, obj/item/tool)
+/datum/surgery_step/proc/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, "<span class='warning'>You screw up!</span>",
 		"<span class='warning'>[user] screws up!</span>",
 		"[user] finishes.", TRUE) //By default the patient will notice if the wrong thing has been cut
@@ -178,13 +139,13 @@
 
 //Overrides the surgery step to require anasthetics for a smooth surgery
 //also lets you do self-surgery again bottom text
-/datum/surgery_step/initiate(mob/user, mob/living/target, target_zone, obj/item/tool, try_to_fail = FALSE)
-	target.surgery_steps_in_progress[target_zone] = src
+/datum/surgery_step/initiate(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, try_to_fail = FALSE)
+	surgery.step_in_progress = TRUE
 	var/speed_mod = (user == target ? 0.25 : 1) //self-surgery is hard
 	var/advance = FALSE
 	var/obj/item/bodypart/affecting = target.get_bodypart(target_zone)
-	if(preop(user, target, target_zone, tool) == -1)
-		target.surgery_steps_in_progress -= target_zone
+	if(preop(user, target, target_zone, tool, surgery) == -1)
+		surgery.step_in_progress = FALSE
 		return FALSE
 	
 	if(tool)
@@ -195,7 +156,7 @@
 		if(surgerye)
 			speed_mod *= surgerye.get_speed_mod()
 			
-	if(do_after(user, base_time * speed_mod, target = target))
+	if(do_after(user, time * speed_mod, target = target))
 		var/prob_chance = 100
 		if(implement_type)	//this means it isn't a require hand or any item step.
 			prob_chance = implements[implement_type]
@@ -218,7 +179,7 @@
 			else
 				prob_chance *= 0.5
 		
-		prob_chance *= get_surgery_probability_multiplier(src, target, user)
+		prob_chance *= surgery.get_probability_multiplier()
 
 		var/mob/living/carbon/C = target
 		if(istype(C) && C.can_feel_pain() && affecting && affecting.is_organic_limb() && (target.stat <= UNCONSCIOUS) && (target.mob_biotypes & MOB_ORGANIC) && !target.InFullCritical() && !HAS_TRAIT(target, TRAIT_PAINKILLER) && !(target.chem_effects[CE_PAINKILLER] >= 50))
@@ -230,7 +191,7 @@
 				prob_chance *= 0.4
 			
 			target.visible_message("<span class='warning'>[target] [pick("writhes in pain", "squirms and kicks in agony", "cries in pain as [target.p_their()] body violently jerks")], impeding the surgery!</span>", \
-			"<span class='warning'>I[pick(" writhe as agonizing pain surges throught my entire body", " feel burning pain sending my body into a convulsion", " squirm as sickening pain fills every part of me")]!</span>")
+			"<span class='warning'>You[pick(" writhe as agonizing pain surges throught your entire body", " feel burning pain sending your body into a convulsion", "r body squirms as sickening pain fills every part of it")]!</span>")
 			target.emote("scream")
 			target.blood_volume -= 5
 			target.add_splatter_floor(get_turf(target))
@@ -241,11 +202,15 @@
 		if(user.mind && (user.mind.diceroll(GET_STAT_LEVEL(user, int)*0.5, GET_SKILL_LEVEL(user, surgery)*1.5, dicetype = "6d6", mod = -(round(100 - prob_chance)/4), crit = 20) <= DICE_FAILURE))
 			didntfuckup = FALSE
 		if(didntfuckup || (iscyborg(user) && !silicons_obey_prob && chem_check(target) && !try_to_fail))
-			if(success(user, target, target_zone, tool))
+			if(success(user, target, target_zone, tool, surgery))
 				advance = TRUE
 		else
-			if(failure(user, target, target_zone, tool))
+			if(failure(user, target, target_zone, tool, surgery))
 				advance = TRUE
 		spread_germs_to_bodypart(affecting, user, tool)
-	target.surgery_steps_in_progress -= target_zone
+		if(advance && !repeatable)
+			surgery.status++
+			if(surgery.status > surgery.steps.len)
+				surgery.complete()
+	surgery.step_in_progress = FALSE
 	return advance

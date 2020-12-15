@@ -54,15 +54,13 @@
 		INVOKE_ASYNC(src, .proc/RefreshInfectionImage)
 
 	if(stage == 5 && prob(50))
-		for(var/datum/surgery/S in owner.surgeries)
-			if(S.location == BODY_ZONE_CHEST && istype(S.get_surgery_step(), /datum/surgery_step/manipulate_organs))
-				AttemptGrow(0)
-				return
-		AttemptGrow()
+		var/obj/item/bodypart/chest/chest = owner.get_bodypart(BODY_ZONE_CHEST)
+		if(CHECK_BITFIELD(chest.how_open(), SURGERY_RETRACTED))
+			AttemptGrow(FALSE)
+		else
+			AttemptGrow(TRUE)
 
-
-
-/obj/item/organ/body_egg/alien_embryo/proc/AttemptGrow(var/kill_on_sucess=FALSE) //skyrat-edit
+/obj/item/organ/body_egg/alien_embryo/proc/AttemptGrow(kill_on_sucess = TRUE)
 	if(!owner || bursting)
 		return
 

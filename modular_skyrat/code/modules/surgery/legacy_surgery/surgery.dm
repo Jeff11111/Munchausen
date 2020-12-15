@@ -18,7 +18,7 @@
 	var/datum/wound/targetable_wound						//The wound type this surgery targets
 	var/requires_bodypart = TRUE							//Surgery available only when a bodypart is present, or only when it is missing.
 	var/success_multiplier = 0								//Step success probability multiplier
-	var/requires_real_bodypart = 0							//Some surgeries don't work on limbs that don't really exist
+	var/requires_real_bodypart = FALSE						//Some surgeries don't work on limbs that don't really exist
 	var/lying_required = FALSE								//Does the victim needs to be lying down.
 	var/requires_tech = FALSE
 	var/replaced_by

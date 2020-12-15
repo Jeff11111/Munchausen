@@ -39,4 +39,4 @@
 		target.reagents.reaction(owner, INGEST)
 		target.reagents.trans_to(owner, target.reagents.total_volume)
 	qdel(target)
-	return 1
+	return TRUE

@@ -1,6 +1,6 @@
 /obj/item/retractor
 	name = "retractor"
-	desc = "Retracts stuff."
+	desc = "A surgical tool to keep a patient wide open while you exhume their guts out."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "retractor"
 	custom_materials = list(/datum/material/iron=6000, /datum/material/glass=3000)
@@ -202,12 +202,14 @@
 	. = list()
 	if(!linked_techweb)
 		return
+	/* NIGGERS will be implemented at LATER DATE!!!
 	for(var/subtype in subtypesof(/datum/design/surgery))
 		var/datum/design/surgery/prototype = subtype
 		var/id = initial(prototype.id)
 		if(id in linked_techweb.researched_designs)
 			prototype = SSresearch.techweb_design_by_id(id)
 			. |= prototype.surgery
+	*/
 
 /obj/item/scalpel/advanced/attack_self(mob/user)
 	playsound(get_turf(user), 'sound/machines/click.ogg', 50, TRUE)
@@ -307,10 +309,6 @@
 	attack_verb = list("slapped")
 	germ_level = 0
 
-/obj/item/surgical_drapes/attack(mob/living/M, mob/user)
-	if(!attempt_initiate_surgery(src, M, user))
-		..()
-
 /obj/item/surgical_drapes/advanced
 	name = "smart surgical drapes"
 	desc = "A smart set of drapes with wireless synchronization to the station's research networks, with an integrated display allowing users to execute advanced surgeries without the aid of an operating computer."
@@ -324,12 +322,14 @@
 	. = list()
 	if(!linked_techweb)
 		return
+	/* NIGGERS will be implemented at LATER DATE!!!
 	for(var/subtype in subtypesof(/datum/design/surgery))
 		var/datum/design/surgery/prototype = subtype
 		var/id = initial(prototype.id)
 		if(id in linked_techweb.researched_designs)
 			prototype = SSresearch.techweb_design_by_id(id)
 			. |= prototype.surgery
+	*/
 
 /obj/item/organ_storage //allows medical cyborgs to manipulate organs without hands
 	name = "organ storage bag"
@@ -393,13 +393,13 @@
 		to_chat(user, "<span class='notice'>You load the surgery protocol from [O] into [src].</span>")
 		var/obj/item/disk/surgery/D = O
 		if(do_after(user, 10, target = O))
-			advanced_surgeries |= D.surgeries
+			advanced_surgeries |= D.surgery_steps
 		return TRUE
 	if(istype(O, /obj/machinery/computer/operating))
 		to_chat(user, "<span class='notice'>You copy surgery protocols from [O] into [src].</span>")
 		var/obj/machinery/computer/operating/OC = O
 		if(do_after(user, 10, target = O))
-			advanced_surgeries |= OC.advanced_surgeries
+			advanced_surgeries |= OC.advanced_surgery_steps
 		return TRUE
 	return
 

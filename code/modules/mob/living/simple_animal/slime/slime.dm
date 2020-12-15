@@ -321,11 +321,10 @@
 
 				discipline_slime(M)
 	else
-		if(stat == DEAD && surgeries.len)
-			if(M.a_intent == INTENT_HELP || M.a_intent == INTENT_DISARM)
-				for(var/datum/surgery/S in surgeries)
-					if(S.next_step(M,M.a_intent))
-						return 1
+		if(stat == DEAD && (M.a_intent == INTENT_HELP || M.a_intent == INTENT_DISARM))
+			for(var/datum/surgery_step/S in GLOB.surgery_steps)
+				if(S.try_op(M, src, M.zone_selected, M.get_active_held_item(), (M.a_intent == INTENT_DISARM)))
+					return TRUE
 		if(..()) //successful attack
 			attacked += 10
 
@@ -338,11 +337,10 @@
 
 
 /mob/living/simple_animal/slime/attackby(obj/item/W, mob/living/user, params)
-	if(stat == DEAD && surgeries.len)
-		if(user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM)
-			for(var/datum/surgery/S in surgeries)
-				if(S.next_step(user,user.a_intent))
-					return 1
+	if(stat == DEAD && (user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM))
+		for(var/datum/surgery_step/S in GLOB.surgery_steps)
+			if(S.try_op(user, src, user.zone_selected, user.get_active_held_item(), (user.a_intent == INTENT_DISARM)))
+				return TRUE
 	if(istype(W, /obj/item/stack/sheet/mineral/plasma) && !stat) //Let's you feed slimes plasma.
 		if (user in Friends)
 			++Friends[user]

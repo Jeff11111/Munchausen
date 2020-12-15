@@ -563,7 +563,7 @@
 
 //empties the bodypart from its organs and other things inside it
 /obj/item/bodypart/proc/drop_organs(mob/user, violent_removal)
-	var/turf/T = get_turf(src)
+	var/turf/T = get_turf(src) || get_turf(src.loc)
 	if(!(status & BODYPART_ROBOTIC))
 		playsound(T, 'sound/misc/splort.ogg', 50, 1, -1)
 	if(current_gauze)
@@ -573,8 +573,6 @@
 		O.transfer_to_limb(src, owner)
 	for(var/obj/item/I in src)
 		if(I == brain)
-			if(user)
-				user.visible_message("<span class='warning'>[user] saws [src] open and pulls out a brain!</span>", "<span class='notice'>You saw [src] open and pull out a brain.</span>")
 			if(brainmob)
 				brainmob.container = null
 				brainmob.forceMove(brain)
@@ -1489,6 +1487,19 @@
 //Used by some medical tools
 /obj/item/bodypart/proc/listen()
 	return
+
+//Used by surgery
+/obj/item/bodypart/proc/how_open()
+	. = 0
+	var/datum/wound/incision = (locate(/datum/wound/slash/critical) in wounds) || (locate(/datum/wound/mechanical/slash/critical) in wounds)
+	if(incision)
+		. |= SURGERY_INCISED
+		if(CHECK_BITFIELD(incision.wound_flags, WOUND_RETRACTED_SKIN))
+			. |= SURGERY_RETRACTED
+		if(CHECK_BITFIELD(incision.wound_flags, WOUND_SET_BONES))
+			. |= SURGERY_SET_BONES
+	if(is_broken())
+		. |= SURGERY_BROKEN
 
 //To update the bodypart's icon when not attached to a mob
 /obj/item/bodypart/proc/update_icon_dropped()

@@ -126,12 +126,6 @@
 		return "<span class='deadsay'>[..()]</span>"
 	. = ..()
 
-/datum/wound/slash/critical/incision/disembowel/Destroy()
-	var/datum/component/storage/concrete/organ/ST = victim?.GetComponent(/datum/component/storage/concrete/organ)
-	if(ST)
-		ST.accessible = FALSE
-	. = ..()
-
 /datum/wound/slash/critical/incision/disembowel/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
 	descriptive = "\The [L.name] is disemboweled!"
 	switch(L.body_zone)
@@ -176,7 +170,6 @@
 		our_component.bodypart_affected = L
 		our_component.drop_all_on_deconstruct = FALSE
 		our_component.silent = TRUE
-		our_component.accessible = TRUE
 		our_component.update_insides()
 	. = ..()
 
@@ -207,12 +200,6 @@
 /datum/wound/mechanical/slash/critical/incision/disembowel/get_examine_description(mob/user)
 	if(limb.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))
 		return "<span class='deadsay'>[..()]</span>"
-	. = ..()
-
-/datum/wound/mechanical/slash/critical/incision/disembowel/Destroy()
-	var/datum/component/storage/concrete/organ/ST = victim?.GetComponent(/datum/component/storage/concrete/organ)
-	if(ST)
-		ST.accessible = FALSE
 	. = ..()
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
@@ -259,6 +246,5 @@
 		our_component.bodypart_affected = L
 		our_component.drop_all_on_deconstruct = FALSE
 		our_component.silent = TRUE
-		our_component.accessible = TRUE
 		our_component.update_insides()
 	. = ..()
