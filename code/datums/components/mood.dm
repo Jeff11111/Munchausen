@@ -53,7 +53,7 @@
 	if(mood_signs == 0)
 		mood_symbol = ""
 	else if(mood_signs < 0)
-		mood_symbol = "<span class='red'><b>-</b></span> "
+		mood_symbol = "<span class='red'><b>-</b></span>"
 	mood_signs = abs(mood_signs)
 	var/left_symbols = ""
 	if(mood_signs && mood_symbol)
@@ -66,11 +66,11 @@
 
 /datum/component/mood/proc/get_right_signs_from_number(num)
 	var/mood_signs = num
-	var/mood_symbol = "<span class='green'><b>+</b></span> "
+	var/mood_symbol = "<span class='green'><b>+</b></span>"
 	if(mood_signs == 0)
 		mood_symbol = ""
 	else if(mood_signs < 0)
-		mood_symbol = "<span class='red'><b>-</b></span> "
+		mood_symbol = "<span class='red'><b>-</b></span>"
 	mood_signs = abs(mood_signs)
 	var/right_symbols = ""
 	if(mood_signs && mood_symbol)
