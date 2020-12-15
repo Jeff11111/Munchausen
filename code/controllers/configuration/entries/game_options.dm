@@ -291,7 +291,7 @@
 	config_entry_value = 7
 
 /datum/config_entry/number/movedelay/sprint_stamina_cost
-	config_entry_value = 0.7
+	config_entry_value = 2
 
 /datum/config_entry/number/movedelay/sprint_buffer_regen_per_ds
 	config_entry_value = 0.3

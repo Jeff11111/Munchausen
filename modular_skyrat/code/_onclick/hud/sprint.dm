@@ -44,8 +44,12 @@
 /obj/screen/sprint_buffer/Click()
 	if(isliving(usr))
 		var/mob/living/L = usr
-		to_chat(L, "<span class='boldnotice'>Your sprint buffer's maximum capacity is [L.sprint_buffer_max]. It is currently at [L.sprint_buffer], regenerating at [L.sprint_buffer_regen_ds * 10] per second. \
-		Sprinting while this is empty will incur a [L.sprint_stamina_cost] stamina cost per tile.</span>")
+		var/msg = list("<span class='notice'>*---------*</span>")
+		msg += "<span class='notice'>Your sprint buffer's maximum capacity is [L.sprint_buffer_max].</span>"
+		msg += "<span class='notice'>It is currently at [L.sprint_buffer], regenerating at [L.sprint_buffer_regen_ds * 10] per second.</span>"
+		msg += "<span class='notice'>Sprinting while this is empty will incur a [L.sprint_stamina_cost] stamina cost per tile.</span>"
+		msg += "<span class='notice'>*---------*</span>"
+		to_chat(L, jointext(msg, "\n"))
 
 /obj/screen/sprint_buffer/proc/update_to_mob(mob/living/L)
 	var/amount = 0

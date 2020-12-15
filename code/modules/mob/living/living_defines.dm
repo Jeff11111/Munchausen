@@ -156,10 +156,9 @@
 	var/stambuffer = 20
 	var/stambufferregentime
 
-	//Sprint buffer---
+	//Sprint buffer
 	var/sprint_buffer = 7					//Tiles
 	var/sprint_buffer_max = 7
 	var/sprint_buffer_regen_ds = 0.05		//Tiles per world.time decisecond
 	var/sprint_buffer_regen_last = 0		//last world.time this was regen'd for math.
-	var/sprint_stamina_cost = 2.5			//stamina loss per tile while insufficient sprint buffer.
-	//---End
+	var/sprint_stamina_cost = 2			//stamina loss per tile while insufficient sprint buffer.
