@@ -578,7 +578,7 @@
 				brainmob.forceMove(brain)
 				brain.brainmob = brainmob
 				brainmob = null
-			if(T)
+			if(istype(T))
 				brain.forceMove(T)
 			else
 				brain.moveToNullspace()
@@ -588,7 +588,7 @@
 			if(istype(I, /obj/item/reagent_containers/pill))
 				for(var/datum/action/item_action/hands_free/activate_pill/AP in I.actions)
 					qdel(AP)
-			if(T)
+			if(istype(T))
 				I.forceMove(T)
 			else
 				I.moveToNullspace()
@@ -1819,7 +1819,10 @@
 		QDEL_NULL(current_gauze)
 	else
 		var/turf/drop = get_turf(src)
-		current_gauze.forceMove(drop)
+		if(istype(drop))
+			current_gauze.forceMove(drop)
+		else
+			qdel(current_gauze)
 		current_gauze = null
 
 	if(!owner)
