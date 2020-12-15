@@ -6,7 +6,7 @@
 /mob/living/carbon/ComponentInitialize()
 	. = ..()
 	//Carbon mobs always have an organ storage component - it just becomes accessible when necessary.
-	var/datum/component/storage/concrete/organ/ST = AddComponent(/datum/component/storage/concrete/organ)
+	AddComponent(/datum/component/storage/concrete/organ)
 
 /mob/living/carbon/Destroy()
 	. = ..()
