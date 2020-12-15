@@ -10,7 +10,7 @@
 	surgery_flags = 0
 	var/organ_rejection_dam = 0
 
-/datum/surgery_step/add_prosthetic/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_step/add_prosthetic/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	if(istype(tool, /obj/item/organ_storage))
 		if(!tool.contents.len)
 			to_chat(user, "<span class='notice'>There is nothing inside [tool]!</span>")
@@ -54,7 +54,7 @@
 			"[user] begins to attach [tool] onto [target]'s [parse_zone(target_zone)].",
 			"[user] begins to attach something onto [target]'s [parse_zone(target_zone)].")
 
-/datum/surgery_step/add_prosthetic/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_step/add_prosthetic/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	if(istype(tool, /obj/item/organ_storage))
 		tool.icon_state = initial(tool.icon_state)
 		tool.desc = initial(tool.desc)

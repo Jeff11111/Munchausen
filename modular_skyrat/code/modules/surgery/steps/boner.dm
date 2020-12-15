@@ -18,12 +18,12 @@
 		to_chat(user, "<span class='notice'>\The bones in [borked] have already been set properly.</span>")
 		return FALSE
 	
-/datum/surgery_step/set_bones/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_step/set_bones/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	display_results(user, target, "<span class='notice'>You begin to set the bones in [target]'s [parse_zone(user.zone_selected)]...</span>",
 		"<span class='notice'>[user] begins to set the bones in [target]'s [parse_zone(user.zone_selected)] with [tool].</span>",
 		"<span class='notice'>[user] begins to set the bones in [target]'s [parse_zone(user.zone_selected)].</span>")
 
-/datum/surgery_step/set_bones/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
+/datum/surgery_step/set_bones/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, default_display_results = FALSE)
 	if(istype(tool, /obj/item/stack))
 		var/obj/item/stack/used_stack = tool
 		used_stack.use(1)
@@ -37,7 +37,7 @@
 		incision.wound_flags |= WOUND_SET_BONES
 	return ..()
 
-/datum/surgery_step/set_bones/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, var/fail_prob = 0)
+/datum/surgery_step/set_bones/failure(mob/user, mob/living/target, target_zone, obj/item/tool, var/fail_prob = 0)
 	. = ..()
 	if(istype(tool, /obj/item/stack))
 		var/obj/item/stack/used_stack = tool
@@ -50,12 +50,12 @@
 	base_time = 40
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_BROKEN | STEP_NEEDS_SET_BONES) //i still hate black people
 
-/datum/surgery_step/gel_bones/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_step/gel_bones/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	display_results(user, target, "<span class='notice'>You begin to repair the fracture in [target]'s [parse_zone(user.zone_selected)]...</span>",
 		"<span class='notice'>[user] begins to repair the fracture in [target]'s [parse_zone(user.zone_selected)] with [tool].</span>",
 		"<span class='notice'>[user] begins to repair the fracture in [target]'s [parse_zone(user.zone_selected)].</span>")
 
-/datum/surgery_step/gel_bones/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results = FALSE)
+/datum/surgery_step/gel_bones/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, default_display_results = FALSE)
 	if(istype(tool, /obj/item/stack))
 		var/obj/item/stack/used_stack = tool
 		used_stack.use(1)
@@ -72,7 +72,7 @@
 		incision.wound_flags &= ~WOUND_SET_BONES
 	return ..()
 
-/datum/surgery_step/gel_bones/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery, var/fail_prob = 0)
+/datum/surgery_step/gel_bones/failure(mob/user, mob/living/target, target_zone, obj/item/tool, var/fail_prob = 0)
 	. = ..()
 	if(istype(tool, /obj/item/stack))
 		var/obj/item/stack/used_stack = tool

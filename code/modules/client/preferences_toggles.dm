@@ -371,7 +371,7 @@ GLOBAL_LIST_INIT(ghost_orbits, list(GHOST_ORBIT_CIRCLE,GHOST_ORBIT_TRIANGLE,GHOS
 	if(isobserver(mob))
 		mob.hud_used.show_hud()
 	SSblackbox.record_feedback("nested tally", "preferences_verb", 1, list("Toggle Ghost HUD", "[prefs.ghost_hud ? "Enabled" : "Disabled"]"))
-// SKYRAT EDIT: Credits
+
 /client/verb/toggle_show_credits()
 	set name = "Toggle Credits"
 	set category = "Preferences"
