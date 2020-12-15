@@ -580,6 +580,8 @@
 				brainmob = null
 			if(T)
 				brain.forceMove(T)
+			else
+				brain.moveToNullspace()
 			brain = null
 			update_icon_dropped()
 		else
@@ -588,6 +590,8 @@
 					qdel(AP)
 			if(T)
 				I.forceMove(T)
+			else
+				I.moveToNullspace()
 		if(istype(I, /obj/item/bodypart))
 			var/obj/item/bodypart/BP = I
 			BP.update_limb(TRUE)
