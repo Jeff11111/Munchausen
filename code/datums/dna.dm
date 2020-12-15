@@ -18,12 +18,8 @@
 	var/stability = 100
 	var/scrambled = FALSE //Did we take something like mutagen? In that case we cant get our genes scanned to instantly cheese all the powers.
 	var/skin_tone_override //because custom skin tones are not found in the skin_tones global list.
-	var/pale_skin_tone
-	var/not_pale_skin_tone
-	//SKYRAT CHANGE
 	var/blood_color = ""
 	var/monkey_aspect = FALSE //Cannot be absorbed by changelings, is "simple minded"
-	//
 
 /datum/dna/New(mob/living/new_holder)
 	if(istype(new_holder))
@@ -84,9 +80,7 @@
 	new_dna.nameless = nameless
 	new_dna.custom_species = custom_species
 	new_dna.mutations = mutations.Copy()
-	//SKYRAT CHANGE - Blood color
 	new_dna.blood_color = blood_color
-	//
 
 //See mutation.dm for what 'class' does. 'time' is time till it removes itself in decimals. 0 for no timer
 /datum/dna/proc/add_mutation(mutation, class = MUT_OTHER, time)
@@ -393,7 +387,6 @@
 	if(icon_update)
 		update_body()
 		update_hair()
-		update_body_parts()
 		update_mutations_overlay()// no lizard with human hulk overlay please.
 
 /mob/proc/has_dna()

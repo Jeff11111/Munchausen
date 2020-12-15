@@ -18,7 +18,7 @@
 
 	var/disgust = 0
 
-//inventory slots
+	//inventory slots
 	var/obj/item/back = null
 	var/obj/item/clothing/mask/wear_mask = null
 	var/obj/item/clothing/neck/wear_neck = null
@@ -45,9 +45,7 @@
 	rotate_on_lying = TRUE
 
 	var/tinttotal = 0	// Total level of visualy impairing items
-	//skyrat edit
 	var/list/bodyparts = BODYPARTS_PATH
-	//
 	//Gets filled up in create_bodyparts()
 	var/list/hand_bodyparts = list() //a collection of arms (or actually whatever the fug /bodyparts you monsters use to wreck my systems)
 	var/icon_render_key = ""

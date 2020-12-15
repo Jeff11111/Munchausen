@@ -619,7 +619,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	var/obj/item/bodypart/head/HD = H.get_bodypart(BODY_ZONE_HEAD)
 
 	if(HD && !(HAS_TRAIT(H, TRAIT_HUSK)))
-		// lipstick
+		// Lipstick
 		if(H.lip_style && (LIPS in species_traits))
 			var/mutable_appearance/lip_overlay = mutable_appearance('icons/mob/human_face.dmi', "lips-[H.lip_style]", -BODY_LAYER)
 			lip_overlay.color = H.lip_color
@@ -637,13 +637,26 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			var/mutable_appearance/left_eye_overlay
 			var/mutable_appearance/right_eye_overlay
 			
+			//variables for eye colors, since i want to make sleepy niggas have eyelids instead of showing the eyes
+			//(they are sleepy silly they cant eye)
+			var/left_eye_color = ((EYECOLOR in species_traits) ? sanitize_hexcolor(H.left_eye_color) : null)
+			var/right_eye_color = ((EYECOLOR in species_traits) ? sanitize_hexcolor(H.right_eye_color) : null)
+
+			//sleepy mode activate
+			if(H.stat > CONSCIOUS)
+				var/neweyecolor = sanitize_hexcolor(SKINTONE2HEX(H.skin_tone))
+				if(H.dna.skin_tone_override)
+					neweyecolor = sanitize_hexcolor(H.dna.features["mcolor"])
+				left_eye_color = neweyecolor
+				right_eye_color = neweyecolor
+			
 			if(LE)
-				left_eye_overlay = mutable_appearance(icon_eyes, "eye-left", -BODY_LAYER, color = ((EYECOLOR in species_traits) ? sanitize_hexcolor(H.left_eye_color) : null))
+				left_eye_overlay = mutable_appearance(icon_eyes, "eye-left", -BODY_LAYER, color = left_eye_color)
 			else
 				left_eye_overlay = mutable_appearance(icon_eyes, "eye-left-missing", -BODY_LAYER)
 
 			if(RE)
-				right_eye_overlay = mutable_appearance(icon_eyes, "eye-right", -BODY_LAYER, color = ((EYECOLOR in species_traits) ? sanitize_hexcolor(H.right_eye_color) : null))
+				right_eye_overlay = mutable_appearance(icon_eyes, "eye-right", -BODY_LAYER, color = right_eye_color)
 			else
 				right_eye_overlay = mutable_appearance(icon_eyes, "eye-right-missing", -BODY_LAYER)
 

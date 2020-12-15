@@ -56,34 +56,29 @@ There are several things that need to be remembered:
 /mob/living/carbon/human/proc/update_mutant_bodyparts()
 	dna.species.handle_mutant_bodyparts(src)
 
-
 /mob/living/carbon/human/update_body(update_genitals = FALSE)
 	remove_overlay(BODY_LAYER)
 	dna.species.handle_body(src)
-	..()
+	. = ..()
 	if(update_genitals)
 		update_genitals()
 
 /mob/living/carbon/human/update_fire()
-	..((fire_stacks > 3) ? "Standing" : "Generic_mob_burning")
-
+	. = ..((fire_stacks > 3) ? "Standing" : "Generic_mob_burning")
 
 /* --------------------------------------- */
 //For legacy support.
 /mob/living/carbon/human/regenerate_icons()
-
 	if(!..())
 		icon_render_key = null //invalidate bodyparts cache
 		update_body(TRUE)
 		update_hair()
 		update_inv_w_uniform()
-		//skyrat edit
 		update_inv_w_underwear()
 		update_inv_w_socks()
 		update_inv_w_shirt()
 		update_inv_ears_extra()
 		update_inv_wrists()
-		//
 		update_inv_wear_id()
 		update_inv_gloves()
 		update_inv_glasses()
