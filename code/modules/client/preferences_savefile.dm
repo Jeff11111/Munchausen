@@ -234,6 +234,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//citadel code
 	S["arousable"]			>> arousable
 	S["widescreenpref"]		>> widescreenpref
+	S["fullscreenpref"]		>> fullscreenpref
 	S["autostand"]			>> autostand
 	S["preferred_chaos"]	>> preferred_chaos
 	S["auto_ooc"]			>> auto_ooc
@@ -274,6 +275,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	// SKYRAT EDIT: Credits
 	show_credits		= sanitize_integer(show_credits, 0, 1, initial(show_credits))
 	widescreenpref		= sanitize_integer(widescreenpref, 0, 1, initial(widescreenpref))
+	fullscreenpref		= sanitize_integer(fullscreenpref, 0, 1, initial(fullscreenpref))
 	autostand			= sanitize_integer(autostand, 0, 1, initial(autostand))
 	auto_ooc			= sanitize_integer(auto_ooc, 0, 1, initial(auto_ooc))
 	no_tetris_storage		= sanitize_integer(no_tetris_storage, 0, 1, initial(no_tetris_storage))
@@ -368,6 +370,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//citadel code
 	WRITE_FILE(S["arousable"], arousable)
 	WRITE_FILE(S["widescreenpref"], widescreenpref)
+	WRITE_FILE(S["fullscreenpref"], fullscreenpref)
 	WRITE_FILE(S["autostand"], autostand)
 	WRITE_FILE(S["preferred_chaos"], preferred_chaos)
 	WRITE_FILE(S["auto_ooc"], auto_ooc)
