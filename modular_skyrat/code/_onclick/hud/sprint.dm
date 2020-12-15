@@ -45,7 +45,8 @@
 	if(isliving(usr))
 		var/mob/living/L = usr
 		var/msg = list("<span class='notice'>*---------*</span>")
-		msg += "<span class='notice'>Your sprint buffer's maximum capacity is [L.sprint_buffer_max].</span>"
+		msg += "<span class='notice'><b>Sprint Buffer</b></span>"
+		msg += "<span class='notice'>My sprint buffer's maximum capacity is [L.sprint_buffer_max].</span>"
 		msg += "<span class='notice'>It is currently at [L.sprint_buffer], regenerating at [L.sprint_buffer_regen_ds * 10] per second.</span>"
 		msg += "<span class='notice'>Sprinting while this is empty will incur a [L.sprint_stamina_cost] stamina cost per tile.</span>"
 		msg += "<span class='notice'>*---------*</span>"
