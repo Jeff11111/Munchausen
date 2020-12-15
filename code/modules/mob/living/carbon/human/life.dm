@@ -295,6 +295,13 @@
 	if(we_breath)
 		Unconscious(80)
 
+/mob/living/carbon/needs_heart()
+	if(HAS_TRAIT(src, TRAIT_STABLEHEART))
+		return FALSE
+	if(dna?.species && (NOBLOOD in dna.species.species_traits)) //not all carbons have species!
+		return FALSE
+	return TRUE
+
 #undef THERMAL_PROTECTION_HEAD
 #undef THERMAL_PROTECTION_CHEST
 #undef THERMAL_PROTECTION_GROIN
