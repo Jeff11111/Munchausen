@@ -1728,7 +1728,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			playsound(target.loc, user.dna.species.miss_sound, 25, TRUE, -1)
 			target.visible_message("<span class='danger'><b>[user]</b>'s [atk_verb] misses <b>[target]</b>!</span>", \
 							"<span class='danger'>I avoid <b>[user]</b>'s [atk_verb]!</span>", "<span class='hear'>I hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, null, \
-							user, "<span class='warning'>MY [atk_verb] misses <b>[target]</b>!</span>")
+							user, "<span class='warning'>My [atk_verb] misses <b>[target]</b>!</span>")
 			log_combat(user, target, "attempted to punch")
 			return FALSE
 
