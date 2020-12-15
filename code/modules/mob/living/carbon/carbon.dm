@@ -914,6 +914,7 @@
 		if(health <= HEALTH_THRESHOLD_DEAD && !HAS_TRAIT(src, TRAIT_NODEATH))
 			death()
 			return
+		var/old_stat = stat
 		if(IsUnconscious() || IsSleeping() || ((getOxyLoss() >= 50) && (mind?.diceroll(STAT_DATUM(end)) <= DICE_FAILURE)) || (HAS_TRAIT(src, TRAIT_DEATHCOMA)))
 			stat = UNCONSCIOUS
 			SEND_SIGNAL(src, COMSIG_DISABLE_COMBAT_MODE)
@@ -927,6 +928,9 @@
 				stat = CONSCIOUS
 			if(eye_blind <= 1)
 				adjust_blindness(-1)
+		//update eyelids
+		if(stat != old_stat)
+			dna?.species?.handle_body(src)
 		update_mobility()
 	update_damage_hud()
 	update_health_hud()
