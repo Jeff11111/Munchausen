@@ -76,6 +76,17 @@
 	implements = list(TOOL_RETRACTOR = 100, TOOL_SCREWDRIVER = 45, TOOL_WIRECUTTER = 35)
 	base_time = 24
 
+/datum/surgery_step/retract_skin/validate_target(mob/living/target, mob/user)
+	. = ..()
+	if(!.) //nah nigga lol
+		return FALSE
+	var/mob/living/carbon/C = target
+	var/obj/item/bodypart/BP = C.get_bodypart(user.zone_selected)
+	var/datum/wound/slash/critical/incision/incision = locate() in BP.wounds
+	if(CHECK_BITFIELD(incision?.wound_flags, WOUND_RETRACTED_SKIN))
+		to_chat(user, "<span class='notice'>\The [BP] has already been retracted.</span>")
+		return FALSE
+
 /datum/surgery_step/retract_skin/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	display_results(user, target, "<span class='notice'>You begin to retract the skin in [target]'s [parse_zone(target_zone)]...</span>",
 		"[user] begins to retract the skin in [target]'s [parse_zone(target_zone)].",

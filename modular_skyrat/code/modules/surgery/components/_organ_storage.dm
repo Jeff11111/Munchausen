@@ -32,6 +32,7 @@
 
 //Check if we are accessible
 /datum/component/storage/concrete/organ/proc/is_accessible(mob/living/carbon/nigger)
+	. = FALSE
 	var/how_open = bodypart_affected?.how_open()
 	if((bodypart_affected?.encased && CHECK_BITFIELD(how_open, SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_BROKEN)) || CHECK_BITFIELD(how_open, SURGERY_INCISED | SURGERY_RETRACTED))
 		return TRUE
@@ -358,6 +359,10 @@
 		return FALSE
 	// this must come before the screen objects only block, dunno why it wasn't before
 	var/mob/living/L = M
+	//FUCK
+	var/mob/living/carbon/nigger_faggot = parent
+	if(L.a_intent == INTENT_GRAB)
+		bodypart_affected = nigger_faggot.get_bodypart(L.zone_selected)
 	if(!istype(L) || !(L.a_intent == INTENT_GRAB) || !is_accessible(parent))
 		return FALSE
 	if(isliving(over_object) && (L.zone_selected == bodypart_affected.body_zone))
