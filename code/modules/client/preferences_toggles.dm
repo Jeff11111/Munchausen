@@ -272,6 +272,19 @@ TOGGLE_CHECKBOX(/datum/verbs/menu/Settings, listen_bank_card)()
 /datum/verbs/menu/Settings/listen_bank_card/Get_checked(client/C)
 	return C.prefs.chat_toggles & CHAT_BANKCARD
 
+TOGGLE_CHECKBOX(/datum/verbs/menu/Settings, toggle_fullscreen)()
+	set name = "Toggle Fullscreen"
+	set category = "Preferences"
+	set desc = "Toggles fullscreen."
+	prefs.fullscreenpref = !prefs.fullscreenpref
+	prefs.save_preferences()
+	to_chat(src, "Fullscreen [prefs.fullscreenpref ? "enabled" : "disabled"].")
+	fullscreen()
+	SSblackbox.record_feedback("nested tally", "fullscreen toggle", 1, list("Toggle Fullscreen", "[prefs.fullscreenpref ? "Enabled" : "Disabled"]"))
+
+/datum/verbs/menu/Settings/toggle_fullscreen/Get_checked(client/C)
+	return C.prefs.fullscreenpref
+
 GLOBAL_LIST_INIT(ghost_forms, list("ghost","ghostking","ghostian2","skeleghost","ghost_red","ghost_black", \
 							"ghost_blue","ghost_yellow","ghost_green","ghost_pink", \
 							"ghost_cyan","ghost_dblue","ghost_dred","ghost_dgreen", \
@@ -394,16 +407,6 @@ GLOBAL_LIST_INIT(ghost_orbits, list(GHOST_ORBIT_CIRCLE,GHOST_ORBIT_TRIANGLE,GHOS
 	else
 		to_chat(src, "<span class='notice'>You will no longer examine things you click on.</span>")
 	SSblackbox.record_feedback("nested tally", "preferences_verb", 1, list("Toggle Ghost Inquisitiveness", "[prefs.inquisitive_ghost ? "Enabled" : "Disabled"]"))
-
-/client/proc/togglefullscreen()
-	set name = "Toggle Fullscreen"
-	set category = "Preferences"
-	set desc = "Toggles fullscreen."
-	prefs.fullscreenpref = !prefs.fullscreenpref
-	prefs.save_preferences()
-	to_chat(src, "Fullscreen [prefs.fullscreenpref ? "enabled" : "disabled"].")
-	fullscreen()
-	SSblackbox.record_feedback("nested tally", "fullscreen toggle", 1, list("Toggle Fullscreen", "[prefs.fullscreenpref ? "Enabled" : "Disabled"]"))
 
 //Admin Preferences
 /client/proc/toggleadminhelpsound()
