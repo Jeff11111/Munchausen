@@ -730,3 +730,14 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 	log_admin("[key_name(usr)] has [AI_Interact ? "activated" : "deactivated"] Admin AI Interact")
 	message_admins("[key_name_admin(usr)] has [AI_Interact ? "activated" : "deactivated"] their AI interaction")
+
+/client/verb/toggle_rightclickmenu()
+	set name = "Toggle Right Click Menu"
+	set category = "Admin"
+	set desc = "Enable BYOND's terrible context menu for debug purposes."
+
+	if(!check_rights_for(src, R_VAREDIT))
+		to_chat(src, "<span class='warning'>Only niggas with var edit perms can use the right clicking menu.</span>")
+		return FALSE
+	show_popup_menus = !show_popup_menus
+	to_chat(src, "<span class='warning'>Right click context menu has been toggled [show_popup_menus ? "on" : "off"].</span>")

@@ -39,14 +39,3 @@
 /client/proc/is_mentor() // admins are mentors too.
 	if(mentor_datum || check_rights_for(src, R_ADMIN,0))
 		return TRUE
-
-/client/verb/toggle_rightclickmenu()
-	set category = "OOC"
-	set name = "Toggle Right Click Menu"
-	set desc = "NOT THE CONTEXT MENU OH GOD"
-
-	if(!check_rights_for(src, R_VAREDIT))
-		to_chat(src, "<span class='warning'>Only niggas with var edit perms can use the right clicking menu, for debug purposes.</span>")
-		return FALSE
-	show_popup_menus = !show_popup_menus
-	to_chat(src, "<span class='warning'>Right click context menu has been toggled [show_popup_menus ? "on" : "off"].</span>")
