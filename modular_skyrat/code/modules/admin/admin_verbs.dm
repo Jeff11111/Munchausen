@@ -59,6 +59,7 @@
 	/client/proc/revokebunkerbypass,
 	/client/proc/stop_sounds,
 	/client/proc/hide_verbs,			/*hides all our adminverbs*/
+	/client/proc/toggle_rightclickmenu, /*lets us use the right click context menu*/
 	/datum/admins/proc/open_borgopanel
 	)
 

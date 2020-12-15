@@ -731,7 +731,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	log_admin("[key_name(usr)] has [AI_Interact ? "activated" : "deactivated"] Admin AI Interact")
 	message_admins("[key_name_admin(usr)] has [AI_Interact ? "activated" : "deactivated"] their AI interaction")
 
-/client/verb/toggle_rightclickmenu()
+/client/proc/toggle_rightclickmenu()
 	set name = "Toggle Right Click Menu"
 	set category = "Admin"
 	set desc = "Enable BYOND's terrible context menu for debug purposes."
