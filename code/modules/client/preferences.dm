@@ -90,12 +90,10 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 	var/preferred_chaos = null
 	var/pda_style = MONO
 	var/pda_color = "#808000"
-	// SKYRAT CHANGE START
 	var/show_credits = TRUE
 	var/event_participation = FALSE
 	var/event_prefs = ""
 	var/appear_in_round_end_report = TRUE //whether the player of the character is listed on the round-end report
-	// SKYRAT CHANGE END
 
 	var/uses_glasses_colour = 0
 
@@ -274,6 +272,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 
 	var/arousable = TRUE
 	var/widescreenpref = TRUE
+	var/fullscreenpref = TRUE
 	var/autostand = TRUE
 	var/auto_ooc = FALSE
 

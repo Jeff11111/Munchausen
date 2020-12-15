@@ -395,6 +395,16 @@ GLOBAL_LIST_INIT(ghost_orbits, list(GHOST_ORBIT_CIRCLE,GHOST_ORBIT_TRIANGLE,GHOS
 		to_chat(src, "<span class='notice'>You will no longer examine things you click on.</span>")
 	SSblackbox.record_feedback("nested tally", "preferences_verb", 1, list("Toggle Ghost Inquisitiveness", "[prefs.inquisitive_ghost ? "Enabled" : "Disabled"]"))
 
+/client/proc/togglefullscreen()
+	set name = "Toggle Fullscreen"
+	set category = "Preferences"
+	set desc = "Toggles fullscreen."
+	prefs.fullscreenpref = !prefs.fullscreenpref
+	prefs.save_preferences()
+	to_chat(src, "Fullscreen [prefs.fullscreenpref ? "enabled" : "disabled"].")
+	fullscreen()
+	SSblackbox.record_feedback("nested tally", "fullscreen toggle", 1, list("Toggle Fullscreen", "[prefs.fullscreenpref ? "Enabled" : "Disabled"]"))
+
 //Admin Preferences
 /client/proc/toggleadminhelpsound()
 	set name = "Hear/Silence Adminhelps"

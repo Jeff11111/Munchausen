@@ -959,21 +959,19 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	if (isnull(new_size))
 		CRASH("change_view called without argument.")
 
-//CIT CHANGES START HERE - makes change_view change DEFAULT_VIEW to 15x15 depending on preferences
 	if(prefs && CONFIG_GET(string/default_view))
 		if(!prefs.widescreenpref && new_size == CONFIG_GET(string/default_view))
 			new_size = "15x15"
-//END OF CIT CHANGES
 
 	var/list/old_view = getviewsize(view)
 	view = new_size
 	var/list/actualview = getviewsize(view)
 	apply_clickcatcher(actualview)
 	mob.reload_fullscreen()
-	if (isliving(mob))
+	if(isliving(mob))
 		var/mob/living/M = mob
 		M.update_damage_hud()
-	if (prefs.auto_fit_viewport)
+	if(prefs.auto_fit_viewport)
 		fit_viewport()
 	SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_CHANGE_VIEW, src, old_view, actualview)
 
@@ -1024,3 +1022,10 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		screen -= S
 		qdel(S)
 	char_render_holders = null
+
+/client/proc/fullscreen()
+	if(prefs?.fullscreenpref)
+		winset(src, "mainwindow", "is-maximized=false;can-resize=false;titlebar=false;menu=")
+		winset(src, "mainwindow", "is-maximized=true")
+	else
+		winset(src, "mainwindow", "is-maximized=false;can-resize=true;titlebar=true;menu=menu")
