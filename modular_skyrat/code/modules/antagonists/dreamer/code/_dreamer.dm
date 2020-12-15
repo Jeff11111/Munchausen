@@ -14,7 +14,7 @@
 	var/list/associated_keys = list()
 	var/list/hearts_seen = list()
 	var/list/obj/structure/wonder/wonders_done = list()
-	var/current_wonder = 0
+	var/current_wonder = 1
 	var/sum_keys = 0
 
 //Transferring body unfucking.

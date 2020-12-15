@@ -75,11 +75,11 @@
 		if(is_dreamer(H))
 			for(var/datum/antagonist/dreamer/dreammy in H.mind.antag_datums)
 				dream_master = dreammy
-				if(length(dream_master.recipe_progression) >= dream_master.current_wonder)
-					H.mind.learned_recipes -= dream_master.recipe_progression[dream_master.current_wonder]
-				dream_master.current_wonder++
+				H.mind.learned_recipes -= dream_master.recipe_progression[clamp(dream_master.current_wonder, 1, 4)]
 				icon_state = "creation[clamp(dream_master.current_wonder, 1, 4)]"
 				name = "[dream_master.associated_keys[clamp(dream_master.current_wonder, 1, 4)]] Wonder"
+				wonder_id = dream_master.current_wonder
+				dream_master.current_wonder++
 				if(length(dream_master.recipe_progression) >= dream_master.current_wonder)
 					var/wonder = dream_master.recipe_progression[dream_master.current_wonder]
 					var/datum/crafting_recipe/wonder/wonderful = new wonder()
@@ -87,7 +87,6 @@
 					wonderful.update_global_wonder()
 					H.mind.teach_crafting_recipe(wonderful.type)
 					qdel(wonderful)
-				wonder_id = dream_master.current_wonder
 				if(length(dream_master.heart_keys) >= wonder_id)
 					key_num = dream_master.heart_keys[wonder_id]
 				if(length(dream_master.associated_keys) >= wonder_id)
