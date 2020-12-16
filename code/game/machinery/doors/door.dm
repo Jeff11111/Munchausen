@@ -39,7 +39,7 @@
 	var/unres_sides = 0 //Unrestricted sides. A bitflag for which direction (if any) can open the door with no access
 	ricochet_chance_mod = 0.8
 
-/obj/machinery/door/middle_attack_hand(mob/user)
+/obj/machinery/door/alt_attack_hand(mob/user)
 	. = ..()
 	if(allowed(user))
 		if(locked)
