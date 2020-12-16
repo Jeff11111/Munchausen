@@ -12,7 +12,7 @@
 	type_of_meat = /obj/item/reagent_containers/food/snacks/meat/slab/monkey
 	gib_type = /obj/effect/decal/cleanable/blood/gibs
 	unique_name = TRUE
-	//blocks_emissive = EMISSIVE_BLOCK_UNIQUE // Skyrat edit -- 512 compatibility
+	blocks_emissive = EMISSIVE_BLOCK_UNIQUE
 	bodyparts = MONKEY_BODYPARTS_PATH
 	hud_type = /datum/hud/monkey
 

@@ -10,35 +10,40 @@
 #define PLANE_SPACE_PARALLAX -90
 #define PLANE_SPACE_PARALLAX_RENDER_TARGET "PLANE_SPACE_PARALLAX"
 
-#define OPENSPACE_LAYER 17 //Openspace layer over all
-#define OPENSPACE_PLANE -2 //Openspace plane below all turfs // Skyrat change -- 512 compatibility -- changed to 0 from -10
-#define OPENSPACE_BACKDROP_PLANE -2 //Black square just over openspace plane to guaranteed cover all in openspace turf // Skyrat change -- 512 compatibility -- changed to 0 from -9
-
-#define FLOOR_PLANE -10 // Skyrat change -- reduced by 2 to make space for two more planes
-#define ABOVE_FLOOR_PLANE -9 //Skyrat change - Used by grilles and stuff idk man my IQ is low
+#define FLOOR_PLANE -11
 #define FLOOR_PLANE_RENDER_TARGET "FLOOR_PLANE"
 
-#define WALL_PLANE -8 // Skyrat change -- reduced by 1 to make space for another plane
+#define ABOVE_FLOOR_PLANE -10
+#define ABOVE_FLOOR_PLANE_RENDER_TARGET "FLOOR_PLANE"
+
+#define WALL_PLANE -9
 #define WALL_PLANE_RENDER_TARGET "WALL_PLANE"
 
-#define ABOVE_WALL_PLANE -7 // Skyrat change -- reduced by 1 to make space for another plane
+#define ABOVE_WALL_PLANE -8
 #define ABOVE_WALL_PLANE_RENDER_TARGET "ABOVE_WALL_PLANE"
 
-#define FIELD_OF_VISION_BLOCKER_PLANE -6 // Skyrat change -- reduced by 1 to make space for another plane
-#define FIELD_OF_VISION_BLOCKER_RENDER_TARGET "*FIELD_OF_VISION_BLOCKER_PLANE"
+#define MOB_PLANE -7
+#define MOB_PLANE_RENDER_TARGET "MOB_PLANE"
 
-#define FIELD_OF_VISION_PLANE -5 // Skyrat change -- reduced by 1 to make space for another plane
-#define FIELD_OF_VISION_RENDER_TARGET "*FIELD_OF_VISION_PLANE"
-#define FIELD_OF_VISION_LAYER 17 //used to place the visual (not the mask) shadow cone above any other floor plane stuff.
+#define FIELD_OF_VISION_BLOCKER_PLANE -6
+#define FIELD_OF_VISION_BLOCKER_PLANE_RENDER_TARGET "*FIELD_OF_VISION_BLOCKER_PLANE"
 
-#define GAME_PLANE -4 // Skyrat change -- reduced by 1 to make space for another plane
+#define FIELD_OF_VISION_PLANE -5
+#define FIELD_OF_VISION_PLANE_RENDER_TARGET "*FIELD_OF_VISION_PLANE"
+
+#define GAME_PLANE -4
 #define GAME_PLANE_RENDER_TARGET "GAME_PLANE"
 
-#define FIELD_OF_VISION_VISUAL_PLANE -3 //Yea, FoV does require quite a few planes to work with 513 filters to a decent degree.  // Skyrat change -- reduced by 1 to make space for another plane
+#define FIELD_OF_VISION_VISUAL_PLANE -3 //Yea, FoV does require quite a few planes to work with 513 filters to a decent degree.
+#define FIELD_OF_VISION_VISUAL_LAYER 17 //used to place the visual (not the mask) shadow cone above any other floor plane stuff.
 #define FIELD_OF_VISION_VISUAL_RENDER_TARGET "FIELD_OF_VISION_VISUAL_PLANE"
 
+#define OPENSPACE_PLANE -2 //Openspace plane below all turfs
+#define OPENSPACE_BACKDROP_PLANE -2 //Black square just over openspace plane to guaranteed cover all in openspace turf
+#define OPENSPACE_LAYER 17 //Openspace layer over all
+
 #define CHAT_PLANE -1 //We don't want heard messages to be hidden by FoV.
-#define CHAT_LAYER 20.35  //Legacy, it doesn't matter that much because we are displayed above the game plane anyway. //Skyrat change fom 12.1
+#define CHAT_LAYER 20.35  //Legacy, it doesn't matter that much because we are displayed above the game plane anyway.
 
 #define BLACKNESS_PLANE 0 //To keep from conflicts with SEE_BLACKNESS internals
 #define BLACKNESS_PLANE_RENDER_TARGET "BLACKNESS_PLANE"
@@ -96,15 +101,13 @@
 #define BELOW_MOB_LAYER 3.7
 #define LYING_MOB_LAYER 3.8
 #define MOB_LOWER_LAYER 3.95
-//#define MOB_LAYER 4 //For easy recordkeeping; this is a byond define
+#define MOB_LAYER 4 //For easy recordkeeping; this is a byond define
 #define MOB_UPPER_LAYER 4.05
 #define ABOVE_MOB_LAYER 4.1
-//skyrat edit
 #define LOW_WALL_LAYER 4.2
 #define WALL_OBJ_LAYER 4.25
 #define WALL_WINDOW_LAYER 4.27
 #define ABOVE_WALL_WINDOW_LAYER 4.28
-//
 #define EDGED_TURF_LAYER 4.3
 #define ON_EDGED_TURF_LAYER 4.35
 #define LARGE_MOB_LAYER 4.4
@@ -112,7 +115,7 @@
 
 #define SPACEVINE_LAYER 4.8
 #define SPACEVINE_MOB_LAYER 4.9
-//#define FLY_LAYER 5 //For easy recordkeeping; this is a byond define
+#define FLY_LAYER 5 //For easy recordkeeping; this is a byond define
 #define ABOVE_FLY_LAYER 5.1
 #define GASFIRE_LAYER 5.2
 #define RIPPLE_LAYER 5.3

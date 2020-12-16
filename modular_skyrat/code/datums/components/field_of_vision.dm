@@ -35,13 +35,9 @@
   */
 /datum/component/field_of_vision
 	can_transfer = TRUE
-
-/**
-  * That special invisible, almost neigh indestructible movable
-  * that holds both shadow cone mask and image and follows the player around.
-  */
+	/// Our screen object
 	var/obj/screen/fov_holder/fov
-	///The current screen size this field of vision is meant to fit for.
+	/// The current screen size this field of vision is meant to fit for.
 	var/current_fov_size = list(15, 15)
 	/// How much is the cone rotated clockwise, purely backend. Please use rotate_shadow_cone() if you must.
 	var/angle = 0
@@ -122,17 +118,17 @@
 		fov.hud = M.hud_used
 		fov.dir = M.dir
 		fov.screen_loc = ui_fov
-		shadow_mask = image('icons/misc/field_of_vision.dmi', null, "[shadow_angle]", FIELD_OF_VISION_LAYER)
+		shadow_mask = image('icons/misc/field_of_vision.dmi', null, "[shadow_angle]", FIELD_OF_VISION_VISUAL_LAYER)
 		shadow_mask.plane = FIELD_OF_VISION_PLANE
 		fov.add_overlay(shadow_mask)
-		visual_shadow = image('icons/misc/field_of_vision.dmi', null, "[shadow_angle]_v", FIELD_OF_VISION_LAYER)
+		visual_shadow = image('icons/misc/field_of_vision.dmi', null, "[shadow_angle]_v", FIELD_OF_VISION_VISUAL_LAYER)
 		visual_shadow.plane = FIELD_OF_VISION_VISUAL_PLANE
 		fov.add_overlay(visual_shadow)
 		owner_mask = new
 		owner_mask.appearance_flags = RESET_TRANSFORM
 		owner_mask.plane = FIELD_OF_VISION_BLOCKER_PLANE
 		if(has_adj_mask)
-			adj_mask = image('icons/misc/field_of_vision.dmi', null, "adj_mask", FIELD_OF_VISION_LAYER)
+			adj_mask = image('icons/misc/field_of_vision.dmi', null, "adj_mask", FIELD_OF_VISION_VISUAL_LAYER)
 			adj_mask.appearance_flags = RESET_TRANSFORM
 			adj_mask.plane = FIELD_OF_VISION_BLOCKER_PLANE
 			fov.add_overlay(adj_mask)

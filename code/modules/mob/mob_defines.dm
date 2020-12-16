@@ -2,15 +2,15 @@
 	datum_flags = DF_USE_TAG
 	density = TRUE
 	layer = MOB_LAYER
+	plane = MOB_PLANE
 	animate_movement = 2
 	flags_1 = HEAR_1
 	hud_possible = list(ANTAG_HUD)
 	pressure_resistance = 8
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 	throwforce = 10
-	//blocks_emissive = EMISSIVE_BLOCK_GENERIC // Skyrat edit -- 512 compatibility
-
-	//vis_flags = VIS_INHERIT_PLANE //when this be added to vis_contents of something it inherit something.plane, important for visualisation of mob in openspace. // Skyrat edit -- 512 compatibility
+	blocks_emissive = EMISSIVE_BLOCK_GENERIC
+	vis_flags = VIS_INHERIT_PLANE //when this be added to vis_contents of something it inherit something.plane, important for visualisation of mob in openspace.
 
 	/// What receives our keyboard input. src by default.
 	var/datum/focus

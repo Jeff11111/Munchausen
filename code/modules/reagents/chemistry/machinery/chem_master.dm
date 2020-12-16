@@ -293,7 +293,7 @@
 					"Maximum [vol_each_max] units per item.",
 					"How many units to fill?",
 					vol_each_max))
-			vol_each = clamp(vol_each, 0, vol_each_max) // Skyrat edit -- 512 compatibility
+			vol_each = clamp(vol_each, 0, vol_each_max)
 			if(vol_each <= 0)
 				return FALSE
 			// Get item name

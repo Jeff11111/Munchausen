@@ -26,7 +26,7 @@
 
 /obj/screen/plane_master/openspace/Initialize()
 	. = ..()
-	filters += filter(type="alpha", render_source=FIELD_OF_VISION_RENDER_TARGET, flags=MASK_INVERSE)
+	filters += filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE)
 
 /obj/screen/plane_master/openspace/backdrop(mob/mymob)
 	filters = list()
@@ -61,14 +61,11 @@
 	else
 		remove_filter("ambient_occlusion")
 
+//Shit right above walls
 /obj/screen/plane_master/above_wall
 	name = "above wall plane master"
 	plane = ABOVE_WALL_PLANE
 	appearance_flags = PLANE_MASTER
-
-/obj/screen/plane_master/above_wall/Initialize()
-	. = ..()
-	add_filter("vision_cone", 100, list(type="alpha", render_source=FIELD_OF_VISION_RENDER_TARGET, flags=MASK_INVERSE))
 
 /obj/screen/plane_master/above_wall/backdrop(mob/mymob)
 	if(mymob?.client?.prefs.ambientocclusion)
@@ -83,11 +80,24 @@
 	appearance_flags = PLANE_MASTER //should use client color
 	blend_mode = BLEND_OVERLAY
 
-/obj/screen/plane_master/game_world/Initialize()
-	. = ..()
-	add_filter("vision_cone", 100, list(type="alpha", render_source=FIELD_OF_VISION_RENDER_TARGET, flags=MASK_INVERSE))
-
 /obj/screen/plane_master/game_world/backdrop(mob/mymob)
+	if(mymob?.client?.prefs.ambientocclusion)
+		add_filter("ambient_occlusion", 0, EPIC_AMBIENT_OCCUSION)
+	else
+		remove_filter("ambient_occlusion")
+
+///Contains mobs
+/obj/screen/plane_master/mobs
+	name = "mobs plane master"
+	plane = MOB_PLANE
+	appearance_flags = PLANE_MASTER //should use client color
+	blend_mode = BLEND_OVERLAY
+
+/obj/screen/plane_master/mobs/Initialize()
+	. = ..()
+	add_filter("vision_cone", 100, list(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
+
+/obj/screen/plane_master/mobs/backdrop(mob/mymob)
 	if(mymob?.client?.prefs.ambientocclusion)
 		add_filter("ambient_occlusion", 0, EPIC_AMBIENT_OCCUSION)
 	else
@@ -104,18 +114,18 @@
 /obj/screen/plane_master/field_of_vision
 	name = "field of vision mask plane master"
 	plane = FIELD_OF_VISION_PLANE
-	render_target = FIELD_OF_VISION_RENDER_TARGET
+	render_target = FIELD_OF_VISION_PLANE_RENDER_TARGET
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/screen/plane_master/field_of_vision/Initialize()
 	. = ..()
-	filters += filter(type="alpha", render_source=FIELD_OF_VISION_BLOCKER_RENDER_TARGET, flags=MASK_INVERSE)
+	filters += filter(type="alpha", render_source=FIELD_OF_VISION_BLOCKER_PLANE_RENDER_TARGET, flags=MASK_INVERSE)
 
 ///Used to display the owner and its adjacent surroundings through the FoV plane mask.
 /obj/screen/plane_master/field_of_vision_blocker
 	name = "field of vision blocker plane master"
 	plane = FIELD_OF_VISION_BLOCKER_PLANE
-	render_target = FIELD_OF_VISION_BLOCKER_RENDER_TARGET
+	render_target = FIELD_OF_VISION_BLOCKER_PLANE_RENDER_TARGET
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 ///Stores the visible portion of the FoV shadow cone.
@@ -126,7 +136,7 @@
 
 /obj/screen/plane_master/field_of_vision_visual/Initialize()
 	. = ..()
-	filters += filter(type="alpha", render_source=FIELD_OF_VISION_BLOCKER_RENDER_TARGET, flags=MASK_INVERSE)
+	filters += filter(type="alpha", render_source=FIELD_OF_VISION_BLOCKER_PLANE_RENDER_TARGET, flags=MASK_INVERSE)
 
 ///Contains all lighting objects
 /obj/screen/plane_master/lighting
@@ -134,7 +144,7 @@
 	plane = LIGHTING_PLANE
 	blend_mode = BLEND_MULTIPLY
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-/* // Skyrat edit -- 512 compatibility
+
 /obj/screen/plane_master/lighting/Initialize()
 	. = ..()
 	filters += filter(type="alpha", render_source=EMISSIVE_RENDER_TARGET, flags=MASK_INVERSE)
@@ -155,7 +165,7 @@
 /obj/screen/plane_master/emissive/Initialize()
 	. = ..()
 	filters += filter(type="alpha", render_source=EMISSIVE_BLOCKER_RENDER_TARGET, flags=MASK_INVERSE)
-	filters += filter(type="alpha", render_source=FIELD_OF_VISION_RENDER_TARGET, flags=MASK_INVERSE)
+	filters += filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE)
 
 /**
   * Things placed on this always mask the lighting plane. Doesn't render directly.
@@ -172,7 +182,7 @@
 
 /obj/screen/plane_master/emissive_unblockable/Initialize()
 	. = ..()
-	filters += filter(type="alpha", render_source=FIELD_OF_VISION_RENDER_TARGET, flags=MASK_INVERSE)
+	filters += filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE)
 
 /**
   * Things placed on this layer mask the emissive layer. Doesn't render directly
@@ -184,9 +194,8 @@
 	plane = EMISSIVE_BLOCKER_PLANE
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	render_target = EMISSIVE_BLOCKER_RENDER_TARGET
-*/ // Skyrat edit -- 512 compatibility
-///Contains space parallax
 
+///Contains space parallax
 /obj/screen/plane_master/parallax
 	name = "parallax plane master"
 	plane = PLANE_SPACE_PARALLAX

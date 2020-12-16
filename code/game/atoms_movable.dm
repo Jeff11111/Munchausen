@@ -42,7 +42,7 @@
 	var/floating_need_update = FALSE
 
 	var/zfalling = FALSE
-/* // Skyrat edit -- 512 compatibility
+
 	/// Either FALSE, [EMISSIVE_BLOCK_GENERIC], or [EMISSIVE_BLOCK_UNIQUE]
 	var/blocks_emissive = FALSE
 	///Internal holder for emissive blocker object, do not use directly use blocks_emissive
@@ -69,7 +69,7 @@
 				SSvis_overlays.remove_vis_overlay(src, list(vs))
 				break
 	SSvis_overlays.add_vis_overlay(src, icon, icon_state, EMISSIVE_BLOCKER_LAYER, EMISSIVE_BLOCKER_PLANE, dir)
-*/ // Skyrat edit -- 512 compatibility
+
 /atom/movable/proc/can_zFall(turf/source, levels = 1, turf/target, direction)
 	if(!direction)
 		direction = DOWN
@@ -232,7 +232,7 @@
 /atom/movable/Destroy(force)
 	QDEL_NULL(proximity_monitor)
 	QDEL_NULL(language_holder)
-	//QDEL_NULL(em_block) // Skyrat edit -- 512 compatibility
+	QDEL_NULL(em_block)
 
 	unbuckle_all_mobs(force=1)
 
@@ -451,7 +451,7 @@
 		I = image('icons/effects/effects.dmi', A, visual_effect_icon, A.layer + 0.1)
 	else if(used_item)
 		I = image(icon = used_item, loc = A, layer = A.layer + 0.1)
-		I.plane = GAME_PLANE
+		I.plane = MOB_PLANE
 
 		// Scale the icon.
 		I.transform *= 0.75
@@ -625,7 +625,7 @@
 	if(!istype(loc, /turf))
 		return
 	var/image/I = image(icon = src, loc = loc, layer = layer + 0.1)
-	I.plane = GAME_PLANE
+	I.plane = MOB_PLANE
 	I.transform *= 0.75
 	I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
 	var/turf/T = get_turf(src)

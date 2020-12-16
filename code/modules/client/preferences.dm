@@ -2878,9 +2878,11 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					ambientocclusion = !ambientocclusion
 					if(parent && parent.screen && parent.screen.len)
 						var/obj/screen/plane_master/game_world/G = parent.mob.hud_used.plane_masters["[GAME_PLANE]"]
+						var/obj/screen/plane_master/game_world/M = parent.mob.hud_used.plane_masters["[MOB_PLANE]"]
 						var/obj/screen/plane_master/above_wall/A = parent.mob.hud_used.plane_masters["[ABOVE_WALL_PLANE]"]
 						var/obj/screen/plane_master/wall/W = parent.mob.hud_used.plane_masters["[WALL_PLANE]"]
 						G.backdrop(parent.mob)
+						M.backdrop(parent.mob)
 						A.backdrop(parent.mob)
 						W.backdrop(parent.mob)
 
