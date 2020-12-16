@@ -1,6 +1,6 @@
 /obj/screen/nutrition
 	name = "nutrition"
-	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_gen.dmi'
 	icon_state = "nutrition"
 
 /obj/screen/nutrition/Click(location, control, params)

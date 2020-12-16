@@ -1,6 +1,6 @@
 /obj/screen/hydration
 	name = "hydration"
-	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
+	icon = 'modular_skyrat/icons/mob/screen/screen_gen.dmi'
 	icon_state = "hydration"
 
 /obj/screen/hydration/Click(location, control, params)
