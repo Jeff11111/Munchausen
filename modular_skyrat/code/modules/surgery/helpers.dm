@@ -82,7 +82,7 @@
 	return TRUE
 
 /proc/spread_germs_to_bodypart(obj/item/bodypart/BP, mob/living/carbon/human/user, obj/item/tool)
-	if(!istype(user) || !istype(BP) || BP.is_robotic_limb())
+	if(!istype(user) || !istype(BP) || !istype(BP.owner) || BP.is_robotic_limb())
 		return
 
 	//Germs from the surgeon
