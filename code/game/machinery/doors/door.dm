@@ -40,7 +40,6 @@
 	ricochet_chance_mod = 0.8
 
 /obj/machinery/door/alt_attack_hand(mob/user)
-	. = ..()
 	if(allowed(user))
 		if(locked)
 			unlock()

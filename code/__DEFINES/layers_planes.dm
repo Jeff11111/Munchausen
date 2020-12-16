@@ -22,17 +22,17 @@
 #define ABOVE_WALL_PLANE -8
 #define ABOVE_WALL_PLANE_RENDER_TARGET "ABOVE_WALL_PLANE"
 
-#define MOB_PLANE -7
+#define GAME_PLANE -7
+#define GAME_PLANE_RENDER_TARGET "GAME_PLANE"
+
+#define MOB_PLANE -6
 #define MOB_PLANE_RENDER_TARGET "MOB_PLANE"
 
-#define FIELD_OF_VISION_BLOCKER_PLANE -6
+#define FIELD_OF_VISION_BLOCKER_PLANE -5
 #define FIELD_OF_VISION_BLOCKER_PLANE_RENDER_TARGET "*FIELD_OF_VISION_BLOCKER_PLANE"
 
-#define FIELD_OF_VISION_PLANE -5
+#define FIELD_OF_VISION_PLANE -4
 #define FIELD_OF_VISION_PLANE_RENDER_TARGET "*FIELD_OF_VISION_PLANE"
-
-#define GAME_PLANE -4
-#define GAME_PLANE_RENDER_TARGET "GAME_PLANE"
 
 #define FIELD_OF_VISION_VISUAL_PLANE -3 //Yea, FoV does require quite a few planes to work with 513 filters to a decent degree.
 #define FIELD_OF_VISION_VISUAL_LAYER 17 //used to place the visual (not the mask) shadow cone above any other floor plane stuff.
