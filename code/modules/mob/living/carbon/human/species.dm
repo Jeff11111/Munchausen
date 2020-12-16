@@ -436,9 +436,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 	SEND_SIGNAL(C, COMSIG_SPECIES_GAIN, src, old_species)
 
-
-// EDIT ENDS
-
 /datum/species/proc/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	if(C.dna.species.exotic_bloodtype)
 		if(!new_species.exotic_bloodtype)

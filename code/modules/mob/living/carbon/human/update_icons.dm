@@ -666,13 +666,12 @@ There are several things that need to be remembered:
 		inv = hud_used.inv_slots[SLOT_R_STORE]
 		inv.update_icon()
 
-		var/widescreenlayout = FALSE
-		if(client?.prefs?.widescreenpref)
-			widescreenlayout = TRUE
+		var/widescreenlayout = client?.prefs?.widescreenpref
 		
 		if(l_store)
-			l_store.screen_loc = ui_storage1
-			if(!widescreenlayout)
+			if(widescreenlayout)
+				l_store.screen_loc = ui_storage1
+			else
 				l_store.screen_loc = ui_boxstorage1
 			if(hud_used.hud_shown)
 				if(widescreenlayout || hud_used.extra_shown)
@@ -680,8 +679,9 @@ There are several things that need to be remembered:
 			update_observer_view(l_store)
 
 		if(r_store)
-			r_store.screen_loc = ui_storage2
-			if(!widescreenlayout)
+			if(widescreenlayout)
+				r_store.screen_loc = ui_storage2
+			else
 				r_store.screen_loc = ui_boxstorage2
 			if(hud_used.hud_shown)
 				if(widescreenlayout || hud_used.extra_shown)
