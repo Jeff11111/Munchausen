@@ -42,6 +42,10 @@
 		var/obj/item/bodypart/BP = C.get_bodypart(user.zone_selected)
 		if(requires_bodypart && !BP)
 			. = FALSE
+		else if(!requires_bodypart)
+			if(BP)
+				return FALSE
+			return TRUE
 		if(istype(H) && !ignore_clothes && H.clothingonpart(BP))
 			. = FALSE
 		if(!CHECK_BITFIELD(BP?.status, requires_bodypart_type))
