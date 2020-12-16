@@ -77,7 +77,7 @@
 /obj/item/bodypart/left_eye/drop_limb(special, ignore_children, dismembered, destroyed, wounding_type)
 	var/mob/living/carbon/C = owner
 	. = ..()
-	if(QDELETED(C) || !.)
+	if(QDELETED(C))
 		return
 	C?.clear_fullscreen("left_eye_damage")
 	C?.cure_blind(EYE_DAMAGE)
@@ -137,6 +137,7 @@
 		owner.overlay_fullscreen("left_eye_damage", /obj/screen/fullscreen/impaired/left, eye_damaged)
 		if(!other_eye)
 			owner.overlay_fullscreen("right_eye_damage", /obj/screen/fullscreen/impaired, eye_damaged)
+			fov?.generate_fov_holder(owner, 45, FOV_180PLUS45_DEGREES, FALSE)
 	else
 		owner.clear_fullscreen("left_eye_damage")
 		if(!other_eye)
@@ -144,7 +145,7 @@
 			fov?.generate_fov_holder(owner, 45, FOV_180PLUS45_DEGREES, FALSE)
 	if(eye_damaged < BLIND_VISION_THREE)
 		owner.cure_blind(EYE_DAMAGE)
-		if(fov && fov.angle == 315)
+		if(fov && fov.angle == 45)
 			fov?.generate_fov_holder(owner, 0, FOV_180_DEGREES, FALSE)
 	return eye_damaged
 
