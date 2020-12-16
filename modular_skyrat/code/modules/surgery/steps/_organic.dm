@@ -31,6 +31,8 @@
 		return FALSE
 	if(implement_type == /obj/item && !tool.get_sharpness())
 		return FALSE
+	if(istype(tool, /obj/item/reagent_containers))
+		return FALSE
 
 /datum/surgery_step/incise/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	. = ..()
