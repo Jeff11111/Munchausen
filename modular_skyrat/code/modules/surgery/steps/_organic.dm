@@ -75,6 +75,7 @@
 	name = "Retract skin"
 	implements = list(TOOL_RETRACTOR = 100, TOOL_SCREWDRIVER = 45, TOOL_WIRECUTTER = 35)
 	base_time = 24
+	surgery_flags = (STEP_NEEDS_INCISED)
 
 /datum/surgery_step/retract_skin/validate_target(mob/living/target, mob/user)
 	. = ..()

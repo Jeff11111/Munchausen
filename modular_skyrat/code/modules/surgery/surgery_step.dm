@@ -86,12 +86,14 @@
 				if(tool_check(user, tool, target))
 					success = TRUE
 					break
-	if(!validate_user(user))
-		success = FALSE
-	if(!validate_target(target, user))
-		success = FALSE
-	if(target.surgery_steps_in_progress[target_zone])
-		success = FALSE
+	if(success)
+		if(!validate_user(user))
+			success = FALSE
+		if(!validate_target(target, user))
+			success = FALSE
+		if(target.surgery_steps_in_progress[target_zone])
+			success = FALSE
+	
 	if(success)
 		if(get_location_accessible(target, target_zone) || ignore_clothes)
 			return initiate(user, target, target_zone, tool, try_to_fail)
