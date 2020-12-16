@@ -68,7 +68,7 @@
 		if(BP)
 			var/datum/wound/slash/critical/incision = locate() in BP.wounds
 			if(incision)
-				incision.blood_flow -= 3
+				incision.blood_flow = 0.1
 
 //retract skin
 /datum/surgery_step/retract_skin
