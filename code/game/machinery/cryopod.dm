@@ -305,7 +305,6 @@
 				"<span class='userdanger'>I bang loudly on [src]. It's stuck!</span>")
 
 /obj/machinery/cryopod/alt_attack_hand(mob/user)
-	. = ..()
 	if(!state_open)
 		if(!occupant)
 			to_chat(user, "<span class='warning'>It won't budge. I should leave them alone.</span>")
