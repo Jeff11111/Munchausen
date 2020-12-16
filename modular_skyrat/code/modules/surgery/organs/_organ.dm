@@ -101,6 +101,8 @@
 
 //when a limb is dropped, the internal organs are removed from the mob and put into the limb
 /obj/item/organ/proc/transfer_to_limb(obj/item/bodypart/LB, mob/living/carbon/C)
+	if(!istype(LB))
+		return FALSE
 	Remove()
 	forceMove(LB)
 

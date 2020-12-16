@@ -162,14 +162,7 @@
 	update_icon_dropped()
 	if(destroyed)
 		for(var/obj/item/organ/O in src)
-			O.applyOrganDamage(9/10 * O.maxHealth, 9/10 * O.maxHealth)
-			O.forceMove(get_turf(src))
-	
-	//Start processing rotting
-	if(!destroyed)
-		START_PROCESSING(SSobj, src)
-		//Recover integrity
-		limb_integrity = max_integrity
+			qdel(O)
 	
 	C.update_health_hud() //update the healthdoll
 	C.update_body()
@@ -180,12 +173,18 @@
 		qdel(src)
 		return
 
+	//Start processing rotting... if we didn't get destroyed
+	START_PROCESSING(SSobj, src)
+	//Also, recover integrity
+	limb_integrity = max_integrity
+	
 	if(is_pseudopart)
-		drop_organs(C)	//Psuedoparts shouldn't have organs, but just in case
+		drop_organs(C) //Pseudoparts shouldn't have organs, but just in case
 		qdel(src)
 		return
 
-	forceMove(Tsec)
+	if(istype(Tsec))
+		forceMove(Tsec)
 	
 /**
   * get_mangled_state() is relevant for flesh and bone bodyparts, and returns whether this bodypart has mangled skin, mangled bone, or both (or neither i guess)

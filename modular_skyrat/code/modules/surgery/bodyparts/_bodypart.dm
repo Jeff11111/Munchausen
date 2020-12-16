@@ -125,11 +125,13 @@
 	var/render_like_organic = FALSE
 	/// This is used for pseudolimbs. Basically replaces the mob overlay icon with this.
 	var/mutable_appearance/custom_overlay = null
+	
 	/// These were head vars before, but i had to generify behavior for edge cases
 	/// (IPCs have their brain in da chest)
 	var/mob/living/brain/brainmob = null
 	var/obj/item/organ/brain/brain = null
-	/// If something is currently grasping this bodypart and trying to staunch bleeding (see [/obj/item/grasp_self])
+
+	/// If something is currently grasping this bodypart and trying to staunch bleeding
 	var/obj/item/grab/grasped_by
 
 	/// How much pain this limb is feeling
@@ -564,7 +566,7 @@
 //empties the bodypart from its organs and other things inside it
 /obj/item/bodypart/proc/drop_organs(mob/user, violent_removal)
 	var/turf/T = get_turf(src) || get_turf(src.loc)
-	if(!(status & BODYPART_ROBOTIC))
+	if(!CHECK_BITFIELD(status, BODYPART_ROBOTIC))
 		playsound(T, 'sound/misc/splort.ogg', 50, 1, -1)
 	if(current_gauze)
 		remove_gauze(drop_gauze = FALSE)
