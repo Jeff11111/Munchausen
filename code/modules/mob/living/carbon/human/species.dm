@@ -1718,20 +1718,11 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		var/obj/item/bodypart/affecting = target.get_bodypart(ran_zone(user.zone_selected, ran_zone_prob))
 
 		var/missed = FALSE
+		
 		//Dice roll to see if we fuck up
 		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.75, GET_SKILL_LEVEL(user, melee)*1.25, dicetype = "6d6", mod = -(miss_entirely/(target.lying ? 10 : 5)), crit = 20) <= DICE_FAILURE)
 			missed = TRUE
 		
-		//Aimed combat intent means we never miss, at the cost of stamina
-		switch(c_intent)
-			if(CI_AIMED)
-				missed = FALSE
-				var/endurance_mod = 1
-				if(user.mind)
-					var/datum/stats/end = GET_STAT(user, dex)
-					endurance_mod = round((MAX_STAT/2)/end.level, 0.1)
-				user.adjustStaminaLoss(5 * endurance_mod)
-
 		if(!damage || !affecting || (missed && target != user))//future-proofing for species that have 0 damage/weird cases where no zone is targeted
 			playsound(target.loc, user.dna.species.miss_sound, 25, TRUE, -1)
 			target.visible_message("<span class='danger'><b>[user]</b>'s [atk_verb] misses <b>[target]</b>!</span>", \
