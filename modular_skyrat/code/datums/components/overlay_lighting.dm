@@ -23,6 +23,7 @@
 	appearance_flags = RESET_COLOR | RESET_ALPHA | RESET_TRANSFORM	
 	mouse_opacity = 0
 	alpha = 0
+	vis_flags = 0
 
 /datum/component/overlay_lighting
 	var/atom/movable/current_holder 
