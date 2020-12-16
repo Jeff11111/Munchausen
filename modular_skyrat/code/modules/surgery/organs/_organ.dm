@@ -130,7 +130,7 @@
 /obj/item/organ/proc/is_synthetic()
 	return (organ_flags & ORGAN_SYNTHETIC)
 
-/obj/item/organ/proc/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE)
+/obj/item/organ/proc/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = FALSE)
 	if(!iscarbon(M) || owner == M)
 		return FALSE
 
