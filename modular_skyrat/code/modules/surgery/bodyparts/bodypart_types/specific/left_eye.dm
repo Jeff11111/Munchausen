@@ -49,12 +49,12 @@
 	. = ..()
 	if(dropped)
 		. = list()
-		. += mutable_appearance('modular_skyrat/icons/obj/surgery.dmi', "[initial(icon_state)]", -BODYPARTS_LAYER, color = src.color)
+		. += mutable_appearance('modular_skyrat/icons/obj/surgery.dmi', "[initial(icon_state)]", GAME_PLANE, color = src.color)
 
 /obj/item/bodypart/left_eye/update_icon_dropped()
 	cut_overlays()
 	icon_state = initial(icon_state)//default to dismembered eye sprite
-	var/mutable_appearance/iris = mutable_appearance(icon, "eye-iris", -BODYPARTS_LAYER, plane, eye_color || old_eye_color)
+	var/mutable_appearance/iris = mutable_appearance(icon, "eye-iris", GAME_PLANE, plane, eye_color || old_eye_color)
 	add_overlay(iris)
 	return
 

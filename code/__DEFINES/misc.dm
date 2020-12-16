@@ -166,7 +166,6 @@ GLOBAL_LIST_EMPTY(bloody_footprints_cache)
 #define BLOOD_COLOR_LIZARD			"#db004D"
 #define BLOOD_COLOR_UNIVERSAL		"#db3300"
 #define BLOOD_COLOR_BUG				"#a37c0f"
-//skyrat blood
 #define BLOOD_COLOR_PLANT			"#99ff33"
 #define BLOOD_COLOR_ALCOHOL			"#800000"
 #define BLOOD_COLOR_GREY			"#a6a6a6"
@@ -174,7 +173,6 @@ GLOBAL_LIST_EMPTY(bloody_footprints_cache)
 #define BLOOD_COLOR_MUSHROOM		"#730099"
 #define BLOOD_COLOR_DARK			"#1a1a1a"
 #define BLOOD_COLOR_BIOHAZARD		"#008000"
-//
 
 
 //suit sensors: sensor_mode defines
@@ -278,10 +276,8 @@ GLOBAL_LIST_INIT(pda_reskins, list(PDA_SKIN_CLASSIC = 'icons/obj/pda.dmi', PDA_S
 								PDA_SKIN_MINIMAL = 'icons/obj/pda_minimal.dmi'))
 
 /////////////////////////////////////
-// atom.appearence_flags shortcuts //
+// atom.appearance_flags shortcuts //
 /////////////////////////////////////
-
-/*
 
 // Disabling certain features
 #define APPEARANCE_IGNORE_TRANSFORM			RESET_TRANSFORM
@@ -298,8 +294,6 @@ GLOBAL_LIST_INIT(pda_reskins, list(PDA_SKIN_CLASSIC = 'icons/obj/pda.dmi', PDA_S
 #define APPEARANCE_CONSIDER_COLOURING		(~RESET_COLOR|~NO_CLIENT_COLOR)
 #define APPEARANCE_CONSIDER_ALPHA			~RESET_ALPHA
 #define APPEARANCE_LONG_GLIDE				LONG_GLIDE
-
-*/
 
 // Consider these images/atoms as part of the UI/HUD
 #define APPEARANCE_UI_IGNORE_ALPHA			(RESET_COLOR|RESET_TRANSFORM|NO_CLIENT_COLOR|RESET_ALPHA|PIXEL_SCALE)
