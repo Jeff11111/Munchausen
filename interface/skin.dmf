@@ -82,6 +82,15 @@ window "mainwindow"
 		is-visible = false
 		auto-format = false
 		saved-params = ""
+	elem "tooltip"
+		type = BROWSER
+		pos = 0,0
+		size = 999x999
+		anchor1 = none
+		anchor2 = none
+		background-color = #272727
+		is-visible = false
+		saved-params = ""
 
 window "mapwindow"
 	elem "mapwindow"
