@@ -165,7 +165,7 @@
 		if(BODY_ZONE_PRECISE_R_FOOT)
 			initial_flow *= (1/2)
 			minimum_flow *= (1/3)
-	var/datum/component/storage/concrete/organ/our_component = L.owner.GetComponent(/datum/component/storage/concrete/organ)
+	var/datum/component/storage/concrete/organ/our_component = L.owner?.GetComponent(/datum/component/storage/concrete/organ)
 	if(our_component)
 		our_component.bodypart_affected = L
 		our_component.drop_all_on_deconstruct = FALSE
@@ -241,7 +241,7 @@
 		if(BODY_ZONE_PRECISE_R_FOOT)
 			initial_flow *= (1/2)
 			minimum_flow *= (1/3)
-	var/datum/component/storage/concrete/organ/our_component = L.owner.GetComponent(/datum/component/storage/concrete/organ)
+	var/datum/component/storage/concrete/organ/our_component = L.owner?.GetComponent(/datum/component/storage/concrete/organ)
 	if(our_component)
 		our_component.bodypart_affected = L
 		our_component.drop_all_on_deconstruct = FALSE
