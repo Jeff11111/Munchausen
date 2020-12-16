@@ -312,6 +312,7 @@
 		open_machine(user)
 	else if(state_open)
 		close_machine(user)
+	return TRUE
 
 /obj/machinery/cryopod/relaymove(mob/user)
 	container_resist(user)
