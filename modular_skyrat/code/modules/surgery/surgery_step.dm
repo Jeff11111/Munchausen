@@ -50,7 +50,7 @@
 			. = FALSE
 		if(!CHECK_BITFIELD(BP?.status, requires_bodypart_type))
 			. = FALSE
-		if(CHECK_BITFIELD(surgery_flags, STEP_NEEDS_INCISED) && !BP?.encased)
+		if(CHECK_BITFIELD(surgery_flags, STEP_NEEDS_ENCASED) && !BP?.encased)
 			. = FALSE
 		var/how_open = BP?.how_open()
 		if(CHECK_BITFIELD(surgery_flags, STEP_NEEDS_INCISED) && !CHECK_BITFIELD(how_open, SURGERY_INCISED))
@@ -70,12 +70,9 @@
 
 /datum/surgery_step/proc/try_op(mob/user, mob/living/target, target_zone, obj/item/tool, try_to_fail = FALSE)
 	var/success = FALSE
-	if(accept_hand)
-		if(!tool)
-			success = TRUE
-		if(iscyborg(user))
-			success = TRUE
-	if(accept_any_item)
+	if(accept_hand && !tool)
+		success = TRUE
+	else if(accept_any_item)
 		if(tool && tool_check(user, tool, target))
 			success = TRUE
 	else if(tool)
