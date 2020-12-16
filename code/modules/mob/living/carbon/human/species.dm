@@ -429,10 +429,8 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			else
 				H.physiology.footstep_type = null
 
-	/* SKYRAT EDIT - START, COMMENTED OUT
 		if(H.client && has_field_of_vision && CONFIG_GET(flag/use_field_of_vision))
 			H.LoadComponent(/datum/component/field_of_vision, H.field_of_vision_type)
-	SKYRAT EDIT - END */
 
 	C.add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/species, TRUE, multiplicative_slowdown = speedmod)
 
