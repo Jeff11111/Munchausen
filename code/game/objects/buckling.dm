@@ -68,6 +68,8 @@
 	M.buckling = null
 	M.buckled = src
 	M.setDir(dir)
+	//We also change the mob's plane to avoid funnies
+	M.plane = plane
 	buckled_mobs |= M
 	M.update_mobility()
 	M.throw_alert("buckled", /obj/screen/alert/restrained/buckled)
@@ -90,6 +92,8 @@
 		buckled_mob.anchored = initial(buckled_mob.anchored)
 		buckled_mob.update_mobility()
 		buckled_mob.clear_alert("buckled")
+		//revert the nigger's plane
+		buckled_mob.plane = initial(buckled_mob.plane)
 		buckled_mobs -= buckled_mob
 		SEND_SIGNAL(src, COMSIG_MOVABLE_UNBUCKLE, buckled_mob, force)
 
