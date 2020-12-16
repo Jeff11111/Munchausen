@@ -59,4 +59,3 @@
 
 	if(has_field_of_vision && CONFIG_GET(flag/use_field_of_vision))
 		LoadComponent(/datum/component/field_of_vision, field_of_vision_type)
-	client?.fullscreen()

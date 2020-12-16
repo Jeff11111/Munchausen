@@ -487,6 +487,9 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 			menuitem.Load_checked(src)
 
 	Master.UpdateTickRate()
+	
+	//lastly, update full screen
+	fullscreen()
 
 /client/proc/ensure_keys_set()
 	if(SSinput.initialized)
