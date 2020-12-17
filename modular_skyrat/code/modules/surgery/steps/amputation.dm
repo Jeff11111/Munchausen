@@ -30,7 +30,7 @@
 	base_time = 80
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	possible_locs = ORGAN_BODYPARTS
-	surgery_flags = (STEP_NEEDS_ENCASED | STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED | STEP_NEEDS_BROKEN) //i to this moment still hate black people
+	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED | STEP_NEEDS_BROKEN) //i to this moment still hate black people
 
 /datum/surgery_step/disembowel/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	display_results(user, target, "<span class='notice'>You begin to spoon out [target]'s [parse_zone(target_zone)] organs...</span>",
