@@ -480,7 +480,7 @@ GLOBAL_LIST_INIT(pda_reskins, list(PDA_SKIN_CLASSIC = 'icons/obj/pda.dmi', PDA_S
 
 //Filters
 #define AMBIENT_OCCLUSION(_size, _color) list("type"="drop_shadow","x"=0,"y"=-2,"size"=_size,"color"=_color)
-#define EPIC_AMBIENT_OCCUSION list("type"="drop_shadow", "x"=2, "y"=-2, "color"=rgb(4, 8, 16, 150), "size"=4, "offset"=1)
+#define GOON_AMBIENT_OCCLUSION list("type"="drop_shadow", "x"=2, "y"=-2, "color"=rgb(4, 8, 16, 150), "size"=4, "offset"=1)
 #define MOB_AMBIENT_OCCLUSION1 list("type"="drop_shadow", "x"=0, "y"=2, "size"=1, "offset"=0, "color"=rgb(200,200,200,120))
 #define MOB_AMBIENT_OCCLUSION2 list("type"="drop_shadow", "x"=0, "y"=-1, "size"=2, "offset"=0, "color"=rgb(0,0,0,225))
 #define EYE_BLUR(size) list("type"="blur", "size"=size)
