@@ -11,7 +11,7 @@
 	name = "Combat Gloves Plus"
 	desc = "A pair of gloves that are fireproof and shock resistant."
 	item = /obj/item/clothing/gloves/krav_maga/combatglovesplus
-	cost = 4
+	cost = 3
 	include_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
 	surplus = 0
 
@@ -47,6 +47,7 @@
 	item = /obj/item/gun/energy/kinetic_accelerator/crossbow
 	cost = 12
 	surplus = 50
+
 /datum/uplink_item/stealthy_weapons/traitor_chem_bottle
 	name = "Poison Kit"
 	desc = "An assortment of deadly chemicals packed into a compact box. Comes with a syringe for more precise application."

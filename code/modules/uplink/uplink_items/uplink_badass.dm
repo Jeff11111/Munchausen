@@ -7,16 +7,16 @@
 
 // Pointless (Badassery)
 
+/datum/uplink_item/badass/costumes
+	include_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
+	cost = 2
+	cant_discount = TRUE
+
 /datum/uplink_item/badass/costumes/obvious_chameleon
 	name = "Broken Chameleon Kit"
 	desc = "A set of items that contain chameleon technology allowing you to disguise as pretty much anything on the station, and more! \
 			Please note that this kit did NOT pass quality control."
 	item = /obj/item/storage/box/syndie_kit/chameleon/broken
-
-/datum/uplink_item/badass/costumes
-	include_modes = list(/datum/game_mode/nuclear, /datum/game_mode/nuclear/clown_ops)
-	cost = 4
-	cant_discount = TRUE
 
 /datum/uplink_item/badass/costumes/centcom_official
 	name = "CentCom Official Costume"
@@ -33,7 +33,7 @@
 	name = "Plastitanium Toolbox"
 	desc = "A very high impact toolbox. Excels at destroying stationary structures."
 	item = /obj/item/storage/toolbox/plastitanium
-	cost = 2		//18 damage on mobs, 50 on objects, 4.5 stam/hit
+	cost = 3		//18 damage on mobs, 50 on objects, 4.5 stam/hit
 
 /datum/uplink_item/badass/balloon
 	name = "Syndicate Balloon"
