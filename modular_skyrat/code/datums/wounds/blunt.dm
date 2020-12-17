@@ -751,7 +751,7 @@
 	internal_bleeding_chance = 60
 	pain_amount = 30
 	flat_damage_roll_increase = 15
-	infection_chance = 65 //Compound fractures always have some exposed flesh
+	infection_chance = 50 //Compound fractures always have some exposed flesh
 	infection_rate = 2
 	descriptive = "A bone is shattered!"
 

@@ -300,7 +300,7 @@
 	status_effect_type = /datum/status_effect/wound/slash/severe
 	scarring_descriptions = list("a twisted line of faded gashes", "a gnarled sickle-shaped slice scar", "a long-faded puncture wound")
 	pain_amount = 15
-	infection_chance = 60 //yep, possible
+	infection_chance = 50 //yep, possible
 	infection_rate = 3
 	descriptive = "The flesh is torn!"
 
@@ -323,6 +323,6 @@
 	status_effect_type = /datum/status_effect/wound/slash/critical
 	scarring_descriptions = list("a winding path of very badly healed scar tissue", "a series of peaks and valleys along a gruesome line of cut scar tissue", "a grotesque snake of indentations and stitching scars")
 	pain_amount = 20
-	infection_chance = 80 //yep, possible
+	infection_chance = 50 //yep, possible
 	infection_rate = 4
 	descriptive = "The flesh is lacerated!"
