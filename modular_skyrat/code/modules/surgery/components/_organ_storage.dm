@@ -34,7 +34,7 @@
 /datum/component/storage/concrete/organ/proc/is_accessible(mob/living/carbon/nigger)
 	. = FALSE
 	var/how_open = bodypart_affected?.how_open()
-	if((bodypart_affected?.encased && CHECK_BITFIELD(how_open, SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_BROKEN)) || CHECK_BITFIELD(how_open, SURGERY_INCISED | SURGERY_RETRACTED))
+	if((bodypart_affected?.encased && CHECK_BITFIELD(how_open, SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_BROKEN)) || (!bodypart?.encased && CHECK_BITFIELD(how_open, SURGERY_INCISED | SURGERY_RETRACTED))
 		return TRUE
 	else if(locate(/datum/wound/slash/critical/incision/disembowel) in bodypart_affected?.wounds)
 		return TRUE
