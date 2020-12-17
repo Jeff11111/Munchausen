@@ -14,7 +14,7 @@
 		return FALSE
 	var/mob/living/carbon/C = target
 	var/obj/item/bodypart/BP = C.get_bodypart(user.zone_selected)
-	if(locate(/datum/wound/slash/critical/incision) in BP.wounds)
+	if(locate(/datum/wound/slash/critical) in BP?.wounds)
 		return FALSE
 
 /datum/surgery_step/incise/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
@@ -24,11 +24,6 @@
 
 /datum/surgery_step/incise/tool_check(mob/user, obj/item/tool, mob/living/carbon/target)
 	. = ..()
-	if(istype(tool, /obj/item/pen) && user.a_intent == INTENT_HELP && target)
-		var/obj/item/bodypart/BP = target.get_bodypart(user.zone_selected)
-		if(istype(BP))
-			BP.attackby(tool, user)
-		return FALSE
 	if(implement_type == /obj/item && !tool.get_sharpness())
 		return FALSE
 	if(istype(tool, /obj/item/reagent_containers))
@@ -83,7 +78,7 @@
 		return FALSE
 	var/mob/living/carbon/C = target
 	var/obj/item/bodypart/BP = C.get_bodypart(user.zone_selected)
-	var/datum/wound/slash/critical/incision/incision = locate() in BP.wounds
+	var/datum/wound/slash/critical/incision = locate() in BP.wounds
 	if(CHECK_BITFIELD(incision?.wound_flags, WOUND_RETRACTED_SKIN))
 		return FALSE
 
@@ -94,13 +89,11 @@
 
 /datum/surgery_step/retract_skin/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	. = ..()
-	if(iscarbon(target))
-		var/mob/living/carbon/C = target
-		var/obj/item/bodypart/BP = C.get_bodypart(target_zone)
-		if(BP)
-			var/datum/wound/slash/critical/incision = locate() in BP.wounds
-			if(incision)
-				incision.wound_flags |= WOUND_RETRACTED_SKIN
+	var/obj/item/bodypart/BP = target.get_bodypart(target_zone)
+	if(BP)
+		var/datum/wound/slash/critical/incision = locate() in BP.wounds
+		if(incision)
+			incision.wound_flags |= WOUND_RETRACTED_SKIN
 
 //saw bone
 /datum/surgery_step/saw
@@ -143,6 +136,15 @@
 	base_time = 30
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED)
 
+/datum/surgery_step/drill/validate_target(mob/living/target, mob/user)
+	. = ..()
+	if(!.) //nah nigga lol
+		return FALSE
+	var/mob/living/carbon/C = target
+	var/obj/item/bodypart/BP = C.get_bodypart(user.zone_selected)
+	if(CHECK_BITFIELD(BP?.how_open(), SURGERY_DRILLED))
+		return FALSE
+
 /datum/surgery_step/drill/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	display_results(user, target, "<span class='notice'>You begin to drill into the bone in [target]'s [parse_zone(target_zone)]...</span>",
 		"[user] begins to drill into the bone in [target]'s [parse_zone(target_zone)].",
@@ -152,6 +154,9 @@
 	display_results(user, target, "<span class='notice'>You drill into [target]'s [parse_zone(target_zone)].</span>",
 		"[user] drills into [target]'s [parse_zone(target_zone)]!",
 		"[user] drills into [target]'s [parse_zone(target_zone)]!")
+	var/obj/item/bodypart/BP = target.get_bodypart(user.zone_selected)
+	var/datum/wound/slash/critical/incision = locate() in BP?.wounds
+	incision?.wound_flags |= WOUND_DRILLED
 	return TRUE
 
 //close incision

@@ -1512,6 +1512,8 @@
 			. |= SURGERY_RETRACTED
 		if(CHECK_BITFIELD(incision.wound_flags, WOUND_SET_BONES))
 			. |= SURGERY_SET_BONES
+		if(CHECK_BITFIELD(incision.wound_flags, WOUND_DRILLED))
+			. |= SURGERY_DRILLED
 	if(is_broken())
 		. |= SURGERY_BROKEN
 

@@ -5,7 +5,7 @@
 	base_time = 64
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	possible_locs = AMPUTATE_BODYPARTS
-	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_BROKEN) //i to this moment still hate black people
+	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED | STEP_NEEDS_BROKEN) //i to this moment still hate black people
 
 /datum/surgery_step/sever_limb/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	var/obj/item/bodypart/BP = target.get_bodypart(target_zone)
@@ -30,6 +30,7 @@
 	base_time = 80
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	possible_locs = ORGAN_BODYPARTS
+	requires_bodypart_type = 0
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED | STEP_NEEDS_BROKEN) //i to this moment still hate black people
 
 /datum/surgery_step/disembowel/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)

@@ -4,6 +4,7 @@
 	implements = list(/obj/item/stack/teeth = 100)
 	base_time = 40
 	possible_locs = list(BODY_ZONE_PRECISE_MOUTH)
+	requires_bodypart_type = 0
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED)
 
 /datum/surgery_step/insert_teeth/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)

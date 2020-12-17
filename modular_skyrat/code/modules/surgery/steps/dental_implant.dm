@@ -4,7 +4,7 @@
 	implements = list(/obj/item/reagent_containers/pill = 100)
 	base_time = 16
 	possible_locs = list(BODY_ZONE_PRECISE_MOUTH)
-	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED)
+	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED | STEP_NEEDS_DRILLED)
 
 /datum/surgery_step/insert_pill/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	user.visible_message("[user] begins to wedge \the [tool] in [target]'s [parse_zone(target_zone)].", "<span class='notice'>You begin to wedge [tool] in [target]'s [parse_zone(target_zone)]...</span>")

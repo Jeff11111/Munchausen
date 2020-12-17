@@ -107,7 +107,8 @@
 #define WOUND_SEEPS_GAUZE (1<<5)
 #define WOUND_SOUND_HINTS (1<<6)
 #define WOUND_RETRACTED_SKIN (1<<7)
-#define WOUND_SET_BONES (1<<8)
+#define WOUND_DRILLED (1<<8)
+#define WOUND_SET_BONES (1<<9)
 
 //Organ status flags
 #define ORGAN_ORGANIC   (1<<0)
