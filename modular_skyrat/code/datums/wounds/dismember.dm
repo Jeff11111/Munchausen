@@ -135,7 +135,7 @@
 	biology_required = list()
 	pain_amount = 40 //Horrible, will probably send you into shock.
 	infection_chance = 90
-	infection_rate = 6
+	infection_rate = 2
 	occur_text = null
 	initial_flow = 4.25
 	minimum_flow = 4

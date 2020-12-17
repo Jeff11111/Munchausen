@@ -17,7 +17,7 @@
 	scarring_descriptions = list("a precise line of scarred tissue", "a long line of slightly darker tissue")
 	pain_amount = 15
 	infection_chance = 90
-	infection_rate = 6
+	infection_rate = 3
 	descriptive = "The flesh is incised!"
 	wound_flags = (WOUND_SOUND_HINTS | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE | WOUND_VISIBLE_THROUGH_CLOTHING)
 

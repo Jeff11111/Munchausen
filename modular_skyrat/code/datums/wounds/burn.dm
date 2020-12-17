@@ -19,7 +19,7 @@
 	required_status = BODYPART_ORGANIC
 	pain_amount = 10 //Burns are awful
 	infection_chance = 30
-	infection_rate = 2
+	infection_rate = 3
 	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE)
 
 /datum/wound/burn/handle_process()
@@ -132,7 +132,7 @@
 	scarring_descriptions = list("small amoeba-shaped skinmarks", "a faded streak of depressed skin")
 	pain_amount = 15 //Burns are awful
 	infection_chance = 40
-	infection_rate = 4
+	infection_rate = 3
 	descriptive = "The skin is seared!"
 	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN)
 
@@ -153,7 +153,7 @@
 	scarring_descriptions = list("a large, jagged patch of faded skin", "random spots of shiny, smooth skin", "spots of taut, leathery skin")
 	pain_amount = 25 //Burns are awful
 	infection_chance = 70
-	infection_rate = 5
+	infection_rate = 3.5
 	descriptive = "The flesh is seared!"
 
 /datum/wound/burn/critical
@@ -174,7 +174,7 @@
 	scarring_descriptions = list("massive, disfiguring keloid scars", "several long streaks of badly discolored and malformed skin", "unmistakeable splotches of dead tissue from serious burns")
 	pain_amount = 35 //Burns are awful
 	infection_chance = 90
-	infection_rate = 6
+	infection_rate = 4
 	descriptive = "The flesh is charred!"
 	disabling = TRUE
 

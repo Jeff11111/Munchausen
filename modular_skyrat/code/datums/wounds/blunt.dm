@@ -725,7 +725,7 @@
 	pain_amount = 20
 	flat_damage_roll_increase = 10
 	infection_chance = 20 //Very low, but possible
-	infection_rate = 3
+	infection_rate = 1
 	descriptive = "A bone is fractured!"
 
 /datum/wound/blunt/critical
@@ -752,7 +752,7 @@
 	pain_amount = 30
 	flat_damage_roll_increase = 15
 	infection_chance = 65 //Compound fractures always have some exposed flesh
-	infection_rate = 5
+	infection_rate = 2
 	descriptive = "A bone is shattered!"
 
 // doesn't make much sense for "a" bone to stick out of your head
