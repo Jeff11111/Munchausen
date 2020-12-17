@@ -119,10 +119,11 @@
 #define BODYPART_ROBOTIC	(1<<1)
 #define BODYPART_DEAD		(1<<2) //Completely septic and unusable limb
 #define BODYPART_SYNTHETIC	(1<<3) //Synthetic bodypart, can't get infected
-#define BODYPART_FROZEN		(1<<3) //Cold, doesn't rot
-#define BODYPART_NOBLEED	(1<<4)
-#define BODYPART_NOEMBED	(1<<5)
-#define BODYPART_NOPAIN 	(1<<6)
+#define BODYPART_CUT_AWAY	(1<<4) //Just got reattached but needs to be sewn back on to organ
+#define BODYPART_FROZEN		(1<<5) //Cold, doesn't rot
+#define BODYPART_NOBLEED	(1<<6)
+#define BODYPART_NOEMBED	(1<<7)
+#define BODYPART_NOPAIN 	(1<<8)
 
 //Bodypart disabling defines
 #define BODYPART_NOT_DISABLED 0
@@ -131,6 +132,7 @@
 #define BODYPART_DISABLED_PAIN 3
 #define BODYPART_DISABLED_PARALYSIS 4
 #define BODYPART_DISABLED_DEAD 5
+#define BODYPART_DISABLED_SEVERED 5
 
 //Maximum number of brain traumas wounds to the head can cause
 #define TRAUMA_LIMIT_WOUND 2

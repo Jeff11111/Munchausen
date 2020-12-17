@@ -240,6 +240,7 @@
 	if(owner)
 		STOP_PROCESSING(SSobj, src)
 		return
+	status |= BODYPART_CUT_AWAY
 	on_death()
 
 /obj/item/bodypart/proc/on_death()
@@ -1359,6 +1360,8 @@
 		return FALSE
 	if(is_dead())
 		return BODYPART_DISABLED_DEAD
+	if(is_cut_away())
+		return BODYPART_DISABLED_SEVERED
 	if(HAS_TRAIT(owner, TRAIT_PARALYSIS) || (status & BODYPART_DEAD))
 		return BODYPART_DISABLED_PARALYSIS
 	for(var/i in wounds)
@@ -1468,6 +1471,9 @@
 
 /obj/item/bodypart/proc/is_dead()
 	return (status & BODYPART_DEAD)
+
+/obj/item/bodypart/proc/is_cut_away()
+	return (status & BODYPART_CUT_AWAY)
 
 /obj/item/bodypart/proc/is_broken()
 	. = FALSE

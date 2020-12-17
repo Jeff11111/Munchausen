@@ -62,7 +62,7 @@
 	return ..()
 
 /obj/item/organ/janitize(add_germs, minimum_germs, maximum_germs)
-	..()
+	. = ..()
 	if(germ_level >= INFECTION_LEVEL_THREE)
 		kill_organ()
 	else
@@ -182,6 +182,7 @@
 	if(owner)
 		STOP_PROCESSING(SSobj, src)
 		return
+	organ_flags |= ORGAN_CUT_AWAY
 	on_death() //Kinda hate doing it like this, but I really don't want to call process directly.
 
 //Sources; life.dm process_organs

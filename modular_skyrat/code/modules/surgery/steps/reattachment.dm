@@ -127,3 +127,23 @@
 			target.regenerate_icons()
 			return 1
 		qdel(tool)
+
+//sewing a limb back on
+/datum/surgery_step/sew_limb
+	name = "Sew limb"
+	implements = list(/obj/item/stack/medical/suture = 100, /obj/item/stack/medical/fixovein = 100, /obj/item/stack/sticky_tape/surgical = 80, /obj/item/stack/sticky_tape = 65, /obj/item/stack/cable_coil = 50)
+	base_time = 32
+	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	possible_locs = ALL_BODYPARTS
+	requires_bodypart = FALSE
+	requires_bodypart_type = BODYPART_ORGANIC
+	surgery_flags = 0
+
+/datum/surgery_step/sew_limb/validate_target(mob/living/target, mob/user)
+	. = ..()
+	if(!. || !iscarbon(target))
+		return
+	var/mob/living/carbon/C = target
+	var/obj/item/bodypart/affected = C.get_bodypart(user.zone_selected)
+	if(!affected.is_cut_away())
+		return FALSE
