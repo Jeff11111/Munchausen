@@ -16,6 +16,7 @@
 	var/brightness_on = 4 //range of light when on
 	var/flashlight_power = 0.8 //strength of the light when on
 	light_color = "#FFCC66"
+
 	//Flashlights use power cells
 	var/starting_cell = /obj/item/stock_parts/cell
 	var/obj/item/stock_parts/cell/powercell
@@ -28,16 +29,11 @@
 		powercell = new starting_cell(src)
 	AddComponent(/datum/component/overlay_lighting, light_color, brightness_on, flashlight_power, FALSE) //Skyrat change
 	update_brightness()
-	START_PROCESSING(SSobj, src)
 
-/obj/item/flashlight/proc/update_brightness(mob/user = null)
+/obj/item/flashlight/proc/update_brightness(mob/user)
 	var/datum/component/overlay_lighting/OL = GetComponent(/datum/component/overlay_lighting)
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
-		/*if(flashlight_power)
-			set_light(l_range = brightness_on, l_power = flashlight_power)
-		else
-			set_light(brightness_on)*/
 		OL.turn_on()
 	else
 		icon_state = initial(icon_state)
@@ -71,23 +67,36 @@
 			powercell = I
 
 /obj/item/flashlight/process()
-	. = ..()
-	if((on && powercell && !powercell.use(5)) || (on && !powercell))
-		attack_self()
-
-/obj/item/flashlight/attack_self(mob/user)
-	if((!on && powercell && powercell.use(10)) || on)
-		on = !on
 	if(on)
-		START_PROCESSING(SSobj, src)
+		if(!cell?.use(CEILING((flashlight_power * brightness_on)/2, 1)))
+			turn_off()
 	else
 		STOP_PROCESSING(SSobj, src)
+
+/obj/item/flashlight/proc/turn_off()
+	if(on)
+		on = FALSE
+		STOP_PROCESSING(SSobj, src)
+
+/obj/item/flashlight/proc/turn_on()
+	if(!on && powercell?.use(10))
+		on = TRUE
+		START_PROCESSING(SSobj, src)
+
+/obj/item/flashlight/proc/toggle_light()
+	if(on)
+		turn_off()
+	else
+		turn_on()
+
+/obj/item/flashlight/attack_self(mob/user)
+	toggle_light()
 	update_brightness(user)
 	playsound(get_turf(src), on ? 'sound/weapons/magin.ogg' : 'sound/weapons/magout.ogg', 40, 1)
 	for(var/X in actions)
 		var/datum/action/A = X
 		A.UpdateButtonIcon()
-	return 1
+	return TRUE
 
 /obj/item/flashlight/suicide_act(mob/living/carbon/human/user)
 	if (user.eye_blind)
