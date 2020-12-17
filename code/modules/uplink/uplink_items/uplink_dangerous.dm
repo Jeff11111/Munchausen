@@ -189,7 +189,7 @@
 		 Using a wrench on the piston valve will allow you to tweak the amount of gas used per punch to \
 		 deal extra damage and hit targets further. Use a screwdriver to take out any attached tanks."
 	item = /obj/item/melee/powerfist
-	cost = 8
+	cost = 6
 
 /datum/uplink_item/dangerous/sniper
 	name = "Sniper Rifle"
