@@ -107,7 +107,7 @@
 	name = "Saw bone"
 	implements = list(TOOL_SAW = 100, /obj/item/melee/arm_blade = 75, /obj/item/fireaxe = 50, /obj/item/hatchet = 35, /obj/item/kitchen/knife/butcher = 25)
 	base_time = 54
-	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED | STEP_NEEDS_ENCASED)
+	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED)
 
 /datum/surgery_step/saw/validate_target(mob/living/target, mob/user)
 	. = ..()
