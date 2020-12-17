@@ -166,9 +166,9 @@
 	if(I == parent)
 		return FALSE	//no paradoxes for you
 	var/obj/item/organ/O = I
-	if(!istype(O) || !(bodypart_affected && !bodypart_affected.cavity_item && (I.w_class <= bodypart_affected.max_cavity_size)))
+	if(!istype(O) && !(bodypart_affected && !bodypart_affected.cavity_item && (I.w_class <= bodypart_affected.max_cavity_size)))
 		return FALSE
-	if(istype(O) && bodypart_affected && (O.zone != bodypart_affected.body_zone))
+	else if(istype(O) && bodypart_affected && (O.zone != bodypart_affected.body_zone))
 		return FALSE
 	var/mob/living/carbon/carbon_parent = parent
 	if(istype(O) && carbon_parent.getorganslot(O.slot))
