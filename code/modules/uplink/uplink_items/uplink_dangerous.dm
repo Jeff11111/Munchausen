@@ -100,7 +100,7 @@
 			all energy projectiles, but requires two hands to wield."
 	item = /obj/item/dualsaber
 	player_minimum = 25
-	cost = 16
+	cost = 14
 	exclude_modes = list(/datum/game_mode/nuclear/clown_ops)
 
 /datum/uplink_item/dangerous/doublesword/get_discount()
