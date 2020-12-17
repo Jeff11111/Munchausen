@@ -57,7 +57,7 @@
 
 /obj/screen/plane_master/wall/backdrop(mob/mymob)
 	if(mymob?.client?.prefs.ambientocclusion)
-		add_filter("ambient_occlusion", 0, GOON_AMBIENT_OCCUSION)
+		add_filter("ambient_occlusion", 0, GOON_GENERAL_AMBIENT_OCCLUSION)
 	else
 		remove_filter("ambient_occlusion")
 
@@ -69,7 +69,7 @@
 
 /obj/screen/plane_master/above_wall/backdrop(mob/mymob)
 	if(mymob?.client?.prefs.ambientocclusion)
-		add_filter("ambient_occlusion", 0, GOON_AMBIENT_OCCUSION)
+		add_filter("ambient_occlusion", 0, GOON_GENERAL_AMBIENT_OCCLUSION)
 	else
 		remove_filter("ambient_occlusion")
 
@@ -82,7 +82,7 @@
 
 /obj/screen/plane_master/game_world/backdrop(mob/mymob)
 	if(mymob?.client?.prefs.ambientocclusion)
-		add_filter("ambient_occlusion", 0, GOON_AMBIENT_OCCUSION)
+		add_filter("ambient_occlusion", 0, GOON_GENERAL_AMBIENT_OCCLUSION)
 	else
 		remove_filter("ambient_occlusion")
 
@@ -99,9 +99,11 @@
 
 /obj/screen/plane_master/mobs/backdrop(mob/mymob)
 	if(mymob?.client?.prefs.ambientocclusion)
-		add_filter("ambient_occlusion", 0, GOON_AMBIENT_OCCLUSION)
+		add_filter("ambient_occlusion", 0, BURGER_MOB_AMBIENT_OCCLUSION1)
+		add_filter("ambient_occlusion2", 0, BURGER_MOB_AMBIENT_OCCLUSION2)
 	else
 		remove_filter("ambient_occlusion")
+		remove_filter("ambient_occlusion2")
 
 //Reserved to chat messages, so they are still displayed above the field of vision masking.
 /obj/screen/plane_master/chat_messages
