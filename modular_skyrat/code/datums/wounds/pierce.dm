@@ -174,7 +174,7 @@
 	scarring_descriptions = list("a small, faded bruise", "a small twist of reformed skin", "a thumb-sized puncture scar")
 	pain_amount = 8
 	infection_chance = 35 //low, but possible
-	infection_rate = 4
+	infection_rate = 2
 	descriptive = "The skin is penetrated!"
 	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN)
 
@@ -197,7 +197,7 @@
 	scarring_descriptions = list("an ink-splat shaped pocket of scar tissue", "a long-faded puncture wound", "a tumbling puncture hole with evidence of faded stitching")
 	pain_amount = 15
 	infection_chance = 60 //yep possible
-	infection_rate = 5
+	infection_rate = 3
 	descriptive = "The flesh is penetrated!"
 
 /datum/wound/pierce/critical
@@ -219,5 +219,5 @@
 	scarring_descriptions = list("a rippling shockwave of scar tissue", "a wide, scattered cloud of shrapnel marks", "a gruesome multi-pronged puncture scar")
 	pain_amount = 20
 	infection_chance = 80 //yep possible
-	infection_rate = 6
+	infection_rate = 4
 	descriptive = "The flesh is ruptured!"
