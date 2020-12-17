@@ -117,7 +117,7 @@
 
 /datum/wound/slash/handle_process()
 	if(victim.stat == DEAD)
-		if(wound_flags & WOUND_SEEPS_GAUZE)
+		if(CHECK_BITFIELD(wound_flags, WOUND_SEEPS_GAUZE))
 			blood_flow -= max(clot_rate, WOUND_SLASH_DEAD_CLOT_MIN)
 			if(blood_flow < minimum_flow)
 				if(demotes_to)
