@@ -80,22 +80,6 @@
 	icon_state = "deagleg"
 	item_state = "deagleg"
 
-/obj/item/gun/ballistic/automatic/pistol/deagle/camo
-	desc = "A Deagle brand Deagle for operators operating operationally. Uses .50 AE ammo."
-	icon_state = "deaglecamo"
-	item_state = "deagleg"
-
-/obj/item/gun/ballistic/automatic/pistol/APS
-	name = "stechkin APS pistol"
-	desc = "The original Russian version of a widely used Syndicate sidearm. Uses 9mm ammo."
-	icon_state = "aps"
-	w_class = WEIGHT_CLASS_SMALL
-	mag_type = /obj/item/ammo_box/magazine/m9mm
-	can_suppress = FALSE
-	burst_size = 3
-	fire_delay = 2
-	actions_types = list(/datum/action/item_action/toggle_firemode)
-
 /obj/item/gun/ballistic/automatic/pistol/stickman
 	name = "flat gun"
 	desc = "A 2 dimensional gun.. what?"

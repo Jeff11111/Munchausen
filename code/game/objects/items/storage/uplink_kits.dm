@@ -388,7 +388,6 @@
 	new /obj/item/ammo_box/magazine/m45/kitchengun(src)
 	new /obj/item/ammo_box/magazine/m45/kitchengun(src)
 
-
 /obj/item/storage/box/strange_seeds_10pack
 
 /obj/item/storage/box/strange_seeds_10pack/PopulateContents()
@@ -408,6 +407,12 @@
 
 /obj/item/storage/box/syndie_kit/pistol/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol(src)
+	new /obj/item/ammo_box/magazine/m10mm(src)
+
+/obj/item/storage/box/syndie_kit/makarov
+
+/obj/item/storage/box/syndie_kit/makarov/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/makarov(src)
 	new /obj/item/ammo_box/magazine/m10mm(src)
 
 /obj/item/storage/box/syndie_kit/contract_kit

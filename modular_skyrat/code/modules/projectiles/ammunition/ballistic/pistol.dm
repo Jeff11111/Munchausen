@@ -1,4 +1,4 @@
-// 9mm rubber (USP)
+// 9mm rubber
 /obj/item/ammo_casing/c9mm/rubber
 	name = "9mm rubber bullet casing"
 	desc = "A 9mm rubber bullet casing."

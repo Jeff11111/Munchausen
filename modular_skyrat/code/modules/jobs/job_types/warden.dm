@@ -35,7 +35,7 @@
 	new /obj/item/ammo_box/magazine/m45(src)
 
 /obj/item/storage/briefcase/choice/glock/PopulateContents()
-	new /obj/item/gun/ballistic/automatic/pistol/APS/glock(src)
+	new /obj/item/gun/ballistic/automatic/pistol/cz/glock(src)
 	new /obj/item/ammo_box/magazine/m9mm(src)
 
 /obj/item/storage/briefcase/choice/mateba/PopulateContents()
