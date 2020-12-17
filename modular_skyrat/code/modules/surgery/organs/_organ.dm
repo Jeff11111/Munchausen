@@ -470,7 +470,7 @@
 		user.visible_message("<span class='notice'>[user] starts severing \the [src] from \the [owner]...</span>", \
 						"<span class='notice'>I start severing \the [src] from \the [owner]...</span>")
 		var/heymedic = GET_SKILL_LEVEL(user, surgery)
-		if(!do_mob(user, owner, 3 - (heymedic/MAX_SKILL)))
+		if(!do_mob(user, owner, 3 SECONDS - (heymedic/MAX_SKILL)))
 			to_chat(user, "<span class='warning'>I must stand still!</span>")
 			return TRUE
 		user.visible_message("<span class='notice'>[user] severs \the [src] away safely.</span>", \
@@ -483,7 +483,7 @@
 			user.visible_message("<span class='notice'>[user] starts stitching \the [src] on \the [owner]...</span>", \
 						"<span class='notice'>You start stitching \the [src] on \the [owner]...</span>")
 			var/heymedic = GET_SKILL_LEVEL(user, surgery)
-			if(!do_mob(user, owner, 3 - (heymedic/MAX_SKILL)))
+			if(!do_mob(user, owner, 3 SECONDS - (heymedic/MAX_SKILL)))
 				to_chat(user, "<span class='warning'>I must stand still!</span>")
 				return TRUE
 			if(!bingus.use(2))
@@ -499,7 +499,7 @@
 			user.visible_message("<span class='notice'>[user] starts stitching \the [src]...</span>", \
 						"<span class='notice'>You start stitching \the [src]...</span>")
 			var/heymedic = GET_SKILL_LEVEL(user, surgery)
-			if(!do_mob(user, owner, 3 - (heymedic/MAX_SKILL)))
+			if(!do_mob(user, owner, 3 SECONDS - (heymedic/MAX_SKILL)))
 				to_chat(user, "<span class='warning'>I must stand still!</span>")
 				return TRUE
 			if(!bingus.use(1))
@@ -514,7 +514,7 @@
 			user.visible_message("<span class='notice'>[user] starts screwing \the [src] on \the [owner]...</span>", \
 						"<span class='notice'>You start screwing \the [src] on \the [owner]...</span>")
 			var/heymedic = GET_SKILL_LEVEL(user, electronics)
-			if(!do_mob(user, owner, 3 - (heymedic/MAX_SKILL)))
+			if(!do_mob(user, owner, 3 SECONDS - (heymedic/MAX_SKILL)))
 				to_chat(user, "<span class='warning'>I must stand still!</span>")
 				return TRUE
 			user.visible_message("<span class='notice'>[user] screws \the [src] safely on \the [owner].</span>", \
@@ -531,7 +531,7 @@
 		user.visible_message("<span class='notice'>[user] starts welding \the [src]...</span>", \
 					"<span class='notice'>You start welding \the [src]...</span>")
 		var/heymedic = GET_SKILL_LEVEL(user, electronics)
-		if(!do_mob(user, owner, 3 - (heymedic/MAX_SKILL)))
+		if(!do_mob(user, owner, 3 SECONDS - (heymedic/MAX_SKILL)))
 			to_chat(user, "<span class='warning'>I must stand still!</span>")
 			return TRUE
 		if(!welder.use(2))

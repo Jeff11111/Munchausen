@@ -610,8 +610,6 @@
 					H.emote("gasp")
 					H.Jitter(100)
 					SEND_SIGNAL(H, COMSIG_LIVING_MINOR_SHOCK)
-					if(tplus > tloss)
-						H.adjustBrainLoss(max(0, min(99, ((tlimit - tplus) / tlimit * 100))), 150)
 					log_combat(user, H, "revived", defib)
 					if(req_defib)
 						if(defib.healdisk)
