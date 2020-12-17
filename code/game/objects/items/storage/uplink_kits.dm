@@ -413,7 +413,13 @@
 
 /obj/item/storage/box/syndie_kit/makarov/PopulateContents()
 	new /obj/item/gun/ballistic/automatic/pistol/makarov(src)
-	new /obj/item/ammo_box/magazine/m10mm(src)
+	new /obj/item/ammo_box/magazine/m9mm(src)
+
+/obj/item/storage/box/syndie_kit/czauto
+
+/obj/item/storage/box/syndie_kit/czauto/PopulateContents()
+	new /obj/item/gun/ballistic/automatic/pistol/cz(src)
+	new /obj/item/ammo_box/magazine/m9mm(src)
 
 /obj/item/storage/box/syndie_kit/contract_kit
 	name = "contractor kit"

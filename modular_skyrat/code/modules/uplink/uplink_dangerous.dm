@@ -67,9 +67,17 @@
 	include_modes = list(/datum/game_mode/nuclear)
 
 /datum/uplink_item/dangerous/makarov
-	name = "Makarov Pistol"
+	name = "Compact 9mm Pistol"
 	desc = "A sleek box containing a small, easily concealable handgun that uses 9mm auto rounds in 15-round magazines. The handgun is compatible \
 			with suppressors."
 	item = /obj/item/storage/box/syndie_kit/makarov
 	cost = 6
+	exclude_modes = list(/datum/game_mode/nuclear/clown_ops)
+
+/datum/uplink_item/dangerous/aps
+	name = "Automatic 9mm Pistol"
+	desc = "The CZ-80 - A machine pistol for the modern age. Uses 9mm auto rounds in 15-round magazines and is compatible \
+			with suppressors. The gun fires in three round bursts."
+	item = /obj/item/storage/box/syndie_kit/czauto
+	cost = 8
 	exclude_modes = list(/datum/game_mode/nuclear/clown_ops)
