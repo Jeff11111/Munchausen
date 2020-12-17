@@ -702,20 +702,34 @@
 	var/obj/effect/decal/cleanable/trail_holder/connected_trail
 	for(var/obj/effect/decal/cleanable/trail_holder/nice in start)
 		connected_trail = nice
-		if(connected_trail)
-			var/dire_straits = turn(connected_trail.existing_dirs[length(connected_trail.existing_dirs)] | direction, 180)
+		break
+	
+	if(connected_trail?.connected_trail)
+		var/dire_straits = get_dir(connected_trail.connected_trail, target_turf)
+		if(dire_straits in GLOB.diagonals)
+			var/noodir = 0
+			switch(dire_straits)
+				if(SOUTHEAST)
+					noodir = NORTHEAST
+				if(SOUTHWEST)
+					noodir = NORTHWEST
+				if(NORTHEAST)
+					noodir = SOUTHEAST
+				if(NORTHWEST)
+					noodir = SOUTHWEST
 			connected_trail.existing_dirs -= connected_trail.existing_dirs[length(connected_trail.existing_dirs)]
-			connected_trail.existing_dirs |= dire_straits
+			connected_trail.existing_dirs |= noodir
 			connected_trail.cut_overlays()
 			for(var/poggers in connected_trail.existing_dirs)
 				connected_trail.add_overlay(image('modular_skyrat/icons/effects/blood_fuck.dmi', trail_type, dir = poggers))
-		break
-	
+
 	for(var/obj/effect/decal/cleanable/trail_holder/TH in target_turf)
 		if((!(newdir in TH.existing_dirs) || trail_type == "tracks_1" || trail_type == "tracks_2" || trail_type == "tracks_3") && TH.existing_dirs.len <= 16) //maximum amount of overlays is 16 (all light & heavy directions filled)
 			TH.existing_dirs |= newdir
 			TH.add_overlay(image('modular_skyrat/icons/effects/blood_fuck.dmi', trail_type, dir = newdir))
 			TH.transfer_mob_blood_dna(src)
+			if(connected_trail)
+				TH.connected_trail = connected_trail
 
 	//warn the player occasionally about dragging being bad
 	if(prob(4) && lying && bleed_amt && iscarbon(src))
