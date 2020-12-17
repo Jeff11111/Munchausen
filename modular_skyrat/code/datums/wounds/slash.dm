@@ -117,13 +117,14 @@
 
 /datum/wound/slash/handle_process()
 	if(victim.stat == DEAD)
-		blood_flow -= max(clot_rate, WOUND_SLASH_DEAD_CLOT_MIN)
-		if(blood_flow < minimum_flow)
-			if(demotes_to)
-				replace_wound(demotes_to)
-			else
-				qdel(src)
-			return
+		if(wound_flags & WOUND_SEEPS_GAUZE)
+			blood_flow -= max(clot_rate, WOUND_SLASH_DEAD_CLOT_MIN)
+			if(blood_flow < minimum_flow)
+				if(demotes_to)
+					replace_wound(demotes_to)
+				else
+					qdel(src)
+				return
 
 	blood_flow = min(blood_flow, WOUND_SLASH_MAX_BLOODFLOW)
 
