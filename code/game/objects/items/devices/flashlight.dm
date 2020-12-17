@@ -68,7 +68,7 @@
 
 /obj/item/flashlight/process()
 	if(on)
-		if(!cell?.use(CEILING((flashlight_power * brightness_on)/2, 1)))
+		if(!powercell?.use(CEILING((flashlight_power * brightness_on)/2, 1)))
 			turn_off()
 	else
 		STOP_PROCESSING(SSobj, src)
@@ -83,14 +83,14 @@
 		on = TRUE
 		START_PROCESSING(SSobj, src)
 
-/obj/item/flashlight/proc/toggle_light()
+/obj/item/flashlight/proc/toggle()
 	if(on)
 		turn_off()
 	else
 		turn_on()
 
 /obj/item/flashlight/attack_self(mob/user)
-	toggle_light()
+	toggle()
 	update_brightness(user)
 	playsound(get_turf(src), on ? 'sound/weapons/magin.ogg' : 'sound/weapons/magout.ogg', 40, 1)
 	for(var/X in actions)
@@ -344,8 +344,8 @@
 	else
 		. = ""
 
-/obj/item/flashlight/flare/proc/turn_off()
-	on = FALSE
+/obj/item/flashlight/flare/turn_off()
+	. = ..()
 	force = initial(src.force)
 	damtype = initial(src.damtype)
 	if(ismob(loc))
@@ -529,8 +529,8 @@
 		STOP_PROCESSING(SSobj, src)
 		update_icon()
 
-/obj/item/flashlight/glowstick/proc/turn_off()
-	on = FALSE
+/obj/item/flashlight/glowstick/turn_off()
+	. = ..()
 	update_icon()
 
 /obj/item/flashlight/glowstick/update_icon_state()

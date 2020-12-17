@@ -781,8 +781,14 @@
 			if(world.time >= C.last_cpr + C.cpr_cooldown)
 				var/they_beat = !HAS_TRAIT(C, TRAIT_NOPULSE)
 				var/obj/item/organ/heart/they_heart = C.getorganslot(ORGAN_SLOT_HEART)
-
-				src.visible_message("<b>[src]</b> performs CPR on [C.name]!", \
+				var/obj/item/bodypart/chest/they_chest = C.get_bodypart(BODY_ZONE_CHEST)
+				var/heart_exposed_mod = 0
+				if((they_chest.how_open() & SURGERY_RETRACTED) && istype(they_heart))
+					heart_exposed_mod = 10
+					visible_message("<b>[src]</b> massages [C.name]'s [they_heart]!", \
+								"<span class='notice'>You massage [C.name]'s [they_heart].</span>")
+				else
+					visible_message("<b>[src]</b> performs CPR on [C.name]!", \
 								"<span class='notice'>You perform CPR on [C.name].</span>")
 				SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "perform_cpr", /datum/mood_event/perform_cpr)
 				C.last_cpr = world.time
@@ -795,14 +801,15 @@
 				else
 					to_chat(C, "<span class='unconscious'>I feel my chest being pushed on...</span>")
 				
-				var/diceroll = mind?.diceroll(heyeinstein, heymedic, "6d6", 20)
+				var/diceroll = mind?.diceroll(heyeinstein, heymedic, "6d6", 20, mod = heart_exposed_mod)
 				if((diceroll >= DICE_SUCCESS) || !mind)
-					if(prob(50) || (diceroll >= DICE_CRIT_SUCCESS))
+					if(prob(40) || (diceroll >= DICE_CRIT_SUCCESS))
 						they_heart.last_arrest = world.time
 						if(they_heart.Restart() && C.revive())
 							C.grab_ghost()
 							C.visible_message("<span class='warning'><b>[C]</b> limply spasms their muscles.</span>", \
 											"<span class='userdanger'>My muscles spasm as i am brought back to life!</span>")
+						they_heart.artificial_pump(src)
 				else
 					var/obj/item/bodypart/chest/affected = C.get_bodypart(BODY_ZONE_CHEST)
 					if((diceroll <= DICE_CRIT_FAILURE) && !affected.is_broken())

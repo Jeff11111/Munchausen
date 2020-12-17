@@ -90,6 +90,9 @@
 	//Regardless of full heal or not, we cap brain damage to 100 max
 	if(getBrainLoss() > 100)
 		setBrainLoss(100)
+	//Cap oxygen damage to 75
+	if(getOxyLoss() > 75)
+		setOxyLoss(75)
 
 /mob/living/carbon/succumb()
 	set name = "Succumb"

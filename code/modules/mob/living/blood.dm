@@ -91,9 +91,8 @@
 			adjust_nutrition(-nutrition_ratio * HUNGER_FACTOR)
 			blood_volume = min((BLOOD_VOLUME_NORMAL * blood_ratio), blood_volume + spleen.get_blood() * nutrition_ratio * hydration_ratio)
 		
-		//Effects of low blood oxygenation
-		var/word = pick("dizzy","woozy","faint")
-		switch(get_blood_oxygenation())
+		//Effects of low blood circulation
+		switch(get_blood_circulation())
 			if(BLOOD_VOLUME_EXCESS to BLOOD_VOLUME_MAX_LETHAL)
 				if(prob(15))
 					to_chat(src, "<span class='userdanger'>Blood starts to tear your skin apart. You're going to burst!</span>")
@@ -106,6 +105,10 @@
 			if(BLOOD_VOLUME_MAXIMUM to BLOOD_VOLUME_EXCESS)
 				if(prob(10))
 					to_chat(src, "<span class='warning'>You feel terribly bloated.</span>")
+		
+		//Effects of low blood oxygenation
+		var/word = pick("dizzy","woozy","faint")
+		switch(get_blood_oxygenation())
 			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 				if(prob(5))
 					to_chat(src, "<span class='warning'>You feel [word].</span>")
@@ -126,7 +129,7 @@
 		if(get_blood_circulation() <= BLOOD_VOLUME_SURVIVE)
 			var/obj/item/organ/heart/bingus = getorganslot(ORGAN_SLOT_HEART)
 			if(bingus && !CHECK_BITFIELD(bingus.status, ORGAN_ROBOTIC))
-				adjustOrganLoss(ORGAN_SLOT_HEART, rand(1, 2))
+				adjustOrganLoss(ORGAN_SLOT_HEART, pick(0.5, 1))
 
 		var/temp_bleed = 0
 		//Bleeding out

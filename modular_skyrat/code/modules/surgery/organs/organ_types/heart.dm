@@ -19,12 +19,6 @@
 	// Heart attack code is in code/modules/mob/living/carbon/human/life.dm
 	attack_verb = list("beat", "thumped")
 
-	var/no_pump = FALSE
-	var/beat = BEAT_NONE //is this mob having a heatbeat sound played? if so, which?
-
-	var/failed = FALSE		//to prevent constantly running failing code
-	var/operated = FALSE	//whether the heart's been operated on to fix some of its damages
-
 	maxHealth = HEART_MAX_HEALTH
 	low_threshold = HEART_MAX_HEALTH/4.5
 	high_threshold = HEART_MAX_HEALTH/3 * 2
@@ -32,12 +26,25 @@
 	//Bobmed variables
 	damage_reduction = 0.7
 	relative_size = 4 //Chance is low because getting shot in the chest once and going into crit ain't good
+	var/beat = BEAT_NONE //is this mob having a heatbeat sound played? if so, which?
+	var/failed = FALSE		//to prevent constantly running failing code
 	var/pulse = PULSE_NORM
 	var/last_arrest = 0 //last time we stopped beating
 	var/arrest_cooldown = 2 MINUTES //time it takes before we can stop again, so patients don't die over and over
-	//from heart failure
-	var/heartbeat = 0
+									//from heart failure
+	var/heartbeat = 0 //For some reason this is the variable that actually hands the beat variable
 	var/open = 0
+	var/pump_duration = 5 SECONDS // how long effectively a pump lasts
+	var/list/recent_pump //Used by CPR and blood circulation
+						//Time of the pumping associated with "effectiveness", from 0 to 1
+
+/obj/item/organ/heart/proc/artificial_pump(mob/user, forced_pump)
+	if(!forced_pump)
+		var/heymedic = (GET_SKILL_LEVEL(user, firstaid)/(MAX_SKILL*2))
+		recent_pump = list(world.time = (0.4 + CEILING(heymedic, 0.1)))
+	else
+		recent_pump = list(world.time = (0.4 + CEILING(forced_pump, 0.1)))
+	return TRUE
 
 /obj/item/organ/heart/surgical_examine(mob/user)
 	. = list()
@@ -108,20 +115,20 @@
 		Stop()
 
 /obj/item/organ/heart/attack_self(mob/user)
-	..()
+	. = ..()
 	if(!pulse)
 		user.visible_message("<span class='notice'>[user] squeezes [src] to \
 			make it beat again!</span>","<span class='notice'>You squeeze [src] to make it beat again!</span>")
 		Restart()
-		addtimer(CALLBACK(src, .proc/stop_if_unowned), 80)
+		addtimer(CALLBACK(src, .proc/stop_if_unowned), 8 SECONDS)
 
 /obj/item/organ/heart/proc/Stop()
 	pulse = PULSE_NONE
 	if(owner)
-		if(CHECK_BITFIELD(organ_flags, ORGAN_VITAL))
-			owner.death()
 		to_chat(owner, "<span class='userdanger'><b>MY HEART HAS STOPPED!</b></span>")
 	update_icon()
+	if(CHECK_BITFIELD(organ_flags, ORGAN_VITAL))
+		owner.death()
 	return TRUE
 
 /obj/item/organ/heart/proc/Restart()
@@ -147,13 +154,17 @@
 	handle_pulse()
 	if(pulse)
 		handle_heartbeat()
-		if(pulse >= PULSE_2FAST && prob(2))
-			applyOrganDamage(1)
+		if(pulse >= PULSE_THREADY)
+			if(prob(5))
+				applyOrganDamage(0.5)
+		else if(pulse >= PULSE_2FAST)
+			if(prob(1))
+				applyOrganDamage(0.5)
 
 /obj/item/organ/heart/proc/can_stop() //Can the heart stop beating? Used to prevent bloodsucker hearts from failing under normal circumstances
 	. = TRUE
 	if(world.time < last_arrest + arrest_cooldown)
-		return TRUE
+		return FALSE
 
 /obj/item/organ/heart/proc/handle_pulse()
 	// Pulse mod starts out as just the chemical effect amount
@@ -164,7 +175,7 @@
 	if(pulse_mod > 2 && !is_stable)
 		var/damage_chance = (pulse_mod - 2) ** 2
 		if(prob(damage_chance))
-			applyOrganDamage(1)
+			applyOrganDamage(0.5)
 	
 	// Now pulse mod is impacted by shock stage and other things too
 	if(owner.shock_stage > SHOCK_STAGE_2)

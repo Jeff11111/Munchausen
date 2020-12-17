@@ -4,7 +4,6 @@
 	icon_state = "heart-cursed"
 	icon_base = "heart-cursed"
 	decay_factor = 0
-	no_pump = TRUE
 	actions_types = list(/datum/action/item_action/organ_action/cursed_heart)
 	var/last_pump = 0
 	var/add_colour = TRUE //So we're not constantly recreating colour datums

@@ -1347,7 +1347,7 @@
 		return blood_volume
 	
 	if(!heart && needs_heart())
-		return 0.1 * apparent_blood_volume
+		return 0.25 * apparent_blood_volume
 
 	var/pulse_mod = 1
 	if(HAS_TRAIT(src, TRAIT_FAKEDEATH))
@@ -1355,7 +1355,10 @@
 	else
 		switch(heart.pulse)
 			if(-INFINITY to PULSE_NONE)
-				pulse_mod *= 0.1 //Fuck.
+				if(length(heart.recent_pump) && (world.time <= heart.recent_pump[1] + heart.pump_duration))
+					pulse_mod *= heart.recent_pump[heart.recent_pump[1]]
+				else
+					pulse_mod *= 0.25 //Fuck.
 			if(PULSE_SLOW)
 				pulse_mod *= 0.9
 			if(PULSE_FAST)
@@ -1370,14 +1373,6 @@
 		apparent_blood_volume *= max(0, 1 - (chem_effects[CE_BLOCKAGE])/100)
 
 	return min(apparent_blood_volume, BLOOD_VOLUME_NORMAL)
-
-//Do we need blood to sustain the brain?
-/mob/living/carbon/proc/blood_carries_oxygen()
-	return TRUE
-
-//Do we need lungs?
-/mob/living/carbon/proc/needs_lungs()
-	return TRUE
 
 //Blood volume, affected by the condition of circulation organs, affected by the oxygen loss. What ultimately matters for brain.
 /mob/living/carbon/proc/get_blood_oxygenation()
@@ -1399,9 +1394,17 @@
 		oxygenated_mult = 0.5
 	else if(chem_effects[CE_OXYGENATED] >= 2) // Dexplus.
 		oxygenated_mult = 0.8
-	apparent_blood_volume_mod = apparent_blood_volume_mod + oxygenated_mult - (apparent_blood_volume_mod * oxygenated_mult)
+	apparent_blood_volume_mod += (apparent_blood_volume_mod * oxygenated_mult)
 	apparent_blood_volume = apparent_blood_volume * apparent_blood_volume_mod
 	return min(apparent_blood_volume, BLOOD_VOLUME_NORMAL)
+
+//Do we need blood to sustain the brain?
+/mob/living/carbon/proc/blood_carries_oxygen()
+	return TRUE
+
+//Do we need lungs?
+/mob/living/carbon/proc/needs_lungs()
+	return TRUE
 
 //Get the pulse integer
 /mob/living/carbon/proc/pulse()
