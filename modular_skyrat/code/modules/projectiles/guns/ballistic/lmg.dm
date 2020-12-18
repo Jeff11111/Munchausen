@@ -10,8 +10,8 @@
 	autochamber = TRUE
 
 /obj/item/gun/ballistic/automatic/l6_saw/update_icon()
-	..()
-	icon_state = "pk[cover_open ? "-e" : ""]"
+	. = ..()
+	icon_state = "pk[cover_open ? "-open" : ""]"
 	item_state = "pk[magazine ? "" : "-e"][is_wielded ? "-wielded" : ""]"
 
 /obj/item/gun/ballistic/automatic/l6_saw/build_magazine_overlay()
