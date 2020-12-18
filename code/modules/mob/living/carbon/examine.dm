@@ -84,33 +84,14 @@
 		msg += "[t_He] really keeps to the left."
 	else if(l_limbs_missing >= 4 && r_limbs_missing >= 4)
 		msg += "[t_He] [p_do()]n't seem all there."
-	var/bruteloss = getBruteLoss()
-	var/burnloss = getFireLoss()
-	var/cellularloss = getCloneLoss()
 	if(!(user == src && src.hal_screwyhud == SCREWYHUD_HEALTHY)) //fake healthy
-		if(bruteloss)
-			if (bruteloss < 25)
-				msg += "[t_He] [t_has] minor bruising."
-			else if (bruteloss < 50)
-				msg += "[t_He] [t_has] <b>moderate</b> bruising!"
-			else
-				msg += "<B>[t_He] [t_has] severe bruising!</B>"
-
-		if(burnloss)
-			if (burnloss < 25)
-				msg += "[t_He] [t_has] minor burns."
-			else if (burnloss < 50)
-				msg += "[t_He] [t_has] <b>moderate</b> burns!"
-			else
-				msg += "<B>[t_He] [t_has] severe burns!</B>"
-
-		if(cellularloss)
-			if(cellularloss < 25)
-				msg += "[t_He] [t_is] slightly deformed."
-			else if (cellularloss < 50)
-				msg += "[t_He] [t_is] <b>moderately</b> deformed!"
-			else
-				msg += "<b>[t_He] [t_is] severely deformed!</b>"
+		switch(getBruteLoss() + getFireLoss() + getCloneLoss())
+			if(1 to 25)
+				msg += "[t_He] [t_is] barely injured."
+			if(25 to 50)
+				msg += "[t_He] [t_is] <B>moderately</B> injured!"
+			if(50 to INFINITY)
+				msg += "<B>[t_He] [t_is] severely injured!</B>"
 
 	var/bleed_text
 	var/list/obj/item/bodypart/bleeding_limbs = list()

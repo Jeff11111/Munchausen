@@ -196,8 +196,6 @@
 			if(100 to 200)
 				. += "<span class='warning'>[t_He] [t_is] twitching ever so slightly.</span>"
 
-	var/temp = getBruteLoss() //no need to calculate each of these twice
-
 	var/list/dont_repeat_soaked = list()
 	var/list/msg = list()
 	var/list/missing = ALL_BODYPARTS
@@ -273,45 +271,26 @@
 				msg += should_msg
 
 	if(l_limbs_missing >= 2 && r_limbs_missing == 0)
-		msg += "[t_He] look[p_s()] all right now."
+		msg += "[t_He] look[p_s()] right winged."
 	else if(l_limbs_missing == 0 && r_limbs_missing >= 4)
-		msg += "[t_He] really keeps to the left."
+		msg += "[t_He] look[p_s()] left winged."
 	else if(l_limbs_missing >= 4 && r_limbs_missing >= 4)
-		msg += "[t_He] [p_do()]n't seem all there."
+		msg += "[t_He] [p_are()] a centrist."
 
 	if(!screwy_self && !(user == src && src.hal_screwyhud == SCREWYHUD_HEALTHY)) //fake healthy
-		if(temp)
-			if(temp < 25)
-				msg += "[t_He] [t_has] minor bruising."
-			else if(temp < 50)
-				msg += "[t_He] [t_has] <b>moderate</b> bruising!"
-			else
-				msg += "<B>[t_He] [t_has] severe bruising!</B>"
-
-		temp = getFireLoss()
-		if(temp)
-			if(temp < 25)
-				msg += "[t_He] [t_has] minor burns."
-			else if (temp < 50)
-				msg += "[t_He] [t_has] <b>moderate</b> burns!"
-			else
-				msg += "<B>[t_He] [t_has] severe burns!</B>"
-
-		temp = getCloneLoss()
-		if(temp)
-			if(temp < 25)
-				msg += "[t_He] [t_has] minor cellular damage."
-			else if(temp < 50)
-				msg += "[t_He] [t_has] <b>moderate</b> cellular damage!"
-			else
-				msg += "<b>[t_He] [t_has] severe cellular damage!</b>"
+		switch(getBruteLoss() + getFireLoss() + getCloneLoss())
+			if(1 to 25)
+				msg += "[t_He] [t_is] barely injured."
+			if(25 to 50)
+				msg += "[t_He] [t_is] <B>moderately</B> injured!"
+			if(50 to INFINITY)
+				msg += "<B>[t_He] [t_is] severely injured!</B>"
 
 	if(!screwy_self)
 		if(fire_stacks > 0)
 			msg += "[t_He] [t_is] covered in something flammable."
 		if(fire_stacks < 0)
 			msg += "[t_He] look[p_s()] a little soaked."
-
 
 	if(pulledby && pulledby.grab_state)
 		msg += "[t_He] [t_is] restrained by [pulledby]'s grip."
