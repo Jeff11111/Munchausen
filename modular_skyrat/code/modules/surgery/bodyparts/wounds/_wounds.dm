@@ -77,6 +77,10 @@
 	var/limp_slowdown
 	/// How much we're contributing to this limb's bleed_rate
 	var/blood_flow
+	/// Loosely how many times we need to proc to stop bleeding
+	/// This generally is the same value as blood flow, but
+	/// these values CAN differ
+	var/blood_time
 
 	/// List of alerts we can throw, of category associated with type
 	var/list/associated_alerts = list()
@@ -512,6 +516,7 @@
 			remove_wound()
 		else
 			blood_flow = round(blood_flow/2, 0.1)
+			blood_time = round(blood_time/2, 0.1)
 			if(victim)
 				victim.visible_message("<span class='notice'>The [lowertext(src.name)] on [victim]'s [limb.name] seems to be bleeding considerably less.</span>")
 	else if((severity == WOUND_SEVERITY_SEVERE) && (quantity >= 30))
@@ -519,10 +524,12 @@
 			remove_wound()
 		else
 			blood_flow = round(blood_flow/2, 0.1)
+			blood_time = round(blood_time/2, 0.1)
 			if(victim)
 				victim.visible_message("<span class='notice'>The [lowertext(src.name)] on [victim]'s [limb.name] seems to be bleeding considerably less.</span>")
 	else if(quantity >= 5)
 		blood_flow = max(round(blood_flow - (initial(blood_flow)/5), 0.1), 0)
+		blood_time = max(round(blood_time - (initial(blood_time)/5), 0.1), 0)
 		if(victim)
 			victim.visible_message("<span class='notice'>The [lowertext(src.name)] on [victim]'s [limb.name] seems to be significantly eased.</span>")
 	if(quantity >= 10)

@@ -117,7 +117,8 @@
 	occur_text = null
 	initial_flow = 4.25
 	minimum_flow = 4
-	clot_rate = 0
+	flow_clot_rate = 0
+	time_clot_rate = 0
 	descriptive = "The limb is disemboweled!"
 	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE | WOUND_VISIBLE_THROUGH_CLOTHING)
 
@@ -183,7 +184,8 @@
 	wound_type = WOUND_LIST_DISEMBOWEL
 	initial_flow = 2
 	minimum_flow = 0.5
-	clot_rate = 0
+	flow_clot_rate = 0
+	time_clot_rate = 0
 	max_per_type = 4
 	threshold_penalty = 80
 	demotes_to = null

@@ -13,10 +13,14 @@
 
 	/// How much blood we start losing when this wound is first applied
 	var/initial_flow
-	/// When we have less than this amount of flow, we demote to a lower cut or are healed of the wound
+	/// How much bleeding we have left when this wound is first applied
+	var/initial_time
+	/// When we have less than this amount of flow, either from treatment or clotting, we demote to a lower cut or are healed of the wound
 	var/minimum_flow
 	/// How fast our blood flow will naturally decrease per tick, not only do larger cuts bleed more faster, they clot slower
-	var/clot_rate
+	var/flow_clot_rate
+	/// How fast the time decreases per tick
+	var/time_clot_rate
 
 	/// Once the blood flow drops below minimum_flow, we demote it to this type of wound. If there's none, we're all better
 	var/demotes_to
@@ -49,8 +53,10 @@
 
 /datum/wound/mechanical/slash/wound_injury(datum/wound/slash/old_wound = null)
 	blood_flow = initial_flow
+	blood_time = initial_time
 	if(old_wound)
 		blood_flow = max(old_wound.blood_flow, initial_flow)
+		blood_time = max(old_wound.blood_time, blood_time)
 
 /datum/wound/mechanical/slash/get_examine_description(mob/user)
 	if(!patch && !welded)
@@ -70,11 +76,11 @@
 		return
 	if(wounding_type in list(WOUND_SLASH, WOUND_PIERCE)) // can't stab dead bodies to make them leak faster
 		blood_flow += 0.05 * wounding_dmg
+		blood_time += 0.05 * wounding_dmg
 
 /datum/wound/mechanical/slash/drag_bleed_amt()
 	// compare with being at 100 brute damage before, where you bled (brute/100 * 2), = 2 blood per tile
 	var/bleed_amt = min(blood_flow * 0.1, 1) // 3 * 3 * 0.1 = 0.9 blood total, less than before! the share here is .6 blood of course.
-
 	if(limb.current_gauze && CHECK_BITFIELD(wound_flags, WOUND_SEEPS_GAUZE)) // gauze stops all bleeding from dragging on this limb, but wears the gauze out quicker
 		limb.seep_gauze(bleed_amt * 0.33)
 		return
@@ -83,15 +89,17 @@
 
 /datum/wound/mechanical/slash/handle_process()
 	blood_flow = min(blood_flow, WOUND_SLASH_MAX_BLOODFLOW)
-
+	blood_time = min(blood_time, WOUND_SLASH_MAX_BLOODTIME)
 	if(cares_about_gauze)
 		if(limb.current_gauze && CHECK_BITFIELD(wound_flags, WOUND_SEEPS_GAUZE))
-			if(clot_rate > 0)
-				blood_flow -= clot_rate
+			blood_flow -= flow_clot_rate
 			blood_flow -= limb.current_gauze.absorption_rate
+			blood_time -= time_clot_rate
+			blood_time -= limb.current_gauze.absorption_rate
 			limb.seep_gauze(limb.current_gauze.absorption_rate)
 		else
-			blood_flow -= clot_rate
+			blood_flow -= flow_clot_rate
+			blood_time -= time_clot_rate
 
 	if(blood_flow > highest_flow)
 		highest_flow = blood_flow
@@ -99,16 +107,18 @@
 	if(blood_flow < minimum_flow)
 		if(demotes_to)
 			replace_wound(demotes_to)
-		else
-			to_chat(victim, "<span class='green'>The cut on your [limb.name] has stopped bleeding!</span>")
-			qdel(src)
+			return
+	if(blood_time <= 0)
+		to_chat(victim, "<span class='green'>The cut on your [limb.name] has stopped bleeding!</span>")
+		qdel(src)
 
 /datum/wound/mechanical/slash/on_stasis()
 	if(blood_flow < minimum_flow)
 		if(demotes_to)
 			replace_wound(demotes_to)
-		else
-			qdel(src)
+			return
+	if(blood_time <= 0)
+		qdel(src)
 		return
 
 /* BEWARE, THE BELOW NONSENSE IS MADNESS. blunt.dm looks more like what I have in mind and is sufficiently clean, don't pay attention to this messiness */
@@ -156,7 +166,7 @@
 		user.visible_message("<span class='green'>[user] welds \the [lowertext(name)] [victim]'s [limb.name] with [I].</span>", "<span class='green'>You weld \the [lowertext(name)] on [user == victim ? "your" : "[victim]'s"] [limb.name] with [I].</span>")
 	var/blood_cauterized = (1 / time_mod) * max(0.5, patched)
 	blood_flow -= blood_cauterized
-
+	blood_time -= blood_cauterized
 	if(repeat_patch)
 		patched = 0
 
@@ -192,6 +202,7 @@
 	limb.heal_damage(5 * power, 5 * power)
 	var/blood_cauterized = power * 0.15
 	blood_flow -= blood_cauterized
+	blood_time -= blood_cauterized
 	patch = "[lowertext(I.name)]"
 	patched = power
 	user.visible_message("<span class='green'>[user] wraps [victim]'s [limb.name] with [I].</span>", "<span class='green'>You wrap [user == victim ? "your" : "[victim]'s"] [limb.name] with [I].</span>")
@@ -207,9 +218,11 @@
 	severity = WOUND_SEVERITY_MODERATE
 	viable_zones = ALL_BODYPARTS
 	initial_flow = 2
+	initial_time = 2
 	minimum_flow = 0.5
 	max_per_type = 3
-	clot_rate = 0.15
+	flow_clot_rate = 0.10
+	time_clot_rate = 0.10
 	threshold_minimum = 20
 	threshold_penalty = 10
 	status_effect_type = /datum/status_effect/wound/slash/moderate
@@ -228,8 +241,10 @@
 	severity = WOUND_SEVERITY_SEVERE
 	viable_zones = ALL_BODYPARTS
 	initial_flow = 3.25
+	initial_time = 3.25
 	minimum_flow = 2.75
-	clot_rate = 0.07
+	flow_clot_rate = 0.05
+	time_clot_rate = 0.05
 	max_per_type = 4
 	threshold_minimum = 50
 	threshold_penalty = 25
@@ -249,8 +264,10 @@
 	severity = WOUND_SEVERITY_CRITICAL
 	viable_zones = ALL_BODYPARTS
 	initial_flow = 4.25
+	initial_time = 4.25
 	minimum_flow = 4
-	clot_rate = -0.05 // critical cuts actively get worse instead of better
+	flow_clot_rate = -0.05 // critical cuts actively get worse instead of better
+	time_clot_rate = -0.05 // critical cuts actively get worse instead of better
 	max_per_type = 5
 	threshold_minimum = 80
 	threshold_penalty = 40

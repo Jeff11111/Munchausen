@@ -15,12 +15,13 @@
 	treatable_by = list(/obj/item/stack/medical/suture, /obj/item/stack/medical/fixovein)
 	treat_priority = TRUE
 	base_treat_time = 2 SECONDS
+	blood_flow = 3
+	blood_time = 3
 	descriptive = "An artery is torn!"
 	wound_flags = (WOUND_SOUND_HINTS)
 	var/next_squirt = 0 //kinky.
 	var/squirt_delay_min = 8 SECONDS
 	var/squirt_delay_max = 12 SECONDS
-	var/blood_loss_per_squirt = 3
 
 /datum/wound/artery/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
 	if(L)
@@ -31,34 +32,35 @@
 		desc = "Patient's [L.artery_name] has been violently slashed open, causing severe hemorrhaging."
 		switch(L.body_zone)
 			if(BODY_ZONE_PRECISE_LEFT_EYE)
-				blood_loss_per_squirt *= 0.35
+				blood_flow *= 0.35
 			if(BODY_ZONE_PRECISE_RIGHT_EYE)
-				blood_loss_per_squirt *= 0.35
+				blood_flow *= 0.35
 			if(BODY_ZONE_HEAD)
-				blood_loss_per_squirt *= 1.5
+				blood_flow *= 1.5
 			if(BODY_ZONE_PRECISE_NECK)
-				blood_loss_per_squirt *= 2.5
+				blood_flow *= 2.5
 			if(BODY_ZONE_CHEST)
-				blood_loss_per_squirt *= 1
+				blood_flow *= 1
 			if(BODY_ZONE_PRECISE_GROIN)
-				blood_loss_per_squirt *= 1
+				blood_flow *= 1
 			if(BODY_ZONE_L_ARM)
-				blood_loss_per_squirt *= 0.75
+				blood_flow *= 0.75
 			if(BODY_ZONE_R_ARM)
-				blood_loss_per_squirt *= 0.75
+				blood_flow *= 0.75
 			if(BODY_ZONE_PRECISE_L_HAND)
-				blood_loss_per_squirt *= 0.5
+				blood_flow *= 0.5
 			if(BODY_ZONE_PRECISE_R_HAND)
-				blood_loss_per_squirt *= 0.5
+				blood_flow *= 0.5
 			if(BODY_ZONE_L_LEG)
-				blood_loss_per_squirt *= 0.75
+				blood_flow *= 0.75
 			if(BODY_ZONE_R_LEG)
-				blood_loss_per_squirt *= 0.75
+				blood_flow *= 0.75
 			if(BODY_ZONE_PRECISE_L_FOOT)
-				blood_loss_per_squirt *= 0.5
+				blood_flow *= 0.5
 			if(BODY_ZONE_PRECISE_R_FOOT)
-				blood_loss_per_squirt *= 0.5
-	L.owner.bleed(blood_loss_per_squirt)
+				blood_flow *= 0.5
+	blood_time = blood_flow
+	L.owner.bleed(blood_flow)
 	L.owner.add_splatter_floor(get_turf(victim))
 	L.owner.death_scream()
 	. = ..()
@@ -66,7 +68,7 @@
 /datum/wound/artery/handle_process()
 	. = ..()
 	//No bleeding means we should be gone
-	if(blood_loss_per_squirt <= 0)
+	if(blood_flow <= 0)
 		qdel(src)
 		return
 	
@@ -83,9 +85,9 @@
 /datum/wound/artery/proc/cum(bleed_mod = 1, force = FALSE)
 	//People with no pulse can't really squirt blood, can they?
 	//Nor can people with no blood
-	if((!(victim.stat >= DEAD) && !(victim.pulse() < PULSE_NORM) && !(victim.blood_volume <= blood_loss_per_squirt) && (blood_loss_per_squirt >= 1)) || force)
+	if((!(victim.stat >= DEAD) && !(victim.pulse() < PULSE_NORM) && !(victim.blood_volume <= blood_flow) && (blood_flow >= 1)) || force)
 		playsound(victim, sound_effect, 75, 0)
-		victim.bleed(blood_loss_per_squirt * bleed_mod, FALSE)
+		victim.bleed(blood_flow * bleed_mod, FALSE)
 		victim.visible_message("<span class='danger'><b>[victim]</b>'s [limb.name]'s [limb.artery_name] squirts blood!</span>", \
 						"<span class='userdanger'>Blood squirts from my [limb.name]'s [limb.artery_name]!</span>")
 		var/spray_dir = pick(GLOB.alldirs)
@@ -100,7 +102,7 @@
 
 /datum/wound/artery/proc/cum_less(bleed_mod = 1)
 	//just bleed without being dramatic
-	victim.bleed(blood_loss_per_squirt * bleed_mod)
+	victim.bleed(blood_flow * bleed_mod)
 
 /datum/wound/artery/treat(obj/item/I, mob/user)
 	if(istype(I, /obj/item/stack/medical/suture) || istype(I, /obj/item/stack/medical/fixovein))
@@ -130,9 +132,9 @@
 	user.visible_message("<span class='green'>[user] stitches up [victim]'s [limb.artery_name].</span>", \
 				"<span class='green'>You stitch up [user == victim ? "your" : "[victim]'s"] [limb.artery_name].</span>")
 	var/blood_sutured = I.stop_bleeding / max(1, time_mod)
-	blood_loss_per_squirt -= blood_sutured
+	blood_time -= blood_sutured
 	limb.heal_damage(I.heal_brute, I.heal_burn)
-	if(blood_loss_per_squirt <= 0)
+	if(blood_time <= 0)
 		to_chat(user, "<span class='nicegreen'>You successfully stitch \the [limb.artery_name] back together.</span>")
 		qdel(src)
 	else

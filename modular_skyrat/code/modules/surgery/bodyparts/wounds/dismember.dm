@@ -139,7 +139,8 @@
 	occur_text = null
 	initial_flow = 4.25
 	minimum_flow = 4
-	clot_rate = 0
+	flow_clot_rate = 0
+	time_clot_rate = 0
 	descriptive = null
 	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE | WOUND_VISIBLE_THROUGH_CLOTHING)
 
@@ -197,7 +198,8 @@
 	severity = WOUND_SEVERITY_LOSS
 	wound_type = WOUND_LIST_LOSS
 	ignore_preexisting = TRUE
-	clot_rate = 0
+	flow_clot_rate = 0
+	time_clot_rate = 0
 	max_per_type = 4
 	threshold_penalty = 80
 	demotes_to = null

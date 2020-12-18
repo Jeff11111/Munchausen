@@ -11,7 +11,8 @@
 	wound_type = WOUND_LIST_INCISION
 	initial_flow = 0.5 //on most surgeries this means 3.5 blood flow without clamping bleeders, 0.5 if clamping
 	minimum_flow = 0
-	clot_rate = 0
+	flow_clot_rate = 0
+	time_clot_rate = 0
 	max_per_type = 5
 	demotes_to = null
 	scarring_descriptions = list("a precise line of scarred tissue", "a long line of slightly darker tissue")
@@ -39,7 +40,8 @@
 	wound_type = WOUND_LIST_INCISION_MECHANICAL
 	initial_flow = 1.5
 	minimum_flow = 0.1
-	clot_rate = 0.02
+	flow_clot_rate = 0
+	time_clot_rate = 0
 	max_per_type = 5
 	demotes_to = null
 	scarring_descriptions = list("a precise line of scarred tissue", "a long line of slightly darker tissue")

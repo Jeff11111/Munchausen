@@ -14,10 +14,14 @@
 
 	/// How much blood we start losing when this wound is first applied
 	var/initial_flow
+	/// How much bleeding we have left when this wound is first applied
+	var/initial_time
 	/// When we have less than this amount of flow, either from treatment or clotting, we demote to a lower cut or are healed of the wound
 	var/minimum_flow
 	/// How fast our blood flow will naturally decrease per tick, not only do larger cuts bleed more faster, they clot slower
-	var/clot_rate
+	var/flow_clot_rate
+	/// How fast the time decreases per tick
+	var/time_clot_rate
 
 	/// Once the blood flow drops below minimum_flow, we demote it to this type of wound. If there's none, we're all better
 	var/demotes_to
@@ -26,10 +30,6 @@
 	var/max_per_type
 	/// The maximum flow we've had so far
 	var/highest_flow
-	/// How much flow we've already cauterized
-	var/cauterized
-	/// How much flow we've already sutured
-	var/sutured
 	/// Does our blood flow get affected by gauze?
 	var/cares_about_gauze = TRUE
 	/// A bad system I'm using to track the worst scar we earned (since we can demote, we want the biggest our wound has been, not what it was when it was cured (probably moderate))
@@ -53,9 +53,9 @@
 /datum/wound/slash/on_hemostatic(quantity)
 	if((quantity >= 15) && (severity == WOUND_SEVERITY_SEVERE) && demotes_to)
 		blood_flow = max(blood_flow - highest_flow/4, minimum_flow)
+		blood_time = max(blood_time - highest_flow/4, minimum_flow)
 		quantity -= 15
 	else if((quantity >= 15) && (severity <= WOUND_SEVERITY_MODERATE))
-		sutured = min(sutured + highest_flow/5, blood_flow)
 		quantity -= 15
 	
 	if(quantity >= 5)
@@ -63,8 +63,10 @@
 
 /datum/wound/slash/wound_injury(datum/wound/slash/old_wound = null)
 	blood_flow = initial_flow
+	blood_time = initial_time
 	if(old_wound)
 		blood_flow = max(old_wound.blood_flow, initial_flow)
+		blood_time = max(old_wound.blood_time, initial_time)
 		if(old_wound.severity > severity && old_wound.highest_scar)
 			highest_scar = old_wound.highest_scar
 			old_wound.highest_scar = null
@@ -104,43 +106,48 @@
 		return
 	if(wounding_type in list(WOUND_SLASH, WOUND_PIERCE)) // can't stab dead bodies to make them bleed faster
 		blood_flow += 0.05 * wounding_dmg
+		blood_time += 0.05 * wounding_dmg
 
 /datum/wound/slash/drag_bleed_amt()
 	// compare with being at 100 brute damage before, where you bled (brute/100 * 2), = 2 blood per tile
 	var/bleed_amt = min(blood_flow * 0.1, 1) // 3 * 3 * 0.1 = 0.9 blood total, less than before! the share here is .6 blood of course.
-
 	if(limb.current_gauze && CHECK_BITFIELD(wound_flags, WOUND_SEEPS_GAUZE)) // gauze stops all bleeding from dragging on this limb, but wears the gauze out quicker
 		limb.seep_gauze(bleed_amt * 0.33)
 		return
-	testing("blood from drag [name]: [bleed_amt]")
 	return bleed_amt
 
 /datum/wound/slash/handle_process()
 	if(victim.stat == DEAD)
 		if(CHECK_BITFIELD(wound_flags, WOUND_SEEPS_GAUZE))
-			blood_flow -= max(clot_rate, WOUND_SLASH_DEAD_CLOT_MIN)
+			blood_flow -= max(flow_clot_rate, WOUND_SLASH_DEAD_FLOW_CLOT_MIN)
+			blood_time -= max(time_clot_rate, WOUND_SLASH_DEAD_TIME_CLOT_MIN)
 			if(blood_flow < minimum_flow)
 				if(demotes_to)
 					replace_wound(demotes_to)
-				else
-					qdel(src)
+					return
+			if(blood_time <= 0)
+				qdel(src)
 				return
 
 	blood_flow = min(blood_flow, WOUND_SLASH_MAX_BLOODFLOW)
-
+	blood_time = min(blood_time, WOUND_SLASH_MAX_BLOODTIME)
 	if(victim.reagents && victim.reagents.has_reagent(/datum/reagent/toxin/heparin))
 		blood_flow += 0.5 // old herapin used to just add +2 bleed stacks per tick, this adds 0.5 bleed flow to all open cuts which is probably even stronger as long as you can cut them first
+		blood_time += 0.5
 	else if(victim.reagents && victim.reagents.has_reagent(/datum/reagent/medicine/coagulant))
 		blood_flow -= 0.25
+		blood_time -= 0.25
 
 	if(cares_about_gauze)
 		if(limb.current_gauze && CHECK_BITFIELD(wound_flags, WOUND_SEEPS_GAUZE))
-			if(clot_rate > 0)
-				blood_flow -= clot_rate
+			blood_flow -= flow_clot_rate
 			blood_flow -= limb.current_gauze.absorption_rate
+			blood_time -= time_clot_rate
+			blood_time -= limb.current_gauze.absorption_rate
 			limb.seep_gauze(limb.current_gauze.absorption_rate)
 		else
-			blood_flow -= clot_rate
+			blood_flow -= flow_clot_rate
+			blood_time -= time_clot_rate
 
 	if(blood_flow > highest_flow)
 		highest_flow = blood_flow
@@ -148,16 +155,18 @@
 	if(blood_flow < minimum_flow)
 		if(demotes_to)
 			replace_wound(demotes_to)
-		else
-			to_chat(victim, "<span class='green'>The cut on your [limb.name] has stopped bleeding!</span>")
-			qdel(src)
+			return
+	if(blood_time <= 0)
+		to_chat(victim, "<span class='green'>The cut on your [limb.name] has stopped bleeding!</span>")
+		qdel(src)
 
 /datum/wound/slash/on_stasis()
 	if(blood_flow < minimum_flow)
 		if(demotes_to)
 			replace_wound(demotes_to)
-		else
-			qdel(src)
+			return
+	if(blood_time <= 0)
+		qdel(src)
 		return
 
 /* BEWARE, THE BELOW NONSENSE IS MADNESS. bones.dm looks more like what I have in mind and is sufficiently clean, don't pay attention to this messiness */
@@ -177,6 +186,7 @@
 /datum/wound/slash/on_xadone(power)
 	. = ..()
 	blood_flow -= 0.03 * power // i think it's like a minimum of 3 power, so .09 blood_flow reduction per tick is pretty good for 0 effort
+	blood_time -= 0.03 * power // i think it's like a minimum of 3 power, so .09 blood_time reduction per tick is pretty good for 0 effort
 
 /// If someone's putting a laser gun up to our cut to cauterize it
 /datum/wound/slash/proc/las_cauterize(obj/item/gun/energy/laser/lasgun, mob/user)
@@ -199,7 +209,7 @@
 		return
 	victim.emote("scream")
 	blood_flow -= damage / (5 * time_mod) // 20 / 5 = 4 bloodflow removed, p good
-	cauterized += damage / (5 * time_mod)
+	blood_time -= damage / (5 * time_mod) // 20 / 5 = 4 bloodflow removed, p good
 	victim.visible_message("<span class='warning'>The cuts on [victim]'s [fake_limb ? "[fake_limb] stump" : limb.name] scar over!</span>")
 
 /// If someone is using either a cautery tool or something with heat to cauterize this cut
@@ -222,8 +232,7 @@
 		victim.emote("scream")
 	var/blood_cauterized = (0.6 / max(1, time_mod))
 	blood_flow -= blood_cauterized
-	cauterized += blood_cauterized
-
+	blood_time -= blood_cauterized
 	if(blood_flow > minimum_flow)
 		try_treating(I, user)
 	else if(demotes_to)
@@ -250,9 +259,8 @@
 	user.visible_message("<span class='green'>[user] stitches up some of the bleeding on [victim].</span>", "<span class='green'>You stitch up some of the bleeding on [user == victim ? "yourself" : "[victim]"].</span>")
 	var/blood_sutured = I.stop_bleeding / max(1, time_mod)
 	blood_flow -= blood_sutured
-	sutured += blood_sutured
+	blood_time -= blood_sutured
 	limb.heal_damage(I.heal_brute, I.heal_burn)
-
 	if(blood_flow > minimum_flow)
 		try_treating(I, user)
 	else if(demotes_to)
@@ -268,9 +276,11 @@
 	severity = WOUND_SEVERITY_MODERATE
 	viable_zones = ALL_BODYPARTS
 	initial_flow = 2
+	initial_time = 2
 	minimum_flow = 0.5
 	max_per_type = 3
-	clot_rate = 0.10
+	flow_clot_rate = 0.10
+	time_clot_rate = 0.10
 	threshold_minimum = 20
 	threshold_penalty = 10
 	status_effect_type = /datum/status_effect/wound/slash/moderate
@@ -291,8 +301,10 @@
 	severity = WOUND_SEVERITY_SEVERE
 	viable_zones = ALL_BODYPARTS
 	initial_flow = 3.25
+	initial_time = 3.25
 	minimum_flow = 2.75
-	clot_rate = 0.05
+	flow_clot_rate = 0.05
+	time_clot_rate = 0.05
 	max_per_type = 4
 	threshold_minimum = 50
 	threshold_penalty = 25
@@ -314,8 +326,10 @@
 	severity = WOUND_SEVERITY_CRITICAL
 	viable_zones = ALL_BODYPARTS
 	initial_flow = 4.25
+	initial_time = 4.25
 	minimum_flow = 4
-	clot_rate = -0.05 // critical cuts actively get worse instead of better
+	flow_clot_rate = -0.05 // critical cuts actively get worse instead of better
+	time_clot_rate = -0.05 // critical cuts actively get worse instead of better
 	max_per_type = 5
 	threshold_minimum = 80
 	threshold_penalty = 40

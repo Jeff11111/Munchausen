@@ -14,17 +14,12 @@
 
 	/// How much blood we start losing when this wound is first applied
 	var/initial_flow
+	/// How much bleeding we have left when this wound is first applied
+	var/initial_time
 	/// If gauzed, what percent of the internal bleeding actually clots of the total absorption rate
-	var/gauzed_clot_rate
-
-	/// How much flow we've already cauterized
-	var/cauterized
-	/// How much flow we've already sutured
-	var/sutured
-	/// When hit on this bodypart, we have this chance of losing some blood + the incoming damage
-	var/internal_bleeding_chance
-	/// If we let off blood when hit, the max blood lost is this * the incoming damage
-	var/internal_bleeding_coefficient
+	var/gauzed_flow_clot_rate
+	/// If gauze, how much the bleed timer decreases of the total absorption rate
+	var/gauzed_time_clot_rate
 
 	base_treat_time = 2.5 SECONDS
 	biology_required = list(HAS_FLESH)
@@ -43,25 +38,31 @@
 
 /datum/wound/pierce/wound_injury(datum/wound/old_wound)
 	blood_flow = initial_flow
+	blood_time = initial_time
 
 /datum/wound/pierce/handle_process()
 	blood_flow = min(blood_flow, WOUND_PIERCE_MAX_BLOODFLOW)
+	blood_time = min(blood_time, WOUND_PIERCE_MAX_BLOODTIME)
 
 	if(victim.bodytemperature < (BODYTEMP_NORMAL -  10))
 		blood_flow -= 0.2
+		blood_time -= 0.2
 		if(prob(5))
 			to_chat(victim, "<span class='notice'>You feel the [lowertext(name)] in your [limb.name] firming up from the cold!</span>")
 
 	if(victim?.reagents?.has_reagent(/datum/reagent/toxin/heparin))
 		blood_flow += 0.5 // old herapin used to just add +2 bleed stacks per tick, this adds 0.5 bleed flow to all open cuts which is probably even stronger as long as you can cut them first
+		blood_time += 0.5
 	else if(victim?.reagents?.has_reagent(/datum/reagent/medicine/coagulant))
 		blood_flow -= 0.25
+		blood_time -= 0.25
 
 	if(limb.current_gauze)
-		blood_flow -= limb.current_gauze.absorption_rate * gauzed_clot_rate
+		blood_flow -= limb.current_gauze.absorption_rate * gauzed_flow_clot_rate
+		blood_time -= limb.current_gauze.absorption_rate * gauzed_time_clot_rate
 		limb.current_gauze.absorption_capacity -= limb.current_gauze.absorption_rate
 
-	if(blood_flow <= 0)
+	if(blood_time <= 0)
 		qdel(src)
 
 /datum/wound/pierce/treat(obj/item/I, mob/user)
@@ -75,7 +76,7 @@
 /datum/wound/pierce/on_xadone(power)
 	. = ..()
 	blood_flow -= 0.03 * power // i think it's like a minimum of 3 power, so .09 blood_flow reduction per tick is pretty good for 0 effort
-
+	blood_time -= 0.03 * power
 
 /// If someone is using a suture to close this cut
 /datum/wound/pierce/proc/suture(obj/item/stack/medical/suture/I, mob/user)
@@ -98,7 +99,7 @@
 	user.visible_message("<span class='green'>[user] stitches up some of the bleeding on [victim].</span>", "<span class='green'>You stitch up some of the bleeding on [user == victim ? "yourself" : "[victim]"].</span>")
 	var/blood_sutured = I.stop_bleeding / max(1, time_mod)
 	blood_flow -= blood_sutured
-	sutured += blood_sutured
+	blood_time -= blood_sutured
 	limb.heal_damage(I.heal_brute, I.heal_burn)
 
 	if(blood_flow > 0)
@@ -127,7 +128,7 @@
 		victim.emote("scream")
 	var/blood_cauterized = (0.6 / max(1, time_mod))
 	blood_flow -= blood_cauterized
-
+	blood_time -= blood_cauterized
 	if(blood_flow > 0)
 		try_treating(I, user)
 
@@ -153,6 +154,7 @@
 		return
 	victim.emote("scream")
 	blood_flow -= damage / (5 * time_mod) // 20 / 5 = 4 bloodflow removed, p good
+	blood_time -= damage / (5 * time_mod)
 	victim.visible_message("<span class='warning'>The punctures on [victim]'s [fake_limb ? "[fake_limb] stump" : limb.name] scar over!</span>")
 
 /datum/wound/pierce/moderate
@@ -165,9 +167,9 @@
 	severity = WOUND_SEVERITY_MODERATE
 	viable_zones = ALL_BODYPARTS
 	initial_flow = 2
-	gauzed_clot_rate = 0.4
-	internal_bleeding_chance = 30
-	internal_bleeding_coefficient = 1.25
+	initial_time = 2
+	gauzed_flow_clot_rate = 0.4
+	gauzed_time_clot_rate = 0.4
 	threshold_minimum = 30
 	threshold_penalty = 20
 	status_effect_type = /datum/status_effect/wound/pierce/moderate
@@ -188,9 +190,9 @@
 	severity = WOUND_SEVERITY_SEVERE
 	viable_zones = ALL_BODYPARTS
 	initial_flow = 3.25
-	gauzed_clot_rate = 0.5
-	internal_bleeding_chance = 60
-	internal_bleeding_coefficient = 1.5
+	initial_time = 3.25
+	gauzed_flow_clot_rate = 0.5
+	gauzed_time_clot_rate = 0.5
 	threshold_minimum = 50
 	threshold_penalty = 35
 	status_effect_type = /datum/status_effect/wound/pierce/severe
@@ -210,9 +212,9 @@
 	severity = WOUND_SEVERITY_CRITICAL
 	viable_zones = ALL_BODYPARTS
 	initial_flow = 4.25
-	gauzed_clot_rate = 0.6
-	internal_bleeding_chance = 80
-	internal_bleeding_coefficient = 1.75
+	initial_time = 4.25
+	gauzed_flow_clot_rate = 0.6
+	gauzed_time_clot_rate = 0.6
 	threshold_minimum = 100
 	threshold_penalty = 50
 	status_effect_type = /datum/status_effect/wound/pierce/critical

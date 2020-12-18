@@ -13,12 +13,12 @@
 
 	/// How much blood we start losing when this wound is first applied
 	var/initial_flow
+	/// How much bleeding we have left when this wound is first applied
+	var/initial_time
 	/// If gauzed, what percent of the internal bleeding actually clots of the total absorption rate
-	var/gauzed_clot_rate
-	/// When hit on this bodypart, we have this chance of losing some blood + the incoming damage
-	var/internal_bleeding_chance
-	/// If we let off blood when hit, the max blood lost is this * the incoming damage
-	var/internal_bleeding_coefficient
+	var/gauzed_flow_clot_rate
+	/// If gauze, how much the bleed timer decreases of the total absorption rate
+	var/gauzed_time_clot_rate
 
 	requires_patch = FALSE
 	repeat_patch = TRUE
@@ -41,15 +41,18 @@
 
 /datum/wound/mechanical/pierce/wound_injury(datum/wound/old_wound)
 	blood_flow = initial_flow
+	blood_time = initial_time
 
 /datum/wound/mechanical/pierce/handle_process()
 	blood_flow = min(blood_flow, WOUND_SLASH_MAX_BLOODFLOW)
+	blood_time = min(blood_time, WOUND_PIERCE_MAX_BLOODTIME)
 
 	if(limb.current_gauze)
-		blood_flow -= limb.current_gauze.absorption_rate * gauzed_clot_rate
+		blood_flow -= limb.current_gauze.absorption_rate * gauzed_flow_clot_rate
+		blood_time -= limb.current_gauze.absorption_rate * gauzed_time_clot_rate
 		limb.current_gauze.absorption_capacity -= limb.current_gauze.absorption_rate
 
-	if(blood_flow <= 0)
+	if(blood_time <= 0)
 		qdel(src)
 
 /datum/wound/mechanical/pierce/treat(obj/item/I, mob/user)
@@ -95,7 +98,7 @@
 		user.visible_message("<span class='green'>[user] welds \the [lowertext(name)] [victim]'s [limb.name] with [I].</span>", "<span class='green'>You weld \the [lowertext(name)] on [user == victim ? "your" : "[victim]'s"] [limb.name] with [I].</span>")
 	var/blood_cauterized = (1 / time_mod) * max(0.5, patched)
 	blood_flow -= blood_cauterized
-
+	blood_time -= blood_cauterized
 	if(repeat_patch)
 		patched = 0
 
@@ -129,6 +132,7 @@
 	limb.heal_damage(3.5 * power/2, 3.5 * power)
 	var/blood_cauterized = power * 0.15
 	blood_flow -= blood_cauterized
+	blood_time -= blood_cauterized
 	patch = "[lowertext(I.name)]"
 	patched = power
 	user.visible_message("<span class='green'>[user] wraps [victim]'s [limb.name] with [I].</span>", "<span class='green'>You wrap [user == victim ? "your" : "[victim]'s"] [limb.name] with [I].</span>")
@@ -156,10 +160,10 @@
 	sound_effect = 'modular_skyrat/sound/effects/blood1.ogg'
 	severity = WOUND_SEVERITY_MODERATE
 	viable_zones = ALL_BODYPARTS
-	initial_flow = 1.5
-	gauzed_clot_rate = 0.8
-	internal_bleeding_chance = 30
-	internal_bleeding_coefficient = 1.25
+	initial_flow = 2
+	initial_time = 2
+	gauzed_flow_clot_rate = 0.4
+	gauzed_time_clot_rate = 0.4
 	threshold_minimum = 30
 	threshold_penalty = 20
 	status_effect_type = /datum/status_effect/wound/pierce/moderate
@@ -178,10 +182,10 @@
 	severity = WOUND_SEVERITY_SEVERE
 	viable_zones = ALL_BODYPARTS
 	treatable_by = list(/obj/item/stack/sheet)
-	initial_flow = 2.25
-	gauzed_clot_rate = 0.6
-	internal_bleeding_chance = 60
-	internal_bleeding_coefficient = 1.5
+	initial_flow = 3.25
+	initial_time = 3.25
+	gauzed_flow_clot_rate = 0.5
+	gauzed_time_clot_rate = 0.5
 	threshold_minimum = 50
 	threshold_penalty = 35
 	status_effect_type = /datum/status_effect/wound/pierce/severe
@@ -199,10 +203,10 @@
 	severity = WOUND_SEVERITY_CRITICAL
 	viable_zones = ALL_BODYPARTS
 	treatable_by = list(/obj/item/stack/sheet)
-	initial_flow = 3
-	gauzed_clot_rate = 0.4
-	internal_bleeding_chance = 80
-	internal_bleeding_coefficient = 1.75
+	initial_flow = 4.25
+	initial_time = 4.25
+	gauzed_flow_clot_rate = 0.6
+	gauzed_time_clot_rate = 0.6
 	threshold_minimum = 100
 	threshold_penalty = 50
 	status_effect_type = /datum/status_effect/wound/pierce/critical
