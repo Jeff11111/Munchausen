@@ -73,8 +73,8 @@
 	desc = "Checks if the host has no pulse."
 
 /datum/nanite_rule/pulse/check_rule()
-	if(iscarbon(program.hostmob))
-		var/mob/living/carbon/C = program.hostmob
+	if(iscarbon(program.host_mob))
+		var/mob/living/carbon/C = program.host_mob
 		if(C.pulse() <= PULSE_NONE)
 			return TRUE
 	return FALSE
