@@ -136,6 +136,16 @@
 	var/datum/nanite_rule/death/rule = new(target)
 	return rule
 
+/datum/nanite_program/sensor/pulse
+	name = "Pulse Sensor"
+	desc = "The nanites receive a signal when they detect the host has no pulse."
+	can_rule = TRUE
+	var/spent = FALSE
+
+/datum/nanite_program/sensor/pulse/make_rule(datum/nanite_program/target)
+	var/datum/nanite_rule/pulse/rule = new(target)
+	return rule
+
 /datum/nanite_program/sensor/nanite_volume
 	name = "Nanite Volume Sensor"
 	desc = "The nanites receive a signal when the nanite supply is above/below a certain percentage."

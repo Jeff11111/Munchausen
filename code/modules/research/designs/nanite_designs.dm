@@ -521,6 +521,13 @@
 	program_type = /datum/nanite_program/sensor/death
 	category = list("Sensor Nanites")
 
+/datum/design/nanites/sensor_pulse
+	name = "Pulse Sensor"
+	desc = "The nanites receive a signal when they detect the host has no pulse."
+	id = "sensor_pulse_nanites"
+	program_type = /datum/nanite_program/sensor/pulse
+	category = list("Sensor Nanites")
+
 /datum/design/nanites/sensor_voice
 	name = "Voice Sensor"
 	desc = "Sends a signal when the nanites hear a determined word or sentence."
