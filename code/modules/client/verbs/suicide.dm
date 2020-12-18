@@ -1,7 +1,10 @@
-/mob/var/suiciding = 0
+/mob
+	var/suiciding = FALSE
 
 /mob/living/carbon/human/verb/suicide()
-	set hidden = 1
+	set category = "IC"
+	set name = "Kill yourself"
+	set desc = "Put yourself out of your misery."
 	if(!canSuicide())
 		return
 	var/oldkey = ckey
@@ -78,10 +81,12 @@
 		suicide_log()
 
 		adjustOxyLoss(max(200 - getToxLoss() - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
-		death(0)
+		death()
 
 /mob/living/brain/verb/suicide()
-	set hidden = 1
+	set category = "IC"
+	set name = "Kill yourself"
+	set desc = "Put yourself out of your misery."
 	if(!canSuicide())
 		return
 	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
@@ -97,7 +102,9 @@
 		death(0)
 
 /mob/living/carbon/monkey/verb/suicide()
-	set hidden = 1
+	set category = "IC"
+	set name = "Kill yourself"
+	set desc = "Put yourself out of your misery."
 	if(!canSuicide())
 		return
 	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
@@ -114,7 +121,9 @@
 		death(0)
 
 /mob/living/silicon/ai/verb/suicide()
-	set hidden = 1
+	set category = "IC"
+	set name = "Kill yourself"
+	set desc = "Put yourself out of your misery."
 	if(!canSuicide())
 		return
 	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
@@ -150,7 +159,9 @@
 		death(0)
 
 /mob/living/silicon/pai/verb/suicide()
-	set hidden = 1
+	set category = "IC"
+	set name = "Kill yourself"
+	set desc = "Put yourself out of your misery."
 	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
 	if(confirm == "Yes")
 		var/turf/T = get_turf(src.loc)
@@ -164,7 +175,9 @@
 		to_chat(src, "Aborting suicide attempt.")
 
 /mob/living/carbon/alien/humanoid/verb/suicide()
-	set hidden = 1
+	set category = "IC"
+	set name = "Kill yourself"
+	set desc = "Put yourself out of your misery."
 	if(!canSuicide())
 		return
 	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
@@ -183,7 +196,9 @@
 		death(0)
 
 /mob/living/simple_animal/verb/suicide()
-	set hidden = 1
+	set category = "IC"
+	set name = "Kill yourself"
+	set desc = "Put yourself out of your misery."
 	if(!canSuicide())
 		return
 	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
@@ -213,12 +228,12 @@
 	switch(stat)
 		if(CONSCIOUS)
 			return TRUE
-		if(SOFT_CRIT)
-			to_chat(src, "You can't commit suicide while in a critical condition!")
 		if(UNCONSCIOUS)
 			to_chat(src, "You need to be conscious to commit suicide!")
 		if(DEAD)
 			to_chat(src, "You're already dead!")
+	if(InFullCritical())
+		to_chat(src, "You can't kill yourself while in a critical condition!")
 	return
 
 /mob/living/carbon/canSuicide()
