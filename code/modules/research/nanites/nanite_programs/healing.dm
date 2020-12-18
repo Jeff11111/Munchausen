@@ -192,6 +192,11 @@
 		for(var/obj/item/bodypart/L in parts)
 			if(L.heal_damage(3/parts.len, 3/parts.len, FALSE))
 				update = TRUE
+		for(var/obj/item/organ/O in C.internal_organs)
+			if(O.damage >= O.high_threshold)
+				O.applyOrganDamage(-1)
+			else
+				O.applyOrganDamage(-0.5)
 		if(update)
 			host_mob.update_damage_overlays()
 	else
@@ -258,4 +263,3 @@
 		log_game("[C] has been successfully defibrillated by nanites.")
 	else
 		playsound(C, 'sound/machines/defib_failed.ogg', 50, FALSE)
-
