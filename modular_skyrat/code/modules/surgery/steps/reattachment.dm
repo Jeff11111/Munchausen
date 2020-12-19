@@ -125,8 +125,8 @@
 					L.custom_overlay.pixel_x -= 16
 					L.custom_overlay.pixel_y += 0
 			target.regenerate_icons()
-			return 1
-		qdel(tool)
+			qdel(tool)
+			return TRUE
 
 //sewing a limb back on
 /datum/surgery_step/sew_limb
