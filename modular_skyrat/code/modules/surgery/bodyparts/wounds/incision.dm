@@ -23,6 +23,8 @@
 	wound_flags = (WOUND_SOUND_HINTS | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE | WOUND_VISIBLE_THROUGH_CLOTHING)
 
 /datum/wound/slash/critical/incision/build_wound_overlay()
+	if(!CHECK_BITFIELD(wound_flags, WOUND_RETRACTED_SKIN))
+		return FALSE
 	if(limb.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN))
 		var/icon_poggers = "dissected_[limb.body_zone]"
 		wound_overlay = mutable_appearance('modular_skyrat/icons/mob/wound_overlays.dmi', icon_poggers)

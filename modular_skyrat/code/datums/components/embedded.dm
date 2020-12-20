@@ -231,7 +231,7 @@
 	var/time_taken = rip_time * weapon.w_class
 	victim.visible_message("<span class='warning'>[user] attempts to remove [weapon] from [user == victim ? victim.p_their() : "[victim]'s"] [limb.name].</span>","<span class='notice'>You attempt to remove [weapon] from [user == victim ? "your" : "[victim]'s"] [limb.name]... (It will take [DisplayTimeText(time_taken)].)</span>")
 
-	if(!do_after(user, time_taken, target = victim))
+	if(!do_mob(user, victim, time_taken))
 		return
 	
 	if(!weapon || !limb || weapon.loc != victim || !(weapon in limb.embedded_objects))
@@ -263,7 +263,7 @@
 		else
 			weapon.forceMove(get_turf(victim))
 
-	SEND_SIGNAL(weapon, COMSIG_ITEM_ON_EMBED_REMOVAL)
+	SEND_SIGNAL(weapon, COMSIG_ITEM_ON_EMBED_REMOVAL, limb)
 	qdel(src)
 
 /// Something deleted or moved our weapon while it was embedded, how rude!

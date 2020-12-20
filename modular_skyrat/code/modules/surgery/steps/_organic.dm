@@ -94,6 +94,20 @@
 		var/datum/wound/slash/critical/incision = locate() in BP.wounds
 		if(incision)
 			incision.wound_flags |= WOUND_RETRACTED_SKIN
+			incision.build_wound_overlay()
+		tool.tryEmbed(BP, TRUE, TRUE)
+		RegisterSignal(tool, COMSIG_ITEM_ON_EMBED_REMOVAL, .proc/unspeculumize)
+		playsound(target, 'modular_skyrat/sound/gore/stuck2.ogg', 60, 0)
+		target.update_body()
+
+/datum/surgery_step/retract_skin/proc/unspeculumize(mob/source, obj/item/bodypart/limb)
+	var/datum/wound/slash/critical/incision = locate() in limb?.wounds
+	if(incision)
+		incision.wound_flags &= ~WOUND_RETRACTED_SKIN
+		incision.build_wound_overlay()
+	if(istype(source))
+		playsound(source, 'modular_skyrat/sound/gore/stuck1.ogg', 60, 0)
+		source.update_body()
 
 //saw bone
 /datum/surgery_step/saw

@@ -1,8 +1,8 @@
 /obj/item/retractor
-	name = "retractor"
+	name = "speculum"
 	desc = "A surgical tool to keep a patient wide open while you exhume their guts out."
 	icon = 'icons/obj/surgery.dmi'
-	icon_state = "retractor"
+	icon_state = "speculum"
 	custom_materials = list(/datum/material/iron=6000, /datum/material/glass=3000)
 	item_flags = SURGICAL_TOOL
 	flags_1 = CONDUCT_1
@@ -26,18 +26,18 @@
 		icon_state = "hemostat_a"
 	else
 		tool_behaviour = TOOL_RETRACTOR
-		to_chat(user, "<span class='notice'>You configure the gears of [src], they are now in retractor mode.</span>")
+		to_chat(user, "<span class='notice'>You configure the gears of [src], they are now in speculum mode.</span>")
 		icon_state = "retractor_a"
 
 /obj/item/retractor/advanced/examine(mob/living/user)
 	. = ..()
-	. += "<span class = 'notice> It resembles a [tool_behaviour == TOOL_RETRACTOR ? "retractor" : "hemostat"]. </span>"
+	. += "<span class = 'notice> It's gears resemble a [tool_behaviour == TOOL_RETRACTOR ? "speculum" : "hemostat"]. </span>"
 
 /obj/item/retractor/augment
-	name = "retractor"
+	name = "speculum"
 	desc = "Micro-mechanical manipulator for retracting stuff."
 	icon = 'icons/obj/surgery.dmi'
-	icon_state = "retractor"
+	icon_state = "speculum"
 	custom_materials = list(/datum/material/iron=6000, /datum/material/glass=3000)
 	flags_1 = CONDUCT_1
 	w_class = WEIGHT_CLASS_TINY
@@ -70,7 +70,7 @@
 
 /obj/item/cautery
 	name = "cautery"
-	desc = "This stops bleeding."
+	desc = "This seals wounds."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "cautery"
 	custom_materials = list(/datum/material/iron=2500, /datum/material/glass=750)
@@ -84,7 +84,7 @@
 
 /obj/item/cautery/augment
 	name = "cautery"
-	desc = "A heated element that cauterizes wounds."
+	desc = "This seals wounds, but better."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "cautery"
 	custom_materials = list(/datum/material/iron=2500, /datum/material/glass=750)
@@ -171,11 +171,9 @@
 	sharpness = SHARP_EDGED
 	tool_behaviour = TOOL_SCALPEL
 	toolspeed = 1
-	//skyrat edit
 	wound_bonus = 10
 	bare_wound_bonus = 10
 	germ_level = 0
-	//
 
 /obj/item/scalpel/Initialize()
 	. = ..()
@@ -272,11 +270,9 @@
 	sharpness = SHARP_EDGED
 	tool_behaviour = TOOL_SAW
 	toolspeed = 1
-	//skyrat edit
 	wound_bonus = 10
 	bare_wound_bonus = 10
 	germ_level = 0
-	//
 
 /obj/item/circular_saw/Initialize()
 	. = ..()

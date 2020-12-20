@@ -120,7 +120,7 @@
 	flow_clot_rate = 0
 	time_clot_rate = 0
 	descriptive = "The limb is disemboweled!"
-	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE | WOUND_VISIBLE_THROUGH_CLOTHING)
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_RETRACTED_SKIN | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE | WOUND_VISIBLE_THROUGH_CLOTHING)
 
 /datum/wound/slash/critical/incision/disembowel/get_examine_description(mob/user)
 	if(limb.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))
@@ -197,7 +197,7 @@
 	pain_amount = 40 //Just absolutely unbearable. Will send you into shock most of the time.
 	occur_text = null
 	descriptive = "The limb is disemboweled!"
-	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE | WOUND_VISIBLE_THROUGH_CLOTHING)
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_RETRACTED_SKIN | WOUND_MANGLES_SKIN | WOUND_MANGLES_MUSCLE | WOUND_VISIBLE_THROUGH_CLOTHING)
 
 /datum/wound/mechanical/slash/critical/incision/disembowel/get_examine_description(mob/user)
 	if(limb.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))

@@ -25,3 +25,4 @@
 #define GM_WRENCH "wrench"
 #define GM_STRANGLE "strangle"
 #define GM_TAKEDOWN "takedown"
+#define GM_EMBEDDED "embedded"

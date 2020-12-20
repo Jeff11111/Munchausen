@@ -62,7 +62,7 @@
 
 /// Icon updating
 /obj/item/grab/update_icon()
-	..()
+	. = ..()
 	switch(grasped_zone)
 		if(BODY_ZONE_PRECISE_NECK)
 			icon_state = GM_STRANGLE
@@ -72,6 +72,8 @@
 				icon_state = GM_SELF
 		else
 			icon_state = GM_WRENCH
+	if(length(grasped_part?.embedded_objects))
+		icon_state = GM_EMBEDDED
 	update_grab_mode()
 
 /// Desc and name updating
@@ -83,8 +85,13 @@
 			desc = "Grabbing <b>[grasped_mob]</b> by [grasped_mob.p_their()] [grasped_part.name]."
 		else
 			desc = "Grabbing [grasped_part.name]."
+		if(grab_mode == GM_EMBEDDED)
+			var/obj/item/I = grasped_part.embedded_objects[1]
+			if(istype(I))
+				name = "embedded [I.name]"
+				desc = "Pulling out [I.name]."
 	else if(grasped_mob)
-		name = "grasped <b>[grasped_mob]</b>"
+		name = "grasped [grasped_mob]"
 		desc = "Grabbing <b>[grasped_mob]</b>."
 	else
 		name = initial(name)
@@ -92,7 +99,7 @@
 
 /// Performing a move
 /obj/item/grab/attack_self(mob/user)
-	..()
+	. = ..()
 	if(iscarbon(grasped_mob) && (grasping_mob.next_move < world.time))
 		switch(grab_mode)
 			if(GM_WRENCH)
@@ -111,6 +118,12 @@
 				else if(!strangling)
 					if(grasped_part.get_wrenched(grasping_mob, grasped_mob))
 						actions_done++
+			if(GM_EMBEDDED)
+				if(length(grasped_part?.embedded_objects))
+					var/obj/item/embeddy = grasped_part.embedded_objects[1]
+					SEND_SIGNAL(grasped_mob, COMSIG_CARBON_EMBED_RIP, embeddy, grasped_part, user)
+				else
+					update_icon()
 
 /// Examining
 /obj/item/grab/examine(mob/user)
@@ -146,6 +159,7 @@
 	if(grasped_part)
 		RegisterSignal(grasped_part, COMSIG_PARENT_QDELETING, .proc/qdel_void)
 		RegisterSignal(grasped_mob, COMSIG_CARBON_REMOVE_LIMB, .proc/check_delimb)
+		RegisterSignal(grasped_mob, COMSIG_CARBON_EMBED_REMOVAL, /atom/.proc/update_icon)
 	
 	RegisterSignal(grasping_mob, COMSIG_LIVING_STOP_PULLING, .proc/qdel_void)
 	RegisterSignal(grasping_mob, COMSIG_LIVING_STOP_GRABBING, .proc/qdel_void)
