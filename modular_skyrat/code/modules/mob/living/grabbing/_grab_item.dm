@@ -47,6 +47,7 @@
 	if(grasped_mob)
 		UnregisterSignal(grasped_mob, COMSIG_PARENT_QDELETING)
 		UnregisterSignal(grasped_mob, COMSIG_CARBON_REMOVE_LIMB)
+		UnregisterSignal(grasped_mob, COMSIG_CARBON_EMBED_REMOVAL)
 	if(grasped_part)
 		UnregisterSignal(grasped_part, COMSIG_PARENT_QDELETING)
 		grasped_part.grasped_by = null
