@@ -11,7 +11,7 @@
 		return COMPONENT_INCOMPATIBLE
 	UnregisterSignal(parent, list(COMSIG_MOUSEDROPPED_ONTO, COMSIG_CLICK_ALT, COMSIG_CLICK_MIDDLE, \
 							COMSIG_ATOM_ATTACK_HAND, COMSIG_ITEM_PRE_ATTACK, COMSIG_ITEM_ATTACK_SELF, \
-							COMSIG_ITEM_PICKUP))
+							COMSIG_ITEM_PICKUP, COMSIG_PARENT_ATTACKBY))
 	addtimer(CALLBACK(src, .proc/update_insides), 1 SECONDS)
 
 //Gives all organs parent as stored_in
@@ -164,7 +164,9 @@
 	if(!istype(I) || (I.item_flags & ABSTRACT) || !is_accessible(parent))
 		return FALSE //Not an item
 	if(I == parent)
-		return FALSE	//no paradoxes for you
+		return FALSE //no paradoxes for you
+	if(M && (M.a_intent != INTENT_GRAB))
+		return FALSE //must be on grab intent
 	var/obj/item/organ/O = I
 	if(!istype(O) && !(bodypart_affected && !bodypart_affected.cavity_item && (I.w_class <= bodypart_affected.max_cavity_size)))
 		return FALSE
