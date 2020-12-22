@@ -126,18 +126,18 @@
 			eye_damaged = FALSE
 	var/datum/component/field_of_vision/fov = owner.GetComponent(/datum/component/field_of_vision)
 	if((eye_damaged >= BLIND_VISION_THREE) || is_disabled())
-		if(other_eye && (other_eye.eye_damaged < BLIND_VISION_THREE) && fov)
+		if(istype(other_eye) && (other_eye.eye_damaged < BLIND_VISION_THREE) && fov)
 			fov?.generate_fov_holder(owner, 45, FOV_180PLUS45_DEGREES, FALSE)
 		else
 			owner.become_blind(EYE_DAMAGE)
 	else if(eye_damaged)
 		owner.overlay_fullscreen("right_eye_damage", /obj/screen/fullscreen/impaired/right, eye_damaged)
-		if(!other_eye)
+		if(!istype(other_eye))
 			owner.overlay_fullscreen("left_eye_damage", /obj/screen/fullscreen/impaired, eye_damaged)
 			fov?.generate_fov_holder(owner, 315, FOV_180PLUS45_DEGREES, FALSE)
 	else
 		owner.clear_fullscreen("right_eye_damage")
-		if(!other_eye)
+		if(!istype(other_eye))
 			owner.clear_fullscreen("left_eye_damage")
 			fov?.generate_fov_holder(owner, 315, FOV_180PLUS45_DEGREES, FALSE)
 	if(eye_damaged < BLIND_VISION_THREE)
