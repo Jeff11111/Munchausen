@@ -2169,13 +2169,12 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 /datum/species/proc/althelp(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
 	if(user == target && istype(user))
 		if(IS_STAMCRIT(user))
-			to_chat(user, "<span class='warning'>I'm too exhausted for that.</span>")
+			to_chat(user, "<span class='warning'>I'm too exhausted for that!</span>")
 			return
 		if(user.IsKnockdown() || user.IsParalyzed() || user.IsStun())
 			to_chat(user, "<span class='warning'>I can't seem to force myself up right now!</span>")
 			return
 		if(CHECK_MOBILITY(user, MOBILITY_STAND))
-			to_chat(user, "<span class='notice'>I can only force myself up if I'm on the ground.</span>")
 			return
 		user.visible_message("<span class='notice'><b>[user]</b> forces [p_them()]self up to [p_their()] feet!</span>", "<span class='notice'>I force myself up to your feet!</span>")
 		user.set_resting(FALSE, TRUE)
