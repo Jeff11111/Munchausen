@@ -5,6 +5,7 @@
 	attack_verb = list("kicked", "stomped")
 	max_damage = 30
 	max_stamina_damage = 30
+	body_zone = BODY_ZONE_PRECISE_L_FOOT
 	body_part = FOOT_LEFT
 	body_damage_coeff = 0.75
 	px_x = -2

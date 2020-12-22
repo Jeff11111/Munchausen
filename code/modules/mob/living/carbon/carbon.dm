@@ -765,9 +765,9 @@
 
 	var/obj/item/bodypart/left_eye/LE = get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
 	var/obj/item/bodypart/right_eye/RE = get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
-	if(LE)
+	if(istype(LE))
 		. += LE.tint
-	else if(RE)
+	else if(istype(RE))
 		. += RE.tint
 	else
 		. += INFINITY

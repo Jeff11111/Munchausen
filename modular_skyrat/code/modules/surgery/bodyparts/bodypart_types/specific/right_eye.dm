@@ -85,7 +85,8 @@
 	C?.update_tint()
 	C?.update_sight()
 	var/obj/item/bodypart/left_eye/other_eye = C?.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
-	other_eye?.check_damage()
+	if(istype(other_eye))
+		other_eye?.check_damage()
 
 /obj/item/bodypart/right_eye/receive_damage(brute = 0, burn = 0, stamina = 0, blocked = 0, updating_health = TRUE, required_status = null, wound_bonus = 0, bare_wound_bonus = 0, sharpness = SHARP_NONE, spread_damage = TRUE, pain = 0, toxin = 0, clone = 0)
 	. = ..()
