@@ -10,14 +10,12 @@ NANITE SCANNER
 GENETICS SCANNER
 
 */
-//skyrat defines
 #define SCANMODE_HEALTH 0
 #define SCANMODE_CHEMICAL 1
 #define SCANMODE_WOUND 2
 #define SCANMODE_PAIN 3
 #define SCANNER_CONDENSED 0
 #define SCANNER_VERBOSE 1
-//
 
 /obj/item/t_scanner
 	name = "\improper T-ray scanner"
@@ -126,7 +124,6 @@ GENETICS SCANNER
 		return
 
 	user.visible_message("<span class='notice'>[user] has analyzed [M]'s vitals.</span>")
-	//skyrat edit
 	if(scanmode == SCANMODE_HEALTH)
 		healthscan(user, M, mode, advanced)
 	else if(scanmode == SCANMODE_CHEMICAL)
@@ -135,7 +132,6 @@ GENETICS SCANNER
 		woundscan(user, M, src)
 	else if(scanmode == SCANMODE_PAIN)
 		painscan(user, M, advanced)
-	//
 
 	add_fingerprint(user)
 
@@ -253,10 +249,8 @@ GENETICS SCANNER
 						switch(B.resilience)
 							if(TRAUMA_RESILIENCE_SURGERY)
 								trauma_desc += "severe "
-							//skyrat edit
 							if(TRAUMA_RESILIENCE_WOUND)
 								trauma_desc += "fracture-derived "
-							//
 							if(TRAUMA_RESILIENCE_LOBOTOMY)
 								trauma_desc += "deep-rooted "
 							if(TRAUMA_RESILIENCE_MAGIC, TRAUMA_RESILIENCE_ABSOLUTE)
@@ -325,8 +319,6 @@ GENETICS SCANNER
 
 			if(temp_message || damage_message)
 				msg += "\n<b><span class='info'>[uppertext(O.name)]:</b></span> [damage_message] [temp_message]\n"
-
-
 
 		//END; LOOK FOR MISSING ORGANS?
 		var/breathes = TRUE
@@ -407,8 +399,12 @@ GENETICS SCANNER
 		var/mob/living/carbon/C = M
 		for(var/obj/item/bodypart/BP in C.bodyparts)
 			if(BP.germ_level || BP.is_dead())
-				msg += "<span class='green'>Subject has an infected limb. Perform a wellbeing scan for more information.</span>\n"
+				msg += "<span class='green'>Subject's [BP.name] is infected. Perform a wellbeing scan for more information.</span>\n"
 				break
+			for(var/datum/injury/IN in BP.injuries)
+				if(IN.germ_level)
+					msg += "<span class='green'>Subject's [BP.name] has an infected injury. Disinfection is recommended.</span>\n"
+					break
 		for(var/obj/item/organ/O in C.bodyparts)
 			if(O.germ_level || O.is_dead())
 				msg += "<span class='green'>Subject has an infected organ. Perform a wellbeing scan for more information.</span>\n"

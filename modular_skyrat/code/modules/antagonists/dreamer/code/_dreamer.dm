@@ -154,7 +154,7 @@
 		var/obj/item/organ/brain/brain = dreamer.getorganslot(ORGAN_SLOT_BRAIN)
 		var/obj/item/bodypart/head/head = dreamer.get_bodypart(BODY_ZONE_HEAD)
 		if(head)
-			head.dismember_wound(WOUND_BURN)
+			head.apply_dismember(WOUND_BURN)
 		if(brain)
 			qdel(brain)
 		H.SetSleeping(250)
@@ -194,7 +194,7 @@
 	var/obj/item/organ/brain/brain = C.getorganslot(ORGAN_SLOT_BRAIN)
 	var/obj/item/bodypart/head/head = C.get_bodypart(BODY_ZONE_HEAD)
 	if(head)
-		head.dismember_wound(WOUND_BURN)
+		head.apply_dismember(WOUND_BURN)
 	if(brain)
 		qdel(brain)
 

@@ -36,10 +36,6 @@
 	var/how_open = bodypart_affected?.how_open()
 	if((bodypart_affected?.encased && CHECK_BITFIELD(how_open, SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_BROKEN)) || (!bodypart_affected?.encased && CHECK_BITFIELD(how_open, SURGERY_INCISED | SURGERY_RETRACTED)))
 		return TRUE
-	else if(locate(/datum/wound/slash/critical/incision/disembowel) in bodypart_affected?.wounds)
-		return TRUE
-	else if(locate(/datum/wound/mechanical/slash/critical/incision/disembowel) in bodypart_affected?.wounds)
-		return TRUE
 
 //Only open this if aiming at the correct limb
 /datum/component/storage/concrete/organ/on_attack_hand(datum/source, mob/user)
@@ -317,10 +313,8 @@
 			carbon_parent.custom_pain("MY [capitalize(O.name)] HURTS!", rand(30, 40))
 		if(!CHECK_BITFIELD(O.organ_flags, ORGAN_CUT_AWAY) && bodypart_affected)
 			bodypart_affected.generic_bleedstacks += 5
-			for(var/datum/wound/slash/fucked in bodypart_affected.wounds)
-				fucked.blood_flow += rand(2, 3)
-			for(var/datum/wound/pierce/shitted in bodypart_affected.wounds)
-				shitted.blood_flow += rand(2, 3)
+			for(var/datum/injury/fucked in bodypart_affected.wounds)
+				fucked.open_injury(rand(5, 15))
 		O.stored_in = null
 		O.Remove(FALSE)
 		O.organ_flags |= ORGAN_CUT_AWAY

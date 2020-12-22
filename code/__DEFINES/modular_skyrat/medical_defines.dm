@@ -40,19 +40,9 @@
 // Set wound_bonus on an item or attack to this to disable checking wounding for the attack
 #define CANT_WOUND -100
 
-// List in order of highest severity to lowest (if the wound is rolled for normally - there are edge cases like incisions)
-#define WOUND_LIST_INCISION	list(/datum/wound/slash/critical/incision)
-#define WOUND_LIST_INCISION_MECHANICAL	list(/datum/wound/mechanical/slash/critical/incision)
+// List in order of highest severity to lowest (if the wound is rolled for normally - there are edge cases)
 #define WOUND_LIST_BLUNT		list(/datum/wound/blunt/critical, /datum/wound/blunt/severe, /datum/wound/blunt/moderate/jaw, /datum/wound/blunt/moderate/ribcage, /datum/wound/blunt/moderate/hips, /datum/wound/blunt/moderate)
 #define WOUND_LIST_BLUNT_MECHANICAL list(/datum/wound/mechanical/blunt/critical, /datum/wound/mechanical/blunt/severe, /datum/wound/mechanical/blunt/moderate)
-#define WOUND_LIST_SLASH		list(/datum/wound/slash/critical, /datum/wound/slash/severe, /datum/wound/slash/moderate)
-#define WOUND_LIST_SLASH_MECHANICAL		list(/datum/wound/mechanical/slash/critical, /datum/wound/mechanical/slash/severe, /datum/wound/mechanical/slash/moderate)
-#define WOUND_LIST_LOSS			list(/datum/wound/loss, /datum/wound/slash/loss)
-#define WOUND_LIST_DISEMBOWEL			list(/datum/wound/disembowel, /datum/wound/slash/critical/incision/disembowel, /datum/wound/mechanical/slash/critical/incision/disembowel)
-#define WOUND_LIST_PIERCE		list(/datum/wound/pierce/critical, /datum/wound/pierce/severe, /datum/wound/pierce/moderate)
-#define WOUND_LIST_PIERCE_MECHANICAL		list(/datum/wound/mechanical/pierce/critical, /datum/wound/mechanical/pierce/severe, /datum/wound/mechanical/pierce/moderate)
-#define WOUND_LIST_BURN		list(/datum/wound/burn/critical, /datum/wound/burn/severe, /datum/wound/burn/moderate)
-#define WOUND_LIST_BURN_MECHANICAL		list(/datum/wound/mechanical/burn/critical, /datum/wound/mechanical/burn/severe, /datum/wound/mechanical/burn/moderate)
 #define WOUND_LIST_TENDON	list(/datum/wound/tendon)
 #define WOUND_LIST_ARTERY	list(/datum/wound/artery)
 
@@ -63,27 +53,7 @@
 #define WOUND_INFECTION_SEPTIC		1000 // below here, your skin is almost entirely falling off and your limb locks up more frequently. You are within a stone's throw of septic paralysis and losing the limb
 // Above WOUND_INFECTION_SEPTIC, your limb is completely putrid and you start rolling to lose the entire limb by way of paralyzation. After 3 failed rolls (~4-5% each probably), the limb is paralyzed
 
-#define WOUND_SLASH_MAX_BLOODFLOW		8 // how much blood you can lose per tick per slash max. 8 is a LOT of blood for one cut so don't worry about hitting it easily
-#define WOUND_PIERCE_MAX_BLOODFLOW		8 // same as above, but for piercing wounds
-#define WOUND_SLASH_MAX_BLOODTIME		8 // nigger time jnmbjfjbnnf tired to write
-#define WOUND_PIERCE_MAX_BLOODTIME		8 // same as above, but for piercing wounds
-#define WOUND_SLASH_DEAD_FLOW_CLOT_MIN		0.05 // dead people don't bleed, but they can clot! this is the minimum amount of clotting per tick on dead people, so even critical cuts will slowly clot in dead people
-#define WOUND_PIERCE_DEAD_FLOW_CLOT_MIN		0.05 // same as above but for piercing wounds
-#define WOUND_SLASH_DEAD_TIME_CLOT_MIN		0.05 // dead people don't bleed, but they can clot! this is the minimum amount of clotting per tick on dead people, so even critical cuts will slowly clot in dead people
-#define WOUND_PIERCE_DEAD_TIME_CLOT_MIN		0.05 // same as above but for piercing wounds
 #define WOUND_BONE_HEAD_TIME_VARIANCE 	20 // if we suffer a bone wound to the head that creates brain traumas, the timer for the trauma cycle is +/- by this percent (0-100)
-
-// The following are for persistent scar save formats
-// Do note that cosmetic scars don't use this format.
-#define SCAR_SAVE_VERS				1 // The version number of the scar we're saving
-#define SCAR_SAVE_ZONE				2 // The body_zone we're applying to on granting
-#define SCAR_SAVE_DESC				3 // The description we're loading
-#define SCAR_SAVE_PRECISE_LOCATION	4 // The precise location we're loading
-#define SCAR_SAVE_SEVERITY			5 // The severity the scar had
-
-// increment this number when you update the persistent scarring format in a way that invalidates previous saved scars (new fields, reordering, etc)
-// saved scars with a version lower than this will be discarded
-#define SCAR_CURRENT_VERSION 1
 
 // General dismemberment now requires 3 things for a limb to be dismemberable:
 //	1. Skin is mangled: At least a moderate slash or pierce wound
@@ -91,44 +61,66 @@
 // 	3. Bone is mangled: At least a severe bone wound on that limb
 // see [/obj/item/bodypart/proc/get_mangled_state()] for more information
 #define BODYPART_MANGLED_NONE	0
-#define BODYPART_MANGLED_SKIN	(1<<0)
-#define BODYPART_MANGLED_MUSCLE (1<<1)
-#define BODYPART_MANGLED_BONE	(1<<2)
-#define BODYPART_MANGLED_BOTH 	(BODYPART_MANGLED_SKIN | BODYPART_MANGLED_MUSCLE | BODYPART_MANGLED_BONE)
+#define BODYPART_MANGLED_MUSCLE (1<<0)
+#define BODYPART_MANGLED_BONE	(1<<1)
+#define BODYPART_MANGLED_BOTH 	(BODYPART_MANGLED_MUSCLE | BODYPART_MANGLED_BONE)
 
 // What kind of biology we have, and what wounds we can suffer, mostly relies on the HAS_FLESH and HAS_BONE species traits on human species
 #define BIO_INORGANIC	0 // golems, cannot suffer any wounds
 #define BIO_BONE	(1<<0) // skeletons and plasmemes, can only suffer bone wounds, only needs mangled bone to be able to dismember
 #define BIO_FLESH	(1<<1) // slimepeople can only suffer slashing, piercing, and burn wounds
-#define BIO_SKIN	(1<<2) // literally nothing right now
-#define BIO_FULL	(BIO_BONE | BIO_FLESH | BIO_SKIN) // standard humanoids, can suffer all wounds, needs mangled bone and flesh to dismember
+#define BIO_FULL	(BIO_BONE | BIO_FLESH) // standard humanoids, can suffer all wounds, needs mangled bone and flesh to dismember
 
-// Wound flags
+//Wound flags
 #define WOUND_MANGLES_SKIN (1<<0)
 #define WOUND_MANGLES_MUSCLE (1<<1)
 #define WOUND_MANGLES_BONE (1<<2)
 #define WOUND_VISIBLE_THROUGH_CLOTHING (1<<3)
 #define WOUND_SEEPS_GAUZE (1<<5)
-#define WOUND_SOUND_HINTS (1<<6)
-#define WOUND_RETRACTED_SKIN (1<<7)
-#define WOUND_DRILLED (1<<8)
-#define WOUND_SET_BONES (1<<9)
+#define WOUND_ACCEPTS_STUMP (1<<6)
+#define WOUND_SOUND_HINTS (1<<7)
+
+//Injury flags
+#define INJURY_SOUND_HINTS (1<<0)
+#define INJURY_BANDAGED (1<<1)
+#define INJURY_CLAMPED (1<<2)
+#define INJURY_SALVED (1<<3)
+#define INJURY_DISINFECTED (1<<4)
+#define INJURY_SURGICAL (1<<5)
+#define INJURY_RETRACTED_SKIN (1<<6)
+#define INJURY_DRILLED (1<<7)
+#define INJURY_SET_BONES (1<<8)
 
 //Organ status flags
 #define ORGAN_ORGANIC   (1<<0)
 #define ORGAN_ROBOTIC   (1<<1)
-#define ORGAN_NODAMAGE  (1<<2) //not yet implemented
+
+//Flags for the organ_flags var on /obj/item/organ
+#define ORGAN_SYNTHETIC			(1<<0)	//Synthetic organs, or cybernetic organs. Reacts to EMPs and don't deteriorate or heal
+#define ORGAN_FROZEN			(1<<1)	//Frozen organs, don't deteriorate
+#define ORGAN_FAILING			(1<<2)	//Failing organs perform damaging effects until replaced or fixed
+#define ORGAN_DEAD				(1<<3)  //Not only is the organ failing, it is completely septic and spreading it around
+#define ORGAN_EXTERNAL			(1<<4)	//Was this organ implanted/inserted/etc, if true will not be removed during species change.
+#define ORGAN_VITAL				(1<<5)	//Currently only the brain
+#define ORGAN_NO_SPOIL			(1<<6)	//Do not spoil under any circumstances
+#define ORGAN_NO_DISMEMBERMENT	(1<<7)	//Immune to disembowelment.
+#define ORGAN_EDIBLE			(1<<8)	//is a snack? :D
+#define ORGAN_CUT_AWAY			(1<<9)	//Required for ogan manipulation
 
 //Bodypart status flags
 #define BODYPART_ORGANIC	(1<<0)
 #define BODYPART_ROBOTIC	(1<<1)
-#define BODYPART_DEAD		(1<<2) //Completely septic and unusable limb
-#define BODYPART_SYNTHETIC	(1<<3) //Synthetic bodypart, can't get infected
-#define BODYPART_CUT_AWAY	(1<<4) //Just got reattached but needs to be sewn back on to organ
-#define BODYPART_FROZEN		(1<<5) //Cold, doesn't rot
-#define BODYPART_NOBLEED	(1<<6)
-#define BODYPART_NOEMBED	(1<<7)
-#define BODYPART_NOPAIN 	(1<<8)
+#define BODYPART_SYNTHETIC	(1<<2)
+
+//Flags for the limb_flags var on /obj/item/bodypart
+#define	BODYPART_VITAL		(1<<0) //Kills the owner if destroyed or dismembered
+#define BODYPART_DEAD		(1<<1) //Completely septic and unusable limb
+#define BODYPART_CUT_AWAY	(1<<2) //Just got reattached but needs to be sewn back on to organ
+#define BODYPART_FROZEN		(1<<3) //Cold, doesn't rot
+#define BODYPART_NOBLEED	(1<<4) //Does not bleed
+#define BODYPART_NOEMBED	(1<<5) //Does not suffer with embedding
+#define BODYPART_NOPAIN 	(1<<6) //Does not feel pain
+#define	BODYPART_HEALS_OVERKILL	(1<<7) //Heals bad injuries on it's own
 
 //Bodypart disabling defines
 #define BODYPART_NOT_DISABLED 0
@@ -258,18 +250,6 @@
 #define PAIN_LEVEL_2 10
 #define PAIN_LEVEL_3 40
 #define PAIN_LEVEL_4 70
-
-//Flags for the organ_flags var on /obj/item/organ
-#define ORGAN_SYNTHETIC			(1<<0)	//Synthetic organs, or cybernetic organs. Reacts to EMPs and don't deteriorate or heal
-#define ORGAN_FROZEN			(1<<1)	//Frozen organs, don't deteriorate
-#define ORGAN_FAILING			(1<<2)	//Failing organs perform damaging effects until replaced or fixed
-#define ORGAN_DEAD				(1<<3)  //Not only is the organ failing, it is completely septic and spreading it around
-#define ORGAN_EXTERNAL			(1<<4)	//Was this organ implanted/inserted/etc, if true will not be removed during species change.
-#define ORGAN_VITAL				(1<<5)	//Currently only the brain
-#define ORGAN_NO_SPOIL			(1<<6)	//Do not spoil under any circumstances
-#define ORGAN_NO_DISMEMBERMENT	(1<<7)	//Immune to disembowelment.
-#define ORGAN_EDIBLE			(1<<8)	//is a snack? :D
-#define ORGAN_CUT_AWAY			(1<<9)	//Required for ogan manipulation
 
 // Pulse levels, very simplified.
 #define PULSE_NONE    0   // So !M.pulse checks would be possible.

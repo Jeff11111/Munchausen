@@ -27,10 +27,6 @@
 	//bodyparts are actually created before we try to equip things to
 	//those slots
 
-	//skyrat edit
-	if(ancestor_chain > 1)
-		generate_fake_scars(rand(ancestor_chain, ancestor_chain * 4))
-	//
 	if(relic_hat)
 		equip_to_slot_or_del(new relic_hat, SLOT_HEAD)
 	if(relic_mask)

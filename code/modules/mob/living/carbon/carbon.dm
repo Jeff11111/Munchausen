@@ -993,10 +993,6 @@
 		var/datum/wound/w = i
 		if(istype(w))
 			w.remove_wound(FALSE, TRUE)
-	for(var/i in all_scars)
-		var/datum/scar/s = i
-		if(istype(s) && !s.permanent)
-			qdel(s)
 	if(admin_revive)
 		regenerate_limbs()
 		regenerate_organs()
@@ -1008,7 +1004,7 @@
 			for(var/addi in reagents.addiction_list)
 				reagents.remove_addiction(addi)
 	cure_all_traumas(TRAUMA_RESILIENCE_MAGIC)
-	..()
+	. = ..()
 	// heal ears after healing traits, since ears check TRAIT_DEAF trait
 	// when healing.
 	restoreEars()
@@ -1263,37 +1259,6 @@
 			dna.features["body_model"] = MALE
 	if(update_icon)
 		update_body()
-
-//skyrat edit
-/**
-  * generate_fake_scars()- for when you want to scar someone, but you don't want to hurt them first. These scars don't count for temporal scarring (hence, fake)
-  *
-  * If you want a specific wound scar, pass that wound type as the second arg, otherwise you can pass a list like WOUND_LIST_SLASH to generate a random cut scar.
-  *
-  * Arguments:
-  * * num_scars- A number for how many scars you want to add
-  * * forced_type- Which wound or category of wounds you want to choose from, WOUND_LIST_BLUNT, WOUND_LIST_SLASH, WOUND_LIST_PIERCE, or WOUND_LIST_BURN (or some combination). If passed a list, picks randomly from the listed wounds. Defaults to all 3 types
-  */
-/mob/living/carbon/proc/generate_fake_scars(num_scars, forced_type, permanent = FALSE)
-	for(var/i in 1 to num_scars)
-		var/datum/scar/S = new
-		var/obj/item/bodypart/BP = pick(bodyparts)
-
-		var/wound_type
-		if(forced_type)
-			if(islist(forced_type))
-				wound_type = pick(forced_type)
-			else
-				wound_type = forced_type
-		else
-			wound_type = pick(WOUND_LIST_BLUNT + WOUND_LIST_SLASH + WOUND_LIST_BURN + WOUND_LIST_PIERCE)
-
-		var/datum/wound/W = new wound_type
-		S.generate(BP, W)
-		S.fake = TRUE
-		if(permanent)
-			S.permanent = TRUE
-		QDEL_NULL(W)
 
 /mob/living/carbon/proc/get_total_bleed_rate()
 	var/total_bleed_rate = 0

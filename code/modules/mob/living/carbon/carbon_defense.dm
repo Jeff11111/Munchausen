@@ -83,7 +83,7 @@
 		send_item_attack_message(I, user, affecting.body_zone, totitemdamage, affecting)
 		//Clean the wound string
 		wound_message = ""
-		if(I.damtype == BRUTE && affecting.status == BODYPART_ORGANIC)
+		if(I.damtype == BRUTE && affecting.is_organic_limb())
 			var/basebloodychance = affecting.brute_dam + totitemdamage
 			if(prob(basebloodychance))
 				I.add_mob_blood(src)
@@ -131,10 +131,6 @@
 			extra_wound_details = ", [I.get_sharpness() == SHARP_EDGED ? "slicing" : "piercing"] through bone"
 			if(!hit_BP.is_organic_limb())
 				extra_wound_details = ", [I.get_sharpness() == SHARP_EDGED ? "slicing" : "piercing"] through internal components"
-		else if(mangled_state & BODYPART_MANGLED_SKIN || (mangled_state & BODYPART_MANGLED_SKIN && bio_state & BIO_SKIN))
-			extra_wound_details = ", [I.get_sharpness() == SHARP_EDGED ? "slicing" : "piercing"] through skin"
-			if(!hit_BP.is_organic_limb())
-				extra_wound_details = ", [I.get_sharpness() == SHARP_EDGED ? "slicing" : "piercing"] through armoring"
 
 	var/message_verb = "attacked"
 	if(LAZYLEN(I.attack_verb))
@@ -509,14 +505,14 @@
 /mob/living/carbon/getBruteLoss_nonProsthetic()
 	var/amount = 0
 	for(var/obj/item/bodypart/BP in bodyparts)
-		if (BP.status < 2)
+		if(!BP.is_robotic_limb())
 			amount += BP.brute_dam
 	return amount
 
 /mob/living/carbon/getFireLoss_nonProsthetic()
 	var/amount = 0
 	for(var/obj/item/bodypart/BP in bodyparts)
-		if (BP.status < 2)
+		if(!BP.is_robotic_limb())
 			amount += BP.burn_dam
 	return amount
 

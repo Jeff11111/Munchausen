@@ -3,7 +3,7 @@
 
 /mob/living/carbon/get_bodypart(zone)
 	if(!zone)
-		zone = BODY_ZONE_CHEST
+		return
 	for(var/X in bodyparts)
 		var/obj/item/bodypart/L = X
 		if(L.body_zone == zone)

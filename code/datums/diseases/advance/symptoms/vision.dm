@@ -74,7 +74,7 @@ Bonus
 							RE?.kill_limb()
 					else
 						M.visible_message("<span class='warning'>[M]'s eyes fall off their sockets!</span>", "<span class='userdanger'>Your eyes fall off their sockets!</span>")
-						LE?.dismember_wound(WOUND_SLASH)
-						RE?.dismember_wound(WOUND_SLASH)
+						LE?.apply_dismember(WOUND_SLASH)
+						RE?.apply_dismember(WOUND_SLASH)
 				else
 					to_chat(M, "<span class='userdanger'>Your eyes burn horrifically!</span>")

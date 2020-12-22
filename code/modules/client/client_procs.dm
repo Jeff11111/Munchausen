@@ -1031,4 +1031,4 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		winset(src, "mainwindow", "is-maximized=false;can-resize=false;titlebar=false;statusbar=false;menu=false")
 		winset(src, "mainwindow", "is-maximized=true")
 	else
-		winset(src, "mainwindow", "is-maximized=false;can-resize=true;titlebar=true;statusbar=true;menu=menu")
+		winset(src, "mainwindow", "is-maximized=false;can-resize=true;titlebar=true;statusbar=false;menu=menu")

@@ -42,7 +42,7 @@
 	/// Who owns the body part that we're wounding
 	var/mob/living/carbon/victim = null
 	/// What species traits we need in order to be applicable (HAS_SKIN, HAS_FLESH and HAS_BONE) ((monkeys and carbons are assumed to have all))
-	var/biology_required = list(HAS_SKIN, HAS_FLESH, HAS_BONE)
+	var/biology_required = list(HAS_FLESH, HAS_BONE)
 	/// What kind of limb statuses we can apply on
 	var/required_status = BODYPART_ORGANIC
 	/// The bodypart we're parented to
@@ -121,10 +121,6 @@
 	/// if you're a lazy git and just throw them in cryo, the wound will go away after accumulating severity * 25 power
 	var/cryo_progress
 
-	/// What kind of scars this wound will create description wise once healed
-	var/list/scarring_descriptions = list("general disfigurement")
-	/// If we've already tried scarring while removing (since remove_wound calls qdel, and qdel calls remove wound, .....) TODO: make this cleaner
-	var/already_scarred = FALSE
 	/// If we forced this wound through badmin smite, we won't count it towards the round totals
 	var/from_smite
 	/// Can we do a far cry and treat this wound just by clicking some text on the check self stuff?
@@ -199,7 +195,7 @@
   * * smited- If this is a smite, we don't care about this wound for stat tracking purposes (not yet implemented)
   */
 /datum/wound/proc/apply_wound(obj/item/bodypart/L, silent = FALSE, datum/wound/old_wound = null, smited = FALSE)
-	if(!istype(L) || !L.owner || !(L.body_zone in viable_zones) || isalien(L.owner))
+	if(!istype(L) || !L.owner || !(L.body_zone in viable_zones) || isalien(L.owner) || (L.is_stump() && !CHECK_BITFIELD(wound_flags, WOUND_ACCEPTS_STUMP)))
 		qdel(src)
 		return
 
@@ -249,8 +245,6 @@
 	//Send the bad mood event
 	if(severity >= WOUND_SEVERITY_SEVERE)
 		SEND_SIGNAL(victim, COMSIG_ADD_MOOD_EVENT, "wounded", /datum/mood_event/injured)
-		if(istype(src, /datum/wound/burn) && istype(L, /obj/item/bodypart/head))
-			ADD_TRAIT(victim, TRAIT_DISFIGURED, "burntraisin")
 
 	if(!(silent || demoted))
 		var/msg = "<span class='danger'>[victim]'s [limb.name] [occur_text]!</span>"
@@ -269,7 +263,6 @@
 
 	if(!demoted)
 		wound_injury(old_wound)
-		second_wind()
 	
 	//Update the descriptive string for combat, if we were silent
 	if(silent)
@@ -279,13 +272,6 @@
 /datum/wound/proc/remove_wound(ignore_limb, replaced = FALSE, forced = FALSE)
 	if(severity == WOUND_SEVERITY_PERMANENT && !forced)
 		return FALSE
-	//TODO: have better way to tell if we're getting removed without replacement (full heal) scar stuff
-	if(limb && !already_scarred && !replaced)
-		already_scarred = TRUE
-		if(limb.is_organic_limb())
-			if(CAN_SCAR in victim.dna?.species?.species_traits)
-				var/datum/scar/new_scar = new
-				new_scar.generate(limb, src)
 	if(victim)
 		LAZYREMOVE(victim.all_wounds, src)
 		SEND_SIGNAL(victim, COMSIG_CARBON_LOSE_WOUND, src, limb)
@@ -305,7 +291,6 @@
   */
 /datum/wound/proc/replace_wound(new_type, smited = FALSE, transfer_vars = FALSE, silent = FALSE)
 	var/datum/wound/new_wound = new new_type
-	already_scarred = TRUE
 	var/infected = germ_level
 	var/disinfected = sanitization
 	remove_wound(replaced=TRUE)
@@ -319,27 +304,6 @@
 /// The immediate negative effects faced as a result of the wound
 /datum/wound/proc/wound_injury(datum/wound/old_wound = null)
 	return
-
-/// Additional beneficial effects when the wound is gained, in case you want to give a temporary boost to allow the victim to try an escape or last stand
-/datum/wound/proc/second_wind()
-	if(!victim)
-		return
-	if(HAS_TRAIT(victim, TRAIT_NODETERMINATION)) //toby is gone
-		return
-	//Kidneys regulate the production of adrenaline (determination)
-	var/obj/item/organ/kidneys/kidneys = victim.getorganslot(ORGAN_SLOT_KIDNEYS)
-	if(kidneys && kidneys.get_adrenaline_multiplier())
-		switch(severity)	
-			if(WOUND_SEVERITY_MODERATE)
-				victim.reagents.add_reagent(/datum/reagent/determination, WOUND_DETERMINATION_MODERATE * kidneys.get_adrenaline_multiplier())
-			if(WOUND_SEVERITY_SEVERE)
-				victim.reagents.add_reagent(/datum/reagent/determination, WOUND_DETERMINATION_SEVERE * kidneys.get_adrenaline_multiplier())
-			if(WOUND_SEVERITY_CRITICAL)
-				victim.reagents.add_reagent(/datum/reagent/determination, WOUND_DETERMINATION_CRITICAL * kidneys.get_adrenaline_multiplier())
-			if(WOUND_SEVERITY_LOSS)
-				victim.reagents.add_reagent(/datum/reagent/determination, WOUND_DETERMINATION_LOSS * kidneys.get_adrenaline_multiplier())
-			if(WOUND_SEVERITY_PERMANENT)
-				victim.reagents.add_reagent(/datum/reagent/determination, WOUND_DETERMINATION_PERMANENT * kidneys.get_adrenaline_multiplier())
 
 /**
   * try_treating() is an intercept run from [/mob/living/carbon/attackby()] right after surgeries but before anything else. Return TRUE here if the item is something that is relevant to treatment to take over the interaction.

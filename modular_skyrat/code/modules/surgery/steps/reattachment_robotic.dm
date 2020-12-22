@@ -32,5 +32,5 @@
 		"[user] weld [L]'s [parse_zone(target_zone)] in place!",
 		"[user] weld [L]'s [parse_zone(target_zone)] in place!")
 	var/obj/item/bodypart/target_limb = target.get_bodypart(target_zone)
-	target_limb?.status |= ~BODYPART_CUT_AWAY
+	target_limb?.limb_flags &= ~BODYPART_CUT_AWAY
 	return TRUE

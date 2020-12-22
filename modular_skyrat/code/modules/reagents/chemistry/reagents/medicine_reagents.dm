@@ -206,31 +206,6 @@
 	pH = 6.5
 	value = REAGENT_VALUE_RARE
 	can_synth = TRUE
-	var/method_used = INJECT
-
-/datum/reagent/medicine/corticosteroids/reaction_mob(mob/living/M, method, reac_volume, show_message, touch_protection)
-	. = ..()
-	method_used = method
-
-/datum/reagent/medicine/corticosteroids/on_mob_life(mob/living/carbon/M)
-	. = ..()
-	if(iscarbon(M))
-		var/mob/living/carbon/C = M
-		if(method_used in list(INJECT, PATCH))
-			if(C.all_scars && C.all_scars.len)
-				var/datum/scar/S = pick(C.all_scars)
-				if(istype(S) && !S.permanent)
-					to_chat(C, "<span class='notice'>You feel one of your scars quickly fading away!</span>")
-					qdel(S)
-		else
-			C.adjust_disgust(10)
-			C.adjust_blurriness(10)
-			C.AdjustDazed(15)
-			if(prob(15))
-				C.vomit(20, TRUE, TRUE)
-			if(prob(5))
-				C.AdjustKnockdown(50, TRUE)
-				C.AdjustUnconscious(50)
 
 //Used to treat wounds - the effects vary depending on type
 /datum/reagent/medicine/fibrin

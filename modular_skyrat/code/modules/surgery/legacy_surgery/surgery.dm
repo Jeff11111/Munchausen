@@ -116,9 +116,6 @@
 		return null
 
 /datum/surgery/proc/complete()
-	if(operated_bodypart)
-		for(var/datum/wound/slash/critical/incision/inch in operated_bodypart.wounds)
-			inch.remove_wound()
 	SSblackbox.record_feedback("tally", "surgeries_completed", 1, type)
 	qdel(src)
 

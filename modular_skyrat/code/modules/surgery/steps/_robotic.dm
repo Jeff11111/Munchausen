@@ -16,7 +16,7 @@
 		return FALSE
 	var/mob/living/carbon/C = target
 	var/obj/item/bodypart/BP = C.get_bodypart(user.zone_selected)
-	if(locate(/datum/wound/mechanical/slash/critical) in BP?.wounds)
+	if(BP.get_incision(TRUE))
 		return FALSE
 
 /datum/surgery_step/mechanic_incise/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)

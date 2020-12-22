@@ -65,10 +65,8 @@
 				if(target_limb.body_zone == BODY_ZONE_HEAD)
 					gib_head(M)
 				else if(target_limb.body_zone == BODY_ZONE_PRECISE_GROIN)
-					target_limb.disembowel(BRUTE)
 					target_limb.receive_damage(target_limb.max_damage)
 				else if(target_limb.body_zone == BODY_ZONE_CHEST)
-					target_limb.disembowel(BRUTE)
 					target_limb.receive_damage(target_limb.max_damage)
 				else
 					target_limb.dismember(BRUTE, FALSE, TRUE)

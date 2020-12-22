@@ -271,7 +271,7 @@
 			if(B && src.pain)
 				B.receive_damage(pain = (src.pain*((100-blocked)/100)))
 			// So if you hit a robotic, it sparks instead of bloodspatters
-			if(B && B.status == BODYPART_ROBOTIC)
+			if(B && B.is_robotic_limb())
 				do_sparks(2, FALSE, target.loc)
 				if(prob(25))
 					new /obj/effect/decal/cleanable/oil(target_loca)

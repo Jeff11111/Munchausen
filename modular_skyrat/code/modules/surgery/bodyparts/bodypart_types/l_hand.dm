@@ -13,7 +13,6 @@
 	px_y = -3
 	stam_heal_tick = 3
 	parent_bodyzone = BODY_ZONE_L_ARM
-	dismember_bodyzone = BODY_ZONE_L_ARM
 	heal_zones = list(BODY_ZONE_L_ARM)
 	amputation_point = "left arm"
 	children_zones = list()

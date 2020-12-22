@@ -5,9 +5,9 @@
 	icon_state = "vertebrae"
 	max_damage = 30
 	max_stamina_damage = 30
-	dismember_bodyzone = BODY_ZONE_CHEST
 	body_zone = BODY_ZONE_PRECISE_NECK
 	body_part = NECK
+	heal_zones = list(BODY_ZONE_HEAD)
 	children_zones = list(BODY_ZONE_HEAD)
 	parent_bodyzone = BODY_ZONE_CHEST
 	w_class = WEIGHT_CLASS_BULKY

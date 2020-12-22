@@ -14,14 +14,12 @@
 	px_y = 12
 	stam_heal_tick = 4
 	amputation_point = "groin"
-	dismember_bodyzone = BODY_ZONE_PRECISE_GROIN
 	parent_bodyzone = BODY_ZONE_PRECISE_GROIN
 	children_zones = list(BODY_ZONE_PRECISE_R_FOOT)
 	heal_zones = list(BODY_ZONE_PRECISE_R_FOOT)
 	specific_locations = list("inner right thigh", "outer right calf", "outer right hip", "right kneecap", "lower right shin")
 	max_cavity_size = WEIGHT_CLASS_SMALL
 	dismember_mod = 0.8
-	disembowel_mod = 0.8
 	miss_entirely_prob = 12
 	zone_prob = 65
 	extra_zone_prob = 35

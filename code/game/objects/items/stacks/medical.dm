@@ -35,8 +35,8 @@
 	var/required_status = BODYPART_ORGANIC
 	/// What mode we're on (multiple limbs, singular limb)
 	var/mode = MODE_MULTIPLE
-	/// Cost per limb to apply healing
-	var/stackperlimb = 1
+	/// Cost per injury or limb to apply healing
+	var/stackperuse = 1
 
 /obj/item/stack/medical/examine(mob/user)
 	. = ..()
@@ -99,27 +99,21 @@
 		return
 	if(!(affecting.status & required_status)) //Limb must satisfy these status requirements
 		if(!silent)
-			to_chat(user, "<span class='warning'>\The [src] won't work on a robotic limb!</span>")
+			to_chat(user, "<span class='warning'>\The [src] won't work on that limb!</span>")
 		return
 	if(affecting.brute_dam && brute || affecting.burn_dam && burn)
 		if(!silent)
 			user.visible_message("<span class='green'>[user] applies \the [src] on [C]'s [affecting.name].</span>", "<span class='green'>You apply \the [src] on [C]'s [affecting.name].</span>")
-		var/brute2heal = brute
-		var/burn2heal = burn
-		if(affecting.heal_damage(brute2heal, burn2heal, heal_stamina, FALSE, FALSE, TRUE))
+		if(affecting.heal_damage(brute, burn, heal_stamina, FALSE, FALSE, TRUE))
 			C.update_damage_overlays()
-		use(stackperlimb)
+		use(stackperuse)
 		if(affect_children)
 			if(length(affecting.heal_zones))
-				var/childcount = 0
 				for(var/bodypart in affecting.heal_zones)
 					var/obj/item/bodypart/child = C.get_bodypart(bodypart)
 					if(!child)
 						continue
 					heal_carbon(C, user, brute, burn, TRUE, FALSE, child)
-					childcount++
-					if(childcount >= 2)
-						break
 		return TRUE
 	if(!silent)
 		to_chat(user, "<span class='warning'>[C]'s [affecting.name] can not be healed with \the [src]!</span>")
@@ -155,12 +149,63 @@
 		if(!silent)
 			user.visible_message("<span class='green'>[user] applies \the [src] on [M].</span>", "<span class='green'>You apply \the [src] on [M].</span>")
 		M.heal_bodypart_damage((heal_brute/2))
-		use(stackperlimb)
+		use(stackperuse)
 		return TRUE
 	if(iscarbon(M))
 		return heal_carbon(M, user, heal_brute, heal_burn, FALSE, (mode == MODE_MULTIPLE ? TRUE : FALSE))
 	if(!silent)
 		to_chat(user, "<span class='warning'>You can't heal [M] with \the [src]!</span>")
+
+/obj/item/stack/medical/bruise_pack/heal_carbon(mob/living/carbon/C, mob/user, brute, burn, silent, affect_children, obj/item/bodypart/specific_part)
+	var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(user.zone_selected))
+	if(specific_part)
+		affecting = specific_part
+	if(!affecting) //Missing limb?
+		if(!silent)
+			to_chat(user, "<span class='warning'>[C] doesn't have \a [parse_zone(user.zone_selected)]!</span>")
+		return
+	if(!(affecting.status & required_status)) //Limb must satisfy these status requirements
+		if(!silent)
+			to_chat(user, "<span class='warning'>\The [src] won't work on that limb!</span>")
+		return
+	if(affecting.is_bandaged())
+		if(!silent)
+			to_chat(user, "<span class='warning'>All wounds on \the [affecting] have been bandaged up!</span>")
+		return
+	if(affecting.brute_dam)
+		var/heymedic = GET_SKILL_LEVEL(user, firstaid)
+		for(var/datum/injury/IN in affecting.injuries)
+			if(IN.is_bandaged())
+				continue
+			if(!do_mob(user, C, IN.damage / (heymedic/2.5)))
+				to_chat(user, "<span class='warning'>I must stand still!</span>")
+				return
+			var/diceroll = user.mind?.diceroll(skills = heymedic)
+			if(!(diceroll >= DICE_CRIT_SUCCESS) && !use(stackperuse))
+				to_chat(src, "<span class='warning'>All used up...</span>")
+				return
+			if(diceroll >= DICE_CRIT_SUCCESS)
+				to_chat(src, "<span class='nicegreen'>I manage to economize on \the [src]'s use.</span>")
+			if(IN.current_stage <= IN.max_bleeding_stage)
+				user.visible_message("<span class='notice'>\The [user] bandages \a [IN.desc] on [C]'s [affecting.name].", \
+									"I bandage \a [IN.desc] on [C]'s [affecting.name].")
+			else if(IN.damage_type == WOUND_BLUNT)
+				user.visible_message("\The [user] places a bruise patch over \a [IN.desc] on [C]'s [affecting.name].", \
+									"I place a bruise patch over \a [IN.desc] on [C]'s [affecting.name].")
+			else
+				user.visible_message("\The [user] places a bandaid over \a [IN.desc] on [C]'s [affecting.name].", \
+									"I place a bandaid over \a [IN.desc] on [C]'s [affecting.name].")
+			IN.bandage()
+		if(affect_children)
+			if(length(affecting.heal_zones))
+				for(var/bodypart in affecting.heal_zones)
+					var/obj/item/bodypart/child = C.get_bodypart(bodypart)
+					if(!child)
+						continue
+					heal_carbon(C, user, brute, burn, TRUE, FALSE, child)
+		return TRUE
+	if(!silent)
+		to_chat(user, "<span class='warning'>[C]'s [affecting.name] can not be healed with \the [src]!</span>")
 
 /obj/item/stack/medical/bruise_pack/suicide_act(mob/user)
 	user.visible_message("<span class='suicide'>[user] is bludgeoning [user.p_them()]self with [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
@@ -180,9 +225,7 @@
 	absorption_rate = 0.25
 	absorption_capacity = 5
 	splint_factor = 0.35
-	custom_price = PRICE_REALLY_CHEAP
 
-// gauze is only relevant for wounds, which are handled in the wounds themselves
 /obj/item/stack/medical/gauze/try_heal(mob/living/M, mob/user, silent = FALSE, obj/item/bodypart/specific_part)
 	var/obj/item/bodypart/limb = M.get_bodypart(check_zone(user.zone_selected))
 	if(specific_part)
@@ -191,23 +234,6 @@
 		if(!silent)
 			to_chat(user, "<span class='notice'>There's nothing there to bandage!</span>")
 		return
-	
-	if(!LAZYLEN(limb.wounds))
-		if(!silent)
-			to_chat(user, "<span class='notice'>There's no wounds that require bandaging on [user==M ? "your" : "[M]'s"] [limb.name]!</span>") // good problem to have imo
-		return
-	
-	var/gauzeable_wound = FALSE
-	for(var/i in limb.wounds)
-		var/datum/wound/W = i
-		if(W.accepts_gauze)
-			gauzeable_wound = TRUE
-			break
-	if(!gauzeable_wound)
-		if(!silent)
-			to_chat(user, "<span class='notice'>There's no wounds that require bandaging on [user==M ? "your" : "[M]'s"] [limb.name]!</span>") // good problem to have imo
-		return
-
 	if(limb.current_gauze && (limb.current_gauze.absorption_capacity * 0.8 > absorption_capacity)) // ignore if our new wrap is < 20% better than the current one, so someone doesn't bandage it 5 times in a row
 		if(!silent)
 			to_chat(user, "<span class='warning'>The bandage currently on [user==M ? "your" : "[M]'s"] [limb.name] is still in good condition!</span>")
@@ -228,15 +254,11 @@
 		user.visible_message("<span class='green'>[user] applies [src] to [M]'s [limb.name].</span>", "<span class='green'>You bandage the wounds on [user == M ? "yourself" : "[M]'s"] [limb.name].</span>")
 	limb.apply_gauze(src)
 	if(mode == MODE_MULTIPLE)
-		var/childcount = 0
 		for(var/bodypart in limb.heal_zones)
 			var/obj/item/bodypart/child = M.get_bodypart(bodypart)
 			if(!child || !length(child.wounds))
 				continue
 			try_heal(M, user, silent, child, TRUE)
-			childcount++
-			if(childcount >= 2)
-				break
 
 /obj/item/stack/medical/gauze/twelve
 	amount = 12
@@ -310,6 +332,63 @@
 	stop_bleeding = 0.6
 	grind_results = list(/datum/reagent/medicine/spaceacillin = 2)
 
+/obj/item/stack/medical/suture/heal_carbon(mob/living/carbon/C, mob/user, brute, burn, silent, affect_children, obj/item/bodypart/specific_part)
+	var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(user.zone_selected))
+	if(specific_part)
+		affecting = specific_part
+	if(!affecting) //Missing limb?
+		if(!silent)
+			to_chat(user, "<span class='warning'>[C] doesn't have \a [parse_zone(user.zone_selected)]!</span>")
+		return
+	if(!(affecting.status & required_status)) //Limb must satisfy these status requirements
+		if(!silent)
+			to_chat(user, "<span class='warning'>\The [src] won't work on that limb!</span>")
+		return
+	var/has_cut_or_pierce = FALSE
+	for(var/datum/injury/IN in affecting.injuries)
+		if(IN.damage && (IN.damage_type in list(WOUND_PIERCE, WOUND_SLASH)))
+			has_cut_or_pierce = TRUE
+			break
+	if(!has_cut_or_pierce)
+		if(!silent)
+			to_chat(user, "<span class='warning'>All wounds on \the [affecting] have been closed up!</span>")
+		return
+	if(affecting.brute_dam)
+		var/heymedic = GET_SKILL_LEVEL(user, firstaid)
+		for(var/datum/injury/IN in affecting.injuries)
+			if(IN.is_salved())
+				continue
+			if(!do_mob(user, C, 1 SECONDS - (heymedic/4)))
+				to_chat(user, "<span class='warning'>I must stand still!</span>")
+				return
+			var/diceroll = user.mind?.diceroll(skills = heymedic)
+			if(!(diceroll >= DICE_CRIT_SUCCESS) && !use(stackperuse))
+				to_chat(src, "<span class='warning'>All used up...</span>")
+				return
+			if(diceroll >= DICE_CRIT_SUCCESS)
+				to_chat(src, "<span class='nicegreen'>I manage to economize on \the [src]'s use.</span>")
+			IN.heal_damage(rand(10, heal_brute))
+			if(IN.damage >= IN.autoheal_cutoff)
+				user.visible_message("<span class='notice'>\The [user] partially closes a wound on [C]'s [affecting.name] with \the [src].</span>", \
+				"<span class='notice'>I partially close a wound on [C]'s [affecting.name] with \the [src].</span>")
+			else
+				user.visible_message("<span class='notice'>\The [user] closes a wound on [C]'s [affecting.name] with \the [src].</span>", \
+				"<span class='notice'>I close a wound on [C]'s [affecting.name] with \the [src].</span>")
+				if(!IN.damage)
+					qdel(IN)
+				else if(IN.damage <= 10)
+					IN.clamp_injury()
+		if(affect_children)
+			if(length(affecting.heal_zones))
+				for(var/bodypart in affecting.heal_zones)
+					var/obj/item/bodypart/child = C.get_bodypart(bodypart)
+					if(!child)
+						continue
+					heal_carbon(C, user, brute, burn, TRUE, FALSE, child)
+		return TRUE
+	if(!silent)
+		to_chat(user, "<span class='warning'>[C]'s [affecting.name] can not be healed with \the [src]!</span>")
+
 /obj/item/stack/medical/suture/one
 	amount = 1
 
@@ -327,7 +406,7 @@
 	name = "medicated suture"
 	icon_state = "suture_purp"
 	desc = "A suture infused with drugs that speed up wound healing of the treated laceration."
-	heal_brute = 15
+	heal_brute = 20
 	stop_bleeding = 0.75
 	grind_results = list(/datum/reagent/medicine/polypyr = 2)
 
@@ -351,7 +430,7 @@
 		if(!silent)
 			user.visible_message("<span class='green'>[user] applies \the [src] on [M].</span>", "<span class='green'>You apply \the [src] on [M].</span>")
 		M.heal_bodypart_damage(heal_brute)
-		use(stackperlimb)
+		use(stackperuse)
 		return TRUE
 
 	to_chat(user, "<span class='warning'>You can't heal [M] with \the [src]!</span>")
@@ -383,6 +462,51 @@
 		return heal_carbon(M, user, heal_brute, heal_burn, FALSE, (mode == MODE_MULTIPLE ? TRUE : FALSE))
 	if(!silent)
 		to_chat(user, "<span class='warning'>You can't heal [M] with \the [src]!</span>")
+
+/obj/item/stack/medical/ointment/heal_carbon(mob/living/carbon/C, mob/user, brute, burn, silent, affect_children, obj/item/bodypart/specific_part)
+	var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(user.zone_selected))
+	if(specific_part)
+		affecting = specific_part
+	if(!affecting) //Missing limb?
+		if(!silent)
+			to_chat(user, "<span class='warning'>[C] doesn't have \a [parse_zone(user.zone_selected)]!</span>")
+		return
+	if(!(affecting.status & required_status)) //Limb must satisfy these status requirements
+		if(!silent)
+			to_chat(user, "<span class='warning'>\The [src] won't work on that limb!</span>")
+		return
+	if(affecting.is_salved())
+		if(!silent)
+			to_chat(user, "<span class='warning'>All wounds on \the [affecting] have been salved!</span>")
+		return
+	if(affecting.burn_dam)
+		var/heymedic = GET_SKILL_LEVEL(user, firstaid)
+		for(var/datum/injury/IN in affecting.injuries)
+			if(IN.is_salved())
+				continue
+			if(!do_mob(user, C, 1 SECONDS - (heymedic/4)))
+				to_chat(user, "<span class='warning'>I must stand still!</span>")
+				return
+			var/diceroll = user.mind?.diceroll(skills = heymedic)
+			if(!(diceroll >= DICE_CRIT_SUCCESS) && !use(stackperuse))
+				to_chat(src, "<span class='warning'>All used up...</span>")
+				return
+			if(diceroll >= DICE_CRIT_SUCCESS)
+				to_chat(src, "<span class='nicegreen'>I manage to economize on \the [src]'s use.</span>")
+			user.visible_message("<span class='notice'>\The [user] salves \a [IN.desc] on [C]'s [affecting.name].", \
+								"I salve \a [IN.desc] on [C]'s [affecting.name].")
+			IN.salve()
+			IN.disinfect()
+		if(affect_children)
+			if(length(affecting.heal_zones))
+				for(var/bodypart in affecting.heal_zones)
+					var/obj/item/bodypart/child = C.get_bodypart(bodypart)
+					if(!child)
+						continue
+					heal_carbon(C, user, brute, burn, TRUE, FALSE, child)
+		return TRUE
+	if(!silent)
+		to_chat(user, "<span class='warning'>[C]'s [affecting.name] can not be healed with \the [src]!</span>")
 
 /obj/item/stack/medical/ointment/suicide_act(mob/living/user)
 	user.visible_message("<span class='suicide'>[user] is squeezing \the [src] into [user.p_their()] mouth! [user.p_do(TRUE)]n't [user.p_they()] know that stuff is toxic?</span>")
@@ -528,7 +652,7 @@
 		if(!silent)
 			user.visible_message("<span class='green'>[user] applies \the [src] on [M].</span>", "<span class='green'>You apply \the [src] on [M].</span>")
 		M.heal_bodypart_damage(heal, heal)
-		use(stackperlimb)
+		use(stackperuse)
 		return TRUE
 
 	if(!silent)

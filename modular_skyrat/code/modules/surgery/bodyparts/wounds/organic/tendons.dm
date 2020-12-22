@@ -7,7 +7,7 @@
 	severity = WOUND_SEVERITY_CRITICAL
 	wound_type = WOUND_LIST_TENDON
 	viable_zones =	list(BODY_ZONE_PRECISE_NECK, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT)
-	threshold_minimum = 115
+	threshold_minimum = 90
 	threshold_penalty = 15
 	infection_chance = 0
 	infection_rate = 0
@@ -16,7 +16,7 @@
 	base_treat_time = 2 SECONDS
 	descriptive = "A tendon is torn!"
 	disabling = TRUE
-	wound_flags = (WOUND_SOUND_HINTS)
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_ACCEPTS_STUMP)
 	var/datum/speech_mod/aughaughgblerg
 	var/torn = 3
 
@@ -67,7 +67,7 @@
 		attempt_suture(I, user)
 
 /datum/wound/tendon/proc/attempt_suture(obj/item/stack/medical/I, mob/user)
-	if(!locate(/datum/wound/slash/critical/incision) in limb.wounds)
+	if(!limb.get_incision())
 		to_chat(user, "<span class='notice'>I must incise [limb] to treat it's torn [limb.tendon_name]!</span>")
 		return
 	user.visible_message("<span class='notice'>[user] begins stitching [victim]'s [limb] [limb.tendon_name] with [I]...</span>", \

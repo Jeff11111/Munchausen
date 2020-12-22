@@ -145,9 +145,7 @@
 	throwforce = 20
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "cut")
 	bayonet = TRUE
-	//skyrat edit
 	embedding = list("pain_mult" = 4, "embed_chance" = 65, "fall_chance" = 10, "ignore_throwspeed_threshold" = TRUE)
-	//
 
 /obj/item/kitchen/knife/combat/survival
 	name = "survival knife"
@@ -158,9 +156,7 @@
 	force = 15
 	throwforce = 15
 	bayonet = TRUE
-	//skyrat edit
 	embedding = list("pain_mult" = 4, "embed_chance" = 35, "fall_chance" = 10)
-	//
 
 /obj/item/kitchen/knife/combat/bone
 	name = "bone dagger"
@@ -173,9 +169,7 @@
 	force = 15
 	throwforce = 15
 	custom_materials = null
-	//skyrat edit
 	embedding = list("pain_mult" = 4, "embed_chance" = 35, "fall_chance" = 10)
-	//
 
 /obj/item/kitchen/knife/combat/bone/plastic
 	name = "plastic knife"
@@ -183,9 +177,7 @@
 	force = 1
 	throwforce = 1
 	bayonet = FALSE
-	//skyrat edit
-	embedding = NONE
-	//
+	embedding = EMBED_NONE
 
 /obj/item/kitchen/knife/combat/cyborg
 	name = "cyborg knife"

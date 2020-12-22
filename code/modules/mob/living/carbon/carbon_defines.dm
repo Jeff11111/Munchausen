@@ -70,6 +70,8 @@
 	//Bobmed stuff
 	/// All of the wounds a carbon has afflicted throughout their limbs
 	var/list/all_wounds = list()
+	/// All of the injuries a carbon has afflicted throughout their limbs
+	var/list/all_injuries = list()
 	/// All of the scars a carbon has afflicted throughout their limbs
 	var/list/all_scars = list()
 	/// Shock (new critical)

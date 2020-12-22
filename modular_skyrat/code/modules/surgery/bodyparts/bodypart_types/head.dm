@@ -37,12 +37,11 @@
 	//skyrat edit
 	wound_resistance = 10
 	specific_locations = list("left eyebrow", "right eyebrow", "cheekbone", "neck", "throat", "jawline", "entire face", "forehead")
-	scars_covered_by_clothes = FALSE
 	max_cavity_size = WEIGHT_CLASS_SMALL
 	parent_bodyzone = BODY_ZONE_PRECISE_NECK
+	heal_zones = list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_NECK)
 	children_zones = list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE, BODY_ZONE_PRECISE_MOUTH)
 	dismember_mod = 0.7
-	disembowel_mod = 0.7
 	dismember_sounds = list(
 		'modular_skyrat/sound/gore/head_explodie1.ogg',
 		'modular_skyrat/sound/gore/head_explodie2.ogg',

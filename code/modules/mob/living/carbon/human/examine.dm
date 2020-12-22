@@ -159,15 +159,13 @@
 	if(ears && !(SLOT_EARS_LEFT in obscured)) //skyrat edit
 		. += "[t_He] [t_has] [ears.get_examine_string(user)] on [t_his] left ear."
 	
-	//skyrat edit - extra ear slot haha
+	//extra ear slot haha
 	if(ears_extra && !(SLOT_EARS_RIGHT in obscured))
 		. += "[t_He] [t_has] [ears_extra.get_examine_string(user)] on [t_his] right ear."
 	
 	//wearing two ear items makes you look like an idiot
 	if((istype(ears, /obj/item/radio/headset) && !(SLOT_EARS_LEFT in obscured)) && (istype(ears_extra, /obj/item/radio/headset) && !(SLOT_EARS_RIGHT in obscured)))
 		. += "<span class='warning'>[t_He] looks quite tacky wearing both \an [ears.name] and \an [ears_extra.name] on [t_his] head.</span>"
-	
-	//
 
 	//ID
 	if(wear_id)
@@ -196,7 +194,7 @@
 			if(100 to 200)
 				. += "<span class='warning'>[t_He] [t_is] twitching ever so slightly.</span>"
 
-	var/list/dont_repeat_soaked = list()
+	var/list/clothing_items = list(head, wear_mask, wear_neck, wear_suit, w_uniform, belt, wrists, gloves, shoes)
 	var/list/msg = list()
 	var/list/missing = ALL_BODYPARTS
 	if(!screwy_self)
@@ -206,36 +204,34 @@
 					msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] stuck to [t_his] [BP.name]!</B>"
 				else
 					msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] embedded in [t_his] [BP.name]!</B>"
-			if(BP.is_dead())
-				msg += "<span class='deadsay'><B>[t_His] [BP.name] is completely necrotic!</B></span>"
 			if(BP.etching && !clothingonpart(BP))
 				msg += "<B>[t_His] [BP.name] has \"[BP.etching]\" etched on it!</B>"
+			if(BP.is_stump())
+				msg += "<B>[t_He] has a stump where his [parse_zone(BP.body_zone)] should be!</B>"
+			if(BP.grasped_by?.grasping_mob == src)
+				msg += "[t_He] is applying pressure to his [BP.name]!"
+			if(BP.is_dead())
+				msg += "<span class='deadsay'><B>[t_His] [BP.name] is completely necrotic!</B></span>"
+			var/obj/item/hidden
+			for(var/obj/item/I in clothing_items)
+				if(I && (I.body_parts_covered & BP.body_part))
+					hidden = I
+					break
 			for(var/datum/wound/W in BP.wounds)
-				var/list/clothing_items = list(head, wear_mask, wear_neck, wear_suit, w_uniform, belt, wrists, gloves, shoes)
-				var/obj/item/hidden
-				if(!CHECK_BITFIELD(W.wound_flags, WOUND_VISIBLE_THROUGH_CLOTHING))
-					for(var/obj/item/I in clothing_items)
-						if(I && (I.body_parts_covered & BP.body_part))
-							hidden = I
-							break
-				if(!hidden && W.get_examine_description(user))
+				if((!hidden || CHECK_BITFIELD(W.wound_flags, WOUND_VISIBLE_THROUGH_CLOTHING)) && W.get_examine_description(user))
 					msg += "[W.get_examine_description(user)]"
-					if(istype(W, /datum/wound/slash/critical/incision))
-						for(var/obj/item/organ/O in getorganszone(BP.body_zone))
-							for(var/i in O.surgical_examine(user))
-								msg += "<B>[icon2html(O.examine_icon ? O.examine_icon : O, user, O.examine_icon_state ? O.examine_icon_state : O.icon_state)] [i]</B>"
 					if((user != src) && W.severity >= WOUND_SEVERITY_CRITICAL)
 						if(GET_SKILL_LEVEL(user, firstaid) <= JOB_SKILLPOINTS_NOVICE)
 							SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured)
 						else
 							SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured/lesser)
-				else if(hidden && W.blood_flow && !CHECK_BITFIELD(hidden.item_flags, THICKMATERIAL))
-					var/bingus = "<span class='danger'><b>[t_He] has blood soaking through [t_his] [hidden.name]!</b></span>"
-					if(!(bingus in dont_repeat_soaked))
-						msg += bingus
-						dont_repeat_soaked |= bingus
+			if(hidden)
+				if(BP.get_bleed_rate())
+					msg += "<B>[t_He] has blood soaking through [hidden] around [t_his] [BP.name]!</B>"
+			else
+				if(length(BP.injuries))
+					msg += "[t_He] has [BP.get_injuries_desc()] on [t_his] [BP.name]"
 			missing -= BP.body_zone
-
 	//Teeth
 	if(!screwy_self)
 		for(var/obj/item/bodypart/teeth_part in bodyparts)
@@ -243,7 +239,6 @@
 				continue
 			else if(teeth_part.get_teeth_amount() < teeth_part.max_teeth)
 				msg += "<B>[capitalize(t_his)] [teeth_part.name] is missing [teeth_part.max_teeth - teeth_part.get_teeth_amount()] [teeth_part.max_teeth - teeth_part.get_teeth_amount() == 1 ? "tooth" : "teeth"]!</B>"
-
 	//stores missing limbs
 	var/l_limbs_missing = 0
 	var/r_limbs_missing = 0
@@ -257,14 +252,15 @@
 			else if(t == BODY_ZONE_R_ARM || t == BODY_ZONE_R_LEG || t == BODY_ZONE_PRECISE_L_HAND || t == BODY_ZONE_PRECISE_R_HAND)
 				r_limbs_missing++
 			
-			for(var/datum/wound/L in all_wounds)
-				if(L.severity == WOUND_SEVERITY_LOSS)
-					var/list/children_atomization = SSquirks.atomize_bodypart_heritage(L.limb?.body_zone)
-					if((L.fake_body_zone == t) || (L.fake_body_zone in children_atomization)) //There is already a missing parent bodypart or loss wound for us, no need to be redundant
-						should_msg = null
+			for(var/obj/item/bodypart/probable_stump in bodyparts)
+				if(!probable_stump.is_stump())
+					continue
+				var/list/children_atomization = SSquirks.atomize_bodypart_heritage(probable_stump.body_zone)
+				if(t in children_atomization) //There is already a stump parent bodypart, no need to be redundant
+					should_msg = null
 			
 			if(SSquirks.bodypart_child_to_parent[t])
-				if(SSquirks.bodypart_child_to_parent[t] in missing)
+				if(SSquirks.bodypart_child_to_parent[t] in missing) //There is already a stump parent bodypart, no need to be redundant
 					should_msg = null
 
 			if(should_msg)
@@ -558,23 +554,6 @@
 		if(!isnull(trait_exam))
 			msg += trait_exam
 
-	var/scar_severity = 0
-	if(!screwy_self)
-		for(var/i in all_scars)
-			var/datum/scar/S = i
-			if(istype(S) && S.is_visible(checkviewer = FALSE))
-				scar_severity += (S.severity/2)
-
-		switch(scar_severity)
-			if(WOUND_SEVERITY_TRIVIAL)
-				msg += "<span class='smallnotice'><i>[t_He] [t_has] visible scarring, i can look again to take a closer look...</i></span>"
-			if(WOUND_SEVERITY_MODERATE to WOUND_SEVERITY_SEVERE)
-				msg += "<span class='notice'><i>[t_He] [t_has] several bad scars, i can look again to take a closer look...</i></span>"
-			if(WOUND_SEVERITY_CRITICAL to WOUND_SEVERITY_PERMANENT)
-				msg += "<span class='notice'><b><i>[t_He] [t_has] significantly disfiguring scarring, i can look again to take a closer look...</i></b></span>"
-			if(WOUND_SEVERITY_LOSS to INFINITY)
-				msg += "<span class='notice'><b><i>[t_He] [t_is] just absolutely fucked up, i can look again to take a closer look...</i></b></span>"
-	
 	if(is_dreamer(user))
 		var/obj/item/organ/heart = getorganslot(ORGAN_SLOT_HEART)
 		if(heart && heart.etching && findtext(heart.etching, "<b>INRL</b> - "))
@@ -772,7 +751,7 @@
 	var/list/obj/item/bodypart/suppress_limbs = list()
 	for(var/i in bodyparts)
 		var/obj/item/bodypart/BP = i
-		if(BP.status & BODYPART_NOBLEED)
+		if(BP.limb_flags & BODYPART_NOBLEED)
 			suppress_limbs += BP
 
 	var/num_suppress = LAZYLEN(suppress_limbs)
@@ -791,19 +770,5 @@
 	if(num_suppress)
 		. += suppress_text
 	
-	var/list/visible_scars = list()
-	for(var/i in all_scars)
-		var/datum/scar/S = i
-		if(istype(S) && S.is_visible(user))
-			LAZYADD(visible_scars, S)
-	
-	for(var/i in visible_scars)
-		var/datum/scar/S = i
-		var/scar_text = S.get_examine_description(user)
-		if(scar_text)
-			. += scar_text
-	
-	if(!length(visible_scars))
-		. += "<span class='smallnotice'><i>[p_they(TRUE)] [p_have()] no visible scars.</i></span>"
 	. += "<span class='notice'>*---------*</span>"
 

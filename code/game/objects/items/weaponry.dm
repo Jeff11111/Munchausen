@@ -114,10 +114,8 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
 		loc.layer = LARGE_MOB_LAYER //NO HIDING BEHIND PLANTS FOR YOU, DICKWEED (HA GET IT, BECAUSE WEEDS ARE PLANTS)
-		//skyrat edit
 		for(var/obj/item/bodypart/BP in H.bodyparts)
-			BP.status |= BODYPART_NOBLEED //AND WE WON'T BLEED OUT LIKE COWARDS
-		//
+			BP.limb_flags |= BODYPART_NOBLEED //AND WE WON'T BLEED OUT LIKE COWARDS
 		H.adjustStaminaLoss(-50) //CIT CHANGE - AND MAY HE NEVER SUCCUMB TO EXHAUSTION
 	else
 		if(!(flags_1 & ADMIN_SPAWNED_1))

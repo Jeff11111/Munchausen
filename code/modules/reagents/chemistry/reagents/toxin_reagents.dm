@@ -154,16 +154,6 @@
 	pH = 12
 	value = REAGENT_VALUE_RARE
 
-//skyrat edit
-/datum/reagent/toxin/carpotoxin/on_mob_life(mob/living/carbon/M)
-	. = ..()
-	for(var/i in M.all_scars)
-		var/datum/scar/S = i
-		if(istype(S) && !S.permanent)
-			to_chat(M, "<span class='notice'>You feel \the [lowertext(S.description)] quickly fading away!</span>")
-			qdel(i)
-//
-
 /datum/reagent/toxin/zombiepowder
 	name = "Zombie Powder"
 	description = "A strong neurotoxin that puts the subject into a death-like state."

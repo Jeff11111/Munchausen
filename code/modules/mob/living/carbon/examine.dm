@@ -43,16 +43,24 @@
 				msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] embedded in [t_his] [BP.name]!</B>"
 		if(BP.etching)
 			msg += "<B>[t_His] [BP.name] has \"[BP.etching]\" etched on it!</B>"
+		if(BP.is_stump())
+			msg += "<B>[t_He] has a stump where his [parse_zone(BP.body_zone)] should be!</B>"
+		if(BP.grasped_by?.grasping_mob == src)
+			msg += "[t_He] is applying pressure to his [BP.name]!"
 		if(BP.is_dead())
 			msg += "<span class='deadsay'><B>[t_His] [BP.name] is completely necrotic!</B></span>"
 		for(var/datum/wound/W in BP.wounds)
 			if(W.get_examine_description(user))
 				msg += "[W.get_examine_description(user)]"
-				if(istype(W, /datum/wound/slash/critical/incision) || istype(W, /datum/wound/mechanical/slash/critical/incision))
-					for(var/obj/item/organ/O in getorganszone(BP.body_zone))
-						for(var/i in O.surgical_examine(user))
-							msg += "<B>[icon2html(O.examine_icon ? O.examine_icon : O, user, O.examine_icon_state ? O.examine_icon_state : O.icon_state)] [i]</B>"
-
+		if(length(BP.injuries))
+			msg += "[t_He] has [BP.get_injuries_desc()] on [t_his] [BP.name]"
+		missing -= BP.body_zone
+	//british detection
+	for(var/obj/item/bodypart/teeth_part in bodyparts)
+		if(!teeth_part.max_teeth)
+			continue
+		else if(teeth_part.get_teeth_amount() < teeth_part.max_teeth)
+			msg += "<B>[capitalize(t_his)] [teeth_part.name] is missing [teeth_part.max_teeth - teeth_part.get_teeth_amount()] [teeth_part.max_teeth - teeth_part.get_teeth_amount() == 1 ? "tooth" : "teeth"]!</B>"
 	//stores missing limbs
 	var/l_limbs_missing = 0
 	var/r_limbs_missing = 0
@@ -129,22 +137,6 @@
 			bleed_text += "\n[t_He] [t_is] holding [t_his] [grasped_part.name]!"
 		
 		msg += bleed_text
-	
-	var/scar_severity = 0
-	for(var/i in all_scars)
-		var/datum/scar/S = i
-		if(istype(S) && S.is_visible(user))
-			scar_severity += S.severity
-
-	switch(scar_severity)
-		if(WOUND_SEVERITY_TRIVIAL)
-			msg += "<span class='smallnotice'><i>[t_He] [t_has] visible scarring, i can look again to take a closer look...</i></span>"
-		if(WOUND_SEVERITY_MODERATE to WOUND_SEVERITY_SEVERE)
-			msg += "<span class='notice'><i>[t_He] [t_has] several bad scars, i can look again to take a closer look...</i></span>"
-		if(WOUND_SEVERITY_CRITICAL to WOUND_SEVERITY_PERMANENT)
-			msg += "<span class='notice'><b><i>[t_He] [t_has] significantly disfiguring scarring, i can look again to take a closer look...</i></b></span>"
-		if(WOUND_SEVERITY_LOSS to INFINITY)
-			msg += "<span class='notice'><b><i>[t_He] [t_is] just absolutely fucked up, i can look again to take a closer look...</i></b></span>"
 
 	if(is_dreamer(user))
 		var/obj/item/organ/heart = getorganslot(ORGAN_SLOT_HEART)
@@ -355,7 +347,7 @@
 	var/list/obj/item/bodypart/suppress_limbs = list()
 	for(var/i in bodyparts)
 		var/obj/item/bodypart/BP = i
-		if(BP.status & BODYPART_NOBLEED)
+		if(BP.limb_flags & BODYPART_NOBLEED)
 			suppress_limbs += BP
 
 	var/num_suppress = LAZYLEN(suppress_limbs)
@@ -373,21 +365,5 @@
 	suppress_text += ".</B></span>\n"
 	if(num_suppress)
 		msg += suppress_text
-	
-	var/list/visible_scars = list()
-	for(var/i in all_scars)
-		var/datum/scar/S = i
-		if(istype(S) && S.is_visible(user))
-			LAZYADD(visible_scars, S)
-	
-	for(var/i in visible_scars)
-		var/datum/scar/S = i
-		var/scar_text = S.get_examine_description(user)
-		if(scar_text)
-			msg |= "\t[scar_text]"
-	
-	if(!length(visible_scars))
-		msg |= "\t<span class='smallnotice'><i>[p_they(TRUE)] [p_have()] no visible scars.</i></span>"
-	
+
 	return msg
-//

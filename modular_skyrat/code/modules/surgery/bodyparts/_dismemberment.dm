@@ -3,11 +3,6 @@
 	if(owner && dismemberable && !HAS_TRAIT(owner, TRAIT_NODISMEMBER) && !(owner.status_flags & GODMODE))
 		return TRUE
 
-//Check if the limb is disembowable
-/obj/item/bodypart/proc/can_disembowel(obj/item/I)
-	if(owner && disembowable && !HAS_TRAIT(owner, TRAIT_NOGUT) && get_organs() && !(locate(/datum/wound/slash/critical/incision/disembowel) in wounds) && !(locate(/datum/wound/mechanical/slash/critical/incision/disembowel) in wounds) && !(owner.status_flags & GODMODE))
-		return TRUE
-
 //Dismember a limb
 /obj/item/bodypart/proc/dismember(dam_type = BRUTE, silent = FALSE, destroy = FALSE, wounding_type = WOUND_SLASH)
 	if(!can_dismember())
@@ -44,30 +39,6 @@
 	throw_at(target_turf, throw_range, throw_speed)
 	return TRUE
 
-//Disembowel a limb (opens up organ manipulation instantaneously)
-/obj/item/bodypart/proc/disembowel(dam_type = BRUTE, silent = FALSE, wound = FALSE, wounding_type = WOUND_SLASH)
-	if(!can_disembowel())
-		return FALSE
-
-	var/mob/living/carbon/C = owner
-	if(!silent)
-		C.visible_message("<span class='danger'><B>[C]'s [src.name] has been violently disemboweled!</B></span>")
-		playsound(get_turf(C), 'modular_skyrat/sound/gore/dismember.ogg', 80, TRUE)
-	
-	SEND_SIGNAL(C, COMSIG_ADD_MOOD_EVENT, "dismembered", /datum/mood_event/dismembered)
-	C.bleed(12)
-	add_mob_blood(C)
-	
-	receive_damage(clamp(20 * body_damage_coeff, 15, 50), wound_bonus=CANT_WOUND)
-	var/datum/wound/disembowel
-	if(is_organic_limb())
-		disembowel = new /datum/wound/slash/critical/incision/disembowel()
-	else
-		disembowel = new /datum/wound/mechanical/slash/critical/incision/disembowel()
-	
-	disembowel.apply_wound(src, TRUE)
-	return TRUE
-
 //Limb removal. The "special" argument is used for swapping a limb with a new one without the effects of losing a limb kicking in.
 //Destroyed just qdels the limb.
 /obj/item/bodypart/proc/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
@@ -85,46 +56,10 @@
 			C.dropItemToGround(owner.get_item_for_held_index(held_index), TRUE, TRUE)
 		C.hand_bodyparts[held_index] = null
 	
-	for(var/thing in scars)
-		var/datum/scar/S = thing
-		if(istype(S))
-			S.victim = null
-			LAZYREMOVE(owner.all_scars, S)
-
 	for(var/thing in wounds)
 		var/datum/wound/W = thing
 		W.remove_wound(TRUE)
 	
-	if(dismembered && dismember_bodyzone)
-		var/obj/item/bodypart/BP = owner.get_bodypart(check_zone(dismember_bodyzone))
-		if(istype(BP))
-			var/datum/wound/lost
-			if(BP.is_organic_limb())
-				lost = new /datum/wound/slash/loss()
-			else
-				lost = new /datum/wound/mechanical/slash/loss()
-			lost.name = "[lost.name] [lowertext(name)] stump"
-			lost.fake_limb = "[name]"
-			lost.fake_body_zone = body_zone
-			lost.desc = "Patient's [lowertext(name)] has been violently dismembered from [owner.p_their(FALSE)] [parse_zone(dismember_bodyzone)], leaving only a severely damaged stump in it's place."
-			lost.examine_desc = "has been violently severed from [owner.p_their(FALSE)] [parse_zone(dismember_bodyzone)]"
-			lost.descriptive = "\The [name] is violently dismembered!"
-			switch(wounding_type)
-				if(WOUND_BLUNT)
-					lost.descriptive = "\The [name] is shattered into gore!"
-					if(body_zone in list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE))
-						lost.descriptive = "\The [name] pops with a sickening clicking noise!"
-				if(WOUND_BURN)
-					lost.descriptive = "\The [name] is incinerated into dust!"
-				if(WOUND_SLASH)
-					lost.descriptive = "\The [name] is violently dismembered!"
-					if(body_zone in list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE))
-						lost.descriptive = "\The [name] is gouged out with a sickening clicking noise!"
-				if(WOUND_PIERCE)
-					lost.descriptive = "\The [name] is punctured into gore!"
-					if(body_zone in list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE))
-						lost.descriptive = "\The [name] pops with a sickening clicking noise!"
-			lost.apply_wound(BP, TRUE)
 	owner = null
 	if(!ignore_children)
 		for(var/BP in children_zones)
@@ -143,8 +78,11 @@
 		C.clear_alert("embeddedobject")
 		SEND_SIGNAL(C, COMSIG_CLEAR_MOOD_EVENT, "embedded")
 
+	for(var/i in injuries)
+		C.all_injuries -= i
+	
 	if(!special)
-		if(vital)
+		if(CHECK_BITFIELD(limb_flags, BODYPART_VITAL))
 			C.death()
 		if(C.dna)
 			for(var/X in C.dna.mutations) //some mutations require having specific limbs to be kept.
@@ -158,6 +96,26 @@
 				continue
 			O.transfer_to_limb(src, C)
 
+	if(dismembered) //Not a clean chopping off
+		var/obj/item/bodypart/stump/stump  = new(C)
+		stump.name = "stump of a [parse_zone(body_zone)]"
+		stump.body_zone = body_zone
+		stump.body_part = body_part
+		stump.amputation_point = amputation_point
+		stump.joint_name = joint_name
+		stump.parent_bodyzone = parent_bodyzone
+		stump.encased = encased
+		stump.dismember_sounds = dismember_sounds?.Copy()
+		stump.artery_name = "mangled [artery_name ? artery_name : "artery"]"
+		stump.tendon_name = "mangled [tendon_name ? tendon_name : "tendon"]"
+		stump.cavity_name = cavity_name
+		stump.miss_entirely_prob = miss_entirely_prob
+		stump.zone_prob = zone_prob
+		stump.extra_zone_prob = extra_zone_prob
+		stump.attach_limb(C, FALSE, FALSE)
+		var/datum/wound/artery/artery = new()
+		artery.apply_wound(stump, TRUE)
+	
 	update_icon_dropped()
 	if(destroyed)
 		for(var/obj/item/organ/O in src)
@@ -171,6 +129,8 @@
 	if(!Tsec || destroyed)	// Tsec = null happens when a "dummy human" used for rendering icons on prefs screen gets its limbs replaced.
 		qdel(src)
 		return
+	else
+		new /datum/injury/lost_limb(src, wounding_type, !dismembered)
 
 	//Start processing rotting... if we didn't get destroyed
 	START_PROCESSING(SSobj, src)
@@ -196,29 +156,24 @@
 /obj/item/bodypart/proc/get_mangled_state()
 	. = BODYPART_MANGLED_NONE
 	var/biological_state = owner?.get_biological_state()
-	var/required_bone_severity = WOUND_SEVERITY_SEVERE
-	var/required_muscle_severity = WOUND_SEVERITY_SEVERE
-	var/required_skin_severity = WOUND_SEVERITY_MODERATE
-
+	var/required_bone_severity = WOUND_SEVERITY_SEVERE //How fractured the bone needs to be, pretty much
+	var/required_muscle_severity = 15 //How much damage the cut or pierce injury must have
 	if(biological_state && (biological_state & BIO_BONE) && !(biological_state & BIO_FLESH) && !HAS_TRAIT(owner, TRAIT_EASYDISMEMBER))
 		required_bone_severity = WOUND_SEVERITY_CRITICAL
 	
 	if(biological_state && (biological_state & BIO_FLESH) && !(biological_state & BIO_FLESH) && !HAS_TRAIT(owner, TRAIT_EASYDISMEMBER))
-		required_muscle_severity = WOUND_SEVERITY_CRITICAL
+		required_muscle_severity = 25
 
-	if(biological_state && (biological_state == BIO_SKIN) && !HAS_TRAIT(owner, TRAIT_EASYDISMEMBER))
-		required_skin_severity = WOUND_SEVERITY_CRITICAL
-
-	// we can (generally) only have one wound per type, but remember there's multiple types
+	// fracture check
 	for(var/i in wounds)
 		var/datum/wound/W = i
-		if((W.wound_flags & WOUND_MANGLES_SKIN) && (W.severity >= required_skin_severity))
-			. |= BODYPART_MANGLED_SKIN
-		if((W.wound_flags & WOUND_MANGLES_MUSCLE) && (W.severity >= required_muscle_severity))
-			. |= BODYPART_MANGLED_MUSCLE
 		if((W.wound_flags & WOUND_MANGLES_BONE) && (W.severity >= required_bone_severity))
 			. |= BODYPART_MANGLED_BONE
 
+	for(var/i in injuries)
+		var/datum/injury/IN = i
+		if((IN.damage_type in list(WOUND_SLASH, WOUND_PIERCE)) && (IN.damage >= required_muscle_severity))
+			. |= BODYPART_MANGLED_MUSCLE
 /**
   * damage_integrity() is used, once we've confirmed that a flesh and bone bodypart has both the skin, muscle and bone mangled,
   * to try and damage it's integrity, which once it reaches 0... the bodypart is dismembered or gored.
@@ -238,14 +193,11 @@
 	
 	//High endurance - less dismemberment
 	if(owner?.mind)
-		wounding_dmg *= max(0.1, 2 - (GET_STAT_LEVEL(owner, end)/10))
+		wounding_dmg *= max(0.5, 2 - (GET_STAT_LEVEL(owner, end)/10))
 	
-	//If we have a compound fracture or a critical cut, then deal more integrity damage
+	//If we have a compound fracture or, then deal more integrity damage
 	if((locate(/datum/wound/blunt/critical) in wounds) || (locate(/datum/wound/mechanical/blunt/critical) in wounds))
 		wounding_dmg *= 1.35
-	else if((locate(/datum/wound/slash/critical) in wounds) || (locate(/datum/wound/pierce/critical) in wounds) || \
-			(locate(/datum/wound/mechanical/slash/critical) in wounds) || (locate(/datum/wound/mechanical/pierce/critical) in wounds))
-		wounding_dmg *= 1.15
 	
 	//Damage the integrity with the wounding damage
 	limb_integrity = max(0, limb_integrity - wounding_dmg)
@@ -273,28 +225,85 @@
 	if(!(limb_integrity <= 0))
 		return FALSE
 
-	dismember_wound(wounding_type, TRUE)
+	apply_dismember(wounding_type, TRUE)
 	return TRUE
 
-/obj/item/bodypart/proc/dismember_wound(wounding_type, silent = FALSE)
-	var/datum/wound/loss/dismembering = new()
-	dismembering.apply_dismember(src, wounding_type, silent)
-
-/obj/item/bodypart/proc/try_disembowel(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
-	if(!owner)
-		return
-	if(!can_disembowel() || !disembowable || (wounding_dmg < DISEMBOWEL_MINIMUM_DAMAGE) || ((wounding_dmg + wound_bonus) < DISEMBOWEL_MINIMUM_DAMAGE) || (wound_bonus <= CANT_WOUND))
+/obj/item/bodypart/proc/apply_dismember(wounding_type, silent = FALSE)
+	if(!owner || isalien(owner) || !can_dismember())
 		return FALSE
 
-	if(!(limb_integrity <= 0))
-		return FALSE
+	var/occur_text = "is slashed through the last tissue holding it together, severing it completely"
+	switch(wounding_type)
+		if(WOUND_BLUNT)
+			occur_text = "is shattered into a shower of gore"
+			if(is_robotic_limb())
+				occur_text = "is shattered into a shower of sparks"
+		if(WOUND_SLASH)
+			occur_text = "is slashed through the last bit of tissue holding it together, severing it completely"
+			if(is_robotic_limb())
+				occur_text = "is slashed through the last bit of exoskeleton layer holding it together, severing it completely"
+		if(WOUND_PIERCE)
+			occur_text = "is pierced through the last tissue holding it together, goring it into unrecognizable giblets"
+			if(is_robotic_limb())
+				occur_text = "is pierced through the last bit of exoskeleton holding it together, goring it into unrecognizable scrap metal"
+		if(WOUND_BURN)
+			occur_text = "is completely incinerated, falling to a pile of carbonized remains"
+			if(is_robotic_limb())
+				occur_text = "is completely incinerated, falling to a puddle of debris"
 
-	disembowel_wound(wounding_type, TRUE)
-	return TRUE
+	var/mob/living/carbon/poorsod = owner
+	if(prob(50 - GET_STAT_LEVEL(poorsod, end)))
+		poorsod.confused += max(0, 15 - GET_STAT_LEVEL(poorsod, end))
+	if((body_zone == BODY_ZONE_PRECISE_GROIN) && prob(35 - GET_STAT_LEVEL(poorsod, end)))
+		poorsod.vomit(15, 15, 25)
+	if(prob(60 - GET_STAT_LEVEL(poorsod, end)))
+		poorsod.death_scream()
 
-/obj/item/bodypart/proc/disembowel_wound(wounding_type, silent = FALSE)
-	var/datum/wound/disembowel/disemboweled = new()
-	return disemboweled.apply_disembowel(src, wounding_type, silent)
+	var/msg = "<b><span class='danger'>[poorsod]'s [name] [occur_text]!</span></b>"
+
+	if(!silent)
+		poorsod.visible_message(msg, "<span class='userdanger'>Your [name] [occur_text]!</span>")
+
+	if(wounding_type == WOUND_BURN)
+		if(is_organic_limb())
+			new /obj/effect/decal/cleanable/ash(get_turf(owner))
+		if(is_robotic_limb())
+			new /obj/effect/decal/remains/robot(get_turf(owner))
+	
+	//apply the blood gush effect
+	if(wounding_type != WOUND_BURN && owner)
+		var/direction = owner.dir
+		direction = turn(direction, 180)
+		var/bodypart_turn = 0 //relative north
+		if(body_zone in list(BODY_ZONE_L_ARM, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_PRECISE_L_HAND))
+			bodypart_turn = -90 //relative east
+		else if(body_zone in list(BODY_ZONE_R_ARM, BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_R_HAND))
+			bodypart_turn = 90 //relative west
+		direction = turn(direction, bodypart_turn)
+		var/dist = rand(3, 5)
+		var/turf/targ = get_ranged_target_turf(owner, direction, dist)
+		if(istype(targ) && dist > 0 && ((owner.mob_biotypes & MOB_ORGANIC) || (owner.mob_biotypes & MOB_HUMANOID)) && owner.needs_heart() && !owner.is_asystole() && (ishuman(owner) ? !(NOBLOOD in owner.dna?.species?.species_traits) : TRUE))
+			var/obj/effect/decal/cleanable/blood/hitsplatter/B = new(owner.loc, owner.get_blood_dna_list())
+			B.add_blood_DNA(owner.get_blood_dna_list())
+			B.GoTo(targ, dist)
+
+	var/should_kaplosh = FALSE
+	if(wounding_type in list(WOUND_BURN, WOUND_PIERCE, WOUND_BLUNT))
+		should_kaplosh = TRUE
+	var/kaplosh_sound = pick(
+		'modular_skyrat/sound/gore/chop1.ogg',
+		'modular_skyrat/sound/gore/chop2.ogg',
+		'modular_skyrat/sound/gore/chop3.ogg',
+		'modular_skyrat/sound/gore/chop4.ogg',
+		'modular_skyrat/sound/gore/chop5.ogg',
+		'modular_skyrat/sound/gore/chop6.ogg',
+	)
+	if(length(dismember_sounds))
+		kaplosh_sound = pick(dismember_sounds)
+	if(is_robotic_limb())
+		kaplosh_sound = 'modular_skyrat/sound/effects/crowbarhit.ogg'
+	playsound(owner, kaplosh_sound, 80, 0)
+	dismember(dam_type = (wounding_type == WOUND_BURN ? BURN : BRUTE), silent = TRUE, destroy = should_kaplosh, wounding_type = wounding_type)
 
 //Stuff you do when you go inside a parent limb that was chopped off
 /obj/item/bodypart/proc/on_transfer_to_limb(obj/item/bodypart/BP)
@@ -347,23 +356,22 @@
 		for(var/datum/wound/woundie in parent.wounds)
 			if((woundie.fake_body_zone == body_zone) && (woundie.severity == WOUND_SEVERITY_LOSS))
 				woundie.remove_wound()
+		for(var/datum/injury/lost_limb/lost_limb in injuries)
+			qdel(lost_limb)
 	
 	//Insert stored organs on the owner
 	for(var/obj/item/organ/O in contents)
 		O.Insert(C)
-	
-	//Add scars to the owner
-	for(var/thing in scars)
-		var/datum/scar/S = thing
-		if(istype(S))
-			S.victim = C
-			LAZYADD(C.all_scars, thing)
 	
 	//Apply stored wounds to the owner
 	for(var/i in wounds)
 		var/datum/wound/W = i
 		W.apply_wound(src, TRUE)
 
+	//Add injuries to the owner's injury list
+	for(var/i in injuries)
+		C.all_injuries |= i
+	
 	update_bodypart_damage_state()
 	update_disabled()
 
@@ -407,8 +415,4 @@
 			L.render_like_organic = TRUE
 		
 		L.attach_limb(src, TRUE, ignore_parent_restriction)
-		var/datum/scar/S = new
-		var/datum/wound/loss/phantom_loss = new
-		S.generate(L, phantom_loss)
-		QDEL_NULL(phantom_loss)
 		return L

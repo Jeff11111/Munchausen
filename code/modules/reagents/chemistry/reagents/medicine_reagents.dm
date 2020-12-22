@@ -72,12 +72,6 @@
 		if(D.severity == DISEASE_SEVERITY_POSITIVE)
 			continue
 		D.cure()
-	//skyrat edit
-	for(var/i in M.all_scars)
-		var/datum/scar/S = i
-		if(istype(S) && !S.permanent)
-			qdel(i)
-	//
 	..()
 	. = 1
 
@@ -295,12 +289,6 @@
 				to_chat(M, "<span class='warning'>You don't feel so good...</span>")
 		else if(M.getFireLoss())
 			M.adjustFireLoss(-reac_volume)
-			//skyrat edit
-			if(iscarbon(M))
-				var/mob/living/carbon/carbies = M
-				for(var/datum/wound/burn/burn_wound in carbies.all_wounds)
-					burn_wound.regenerate_flesh(reac_volume)
-			//
 			if(show_message)
 				to_chat(M, "<span class='danger'>You feel your burns healing! It stings like hell!</span>")
 			M.emote("scream")

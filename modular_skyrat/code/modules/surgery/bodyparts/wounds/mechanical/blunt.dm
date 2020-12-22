@@ -27,6 +27,7 @@
 
 	base_treat_time = 5 SECONDS
 	biology_required = list(HAS_BONE)
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_VISIBLE_THROUGH_CLOTHING | WOUND_MANGLES_BONE)
 	required_status = BODYPART_ROBOTIC
 	pain_amount = 3
 
@@ -45,7 +46,7 @@
 		active_trauma = victim.gain_trauma_type(brain_trauma_group, TRAUMA_RESILIENCE_WOUND)
 		next_trauma_cycle = world.time + (rand(100-WOUND_BONE_HEAD_TIME_VARIANCE, 100+WOUND_BONE_HEAD_TIME_VARIANCE) * 0.01 * trauma_cycle_cooldown)
 
-	//RegisterSignal(victim, COMSIG_HUMAN_EARLY_UNARMED_ATTACK, .proc/attack_with_hurt_hand)
+	RegisterSignal(victim, COMSIG_HUMAN_EARLY_UNARMED_ATTACK, .proc/attack_with_hurt_hand)
 	if(limb.held_index && victim.get_item_for_held_index(limb.held_index) && (disabling || prob(30 * severity)))
 		var/obj/item/I = victim.get_item_for_held_index(limb.held_index)
 		if(istype(I, /obj/item/offhand))
@@ -214,7 +215,6 @@
 	threshold_minimum = 35
 	threshold_penalty = 15
 	status_effect_type = /datum/status_effect/wound/blunt/moderate
-	scarring_descriptions = list("light discoloring", "a slight blue tint")
 	associated_alerts = list()
 	can_self_treat = TRUE
 	pain_amount = 10
@@ -374,7 +374,6 @@
 	threshold_penalty = 30
 	status_effect_type = /datum/status_effect/wound/blunt/severe
 	treat_priority = TRUE
-	scarring_descriptions = list("a faded, fist-sized bruise", "a vaguely triangular peel scar")
 	brain_trauma_group = BRAIN_TRAUMA_MILD
 	trauma_cycle_cooldown = 1.5 MINUTES
 	shock_chance = 30
@@ -402,13 +401,11 @@
 	disabling = TRUE
 	status_effect_type = /datum/status_effect/wound/blunt/critical
 	treat_priority = TRUE
-	scarring_descriptions = list("a section of janky skin lines and badly healed scars", "a large patch of uneven skin tone", "a cluster of calluses")
 	brain_trauma_group = BRAIN_TRAUMA_SEVERE
 	trauma_cycle_cooldown = 2.5 MINUTES
 	shock_chance = 45
 	pain_amount = 30
 	flat_damage_roll_increase = 15
-	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_BONE)
 	descriptive = "A joint is shattered!"
 
 /// if someone is using a reagent container

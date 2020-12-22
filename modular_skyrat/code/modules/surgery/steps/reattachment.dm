@@ -87,7 +87,7 @@
 			"[user] finishes attaching [tool]!",
 			"[user] finishes the attachment procedure!")
 		if(istype(tool))
-			var/obj/item/new_limb = new(target)
+			var/obj/item/new_limb = new tool.type(target)
 			if(target_zone == BODY_ZONE_PRECISE_R_HAND)
 				target.put_in_r_hand(new_limb)
 				ADD_TRAIT(new_limb, TRAIT_NODROP, "surgery")
@@ -161,5 +161,5 @@
 		"[user] sews [L]'s [parse_zone(target_zone)] in place!",
 		"[user] sews [L]'s [parse_zone(target_zone)] in place!")
 	var/obj/item/bodypart/target_limb = target.get_bodypart(target_zone)
-	target_limb?.status |= ~BODYPART_CUT_AWAY
+	target_limb?.limb_flags &= ~BODYPART_CUT_AWAY
 	return TRUE

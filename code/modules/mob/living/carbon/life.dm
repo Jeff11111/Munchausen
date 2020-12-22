@@ -404,6 +404,9 @@
 			for(var/datum/wound/W in BP.wounds)
 				if(W.infection_check())
 					W.germ_level += W.infection_rate
+			for(var/datum/injury/IN in BP.injuries)
+				if(IN.infection_check())
+					IN.germ_level += IN.infection_rate
 		
 		//Always try to update the germ level of bodyparts
 		BP.update_germs()

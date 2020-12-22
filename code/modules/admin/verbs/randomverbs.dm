@@ -1269,12 +1269,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 								ADMIN_PUNISHMENT_FRY,
 								ADMIN_PUNISHMENT_CRACK,
 								ADMIN_PUNISHMENT_BLEED,
-								ADMIN_PUNISHMENT_PERFORATE,
-								ADMIN_PUNISHMENT_BURN,
-								ADMIN_PUNISHMENT_WARCRIME,
-								ADMIN_PUNISHMENT_INCISIONIFY,
 								ADMIN_PUNISHMENT_SHRAPNEL,
-								ADMIN_PUNISHMENT_SCARIFY,
 								ADMIN_PUNISHMENT_NUGGET,
 								ADMIN_PUNISHMENT_ONE,
 								ADMIN_PUNISHMENT_EXTREMITIES,
@@ -1282,7 +1277,6 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 								ADMIN_PUNISHMENT_HOLLOW,
 								ADMIN_PUNISHMENT_LIVELEAK,
 								ADMIN_PUNISHMENT_ISIS,
-								ADMIN_PUNISHMENT_MEDIC,
 								ADMIN_PUNISHMENT_PAPAJOHNS,
 								ADMIN_PUNISHMENT_PHANTOM_PAIN,
 								ADMIN_PUNISHMENT_SHARETHEPAIN,
@@ -1381,84 +1375,6 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 				if(!squish_part.is_organic_limb())
 					type_wound = pick(WOUND_LIST_BLUNT_MECHANICAL)
 				squish_part.force_wound_upwards(type_wound, smited=TRUE)
-		if(ADMIN_PUNISHMENT_BLEED)
-			if(!iscarbon(target))
-				to_chat(usr,"<span class='warning'>This must be used on a carbon mob.</span>")
-				return
-			var/mob/living/carbon/C = target
-			for(var/obj/item/bodypart/slice_part in C.bodyparts)
-				var/type_wound = pick(WOUND_LIST_SLASH)
-				if(!slice_part.is_organic_limb())
-					type_wound = pick(WOUND_LIST_SLASH_MECHANICAL)
-				var/i = 0
-				while(i < 3)
-					i++
-					slice_part.force_wound_upwards(type_wound, smited=TRUE)
-		if(ADMIN_PUNISHMENT_PERFORATE)
-			if(!iscarbon(target))
-				to_chat(usr,"<span class='warning'>This must be used on a carbon mob.</span>")
-				return
-			var/mob/living/carbon/C = target
-			for(var/obj/item/bodypart/puncture_part in C.bodyparts)
-				var/type_wound = pick(WOUND_LIST_PIERCE)
-				if(!puncture_part.is_organic_limb())
-					type_wound = pick(WOUND_LIST_PIERCE_MECHANICAL)
-				var/i = 0
-				while(i < 3)
-					i++
-					puncture_part.force_wound_upwards(type_wound, smited=TRUE)
-		if(ADMIN_PUNISHMENT_BURN)
-			if(!iscarbon(target))
-				to_chat(usr,"<span class='warning'>This must be used on a carbon mob.</span>")
-				return
-			var/mob/living/carbon/C = target
-			for(var/obj/item/bodypart/burn_part in C.bodyparts)
-				var/type_wound = pick(WOUND_LIST_BURN)
-				if(!burn_part.is_organic_limb())
-					type_wound = pick(WOUND_LIST_BURN_MECHANICAL)
-				burn_part.force_wound_upwards(type_wound, smited=TRUE)
-		if(ADMIN_PUNISHMENT_WARCRIME)
-			if(!iscarbon(target))
-				to_chat(usr,"<span class='warning'>This must be used on a carbon mob.</span>")
-				return
-			var/list/orders = list("I was just following orders", "Fuck, go back")
-			var/sure = input("Are you that evil?", "Space Nuremberg Trials") as anything in orders
-			if(sure == orders[1])
-				var/mob/living/carbon/C = target
-				for(var/obj/item/bodypart/burn_part in C.bodyparts)
-					var/type_wound = pick(WOUND_LIST_BURN)
-					if(!burn_part.is_organic_limb())
-						type_wound = pick(WOUND_LIST_BURN_MECHANICAL)
-					burn_part.force_wound_upwards(type_wound, smited=TRUE)
-				for(var/obj/item/bodypart/puncture_part in C.bodyparts)
-					var/type_wound = pick(WOUND_LIST_PIERCE)
-					if(!puncture_part.is_organic_limb())
-						type_wound = pick(WOUND_LIST_PIERCE_MECHANICAL)
-					var/i = 0
-					while(i < 3)
-						i++
-						puncture_part.force_wound_upwards(type_wound, smited=TRUE)
-				for(var/obj/item/bodypart/slice_part in C.bodyparts)
-					var/type_wound = pick(WOUND_LIST_SLASH)
-					if(!slice_part.is_organic_limb())
-						type_wound = pick(WOUND_LIST_SLASH_MECHANICAL)
-					var/i = 0
-					while(i < 3)
-						i++
-						slice_part.force_wound_upwards(type_wound, smited=TRUE)
-				for(var/obj/item/bodypart/squish_part in C.bodyparts)
-					var/type_wound = pick(WOUND_LIST_BLUNT)
-					if(!squish_part.is_organic_limb())
-						type_wound = pick(WOUND_LIST_BLUNT_MECHANICAL)
-					squish_part.force_wound_upwards(type_wound, smited=TRUE)
-		if(ADMIN_PUNISHMENT_INCISIONIFY)
-			if(!iscarbon(target))
-				to_chat(usr,"<span class='warning'>This must be used on a carbon mob.</span>")
-				return
-			var/mob/living/carbon/C = target
-			for(var/obj/item/bodypart/BP in C.bodyparts)
-				var/datum/wound/woundie = new /datum/wound/slash/critical/incision()
-				woundie.apply_wound(BP)
 		if(ADMIN_PUNISHMENT_SHRAPNEL)
 			if(!iscarbon(target))
 				to_chat(usr,"<span class='warning'>This must be used on a carbon mob.</span>")
@@ -1471,13 +1387,6 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 					shame.name = "shrapnel of shame"
 					shame.desc = "You're shameful."
 					shame.tryEmbed(BP, TRUE, FALSE)
-		if(ADMIN_PUNISHMENT_SCARIFY)
-			if(!iscarbon(target))
-				to_chat(usr,"<span class='warning'>This must be used on a carbon mob.</span>")
-				return
-			var/mob/living/carbon/C = target
-			C.generate_fake_scars(rand(1, 4), null, TRUE)
-			to_chat(C, "<span class='userdanger'>You feel your body grow jaded and torn...</span>")
 		if(ADMIN_PUNISHMENT_NUGGET)
 			if(!iscarbon(target))
 				to_chat(usr,"<span class='warning'>This must be used on a carbon mob.</span>")
@@ -1556,23 +1465,6 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 				var/obj/item/bodypart/BP = C.get_bodypart(BODY_ZONE_HEAD)
 				if(istype(BP))
 					BP.dismember(BRUTE)
-		if(ADMIN_PUNISHMENT_MEDIC)
-			if(!iscarbon(target))
-				to_chat(usr,"<span class='warning'>This must be used on a carbon mob.</span>")
-				return
-			var/mob/living/carbon/C = target
-			var/obj/item/organ/heart/ht = C.getorganslot(ORGAN_SLOT_HEART)
-			if(ht)
-				to_chat(C, "<span class='nicegreen'>Don't worry... it'll grow back!</span>")
-				var/obj/item/bodypart/BP = C.get_bodypart(BODY_ZONE_CHEST)
-				if(istype(BP))
-					var/datum/wound/woundie = new /datum/wound/slash/critical/incision()
-					woundie.apply_wound(L = BP, smited = TRUE)
-				ht.Remove()
-				ht.forceMove(get_turf(C))
-				spawn(6 SECONDS)
-					new /obj/effect/gibspawner/human(ht.loc)
-					qdel(ht)
 		if(ADMIN_PUNISHMENT_PAPAJOHNS)
 			if(!iscarbon(target))
 				to_chat(usr,"<span class='warning'>This must be used on a carbon mob.</span>")

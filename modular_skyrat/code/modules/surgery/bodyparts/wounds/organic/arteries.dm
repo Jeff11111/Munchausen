@@ -8,7 +8,7 @@
 	severity = WOUND_SEVERITY_CRITICAL
 	wound_type = WOUND_LIST_ARTERY
 	viable_zones = ALL_BODYPARTS
-	threshold_minimum = 115
+	threshold_minimum = 90
 	threshold_penalty = 0
 	infection_chance = 0
 	infection_rate = 0
@@ -18,7 +18,7 @@
 	blood_flow = 3
 	blood_time = 3
 	descriptive = "An artery is torn!"
-	wound_flags = (WOUND_SOUND_HINTS)
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_ACCEPTS_STUMP)
 	var/next_squirt = 0 //kinky.
 	var/squirt_delay_min = 8 SECONDS
 	var/squirt_delay_max = 12 SECONDS
@@ -85,7 +85,15 @@
 /datum/wound/artery/proc/cum(bleed_mod = 1, force = FALSE)
 	//People with no pulse can't really squirt blood, can they?
 	//Nor can people with no blood
-	if((!(victim.stat >= DEAD) && !(victim.pulse() < PULSE_NORM) && !(victim.blood_volume <= blood_flow) && (blood_flow >= 1)) || force)
+	//Nor can people with no open wounds
+	var/open_wound = FALSE
+	for(var/datum/wound/W in (limb.wounds - src))
+		if(W.blood_flow)
+			open_wound = TRUE
+	for(var/datum/injury/IN in limb.injuries)
+		if(IN.damage_type in list(WOUND_SLASH, WOUND_PIERCE) && IN.damage && !IN.is_treated())
+			open_wound = TRUE
+	if((open_wound && !(victim.stat >= DEAD) && !(victim.pulse() < PULSE_NORM) && !(victim.blood_volume <= blood_flow) && (blood_flow >= 1)) || force)
 		playsound(victim, sound_effect, 75, 0)
 		victim.bleed(blood_flow * bleed_mod, FALSE)
 		victim.visible_message("<span class='danger'><b>[victim]</b>'s [limb.name]'s [limb.artery_name] squirts blood!</span>", \
@@ -98,18 +106,21 @@
 		next_squirt = world.time + FLOOR(rand(squirt_delay_min, squirt_delay_max), 10)
 	else
 		next_squirt = world.time + FLOOR(rand(squirt_delay_min, squirt_delay_max), 10)
-		return cum_less(bleed_mod)
+		return cum_less(bleed_mod, open_wound)
 
-/datum/wound/artery/proc/cum_less(bleed_mod = 1)
+/datum/wound/artery/proc/cum_less(bleed_mod = 1, open_wound = TRUE)
 	//just bleed without being dramatic
-	victim.bleed(blood_flow * bleed_mod)
+	if(open_wound)
+		victim.bleed(blood_flow * bleed_mod)
+	else
+		victim.blood_volume -= blood_flow * bleed_mod
 
 /datum/wound/artery/treat(obj/item/I, mob/user)
 	if(istype(I, /obj/item/stack/medical/suture) || istype(I, /obj/item/stack/medical/fixovein))
 		attempt_suture(I, user)
 
 /datum/wound/artery/proc/attempt_suture(obj/item/stack/medical/I, mob/user)
-	if(!locate(/datum/wound/slash/critical/incision) in limb.wounds)
+	if(!limb.get_incision())
 		to_chat(user, "<span class='notice'>I must incise [limb] to treat it's arterial bleeding!</span>")
 		return
 	user.visible_message("<span class='notice'>[user] begins stitching [victim]'s [limb] [limb.artery_name] with [I]...</span>", \

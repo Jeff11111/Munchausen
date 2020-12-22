@@ -10,8 +10,8 @@
 	if(!.) //no chungus
 		return
 	var/obj/item/bodypart/borked = target.get_bodypart(user.zone_selected)
-	var/datum/wound/slash/critical/incision = locate() in borked?.wounds
-	if(CHECK_BITFIELD(incision?.wound_flags, WOUND_SET_BONES))
+	var/datum/injury/incision = borked?.get_incision()
+	if(CHECK_BITFIELD(incision?.injury_flags, INJURY_SET_BONES))
 		return FALSE
 	
 /datum/surgery_step/set_bones/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
@@ -19,7 +19,7 @@
 		"<span class='notice'>[user] begins to set the bones in [target]'s [parse_zone(user.zone_selected)] with [tool].</span>",
 		"<span class='notice'>[user] begins to set the bones in [target]'s [parse_zone(user.zone_selected)].</span>")
 
-/datum/surgery_step/set_bones/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, default_display_results = FALSE)
+/datum/surgery_step/set_bones/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	if(istype(tool, /obj/item/stack))
 		var/obj/item/stack/used_stack = tool
 		used_stack.use(1)
@@ -28,9 +28,9 @@
 		"<span class='notice'>[user] successfully sets the bones in [target]'s [parse_zone(target_zone)]!</span>")
 	log_combat(user, target, "set bones in", addition="INTENT: [uppertext(user.a_intent)]")
 	var/obj/item/bodypart/borked = target.get_bodypart(target_zone)
-	var/datum/wound/slash/critical/incision = locate() in borked?.wounds
+	var/datum/injury/incision = borked?.get_incision()
 	if(incision)
-		incision.wound_flags |= WOUND_SET_BONES
+		incision.injury_flags |= INJURY_SET_BONES
 	return ..()
 
 /datum/surgery_step/set_bones/failure(mob/user, mob/living/target, target_zone, obj/item/tool, var/fail_prob = 0)
@@ -63,12 +63,12 @@
 	for(var/datum/wound/blunt/blunt in nigger_fractures?.wounds)
 		if(blunt.severity >= WOUND_SEVERITY_SEVERE)
 			qdel(blunt)
-	var/datum/wound/slash/critical/incision = locate() in nigger_fractures?.wounds
+	var/datum/injury/incision = nigger_fractures?.get_incision()
 	if(incision)
-		incision.wound_flags &= ~WOUND_SET_BONES
+		incision.injury_flags &= ~INJURY_SET_BONES
 	return ..()
 
-/datum/surgery_step/gel_bones/failure(mob/user, mob/living/target, target_zone, obj/item/tool, var/fail_prob = 0)
+/datum/surgery_step/gel_bones/failure(mob/user, mob/living/target, target_zone, obj/item/tool)
 	. = ..()
 	if(istype(tool, /obj/item/stack))
 		var/obj/item/stack/used_stack = tool

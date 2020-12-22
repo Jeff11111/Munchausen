@@ -14,7 +14,7 @@
 		return FALSE
 	var/mob/living/carbon/C = target
 	var/obj/item/bodypart/BP = C.get_bodypart(user.zone_selected)
-	if(locate(/datum/wound/slash/critical) in BP?.wounds)
+	if(BP.get_incision())
 		return FALSE
 
 /datum/surgery_step/incise/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
@@ -38,11 +38,9 @@
 				"Blood pools around the incision in [H]'s [parse_zone(target_zone)].")
 			var/obj/item/bodypart/BP = target.get_bodypart(target_zone)
 			if(istype(BP))
-				var/datum/wound/slash/critical/incision/inch = new()
-				inch.apply_wound(BP, TRUE)
-				if(inch)
-					inch.blood_flow += 3
+				BP.create_injury(WOUND_SLASH, BP.max_damage * 0.4, TRUE)
 				target.wound_message = ""
+				playsound(target, 'modular_skyrat/sound/gore/flesh.ogg', 75, 0)
 
 //clamp bleeders
 //Not a hard requirement, just needed if you don't want your patient to bleed out
@@ -62,9 +60,7 @@
 		var/mob/living/carbon/C = target
 		var/obj/item/bodypart/BP = C.get_bodypart(target_zone)
 		if(BP)
-			var/datum/wound/slash/critical/incision = locate() in BP.wounds
-			if(incision)
-				incision.blood_flow = 0.1
+			BP.clamp_limb()
 
 //retract skin
 /datum/surgery_step/retract_skin
@@ -78,8 +74,8 @@
 		return FALSE
 	var/mob/living/carbon/C = target
 	var/obj/item/bodypart/BP = C.get_bodypart(user.zone_selected)
-	var/datum/wound/slash/critical/incision = locate() in BP.wounds
-	if(CHECK_BITFIELD(incision?.wound_flags, WOUND_RETRACTED_SKIN))
+	var/datum/injury/incision = BP.get_incision()
+	if(CHECK_BITFIELD(incision?.injury_flags, INJURY_RETRACTED_SKIN))
 		return FALSE
 
 /datum/surgery_step/retract_skin/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
@@ -91,20 +87,18 @@
 	. = ..()
 	var/obj/item/bodypart/BP = target.get_bodypart(target_zone)
 	if(BP)
-		var/datum/wound/slash/critical/incision = locate() in BP.wounds
-		if(incision)
-			incision.wound_flags |= WOUND_RETRACTED_SKIN
-			incision.build_wound_overlay()
+		BP.open_incision()
+		if(!length(tool.embedding))
+			tool.embedding = EMBED_NONE
 		tool.tryEmbed(BP, TRUE, TRUE)
-		RegisterSignal(tool, COMSIG_ITEM_ON_EMBED_REMOVAL, .proc/unspeculumize)
+		RegisterSignal(tool, COMSIG_ITEM_ON_EMBED_REMOVAL, .proc/unspeculumize, TRUE)
 		playsound(target, 'modular_skyrat/sound/gore/stuck2.ogg', 60, 0)
 		target.update_body()
 
 /datum/surgery_step/retract_skin/proc/unspeculumize(mob/source, obj/item/bodypart/limb)
-	var/datum/wound/slash/critical/incision = locate() in limb?.wounds
+	var/datum/injury/incision = limb?.get_incision()
 	if(incision)
-		incision.wound_flags &= ~WOUND_RETRACTED_SKIN
-		incision.build_wound_overlay()
+		incision.injury_flags &= ~INJURY_RETRACTED_SKIN
 	if(istype(source))
 		playsound(source, 'modular_skyrat/sound/gore/stuck1.ogg', 60, 0)
 		source.update_body()
@@ -169,8 +163,8 @@
 		"[user] drills into [target]'s [parse_zone(target_zone)]!",
 		"[user] drills into [target]'s [parse_zone(target_zone)]!")
 	var/obj/item/bodypart/BP = target.get_bodypart(user.zone_selected)
-	var/datum/wound/slash/critical/incision = locate() in BP?.wounds
-	incision?.wound_flags |= WOUND_DRILLED
+	var/datum/injury/incision = BP.get_incision()
+	incision?.injury_flags |= INJURY_DRILLED
 	return TRUE
 
 //close incision
@@ -195,7 +189,49 @@
 		var/mob/living/carbon/C = target
 		var/obj/item/bodypart/BP = C.get_bodypart(target_zone)
 		if(istype(BP))
-			for(var/datum/wound/slash/critical/incision/inch in BP.wounds)
-				inch.remove_wound()
-			for(var/datum/wound/mechanical/slash/critical/incision/inch in BP.wounds)
-				inch.remove_wound()
+			var/datum/injury/inch = BP.get_incision()
+			inch?.close_injury()
+		if(BP.is_clamped())
+			BP.unclamp_limb()
+
+//disinfect injuries
+/datum/surgery_step/disinfect_injuries
+	name = "Disinfect injuries"
+	implements = list(/obj/item/reagent_containers = 100)
+	base_time = 40
+	surgery_flags = (STEP_NEEDS_INCISED)
+
+/datum/surgery_step/disinfect_injuries/tool_check(mob/user, obj/item/tool, mob/living/carbon/target)
+	. = ..()
+	if(.)
+		var/obj/item/reagent_containers/RC = tool
+		if(!istype(RC) || !RC.is_drainable())
+			return FALSE
+		if(!RC.reagents?.has_reagent(/datum/reagent/space_cleaner/sterilizine, 10) && !RC.reagents.has_reagent(/datum/reagent/consumable/ethanol, 30))
+			return FALSE
+		if(RC.reagents.has_reagent(/datum/reagent/consumable/ethanol, 30))
+			var/datum/reagent/consumable/ethanol/ethanol = RC.reagents.get_reagent(/datum/reagent/consumable/ethanol)
+			if(ethanol.boozepwr < 40)
+				return FALSE
+
+/datum/surgery_step/disinfect_injuries/validate_target(mob/living/target, mob/user)
+	. = ..()
+	if(!.)
+		return FALSE
+	var/mob/living/carbon/C = target
+	var/obj/item/bodypart/BP = C.get_bodypart(user.zone_selected)
+	if(BP.is_disinfected())
+		return FALSE
+
+/datum/surgery_step/disinfect_injuries/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
+	display_results(user, target, "<span class='notice'>You begin to disinfect the injuries on [target]'s [parse_zone(target_zone)]...</span>",
+		"[user] begins to sterilize the injuries on [target]'s [parse_zone(target_zone)].",
+		"[user] begins to sterilize the injuries on [target]'s [parse_zone(target_zone)].")
+
+/datum/surgery_step/saw/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
+	display_results(user, target, "<span class='notice'>You sterilize the injuries on [target]'s [parse_zone(target_zone)] open.</span>",
+		"[user] sterilizes the injuries on [target]'s [parse_zone(target_zone)] open!",
+		"[user] sterilizes the injuries on [target]'s [parse_zone(target_zone)] open!")
+	var/obj/item/bodypart/BP = target.get_bodypart(target_zone)
+	BP?.disinfect_limb()
+	return TRUE

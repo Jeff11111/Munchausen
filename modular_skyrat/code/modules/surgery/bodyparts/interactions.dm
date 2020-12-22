@@ -28,7 +28,7 @@
 		var/datum/wound/W
 		if(bio_state & BIO_BONE)
 			if(status & BODYPART_ORGANIC)
-				if(body_zone == BODY_ZONE_HEAD)
+				if(body_zone == BODY_ZONE_PRECISE_MOUTH)
 					W = new /datum/wound/blunt/moderate/jaw()
 				else if(body_zone == BODY_ZONE_CHEST)
 					W = new /datum/wound/blunt/moderate/ribcage()
@@ -38,11 +38,6 @@
 					W = new /datum/wound/blunt/moderate()
 			else
 				W = new /datum/wound/mechanical/blunt/moderate()
-		else
-			if(status & BODYPART_ORGANIC)
-				W = new /datum/wound/slash/moderate()
-			else
-				W = new /datum/wound/mechanical/slash/moderate()
 		//Critical success means we cause a hairline fracture, straight up
 		if(dice >= DICE_CRIT_SUCCESS)
 			if(bio_state & BIO_BONE)
@@ -50,16 +45,11 @@
 					W = new /datum/wound/blunt/severe
 				else
 					W = new /datum/wound/mechanical/blunt/severe
-			else
-				if(status & BODYPART_ORGANIC)
-					W = new /datum/wound/slash/critical()
-				else
-					W = new /datum/wound/mechanical/slash/critical()
 		if(istype(W))
 			W.apply_wound(src, TRUE)
 		var/str = GET_STAT_LEVEL(user, str)
 		if(str)
-			receive_damage(str*0.75, wound_bonus=CANT_WOUND)
+			receive_damage(str*0.75)
 		user.changeNext_move(CLICK_CD_GRABBING)
 		if(user != victim)
 			user.visible_message("<span class='danger'><b>[user]</b> dislocates <b>[victim]</b>'s [name] with a sickening crack![victim.wound_message]</span>", "<span class='danger'>You dislocate <b>[victim]</b>'s [name] with a sickening crack!</span>", ignored_mobs=victim)

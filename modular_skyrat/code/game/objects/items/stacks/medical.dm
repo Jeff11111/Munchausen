@@ -73,7 +73,7 @@
 		if(!silent)
 			user.visible_message("<span class='green'>[user] applies \the [src] on [M].</span>", "<span class='green'>You apply \the [src] on [M].</span>")
 		M.heal_bodypart_damage(heal_brute)
-		use(stackperlimb)
+		use(stackperuse)
 		return TRUE
 	if(iscarbon(M))
 		return heal_carbon(M, user, heal_brute, heal_burn, FALSE, (mode == MODE_MULTIPLE ? TRUE : FALSE))

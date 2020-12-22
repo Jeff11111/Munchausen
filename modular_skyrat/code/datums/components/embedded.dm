@@ -65,7 +65,7 @@
 
 	if(part)
 		limb = part
-		if(limb.status & BODYPART_NOEMBED)
+		if(limb.limb_flags & BODYPART_NOEMBED)
 			return COMPONENT_INCOMPATIBLE
 	src.embed_chance = embed_chance
 	src.fall_chance = fall_chance

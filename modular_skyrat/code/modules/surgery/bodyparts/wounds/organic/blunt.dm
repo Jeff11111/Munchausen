@@ -29,14 +29,14 @@
 	var/next_trauma_cycle
 	/// How long do we wait +/- 20% for the next trauma?
 	var/trauma_cycle_cooldown
-	/// If this is a chest wound and this is set, we have this chance to cough up blood when hit in the chest
-	var/internal_bleeding_chance = 0
 
+	infection_chance = 0
+	infection_rate = 0
 	base_treat_time = 4 SECONDS
 	biology_required = list(HAS_BONE)
 	required_status = BODYPART_ORGANIC
 	pain_amount = 3
-	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_MANGLES_BONE)
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_VISIBLE_THROUGH_CLOTHING | WOUND_MANGLES_BONE)
 
 /*
 	Overwriting of base procs
@@ -46,14 +46,6 @@
 	. = ..()
 	if(active_trauma)
 		QDEL_NULL(active_trauma)
-
-/datum/wound/blunt/on_hemostatic(quantity)
-	if((severity <= WOUND_SEVERITY_SEVERE) && (quantity >= 15))
-		internal_bleeding_chance = round(internal_bleeding_chance/2, 0.1)
-		if(internal_bleeding_chance <= 2)
-			internal_bleeding_chance = 0
-		if(victim)
-			victim.visible_message("<span class='notice'>The [lowertext(src.name)] on <b>[victim]</b>'s [limb] seems to be bleeding significantly less.</span>")
 
 /datum/wound/blunt/wound_injury(datum/wound/old_wound = null)
 	if(limb.body_zone == BODY_ZONE_HEAD && brain_trauma_group)
@@ -259,7 +251,6 @@
 	threshold_penalty = 15
 	treatable_tool = TOOL_BONESET
 	status_effect_type = /datum/status_effect/wound/blunt/moderate
-	scarring_descriptions = list("light discoloring", "a slight blue tint")
 	associated_alerts = list()
 	can_self_treat = TRUE
 	pain_amount = 10
@@ -427,7 +418,6 @@
 	threshold_penalty = 15
 	treatable_tool = TOOL_BONESET
 	status_effect_type = /datum/status_effect/wound/blunt/moderate
-	scarring_descriptions = list("light discoloring", "a slight blue tint")
 	associated_alerts = list()
 	pain_amount = 15 //Hurts a lot, almost a hairline fracture
 
@@ -523,7 +513,6 @@
 	threshold_penalty = 15
 	treatable_tool = TOOL_BONESET
 	status_effect_type = /datum/status_effect/wound/blunt/moderate
-	scarring_descriptions = list("light discoloring", "a slight blue tint")
 	associated_alerts = list()
 	pain_amount = 15 //Hurts more than your average dislocation
 
@@ -619,7 +608,6 @@
 	threshold_penalty = 15
 	treatable_tool = TOOL_BONESET
 	status_effect_type = /datum/status_effect/wound/blunt/moderate
-	scarring_descriptions = list("light discoloring", "a slight blue tint")
 	associated_alerts = list()
 	pain_amount = 15 //Hurts a bit more
 	descriptive = "The jaw is dislocated!"
@@ -706,7 +694,7 @@
 	name = "Hairline Fracture"
 	desc = "Patient's bone has suffered a crack in the foundation, causing serious pain and reduced limb functionality."
 	treat_text = "Recommended light surgical application of bone gel, though a sling of medical gauze will prevent worsening situation."
-	examine_desc = "appears grotesquely swollen"
+	examine_desc = "appears dented and grotesquely swollen"
 	occur_text = "cracks audibly and develops a nasty looking bruise"
 	severity = WOUND_SEVERITY_SEVERE
 	viable_zones = ALL_BODYPARTS_MINUS_EYES
@@ -718,14 +706,10 @@
 	treatable_by = list(/obj/item/stack/sticky_tape/surgical, /obj/item/stack/medical/bone_gel)
 	status_effect_type = /datum/status_effect/wound/blunt/severe
 	treat_priority = TRUE
-	scarring_descriptions = list("a faded, fist-sized bruise", "a vaguely triangular peel scar")
 	brain_trauma_group = BRAIN_TRAUMA_MILD
 	trauma_cycle_cooldown = 1.5 MINUTES
-	internal_bleeding_chance = 40
 	pain_amount = 20
 	flat_damage_roll_increase = 10
-	infection_chance = 20 //Very low, but possible
-	infection_rate = 1
 	descriptive = "A bone is fractured!"
 
 /datum/wound/blunt/critical
@@ -745,14 +729,10 @@
 	treatable_by = list(/obj/item/stack/sticky_tape/surgical, /obj/item/stack/medical/bone_gel)
 	status_effect_type = /datum/status_effect/wound/blunt/critical
 	treat_priority = TRUE
-	scarring_descriptions = list("a section of janky skin lines and badly healed scars", "a large patch of uneven skin tone", "a cluster of calluses")
 	brain_trauma_group = BRAIN_TRAUMA_SEVERE
 	trauma_cycle_cooldown = 2.5 MINUTES
-	internal_bleeding_chance = 60
 	pain_amount = 30
 	flat_damage_roll_increase = 15
-	infection_chance = 50 //Compound fractures always have some exposed flesh
-	infection_rate = 2
 	descriptive = "A bone is shattered!"
 
 // doesn't make much sense for "a" bone to stick out of your head

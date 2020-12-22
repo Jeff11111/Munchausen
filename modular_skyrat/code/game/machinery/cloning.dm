@@ -521,7 +521,7 @@
 		if(BP && BP.can_dismember())
 			BP.drop_limb()
 			BP.forceMove(src)
-			BP.status |= BODYPART_FROZEN
+			BP.limb_flags |= BODYPART_FROZEN
 			unattached_flesh += BP
 
 	for(var/o in H.internal_organs)

@@ -94,11 +94,6 @@
 	// 2% per second, tick interval is in deciseconds
 	if(prob((tick_interval+1) * 0.2) && (!owner.is_asystole() && !owner.nervous_system_failure()))
 		owner.emote("snore")
-	// Heal minor damage
-	if(((owner.getBruteLoss() + owner.getFireLoss() + owner.getToxLoss()) <= 50) && (owner.InFullCritical()) && prob(1))
-		owner.adjustBruteLoss(-1 * owner.metabolism_efficiency)
-		owner.adjustFireLoss(-1 * owner.metabolism_efficiency)
-		owner.adjustToxLoss(-2 * owner.metabolism_efficiency)
 
 /datum/status_effect/incapacitating/sleeping/on_apply()
 	. = ..()
@@ -456,9 +451,9 @@
 		H.remove_status_effect(/datum/status_effect/neck_slice)
 
 	var/still_bleeding = FALSE
-	for(var/thing in throat.wounds)
-		var/datum/wound/W = thing
-		if(W.wound_type == WOUND_LIST_SLASH && W.severity > WOUND_SEVERITY_MODERATE)
+	for(var/thing in throat.injuries)
+		var/datum/injury/W = thing
+		if(W.damage_type == WOUND_SLASH && W.damage >= 5)
 			still_bleeding = TRUE
 			break
 	if(!still_bleeding)

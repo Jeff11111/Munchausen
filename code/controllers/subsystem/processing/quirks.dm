@@ -122,20 +122,6 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 			H.dna.species.disliked_food = 0
 			for(var/V in cli.prefs.fooddislikes)
 				H.dna.species.disliked_food |= cli.prefs.fooddislikes[V]
-	//Yes, i am using the quirk subsystem to assign scars. Too bad!
-	if(istype(H))
-		for(var/i in cli.prefs.cosmetic_scars)
-			if(H.get_bodypart(i))
-				for(var/y in cli.prefs.cosmetic_scars[i])
-					var/datum/scar/S = new()
-					S.permanent = TRUE
-					if(cli.prefs.cosmetic_scars[i][y]["desc"] && (cli.prefs.cosmetic_scars[i][y]["desc"] != "None"))
-						S.pref_apply(H.get_bodypart(i), y, cli.prefs.cosmetic_scars[i][y]["desc"], cli.prefs.cosmetic_scars[i][y]["severity"])
-		if(LAZYLEN(cli.prefs.body_descriptors) && LAZYLEN(H.dna.species.descriptors))
-			for(var/entry in H.dna.species.descriptors)
-				if(cli.prefs.body_descriptors[entry])
-					var/datum/mob_descriptor/descriptor = H.dna.species.descriptors[entry]
-					descriptor.current_value = cli.prefs.body_descriptors[entry]
 	//Let's update the gene tools, just in case
 	for(var/obj/item/organ/genital/genetool in H.internal_organs)
 		genetool.update()
