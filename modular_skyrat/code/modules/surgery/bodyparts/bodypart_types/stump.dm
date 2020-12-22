@@ -1,6 +1,7 @@
 /obj/item/bodypart/stump
 	name = "limb stump"
 	desc = "Oh no..."
+	max_damage = 10 //placeholder to avoid runtimes, actually set on dismemberment of a limb
 
 /obj/item/bodypart/stump/can_dismember(obj/item/I)
 	return FALSE
