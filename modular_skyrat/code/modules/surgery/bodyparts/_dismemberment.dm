@@ -113,6 +113,11 @@
 		stump.zone_prob = zone_prob
 		stump.extra_zone_prob = extra_zone_prob
 		stump.attach_limb(C, FALSE, FALSE)
+		stump.max_damage = max_damage
+		stump.max_tox_damage = max_tox_damage
+		stump.max_pain_damage = max_pain_damage
+		stump.status = status
+		stump.limb_flags = limb_flags
 		var/datum/wound/artery/artery = new()
 		artery.apply_wound(stump, TRUE)
 	

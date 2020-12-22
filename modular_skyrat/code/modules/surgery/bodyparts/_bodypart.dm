@@ -116,8 +116,6 @@
 	var/status = BODYPART_ORGANIC
 	/// General bodypart flags
 	var/limb_flags = 0
-	/// Self explanatory
-	var/disembowable = TRUE
 	/// Maximum weight for a cavity item
 	var/max_cavity_size = WEIGHT_CLASS_TINY
 	/// Synthetic bodyparts can have patches applied but are harder to repair by conventional means
