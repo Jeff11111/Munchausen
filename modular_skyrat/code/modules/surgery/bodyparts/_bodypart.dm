@@ -1980,7 +1980,7 @@
 	else if(owner)
 		C = owner
 		no_update = FALSE
-	else if(!owner)
+	else if(!C)
 		no_update = TRUE
 
 	if(C && HAS_TRAIT(C, TRAIT_HUSK))
