@@ -1091,6 +1091,7 @@
 				if(other.can_merge(IN))
 					other.merge_injury(IN)
 					return other
+		injuries |= IN
 		return IN
 	return FALSE
 
