@@ -743,6 +743,8 @@
 
 // Updates brute_damn and burn_damn from wound damages
 /obj/item/bodypart/proc/update_damages()
+	if(is_robotic_limb())
+		return
 	number_injuries = 0
 	brute_dam = 0
 	burn_dam = 0
@@ -1238,8 +1240,24 @@
 	if(only_organic && !is_organic_limb()) //This makes robolimbs not healable by chems.
 		return
 
-	brute_dam	= round(max(brute_dam - brute, 0), DAMAGE_PRECISION)
-	burn_dam	= round(max(burn_dam - burn, 0), DAMAGE_PRECISION)
+	if(is_robotic_limb())
+		brute_dam = round(max(brute_dam - brute, 0), DAMAGE_PRECISION)
+	else
+		for(var/datum/injury/IN in injuries)
+			if(brute <= 0)
+				break
+			if(IN.damage_type == WOUND_BURN)
+				continue
+			brute = IN.heal_damage(brute)
+	if(is_robotic_limb())
+		burn_dam = round(max(burn_dam - burn, 0), DAMAGE_PRECISION)
+	else
+		for(var/datum/injury/IN in injuries)
+			if(burn <= 0)
+				break
+			if(IN.damage_type != WOUND_BURN)
+				continue
+			burn = IN.heal_damage(burn)
 	limb_integrity = round(min(limb_integrity + brute + burn, max_limb_integrity))
 	stamina_dam = round(max(stamina_dam - stamina, 0), DAMAGE_PRECISION)
 	pain_dam = round(max(pain_dam - pain, 0), DAMAGE_PRECISION)

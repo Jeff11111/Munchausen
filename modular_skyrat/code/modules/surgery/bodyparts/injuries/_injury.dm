@@ -49,10 +49,10 @@
 
 	if(istype(limb))
 		parent_bodypart = limb
-		parent_bodypart.injuries |= src
+		parent_bodypart.injuries += src
 		if(parent_bodypart.owner)
 			parent_mob = parent_bodypart.owner
-			parent_bodypart.owner.all_injuries |= src
+			parent_bodypart.owner.all_injuries += src
 	. = ..()
 
 /datum/injury/Destroy()
