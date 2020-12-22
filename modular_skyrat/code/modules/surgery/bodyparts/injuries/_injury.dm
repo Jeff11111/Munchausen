@@ -20,6 +20,7 @@
 	var/germ_level = 0			// amount of germs in the wound
 	var/infection_rate = 1		// rate of infection for this wound
 	var/obj/item/bodypart/parent_bodypart	// the bodypart the wound is on, if on a bodypart
+	var/mob/living/carbon/parent_mob // the mob the wound is on, if on a mob
 
 	//These are defined by the wound type and should not be changed here
 	var/list/stages				// stages such as "cut", "deep cut", etc.
@@ -42,24 +43,25 @@
 
 	src.damage = damage
 
-	// initialize with the appropriate stage
-	init_stage(damage)
-
+	// initialize with the appropriate stage and bleeding ticks
 	bleed_timer += damage
+	init_stage(damage)
 
 	if(istype(limb))
 		parent_bodypart = limb
 		parent_bodypart.injuries |= src
 		if(parent_bodypart.owner)
+			parent_mob = parent_bodypart.owner
 			parent_bodypart.owner.all_injuries |= src
 	. = ..()
 
 /datum/injury/Destroy()
 	if(parent_bodypart)
 		parent_bodypart.injuries -= src
-		if(parent_bodypart.owner)
-			parent_bodypart.owner.all_injuries |= src
 		parent_bodypart = null
+	if(parent_mob)
+		parent_mob.all_injuries -= src
+		parent_mob = null
 	. = ..()
 
 // returns 1 if there's a next stage, 0 otherwise
@@ -77,13 +79,13 @@
 	return (damage / amount)
 
 /datum/injury/proc/can_autoheal()
-	if(LAZYLEN(parent_bodypart?.embedded_objects))
+	if(length(parent_bodypart?.embedded_objects))
 		return FALSE
 	return (wound_damage() <= autoheal_cutoff) ? TRUE : is_treated()
 
 // checks whether the wound has been appropriately treated
 /datum/injury/proc/is_treated()
-	if(LAZYLEN(parent_bodypart?.embedded_objects))
+	if(length(parent_bodypart?.embedded_objects))
 		return FALSE
 	switch(damage_type)
 		if(WOUND_BLUNT, WOUND_SLASH, WOUND_PIERCE)
@@ -101,7 +103,7 @@
 		return FALSE
 	if(other.can_autoheal() != can_autoheal())
 		return FALSE
-	if(!(other.injury_flags & injury_flags))
+	if(other.injury_flags != injury_flags)
 		return FALSE
 	if(other.parent_bodypart != parent_bodypart)
 		return FALSE

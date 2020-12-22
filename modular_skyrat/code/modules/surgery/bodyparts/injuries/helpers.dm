@@ -41,4 +41,4 @@
 					return /datum/injury/burn/large
 				if(0 to 15)
 					return /datum/injury/burn/moderate
-	return null //no wound
+	return null //no injury
