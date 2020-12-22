@@ -49,16 +49,16 @@
 
 	if(istype(limb))
 		parent_bodypart = limb
-		LAZYADD(parent_bodypart.injuries, src)
+		parent_bodypart.injuries |= src
 		if(parent_bodypart.owner)
-			LAZYADD(parent_bodypart.owner.all_injuries, src)
+			parent_bodypart.owner.all_injuries |= src
 	. = ..()
 
 /datum/injury/Destroy()
 	if(parent_bodypart)
-		LAZYREMOVE(parent_bodypart.injuries, src)
+		parent_bodypart.injuries -= src
 		if(parent_bodypart.owner)
-			LAZYREMOVE(parent_bodypart.owner.all_injuries, src)
+			parent_bodypart.owner.all_injuries |= src
 		parent_bodypart = null
 	. = ..()
 
