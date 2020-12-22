@@ -87,8 +87,6 @@
 	var/obj/item/cavity_item
 	/// The (TG) wounds currently afflicting this body part
 	var/list/datum/wound/wounds = list()
-	/// The scars currently afflicting this body part
-	var/list/datum/scar/scars = list()
 	/// The (Bay) injuries currently afflicting this boddypart
 	var/list/datum/injury/injuries = list()
 	/// Number of injuries - Does not always equal length(injuries)
