@@ -1,7 +1,7 @@
 /** LIMB LOSS **/
 /datum/injury/lost_limb
 
-/datum/injury/lost_limb/New(obj/item/bodypart/limb, losstype, clean)
+/datum/injury/lost_limb/apply_injury(damage, obj/item/bodypart/limb, losstype, clean)
 	var/damage_amt = limb.max_damage
 	if(clean)
 		damage_amt /= 2

@@ -32,20 +32,22 @@
 	var/list/desc_list = list()
 	var/list/damage_list = list()
 
-/datum/injury/proc/apply_injury(damage, obj/item/bodypart/limb)
+/datum/injury/New()
+	. = ..()
 	created = world.time
-
 	// reading from a list("stage" = damage) is pretty difficult, so build two separate
 	// lists from them instead
 	for(var/V in stages)
 		desc_list += V
 		damage_list += stages[V]
 
-	src.damage = damage
+/datum/injury/proc/apply_injury(our_damage, obj/item/bodypart/limb)
+	//aaaaaaaaah
+	damage = our_damage
 
 	// initialize with the appropriate stage and bleeding ticks
-	bleed_timer += damage
-	init_stage(damage)
+	bleed_timer += our_damage
+	init_stage(our_damage)
 
 	if(istype(limb))
 		parent_bodypart = limb
