@@ -49,6 +49,7 @@
 
 	if(istype(limb))
 		parent_bodypart = limb
+		LAZYADD(parent_bodypart.injuries, src)
 		if(parent_bodypart.owner)
 			LAZYADD(parent_bodypart.owner.all_injuries, src)
 	. = ..()
