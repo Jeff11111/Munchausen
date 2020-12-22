@@ -1092,6 +1092,7 @@
 					other.merge_injury(IN)
 					return other
 		injuries |= IN
+		owner?.all_injuries |= IN
 		return IN
 	return FALSE
 
