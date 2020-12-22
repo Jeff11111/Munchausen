@@ -1081,7 +1081,8 @@
 	//Creating injury
 	var/wound_type = get_injury_type(injury_type, damage)
 	if(wound_type)
-		var/datum/injury/IN = new wound_type(damage, src)
+		var/datum/injury/IN = new wound_type()
+		IN.apply_injury(damage, src)
 		//Check whether we can add the wound to an existing wound
 		if(surgical)
 			IN.autoheal_cutoff = 0
@@ -1091,8 +1092,6 @@
 				if(other.can_merge(IN))
 					other.merge_injury(IN)
 					return other
-		injuries |= IN
-		owner?.all_injuries |= IN
 		return IN
 	return FALSE
 

@@ -32,7 +32,7 @@
 	var/list/desc_list = list()
 	var/list/damage_list = list()
 
-/datum/injury/New(damage, obj/item/bodypart/limb)
+/datum/injury/proc/apply_injury(damage, obj/item/bodypart/limb)
 	created = world.time
 
 	// reading from a list("stage" = damage) is pretty difficult, so build two separate
@@ -53,7 +53,6 @@
 		if(parent_bodypart.owner)
 			parent_mob = parent_bodypart.owner
 			parent_bodypart.owner.all_injuries += src
-	. = ..()
 
 /datum/injury/Destroy()
 	if(parent_bodypart)

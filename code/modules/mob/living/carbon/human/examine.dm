@@ -229,7 +229,7 @@
 				if(BP.get_bleed_rate())
 					msg += "<B>[t_He] has blood soaking through [hidden] around [t_his] [BP.name]!</B>"
 			else
-				if(length(BP.injuries))
+				if(length(BP.injuries) && (BP.get_injuries_desc() != "nothing"))
 					msg += "[t_He] has [BP.get_injuries_desc()] on [t_his] [BP.name]"
 			missing -= BP.body_zone
 	//Teeth
