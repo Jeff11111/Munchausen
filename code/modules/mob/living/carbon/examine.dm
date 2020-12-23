@@ -44,9 +44,9 @@
 		if(BP.etching)
 			msg += "<B>[t_His] [BP.name] has \"[BP.etching]\" etched on it!</B>"
 		if(BP.is_stump())
-			msg += "<B>[t_He] has a stump where his [parse_zone(BP.body_zone)] should be!</B>"
+			msg += "<B>[t_He] has a stump where [t_his] [parse_zone(BP.body_zone)] should be!</B>"
 		if(BP.grasped_by?.grasping_mob == src)
-			msg += "[t_He] is applying pressure to his [BP.name]!"
+			msg += "[t_He] is applying pressure to [t_his] [BP.name]!"
 		if(BP.is_dead())
 			msg += "<span class='deadsay'><B>[t_His] [BP.name] is completely necrotic!</B></span>"
 		for(var/datum/wound/W in BP.wounds)
