@@ -40,6 +40,7 @@
 			if(istype(BP))
 				var/datum/injury/ouchie = BP.create_injury(WOUND_SLASH, BP.max_damage * 0.4, TRUE)
 				ouchie.apply_injury(BP.max_damage * 0.4, BP)
+				ouchie.injury_flags |= INJURY_SURGICAL
 				target.wound_message = ""
 				playsound(target, 'modular_skyrat/sound/gore/flesh.ogg', 75, 0)
 
@@ -49,6 +50,15 @@
 	name = "Clamp bleeders"
 	implements = list(TOOL_HEMOSTAT = 100, TOOL_WIRECUTTER = 60, /obj/item/stack/packageWrap = 35, /obj/item/stack/cable_coil = 15)
 	base_time = 24
+
+/datum/surgery_step/clamp_bleeders/validate_target(mob/living/target, mob/user)
+	. = ..()
+	if(!.)
+		return
+	var/mob/living/carbon/C = target
+	var/obj/item/bodypart/limb = C.get_bodypart(user.zone_selected)
+	if(limb.is_clamped())
+		return FALSE
 
 /datum/surgery_step/clamp_bleeders/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	display_results(user, target, "<span class='notice'>You begin to clamp bleeders in [target]'s [parse_zone(target_zone)]...</span>",
