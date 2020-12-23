@@ -41,7 +41,7 @@
 
 //Limb removal. The "special" argument is used for swapping a limb with a new one without the effects of losing a limb kicking in.
 //Destroyed just qdels the limb.
-/obj/item/bodypart/proc/drop_limb(special, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
+/obj/item/bodypart/proc/drop_limb(special = FALSE, ignore_children = FALSE, dismembered = FALSE, destroyed = FALSE, wounding_type = WOUND_SLASH)
 	if(!owner)
 		return
 	
@@ -96,7 +96,7 @@
 				continue
 			O.transfer_to_limb(src, C)
 
-	if(dismembered) //Not a clean chopping off
+	if(dismembered && !is_stump()) //Not a clean chopping off
 		var/obj/item/bodypart/stump/stump  = new(C)
 		stump.name = "stump of a [parse_zone(body_zone)]"
 		stump.body_zone = body_zone
@@ -120,6 +120,8 @@
 		stump.limb_flags = limb_flags
 		var/datum/wound/artery/artery = new()
 		artery.apply_wound(stump, TRUE)
+		var/datum/injury/ouchie = stump.create_injury(wounding_type, stump.max_damage / 2, FALSE, TRUE)
+		ouchie.apply_injury(stump.max_damage / 2, stump)
 	
 	update_icon_dropped()
 	if(destroyed)
