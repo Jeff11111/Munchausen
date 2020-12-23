@@ -86,9 +86,9 @@
 	var/list/heal_zones = list() //body zones that are healed in "multiple" mode on medical items
 	var/obj/item/cavity_item
 	/// The (TG) wounds currently afflicting this body part
-	var/list/datum/wound/wounds = list()
+	var/list/wounds = list()
 	/// The (Bay) injuries currently afflicting this boddypart
-	var/list/datum/injury/injuries = list()
+	var/list/injuries = list()
 	/// Number of injuries - Does not always equal length(injuries)
 	var/number_injuries = 0
 	/// Our current stored wound damage multiplier
