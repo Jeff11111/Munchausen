@@ -58,7 +58,7 @@
 /obj/screen/plane_master/wall/backdrop(mob/mymob)
 	if(mymob?.client?.prefs.ambientocclusion)
 		add_filter("ambient_occlusion", 0, BURGER_WALL_AMBIENT_OCCLUSION1)
-		add_filter("ambient_occlusion", 0, BURGER_WALL_AMBIENT_OCCLUSION2)
+		add_filter("ambient_occlusion2", 0, BURGER_WALL_AMBIENT_OCCLUSION2)
 	else
 		remove_filter("ambient_occlusion")
 		remove_filter("ambient_occlusion2")
