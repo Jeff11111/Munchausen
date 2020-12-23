@@ -26,6 +26,9 @@
 	. = ..()
 	. += "<span class='info'>Current track: [vibing_string]</span>"
 
+/obj/item/device/cassette/middleclick_attack_self(mob/user)
+	return middle_attack_hand(user)
+
 /obj/item/device/cassette/middle_attack_hand(mob/user)
 	var/list/tunes = list()
 	for(var/pog in all_tunes)
