@@ -90,7 +90,7 @@
 		return FALSE
 	switch(damage_type)
 		if(WOUND_BLUNT, WOUND_SLASH, WOUND_PIERCE)
-			return (parent_bodypart.current_gauze || is_bandaged())
+			return (parent_bodypart?.current_gauze || is_bandaged())
 		if(WOUND_BURN)
 			return (is_salved())
 
@@ -156,14 +156,9 @@
 
 // heal the given amount of damage, and if the given amount of damage was more
 // than what needed to be healed, return how much heal was left
-/datum/injury/proc/heal_damage(amount)
-	if(LAZYLEN(parent_bodypart.embedded_objects))
+/datum/injury/proc/heal_damage(amount	)
+	if(length(parent_bodypart?.embedded_objects))
 		return amount // heal nothing
-	if(parent_bodypart)
-		if(damage_type == WOUND_BURN && !(parent_bodypart.burn_reduction >= 5 || CHECK_BITFIELD(parent_bodypart.limb_flags, BODYPART_HEALS_OVERKILL)))
-			return amount	//We don't want to heal wounds on irreparable organs.
-		else if(!(parent_bodypart.brute_reduction >= 5 || CHECK_BITFIELD(parent_bodypart.limb_flags, BODYPART_HEALS_OVERKILL)))
-			return amount
 
 	var/healed_damage = min(damage, amount)
 	amount -= healed_damage

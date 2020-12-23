@@ -998,12 +998,16 @@
 		if(is_robotic_limb())
 			brute_dam += brute
 		else
-			create_injury(wounding_type, brute)
+			var/datum/injury/ouchie = create_injury(wounding_type, brute)
+			if(!(ouchie in injuries))
+				ouchie.apply_injury(brute, src)
 	if(burn)
 		if(is_robotic_limb())
 			burn_dam += burn
 		else
-			create_injury(wounding_type, burn)
+			var/datum/injury/ouchie = create_injury(wounding_type, burn)
+			if(!(ouchie in injuries))
+				ouchie.apply_injury(burn, src)
 		if(owner && prob(burn))
 			owner.IgniteMob()
 	
@@ -1082,7 +1086,6 @@
 	var/wound_type = get_injury_type(injury_type, damage)
 	if(wound_type)
 		var/datum/injury/IN = new wound_type()
-		IN.apply_injury(damage, src)
 		//Check whether we can add the wound to an existing wound
 		if(surgical)
 			IN.autoheal_cutoff = 0

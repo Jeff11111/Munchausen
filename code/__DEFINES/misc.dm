@@ -479,15 +479,15 @@ GLOBAL_LIST_INIT(pda_reskins, list(PDA_SKIN_CLASSIC = 'icons/obj/pda.dmi', PDA_S
 #define PDAIMG(what) {"<span class="pda16x16 [#what]"></span>"}
 
 //Filters
-#define AMBIENT_OCCLUSION(_size, _color) list("type"="drop_shadow","x"=0,"y"= -2,"size"=_size,"color"=_color)
-#define GOON_GENERAL_AMBIENT_OCCLUSION list("type"="drop_shadow", "x"=2, "y"= -2, "color"=rgb(4, 8, 16, 150), "size"= 4, "offset"= 1)
-#define BURGER_WALL_AMBIENT_OCCLUSION1 list("type"="drop_shadow", "x"= 1, "y"= 1, "size"=2, "offset"= 0, "color"=rgb(0,0,0))
-#define BURGER_WALL_AMBIENT_OCCLUSION2 list("type"="drop_shadow", "x"= -1, "y"= -1, "size"=2, "offset"= 0, "color"=rgb(0,0,0))
-#define BURGER_OBJ_AMBIENT_OCCLUSION list("type"="drop_shadow", "x"= 0, "y"= -1, "size"=1, "offset"= 0, "color"=rgb(0,0,0))
-#define BURGER_MOB_AMBIENT_OCCLUSION1 list("type"="drop_shadow", "x"= 0, "y"= 2, "size"=1, "offset"= 0, "color"=rgb(200,200,200,120))
-#define BURGER_MOB_AMBIENT_OCCLUSION2 list("type"="drop_shadow", "x"= 0, "y"=-1, "size"=2, "offset"= 0, "color"=rgb(0,0,0,225))
-#define EYE_BLUR(size) list("type"="blur", "size"=size)
-#define GRAVITY_MOTION_BLUR list("type"="motion_blur","x"=0,"y"=0)
+#define AMBIENT_OCCLUSION(_size, _color) list("type" = "drop_shadow","x"=0,"y"= -2,"size"=_size,"color"=_color)
+#define GOON_GENERAL_AMBIENT_OCCLUSION list("type" = "drop_shadow", "x"=2, "y"= -2, "color"=rgb(4, 8, 16, 150), "size"= 4, "offset"= 1)
+#define BURGER_WALL_AMBIENT_OCCLUSION1 list("type" = "drop_shadow", "x"= 1, "y"= 1, "size"=2, "offset"= 0, "color"=rgb(0,0,0))
+#define BURGER_WALL_AMBIENT_OCCLUSION2 list("type" = "drop_shadow", "x"= -1, "y"= -1, "size"=2, "offset"= 0, "color"=rgb(0,0,0))
+#define BURGER_OBJ_AMBIENT_OCCLUSION list("type" = "drop_shadow", "x"= 0, "y"= -1, "size"=1, "offset"= 0, "color"=rgb(0,0,0))
+#define BURGER_MOB_AMBIENT_OCCLUSION1 list("type" = "drop_shadow", "x"= 0, "y"= 2, "size"=1, "offset"= 0, "color"=rgb(200,200,200,120))
+#define BURGER_MOB_AMBIENT_OCCLUSION2 list("type" = "drop_shadow", "x"= 0, "y"=-1, "size"=2, "offset"= 0, "color"=rgb(0,0,0,225))
+#define EYE_BLUR(size) list("type" = "blur", "size"= size)
+#define GRAVITY_MOTION_BLUR list("type" = "motion_blur","x"=0,"y"=0)
 
 #define STANDARD_GRAVITY 1 //Anything above this is high gravity, anything below no grav
 #define GRAVITY_DAMAGE_TRESHOLD 3 //Starting with this value gravity will start to damage mobs

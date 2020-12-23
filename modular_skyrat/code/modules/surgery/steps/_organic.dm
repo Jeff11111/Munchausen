@@ -38,7 +38,8 @@
 				"Blood pools around the incision in [H]'s [parse_zone(target_zone)].")
 			var/obj/item/bodypart/BP = target.get_bodypart(target_zone)
 			if(istype(BP))
-				BP.create_injury(WOUND_SLASH, BP.max_damage * 0.4, TRUE)
+				var/datum/injury/ouchie = BP.create_injury(WOUND_SLASH, BP.max_damage * 0.4, TRUE)
+				ouchie.apply_injury(BP.max_damage * 0.4, BP)
 				target.wound_message = ""
 				playsound(target, 'modular_skyrat/sound/gore/flesh.ogg', 75, 0)
 
