@@ -428,7 +428,7 @@
 /obj/item/projectile/hook/fire(setAngle)
 	if(firer)
 		chain = firer.Beam(src, icon_state = "chain", time = INFINITY, maxdistance = INFINITY)
-	..()
+	. = ..()
 	//TODO: root the firer until the chain returns
 
 /obj/item/projectile/hook/on_hit(atom/target)
@@ -1080,7 +1080,7 @@
 	name = "angelic colossus chest"
 
 /obj/structure/closet/crate/necropolis/colossus/crusher/PopulateContents()
-	..()
+	. = ..()
 	new /obj/item/crusher_trophy/blaster_tubes(src)
 
 //Hierophant
