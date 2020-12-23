@@ -108,7 +108,7 @@
 	/// How much this wound reduces organ_damage_required in /obj/item/bodypart/damage_organs() (organ_required_reduction* organ_damage_requirement)
 	var/organ_required_reduction = 0.1
 	/// How much pain this wound causes
-	var/pain_amount = 5
+	var/pain_amount = 10
 	/// How much this wound increases the damage on organ damage rolls, multiplier
 	var/damage_roll_increase = 0.1
 	/// How much this wound increases the damage on organ damage rolls, flat
