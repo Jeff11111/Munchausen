@@ -88,7 +88,7 @@
 /obj/item/bodypart/proc/inspect(mob/user)
 	user.visible_message("<span class='notice'>[user] starts inspecting [owner]'s [name] carefully.</span>")
 	if(length(get_injuries_desc()))
-		to_chat(user, "<span class='warning'>You find [get_injuries_desc()]</span>")
+		to_chat(user, "<span class='warning'>You find [get_injuries_desc()].</span>")
 		var/list/stuff = embedded_objects.Copy()
 		if(length(stuff))
 			to_chat(user, "<span class='warning'>There's [english_list(stuff)] sticking out of [owner]'s [name].</span>")

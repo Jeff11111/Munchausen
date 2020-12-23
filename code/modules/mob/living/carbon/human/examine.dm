@@ -227,10 +227,10 @@
 							SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured/lesser)
 			if(hidden)
 				if(BP.get_bleed_rate())
-					msg += "<B>[t_He] has blood soaking through [t_his] [hidden] around [t_his] [BP.name]!</B>"
+					msg += "<B>[t_He] [t_has] blood soaking through [t_his] [hidden] around [t_his] [BP.name]!</B>"
 			else
 				if(length(BP.injuries) && (BP.get_injuries_desc() != "nothing"))
-					msg += "[t_He] has [BP.get_injuries_desc()] on [t_his] [BP.name]"
+					msg += "[t_He] [t_has] [BP.get_injuries_desc()] on [t_his] [BP.name]."
 			missing -= BP.body_zone
 	//Teeth
 	if(!screwy_self)
