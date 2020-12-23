@@ -43,6 +43,8 @@
 /obj/item/bodypart/neck/update_icon_dropped()
 	if(locate(/obj/item/bodypart/head) in src)
 		return ..()
+	if(istype(loc, /obj/item/bodypart)) //we're inside a head or neck
+		return ..()
 	cut_overlays()
 	icon_state = initial(icon_state)//default to dismembered sprite
 

@@ -117,6 +117,8 @@
 
 ///Someone inspected our embeddable item
 /datum/element/embed/proc/examined(obj/item/I, mob/user, list/examine_list)
+	if(!embed_chance) //Can't actually embed, just don't say nuffin
+		return
 	if(I.isEmbedHarmless())
 		examine_list += "[I] feels sticky, and could probably get stuck to someone if thrown properly!"
 	else

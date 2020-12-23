@@ -28,6 +28,8 @@
 		. += mutable_appearance('modular_skyrat/icons/obj/surgery.dmi', "[initial(icon_state)]", -BODYPARTS_LAYER, color = src.color)
 
 /obj/item/bodypart/mouth/update_icon_dropped()
+	if(istype(loc, /obj/item/bodypart)) //we're inside a head or neck
+		return ..()
 	cut_overlays()
 	icon_state = initial(icon_state)//default to dismembered sprite
 
