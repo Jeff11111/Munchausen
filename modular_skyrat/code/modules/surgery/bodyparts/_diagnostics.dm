@@ -64,7 +64,7 @@
 			bone = "broken [bone]"
 		injury_descriptors["[bone] exposed"] = 1
 
-		if(!encased || how_open() & SURGERY_BROKEN)
+		if(!encased || (how_open() & SURGERY_BROKEN))
 			var/list/bits = list()
 			for(var/obj/item/organ/organ in get_organs())
 				bits += organ.get_visible_state()
