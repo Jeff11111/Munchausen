@@ -77,11 +77,13 @@
 	if(on)
 		on = FALSE
 		STOP_PROCESSING(SSobj, src)
+	update_brightness()
 
 /obj/item/flashlight/proc/turn_on()
 	if(!on && powercell?.use(10))
 		on = TRUE
 		START_PROCESSING(SSobj, src)
+	update_brightness()
 
 /obj/item/flashlight/proc/toggle()
 	if(on)
@@ -91,7 +93,6 @@
 
 /obj/item/flashlight/attack_self(mob/user)
 	toggle()
-	update_brightness(user)
 	playsound(get_turf(src), on ? 'sound/weapons/magin.ogg' : 'sound/weapons/magout.ogg', 40, 1)
 	for(var/X in actions)
 		var/datum/action/A = X
