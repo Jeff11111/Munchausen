@@ -175,8 +175,7 @@
 		if((W.wound_flags & WOUND_MANGLES_BONE) && (W.severity >= required_bone_severity))
 			. |= BODYPART_MANGLED_BONE
 
-	for(var/i in injuries)
-		var/datum/injury/IN = i
+	for(var/datum/injury/IN in injuries)
 		if((IN.damage_type in list(WOUND_SLASH, WOUND_PIERCE)) && (IN.damage >= required_muscle_severity))
 			. |= BODYPART_MANGLED_MUSCLE
 /**

@@ -1918,8 +1918,7 @@
 		//Arteries don't give a shit about gauze so we do them later
 		if(istype(W) && !istype(W, /datum/wound/artery))
 			bleed_rate += W.blood_flow
-	for(var/thing in injuries)
-		var/datum/injury/IN = thing
+	for(var/datum/injury/IN in injuries)
 		if(IN.is_bleeding())
 			bleed_rate += IN.get_bleed_rate()
 	
