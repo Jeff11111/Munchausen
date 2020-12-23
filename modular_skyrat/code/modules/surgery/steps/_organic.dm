@@ -229,10 +229,10 @@
 		"[user] begins to sterilize the injuries on [target]'s [parse_zone(target_zone)].",
 		"[user] begins to sterilize the injuries on [target]'s [parse_zone(target_zone)].")
 
-/datum/surgery_step/saw/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
-	display_results(user, target, "<span class='notice'>You sterilize the injuries on [target]'s [parse_zone(target_zone)] open.</span>",
-		"[user] sterilizes the injuries on [target]'s [parse_zone(target_zone)] open!",
-		"[user] sterilizes the injuries on [target]'s [parse_zone(target_zone)] open!")
+/datum/surgery_step/disinfect_injuries/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
+	display_results(user, target, "<span class='notice'>You sterilize the injuries on [target]'s [parse_zone(target_zone)].</span>",
+		"[user] sterilizes the injuries on [target]'s [parse_zone(target_zone)]!",
+		"[user] sterilizes the injuries on [target]'s [parse_zone(target_zone)]!")
 	var/obj/item/bodypart/BP = target.get_bodypart(target_zone)
 	BP?.disinfect_limb()
 	return TRUE
