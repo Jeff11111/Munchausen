@@ -325,7 +325,8 @@
 /obj/item/bodypart/proc/attach_limb(mob/living/carbon/C, special, ignore_parent_restriction = FALSE)
 	if(SEND_SIGNAL(C, COMSIG_CARBON_ATTACH_LIMB, src, special) & COMPONENT_NO_ATTACH)
 		return FALSE
-	if(parent_bodyzone && !ignore_parent_restriction && !C.get_bodypart(parent_bodyzone))
+	var/obj/item/bodypart/screaming = C.get_bodypart(parent_bodyzone)
+	if(parent_bodyzone && !ignore_parent_restriction && (!istype(screaming) || screaming.is_stump()))
 		return FALSE
 	. = TRUE
 	moveToNullspace()
