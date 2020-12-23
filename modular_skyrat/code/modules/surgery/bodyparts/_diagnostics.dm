@@ -62,7 +62,7 @@
 		var/bone = encased ? encased : "bone"
 		if(is_broken())
 			bone = "broken [bone]"
-		injury_descriptors["a [bone] exposed"] = 1
+		injury_descriptors["[bone] exposed"] = 1
 
 		if(!encased || how_open() & SURGERY_BROKEN)
 			var/list/bits = list()
