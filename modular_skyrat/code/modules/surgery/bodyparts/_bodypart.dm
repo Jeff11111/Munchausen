@@ -1079,7 +1079,7 @@
 				var/datum/injury/IN = pick(compatible_injuries)
 				IN.open_injury(damage)
 				if(owner && wound_messages && prob(25 + damage))
-					owner.wound_message += " \The [IN] on [src] worsens!"
+					owner.wound_message += " \The [IN.desc] on [src] worsens!"
 				return IN
 	
 	//Creating injury
