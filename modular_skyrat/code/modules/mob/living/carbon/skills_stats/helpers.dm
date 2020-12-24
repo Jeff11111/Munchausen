@@ -66,7 +66,7 @@
 		sum -= 5
 	
 	//Fraggots always have a 50% chance to fail at a diceroll miserably
-	if(carbonmob?.fraggot && prob(50))
+	if(carbonmob?.fraggot)
 		return DICE_CRIT_FAILURE
 	
 	//Finally, return whether it was a failure or a success
