@@ -346,6 +346,7 @@
 	var/list/obj/item/bodypart/bleeding_limbs = list()
 	var/list/obj/item/bodypart/grasped_limbs = list()
 	if(!screwy_self)
+
 		if(reagents.has_reagent(/datum/reagent/teslium))
 			msg += "[t_He] [t_is] emitting a gentle blue glow!"
 
