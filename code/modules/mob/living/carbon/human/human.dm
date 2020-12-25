@@ -1096,7 +1096,7 @@
 	return (istype(target) && target.stat == CONSCIOUS)
 
 /mob/living/carbon/human/proc/can_be_firemanned(mob/living/carbon/target)
-	return (ishuman(target) && !CHECK_MOBILITY(target, MOBILITY_STAND))
+	return (ishuman(target) && (!CHECK_MOBILITY(target, MOBILITY_STAND) || target.pulledby == src))
 
 /mob/living/carbon/human/proc/fireman_carry(mob/living/carbon/target)
 	var/carrydelay = 4 SECONDS //First aid impacts carry speed
