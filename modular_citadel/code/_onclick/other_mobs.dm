@@ -8,7 +8,6 @@
 	var/c_intent = combat_intent
 	if(c_intent == CI_DUAL)
 		var/obj/item/W = get_inactive_held_item()
-		visible_message("<span class='warning'>\The <b>[src]</b> attacks with their offhand!</span>")
 		var/old_zone = zone_selected
 		var/old_intent = a_intent
 		a_intent = hand_index_to_intent[get_inactive_hand_index()]

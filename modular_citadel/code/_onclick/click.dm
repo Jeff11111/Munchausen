@@ -47,7 +47,6 @@
 			switch(c_intent)
 				if(CI_DUAL)
 					var/obj/item/wap = get_inactive_held_item()
-					visible_message("<span class='warning'>\The <b>[src]</b> attacks with their offhand!</span>")
 					var/old_zone = zone_selected
 					var/old_intent = a_intent
 					zone_selected = hand_index_to_zone[get_inactive_hand_index()]
