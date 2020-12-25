@@ -33,8 +33,10 @@
 //Check if we are accessible
 /datum/component/storage/concrete/organ/proc/is_accessible(mob/living/carbon/nigger)
 	. = FALSE
-	var/how_open = bodypart_affected?.how_open()
-	if((bodypart_affected?.encased && CHECK_BITFIELD(how_open, SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_BROKEN)) || (!bodypart_affected?.encased && CHECK_BITFIELD(how_open, SURGERY_INCISED | SURGERY_RETRACTED)))
+	if(bodypart_affected)
+		if((bodypart_affected.encased && CHECK_BITFIELD(how_open, SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_BROKEN)) || (!bodypart_affected.encased && CHECK_BITFIELD(how_open, SURGERY_INCISED | SURGERY_RETRACTED)))
+			return TRUE
+	else
 		return TRUE
 
 //Only open this if aiming at the correct limb
