@@ -638,7 +638,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			var/right_eye_color = ((EYECOLOR in species_traits) ? sanitize_hexcolor(H.right_eye_color) : null)
 
 			//sleepy mode activate
-			if(H.stat > CONSCIOUS)
+			if((H.stat > CONSCIOUS) && ishuman(H))
 				var/neweyecolor = sanitize_hexcolor(SKINTONE2HEX(H.skin_tone))
 				if(H.dna.skin_tone_override)
 					neweyecolor = sanitize_hexcolor(H.dna.features["mcolor"])
