@@ -357,11 +357,11 @@
 	user.equip_to_slot_if_possible(inhand, SLOT_S_STORE, TRUE, TRUE)
 	if(!QDELETED(inhand))
 		LAZYADD(equipped, inhand)
-		RegisterSignal(inhand, COMSIG_ITEM_DROPPED, .proc/check_s_store)
 	var/amount_equipped = LAZYLEN(equipped)
 	if(amount_equipped)
 		LAZYADD(offhands[L], equipped)
 	if(amount_equipped >= 1)
+		inhand.riding = src
 		return TRUE
 	unequip_buckle_inhands(L)
 	return FALSE
@@ -392,10 +392,11 @@
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	var/mob/living/carbon/rider
 	var/mob/living/parent
+	var/datum/component/riding/human/riding
 	var/selfdeleting = FALSE
 
 /obj/item/riding_offhand/dropped(mob/user)
-	if(item_flags & DROPDEL)
+	if((item_flags & DROPDEL) || (riding?.fireman_carrying))
 		selfdeleting = TRUE
 	. = ..()
 
@@ -407,6 +408,7 @@
 
 /obj/item/riding_offhand/Destroy()
 	UnregisterSignal(src, COMSIG_ITEM_DROPPED)
+	riding = null
 	var/atom/movable/AM = parent
 	if(selfdeleting)
 		if(rider in AM.buckled_mobs)
