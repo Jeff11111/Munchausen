@@ -321,8 +321,7 @@
 	
 	if(HAS_TRAIT(I, TRAIT_NODROP) && !force)
 		return FALSE
-		
-	//skyrat change - unequip delays
+	
 	if(!ignore_strip_self)
 		if((I.item_flags & IN_INVENTORY) && I.strip_self_delay && ishuman(src))
 			var/mob/living/carbon/human/H = src
@@ -330,8 +329,7 @@
 				H.visible_message("<span class='notice'>[H] starts stripping [I]...</span>", "<span class='notice'>You start stripping [I]...</span>")
 				if(!do_after(H, I.strip_self_delay, TRUE, H))
 					return FALSE
-	//
-
+	
 	var/hand_index = get_held_index_of_item(I)
 	if(hand_index)
 		held_items[hand_index] = null

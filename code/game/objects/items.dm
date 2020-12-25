@@ -447,7 +447,7 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 	if(item_flags & DROPDEL)
 		qdel(src)
 	item_flags &= ~IN_INVENTORY
-	if(SEND_SIGNAL(src, COMSIG_ITEM_DROPPED,user) & COMPONENT_DROPPED_RELOCATION)
+	if(SEND_SIGNAL(src, COMSIG_ITEM_DROPPED, user) & COMPONENT_DROPPED_RELOCATION)
 		. = ITEM_RELOCATED_BY_DROPPED
 	user.update_equipment_speed_mods()
 

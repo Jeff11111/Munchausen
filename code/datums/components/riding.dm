@@ -347,6 +347,31 @@
 	unequip_buckle_inhands(L)
 	return FALSE
 
+/datum/component/riding/proc/equip_buckle_s_store(mob/living/carbon/human/user, mob/living/riding_target_override)
+	var/list/equipped
+	var/mob/living/L = riding_target_override ? riding_target_override : user
+	var/obj/item/riding_offhand/inhand = new
+	inhand.item_flags &= ~DROPDEL
+	inhand.rider = L
+	inhand.parent = parent
+	user.equip_to_slot_if_possible(inhand, SLOT_S_STORE, TRUE, TRUE)
+	if(!QDELETED(inhand))
+		LAZYADD(equipped, inhand)
+		RegisterSignal(inhand, COMSIG_ITEM_DROPPED, .proc/check_s_store)
+	var/amount_equipped = LAZYLEN(equipped)
+	if(amount_equipped)
+		LAZYADD(offhands[L], equipped)
+	if(amount_equipped >= 1)
+		return TRUE
+	unequip_buckle_inhands(L)
+	return FALSE
+
+/datum/component/riding/proc/check_s_store(obj/item/source, mob/living/carbon/human/user)
+	if(!istype(user))
+		return FALSE
+	if(user.s_store != source)
+		qdel(source)
+
 /datum/component/riding/proc/unequip_buckle_inhands(mob/living/carbon/user)
 	for(var/a in offhands[user])
 		LAZYREMOVE(offhands[user], a)
@@ -370,7 +395,8 @@
 	var/selfdeleting = FALSE
 
 /obj/item/riding_offhand/dropped(mob/user)
-	selfdeleting = TRUE
+	if(item_flags & DROPDEL)
+		selfdeleting = TRUE
 	. = ..()
 
 /obj/item/riding_offhand/equipped()
@@ -380,6 +406,7 @@
 	. = ..()
 
 /obj/item/riding_offhand/Destroy()
+	UnregisterSignal(src, COMSIG_ITEM_DROPPED)
 	var/atom/movable/AM = parent
 	if(selfdeleting)
 		if(rider in AM.buckled_mobs)

@@ -1139,19 +1139,25 @@
 		return
 	var/equipped_hands_self
 	var/equipped_hands_target
-	if(hands_needed)
+	if(fireman)
+		equipped_hands_self = riding_datum.equip_buckle_s_store(src, target)
+	else if(hands_needed)
 		equipped_hands_self = riding_datum.equip_buckle_inhands(src, hands_needed, target)
 	if(target_hands_needed)
 		equipped_hands_target = riding_datum.equip_buckle_inhands(target, target_hands_needed)
 
-	if(hands_needed || target_hands_needed)
-		if(hands_needed && !equipped_hands_self)
+	if(fireman || hands_needed || target_hands_needed)
+		if(fireman && !equipped_hands_self)
+			src.visible_message("<span class='warning'><b>[src]</b> can't get a grip on <b>[target]</b>!</span>",
+				"<span class='warning'>I can't get a grip on <b>[target]</b>!</span>")
+			return
+		else if(hands_needed && !equipped_hands_self)
 			src.visible_message("<span class='warning'><b>[src]</b> can't get a grip on <b>[target]</b> because their hands are full!</span>",
-				"<span class='warning'>You can't get a grip on <b>[target]</b> because your hands are full!</span>")
+				"<span class='warning'>I can't get a grip on <b>[target]</b> because your hands are full!</span>")
 			return
 		else if(target_hands_needed && !equipped_hands_target)
 			target.visible_message("<span class='warning'><b>[target]</b> can't get a grip on <b>[src]</b> because their hands are full!</span>",
-				"<span class='warning'>You can't get a grip on <b>[src]</b> because your hands are full!</span>")
+				"<span class='warning'>I can't get a grip on <b>[src]</b> because your hands are full!</span>")
 			return
 
 	stop_pulling()
