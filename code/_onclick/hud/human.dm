@@ -396,7 +396,7 @@
 	inv_box = new /obj/screen/inventory()
 	inv_box.name = "wrists"
 	inv_box.icon = ui_style
-	inv_box.icon_state = "wrists"
+	inv_box.icon_state = "wrist_r"
 	inv_box.screen_loc = ui_wrists
 	inv_box.slot_id = SLOT_WRISTS
 	extra_inventory += inv_box
