@@ -2,7 +2,8 @@
 /datum/surgery_step/replace_limb
 	name = "Replace limb"
 	implements = list(/obj/item/bodypart = 100,
-					/obj/item/organ_storage = 100)
+					/obj/item/organ_storage = 100,
+					/obj/item = 100)
 	base_time = 32
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED | STEP_NEEDS_BROKEN)
 
