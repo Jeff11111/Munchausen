@@ -783,7 +783,7 @@
 				var/obj/item/organ/heart/they_heart = C.getorganslot(ORGAN_SLOT_HEART)
 				var/obj/item/bodypart/chest/they_chest = C.get_bodypart(BODY_ZONE_CHEST)
 				var/heart_exposed_mod = 0
-				if((they_chest.how_open() & SURGERY_RETRACTED) && istype(they_heart))
+				if(CHECK_BITFIELD(they_chest.how_open(), SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_BROKEN) && istype(they_heart))
 					heart_exposed_mod = 10
 					visible_message("<b>[src]</b> massages [C.name]'s [they_heart]!", \
 								"<span class='notice'>You massage [C.name]'s [they_heart].</span>")
@@ -804,12 +804,13 @@
 				var/diceroll = mind?.diceroll(heyeinstein, heymedic, "6d6", 20, mod = heart_exposed_mod)
 				if((diceroll >= DICE_SUCCESS) || !mind)
 					if(prob(40) || (diceroll >= DICE_CRIT_SUCCESS))
-						they_heart.last_arrest = world.time
 						if(they_heart.Restart() && C.revive())
 							C.grab_ghost()
 							C.visible_message("<span class='warning'><b>[C]</b> limply spasms their muscles.</span>", \
 											"<span class='userdanger'>My muscles spasm as i am brought back to life!</span>")
 						they_heart.artificial_pump(src)
+						if(getBrainLoss() >= 100)
+							setBrainLoss(99)
 				else
 					var/obj/item/bodypart/chest/affected = C.get_bodypart(BODY_ZONE_CHEST)
 					if((diceroll <= DICE_CRIT_FAILURE) && !affected.is_broken())

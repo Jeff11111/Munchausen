@@ -55,7 +55,7 @@
 
 	if(stage == 5 && prob(50))
 		var/obj/item/bodypart/chest/chest = owner.get_bodypart(BODY_ZONE_CHEST)
-		if(CHECK_BITFIELD(chest.how_open(), SURGERY_RETRACTED))
+		if(CHECK_BITFIELD(chest.how_open(), SURGERY_INCISED | SURGERY_RETRACTED))
 			AttemptGrow(FALSE)
 		else
 			AttemptGrow(TRUE)

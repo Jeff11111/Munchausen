@@ -58,13 +58,13 @@
 		else
 			injury_descriptors[this_injury_desc] = IN.amount
 
-	if(how_open() & SURGERY_RETRACTED)
+	if(CHECK_BITFIELD(how_open(), SURGERY_INCISED | SURGERY_RETRACTED))
 		var/bone = encased ? encased : "bone"
 		if(is_broken())
 			bone = "broken [bone]"
 		injury_descriptors["[bone] exposed"] = 1
 
-		if(!encased || (how_open() & SURGERY_BROKEN))
+		if(!encased || (CHECK_BITFIELD(how_open(), SURGERY_BROKEN)))
 			var/list/bits = list()
 			for(var/obj/item/organ/organ in get_organs())
 				bits += organ.get_visible_state()

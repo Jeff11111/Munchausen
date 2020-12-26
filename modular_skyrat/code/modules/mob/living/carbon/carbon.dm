@@ -101,8 +101,8 @@
 /mob/living/carbon/revive(full_heal, admin_revive)
 	. = ..()
 	//Regardless of full heal or not, we cap brain damage to 100 max
-	if(getBrainLoss() > 100)
-		setBrainLoss(100)
+	if(getBrainLoss() >= 100)
+		setBrainLoss(99)
 	//Cap oxygen damage to 75
 	if(getOxyLoss() > 75)
 		setOxyLoss(75)

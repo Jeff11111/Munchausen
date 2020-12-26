@@ -11,7 +11,7 @@
 		return COMPONENT_INCOMPATIBLE
 	UnregisterSignal(parent, list(COMSIG_MOUSEDROPPED_ONTO, COMSIG_CLICK_ALT, COMSIG_CLICK_MIDDLE, \
 							COMSIG_ATOM_ATTACK_HAND, COMSIG_ITEM_PRE_ATTACK, COMSIG_ITEM_ATTACK_SELF, \
-							COMSIG_ITEM_PICKUP, COMSIG_PARENT_ATTACKBY))
+							COMSIG_ITEM_PICKUP, COMSIG_PARENT_ATTACKBY, COMSIG_ATOM_ATTACK_GHOST, COMSIG_PARENT_ATTACKBY))
 	addtimer(CALLBACK(src, .proc/update_insides), 1 SECONDS)
 
 //Gives all organs parent as stored_in
@@ -164,7 +164,7 @@
 		return FALSE //Not an item
 	if(I == parent)
 		return FALSE //no paradoxes for you
-	if(M && (M.a_intent != INTENT_GRAB))
+	if(M)
 		return FALSE //must be on grab intent
 	var/obj/item/organ/O = I
 	if(!istype(O) && !(bodypart_affected && !bodypart_affected.cavity_item && (I.w_class <= bodypart_affected.max_cavity_size)))
@@ -315,7 +315,6 @@
 			carbon_parent.death_scream()
 			carbon_parent.custom_pain("MY [capitalize(O.name)] HURTS!", rand(30, 40))
 		if(!CHECK_BITFIELD(O.organ_flags, ORGAN_CUT_AWAY) && bodypart_affected)
-			bodypart_affected.generic_bleedstacks += 5
 			for(var/datum/injury/fucked in bodypart_affected.wounds)
 				fucked.open_injury(rand(5, 15))
 		O.stored_in = null
@@ -363,7 +362,7 @@
 	var/mob/living/carbon/nigger_faggot = parent
 	if(L.a_intent == INTENT_GRAB)
 		bodypart_affected = nigger_faggot.get_bodypart(L.zone_selected)
-	if(!istype(L) || !(L.a_intent == INTENT_GRAB) || !is_accessible(parent))
+	if(!istype(L) || !(L.a_intent == INTENT_GRAB) || !is_accessible(L))
 		return FALSE
 	if(isliving(over_object) && (L.zone_selected == bodypart_affected.body_zone))
 		update_insides()

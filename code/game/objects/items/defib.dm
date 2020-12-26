@@ -624,7 +624,7 @@
 			else if(!H.getorgan(/obj/item/organ/heart))
 				user.visible_message("<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Patient's heart is missing. Operation aborted.</span>")
 				playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
-			else if(H.undergoing_cardiac_arrest())
+			else if(!CHECK_MOBILITY(H, MOBILITY_STAND))
 				H.set_heartattack(FALSE)
 				if(!(heart.organ_flags & ORGAN_FAILING))
 					H.set_heartattack(FALSE)
@@ -632,9 +632,9 @@
 				else
 					user.visible_message("<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Resuscitation failed, heart damage detected.</span>")
 				playsound(src, 'sound/machines/defib_zap.ogg', 50, 1, -1)
-			else
-				user.visible_message("<span class='warning'>[req_defib ? "[defib]" : "[src]"] buzzes: Patient is not in a valid state. Operation aborted.</span>")
-				playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
+				var/obj/item/organ/heart/heart = H.getorganslot(ORGAN_SLOT_HEART)
+				if(istype(heart))
+					heart.artificial_pump(null, 0.6)
 	busy = FALSE
 	update_icon()
 

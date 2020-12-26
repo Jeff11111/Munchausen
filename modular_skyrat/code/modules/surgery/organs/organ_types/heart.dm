@@ -136,6 +136,8 @@
 	pulse = PULSE_NORM
 	if(owner && (pulse != old_pulse))
 		to_chat(owner, "<span class='userdanger'><b>My heart beats again!</b></span>")
+	if(pulse != old_pulse)
+		last_arrest = world.time
 	update_icon()
 	return TRUE
 
