@@ -144,7 +144,7 @@
 /mob/p_their(capitalized, temp_gender)
 	if(!temp_gender)
 		temp_gender = gender
-	. = "its"
+	. = "it's"
 	switch(temp_gender)
 		if(FEMALE)
 			. = "her"
