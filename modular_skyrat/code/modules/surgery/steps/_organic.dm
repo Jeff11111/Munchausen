@@ -181,7 +181,7 @@
 //Cauterize incision
 /datum/surgery_step/close
 	name = "Cauterize"
-	implements = list(TOOL_CAUTERY = 100, /obj/item/gun/energy/laser = 80 /obj/item = 70) // 70% success with any hot item.
+	implements = list(TOOL_CAUTERY = 100, /obj/item/gun/energy/laser = 80, /obj/item = 70) // 70% success with any hot item.
 	base_time = 24
 
 /datum/surgery_step/close/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
