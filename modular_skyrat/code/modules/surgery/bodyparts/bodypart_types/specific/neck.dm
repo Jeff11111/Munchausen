@@ -33,12 +33,14 @@
 	artery_name = "carotid artery"
 
 /obj/item/bodypart/neck/get_limb_icon(dropped)
-	. = ..()
-	if(dropped)
+	if(dropped && !istype(loc, /obj/item/bodypart))
+		. = list()
 		for(var/obj/item/bodypart/head/nohead in src)
 			. |= nohead.get_limb_icon(TRUE)
 			return
 		. |= mutable_appearance(icon, initial(icon_state), -BODYPARTS_LAYER, color = src.color)
+	else
+		return ..()
 
 /obj/item/bodypart/neck/update_icon_dropped()
 	if(locate(/obj/item/bodypart/head) in src)

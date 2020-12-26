@@ -22,10 +22,11 @@
 	cavity_name = "dental"
 
 /obj/item/bodypart/mouth/get_limb_icon(dropped)
-	. = ..()
-	if(dropped)
+	if(dropped && !istype(loc, /obj/item/bodypart))
 		. = list()
 		. += mutable_appearance('modular_skyrat/icons/obj/surgery.dmi', "[initial(icon_state)]", -BODYPARTS_LAYER, color = src.color)
+	else
+		return ..()
 
 /obj/item/bodypart/mouth/update_icon_dropped()
 	if(istype(loc, /obj/item/bodypart)) //we're inside a head or neck

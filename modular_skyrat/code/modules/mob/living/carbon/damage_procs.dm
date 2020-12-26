@@ -27,15 +27,17 @@
 	return ..()
 
 /mob/living/carbon/fully_heal(admin_revive)
-	..()
+	. = ..()
 	remove_all_embedded_objects()
 	shock_stage = 0
 	setPainLoss(0, FALSE)
 	janitize(0, 0, 0)
 	for(var/obj/item/bodypart/BP in bodyparts)
 		BP.janitize(0, 0, 0)
-		BP.rejecting = 0
+		BP.rejecting = FALSE
 		BP.fill_teeth()
+		for(var/datum/injury/IN in BP.injuries)
+			qdel(IN)
 	for(var/obj/item/organ/O in internal_organs)
 		O.janitize(0, 0, 0)
-		O.rejecting = 0
+		O.rejecting = FALSE

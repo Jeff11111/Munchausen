@@ -42,10 +42,11 @@
 	return BODYPART_MANGLED_BOTH
 
 /obj/item/bodypart/left_eye/get_limb_icon(dropped)
-	. = ..()
-	if(dropped)
+	if(dropped && !istype(loc, /obj/item/bodypart))
 		. = list()
 		. += mutable_appearance('modular_skyrat/icons/obj/surgery.dmi', "[initial(icon_state)]", GAME_PLANE, color = src.color)
+	else
+		return ..()
 
 /obj/item/bodypart/left_eye/update_icon_dropped()
 	if(istype(loc, /obj/item/bodypart)) //we're inside a head or neck
