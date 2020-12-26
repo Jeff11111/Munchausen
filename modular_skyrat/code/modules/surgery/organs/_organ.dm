@@ -432,6 +432,8 @@
 			user.visible_message("<span class='notice'>[user] stitches \the [src] safely.</span>", \
 							"<span class='notice'>I stitch \the [src] safely.</span>")
 			applyOrganDamage(-min(50, maxHealth/2))
+			if(istype(src, /obj/item/organ/brain) && owner)
+				owner.cure_all_traumas(TRAUMA_RESILIENCE_LOBOTOMY)
 		return TRUE
 	else if(owner && (I.tool_behaviour == TOOL_SCREWDRIVER) && is_robotic())
 		if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
