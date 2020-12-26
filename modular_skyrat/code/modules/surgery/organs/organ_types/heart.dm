@@ -92,7 +92,7 @@
 					user.playsound_local(get_turf(user), 'modular_skyrat/sound/effects/newheart.ogg', 75, 0)
 					droomer.hearts_seen |= etching
 	else if(is_dreamer(user) && !findtext(etching, "<b>INRL</b> - "))
-		. += "<b>There is NOTHING on his heart. Should be? Following the TRUTH - not here. I need to keep LOOKING. Keep FOLLOWING my heart.</b>"
+		. += "<span class='danger'><b>There is NOTHING on his heart. Should be? Following the TRUTH - not here. I need to keep LOOKING. Keep FOLLOWING my heart.</b>></span>"
 	if(!owner)
 		. += "<span class='notice'>This organ can be inserted into \the [parse_zone(zone)].</span>"
 
