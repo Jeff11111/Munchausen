@@ -785,11 +785,11 @@
 				var/heart_exposed_mod = 0
 				if(CHECK_BITFIELD(they_chest.how_open(), SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_BROKEN) && istype(they_heart))
 					heart_exposed_mod = 10
-					visible_message("<b>[src]</b> massages [C.name]'s [they_heart]!", \
-								"<span class='notice'>You massage [C.name]'s [they_heart].</span>")
+					visible_message("<b>[src]</b> massages <b>[C.name]</b>'s [they_heart]!", \
+								"<span class='notice'>You massage <b>[C.name]</b>'s [they_heart].</span>")
 				else
-					visible_message("<b>[src]</b> performs CPR on [C.name]!", \
-								"<span class='notice'>You perform CPR on [C.name].</span>")
+					visible_message("<b>[src]</b> performs CPR on <b>[C.name]</b>!", \
+								"<span class='notice'>You perform CPR on <b>[C.name]</b>.</span>")
 				SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "perform_cpr", /datum/mood_event/perform_cpr)
 				C.last_cpr = world.time
 				log_combat(src, C, "CPRed")
@@ -814,15 +814,15 @@
 				else
 					var/obj/item/bodypart/chest/affected = C.get_bodypart(BODY_ZONE_CHEST)
 					if((diceroll <= DICE_CRIT_FAILURE) && !affected.is_broken())
-						visible_message("<span class='danger'><b><b>[src]</b></b> botches the CPR, cracking <b>[C]</b>'s ribs!</span>", \
+						visible_message("<span class='danger'><b>[src]</b> botches the CPR, cracking <b>[C]</b>'s ribs!</span>", \
 									"<span class='danger'>I botch the CPR, cracking <b>[C]</b>'s ribs!</span>",
-									target = C, target_message = "<span class='userdanger'><b><b>[src]</b></b> botches the CPR and cracks my ribs!</span>")
+									target = C, target_message = "<span class='userdanger'><b>[src]</b> botches the CPR and cracks my ribs!</span>")
 						var/datum/wound/fracture
 						if(affected.is_organic_limb())
-							var/fucked_up = (prob(heyheavy*2) ? /datum/wound/blunt/critical : /datum/wound/blunt/severe)
+							var/fucked_up = (prob(heyheavy*3) ? /datum/wound/blunt/critical : /datum/wound/blunt/severe)
 							fracture = new fucked_up()
 						else
-							var/fucked_up = (prob(heyheavy*2) ? /datum/wound/mechanical/blunt/critical : /datum/wound/mechanical/blunt/severe)
+							var/fucked_up = (prob(heyheavy*3) ? /datum/wound/mechanical/blunt/critical : /datum/wound/mechanical/blunt/severe)
 							fracture = new fucked_up()
 						fracture.apply_wound(affected, TRUE)
 						C.wound_message = ""
