@@ -178,16 +178,16 @@
 	incision?.injury_flags |= INJURY_DRILLED
 	return TRUE
 
-//close incision
+//Cauterize incision
 /datum/surgery_step/close
-	name = "Mend incision"
-	implements = list(TOOL_CAUTERY = 100, /obj/item/gun/energy/laser = 90, TOOL_WELDER = 70, /obj/item = 30) // 30% success with any hot item.
+	name = "Cauterize"
+	implements = list(TOOL_CAUTERY = 100, /obj/item/gun/energy/laser = 80 /obj/item = 70) // 70% success with any hot item.
 	base_time = 24
 
 /datum/surgery_step/close/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
-	display_results(user, target, "<span class='notice'>You begin to mend the incision in [target]'s [parse_zone(target_zone)]...</span>",
-		"[user] begins to mend the incision in [target]'s [parse_zone(target_zone)].",
-		"[user] begins to mend the incision in [target]'s [parse_zone(target_zone)].")
+	display_results(user, target, "<span class='notice'>You begin the wounds in [target]'s [parse_zone(target_zone)]...</span>",
+		"[user] begins to cauterize the wounds in [target]'s [parse_zone(target_zone)].",
+		"[user] begins to cauterize the wounds in [target]'s [parse_zone(target_zone)].")
 
 /datum/surgery_step/close/tool_check(mob/user, obj/item/tool, mob/living/carbon/target)
 	if(implement_type == TOOL_WELDER || implement_type == /obj/item)
@@ -200,8 +200,13 @@
 		var/mob/living/carbon/C = target
 		var/obj/item/bodypart/BP = C.get_bodypart(target_zone)
 		if(istype(BP))
-			var/datum/injury/inch = BP.get_incision()
-			inch?.close_injury()
+			for(var/datum/injury/inch in BP.injuries)
+				if(!inch.is_bleeding())
+					continue
+				if(inch.is_surgical())
+					inch.close_injury()
+				else
+					inch.clamp_injury()
 		if(BP.is_clamped())
 			BP.unclamp_limb()
 
