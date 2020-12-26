@@ -143,18 +143,18 @@
 	var/obj/item/organ/liver/liver = getorganslot(ORGAN_SLOT_LIVER)
 	var/obj/item/organ/kidneys/kidneys = getorganslot(ORGAN_SLOT_KIDNEYS)
 	var/did_something = FALSE
-	if(liver && (liver.tox_dam < liver.max_tox_dam))
-		if(amount > 0)
+	if(amount > 0 )
+		if(liver?.tox_dam >= kidneys?.tox_dam && liver?.tox_dam < liver?.max_tox_dam)
 			if(liver.add_toxins(abs(amount)))
 				did_something = TRUE
-		else
-			if(liver.remove_toxins(abs(amount)))
-				did_something = TRUE
-	else if(kidneys && (kidneys.tox_dam < kidneys.max_tox_dam))
-		if(amount > 0)
+		else if(kidneys?.tox_dam >= liver?.max_tox_dam && kidneys.tox_dam < kidneys.max_tox_dam)
 			if(kidneys.add_toxins(abs(amount)))
 				did_something = TRUE
-		else
+	else
+		if(liver?.tox_dam)
+			if(liver.remove_toxins(abs(amount)))
+				did_something = TRUE
+		else if(kidneys?.tox_dam)
 			if(kidneys.remove_toxins(abs(amount)))
 				did_something = TRUE
 	if(updating_health && did_something)
