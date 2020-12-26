@@ -159,7 +159,7 @@
 	combat_intents = new /obj/screen/combat_intent
 	combat_intents.icon = 'modular_skyrat/icons/mob/screen/combat_intents.dmi'
 	combat_intents.icon_state = CI_DEFAULT
-	combat_intents.screen_loc = ui_combatintent
+	combat_intents.screen_loc = ui_combat_intent
 	combat_intents.hud = src
 	static_inventory += combat_intents
 
