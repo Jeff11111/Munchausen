@@ -1320,7 +1320,7 @@
 	else
 		switch(heart.pulse)
 			if(-INFINITY to PULSE_NONE)
-				if(length(heart.recent_pump) && (world.time <= heart.recent_pump[1] + heart.pump_duration))
+				if(length(heart.recent_pump) && (world.time <= text2num(heart.recent_pump[1]) + heart.pump_duration))
 					pulse_mod *= heart.recent_pump[heart.recent_pump[1]]
 				else
 					pulse_mod *= 0.25 //Fuck.

@@ -35,15 +35,15 @@
 	var/heartbeat = 0 //For some reason this is the variable that actually hands the beat variable
 	var/open = 0
 	var/pump_duration = 5 SECONDS // how long effectively a pump lasts
-	var/list/recent_pump //Used by CPR and blood circulation
+	var/list/recent_pump = list() //Used by CPR and blood circulation
 						//Time of the pumping associated with "effectiveness", from 0 to 1
 
 /obj/item/organ/heart/proc/artificial_pump(mob/user, forced_pump)
 	if(!forced_pump)
 		var/heymedic = (GET_SKILL_LEVEL(user, firstaid)/(MAX_SKILL*2))
-		recent_pump = list(world.time = (0.4 + CEILING(heymedic, 0.1)))
+		recent_pump = list("[world.time]" = (0.4 + CEILING(heymedic, 0.1)))
 	else
-		recent_pump = list(world.time = (0.4 + CEILING(forced_pump, 0.1)))
+		recent_pump = list("[world.time]" = (0.4 + CEILING(forced_pump, 0.1)))
 	return TRUE
 
 /obj/item/organ/heart/surgical_examine(mob/user)
