@@ -398,6 +398,8 @@
 /obj/item/riding_offhand/dropped(mob/user)
 	if((item_flags & DROPDEL) || (riding?.fireman_carrying))
 		selfdeleting = TRUE
+	if(riding?.fireman_carrying)
+		qdel(src)
 	. = ..()
 
 /obj/item/riding_offhand/equipped()

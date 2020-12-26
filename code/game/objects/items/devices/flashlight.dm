@@ -49,6 +49,8 @@
 /obj/item/flashlight/AltClick(mob/user)
 	. = ..()
 	if(powercell)
+		if(on)
+			turn_off()
 		to_chat(user, "<span class='notice'>You remove [src]'s power cell.</span>")
 		powercell.forceMove(get_turf(user))
 		user.put_in_active_hand(powercell)
