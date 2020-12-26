@@ -49,9 +49,16 @@
 ////////////
 
 /obj/item/clothing/glasses/hud/health
-	name = "health scanner HUD"
-	desc = "A heads-up display that scans the humans in view and provides accurate data about their health status."
+	name = "health scanner goggles"
+	desc = "A pair of heads-up display goggles that scans the humans in view and provides accurate data about their health status."
 	icon_state = "healthhud"
+	hud_type = DATA_HUD_MEDICAL_ADVANCED
+	glass_colour_type = /datum/client_colour/glass_colour/lightblue
+
+/obj/item/clothing/glasses/hud/health/disease
+	name = "disease goggles"
+	desc = "A coroner's best friend."
+	icon_state = "disease"
 	hud_type = DATA_HUD_MEDICAL_ADVANCED
 	glass_colour_type = /datum/client_colour/glass_colour/lightblue
 
@@ -72,7 +79,7 @@
 	flash_protect = -2
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
 	glass_colour_type = /datum/client_colour/glass_colour/green
-	
+
 /obj/item/clothing/glasses/hud/health/night/syndicate
 	name = "combat night vision health scanner HUD"
 	desc = "An advanced shielded medical heads-up display that allows soldiers to approximate how much lead poisoning their allies have suffered in complete darkness."
