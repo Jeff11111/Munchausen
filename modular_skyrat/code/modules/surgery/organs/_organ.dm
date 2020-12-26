@@ -179,7 +179,8 @@
 	if(owner)
 		STOP_PROCESSING(SSobj, src)
 		return
-	organ_flags |= ORGAN_CUT_AWAY
+	if(isturf(loc))
+		organ_flags |= ORGAN_CUT_AWAY
 	on_death() //Kinda hate doing it like this, but I really don't want to call process directly.
 
 //Sources; life.dm process_organs

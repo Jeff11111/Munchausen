@@ -234,7 +234,8 @@
 	if(owner)
 		STOP_PROCESSING(SSobj, src)
 		return
-	limb_flags |= BODYPART_CUT_AWAY
+	if(isturf(loc))
+		limb_flags |= BODYPART_CUT_AWAY
 	on_death()
 
 /obj/item/bodypart/proc/on_death()

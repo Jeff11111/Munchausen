@@ -444,18 +444,17 @@
 	value = REAGENT_VALUE_COMMON
 
 /datum/reagent/medicine/mine_salve/on_mob_metabolize(mob/living/M) //modularisation for miners salve painkiller.
-	..()
+	. =..()
 	if(iscarbon(M))
 		var/mob/living/carbon/C = M
 		C.add_chem_effect(CE_PAINKILLER, 50)
 
 /datum/reagent/medicine/mine_salve/on_mob_life(mob/living/carbon/C)
+	. = ..()
 	C.hal_screwyhud = SCREWYHUD_HEALTHY
 	C.adjustBruteLoss(-0.25*REM, 0)
 	C.adjustFireLoss(-0.25*REM, 0)
 	C.adjustStaminaLoss(-0.5*REM, 0)
-	..()
-	return TRUE
 
 /datum/reagent/medicine/mine_salve/reaction_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
 	if(iscarbon(M) && M.stat != DEAD)
