@@ -70,6 +70,7 @@
 	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/pistol_lefthand.dmi'
 	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/pistol_righthand.dmi'
 	fire_sound = 'modular_skyrat/sound/guns/pistol1.ogg'
+	w_class = WEIGHT_CLASS_SMALL
 	mag_type = /obj/item/ammo_box/magazine/m9mm
 	suppressed_pixel_x = 5
 	can_suppress = TRUE
