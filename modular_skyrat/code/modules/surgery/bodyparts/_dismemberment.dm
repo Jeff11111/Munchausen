@@ -118,6 +118,7 @@
 		stump.max_pain_damage = max_pain_damage
 		stump.status = status
 		stump.limb_flags = limb_flags
+		stump.animal_origin = animal_origin
 		var/datum/wound/artery/artery = new()
 		artery.apply_wound(stump, TRUE)
 		var/datum/injury/ouchie = stump.create_injury(wounding_type, stump.max_damage / 2, FALSE, TRUE)
