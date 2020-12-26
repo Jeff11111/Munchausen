@@ -169,7 +169,8 @@
 /mob/living/carbon/get_missing_limbs()
 	var/list/full = ALL_BODYPARTS //skyrat edit
 	for(var/zone in full)
-		if(get_bodypart(zone))
+		var/obj/item/bodypart/nigger = get_bodypart(zone)
+		if(istype(nigger) && !nigger.is_stump())
 			full -= zone
 	return full
 

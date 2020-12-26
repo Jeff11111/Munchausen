@@ -889,7 +889,7 @@
 			if((wounding_type == WOUND_SLASH) || (wounding_type == WOUND_PIERCE))
 				wounding_type = WOUND_BLUNT
 			else if(wounding_type == WOUND_BLUNT)
-				wounding_type = WOUND_SLASH
+				wounding_type = WOUND_PIERCE
 		// A big blunt weapon too can dismember a limb
 		// If we already have a mangled bone, we start rolling (inefficiently) for slashes
 		if((wounding_type == WOUND_BLUNT) && (mangled_state & BODYPART_MANGLED_BONE) && !(mangled_state & BODYPART_MANGLED_MUSCLE) && !sharpness)
