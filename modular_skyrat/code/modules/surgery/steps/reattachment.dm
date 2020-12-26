@@ -78,7 +78,7 @@
 		display_results(user, target, "<span class='notice'>You succeed in replacing [target]'s [parse_zone(target_zone)].</span>",
 			"[user] successfully replaces [target]'s [parse_zone(target_zone)] with [bruh ? bruh : tool]!",
 			"[user] successfully replaces [target]'s [parse_zone(target_zone)]!")
-		return 1
+		return TRUE
 	else
 		var/obj/item/bodypart/L = target.newBodyPart(target_zone, FALSE, FALSE)
 		L.is_pseudopart = TRUE

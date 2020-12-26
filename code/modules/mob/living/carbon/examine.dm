@@ -87,11 +87,12 @@
 			msg += should_msg
 
 	if(l_limbs_missing >= 2 && r_limbs_missing == 0)
-		msg += "[t_He] look[p_s()] all right now."
+		msg += "[t_He] look[p_s()] right winged."
 	else if(l_limbs_missing == 0 && r_limbs_missing >= 4)
-		msg += "[t_He] really keeps to the left."
+		msg += "[t_He] look[p_s()] left winged."
 	else if(l_limbs_missing >= 4 && r_limbs_missing >= 4)
-		msg += "[t_He] [p_do()]n't seem all there."
+		msg += "[t_He] [p_are()] a centrist."
+	
 	if(!(user == src && src.hal_screwyhud == SCREWYHUD_HEALTHY)) //fake healthy
 		switch(getBruteLoss() + getFireLoss() + getCloneLoss())
 			if(1 to 25)
