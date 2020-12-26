@@ -31,7 +31,18 @@
 	. = ..()
 	if(!proximity)
 		return
-	if(iscarbon(A) && A.reagents && reagents.total_volume)
+	if(istype(A, /obj/item/reagent_containers/glass))
+		if(A.name == initial(A.name))
+			to_chat(user, "<span class='notice'>It's pretty clean already.</span>")
+			return
+		else if(length(A.reagents.reagent_list))
+			return
+		to_chat(user, "<span class='notice'>You wipe down \the [A.name]</span>")
+		A.name = initial(A.name)
+		A.icon = initial(A.icon)
+		A.icon_state = initial(A.icon_state)
+		A.update_icon()
+	else if(iscarbon(A) && A.reagents && reagents.total_volume)
 		var/mob/living/carbon/C = A
 		var/reagentlist = pretty_string_from_reagent_list(reagents)
 		var/log_object = "a damp rag containing [reagentlist]"
@@ -39,7 +50,7 @@
 			C.visible_message("<span class='danger'>[user] is trying to smother \the [C] with \the [src]!</span>", "<span class='userdanger'>[user] is trying to smother you with \the [src]!</span>", "<span class='italics'>You hear some struggling and muffled cries of surprise.</span>")
 			if(do_after(user, 20, target = C))
 				reagents.reaction(C, INGEST)
-				reagents.trans_to(C, 5)
+				reagents.trans_to(C, reagents.total_volume)
 				C.visible_message("<span class='danger'>[user] has smothered \the [C] with \the [src]!</span>", "<span class='userdanger'>[user] has smothered you with \the [src]!</span>", "<span class='italics'>You hear some struggling and a heavy breath taken.</span>")
 				log_combat(user, C, "smothered", log_object)
 		else
