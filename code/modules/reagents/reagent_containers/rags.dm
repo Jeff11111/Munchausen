@@ -49,7 +49,7 @@
 		if(user.a_intent == INTENT_HARM && !C.is_mouth_covered())
 			C.visible_message("<span class='danger'>[user] is trying to smother \the [C] with \the [src]!</span>", "<span class='userdanger'>[user] is trying to smother you with \the [src]!</span>", "<span class='italics'>You hear some struggling and muffled cries of surprise.</span>")
 			if(do_after(user, 20, target = C))
-				reagents.reaction(C, INGEST)
+				reagents.reaction(C, VAPOR)
 				reagents.trans_to(C, reagents.total_volume)
 				C.visible_message("<span class='danger'>[user] has smothered \the [C] with \the [src]!</span>", "<span class='userdanger'>[user] has smothered you with \the [src]!</span>", "<span class='italics'>You hear some struggling and a heavy breath taken.</span>")
 				log_combat(user, C, "smothered", log_object)
