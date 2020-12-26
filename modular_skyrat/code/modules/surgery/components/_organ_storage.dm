@@ -337,13 +337,14 @@
 	if(niggertwo.incapacitated() || !A.Adjacent(user) || niggertwo.lying)
 		return
 
-	playsound(A, pick(rustle_sound), 50, 1, -5)
 	var/list/params_list = params2list(params)
 	if(params_list["shift"])
 		nigger.examine(user)
-	else if(niggertwo.get_active_held_item() == null)
+	else if(!niggertwo.get_active_held_item())
+		playsound(A, pick(rustle_sound), 50, 1, -5)
 		nigger.attack_hand(niggertwo)
 	else
+		playsound(A, pick(rustle_sound), 50, 1, -5)
 		nigger.attackby(niggertwo.get_active_held_item(), niggertwo)
 	return TRUE
 
