@@ -185,7 +185,7 @@
 	base_time = 24
 
 /datum/surgery_step/close/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
-	display_results(user, target, "<span class='notice'>You begin the wounds in [target]'s [parse_zone(target_zone)]...</span>",
+	display_results(user, target, "<span class='notice'>You begin cauterizing the wounds in [target]'s [parse_zone(target_zone)]...</span>",
 		"[user] begins to cauterize the wounds in [target]'s [parse_zone(target_zone)].",
 		"[user] begins to cauterize the wounds in [target]'s [parse_zone(target_zone)].")
 
