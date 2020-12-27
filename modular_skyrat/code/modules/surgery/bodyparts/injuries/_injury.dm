@@ -55,6 +55,7 @@
 		if(parent_bodypart.owner)
 			parent_mob = parent_bodypart.owner
 			parent_bodypart.owner.all_injuries += src
+			sound_hint(parent_mob, parent_mob)
 
 /datum/injury/Destroy()
 	if(parent_bodypart)
