@@ -114,11 +114,8 @@
 				else
 					to_chat(grasping_mob, "<span class='warning'>You need to grip and wrench <b>[grasped_mob]</b> with another hand to take [grasped_mob.p_them()] down!</span>")
 			if(GM_STRANGLE)
-				if((grasping_mob.a_intent != INTENT_GRAB) || strangling)
-					do_strangle(grasped_mob, grasped_part, grasping_mob)
-				else if(!strangling)
-					if(grasped_part.get_wrenched(grasping_mob, grasped_mob))
-						actions_done++
+				if(do_strangle(grasped_mob, grasped_part, grasping_mob))
+					actions_done++
 			if(GM_EMBEDDED)
 				if(length(grasped_part?.embedded_objects))
 					var/obj/item/embeddy = grasped_part.embedded_objects[1]
