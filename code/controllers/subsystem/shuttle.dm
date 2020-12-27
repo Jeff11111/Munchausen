@@ -19,7 +19,7 @@ SUBSYSTEM_DEF(shuttle)
 	//emergency shuttle stuff
 	var/obj/docking_port/mobile/emergency/emergency
 	var/obj/docking_port/mobile/emergency/backup/backup_shuttle
-	var/emergencyCallTime = 3600	//time taken for emergency shuttle to fuel
+	var/emergencyCallTime = 1200	//time taken for emergency shuttle to fuel
 	var/emergencyDockTime = 1800		//time taken for emergency shuttle to leave after fueling
 	var/emergencyEscapeTime = 1200	//time taken for emergency shuttle to reach a safe distance after leaving station (in deciseconds)
 	var/area/emergencyLastCallLoc
@@ -28,7 +28,7 @@ SUBSYSTEM_DEF(shuttle)
 	var/emergencyNoRecall = FALSE
 	var/adminEmergencyNoRecall = FALSE //so admins can block the recall MODULE: SHUTTLE TOGGLE
 	var/lastMode = SHUTTLE_IDLE //MODULE: SHUTTLE TOGGLE
-	var/lastCallTime = 6000 //MODULE: SHUTTLE TOGGLE
+	var/lastCallTime = 1200 //MODULE: SHUTTLE TOGGLE
 	var/list/hostileEnvironments = list() //Things blocking escape shuttle from leaving
 	var/list/tradeBlockade = list() //Things blocking cargo from leaving.
 	var/supplyBlocked = FALSE
