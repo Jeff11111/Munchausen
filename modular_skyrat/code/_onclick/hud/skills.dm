@@ -16,7 +16,7 @@
 		//if we suck just ignore the skill entirely
 		//when the screen button is added, to check garbage skills it'll be rmb.
 		if((skill.level > 1) || modifiers["middle"])
-			msg += "<span class='info'>I am <b>[skill.skillnumtodesc(skill.level)] ([skill.level])</b> at <b>[lowertext(skill.name)]</b>.</span><br>"
+			msg += "<span class='info'>- I am <b>[skill.skillnumtodesc(skill.level)] ([skill.level])</b> at <b>[lowertext(skill.name)]</b>.</span><br>"
 	
 	msg += "<br>"
 
@@ -26,6 +26,6 @@
 		//Ignore the fakes
 		if(stat.fake_type)
 			continue
-		msg += "<span class='info'>I have <b>[stat.statnumtodesc(stat.level)] ([stat.level])</b> <b>[lowertext(stat.name)] ([stat.shorthand])</b>.</span><br>"
+		msg += "<span class='info'>- I have <b>[stat.statnumtodesc(stat.level)] ([stat.level])</b> <b>[lowertext(stat.name)] ([stat.shorthand])</b>.</span><br>"
 	
 	to_chat(usr, msg)
