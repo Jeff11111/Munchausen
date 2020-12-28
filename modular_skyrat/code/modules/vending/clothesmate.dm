@@ -11,4 +11,3 @@
 	for(var/P in typesof(/datum/gear/socks))
 		var/datum/gear/G = P
 		products[initial(G.path)] = 5
-	products[/obj/item/skin_kit] = 30

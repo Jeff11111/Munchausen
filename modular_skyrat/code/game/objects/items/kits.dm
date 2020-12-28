@@ -57,27 +57,3 @@
 		else if((istype(target, /obj/item/gun/ballistic/revolver/detective) || istype(target, /obj/item/gun/ballistic/revolver/russian) || istype(target, /obj/item/toy/gun)) && !open)
 			to_chat(user, "<span class='notice'>You have to open the conversion kit first.</span>")
 			return FALSE
-
-//clothing reskinning kit
-/obj/item/skin_kit
-	name = "\improper General Modification Kit"
-	desc = "Also known as a crochet kit with spray paint on the side. Able to modify many objects."
-	icon = 'modular_skyrat/icons/obj/kit.dmi'
-	icon_state = "clothing_kit"
-	w_class = WEIGHT_CLASS_SMALL
-
-/obj/item/skin_kit/afterattack(atom/target, mob/user, proximity)
-	if(istype(target, /obj))
-		var/obj/O = target
-		if(O.unique_reskin_stored)
-			O.unique_reskin = O.unique_reskin_stored
-			if(current_skin && !always_reskinnable)
-				to_chat(user, "<span class='notice'>[target] cannot be reskinned, or has been reskinned already.</span>")
-			if(O.reskin_obj(user))
-				qdel(src)
-				return TRUE
-			else
-				O.unique_reskin = initial(O.unique_reskin)
-				return FALSE
-		else
-			to_chat(user, "<span class='notice'>[target] cannot be reskinned, or has been reskinned already.</span>")
