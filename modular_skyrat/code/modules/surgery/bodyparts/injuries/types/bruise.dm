@@ -6,7 +6,8 @@
 		"large bruise" = 30,
 		"moderate bruise" = 20,
 		"small bruise" = 10,
-		"tiny bruise" = 5
+		"tiny bruise" = 5,
+		"tiny hematoma" = 0,
 		)
 
 	bleed_threshold = 20
