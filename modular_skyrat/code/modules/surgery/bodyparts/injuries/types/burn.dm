@@ -29,6 +29,7 @@
 		"healing severe burn" = 10,
 		"burn scar" = 0
 		)
+	fade_away = INFINITY
 
 /datum/injury/burn/deep
 	stages = list(
@@ -37,6 +38,7 @@
 		"healing deep burn" = 15,
 		"large burn scar" = 0
 		)
+	fade_away = INFINITY
 
 /datum/injury/burn/carbonised
 	stages = list(
@@ -44,3 +46,4 @@
 		"healing carbonised area" = 20,
 		"massive burn scar" = 0
 		)
+	fade_away = INFINITY

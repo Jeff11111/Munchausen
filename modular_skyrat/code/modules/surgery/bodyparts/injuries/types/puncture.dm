@@ -22,6 +22,7 @@
 		"large scab" = 2,
 		"small round scar" = 0
 		)
+	fade_away = INFINITY
 
 /datum/injury/puncture/gaping
 	max_bleeding_stage = 3
@@ -32,6 +33,7 @@
 		"small angry scar" = 5,
 		"small round scar" = 0
 		)
+	fade_away = INFINITY
 
 /datum/injury/puncture/gaping_big
 	max_bleeding_stage = 3
@@ -42,6 +44,7 @@
 		"large angry scar" = 10,
 		"large round scar" = 0
 		)
+	fade_away = INFINITY
 
 /datum/injury/puncture/massive
 	max_bleeding_stage = 3
@@ -52,3 +55,4 @@
 		"massive angry scar" = 10,
 		"massive jagged scar" = 0
 		)
+	fade_away = INFINITY

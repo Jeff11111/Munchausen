@@ -52,6 +52,7 @@
 		"small angry scar" = 5,
 		"small straight scar" = 0
 		)
+	fade_away = INFINITY
 
 /datum/injury/slash/gaping_big
 	max_bleeding_stage = 3
@@ -62,6 +63,7 @@
 		"large angry scar" = 10,
 		"large straight scar" = 0
 		)
+	fade_away = INFINITY
 
 /datum/injury/slash/massive
 	max_bleeding_stage = 3
@@ -72,3 +74,4 @@
 		"massive angry scar" = 10,
 		"massive jagged scar" = 0
 		)
+	fade_away = INFINITY

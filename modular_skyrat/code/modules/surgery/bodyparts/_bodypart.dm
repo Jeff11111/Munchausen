@@ -718,7 +718,7 @@
 	
 	for(var/datum/injury/IN in injuries)
 		// Wounds can disappear after 10 minutes at the earliest
-		if(IN.damage <= 0 && IN.created && IN.created + (10 MINUTES) <= world.time)
+		if(IN.damage <= 0 && IN.created && IN.created + IN.fade_away <= world.time)
 			qdel(IN)
 			continue
 		
