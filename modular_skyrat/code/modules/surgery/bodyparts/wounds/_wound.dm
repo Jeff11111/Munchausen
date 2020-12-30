@@ -184,6 +184,10 @@
 /datum/wound/proc/build_wound_overlay()
 	return FALSE
 
+/datum/wound/proc/should_disable_limb(obj/item/bodypart/affected)
+	if(disabling)
+		return TRUE
+
 /**
   * apply_wound() is used once a wound type is instantiated to assign it to a bodypart, and actually come into play.
   *

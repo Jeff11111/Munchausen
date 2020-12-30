@@ -1415,7 +1415,7 @@
 		return BODYPART_DISABLED_PARALYSIS
 	for(var/i in wounds)
 		var/datum/wound/W = i
-		if(W.disabling)
+		if(W.should_disable_limb(src))
 			return BODYPART_DISABLED_WOUND
 	if(can_dismember())
 		. = disabled //inertia, to avoid limbs healing 0.1 damage and being re-enabled
