@@ -994,6 +994,14 @@
 	else if(!spread_damage && owner?.can_feel_pain()) //Can't spread, just add to the owner's shock
 		owner.shock_stage += max(0, extrabrute + extraburn - (owner?.chem_effects[CE_PAINKILLER]/3))
 
+	//Damage the wounds and injuries, too
+	for(var/i in wounds)
+		var/datum/wound/W = i
+		W.receive_damage(wounding_type, wounding_dmg, wound_bonus, pain)
+	for(var/i in injuries)
+		var/datum/injury/IN = i
+		IN.receive_damage(max(brute, burn), pain, wounding_type)
+	
 	//Brute and burn damage is associated with injuries
 	if(brute)
 		if(is_robotic_limb())
@@ -1038,11 +1046,6 @@
 	if(is_robotic_limb() && owner)
 		if((brute+burn)>3 && prob((20+brute+burn)))
 			do_sparks(3,FALSE,src.owner)
-
-	//Damage the wounds, too
-	for(var/i in wounds)
-		var/datum/wound/W = i
-		W.receive_damage(wounding_type, wounding_dmg, wound_bonus, pain)
 
 	//Update the owner's health stuffies
 	if(owner && updating_health)

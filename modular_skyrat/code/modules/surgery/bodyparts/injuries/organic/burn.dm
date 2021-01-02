@@ -6,6 +6,11 @@
 /datum/injury/burn/is_bleeding()
 	return FALSE //burns cannot bleed
 
+/datum/injury/burn/receive_damage(damage_received = 0, pain_received = 0, damage_type = WOUND_BLUNT)
+	if((wound_damage() + (damage_received/2) >= 40) && parent_bodypart && !parent_bodypart.is_dead())
+		parent_mob?.wound_message += " \The [parent_bodypart.name] fully melts away!"
+		parent_bodypart.kill_limb()
+
 /datum/injury/burn/moderate
 	stages = list(
 		"ripped burn" = 10,

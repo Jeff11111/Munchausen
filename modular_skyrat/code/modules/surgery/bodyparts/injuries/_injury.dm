@@ -42,11 +42,12 @@
 		desc_list += V
 		damage_list += stages[V]
 
+//applies the injury on a limb proper
 /datum/injury/proc/apply_injury(our_damage, obj/item/bodypart/limb)
 	//aaaaaaaaah
 	damage = our_damage
 
-	// initialize with the appropriate stage and bleeding ticks
+	//initialize with the appropriate stage and bleeding ticks
 	bleed_timer += our_damage
 	init_stage(our_damage)
 
@@ -66,6 +67,10 @@
 		parent_mob.all_injuries -= src
 		parent_mob = null
 	. = ..()
+
+//special proc for when the parent bodypart receives some damage
+/datum/injury/proc/receive_damage(damage_received = 0, pain_received = 0, damage_type = WOUND_BLUNT)
+	return FALSE
 
 // returns 1 if there's a next stage, 0 otherwise
 /datum/injury/proc/init_stage(initial_damage)
