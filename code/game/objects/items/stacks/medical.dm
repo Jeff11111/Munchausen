@@ -172,7 +172,7 @@
 		if(!silent)
 			to_chat(user, "<span class='warning'>All wounds on \the [affecting] have been bandaged up!</span>")
 		return
-	if(affecting.brute_dam)
+	if(affecting.brute_dam || affecting.burn_dam)
 		var/heymedic = GET_SKILL_LEVEL(user, firstaid)
 		for(var/datum/injury/IN in affecting.injuries)
 			if(IN.is_bandaged())
@@ -346,17 +346,17 @@
 		return
 	var/has_cut_or_pierce = FALSE
 	for(var/datum/injury/IN in affecting.injuries)
-		if(IN.damage && (IN.damage_type in list(WOUND_PIERCE, WOUND_SLASH)))
+		if(IN.damage && IN.is_bleeding())
 			has_cut_or_pierce = TRUE
 			break
 	if(!has_cut_or_pierce)
 		if(!silent)
 			to_chat(user, "<span class='warning'>All wounds on \the [affecting] have been closed up!</span>")
 		return
-	if(affecting.brute_dam)
+	if(affecting.brute_dam || affecting.burn_dam)
 		var/heymedic = GET_SKILL_LEVEL(user, firstaid)
 		for(var/datum/injury/IN in affecting.injuries)
-			if(IN.is_salved())
+			if(IN.is_clamped())
 				continue
 			if(!do_mob(user, C, 1 SECONDS - (heymedic/4)))
 				to_chat(user, "<span class='warning'>I must stand still!</span>")
@@ -367,16 +367,16 @@
 				return
 			if(diceroll >= DICE_CRIT_SUCCESS)
 				to_chat(src, "<span class='nicegreen'>I manage to economize on \the [src]'s use.</span>")
-			IN.heal_damage(rand(10, heal_brute))
 			if(IN.damage >= IN.autoheal_cutoff)
 				user.visible_message("<span class='notice'>\The [user] partially closes a wound on [C]'s [affecting.name] with \the [src].</span>", \
 				"<span class='notice'>I partially close a wound on [C]'s [affecting.name] with \the [src].</span>")
+				IN.heal_damage(rand(10, heal_brute))
 			else
 				user.visible_message("<span class='notice'>\The [user] closes a wound on [C]'s [affecting.name] with \the [src].</span>", \
 				"<span class='notice'>I close a wound on [C]'s [affecting.name] with \the [src].</span>")
 				if(!IN.damage)
 					qdel(IN)
-				else if(IN.damage <= 10)
+				else if(IN.damage <= autoheal_cutoff)
 					IN.clamp_injury()
 		if(affect_children)
 			if(length(affecting.heal_zones))
@@ -437,7 +437,7 @@
 
 /obj/item/stack/medical/ointment
 	name = "ointment"
-	desc = "Basic burn ointment, rated effective for second degree burns with proper bandaging, though it's still an effective stabilizer for worse burns. Not terribly good at outright healing burns though."
+	desc = "Basic burn ointment, rated effective for second degree burns with proper bandaging, though it's still an effective stabilizer for worse injuries. Not terribly good at outright healing, however."
 	gender = PLURAL
 	singular_name = "ointment"
 	icon_state = "ointment"
@@ -449,7 +449,7 @@
 	other_delay = 20
 	amount = 12
 	max_amount = 12
-	heal_burn = 20
+	heal_burn = 10
 	flesh_regeneration = 2.5
 	sanitization = 0.75
 	grind_results = list(/datum/reagent/medicine/silver_sulfadiazine = 10)
@@ -479,7 +479,7 @@
 		if(!silent)
 			to_chat(user, "<span class='warning'>All wounds on \the [affecting] have been salved!</span>")
 		return
-	if(affecting.burn_dam)
+	if(affecting.brute_dam || affecting.burn_dam)
 		var/heymedic = GET_SKILL_LEVEL(user, firstaid)
 		for(var/datum/injury/IN in affecting.injuries)
 			if(IN.is_salved())
@@ -514,7 +514,7 @@
 
 /obj/item/stack/medical/mesh
 	name = "regenerative mesh"
-	desc = "A bacteriostatic mesh used to dress burns."
+	desc = "A bacteriostatic mesh used to dress injuries."
 	gender = PLURAL
 	singular_name = "regenerative mesh"
 	icon_state = "regen_mesh"
@@ -528,6 +528,81 @@
 	flesh_regeneration = 3
 	var/is_open = TRUE ///This var determines if the sterile packaging of the mesh has been opened.
 	grind_results = list(/datum/reagent/medicine/spaceacillin = 2)
+
+/obj/item/stack/medical/mesh/heal(mob/living/M, mob/user, silent = FALSE, obj/item/bodypart/specific_part)
+	. = ..()
+	if(iscarbon(M))
+		return heal_carbon(M, user, heal_brute, heal_burn, FALSE, (mode == MODE_MULTIPLE ? TRUE : FALSE))
+	if(isanimal(M))
+		var/mob/living/simple_animal/critter = M
+		if (!(critter.healable))
+			if(!silent)
+				to_chat(user, "<span class='warning'>You cannot use \the [src] on [M]!</span>")
+			return FALSE
+		else if (critter.health >= critter.maxHealth)
+			if(!silent)
+				to_chat(user, "<span class='notice'>[M] is at full health.</span>")
+			return FALSE
+		if(!silent)
+			user.visible_message("<span class='green'>[user] applies \the [src] on [M].</span>", "<span class='green'>You apply \the [src] on [M].</span>")
+		M.heal_bodypart_damage(0, heal_burn)
+		use(stackperuse)
+		return TRUE
+
+	to_chat(user, "<span class='warning'>You can't heal [M] with \the [src]!</span>")
+
+/obj/item/stack/medical/mesh/heal_carbon(mob/living/carbon/C, mob/user, brute, burn, silent, affect_children, obj/item/bodypart/specific_part)
+	var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(user.zone_selected))
+	if(specific_part)
+		affecting = specific_part
+	if(!affecting) //Missing limb?
+		if(!silent)
+			to_chat(user, "<span class='warning'>[C] doesn't have \a [parse_zone(user.zone_selected)]!</span>")
+		return
+	if(!(affecting.status & required_status)) //Limb must satisfy these status requirements
+		if(!silent)
+			to_chat(user, "<span class='warning'>\The [src] won't work on that limb!</span>")
+		return
+	if(affecting.is_salved() && affecting.is_bandaged())
+		if(!silent)
+			to_chat(user, "<span class='warning'>All wounds on \the [affecting] have been salved and bandaged up!</span>")
+		return
+	if(affecting.brute_dam || affecting.burn_dam)
+		var/heymedic = GET_SKILL_LEVEL(user, firstaid)
+		for(var/datum/injury/IN in affecting.injuries)
+			if(IN.is_salved())
+				continue
+			if(!do_mob(user, C, 1 SECONDS - (heymedic/4)))
+				to_chat(user, "<span class='warning'>I must stand still!</span>")
+				return
+			var/diceroll = user.mind?.diceroll(skills = heymedic)
+			if(!(diceroll >= DICE_CRIT_SUCCESS) && !use(stackperuse))
+				to_chat(src, "<span class='warning'>All used up...</span>")
+				return
+			if(diceroll >= DICE_CRIT_SUCCESS)
+				to_chat(src, "<span class='nicegreen'>I manage to economize on \the [src]'s use.</span>")
+			if(IN.damage >= IN.autoheal_cutoff)
+				user.visible_message("<span class='notice'>\The [user] partially bandages a wound on [C]'s [affecting.name] with \the [src].</span>", \
+				"<span class='notice'>I partially bandage a wound on [C]'s [affecting.name] with \the [src].</span>")
+				IN.heal_damage(rand(10, heal_burn))
+			else
+				user.visible_message("<span class='notice'>\The [user] bandages a wound on [C]'s [affecting.name] with \the [src].</span>", \
+				"<span class='notice'>I bandage a wound on [C]'s [affecting.name] with \the [src].</span>")
+				if(!IN.damage)
+					qdel(IN)
+				else if(IN.damage <= IN.autoheal_cutoff)
+					IN.bandage()
+					IN.salve()
+		if(affect_children)
+			if(length(affecting.heal_zones))
+				for(var/bodypart in affecting.heal_zones)
+					var/obj/item/bodypart/child = C.get_bodypart(bodypart)
+					if(!child)
+						continue
+					heal_carbon(C, user, brute, burn, TRUE, FALSE, child)
+		return TRUE
+	if(!silent)
+		to_chat(user, "<span class='warning'>[C]'s [affecting.name] can not be healed with \the [src]!</span>")
 
 /obj/item/stack/medical/mesh/one
 	amount = 1
@@ -608,7 +683,7 @@
 	gender = PLURAL
 	singular_name = "advanced regenerative mesh"
 	icon_state = "aloe_mesh"
-	heal_burn = 15
+	heal_burn = 20
 	sanitization = 1.25
 	flesh_regeneration = 3.5
 	grind_results = list(/datum/reagent/consumable/aloejuice = 5)
@@ -657,6 +732,59 @@
 
 	if(!silent)
 		to_chat(user, "<span class='warning'>You can't heal [M] with the \the [src]!</span>")
+
+/obj/item/stack/medical/aloe/heal_carbon(mob/living/carbon/C, mob/user, brute, burn, silent, affect_children, obj/item/bodypart/specific_part)
+	var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(user.zone_selected))
+	if(specific_part)
+		affecting = specific_part
+	if(!affecting) //Missing limb?
+		if(!silent)
+			to_chat(user, "<span class='warning'>[C] doesn't have \a [parse_zone(user.zone_selected)]!</span>")
+		return
+	if(!(affecting.status & required_status)) //Limb must satisfy these status requirements
+		if(!silent)
+			to_chat(user, "<span class='warning'>\The [src] won't work on that limb!</span>")
+		return
+	if(affecting.is_salved())
+		if(!silent)
+			to_chat(user, "<span class='warning'>All wounds on \the [affecting] have been salved!</span>")
+		return
+	if(affecting.brute_dam || affecting.burn_dam)
+		var/heymedic = GET_SKILL_LEVEL(user, firstaid)
+		for(var/datum/injury/IN in affecting.injuries)
+			if(IN.is_salved() && (IN.damage >= IN.autoheal_cutoff))
+				continue
+			if(!do_mob(user, C, 1 SECONDS - (heymedic/4)))
+				to_chat(user, "<span class='warning'>I must stand still!</span>")
+				return
+			var/diceroll = user.mind?.diceroll(skills = heymedic)
+			if(!(diceroll >= DICE_CRIT_SUCCESS) && !use(stackperuse))
+				to_chat(src, "<span class='warning'>All used up...</span>")
+				return
+			if(diceroll >= DICE_CRIT_SUCCESS)
+				to_chat(src, "<span class='nicegreen'>I manage to economize on \the [src]'s use.</span>")
+			if(IN.damage >= IN.autoheal_cutoff)
+				user.visible_message("<span class='notice'>\The [user] partially salves a wound on [C]'s [affecting.name] with \the [src].</span>", \
+				"<span class='notice'>I partially salve a wound on [C]'s [affecting.name] with \the [src].</span>")
+				IN.heal_damage(rand(10, heal_burn))
+			else
+				user.visible_message("<span class='notice'>\The [user] salves a wound on [C]'s [affecting.name] with \the [src].</span>", \
+				"<span class='notice'>I salve a wound on [C]'s [affecting.name] with \the [src].</span>")
+				if(!IN.damage)
+					qdel(IN)
+				else if(IN.damage <= IN.autoheal_cutoff)
+					IN.salve()
+					IN.disinfect()
+		if(affect_children)
+			if(length(affecting.heal_zones))
+				for(var/bodypart in affecting.heal_zones)
+					var/obj/item/bodypart/child = C.get_bodypart(bodypart)
+					if(!child)
+						continue
+					heal_carbon(C, user, brute, burn, TRUE, FALSE, child)
+		return TRUE
+	if(!silent)
+		to_chat(user, "<span class='warning'>[C]'s [affecting.name] can not be healed with \the [src]!</span>")
 
 /*
 The idea is for these medical devices to work like a hybrid of the old brute packs and tend wounds,
