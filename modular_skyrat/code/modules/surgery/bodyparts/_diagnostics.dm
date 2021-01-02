@@ -12,6 +12,7 @@
 
 //Examine stuff
 /obj/item/bodypart/proc/get_injuries_desc()
+	var/obj/item/bodypart/parent = owner?.get_bodypart(parent_bodyzone)
 	if(is_robotic_limb())
 		var/list/descriptors = list()
 		if(brute_dam)
@@ -27,10 +28,12 @@
 				if(21 to INFINITY)
 					descriptors += pick("a lot of burns","severe melting")
 		
+		if(is_cut_away() && !(parent?.is_cut_away()))
+			descriptors += "a tear at the [amputation_point] so severe that it hangs by a scrap of metal"
+
 		return english_list(descriptors)
 
 	var/list/flavor_text = list()
-	var/obj/item/bodypart/parent = owner?.get_bodypart(parent_bodyzone)
 	if(is_cut_away() && !(parent?.is_cut_away()))
 		flavor_text += "a tear at the [amputation_point] so severe that it hangs by a scrap of flesh"
 
