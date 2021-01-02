@@ -8,8 +8,11 @@
 
 /datum/injury/burn/receive_damage(damage_received = 0, pain_received = 0, damage_type = WOUND_BLUNT)
 	if((wound_damage() + (damage_received/2) >= 40) && parent_bodypart && !parent_bodypart.is_dead())
-		parent_mob?.wound_message += " \The [parent_bodypart.name] fully melts away!"
-		parent_bodypart.kill_limb()
+		if(parent_bodypart.is_organic_limb())
+			parent_mob?.wound_message += " \The [parent_bodypart.name] fully melts away!"
+			parent_bodypart.kill_limb()
+		else
+			parent_bodypart.dismember(BURN, TRUE, TRUE, WOUND_BURN)
 
 /datum/injury/burn/moderate
 	stages = list(

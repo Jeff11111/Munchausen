@@ -31,7 +31,7 @@
 	if(istype(tool, /obj/item/reagent_containers))
 		return FALSE
 
-/datum/surgery_step/mechanic_incise/success(mob/user, mob/living/target, target_zone, obj/item/tool)
+/datum/surgery_step/mechanic_incise/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	. = ..()
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
@@ -40,11 +40,10 @@
 				"Hydraulic fluid pools around the incision in [H]'s [parse_zone(target_zone)].")
 			var/obj/item/bodypart/BP = target.get_bodypart(target_zone)
 			if(istype(BP))
-				var/datum/wound/mechanical/slash/critical/incision/inch = new()
-				inch.apply_wound(BP, TRUE)
-				if(inch)
-					inch.blood_flow += 3
-				H.wound_message = ""
+				var/datum/injury/ouchie = BP.create_injury(WOUND_SLASH, BP.max_damage * 0.4, TRUE)
+				ouchie.apply_injury(BP.max_damage * 0.4, BP)
+				ouchie.injury_flags |= INJURY_SURGICAL
+				target.wound_message = ""
 
 //prepare electronics
 //(mechanical equivalente of clamp bleeders)
@@ -55,6 +54,15 @@
 		TOOL_HEMOSTAT = 10) // try to reboot internal controllers via short circuit with some conductor
 	base_time = 24
 	requires_bodypart_type = BODYPART_ROBOTIC
+
+/datum/surgery_step/mechanic_clamp_bleeders/validate_target(mob/living/target, mob/user)
+	. = ..()
+	if(!.)
+		return
+	var/mob/living/carbon/C = target
+	var/obj/item/bodypart/limb = C.get_bodypart(user.zone_selected)
+	if(limb.is_clamped())
+		return FALSE
 
 /datum/surgery_step/mechanic_clamp_bleeders/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	display_results(user, target, "<span class='notice'>You begin to prepare electronics in [target]'s [parse_zone(target_zone)]...</span>",
@@ -67,9 +75,7 @@
 		var/mob/living/carbon/C = target
 		var/obj/item/bodypart/BP = C.get_bodypart(target_zone)
 		if(BP)
-			var/datum/wound/mechanical/slash/critical/incision = locate() in BP.wounds
-			if(incision)
-				incision.blood_flow = 0.1
+			BP.clamp_limb()
 
 //unwrench
 //(mechanical equivalent of retract skin)
@@ -87,8 +93,8 @@
 		return FALSE
 	var/mob/living/carbon/C = target
 	var/obj/item/bodypart/BP = C.get_bodypart(user.zone_selected)
-	var/datum/wound/mechanical/slash/critical/incision = locate() in BP.wounds
-	if(CHECK_BITFIELD(incision?.wound_flags, WOUND_RETRACTED_SKIN))
+	var/datum/injury/incision = BP.get_incision()
+	if(CHECK_BITFIELD(incision?.injury_flags, INJURY_RETRACTED_SKIN))
 		return FALSE
 
 /datum/surgery_step/mechanic_retract_skin/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
@@ -100,9 +106,9 @@
 	. = ..()
 	var/obj/item/bodypart/BP = target.get_bodypart(target_zone)
 	if(BP)
-		var/datum/wound/mechanical/slash/critical/incision = locate() in BP.wounds
+		var/datum/injury/incision = BP.get_incision()
 		if(incision)
-			incision.wound_flags |= WOUND_RETRACTED_SKIN
+			incision.injury_flags |= INJURY_RETRACTED_SKIN
 
 //pry off plating
 //(mechanical equivalent of sawing through bone)
@@ -147,11 +153,22 @@
 	name = "Screw shell"
 	implements = list(
 		TOOL_SCREWDRIVER		= 100,
-		TOOL_SCALPELl 		= 75,
+		TOOL_SCALPEL 		= 75,
 		/obj/item/kitchen/knife	= 50,
 		/obj/item				= 10) // 10% success with any sharp item.
 	base_time = 24
 	requires_bodypart_type = BODYPART_ROBOTIC
+
+/datum/surgery_step/mechanic_close/validate_target(mob/living/target, mob/user)
+	. = ..()
+	if(!.) //nah nigga lol
+		return FALSE
+	var/mob/living/carbon/C = target
+	var/obj/item/bodypart/BP = C.get_bodypart(user.zone_selected)
+	for(var/datum/injury/IN in BP.injuries)
+		if(IN.is_bleeding())
+			return TRUE
+	return FALSE
 
 /datum/surgery_step/mechanic_close/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	display_results(user, target, "<span class='notice'>You begin to screw the shell of [target]'s [parse_zone(target_zone)]...</span>",
@@ -164,10 +181,15 @@
 		var/mob/living/carbon/C = target
 		var/obj/item/bodypart/BP = C.get_bodypart(target_zone)
 		if(istype(BP))
-			for(var/datum/wound/slash/critical/incision/inch in BP.wounds)
-				inch.remove_wound()
-			for(var/datum/wound/mechanical/slash/critical/incision/inch in BP.wounds)
-				inch.remove_wound()
+			for(var/datum/injury/inch in BP.injuries)
+				if(!inch.is_bleeding())
+					continue
+				if(inch.is_surgical())
+					inch.close_injury()
+				else
+					inch.clamp_injury()
+		if(BP.is_clamped())
+			BP.unclamp_limb()
 
 /datum/surgery_step/mechanic_close/tool_check(mob/user, obj/item/tool, mob/living/carbon/target)
 	if(implement_type == /obj/item && !tool.get_sharpness())

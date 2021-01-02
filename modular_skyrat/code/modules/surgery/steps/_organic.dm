@@ -184,6 +184,17 @@
 	implements = list(TOOL_CAUTERY = 100, /obj/item/gun/energy/laser = 80, /obj/item = 70) // 70% success with any hot item.
 	base_time = 24
 
+/datum/surgery_step/close/validate_target(mob/living/target, mob/user)
+	. = ..()
+	if(!.) //nah nigga lol
+		return FALSE
+	var/mob/living/carbon/C = target
+	var/obj/item/bodypart/BP = C.get_bodypart(user.zone_selected)
+	for(var/datum/injury/IN in BP.injuries)
+		if(IN.is_bleeding())
+			return TRUE
+	return FALSE
+
 /datum/surgery_step/close/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	display_results(user, target, "<span class='notice'>You begin cauterizing the wounds in [target]'s [parse_zone(target_zone)]...</span>",
 		"[user] begins to cauterize the wounds in [target]'s [parse_zone(target_zone)].",

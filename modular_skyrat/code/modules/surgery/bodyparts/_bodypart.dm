@@ -548,7 +548,7 @@
 		return ..()
 
 /obj/item/bodypart/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
-	..()
+	. = ..()
 	if(!is_robotic_limb())
 		playsound(get_turf(src), 'sound/misc/splort.ogg', 50, 1, -1)
 	pixel_x = rand(-3, 3)
@@ -710,15 +710,9 @@
 			break	//limit increase to a maximum of one injury infection per 2 seconds
 
 /obj/item/bodypart/proc/update_injuries()
-	if(is_robotic_limb()) //Robotic limbs don't heal or get worse.
-		for(var/datum/injury/IN in injuries) //Repaired injuries disappear though
-			if(IN.damage <= 0) //and they disappear right away
-				qdel(IN) //TODO: robot injuries for robot limbs
-		return
-	
 	for(var/datum/injury/IN in injuries)
 		// Wounds can disappear after 10 minutes at the earliest
-		if(IN.damage <= 0 && IN.created && IN.created + IN.fade_away <= world.time)
+		if(IN.damage <= 0 && IN.created && (IN.created + IN.fade_away <= world.time || is_robotic_limb()))
 			qdel(IN)
 			continue
 		
@@ -730,13 +724,13 @@
 			if(owner.IsSleeping()) // sleepy niggas heal quadruple
 				heal_amt *= 4
 		heal_amt = CEILING(heal_amt, 0.1)
-		if(owner.can_autoheal())
+		if(IN.can_autoheal())
 			IN.heal_damage(heal_amt)
 
 		// Bleeding
 		if(owner && !(ishuman(owner) && (NOBLOOD in owner.dna?.species?.species_traits)))
 			IN.bleed_timer--
-		
+	
 	// Sync the limb's damage with its injuries
 	update_damages()
 	if(owner && update_bodypart_damage_state())
@@ -744,8 +738,6 @@
 
 // Updates brute_damn and burn_damn from wound damages
 /obj/item/bodypart/proc/update_damages()
-	if(is_robotic_limb())
-		return
 	number_injuries = 0
 	brute_dam = 0
 	burn_dam = 0
@@ -1004,19 +996,13 @@
 	
 	//Brute and burn damage is associated with injuries
 	if(brute)
-		if(is_robotic_limb())
-			brute_dam += brute
-		else
-			var/datum/injury/ouchie = create_injury(wounding_type, brute)
-			if(!(ouchie in injuries))
-				ouchie.apply_injury(brute, src)
+		var/datum/injury/ouchie = create_injury(wounding_type, brute)
+		if(!(ouchie in injuries))
+			ouchie.apply_injury(brute, src)
 	if(burn)
-		if(is_robotic_limb())
-			burn_dam += burn
-		else
-			var/datum/injury/ouchie = create_injury(wounding_type, burn)
-			if(!(ouchie in injuries))
-				ouchie.apply_injury(burn, src)
+		var/datum/injury/ouchie = create_injury(wounding_type, burn)
+		if(!(ouchie in injuries))
+			ouchie.apply_injury(burn, src)
 		if(owner && prob(burn))
 			owner.IgniteMob()
 	
@@ -1044,7 +1030,7 @@
 		owner.flash_pain(min(round(pain/30) * 255, 255), 0, rand(1,4), pick(5,10))
 
 	if(is_robotic_limb() && owner)
-		if((brute+burn)>3 && prob((20+brute+burn)))
+		if((brute+burn) > 3 && prob(20+brute+burn))
 			do_sparks(3,FALSE,src.owner)
 
 	//Update the owner's health stuffies
@@ -1248,24 +1234,20 @@
 	if(only_organic && !is_organic_limb()) //This makes robolimbs not healable by chems.
 		return
 
-	if(is_robotic_limb())
-		brute_dam = round(max(brute_dam - brute, 0), DAMAGE_PRECISION)
-	else
-		for(var/datum/injury/IN in injuries)
-			if(brute <= 0)
-				break
-			if(IN.damage_type == WOUND_BURN)
-				continue
-			brute = IN.heal_damage(brute)
-	if(is_robotic_limb())
-		burn_dam = round(max(burn_dam - burn, 0), DAMAGE_PRECISION)
-	else
-		for(var/datum/injury/IN in injuries)
-			if(burn <= 0)
-				break
-			if(IN.damage_type != WOUND_BURN)
-				continue
-			burn = IN.heal_damage(burn)
+	for(var/datum/injury/IN in injuries)
+		if(brute <= 0)
+			break
+		if((IN.damage_type == WOUND_BURN) || !(status & IN.required_status))
+			continue
+		brute = IN.heal_damage(brute)
+	
+	for(var/datum/injury/IN in injuries)
+		if(burn <= 0)
+			break
+		if((IN.damage_type != WOUND_BURN) || !(status & IN.required_status))
+			continue
+		burn = IN.heal_damage(burn)
+	
 	limb_integrity = round(min(limb_integrity + brute + burn, max_limb_integrity))
 	stamina_dam = round(max(stamina_dam - stamina, 0), DAMAGE_PRECISION)
 	pain_dam = round(max(pain_dam - pain, 0), DAMAGE_PRECISION)
@@ -1364,12 +1346,12 @@
 	if(!can_feel_pain())
 		return 0
 	var/multiplier = 1 //Multiply our total pain damage by this
-	if(is_robotic_limb())
-		//Robotic limbs feel a bit less pain, but are not immune to it
-		multiplier *= 0.75
 	if(grasped_by)
 		//Being grasped lowers the pain just a bit
 		multiplier *= 0.75
+	if(is_robotic_limb())
+		//Robotic limbs feel a bit less pain, but are not immune to it
+		multiplier *= 0.5
 	var/extra_pain = 0
 	extra_pain += 0.5 * brute_dam
 	extra_pain += 0.6 * burn_dam

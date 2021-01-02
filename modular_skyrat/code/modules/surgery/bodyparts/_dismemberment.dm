@@ -142,8 +142,6 @@
 	if(!Tsec || destroyed)	// Tsec = null happens when a "dummy human" used for rendering icons on prefs screen gets its limbs replaced.
 		qdel(src)
 		return
-	else
-		new /datum/injury/lost_limb(src, wounding_type, !dismembered)
 
 	//Start processing rotting... if we didn't get destroyed
 	START_PROCESSING(SSobj, src)
@@ -268,14 +266,22 @@
 		poorsod.confused += max(0, 15 - GET_STAT_LEVEL(poorsod, end))
 	if((body_zone == BODY_ZONE_PRECISE_GROIN) && prob(35 - GET_STAT_LEVEL(poorsod, end)))
 		poorsod.vomit(15, 15, 25)
-	if(prob(60 - GET_STAT_LEVEL(poorsod, end)))
+	if(prob(80 - GET_STAT_LEVEL(poorsod, end)))
 		poorsod.death_scream()
 
 	var/msg = "<b><span class='danger'>[poorsod]'s [name] [occur_text]!</span></b>"
 
 	if(!silent)
 		poorsod.visible_message(msg, "<span class='userdanger'>Your [name] [occur_text]!</span>")
-
+	else
+		switch(wounding_type)
+			if(WOUND_SLASH)
+				poorsod.wound_message += " \The [name] is violently severed!"
+			if(WOUND_PIERCE, WOUND_BLUNT)
+				poorsod.wound_message += " \The [name] is violently gored!"
+			if(WOUND_BURN)
+				poorsod.wound_message += " \The [name] is violently incinerated!"
+	
 	if(wounding_type == WOUND_BURN)
 		if(is_organic_limb())
 			new /obj/effect/decal/cleanable/ash(get_turf(owner))

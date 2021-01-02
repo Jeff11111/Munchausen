@@ -33,6 +33,9 @@
 	var/list/desc_list = list()
 	var/list/damage_list = list()
 
+	// limb status required for this injury
+	var/required_status = BODYPART_ORGANIC
+
 /datum/injury/New()
 	. = ..()
 	created = world.time
