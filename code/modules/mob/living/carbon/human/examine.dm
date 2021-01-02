@@ -194,43 +194,14 @@
 			if(100 to 200)
 				. += "<span class='warning'>[t_He] [t_is] twitching ever so slightly.</span>"
 
-	var/list/clothing_items = list(head, wear_mask, wear_neck, wear_suit, w_uniform, belt, wrists, gloves, shoes)
 	var/list/msg = list()
 	var/list/missing = ALL_BODYPARTS
 	if(!screwy_self)
 		for(var/obj/item/bodypart/BP in bodyparts)
-			for(var/obj/item/I in BP.embedded_objects)
-				if(I.isEmbedHarmless())
-					msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] stuck to [t_his] [BP.name]!</B>"
-				else
-					msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] embedded in [t_his] [BP.name]!</B>"
-			if(BP.etching && !clothingonpart(BP))
-				msg += "<B>[t_His] [BP.name] has \"[BP.etching]\" etched on it!</B>"
 			if(BP.is_stump())
-				msg += "<B>[t_He] has a stump where [t_his] [parse_zone(BP.body_zone)] should be!</B>"
+				msg += "<span class='deadsay'><B>[t_He] has a stump where [t_his] [parse_zone(BP.body_zone)] should be!</B></span>"
 			if(BP.grasped_by?.grasping_mob == src)
 				msg += "[t_He] is applying pressure to his [BP.name]!"
-			if(BP.is_dead())
-				msg += "<span class='deadsay'><B>[t_His] [BP.name] is completely necrotic!</B></span>"
-			var/obj/item/hidden
-			for(var/obj/item/I in clothing_items)
-				if(I && (I.body_parts_covered & BP.body_part))
-					hidden = I
-					break
-			for(var/datum/wound/W in BP.wounds)
-				if((!hidden || CHECK_BITFIELD(W.wound_flags, WOUND_VISIBLE_THROUGH_CLOTHING)) && W.get_examine_description(user))
-					msg += "[W.get_examine_description(user)]"
-					if((user != src) && W.severity >= WOUND_SEVERITY_CRITICAL)
-						if(GET_SKILL_LEVEL(user, firstaid) <= JOB_SKILLPOINTS_NOVICE)
-							SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured)
-						else
-							SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured/lesser)
-			if(hidden)
-				if(BP.get_bleed_rate())
-					msg += "<B>[t_He] [t_has] blood soaking through [t_his] [hidden] around [t_his] [BP.name]!</B>"
-			else
-				if(BP.get_injuries_desc() != "nothing")
-					msg += "[t_He] [t_has] [BP.get_injuries_desc()] on [t_his] [BP.name]."
 			missing -= BP.body_zone
 	//Teeth
 	if(!screwy_self)
@@ -274,13 +245,19 @@
 		msg += "[t_He] [p_are()] a centrist."
 
 	if(!screwy_self && !(user == src && src.hal_screwyhud == SCREWYHUD_HEALTHY)) //fake healthy
-		switch(getBruteLoss() + getFireLoss() + getCloneLoss())
+		var/damaged = getBruteLoss() + getFireLoss() + getCloneLoss()
+		switch(damaged)
 			if(1 to 25)
 				msg += "[t_He] [t_is] barely injured."
 			if(25 to 50)
 				msg += "[t_He] [t_is] <B>moderately</B> injured!"
 			if(50 to INFINITY)
 				msg += "<B>[t_He] [t_is] severely injured!</B>"
+				if(damaged >= 65)
+					if(GET_SKILL_LEVEL(user, firstaid) <= JOB_SKILLPOINTS_NOVICE)
+						SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured)
+					else
+						SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured/lesser)
 
 	if(!screwy_self)
 		if(fire_stacks > 0)
@@ -635,57 +612,48 @@
 		. |= "<span class='smallnotice'><i>[p_they(TRUE)] [p_have()] no visible scars.</i></span>"
 		return
 	
+	var/t_He = p_they(TRUE)
 	var/t_His = p_their(TRUE)
-	var/list/damaged_bodypart_text = list()
-	for(var/obj/item/bodypart/BP in bodyparts)
-		var/how_brute = ""
-		var/how_burn = ""
-		var/max_sev = 0
-		var/sev = 0
-		var/styletext = "tinydanger"
-		var/text = ""
-		if(!BP.brute_dam && !BP.burn_dam)
-			continue
-		if(BP.brute_dam)
-			sev = clamp(round(BP.brute_dam/BP.max_damage * 3, 1), 1, 3)
-			max_sev = max(max_sev, sev)
-			switch(sev)
-				if(1)
-					how_brute = BP.light_brute_msg
-				if(2)
-					how_brute = BP.medium_brute_msg
-				if(3)
-					how_brute = BP.heavy_brute_msg
-		if(BP.burn_dam)
-			sev = clamp(round(BP.burn_dam/BP.max_damage * 3, 1), 1, 3)
-			max_sev = max(max_sev, sev)
-			switch(sev)
-				if(1)
-					how_burn = BP.light_burn_msg
-				if(2)
-					how_burn = BP.medium_burn_msg
-				if(3)
-					how_burn = BP.heavy_burn_msg
-		switch(max_sev)
-			if(1)
-				styletext = "tinydanger"
-			if(2)
-				styletext = "smalldanger"
-			if(3)
-				styletext = "danger"
-		if(how_brute && how_burn)
-			text = "<span class='[styletext]'>[p_their(TRUE)] [BP.name] is [how_brute] and [how_burn][max_sev >= 2 ? "!" : "."]</span>"
-		else if(how_brute)
-			text = "<span class='[styletext]'>[p_their(TRUE)] [BP.name] is [how_brute][max_sev >= 2 ? "!" : "."]</span>"
-		else if(how_burn)
-			text = "<span class='[styletext]'>[p_their(TRUE)] [BP.name] is [how_burn][max_sev >= 2 ? "!" : "."]</span>"
-		
-		if(length(text))
-			damaged_bodypart_text |= text
+	var/t_his = p_their()
+	var/t_has = p_have()
 	
-	. += damaged_bodypart_text
-
-	if(!length(damaged_bodypart_text))
+	var/list/damaged_bodypart_text = list()
+	var/list/clothing_items = list(head, wear_mask, wear_neck, wear_suit, w_uniform, belt,
+								w_shirt, w_underwear, w_socks, back,
+								ears, ears_extra, wrists, gloves, shoes)
+	for(var/obj/item/bodypart/BP in bodyparts)
+		for(var/obj/item/I in BP.embedded_objects)
+			if(I.isEmbedHarmless())
+				damaged_bodypart_text += "<span class='warning'>[t_He] [t_has] \a [icon2html(I, user)] [I] stuck to [t_his] [BP.name]!</span>"
+			else
+				damaged_bodypart_text += "<span class='danger'><B>[t_He] [t_has] \a [icon2html(I, user)] [I] embedded in [t_his] [BP.name]!</B></span>"
+		if(BP.etching && !clothingonpart(BP))
+			damaged_bodypart_text += "<span class='warning'>[t_His] [BP.name] has \"[BP.etching]\" etched on it!</span>"
+		if(BP.is_dead())
+			damaged_bodypart_text += "<span class='deadsay'><B>[t_His] [BP.name] is completely necrotic!</B></span>"
+		var/obj/item/hidden
+		for(var/obj/item/I in clothing_items)
+			if(I && (I.body_parts_covered & BP.body_part))
+				hidden = I
+				break
+		for(var/datum/wound/W in BP.wounds)
+			if((!hidden || CHECK_BITFIELD(W.wound_flags, WOUND_VISIBLE_THROUGH_CLOTHING)) && W.get_examine_description(user))
+				damaged_bodypart_text += "[W.get_examine_description(user)]"
+				if((user != src) && W.severity >= WOUND_SEVERITY_CRITICAL)
+					if(GET_SKILL_LEVEL(user, firstaid) <= JOB_SKILLPOINTS_NOVICE)
+						SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured)
+					else
+						SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured/lesser)
+		if(hidden)
+			if(BP.get_bleed_rate())
+				damaged_bodypart_text += "<span class='warning'>[t_He] [t_has] blood soaking through [t_his] [hidden] around [t_his] [BP.name]!</span>"
+		else
+			if(BP.get_injuries_desc() != "nothing")
+				damaged_bodypart_text += "<span class='danger'>[t_He] [t_has] [BP.get_injuries_desc()] on [t_his] [BP.name].</span>"
+	
+	if(length(damaged_bodypart_text))
+		. |= damaged_bodypart_text
+	else
 		. += "<span class='smallnotice'>[p_they(TRUE)] [p_have()] no significantly damaged bodyparts.</span>"
 	
 	var/list/obj/item/bodypart/gauzed_limbs = list()
@@ -735,4 +703,3 @@
 		. += suppress_text
 	
 	. += "<span class='notice'>*---------*</span>"
-

@@ -226,64 +226,54 @@
 
 //skyrat edit
 /mob/living/carbon/examine_more(mob/user)
-	var/msg = list("<span class='notice'><i><b>I examine [src] closer, and note the following...</b></i></span>")
-	if((src == user) && HAS_TRAIT(user, TRAIT_SCREWY_CHECKSELF))
-		msg |= "\t<span class='smallnotice'>[p_they(TRUE)] [p_have()] no significantly damaged bodyparts.</span>"
-		msg |= "\t<span class='smallnotice'><i>[p_they(TRUE)] [p_have()] no visible scars.</i></span>"
-		return msg
-
-	var/t_His = p_their(TRUE)
-	var/list/damaged_bodypart_text = list()
-	for(var/obj/item/bodypart/BP in bodyparts)
-		var/how_brute = ""
-		var/how_burn = ""
-		var/max_sev = 0
-		var/sev = 0
-		var/styletext = "tinydanger"
-		var/text = ""
-		if(!BP.brute_dam && !BP.burn_dam)
-			continue
-		if(BP.brute_dam >= (BP.max_damage/3))
-			sev = round(BP.brute_dam/BP.max_damage * 3, 1)
-			max_sev = max(max_sev, sev)
-			switch(sev)
-				if(1)
-					how_brute = BP.light_brute_msg
-				if(2)
-					how_brute = BP.medium_brute_msg
-				if(3)
-					how_brute = BP.heavy_brute_msg
-		if(BP.burn_dam >= (BP.max_damage/3))
-			sev = round(BP.burn_dam/BP.max_damage * 3, 1)
-			max_sev = max(max_sev, sev)
-			switch(sev)
-				if(1)
-					how_burn = BP.light_burn_msg
-				if(2)
-					how_burn = BP.medium_burn_msg
-				if(3)
-					how_burn = BP.heavy_burn_msg
-		switch(max_sev)
-			if(1)
-				styletext = "tinydanger"
-			if(2)
-				styletext = "smalldanger"
-			if(3)
-				styletext = "danger"
-		if(how_brute && how_burn)
-			text = "\t<span class='[styletext]'>[p_their(TRUE)] [BP.name] is [how_brute] and [how_burn][max_sev >= 2 ? "!" : "."]</span>"
-		else if(how_brute)
-			text = "\t<span class='[styletext]'>[p_their(TRUE)] [BP.name] is [how_brute][max_sev >= 2 ? "!" : "."]</span>"
-		else if(how_burn)
-			text = "\t<span class='[styletext]'>[p_their(TRUE)] [BP.name] is [how_burn][max_sev >= 2 ? "!" : "."]</span>"
-		
-		if(length(text))
-			damaged_bodypart_text |= text
+	. = list("<span class='notice'><i><b>I examine [src] closer, and note the following...</b></i></span>", "<span class='notice'>*---------*</span>")
 	
-	msg |= damaged_bodypart_text
-
-	if(!length(damaged_bodypart_text))
-		msg |= "\t<span class='smallnotice'>[p_they(TRUE)] [p_have()] no significantly damaged bodyparts.</span>"
+	if((src == user) && HAS_TRAIT(user, TRAIT_SCREWY_CHECKSELF))
+		. |= "<span class='smallnotice'>[p_they(TRUE)] [p_have()] no significantly damaged bodyparts.</span>"
+		. |= "<span class='smallnotice'><i>[p_they(TRUE)] [p_have()] no visible scars.</i></span>"
+		return
+	
+	var/t_He = p_they(TRUE)
+	var/t_His = p_their(TRUE)
+	var/t_his = p_their()
+	var/t_has = p_have()
+	
+	var/list/damaged_bodypart_text = list()
+	var/list/clothing_items = list(head, wear_mask, wear_neck, back)
+	for(var/obj/item/bodypart/BP in bodyparts)
+		for(var/obj/item/I in BP.embedded_objects)
+			if(I.isEmbedHarmless())
+				damaged_bodypart_text += "<span class='warning'>[t_He] [t_has] \a [icon2html(I, user)] [I] stuck to [t_his] [BP.name]!</span>"
+			else
+				damaged_bodypart_text += "<span class='danger'><B>[t_He] [t_has] \a [icon2html(I, user)] [I] embedded in [t_his] [BP.name]!</B></span>"
+		if(BP.etching && !clothingonpart(BP))
+			damaged_bodypart_text += "<span class='warning'>[t_His] [BP.name] has \"[BP.etching]\" etched on it!</span>"
+		if(BP.is_dead())
+			damaged_bodypart_text += "<span class='deadsay'><B>[t_His] [BP.name] is completely necrotic!</B></span>"
+		var/obj/item/hidden
+		for(var/obj/item/I in clothing_items)
+			if(I && (I.body_parts_covered & BP.body_part))
+				hidden = I
+				break
+		for(var/datum/wound/W in BP.wounds)
+			if((!hidden || CHECK_BITFIELD(W.wound_flags, WOUND_VISIBLE_THROUGH_CLOTHING)) && W.get_examine_description(user))
+				damaged_bodypart_text += "[W.get_examine_description(user)]"
+				if((user != src) && W.severity >= WOUND_SEVERITY_CRITICAL)
+					if(GET_SKILL_LEVEL(user, firstaid) <= JOB_SKILLPOINTS_NOVICE)
+						SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured)
+					else
+						SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured/lesser)
+		if(hidden)
+			if(BP.get_bleed_rate())
+				damaged_bodypart_text += "<span class='warning'>[t_He] [t_has] blood soaking through [t_his] [hidden] around [t_his] [BP.name]!</span>"
+		else
+			if(BP.get_injuries_desc() != "nothing")
+				damaged_bodypart_text += "<span class='danger'>[t_He] [t_has] [BP.get_injuries_desc()] on [t_his] [BP.name].</span>"
+	
+	if(length(damaged_bodypart_text))
+		. |= damaged_bodypart_text
+	else
+		. += "<span class='smallnotice'>[p_they(TRUE)] [p_have()] no significantly damaged bodyparts.</span>"
 	
 	var/list/obj/item/bodypart/gauzed_limbs = list()
 	for(var/i in bodyparts)
@@ -291,7 +281,7 @@
 		if(BP.current_gauze)
 			gauzed_limbs += BP
 	var/num_gauze = LAZYLEN(gauzed_limbs)
-	var/gauze_text = "\t<span class='notice'>[t_His]"
+	var/gauze_text = "<span class='notice'>[t_His]"
 	switch(num_gauze)
 		if(1 to 2)
 			gauze_text += " <a href='?src=[REF(gauzed_limbs[1])];gauze=1;'>"
@@ -303,11 +293,11 @@
 				var/obj/item/bodypart/BP = gauzed_limbs[i]
 				gauze_text += " <a href='?src=[REF(BP)];gauze=1;'>[BP.name]</a>,"
 			gauze_text += " and <a href='?src=[REF(gauzed_limbs[num_gauze])];gauze=1;'>[gauzed_limbs[num_gauze].name]</a>"
-	gauze_text += "[num_gauze == 1 ? " is gauzed" : " are gauzed"]"
 	
+	gauze_text += "[num_gauze == 1 ? " is gauzed" : " are gauzed"]"
 	gauze_text += ".</span>"
 	if(num_gauze)
-		msg += gauze_text
+		. |= gauze_text
 
 	var/list/obj/item/bodypart/suppress_limbs = list()
 	for(var/i in bodyparts)
@@ -316,7 +306,7 @@
 			suppress_limbs += BP
 
 	var/num_suppress = LAZYLEN(suppress_limbs)
-	var/suppress_text = "\t<span class='notice'><B>[t_His]"
+	var/suppress_text = "<span class='notice'><B>[t_His]"
 	switch(num_suppress)
 		if(1 to 2)
 			suppress_text += " [suppress_limbs[1].name][num_suppress == 2 ? " and [suppress_limbs[2].name]" : ""]"
@@ -325,10 +315,11 @@
 				var/obj/item/bodypart/BP = suppress_limbs[i]
 				suppress_text += " [BP.name],"
 			suppress_text += " and [suppress_limbs[num_suppress].name]"
-	suppress_text += "[num_suppress == 1 ? " is impervious to bleeding" : " are impervious to bleeding"]"
 	
+	suppress_text += "[num_suppress == 1 ? " is impervious to bleeding" : " are impervious to bleeding"]"
 	suppress_text += ".</B></span>\n"
 	if(num_suppress)
-		msg += suppress_text
+		. += suppress_text
+	
+	. += "<span class='notice'>*---------*</span>"
 
-	return msg
