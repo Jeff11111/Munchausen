@@ -40,6 +40,13 @@
 	if(active_trauma)
 		QDEL_NULL(active_trauma)
 
+/datum/wound/mechanical/blunt/should_disable_limb(obj/item/bodypart/affected)
+	. = ..()
+	if(.)
+		return TRUE
+	if(severity >= WOUND_SEVERITY_SEVERE && !(affected?.current_gauze?.splint_factor < 0.4))
+		return TRUE
+
 /datum/wound/mechanical/blunt/wound_injury(datum/wound/old_wound = null)
 	if(limb.body_zone == BODY_ZONE_HEAD && brain_trauma_group)
 		processes = TRUE
