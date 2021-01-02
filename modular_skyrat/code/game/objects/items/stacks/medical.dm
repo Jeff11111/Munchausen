@@ -28,7 +28,7 @@
 	other_delay = 45
 	absorption_rate = 0.10
 	absorption_capacity = 3.5
-	splint_factor = 0.65
+	splint_factor = 0.3
 	novariants = TRUE
 	merge_type = /obj/item/stack/medical/gauze/splint/tribal
 
