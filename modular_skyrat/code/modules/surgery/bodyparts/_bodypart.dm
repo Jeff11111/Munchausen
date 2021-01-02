@@ -113,7 +113,7 @@
 	/// Robotic, organic, etc
 	var/status = BODYPART_ORGANIC
 	/// General bodypart flags
-	var/limb_flags = 0
+	var/limb_flags = (BODYPART_CAN_STUMP)
 	/// Maximum weight for a cavity item
 	var/max_cavity_size = WEIGHT_CLASS_TINY
 	/// Synthetic bodyparts can have patches applied but are harder to repair by conventional means

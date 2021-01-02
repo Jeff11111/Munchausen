@@ -28,6 +28,7 @@
 	amputation_point = "eyesocket"
 	tendon_name = "rectus"
 	artery_name = "central retinal artery"
+	limb_flags = 0
 	var/sight_flags = 0
 	var/see_in_dark = 2
 	var/tint = 0
@@ -128,25 +129,35 @@
 		else
 			eye_damaged = FALSE
 	var/datum/component/field_of_vision/fov = owner.GetComponent(/datum/component/field_of_vision)
+	var/fuck_with_fov = TRUE
+	var/mob/living/carbon/human/humie = owner
+	if(istype(humie))
+		var/obj/item/clothing/head/beanie = humie.head
+		if(istype(beanie) && beanie.fov_angle)
+			fuck_with_fov = FALSE
+	if(!istype(fov))
+		fuck_with_fov = FALSE
 	if((eye_damaged >= BLIND_VISION_THREE) || is_disabled())
-		if(istype(other_eye) && (other_eye.eye_damaged < BLIND_VISION_THREE) && fov)
+		if(istype(other_eye) && (other_eye.eye_damaged < BLIND_VISION_THREE) && fuck_with_fov)
 			fov?.generate_fov_holder(owner, 315, FOV_180MINUS45_DEGREES, FALSE)
-		else
+		else if(!istype(other_eye) || other_eye.eye_damaged >= BLIND_VISION_THREE)
 			owner.become_blind(EYE_DAMAGE)
 	else if(eye_damaged)
 		owner.overlay_fullscreen("left_eye_damage", /obj/screen/fullscreen/impaired/left, eye_damaged)
 		if(!istype(other_eye))
 			owner.overlay_fullscreen("right_eye_damage", /obj/screen/fullscreen/impaired, eye_damaged)
-			fov?.generate_fov_holder(owner, 45, FOV_180PLUS45_DEGREES, FALSE)
+			if(fuck_with_fov)
+				fov.generate_fov_holder(owner, 45, FOV_180PLUS45_DEGREES, FALSE)
 	else
 		owner.clear_fullscreen("left_eye_damage")
 		if(!istype(other_eye))
 			owner.clear_fullscreen("right_eye_damage")
-			fov?.generate_fov_holder(owner, 45, FOV_180PLUS45_DEGREES, FALSE)
+			if(fuck_with_fov)
+				fov.generate_fov_holder(owner, 45, FOV_180PLUS45_DEGREES, FALSE)
 	if(eye_damaged < BLIND_VISION_THREE)
 		owner.cure_blind(EYE_DAMAGE)
-		if(fov && fov.angle == 45)
-			fov?.generate_fov_holder(owner, 0, FOV_180_DEGREES, FALSE)
+		if(fuck_with_fov && fov.angle == 45)
+			fov.generate_fov_holder(owner, 0, FOV_180_DEGREES, FALSE)
 	return eye_damaged
 
 #undef BLURRY_VISION_ONE

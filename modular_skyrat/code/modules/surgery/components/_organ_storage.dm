@@ -164,7 +164,7 @@
 		return FALSE //Not an item
 	if(I == parent)
 		return FALSE //no paradoxes for you
-	if(M)
+	if(M.a_intent != INTENT_GRAB)
 		return FALSE //must be on grab intent
 	var/obj/item/organ/O = I
 	if(!istype(O) && !(bodypart_affected && !bodypart_affected.cavity_item && (I.w_class <= bodypart_affected.max_cavity_size)))

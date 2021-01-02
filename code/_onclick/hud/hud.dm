@@ -266,7 +266,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	else if (viewmob.hud_used)
 		viewmob.hud_used.plane_masters_update()
 	
-	//Update the FOV
+	// Update the FOV
 	var/datum/component/field_of_vision/track_and_field = GetComponent(/datum/component/field_of_vision)
 	if(track_and_field)
 		track_and_field.resize_fov(track_and_field.current_fov_size, screenmob.client.view)

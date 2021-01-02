@@ -114,13 +114,14 @@
 
 //Flags for the limb_flags var on /obj/item/bodypart
 #define	BODYPART_VITAL		(1<<0) //Kills the owner if destroyed or dismembered
-#define BODYPART_DEAD		(1<<1) //Completely septic and unusable limb
-#define BODYPART_CUT_AWAY	(1<<2) //Just got reattached but needs to be sewn back on to organ
-#define BODYPART_FROZEN		(1<<3) //Cold, doesn't rot
-#define BODYPART_NOBLEED	(1<<4) //Does not bleed
-#define BODYPART_NOEMBED	(1<<5) //Does not suffer with embedding
-#define BODYPART_NOPAIN 	(1<<6) //Does not feel pain
-#define	BODYPART_HEALS_OVERKILL	(1<<7) //Heals bad injuries on it's own
+#define	BODYPART_HEALS_OVERKILL	(1<<1) //Heals bad injuries on it's own
+#define	BODYPART_CAN_STUMP	(1<<2) //Leaves a stump behind when violently severed
+#define BODYPART_DEAD		(1<<3) //Completely septic and unusable limb
+#define BODYPART_CUT_AWAY	(1<<4) //Just got reattached but needs to be sewn back on to organ
+#define BODYPART_FROZEN		(1<<5) //Cold, doesn't rot
+#define BODYPART_NOBLEED	(1<<6) //Does not bleed
+#define BODYPART_NOEMBED	(1<<7) //Does not suffer with embedding
+#define BODYPART_NOPAIN 	(1<<8) //Does not feel pain
 
 //Bodypart disabling defines
 #define BODYPART_NOT_DISABLED 0

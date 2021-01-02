@@ -1,4 +1,4 @@
-	//Baseline hardsuits
+//Baseline hardsuits
 /obj/item/clothing/head/helmet/space/hardsuit
 	name = "hardsuit helmet"
 	desc = "A special helmet designed for work in a hazardous, low-pressure environment. Has radiation shielding."
@@ -17,6 +17,8 @@
 	var/rad_record = 0
 	var/grace_count = 0
 	var/datum/looping_sound/geiger/soundloop
+	fov_angle = 0
+	fov_shadow_angle = FOV_180_DEGREES
 
 /obj/item/clothing/head/helmet/space/hardsuit/Initialize()
 	. = ..()

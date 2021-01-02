@@ -376,7 +376,7 @@
 				"<span class='notice'>I close a wound on [C]'s [affecting.name] with \the [src].</span>")
 				if(!IN.damage)
 					qdel(IN)
-				else if(IN.damage <= autoheal_cutoff)
+				else if(IN.damage <= IN.autoheal_cutoff)
 					IN.clamp_injury()
 		if(affect_children)
 			if(length(affecting.heal_zones))

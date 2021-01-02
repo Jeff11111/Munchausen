@@ -5,10 +5,12 @@
 	item_state = "that"
 	body_parts_covered = HEAD
 	slot_flags = ITEM_SLOT_HEAD
-	var/blockTracking = 0 //For AI tracking
-	var/can_toggle = null
 	dynamic_hair_suffix = "+generic"
 	var/datum/beepsky_fashion/beepsky_fashion //the associated datum for applying this to a secbot
+	var/blockTracking = 0 //For AI tracking
+	var/can_toggle = null
+	var/fov_angle = null
+	var/fov_shadow_angle = null
 
 /obj/item/clothing/head/Initialize()
 	. = ..()
@@ -47,8 +49,6 @@
 			R.visible_message("<span class='notice'>[src] lands neatly on top of [R].", "<span class='notice'>[src] lands perfectly on top of you.</span>")
 			R.place_on_head(src) //hats aren't designed to snugly fit borg heads or w/e so they'll always manage to knock eachother off
 
-
-
 /obj/item/clothing/head/worn_overlays(isinhands = FALSE, icon_file, used_state, style_flags = NONE)
 	. = ..()
 	if(!isinhands)
@@ -58,7 +58,20 @@
 			. += mutable_appearance('icons/effects/blood.dmi', "helmetblood", color = blood_DNA_to_color())
 
 /obj/item/clothing/head/update_clothes_damaged_state() //skyrat edit
-	..()
+	. = ..()
 	if(ismob(loc))
 		var/mob/M = loc
 		M.update_inv_head()
+
+/obj/item/clothing/head/equipped(mob/user, slot)
+	. = ..()
+	if((slot == SLOT_HEAD) && fov_angle && fov_shadow_angle)
+		var/datum/component/field_of_vision/fov = user.GetComponent(/datum/component/field_of_vision)
+		if(fov)
+			fov.generate_fov_holder(user, fov_angle, fov_shadow_angle, FALSE)
+
+/obj/item/clothing/head/dropped(mob/user)
+	. = ..()
+	var/datum/component/field_of_vision/fov = user.GetComponent(/datum/component/field_of_vision)
+	if(fov)
+		fov.generate_fov_holder(user, 0, user.field_of_vision_type, FALSE)

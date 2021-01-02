@@ -167,7 +167,7 @@
 			ContactContractDisease(D)
 
 	//surgeries have higher priority than wounds due to incision wounds.
-	if(user.a_intent == INTENT_HELP)
+	if(user.a_intent == INTENT_HELP || user.a_intent == INTENT_DISARM)
 		for(var/datum/surgery_step/S in GLOB.surgery_steps)
 			if(S.try_op(user, src, user.zone_selected, user.get_active_held_item(), (user.a_intent == INTENT_DISARM)))
 				return TRUE
@@ -514,7 +514,6 @@
 			amount += BP.burn_dam
 	return amount
 
-//skyrat edit
 /// Check ourselves to see if we've got any shrapnel, return true if we do. This is a much simpler version of what humans do, we only indicate we're checking ourselves if there's actually shrapnel
 /mob/living/carbon/proc/check_self_for_injuries()
 	if(stat == DEAD || stat == UNCONSCIOUS)

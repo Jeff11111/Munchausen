@@ -43,7 +43,7 @@
 		return ..()
 
 /obj/item/clothing/under/update_clothes_damaged_state() //skyrat edit
-	..()
+	. = ..()
 	if(ismob(loc))
 		var/mob/M = loc
 		M.update_inv_w_uniform()

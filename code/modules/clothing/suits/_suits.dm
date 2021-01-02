@@ -34,7 +34,7 @@
 			//SKYRAT EDIT END
 
 /obj/item/clothing/suit/update_clothes_damaged_state() //skyrat edit
-	..()
+	. = ..()
 	if(ismob(loc))
 		var/mob/M = loc
 		M.update_inv_wear_suit()

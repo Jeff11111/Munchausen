@@ -1,3 +1,8 @@
+//Check if the limb is stumpable
+/obj/item/bodypart/proc/can_stump(obj/item/I)
+	if(owner && (limb_flags & BODYPART_CAN_STUMP))
+		return TRUE
+
 //Check if the limb is dismemberable
 /obj/item/bodypart/proc/can_dismember(obj/item/I)
 	if(owner && dismemberable && !HAS_TRAIT(owner, TRAIT_NODISMEMBER) && !(owner.status_flags & GODMODE))
@@ -96,7 +101,7 @@
 				continue
 			O.transfer_to_limb(src, C)
 
-	if(dismembered && !is_stump()) //Not a clean chopping off
+	if(dismembered && !is_stump() && can_stump()) //Not a clean chopping off
 		var/obj/item/bodypart/stump/stump  = new(C)
 		stump.name = "stump of a [parse_zone(body_zone)]"
 		stump.body_zone = body_zone

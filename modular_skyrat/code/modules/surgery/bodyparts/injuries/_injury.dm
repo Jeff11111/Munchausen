@@ -84,7 +84,7 @@
 /datum/injury/proc/can_autoheal()
 	if(length(parent_bodypart?.embedded_objects))
 		return FALSE
-	return (wound_damage() <= autoheal_cutoff) ? TRUE : is_treated()
+	return (wound_damage() <= autoheal_cutoff) ? TRUE : (is_treated() || parent_bodypart?.limb_flags & BODYPART_HEALS_OVERKILL)
 
 // checks whether the wound has been appropriately treated
 /datum/injury/proc/is_treated()
