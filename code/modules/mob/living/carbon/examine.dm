@@ -230,7 +230,6 @@
 	
 	if((src == user) && HAS_TRAIT(user, TRAIT_SCREWY_CHECKSELF))
 		. |= "<span class='smallnotice'>[p_they(TRUE)] [p_have()] no significantly damaged bodyparts.</span>"
-		. |= "<span class='smallnotice'><i>[p_they(TRUE)] [p_have()] no visible scars.</i></span>"
 		return
 	
 	var/t_He = p_they(TRUE)
