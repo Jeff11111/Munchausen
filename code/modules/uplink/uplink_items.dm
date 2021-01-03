@@ -102,8 +102,8 @@
 		return A
 	else
 		var/list/turf/chungus = list()
-		for(var/fuck in SSpersistence.spawned_objects)
-			chungus |= get_turf(SSpersistence.spawned_objects[fuck])
+		for(var/fuck in SSpersistence.new_secret_satchels)
+			chungus |= get_turf(fuck)
 		var/turf/open/fuck
 		if(length(chungus))
 			fuck = pick(chungus)
