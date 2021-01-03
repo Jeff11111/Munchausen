@@ -760,7 +760,7 @@
 		var/obj/item/bodypart/LB = get_bodypart(X)
 
 		if(!LB)
-			to_chat(src, "<span class='notice'>[capitalize(parse_zone(X))]: <span class='deadsay'><b>MISSING</b></span> </span>")
+			to_chat(src, "<span class='notice'>- [capitalize(parse_zone(X))]: <span class='deadsay'><b>MISSING</b></span> </span>")
 			continue
 
 		var/limb_max_damage = LB.max_damage
@@ -857,9 +857,9 @@
 			status += "<span class='nicegreen'><b>OK</b></span>"
 		
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF))
-			to_chat(src, "<span class='notice'>[capitalize(LB.name)]: <span class='info'>[jointext(status, " | ")]</span> </span>")
+			to_chat(src, "<span class='notice'>- [capitalize(LB.name)]: <span class='info'>[jointext(status, " | ")]</span> </span>")
 		else
-			to_chat(src, "<span class='notice'>[capitalize(LB.name)]: <span class='nicegreen'><b>OK</b></span> </span>")
+			to_chat(src, "<span class='notice'>- [capitalize(LB.name)]: <span class='nicegreen'><b>OK</b></span> </span>")
 	to_chat(src, "<span class='info'>*---------*</span>")
 
 ///Get all the clothing on a specific body part
