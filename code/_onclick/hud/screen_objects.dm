@@ -805,7 +805,7 @@
 /obj/screen/healths/Click(location, control, params)
 	var/mob/living/carbon/C = usr
 	if(istype(C))
-		C.check_pulse()
+		C.check_pulse(C)
 
 /obj/screen/healths/alien
 	icon = 'icons/mob/screen_alien.dmi'
