@@ -1,4 +1,5 @@
-/mob/living/carbon/human/var/auto_hiss = FALSE
+/mob/living/carbon/human
+	var/auto_hiss = FALSE
 
 /mob/living/carbon/human/proc/toggle_hiss()
 	toggle_speech_mod(/datum/speech_mod/auto_hiss)
