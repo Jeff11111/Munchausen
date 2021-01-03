@@ -192,7 +192,13 @@
 				extra_zone_prob = supposed_to_affect.extra_zone_prob
 				miss_entirely = supposed_to_affect.miss_entirely_prob
 			miss_entirely /= (victim.lying ? 10 : 1)
-			if(assailant.mind.diceroll(GET_STAT_LEVEL(assailant, dex)*1.5, GET_SKILL_LEVEL(assailant, ranged)*0.5, dicetype = "6d6", mod = -CEILING(miss_entirely/6 + throwingdatum.dist_travelled/6, 1), crit = 20) <= DICE_CRIT_FAILURE)
+
+			//good modifier if aimed
+			var/modifier = 0
+			if(assailant.combat_intent == CI_AIMED)
+				modifier = 5
+			
+			if(assailant.mind.diceroll(GET_STAT_LEVEL(assailant, dex)*1.5, GET_SKILL_LEVEL(assailant, ranged)*0.5, dicetype = "6d6", mod = -CEILING(miss_entirely/6 + throwingdatum.dist_travelled/6, 1) + modifier, crit = 20) <= DICE_CRIT_FAILURE)
 				blocked = 100
 				var/swing_sound = pick('modular_skyrat/sound/attack/swing_01.ogg',
 									'modular_skyrat/sound/attack/swing_02.ogg',
