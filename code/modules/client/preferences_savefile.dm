@@ -439,12 +439,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["skin_tone"]				>> skin_tone
 	S["hair_style_name"]		>> hair_style
 	S["facial_style_name"]		>> facial_hair_style
-	S["underwear"]				>> underwear
-	S["undie_color"]			>> undie_color
-	S["undershirt"]				>> undershirt
-	S["shirt_color"]			>> shirt_color
-	S["socks"]					>> socks
-	S["socks_color"]			>> socks_color
 	S["backbag"]				>> backbag
 	S["feature_mcolor"]					>> features["mcolor"]
 	S["feature_lizard_tail"]			>> features["tail_lizard"]
@@ -579,12 +573,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	hair_style					= sanitize_inlist(hair_style, GLOB.hair_styles_list)
 	facial_hair_style			= sanitize_inlist(facial_hair_style, GLOB.facial_hair_styles_list)
-	underwear					= sanitize_inlist(underwear, GLOB.underwear_list)
-	undershirt 					= sanitize_inlist(undershirt, GLOB.undershirt_list)
-	undie_color						= sanitize_hexcolor(undie_color, 6, TRUE, initial(undie_color))
-	shirt_color						= sanitize_hexcolor(shirt_color, 6, TRUE, initial(shirt_color))
-	socks							= sanitize_inlist(socks, GLOB.socks_list)
-	socks_color						= sanitize_hexcolor(socks_color, 6, TRUE, initial(socks_color))
 	age								= sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
 	hair_color						= sanitize_hexcolor(hair_color, 6, TRUE)
 	facial_hair_color				= sanitize_hexcolor(facial_hair_color, 6, TRUE)
@@ -711,12 +699,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["skin_tone"]				, skin_tone)
 	WRITE_FILE(S["hair_style_name"]			, hair_style)
 	WRITE_FILE(S["facial_style_name"]		, facial_hair_style)
-	WRITE_FILE(S["underwear"]				, underwear)
-	WRITE_FILE(S["undie_color"]				, undie_color)
-	WRITE_FILE(S["undershirt"]				, undershirt)
-	WRITE_FILE(S["shirt_color"]				, shirt_color)
-	WRITE_FILE(S["socks"]					, socks)
-	WRITE_FILE(S["socks_color"]				, socks_color)
 	WRITE_FILE(S["backbag"]					, backbag)
 	WRITE_FILE(S["species"]					, pref_species.id)
 	WRITE_FILE(S["feature_mcolor"]					, features["mcolor"])

@@ -123,7 +123,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 
 	var/list/foodlikes = list()
 	var/list/fooddislikes = list()
-	var/list/color_gear = list()
 	var/maxlikes = 3
 	var/maxdislikes = 3
 
@@ -132,12 +131,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 	var/list/alt_titles_preferences = list()
 
 	//END OF SKYRAT CHANGES
-	var/underwear = "Nude"				//underwear type
-	var/undie_color = "#FFFFFF"
-	var/undershirt = "Nude"				//undershirt type
-	var/shirt_color = "#FFFFFF"
-	var/socks = "Nude"					//socks type
-	var/socks_color = "#FFFFFF"
 	var/backbag = DBACKPACK				//backpack type
 	var/hair_style = "Bald"				//Hair type
 	var/hair_color = "#FFFFFF"				//Hair color
