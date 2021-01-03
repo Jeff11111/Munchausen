@@ -787,24 +787,22 @@
 		return FALSE
 
 	var/dmg_mlt = CONFIG_GET(number/damage_multiplier) * hit_percent
-	brute = round(max(brute * dmg_mlt, 0),DAMAGE_PRECISION)
-	burn = round(max(burn * dmg_mlt, 0),DAMAGE_PRECISION)
+	var/burn_brutemod = 1 + (0.35 * burn_dam/max_damage)
+	brute = round(max(brute * dmg_mlt * wound_damage_multiplier * burn_brutemod, 0), DAMAGE_PRECISION)
+	burn = round(max(burn * dmg_mlt * wound_damage_multiplier, 0), DAMAGE_PRECISION)
 	brute = max(0, brute - brute_reduction)
 	burn = max(0, burn - burn_reduction)
-	stamina = round(max(stamina * dmg_mlt, 0),DAMAGE_PRECISION)
+	stamina = round(max(stamina * dmg_mlt, 0), DAMAGE_PRECISION)
 	stamina = max(0, stamina - stamina_reduction)
-	pain = round(max(pain * dmg_mlt, 0),DAMAGE_PRECISION)
+	pain = round(max(pain * dmg_mlt, 0), DAMAGE_PRECISION)
 	pain = max(0, pain - pain_reduction)
-	toxin = round(max(toxin * dmg_mlt, 0),DAMAGE_PRECISION)
+	toxin = round(max(toxin * dmg_mlt, 0), DAMAGE_PRECISION)
 	toxin = max(0, toxin - tox_reduction)
-	clone = round(max(clone * dmg_mlt, 0),DAMAGE_PRECISION)
+	clone = round(max(clone * dmg_mlt, 0), DAMAGE_PRECISION)
 	clone = max(0, clone - clone_reduction)
 
 	if(!brute && !burn && !stamina && !pain && !toxin && !clone)
 		return FALSE
-
-	brute *= wound_damage_multiplier
-	burn *= wound_damage_multiplier
 
 	switch(animal_origin)
 		if(ALIEN_BODYPART,LARVA_BODYPART) //aliens take double burn //nothing can burn with so much snowflake code around
