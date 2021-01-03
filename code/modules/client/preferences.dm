@@ -347,7 +347,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 			dat += "<h2>Additional Preferences</h2>"
 			dat += "<b>Auto-Hiss:</b> <a href='?_src_=prefs;preference=auto_hiss'>[auto_hiss ? "Yes" : "No"]</a>"
 
-
 			dat += "<h2>Special Names:</h2>"
 			var/old_group
 			for(var/custom_name_id in (GLOB.preferences_custom_names - list("religion", "deity"))) //skyrat edit
@@ -2780,10 +2779,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 	character.dna.skin_tone_override = use_custom_skin_tone ? skin_tone : null
 	character.hair_style = hair_style
 	character.facial_hair_style = facial_hair_style
-	character.undie_color = undie_color
-	character.shirt_color = shirt_color
-	character.socks_color = socks_color
-
+	
 	var/datum/species/chosen_species
 	if(!roundstart_checks || (pref_species.id in GLOB.roundstart_races))
 		chosen_species = pref_species.type
