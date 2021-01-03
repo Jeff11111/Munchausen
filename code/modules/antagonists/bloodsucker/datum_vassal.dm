@@ -139,7 +139,7 @@
 	var/datum/atom_hud/antag/bloodsucker/hud = GLOB.huds[ANTAG_HUD_BLOODSUCKER]
 	hud.join_hud(vassal)
 	set_antag_hud(vassal, icontype) // Located in icons/mob/hud.dmi
-	owner.current.hud_list[ANTAG_HUD].icon = image('icons/mob/hud.dmi', owner.current, "bloodsucker")
+	owner.current.hud_list[ANTAG_HUD].icon = image('modular_skyrat/icons/mob/hud.dmi', owner.current, "bloodsucker")
 
 /datum/antagonist/vassal/proc/update_vassal_icons_removed(mob/living/vassal)
 	var/datum/atom_hud/antag/hud = GLOB.huds[ANTAG_HUD_BLOODSUCKER]
