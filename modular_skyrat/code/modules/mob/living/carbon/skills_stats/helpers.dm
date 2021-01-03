@@ -65,7 +65,7 @@
 	if(carbonmob?.chem_effects[CE_PAINKILLER] >= 75)
 		sum -= 5
 	
-	//Fraggots always have a 50% chance to fail at a diceroll miserably
+	//Fraggots always have a 100% chance to fail at a diceroll miserably
 	if(carbonmob?.fraggot)
 		return DICE_CRIT_FAILURE
 	
