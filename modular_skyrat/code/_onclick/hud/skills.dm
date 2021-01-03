@@ -15,7 +15,7 @@
 		var/datum/skills/skill = usr.mind.mob_skills[s]
 		//if we suck just ignore the skill entirely
 		//when the screen button is added, to check garbage skills it'll be rmb.
-		if((skill.level > 1) || modifiers["middle"])
+		if((skill.level >= 4) || modifiers["right"])
 			msg += "<span class='info'>- I am <b>[skill.skillnumtodesc(skill.level)] ([skill.level])</b> at <b>[lowertext(skill.name)]</b>.</span><br>"
 	
 	msg += "<br>"
