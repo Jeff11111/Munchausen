@@ -21,18 +21,18 @@
 		if(!has_gravity())
 			health_deficiency = health_deficiency*0.2
 		totaldelay += health_deficiency
-		var/standupwarning = "[src] and everyone around them should probably yell at the dev team"
+		var/standupwarning = "<b>[src]</b> and everyone around them should probably yell at the dev team"
 		switch(health_deficiency)
 			if(-INFINITY to 10)
-				standupwarning = "[src] stands right up!"
+				standupwarning = "<b>[src]</b> stands right up!"
 			if(10 to 35)
-				standupwarning = "[src] tries to stand up."
+				standupwarning = "<b>[src]</b> tries to stand up."
 			if(35 to 60)
-				standupwarning = "[src] slowly pushes [p_them()]self upright."
+				standupwarning = "<b>[src]</b> slowly pushes [p_them()]self upright."
 			if(60 to 80)
-				standupwarning = "[src] weakly attempts to stand up."
+				standupwarning = "<b>[src]</b> weakly attempts to stand up."
 			if(80 to INFINITY)
-				standupwarning = "[src] struggles to stand up."
+				standupwarning = "<b>[src]</b> struggles to stand up."
 		var/usernotice = automatic ? "<span class='notice'>You are now getting up. (Auto)</span>" : "<span class='notice'>You are now getting up.</span>"
 		visible_message("<span class='notice'>[standupwarning]</span>", usernotice, vision_distance = 5)
 		if(do_after(src, totaldelay, target = src, required_mobility_flags = MOBILITY_RESIST))
@@ -43,7 +43,7 @@
 		else
 			combat_flags &= ~COMBAT_FLAG_RESISTING_REST
 			if(resting)		//we didn't shove ourselves up or something
-				visible_message("<span class='notice'>[src] falls right back down.</span>", "<span class='notice'>You fall right back down.</span>")
+				visible_message("<span class='notice'><b>[src]</b> falls right back down.</span>", "<span class='notice'>You fall right back down.</span>")
 				if(has_gravity())
 					playsound(src, "bodyfall", 20, 1)
 			return FALSE
