@@ -31,7 +31,6 @@
 		to_chat(H, "<span class='notice'>You close [src] valve.</span>")
 		H.internal = null
 		H.update_internals_hud_icon(FALSE)
-		H.breathe()
 	else
 		if(!H.getorganslot(ORGAN_SLOT_BREATHING_TUBE))
 			if(HAS_TRAIT(H, TRAIT_NO_INTERNALS))
@@ -58,7 +57,7 @@
 			to_chat(H, "<span class='notice'>You open [src] valve.</span>")
 		H.internal = src
 		H.update_internals_hud_icon(TRUE)
-		H.breathe()
+	H.breathe()
 	H.update_action_buttons_icon()
 
 /obj/item/tank/Initialize()

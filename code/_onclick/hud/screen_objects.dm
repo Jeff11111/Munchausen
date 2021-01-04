@@ -320,6 +320,7 @@
 		else
 			to_chat(C, "<span class='warning'>You don't have an oxygen tank!</span>")
 			return
+	C.breathe()
 	C.update_action_buttons_icon()
 
 /obj/screen/mov_intent
