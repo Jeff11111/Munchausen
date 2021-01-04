@@ -13,13 +13,15 @@
 	recommended_enemies = 1 //One dreamer only
 
 /datum/game_mode/dreamer/post_setup(report)
-	..()
+	. = ..()
 	var/datum/mind/dreamer
 	while(!istype(dreamer))
 		if(length(antag_candidates))
 			dreamer = pick_n_take(antag_candidates)
 		else
-			break
+			var/mob/M = pick(GLOB.player_list)
+			if(M?.mind)
+				dreamer = M.mind
 	if(istype(dreamer))
 		var/datum/antagonist/dreamer/new_antag = new()
 		addtimer(CALLBACK(dreamer, /datum/mind.proc/add_antag_datum, new_antag), rand(100,200))
