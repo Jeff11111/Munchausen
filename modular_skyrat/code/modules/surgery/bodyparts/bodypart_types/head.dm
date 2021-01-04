@@ -250,15 +250,6 @@
 			O.drop_limb(special, TRUE, FALSE, FALSE)
 	attach_limb(C, special)
 
-/obj/item/bodypart/head/can_dismember(obj/item/I)
-	. = ..()
-	if(. && owner)
-		if(HAS_TRAIT(owner, TRAIT_NODECAP))
-			return FALSE
-		var/obj/item/bodypart/neck/throat = owner.get_bodypart(BODY_ZONE_PRECISE_NECK)
-		if(throat)
-			return (throat.can_dismember(I) && (throat.get_mangled_state() & BODYPART_MANGLED_BOTH))
-
 /obj/item/bodypart/head/get_wrenched(mob/living/carbon/user, mob/living/carbon/victim, silent)
 	if(victim.get_bodypart(BODY_ZONE_PRECISE_NECK))
 		var/obj/item/bodypart/neck/heehoo = victim.get_bodypart(BODY_ZONE_PRECISE_NECK)
