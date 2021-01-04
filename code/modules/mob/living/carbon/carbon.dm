@@ -207,7 +207,11 @@
 	if(istype(I, /obj/item/grab))
 		var/obj/item/grab/grabby = I
 		if(grabby.grasped_mob && (grabby.grasped_mob != src))
+			if(pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE)
+				to_chat(src, "<span class='warning'>I can't throw [pulledby] away! Their grip is too strong!</span>")
+				return
 			throwable_mob = grabby.grasped_mob
+			dropItemToGround(grabby)
 
 	if(!I || throwable_mob)
 		if(!throwable_mob && pulling && isliving(pulling) && grab_state >= GRAB_AGGRESSIVE)
