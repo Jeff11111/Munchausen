@@ -645,7 +645,7 @@
 						SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "saw_wounded", /datum/mood_event/saw_injured/lesser)
 		if(hidden)
 			if(BP.get_bleed_rate())
-				damaged_bodypart_text += "<span class='warning'>[t_He] [t_has] blood soaking through [t_his] [hidden] around [t_his] [BP.name]!</span>"
+				damaged_bodypart_text += "<span class='warning'>[t_He] [t_has] blood soaking through [t_his] [hidden.name] around [t_his] [BP.name]!</span>"
 		else
 			if(BP.get_injuries_desc() != "nothing")
 				damaged_bodypart_text += "<span class='danger'>[t_He] [t_has] [BP.get_injuries_desc()] on [t_his] [BP.name].</span>"
