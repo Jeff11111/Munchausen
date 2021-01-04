@@ -110,6 +110,14 @@
 		setMovetype(movement_type & ~CRAWLING)
 		mobility_flags |= MOBILITY_STAND
 		lying = 0
+	
+	//flying while thrown
+	if(throwing)
+		if(!is_flying())
+			movement_type |= FLYING
+	else
+		if(!(initial(movement_type) & FLYING))
+			movement_type &= ~FLYING
 
 	if(should_be_lying || restrained || incapacitated())
 		mobility_flags &= ~(MOBILITY_UI|MOBILITY_PULL)

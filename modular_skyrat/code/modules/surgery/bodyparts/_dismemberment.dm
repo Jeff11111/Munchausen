@@ -238,7 +238,7 @@
 	apply_dismember(wounding_type, TRUE)
 	return TRUE
 
-/obj/item/bodypart/proc/apply_dismember(wounding_type, silent = FALSE)
+/obj/item/bodypart/proc/apply_dismember(wounding_type = WOUND_SLASH, silent = FALSE)
 	if(!owner || isalien(owner) || !can_dismember())
 		return FALSE
 
@@ -269,10 +269,8 @@
 	if(prob(80 - GET_STAT_LEVEL(poorsod, end)))
 		poorsod.death_scream()
 
-	var/msg = "<b><span class='danger'>[poorsod]'s [name] [occur_text]!</span></b>"
-
 	if(!silent)
-		poorsod.visible_message(msg, "<span class='userdanger'>Your [name] [occur_text]!</span>")
+		poorsod.visible_message("<b><span class='danger'>[poorsod]'s [name] [occur_text]!</span></b>", "<span class='userdanger'>Your [name] [occur_text]!</span>")
 	else
 		switch(wounding_type)
 			if(WOUND_SLASH)

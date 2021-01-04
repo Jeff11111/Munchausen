@@ -1124,6 +1124,7 @@
 /mob/living/throw_at(atom/target, range, speed, mob/thrower, spin = FALSE, diagonals_first = 0, datum/callback/callback)
 	stop_pulling()
 	. = ..()
+	update_mobility()
 
 // Called when we are hit by a bolt of polymorph and changed
 // Generally the mob we are currently in is about to be deleted

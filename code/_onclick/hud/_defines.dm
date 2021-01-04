@@ -180,9 +180,9 @@
 #define ui_wrists "WEST+1,SOUTH+4"
 
 //Ghosts
-#define ui_ghost_jumptomob "SOUTH:6,CENTER-2:24"
-#define ui_ghost_orbit "SOUTH:6,CENTER-1:24"
-#define ui_ghost_reenter_corpse "SOUTH:6,CENTER:24"
-#define ui_ghost_teleport "SOUTH:6,CENTER+1:24"
-#define ui_ghost_spawners "SOUTH:6,CENTER+2:24"
-#define ui_ghost_eventsignup "NORTH:-80:26, WEST:6"
+#define ui_ghost_jumptomob "SOUTH,CENTER-1"
+#define ui_ghost_orbit "SOUTH,CENTER"
+#define ui_ghost_reenter_corpse "SOUTH,CENTER+1"
+#define ui_ghost_teleport "SOUTH,CENTER+2"
+#define ui_ghost_spawners "SOUTH,CENTER+3"
+#define ui_ghost_eventsignup "NORTH-2, WEST"
