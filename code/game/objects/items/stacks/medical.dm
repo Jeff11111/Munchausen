@@ -240,7 +240,7 @@
 		return
 
 	if(!silent)
-		user.visible_message("<span class='warning'>[user] begins wrapping the wounds on [M]'s [limb.name] with [src]...</span>", "<span class='warning'>You begin wrapping the wounds on [user == M ? "your" : "[M]'s"] [limb.name] with [src]...</span>")
+		user.visible_message("<span class='warning'>[user] begins wrapping the wounds on [M]'s [limb.name] with [src]...</span>", "<span class='warning'>You begin wrapping \the [src.name] on [user == M ? "your" : "[M]'s"] [limb.name]...</span>")
 	var/time_mod = 1
 	//Medical skill affects the speed of the do_after
 	if(user.mind)
@@ -251,7 +251,7 @@
 		return
 
 	if(!silent)
-		user.visible_message("<span class='green'>[user] applies [src] to [M]'s [limb.name].</span>", "<span class='green'>You bandage the wounds on [user == M ? "yourself" : "[M]'s"] [limb.name].</span>")
+		user.visible_message("<span class='green'>[user] applies [src] to [M]'s [limb.name].</span>", "<span class='green'>You bandage [user == M ? "your" : "[M]'s"] [limb.name].</span>")
 	limb.apply_gauze(src)
 	if(mode == MODE_MULTIPLE)
 		for(var/bodypart in limb.heal_zones)
