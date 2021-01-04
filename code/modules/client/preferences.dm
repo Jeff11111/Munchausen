@@ -123,6 +123,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 
 	var/list/foodlikes = list()
 	var/list/fooddislikes = list()
+	var/list/color_gear = list()
 	var/maxlikes = 3
 	var/maxdislikes = 3
 

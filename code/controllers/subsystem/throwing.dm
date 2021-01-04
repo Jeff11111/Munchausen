@@ -152,7 +152,11 @@ SUBSYSTEM_DEF(throwing)
 		var/turf/T = get_turf(thrownthing)
 		if(T && thrownthing.has_gravity(T))
 			T.zFall(thrownthing)
-
+	
+	if(isliving(thrownthing))
+		var/mob/living/L = thrownthing
+		L.update_mobility()
+	
 	qdel(src)
 
 /datum/thrownthing/proc/hit_atom(atom/A)
