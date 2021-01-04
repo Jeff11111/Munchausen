@@ -26,15 +26,13 @@
 
 /mob/living/simple_animal/pet/fox/ComponentInitialize()
 	. = ..()
-	//Skyrat change start
 	AddElement(/datum/element/wuv, "yaps happily!", EMOTE_AUDIBLE, /datum/mood_event/pet_animal, "screeches!", EMOTE_AUDIBLE)
 	AddElement(/datum/element/mob_holder, held_icon)
-	//Skyratchange stop
 
-//Captain fox
+//quotefox
 /mob/living/simple_animal/pet/fox/Renault
-	name = "Renault"
-	desc = "Renault, the Captain's trustworthy fox."
-	gender = FEMALE
+	name = "Quotefox"
+	desc = "Quotefox, the Captain's abominable nigger-lipped creature."
+	gender = MALE
 	gold_core_spawnable = NO_SPAWN
 	unique_pet = TRUE
