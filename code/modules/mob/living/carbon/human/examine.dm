@@ -113,7 +113,7 @@
 	if(gloves && !(SLOT_GLOVES in obscured))
 		. += "[t_He] [t_has] [gloves.get_examine_string(user)] on [t_his] hands."
 	else if(length(blood_DNA))
-		var/hand_number = get_num_arms(FALSE)
+		var/hand_number = get_num_hands(FALSE)
 		if(hand_number)
 			. += "<span class='warning'>[t_He] [t_has] [hand_number > 1 ? "" : "a"] blood-stained hand[hand_number > 1 ? "s" : ""]!</span>"
 
