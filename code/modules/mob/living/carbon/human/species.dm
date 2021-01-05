@@ -1675,7 +1675,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			if(CI_STRONG)
 				damage *= 1.5 //fuck it
 			if(CI_WEAK)
-				damage *= 0.4
+				damage *= 0.25
 
 		var/punchedstam = target.getStaminaLoss()
 		var/punchedbrute = target.getBruteLoss()
@@ -1725,10 +1725,10 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		//good modifier if aimed
 		var/modifier = 0
 		if(user.combat_intent == CI_AIMED)
-			modifier = 5
+			modifier += 6
 		
 		//Dice roll to see if we fuck up
-		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*1.5, dicetype = "6d6", mod = -(miss_entirely/5) + modifier, crit = 20) <= DICE_CRIT_FAILURE)
+		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*1.5, dicetype = "6d6", mod = -(miss_entirely/5) + modifier, crit = 18) <= DICE_CRIT_FAILURE)
 			missed = TRUE
 		
 		if(!damage || !affecting || (missed && target != user))//future-proofing for species that have 0 damage/weird cases where no zone is targeted

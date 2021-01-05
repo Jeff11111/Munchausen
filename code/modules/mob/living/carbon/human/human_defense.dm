@@ -83,9 +83,9 @@
 			//good modifier if aimed
 			var/modifier = 0
 			if(fireboy.combat_intent == CI_AIMED)
-				modifier = 5
+				modifier += 6
 			
-			switch(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.5, GET_SKILL_LEVEL(fireboy, ranged)*1.5, dicetype = "6d6", mod = -CEILING(miss_entirely/5 + get_dist(P.starting, src)/5 + modifier, 1), crit = 20))
+			switch(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.5, GET_SKILL_LEVEL(fireboy, ranged)*1.5, dicetype = "6d6", mod = -CEILING(miss_entirely/5 + get_dist(P.starting, src)/5 + modifier, 1), crit = 18))
 				//Missed shot
 				if(DICE_CRIT_FAILURE)
 					if(fireboy != src)
@@ -161,7 +161,8 @@
 			c_intent = carbon_mob.combat_intent
 			var/modifier = 0
 			if(c_intent == CI_AIMED)
-				modifier += 5
+				modifier += 6
+			
 			//Chance to miss the attack entirely, based on a diceroll
 			var/missed = FALSE
 			if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*1.5, dicetype = "6d6", mod = -(miss_entirely/5) + modifier, crit = 20) <= DICE_CRIT_FAILURE)
