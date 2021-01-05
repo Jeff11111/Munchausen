@@ -45,6 +45,15 @@
 		desc_list += V
 		damage_list += stages[V]
 
+/datum/injury/Destroy()
+	if(parent_bodypart)
+		parent_bodypart.injuries -= src
+		parent_bodypart = null
+	if(parent_mob)
+		parent_mob.all_injuries -= src
+		parent_mob = null
+	. = ..()
+
 //applies the injury on a limb proper
 /datum/injury/proc/apply_injury(our_damage, obj/item/bodypart/limb)
 	//aaaaaaaaah
@@ -61,15 +70,6 @@
 			parent_mob = parent_bodypart.owner
 			parent_bodypart.owner.all_injuries += src
 			sound_hint(parent_mob, parent_mob)
-
-/datum/injury/Destroy()
-	if(parent_bodypart)
-		parent_bodypart.injuries -= src
-		parent_bodypart = null
-	if(parent_mob)
-		parent_mob.all_injuries -= src
-		parent_mob = null
-	. = ..()
 
 //special proc for when the parent bodypart receives some damage
 /datum/injury/proc/receive_damage(damage_received = 0, pain_received = 0, damage_type = WOUND_BLUNT)

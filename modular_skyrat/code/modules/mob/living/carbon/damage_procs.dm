@@ -38,7 +38,7 @@
 		BP.fill_teeth()
 		for(var/datum/injury/IN in BP.injuries)
 			qdel(IN)
-		BP.update_damages()
+		BP.update_injuries()
 	for(var/obj/item/organ/O in internal_organs)
 		O.janitize(0, 0, 0)
 		O.rejecting = FALSE
