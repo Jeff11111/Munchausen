@@ -75,7 +75,7 @@
 		"<span class='notice'>[user] successfully applies [tool] on the plating on [target]'s [parse_zone(target_zone)]!</span>")
 	log_combat(user, target, "nanopasted fracture in", addition="INTENT: [uppertext(user.a_intent)]")
 	var/obj/item/bodypart/nigger_fractures = target.get_bodypart(target_zone)
-	for(var/datum/wound/blunt/blunt in nigger_fractures?.wounds)
+	for(var/datum/wound/mechanical/blunt/blunt in nigger_fractures?.wounds)
 		if(blunt.severity >= WOUND_SEVERITY_SEVERE)
 			qdel(blunt)
 	var/datum/injury/incision = nigger_fractures?.get_incision()
