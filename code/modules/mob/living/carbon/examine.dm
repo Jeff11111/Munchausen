@@ -229,7 +229,7 @@
 	. = list("<span class='notice'><i><b>I examine [src] closer, and note the following...</b></i></span>", "<span class='notice'>*---------*</span>")
 	
 	if((src == user) && HAS_TRAIT(user, TRAIT_SCREWY_CHECKSELF))
-		. |= "<span class='smallnotice'>[p_they(TRUE)] [p_have()] no significantly damaged bodyparts.</span>"
+		. |= "<span class='smallnotice'>[p_they(TRUE)] [p_have()] no visibly damaged bodyparts.</span>"
 		return
 	
 	var/t_He = p_they(TRUE)
@@ -272,7 +272,7 @@
 	if(length(damaged_bodypart_text))
 		. |= damaged_bodypart_text
 	else
-		. += "<span class='smallnotice'>[p_they(TRUE)] [p_have()] no significantly damaged bodyparts.</span>"
+		. += "<span class='smallnotice'>[p_they(TRUE)] [p_have()] no visibly damaged bodyparts.</span>"
 	
 	var/list/obj/item/bodypart/gauzed_limbs = list()
 	for(var/i in bodyparts)
