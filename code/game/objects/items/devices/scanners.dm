@@ -463,7 +463,7 @@ GENETICS SCANNER
 		if(cyberimp_detect)
 			msg += "<span class='notice'>Detected cybernetic modifications:</span>"
 			msg += "<span class='notice'>[cyberimp_detect]</span>"
-	msg += "<span class='notice'>*---------*</span>"
+	msg += "\n<span class='notice'>*---------*</span>"
 	to_chat(user, msg)
 	SEND_SIGNAL(M, COMSIG_NANITE_SCAN, user, FALSE)
 
