@@ -166,7 +166,7 @@
 	var/mob/living/carbon/C = target
 	var/obj/item/bodypart/BP = C.get_bodypart(user.zone_selected)
 	for(var/datum/injury/IN in BP.injuries)
-		if(IN.is_bleeding())
+		if(IN.is_bleeding() || IN.damage_type == WOUND_SLASH || IN.damage_type == WOUND_PIERCE)
 			return TRUE
 	return FALSE
 
@@ -182,8 +182,6 @@
 		var/obj/item/bodypart/BP = C.get_bodypart(target_zone)
 		if(istype(BP))
 			for(var/datum/injury/inch in BP.injuries)
-				if(!inch.is_bleeding())
-					continue
 				if(inch.is_surgical())
 					inch.close_injury()
 				else
