@@ -160,7 +160,7 @@
 			var/mob/living/carbon/carbon_mob = user
 			//Chance to miss the attack entirely, based on a diceroll
 			var/missed = FALSE
-			if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.75, GET_SKILL_LEVEL(user, melee)*1.25, dicetype = "6d6", mod = -(miss_entirely/5), crit = 20) <= DICE_FAILURE)
+			if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*1.5, dicetype = "6d6", mod = -(miss_entirely/5), crit = 20) <= DICE_FAILURE)
 				missed = TRUE
 			c_intent = carbon_mob.combat_intent
 			if(carbon_mob.mind)
@@ -169,8 +169,8 @@
 					ran_zone_prob = dex.get_ran_zone_prob(ran_zone_prob, extra_zone_prob)
 			if(missed && (user != src))
 				visible_message("<span class='danger'><b>[user]</b> misses <b>[src]</b> with [I]!</span>", \
-							"<span class='danger'>You avoid <b>[user]</b>'s attack with [I]!</span>", "<span class='hear'>You hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, null, \
-							user, "<span class='warning'>You miss <b>[src]</b> with [I]!</span>")
+							"<span class='danger'>I avoid <b>[user]</b>'s attack with [I]!</span>", "<span class='hear'>I hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, null, \
+							user, "<span class='warning'>I miss <b>[src]</b> with [I]!</span>")
 				var/swing_sound = pick('modular_skyrat/sound/attack/swing_01.ogg',
 									'modular_skyrat/sound/attack/swing_02.ogg',
 									'modular_skyrat/sound/attack/swing_03.ogg',
