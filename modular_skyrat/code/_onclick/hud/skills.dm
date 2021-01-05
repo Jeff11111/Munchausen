@@ -11,7 +11,7 @@
 		return
 	
 	var/msg = "<span class='info'>*---------*</span><br>"
-	msg += "<span class='info'><b>Skills</b></span><br>"
+	msg += "<span class='notice'><b>Skills</b></span><br>"
 	for(var/s in usr.mind.mob_skills)
 		var/datum/skills/skill = usr.mind.mob_skills[s]
 		//if we suck just ignore the skill entirely
@@ -21,13 +21,13 @@
 	
 	msg += "<br>"
 
-	msg += "<span class='info'><b>Stats</b></span><br>"
+	msg += "<span class='notice'><b>Stats</b></span><br>"
 	for(var/s in usr.mind.mob_stats)
 		var/datum/stats/stat = usr.mind.mob_stats[s]
 		//Ignore the fakes
 		if(stat.fake_type)
 			continue
-		msg += "<span class='notice'>- I have <b>[stat.statnumtodesc(stat.level)] ([stat.level])</b> <b>[lowertext(stat.name)] ([stat.shorthand])</b>.</span><br>"
+		msg += "<span class='info'>- I have <b>[stat.statnumtodesc(stat.level)] ([stat.level])</b> <b>[lowertext(stat.name)] ([stat.shorthand])</b>.</span><br>"
 	
 	msg += "<span class='info'>*---------*</span>"
 	to_chat(usr, msg)

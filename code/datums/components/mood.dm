@@ -83,7 +83,7 @@
 
 /datum/component/mood/proc/print_mood(mob/user)
 	var/msg = "<span class='info'>*---------*</span>\n"
-	msg += "<span class='info'><EM>My thoughts</EM></span>\n"
+	msg += "<span class='notice'><b>My thoughts</b></span>\n"
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		msg += "<span class='info'>I remember my name, it is [H.real_name].</span>\n"

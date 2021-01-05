@@ -132,7 +132,7 @@
 	else if(carbonM == carbonUser)
 		if(carbonUser.zone_selected != BODY_ZONE_PRECISE_MOUTH)
 			return
-		visible_message("<span class='warning'>[carbonUser] is attempting to chug [src]'s contents!</span>")
+		visible_message("<span class='warning'><b>[carbonUser]</b> is attempting to chug [src]'s contents!</span>")
 		if(!do_after(carbonUser, self_forced, target = carbonUser))
 			return
 		reagents.reaction(carbonUser, INGEST)
