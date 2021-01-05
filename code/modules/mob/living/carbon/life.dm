@@ -94,8 +94,9 @@
 	if(!getorganslot(ORGAN_SLOT_BREATHING_TUBE) && !chem_effects[CE_STABLE])
 		if(pulledby && pulledby.grab_state >= GRAB_KILL)
 			losebreath += 1.5  //You are being strangled!
-			visible_message("<span class='danger'>[pulledby] strangles [src]!</span>", "<span class='userdanger'>[pulledby] strangles you!</span>", ignored_mobs = pulledby)
-			to_chat(pulledby, "<span class='danger'>You strangle [src]!</span>")
+			visible_message("<span class='danger'><b>[pulledby]</b> strangles <b>[src]</b>!</span>", \
+						"<span class='userdanger'><b>[pulledby]</b> strangles you!</span>", ignored_mobs = pulledby)
+			to_chat(pulledby, "<span class='danger'>You strangle <b>[src]</b>!</span>")
 		else if(is_asystole() || nervous_system_failure() || HAS_TRAIT(src, TRAIT_MAGIC_CHOKE) || (lungs && CHECK_BITFIELD(lungs.organ_flags, ORGAN_FAILING | ORGAN_DEAD)))
 			losebreath += 1  //You can't breath at all!
 		else if(InShock())

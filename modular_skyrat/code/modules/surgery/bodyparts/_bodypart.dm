@@ -1258,9 +1258,10 @@
 			if((NOBLOOD in owner.dna.species.species_traits) || (owner.blood_volume >= BLOOD_VOLUME_OKAY))
 				owner.revive(0)
 				owner.cure_husk(0) // If it has REVIVESBYHEALING, it probably can't be cloned. No husk cure.
+	update_damages()
 	consider_processing()
 	update_disabled()
-	return update_bodypart_damage_state()
+	return update_bodypart_damage_state() || .
 
 //Filters toxins into the organs
 /obj/item/bodypart/proc/filter_toxins(toxins = 0, only_robotic = FALSE, only_organic = FALSE, updating_health = FALSE)

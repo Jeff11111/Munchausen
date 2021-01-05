@@ -1,6 +1,6 @@
 //Check if the limb is stumpable
 /obj/item/bodypart/proc/can_stump(obj/item/I)
-	if(owner && (limb_flags & BODYPART_CAN_STUMP))
+	if(owner && (CHECK_BODYPART(limb_flags, BODYPART_CAN_STUMP)))
 		return TRUE
 
 //Check if the limb is dismemberable
@@ -129,6 +129,7 @@
 		artery.apply_wound(stump, TRUE)
 		var/datum/injury/ouchie = stump.create_injury(wounding_type, stump.max_damage / 2, FALSE, TRUE)
 		ouchie.apply_injury(stump.max_damage / 2, stump)
+		stump.attach_limb(C)
 	
 	update_icon_dropped()
 	if(destroyed)

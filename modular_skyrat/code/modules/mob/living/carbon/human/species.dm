@@ -177,8 +177,8 @@
 			if(BP)
 				if(damage > 0 ? BP.receive_damage(brute = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness) : BP.heal_damage(brute = abs(damage_amount), only_robotic = FALSE, only_organic = FALSE))
 					H.update_damage_overlays()
-
-			else//no bodypart, we deal damage with a more general method.
+			//no bodypart, we deal damage with a more general method.
+			else
 				H.adjustBruteLoss(damage_amount)
 		if(BURN)
 			H.damageoverlaytemp = 20
@@ -186,6 +186,7 @@
 			if(BP)
 				if(damage > 0 ? BP.receive_damage(burn = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness) : BP.heal_damage(burn = abs(damage_amount), only_robotic = FALSE, only_organic = FALSE))
 					H.update_damage_overlays()
+			//no bodypart, we deal damage with a more general method.
 			else
 				H.adjustFireLoss(damage_amount)
 		if(PAIN)
@@ -194,6 +195,7 @@
 			if(BP)
 				if(damage > 0 ? BP.receive_damage(pain = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness) : BP.heal_damage(pain = abs(damage_amount), only_robotic = FALSE, only_organic = FALSE))
 					H.update_damage_overlays()
+			//no bodypart, we deal damage with a more general method.
 			else
 				H.adjustPainLoss(damage_amount)
 		if(TOX)
