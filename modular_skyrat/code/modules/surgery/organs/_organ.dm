@@ -634,7 +634,7 @@
 			var/obj/item/organ/bladder/BL
 
 			if(dna.species.mutantbladder)
-				BL = new dna.species.mutantspleen()
+				BL = new dna.species.mutantbladder()
 			else
 				BL = new()
 			BL.Insert(src)
