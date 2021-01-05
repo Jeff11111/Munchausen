@@ -559,9 +559,9 @@
 
 	. = "[victim.p_their(TRUE)] [fake_limb ? fake_limb : limb.name] [examine_desc][condition]"
 	if(severity >= WOUND_SEVERITY_MODERATE)
-		. = "<B>[.]!</B>"
+		. = "<span class='danger'><B>[.]!</B></span>"
 	else
-		. = "[.]."
+		. = "<span class='danger'>[.].</span>"
 
 /datum/wound/proc/get_scanner_description(mob/user)
 	var/infection_level = "None"
