@@ -101,6 +101,8 @@
 		return 1
 	else
 		var/obj/item/bodypart/L = target.newBodyPart(target_zone, FALSE, FALSE)
+		if(!L)
+			return
 		L.is_pseudopart = TRUE
 		L.attach_limb(target)
 		display_results(user, target, "<span class='notice'>You attach [tool].</span>",
