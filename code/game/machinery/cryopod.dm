@@ -301,7 +301,7 @@
 	playsound(src, 'modular_skyrat/sound/machinery/cryo_open.ogg', 25, 0)
 
 /obj/machinery/cryopod/container_resist(mob/living/user)
-	visible_message("<span class='danger'>[user] bangs loudly on [src]!</span>", \
+	visible_message("<span class='danger'><b>[user]</b> bangs loudly on [src]!</span>", \
 				"<span class='userdanger'>I bang loudly on [src]. It's stuck!</span>")
 
 /obj/machinery/cryopod/alt_attack_hand(mob/user)
