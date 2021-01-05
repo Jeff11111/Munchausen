@@ -288,7 +288,7 @@
 	if(!user.get_bodypart(BODY_ZONE_PRECISE_L_FOOT) && !user.get_bodypart(BODY_ZONE_PRECISE_R_FOOT))
 		to_chat(user, "<span class='warning'>I can't kick without feet!</span>")
 		return FALSE // You need at least one foot to kick with. 
-	if(!target.resting && !(GET_SKILL_LEVEL(user, melee) >= JOB_SKILLPOINTS_TRAINED) && (user.zone_selected in list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)))
+	if(!target.lying && !(GET_SKILL_LEVEL(user, melee) >= JOB_SKILLPOINTS_TRAINED) && !(user.zone_selected in list(BODY_ZONE_PRECISE_GROIN, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_R_FOOT)))
 		to_chat(user, "<span class='warning'>I can't kick above [target]'s waist!</span>")
 		return FALSE // You can't kick above their waist if you ain't skilled
 	if(!attacker_style && HAS_TRAIT(user, TRAIT_PACIFISM))
@@ -399,9 +399,9 @@
 		var/extra_zone_prob = 25
 		var/miss_entirely = 10
 		if(supposed_to_affect)
-			ran_zone_prob = supposed_to_affect.zone_prob * 0.75
-			extra_zone_prob = supposed_to_affect.extra_zone_prob * 0.5
-			miss_entirely = supposed_to_affect.miss_entirely_prob * 1.5
+			ran_zone_prob = supposed_to_affect.zone_prob
+			extra_zone_prob = supposed_to_affect.extra_zone_prob
+			miss_entirely = supposed_to_affect.miss_entirely_prob
 		miss_entirely /= (target.lying ? 5 : 1)
 		if(user.mind)
 			var/datum/stats/dex/dex = GET_STAT(user, dex)
@@ -429,7 +429,6 @@
 							user, "<span class='warning'>My [atk_verb] misses [target]!</span>")
 			log_combat(user, target, "attempted to punch")
 			return FALSE
-
 
 		var/armor_block = target.run_armor_check(affecting, "melee")
 
@@ -490,7 +489,7 @@
 		to_chat(user, "<span class='warning'>I'm too exhausted.</span>")
 		return FALSE
 	//British people don't bite
-	var/obj/item/bodypart/teeth_part = user.get_bodypart(BODY_ZONE_HEAD)
+	var/obj/item/bodypart/teeth_part = user.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
 	if(!teeth_part || !teeth_part.get_teeth_amount())
 		to_chat(user, "<span class='warning'>I can't bite without teeth!</span>")
 		return FALSE
@@ -586,9 +585,9 @@
 		var/extra_zone_prob = 25
 		var/miss_entirely = 10
 		if(supposed_to_affect)
-			ran_zone_prob = supposed_to_affect.zone_prob * 0.75
-			extra_zone_prob = supposed_to_affect.extra_zone_prob * 0.5
-			miss_entirely = supposed_to_affect.miss_entirely_prob * 1.5
+			ran_zone_prob = supposed_to_affect.zone_prob
+			extra_zone_prob = supposed_to_affect.extra_zone_prob
+			miss_entirely = supposed_to_affect.miss_entirely_prob
 		miss_entirely /= (target.lying ? 5 : 1)
 		if(user.mind)
 			var/datum/stats/dex/dex = GET_STAT(user, dex)

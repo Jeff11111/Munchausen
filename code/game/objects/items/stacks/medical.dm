@@ -526,8 +526,8 @@
 	repeating = TRUE
 	sanitization = 1
 	flesh_regeneration = 3
-	var/is_open = TRUE ///This var determines if the sterile packaging of the mesh has been opened.
 	grind_results = list(/datum/reagent/medicine/spaceacillin = 2)
+	var/is_open = TRUE ///This var determines if the sterile packaging of the mesh has been opened.
 
 /obj/item/stack/medical/mesh/heal(mob/living/M, mob/user, silent = FALSE, obj/item/bodypart/specific_part)
 	. = ..()

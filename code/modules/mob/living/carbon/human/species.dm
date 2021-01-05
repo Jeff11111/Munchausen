@@ -1089,7 +1089,8 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		var/obj/item/clothing/shoes/shoes = (H.wear_suit && (H.wear_suit.body_parts_covered & FEET)) ? H.wear_suit : H.shoes // suits take priority over shoes
 		return shoes.move_trail
 	else
-		return move_trail */
+		return move_trail
+*/
 
 /datum/species/proc/spec_life(mob/living/carbon/human/H)
 	if(HAS_TRAIT(H, TRAIT_NOBREATH))
