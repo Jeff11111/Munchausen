@@ -96,7 +96,7 @@
 			to_chat(target, "<span class='userdanger'><b>[src]</b> lands a tackle on you, sending you both tumbling!</span>")
 
 			target.Paralyze(((0.5 SECONDS)/min(GET_STAT_LEVEL(target, dex), 1) * MAX_STAT/2)
-			target.adjustStaminaLoss(((tackle_base_stamina_cost * 1.5)/min(GET_STAT_LEVEL(target, dex), 1)) * MAX_STAT/2)
+			target.adjustStaminaLoss((tackle_base_stamina_cost * 1.5)/min(GET_STAT_LEVEL(target, dex), 1) * MAX_STAT/2)
 			target.Knockdown((3 SECONDS)/min(GET_STAT_LEVEL(target, dex), 1) * MAX_STAT/2)
 			target.Stumble(6 SECONDS)
 			Knockdown(1.5 SECONDS)
