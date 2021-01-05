@@ -30,10 +30,10 @@
 			time *= clamp((MAX_STAT/2)/choppa, 0.25, 2)
 			var/diceroll = user.mind.diceroll(skills = SKILL_DATUM(surgery))
 			if(BP.can_dismember())
-				user.visible_message("<span class='danger'><b>[user]</b> starts severing <b>[target]</b>'s [BP]!</span>", \
-									"<span class='warning'>I start severing <b>\the [target]</b>'s [BP]...</span>", \
+				user.visible_message("<span class='danger'><b>[user]</b> starts severing <b>[target]</b>'s [BP.name]!</span>", \
+									"<span class='warning'>I start severing <b>\the [target]</b>'s [BP.name]...</span>", \
 									target = target, \
-									target_message = "<span class='userdanger'><b>[user]</b> starts severing my [BP]!</span>")
+									target_message = "<span class='userdanger'><b>[user]</b> starts severing my [BP.name]!</span>")
 				if(!do_mob(user, victim, time))
 					to_chat(user, "<span class='warning'>I must stand still!</span>")
 					return FALSE
