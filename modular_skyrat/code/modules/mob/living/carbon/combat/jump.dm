@@ -58,7 +58,6 @@
 //Resetting our tackle
 /mob/living/carbon/proc/reset_tackle()
 	UnregisterSignal(src, COMSIG_MOVABLE_IMPACT)
-	UnregisterSignal(src, COMSIG_MOVABLE_MOVED)
 	tackling = FALSE
 
 /mob/living/carbon/proc/tackle_sack(mob/living/carbon/user, atom/hit)
