@@ -134,9 +134,9 @@
 /obj/item/organ/heart/proc/Restart()
 	var/old_pulse = pulse
 	pulse = PULSE_NORM
-	if(owner && (pulse != old_pulse))
+	if(owner && !old_pulse && pulse)
 		to_chat(owner, "<span class='userdanger'><b>My heart beats again!</b></span>")
-	if(pulse != old_pulse)
+	if(!old_pulse && pulse)
 		last_arrest = world.time
 	update_icon()
 	return TRUE
