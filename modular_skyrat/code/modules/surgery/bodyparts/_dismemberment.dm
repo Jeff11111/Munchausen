@@ -101,6 +101,7 @@
 				continue
 			O.transfer_to_limb(src, C)
 
+	limb_flags |= BODYPART_CUT_AWAY
 	if(dismembered && !is_stump() && can_stump()) //Not a clean chopping off
 		var/obj/item/bodypart/stump/stump  = new(C)
 		stump.name = "stump of a [parse_zone(body_zone)]"
