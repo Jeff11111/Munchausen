@@ -110,7 +110,7 @@
 
 	var/obj/item/bodypart/affecting = H.get_bodypart(check_zone(user.zone_selected))
 
-	if(affecting && affecting.is_robotic_limb() && (user.a_intent == INTENT_HELP))
+	if(affecting?.is_robotic_limb() && (user.a_intent == INTENT_HELP))
 		if(INTERACTING_WITH(user, H))
 			to_chat(user, "<span class='warning'>You are already interacting with [H]!</span>")
 			return
@@ -129,7 +129,6 @@
 			attack(H, user)
 	else
 		return ..()
-
 
 /obj/item/weldingtool/afterattack(atom/O, mob/user, proximity)
 	. = ..()

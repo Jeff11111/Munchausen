@@ -13,29 +13,10 @@
 //Examine stuff
 /obj/item/bodypart/proc/get_injuries_desc()
 	var/obj/item/bodypart/parent = owner?.get_bodypart(parent_bodyzone)
-	if(is_robotic_limb())
-		var/list/descriptors = list()
-		if(brute_dam)
-			switch(brute_dam)
-				if(0 to 20)
-					descriptors += "some dents"
-				if(21 to INFINITY)
-					descriptors += pick("a lot of dents","severe denting")
-		if(burn_dam)
-			switch(burn_dam)
-				if(0 to 20)
-					descriptors += "some burns"
-				if(21 to INFINITY)
-					descriptors += pick("a lot of burns","severe melting")
-		
-		if(is_cut_away() && !(parent?.is_cut_away()))
-			descriptors += "a tear at the [amputation_point] so severe that it hangs by a scrap of metal"
-
-		return english_list(descriptors)
 
 	var/list/flavor_text = list()
 	if(is_cut_away() && !(parent?.is_cut_away()))
-		flavor_text += "a tear at the [amputation_point] so severe that it hangs by a scrap of flesh"
+		flavor_text += "a tear at the [amputation_point] so severe that it hangs by a scrap of [!is_robotic_limb() ? "flesh" : "metal"]"
 
 	var/list/injury_descriptors = list()
 	for(var/datum/injury/IN in injuries)
@@ -60,19 +41,20 @@
 			injury_descriptors[this_injury_desc] += IN.amount
 		else
 			injury_descriptors[this_injury_desc] = IN.amount
+	
+	if(!is_robotic_limb())
+		if(CHECK_BITFIELD(how_open(), SURGERY_INCISED | SURGERY_RETRACTED))
+			var/bone = encased ? encased : "bone"
+			if(is_broken())
+				bone = "broken [bone]"
+			injury_descriptors["[bone] exposed"] = 1
 
-	if(CHECK_BITFIELD(how_open(), SURGERY_INCISED | SURGERY_RETRACTED))
-		var/bone = encased ? encased : "bone"
-		if(is_broken())
-			bone = "broken [bone]"
-		injury_descriptors["[bone] exposed"] = 1
-
-		if(!encased || (CHECK_BITFIELD(how_open(), SURGERY_BROKEN)))
-			var/list/bits = list()
-			for(var/obj/item/organ/organ in get_organs())
-				bits += organ.get_visible_state()
-			if(bits.len)
-				injury_descriptors["[english_list(bits)] visible in the wounds"] = 1
+			if(!encased || (CHECK_BITFIELD(how_open(), SURGERY_BROKEN)))
+				var/list/bits = list()
+				for(var/obj/item/organ/organ in get_organs())
+					bits += organ.get_visible_state()
+				if(bits.len)
+					injury_descriptors["[english_list(bits)] visible in the wounds"] = 1
 
 	for(var/injury in injury_descriptors)
 		switch(injury_descriptors[injury])

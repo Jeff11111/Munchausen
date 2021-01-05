@@ -387,8 +387,8 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 
 /proc/item_heal_robotic(mob/living/carbon/human/H, mob/user, brute_heal, burn_heal)
 	var/obj/item/bodypart/affecting = H.get_bodypart(check_zone(user.zone_selected))
-	if(affecting && (affecting.is_robotic_limb()))
-		var/dam //changes repair text based on how much brute/burn was supplied
+	if(affecting?.is_robotic_limb())
+		var/dam = 0//changes repair text based on how much brute/burn was supplied
 		if(brute_heal > burn_heal)
 			dam = 1
 		else
@@ -398,10 +398,9 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 				H.update_damage_overlays()
 			user.visible_message("[user] has fixed some of the [dam ? "dents on" : "burnt wires in"] [H]'s [affecting.name].", \
 			"<span class='notice'>You fix some of the [dam ? "dents on" : "burnt wires in"] [H]'s [affecting.name].</span>")
-			return 1 //successful heal
+			return TRUE //successful heal
 		else
 			to_chat(user, "<span class='warning'>[affecting] is already in good condition!</span>")
-
 
 /proc/IsAdminGhost(var/mob/user)
 	if(!user)		//Are they a mob? Auto interface updates call this with a null src

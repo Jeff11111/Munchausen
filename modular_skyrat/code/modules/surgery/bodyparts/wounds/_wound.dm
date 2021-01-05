@@ -639,7 +639,7 @@
 		to_chat(user, "<span class='warning'>There aren't enough stacks of [I.name] to heal \the [src.name]!</span>")
 		return
 	
-	limb.heal_damage(I.heal_brute, I.heal_burn)
+	limb.heal_damage(I.heal_brute, I.heal_burn, 0, FALSE, FALSE)
 	user.visible_message("<span class='green'>[user] applies [I] to [victim].</span>", "<span class='green'>You apply [I] to [user == victim ? "your" : "[victim]'s"] [limb.name].</span>")
 	sanitization += I.sanitization * WOUND_SANITIZATION_STERILIZER
 
@@ -663,7 +663,7 @@
 		to_chat(user, "<span class='warning'>There aren't enough stacks of [I.name] to heal \the [src.name]!</span>")
 		return
 	
-	limb.heal_damage(I.heal_brute, I.heal_burn)
+	limb.heal_damage(I.heal_brute, I.heal_burn, 0, FALSE, FALSE)
 	user.visible_message("<span class='green'>[user] applies [I] to [victim].</span>", "<span class='green'>You apply [I] to [user == victim ? "your" : "[victim]'s"] [limb.name].</span>")
 	sanitization += I.sanitization * WOUND_SANITIZATION_STERILIZER
 

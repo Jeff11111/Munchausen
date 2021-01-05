@@ -11,7 +11,7 @@
 	coldmod = 0.5
 	burnmod = 1.25
 	heatmod = 1.25
-	brutemod = 1.25
+	brutemod = 1
 	toxmod = 0
 	clonemod = 0
 	siemens_coeff = 1.2 //Not more because some shocks will outright crit you, which is very unfun

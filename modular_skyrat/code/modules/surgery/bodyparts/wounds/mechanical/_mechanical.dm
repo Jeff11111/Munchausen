@@ -118,7 +118,7 @@
 		to_chat(user, "<span class='warning'>There aren't enough stacks of [I.name] to patch \the [src.name]!</span>")
 		return
 
-	limb.heal_damage(10 * power, 10 * power)
+	limb.heal_damage(10 * power, 10 * power, 0, FALSE, FALSE)
 	patch = "[lowertext(I.name)]"
 	patched = power
 	user.visible_message("<span class='green'>[user] wraps [victim]'s [limb.name] with [I].</span>", "<span class='green'>You wrap [user == victim ? "your" : "[victim]'s"] [limb.name] with [I].</span>")
@@ -147,7 +147,7 @@
 	if(!do_after(user, base_treat_time * time_mod, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 
-	limb.heal_damage(10, 10)
+	limb.heal_damage(10 * power, 10 * power, 0, FALSE, FALSE)
 	welded = TRUE
 	if(patched)
 		user.visible_message("<span class='green'>[user] welds \the [patch] on [victim]'s [limb.name] with [I].</span>", "<span class='green'>You weld \the patch on [user == victim ? "your" : "[victim]'s"] [limb.name] with [I].</span>")
@@ -174,7 +174,7 @@
 	if(!do_after(user, base_treat_time * time_mod, target=victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 
-	limb.heal_damage(10, 10)
+	limb.heal_damage(10 * power, 10 * power, 0, FALSE, FALSE)
 	limb.apply_gauze(I)
 	user.visible_message("<span class='green'>[user] wraps on [victim]'s [limb.name] with [I].</span>", "<span class='green'>You wrap [user == victim ? "your" : "[victim]'s"] [limb.name] with [I].</span>")
 	return TRUE

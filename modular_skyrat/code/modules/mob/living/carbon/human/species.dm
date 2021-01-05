@@ -175,7 +175,7 @@
 			H.damageoverlaytemp = 20
 			var/damage_amount = forced ? damage : damage * hit_percent * brutemod * H.physiology.brute_mod
 			if(BP)
-				if(damage > 0 ? BP.receive_damage(brute = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness) : BP.heal_damage(abs(damage_amount), 0))
+				if(damage > 0 ? BP.receive_damage(brute = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness) : BP.heal_damage(brute = abs(damage_amount), only_robotic = FALSE, only_organic = FALSE))
 					H.update_damage_overlays()
 
 			else//no bodypart, we deal damage with a more general method.
@@ -184,7 +184,7 @@
 			H.damageoverlaytemp = 20
 			var/damage_amount = forced ? damage : damage * hit_percent * burnmod * H.physiology.burn_mod
 			if(BP)
-				if(damage > 0 ? BP.receive_damage(burn = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness) : BP.heal_damage(0, abs(damage_amount)))
+				if(damage > 0 ? BP.receive_damage(burn = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness) : BP.heal_damage(burn = abs(damage_amount), only_robotic = FALSE, only_organic = FALSE))
 					H.update_damage_overlays()
 			else
 				H.adjustFireLoss(damage_amount)
@@ -192,7 +192,7 @@
 			H.damageoverlaytemp = 20
 			var/damage_amount = forced ? damage : damage * hit_percent * painmod * H.physiology.burn_mod
 			if(BP)
-				if(damage > 0 ? BP.receive_damage(pain = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness) : BP.heal_damage(0, abs(damage_amount)))
+				if(damage > 0 ? BP.receive_damage(pain = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness) : BP.heal_damage(pain = abs(damage_amount), only_robotic = FALSE, only_organic = FALSE))
 					H.update_damage_overlays()
 			else
 				H.adjustPainLoss(damage_amount)
