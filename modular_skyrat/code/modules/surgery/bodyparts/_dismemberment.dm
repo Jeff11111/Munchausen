@@ -1,6 +1,6 @@
 //Check if the limb is stumpable
 /obj/item/bodypart/proc/can_stump(obj/item/I)
-	if(owner && (CHECK_BODYPART(limb_flags, BODYPART_CAN_STUMP)))
+	if(owner && (CHECK_BITFIELD(limb_flags, BODYPART_CAN_STUMP)))
 		return TRUE
 
 //Check if the limb is dismemberable
