@@ -41,7 +41,7 @@
 					user.visible_message("<span class='danger'><b>[user]</b> botches the dismemberment!</span>", 
 										"<span class='warning'>Oh no - I fucked up...</span>")
 					if(prob(40))
-						BP.painless_wound_roll(WOUND_SLASH, force, wound_bonus, bare_wound_bonus)
+						BP.create_injury(WOUND_SLASH, force * 2, FALSE, FALSE)
 					return FALSE
 				BP.apply_dismember(WOUND_SLASH)
 				user.put_in_hands(BP)
@@ -57,7 +57,7 @@
 					user.visible_message("<span class='danger'><b>[user]</b> botches the dissection!</span>", 
 										"<span class='warning'>Oh no - I fucked up...</span>")
 					if(prob(40))
-						BP.painless_wound_roll(WOUND_SLASH, force, wound_bonus, bare_wound_bonus)
+						BP.create_injury(WOUND_SLASH, force * 2, FALSE, FALSE)
 					return FALSE
 				BP.drop_limb(TRUE)
 				user.put_in_hands(BP)

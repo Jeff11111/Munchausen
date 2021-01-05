@@ -35,6 +35,12 @@
 	smooth = SMOOTH_TRUE
 	canSmoothWith = list(/obj/structure/table, /obj/structure/table/reinforced, /obj/structure/table/greyscale)
 
+/obj/structure/table/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/grab))
+		return attack_hand(user)
+	else
+		return ..()
+	
 /obj/structure/table/examine(mob/user)
 	. = ..()
 	. += deconstruction_hints(user)
@@ -65,7 +71,7 @@
 		if(isliving(user.pulling))
 			var/mob/living/pushed_mob = user.pulling
 			if(pushed_mob.buckled)
-				to_chat(user, "<span class='warning'>[pushed_mob] is buckled to [pushed_mob.buckled]!</span>")
+				to_chat(user, "<span class='warning'><b>[pushed_mob]</b> is buckled to [pushed_mob.buckled]!</span>")
 				return
 			if(user.a_intent == INTENT_GRAB)
 				if(user.grab_state < GRAB_AGGRESSIVE)
@@ -73,8 +79,8 @@
 					return
 				tablepush(user, pushed_mob)
 			if(user.a_intent == INTENT_HELP)
-				pushed_mob.visible_message("<span class='notice'>[user] begins to place [pushed_mob] onto [src]...</span>", \
-									"<span class='userdanger'>[user] begins to place [pushed_mob] onto [src]...</span>")
+				pushed_mob.visible_message("<span class='notice'><b>[user]</b> begins to place <b>[pushed_mob]</b> onto [src]...</span>", \
+									"<span class='userdanger'><b>[user]</b> begins to place <b>[pushed_mob]</b> onto [src]...</span>")
 				if(do_after(user, 35, target = pushed_mob))
 					tableplace(user, pushed_mob)
 				else
@@ -83,8 +89,8 @@
 		else if(user.pulling.pass_flags & PASSTABLE)
 			user.Move_Pulled(src)
 			if (user.pulling.loc == loc)
-				user.visible_message("<span class='notice'>[user] places [user.pulling] onto [src].</span>",
-					"<span class='notice'>You place [user.pulling] onto [src].</span>")
+				user.visible_message("<span class='notice'><b>[user]</b> places <b>[user.pulling]</b> onto [src].</span>",
+					"<span class='notice'>You place <b>[user.pulling]</b> onto [src].</span>")
 				user.stop_pulling()
 	return ..()
 
@@ -110,8 +116,8 @@
 /obj/structure/table/proc/tableplace(mob/living/user, mob/living/pushed_mob)
 	pushed_mob.forceMove(src.loc)
 	pushed_mob.set_resting(TRUE, FALSE)
-	pushed_mob.visible_message("<span class='notice'>[user] places [pushed_mob] onto [src].</span>", \
-								"<span class='notice'>[user] places [pushed_mob] onto [src].</span>")
+	pushed_mob.visible_message("<span class='notice'><b>[user]</b> places <b>[pushed_mob]</b> onto [src].</span>", \
+								"<span class='notice'><b>[user]</b> places <b>[pushed_mob]</b> onto [src].</span>")
 	log_combat(user, pushed_mob, "placed")
 
 /obj/structure/table/proc/tablepush(mob/living/user, mob/living/pushed_mob)
@@ -128,8 +134,8 @@
 	if(pushed_mob.loc != loc) //Something prevented the tabling
 		return
 	pushed_mob.DefaultCombatKnockdown(40)
-	pushed_mob.visible_message("<span class='danger'>[user] slams [pushed_mob] onto [src]!</span>", \
-								"<span class='userdanger'>[user] slams you onto [src]!</span>")
+	pushed_mob.visible_message("<span class='danger'><b>[user]</b> slams <b>[pushed_mob]</b> onto [src]!</span>", \
+								"<span class='userdanger'><b>[user]</b> slams you onto [src]!</span>")
 	log_combat(user, pushed_mob, "tabled", null, "onto [src]")
 	if(!ishuman(pushed_mob))
 		return
@@ -141,8 +147,8 @@
 /obj/structure/table/shove_act(mob/living/target, mob/living/user)
 	if(CHECK_MOBILITY(target, MOBILITY_STAND))
 		target.DefaultCombatKnockdown(SHOVE_KNOCKDOWN_TABLE)
-	user.visible_message("<span class='danger'>[user.name] shoves [target.name] onto \the [src]!</span>",
-		"<span class='danger'>You shove [target.name] onto \the [src]!</span>", null, COMBAT_MESSAGE_RANGE)
+	user.visible_message("<span class='danger'><b>[user.name]</b> shoves <b>[target.name]</b> onto \the [src]!</span>",
+		"<span class='danger'>You shove <b>[target.name]</b> onto \the [src]!</span>", null, COMBAT_MESSAGE_RANGE)
 	target.forceMove(loc)
 	log_combat(user, target, "shoved", "onto [src] (table)")
 	return TRUE
@@ -169,7 +175,7 @@
 				var/obj/item/item = x
 				AfterPutItemOnTable(item, user)
 			SEND_SIGNAL(I, COMSIG_TRY_STORAGE_QUICK_EMPTY, drop_location())
-			user.visible_message("[user] empties [I] on [src].")
+			user.visible_message("<b>[user]</b> empties [I] on [src].")
 			return
 		// If the tray IS empty, continue on (tray will be placed on the table like other items)
 

@@ -34,19 +34,19 @@
 		return 0
 
 	if(M == user)
-		M.visible_message("<span class='notice'>[user] attempts to [apply_method] [src].</span>")
+		M.visible_message("<span class='notice'><b>[user]</b> attempts to [apply_method] [src].</span>")
 		if(self_delay)
 			if(!do_mob(user, M, self_delay))
 				return 0
 		to_chat(M, "<span class='notice'>You [apply_method] [src].</span>")
 
 	else
-		M.visible_message("<span class='danger'>[user] attempts to force [M] to [apply_method] [src].</span>", \
-							"<span class='userdanger'>[user] attempts to force [M] to [apply_method] [src].</span>")
+		M.visible_message("<span class='danger'><b>[user]</b> attempts to force <b>[M]</b> to [apply_method] [src].</span>", \
+							"<span class='userdanger'><b>[user]</b> attempts to force <b>[M]</b> to [apply_method] [src].</span>")
 		if(!do_mob(user, M))
 			return 0
-		M.visible_message("<span class='danger'>[user] forces [M] to [apply_method] [src].</span>", \
-							"<span class='userdanger'>[user] forces [M] to [apply_method] [src].</span>")
+		M.visible_message("<span class='danger'><b>[user]</b> forces <b>[M]</b> to [apply_method] [src].</span>", \
+							"<span class='userdanger'><b>[user]</b> forces <b>[M]</b> to [apply_method] [src].</span>")
 
 	var/makes_me_think = pick(strings("redpill.json", "redpill_questions"))
 	if(icon_state == "pill4" && prob(5)) //you take the red pill - you stay in Wonderland, and I show you how deep the rabbit hole goes

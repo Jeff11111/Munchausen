@@ -527,7 +527,7 @@
 	var/washing_face = 0
 	if(selected_area in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE))
 		washing_face = 1
-	user.visible_message("<span class='notice'>[user] starts washing [user.p_their()] [washing_face ? "face" : "hands"]...</span>", \
+	user.visible_message("<span class='notice'><b>[user]</b> starts washing [user.p_their()] [washing_face ? "face" : "hands"]...</span>", \
 						"<span class='notice'>You start washing your [washing_face ? "face" : "hands"]...</span>")
 	busy = TRUE
 
@@ -537,7 +537,7 @@
 
 	busy = FALSE
 
-	user.visible_message("<span class='notice'>[user] washes [user.p_their()] [washing_face ? "face" : "hands"] using [src].</span>", \
+	user.visible_message("<span class='notice'><b>[user]</b> washes [user.p_their()] [washing_face ? "face" : "hands"] using [src].</span>", \
 						"<span class='notice'>You wash your [washing_face ? "face" : "hands"] using [src].</span>")
 	if(washing_face)
 		if(ishuman(user))
@@ -575,7 +575,7 @@
 				user.DefaultCombatKnockdown(stunforce * 2)
 				user.stuttering = stunforce/20
 				B.deductcharge(B.hitcost)
-				user.visible_message("<span class='warning'>[user] shocks [user.p_them()]self while attempting to wash the active [B.name]!</span>", \
+				user.visible_message("<span class='warning'><b>[user]</b> shocks [user.p_them()]self while attempting to wash the active [B.name]!</span>", \
 									"<span class='userdanger'>You unwisely attempt to wash [B] while it's still on.</span>")
 				playsound(src, "sparks", 50, 1)
 				return
@@ -793,7 +793,7 @@
 	if(anchored)
 		return TRUE
 
-	user.visible_message("<span class='warning'>[user] cuts apart [src].</span>",
+	user.visible_message("<span class='warning'><b>[user]</b> cuts apart [src].</span>",
 		"<span class='notice'>You start to cut apart [src].</span>", "You hear cutting.")
 	if(I.use_tool(src, user, 50, volume=100) && !anchored)
 		to_chat(user, "<span class='notice'>You cut apart [src].</span>")

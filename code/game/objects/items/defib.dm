@@ -480,16 +480,16 @@
 		return
 	if(!req_defib && !combat)
 		return
-	user.visible_message("<span class='warning'>[user] begins to place [src] on [H]'s chest.</span>",
-		"<span class='warning'>You overcharge the paddles and begin to place them onto [H]'s chest...</span>")
+	user.visible_message("<span class='warning'><b>[user]</b> begins to place [src] on <b>[H]</b>'s chest.</span>",
+		"<span class='warning'>You overcharge the paddles and begin to place them onto <b>[H]</b>'s chest...</span>")
 	busy = TRUE
 	if(gaming_timer)
 		qdel(gaming_timer)
 	gaming_timer = addtimer(CALLBACK(src, .proc/reset_gaming), 20 SECONDS, TIMER_STOPPABLE) //If we go idiotic, fix in 20 seconds just to be sure
 	update_icon()
 	if(do_mob(user = user, target = H, time = 30))
-		user.visible_message("<span class='notice'>[user] places [src] on [H]'s chest.</span>",
-			"<span class='warning'>You place [src] on [H]'s chest and begin to charge them.</span>")
+		user.visible_message("<span class='notice'><b>[user]</b> places [src] on <b>[H]</b>'s chest.</span>",
+			"<span class='warning'>You place [src] on <b>[H]</b>'s chest and begin to charge them.</span>")
 		var/turf/T = get_turf(defib)
 		playsound(src, 'sound/machines/defib_charge.ogg', 50, 0)
 		if(req_defib)
@@ -502,19 +502,20 @@
 				update_icon()
 				return
 			if(H && H.stat == DEAD)
-				to_chat(user, "<span class='warning'>[H] is dead.</span>")
+				to_chat(user, "<span class='warning'><b>[H]</b> is dead.</span>")
 				playsound(src, 'sound/machines/defib_failed.ogg', 50, 0)
 				busy = FALSE
 				update_icon()
 				return
-			user.visible_message("<span class='boldannounce'><i>[user] shocks [H] with \the [src]!</span>", "<span class='warning'>You shock [H] with \the [src]!</span>")
+			user.visible_message("<span class='boldannounce'><b>[user]</b> shocks <b>[H]</b> with \the [src]!</span>", \
+							"<span class='warning'>You shock <b>[H]</b> with \the [src]!</span>")
 			playsound(src, 'sound/machines/defib_zap.ogg', 100, 1, -1)
 			playsound(src, 'sound/weapons/egloves.ogg', 100, 1, -1)
 			H.emote("scream")
 			shock_touching(45, H)
 			if(H.can_heartattack() && !H.undergoing_cardiac_arrest())
 				if(!H.stat)
-					H.visible_message("<span class='warning'>[H] thrashes wildly, clutching at [H.p_their()] chest!</span>",
+					H.visible_message("<span class='warning'><b>[H]</b> thrashes wildly, clutching at [H.p_their()] chest!</span>",
 						"<span class='userdanger'>You feel a horrible agony in your chest!</span>")
 				H.set_heartattack(TRUE)
 			H.apply_damage(50, BURN, BODY_ZONE_CHEST)
@@ -534,7 +535,8 @@
 	update_icon()
 
 /obj/item/shockpaddles/proc/do_help(mob/living/carbon/H, mob/living/user)
-	user.visible_message("<span class='warning'>[user] begins to place [src] on [H]'s chest.</span>", "<span class='warning'>You begin to place [src] on [H]'s chest...</span>")
+	user.visible_message("<span class='warning'><b>[user]</b> begins to place [src] on <b>[H]</b>'s chest.</span>", \
+					"<span class='warning'>You begin to place [src] on <b>[H]</b>'s chest...</span>")
 	busy = TRUE
 	if(gaming_timer)
 		qdel(gaming_timer)
@@ -551,7 +553,7 @@
 		primetimer2 = 20
 
 	if(do_mob(user = user, target = H, time = primetimer)) //beginning to place the paddles on patient's chest to allow some time for people to move away to stop the process
-		user.visible_message("<span class='notice'>[user] places [src] on [H]'s chest.</span>", "<span class='warning'>You place [src] on [H]'s chest.</span>")
+		user.visible_message("<span class='notice'><b>[user]</b> places [src] on <b>[H]</b>'s chest.</span>", "<span class='warning'>You place [src] on <b>[H]</b>'s chest.</span>")
 		playsound(src, 'sound/machines/defib_charge.ogg', 75, 0)
 		var/obj/item/organ/heart/heart = H.getorgan(/obj/item/organ/heart)
 		if(do_mob(user = user, target = H, time = primetimer2)) //placed on chest and short delay to shock for dramatic effect, revive time is 5sec total
@@ -566,7 +568,7 @@
 					update_icon()
 					return
 			if(H.stat == DEAD)
-				H.visible_message("<span class='warning'>[H]'s body convulses a bit.</span>")
+				H.visible_message("<span class='warning'><b>[H]</b>'s body convulses a bit.</span>")
 				playsound(src, "bodyfall", 50, 1)
 				playsound(src, 'sound/machines/defib_zap.ogg', 75, 1, -1)
 				shock_touching(30, H)
@@ -612,7 +614,7 @@
 						if(defib.healdisk)
 							H.heal_overall_damage(40, 40)
 						else
-							H.heal_overall_damage(rand(10, 15), rand(10, 15))
+							H.heal_overall_damage(rand(5, 10), rand(5, 10))
 				if(req_defib)
 					defib.deductcharge(revivecost)
 					cooldown = 1

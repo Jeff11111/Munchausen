@@ -184,7 +184,7 @@
 	if(user.mind && GET_STAT_LEVEL(user, str) < 10)
 		switch(user.mind.diceroll(STAT_DATUM(str)))
 			if(DICE_FAILURE)
-				totitemdamage *= 0.65
+				totitemdamage *= 0.7
 				pitiful = TRUE
 			if(DICE_CRIT_FAILURE)
 				totitemdamage *= 0.25
@@ -307,7 +307,7 @@
 	if(user.mind && GET_STAT_LEVEL(user, str) < 10)
 		switch(user.mind.diceroll(STAT_DATUM(str)))
 			if(DICE_FAILURE)
-				. *= 0.65
+				. *= 0.7
 			if(DICE_CRIT_FAILURE)
 				. *= 0.25
 	

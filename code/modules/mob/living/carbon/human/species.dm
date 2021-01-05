@@ -1727,7 +1727,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			modifier = 5
 		
 		//Dice roll to see if we fuck up
-		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.75, GET_SKILL_LEVEL(user, melee)*1.25, dicetype = "6d6", mod = -(miss_entirely/(target.lying ? 10 : 5)) + modifier, crit = 20) <= DICE_FAILURE)
+		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*1.5, dicetype = "6d6", mod = -(miss_entirely/5) + modifier, crit = 20) <= DICE_CRIT_FAILURE)
 			missed = TRUE
 		
 		if(!damage || !affecting || (missed && target != user))//future-proofing for species that have 0 damage/weird cases where no zone is targeted

@@ -319,7 +319,7 @@
 		return
 	var/dice = DICE_SUCCESS
 	if(user.mind)
-		dice = user.mind.diceroll(GET_STAT_LEVEL(user, str)*0.75, GET_SKILL_LEVEL(user, melee)*0.5)
+		dice = user.mind.diceroll(GET_STAT_LEVEL(user, str)*1.25, GET_SKILL_LEVEL(user, melee)*0.75, "6d6", 20)
 
 	if(dice >= DICE_SUCCESS)
 		user.visible_message("<span class='danger'><b>[user]</b> torques <b>[victim]</b>'s disconnected [limb.name] actuators with a loud pop![victim.wound_message]</span>", "<span class='danger'>I torque <b>[victim]</b>'s disconnected [limb.name] actuators with a loud pop![victim.wound_message]</span>", ignored_mobs=victim)

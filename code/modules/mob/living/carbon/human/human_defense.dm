@@ -158,11 +158,15 @@
 		var/c_intent = CI_DEFAULT
 		if(iscarbon(user))
 			var/mob/living/carbon/carbon_mob = user
+			c_intent = carbon_mob.combat_intent
+			var/modifier = 0
+			if(c_intent == CI_AIMED)
+				modifier += 5
 			//Chance to miss the attack entirely, based on a diceroll
 			var/missed = FALSE
-			if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*1.5, dicetype = "6d6", mod = -(miss_entirely/5), crit = 20) <= DICE_FAILURE)
+			if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*1.5, dicetype = "6d6", mod = -(miss_entirely/5) + modifier, crit = 20) <= DICE_CRIT_FAILURE)
 				missed = TRUE
-			c_intent = carbon_mob.combat_intent
+			
 			if(carbon_mob.mind)
 				var/datum/stats/dex/dex = GET_STAT(carbon_mob, dex)
 				if(dex)

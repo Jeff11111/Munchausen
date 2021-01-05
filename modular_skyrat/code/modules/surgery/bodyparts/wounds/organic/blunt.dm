@@ -358,7 +358,8 @@
 	
 	var/dice = DICE_SUCCESS
 	if(user.mind)
-		dice = user.mind.diceroll(GET_STAT_LEVEL(user, str)*0.75, GET_SKILL_LEVEL(user, melee)*0.5)
+		dice = user.mind.diceroll(GET_STAT_LEVEL(user, str)*1.25, GET_SKILL_LEVEL(user, melee)*0.75, "6d6", 20)
+	
 	if(dice >= DICE_SUCCESS)
 		victim.agony_scream()
 		if(dice >= DICE_CRIT_SUCCESS)

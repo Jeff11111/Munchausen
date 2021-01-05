@@ -309,7 +309,7 @@
 			if(GET_SKILL_LEVEL(L, electronics) < 8)
 				to_chat(L, "<span class='warning'>I don't... know how to do this.</span>")
 				return
-			if(L.mind.diceroll(STAT_DATUM(int), SKILL_DATUM(electronics), "6d6") <= DICE_FAILURE)
+			if(L.mind.diceroll(STAT_DATUM(int), SKILL_DATUM(electronics), "6d6", crit = 20) <= DICE_FAILURE)
 				to_chat(L, "<span class='warning'>[pick("Uhh...", "Fnord...", "Fuck!", "Hnng...", "Ahh...")]</span>")
 				target_wire = pick(colors)
 			if(I || IsAdminGhost(usr))

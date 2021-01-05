@@ -288,7 +288,7 @@
 	if(!user.get_bodypart(BODY_ZONE_PRECISE_L_FOOT) && !user.get_bodypart(BODY_ZONE_PRECISE_R_FOOT))
 		to_chat(user, "<span class='warning'>I can't kick without feet!</span>")
 		return FALSE // You need at least one foot to kick with. 
-	if(!target.resting && !(GET_SKILL_LEVEL(user, melee) >= 12) && (user.zone_selected in list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)))
+	if(!target.resting && !(GET_SKILL_LEVEL(user, melee) >= JOB_SKILLPOINTS_TRAINED) && (user.zone_selected in list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)))
 		to_chat(user, "<span class='warning'>I can't kick above [target]'s waist!</span>")
 		return FALSE // You can't kick above their waist if you ain't skilled
 	if(!attacker_style && HAS_TRAIT(user, TRAIT_PACIFISM))
@@ -419,7 +419,7 @@
 			modifier += 5
 		
 		//Dice roll to see if we fuck up
-		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.75, GET_SKILL_LEVEL(user, melee)*1.25, dicetype = "6d6", mod = -(miss_entirely/(target.lying ? 10 : 5)) + modifier, crit = 20) <= DICE_FAILURE)
+		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*1.5, dicetype = "6d6", mod = -(miss_entirely/5) + modifier, crit = 20) <= DICE_CRIT_FAILURE)
 			missed = TRUE
 		
 		if(!damage || !affecting || (missed && target != user))//future-proofing for species that have 0 damage/weird cases where no zone is targeted
@@ -606,7 +606,7 @@
 			modifier += 5
 		
 		//Dice roll to see if we fuck up
-		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.75, GET_SKILL_LEVEL(user, melee)*1.25, dicetype = "6d6", mod = -(miss_entirely/(target.lying ? 10 : 5)) + modifier, crit = 20) <= DICE_FAILURE)
+		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*1.5, dicetype = "6d6", mod = -(miss_entirely/5) + modifier, crit = 20) <= DICE_FAILURE)
 			missed = TRUE
 		
 		if(!damage || !affecting || (missed && target != user))//future-proofing for species that have 0 damage/weird cases where no zone is targeted
