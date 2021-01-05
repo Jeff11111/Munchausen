@@ -1226,7 +1226,7 @@
 //Damage cannot go below zero.
 //Cannot remove negative damage (i.e. apply damage)
 /obj/item/bodypart/proc/heal_damage(brute, burn, stamina, only_robotic = FALSE, only_organic = TRUE, updating_health = TRUE, pain, toxin, clone)
-	if(only_robotic && !is_robotic_limb()) //This makes organic limbs not heal when the proc is in Robotic mode.
+	if(only_robotic && !is_robotic_limb()) //This makes organic limbs not heal when the proc is in robotic mode.
 		return
 
 	if(only_organic && !is_organic_limb()) //This makes robolimbs not healable by chems.
@@ -1235,14 +1235,14 @@
 	for(var/datum/injury/IN in injuries)
 		if(brute <= 0)
 			break
-		if((IN.damage_type == WOUND_BURN) || !(status & IN.required_status))
+		if(IN.damage_type == WOUND_BURN)
 			continue
 		brute = IN.heal_damage(brute)
 	
 	for(var/datum/injury/IN in injuries)
 		if(burn <= 0)
 			break
-		if((IN.damage_type != WOUND_BURN) || !(status & IN.required_status))
+		if(IN.damage_type != WOUND_BURN)
 			continue
 		burn = IN.heal_damage(burn)
 	
