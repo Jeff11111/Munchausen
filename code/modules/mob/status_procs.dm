@@ -24,7 +24,7 @@
   */
 /mob/proc/blind_eyes(amount)
 	var/old_blind = eye_blind
-	eye_blind = max((!eye_blind && stat == UNCONSCIOUS || HAS_TRAIT(src, TRAIT_BLIND)) ? 1 : eye_blind , amount)
+	eye_blind = max((!eye_blind && stat == UNCONSCIOUS || HAS_TRAIT(src, TRAIT_BLIND)) ? 1 : eye_blind + amount)
 	var/new_blind = eye_blind
 	if(old_blind != new_blind)
 		update_blindness()
@@ -45,20 +45,17 @@
 /mob/proc/set_blindness(amount)
 	var/old_eye_blind = eye_blind
 	eye_blind = max(amount, (stat == UNCONSCIOUS || HAS_TRAIT(src, TRAIT_BLIND)) ? 1 : 0)
-	if(!old_eye_blind || !eye_blind)
+	if(!eye_blind || !old_eye_blind)
 		update_blindness()
 
 /// proc that adds and removes blindness overlays when necessary
 /mob/proc/update_blindness()
 	if(eye_blind) // UNCONSCIOUS or has blind trait, or has temporary blindness
-		if(stat == CONSCIOUS || stat == SOFT_CRIT)
-			throw_alert("blind", /obj/screen/alert/blind)
 		if(HAS_TRAIT(src, TRAIT_BLIND))
 			overlay_fullscreen("blind", /obj/screen/fullscreen/impaired)
 		else
 			overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 	else // CONSCIOUS no blind trait, no blindness
-		clear_alert("blind")
 		clear_fullscreen("blind")
 
 /**

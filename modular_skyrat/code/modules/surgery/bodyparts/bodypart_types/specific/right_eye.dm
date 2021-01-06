@@ -145,7 +145,7 @@
 	else if(eye_damaged)
 		owner.overlay_fullscreen("right_eye_damage", /obj/screen/fullscreen/impaired/right, eye_damaged)
 		if(!istype(other_eye))
-			owner.overlay_fullscreen("left_eye_damage", /obj/screen/fullscreen/impaired, eye_damaged)
+			owner.overlay_fullscreen("left_eye_damage", /obj/screen/fullscreen/impaired/left, eye_damaged)
 			if(fuck_with_fov)
 				fov.generate_fov_holder(owner, 315, FOV_180PLUS45_DEGREES, FALSE)
 	else

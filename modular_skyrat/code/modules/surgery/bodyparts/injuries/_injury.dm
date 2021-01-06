@@ -100,9 +100,9 @@
 		return FALSE
 	switch(damage_type)
 		if(WOUND_BLUNT, WOUND_SLASH, WOUND_PIERCE)
-			return (parent_bodypart?.current_gauze || is_bandaged())
+			return (is_bandaged())
 		if(WOUND_BURN)
-			return (is_salved())
+			return (is_salved() || (is_disinfected() && is_bandaged()))
 
 // Checks whether other other can be merged into src.
 /datum/injury/proc/can_merge(datum/injury/other)
