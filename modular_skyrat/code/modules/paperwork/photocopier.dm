@@ -277,30 +277,30 @@
 		return
 	src.add_fingerprint(user)
 	if(target == user)
-		user.visible_message("[user] starts climbing onto the photocopier!", "<span class='notice'>You start climbing onto the photocopier...</span>")
+		user.visible_message("<b>[user]</b> starts climbing onto the photocopier!", "<span class='notice'>You start climbing onto the photocopier...</span>")
 	else
-		user.visible_message("<span class='warning'>[user] starts putting [target] onto the photocopier!</span>", "<span class='notice'>You start putting [target] onto the photocopier...</span>")
+		user.visible_message("<span class='warning'><b>[user]</b> starts putting <b>[target]</b> onto the photocopier!</span>", "<span class='notice'>You start putting <b>[target]</b> onto the photocopier...</span>")
 
 	if(do_after(user, 20, target = src))
 		if(!target || QDELETED(target) || QDELETED(src) || !Adjacent(target)) //check if the photocopier/target still exists.
 			return
 
 		if(target == user)
-			user.visible_message("[user] climbs onto the photocopier!", "<span class='notice'>You climb onto the photocopier.</span>")
+			user.visible_message("<b>[user]</b> climbs onto the photocopier!", "<span class='notice'>You climb onto the photocopier.</span>")
 		else
-			user.visible_message("<span class='warning'>[user] puts [target] onto the photocopier!</span>", "<span class='notice'>You put [target] onto the photocopier.</span>")
+			user.visible_message("<span class='warning'><b>[user]</b> puts <b>[target]</b> onto the photocopier!</span>", "<span class='notice'>You put <b>[target]</b> onto the photocopier.</span>")
 
 		target.loc = get_turf(src)
 		ass = target
 
 		if(photocopy)
 			photocopy.loc = src.loc
-			visible_message("<span class='warning'>[photocopy] is shoved out of the way by [ass]!</span>")
+			visible_message("<span class='warning'>[photocopy] is shoved out of the way by <b>[ass]</b>!</span>")
 			photocopy = null
 
 		else if(copy)
 			copy.loc = src.loc
-			visible_message("<span class='warning'>[copy] is shoved out of the way by [ass]!</span>")
+			visible_message("<span class='warning'>[copy] is shoved out of the way by <b>[ass]</b>!</span>")
 			copy = null
 	updateUsrDialog()
 

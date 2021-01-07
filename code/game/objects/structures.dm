@@ -81,7 +81,7 @@
 	if(do_mob(user, user, adjusted_climb_time))
 		if(src.loc) //Checking if structure has been destroyed
 			if(do_climb(user))
-				user.visible_message("<span class='warning'>[user] climbs onto [src].</span>", \
+				user.visible_message("<span class='warning'><b>[user]</b> climbs onto [src].</span>", \
 									"<span class='notice'>You climb onto [src].</span>")
 				log_combat(user, src, "climbed onto")
 				if(climb_stun)
