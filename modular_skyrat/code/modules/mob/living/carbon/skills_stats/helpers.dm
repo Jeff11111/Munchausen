@@ -107,8 +107,9 @@
 	//Victim is unconscious, can't parry
 	if(victim.stat >= UNCONSCIOUS)
 		return
+	var/block_chance = weapon?.block_chance || 10
 	//Do a dice roll based on melee skill and dexterity, modifier being half the total damage
-	switch(diceroll(GET_STAT_LEVEL(victim, dex)*0.75, GET_SKILL_LEVEL(victim, melee)*1.25, dicetype = "6d6", mod = -abs(round(total_damage/2)), crit = 20))
+	switch(diceroll(GET_STAT_LEVEL(victim, dex)*0.5, GET_SKILL_LEVEL(victim, melee)*1.5, dicetype = "6d6", mod = -abs(round(total_damage/2)), crit = 20))
 		//Always go through, no questions asked on crit successes
 		if(DICE_CRIT_SUCCESS)
 			victim.changeNext_move(CLICK_CD_MELEE)

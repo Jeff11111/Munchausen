@@ -4,6 +4,7 @@
 	item_flags = ITEM_CAN_BLOCK
 	block_parry_data = /datum/block_parry_data/shield
 	armor = list("melee" = 50, "bullet" = 50, "laser" = 50, "energy" = 0, "bomb" = 30, "bio" = 0, "rad" = 0, "fire" = 80, "acid" = 70)
+	block_chance = 50
 	/// Shield flags
 	var/shield_flags = SHIELD_FLAGS_DEFAULT
 	/// Last shieldbash world.time
@@ -272,12 +273,14 @@ obj/item/shield/riot/bullet_proof
 	repair_material = /obj/item/stack/sheet/mineral/wood
 	shield_flags = SHIELD_FLAGS_DEFAULT
 	max_integrity = 250
+	block_chance = 35
 
 /obj/item/shield/riot/roman/fake
 	desc = "Bears an inscription on the inside: <i>\"Romanes venio domus\"</i>. It appears to be a bit flimsy."
 	block_chance = 0
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	max_integrity = 40
+	block_chance = 0
 
 /obj/item/shield/riot/roman/shatter(mob/living/carbon/human/owner)
 	playsound(owner, 'sound/effects/grillehit.ogg', 100)
@@ -293,9 +296,9 @@ obj/item/shield/riot/bullet_proof
 	custom_materials = list(/datum/material/wood = MINERAL_MATERIAL_AMOUNT * 10)
 	resistance_flags = FLAMMABLE
 	repair_material = /obj/item/stack/sheet/mineral/wood
-	block_chance = 30
 	shield_flags = SHIELD_FLAGS_DEFAULT
 	max_integrity = 150
+	block_chance = 25
 
 /obj/item/shield/riot/buckler/shatter(mob/living/carbon/human/owner)
 	playsound(owner, 'sound/effects/bang.ogg', 50)
@@ -314,6 +317,7 @@ obj/item/shield/riot/bullet_proof
 	throw_range = 4
 	w_class = WEIGHT_CLASS_NORMAL
 	var/active = FALSE
+	block_chance = 40
 
 /obj/item/shield/riot/tele/run_block(mob/living/owner, atom/object, damage, attack_text, attack_type, armour_penetration, mob/attacker, def_zone, final_block_chance, list/block_return)
 	if(!active)
@@ -357,6 +361,7 @@ obj/item/shield/riot/bullet_proof
 	max_integrity = 300 //Made of metal welded together its strong but not unkillable
 	force = 10
 	throwforce = 7
+	block_chance = 25
 
 /obj/item/shield/riot/tower
 	name = "tower shield"
@@ -370,11 +375,13 @@ obj/item/shield/riot/bullet_proof
 	w_class = WEIGHT_CLASS_HUGE
 	item_flags = SLOWS_WHILE_IN_HAND
 	shield_flags = SHIELD_FLAGS_DEFAULT
+	block_chance = 65
 
 /obj/item/shield/riot/tower/swat
 	name = "swat shield"
 	desc = "A massive, heavy shield that can block a lot of attacks, can take a lot of abuse before breaking."
 	max_integrity = 250
+	block_chance = 70
 
 /obj/item/shield/riot/implant
 	name = "telescoping shield implant"
@@ -389,6 +396,7 @@ obj/item/shield/riot/bullet_proof
 	item_flags = SLOWS_WHILE_IN_HAND
 	var/recharge_timerid
 	var/recharge_delay = 15 SECONDS
+	block_chance = 40
 
 /// Entirely overriden take_damage. This shouldn't exist outside of an implant (other than maybe christmas).
 /obj/item/shield/riot/implant/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir, armour_penetration = 0)

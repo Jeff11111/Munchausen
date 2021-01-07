@@ -35,10 +35,7 @@
 			// i don't like this too
 			var/final_block_chance = I.block_chance - (clamp((armour_penetration-I.armour_penetration)/2,0,100)) + block_chance_modifier //So armour piercing blades can still be parried by other blades, for example
 			var/results
-			if(I == active_block_item)
-				results = I.active_block(src, object, damage, attack_text, attack_type, armour_penetration, attacker, def_zone, final_block_chance, return_list, attack_direction)
-			else
-				results = I.run_block(src, object, damage, attack_text, attack_type, armour_penetration, attacker, def_zone, final_block_chance, return_list)
+			results = I.run_block(src, object, damage, attack_text, attack_type, armour_penetration, attacker, def_zone, final_block_chance, return_list)
 			. |= results
 			if((results & BLOCK_SUCCESS) && !(results & BLOCK_CONTINUE_CHAIN))
 				break
@@ -46,10 +43,7 @@
 		for(var/obj/item/I in tocheck)
 			// i don't like this too
 			var/final_block_chance = I.block_chance - (clamp((armour_penetration-I.armour_penetration)/2,0,100)) + block_chance_modifier //So armour piercing blades can still be parried by other blades, for example
-			if(I == active_block_item)		//block is long termed enough we give a damn. parry, not so much.
-				I.check_active_block(src, object, damage, attack_text, attack_type, armour_penetration, attacker, def_zone, final_block_chance, return_list, attack_direction)
-			else
-				I.check_block(src, object, damage, attack_text, attack_type, armour_penetration, attacker, def_zone, final_block_chance, return_list)
+			I.check_block(src, object, damage, attack_text, attack_type, armour_penetration, attacker, def_zone, final_block_chance, return_list)
 	if(. & BLOCK_SUCCESS)
 		return_list[BLOCK_RETURN_PROJECTILE_BLOCK_PERCENTAGE] = 100
 	else if(isnull(return_list[BLOCK_RETURN_PROJECTILE_BLOCK_PERCENTAGE]))
@@ -81,10 +75,16 @@
 	. = SEND_SIGNAL(src, COMSIG_ITEM_RUN_BLOCK, owner, object, damage, attack_text, attack_type, armour_penetration, attacker, def_zone, final_block_chance, block_return)
 	if(. & BLOCK_SUCCESS)
 		return
-	if(prob(final_block_chance))
-		owner.visible_message("<span class='danger'>[owner] blocks [attack_text] with [src]!</span>",
-			"<span class='danger'>You block [attack_text] with [src]!</span>")
-		return . | BLOCK_SUCCESS | BLOCK_PHYSICAL_EXTERNAL
+	if(owner.mind && final_block_chance >= 5)
+		if(owner.mind.diceroll(GET_STAT_LEVEL(victim, end)*0.5, GET_SKILL_LEVEL(victim, melee)*1.5, dicetype = "6d6", mod = CEILING(final_block_chance/5, 1), crit = 20) >= DICE_SUCCESS)
+			owner.visible_message("<span class='danger'><b>[owner]</b> blocks [attack_text] with [src]!</span>",
+				"<span class='danger'>I block [attack_text] with [src]!</span>")
+			return . | BLOCK_SUCCESS | BLOCK_PHYSICAL_EXTERNAL
+	else
+		if(prob(final_block_chance))
+			owner.visible_message("<span class='danger'><b>[owner]</b> blocks [attack_text] with [src]!</span>",
+				"<span class='danger'>I block [attack_text] with [src]!</span>")
+			return . | BLOCK_SUCCESS | BLOCK_PHYSICAL_EXTERNAL
 	return . | BLOCK_NONE
 
 /// Returns block information using list/block_return. Used for check_block() on mobs.
