@@ -102,7 +102,7 @@
 	else if(patched)
 		to_chat(user, "<span class='warning'>The limb has already been patched!</span>")
 		return
-	user.visible_message("<span class='notice'>[user] begins wrapping [victim]'s [limb.name] with \the [I]...</span>", "<span class='notice'>You begin wrapping [user == victim ? "your" : "[victim]'s"] [limb.name] with \the [I]...</span>")
+	user.visible_message("<span class='notice'><b>[user]</b> begins wrapping <b>[victim]</b>'s [limb.name] with \the [I]...</span>", "<span class='notice'>You begin wrapping [user == victim ? "your" : "<b>[victim]</b>'s"] [limb.name] with \the [I]...</span>")
 	var/time_mod = (user == victim ? 2 : 1)
 
 	//Electronics skill affects the speed of the do_mob
@@ -121,7 +121,7 @@
 	limb.heal_damage(10 * power, 10 * power, 0, FALSE, FALSE)
 	patch = "[lowertext(I.name)]"
 	patched = power
-	user.visible_message("<span class='green'>[user] wraps [victim]'s [limb.name] with [I].</span>", "<span class='green'>You wrap [user == victim ? "your" : "[victim]'s"] [limb.name] with [I].</span>")
+	user.visible_message("<span class='green'><b>[user]</b> wraps <b>[victim]</b>'s [limb.name] with [I].</span>", "<span class='green'>You wrap [user == victim ? "your" : "<b>[victim]</b>'s"] [limb.name] with [I].</span>")
 	return TRUE
 
 /// Welding the patch proper
@@ -133,9 +133,9 @@
 		to_chat(user, "<span class='warning'>The limb doesn't have a mineral patch!</span>")
 		return
 	if(patched)
-		user.visible_message("<span class='notice'>[user] begins welding \the [patch] on [victim]'s [limb.name] with \the [I]...</span>", "<span class='notice'>You begin welding \the [patch] [user == victim ? "your" : "[victim]'s"] [limb.name] with \the [I]...</span>")
+		user.visible_message("<span class='notice'><b>[user]</b> begins welding \the [patch] on <b>[victim]</b>'s [limb.name] with \the [I]...</span>", "<span class='notice'>You begin welding \the [patch] [user == victim ? "your" : "<b>[victim]</b>'s"] [limb.name] with \the [I]...</span>")
 	else
-		user.visible_message("<span class='notice'>[user] begins welding \the [lowertext(name)] on [victim]'s [limb.name] with \the [I]...</span>", "<span class='notice'>You begin welding \the [lowertext(name)] on [user == victim ? "your" : "[victim]'s"] [limb.name] with \the [I]...</span>")
+		user.visible_message("<span class='notice'><b>[user]</b> begins welding \the [lowertext(name)] on <b>[victim]</b>'s [limb.name] with \the [I]...</span>", "<span class='notice'>You begin welding \the [lowertext(name)] on [user == victim ? "your" : "<b>[victim]</b>'s"] [limb.name] with \the [I]...</span>")
 	var/time_mod = (user == victim ? 2 : 1)
 
 	//Electronics skill affects the speed of the do_mob
@@ -150,9 +150,9 @@
 	limb.heal_damage(10 * power, 10 * power, 0, FALSE, FALSE)
 	welded = TRUE
 	if(patched)
-		user.visible_message("<span class='green'>[user] welds \the [patch] on [victim]'s [limb.name] with [I].</span>", "<span class='green'>You weld \the patch on [user == victim ? "your" : "[victim]'s"] [limb.name] with [I].</span>")
+		user.visible_message("<span class='green'><b>[user]</b> welds \the [patch] on <b>[victim]</b>'s [limb.name] with [I].</span>", "<span class='green'>You weld \the patch on [user == victim ? "your" : "<b>[victim]</b>'s"] [limb.name] with [I].</span>")
 	else
-		user.visible_message("<span class='green'>[user] welds \the [lowertext(name)] [victim]'s [limb.name] with [I].</span>", "<span class='green'>You weld \the [lowertext(name)] on [user == victim ? "your" : "[victim]'s"] [limb.name] with [I].</span>")
+		user.visible_message("<span class='green'><b>[user]</b> welds \the [lowertext(name)] <b>[victim]</b>'s [limb.name] with [I].</span>", "<span class='green'>You weld \the [lowertext(name)] on [user == victim ? "your" : "<b>[victim]</b>'s"] [limb.name] with [I].</span>")
 	if(repeat_patch)
 		patched = 0
 	return TRUE
@@ -162,7 +162,7 @@
 	if(limb.current_gauze)
 		to_chat(user, "<span class='warning'>The limb has already been taped!</span>")
 		return
-	user.visible_message("<span class='notice'>[user] begins wrapping [victim]'s [limb.name] with \the [I]...</span>", "<span class='notice'>You begin wrapping [user == victim ? "your" : "[victim]'s"] [limb.name] with \the [I]...</span>")
+	user.visible_message("<span class='notice'><b>[user]</b> begins wrapping <b>[victim]</b>'s [limb.name] with \the [I]...</span>", "<span class='notice'>You begin wrapping [user == victim ? "your" : "<b>[victim]</b>'s"] [limb.name] with \the [I]...</span>")
 	var/time_mod = (user == victim ? 2 : 1)
 
 	//Electronics skill affects the speed of the do_mob
@@ -176,7 +176,7 @@
 
 	limb.heal_damage(10 * power, 10 * power, 0, FALSE, FALSE)
 	limb.apply_gauze(I)
-	user.visible_message("<span class='green'>[user] wraps on [victim]'s [limb.name] with [I].</span>", "<span class='green'>You wrap [user == victim ? "your" : "[victim]'s"] [limb.name] with [I].</span>")
+	user.visible_message("<span class='green'><b>[user]</b> wraps on <b>[victim]</b>'s [limb.name] with [I].</span>", "<span class='green'>You wrap [user == victim ? "your" : "<b>[victim]</b>'s"] [limb.name] with [I].</span>")
 	return TRUE
 
 /// We cannot be healed normally.

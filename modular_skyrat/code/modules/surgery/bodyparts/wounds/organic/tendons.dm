@@ -70,8 +70,8 @@
 	if(!limb.get_incision())
 		to_chat(user, "<span class='notice'>I must incise [limb] to treat it's torn [limb.tendon_name]!</span>")
 		return
-	user.visible_message("<span class='notice'>[user] begins stitching [victim]'s [limb] [limb.tendon_name] with [I]...</span>", \
-					"<span class='notice'>You begin stitching [user == victim ? "your" : "[victim]'s"] [limb] [limb.tendon_name] with [I]...</span>")
+	user.visible_message("<span class='notice'><b>[user]</b> begins stitching <b>[victim]</b>'s [limb] [limb.tendon_name] with [I]...</span>", \
+					"<span class='notice'>You begin stitching [user == victim ? "your" : "<b>[victim]</b>'s"] [limb] [limb.tendon_name] with [I]...</span>")
 	var/time_mod = (user == victim ? 1.5 : 1)
 
 	//Medical skill affects the speed of the do_mob
@@ -87,8 +87,8 @@
 		to_chat(user, "<span class='warning'>There aren't enough stacks of [I.name] to heal \the [src.name]!</span>")
 		return
 
-	user.visible_message("<span class='green'>[user] stitches up [victim]'s [limb.tendon_name].</span>", \
-				"<span class='green'>You stitch up [user == victim ? "your" : "[victim]'s"] [limb.tendon_name].</span>")
+	user.visible_message("<span class='green'><b>[user]</b> stitches up <b>[victim]</b>'s [limb.tendon_name].</span>", \
+				"<span class='green'>You stitch up [user == victim ? "your" : "<b>[victim]</b>'s"] [limb.tendon_name].</span>")
 	var/sutured = I.stop_bleeding / max(1, time_mod)
 	torn -= sutured
 	limb.heal_damage(I.heal_brute, I.heal_burn, 0, FALSE, FALSE)

@@ -285,7 +285,7 @@
 		custom_location = "hips"
 	
 	if(first_time)
-		user.visible_message("<span class='notice'>[user] starts to strain their [custom_location ? custom_location : limb.name] back in place...</span>", "<span class='notice'>I start straining my [custom_location ? custom_location : limb.name] back in place...</span>")
+		user.visible_message("<span class='notice'><b>[user]</b> starts to strain their [custom_location ? custom_location : limb.name] back in place...</span>", "<span class='notice'>I start straining my [custom_location ? custom_location : limb.name] back in place...</span>")
 	
 	//Medical skill affects the speed of the do_mob
 	if(user.mind)
@@ -297,12 +297,12 @@
 		return
 
 	if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, firstaid)*0.75) >= DICE_SUCCESS)
-		user.visible_message("<span class='danger'>[user] snaps their own [custom_location ? custom_location : limb.name] back in place!</span>", "<span class='danger'>I snap my [custom_location ? custom_location : limb.name] back into place!</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> snaps their own [custom_location ? custom_location : limb.name] back in place!</span>", "<span class='danger'>I snap my [custom_location ? custom_location : limb.name] back into place!</span>")
 		victim.agony_scream()
 		limb.receive_damage(brute=12, wound_bonus=CANT_WOUND)
 		qdel(src)
 	else
-		user.visible_message("<span class='danger'>[user] wrenches their own dislocated [custom_location ? custom_location : limb.name] around painfully!</span>", "<span class='danger'>I wrench my own dislocated [custom_location ? custom_location : limb.name] around painfully!</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> wrenches their own dislocated [custom_location ? custom_location : limb.name] around painfully!</span>", "<span class='danger'>I wrench my own dislocated [custom_location ? custom_location : limb.name] around painfully!</span>")
 		limb.receive_damage(brute=8, wound_bonus=CANT_WOUND)
 		self_treat(user, FALSE)
 	return
@@ -316,8 +316,8 @@
 		return TRUE
 
 	if(user.grab_state >= GRAB_AGGRESSIVE)
-		user.visible_message("<span class='danger'>[user] begins twisting and straining <b>[victim]</b>'s dislocated [limb.name]!</span>", "<span class='notice'>I begin twisting and straining <b>[victim]</b>'s dislocated [limb.name]...</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='userdanger'>[user] begins twisting and straining my dislocated [limb.name]!</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> begins twisting and straining <b>[victim]</b>'s dislocated [limb.name]!</span>", "<span class='notice'>I begin twisting and straining <b>[victim]</b>'s dislocated [limb.name]...</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> begins twisting and straining my dislocated [limb.name]!</span>")
 		if(user.a_intent == INTENT_HELP)
 			chiropractice(user)
 		else
@@ -339,14 +339,14 @@
 		return
 
 	if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, firstaid)*0.75) >= DICE_SUCCESS)
-		user.visible_message("<span class='danger'>[user] snaps <b>[victim]</b>'s dislocated [limb.name] back into place!</span>", "<span class='notice'>I snap <b>[victim]</b>'s dislocated [limb.name] back into place!</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='userdanger'>[user] snaps my dislocated [limb.name] back into place!</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> snaps <b>[victim]</b>'s dislocated [limb.name] back into place!</span>", "<span class='notice'>I snap <b>[victim]</b>'s dislocated [limb.name] back into place!</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> snaps my dislocated [limb.name] back into place!</span>")
 		victim.agony_scream()
 		limb.receive_damage(brute=10, wound_bonus=CANT_WOUND)
 		qdel(src)
 	else
-		user.visible_message("<span class='danger'>[user] wrenches <b>[victim]</b>'s dislocated [limb.name] around painfully!</span>", "<span class='danger'>I wrench <b>[victim]</b>'s dislocated [limb.name] around painfully!</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='userdanger'>[user] wrenches my dislocated [limb.name] around painfully!</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> wrenches <b>[victim]</b>'s dislocated [limb.name] around painfully!</span>", "<span class='danger'>I wrench <b>[victim]</b>'s dislocated [limb.name] around painfully!</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> wrenches my dislocated [limb.name] around painfully!</span>")
 		limb.receive_damage(brute=7, wound_bonus=CANT_WOUND)
 		chiropractice(user)
 
@@ -367,11 +367,11 @@
 		else
 			replace_wound(/datum/wound/blunt/severe, silent = TRUE)
 		limb.receive_damage(brute=GET_STAT_LEVEL(user, str)*0.75, wound_bonus = CANT_WOUND)
-		user.visible_message("<span class='danger'>[user] snaps <b>[victim]</b>'s dislocated [limb.name] with a sickening crack![victim.wound_message]</span>", "<span class='danger'>I snap <b>[victim]</b>'s dislocated [limb.name] with a sickening crack![victim.wound_message]</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='userdanger'>[user] snaps my dislocated [limb.name] with a sickening crack![victim.wound_message]</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> snaps <b>[victim]</b>'s dislocated [limb.name] with a sickening crack![victim.wound_message]</span>", "<span class='danger'>I snap <b>[victim]</b>'s dislocated [limb.name] with a sickening crack![victim.wound_message]</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> snaps my dislocated [limb.name] with a sickening crack![victim.wound_message]</span>")
 	else
-		user.visible_message("<span class='danger'>[user] wrenches <b>[victim]</b>'s dislocated [limb.name] around painfully![victim.wound_message]</span>", "<span class='danger'>I wrench <b>[victim]</b>'s dislocated [limb.name] around painfully![victim.wound_message]</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='userdanger'>[user] wrenches my dislocated [limb.name] around painfully![victim.wound_message]</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> wrenches <b>[victim]</b>'s dislocated [limb.name] around painfully![victim.wound_message]</span>", "<span class='danger'>I wrench <b>[victim]</b>'s dislocated [limb.name] around painfully![victim.wound_message]</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> wrenches my dislocated [limb.name] around painfully![victim.wound_message]</span>")
 		limb.receive_damage(brute=GET_STAT_LEVEL(user, str)*0.5, wound_bonus = CANT_WOUND)
 	//Clean the wound string either way
 	victim.wound_message = ""
@@ -380,9 +380,9 @@
 
 /datum/wound/blunt/moderate/treat(obj/item/I, mob/user)
 	if(victim == user)
-		victim.visible_message("<span class='danger'>[user] begins resetting [victim.p_their()] [limb.name] with [I].</span>", "<span class='warning'>I begin resetting my [limb.name] with [I]...</span>")
+		victim.visible_message("<span class='danger'><b>[user]</b> begins resetting [victim.p_their()] [limb.name] with [I].</span>", "<span class='warning'>I begin resetting my [limb.name] with [I]...</span>")
 	else
-		user.visible_message("<span class='danger'>[user] begins resetting <b>[victim]</b>'s [limb.name] with [I].</span>", "<span class='notice'>I begin resetting <b>[victim]</b>'s [limb.name] with [I]...</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> begins resetting <b>[victim]</b>'s [limb.name] with [I].</span>", "<span class='notice'>I begin resetting <b>[victim]</b>'s [limb.name] with [I]...</span>")
 
 	var/time_mod = (user == victim ? 1.5 : 1)
 	//Medical skill affects the speed of the do_mob
@@ -396,12 +396,12 @@
 	if(victim == user)
 		if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, firstaid) * 0.75) < DICE_SUCCESS)
 			limb.receive_damage(brute=10, wound_bonus=CANT_WOUND)
-		victim.visible_message("<span class='danger'>[user] finishes resetting [victim.p_their()] [limb.name]!</span>", "<span class='userdanger'>I reset my [limb.name]!</span>")
+		victim.visible_message("<span class='danger'><b>[user]</b> finishes resetting [victim.p_their()] [limb.name]!</span>", "<span class='userdanger'>I reset my [limb.name]!</span>")
 	else
 		if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, firstaid) * 0.75) < DICE_SUCCESS)
 			limb.receive_damage(brute=7, wound_bonus=CANT_WOUND)
-		user.visible_message("<span class='danger'>[user] finishes resetting <b>[victim]</b>'s [limb.name]!</span>", "<span class='nicegreen'>I finish resetting <b>[victim]</b>'s [limb.name]!</span>", victim)
-		to_chat(victim, "<span class='userdanger'>[user] resets my [limb.name]!</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> finishes resetting <b>[victim]</b>'s [limb.name]!</span>", "<span class='nicegreen'>I finish resetting <b>[victim]</b>'s [limb.name]!</span>", victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> resets my [limb.name]!</span>")
 
 	victim.agony_scream()
 	qdel(src)
@@ -443,8 +443,8 @@
 		return TRUE
 
 	if((user.grab_state >= GRAB_AGGRESSIVE) && (user.a_intent == INTENT_HELP) && victim.lying)
-		user.visible_message("<span class='notice'>[user] begins massaging <b>[victim]</b>'s ribs.</span>", "<span class='notice'>I begin massaging <b>[victim]</b>'s dislocated ribs...</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='notice'>[user] begins massaging my dislocated ribs.</span>")
+		user.visible_message("<span class='notice'><b>[user]</b> begins massaging <b>[victim]</b>'s ribs.</span>", "<span class='notice'>I begin massaging <b>[victim]</b>'s dislocated ribs...</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='notice'><b>[user]</b> begins massaging my dislocated ribs.</span>")
 		chiropractice(user)
 		return TRUE
 
@@ -463,22 +463,22 @@
 		return
 
 	if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, firstaid) * 0.75) < DICE_SUCCESS)
-		user.visible_message("<span class='notice'>[user] massages <b>[victim]</b>'s dislocated ribs back in place.</span>", "<span class='notice'>I massage <b>[victim]</b>'s dislocated ribs back into place.</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='notice'>[user] massages my dislocated ribs back into place.</span>")
+		user.visible_message("<span class='notice'><b>[user]</b> massages <b>[victim]</b>'s dislocated ribs back in place.</span>", "<span class='notice'>I massage <b>[victim]</b>'s dislocated ribs back into place.</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='notice'><b>[user]</b> massages my dislocated ribs back into place.</span>")
 		victim.agony_scream()
 		limb.receive_damage(brute=10, wound_bonus=CANT_WOUND)
 		qdel(src)
 	else
-		user.visible_message("<span class='danger'>[user] grinds <b>[victim]</b>'s rib cartilage around painfully!</span>", "<span class='danger'>I grind <b>[victim]</b>'s rib cartilage around painfully!</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='userdanger'>[user] grinds my ribs' cartilage around painfully!</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> grinds <b>[victim]</b>'s rib cartilage around painfully!</span>", "<span class='danger'>I grind <b>[victim]</b>'s rib cartilage around painfully!</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> grinds my ribs' cartilage around painfully!</span>")
 		limb.receive_damage(brute=8, wound_bonus=CANT_WOUND)
 		chiropractice(user)
 
 /datum/wound/blunt/moderate/ribcage/treat(obj/item/I, mob/user)
 	if(victim == user)
-		victim.visible_message("<span class='danger'>[user] begins resetting [victim.p_their()] ribs with [I].</span>", "<span class='warning'>I begin resetting my ribs with [I]...</span>")
+		victim.visible_message("<span class='danger'><b>[user]</b> begins resetting [victim.p_their()] ribs with [I].</span>", "<span class='warning'>I begin resetting my ribs with [I]...</span>")
 	else
-		user.visible_message("<span class='danger'>[user] begins resetting <b>[victim]</b>'s ribs with [I].</span>", "<span class='notice'>I begin resetting <b>[victim]</b>'s ribs with [I]...</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> begins resetting <b>[victim]</b>'s ribs with [I].</span>", "<span class='notice'>I begin resetting <b>[victim]</b>'s ribs with [I]...</span>")
 	var/time_mod = (user == victim ? 1.5 : 1)
 
 	//Medical skill affects the speed of the do_mob
@@ -493,12 +493,12 @@
 	if(victim == user)
 		if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, firstaid) * 0.75) < DICE_SUCCESS)
 			limb.receive_damage(brute=15, wound_bonus=CANT_WOUND)
-		victim.visible_message("<span class='danger'>[user] finishes resetting [victim.p_their()] ribs!</span>", "<span class='userdanger'>I reset my ribs!</span>")
+		victim.visible_message("<span class='danger'><b>[user]</b> finishes resetting [victim.p_their()] ribs!</span>", "<span class='userdanger'>I reset my ribs!</span>")
 	else
 		if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, firstaid) * 0.75) < DICE_SUCCESS)
 			limb.receive_damage(brute=10, wound_bonus=CANT_WOUND)
-		user.visible_message("<span class='danger'>[user] finishes resetting <b>[victim]</b>'s ribs!</span>", "<span class='nicegreen'>I finish resetting <b>[victim]</b>'s ribs!</span>", victim)
-		to_chat(victim, "<span class='userdanger'>[user] resets my ribs!</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> finishes resetting <b>[victim]</b>'s ribs!</span>", "<span class='nicegreen'>I finish resetting <b>[victim]</b>'s ribs!</span>", victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> resets my ribs!</span>")
 
 	victim.agony_scream()
 	qdel(src)
@@ -538,8 +538,8 @@
 		return TRUE
 
 	if((user.grab_state >= GRAB_AGGRESSIVE) && (user.a_intent == INTENT_HELP) && victim.lying)
-		user.visible_message("<span class='danger'>[user] begins forcing <b>[victim]</b>'s femur into it's socket!</span>", "<span class='notice'>I begin forcing <b>[victim]</b>'s femurs into their sockets...</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='userdanger'>[user] begins forcing my femur in place!</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> begins forcing <b>[victim]</b>'s femur into it's socket!</span>", "<span class='notice'>I begin forcing <b>[victim]</b>'s femurs into their sockets...</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> begins forcing my femur in place!</span>")
 		chiropractice(user)
 		return TRUE
 
@@ -558,22 +558,22 @@
 		return
 
 	if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, firstaid) * 0.75) >= DICE_SUCCESS)
-		user.visible_message("<span class='danger'>[user] forces <b>[victim]</b>'s femoral bone back in place!</span>", "<span class='notice'>I force <b>[victim]</b>'s dislocated femoral bone back in place.</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='userdanger'>[user] forces my femoral bone in place!</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> forces <b>[victim]</b>'s femoral bone back in place!</span>", "<span class='notice'>I force <b>[victim]</b>'s dislocated femoral bone back in place.</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> forces my femoral bone in place!</span>")
 		victim.agony_scream()
 		limb.receive_damage(brute=15, wound_bonus=CANT_WOUND)
 		qdel(src)
 	else
-		user.visible_message("<span class='danger'>[user] painfully wrenches <b>[victim]</b>'s femur around!</span>", "<span class='danger'>I painfully wrench <b>[victim]</b>'s femur around!</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='userdanger'>[user] painfully wrenches my femur around!</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> painfully wrenches <b>[victim]</b>'s femur around!</span>", "<span class='danger'>I painfully wrench <b>[victim]</b>'s femur around!</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> painfully wrenches my femur around!</span>")
 		limb.receive_damage(brute=10, wound_bonus=CANT_WOUND)
 		chiropractice(user)
 
 /datum/wound/blunt/moderate/hips/treat(obj/item/I, mob/user)
 	if(victim == user)
-		victim.visible_message("<span class='danger'>[user] begins resetting [victim.p_their()] femur with [I].</span>", "<span class='warning'>I begin resetting my femur with [I]...</span>")
+		victim.visible_message("<span class='danger'><b>[user]</b> begins resetting [victim.p_their()] femur with [I].</span>", "<span class='warning'>I begin resetting my femur with [I]...</span>")
 	else
-		user.visible_message("<span class='danger'>[user] begins resetting <b>[victim]</b>'s femur with [I].</span>", "<span class='notice'>I begin resetting <b>[victim]</b>'s femur with [I]...</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> begins resetting <b>[victim]</b>'s femur with [I].</span>", "<span class='notice'>I begin resetting <b>[victim]</b>'s femur with [I]...</span>")
 
 	//Medical skill affects the speed of the do_mob
 	var/time_mod = (user == victim ? 1.5 : 1)
@@ -588,12 +588,12 @@
 	if(victim == user)
 		if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, firstaid) * 0.75) < DICE_SUCCESS)
 			limb.receive_damage(brute=15, wound_bonus=CANT_WOUND)
-		victim.visible_message("<span class='danger'>[user] finishes resetting [victim.p_their()] femur!</span>", "<span class='userdanger'>I reset my femur!</span>")
+		victim.visible_message("<span class='danger'><b>[user]</b> finishes resetting [victim.p_their()] femur!</span>", "<span class='userdanger'>I reset my femur!</span>")
 	else
 		if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, firstaid) * 0.75) < DICE_SUCCESS)
 			limb.receive_damage(brute=7, wound_bonus=CANT_WOUND)
-		user.visible_message("<span class='danger'>[user] finishes resetting <b>[victim]</b>'s femur!</span>", "<span class='nicegreen'>I finish resetting <b>[victim]</b>'s femur!</span>", victim)
-		to_chat(victim, "<span class='userdanger'>[user] resets my femur!</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> finishes resetting <b>[victim]</b>'s femur!</span>", "<span class='nicegreen'>I finish resetting <b>[victim]</b>'s femur!</span>", victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> resets my femur!</span>")
 
 	victim.agony_scream()
 	qdel(src)
@@ -634,8 +634,8 @@
 		return TRUE
 
 	if((user.grab_state >= GRAB_AGGRESSIVE) && (user.a_intent == INTENT_HELP))
-		user.visible_message("<span class='notice'>[user] begins forcing <b>[victim]</b>'s jaw back in place.</span>", "<span class='notice'>I begin forcing <b>[victim]</b>'s jaw back in place...</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='notice'>[user] begins forcing my jaw back in place.</span>")
+		user.visible_message("<span class='notice'><b>[user]</b> begins forcing <b>[victim]</b>'s jaw back in place.</span>", "<span class='notice'>I begin forcing <b>[victim]</b>'s jaw back in place...</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='notice'><b>[user]</b> begins forcing my jaw back in place.</span>")
 		chiropractice(user)
 		return TRUE
 
@@ -654,22 +654,22 @@
 		return
 
 	if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, firstaid) * 0.75) >= DICE_SUCCESS)
-		user.visible_message("<span class='notice'>[user] jams <b>[victim]</b>'s jaw back in place.</span>", "<span class='notice'>I jam <b>[victim]</b>'s dislocated jaaw back into place.</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='notice'>[user] jams my dislocated jaw back into place.</span>")
+		user.visible_message("<span class='notice'><b>[user]</b> jams <b>[victim]</b>'s jaw back in place.</span>", "<span class='notice'>I jam <b>[victim]</b>'s dislocated jaaw back into place.</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='notice'><b>[user]</b> jams my dislocated jaw back into place.</span>")
 		victim.agony_scream()
 		limb.receive_damage(brute=10, wound_bonus=CANT_WOUND)
 		qdel(src)
 	else
-		user.visible_message("<span class='danger'>[user] moves <b>[victim]</b>'s jaw around painfully!</span>", "<span class='danger'>I move <b>[victim]</b>'s jaw around painfully!</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='userdanger'>[user] moves my jaw around painfully!</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> moves <b>[victim]</b>'s jaw around painfully!</span>", "<span class='danger'>I move <b>[victim]</b>'s jaw around painfully!</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> moves my jaw around painfully!</span>")
 		limb.receive_damage(brute=8, wound_bonus=CANT_WOUND)
 		chiropractice(user)
 
 /datum/wound/blunt/moderate/jaw/treat(obj/item/I, mob/user)
 	if(victim == user)
-		victim.visible_message("<span class='danger'>[user] begins resetting [victim.p_their()] jaw with [I].</span>", "<span class='warning'>I begin resetting my jaw with [I]...</span>")
+		victim.visible_message("<span class='danger'><b>[user]</b> begins resetting [victim.p_their()] jaw with [I].</span>", "<span class='warning'>I begin resetting my jaw with [I]...</span>")
 	else
-		user.visible_message("<span class='danger'>[user] begins resetting <b>[victim]</b>'s jaw with [I].</span>", "<span class='notice'>I begin resetting <b>[victim]</b>'s jaw with [I]...</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> begins resetting <b>[victim]</b>'s jaw with [I].</span>", "<span class='notice'>I begin resetting <b>[victim]</b>'s jaw with [I]...</span>")
 	
 	//Medical skill affects the speed of the do_mob
 	var/time_mod = (user == victim ? 1.5 : 1)
@@ -684,12 +684,12 @@
 	if(victim == user)
 		if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, firstaid) * 0.75) < DICE_SUCCESS)
 			limb.receive_damage(brute=15, wound_bonus=CANT_WOUND)
-		victim.visible_message("<span class='danger'>[user] finishes resetting [victim.p_their()] jaw!</span>", "<span class='userdanger'>I reset my jaw!</span>")
+		victim.visible_message("<span class='danger'><b>[user]</b> finishes resetting [victim.p_their()] jaw!</span>", "<span class='userdanger'>I reset my jaw!</span>")
 	else
 		if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, firstaid) * 0.75) < DICE_SUCCESS)
 			limb.receive_damage(brute=10, wound_bonus=CANT_WOUND)
-		user.visible_message("<span class='danger'>[user] finishes resetting <b>[victim]</b>'s jaw!</span>", "<span class='nicegreen'>I finish resetting <b>[victim]</b>'s jaw!</span>", victim)
-		to_chat(victim, "<span class='userdanger'>[user] resets my jaw!</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> finishes resetting <b>[victim]</b>'s jaw!</span>", "<span class='nicegreen'>I finish resetting <b>[victim]</b>'s jaw!</span>", victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> resets my jaw!</span>")
 
 	victim.agony_scream()
 	qdel(src)
@@ -765,7 +765,7 @@
 		to_chat(user, "<span class='warning'>[user == victim ? "My" : "<b>[victim]</b>'s"] [limb.name] is already coated with bone gel!</span>")
 		return
 
-	user.visible_message("<span class='danger'>[user] begins hastily applying [I] to <b>[victim]</b>'s' [limb.name]...</span>", "<span class='warning'>I begin hastily applying [I] to [user == victim ? "my" : "<b>[victim]</b>'s"] [limb.name], disregarding the warning label...</span>")
+	user.visible_message("<span class='danger'><b>[user]</b> begins hastily applying [I] to <b>[victim]</b>'s' [limb.name]...</span>", "<span class='warning'>I begin hastily applying [I] to [user == victim ? "my" : "<b>[victim]</b>'s"] [limb.name], disregarding the warning label...</span>")
 
 	//Medical skill affects the speed of the do_mob
 	var/time_mod = (user == victim ? 1.5 : 1)
@@ -783,8 +783,8 @@
 	
 	victim.agony_scream()
 	if(user != victim)
-		user.visible_message("<span class='notice'>[user] finishes applying [I] to <b>[victim]</b>'s [limb.name], emitting a fizzing noise!</span>", "<span class='notice'>I finish applying [I] to <b>[victim]</b>'s [limb.name]!</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='userdanger'>[user] finishes applying [I] to my [limb.name], and i can feel the bones exploding with pain as they begin melting and reforming!</span>")
+		user.visible_message("<span class='notice'><b>[user]</b> finishes applying [I] to <b>[victim]</b>'s [limb.name], emitting a fizzing noise!</span>", "<span class='notice'>I finish applying [I] to <b>[victim]</b>'s [limb.name]!</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> finishes applying [I] to my [limb.name], and i can feel the bones exploding with pain as they begin melting and reforming!</span>")
 	else
 		if(!HAS_TRAIT(user, TRAIT_PAINKILLER))
 			var/painkiller_bonus = 0
@@ -822,7 +822,7 @@
 		to_chat(user, "<span class='warning'>[user == victim ? "My" : "<b>[victim]</b>'s"] [limb.name] is already wrapped in [I.name] and reforming!</span>")
 		return
 
-	user.visible_message("<span class='danger'>[user] begins applying [I] to <b>[victim]</b>'s' [limb.name]...</span>", "<span class='warning'>I begin applying [I] to [user == victim ? "my" : "<b>[victim]</b>'s"] [limb.name]...</span>")
+	user.visible_message("<span class='danger'><b>[user]</b> begins applying [I] to <b>[victim]</b>'s' [limb.name]...</span>", "<span class='warning'>I begin applying [I] to [user == victim ? "my" : "<b>[victim]</b>'s"] [limb.name]...</span>")
 
 	//aaaaaaaaaaaaaaaaaaa
 	var/time_mod = (user == victim ? 1.5 : 1)
@@ -840,8 +840,8 @@
 	regen_points_current = 0
 	regen_points_needed = 15 * (user == victim ? 1.5 : 1) * (severity - WOUND_SEVERITY_TRIVIAL)
 	if(user != victim)
-		user.visible_message("<span class='notice'>[user] finishes applying [I] to <b>[victim]</b>'s [limb.name], emitting a fizzing noise!</span>", "<span class='notice'>I finish applying [I] to <b>[victim]</b>'s [limb.name]!</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='green'>[user] finishes applying [I] to my [limb.name], i immediately begin to feel my bones start to reform!</span>")
+		user.visible_message("<span class='notice'><b>[user]</b> finishes applying [I] to <b>[victim]</b>'s [limb.name], emitting a fizzing noise!</span>", "<span class='notice'>I finish applying [I] to <b>[victim]</b>'s [limb.name]!</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='green'><b>[user]</b> finishes applying [I] to my [limb.name], i immediately begin to feel my bones start to reform!</span>")
 	else
 		victim.visible_message("<span class='notice'><b>[victim]</b> finishes applying [I] to [victim.p_their()] [limb.name], !</span>", "<span class='green'>I finish applying [I] to my [limb.name], and i immediately begin to feel my bones start to reform!</span>")
 

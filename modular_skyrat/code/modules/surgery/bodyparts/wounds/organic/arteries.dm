@@ -96,7 +96,7 @@
 	if((open_wound && (victim.stat < DEAD) && (victim.pulse() > PULSE_NORM) && (victim.blood_volume >= blood_flow) && (blood_flow >= 1)) || force)
 		playsound(victim, sound_effect, 75, 0)
 		victim.bleed(blood_flow * bleed_mod, FALSE)
-		victim.visible_message("<span class='danger'><b>[victim]</b>'s [limb.name]'s [limb.artery_name] squirts blood!</span>", \
+		victim.visible_message("<span class='danger'><b><b>[victim]</b></b>'s [limb.name]'s [limb.artery_name] squirts blood!</span>", \
 						"<span class='userdanger'>Blood squirts from my [limb.name]'s [limb.artery_name]!</span>")
 		var/spray_dir = pick(GLOB.alldirs)
 		var/turf/uhoh = get_edge_target_turf(victim, spray_dir)
@@ -123,8 +123,8 @@
 	if(!limb.get_incision())
 		to_chat(user, "<span class='notice'>I must incise [limb] to treat it's arterial bleeding!</span>")
 		return
-	user.visible_message("<span class='notice'>[user] begins stitching [victim]'s [limb] [limb.artery_name] with [I]...</span>", \
-					"<span class='notice'>You begin stitching [user == victim ? "your" : "[victim]'s"] [limb] [limb.artery_name] with [I]...</span>")
+	user.visible_message("<span class='notice'><b>[user]</b> begins stitching <b>[victim]</b>'s [limb] [limb.artery_name] with [I]...</span>", \
+					"<span class='notice'>You begin stitching [user == victim ? "your" : "<b>[victim]</b>'s"] [limb] [limb.artery_name] with [I]...</span>")
 	var/time_mod = (user == victim ? 1.5 : 1)
 
 	//Medical skill affects the speed of the do_mob
@@ -140,8 +140,8 @@
 		to_chat(user, "<span class='warning'>There aren't enough stacks of [I.name] to heal \the [src.name]!</span>")
 		return
 
-	user.visible_message("<span class='green'>[user] stitches up [victim]'s [limb.artery_name].</span>", \
-				"<span class='green'>You stitch up [user == victim ? "your" : "[victim]'s"] [limb.artery_name].</span>")
+	user.visible_message("<span class='green'><b>[user]</b> stitches up <b>[victim]</b>'s [limb.artery_name].</span>", \
+				"<span class='green'>You stitch up [user == victim ? "your" : "<b>[victim]</b>'s"] [limb.artery_name].</span>")
 	var/blood_sutured = I.stop_bleeding / max(1, time_mod)
 	blood_time -= blood_sutured
 	limb.heal_damage(I.heal_brute, I.heal_burn, 0, FALSE, FALSE)

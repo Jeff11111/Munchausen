@@ -148,7 +148,7 @@
 	if(usr.canUseTopic(victim, BE_CLOSE, FALSE))
 		if(href_list["self_treat"])
 			if(INTERACTING_WITH(usr, victim))
-				to_chat(usr, "<span class='warning'>You're already interacting with [victim]!</span>")
+				to_chat(usr, "<span class='warning'>You're already interacting with <b>[victim]</b>!</span>")
 				return FALSE
 			self_treat(usr, TRUE)
 
@@ -251,7 +251,7 @@
 		SEND_SIGNAL(victim, COMSIG_ADD_MOOD_EVENT, "wounded", /datum/mood_event/injured)
 
 	if(!(silent || demoted))
-		var/msg = "<span class='danger'>[victim]'s [limb.name] [occur_text]!</span>"
+		var/msg = "<span class='danger'><b>[victim]</b>'s [limb.name] [occur_text]!</span>"
 		var/vis_dist = COMBAT_MESSAGE_RANGE
 
 		if(severity > WOUND_SEVERITY_MODERATE)
@@ -346,7 +346,7 @@
 		return FALSE
 	// now that we've determined we have a valid attempt at treating, we can stomp on their dreams if we're already interacting with the patient or if their part is obscured
 	if(INTERACTING_WITH(user, victim))
-		to_chat(user, "<span class='warning'>You're already interacting with [victim]!</span>")
+		to_chat(user, "<span class='warning'>You're already interacting with <b>[victim]</b>!</span>")
 		return TRUE
 
 	if(!victim.can_inject(user, FALSE))
@@ -395,7 +395,7 @@
 /datum/wound/proc/handle_germs()
 	if(strikes_to_lose_limb <= 0)
 		if(prob(1))
-			victim.visible_message("<span class='danger'>The infection on the remnants of [victim]'s [limb.name] shift and bubble nauseatingly!</span>", "<span class='userdanger'>I can feel the infection on the remnants of your [limb.name] coursing through my veins!</span>")
+			victim.visible_message("<span class='danger'>The infection on the remnants of <b>[victim]</b>'s [limb.name] shift and bubble nauseatingly!</span>", "<span class='userdanger'>I can feel the infection on the remnants of your [limb.name] coursing through my veins!</span>")
 		disabling = TRUE
 		return
 	
@@ -486,7 +486,7 @@
 			blood_flow = round(blood_flow/2, 0.1)
 			blood_time = round(blood_time/2, 0.1)
 			if(victim)
-				victim.visible_message("<span class='notice'>The [lowertext(src.name)] on [victim]'s [limb.name] seems to be bleeding considerably less.</span>")
+				victim.visible_message("<span class='notice'>The [lowertext(src.name)] on <b>[victim]</b>'s [limb.name] seems to be bleeding considerably less.</span>")
 	else if((severity == WOUND_SEVERITY_SEVERE) && (quantity >= 30))
 		if(prob(25))
 			remove_wound()
@@ -494,16 +494,16 @@
 			blood_flow = round(blood_flow/2, 0.1)
 			blood_time = round(blood_time/2, 0.1)
 			if(victim)
-				victim.visible_message("<span class='notice'>The [lowertext(src.name)] on [victim]'s [limb.name] seems to be bleeding considerably less.</span>")
+				victim.visible_message("<span class='notice'>The [lowertext(src.name)] on <b>[victim]</b>'s [limb.name] seems to be bleeding considerably less.</span>")
 	else if(quantity >= 5)
 		blood_flow = max(round(blood_flow - (initial(blood_flow)/5), 0.1), 0)
 		blood_time = max(round(blood_time - (initial(blood_time)/5), 0.1), 0)
 		if(victim)
-			victim.visible_message("<span class='notice'>The [lowertext(src.name)] on [victim]'s [limb.name] seems to be significantly eased.</span>")
+			victim.visible_message("<span class='notice'>The [lowertext(src.name)] on <b>[victim]</b>'s [limb.name] seems to be significantly eased.</span>")
 	if(quantity >= 10)
 		germ_level = max(round(germ_level - WOUND_INFECTION_MODERATE, 0.1), 0)
 		if(victim)
-			victim.visible_message("<span class='notice'>The [lowertext(src.name)] on [victim]'s [limb] seems significantly cleaner.</span>")
+			victim.visible_message("<span class='notice'>The [lowertext(src.name)] on <b>[victim]</b>'s [limb] seems significantly cleaner.</span>")
 
 /// Used when put on a stasis bed
 /datum/wound/proc/on_stasis()
@@ -617,16 +617,16 @@
 		to_chat(user, "<span class='notice'>[I] is still recharging!</span>")
 		return
 	if(germ_level <= WOUND_INFECTION_SANITIZATION_RATE || germ_level < sanitization)
-		to_chat(user, "<span class='notice'>There's no infection to treat on [victim]'s [limb.name]!</span>")
+		to_chat(user, "<span class='notice'>There's no infection to treat on <b>[victim]</b>'s [limb.name]!</span>")
 		return
 
-	user.visible_message("<span class='notice'>[user] flashes the infection on [victim]'s [limb] with [I].</span>", "<span class='notice'>You flash the infection on [user == victim ? "your" : "[victim]'s"] [limb.name] with [I].</span>", vision_distance=COMBAT_MESSAGE_RANGE)
+	user.visible_message("<span class='notice'><b>[user]</b> flashes the infection on <b>[victim]</b>'s [limb] with [I].</span>", "<span class='notice'>You flash the infection on [user == victim ? "your" : "<b>[victim]</b>'s"] [limb.name] with [I].</span>", vision_distance=COMBAT_MESSAGE_RANGE)
 	sanitization += I.uv_power
 	I.uv_cooldown = world.time + I.uv_cooldown_length
 
 /// If someone is using mesh on our infection
 /datum/wound/proc/mesh(obj/item/stack/medical/mesh/I, mob/user)
-	user.visible_message("<span class='notice'>[user] begins wrapping [victim]'s [limb.name] with [I]...</span>", "<span class='notice'>You begin wrapping [user == victim ? "your" : "[victim]'s"] [limb.name] with [I]...</span>")
+	user.visible_message("<span class='notice'><b>[user]</b> begins wrapping <b>[victim]</b>'s [limb.name] with [I]...</span>", "<span class='notice'>You begin wrapping [user == victim ? "your" : "<b>[victim]</b>'s"] [limb.name] with [I]...</span>")
 	var/time_mod =  1
 	//Medical skill affects the speed of the do_mob
 	if(user.mind)
@@ -640,17 +640,17 @@
 		return
 	
 	limb.heal_damage(I.heal_brute, I.heal_burn, 0, FALSE, FALSE)
-	user.visible_message("<span class='green'>[user] applies [I] to [victim].</span>", "<span class='green'>You apply [I] to [user == victim ? "your" : "[victim]'s"] [limb.name].</span>")
+	user.visible_message("<span class='green'><b>[user]</b> applies [I] to <b>[victim]</b>.</span>", "<span class='green'>You apply [I] to [user == victim ? "your" : "<b>[victim]</b>'s"] [limb.name].</span>")
 	sanitization += I.sanitization * WOUND_SANITIZATION_STERILIZER
 
 	if(sanitization >= germ_level)
-		to_chat(user, "<span class='notice'>You've done all you can with [I], now you must wait for the infection on [victim]'s [limb.name] to go away.</span>")
+		to_chat(user, "<span class='notice'>You've done all you can with [I], now you must wait for the infection on <b>[victim]</b>'s [limb.name] to go away.</span>")
 	else
 		try_treating(I, user)
 
 /// If someone is using ointment on our infection
 /datum/wound/proc/ointment(obj/item/stack/medical/ointment/I, mob/user)
-	user.visible_message("<span class='notice'>[user] begins applying [I] to [victim]'s [limb.name]...</span>", "<span class='notice'>You begin applying [I] to [user == victim ? "your" : "[victim]'s"] [limb.name]...</span>")
+	user.visible_message("<span class='notice'><b>[user]</b> begins applying [I] to <b>[victim]</b>'s [limb.name]...</span>", "<span class='notice'>You begin applying [I] to [user == victim ? "your" : "<b>[victim]</b>'s"] [limb.name]...</span>")
 	var/time_mod = 1
 	//Medical skill affects the speed of the do_mob
 	if(user.mind)
@@ -664,10 +664,10 @@
 		return
 	
 	limb.heal_damage(I.heal_brute, I.heal_burn, 0, FALSE, FALSE)
-	user.visible_message("<span class='green'>[user] applies [I] to [victim].</span>", "<span class='green'>You apply [I] to [user == victim ? "your" : "[victim]'s"] [limb.name].</span>")
+	user.visible_message("<span class='green'><b>[user]</b> applies [I] to <b>[victim]</b>.</span>", "<span class='green'>You apply [I] to [user == victim ? "your" : "<b>[victim]</b>'s"] [limb.name].</span>")
 	sanitization += I.sanitization * WOUND_SANITIZATION_STERILIZER
 
 	if((germ_level <= 0 || sanitization >= germ_level))
-		to_chat(user, "<span class='notice'>You've done all you can with [I], now you must wait for the infection on [victim]'s [limb.name] to go away.</span>")
+		to_chat(user, "<span class='notice'>You've done all you can with [I], now you must wait for the infection on <b>[victim]</b>'s [limb.name] to go away.</span>")
 	else
 		try_treating(I, user)
