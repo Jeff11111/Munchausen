@@ -91,7 +91,7 @@
 		if(W.blood_flow)
 			open_wound = TRUE
 	for(var/datum/injury/IN in limb.injuries)
-		if(IN.damage_type in list(WOUND_SLASH, WOUND_PIERCE) && IN.damage && !IN.is_treated())
+		if(IN.is_bleeding())
 			open_wound = TRUE
 	if((open_wound && !(victim.stat >= DEAD) && !(victim.pulse() < PULSE_NORM) && !(victim.blood_volume <= blood_flow) && (blood_flow >= 1)) || force)
 		playsound(victim, sound_effect, 75, 0)
