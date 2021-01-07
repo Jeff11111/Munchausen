@@ -215,8 +215,8 @@
 	treat_text = "Recommended wrenching of the affected limb, though manual synchronization by applying an aggressive grab to the patient and helpfully interacting with afflicted limb may suffice.  Use of synthetic healing chemicals may also help."
 	examine_desc = "has visibly disconnected rotors"
 	occur_text = "snaps and becomes unseated"
-	severity = ALL_BODYPARTS_MINUS_EYES
-	viable_zones = ALL_BODYPARTS
+	severity = WOUND_SEVERITY_MODERATE
+	viable_zones = ALL_BODYPARTS_MINUS_EYES
 	interaction_efficiency_penalty = 1.5
 	limp_slowdown = 3
 	threshold_minimum = 35
