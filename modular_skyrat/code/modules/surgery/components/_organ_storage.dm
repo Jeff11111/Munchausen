@@ -35,7 +35,7 @@
 	. = FALSE
 	if(bodypart_affected)
 		var/how_open = bodypart_affected.how_open()
-		if((bodypart_affected.encased && CHECK_BITFIELD(how_open, SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_BROKEN)) || (!bodypart_affected.encased && CHECK_BITFIELD(how_open, SURGERY_INCISED | SURGERY_RETRACTED)))
+		if((bodypart_affected.encased && CHECK_MULTIPLE_BITFIELDS(how_open, SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_BROKEN)) || (!bodypart_affected.encased && CHECK_MULTIPLE_BITFIELDS(how_open, SURGERY_INCISED | SURGERY_RETRACTED)))
 			return TRUE
 	else
 		return TRUE

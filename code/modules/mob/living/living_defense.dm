@@ -1,4 +1,3 @@
-//skyrat edit pretty much the whole proc is different
 /mob/living/proc/run_armor_check(def_zone = null, attack_flag = "melee", absorb_text = null, soften_text = null, armour_penetration, penetrated_text, silent=FALSE)
 	var/armor = getarmor(def_zone, attack_flag)
 	
@@ -28,7 +27,6 @@
 		else
 			to_chat(src, "<span class='warning'>Your armor softens the blow!</span>")
 	return armor
-//
 
 /mob/living/proc/getarmor(def_zone, type)
 	return 0

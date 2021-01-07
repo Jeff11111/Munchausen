@@ -783,7 +783,7 @@
 				var/obj/item/organ/heart/they_heart = C.getorganslot(ORGAN_SLOT_HEART)
 				var/obj/item/bodypart/chest/they_chest = C.get_bodypart(BODY_ZONE_CHEST)
 				var/heart_exposed_mod = 0
-				if(CHECK_BITFIELD(they_chest.how_open(), SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_BROKEN) && istype(they_heart))
+				if(CHECK_MULTIPLE_BITFIELDS(they_chest.how_open(), SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_BROKEN) && istype(they_heart))
 					heart_exposed_mod = 10
 					visible_message("<b>[src]</b> massages <b>[C.name]</b>'s [they_heart]!", \
 								"<span class='notice'>You massage <b>[C.name]</b>'s [they_heart].</span>")

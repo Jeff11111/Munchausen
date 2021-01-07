@@ -332,7 +332,7 @@
 
 
 	if(blood_DNA && !istype(src, /obj/effect/decal))
-		override[EXAMINE_POSITION_BEFORE] = " <span class='red'>blood-stained</span> "
+		override[EXAMINE_POSITION_BEFORE] = " <span class='danger'><b>blood-stained</b></span> "
 		should_override = TRUE
 
 	if(should_override)

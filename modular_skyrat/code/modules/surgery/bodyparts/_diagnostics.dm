@@ -43,7 +43,7 @@
 			injury_descriptors[this_injury_desc] = IN.amount
 	
 	if(!is_robotic_limb())
-		if(CHECK_BITFIELD(how_open(), SURGERY_INCISED | SURGERY_RETRACTED))
+		if(CHECK_MULTIPLE_BITFIELDS(how_open(), SURGERY_INCISED | SURGERY_RETRACTED))
 			var/bone = encased ? encased : "bone"
 			if(is_broken())
 				bone = "broken [bone]"

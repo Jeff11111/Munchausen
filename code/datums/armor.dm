@@ -17,9 +17,7 @@
 	var/fire
 	var/acid
 	var/magic
-	//skyrat edit
 	var/wound
-	//
 
 /datum/armor/New(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0, fire = 0, acid = 0, magic = 0, wound = 0) //skyrat edit
 	src.melee = melee
@@ -32,9 +30,7 @@
 	src.fire = fire
 	src.acid = acid
 	src.magic = magic
-	//skyrat edit
 	src.wound = wound
-	//
 	tag = ARMORID
 
 /datum/armor/proc/modifyRating(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0, fire = 0, acid = 0, magic = 0, wound = 0) //skyrat edit
@@ -53,10 +49,8 @@
 					(isnull(rad) ? src.rad : rad),\
 					(isnull(fire) ? src.fire : fire),\
 					(isnull(acid) ? src.acid : acid),\
-					//skyrat edit
 					(isnull(magic) ? src.magic : magic),\
 					(isnull(wound) ? src.wound : wound))
-					//
 
 /datum/armor/proc/getRating(rating)
 	return vars[rating]

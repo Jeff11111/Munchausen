@@ -99,7 +99,6 @@
 		return
 	
 	var/melee_armor = victim.getarmor(body_zone, "melee")
-	
 	if(INTERACTING_WITH(user, victim))
 		return
 
