@@ -2031,13 +2031,13 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	var/armor_block = H.run_armor_check(affecting, "melee", "<span class='notice'>Your armor has protected your [parse_zone(hit_area)].</span>", "<span class='notice'>Your armor has softened a hit to your [parse_zone(hit_area)].</span>",I.armour_penetration)
 	var/Iforce = I.force //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
 
-	armor_block = min(95,armor_block)
+	armor_block = min(95, armor_block)
 	var/Iwound_bonus = I.wound_bonus
 
 	var/weakness = H.check_weakness(I, user)
 	
 	//Damage moment
-	apply_damage(totitemdamage * weakness, I.damtype, hit_area, armor_block, H, wound_bonus = Iwound_bonus, bare_wound_bonus = I.bare_wound_bonus, sharpness = I.get_sharpness()) //CIT CHANGE - replaces I.force with totitemdamage //skyrat edit
+	apply_damage(totitemdamage * weakness, I.damtype, hit_area, armor_block, H, wound_bonus = Iwound_bonus, bare_wound_bonus = I.bare_wound_bonus, sharpness = I.get_sharpness())
 
 	//How the fuck does this work?
 	I.do_stagger_action(H, user, totitemdamage)
@@ -2312,72 +2312,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 					"<span class='danger'>I drop \the [target_held_item]!!</span>", null, COMBAT_MESSAGE_RANGE)
 				append_message += ", causing them to drop [target_held_item]"
 		log_combat(user, target, "shoved", append_message)
-
-/*****moved to modular_skyrat
-/datum/species/proc/apply_damage(damage, damagetype = BRUTE, def_zone = null, blocked, mob/living/carbon/human/H, forced = FALSE, spread_damage = FALSE)
-	SEND_SIGNAL(src, COMSIG_MOB_APPLY_DAMGE, damage, damagetype, def_zone)
-	var/hit_percent = (100-(blocked+armor))/100
-	hit_percent = (hit_percent * (100-H.physiology.damage_resistance))/100
-	if(!forced && hit_percent <= 0)
-		return 0
-
-	var/obj/item/bodypart/BP = null
-	if(!spread_damage)
-		if(isbodypart(def_zone))
-			if(damagetype == STAMINA && istype(def_zone, /obj/item/bodypart/head))
-				BP = H.get_bodypart(check_zone(BODY_ZONE_CHEST))
-			else
-				BP = def_zone
-		else
-			if(!def_zone)
-				def_zone = ran_zone(def_zone)
-			if(damagetype == STAMINA && def_zone == BODY_ZONE_HEAD)
-				def_zone = BODY_ZONE_CHEST
-			BP = H.get_bodypart(check_zone(def_zone))
-		if(!BP)
-			BP = H.bodyparts[1]
-
-	switch(damagetype)
-		if(BRUTE)
-			H.damageoverlaytemp = 20
-			var/damage_amount = forced ? damage : damage * hit_percent * brutemod * H.physiology.brute_mod
-			if(BP)
-				if(damage > 0 ? BP.receive_damage(damage_amount, 0) : BP.heal_damage(abs(damage_amount), 0))
-					H.update_damage_overlays()
-					if(HAS_TRAIT(H, TRAIT_MASO) && prob(damage_amount))
-						H.mob_climax(forced_climax=TRUE)
-
-			else//no bodypart, we deal damage with a more general method.
-				H.adjustBruteLoss(damage_amount)
-		if(BURN)
-			H.damageoverlaytemp = 20
-			var/damage_amount = forced ? damage : damage * hit_percent * burnmod * H.physiology.burn_mod
-			if(BP)
-				if(damage > 0 ? BP.receive_damage(0, damage_amount) : BP.heal_damage(0, abs(damage_amount)))
-					H.update_damage_overlays()
-			else
-				H.adjustFireLoss(damage_amount)
-		if(TOX)
-			var/damage_amount = forced ? damage : damage * hit_percent * H.physiology.tox_mod
-			H.adjustToxLoss(damage_amount)
-		if(OXY)
-			var/damage_amount = forced ? damage : damage * hit_percent * H.physiology.oxy_mod
-			H.adjustOxyLoss(damage_amount)
-		if(CLONE)
-			var/damage_amount = forced ? damage : damage * hit_percent * H.physiology.clone_mod
-			H.adjustCloneLoss(damage_amount)
-		if(STAMINA)
-			var/damage_amount = forced ? damage : damage * hit_percent * H.physiology.stamina_mod
-			if(BP)
-				if(damage > 0 ? BP.receive_damage(0, 0, damage_amount) : BP.heal_damage(0, 0, abs(damage * hit_percent * H.physiology.stamina_mod), only_robotic = FALSE, only_organic = FALSE))
-					H.update_stamina()
-			else
-				H.adjustStaminaLoss(damage_amount)
-		if(BRAIN)
-			var/damage_amount = forced ? damage : damage * hit_percent * H.physiology.brain_mod
-			H.adjustBrainLoss(damage_amount)
-	return 1
-*/
 
 /datum/species/proc/on_hit(obj/item/projectile/P, mob/living/carbon/human/H)
 	// called when hit by a projectile

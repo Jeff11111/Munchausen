@@ -75,20 +75,16 @@
 	icon_state = "executioners_sword"
 	item_state = "executioners_sword"
 	sharpness = SHARP_EDGED
-	var/delimb_chance = 15
+	var/delimb_chance = 20
 	var/armorthreshold = 25
 	click_delay = CLICK_CD_MELEE * 2.5
 
 /obj/item/melee/sword/executioner/melee_attack_chain(mob/user, atom/target, params, flags, damage_multiplier = 1)
-	..()
-	var/def_zone = user.zone_selected
-	if(iscarbon(target))
+	. = ..()
+	if(. && iscarbon(target))
 		var/mob/living/carbon/C = target
 		var/obj/item/bodypart/BP = C.get_bodypart(check_zone(user.zone_selected))
 		if(!istype(BP))
-			return
-		if((C.getarmor(def_zone, "melee") >= armorthreshold) || (def_zone in list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN)))
-			user.changeNext_move(CLICK_CD_MELEE * 2)
 			return
 		if(prob(delimb_chance))
 			BP.dismember(BRUTE)
