@@ -185,4 +185,4 @@
 #define ui_ghost_reenter_corpse "SOUTH,CENTER+1"
 #define ui_ghost_teleport "SOUTH,CENTER+2"
 #define ui_ghost_spawners "SOUTH,CENTER+3"
-#define ui_ghost_eventsignup "NORTH-2, WEST"
+#define ui_ghost_eventsignup "NORTH-1, WEST"
