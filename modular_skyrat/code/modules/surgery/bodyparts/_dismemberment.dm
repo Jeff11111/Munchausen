@@ -1,6 +1,6 @@
 //Check if the limb is stumpable
 /obj/item/bodypart/proc/can_stump(obj/item/I)
-	if(owner && (CHECK_BITFIELD(limb_flags, BODYPART_CAN_STUMP)))
+	if(CHECK_BITFIELD(limb_flags, BODYPART_CAN_STUMP))
 		return TRUE
 
 //Check if the limb is dismemberable
@@ -118,18 +118,17 @@
 		stump.miss_entirely_prob = miss_entirely_prob
 		stump.zone_prob = zone_prob
 		stump.extra_zone_prob = extra_zone_prob
-		stump.attach_limb(C, FALSE, FALSE)
 		stump.max_damage = max_damage
 		stump.max_tox_damage = max_tox_damage
 		stump.max_pain_damage = max_pain_damage
 		stump.status = status
 		stump.limb_flags = limb_flags
 		stump.animal_origin = animal_origin
+		stump.attach_limb(C, FALSE, FALSE)
 		var/datum/wound/artery/artery = new()
 		artery.apply_wound(stump, TRUE)
 		var/datum/injury/ouchie = stump.create_injury(wounding_type, stump.max_damage / 2, FALSE, TRUE)
 		ouchie.apply_injury(stump.max_damage / 2, stump)
-		stump.attach_limb(C)
 	
 	update_icon_dropped()
 	if(destroyed)
