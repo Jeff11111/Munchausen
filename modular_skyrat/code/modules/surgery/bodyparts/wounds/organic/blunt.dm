@@ -853,6 +853,8 @@
 		gel(I, user)
 	else if(istype(I, /obj/item/stack/sticky_tape/surgical))
 		tape(I, user)
+	else if(I.tool_behaviour == TOOL_BONESET)
+		treat(I, user)
 
 /datum/wound/blunt/get_scanner_description(mob/user)
 	. = ..()
