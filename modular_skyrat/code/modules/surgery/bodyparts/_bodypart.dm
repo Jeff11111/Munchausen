@@ -520,10 +520,10 @@
 	if(W.get_sharpness() && (user.a_intent == INTENT_HARM))
 		add_fingerprint(user)
 		if(!contents.len)
-			user.visible_message("<span class='warning'>[user] begins to butcher [src].</span>",\
+			user.visible_message("<span class='warning'><b>[user]</b> begins to butcher [src].</span>",\
 				"<span class='notice'>You begin butchering [src]...</span>")
 			if(do_after(user, 54, target = src))
-				user.visible_message("<span class='warning'>[user] butchers [src] into giblets!</span>",\
+				user.visible_message("<span class='warning'><b>[user]</b> butchers [src] into giblets!</span>",\
 					"<span class='warning'>You butcher [src] into giblets!</span>")
 				new /obj/item/reagent_containers/food/snacks/meat/slab/human(get_turf(src))
 				new /obj/item/reagent_containers/food/snacks/meat/slab/human(get_turf(src))
@@ -532,7 +532,7 @@
 				return qdel(src)
 			return
 		playsound(loc, 'sound/weapons/slice.ogg', 50, 1, -1)
-		user.visible_message("<span class='warning'>[user] begins to cut open [src].</span>",\
+		user.visible_message("<span class='warning'><b>[user]</b> begins to cut open [src].</span>",\
 			"<span class='notice'>You begin to cut open [src]...</span>")
 		if(do_after(user, 5 SECONDS, target = src))
 			drop_organs(user)
@@ -541,7 +541,7 @@
 		if(badboy)
 			badboy = strip_html_simple(badboy)
 			etching = "<b>[badboy]</b>"
-			user.visible_message("<span class='notice'>[user] etches something on \the [src] with \the [W].</span>", " <span class='notice'>You etch \"[badboy]\" on [src] with \the [W]. Hehe.</span>")
+			user.visible_message("<span class='notice'><b>[user]</b> etches something on \the [src] with \the [W].</span>", " <span class='notice'>You etch \"[badboy]\" on [src] with \the [W]. Hehe.</span>")
 		else
 			return ..()
 	else

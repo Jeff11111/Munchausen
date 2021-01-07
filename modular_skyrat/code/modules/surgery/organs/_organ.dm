@@ -375,16 +375,16 @@
 		if(badboy)
 			badboy = strip_html_simple(badboy)
 			etching = "[badboy]"
-			user.visible_message("<span class='notice'>[user] etches something on \the [src] with \the [I].</span>", \
+			user.visible_message("<span class='notice'><b>[user]</b> etches something on \the [src] with \the [I].</span>", \
 					" <span class='notice'>You etch <b>\"[badboy]\"</b> on [src] with \the [I]. Hehe.</span>")
 			return TRUE		
 		else
 			return ..()
 	else if(!owner && I.get_sharpness() && (user.a_intent == INTENT_HARM))
-		user.visible_message("<span class='warning'>[user] begins to butcher [src].</span>",\
+		user.visible_message("<span class='warning'><b>[user]</b> begins to butcher [src].</span>",\
 			"<span class='notice'>You begin butchering [src]...</span>")
 		if(do_after(user, 54, target = src))
-			user.visible_message("<span class='warning'>[user] butchers [src] into giblets!</span>",\
+			user.visible_message("<span class='warning'><b>[user]</b> butchers [src] into giblets!</span>",\
 				"<span class='warning'>You butcher [src] into giblets!</span>")
 			new /obj/item/reagent_containers/food/snacks/meat/slab/human(get_turf(src))
 			if(prob(50))
@@ -392,21 +392,21 @@
 			qdel(src)
 			return TRUE
 	else if(owner && I.get_sharpness() && !CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
-		user.visible_message("<span class='notice'>[user] starts severing \the [src] from \the [owner]...</span>", \
+		user.visible_message("<span class='notice'><b>[user]</b> starts severing \the [src] from \the [owner]...</span>", \
 						"<span class='notice'>I start severing \the [src] from \the [owner]...</span>")
 		var/heymedic = GET_SKILL_LEVEL(user, surgery)
 		if(!do_mob(user, owner, 3 SECONDS - (heymedic/MAX_SKILL)))
 			to_chat(user, "<span class='warning'>I must stand still!</span>")
 			return TRUE
-		user.visible_message("<span class='notice'>[user] severs \the [src] away safely.</span>", \
+		user.visible_message("<span class='notice'><b>[user]</b> severs \the [src] away safely.</span>", \
 						"<span class='notice'>I sever \the [src] away safely.</span>")
 		organ_flags |= ORGAN_CUT_AWAY
 		return TRUE
 	else if(owner && (istype(I, /obj/item/stack/medical/suture) || istype(I, /obj/item/stack/medical/fixovein)) && !is_robotic())
 		var/obj/item/stack/medical/bingus = I
 		if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
-			user.visible_message("<span class='notice'>[user] starts stitching \the [src] on \the [owner]...</span>", \
-						"<span class='notice'>You start stitching \the [src] on \the [owner]...</span>")
+			user.visible_message("<span class='notice'><b>[user]</b> starts stitching \the [src] on \the <b>[owner]</b>...</span>", \
+						"<span class='notice'>You start stitching \the [src] on \the <b>[owner]</b>...</span>")
 			var/heymedic = GET_SKILL_LEVEL(user, surgery)
 			if(!do_mob(user, owner, 3 SECONDS - (heymedic/MAX_SKILL)))
 				to_chat(user, "<span class='warning'>I must stand still!</span>")
@@ -414,14 +414,14 @@
 			if(!bingus.use(2))
 				to_chat(user, "<span class='warning'>I don't have enough to stitch \the [src]!</span>")
 				return TRUE
-			user.visible_message("<span class='notice'>[user] stitches \the [src] safely on \the [owner].</span>", \
-							"<span class='notice'>I stitch \the [src] safely on \the [owner].</span>")
+			user.visible_message("<span class='notice'><b>[user]</b> stitches \the [src] safely on \the <b>[owner]</b>.</span>", \
+							"<span class='notice'>I stitch \the [src] safely on \the <b>[owner]</b>.</span>")
 			organ_flags &= ~ORGAN_CUT_AWAY
 		else
 			if((is_dead() || is_broken()) && !istype(src, /obj/item/organ/brain))
 				to_chat(user, "<span class='warning'>\The [src] is unsalvageable! I can't heal it!</span>")
 				return TRUE
-			user.visible_message("<span class='notice'>[user] starts stitching \the [src]...</span>", \
+			user.visible_message("<span class='notice'><b>[user]</b> starts stitching \the [src]...</span>", \
 						"<span class='notice'>You start stitching \the [src]...</span>")
 			var/heymedic = GET_SKILL_LEVEL(user, surgery)
 			if(!do_mob(user, owner, 3 SECONDS - (heymedic/MAX_SKILL)))
@@ -430,7 +430,7 @@
 			if(!bingus.use(1))
 				to_chat(user, "<span class='warning'>I don't have enough to heal \the [src]!</span>")
 				return TRUE
-			user.visible_message("<span class='notice'>[user] stitches \the [src] safely.</span>", \
+			user.visible_message("<span class='notice'><b>[user]</b> stitches \the [src] safely.</span>", \
 							"<span class='notice'>I stitch \the [src] safely.</span>")
 			applyOrganDamage(-min(50, maxHealth/2))
 			if(istype(src, /obj/item/organ/brain) && owner)
@@ -438,14 +438,14 @@
 		return TRUE
 	else if(owner && (I.tool_behaviour == TOOL_SCREWDRIVER) && is_robotic())
 		if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
-			user.visible_message("<span class='notice'>[user] starts screwing \the [src] on \the [owner]...</span>", \
-						"<span class='notice'>You start screwing \the [src] on \the [owner]...</span>")
+			user.visible_message("<span class='notice'><b>[user]</b> starts screwing \the [src] on \the <b>[owner]</b>...</span>", \
+						"<span class='notice'>You start screwing \the [src] on \the <b>[owner]</b>...</span>")
 			var/heymedic = GET_SKILL_LEVEL(user, electronics)
 			if(!do_mob(user, owner, 3 SECONDS - (heymedic/MAX_SKILL)))
 				to_chat(user, "<span class='warning'>I must stand still!</span>")
 				return TRUE
-			user.visible_message("<span class='notice'>[user] screws \the [src] safely on \the [owner].</span>", \
-							"<span class='notice'>I screw \the [src] safely on \the [owner].</span>")
+			user.visible_message("<span class='notice'><b>[user]</b> screws \the [src] safely on \the <b>[owner]</b>.</span>", \
+							"<span class='notice'>I screw \the [src] safely on \the <b>[owner]</b>.</span>")
 			organ_flags &= ~ORGAN_CUT_AWAY
 			return TRUE
 	else if(owner && I.tool_behaviour == TOOL_WELDER && is_robotic())
@@ -455,7 +455,7 @@
 		if((is_dead() || is_broken()) && !istype(src, /obj/item/organ/brain))
 			to_chat(user, "<span class='warning'>\The [src] is unsalvageable! I can't heal it!</span>")
 			return TRUE
-		user.visible_message("<span class='notice'>[user] starts welding \the [src]...</span>", \
+		user.visible_message("<span class='notice'><b>[user]</b> starts welding \the [src]...</span>", \
 					"<span class='notice'>You start welding \the [src]...</span>")
 		var/heymedic = GET_SKILL_LEVEL(user, electronics)
 		if(!do_mob(user, owner, 3 SECONDS - (heymedic/MAX_SKILL)))
@@ -464,22 +464,24 @@
 		if(!welder.use(2))
 			to_chat(user, "<span class='warning'>I don't have enough fuel to heal \the [src]!</span>")
 			return TRUE
-		user.visible_message("<span class='notice'>[user] welds \the [src] safely.</span>", \
+		user.visible_message("<span class='notice'><b>[user]</b> welds \the [src] safely.</span>", \
 						"<span class='notice'>I weld \the [src] safely.</span>")
 		applyOrganDamage(-min(50, maxHealth/2))
+		if(istype(src, /obj/item/organ/brain) && owner)
+			owner.cure_all_traumas(TRAUMA_RESILIENCE_LOBOTOMY)
 		return TRUE
 	else if(owner && I.is_drainable() && !is_robotic())
 		if(!germ_level)
 			return
 		if(I.reagents.remove_reagent(/datum/reagent/medicine/synthflesh, 20))
-			user.visible_message("<span class='notice'>[user] heals \the [src] with \the [I].</span>", \
+			user.visible_message("<span class='notice'><b>[user]</b> heals \the [src] with \the [I].</span>", \
 				"<span class='notice'>I heal \the [src] with \the [I].</span>")
 			applyOrganDamage(-min(50, maxHealth/2))
 		else if(I.reagents.remove_reagent(/datum/reagent/medicine/spaceacillin, 10) \
 			|| I.reagents.remove_reagent(/datum/reagent/medicine/nalidixic_acid, 15) \
 			|| I.reagents.remove_reagent(/datum/reagent/space_cleaner/sterilizine, 20) \
 			|| I.reagents.remove_reagent(/datum/reagent/space_cleaner, 40))
-			user.visible_message("<span class='notice'>[user] disinfects \the [src] with \the [I].</span>", \
+			user.visible_message("<span class='notice'><b>[user]</b> disinfects \the [src] with \the [I].</span>", \
 				"<span class='notice'>I disinfect \the [src] with \the [I].</span>")
 			applyOrganDamage(-10)
 			janitize(-WOUND_SANITIZATION_STERILIZER)
