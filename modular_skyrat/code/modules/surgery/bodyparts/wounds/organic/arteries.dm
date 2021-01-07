@@ -93,7 +93,7 @@
 	for(var/datum/injury/IN in limb.injuries)
 		if(IN.is_bleeding())
 			open_wound = TRUE
-	if((open_wound && !(victim.stat >= DEAD) && !(victim.pulse() < PULSE_NORM) && !(victim.blood_volume <= blood_flow) && (blood_flow >= 1)) || force)
+	if((open_wound && (victim.stat < DEAD) && (victim.pulse() > PULSE_NORM) && (victim.blood_volume >= blood_flow) && (blood_flow >= 1)) || force)
 		playsound(victim, sound_effect, 75, 0)
 		victim.bleed(blood_flow * bleed_mod, FALSE)
 		victim.visible_message("<span class='danger'><b>[victim]</b>'s [limb.name]'s [limb.artery_name] squirts blood!</span>", \
@@ -109,7 +109,7 @@
 		return cum_less(bleed_mod, open_wound)
 
 /datum/wound/artery/proc/cum_less(bleed_mod = 1, open_wound = TRUE)
-	//just bleed without being dramatic
+	//just bleed without being *too* dramatic
 	if(open_wound)
 		victim.bleed(blood_flow * bleed_mod)
 	else
