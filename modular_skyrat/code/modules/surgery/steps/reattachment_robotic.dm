@@ -7,7 +7,7 @@
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	possible_locs = ALL_BODYPARTS
 	requires_bodypart = TRUE
-	requires_bodypart_type = BODYPART_ORGANIC
+	requires_bodypart_type = BODYPART_ROBOTIC
 	surgery_flags = 0
 
 /datum/surgery_step/mechanic_sew_limb/validate_target(mob/living/target, mob/user)
