@@ -214,7 +214,7 @@
 		msg += ", <span class='notice'>and appears to be reforming itself under some surgical tape</span>"
 	else if(gelled)
 		msg += ", <span class='notice'>with fizzing flecks of blue bone gel sparking off the bone</span>"
-	return "<B>[msg]!</B>"
+	return "<span class='danger'><B>[msg]!</B></span>"
 
 /*
 	New common procs for /datum/wound/blunt/
