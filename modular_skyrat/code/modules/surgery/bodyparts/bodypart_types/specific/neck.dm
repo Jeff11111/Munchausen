@@ -40,7 +40,7 @@
 			return
 	else
 		. = list()
-		. |= mutable_appearance(icon, initial(icon_state), -BODYPARTS_LAYER, color = src.color
+		. |= mutable_appearance(icon, initial(icon_state), -BODYPARTS_LAYER, color = src.color)
 
 /obj/item/bodypart/neck/update_icon_dropped()
 	if(locate(/obj/item/bodypart/head) in src)
