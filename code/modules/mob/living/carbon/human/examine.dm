@@ -631,8 +631,8 @@
 		if(BP.is_dead())
 			damaged_bodypart_text += "<span class='deadsay'><B>[t_His] [BP.name] is completely necrotic!</B></span>"
 		var/obj/item/hidden
-		for(var/obj/item/I in clothing_items)
-			if(I && (I.body_parts_covered & BP.body_part))
+		for(var/obj/item/clothing/I in clothing_items)
+			if(I && CHECK_BITFIELD(I.body_parts_covered, BP.body_part) && (CHECK_BITFIELD(I.clothing_flags, THICKMATERIAL)))
 				hidden = I
 				break
 		for(var/datum/wound/W in BP.wounds)
