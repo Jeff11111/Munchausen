@@ -148,7 +148,7 @@
 					var/datum/injury/IN = ouchie
 					if(!IN.is_bleeding())
 						continue
-					BP.seep_gauze(BP.current_gauze.absorption_rate * (IN.get_bleed_rate() * 0.75))
+					BP.seep_gauze(BP.current_gauze.absorption_rate * IN.get_bleed_rate())
 		bleed(temp_bleed)
 
 //Makes a blood drop, leaking amt units of blood from the mob
