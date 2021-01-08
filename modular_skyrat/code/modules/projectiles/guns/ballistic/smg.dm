@@ -49,6 +49,7 @@
 	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/smg_lefthand.dmi'
 	icon_state = "p90"
 	item_state = "p90"
+	generic_magazine_overlays = TRUE
 
 /obj/item/gun/ballistic/automatic/m90/build_magazine_overlay()
 	. = mutable_appearance(icon, "[initial(icon_state)]-[generic_magazine_overlays ? "mag" : initial(magazine.icon_state)][magazine.ammo_count() ? "30" : "0"]")
