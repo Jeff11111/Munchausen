@@ -12,8 +12,7 @@ GENETICS SCANNER
 */
 #define SCANMODE_HEALTH 0
 #define SCANMODE_CHEMICAL 1
-#define SCANMODE_WOUND 2
-#define SCANMODE_PAIN 3
+#define SCANMODE_PAIN 2
 #define SCANNER_CONDENSED 0
 #define SCANNER_VERBOSE 1
 
@@ -96,7 +95,7 @@ GENETICS SCANNER
 
 //I had to edit this shit as a whole because this is piss
 /obj/item/healthanalyzer/attack_self(mob/user)
-	var/list/scam_list = list("Physical health" = SCANMODE_HEALTH, "Chemicals" = SCANMODE_CHEMICAL, "Wounds" = SCANMODE_WOUND, "Wellbeing" = SCANMODE_PAIN)
+	var/list/scam_list = list("Physical health" = SCANMODE_HEALTH, "Chemicals" = SCANMODE_CHEMICAL, "Wellbeing" = SCANMODE_PAIN)
 	var/scam = input(user, "What health analyzer mode do you wish to use?", "[capitalize(src.name)]") as anything in scam_list
 	scanmode = scam_list[scam]
 	switch(scanmode)
@@ -104,8 +103,6 @@ GENETICS SCANNER
 			to_chat(user, "<span class='notice'>You switch the health analyzer to check physical health.</span>")
 		if(SCANMODE_CHEMICAL)
 			to_chat(user, "<span class='notice'>You switch the health analyzer to scan chemical contents.</span>")
-		if(SCANMODE_WOUND)
-			to_chat(user, "<span class='notice'>You switch the health analyzer to report extra info on wounds.</span>")
 		if(SCANMODE_PAIN)
 			to_chat(user, "<span class='notice'>You switch the health analyzer to report extra info on patient wellbeing.</span>")
 
@@ -128,8 +125,6 @@ GENETICS SCANNER
 		healthscan(user, M, mode, advanced)
 	else if(scanmode == SCANMODE_CHEMICAL)
 		chemscan(user, M)
-	else if(scanmode == SCANMODE_WOUND)
-		woundscan(user, M, src)
 	else if(scanmode == SCANMODE_PAIN)
 		painscan(user, M, advanced)
 
@@ -409,9 +404,7 @@ GENETICS SCANNER
 			if(O.germ_level || O.is_dead())
 				msg += "<span class='green'>Subject has an infected organ. Perform a wellbeing scan for more information.</span>\n"
 				break
-		if(length(C.all_wounds))
-			msg += "<span class='danger'>Physical trauma[LAZYLEN(C.all_wounds) > 1? "s" : ""] detected. Perform first aid scan for more information.</span>\n"
-
+	
 	// Time of death
 	if(M.tod && (M.stat == DEAD || ((HAS_TRAIT(M, TRAIT_FAKEDEATH)) && !advanced)))
 		msg += "<span class='info'>Time of Death:</span> [M.tod]\n"
@@ -456,13 +449,26 @@ GENETICS SCANNER
 			else
 				msg += "<span class='info'>Blood level [blood_percent] %, [C.scan_blood_volume()] cl, type: [blood_type], blood oxygenation [blood_oxy_percent] %</span>\n"
 			msg += "<span class='[C.get_pulse_as_number() ? "info" : "danger"]'>Pulse: [capitalize(C.get_pulse(advanced ? GETPULSE_BASIC : GETPULSE_ADVANCED))]</span>\n"
-		var/cyberimp_detect
+		var/cyberimp_detect = ""
 		for(var/obj/item/organ/cyberimp/CI in C.internal_organs)
-			if(CI.status == ORGAN_ROBOTIC && !CI.syndicate_implant)
+			if(CI.status & ORGAN_ROBOTIC && !CI.syndicate_implant)
 				cyberimp_detect += "\n[C.name] is modified with a [CI.name]."
 		if(cyberimp_detect)
 			msg += "<span class='notice'>Detected cybernetic modifications:</span>"
 			msg += "<span class='notice'>[cyberimp_detect]</span>"
+	if(iscarbon(M))
+		var/mob/living/carbon/C = M
+		var/list/render_list = list()
+		for(var/i in C.get_wounded_bodyparts())
+			var/obj/item/bodypart/wounded_part = i
+			render_list += "<span class='alert ml-1'><b>Warning: Physical trauma[LAZYLEN(wounded_part.wounds) > 1? "s" : ""] detected in [wounded_part.name]</b>"
+			for(var/k in wounded_part.wounds)
+				var/datum/wound/W = k
+				render_list += "<div class='ml-2'>[W.get_scanner_description()]</div>\n"
+			render_list += "</span>"
+
+		if(length(render_list))
+			msg |= render_list
 	msg += "\n<span class='notice'>*---------*</span>"
 	to_chat(user, msg)
 	SEND_SIGNAL(M, COMSIG_NANITE_SCAN, user, FALSE)
@@ -983,27 +989,6 @@ GENETICS SCANNER
 	else
 		return HM.alias
 
-//skyrat edit
-/// Displays wounds with extended information on their status vs medscanners
-/proc/woundscan(mob/user, mob/living/carbon/patient, obj/item/healthanalyzer/wound/scanner)
-	if(!istype(patient))
-		return
-
-	var/render_list = ""
-	for(var/i in patient.get_wounded_bodyparts())
-		var/obj/item/bodypart/wounded_part = i
-		render_list += "<span class='alert ml-1'><b>Warning: Physical trauma[LAZYLEN(wounded_part.wounds) > 1? "s" : ""] detected in [wounded_part.name]</b>"
-		for(var/k in wounded_part.wounds)
-			var/datum/wound/W = k
-			render_list += "<div class='ml-2'>[W.get_scanner_description()]</div>\n"
-		render_list += "</span>"
-
-	if(render_list == "")
-		playsound(scanner, 'sound/machines/ping.ogg', 50, FALSE)
-		to_chat(user, "<span class='notice'>\The [scanner] makes a happy ping and briefly displays a smiley face with several exclamation points! It's really excited to report that [patient] has no wounds!</span>")
-	else
-		to_chat(user, jointext(render_list, ""))
-
 /obj/item/healthanalyzer/wound
 	name = "first aid analyzer"
 	icon_state = "adv_spectrometer"
@@ -1039,11 +1024,10 @@ GENETICS SCANNER
 		to_chat(user, "<span class='notice'>\The [src] makes a sad buzz and briefly displays a frowny face, indicating it can't scan [patient].</span>")
 		return
 
-	woundscan(user, patient, src)
+	painscan(user, patient, src.advanced)
 
 #undef SCANMODE_HEALTH
 #undef SCANMODE_CHEMICAL
-#undef SCANMODE_WOUND
 #undef SCANMODE_PAIN
 #undef SCANNER_CONDENSED
 #undef SCANNER_VERBOSE
