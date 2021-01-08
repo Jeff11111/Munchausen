@@ -56,6 +56,13 @@
 	artery_name = "temporal artery"
 	cavity_name = "cranial"
 
+/obj/item/bodypart/head/dismember(dam_type, silent, destroy, wounding_type)
+	var/obj/item/bodypart/chungus = owner?.get_bodypart(BODY_ZONE_PRECISE_NECK)
+	if(chungus)
+		return chungus.dismember(dam_type, silent, destroy, wounding_type)
+	else
+		return ..()
+
 /obj/item/bodypart/head/kill_limb()
 	. = ..()
 	if(owner && !HAS_TRAIT_FROM(owner, TRAIT_DISFIGURED, "rotten"))
