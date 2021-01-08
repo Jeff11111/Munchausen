@@ -224,7 +224,7 @@
 	name = "Disinfect injuries"
 	implements = list(/obj/item/reagent_containers = 100)
 	base_time = 40
-	surgery_flags = (STEP_NEEDS_INCISED)
+	surgery_flags = 0
 
 /datum/surgery_step/disinfect_injuries/tool_check(mob/user, obj/item/tool, mob/living/carbon/target)
 	. = ..()
