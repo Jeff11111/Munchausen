@@ -338,7 +338,8 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		tail = new mutanttail()
 		tail.Insert(C)
 
-	if(C.get_bodypart(BODY_ZONE_HEAD))
+	var/obj/item/bodypart/shoe_on_head = C.get_bodypart(BODY_ZONE_HEAD)
+	if(shoe_on_head && !shoe_on_head.is_stump())
 		if(ears && (replace_current || !should_have_ears))
 			ears.Remove(TRUE)
 			QDEL_NULL(ears)
@@ -721,19 +722,19 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			bodyparts_to_add -= "waggingspines"
 
 	if(mutant_bodyparts["snout"]) //Take a closer look at that snout!
-		if((H.wear_mask && (H.wear_mask.flags_inv & HIDESNOUT)) || (H.head && (H.head.flags_inv & HIDESNOUT)) || !HD || (HD.is_robotic_limb() && !HD.render_like_organic)) //Skyrat change, robo limbs that render like organic
+		if((H.wear_mask && (H.wear_mask.flags_inv & HIDESNOUT)) || (H.head && (H.head.flags_inv & HIDESNOUT)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic)) //Skyrat change, robo limbs that render like organic
 			bodyparts_to_add -= "snout"
 
 	if(mutant_bodyparts["frills"])
-		if(!H.dna.features["frills"] || H.dna.features["frills"] == "None" || H.head && (H.head.flags_inv & HIDEEARS) || !HD || (HD.is_organic_limb() && !HD.render_like_organic)) //skyrat change
+		if(!H.dna.features["frills"] || H.dna.features["frills"] == "None" || H.head && (H.head.flags_inv & HIDEEARS) || !istype(HD) || (HD.is_organic_limb() && !HD.render_like_organic)) //skyrat change
 			bodyparts_to_add -= "frills"
 
 	if(mutant_bodyparts["horns"])
-		if(!H.dna.features["horns"] || H.dna.features["horns"] == "None" || H.head && (H.head.flags_inv & HIDEHAIR) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEHAIR)) || !HD || (HD.is_robotic_limb() && !HD.render_like_organic)) //skyrat change
+		if(!H.dna.features["horns"] || H.dna.features["horns"] == "None" || H.head && (H.head.flags_inv & HIDEHAIR) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEHAIR)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic)) //skyrat change
 			bodyparts_to_add -= "horns"
 
 	if(mutant_bodyparts["ears"])
-		if(!H.dna.features["ears"] || H.dna.features["ears"] == "None" || H.head && (H.head.flags_inv & HIDEEARS) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEEARS)) || !HD || (HD.is_robotic_limb() && !HD.render_like_organic)) //skyrat change
+		if(!H.dna.features["ears"] || H.dna.features["ears"] == "None" || H.head && (H.head.flags_inv & HIDEEARS) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEEARS)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic)) //skyrat change
 			bodyparts_to_add -= "ears"
 
 	if(mutant_bodyparts["wings"])
@@ -754,14 +755,14 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	//Race specific bodyparts:
 	//Synthetics
 	if(mutant_bodyparts["ipc_screen"])
-		if(!H.dna.features["ipc_screen"] || H.dna.features["ipc_screen"] == "None" || H.head && (H.head.flags_inv & HIDEHAIR) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEHAIR)) || !HD || !(HD.is_robotic_limb() && !HD.render_like_organic))
+		if(!H.dna.features["ipc_screen"] || H.dna.features["ipc_screen"] == "None" || H.head && (H.head.flags_inv & HIDEHAIR) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEHAIR)) || !istype(HD) || !(HD.is_robotic_limb() && !HD.render_like_organic))
 			bodyparts_to_add -= "ipc_screen"
 	//Xenos
 	if(mutant_bodyparts["xenodorsal"])
 		if(!H.dna.features["xenodorsal"] || H.dna.features["xenodorsal"] == "None" || (H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT)))
 			bodyparts_to_add -= "xenodorsal"
 	if(mutant_bodyparts["xenohead"])//This is an overlay for different castes using different head crests
-		if(!H.dna.features["xenohead"] || H.dna.features["xenohead"] == "None" || H.head && (H.head.flags_inv & HIDEHAIR) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEHAIR)) || !HD || (HD.is_robotic_limb() && !HD.render_like_organic)) //skyrat change
+		if(!H.dna.features["xenohead"] || H.dna.features["xenohead"] == "None" || H.head && (H.head.flags_inv & HIDEHAIR) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEHAIR)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic)) //skyrat change
 			bodyparts_to_add -= "xenohead"
 	if(mutant_bodyparts["xenotail"])
 		if(!H.dna.features["xenotail"] || H.dna.features["xenotail"] == "None" || H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
@@ -779,11 +780,11 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			bodyparts_to_add -= "mam_waggingtail"
 
 	if(mutant_bodyparts["mam_ears"])
-		if(!H.dna.features["mam_ears"] || H.dna.features["mam_ears"] == "None" || H.head && (H.head.flags_inv & HIDEEARS) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEEARS)) || !HD || (HD.is_robotic_limb() && !HD.render_like_organic)) //skyrat change
+		if(!H.dna.features["mam_ears"] || H.dna.features["mam_ears"] == "None" || H.head && (H.head.flags_inv & HIDEEARS) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEEARS)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic)) //skyrat change
 			bodyparts_to_add -= "mam_ears"
 
 	if(mutant_bodyparts["mam_snouts"]) //Take a closer look at that snout!
-		if((H.wear_mask && (H.wear_mask.flags_inv & HIDESNOUT)) || (H.head && (H.head.flags_inv & HIDESNOUT)) || !HD || (HD.is_robotic_limb() && !HD.render_like_organic)) //Skyrat change, robo limbs that render like organic
+		if((H.wear_mask && (H.wear_mask.flags_inv & HIDESNOUT)) || (H.head && (H.head.flags_inv & HIDESNOUT)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic)) //Skyrat change, robo limbs that render like organic
 			bodyparts_to_add -= "mam_snouts"
 
 	if(mutant_bodyparts["taur"])
