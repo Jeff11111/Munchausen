@@ -6,7 +6,7 @@
 	occur_text = "is violently torn, severing a tendon"
 	severity = WOUND_SEVERITY_CRITICAL
 	wound_type = WOUND_LIST_TENDON
-	viable_zones =	list(BODY_ZONE_PRECISE_NECK, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT)
+	viable_zones =	ALL_BODYPARTS
 	threshold_minimum = 90
 	threshold_penalty = 15
 	infection_chance = 0
@@ -21,7 +21,9 @@
 	var/torn = 3
 
 /datum/wound/tendon/Destroy()
-	QDEL_NULL(aughaughgblerg)
+	if(aughaughgblerg)
+		aughaughgblerg.remove_speech_mod()
+		QDEL_NULL(aughaughgblerg)
 	. = ..()
 
 /datum/wound/tendon/get_examine_description(mob/user)
