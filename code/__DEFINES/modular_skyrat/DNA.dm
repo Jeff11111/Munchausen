@@ -32,12 +32,3 @@
 #define ORGAN_SLOT_KIDNEYS "kidneys"
 #define ORGAN_SLOT_SPLEEN "spleen"
 #define ORGAN_SLOT_INNARDS "innards"
-
-////organ defines
-#define STANDARD_ORGAN_THRESHOLD 	100
-#define STANDARD_ORGAN_HEALING 		(1/(10 MINUTES / (2 SECONDS)))		//designed to heal organs fully when left on a mob for ~10 minutes
-#define STANDARD_ORGAN_DECAY		(1/(25 MINUTES / (2 SECONDS)))		//designed to fail organs when left to decay for ~25 minutes. 2 SECOND is SSmobs tickrate.
-
-//Should take about 20 minutes for a body to fully rot
-#define MIN_ORGAN_DECAY_INFECTION	0.5
-#define MAX_ORGAN_DECAY_INFECTION	1

@@ -44,7 +44,7 @@
 	. = ..()
 	if(.)
 		return TRUE
-	if(severity >= WOUND_SEVERITY_SEVERE && !(affected?.current_gauze?.splint_factor < 0.4))
+	if(severity >= WOUND_SEVERITY_SEVERE && affected && (!affected.current_gauze || affected.current_gauze.splint_factor > 0.4))
 		return TRUE
 
 /datum/wound/mechanical/blunt/wound_injury(datum/wound/old_wound = null)

@@ -100,9 +100,7 @@
 
 	handle_block_parry(seconds)
 
-	//skyrat edit
 	handle_wounds()
-	//
 
 	//Handle our client's color
 	handle_client_color()
