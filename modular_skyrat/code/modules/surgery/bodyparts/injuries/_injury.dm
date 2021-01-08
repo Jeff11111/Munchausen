@@ -139,6 +139,8 @@
 	if(is_disinfected())
 		germ_level = 0	//reset this, just in case
 		return FALSE
+	if(required_status & BODYPART_ROBOTIC) //Robotic injury
+		return FALSE
 
 	if(damage_type == WOUND_BLUNT && !is_bleeding()) //bruises only infectable if bleeding
 		return FALSE
