@@ -144,7 +144,6 @@
 				"<span class='green'>You stitch up [user == victim ? "your" : "<b>[victim]</b>'s"] [limb.artery_name].</span>")
 	var/blood_sutured = I.stop_bleeding / max(1, time_mod)
 	blood_time -= blood_sutured
-	limb.heal_damage(I.heal_brute, I.heal_burn, 0, FALSE, FALSE)
 	if(blood_time <= 0)
 		to_chat(user, "<span class='nicegreen'>You successfully stitch \the [limb.artery_name] back together.</span>")
 		qdel(src)
