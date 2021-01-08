@@ -281,6 +281,15 @@
 		if(!in_range(src, usr) && loc != usr && !istype(loc, /obj/item/clipboard) && loc.loc != usr && usr.get_active_held_item() != i)	//Some check to see if he's allowed to write
 			return
 
+		if(is_dreamer(usr))
+			var/datum/antagonist/dreamer/dreamer
+			for(var/datum/antagonist/dreamer/dreammy in usr.mind.antag_datums)
+				dreamer = dreammy
+				break
+			if(dreamer && (text2num(t) == dreamer.sum_keys))
+				dreamer.wake_up()
+				return
+			
 		t = parsepencode(t, i, usr, iscrayon) // Encode everything from pencode to html
 
 		if(t != null)	//No input from the user means nothing needs to be added
@@ -291,14 +300,6 @@
 				updateinfolinks()
 			show_content(usr)
 			update_icon()
-			if(is_dreamer(usr))
-				var/datum/antagonist/dreamer/dreamer
-				for(var/datum/antagonist/dreamer/dreammy in usr.mind.antag_datums)
-					dreamer = dreammy
-					break
-				if(dreamer && (text2num(t) == dreamer.sum_keys))
-					dreamer.wake_up()
-
 
 /obj/item/paper/attackby(obj/item/P, mob/living/carbon/human/user, params)
 	..()
