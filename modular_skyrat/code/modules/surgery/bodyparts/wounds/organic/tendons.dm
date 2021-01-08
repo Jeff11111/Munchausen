@@ -16,7 +16,7 @@
 	base_treat_time = 2 SECONDS
 	descriptive = "A tendon is torn!"
 	disabling = TRUE
-	wound_flags = (WOUND_SOUND_HINTS | WOUND_ACCEPTS_STUMP)
+	wound_flags = (WOUND_SOUND_HINTS | WOUND_ACCEPTS_STUMP | WOUND_VISIBLE_THROUGH_CLOTHING)
 	var/datum/speech_mod/aughaughgblerg
 	var/torn = 3
 
