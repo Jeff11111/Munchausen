@@ -29,6 +29,7 @@
 	tendon_name = "rectus"
 	artery_name = "central retinal artery"
 	limb_flags = 0
+	stam_heal_tick = 2
 	var/sight_flags = 0
 	var/see_in_dark = 2
 	var/tint = 0

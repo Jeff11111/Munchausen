@@ -27,6 +27,7 @@
 	zone_prob = 25
 	extra_zone_prob = 60
 	max_cavity_size = WEIGHT_CLASS_TINY
+	stam_heal_tick = 2
 	amputation_point = "trachea"
 	joint_name = "cervical spine"
 	tendon_name = "vocal cords"

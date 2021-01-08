@@ -15,6 +15,7 @@
 	zone_prob = 35
 	extra_zone_prob = 65
 	limb_flags = 0
+	stam_heal_tick = 2
 	var/obj/item/stack/sticky_tape/tapered = null
 	amputation_point = "face"
 	joint_name = "ramus"
