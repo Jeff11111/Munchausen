@@ -92,6 +92,10 @@
 	var/datum/skills/melee/melee = GET_SKILL(M, melee)
 	if(istype(melee))
 		melee.level = min(melee.level + rand(15, 20), 30)
+	//Following my HEART
+	var/obj/item/organ/heart/my_heart = M.getorganslot(ORGAN_SLOT_HEART)
+	if(my_heart)
+		my_heart.organ_flags |= ORGAN_VITAL
 	ADD_TRAIT(M, TRAIT_NOPAIN, "dreamer")
 	ADD_TRAIT(M.mind, TRAIT_NOPAIN, "dreamer")
 	ADD_TRAIT(M, TRAIT_BLOODLOSSIMMUNE, "dreamer")
