@@ -39,9 +39,9 @@
 		for(var/obj/item/bodypart/head/nohead in src)
 			. |= nohead.get_limb_icon(TRUE)
 			return
-	else
-		. = list()
 		. |= mutable_appearance(icon, initial(icon_state), -BODYPARTS_LAYER, color = src.color)
+	else
+		return ..()
 
 /obj/item/bodypart/neck/update_icon_dropped()
 	if(locate(/obj/item/bodypart/head) in src)
