@@ -206,6 +206,12 @@
 	. = ..()
 	directional_vehicle_layers = list(TEXT_NORTH = MOB_LOWER_LAYER, TEXT_SOUTH = MOB_UPPER_LAYER, TEXT_EAST = MOB_UPPER_LAYER, TEXT_WEST = MOB_UPPER_LAYER)
 	RegisterSignal(parent, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, .proc/on_host_unarmed_melee)
+	RegisterSignal(parent, COMSIG_ATOM_DIR_CHANGE, .proc/update_dir)
+
+/datum/component/riding/human/proc/update_dir(dir, newdir)
+	var/mob/living/carbon/human/H = parent
+	for(var/mob/living/L in H.buckled_mobs)
+		L.setDir(newdir)
 
 /datum/component/riding/human/vehicle_mob_unbuckle(datum/source, mob/living/M, force = FALSE)
 	var/mob/living/carbon/human/H = parent

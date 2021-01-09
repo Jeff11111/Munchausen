@@ -20,6 +20,7 @@
 	if(bodytemperature <= TCRYO || (HAS_TRAIT(src, TRAIT_HUSK))) //cryosleep or husked people do not pump the blood.
 		return
 
+	blood_volume = max(0, blood_volume)
 	var/temp_bleed = 0
 	for(var/X in bodyparts)
 		var/obj/item/bodypart/BP = X
@@ -68,6 +69,7 @@
 		return
 	if(HAS_TRAIT(src, TRAIT_NOMARROW)) //Bloodsuckers don't need to be here.
 		return
+	blood_volume = max(0, blood_volume)
 	if(bodytemperature >= TCRYO && !(HAS_TRAIT(src, TRAIT_NOCLONE))) //cryosleep or husked people do not pump the blood.
 		//Blood regeneration if there is some space, and a spleen
 		var/obj/item/organ/spleen/spleen = getorganslot(ORGAN_SLOT_SPLEEN)
