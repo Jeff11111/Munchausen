@@ -26,7 +26,7 @@
 /obj/item/bodypart/mouth/get_limb_icon(dropped)
 	if(dropped && !istype(loc, /obj/item/bodypart))
 		. = list()
-		. += mutable_appearance('modular_skyrat/icons/obj/surgery.dmi', "[initial(icon_state)]", -BODYPARTS_LAYER, color = src.color)
+		. |= mutable_appearance('modular_skyrat/icons/obj/surgery.dmi', "[initial(icon_state)]", -BODYPARTS_LAYER, color = src.color)
 	else
 		return ..()
 
