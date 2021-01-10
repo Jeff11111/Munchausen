@@ -378,7 +378,7 @@
 	user.changeNext_move(CLICK_CD_GRABBING)
 	return TRUE
 
-/datum/wound/blunt/moderate/treat(obj/item/I, mob/user)
+/datum/wound/blunt/moderate/boneset(obj/item/I, mob/user)
 	if(victim == user)
 		victim.visible_message("<span class='danger'><b>[user]</b> begins resetting [victim.p_their()] [limb.name] with [I].</span>", "<span class='warning'>I begin resetting my [limb.name] with [I]...</span>")
 	else
@@ -474,7 +474,7 @@
 		limb.receive_damage(brute=8, wound_bonus=CANT_WOUND)
 		chiropractice(user)
 
-/datum/wound/blunt/moderate/ribcage/treat(obj/item/I, mob/user)
+/datum/wound/blunt/moderate/ribcage/boneset(obj/item/I, mob/user)
 	if(victim == user)
 		victim.visible_message("<span class='danger'><b>[user]</b> begins resetting [victim.p_their()] ribs with [I].</span>", "<span class='warning'>I begin resetting my ribs with [I]...</span>")
 	else
@@ -569,7 +569,7 @@
 		limb.receive_damage(brute=10, wound_bonus=CANT_WOUND)
 		chiropractice(user)
 
-/datum/wound/blunt/moderate/hips/treat(obj/item/I, mob/user)
+/datum/wound/blunt/moderate/hips/boneset(obj/item/I, mob/user)
 	if(victim == user)
 		victim.visible_message("<span class='danger'><b>[user]</b> begins resetting [victim.p_their()] femur with [I].</span>", "<span class='warning'>I begin resetting my femur with [I]...</span>")
 	else
@@ -665,7 +665,7 @@
 		limb.receive_damage(brute=8, wound_bonus=CANT_WOUND)
 		chiropractice(user)
 
-/datum/wound/blunt/moderate/jaw/treat(obj/item/I, mob/user)
+/datum/wound/blunt/moderate/jaw/boneset(obj/item/I, mob/user)
 	if(victim == user)
 		victim.visible_message("<span class='danger'><b>[user]</b> begins resetting [victim.p_their()] jaw with [I].</span>", "<span class='warning'>I begin resetting my jaw with [I]...</span>")
 	else
@@ -852,13 +852,16 @@
 	taped = TRUE
 	processes = TRUE
 
+/datum/wound/blunt/proc/boneset(obj/item/I, mob/user)
+	return FALSE
+
 /datum/wound/blunt/treat(obj/item/I, mob/user)
 	if(istype(I, /obj/item/stack/medical/bone_gel))
 		gel(I, user)
 	else if(istype(I, /obj/item/stack/sticky_tape/surgical))
 		tape(I, user)
-	else if(I.tool_behaviour == TOOL_BONESET)
-		treat(I, user)
+	else
+		boneset(I, user)
 
 /datum/wound/blunt/get_scanner_description(mob/user)
 	. = ..()
