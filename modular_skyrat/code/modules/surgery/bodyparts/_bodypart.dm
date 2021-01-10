@@ -308,11 +308,10 @@
 
 //Germs
 /obj/item/bodypart/janitize(add_germs, minimum_germs, maximum_germs)
-	..()
-	if(germ_level >= INFECTION_LEVEL_THREE)
+	. = ..()
+	if(germ_level >= INFECTION_LEVEL_THREE && !is_dead())
 		kill_limb()
-	else
-		revive_limb()
+	update_limb(owner ? FALSE : TRUE)
 
 /obj/item/bodypart/proc/handle_antibiotics()
 	if(!owner || (owner.stat == DEAD) || !germ_level)
