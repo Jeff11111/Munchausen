@@ -290,6 +290,7 @@
 				if(isorgan(I))
 					var/obj/item/organ/O = I
 					O.organ_flags &= ~ORGAN_FROZEN
+					O.organ_flags &= ~ORGAN_CUT_AWAY
 					O.Insert(mob_occupant)
 				else if(isbodypart(I))
 					var/obj/item/bodypart/BP = I
