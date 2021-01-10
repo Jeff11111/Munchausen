@@ -33,6 +33,21 @@
 	protection += physiology.armor.getRating(d_type)
 	return protection
 
+/mob/living/carbon/human/proc/checkarmormax(obj/item/bodypart/def_zone, d_type)
+	if(!d_type || !def_zone)
+		return 0
+	var/protection = 0
+	var/list/body_parts = list(head, wear_mask, wear_suit, w_uniform, w_underwear, w_socks, w_shirt, back, gloves, wrists, shoes, belt, s_store, glasses, ears, ears_extra, wear_id, wear_neck) //Everything but pockets. Pockets are l_store and r_store. (if pockets were allowed, putting something armored, gloves or hats for example, would double up on the armor) //skyrat edit
+	for(var/bp in body_parts)
+		if(!bp)
+			continue
+		if(istype(bp, /obj/item/clothing))
+			var/obj/item/clothing/C = bp
+			if(C.body_parts_covered & def_zone.body_part)
+				protection = max(C.armor.getRating(d_type), protection)
+	protection = max(protection, physiology.armor.getRating(d_type))
+	return protection
+
 /mob/living/carbon/human/on_hit(obj/item/projectile/P)
 	if(dna && dna.species)
 		dna.species.on_hit(P, src)

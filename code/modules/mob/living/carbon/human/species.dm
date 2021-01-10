@@ -1740,9 +1740,21 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			log_combat(user, target, "attempted to punch")
 			return FALSE
 
-
+		// Armor damage reduction
 		var/armor_block = target.run_armor_check(affecting, "melee")
 
+		var/atk_wound_bonus = 0
+		var/atk_barewound_bonus = 0
+		var/atk_sharpness = SHARP_NONE
+
+		// Blocking values that mean the damage was under armor, so wounding is changed to blunt
+		var/armor_border_blocking = 1 - (target.checkarmormax(affecting, "under_armor_mult") * 1/target.checkarmormax(affecting, "armor_range_mult"))
+		if(armor_block >= armor_border_blocking)
+			atk_wound_bonus = max(0, atk_wound_bonus - armor_block/100 * damage)
+			atk_barewound_bonus = 0
+			atk_sharpness = SHARP_NONE
+		
+		armor_block = min(95, armor_block)
 		playsound(target.loc, user.dna.species.attack_sound, 25, 1, -1)
 
 		target.lastattacker = user.real_name
@@ -1753,11 +1765,11 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			target.dismembering_strike(user, affecting.body_zone)
 
 		if(atk_verb == ATTACK_EFFECT_KICK)//kicks deal 1.5x raw damage + 0.5x stamina damage
-			target.apply_damage(damage*1.5, BRUTE, affecting, armor_block)
+			target.apply_damage(damage*1.5, BRUTE, affecting, armor_block, wound_bonus = atk_wound_bonus, bare_wound_bonus = atk_barewound_bonus, sharpness = atk_sharpness)
 			target.apply_damage(damage*0.5, STAMINA, affecting, armor_block)
 			log_combat(user, target, "kicked")
 		else//other attacks deal full raw damage + 2x in stamina damage
-			target.apply_damage(damage, BRUTE, affecting, armor_block)
+			target.apply_damage(damage, BRUTE, affecting, armor_block, wound_bonus = atk_wound_bonus, bare_wound_bonus = atk_barewound_bonus, sharpness = atk_sharpness)
 			target.apply_damage(damage*2, STAMINA, affecting, armor_block)
 			log_combat(user, target, "punched")
 		
@@ -2029,16 +2041,30 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		affecting = H.bodyparts[1]
 
 	hit_area = affecting?.body_zone
+	
+	// Armor damage reduction
 	var/armor_block = H.run_armor_check(affecting, "melee", "<span class='notice'>Your armor has protected your [parse_zone(hit_area)].</span>", "<span class='notice'>Your armor has softened a hit to your [parse_zone(hit_area)].</span>",I.armour_penetration)
+
 	var/Iforce = I.force //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
 
-	armor_block = min(95, armor_block)
 	var/Iwound_bonus = I.wound_bonus
+	
+	var/Ibarewound_bonus = I.bare_wound_bonus
+	
+	var/Isharpness = I.get_sharpness()
+	
+	// Blocking values that mean the damage was under armor, so wounding is changed to blunt
+	var/armor_border_blocking = 1 - (H.checkarmormax(affecting, "under_armor_mult") * 1/H.checkarmormax(affecting, "armor_range_mult"))
+	if(armor_block >= armor_border_blocking)
+		Iwound_bonus = max(0, Iwound_bonus - armor_block/100 * Iforce)
+		Ibarewound_bonus = 0
+		Isharpness = SHARP_NONE
 
 	var/weakness = H.check_weakness(I, user)
-	
+	armor_block = min(95, armor_block)
+
 	//Damage moment
-	apply_damage(totitemdamage * weakness, I.damtype, hit_area, armor_block, H, wound_bonus = Iwound_bonus, bare_wound_bonus = I.bare_wound_bonus, sharpness = I.get_sharpness())
+	apply_damage(totitemdamage * weakness, I.damtype, hit_area, armor_block, H, wound_bonus = Iwound_bonus, bare_wound_bonus = Ibarewound_bonus, sharpness = Isharpness)
 
 	//How the fuck does this work?
 	I.do_stagger_action(H, user, totitemdamage)

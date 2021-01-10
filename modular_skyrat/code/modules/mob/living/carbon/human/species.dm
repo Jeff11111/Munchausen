@@ -432,8 +432,21 @@
 			log_combat(user, target, "attempted to punch")
 			return FALSE
 
+		// Armor damage reduction
 		var/armor_block = target.run_armor_check(affecting, "melee")
 
+		var/atk_wound_bonus = 0
+		var/atk_barewound_bonus = 0
+		var/atk_sharpness = SHARP_NONE
+
+		// Blocking values that mean the damage was under armor, so wounding is changed to blunt
+		var/armor_border_blocking = 1 - (target.checkarmormax(affecting, "under_armor_mult") * 1/target.checkarmormax(affecting, "armor_range_mult"))
+		if(armor_block >= armor_border_blocking)
+			atk_wound_bonus = max(0, atk_wound_bonus - armor_block/100 * damage)
+			atk_barewound_bonus = 0
+			atk_sharpness = SHARP_NONE
+
+		armor_block = min(95, armor_block)
 		playsound(target.loc, user.dna.species.attack_sound, 25, 1, -1)
 
 		target.lastattacker = user.real_name
@@ -442,9 +455,8 @@
 
 		if(user.limb_destroyer)
 			target.dismembering_strike(user, affecting.body_zone)
-
 		
-		target.apply_damage(damage, BRUTE, affecting, armor_block)
+		target.apply_damage(damage, BRUTE, affecting, armor_block, wound_bonus = atk_wound_bonus, bare_wound_bonus = atk_barewound_bonus, sharpness = atk_sharpness)
 		target.apply_damage(damage*2, STAMINA, affecting, armor_block)
 		log_combat(user, target, "kicked")
 		
@@ -619,18 +631,31 @@
 			return FALSE
 
 
+		// Armor damage reduction
 		var/armor_block = target.run_armor_check(affecting, "melee")
 
+		var/atk_wound_bonus = 5
+		var/atk_barewound_bonus = 5
+		var/atk_sharpness = SHARP_POINTY
+
+		// Blocking values that mean the damage was under armor, so wounding is changed to blunt
+		var/armor_border_blocking = 1 - (target.checkarmormax(affecting, "under_armor_mult") * 1/target.checkarmormax(affecting, "armor_range_mult"))
+		if(armor_block >= armor_border_blocking)
+			atk_wound_bonus = max(0, atk_wound_bonus - armor_block/100 * damage)
+			atk_barewound_bonus = 0
+			atk_sharpness = SHARP_NONE
+		
+		armor_block = min(95, armor_block)
 		playsound(target.loc, 'sound/weapons/bite.ogg', 25, 1, -1)
+		
 		target.lastattacker = user.real_name
 		target.lastattackerckey = user.ckey
 		user.dna.species.spec_unarmedattacked(user, target)
 
 		if(user.limb_destroyer)
 			target.dismembering_strike(user, affecting.body_zone)
-
 		
-		target.apply_damage(damage, BRUTE, affecting, armor_block, sharpness = SHARP_POINTY, wound_bonus = 5)
+		target.apply_damage(damage, BRUTE, affecting, armor_block, wound_bonus = atk_wound_bonus, bare_wound_bonus = atk_barewound_bonus, sharpness = atk_sharpness)
 		target.apply_damage(damage*2, STAMINA, affecting, armor_block)
 		log_combat(user, target, "bitten")
 		

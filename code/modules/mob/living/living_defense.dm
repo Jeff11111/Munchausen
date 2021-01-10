@@ -92,9 +92,27 @@
 			P.on_hit(src, final_percent, def_zone)
 			return BULLET_ACT_BLOCK
 		totaldamage = block_calculate_resultant_damage(totaldamage, returnlist)
-	var/armor = run_armor_check(def_zone, P.flag, null, null, P.armour_penetration, null)
+	// Armor damage reduction
+	var/armor_block = run_armor_check(def_zone, P.flag, null, null, P.armour_penetration, null)
+
+	var/Pdamagetype = P.damage_type
+	var/Pwound_bonus = P.wound_bonus
+	var/Pbarewound_bonus = P.bare_wound_bonus
+	var/Psharpness = P.get_sharpness()
+
+	if(ishuman(src))
+		var/mob/living/carbon/human/H = src
+
+		// Blocking values that mean the damage was under armor, so wounding is changed to blunt
+		var/armor_border_blocking = 1 - (H.checkarmormax(def_zone, "under_armor_mult") * 1/H.checkarmormax(def_zone, "armor_range_mult"))
+		if(armor_block >= armor_border_blocking)
+			Pwound_bonus = max(0, Pwound_bonus - armor_block/100 * totaldamage)
+			Pbarewound_bonus = 0
+			Psharpness = SHARP_NONE
+	
+	armor_block = min(95, armor_block)
 	if(totaldamage && !P.nodamage)
-		apply_damage(totaldamage, P.damage_type, def_zone, armor, wound_bonus=P.wound_bonus, bare_wound_bonus=P.bare_wound_bonus, sharpness=P.sharpness) //skyrat edit
+		apply_damage(totaldamage, Pdamagetype, def_zone, armor_block, wound_bonus = Pwound_bonus, bare_wound_bonus= Pbarewound_bonus, sharpness = Psharpness)
 		if(P.dismemberment)
 			check_projectile_dismemberment(P, def_zone)
 		if((P.damage_type == BRUTE) && iscarbon(src))
@@ -130,7 +148,7 @@
 				var/turf/targ = get_ranged_target_turf(src, get_dir(P.starting, src), dist)
 				B.GoTo(targ, dist)
 	var/missing = 100 - final_percent
-	var/armor_ratio = armor * 0.01
+	var/armor_ratio = armor_block * 0.01
 	if(missing > 0)
 		final_percent += missing * armor_ratio
 	return P.on_hit(src, final_percent, def_zone) ? BULLET_ACT_HIT : BULLET_ACT_BLOCK
@@ -139,12 +157,12 @@
 	return 0
 
 /obj/item/proc/get_volume_by_throwforce_and_or_w_class()
-		if(throwforce && w_class)
-				return clamp((throwforce + w_class) * 5, 30, 100)// Add the item's throwforce to its weight class and multiply by 5, then clamp the value between 30 and 100
-		else if(w_class)
-				return clamp(w_class * 8, 20, 100) // Multiply the item's weight class by 8, then clamp the value between 20 and 100
-		else
-				return 0
+	if(throwforce && w_class)
+		return clamp((throwforce + w_class) * 5, 30, 100)// Add the item's throwforce to its weight class and multiply by 5, then clamp the value between 30 and 100
+	else if(w_class)
+		return clamp(w_class * 8, 20, 100) // Multiply the item's weight class by 8, then clamp the value between 20 and 100
+	else
+		return 0
 
 /mob/living/proc/catch_item(obj/item/I, skip_throw_mode_check = FALSE)
 	return FALSE
