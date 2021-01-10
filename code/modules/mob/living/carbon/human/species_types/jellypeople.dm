@@ -6,7 +6,7 @@
 	say_mod = "chirps"
 	species_traits = list(MUTCOLORS,EYECOLOR,HAIR,FACEHAIR,WINGCOLOR,CAN_SCAR,HAS_FLESH)
 	mutantlungs = /obj/item/organ/lungs/slime
-	mutant_heart = /obj/item/organ/heart/slime
+	mutantheart = /obj/item/organ/heart/slime
 	mutant_bodyparts = list("mcolor" = "FFF", "mam_tail" = "None", "mam_ears" = "None", "mam_snouts" = "None", "taur" = "None", "deco_wings" = "None")
 	inherent_traits = list(TRAIT_TOXINLOVER)
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/slime
@@ -29,7 +29,7 @@
 	rainbowblood = TRUE
 	//
 	species_language_holder = /datum/language_holder/jelly
-	mutant_brain = /obj/item/organ/brain/jelly
+	mutantbrain = /obj/item/organ/brain/jelly
 
 /obj/item/organ/brain/jelly
 	name = "slime nucleus"

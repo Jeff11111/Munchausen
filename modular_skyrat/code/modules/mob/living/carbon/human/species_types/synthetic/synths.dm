@@ -23,16 +23,16 @@
 	var/actualhealth = 100 //value we calculate to assume disguise and etc
 	//Same organs as an IPC basically, to share functionality.
 	mutant_organs = list(/obj/item/organ/cyberimp/arm/power_cord)
-	mutant_brain = /obj/item/organ/brain/ipc_positron
+	mutantbrain = /obj/item/organ/brain/ipc_positron
 	mutantstomach = /obj/item/organ/stomach/robot_ipc
 	mutantears = /obj/item/organ/ears/robot_ipc
 	mutantlungs = /obj/item/organ/lungs/robot_ipc
-	mutant_heart = /obj/item/organ/heart/robot_ipc
+	mutantheart = /obj/item/organ/heart/robot_ipc
 	mutantliver = /obj/item/organ/liver/robot_ipc
 	mutantkidneys = /obj/item/organ/kidneys/robot_ipc
 	mutantspleen =  /obj/item/organ/spleen/robot_ipc
 	mutantintestines = /obj/item/organ/intestines/robot_ipc
-	mutantbladder = /obj/item/organ/intestines/robot_ipc
+	mutantbladder = /obj/item/organ/bladder/robot_ipc
 	//same damage as ipcs
 	coldmod = 0.5
 	burnmod = 1.25

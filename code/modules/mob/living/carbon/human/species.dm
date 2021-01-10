@@ -95,12 +95,13 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	var/sound/miss_sound = 'modular_skyrat/sound/gore/punchmiss.ogg'
 
 	var/list/mob/living/ignored_by = list()	// list of mobs that will ignore this species
+
 	//Breathing!
-	var/obj/item/organ/lungs/mutantlungs = null
 	var/breathid = "o2"
 
-	var/obj/item/organ/brain/mutant_brain = /obj/item/organ/brain
-	var/obj/item/organ/heart/mutant_heart = /obj/item/organ/heart
+	var/obj/item/organ/brain/mutantbrain = /obj/item/organ/brain
+	var/obj/item/organ/heart/mutantheart = /obj/item/organ/heart
+	var/obj/item/organ/lungs/mutantlungs = /obj/item/organ/lungs
 	var/obj/item/organ/ears/mutantears = /obj/item/organ/ears
 	var/obj/item/organ/liver/mutantliver = /obj/item/organ/liver
 	var/obj/item/organ/kidneys/mutantkidneys = /obj/item/organ/kidneys
@@ -108,8 +109,8 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	var/obj/item/organ/intestines/mutantintestines = /obj/item/organ/intestines
 	var/obj/item/organ/spleen/mutantspleen = /obj/item/organ/spleen
 	var/obj/item/organ/bladder/mutantbladder = /obj/item/organ/bladder
-	var/obj/item/organ/innards/mutant_mystery_organ
 	var/obj/item/organ/tongue/mutanttongue = /obj/item/organ/tongue
+	var/obj/item/organ/innards/mutant_mystery_organ
 	var/obj/item/organ/tail/mutanttail
 
 	var/obj/item/mutanthands
@@ -237,14 +238,14 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			brain.Remove(TRUE,TRUE)
 			QDEL_NULL(brain)
 	if(should_have_brain && !brain)
-		brain = new mutant_brain()
+		brain = new mutantbrain()
 		brain.Insert(C, TRUE, TRUE)
 
 	if(heart && (!should_have_heart || replace_current))
 		heart.Remove(TRUE)
 		QDEL_NULL(heart)
 	if(should_have_heart && !heart)
-		heart = new mutant_heart()
+		heart = new mutantheart()
 		heart.Insert(C)
 
 	if(lungs && (!should_have_lungs || replace_current))

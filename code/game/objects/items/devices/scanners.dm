@@ -107,7 +107,6 @@ GENETICS SCANNER
 			to_chat(user, "<span class='notice'>You switch the health analyzer to report extra info on patient wellbeing.</span>")
 
 /obj/item/healthanalyzer/attack(mob/living/M, mob/living/carbon/human/user)
-
 	// Clumsiness/brain damage check
 	if((HAS_TRAIT(user, TRAIT_CLUMSY) || HAS_TRAIT(user, TRAIT_DUMB)) && prob(50))
 		to_chat(user, "<span class='notice'>You stupidly try to analyze the floor's vitals!</span>")
@@ -272,7 +271,6 @@ GENETICS SCANNER
 						else
 							temp_message += "\n<span class='notice'>Subject appears to be astrally projecting.</span>"
 
-
 			//LIVER
 			else if(istype(O, /obj/item/organ/liver))
 				var/obj/item/organ/liver/L = O
@@ -290,10 +288,10 @@ GENETICS SCANNER
 			//TONGUE
 			else if(istype(O, /obj/item/organ/tongue))
 				var/obj/item/organ/tongue/T = O
-				if(T.name == "fluffy tongue")
+				if(istype(T, /obj/item/organ/tongue/fluffy))
 					temp_message += "\n<span class='danger'>Subject is suffering from a fluffified tongue. Suggested cure: Yamerol or a tongue transplant.</span>"
 
-			//HECK
+			//PENIS AND BALLS AND TITTIES
 			else if(istype(O, /obj/item/organ/genital/penis))
 				var/obj/item/organ/genital/penis/P = O
 				if(P.length>20)
@@ -363,69 +361,68 @@ GENETICS SCANNER
 	if(ishuman(M))
 		var/datum/species/S = H.dna.species
 		var/mutant = FALSE
+		var/chimera = FALSE
 		if (H.dna.check_mutation(HULK))
 			mutant = TRUE
-		else if (S.mutantlungs != initial(S.mutantlungs))
-			mutant = TRUE
-		else if (S.mutant_brain != initial(S.mutant_brain))
-			mutant = TRUE
-		else if (S.mutant_heart != initial(S.mutant_heart))
-			mutant = TRUE
-		else if (S.mutantears != initial(S.mutantears))
-			mutant = TRUE
-		else if (S.mutanthands != initial(S.mutanthands))
-			mutant = TRUE
-		else if (S.mutanttongue != initial(S.mutanttongue))
-			mutant = TRUE
-		else if (S.mutanttail != initial(S.mutanttail))
-			mutant = TRUE
-		else if (S.mutantliver != initial(S.mutantliver))
-			mutant = TRUE
-		else if (S.mutantstomach != initial(S.mutantstomach))
-			mutant = TRUE
-
-		msg += "<span class='info'>Reported Species: [H.dna.custom_species ? H.dna.custom_species : S.name]</span>\n"
-		msg += "<span class='info'>Base Species: [S.name]</span>\n"
+		if (initial(S.mutantbrain) && H.getorganslot(ORGAN_SLOT_BRAIN) && !istype(H.getorganslot(ORGAN_SLOT_BRAIN), initial(S.mutantbrain)))
+			chimera = TRUE
+		else if (initial(S.mutantheart) && H.getorganslot(ORGAN_SLOT_HEART) && !istype(H.getorganslot(ORGAN_SLOT_HEART), initial(S.mutantheart)))
+			chimera = TRUE
+		else if (initial(S.mutantlungs) && H.getorganslot(ORGAN_SLOT_LUNGS) && !istype(H.getorganslot(ORGAN_SLOT_LUNGS), initial(S.mutantlungs)))
+			chimera = TRUE
+		else if (initial(S.mutantears) && H.getorganslot(ORGAN_SLOT_EARS) && !istype(H.getorganslot(ORGAN_SLOT_EARS), initial(S.mutantears)))
+			chimera = TRUE
+		else if (initial(S.mutanttongue) && H.getorganslot(ORGAN_SLOT_TONGUE) && !istype(H.getorganslot(ORGAN_SLOT_TONGUE), initial(S.mutanttongue)))
+			chimera = TRUE
+		else if (initial(S.mutantliver) && H.getorganslot(ORGAN_SLOT_LIVER) && !istype(H.getorganslot(ORGAN_SLOT_LIVER), initial(S.mutantliver)))
+			chimera = TRUE
+		else if (initial(S.mutantstomach) && H.getorganslot(ORGAN_SLOT_STOMACH) && !istype(H.getorganslot(ORGAN_SLOT_STOMACH), initial(S.mutantstomach)))
+			chimera = TRUE
+		else if (initial(S.mutantkidneys) && H.getorganslot(ORGAN_SLOT_KIDNEYS) && !istype(H.getorganslot(ORGAN_SLOT_KIDNEYS), initial(S.mutantkidneys)))
+			chimera = TRUE
+		else if (initial(S.mutantspleen) && H.getorganslot(ORGAN_SLOT_SPLEEN) && !istype(H.getorganslot(ORGAN_SLOT_SPLEEN), initial(S.mutantspleen)))
+			chimera = TRUE
+		else if (initial(S.mutantbladder) && H.getorganslot(ORGAN_SLOT_BLADDER) && !istype(H.getorganslot(ORGAN_SLOT_BLADDER), initial(S.mutantbladder)))
+			chimera = TRUE
+		else if (initial(S.mutanttail) && H.getorganslot(ORGAN_SLOT_TAIL) && !istype(H.getorganslot(ORGAN_SLOT_TAIL), initial(S.mutanttail)))
+			chimera = TRUE
+		
+		msg += "\n<span class='info'>Reported Species: [H.dna.custom_species ? H.dna.custom_species : S.name]</span>"
+		msg += "\n<span class='info'>Base Species: [S.name]</span>"
 		if(mutant)
-			msg += "<span class='info'>Subject has mutations present.</span>\n"
-	msg += "<span class='info'>Body temperature: [round(M.bodytemperature-T0C,0.1)] &deg;C ([round(M.bodytemperature*1.8-459.67,0.1)] &deg;F)</span>\n"
-	
+			msg += "\n<span class='info'>Subject has mutations present.</span>"
+		if(chimera)
+			msg += "\n<span class='info'>Subject has chimeric organs present.</span>"
+	msg += "\n<span class='info'>Body temperature: [round(M.bodytemperature-T0C,0.1)] &deg;C ([round(M.bodytemperature*1.8-459.67,0.1)] &deg;F)</span>"
 	if(iscarbon(M))
 		var/mob/living/carbon/C = M
 		for(var/obj/item/bodypart/BP in C.bodyparts)
 			if(BP.germ_level || BP.is_dead())
-				msg += "<span class='green'>Subject's [BP.name] is infected. Perform a wellbeing scan for more information.</span>\n"
-				break
+				msg += "\n<span class='green'>Subject's [BP.name] is infected. Perform a wellbeing scan for more information.</span>"
 			for(var/datum/injury/IN in BP.injuries)
 				if(IN.germ_level)
-					msg += "<span class='green'>Subject's [BP.name] has an infected injury. Disinfection is recommended.</span>\n"
-					break
+					msg += "\n<span class='green'>Subject's [BP.name] has an infected injury. Disinfection is recommended.</span>"
 		for(var/obj/item/organ/O in C.bodyparts)
 			if(O.germ_level || O.is_dead())
-				msg += "<span class='green'>Subject has an infected organ. Perform a wellbeing scan for more information.</span>\n"
-				break
+				msg += "\n<span class='green'>Subject's [O.name] is infected. Perform a wellbeing scan for more information.</span>"
 	
 	// Time of death
 	if(M.tod && (M.stat == DEAD || ((HAS_TRAIT(M, TRAIT_FAKEDEATH)) && !advanced)))
-		msg += "<span class='info'>Time of Death:</span> [M.tod]\n"
+		msg += "\n<span class='info'>Time of Death:</span> [M.tod]"
 		var/tdelta = round(world.time - M.timeofdeath)
 		if(tdelta < (DEFIB_TIME_LIMIT * 10))
 			if(heart_ded)
-				msg += "<span class='danger'>Subject died [DisplayTimeText(tdelta)] ago, heart requires surgical intervention for defibrillation.</span>"
+				msg += "\n<span class='danger'>Subject died [DisplayTimeText(tdelta)] ago, heart requires surgical intervention for defibrillation.</span>"
 			else
-				msg += "<span class='danger'>Subject died [DisplayTimeText(tdelta)] ago, defibrillation may be possible!</span>"
+				msg += "\n<span class='danger'>Subject died [DisplayTimeText(tdelta)] ago, defibrillation may be possible!</span>"
 			if(advanced)
 				if(H.get_ghost() || H.key || H.client)//Since it can last a while.
-					msg += "<span class='danger'> Intervention recommended.</span>\n"
-				else
-					msg += "\n"
-			else
-				msg += "\n"
+					msg += " <span class='danger'><b>Intervention recommended.</b></span>"
 	
 	for(var/thing in M.diseases)
 		var/datum/disease/D = thing
 		if(!(D.visibility_flags & HIDDEN_SCANNER))
-			msg += "<span class='alert'><b>Warning: [D.form] detected</b>\nName: [D.name].\nType: [D.spread_text].\nStage: [D.stage]/[D.max_stages].\nPossible Cure: [D.cure_text]</span>\n"
+			msg += "\n<span class='alert'><b>Warning: [D.form] detected</b>\nName: [D.name].\nType: [D.spread_text].\nStage: [D.stage]/[D.max_stages].\nPossible Cure: [D.cure_text]</span>"
 
 	// Blood Level
 	if(M.has_dna())
@@ -434,7 +431,7 @@ GENETICS SCANNER
 		if(blood_typepath)
 			if(ishuman(C))
 				if(H.is_bleeding()) //skyrat edit
-					msg += "<span class='danger'>Subject is bleeding!</span>\n"
+					msg += "\n<span class='danger'>Subject is bleeding!</span>"
 			var/blood_percent =  round((C.scan_blood_volume() / (BLOOD_VOLUME_NORMAL * C.blood_ratio))*100)
 			var/blood_type = C.dna.blood_type
 			var/blood_oxy_percent = round(C.get_blood_oxygenation() / (BLOOD_VOLUME_NORMAL * C.blood_ratio) * 100)
@@ -443,12 +440,12 @@ GENETICS SCANNER
 				if(R)
 					blood_type = R.name
 			if(C.scan_blood_volume() <= (BLOOD_VOLUME_SAFE*C.blood_ratio) && C.scan_blood_volume() > (BLOOD_VOLUME_OKAY*C.blood_ratio))
-				msg += "<span class='danger'>LOW blood level [blood_percent] %, [C.scan_blood_volume()] cl,</span> <span class='info'>type: [blood_type], blood oxygenation [blood_oxy_percent] %</span>\n"
+				msg += "\n<span class='danger'>LOW blood level [blood_percent] %, [C.scan_blood_volume()] cl,</span> <span class='info'>type: [blood_type], blood oxygenation [blood_oxy_percent] %</span>"
 			else if(C.scan_blood_volume() <= (BLOOD_VOLUME_OKAY*C.blood_ratio))
-				msg += "<span class='danger'>CRITICAL blood level [blood_percent] %, [C.scan_blood_volume()] cl,</span> <span class='info'>type: [blood_type], blood oxygenation [blood_oxy_percent] %</span>\n"
+				msg += "\n<span class='danger'>CRITICAL blood level [blood_percent] %, [C.scan_blood_volume()] cl,</span> <span class='info'>type: [blood_type], blood oxygenation [blood_oxy_percent] %</span>"
 			else
-				msg += "<span class='info'>Blood level [blood_percent] %, [C.scan_blood_volume()] cl, type: [blood_type], blood oxygenation [blood_oxy_percent] %</span>\n"
-			msg += "<span class='[C.get_pulse_as_number() ? "info" : "danger"]'>Pulse: [capitalize(C.get_pulse(advanced ? GETPULSE_BASIC : GETPULSE_ADVANCED))]</span>"
+				msg += "\n<span class='info'>Blood level [blood_percent] %, [C.scan_blood_volume()] cl, type: [blood_type], blood oxygenation [blood_oxy_percent] %</span>"
+			msg += "\n<span class='[C.get_pulse_as_number() ? "info" : "danger"]'>Pulse: [capitalize(C.get_pulse(advanced ? GETPULSE_BASIC : GETPULSE_ADVANCED))]</span>"
 		var/cyberimp_detect = ""
 		for(var/obj/item/organ/cyberimp/CI in C.internal_organs)
 			if(CI.status & ORGAN_ROBOTIC && !CI.syndicate_implant)
@@ -521,8 +518,8 @@ GENETICS SCANNER
 	if(!iscarbon(M))
 		to_chat(user, "<span class='warning'>ERROR: Wellbeing scan can only be used on complex lifeforms.</span>")
 		return
-	var/msg = "<span class='info'>*---------*\n"
-	msg += "<span class='info'><b>Bodypart info:</b></span>\n"
+	var/msg = "<span class='info'>*---------*"
+	msg += "\n<span class='info'><b>Bodypart info:</b></span>"
 	var/list/bodypart_info = list()
 	for(var/obj/item/bodypart/BP in C.bodyparts)
 		var/result = "<span class='info'>[capitalize(BP.name)]: "
@@ -534,13 +531,14 @@ GENETICS SCANNER
 			results += "[pain] pain"
 		if(length(results))
 			result += results.Join(", ")
-			result += "</span>\n"
+			result += "</span>"
 			bodypart_info += result
 	if(!length(bodypart_info))
-		msg += "<span class='info'>N/A</span>\n"
+		msg += "\n<span class='info'>N/A</span>"
 	else
+		msg += "\n"
 		msg += bodypart_info.Join("")
-	msg += "<span class='info'><b>Organ info:</b></span>\n"
+	msg += "\n<span class='info'><b>Organ info:</b></span>"
 	var/list/organ_info = list()
 	for(var/obj/item/organ/O in C.internal_organs)
 		var/result = "<span class='info'>[capitalize(O.name)]: "
@@ -552,15 +550,15 @@ GENETICS SCANNER
 			results += "[pain] pain"
 		if(length(results))
 			result += results.Join(", ")
-			result += "</span>\n"
+			result += "</span>"
 			organ_info += result
 	if(!length(organ_info))
-		msg += "<span class='info'>N/A</span>\n"
+		msg += "\n<span class='info'>N/A</span>"
 	else
+		msg += "\n"
 		msg += organ_info.Join("")
-	msg += "<span class='info'><B>Total Pain:</B> [advanced ? (C.get_shock() || "<span class='nicegren'>None</span>") : (round(C.get_shock(), 10) || "<span class='nicegren'>None</span>")]</span>"
-	msg += "\n"
-	msg += "*---------*</span>"
+	msg += "\n<span class='info'><B>Total Pain:</B> [advanced ? (C.get_shock() || "<span class='nicegren'>None</span>") : (round(C.get_shock(), 10) || "<span class='nicegren'>None</span>")]</span>"
+	msg += "\n*---------*</span>"
 	to_chat(user, msg)
 
 /obj/item/healthanalyzer/verb/toggle_mode()
