@@ -66,15 +66,6 @@
 	mag_type = /obj/item/ammo_box/magazine/m50
 	can_suppress = FALSE
 
-/obj/item/gun/ballistic/automatic/pistol/deagle/update_icon()
-	..()
-	if(magazine)
-		cut_overlays()
-		add_overlay("deagle_magazine")
-	else
-		cut_overlays()
-	icon_state = "[initial(icon_state)][chambered ? "" : "-e"]"
-
 /obj/item/gun/ballistic/automatic/pistol/deagle/gold
 	desc = "A gold plated Desert Eagle folded over a million times by superior martian gunsmiths. Uses .50 AE ammo."
 	icon_state = "deagleg"
