@@ -294,6 +294,7 @@
 				else if(isbodypart(I))
 					var/obj/item/bodypart/BP = I
 					BP.attach_limb(mob_occupant)
+					BP.limb_flags &= ~BODYPART_CUT_AWAY
 
 			//Premature clones may have brain damage.
 			//Cap the brain damage at 40% (80 on a standard brain) or the clone will go into nervous system failure and fucking die
