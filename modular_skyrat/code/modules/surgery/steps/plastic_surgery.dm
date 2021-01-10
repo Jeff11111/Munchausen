@@ -7,6 +7,13 @@
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED)
 	time = 64
 
+/datum/surgery_step/reshape_face/validate_target(mob/living/target, mob/user)
+	. = ..()
+	if(!.)
+		return
+	if(!HAS_TRAIT_FROM(target, TRAIT_DISFIGURED, TRAIT_GENERIC))
+		return FALSE
+	
 /datum/surgery_step/reshape_face/tool_check(mob/user, obj/item/tool, mob/living/carbon/target)
 	. = ..()
 	if(!.)
