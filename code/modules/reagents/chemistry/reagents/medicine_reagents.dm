@@ -145,7 +145,7 @@
 	REMOVE_TRAIT(L, TRAIT_NOTEMPERATUREWOUNDING, "cryoxadone")
 
 /datum/reagent/medicine/cryoxadone/on_mob_life(mob/living/carbon/M)
-	var/power = (-0.00003 * (M.bodytemperature ** 2) + 3) * 6 //fuck it
+	var/power = (-0.00003 * (M.bodytemperature ** 2) + 3) * 2 //fuck it
 	if(M.bodytemperature < T0C)
 		M.adjustOxyLoss(-3 * power, 0)
 		M.adjustBruteLoss(-power, 0)
