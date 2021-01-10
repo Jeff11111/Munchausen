@@ -73,6 +73,10 @@
 		if(M.client)
 			M.hud_used.dreamer.update_for_view(M.client.view)
 		M.client?.screen += M.hud_used.dreamer
+		M.hud_used.bloodlust = new()
+		M.client?.screen += M.hud_used.dreamer
+		RegisterSignal(M, COMSIG_LIVING_COMBAT_ENABLED, .proc/activate_bloodlust)
+		RegisterSignal(M, COMSIG_LIVING_COMBAT_DISABLED, .proc/deactivate_bloodlust)
 
 /datum/antagonist/dreamer/proc/give_stats(mob/living/carbon/M)
 	if(!istype(M) || !M.mind)
@@ -233,7 +237,7 @@
 
 /datum/antagonist/dreamer/on_gain()
 	. = ..()
-	START_PROCESSING(SSobj, src)
+	START_PROCESSING(SSfastprocess, src)
 	give_wakeup_call()
 	give_hallucination_object(owner.current)
 	give_stats(owner.current)
@@ -242,4 +246,10 @@
 
 /datum/antagonist/dreamer/on_removal()
 	. = ..()
-	STOP_PROCESSING(SSobj, src)
+	STOP_PROCESSING(SSfastprocess, src)
+
+/datum/antagonist/dreamer/proc/activate_bloodlust()
+	owner.current?.hud_used?.bloodlust?.alpha = 255
+
+/datum/antagonist/dreamer/proc/deactivate_bloodlust()
+	owner.current?.hud_used?.bloodlust?.alpha = 0

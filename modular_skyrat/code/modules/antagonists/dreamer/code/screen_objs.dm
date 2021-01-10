@@ -1,6 +1,10 @@
 //Hallucination screen object
-/datum/hud
-	var/obj/screen/fullscreen/dreamer/dreamer
+/obj/screen/bloodlust
+	name = "bloodlust"
+	icon = 'modular_skyrat/icons/mob/screen/screen_gen.dmi'
+	icon_state = "bloodlust"
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
+	alpha = 0
 
 /obj/screen/fullscreen/dreamer
 	name = "wake up"

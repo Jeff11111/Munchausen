@@ -11,7 +11,7 @@
 	. = ..()
 	music_file = pick('modular_skyrat/sound/music/hot_plates.ogg',
 					'modular_skyrat/sound/music/converter.ogg',
-					'modular_skyrat/sound/music/spires.ogg',
+					'modular_skyrat/sound/music/bereavment.ogg',
 					)
 
 /datum/antagonist/traitor/New()

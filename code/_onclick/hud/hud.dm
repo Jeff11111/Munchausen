@@ -72,6 +72,8 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/obj/screen/fullscreen/pain/redpains
 	var/obj/screen/fullscreen/noise/noise_filter
 	var/obj/screen/fov_holder/fov_holder
+	var/obj/screen/fullscreen/dreamer/dreamer
+	var/obj/screen/bloodlust/bloodlust
 
 	// subtypes can override this to force a specific UI style
 	var/ui_style
@@ -194,11 +196,15 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 				screenmob.client.screen += noise_filter
 			if(fov_holder)
 				screenmob.client.screen += fov_holder
+			if(dreamer)
+				screenmob.client.screen += dreamer
+			if(bloodlust)
+				screenmob.client.screen += bloodlust
 			if(hotkeybuttons.len && !hotkey_ui_hidden)
 				screenmob.client.screen += hotkeybuttons
 			if(infodisplay.len)
 				screenmob.client.screen += infodisplay
-
+		
 			screenmob.client.screen += hide_actions_toggle
 
 			if(action_intent)
@@ -217,6 +223,10 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 				screenmob.client.screen += noise_filter
 			if(fov_holder)
 				screenmob.client.screen += fov_holder
+			if(dreamer)
+				screenmob.client.screen += dreamer
+			if(bloodlust)
+				screenmob.client.screen += bloodlust
 			if(hotkeybuttons.len)
 				screenmob.client.screen -= hotkeybuttons
 			if(infodisplay.len)
@@ -246,6 +256,10 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 				screenmob.client.screen += noise_filter
 			if(fov_holder)
 				screenmob.client.screen += fov_holder
+			if(dreamer)
+				screenmob.client.screen += dreamer
+			if(bloodlust)
+				screenmob.client.screen += bloodlust
 			if(hotkeybuttons.len)
 				screenmob.client.screen -= hotkeybuttons
 			if(infodisplay.len)

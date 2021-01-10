@@ -65,5 +65,5 @@
 	all_tunes = list(
 					"Judge Bitch - Hot Plates" = 'modular_skyrat/sound/music/hot_plates.ogg',
 					"Mega Drive - Converter" = 'modular_skyrat/sound/music/converter.ogg',
-					"CABLE - Spires" = 'modular_skyrat/sound/music/spires.ogg',
+					"Beasuce - Bereavment" = 'modular_skyrat/sound/music/bereavment.ogg',
 					)

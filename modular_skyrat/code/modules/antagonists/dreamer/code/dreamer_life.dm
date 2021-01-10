@@ -31,7 +31,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 	//Modo waker ATIVAR
 	dreamer_dreaming = TRUE
 	//Standard screen flash annoyance
-	if(prob(3))
+	if(prob(2))
 		var/obj/screen/fullscreen/dreamer/dream = owner.current.hud_used?.dreamer
 		if(dream)
 			dream.icon_state = "hall[rand(1,10)]"
@@ -56,7 +56,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 					spawn(5)
 						animate(dream, alpha = 0, time = 10)
 	//Just random laughter
-	else if(prob(2))
+	else if(prob(1))
 		var/comicsound = pick('modular_skyrat/code/modules/antagonists/dreamer/sound/comic1.ogg',
 							'modular_skyrat/code/modules/antagonists/dreamer/sound/comic2.ogg',
 							'modular_skyrat/code/modules/antagonists/dreamer/sound/comic3.ogg',
@@ -64,7 +64,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 							)
 		owner.current.playsound_local(get_turf(owner.current), comicsound, 100, 0)
 	//Crewmember radioing
-	else if(prob(1))
+	else if(prob(1) && prob(50))
 		var/list/people = list()
 		for(var/mob/living/carbon/human/H in GLOB.alive_mob_list)
 			people += H
@@ -79,11 +79,11 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 			var/message = owner.current.compose_message(person, owner.current.language_holder?.selected_language, speak,"[FREQ_COMMON]", list(person.speech_span), face_name = TRUE, source = (person.ears ? person.ears : person.ears_extra))
 			to_chat(owner.current, message)
 	//VERY rare mom/mob hallucination
-	else if(prob(1) && prob(50))
+	else if(prob(1) && prob(20))
 		spawn(0)
 			handle_dreamer_mob_hallucination()
 	//Even rarer OOC hallucination
-	else if(prob(1) && prob(25))
+	else if(prob(1) && prob(10))
 		var/clientkey = owner.current.client.key
 		if(prob(50))
 			var/client/cliente = pick(GLOB.clients)
@@ -96,7 +96,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 		message = replacetext_char(message, "CAPITALIZEME", "[uppertext(owner.current.real_name)]")
 		to_chat(owner.current, "<span class='ooc'><span class='prefix'>OOC:</span> <EM>[clientkey]:</EM> <span class='message linkify'>[message]</span></span>")
 	//Even rarer than that jannie hallucination - bwoink hallucination
-	else if(prob(1) && prob(10))
+	else if(prob(1) && prob(5))
 		var/fakemin = "Trey Liam"
 		if(length(GLOB.admin_datums))
 			var/datum/admins/badmin = GLOB.admin_datums[pick(GLOB.admin_datums)]
@@ -113,7 +113,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 		to_chat(owner.current, "<span class='danger'><i>Click on the administrator's name to reply, or see all of your tickets in the admin column.</i></span>")
 		SEND_SOUND(owner.current, sound('sound/effects/adminhelp.ogg'))
 	//Ban hallucination
-	else if(prob(1) && prob(5))
+	else if(prob(1) && prob(2))
 		var/fakemin = "Trey Liam"
 		if(length(GLOB.admin_datums))
 			var/datum/admins/badmin = GLOB.admin_datums[pick(GLOB.admin_datums)]
@@ -133,7 +133,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 		to_chat(owner.current, "<span class='danger'>To try to resolve this matter head to <a href='https://www.sprc.org/'>[bran]</a>")
 		to_chat(owner.current, "<div class='connectionClosed internal'>You are either AFK, experiencing lag or the connection has closed.</div>")
 	//Talking objects
-	if(prob(6))
+	if(prob(4))
 		var/list/objects = list()
 		for(var/obj/O in view(owner.current))
 			objects += O
@@ -169,7 +169,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 	//Floors go crazy go stupid
 	var/list/turf/open/floor/floorlist = list()
 	for(var/turf/open/floor/F in view(owner.current))
-		if(prob(15))
+		if(prob(7))
 			floorlist += F
 	for(var/F in floorlist)
 		spawn(0)
@@ -177,7 +177,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 	//Shit on THA walls
 	var/list/turf/closed/wall/walllist = list()
 	for(var/turf/closed/wall/W in view(owner.current))
-		if(prob(7))
+		if(prob(3))
 			walllist += W
 	for(var/W in walllist)
 		spawn(0)
@@ -219,7 +219,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 		return
 	var/client/C = owner.current.client
 	var/shakeit = 0
-	while(shakeit < 10)
+	while(shakeit < 5)
 		shakeit++
 		var/intensity = 1 //i tried rand(1,2) but even that was 2 intense
 		animate(C, pixel_y = (C.pixel_y + intensity), time = intensity)
