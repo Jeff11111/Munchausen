@@ -1,7 +1,5 @@
 /obj/structure/window
 	icon = 'modular_skyrat/icons/eris/obj/structures/windows.dmi'
-	//Overlay of the brim
-	var/mutable_appearance/mutable_overlay
 	//change the shit below appropriately please
 	var/wall_icon = 'modular_skyrat/icons/eris/obj/structures/windows.dmi'
 	var/nowall_icon = 'modular_skyrat/icons/eris/obj/structures/windows.dmi'
@@ -33,18 +31,6 @@
 			icon = wall_icon
 			return
 		icon = nowall_icon
-
-/obj/structure/window/update_overlays()
-	. = ..()
-	if(mutable_overlay)
-		cut_overlay(mutable_overlay)
-	var/obj/structure/table/low_wall/wall
-	for(var/obj/structure/table/low_wall/wally in loc)
-		wall = wally
-		break
-	if(wall?.mutable_overlay)
-		mutable_overlay = wall.mutable_overlay
-		add_overlay(mutable_overlay)
 
 /obj/structure/window/fulltile
 	icon = 'modular_skyrat/icons/eris/obj/smooth_structures/nobrim/window.dmi'
