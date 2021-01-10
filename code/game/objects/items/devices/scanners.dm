@@ -313,7 +313,7 @@ GENETICS SCANNER
 					damage_message += "\n<font color='red'>Minor [O.name] failure detected.</span>"
 
 			if(temp_message || damage_message)
-				msg += "\n<b><span class='info'>[uppertext(O.name)]:</b></span> [damage_message] [temp_message]\n"
+				msg += "\n<b><span class='info'>[uppertext(O.name)]:</b></span> [damage_message] [temp_message]"
 
 		//END; LOOK FOR MISSING ORGANS?
 		var/breathes = TRUE
@@ -330,33 +330,33 @@ GENETICS SCANNER
 		var/has_kidneys = C.dna && !(NOKIDNEYS in C.dna.species.species_traits)
 		var/has_bladder = C.dna && !(NOBLADDER in C.dna.species.species_traits)
 		if(!M.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE))
-			msg += "<span class='alert'><b>Subject's left eye is missing.</b></span>\n"
+			msg += "\n<span class='alert'><b>Subject's left eye is missing.</b></span>"
 		if(!M.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE))
-			msg += "<span class='alert'><b>Subject's right eye is missing.</b></span>\n"
+			msg += "\n<span class='alert'><b>Subject's right eye is missing.</b></span>"
 		if(!M.getorganslot(ORGAN_SLOT_EARS))
-			msg += "<span class='alert'><b>Subject does not have ears.</b></span>\n"
+			msg += "\n<span class='alert'><b>Subject does not have ears.</b></span>"
 		if(!M.getorganslot(ORGAN_SLOT_BRAIN))
-			msg += "<span class='alert'><b>Subject's brain is missing!</b></span>\n"
+			msg += "\n<span class='alert'><b>Subject's brain is missing!</b></span>"
 		if(has_liver && !M.getorganslot(ORGAN_SLOT_LIVER))
-			msg += "<span class='alert'><b>Subject's liver is missing!</b></span>\n"
+			msg += "\n<span class='alert'><b>Subject's liver is missing!</b></span>"
 		if(blooded && !M.getorganslot(ORGAN_SLOT_HEART))
-			msg += "<span class='alert'><b>Subject's heart is missing!</b></span>\n"
+			msg += "\n<span class='alert'><b>Subject's heart is missing!</b></span>"
 		if(breathes && !M.getorganslot(ORGAN_SLOT_LUNGS))
-			msg += "<span class='alert'><b>Subject's lungs are missing!</b></span>\n"
+			msg += "\n<span class='alert'><b>Subject's lungs are missing!</b></span>"
 		if(has_stomach && !M.getorganslot(ORGAN_SLOT_STOMACH))
-			msg += "<span class='alert'><b>Subject's stomach is missing!</span>\n"
+			msg += "\n<span class='alert'><b>Subject's stomach is missing!</span>"
 		if(has_spleen && !M.getorganslot(ORGAN_SLOT_SPLEEN))
-			msg += "<span class='alert'><b>Subject's spleen is missing!</span>\n"
+			msg += "\n<span class='alert'><b>Subject's spleen is missing!</span>"
 		if(has_intestines && !M.getorganslot(ORGAN_SLOT_INTESTINES))
-			msg += "<span class='alert'><b>Subject's intestines are missing!</span>\n"
+			msg += "\n<span class='alert'><b>Subject's intestines are missing!</span>"
 		if(has_kidneys && !M.getorganslot(ORGAN_SLOT_KIDNEYS))
-			msg += "<span class='alert'><b>Subject's kidneys are missing!</span>\n"
+			msg += "\n<span class='alert'><b>Subject's kidneys are missing!</span>"
 		if(has_bladder && !M.getorganslot(ORGAN_SLOT_BLADDER))
-			msg += "<span class='alert'><b>Subject's bladder is missing!</span>\n"
+			msg += "\n<span class='alert'><b>Subject's bladder is missing!</span>"
 
 		if(M.radiation)
-			msg += "<span class='alert'>Subject is irradiated.</span>\n"
-			msg += "<span class='info'>Radiation Level: [M.radiation] rad</span>\n"
+			msg += "\n<span class='alert'>Subject is irradiated.</span>"
+			msg += "\n<span class='info'>Radiation Level: [M.radiation] rad</span>"
 
 	// Species and body temperature
 	var/mob/living/carbon/human/H = M //Start to use human only stuff here
@@ -448,13 +448,13 @@ GENETICS SCANNER
 				msg += "<span class='danger'>CRITICAL blood level [blood_percent] %, [C.scan_blood_volume()] cl,</span> <span class='info'>type: [blood_type], blood oxygenation [blood_oxy_percent] %</span>\n"
 			else
 				msg += "<span class='info'>Blood level [blood_percent] %, [C.scan_blood_volume()] cl, type: [blood_type], blood oxygenation [blood_oxy_percent] %</span>\n"
-			msg += "<span class='[C.get_pulse_as_number() ? "info" : "danger"]'>Pulse: [capitalize(C.get_pulse(advanced ? GETPULSE_BASIC : GETPULSE_ADVANCED))]</span>\n"
+			msg += "<span class='[C.get_pulse_as_number() ? "info" : "danger"]'>Pulse: [capitalize(C.get_pulse(advanced ? GETPULSE_BASIC : GETPULSE_ADVANCED))]</span>"
 		var/cyberimp_detect = ""
 		for(var/obj/item/organ/cyberimp/CI in C.internal_organs)
 			if(CI.status & ORGAN_ROBOTIC && !CI.syndicate_implant)
 				cyberimp_detect += "\n[C.name] is modified with a [CI.name]."
 		if(cyberimp_detect)
-			msg += "<span class='notice'>Detected cybernetic modifications:</span>"
+			msg += "\n<span class='notice'>Detected cybernetic modifications:</span>"
 			msg += "<span class='notice'>[cyberimp_detect]</span>"
 	if(iscarbon(M))
 		var/mob/living/carbon/C = M
