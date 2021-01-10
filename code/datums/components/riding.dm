@@ -208,8 +208,8 @@
 	RegisterSignal(parent, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, .proc/on_host_unarmed_melee)
 	RegisterSignal(parent, COMSIG_ATOM_DIR_CHANGE, .proc/update_dir)
 
-/datum/component/riding/human/proc/update_dir(dir, newdir)
-	var/mob/living/carbon/human/H = parent
+/datum/component/riding/human/proc/update_dir(mob/source, dir, newdir)
+	var/mob/living/carbon/human/H = source
 	for(var/mob/living/L in H.buckled_mobs)
 		L.setDir(newdir)
 
