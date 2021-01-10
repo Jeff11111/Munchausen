@@ -5,7 +5,7 @@
 	possible_locs = list(BODY_ZONE_HEAD)
 	requires_bodypart_type = BODYPART_ORGANIC
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED)
-	time = 64
+	base_time = 64
 
 /datum/surgery_step/reshape_face/validate_target(mob/living/target, mob/user)
 	. = ..()
