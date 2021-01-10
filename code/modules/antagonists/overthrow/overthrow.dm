@@ -127,7 +127,6 @@
 	// Give AI hacking board
 	var/obj/item/aiModule/core/full/overthrow/O = new(H)
 	var/list/slots = list (
-		"backpack" = SLOT_IN_BACKPACK,
 		"left pocket" = SLOT_L_STORE,
 		"right pocket" = SLOT_R_STORE
 	)

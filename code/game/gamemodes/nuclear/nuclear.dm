@@ -138,7 +138,6 @@
 	var/command_radio = FALSE
 	var/uplink_type = /obj/item/uplink/nuclear
 
-
 /datum/outfit/syndicate/leader
 	name = "Syndicate Leader - Basic"
 	id = /obj/item/card/id/syndicate/nuke_leader
@@ -158,7 +157,11 @@
 
 	if(tc)
 		var/obj/item/U = new uplink_type(H, H.key, tc)
-		H.equip_to_slot_or_del(U, SLOT_IN_BACKPACK)
+		var/obj/item/storage/chungus = H.back
+		if(chungus)
+			SEND_SIGNAL(chungus, COMSIG_TRY_STORAGE_INSERT, U, null, TRUE, TRUE)
+		else
+			H.equip_to_slot_or_del(U, SLOT_R_STORE)
 
 	var/obj/item/implant/weapons_auth/W = new
 	W.implant(H)

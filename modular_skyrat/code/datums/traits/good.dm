@@ -84,12 +84,6 @@
 	medical_record_text = "Patient demonstrates a high aversion to danger and has described hiding in containers out of fear."
 	medical_condition = FALSE
 
-/datum/quirk/trandening/on_spawn()
-	var/mob/living/carbon/human/H = quirk_holder
-	var/obj/item/limbsurgeon/gloweyes/gloweyes = new(get_turf(H))
-	H.equip_to_slot(gloweyes, SLOT_IN_BACKPACK)
-	H.regenerate_icons()
-
 //More blood!
 /datum/quirk/bloodpressure
 	name = "Polycythemia vera"

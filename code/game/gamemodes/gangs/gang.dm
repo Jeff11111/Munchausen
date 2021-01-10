@@ -189,7 +189,6 @@
 		return
 
 	var/list/slots = list (
-		"backpack" = SLOT_IN_BACKPACK,
 		"left pocket" = SLOT_L_STORE,
 		"right pocket" = SLOT_R_STORE,
 		"hands" = SLOT_HANDS

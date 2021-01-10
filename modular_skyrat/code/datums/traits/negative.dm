@@ -78,7 +78,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	var/list/slots = list(
 		"in my left pocket" = SLOT_L_STORE,
 		"in my right pocket" = SLOT_R_STORE,
-		"in my backpack" = SLOT_IN_BACKPACK
+		"in my backpack" = SLOT_IN_BACKPACK,
 	)
 	where = H.equip_in_one_of_slots(heirloom, slots, FALSE) || "at my feet"
 
