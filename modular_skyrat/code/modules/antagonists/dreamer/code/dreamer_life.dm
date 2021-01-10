@@ -213,13 +213,13 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 		return
 	var/client/C = owner.current.client
 	var/shakeit = 0
-	while(shakeit < 5)
+	while(shakeit < 10)
 		shakeit++
 		var/intensity = 1 //i tried rand(1,2) but even that was 2 intense
-		animate(C, pixel_y = (C.pixel_y + intensity), time = intensity)
-		sleep(intensity)
-		animate(C, pixel_y = (C.pixel_y - intensity), time = intensity)
-		sleep(intensity)
+		animate(C, pixel_y = (C.pixel_y + intensity), time = intensity/2)
+		sleep(intensity/2)
+		animate(C, pixel_y = (C.pixel_y - intensity), time = intensity/2)
+		sleep(intensity/2)
 
 /datum/antagonist/dreamer/proc/handle_dreamer_mob_hallucination()
 	if(!owner.current.client)
