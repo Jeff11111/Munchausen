@@ -900,9 +900,10 @@
 	// Now we have our wounding_type and are ready to carry on with wounds and dealing the actual damage
 	if(owner && wounding_dmg >= WOUND_MINIMUM_DAMAGE && wound_bonus > CANT_WOUND)
 		check_wounding(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
-		if(sharpness)
+		if(wounding_type in list(WOUND_SLASH, WOUND_PIERCE))
 			if(wounding_dmg >= ARTERY_MINIMUM_DAMAGE)
 				check_wounding(WOUND_ARTERY, wounding_dmg * (wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
+		if(wounding_type in list(WOUND_BLUNT, WOUND_SLASH, WOUND_PIERCE))
 			if(wounding_dmg >= TENDON_MINIMUM_DAMAGE)
 				check_wounding(WOUND_TENDON, wounding_dmg * (wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
 
