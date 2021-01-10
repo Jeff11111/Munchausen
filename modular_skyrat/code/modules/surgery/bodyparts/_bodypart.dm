@@ -1557,6 +1557,7 @@
 /obj/item/bodypart/proc/kill_limb()
 	limb_flags |= BODYPART_DEAD
 	update_limb(owner ? FALSE : TRUE)
+	owner?.update_icon()
 
 /obj/item/bodypart/proc/revive_limb()
 	limb_flags &= ~BODYPART_DEAD

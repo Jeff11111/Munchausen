@@ -442,7 +442,7 @@
 		to_chat(user, "<span class='warning'>I must have <b>[victim]</b> in an aggressive grab to manipulate [victim.p_their()] [lowertext(name)]!</span>")
 		return TRUE
 
-	if((user.grab_state >= GRAB_AGGRESSIVE) && (user.a_intent == INTENT_HELP) && victim.lying)
+	if((user.grab_state >= GRAB_AGGRESSIVE) && (user.a_intent == INTENT_HELP))
 		user.visible_message("<span class='notice'><b>[user]</b> begins massaging <b>[victim]</b>'s ribs.</span>", "<span class='notice'>I begin massaging <b>[victim]</b>'s dislocated ribs...</span>", ignored_mobs=victim)
 		to_chat(victim, "<span class='notice'><b>[user]</b> begins massaging my dislocated ribs.</span>")
 		chiropractice(user)

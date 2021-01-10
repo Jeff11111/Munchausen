@@ -13,7 +13,6 @@
 /mob/living/carbon/Destroy()
 	//This must be done first, so the mob ghosts correctly before DNA etc is nulled
 	. =  ..()
-
 	QDEL_LIST(internal_organs)
 	QDEL_LIST(stomach_contents)
 	QDEL_LIST(bodyparts)
@@ -986,6 +985,9 @@
 		organ.janitize(0, 0, 0)
 	for(var/BP in bodyparts)
 		var/obj/item/bodypart/bodypart = BP
+		if(admin_revive && bodypart.is_stump())
+			qdel(bodypart)
+			continue
 		bodypart.rejecting = FALSE
 		bodypart.janitize(0, 0, 0)
 		bodypart.fill_teeth()

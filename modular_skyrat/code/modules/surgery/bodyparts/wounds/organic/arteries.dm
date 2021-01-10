@@ -121,7 +121,7 @@
 
 /datum/wound/artery/proc/attempt_suture(obj/item/stack/medical/I, mob/user)
 	if(!limb.get_incision())
-		to_chat(user, "<span class='notice'>I must incise [limb] to treat it's arterial bleeding!</span>")
+		to_chat(user, "<span class='notice'>I must incise [limb] to treat it's torn [limb.artery_name]!</span>")
 		return
 	user.visible_message("<span class='notice'><b>[user]</b> begins stitching <b>[victim]</b>'s [limb] [limb.artery_name] with [I]...</span>", \
 					"<span class='notice'>You begin stitching [user == victim ? "your" : "<b>[victim]</b>'s"] [limb] [limb.artery_name] with [I]...</span>")

@@ -190,7 +190,12 @@
 					BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_LEFT_EYE, \
 					BODY_ZONE_PRECISE_RIGHT_EYE)
 #define ORGAN_BODYPARTS list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN)
-
+#define TENDON_BODYPARTS list(BODY_ZONE_PRECISE_MOUTH, \
+					BODY_ZONE_PRECISE_NECK, \
+					BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, \
+					BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_R_HAND, \
+					BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_FOOT, \
+					BODY_ZONE_PRECISE_L_FOOT)
 #define SSPARTS	list(/obj/item/bodypart/chest, /obj/item/bodypart/groin, \
 					/obj/item/bodypart/neck, /obj/item/bodypart/head, \
 					/obj/item/bodypart/mouth, \

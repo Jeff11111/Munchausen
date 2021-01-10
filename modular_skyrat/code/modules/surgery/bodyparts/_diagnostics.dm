@@ -15,7 +15,7 @@
 	var/obj/item/bodypart/parent = owner?.get_bodypart(parent_bodyzone)
 
 	var/list/flavor_text = list()
-	if(is_cut_away() && !(parent?.is_cut_away()) && !is_stump())
+	if(owner && is_cut_away() && !(parent?.is_cut_away()) && !is_stump())
 		flavor_text += "a tear at the [amputation_point] so severe that it hangs by a scrap of [!is_robotic_limb() ? "flesh" : "metal"]"
 
 	var/list/injury_descriptors = list()
