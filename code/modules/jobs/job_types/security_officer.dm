@@ -31,7 +31,7 @@
 	L |= ..() | check_config_for_sec_maint()
 	return L
 
-GLOBAL_LIST_INIT(available_depts, list(SEC_DEPT_ELITE, SEC_DEPT_ENGINEERING, SEC_DEPT_MEDICAL, SEC_DEPT_SCIENCE, SEC_DEPT_SUPPLY))
+GLOBAL_LIST_INIT(available_depts, list(SEC_DEPT_ENGINEERING, SEC_DEPT_MEDICAL, SEC_DEPT_SCIENCE, SEC_DEPT_SUPPLY))
 
 /datum/job/officer/after_spawn(mob/living/carbon/human/H, mob/M)
 	. = ..()
@@ -39,10 +39,7 @@ GLOBAL_LIST_INIT(available_depts, list(SEC_DEPT_ELITE, SEC_DEPT_ENGINEERING, SEC
 	var/department
 	if(M && M.client && M.client.prefs)
 		department = M.client.prefs.prefered_security_department
-		if(current_positions <= 1)
-			department = SEC_DEPT_ELITE
-			GLOB.available_depts -= SEC_DEPT_ELITE
-		else if(!LAZYLEN(GLOB.available_depts) || department == "None")
+		if(!LAZYLEN(GLOB.available_depts) || department == "None")
 			return
 		else if(department in GLOB.available_depts)
 			LAZYREMOVE(GLOB.available_depts, department)
@@ -54,14 +51,6 @@ GLOBAL_LIST_INIT(available_depts, list(SEC_DEPT_ELITE, SEC_DEPT_ENGINEERING, SEC
 	var/destination = null
 	var/spawn_point = null
 	switch(department)
-		if(SEC_DEPT_ELITE)
-			for(var/obj/item/I in H.get_equipped_items(TRUE))
-				qdel(I)
-			var/datum/outfit/job/warden/J = new()
-			H.equipOutfit(J)
-			var/datum/job/warden/W = new()
-			W.assign_skills_stats(H)
-			W.special_assign_skills_stats(H)
 		if(SEC_DEPT_SUPPLY)
 			ears = /obj/item/radio/headset/headset_sec/alt/department/supply
 			dep_access = list(ACCESS_MAILSORTING, ACCESS_MINING, ACCESS_MINING_STATION, ACCESS_CARGO)

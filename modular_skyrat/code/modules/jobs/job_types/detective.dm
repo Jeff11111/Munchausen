@@ -1,6 +1,7 @@
 /datum/job/detective
 	title = "Deputy"
-
+	total_positions = 0
+	spawn_positions = 0
 
 /datum/outfit/job/detective
 	name = "Deputy"

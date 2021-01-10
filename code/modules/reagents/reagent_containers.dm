@@ -17,6 +17,38 @@
 	var/container_HP = 2
 	var/cached_icon
 
+/obj/item/reagent_containers/MouseDrop(atom/over, src_location, over_location, src_control, over_control, params)
+	. = ..()
+	if(!iscarbon(usr) || !iscarbon(over) || !is_drainable())
+		return
+	var/mob/living/carbon/carbonUser = usr
+	var/mob/living/carbon/carbonM = over
+
+/obj/item/reagent_containers/food/drinks/MouseDrop(atom/over, atom/src_location, atom/over_location, src_control, over_control, params)
+	. = ..()
+	if(!iscarbon(over) || !iscarbon(usr))
+		return
+	var/mob/living/carbon/carbonUser = usr
+	var/mob/living/carbon/carbonM = over
+	var/forced_time = 1.5 SECONDS
+	var/self_forced = forced_time / 2
+	if(carbonM != carbonUser)
+		if(carbonUser.zone_selected != BODY_ZONE_PRECISE_MOUTH)
+			return
+		visible_message("<span class='warning'>[carbonUser] is attempting to force [carbonM] to chug [src]'s contents!</span>")
+		while(do_after(carbonUser, forced_time, target = carbonM))
+			reagents.reaction(carbonM, INGEST)
+			reagents.trans_to(carbonM, 20, null, null, null, "fed by [carbonUser]")
+			playsound(carbonM.loc,'sound/items/drink.ogg', rand(10,50), 1)
+	else if(carbonM == carbonUser)
+		if(carbonUser.zone_selected != BODY_ZONE_PRECISE_MOUTH)
+			return
+		visible_message("<span class='notice'><b>[carbonUser]</b> is attempting to chug [src]'s contents!</span>")
+		while(do_after(carbonUser, self_forced, target = carbonUser))
+			reagents.reaction(carbonM, INGEST)
+			reagents.trans_to(carbonM, 20, null, null, null, "fed by [carbonUser]")
+			playsound(carbonM.loc,'sound/items/drink.ogg', rand(10,50), 1)
+
 /obj/item/reagent_containers/Initialize(mapload, vol)
 	. = ..()
 	if(isnum(vol) && vol > 0)
