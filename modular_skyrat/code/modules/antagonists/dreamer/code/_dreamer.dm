@@ -237,7 +237,7 @@
 
 /datum/antagonist/dreamer/on_gain()
 	. = ..()
-	START_PROCESSING(SSfastprocess, src)
+	START_PROCESSING(SSprocessing, src)
 	give_wakeup_call()
 	give_hallucination_object(owner.current)
 	give_stats(owner.current)
@@ -246,7 +246,7 @@
 
 /datum/antagonist/dreamer/on_removal()
 	. = ..()
-	STOP_PROCESSING(SSfastprocess, src)
+	STOP_PROCESSING(SSprocessing, src)
 
 /datum/antagonist/dreamer/proc/activate_bloodlust()
 	owner.current?.hud_used?.bloodlust?.alpha = 255
