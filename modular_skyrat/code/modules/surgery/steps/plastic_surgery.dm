@@ -22,12 +22,12 @@
 	if(!(chungus.amount >= 3))
 		return FALSE
 
-/datum/surgery_step/reshape_face/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_step/reshape_face/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	display_results(user, target, "<span class='notice'>You begin to alter [target]'s appearance...</span>",
 		"[user] begins to alter [target]'s appearance.",
 		"[user] begins to make an incision in [target]'s face.")
 
-/datum/surgery_step/reshape_face/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_step/reshape_face/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	var/obj/item/stack/chungus = tool
 	if(istype(chungus))
 		chungus.use(3)
@@ -59,7 +59,7 @@
 		H.sec_hud_set_ID()
 	return TRUE
 
-/datum/surgery_step/reshape_face/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_step/reshape_face/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
 	var/obj/item/stack/chungus = tool
 	if(istype(chungus))
 		chungus.use(3)
