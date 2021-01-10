@@ -73,13 +73,12 @@
 	var/screen_max_rows = INFINITY
 	var/screen_pixel_x = 0								//These two are pixel values for screen loc of boxes and closer
 	var/screen_pixel_x_box = 0
-	var/screen_pixel_y = 12
+	var/screen_pixel_y = 10
 	var/screen_pixel_y_box = 0
 	var/screen_start_x = 4								//These two are where the storage starts being rendered, screen_loc wise.
 	var/screen_start_x_box = 4
 	var/screen_start_y = 2
 	var/screen_start_y_box = 3
-	//End
 
 	var/limited_random_access = FALSE					//Quick if statement in accessible_items to determine if we care at all about what people can access at once.
 	var/limited_random_access_stack_position = 0					//If >0, can only access top <x> items
