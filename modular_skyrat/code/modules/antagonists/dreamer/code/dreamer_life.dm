@@ -17,13 +17,10 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 		if((last_ambience + ambience_duration) <= world.time)
 			play_nice_noises()
 		if(SEND_SIGNAL(owner.current, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_ACTIVE) || waking_up)
-			spawn(0)
-				handle_dreamer_screenshake()
-		spawn(0)
-			handle_dreamer_hallucinations()
+			INVOKE_ASYNC(src, .proc/handle_dreamer_screenshake)
+		INVOKE_ASYNC(src, .proc/handle_dreamer_hallucinations)
 		if(waking_up)
-			spawn(0)
-				handle_dreamer_waking_up()
+			INVOKE_ASYNC(src, .proc/handle_dreamer_waking_up)
 
 /datum/antagonist/dreamer/proc/handle_dreamer_hallucinations()
 	if(dreamer_dreaming)
@@ -80,8 +77,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 			to_chat(owner.current, message)
 	//VERY rare mom/mob hallucination
 	else if(prob(1) && prob(20))
-		spawn(0)
-			handle_dreamer_mob_hallucination()
+		INVOKE_ASYNC(src, .proc/handle_dreamer_mob_hallucination)
 	//Even rarer OOC hallucination
 	else if(prob(1) && prob(10))
 		var/clientkey = owner.current.client.key
@@ -172,16 +168,14 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 		if(prob(7))
 			floorlist += F
 	for(var/F in floorlist)
-		spawn(0)
-			handle_dreamer_floor(F)
+		INVOKE_ASYNC(src, .proc/handle_dreamer_floor, F)
 	//Shit on THA walls
 	var/list/turf/closed/wall/walllist = list()
 	for(var/turf/closed/wall/W in view(owner.current))
 		if(prob(3))
 			walllist += W
 	for(var/W in walllist)
-		spawn(0)
-			handle_dreamer_wall(W)
+		INVOKE_ASYNC(src, .proc/handle_dreamer_wall, W)
 	dreamer_dreaming = FALSE
 
 /datum/antagonist/dreamer/proc/handle_dreamer_floor(turf/open/floor/T)
@@ -288,8 +282,7 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 		if(prob(15))
 			floorlist += F
 	for(var/F in floorlist)
-		spawn(0)
-			handle_waking_up_floor(F)
+		INVOKE_ASYNC(src, .proc/handle_waking_up_floor, F)
 
 /datum/antagonist/dreamer/proc/handle_waking_up_floor(turf/open/floor/T)
 	if(!T)
