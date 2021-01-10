@@ -170,7 +170,7 @@
 	var/list/full = ALL_BODYPARTS //skyrat edit
 	for(var/zone in full)
 		var/obj/item/bodypart/nigger = get_bodypart(zone)
-		if(istype(nigger) && !nigger.is_stump())
+		if(istype(nigger) && !nigger.is_stump() && !istype(nigger, /obj/item/bodypart/stump))
 			full -= zone
 	return full
 
