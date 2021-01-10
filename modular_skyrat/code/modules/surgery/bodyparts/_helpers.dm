@@ -189,7 +189,7 @@
 	var/list/disabled = list()
 	for(var/zone in full)
 		var/obj/item/bodypart/affecting = get_bodypart(zone)
-		if(affecting && affecting.disabled)
+		if(affecting && affecting.disabled && !affecting.is_stump() && !istype(affecting, /obj/item/bodypart/stump))
 			disabled += zone
 	return disabled
 

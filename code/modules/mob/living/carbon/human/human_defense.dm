@@ -829,7 +829,7 @@
 					if(WOUND_SEVERITY_SEVERE)
 						status += "[W.can_self_treat ? "<a href='?src=[REF(W)];self_treat=1;'>" : ""]<span class='danger'><b>[woundmsg]</b></span>[W.can_self_treat ? "</a>" : ""]"
 					if(WOUND_SEVERITY_CRITICAL)
-						status += "[W.can_self_treat ? "<a href='?src=[REF(W)];self_treat=1;'>" : ""]<span class='userdanger'><b>[woundmsg]</span>[W.can_self_treat ? "</a>" : ""]"
+						status += "[W.can_self_treat ? "<a href='?src=[REF(W)];self_treat=1;'>" : ""]<span class='userdanger'><b>[woundmsg]</b></span>[W.can_self_treat ? "</a>" : ""]"
 					if(WOUND_SEVERITY_LOSS)
 						status += "[W.can_self_treat ? "<a href='?src=[REF(W)];self_treat=1;'>" : ""]<span class='deadsay'><b>[woundmsg]</b></span>[W.can_self_treat ? "</a>" : ""]"
 					if(WOUND_SEVERITY_PERMANENT)
@@ -861,9 +861,9 @@
 			status += "<span class='nicegreen'><b>OK</b></span>"
 		
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF))
-			to_chat(src, "<span class='notice'>- [capitalize(LB.name)]: <span class='info'>[jointext(status, " | ")]</span> </span>")
+			to_chat(src, "<span class='notice'>- [capitalize(LB.name)]: <span class='info'>[jointext(status, " | ")]</span>")
 		else
-			to_chat(src, "<span class='notice'>- [capitalize(LB.name)]: <span class='nicegreen'><b>OK</b></span> </span>")
+			to_chat(src, "<span class='notice'>- [capitalize(LB.name)]: <span class='nicegreen'><b>OK</b></span>")
 	to_chat(src, "<span class='info'>*---------*</span>")
 
 ///Get all the clothing on a specific body part
