@@ -440,7 +440,7 @@
 		var/atk_sharpness = SHARP_NONE
 
 		// Blocking values that mean the damage was under armor, so wounding is changed to blunt
-		var/armor_border_blocking = 1 - (target.checkarmormax(affecting, "under_armor_mult") * 1/target.checkarmormax(affecting, "armor_range_mult"))
+		var/armor_border_blocking = 1 - (target.checkarmormax(affecting, "under_armor_mult") * 1/max(0.01, target.checkarmormax(affecting, "armor_range_mult")))
 		if(armor_block >= armor_border_blocking)
 			atk_wound_bonus = max(0, atk_wound_bonus - armor_block/100 * damage)
 			atk_barewound_bonus = 0
@@ -639,7 +639,7 @@
 		var/atk_sharpness = SHARP_POINTY
 
 		// Blocking values that mean the damage was under armor, so wounding is changed to blunt
-		var/armor_border_blocking = 1 - (target.checkarmormax(affecting, "under_armor_mult") * 1/target.checkarmormax(affecting, "armor_range_mult"))
+		var/armor_border_blocking = 1 - (target.checkarmormax(affecting, "under_armor_mult") * 1/max(0.01, target.checkarmormax(affecting, "armor_range_mult")))
 		if(armor_block >= armor_border_blocking)
 			atk_wound_bonus = max(0, atk_wound_bonus - armor_block/100 * damage)
 			atk_barewound_bonus = 0

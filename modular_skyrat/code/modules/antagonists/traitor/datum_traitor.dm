@@ -2,6 +2,8 @@
 	. = ..()
 	if(owner)
 		for(var/datum/stats/stat in owner.mob_stats)
+			if(stat.fake_type)
+				continue
 			stat.level = min(stat.level + 1, MAX_STAT)
 		var/datum/skills/ranged/ranged = owner.mob_skills[SKILL_DATUM(ranged)]
 		if(ranged)

@@ -1748,7 +1748,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		var/atk_sharpness = SHARP_NONE
 
 		// Blocking values that mean the damage was under armor, so wounding is changed to blunt
-		var/armor_border_blocking = 1 - (target.checkarmormax(affecting, "under_armor_mult") * 1/target.checkarmormax(affecting, "armor_range_mult"))
+		var/armor_border_blocking = 1 - (target.checkarmormax(affecting, "under_armor_mult") * 1/max(0.01, target.checkarmormax(affecting, "armor_range_mult")))
 		if(armor_block >= armor_border_blocking)
 			atk_wound_bonus = max(0, atk_wound_bonus - armor_block/100 * damage)
 			atk_barewound_bonus = 0
@@ -2054,7 +2054,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	var/Isharpness = I.get_sharpness()
 	
 	// Blocking values that mean the damage was under armor, so wounding is changed to blunt
-	var/armor_border_blocking = 1 - (H.checkarmormax(affecting, "under_armor_mult") * 1/H.checkarmormax(affecting, "armor_range_mult"))
+	var/armor_border_blocking = 1 - (H.checkarmormax(affecting, "under_armor_mult") * 1/max(0.01, H.checkarmormax(affecting, "armor_range_mult")))
 	if(armor_block >= armor_border_blocking)
 		Iwound_bonus = max(0, Iwound_bonus - armor_block/100 * Iforce)
 		Ibarewound_bonus = 0
