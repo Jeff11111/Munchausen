@@ -1,11 +1,13 @@
-//Hallucination screen object
+//Red flash screen object
 /obj/screen/bloodlust
 	name = "bloodlust"
 	icon = 'modular_skyrat/icons/mob/screen/screen_gen.dmi'
 	icon_state = "bloodlust"
+	screen_loc = "WEST,SOUTH to EAST,NORTH"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	alpha = 0
 
+//Hallucination screen object
 /obj/screen/fullscreen/dreamer
 	name = "wake up"
 	icon = 'modular_skyrat/code/modules/antagonists/dreamer/icons/fullscreen.dmi'
