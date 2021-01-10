@@ -56,6 +56,14 @@
 	artery_name = "temporal artery"
 	cavity_name = "cranial"
 
+/obj/item/bodypart/head/receive_damage(brute, burn, stamina, blocked, updating_health, required_status, wound_bonus, bare_wound_bonus, sharpness, spread_damage, pain, toxin, clone)
+	. = ..()
+	if(owner && burn_dam + burn >= 40)
+		if(!HAS_TRAIT_FROM(owner, TRAIT_DISFIGURED, TRAIT_GENERIC))
+			ADD_TRAIT(owner, TRAIT_DISFIGURED, TRAIT_GENERIC)
+			owner.visible_message("<span class='danger'><b>[owner]'s face turns into an unrecognizable, burnt mess!</b></span>", \
+								"<span class='userdanger'><b>MY FACE MELTS AWAY!</b></span>")
+
 /obj/item/bodypart/head/dismember(dam_type, silent, destroy, wounding_type)
 	var/obj/item/bodypart/chungus = owner?.get_bodypart(BODY_ZONE_PRECISE_NECK)
 	if(chungus)

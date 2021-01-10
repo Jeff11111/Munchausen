@@ -1,17 +1,19 @@
-/datum/surgery/plastic_surgery
-	name = "Plastic surgery"
-	steps = list(/datum/surgery_step/incise,
-			/datum/surgery_step/retract_skin,
-			/datum/surgery_step/reshape_face,
-			/datum/surgery_step/close)
-	possible_locs = list(BODY_ZONE_HEAD)
-	requires_bodypart_type = BODYPART_ORGANIC
-
 //reshape_face
 /datum/surgery_step/reshape_face
 	name = "Reshape face"
-	implements = list(TOOL_SCALPEL = 100, /obj/item/kitchen/knife = 50, TOOL_WIRECUTTER = 35)
+	implements = list(/obj/item/stack/medical/mesh = 100)
+	possible_locs = list(BODY_ZONE_HEAD)
+	requires_bodypart_type = BODYPART_ORGANIC
+	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED)
 	time = 64
+
+/datum/surgery_step/reshape_face/tool_check(mob/user, obj/item/tool, mob/living/carbon/target)
+	. = ..()
+	if(!.)
+		return
+	var/obj/item/stack/chungus = tool
+	if(!(chungus.amount >= 3))
+		return FALSE
 
 /datum/surgery_step/reshape_face/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, "<span class='notice'>You begin to alter [target]'s appearance...</span>",
@@ -19,6 +21,9 @@
 		"[user] begins to make an incision in [target]'s face.")
 
 /datum/surgery_step/reshape_face/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+	var/obj/item/stack/chungus = tool
+	if(istype(chungus))
+		chungus.use(3)
 	if(HAS_TRAIT_FROM(target, TRAIT_DISFIGURED, TRAIT_GENERIC))
 		REMOVE_TRAIT(target, TRAIT_DISFIGURED, TRAIT_GENERIC)
 		display_results(user, target, "<span class='notice'>You successfully restore [target]'s appearance.</span>",
@@ -48,6 +53,9 @@
 	return TRUE
 
 /datum/surgery_step/reshape_face/failure(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+	var/obj/item/stack/chungus = tool
+	if(istype(chungus))
+		chungus.use(3)
 	display_results(user, target, "<span class='warning'>You screw up, leaving [target]'s appearance disfigured!</span>",
 		"[user] screws up, disfiguring [target]'s appearance!",
 		"[user] finishes the operation on [target]'s face.")
