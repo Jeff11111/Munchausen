@@ -23,13 +23,6 @@
 		return
 	var/mob/living/carbon/carbonUser = usr
 	var/mob/living/carbon/carbonM = over
-
-/obj/item/reagent_containers/food/drinks/MouseDrop(atom/over, atom/src_location, atom/over_location, src_control, over_control, params)
-	. = ..()
-	if(!iscarbon(over) || !iscarbon(usr))
-		return
-	var/mob/living/carbon/carbonUser = usr
-	var/mob/living/carbon/carbonM = over
 	var/forced_time = 1.5 SECONDS
 	var/self_forced = forced_time / 2
 	if(carbonM != carbonUser)
