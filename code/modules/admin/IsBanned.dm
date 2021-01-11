@@ -38,7 +38,7 @@
 
 	var/admin = FALSE
 	if(GLOB.admin_datums[ckey] || GLOB.deadmins[ckey])
-		admin = 1
+		admin = TRUE
 
 	//Whitelist
 	if(CONFIG_GET(flag/usewhitelist))
