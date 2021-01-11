@@ -153,3 +153,16 @@
 		C.prefs?.adjust_bobux(-C.prefs.bobux_amount)
 	for(var/datum/preferences/prefs in world)
 		prefs.load_preferences()
+
+/datum/bobux_reward/cum_shower
+	name = "COOM"
+	desc = "Make everyone cum."
+	buy_message = "I'M COOOOOOOOOOOOOMING"
+	id = "coom"
+	cost = 20
+
+/datum/bobux_reward/cum_shower/on_buy(client/noob)
+	. = ..()
+	for(var/mob/living/carbon/human/coomer in GLOB.mob_living_list)
+		coomer.moan()
+		coomer.cum()

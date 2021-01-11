@@ -398,18 +398,7 @@
 			return TRUE
 	else
 		return TRUE
-/*
-/proc/cum_splatter(target, var/mob/living/user) // Like blood_splatter(), but much more questionable on a resume.
-	if(user.has_penis() && !user.has_vagina())
-		new /obj/effect/decal/cleanable/semen(get_turf(target))
-	else if(user.has_vagina() && !user.has_penis())
-		new /obj/effect/decal/cleanable/femcum(get_turf(target))
-	else if(user.has_vagina() && user.has_penis())
-		new /obj/effect/decal/cleanable/femcum(get_turf(target))
-		new /obj/effect/decal/cleanable/semen(get_turf(target))
-	//var/obj/effect/decal/cleanable/cum/C = (get_turf(target))
-	//C.add_blood_DNA(list(data["blood_DNA"] = data["blood_type"]))
-*/
+
 /mob/living/proc/moan()
 	if(!(prob(get_lust() / lust_tolerance * 65)))
 		return
@@ -418,7 +407,7 @@
 		moan--
 	if(!is_muzzled())
 		visible_message(message = "<font color=purple><B>\The [src]</B> [pick("moans", "moans in pleasure")].</font>", ignored_mobs = get_unconsenting())
-		//playsound(get_turf(src), "code/game/lewd/sound/interactions/moan_[gender == FEMALE ? "f" : "m"][rand(1, 7)].ogg", 70, 1, 0)
+		playsound(get_turf(src), "code/game/lewd/sound/interactions/moan_[gender == FEMALE ? "f" : "m"][rand(1, 7)].ogg", 70, 1, 0)
 	if(is_muzzled())//immursion
 		visible_message("<font color=purple><B>[src]</B> [pick("mimes a pleasured moan","moans in silence")].</font>")
 	lastmoan = moan
