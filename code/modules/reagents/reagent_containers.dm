@@ -29,7 +29,7 @@
 		if(carbonUser.zone_selected != BODY_ZONE_PRECISE_MOUTH)
 			return
 		visible_message("<span class='warning'>[carbonUser] is attempting to force [carbonM] to chug [src]'s contents!</span>")
-		while(do_after(carbonUser, forced_time, target = carbonM))
+		while(do_after(carbonUser, forced_time, target = carbonM) && length(reagents.reagent_list))
 			reagents.reaction(carbonM, INGEST)
 			reagents.trans_to(carbonM, 20, null, null, null, "fed by [carbonUser]")
 			playsound(carbonM.loc,'sound/items/drink.ogg', rand(10,50), 1)
@@ -37,7 +37,7 @@
 		if(carbonUser.zone_selected != BODY_ZONE_PRECISE_MOUTH)
 			return
 		visible_message("<span class='notice'><b>[carbonUser]</b> is attempting to chug [src]'s contents!</span>")
-		while(do_after(carbonUser, self_forced, target = carbonUser))
+		while(do_after(carbonUser, self_forced, target = carbonUser) && length(reagents.reagent_list))
 			reagents.reaction(carbonM, INGEST)
 			reagents.trans_to(carbonM, 20, null, null, null, "fed by [carbonUser]")
 			playsound(carbonM.loc,'sound/items/drink.ogg', rand(10,50), 1)
