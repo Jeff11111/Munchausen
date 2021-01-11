@@ -26,24 +26,24 @@
 #define ui_devilsouldisplay "WEST:6,CENTER-1:15"
 
 //Lower center, persistent menu
-#define ui_id "CENTER-4,SOUTH"
-#define ui_belt "CENTER-3,SOUTH"
-#define ui_back "CENTER-2,SOUTH"
+#define ui_id "CENTER-3,SOUTH"
+#define ui_belt "CENTER-2,SOUTH"
+#define ui_back "CENTER-1,SOUTH"
 
 /proc/ui_hand_position(i)
-	var/x_off = !(i % 2)
-	return"CENTER-[x_off],SOUTH"
+	var/x_off = (i % 2)
+	return"CENTER+[x_off],SOUTH"
 
 /proc/ui_equip_position(mob/M)
-	return "CENTER-1,SOUTH+1"
+	return "CENTER,SOUTH+1"
 
 /proc/ui_swaphand_position(mob/M, which = 1)
 	var/x_off = which == 1 ? 1 : 0
-	return "CENTER-[x_off],SOUTH+1"
+	return "CENTER+[x_off],SOUTH+1"
 
 //Widescreen (default location) for pockets
-#define ui_storage1 "CENTER+1,SOUTH"
-#define ui_storage2 "CENTER+2,SOUTH"
+#define ui_storage1 "CENTER+2,SOUTH"
+#define ui_storage2 "CENTER+3,SOUTH"
 
 //Non-widescreen
 #define ui_boxstorage1 "WEST,SOUTH+7"
