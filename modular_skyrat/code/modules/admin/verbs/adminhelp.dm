@@ -99,7 +99,6 @@
 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Adminhelp") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	to_chat(world, "<span class='ooc'><span class='prefix'>OOC:</span> <EM>[key]:</EM> <span class='message linkify'>My ANUS is <span style='color: #DC143C'>BLEEDING!</span></span></span>")
-	to_chat(world, "<span class='ooc'><span class='prefix'>OOC:</span> <EM>[key]:</EM> <span class='message linkify'>[msg] - [emoji_parse(pick(":killher:", ":troll:", ":killhernow:"))]</span>")
 
 // /client/verb/antagrequest(msg as text)
 // 	set category = "Admin"
