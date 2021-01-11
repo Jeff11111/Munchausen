@@ -38,7 +38,7 @@
 	return "CENTER,SOUTH+1"
 
 /proc/ui_swaphand_position(mob/M, which = 1)
-	var/x_off = which == 1 ? 1 : 0
+	var/x_off = which == 1 ? 0 : 1
 	return "CENTER+[x_off],SOUTH+1"
 
 //Widescreen (default location) for pockets
