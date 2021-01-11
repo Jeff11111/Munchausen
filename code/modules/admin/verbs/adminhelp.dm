@@ -194,14 +194,8 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 		qdel(src)
 		return
 	
-	//Humiliate the whiny ass for ahelping lole
-	if(!is_bwoink)
-		to_chat(world, "<span class='ooc'><span class='prefix'>OOC:</span> <EM>[C.key]:</EM> <span class='message linkify'>My ANUS is <span style='color: #DC143C'>BLEEDING!</span></span></span>")
-		to_chat(world, "<span class='ooc'><span class='prefix'>OOC:</span> <EM>[C.key]:</EM> <span class='message linkify'>[msg] - [emoji_parse(pick(":killher:", ":troll:", ":killhernow:"))]</span>")
-	//SKYRAT CHANGE
 	if(admin_C && is_bwoink)
 		handler = "[admin_C.ckey]"
-	//END OF SKYRAT CHANGES
 
 	id = ++ticket_counter
 	opened_at = world.time
@@ -587,67 +581,6 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 /client/proc/get_adminhelp()
 	var/msg = input(src, "Please describe your problem concisely and an admin will help as soon as they're able.", "Adminhelp contents") as text
 	adminhelp(msg)
-
-/* Moved to Modular Skyrat
-/client/verb/adminhelp(msg as text)
-	set category = "Admin"
-	set name = "Adminhelp"
-
-	if(GLOB.say_disabled)	//This is here to try to identify lag problems
-		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
-		return
-
-	//handle muting and automuting
-	if(prefs.muted & MUTE_ADMINHELP)
-		to_chat(src, "<span class='danger'>Error: Admin-PM: You cannot send adminhelps (Muted).</span>")
-		return
-	if(handle_spam_prevention(msg,MUTE_ADMINHELP))
-		return
-
-	msg = trim(msg)
-
-	if(!msg)
-		return
-
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Adminhelp") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	if(current_ticket)
-		if(alert(usr, "You already have a ticket open. Is this for the same issue?",,"Yes","No") != "No")
-			if(current_ticket)
-				current_ticket.MessageNoRecipient(msg)
-				current_ticket.TimeoutVerb()
-				return
-			else
-				to_chat(usr, "<span class='warning'>Ticket not found, creating new one...</span>")
-		else
-			current_ticket.AddInteraction("[key_name_admin(usr)] opened a new ticket.")
-			current_ticket.Close(ignore_admincheck = TRUE)
-
-	new /datum/admin_help(msg, src, FALSE)
-*/
-
-//
-// LOGGING
-//
-
-/* Moved to Skyrat Modular
-//Use this proc when an admin takes action that may be related to an open ticket on what
-//what can be a client, ckey, or mob
-/proc/admin_ticket_log(what, message)
-	var/client/C
-	var/mob/Mob = what
-	if(istype(Mob))
-		C = Mob.client
-	else
-		C = what
-	if(istype(C) && C.current_ticket)
-		C.current_ticket.AddInteraction(message)
-		return C.current_ticket
-	if(istext(what))	//ckey
-		var/datum/admin_help/AH = GLOB.ahelp_tickets.CKey2ActiveTicket(what)
-		if(AH)
-			AH.AddInteraction(message)
-			return AH
-*/
 
 //
 // HELPER PROCS

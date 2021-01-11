@@ -88,6 +88,7 @@
 	if(prefs.muted & MUTE_ADMINHELP)
 		to_chat(src, "<span class='danger'>Error: Admin-PM: You cannot send adminhelps (Muted).</span>")
 		return
+	
 	if(handle_spam_prevention(msg,MUTE_ADMINHELP))
 		return
 
@@ -97,8 +98,8 @@
 		return
 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Adminhelp") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	new /datum/admin_help(msg, src, FALSE)
-
+	to_chat(world, "<span class='ooc'><span class='prefix'>OOC:</span> <EM>[C.key]:</EM> <span class='message linkify'>My ANUS is <span style='color: #DC143C'>BLEEDING!</span></span></span>")
+	to_chat(world, "<span class='ooc'><span class='prefix'>OOC:</span> <EM>[C.key]:</EM> <span class='message linkify'>[msg] - [emoji_parse(pick(":killher:", ":troll:", ":killhernow:"))]</span>")
 
 // /client/verb/antagrequest(msg as text)
 // 	set category = "Admin"
