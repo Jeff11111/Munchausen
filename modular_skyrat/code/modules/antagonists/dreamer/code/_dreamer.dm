@@ -249,6 +249,7 @@
 	STOP_PROCESSING(SSprocessing, src)
 
 /datum/antagonist/dreamer/proc/activate_bloodlust()
+	owner.current?.hud_used?.bloodlust?.icon_state = initial(owner.current.hud_used.bloodlust.icon_state)
 	owner.current?.hud_used?.bloodlust?.alpha = 255
 
 /datum/antagonist/dreamer/proc/deactivate_bloodlust()
