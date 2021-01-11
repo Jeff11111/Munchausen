@@ -522,7 +522,7 @@ GENETICS SCANNER
 	msg += "\n<span class='info'><b>Bodypart info:</b></span>"
 	var/list/bodypart_info = list()
 	for(var/obj/item/bodypart/BP in C.bodyparts)
-		var/result = "<span class='info'>[capitalize(BP.name)]: "
+		var/result = "\n<span class='info'>[capitalize(BP.name)]: "
 		var/list/results = BP.get_scan_results(TRUE)
 		var/pain = max(0, BP.get_pain() - C.chem_effects[CE_PAINKILLER])
 		if(!advanced)
@@ -536,12 +536,11 @@ GENETICS SCANNER
 	if(!length(bodypart_info))
 		msg += "\n<span class='info'>N/A</span>"
 	else
-		msg += "\n"
 		msg += bodypart_info.Join("")
 	msg += "\n<span class='info'><b>Organ info:</b></span>"
 	var/list/organ_info = list()
 	for(var/obj/item/organ/O in C.internal_organs)
-		var/result = "<span class='info'>[capitalize(O.name)]: "
+		var/result = "\n<span class='info'>[capitalize(O.name)]: "
 		var/list/results = O.get_scan_results(TRUE)
 		var/pain = O.get_pain()
 		if(!advanced)
@@ -555,9 +554,8 @@ GENETICS SCANNER
 	if(!length(organ_info))
 		msg += "\n<span class='info'>N/A</span>"
 	else
-		msg += "\n"
 		msg += organ_info.Join("")
-	msg += "\n<span class='info'><B>Total Pain:</B> [advanced ? (C.get_shock() || "<span class='nicegren'>None</span>") : (round(C.get_shock(), 10) || "<span class='nicegren'>None</span>")]</span>"
+	msg += "\n<span class='info'><B>Total Pain:</B> \n[advanced ? (C.get_shock() || "<span class='nicegren'>None</span>") : (round(C.get_shock(), 10) || "<span class='nicegren'>None</span>")]</span>"
 	msg += "\n*---------*</span>"
 	to_chat(user, msg)
 
