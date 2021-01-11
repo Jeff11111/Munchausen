@@ -303,6 +303,10 @@
 /obj/docking_port/mobile/emergency/register()
 	. = ..()
 	SSshuttle.emergency = src
+	addtimer(CALLBACK(src, .proc/nigger_motherfucker_shit_cunt), 10 SECONDS)
+
+/obj/docking_port/mobile/emergency/proc/nigger_motherfucker_shit_cunt()
+	initiate_docking(SSshuttle.getDock("emergency_home"))
 
 /obj/docking_port/mobile/emergency/Destroy(force)
 	if(force)
@@ -378,13 +382,6 @@
 	qdel(query_round_shuttle_name)
 
 /obj/docking_port/mobile/emergency/check()
-	if(mode == SHUTTLE_IDLE)
-		var/atom/FUCK = get_docked()
-		if(!is_station_level(FUCK.z))
-			//move emergency shuttle to station
-			if(initiate_docking(SSshuttle.getDock("emergency_home")) != DOCKING_SUCCESS)
-				setTimer(20)
-				return
 	if(!timer)
 		return
 	
