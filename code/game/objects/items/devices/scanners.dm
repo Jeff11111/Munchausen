@@ -544,7 +544,7 @@ GENETICS SCANNER
 		var/list/results = O.get_scan_results(TRUE)
 		var/pain = O.get_pain()
 		if(!advanced)
-			pain = (round(pain/10, 1) * 10)
+			pain = (CEILING(pain/10, 1) * 10)
 		if(pain)
 			results += "[pain] pain"
 		if(length(results))
