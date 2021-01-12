@@ -108,11 +108,11 @@
 		var/cloonmessage = ""
 		cloonmessage += "<span class='notice'>"
 		cloonmessage += "The status display reads: Cloning speed at <b>[speed_coeff*50]%</b>."
-		cloonmessage += "<br>Predicted amount of cellular damage: <b>[100-heal_level]%</b>."
+		cloonmessage += "\nPredicted amount of cellular damage: <b>[100-heal_level]%</b>."
 		if(cloneill)
-			cloonmessage += "<br>Predicted amount of clone illness cellular damage: <b>[cloneill_cloneloss]</b>."
-			cloonmessage += "<br>Predicted duration of clone illness: <b>[cloneill_duration/10] second[cloneill_duration/10 == 1 ? "s" : ""] ([cloneill_duration/600] minute[cloneill_duration/600 == 1 ? "s" : ""])</b>."
-			cloonmessage += "<br>Predicted probability of hallucinations: <b>[cloneill_hallucination]% every 7 seconds</b>."
+			cloonmessage += "\nPredicted amount of clone illness cellular damage: <b>[cloneill_cloneloss]</b>."
+			cloonmessage += "\nPredicted duration of clone illness: <b>[cloneill_duration/10] second[cloneill_duration/10 == 1 ? "s" : ""] ([cloneill_duration/600] minute[cloneill_duration/600 == 1 ? "s" : ""])</b>."
+			cloonmessage += "\nPredicted probability of hallucinations: <b>[cloneill_hallucination]% every 7 seconds</b>."
 		cloonmessage += "</span>"
 		. += cloonmessage
 		if(efficiency > 5)
@@ -221,7 +221,7 @@
 
 	if(grab_ghost_when == CLONER_FRESH_CLONE)
 		H.grab_ghost()
-		to_chat(H, "<span class='notice'><b>Consciousness slowly creeps over you as your body regenerates.</b><br><i>So this is what cloning feels like?</i></span>")
+		to_chat(H, "<span class='notice'><b>Consciousness slowly creeps over you as your body regenerates.</b>\n<i>So this is what cloning feels like?</i></span>")
 
 	if(grab_ghost_when == CLONER_MATURE_CLONE)
 		H.ghostize(TRUE)	//Only does anything if they were still in their old body and not already a ghost
@@ -244,6 +244,8 @@
 /obj/machinery/clonepod/proc/succ(obj/item/reagent_containers/food/snacks/meat/M)
 	var/ping = FALSE
 	for(var/obj/item/reagent_containers/food/snacks/meat/slab/meatball in (view(src, 1) + M))
+		if(biomass >= max_biomass)
+			break
 		ping = TRUE
 		if(istype(meatball, /obj/item/reagent_containers/food/snacks/meat/slab/biomeat))
 			biomass += 100
@@ -294,6 +296,8 @@
 					O.Insert(mob_occupant)
 				else if(isbodypart(I))
 					var/obj/item/bodypart/BP = I
+					for(var/obj/item/bodypart/child in BP)
+						BP.limb_flags &= ~BODYPART_CUT_AWAY
 					BP.attach_limb(mob_occupant)
 					BP.limb_flags &= ~BODYPART_CUT_AWAY
 
