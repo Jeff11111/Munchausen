@@ -345,7 +345,7 @@
 	else
 		user.visible_message("<span class='danger'><b>[user]</b> begins resetting <b>[victim]</b>'s [limb.name] with [I].</span>", "<span class='notice'>I begin resetting <b>[victim]</b>'s [limb.name] with [I]...</span>")
 
-	if(!do_after(user, base_treat_time * (user == victim ? 1.5 : 1), target = victim, extra_checks=CALLBACK(src, .proc/still_exists)))
+	if(!do_after(user, base_treat_time * (user == victim ? 1.5 : 1), target = victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 
 	if(victim == user)
@@ -423,7 +423,7 @@
 
 	user.visible_message("<span class='danger'><b>[user]</b> begins fastening [limb.name]...</span>", "<span class='warning'>I begin fastening [user == victim ? "my" : "<b>[victim]</b>'s"] [limb.name]...</span>")
 
-	if(!do_after(user, base_treat_time * 1.5 * (user == victim ? 1.5 : 1), target = victim, extra_checks=CALLBACK(src, .proc/still_exists)))
+	if(!do_after(user, base_treat_time * 1.5 * (user == victim ? 1.5 : 1), target = victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 	
 	if(user != victim)
@@ -452,7 +452,7 @@
 
 	user.visible_message("<span class='danger'><b>[user]</b> begins applying [I] to <b>[victim]</b>'s' [limb.name]...</span>", "<span class='warning'>I begin applying [I] to [user == victim ? "my" : "<b>[victim]</b>'s"] [limb.name]...</span>")
 
-	if(!do_after(user, base_treat_time * (user == victim ? 1.5 : 1), target = victim, extra_checks=CALLBACK(src, .proc/still_exists)))
+	if(!do_after(user, base_treat_time * (user == victim ? 1.5 : 1), target = victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 	if(!I.use(1))
 		to_chat(user, "<span class='warning'>There aren't enough stacks of [I.name] to heal \the [src.name]!</span>")
@@ -475,10 +475,13 @@
 /datum/wound/mechanical/blunt/treat(obj/item/I, mob/user)
 	if(istype(I, /obj/item/wrench))
 		wrench(I, user)
+		return TRUE
 	else if(istype(I, /obj/item/stack/sticky_tape) && user.a_intent != INTENT_HARM)
 		tape(I, user)
-	else
+		return TRUE
+	else if(I.tool_behaviour == TOOL_WRENCH)
 		boneset(I, user)
+		return TRUE
 
 /datum/wound/mechanical/blunt/get_scanner_description(mob/user)
 	. = ..()

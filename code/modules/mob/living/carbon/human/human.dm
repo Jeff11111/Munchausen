@@ -749,8 +749,8 @@
 				var/they_breathe = !HAS_TRAIT(C, TRAIT_NOBREATH)
 				var/obj/item/organ/lungs/they_lung = C.getorganslot(ORGAN_SLOT_LUNGS)
 
-				src.visible_message("<b>[src]</b> performs mouth to mouth on [C.name]!", \
-								"<span class='notice'>You perform mouth to mouth on [C.name].</span>")
+				src.visible_message("<b>[src]</b> performs mouth to mouth on <b>[C.name]</b>!", \
+								"<span class='notice'>You perform mouth to mouth on <b>[C.name]</b>.</span>")
 				SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "perform_cpr", /datum/mood_event/perform_cpr)
 				C.last_mtom = world.time
 				log_combat(src, C, "M2Med")

@@ -349,7 +349,7 @@
 		to_chat(user, "<span class='warning'>You're already interacting with <b>[victim]</b>!</span>")
 		return TRUE
 
-	if(!victim.can_inject(user, FALSE))
+	if(CHECK_BITFIELD(wound_flags, WOUND_INJECT_CHECK) && !victim.can_inject(user, FALSE))
 		to_chat(user, "<span class='warning'>\The [src.name] can't be treated if it is not exposed!</span>")
 		return TRUE
 	

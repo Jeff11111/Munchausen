@@ -67,6 +67,7 @@
 /datum/wound/tendon/treat(obj/item/I, mob/user)
 	if(istype(I, /obj/item/stack/medical/suture) || istype(I, /obj/item/stack/medical/fixovein))
 		attempt_suture(I, user)
+		return TRUE
 
 /datum/wound/tendon/proc/attempt_suture(obj/item/stack/medical/I, mob/user)
 	if(!limb.get_incision())

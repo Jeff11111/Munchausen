@@ -561,7 +561,8 @@ By design, d1 is the smallest direction and d2 is the highest
 		user.visible_message("<span class='notice'>[user] starts to fix some of the wires in [H]'s [affecting.name].</span>", "<span class='notice'>You start fixing some of the wires in [H]'s [affecting.name].</span>")
 		if(!do_mob(user, H, 40))
 			return
-		item_heal_robotic(H, user, 0, 15)
+		var/obj/item/bodypart/affected = H.get_bodypart(check_zone(user.zone_selected))
+		affected.heal_damage(0, 15, 0, FALSE, FALSE)
 		if(affecting.burn_dam)
 			attack(H, user)
 	else

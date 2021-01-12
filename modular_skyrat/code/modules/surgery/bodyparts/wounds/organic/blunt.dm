@@ -390,7 +390,7 @@
 		var/datum/skills/firstaid/firstaid = GET_SKILL(user, firstaid)
 		if(firstaid)
 			time_mod *= firstaid.get_medicalstack_mod()
-	if(!do_after(user, base_treat_time * time_mod, target = victim, extra_checks=CALLBACK(src, .proc/still_exists)))
+	if(!do_after(user, base_treat_time * time_mod, target = victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 
 	if(victim == user)
@@ -401,7 +401,7 @@
 		if(user.mind?.diceroll(GET_STAT_LEVEL(user, int)*0.25, GET_SKILL_LEVEL(user, firstaid) * 0.75) < DICE_SUCCESS)
 			limb.receive_damage(brute=7, wound_bonus=CANT_WOUND)
 		user.visible_message("<span class='danger'><b>[user]</b> finishes resetting <b>[victim]</b>'s [limb.name]!</span>", "<span class='nicegreen'>I finish resetting <b>[victim]</b>'s [limb.name]!</span>", victim)
-		to_chat(victim, "<span class='userdanger'><b>[user]</b> resets my [limb.name]!</span>")
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> resets my [limb.joint_name ? limb.joint_name : limb.name]!</span>")
 
 	victim.agony_scream()
 	qdel(src)
@@ -487,7 +487,7 @@
 		if(firstaid)
 			time_mod *= firstaid.get_medicalstack_mod()
 	
-	if(!do_after(user, base_treat_time * time_mod, target = victim, extra_checks=CALLBACK(src, .proc/still_exists)))
+	if(!do_after(user, base_treat_time * time_mod, target = victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 
 	if(victim == user)
@@ -582,7 +582,7 @@
 		if(firstaid)
 			time_mod *= firstaid.get_medicalstack_mod()
 	
-	if(!do_after(user, base_treat_time * time_mod, target = victim, extra_checks=CALLBACK(src, .proc/still_exists)))
+	if(!do_after(user, base_treat_time * time_mod, target = victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 
 	if(victim == user)
@@ -678,7 +678,7 @@
 		if(firstaid)
 			time_mod *= firstaid.get_medicalstack_mod()
 	
-	if(!do_after(user, base_treat_time * time_mod, target = victim, extra_checks=CALLBACK(src, .proc/still_exists)))
+	if(!do_after(user, base_treat_time * time_mod, target = victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 
 	if(victim == user)
@@ -778,7 +778,7 @@
 		if(firstaid)
 			time_mod *= firstaid.get_medicalstack_mod()
 	
-	if(!do_after(user, base_treat_time * time_mod, target = victim, extra_checks=CALLBACK(src, .proc/still_exists)))
+	if(!do_after(user, base_treat_time * time_mod, target = victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 
 	if(!I.use(1))
@@ -835,7 +835,7 @@
 		if(firstaid)
 			time_mod *= firstaid.get_medicalstack_mod()
 	
-	if(!do_after(user, base_treat_time * time_mod, target = victim, extra_checks=CALLBACK(src, .proc/still_exists)))
+	if(!do_after(user, base_treat_time * time_mod, target = victim, extra_checks = CALLBACK(src, .proc/still_exists)))
 		return
 	if(!I.use(1))
 		to_chat(user, "<span class='warning'>There aren't enough stacks of [I.name] to heal \the [src.name]!</span>")
@@ -858,10 +858,13 @@
 /datum/wound/blunt/treat(obj/item/I, mob/user)
 	if(istype(I, /obj/item/stack/medical/bone_gel))
 		gel(I, user)
+		return TRUE
 	else if(istype(I, /obj/item/stack/sticky_tape/surgical))
 		tape(I, user)
-	else
+		return TRUE
+	else if(I.tool_behaviour == TOOL_BONESET)
 		boneset(I, user)
+		return TRUE
 
 /datum/wound/blunt/get_scanner_description(mob/user)
 	. = ..()

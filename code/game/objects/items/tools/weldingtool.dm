@@ -124,7 +124,8 @@
 			"<span class='notice'>You start fixing some of the dents on [H]'s [affecting.name].</span>")
 		if(!do_mob(user, H, 30))
 			return
-		item_heal_robotic(H, user, 15, 0)
+		var/obj/item/bodypart/affected = H.get_bodypart(check_zone(user.zone_selected))
+		affected.heal_damage(15, 0, 0, FALSE, FALSE)
 		if(affecting.brute_dam)
 			attack(H, user)
 	else
