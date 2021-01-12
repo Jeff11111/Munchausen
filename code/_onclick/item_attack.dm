@@ -451,9 +451,7 @@
 		throw_at(target_turf, knockback_tiles, 1, user, spin = FALSE)
 		did_something = TRUE
 	//Knock teeth out
-	if(!weapon || (weapon.damtype == BRUTE && !weapon.get_sharpness()))
-		if(CHECK_BITFIELD(status_flags, GODMODE))
-			break
+	if((!weapon || (weapon.damtype == BRUTE && !weapon.get_sharpness())) && !CHECK_BITFIELD(status_flags, GODMODE))
 		var/obj/item/bodypart/teeth_part = affecting || get_bodypart(check_zone(user.zone_selected))
 		if(teeth_part && teeth_part.max_teeth && prob(force * 3))
 			if(teeth_part.knock_out_teeth(rand(1, 2) * max(round(force/10), 1), get_dir(user, src)))
