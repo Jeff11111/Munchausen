@@ -161,7 +161,7 @@
 	else if(amount < 0 && (liver?.is_working() || kidneys?.is_working()))
 		while(amount < 0 && (liver?.is_working() || kidneys?.is_working()))
 			if(liver?.tox_dam)
-				amount = liver.remove_toxins(abs(amount)))
+				amount = liver.remove_toxins(abs(amount))
 			else if(kidneys?.tox_dam)
 				amount = kidneys.remove_toxins(abs(amount))
 	if(updating_health)
