@@ -31,7 +31,7 @@
 	if (.)
 		if (ishuman(user))
 			// Need hands to clap
-			if (!user.get_bodypart(BODY_ZONE_L_ARM) || !user.get_bodypart(BODY_ZONE_R_ARM))
+			if (!user.get_bodypart_nostump(BODY_ZONE_PRECISE_L_HAND) || !user.get_bodypart_nostump(BODY_ZONE_PRECISE_R_HAND))
 				return
 			playsound(user, pick(clap), 50, 1, -1)
 

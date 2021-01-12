@@ -133,7 +133,7 @@
 		. += "[t_He] [t_is] wearing [shoes.get_examine_string(user)] on [t_his] feet."
 	
 	//sticky tape
-	var/obj/item/bodypart/mouth/jaw = get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+	var/obj/item/bodypart/mouth/jaw = get_bodypart_nostump(BODY_ZONE_PRECISE_MOUTH)
 	if(!wear_mask && istype(jaw) && jaw.tapered)
 		. += "<span class='warning'>[t_He] [t_has] \a <b><a href='?src=[REF(jaw)];tape=[jaw.tapered];'>[jaw.tapered.get_examine_string(user)]</a></b> covering [t_his] mouth!</span>"
 

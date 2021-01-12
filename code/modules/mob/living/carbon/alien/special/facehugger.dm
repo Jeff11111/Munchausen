@@ -134,7 +134,7 @@
 			return FALSE
 		var/mob/living/carbon/target = M
 		// gotta have a head to be implanted (no changelings or sentient plants)
-		if(!target.get_bodypart(BODY_ZONE_HEAD))
+		if(!target.get_bodypart_nostump(BODY_ZONE_HEAD))
 			return FALSE
 
 		if(target.getorgan(/obj/item/organ/alien/hivenode) || target.getorgan(/obj/item/organ/body_egg/alien_embryo))

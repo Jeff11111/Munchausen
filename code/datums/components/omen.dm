@@ -56,7 +56,7 @@
 	if(amount <= 0 || prob(50)) // 50% chance to bonk our head
 		return
 
-	var/obj/item/bodypart/the_head = our_guy.get_bodypart(BODY_ZONE_HEAD)
+	var/obj/item/bodypart/the_head = our_guy.get_bodypart_nostump(BODY_ZONE_HEAD)
 	if(!the_head)
 		return
 

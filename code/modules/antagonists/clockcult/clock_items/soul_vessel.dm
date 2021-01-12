@@ -80,7 +80,7 @@
 		if(I.flags_inv & HIDEHAIR) //they're wearing a mask that covers their skull
 			to_chat(user, "<span class='warning'>[H]'s head is covered, remove [H.p_their()] [H.wear_mask] first!</span>")
 			return
-	var/obj/item/bodypart/head/HE = H.get_bodypart(BODY_ZONE_HEAD)
+	var/obj/item/bodypart/head/HE = H.get_bodypart_nostump(BODY_ZONE_HEAD)
 	if(!HE) //literally headless
 		to_chat(user, "<span class='warning'>[H] has no head, and thus no mind to claim!</span>")
 		return

@@ -34,7 +34,7 @@
 	name = get_visible_name()
 
 /mob/living/carbon/human/calculate_affecting_pressure(pressure)
-	var/headless = !get_bodypart(BODY_ZONE_HEAD) //should the mob be perennially headless (see dullahans), we only take the suit into account, so they can into space.
+	var/headless = !get_bodypart_nostump(BODY_ZONE_HEAD) //should the mob be perennially headless (see dullahans), we only take the suit into account, so they can into space.
 	if(wear_suit && istype(wear_suit, /obj/item/clothing) && (headless || (head && istype(head, /obj/item/clothing))))
 		var/obj/item/clothing/CS = wear_suit
 		var/obj/item/clothing/CH = head

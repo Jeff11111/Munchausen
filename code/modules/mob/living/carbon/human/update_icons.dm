@@ -385,7 +385,7 @@ There are several things that need to be remembered:
 /mob/living/carbon/human/update_inv_glasses()
 	remove_overlay(GLASSES_LAYER)
 
-	if(!get_bodypart(BODY_ZONE_HEAD)) //decapitated
+	if(!get_bodypart_nostump(BODY_ZONE_HEAD)) //decapitated
 		return
 
 	if(client && hud_used)
@@ -417,7 +417,7 @@ There are several things that need to be remembered:
 /mob/living/carbon/human/update_inv_ears()
 	remove_overlay(EAR_LEFT_LAYER)
 
-	if(!get_bodypart(BODY_ZONE_HEAD)) //decapitated
+	if(!get_bodypart_nostump(BODY_ZONE_HEAD)) //decapitated
 		return
 
 	if(client && hud_used)
@@ -442,7 +442,7 @@ There are several things that need to be remembered:
 /mob/living/carbon/human/update_inv_ears_extra()
 	remove_overlay(EAR_RIGHT_LAYER)
 
-	if(!get_bodypart(BODY_ZONE_HEAD)) //decapitated
+	if(!get_bodypart_nostump(BODY_ZONE_HEAD)) //decapitated
 		return
 
 	if(client && hud_used)
@@ -531,7 +531,7 @@ There are several things that need to be remembered:
 /mob/living/carbon/human/update_inv_head()
 	remove_overlay(HEAD_LAYER)
 
-	if(!get_bodypart(BODY_ZONE_HEAD)) //Decapitated
+	if(!get_bodypart_nostump(BODY_ZONE_HEAD)) //Decapitated
 		return
 
 	if(client && hud_used)
@@ -691,7 +691,7 @@ There are several things that need to be remembered:
 /mob/living/carbon/human/update_inv_wear_mask()
 	remove_overlay(FACEMASK_LAYER)
 
-	if(!get_bodypart(BODY_ZONE_HEAD)) //Decapitated
+	if(!get_bodypart_nostump(BODY_ZONE_HEAD)) //Decapitated
 		return
 
 	if(client && hud_used)

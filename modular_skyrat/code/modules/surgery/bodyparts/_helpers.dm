@@ -9,6 +9,17 @@
 		if(L.body_zone == zone)
 			return L
 
+/mob/living/proc/get_bodypart(zone)
+	return
+
+/mob/living/carbon/get_bodypart_nostump(zone)
+	if(!zone)
+		return
+	for(var/X in bodyparts)
+		var/obj/item/bodypart/L = X
+		if((L.body_zone == zone) && !L.is_stump())
+			return L
+
 /mob/living/carbon/has_hand_for_held_index(i)
 	if(i >= hand_bodyparts.len)
 		i = hand_bodyparts.len

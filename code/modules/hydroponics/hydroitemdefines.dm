@@ -121,7 +121,7 @@
 		var/mob/living/carbon/C = user
 		var/obj/item/bodypart/BP = C.get_bodypart(BODY_ZONE_HEAD)
 		if(BP)
-			BP.drop_limb()
+			BP.apply_dismember(WOUND_SLASH)
 			playsound(src,pick('sound/misc/desceration-01.ogg','sound/misc/desceration-02.ogg','sound/misc/desceration-01.ogg') ,50, 1, -1)
 	return (BRUTELOSS)
 

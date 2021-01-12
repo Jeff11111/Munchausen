@@ -327,9 +327,9 @@ GENETICS SCANNER
 		var/has_spleen = C.dna && !(NOSPLEEN in C.dna.species.species_traits)
 		var/has_kidneys = C.dna && !(NOKIDNEYS in C.dna.species.species_traits)
 		var/has_bladder = C.dna && !(NOBLADDER in C.dna.species.species_traits)
-		if(!M.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE))
+		if(!M.get_bodypart_nostump(BODY_ZONE_PRECISE_LEFT_EYE))
 			msg += "\n<span class='alert'><b>Subject's left eye is missing.</b></span>"
-		if(!M.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE))
+		if(!M.get_bodypart_nostump(BODY_ZONE_PRECISE_RIGHT_EYE))
 			msg += "\n<span class='alert'><b>Subject's right eye is missing.</b></span>"
 		if(!M.getorganslot(ORGAN_SLOT_EARS))
 			msg += "\n<span class='alert'><b>Subject does not have ears.</b></span>"

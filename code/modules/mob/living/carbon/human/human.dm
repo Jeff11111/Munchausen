@@ -716,7 +716,7 @@
 /mob/living/carbon/human/proc/do_cpr(mob/living/carbon/C, cpr_type = CHEST_CPR)
 	CHECK_DNA_AND_SPECIES(C)
 
-	var/obj/item/bodypart/mouth/jaw = C.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+	var/obj/item/bodypart/mouth/jaw = C.get_bodypart_nostump(BODY_ZONE_PRECISE_MOUTH)
 	var/obj/item/bodypart/chest/chest = C.get_bodypart(BODY_ZONE_CHEST)
 	var/heymedic = GET_SKILL_LEVEL(src, firstaid) || 10
 	switch(cpr_type)

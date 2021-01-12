@@ -17,7 +17,7 @@
 		. += "[t_He] [t_is] wearing [head.get_examine_string(user)] on [t_his] head."
 	if (wear_mask)
 		. += "[t_He] [t_is] wearing [wear_mask.get_examine_string(user)] on [t_his] face."
-	var/obj/item/bodypart/mouth/jaw = get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+	var/obj/item/bodypart/mouth/jaw = get_bodypart_nostump(BODY_ZONE_PRECISE_MOUTH)
 	if(!wear_mask && istype(jaw) && jaw.tapered)
 		. += "<span class='warning'>[t_He] [t_has] \a <b><a href='?src=[REF(jaw)];tape=[jaw.tapered];'>[jaw.tapered.get_examine_string(user)]</a></b> covering [t_his] mouth!</span>"
 	if (wear_neck)

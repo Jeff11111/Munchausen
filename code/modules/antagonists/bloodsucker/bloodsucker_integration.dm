@@ -5,7 +5,7 @@
 		if(displaymessage != "")
 			to_chat(src, "<span class='warning'>Without a heart, you are incapable of [displaymessage].</span>")
 		return FALSE
-	if(!get_bodypart(BODY_ZONE_HEAD))
+	if(!get_bodypart_nostump(BODY_ZONE_HEAD))
 		if(displaymessage != "")
 			to_chat(src, "<span class='warning'>Without a head, you are incapable of [displaymessage].</span>")
 		return FALSE

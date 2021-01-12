@@ -67,11 +67,12 @@
 		H.apply_damage(source.force, BRUTE, BODY_ZONE_HEAD, wound_bonus=CANT_WOUND) // easy tiger, we'll get to that in a sec
 		var/obj/item/bodypart/slit_throat = H.get_bodypart(BODY_ZONE_PRECISE_NECK)
 		if(slit_throat)
-			var/datum/wound/artery/screaming_through_a_slit_throat = new()
-			screaming_through_a_slit_throat.apply_wound(slit_throat)
-			var/datum/wound/tendon/gargling_through_a_slit_throat = new()
-			gargling_through_a_slit_throat.apply_wound(slit_throat)
-		H.apply_status_effect(/datum/status_effect/neck_slice)
+			if(!locate(/datum/wound/artery) in slit_throat.wounds)
+				var/datum/wound/artery/screaming_through_a_slit_throat = new()
+				screaming_through_a_slit_throat.apply_wound(slit_throat)
+			if(!locate(/datum/wound/tendon) in slit_throat.wounds)
+				var/datum/wound/tendon/gargling_through_a_slit_throat = new()
+				gargling_through_a_slit_throat.apply_wound(slit_throat)
 
 /datum/component/butchering/proc/Butcher(mob/living/butcher, mob/living/meat)
 	var/meat_quality = 50 + (bonus_modifier/10) //increases through quality of butchering tool, and through if it was butchered in the kitchen or not

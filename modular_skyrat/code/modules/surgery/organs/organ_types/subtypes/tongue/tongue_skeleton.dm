@@ -22,9 +22,9 @@
 		return
 	if(!owner)
 		return
-	var/target = owner.get_bodypart(BODY_ZONE_HEAD)
-	owner.apply_damage(d, BURN, target)
-	to_chat(owner, "<span class='userdanger'>You feel your skull burning! Oof, your bones!</span>")
+	var/target = owner.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+	owner.apply_damage(d, BRUTE, target)
+	to_chat(owner, "<span class='userdanger'>You feel your jaw breaking! Oof, your bones!</span>")
 	return
 
 /obj/item/organ/tongue/bone/handle_speech(datum/source, list/speech_args)

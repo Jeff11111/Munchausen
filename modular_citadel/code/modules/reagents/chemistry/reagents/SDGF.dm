@@ -251,13 +251,13 @@ IMPORTANT FACTORS TO CONSIDER WHILE BALANCING
 		if(bodydamage>300)
 			var/obj/item/bodypart/l_arm = SM.get_bodypart(BODY_ZONE_L_ARM) //We get the body parts we want this way.
 			var/obj/item/bodypart/r_arm = SM.get_bodypart(BODY_ZONE_R_ARM)
-			l_arm.drop_limb()
-			r_arm.drop_limb()
+			l_arm?.drop_limb()
+			r_arm?.drop_limb()
 		if(bodydamage>400)
 			var/obj/item/bodypart/l_leg = SM.get_bodypart(BODY_ZONE_L_LEG) //We get the body parts we want this way.
 			var/obj/item/bodypart/r_leg = SM.get_bodypart(BODY_ZONE_R_LEG)
-			l_leg.drop_limb()
-			r_leg.drop_limb()
+			l_leg?.drop_limb()
+			r_leg?.drop_limb()
 		if(bodydamage>500)
 			SM.gain_trauma_type(BRAIN_TRAUMA_SEVERE)
 		if(bodydamage>600)

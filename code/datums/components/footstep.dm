@@ -54,7 +54,7 @@
 
 	if(iscarbon(LM))
 		var/mob/living/carbon/C = LM
-		if(!C.get_bodypart(BODY_ZONE_L_LEG) && !C.get_bodypart(BODY_ZONE_R_LEG))
+		if(!C.get_bodypart_nostump(BODY_ZONE_PRECISE_L_FOOT) && !C.get_bodypart_nostump(BODY_ZONE_PRECISE_R_FOOT))
 			return
 		if(C.m_intent == MOVE_INTENT_WALK)
 			return

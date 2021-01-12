@@ -339,8 +339,8 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		tail = new mutanttail()
 		tail.Insert(C)
 
-	var/obj/item/bodypart/shoe_on_head = C.get_bodypart(BODY_ZONE_HEAD)
-	if(shoe_on_head && !shoe_on_head.is_stump())
+	var/obj/item/bodypart/shoe_on_head = C.get_bodypart_nostump(BODY_ZONE_HEAD)
+	if(shoe_on_head)
 		if(ears && (replace_current || !should_have_ears))
 			ears.Remove(TRUE)
 			QDEL_NULL(ears)
@@ -471,7 +471,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 /datum/species/proc/handle_hair(mob/living/carbon/human/H, forced_colour)
 	H.remove_overlay(HAIR_LAYER)
-	var/obj/item/bodypart/head/HD = H.get_bodypart(BODY_ZONE_HEAD)
+	var/obj/item/bodypart/head/HD = H.get_bodypart_nostump(BODY_ZONE_HEAD)
 	if(!HD) //Decapitated
 		return
 	if(HAS_TRAIT(H, TRAIT_HUSK))
@@ -613,7 +613,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 	var/list/standing = list()
 
-	var/obj/item/bodypart/head/HD = H.get_bodypart(BODY_ZONE_HEAD)
+	var/obj/item/bodypart/head/HD = H.get_bodypart_nostump(BODY_ZONE_HEAD)
 
 	if(HD && !(HAS_TRAIT(H, TRAIT_HUSK)))
 		// Lipstick
@@ -629,8 +629,8 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 		// Eyes
 		if(!(NOEYES in species_traits))
-			var/obj/item/bodypart/left_eye/LE = H.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
-			var/obj/item/bodypart/right_eye/RE = H.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
+			var/obj/item/bodypart/left_eye/LE = H.get_bodypart_nostump(BODY_ZONE_PRECISE_LEFT_EYE)
+			var/obj/item/bodypart/right_eye/RE = H.get_bodypart_nostump(BODY_ZONE_PRECISE_RIGHT_EYE)
 			var/mutable_appearance/left_eye_overlay
 			var/mutable_appearance/right_eye_overlay
 			
@@ -667,7 +667,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			standing += right_eye_overlay
 		
 		if(!(NOJAW in species_traits))
-			var/obj/item/bodypart/mouth/jaw = H.get_bodypart(BODY_ZONE_PRECISE_MOUTH)
+			var/obj/item/bodypart/mouth/jaw = H.get_bodypart_nostump(BODY_ZONE_PRECISE_MOUTH)
 			if(!jaw)
 				standing += mutable_appearance(icon_eyes, "lips-missing", -BODY_LAYER)
 
@@ -689,7 +689,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	if(!mutant_bodyparts)
 		return
 
-	var/obj/item/bodypart/head/HD = H.get_bodypart(BODY_ZONE_HEAD)
+	var/obj/item/bodypart/head/HD = H.get_bodypart_nostump(BODY_ZONE_HEAD)
 	var/tauric = mutant_bodyparts["taur"] && H.dna.features["taur"] && H.dna.features["taur"] != "None"
 
 	if(mutant_bodyparts["tail_lizard"])
@@ -1130,7 +1130,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				return FALSE
 			if(!(I.slot_flags & ITEM_SLOT_MASK))
 				return FALSE
-			if(!H.get_bodypart(BODY_ZONE_HEAD))
+			if(!H.get_bodypart_nostump(BODY_ZONE_HEAD))
 				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_NECK)
@@ -1197,7 +1197,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				return FALSE
 			if(!(I.slot_flags & ITEM_SLOT_EYES))
 				return FALSE
-			if(!H.get_bodypart(BODY_ZONE_HEAD))
+			if(!H.get_bodypart_nostump(BODY_ZONE_HEAD))
 				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_HEAD)
@@ -1205,7 +1205,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				return FALSE
 			if(!(I.slot_flags & ITEM_SLOT_HEAD))
 				return FALSE
-			if(!H.get_bodypart(BODY_ZONE_HEAD))
+			if(!H.get_bodypart_nostump(BODY_ZONE_HEAD))
 				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_EARS_LEFT) //skyrat edit
@@ -1213,7 +1213,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				return FALSE
 			if(!(I.slot_flags & ITEM_SLOT_EARS))
 				return FALSE
-			if(!H.get_bodypart(BODY_ZONE_HEAD))
+			if(!H.get_bodypart_nostump(BODY_ZONE_HEAD))
 				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		//skyrat edit
@@ -1222,7 +1222,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				return FALSE
 			if(!(I.slot_flags & ITEM_SLOT_EARS))
 				return FALSE
-			if(!H.get_bodypart(BODY_ZONE_HEAD))
+			if(!H.get_bodypart_nostump(BODY_ZONE_HEAD))
 				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_W_UNDERWEAR)
@@ -1268,8 +1268,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			if(H.l_store)
 				return FALSE
 
-			var/obj/item/bodypart/O = H.get_bodypart(BODY_ZONE_L_LEG)
-
+			var/obj/item/bodypart/O = H.get_bodypart_nostump(BODY_ZONE_L_LEG)
 			if(!H.w_uniform && !nojumpsuit && (!O || O.is_organic_limb()))
 				if(!disable_warning)
 					to_chat(H, "<span class='warning'>I need a jumpsuit before I can attach this [I.name]!</span>")
