@@ -339,7 +339,7 @@
 	user.changeNext_move(CLICK_CD_GRABBING)
 	return TRUE
 
-/datum/wound/mechanical/blunt/moderate/treat(obj/item/I, mob/user)
+/datum/wound/mechanical/blunt/moderate/boneset(obj/item/I, mob/user)
 	if(victim == user)
 		victim.visible_message("<span class='danger'><b>[user]</b> begins resetting [victim.p_their()] [limb.name] with [I].</span>", "<span class='warning'>I begin resetting my [limb.name] with [I]...</span>")
 	else
@@ -469,11 +469,16 @@
 	taped = TRUE
 	processes = TRUE
 
+/datum/wound/mechanical/blunt/proc/boneset(obj/item/I, mob/user)
+	return FALSE
+
 /datum/wound/mechanical/blunt/treat(obj/item/I, mob/user)
 	if(istype(I, /obj/item/wrench))
 		wrench(I, user)
 	else if(istype(I, /obj/item/stack/sticky_tape) && user.a_intent != INTENT_HARM)
 		tape(I, user)
+	else
+		boneset(I, user)
 
 /datum/wound/mechanical/blunt/get_scanner_description(mob/user)
 	. = ..()
