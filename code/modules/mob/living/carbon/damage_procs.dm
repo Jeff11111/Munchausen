@@ -155,9 +155,9 @@
 					liver.applyOrganDamage(amount)
 					amount = liver.damage - last_damage
 			else if(kidneys.tox_dam < kidneys.max_tox_dam)
-				amount = add_toxins(abs(amount))
+				amount = kidneys.add_toxins(abs(amount))
 			else if(liver?.tox_dam < liver?.max_tox_dam)
-				amount = add_toxins(abs(amount))
+				amount = liver.add_toxins(abs(amount))
 	else if(amount < 0 && (liver?.is_working() || kidneys?.is_working()))
 		while(amount < 0 && (liver?.is_working() || kidneys?.is_working()))
 			if(liver?.tox_dam)
