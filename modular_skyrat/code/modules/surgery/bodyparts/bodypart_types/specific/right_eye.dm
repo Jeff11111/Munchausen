@@ -108,7 +108,7 @@
 /obj/item/bodypart/right_eye/on_transfer_to_limb(obj/item/bodypart/BP)
 	if(istype(BP, /obj/item/bodypart/head))
 		var/obj/item/bodypart/head/HD = BP
-		HD.left_eye = src
+		HD.right_eye = src
 		return TRUE
 	else
 		return ..()

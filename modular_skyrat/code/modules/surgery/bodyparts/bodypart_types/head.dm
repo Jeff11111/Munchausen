@@ -26,7 +26,7 @@
 	var/facial_hair_style = "Shaved"
 	//Eye Colouring
 	var/obj/item/bodypart/left_eye/left_eye
-	var/obj/item/bodypart/left_eye/right_eye
+	var/obj/item/bodypart/right_eye/right_eye
 	//Jaw
 	var/obj/item/bodypart/mouth/jaw
 	//Lips
