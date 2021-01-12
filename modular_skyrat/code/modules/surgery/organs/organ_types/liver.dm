@@ -43,7 +43,7 @@
 	//Failing organs always cause maxHealth pain
 	if(CHECK_BITFIELD(organ_flags, ORGAN_FAILING | ORGAN_DEAD))
 		return (maxHealth + get_toxins())
-	return ((get_toxins() * 0.75 + damage) * damage_mult * pain_multiplier)
+	return ((get_toxins() * 0.5 + damage) * damage_mult * pain_multiplier)
 
 //Returns a percentage value for use by GetToxloss().
 /obj/item/organ/liver/proc/get_toxins()
@@ -54,12 +54,12 @@
 /obj/item/organ/liver/proc/remove_toxins(amount)
 	var/last_tox = tox_dam
 	tox_dam = min(max_tox_dam, max(0, tox_dam - amount))
-	return -(tox_dam - last_tox)
+	return (amount - (last_tox - tox_dam))
 
 /obj/item/organ/liver/proc/add_toxins(amount)
 	var/last_tox = tox_dam
-	tox_dam = min(max_tox_dam ,max(0, tox_dam + amount))
-	return (tox_dam - last_tox)
+	tox_dam = min(max_tox_dam, max(0, tox_dam + amount))
+	return (amount - (tox_dam - last_tox))
 
 /obj/item/organ/liver/on_life()
 	. = ..()
@@ -73,11 +73,11 @@
 			if(thisamount && thisamount <= toxTolerance)
 				owner.reagents.remove_reagent(T.type, 1)
 			else
-				damage += (thisamount*toxLethality*T.toxpwr) //SKYRAT CHANGE - makes livers respect toxin power, as a lot of toxins should be harmless, and some extra deadly
+				applyOrganDamage(thisamount*toxLethality*T.toxpwr)
 	
 	//metabolize reagents
 	owner.reagents.metabolize(owner, can_overdose=TRUE)
-	if(damage > 10 && prob(damage/3))//the higher the damage the higher the probability
+	if((damage + get_toxins()) >= 10 && prob(damage/3))//the higher the damage the higher the probability
 		owner.custom_pain("You feel a dull pain in your abdomen.", 10)
 
 /obj/item/organ/liver/applyOrganDamage(d, maximum = maxHealth)
