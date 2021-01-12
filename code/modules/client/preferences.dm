@@ -1857,14 +1857,9 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						flavor_background = strip_html_simple(msg, MAX_FLAVOR_LEN, TRUE)
 
 				if("flavor_faction")
-					var/new_faction = input(user, "Set your faction", "Character Faction") as null|anything in GLOB.factions_list + list("None (Freelancer)", "Other")
+					var/new_faction = input(user, "Set your faction", "Character Faction") as null|anything in GLOB.factions_list
 					if(new_faction)
-						if(new_faction == "Other")
-							var/custom_faction = input(user, "Set your custom faction/subfaction, if unique. Don't abuse this.", "Character Faction", flavor_faction) as null|text
-							if(custom_faction)
-								flavor_faction = strip_html_simple(custom_faction, 30, TRUE)
-						else
-							flavor_faction = new_faction
+						flavor_faction = new_faction
 
 				if("corporate_relations")
 					var/new_faction = input(user, "Set your corporate relations", "Character Support") as null|anything in list("Loyal", "Supportive", "Neutral", "Skeptical", "Opposed")
