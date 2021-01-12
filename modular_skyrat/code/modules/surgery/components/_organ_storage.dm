@@ -152,7 +152,7 @@
 		var/mob/living/carbon/carbon_parent = parent
 		return carbon_parent.internal_organs
 	else
-		return (bodypart_affected.get_organs() | (bodypart_affected.cavity_item))
+		return (bodypart_affected.get_organs() + (bodypart_affected.cavity_item))
 
 //Hide the organs proper
 /datum/component/storage/concrete/organ/get_ui_item_objects_hide(mob/M)
@@ -260,8 +260,8 @@
 	else if(!bodypart_affected.cavity_item && (I.w_class <= bodypart_affected.max_cavity_size))
 		var/list/not_a_location = contents()
 		if(!(I in not_a_location))
-			var/mob/living/carbon/carbon_parent = parent
-			O.forceMove(carbon_parent)
+			I.forceMove(bodypart_affected)
+			bodypart_affected.cavity_item = I
 			update_insides()
 		refresh_mob_views()
 		return TRUE
