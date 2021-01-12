@@ -142,7 +142,6 @@
 			bleed(-abs(amount), FALSE) //gain the blood instead
 	var/obj/item/organ/liver/liver = getorganslot(ORGAN_SLOT_LIVER)
 	var/obj/item/organ/kidneys/kidneys = getorganslot(ORGAN_SLOT_KIDNEYS)
-	var/did_something = FALSE
 	if(amount > 0 && (liver?.is_working() || kidneys?.is_working()))
 		while(amount > 0 && (liver?.is_working() || kidneys?.is_working()))
 			if(liver?.tox_dam >= liver?.max_tox_dam && kidneys?.tox_dam >= liver.max_tox_dam)
