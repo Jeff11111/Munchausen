@@ -216,8 +216,8 @@
 										"<span class='userdanger'><b>[grasping_mob]</b> takes you down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
 										ignored_mobs = grasping_mob)
 			to_chat(grasping_mob, "<span class='danger'>You take <b>[grasped_mob]</b> down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>")
-			grasped_mob.DefaultCombatKnockdown(clamp(str_diff, 1, 5) SECONDS)
-			grasped_mob.Stun(clamp(str_diff, 1, 5) SECONDS)
+			grasped_mob.DefaultCombatKnockdown(clamp(str_diff, 2, 5) SECONDS)
+			grasped_mob.Stun(clamp(str_diff, 2, 5) SECONDS)
 		else
 			grasped_mob.visible_message("<span class='danger'><b>[grasping_mob]</b> fails to take <b>[grasped_mob]</b> down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
 										"<span class='userdanger'><b>[grasping_mob]</b> fails to take you down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
@@ -229,7 +229,7 @@
 										"<span class='userdanger'><b>[grasping_mob]</b> pins you down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
 										ignored_mobs = grasping_mob)
 			to_chat(grasping_mob, "<span class='danger'>You pin <b>[grasped_mob]</b> down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>")
-			grasped_mob.Stun(clamp(str_diff, 1, 5) SECONDS)
+			grasped_mob.Stun(clamp(str_diff, 2, 5) SECONDS)
 		else
 			grasped_mob.visible_message("<span class='danger'><b>[grasping_mob]</b> fails to pin <b>[grasped_mob]</b> down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
 										"<span class='userdanger'><b>[grasping_mob]</b> fails to pin you down[grasped_part ? " by the [grasped_part.name]" : ""]!</span>",\
