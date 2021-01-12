@@ -1876,7 +1876,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					if(msg)
 						exploitable_info = strip_html_simple(msg, MAX_FLAVOR_LEN, TRUE)
 				if("hair")
-					var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference","#"+hair_color) as color|null
+					var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference", hair_color) as color|null
 					if(new_hair)
 						hair_color = sanitize_hexcolor(new_hair)
 
@@ -1893,7 +1893,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					hair_style = previous_list_item(hair_style, GLOB.hair_styles_list)
 
 				if("facial")
-					var/new_facial = input(user, "Choose your character's facial-hair colour:", "Character Preference","#"+facial_hair_color) as color|null
+					var/new_facial = input(user, "Choose your character's facial-hair colour:", "Character Preference", facial_hair_color) as color|null
 					if(new_facial)
 						facial_hair_color = sanitize_hexcolor(new_facial)
 
@@ -1913,12 +1913,12 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					bgstate = next_list_item(bgstate, bgstate_options)
 				
 				if("left_eye")
-					var/new_eyes = input(user, "Choose your character's left eye colour:", "Character Preference","#"+left_eye_color) as color|null
+					var/new_eyes = input(user, "Choose your character's left eye colour:", "Character Preference", left_eye_color) as color|null
 					if(new_eyes)
 						left_eye_color = sanitize_hexcolor(new_eyes)
 				
 				if("right_eye")
-					var/new_eyes = input(user, "Choose your character's right eye colour:", "Character Preference","#"+right_eye_color) as color|null
+					var/new_eyes = input(user, "Choose your character's right eye colour:", "Character Preference", right_eye_color) as color|null
 					if(new_eyes)
 						right_eye_color = sanitize_hexcolor(new_eyes)
 
@@ -1967,17 +1967,17 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						custom_species = null
 
 				if("mutant_color")
-					var/new_mutantcolor = input(user, "Choose your character's alien/mutant color:", "Character Preference","#"+features["mcolor"]) as color|null
+					var/new_mutantcolor = input(user, "Choose your character's alien/mutant color:", "Character Preference", features["mcolor"]) as color|null
 					if(new_mutantcolor)
 						features["mcolor"] = sanitize_hexcolor(new_mutantcolor)
 
 				if("mutant_color2")
-					var/new_mutantcolor = input(user, "Choose your character's secondary alien/mutant color:", "Character Preference","#"+features["mcolor2"]) as color|null
+					var/new_mutantcolor = input(user, "Choose your character's secondary alien/mutant color:", "Character Preference", features["mcolor2"]) as color|null
 					if(new_mutantcolor)
 						features["mcolor2"] = sanitize_hexcolor(new_mutantcolor)
 
 				if("mutant_color3")
-					var/new_mutantcolor = input(user, "Choose your character's tertiary alien/mutant color:", "Character Preference","#"+features["mcolor3"]) as color|null
+					var/new_mutantcolor = input(user, "Choose your character's tertiary alien/mutant color:", "Character Preference", features["mcolor3"]) as color|null
 					if(new_mutantcolor)
 						features["mcolor3"] = sanitize_hexcolor(new_mutantcolor)
 
@@ -2109,7 +2109,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						features["horns"] = new_horns
 
 				if("horns_color")
-					var/new_horn_color = input(user, "Choose your character's horn colour:", "Character Preference","#"+features["horns_color"]) as color|null
+					var/new_horn_color = input(user, "Choose your character's horn colour:", "Character Preference", features["horns_color"]) as color|null
 					if(new_horn_color)
 						features["horns_color"] = sanitize_hexcolor(new_horn_color)
 
@@ -2120,7 +2120,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						features["wings"] = new_wings
 
 				if("wings_color")
-					var/new_wing_color = input(user, "Choose your character's wing colour:", "Character Preference","#"+features["wings_color"]) as color|null
+					var/new_wing_color = input(user, "Choose your character's wing colour:", "Character Preference",features["wings_color"]) as color|null
 					if(new_wing_color)
 						features["wings_color"] = sanitize_hexcolor(new_wing_color)
 
@@ -2286,7 +2286,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 
 				//Genital code
 				if("cock_color")
-					var/new_cockcolor = input(user, "Penis color:", "Character Preference","#"+features["cock_color"]) as color|null
+					var/new_cockcolor = input(user, "Penis color:", "Character Preference", features["cock_color"]) as color|null
 					if(new_cockcolor)
 						features["cock_color"] = sanitize_hexcolor(new_cockcolor)
 
@@ -2307,7 +2307,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						features["cock_shape"] = new_shape
 
 				if("balls_color")
-					var/new_ballscolor = input(user, "Testicles Color:", "Character Preference","#"+features["balls_color"]) as color|null
+					var/new_ballscolor = input(user, "Testicles Color:", "Character Preference", features["balls_color"]) as color|null
 					if(new_ballscolor)
 						features["balls_color"] = sanitize_hexcolor(new_ballscolor)
 
@@ -2326,7 +2326,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						features["breasts_shape"] = new_shape
 
 				if("breasts_color")
-					var/new_breasts_color = input(user, "Breast Color:", "Character Preference","#"+features["breasts_color"]) as color|null
+					var/new_breasts_color = input(user, "Breast Color:", "Character Preference", features["breasts_color"]) as color|null
 					if(new_breasts_color)
 						features["breasts_color"] = sanitize_hexcolor(new_breasts_color)
 
@@ -2340,17 +2340,17 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						features["vag_shape"] = new_shape
 
 				if("vag_color")
-					var/new_vagcolor = input(user, "Vagina color:", "Character Preference","#"+features["vag_color"]) as color|null
+					var/new_vagcolor = input(user, "Vagina color:", "Character Preference", features["vag_color"]) as color|null
 					if(new_vagcolor)
 						features["vag_color"] = sanitize_hexcolor(new_vagcolor)
 
 				if("ooccolor")
-					var/new_ooccolor = input(user, "Choose your OOC colour:", "Game Preference",ooccolor) as color|null
+					var/new_ooccolor = input(user, "Choose your OOC colour:", "Game Preference", ooccolor) as color|null
 					if(new_ooccolor)
 						ooccolor = sanitize_hexcolor(new_ooccolor)
 
 				if("aooccolor")
-					var/new_aooccolor = input(user, "Choose your Antag OOC colour:", "Game Preference",ooccolor) as color|null
+					var/new_aooccolor = input(user, "Choose your Antag OOC colour:", "Game Preference", ooccolor) as color|null
 					if(new_aooccolor)
 						aooccolor = sanitize_hexcolor(new_aooccolor)
 
@@ -2394,7 +2394,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					if(pickedPDAStyle)
 						pda_style = pickedPDAStyle
 				if("pda_color")
-					var/pickedPDAColor = input(user, "Choose your PDA Interface color.", "Character Preference",pda_color) as color|null
+					var/pickedPDAColor = input(user, "Choose your PDA Interface color.", "Character Preference", pda_color) as color|null
 					if(pickedPDAColor)
 						pda_color = sanitize_hexcolor(pickedPDAColor)
 				if ("max_chat_length")
@@ -2404,12 +2404,12 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 
 				//Skyrat changes begin
 				if("personal_chat_color")
-					var/new_chat_color = input(user, "Choose your character's runechat color:", "Character Preference",personal_chat_color) as color|null
+					var/new_chat_color = input(user, "Choose your character's runechat color:", "Character Preference", personal_chat_color) as color|null
 					if(new_chat_color)
 						personal_chat_color = sanitize_hexcolor(new_chat_color)
 
 				if("hud_toggle_color")
-					var/new_toggle_color = input(user, "Choose your HUD toggle flash color:", "Game Preference",hud_toggle_color) as color|null
+					var/new_toggle_color = input(user, "Choose your HUD toggle flash color:", "Game Preference", hud_toggle_color) as color|null
 					if(new_toggle_color)
 						hud_toggle_color = sanitize_hexcolor(new_toggle_color)
 
