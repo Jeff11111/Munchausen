@@ -317,6 +317,7 @@
 
 	var/datum/thrownthing/TT = new()
 	TT.thrownthing = src
+	TT.start_dir = dir
 	TT.target = target
 	TT.target_turf = get_turf(target)
 	TT.init_dir = get_dir(src, target)

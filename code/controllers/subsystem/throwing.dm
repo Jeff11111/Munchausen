@@ -50,6 +50,7 @@ SUBSYSTEM_DEF(throwing)
 	var/mob/thrower
 	var/diagonals_first
 	var/dist_travelled = 0
+	var/start_dir
 	var/start_time
 	var/dist_x
 	var/dist_y
@@ -112,6 +113,8 @@ SUBSYSTEM_DEF(throwing)
 			return
 
 		AM.Move(step, get_dir(AM, step))
+		if (ismob(AM) && start_dir)
+			AM.setDir(start_dir)
 
 		if (!AM.throwing) // we hit something during our move
 			finalize(hit = TRUE)

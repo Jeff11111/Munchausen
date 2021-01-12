@@ -1,7 +1,7 @@
 /obj/screen/kick_jump_bite
 	name = "kick/jump/bite toggle"
 	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
-	icon_state = "kickjumpbite"
+	icon_state = "act_kickjumpbite"
 
 /obj/screen/kick_jump_bite/Click(location, control, params)
 	. = ..()

@@ -74,16 +74,16 @@
 /datum/component/riding/proc/additional_offset_checks()
 	return TRUE
 
-/datum/component/riding/proc/handle_vehicle_offsets()
+/datum/component/riding/proc/handle_vehicle_offsets(forced_dir)
 	var/atom/movable/AM = parent
-	var/AM_dir = "[AM.dir]"
+	var/AM_dir = "[forced_dir ? forced_dir : AM.dir]"
 	var/passindex = 0
 	if(AM.has_buckled_mobs())
 		for(var/m in AM.buckled_mobs)
 			passindex++
 			var/mob/living/buckled_mob = m
 			var/list/offsets = get_offsets(passindex)
-			var/rider_dir = get_rider_dir(passindex)
+			var/rider_dir = forced_dir ? forced_dir : get_rider_dir(passindex)
 			buckled_mob.setDir(rider_dir)
 			for(var/offsetdir in offsets)
 				if(offsetdir == AM_dir)
@@ -209,7 +209,7 @@
 	RegisterSignal(parent, COMSIG_ATOM_DIR_CHANGE, .proc/update_dir)
 
 /datum/component/riding/human/proc/update_dir(mob/source, dir, newdir)
-	handle_vehicle_offsets()
+	handle_vehicle_offsets(newdir)
 	handle_vehicle_layer()
 
 /datum/component/riding/human/vehicle_mob_unbuckle(datum/source, mob/living/M, force = FALSE)

@@ -356,10 +356,10 @@
 /obj/screen/pull/update_icon_state()
 	if(hud?.mymob?.pulling)
 		name = "stop pulling"
-		icon_state = "pull_on"
+		icon_state = "act_pull"
 	else
 		name = "pull"
-		icon_state = "pull"
+		icon_state = "act_pull_on"
 
 /obj/screen/resist
 	name = "resist"
