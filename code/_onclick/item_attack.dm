@@ -440,10 +440,10 @@
 	var/user_str = 10
 	if(GET_STAT_LEVEL(user, str))
 		user_str = GET_STAT_LEVEL(user, str)
-	var/force_mod = CEILING(force/15, 1)
-	var/knockback_tiles = clamp(round(max(0, user_str - victim_str)/3 * force_mod * rand(1,1.5)), 0, 5)
+	var/force_mod = clamp(FLOOR(force/15, 1), 1, 3)
+	var/knockback_tiles = clamp(round(max(0, user_str - victim_str)/4 * force_mod * rand(1,1.5)), 0, 5)
 	//Slam time
-	if((!weapon || (weapon.damtype == BRUTE)) && knockback_tiles)
+	if((!weapon || (weapon.damtype == BRUTE && !weapon.get_sharpness())) && knockback_tiles)
 		if(knockback_tiles > 1)
 			Stumble(knockback_tiles * 10)
 			sound_hint(src, user)
@@ -451,12 +451,11 @@
 		throw_at(target_turf, knockback_tiles, 1, user, spin = FALSE)
 		did_something = TRUE
 	//Knock teeth out
-	if(!weapon || !weapon.get_sharpness())
-		var/obj/item/bodypart/teeth_part = affecting || get_bodypart(user.zone_selected)
-		var/zone_mod = 1
-		if(teeth_part.body_zone == BODY_ZONE_PRECISE_MOUTH)
-			zone_mod *= 3
-		if(teeth_part && teeth_part.max_teeth && prob(force * zone_mod * 1.5))
+	if(!weapon || (weapon.damtype == BRUTE && !weapon.get_sharpness()))
+		if(CHECK_BITFIELD(status_flags, GODMODE))
+			break
+		var/obj/item/bodypart/teeth_part = affecting || get_bodypart(check_zone(user.zone_selected))
+		if(teeth_part && teeth_part.max_teeth && prob(force * 3))
 			if(teeth_part.knock_out_teeth(rand(1, 2) * max(round(force/10), 1), get_dir(user, src)))
 				var/tooth_sound = pick('modular_skyrat/sound/gore/trauma1.ogg',
 								'modular_skyrat/sound/gore/trauma2.ogg',
