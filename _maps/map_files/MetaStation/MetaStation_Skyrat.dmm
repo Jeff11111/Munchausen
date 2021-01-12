@@ -3436,7 +3436,6 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_y = -30
 	},
-/obj/machinery/limbgrower,
 /turf/open/floor/plasteel/white,
 /area/medical/surgery)
 "ahj" = (

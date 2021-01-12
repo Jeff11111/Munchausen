@@ -138,7 +138,6 @@
 	pixel_x = 26
 	},
 /obj/effect/turf_decal/tile/blue,
-/obj/machinery/limbgrower,
 /turf/open/floor/plasteel/white,
 /area/medical/surgery)
 "aas" = (

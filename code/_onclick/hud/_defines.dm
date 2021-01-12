@@ -76,7 +76,9 @@
 #define ui_drone_head "CENTER-3:14,SOUTH:5"     //maintenance drones
 
 //Lower right, persistent menu
-#define ui_specialattack "EAST-4,SOUTH+1"
+#define ui_specialattack "EAST-5,SOUTH+1"
+#define ui_sleep "EAST-4,SOUTH+1"
+#define ui_teach "EAST-4,SOUTH+1"
 #define ui_wield "EAST-3,SOUTH+1"
 #define ui_resist "EAST-3,SOUTH+1"
 #define ui_pull "EAST-2,SOUTH+1"

@@ -32631,7 +32631,6 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 8
 	},
-/obj/machinery/limbgrower,
 /turf/open/floor/plasteel/white,
 /area/medical/medbay/zone3)
 "aZT" = (

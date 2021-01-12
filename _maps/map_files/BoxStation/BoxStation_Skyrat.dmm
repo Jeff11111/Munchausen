@@ -34328,7 +34328,6 @@
 	pixel_x = 22
 	},
 /obj/machinery/light,
-/obj/machinery/limbgrower,
 /turf/open/floor/plasteel/white,
 /area/medical/sleeper)
 "bIe" = (
