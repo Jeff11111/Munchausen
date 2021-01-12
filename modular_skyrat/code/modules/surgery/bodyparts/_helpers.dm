@@ -9,7 +9,7 @@
 		if(L.body_zone == zone)
 			return L
 
-/mob/living/proc/get_bodypart(zone)
+/mob/living/proc/get_bodypart_nostump(zone)
 	return
 
 /mob/living/carbon/get_bodypart_nostump(zone)
