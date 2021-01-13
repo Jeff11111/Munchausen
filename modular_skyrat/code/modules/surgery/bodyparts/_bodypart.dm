@@ -642,10 +642,13 @@
 	if(stam_heal_tick && stamina_dam > DAMAGE_PRECISION)
 		//Pain makes you regenerate stamina slower.
 		//At maximum pain, you barely regenerate stamina on the limb.
-		var/pain_multiplier = max(0.1, 1 - (max(0, (get_pain() - owner?.chem_effects[CE_PAINKILLER])/max_pain_damage * (owner?.mind ? owner.mind.mob_stats[STAT_DATUM(end)].get_shock_mult() : 1))))
+		var/multiplier = max(0.1, 1 - (max(0, (get_pain() - owner?.chem_effects[CE_PAINKILLER])/max_pain_damage * (owner?.mind ? owner.mind.mob_stats[STAT_DATUM(end)].get_shock_mult() : 1))))
 		if(!can_feel_pain())
-			pain_multiplier = 1
-		if(heal_damage(stamina = (stam_heal_tick * (disabled ? 2 : 1) * pain_multiplier), only_robotic = FALSE, only_organic = FALSE, updating_health = FALSE))
+			multiplier = 1
+		var/datum/component/mood/insanity = owner.GetComponent(/datum/component/mood)
+		if(insanity)
+			multiplier *= CEILING(mood.sanity/100, 0.1)
+		if(heal_damage(stamina = (stam_heal_tick * (disabled ? 2 : 1) * multiplier), only_robotic = FALSE, only_organic = FALSE, updating_health = FALSE))
 			. |= BODYPART_LIFE_UPDATE_HEALTH
 	if(pain_heal_tick && pain_dam > DAMAGE_PRECISION)
 		if(heal_damage(pain = (pain_heal_tick * (owner?.lying ? pain_heal_rest_multiplier : 1) * (owner?.mind ? (2 - GET_STAT(owner, end).get_shock_mult()) : 1)), only_robotic = FALSE, only_organic = FALSE, updating_health = FALSE))
