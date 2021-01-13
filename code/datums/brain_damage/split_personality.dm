@@ -40,6 +40,7 @@
 		C.transfer_ckey(stranger_backseat, FALSE)
 		var/datum/job/random = SSjob.name_occupations[pick(SSjob.name_occupations)]
 		random.assign_skills_stats(stranger_backseat)
+		stranger_backseat.mind.combat_music = 'modular_skyrat/sound/music/silverhand.ogg'
 		to_chat(stranger_backseat, "<span class='notice'>My personality is that of a [random.title].</span>")
 		log_game("[key_name(stranger_backseat)] became [key_name(owner)]'s split personality.")
 		message_admins("[ADMIN_LOOKUPFLW(stranger_backseat)] became [ADMIN_LOOKUPFLW(owner)]'s split personality.")
