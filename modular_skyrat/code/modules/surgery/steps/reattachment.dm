@@ -141,6 +141,14 @@
 	requires_bodypart_type = BODYPART_ORGANIC
 	surgery_flags = 0
 
+/datum/surgery_step/sew_limb/tool_check(mob/user, obj/item/tool, mob/living/carbon/target)
+	. = ..()
+	var/obj/item/stack/vibe = tool
+	if(!istype(vibe))
+		return FALSE
+	if(vibe.get_amount() < 3)
+		return FALSE
+
 /datum/surgery_step/sew_limb/validate_target(mob/living/target, mob/user)
 	. = ..()
 	if(!. || !iscarbon(target))
@@ -157,6 +165,9 @@
 		"[user] begins to sew [target]'s [parse_zone(target_zone)] in place!")
 
 /datum/surgery_step/sew_limb/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
+	var/obj/tem/stack/vibe = tool
+	if(istype(vibe) && !vibe.use(3))
+		return TRUE
 	var/mob/living/carbon/human/L = target
 	var/obj/item/bodypart/BP = target.get_bodypart(target_zone)
 	display_results(user, target, "<span class='notice'>You sew [L]'s [parse_zone(target_zone)] to it's [BP.amputation_point].</span>",
