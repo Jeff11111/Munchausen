@@ -26,7 +26,6 @@
 	stranger_backseat = new(owner, src)
 	var/obj/effect/proc_holder/spell/targeted/personality_commune/stranger_spell = new(src)
 	stranger_backseat.AddSpell(stranger_spell)
-	stranger_backseat.mind = owner.mind
 
 	owner_backseat = new(owner, src)
 	var/obj/effect/proc_holder/spell/targeted/personality_commune/owner_spell = new(src)
@@ -39,6 +38,9 @@
 	if(LAZYLEN(candidates))
 		var/mob/C = pick(candidates)
 		C.transfer_ckey(stranger_backseat, FALSE)
+		var/datum/job/random = SSjob.name_occupations[pick(SSjob.name_occupations)]
+		random.assign_skills_stats(stranger_backseat)
+		to_chat(stranger_backseat, "<span class='notice'>My personality is that of a [random.title].</span>")
 		log_game("[key_name(stranger_backseat)] became [key_name(owner)]'s split personality.")
 		message_admins("[ADMIN_LOOKUPFLW(stranger_backseat)] became [ADMIN_LOOKUPFLW(owner)]'s split personality.")
 	else

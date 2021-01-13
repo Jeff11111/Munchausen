@@ -32,7 +32,7 @@
 		//Attempt the weirder skill assignment
 		special_assign_skills_stats(H)
 
-/datum/job/proc/assign_skills_stats(mob/living/carbon/human/H)
+/datum/job/proc/assign_skills_stats(mob/living/H)
 	//Assign stats
 	var/list/all_stats = list(
 							STAT_DATUM(str) = stat_str,
@@ -64,7 +64,7 @@
 		if(skill)
 			skill.level = clamp(rand(all_skills[currentpath] - skill_variance_negative, all_skills[currentpath] + skill_variance_positive), MIN_SKILL, MAX_SKILL)
 
-/datum/job/proc/special_assign_skills_stats(mob/living/carbon/human/H)
+/datum/job/proc/special_assign_skills_stats(mob/living/H)
 	return
 
 //Point value assignment
@@ -183,7 +183,7 @@
 	skill_gaming = JOB_SKILLPOINTS_LEGENDARY
 
 //Either gets ridiculously low or ridiculously high strength, no inbetween
-/datum/job/clown/special_assign_skills_stats(mob/living/carbon/human/H)
+/datum/job/clown/special_assign_skills_stats(mob/living/H)
 	var/fiddy = prob(66)
 	if(fiddy)
 		var/datum/stats/str/str = GET_STAT(H, str)
@@ -278,7 +278,7 @@
 	skill_gaming = JOB_SKILLPOINTS_LEGENDARY
 
 //Either gets ridiculously low or ridiculously high strength, no inbetween
-/datum/job/mime/special_assign_skills_stats(mob/living/carbon/human/H)
+/datum/job/mime/special_assign_skills_stats(mob/living/H)
 	var/fiddy = prob(65)
 	if(fiddy)
 		var/datum/stats/str/str = GET_STAT(H, str)
