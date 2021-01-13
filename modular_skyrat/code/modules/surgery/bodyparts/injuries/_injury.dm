@@ -274,7 +274,7 @@
 /datum/injury/proc/get_bleed_rate()
 	if(!is_bleeding())
 		return 0
-	return bleed_rate * (damage/10)
+	return round(bleed_rate * ((wound_damage() * amount)), DAMAGE_PRECISION)
 
 /datum/injury/proc/is_surgical()
 	if(CHECK_BITFIELD(injury_flags, INJURY_SURGICAL))

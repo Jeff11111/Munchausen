@@ -144,7 +144,7 @@
 	var/obj/item/organ/kidneys/kidneys = getorganslot(ORGAN_SLOT_KIDNEYS)
 	if(amount > 0 && (liver?.is_working() || kidneys?.is_working()))
 		while(amount > 0 && (liver?.is_working() || kidneys?.is_working()))
-			if(liver?.tox_dam >= liver?.max_tox_dam && kidneys?.tox_dam >= liver.max_tox_dam)
+			if(liver?.tox_dam >= liver?.max_tox_dam && kidneys?.tox_dam >= kidneys?.max_tox_dam)
 				if(kidneys.is_working())
 					var/last_damage = kidneys.damage
 					kidneys.applyOrganDamage(amount)

@@ -306,7 +306,7 @@
 		AM.mouse_opacity = initial(AM.mouse_opacity)
 		var/obj/item/organ/O = AM
 		if(!istype(O))
-			if(bodypart_affected.cavity_item == AM)
+			if(bodypart_affected?.cavity_item == AM)
 				bodypart_affected.cavity_item = null
 				return
 			return FALSE
