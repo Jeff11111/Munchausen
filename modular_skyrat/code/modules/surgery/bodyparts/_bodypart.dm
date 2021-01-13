@@ -1985,7 +1985,8 @@
 	else if(owner)
 		C = owner
 		no_update = FALSE
-	else if(!C)
+	
+	if(!C)
 		no_update = TRUE
 
 	if(C && HAS_TRAIT(C, TRAIT_HUSK))
@@ -2012,7 +2013,7 @@
 
 	if(!animal_origin)
 		var/mob/living/carbon/human/H = C
-		var/datum/species/S = H.dna.species
+		var/datum/species/S = H.dna?.species
 		base_bp_icon = S?.icon_limbs || DEFAULT_BODYPART_ICON
 		species_id = S?.limbs_id
 		species_flags_list = S?.species_traits.Copy()

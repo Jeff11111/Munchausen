@@ -50,11 +50,13 @@
 	name = "alien eyes"
 	desc = "It turned out they had them after all!"
 	sight_flags = SEE_MOBS
+	animal_origin = LARVA_BODYPART
 
 /obj/item/bodypart/right_eye/night_vision/alien
 	name = "alien eye"
 	desc = "It turned out they had them after all!"
 	sight_flags = SEE_MOBS
+	animal_origin = LARVA_BODYPART
 
 /obj/item/bodypart/head/alien
 	icon = 'icons/mob/animal_parts.dmi'
