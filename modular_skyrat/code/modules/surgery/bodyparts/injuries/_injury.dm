@@ -106,11 +106,11 @@
 
 // Checks whether other other can be merged into src.
 /datum/injury/proc/can_merge(datum/injury/other)
+	if(other.damage_type != damage_type)
+		return FALSE
 	if(other.type != type)
 		return FALSE
 	if(other.current_stage != current_stage)
-		return FALSE
-	if(other.damage_type != damage_type)
 		return FALSE
 	if(other.can_autoheal() != can_autoheal())
 		return FALSE
