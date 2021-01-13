@@ -932,7 +932,7 @@
 			if(eye_blind <= 1)
 				adjust_blindness(-1)
 		//update eyelids
-		if(stat != old_stat)
+		if(stat != old_stat && ishuman(src))
 			dna?.species?.handle_body(src)
 		update_mobility()
 	update_damage_hud()
