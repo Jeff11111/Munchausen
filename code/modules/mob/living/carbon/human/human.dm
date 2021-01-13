@@ -6,7 +6,6 @@
 	appearance_flags = KEEP_TOGETHER|TILE_BOUND|PIXEL_SCALE
 
 /mob/living/carbon/human/Initialize()
-	verbs += /mob/living/proc/mob_sleep
 	verbs += /mob/living/proc/lay_down
 	verbs += /mob/living/proc/surrender //Skyrat change
 
