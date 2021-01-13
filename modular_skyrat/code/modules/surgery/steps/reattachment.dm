@@ -165,7 +165,7 @@
 		"[user] begins to sew [target]'s [parse_zone(target_zone)] in place!")
 
 /datum/surgery_step/sew_limb/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
-	var/obj/tem/stack/vibe = tool
+	var/obj/item/stack/vibe = tool
 	if(istype(vibe) && !vibe.use(3))
 		return TRUE
 	var/mob/living/carbon/human/L = target
