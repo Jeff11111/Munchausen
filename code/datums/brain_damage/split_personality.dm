@@ -78,7 +78,7 @@
 
 	if(current_controller == OWNER && !stranger_backseat.client)
 		return
-	else if(current_controller = STRANGER && !owner_backseat.client)
+	else if(current_controller == STRANGER && !owner_backseat.client)
 		return
 	
 	log_game("[key_name(current_backseat)] assumed control of [key_name(owner)] due to [src]. (Original owner: [current_controller == OWNER ? owner.key : current_backseat.key])")
