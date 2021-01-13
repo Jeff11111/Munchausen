@@ -60,8 +60,6 @@
 	var/list/treatable_by
 	/// Specific items such as bandages or sutures that can try directly treating this wound only if the user has the victim in an aggressive grab or higher
 	var/list/treatable_by_grabbed
-	/// Tools with the specified tool flag will also be able to try directly treating this wound
-	var/treatable_tool
 	/// Set to TRUE if we don't give a shit about the patient's comfort and are allowed to just use any random sharp thing on this wound. Will require an aggressive grab or more to perform
 	var/treatable_sharp = FALSE
 	/// Can we use a bandage/gauze on this wound in some kind of way?
@@ -169,7 +167,7 @@
 	return ..()
 
 /datum/wound/proc/wound_alert(clear = FALSE)
-	if(HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF) && !clear)
+	if((HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF) && !clear) || !length(associated_alerts))
 		return FALSE
 	. = TRUE
 	if(!clear)
@@ -328,18 +326,25 @@
 
 	var/allowed = FALSE
 
-	// check if we have a valid treatable tool (or, if cauteries are allowed, if we have something hot)
-	if((I.tool_behaviour == treatable_tool) || (treatable_tool == TOOL_CAUTERY && I.get_temperature()) || (treatable_sharp && I.get_sharpness()))
-		allowed = TRUE
-	// failing that, see if we're aggro grabbing them and if we have an item that works for aggro grabs only
-	else if(user.pulling == victim && user.grab_state >= GRAB_AGGRESSIVE && check_grab_treatments(I, user))
+	// see if we're aggro grabbing them and if we have an item that works for aggro grabs only
+	if(user.pulling == victim && user.grab_state >= GRAB_AGGRESSIVE && check_grab_treatments(I, user))
 		allowed = TRUE
 	// failing THAT, we check if we have a generally allowed item
 	else
-		for(var/allowed_type in treatable_by)
-			if(istype(I, allowed_type))
-				allowed = TRUE
-				break
+		if(treatable_sharp && I.get_sharpness())
+			allowed = TRUE
+		if(!allowed)
+			for(var/allowed_type in treatable_by)
+				if(ispath(allowed_type))
+					if(istype(I, allowed_type))
+						allowed = TRUE
+						break
+				else if(I.tool_behaviour == allowed_type)
+					allowed = TRUE
+					break
+				else if(allowed_type == TOOL_CAUTERY && I.get_temperature())
+					allowed = TRUE
+					break
 
 	// if none of those apply, we return false to avoid interrupting
 	if(!allowed)

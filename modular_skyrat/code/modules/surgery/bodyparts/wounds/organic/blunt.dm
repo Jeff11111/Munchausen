@@ -250,13 +250,13 @@
 	treat_text = "Recommended application of bonesetter to affected limb, though manual relocation by applying an aggressive grab to the patient and helpfully interacting with afflicted limb may suffice."
 	examine_desc = "is awkwardly jammed out of place"
 	occur_text = "jerks violently and becomes unseated"
+	treatable_by = list(TOOL_BONESET)
 	severity = WOUND_SEVERITY_MODERATE
 	viable_zones = LIMB_BODYPARTS
 	interaction_efficiency_penalty = 1.5
 	limp_slowdown = 5
 	threshold_minimum = 35
 	threshold_penalty = 15
-	treatable_tool = TOOL_BONESET
 	status_effect_type = /datum/status_effect/wound/blunt/moderate
 	associated_alerts = list()
 	can_self_treat = TRUE
@@ -424,7 +424,6 @@
 	limp_slowdown = 5
 	threshold_minimum = 35
 	threshold_penalty = 15
-	treatable_tool = TOOL_BONESET
 	status_effect_type = /datum/status_effect/wound/blunt/moderate
 	associated_alerts = list()
 	pain_amount = 20 //Hurts a lot, almost a hairline fracture
@@ -519,7 +518,6 @@
 	limp_slowdown = 10
 	threshold_minimum = 35
 	threshold_penalty = 15
-	treatable_tool = TOOL_BONESET
 	status_effect_type = /datum/status_effect/wound/blunt/moderate
 	associated_alerts = list()
 	pain_amount = 20 //Hurts more than your average dislocation
@@ -614,7 +612,6 @@
 	limp_slowdown = 5
 	threshold_minimum = 35
 	threshold_penalty = 15
-	treatable_tool = TOOL_BONESET
 	status_effect_type = /datum/status_effect/wound/blunt/moderate
 	associated_alerts = list()
 	pain_amount = 20 //Hurts a bit more

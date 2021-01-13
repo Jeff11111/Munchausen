@@ -4,7 +4,6 @@
 	a_or_from = "from"
 	wound_type = WOUND_LIST_BLUNT_MECHANICAL
 	treatable_by = list(/obj/item/stack/sticky_tape, /obj/item/reagent_containers)
-	treatable_tool = TOOL_WRENCH
 
 	/// Have we been taped?
 	var/taped
@@ -217,6 +216,7 @@
 	occur_text = "snaps and becomes unseated"
 	severity = WOUND_SEVERITY_MODERATE
 	viable_zones = ALL_BODYPARTS_MINUS_EYES
+	treatable_by = list(TOOL_WRENCH)
 	interaction_efficiency_penalty = 1.5
 	limp_slowdown = 3
 	threshold_minimum = 35
