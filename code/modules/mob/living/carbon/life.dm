@@ -639,7 +639,6 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 
 	if(drunkenness)
 		drunkenness = max(drunkenness - (drunkenness * 0.01), 0) //skyrat-edit
-		//skyrat edit
 		if(drunkenness <= 121 && drunkenness >= 30)
 			throw_alert("drunk", /obj/screen/alert/drunk)
 		else if(drunkenness > 121)
@@ -648,7 +647,6 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 		else if(drunkenness <= 20) //drunk goes away very slowly so we need to be nice here to the players and NOT pollute their screen
 			clear_alert("drunk")
 			remove_chem_effect(CE_PAINKILLER, 25)
-		//
 		if(drunkenness >= 40) //skyrat-edit
 			SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "drunk", /datum/mood_event/drunk)
 			jitteriness = max(jitteriness - 3, 0)
