@@ -221,6 +221,12 @@
 	icon_state = "bottle1"
 	list_reagents = list(/datum/reagent/medicine/salglu_solution = 30)
 
+/obj/item/reagent_containers/glass/bottle/tramadol
+	name = "tramadol bottle"
+	desc = "A small bottle of tramadol."
+	icon_state = "bottle1"
+	list_reagents = list(/datum/reagent/medicine/tramadol = 30)
+
 /obj/item/reagent_containers/glass/bottle/fibrin
 	name = "fibrin bottle"
 	desc = "A small bottle of fibrin."
