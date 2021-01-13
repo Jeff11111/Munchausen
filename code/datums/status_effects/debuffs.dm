@@ -89,8 +89,10 @@
 		owner.adjustStaminaLoss(-0.5) //reduce stamina loss by 0.5 per tick, 10 per 2 seconds
 	if(human_owner && human_owner.drunkenness)
 		human_owner.drunkenness *= 0.997 //reduce drunkenness by 0.3% per tick, 6% per 2 seconds
-	if(carbon_owner && !carbon_owner.dreaming && prob(2))
-		carbon_owner.dream()
+	if(carbon_owner)
+		if(!carbon_owner.dreaming && prob(2))
+			carbon_owner.dream()
+		carbon_owner?.hud_used?.sleeping?.update_icon()
 	// 2% per second, tick interval is in deciseconds
 	if(prob((tick_interval+1) * 0.2) && (!owner.is_asystole() && !owner.nervous_system_failure()))
 		owner.emote("snore")

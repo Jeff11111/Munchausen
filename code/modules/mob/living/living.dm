@@ -523,17 +523,6 @@
 
 // MOB PROCS //END
 
-/mob/living/proc/mob_sleep()
-	set name = "Sleep"
-	set category = "IC"
-
-	if(IsSleeping())
-		to_chat(src, "<span class='notice'>You are already sleeping.</span>")
-		return
-	else
-		if(alert(src, "You sure you want to sleep for a while?", "Sleep", "Yes", "No") == "Yes")
-			SetSleeping(400) //Short nap
-
 //Skyrat change start
 /mob/living/proc/surrender()
 	set name = "Surrender"

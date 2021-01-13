@@ -31,6 +31,9 @@
 
 	if(stat != DEAD)
 		handle_shock()
+	
+	if(stat != DEAD)
+		handle_sleeping()
 
 /mob/living/carbon/PhysicalLife(seconds, times_fired)
 	if(!(. = ..()))

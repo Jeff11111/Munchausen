@@ -42,3 +42,7 @@
 
 	miasma_turf.assume_air(stank)
 	miasma_turf.air_update_turf()
+
+/mob/living/carbon/proc/handle_sleeping()
+	if(sleeping && AmountSleeping() < 4)
+		SetSleeping(4)

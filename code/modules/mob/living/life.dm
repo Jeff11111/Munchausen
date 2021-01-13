@@ -61,9 +61,10 @@
 	//Random events (vomiting etc)
 	handle_random_events()
 
-	//stuff in the stomach
+	// Stuff in the stomach
 	handle_stomach()
-
+	
+	// Parrying
 	handle_block_parry(seconds)
 
 	// Pain

@@ -1,8 +1,4 @@
 //skyrat meme
-/mob/living/carbon
-	var/immunity 		= 100		//current immune system strength
-	var/immunity_norm 	= 100		//it will regenerate to this value
-
 /mob/living/carbon/ComponentInitialize()
 	. = ..()
 	//Carbon mobs always have an organ storage component - it just becomes accessible when necessary.

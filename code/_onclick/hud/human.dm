@@ -175,6 +175,16 @@
 	special_attacks.hud = src
 	static_inventory += special_attacks
 
+	sleeping = new /obj/screen/sleeping
+	sleeping.screen_loc = ui_sleep
+	sleeping.hud = src
+	static_inventory += sleeping
+
+	teach = new /obj/screen/teach
+	teach.screen_loc = ui_teach
+	teach.hud = src
+	static_inventory += teach
+
 	sprint_buffer = new /obj/screen/sprint_buffer
 	sprint_buffer.screen_loc = ui_sprintbufferloc
 	sprint_buffer.hud = src

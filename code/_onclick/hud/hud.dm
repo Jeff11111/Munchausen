@@ -36,9 +36,10 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/obj/screen/zone_select
 	var/obj/screen/combat_intent/combat_intents
 	var/obj/screen/combattoggle/combat_mode
-	var/obj/screen/fixeye/fixeye
 	var/obj/screen/dodge_parry/dodge_parry
 	var/obj/screen/kick_jump_bite/special_attacks
+	var/obj/screen/sleeping/sleeping
+	var/obj/screen/teach/teach
 	var/obj/screen/wield/wielded
 	var/obj/screen/resist/resist
 	var/obj/screen/sprintbutton/sprint
@@ -67,7 +68,8 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/obj/screen/internals
 	var/obj/screen/nutrition/nutrition
 	var/obj/screen/hydration/hydration
-	var/obj/screen/pains
+	var/obj/screen/fixeye/fixeye
+	var/obj/screen/human/pain/pains
 	var/obj/screen/staminas/staminas
 	var/obj/screen/fullscreen/pain/redpains
 	var/obj/screen/fullscreen/noise/noise_filter

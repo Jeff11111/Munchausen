@@ -2,7 +2,6 @@
 	name = "wield"
 	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "act_wield"
-	layer = ABOVE_HUD_LAYER - 0.1
 	var/active = FALSE
 
 /obj/screen/wield/update_icon()
