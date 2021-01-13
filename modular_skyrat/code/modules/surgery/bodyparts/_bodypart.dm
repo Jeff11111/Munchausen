@@ -647,7 +647,7 @@
 			multiplier = 1
 		var/datum/component/mood/insanity = owner.GetComponent(/datum/component/mood)
 		if(insanity)
-			multiplier *= CEILING(mood.sanity/100, 0.1)
+			multiplier *= CEILING(insanity.sanity/100, 0.1)
 		if(heal_damage(stamina = (stam_heal_tick * (disabled ? 2 : 1) * multiplier), only_robotic = FALSE, only_organic = FALSE, updating_health = FALSE))
 			. |= BODYPART_LIFE_UPDATE_HEALTH
 	if(pain_heal_tick && pain_dam > DAMAGE_PRECISION)
