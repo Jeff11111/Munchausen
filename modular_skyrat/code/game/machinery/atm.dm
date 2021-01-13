@@ -21,7 +21,7 @@
 	RegisterSignal(src, COMSIG_COMPONENT_UPLINK_OPEN, /atom/.proc/update_icon)
 
 /obj/machinery/atm/update_icon()
-	..()
+	. = ..()
 	if(!comicao_trading || comicao_trading.locked)
 		icon_state = initial(icon_state)
 	else
@@ -214,6 +214,8 @@
 				BA.account_balance += totalmoney
 			successful_transaction()
 			break
+	else
+		return ..()
 		
 /obj/machinery/atm/proc/invalid_number()
 	playsound(loc, 'sound/machines/synth_no.ogg', 50, 1, -1)

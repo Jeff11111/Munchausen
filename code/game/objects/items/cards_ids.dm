@@ -127,7 +127,7 @@
 			var/datum/bank_account/D = SSeconomy.get_dep_account(registered_account.account_job.paycheck_department)
 			if(D)
 				msg += "The [D.account_holder] reports a balance of [D.account_balance] cr."
-		if(can_withdraw)
+		if(can_withdrawl)
 			msg += "<span class='info'>Alt-Click the ID to pull money from the linked account in the form of space cash.</span>"
 			msg += "<span class='info'>You can insert credits into the linked account by pressing holochips, cash, or coins against the ID.</span>"
 		if(registered_account.account_holder == user.real_name)
@@ -197,7 +197,7 @@
 	var/assignment = null
 	var/access_txt // mapping aid
 	var/bank_support = ID_FREE_BANK_ACCOUNT
-	var/can_withdraw = FALSE //Can you take money from this ID, directly?
+	var/can_withdrawl = FALSE //Can you take money from this ID, directly?
 	var/datum/bank_account/registered_account
 	var/obj/machinery/paystand/my_store
 	var/uses_overlays = TRUE
@@ -259,6 +259,8 @@
 		return ..()
 
 /obj/item/card/id/proc/insert_money(obj/item/I, mob/user, physical_currency)
+	if(!can_withdrawl)
+		return
 	if(!registered_account)
 		to_chat(user, "<span class='warning'>[src] doesn't have a linked account to deposit [I] into!</span>")
 		return
@@ -276,6 +278,8 @@
 	qdel(I)
 
 /obj/item/card/id/proc/mass_insert_money(list/money, mob/user)
+	if(!can_withdrawl)
+		return FALSE
 	if(!registered_account)
 		to_chat(user, "<span class='warning'>[src] doesn't have a linked account to deposit into!</span>")
 		return FALSE
@@ -349,7 +353,7 @@
 		set_new_account(user)
 		return
 	
-	if(!can_withdraw)
+	if(!can_withdrawl)
 		return
 	
 	if(world.time < registered_account.withdrawDelay)
@@ -768,7 +772,7 @@
 	name = "departmental card (FUCK)"
 	desc = "Provides access to the departmental budget."
 	icon_state = "budgetcard"
-	can_withdraw = TRUE
+	can_withdrawl = TRUE
 	var/department_ID = ACCOUNT_CIV
 	var/department_name = ACCOUNT_CIV_NAME
 

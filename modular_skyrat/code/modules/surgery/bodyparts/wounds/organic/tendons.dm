@@ -31,7 +31,10 @@
 
 /datum/wound/tendon/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
 	if(L)
-		name = "Torn [capitalize(L.tendon_name)]"
+		if(!L.tendon_name)
+			qdel(src)
+			return FALSE
+		name = "Torn [capitalize(L.tendon_name, TRUE)]"
 		desc = "Patient's [L.tendon_name] has been violently slashed open, disabling the affected limb."
 		switch(L.body_zone)
 			if(BODY_ZONE_HEAD)
