@@ -46,8 +46,17 @@
 
 	rotate_on_lying = TRUE
 
+	//Eye colour
+	var/left_eye_color = "#000000"
+	var/right_eye_color = "#000000"
+
+	//Lipstick stuff
+	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
+	var/lip_color = "white"
+
 	var/tinttotal = 0	// Total level of visualy impairing items
 	var/list/bodyparts = BODYPARTS_PATH
+
 	//Gets filled up in create_bodyparts()
 	var/list/hand_bodyparts = list() //a collection of arms (or actually whatever the fug /bodyparts you monsters use to wreck my systems)
 	var/icon_render_key = ""
