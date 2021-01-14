@@ -71,7 +71,12 @@
 						chungus.apply_wound(BP, TRUE)
 				victim.wound_message = ""
 				playsound(target, 'modular_skyrat/sound/gore/flesh.ogg', 75, 0)
-			else if((BP.body_zone == BODY_ZONE_CHEST) && (length(victim.bodyparts) <= 1))
+			else if(BP.body_zone == BODY_ZONE_CHEST)
+				for(var/obj/item/bodypart/other_part in victim.bodyparts)
+					if(other_part.body_zone = BODY_ZONE_CHEST)
+						continue
+					if(!other_part.is_stump())
+						return FALSE
 				user.visible_message("<span class='danger'><b>[user]</b> starts slicing <b>[target]</b> into a bloody carcass!</span>", \
 									"<span class='warning'>I start slicing <b>[target]</b> into a carccass...</span>", \
 									target = target, \
