@@ -5,5 +5,5 @@
 	if(is_asystole() || needs_lungs() && (!cum || cum.is_broken()))
 		return emote("loudnoise")
 	if(!shit || shit.is_disabled())
-		return agony_gargle()
+		return emote("gargle")
 	. = ..()

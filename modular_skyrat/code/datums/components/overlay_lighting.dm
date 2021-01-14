@@ -45,7 +45,7 @@
 		"256" = 'modular_skyrat/icons/misc/light_256.dmi',
 		"288" = 'modular_skyrat/icons/misc/light_288.dmi',
 		"320" = 'modular_skyrat/icons/misc/light_320.dmi',
-		"352" = 'modular_skyrat/icons/misc/light_352.dmi'
+		"352" = 'modular_skyrat/icons/misc/light_352.dmi',
 		)
 
 /datum/component/overlay_lighting/Initialize(_color, _range, _power, starts_on = TRUE)
@@ -129,6 +129,8 @@
 
 /datum/component/overlay_lighting/proc/check_holder()
 	var/atom/movable/A = parent
+	if(!istype(A))
+		return
 	if(isturf(A.loc))
 		set_holder(A)
 	else

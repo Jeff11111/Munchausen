@@ -260,27 +260,27 @@
 		emote_string = pain_emote_by_power["[power]"]
 	return emote_string
 
-/datum/species/proc/agony_scream(var/mob/living/carbon/human/H)
+/datum/species/proc/agony_scream(mob/living/carbon/human/H)
 	if(!istype(H))
 		return FALSE
 	H.emote("agonyscream")
 
-/datum/species/proc/agony_gargle(var/mob/living/carbon/human/H)
+/datum/species/proc/agony_gargle(mob/living/carbon/human/H)
 	if(!istype(H))
 		return FALSE
 	H.emote("gargle")
 
-/datum/species/proc/agony_gasp(var/mob/living/carbon/human/H)
+/datum/species/proc/agony_gasp(mob/living/carbon/human/H)
 	if(!istype(H))
 		return FALSE
 	H.emote("gasp")
 
-/datum/species/proc/death_rattle(var/mob/living/carbon/human/H)
+/datum/species/proc/death_rattle(mob/living/carbon/human/H)
 	if(!istype(H))
 		return FALSE
 	H.emote("deathrattle")
 
-/datum/species/proc/death_scream(var/mob/living/carbon/human/H)
+/datum/species/proc/death_scream(mob/living/carbon/human/H)
 	if(!istype(H))
 		return FALSE
 	H.emote("deathscream")

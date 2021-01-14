@@ -789,7 +789,8 @@
 				else
 					visible_message("<b>[src]</b> performs CPR on <b>[C.name]</b>!", \
 								"<span class='notice'>You perform CPR on <b>[C.name]</b>.</span>")
-				SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "perform_cpr", /datum/mood_event/perform_cpr)
+				if(C.stat >= DEAD || C.is_asystole())
+					SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "perform_cpr", /datum/mood_event/perform_cpr)
 				C.last_cpr = world.time
 				log_combat(src, C, "CPRed")
 
