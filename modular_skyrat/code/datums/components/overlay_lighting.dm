@@ -137,7 +137,7 @@
 		set_holder(A)
 	else
 		var/atom/movable/inside = A.loc
-		if(isturf(inside.loc))
+		if(isturf(inside?.loc))
 			set_holder(inside)
 		else
 			set_holder(null)
