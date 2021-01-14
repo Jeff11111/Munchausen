@@ -92,7 +92,7 @@
 		msg = "[..()], and has been patched[welded ? ", and welded," : ""] with [patch]"
 	else if(!msg && welded)
 		msg = "[..()], and has been welded"
-	return "<B>[msg]!</B>"
+	return "<span class='danger'><B>[msg]!</B></span>"
 
 /// if someone is using a mineral sheet on the wound
 /datum/wound/mechanical/proc/patch(obj/item/stack/sheet/I, mob/user, power)
