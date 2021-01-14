@@ -322,14 +322,14 @@
 		dice = user.mind.diceroll(GET_STAT_LEVEL(user, str)*1.25, GET_SKILL_LEVEL(user, melee)*0.75, "6d6", 20)
 
 	if(dice >= DICE_SUCCESS)
-		user.visible_message("<span class='danger'><b>[user]</b> torques <b>[victim]</b>'s disconnected [limb.name] actuators with a loud pop![victim.wound_message]</span>", "<span class='danger'>I torque <b>[victim]</b>'s disconnected [limb.name] actuators with a loud pop![victim.wound_message]</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='userdanger'><b>[user]</b> snaps my dislocated [limb.name] with a sickening crack![victim.wound_message]</span>")
-		victim.agony_scream()
+		var/obj/item/bodypart/funky_kong = limb
 		if(dice >= DICE_CRIT_SUCCESS)
 			replace_wound(/datum/wound/blunt/critical)
 		else
 			replace_wound(/datum/wound/blunt/severe)
-		limb.receive_damage(brute=GET_STAT_LEVEL(user, str)*0.75, wound_bonus = CANT_WOUND)
+		user.visible_message("<span class='danger'><b>[user]</b> torques <b>[victim]</b>'s disconnected [funky_kong.name] actuators with a loud pop![victim.wound_message]</span>", "<span class='danger'>I torque <b>[victim]</b>'s disconnected [funky_kong.name] actuators with a loud pop![victim.wound_message]</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> snaps my dislocated [funky_kong.name] with a sickening crack![victim.wound_message]</span>")
+		funky_kong.receive_damage(brute=GET_STAT_LEVEL(user, str)*0.75, wound_bonus = CANT_WOUND)
 	else
 		user.visible_message("<span class='danger'><b>[user]</b> grinds <b>[victim]</b>'s disconnected [limb.name] actuators around![victim.wound_message]</span>", "<span class='danger'>I grind <b>[victim]</b>'s disconnected [limb.name] actuators around painfully![victim.wound_message]</span>", ignored_mobs=victim)
 		to_chat(victim, "<span class='userdanger'><b>[user]</b> grinds my dislocated [limb.name] actuators around![victim.wound_message]</span>")
