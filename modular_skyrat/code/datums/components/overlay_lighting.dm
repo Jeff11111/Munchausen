@@ -85,7 +85,7 @@
 	affected_turfs.Cut()
 
 /datum/component/overlay_lighting/proc/get_new_turfs()
-	if(!current_holder)
+	if(!istype(current_holder))
 		return
 	for(var/turf/lit_turf in RANGE_TURFS(lumcount_range, current_holder.loc))
 		lit_turf.dynamic_lumcount += lum_power
