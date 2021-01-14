@@ -95,19 +95,19 @@
 	clean_old_turfs()
 	get_new_turfs()
 
-/datum/component/overlay_lighting/proc/add_dynamic_lumi(var/atom/movable/at)
+/datum/component/overlay_lighting/proc/add_dynamic_lumi(atom/movable/at)
 	LAZYINITLIST(at.affected_dynamic_lights)
 	at.affected_dynamic_lights[src] = lum_range
 	at.vis_contents += visible_mask
 	at.update_dynamic_luminosity()
 
-/datum/component/overlay_lighting/proc/remove_dynamic_lumi(var/atom/movable/at)
+/datum/component/overlay_lighting/proc/remove_dynamic_lumi(atom/movable/at)
 	LAZYINITLIST(at.affected_dynamic_lights)
 	at.affected_dynamic_lights -= src
 	at.vis_contents -= visible_mask
 	at.update_dynamic_luminosity()
 
-/datum/component/overlay_lighting/proc/set_holder(var/atom/movable/new_holder)
+/datum/component/overlay_lighting/proc/set_holder(atom/movable/new_holder)
 	if(new_holder == current_holder)
 		return
 	if(current_holder)

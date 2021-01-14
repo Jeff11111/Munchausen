@@ -104,7 +104,7 @@
 		var/mob/living/carbon/human/H = src
 
 		// Blocking values that mean the damage was under armor, so wounding is changed to blunt
-		var/armor_border_blocking = 1 - (H.checkarmormax(def_zone, "under_armor_mult") * 1/max(0.01, H.checkarmormax(def_zone, "armor_range_mult")))
+		var/armor_border_blocking = 1 - (H.checkarmormax(H.get_bodypart(def_zone), "under_armor_mult") * 1/max(0.01, H.checkarmormax(H.get_bodypart(def_zone), "armor_range_mult")))
 		if(armor_block >= armor_border_blocking)
 			Pwound_bonus = max(0, Pwound_bonus - armor_block/100 * totaldamage)
 			Pbarewound_bonus = 0
