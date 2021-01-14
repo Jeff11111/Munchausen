@@ -251,6 +251,7 @@
 	name = "\improper double barreled shotgun"
 	desc = "The double barreled shotgun - A true classic."
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/shotgun.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/obj/bobstation/guns/worn/back.dmi'
 	lefthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/shotgun_lefthand.dmi'
 	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/shotgun_righthand.dmi'
 	inhand_x_dimension = 32
