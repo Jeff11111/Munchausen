@@ -30,6 +30,8 @@
 	return null
 
 /datum/wound/tendon/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
+	if(!L.owner)
+		return
 	if(L)
 		if(!L.tendon_name)
 			qdel(src)

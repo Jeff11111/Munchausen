@@ -24,6 +24,8 @@
 	var/squirt_delay_max = 12 SECONDS
 
 /datum/wound/artery/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
+	if(!L.owner)
+		return
 	if(L)
 		if(!L.artery_name)
 			qdel(src)

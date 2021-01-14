@@ -85,7 +85,8 @@
 	affected_turfs.Cut()
 
 /datum/component/overlay_lighting/proc/get_new_turfs()
-	if(!istype(current_holder))
+	if(!istype(current_holder) || QDELETED(current_holder))
+		qdel(src)
 		return
 	for(var/turf/lit_turf in RANGE_TURFS(lumcount_range, current_holder.loc))
 		lit_turf.dynamic_lumcount += lum_power
@@ -129,7 +130,8 @@
 
 /datum/component/overlay_lighting/proc/check_holder()
 	var/atom/movable/A = parent
-	if(!istype(A))
+	if(!istype(A) || QDELETED(A))
+		qdel(src)
 		return
 	if(isturf(A.loc))
 		set_holder(A)
