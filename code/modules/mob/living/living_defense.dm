@@ -207,12 +207,12 @@
 				ran_zone_prob = supposed_to_affect.zone_prob
 				extra_zone_prob = supposed_to_affect.extra_zone_prob
 				miss_entirely = supposed_to_affect.miss_entirely_prob
-			miss_entirely /= (victim.lying ? 10 : 1)
+			miss_entirely /= (victim.lying ? 5 : 1)
 
 			//good modifier if aimed
 			var/modifier = 0
 			if(assailant.combat_intent == CI_AIMED)
-				modifier = 5
+				modifier += 6
 			
 			if(assailant.mind.diceroll(GET_STAT_LEVEL(assailant, dex)*1.5, GET_SKILL_LEVEL(assailant, ranged)*0.5, dicetype = "6d6", mod = -CEILING(miss_entirely/5 + throwingdatum.dist_travelled/5, 1) + modifier, crit = 20) <= DICE_CRIT_FAILURE)
 				blocked = 100

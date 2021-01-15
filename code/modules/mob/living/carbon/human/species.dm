@@ -1720,7 +1720,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		
 		//Get the bodypart we actually affect
 		var/obj/item/bodypart/affecting = target.get_bodypart(ran_zone(user.zone_selected, ran_zone_prob))
-
 		var/missed = FALSE
 		
 		//good modifier if aimed

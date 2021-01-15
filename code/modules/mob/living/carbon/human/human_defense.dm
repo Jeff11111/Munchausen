@@ -92,19 +92,18 @@
 			var/obj/item/bodypart/supposed_to_affect = get_bodypart(P.def_zone)
 			if(supposed_to_affect)
 				miss_entirely = supposed_to_affect.miss_entirely_prob
-			miss_entirely /= (lying ? 10 : 1)
+			miss_entirely /= (lying ? 5 : 1)
 
 			//good modifier if aimed
 			var/modifier = 0
 			if(fireboy.combat_intent == CI_AIMED)
 				modifier += 6
 			
-			switch(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.5, GET_SKILL_LEVEL(fireboy, ranged)*1.5, dicetype = "6d6", mod = -CEILING(miss_entirely/5 + get_dist(P.starting, src)/5 + modifier, 1), crit = 20))
+			if(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.5, GET_SKILL_LEVEL(fireboy, ranged)*1.5, dicetype = "6d6", mod = -CEILING(miss_entirely/5 + get_dist(P.starting, src)/5 + modifier, 1), crit = 20) <= DICE_CRIT_FAILURE)
 				//Missed shot
-				if(DICE_CRIT_FAILURE)
-					if(fireboy != src)
-						visible_message("<span class='danger'><b>FAILURE!</b> [P] misses <b>[src]</b> entirely!</span>")
-						return BULLET_ACT_FORCE_PIERCE
+				if(fireboy != src)
+					visible_message("<span class='danger'><b>FAILURE!</b> [P] misses <b>[src]</b> entirely!</span>")
+					return BULLET_ACT_FORCE_PIERCE
 	//Critical hits
 	if(mind)
 		switch(rand(1,100))
@@ -169,6 +168,7 @@
 			extra_zone_prob = supposed_to_affect.extra_zone_prob
 			miss_entirely = supposed_to_affect.miss_entirely_prob
 		miss_entirely /= (lying ? 5 : 1)
+
 		var/c_intent = CI_DEFAULT
 		if(iscarbon(user))
 			var/mob/living/carbon/carbon_mob = user

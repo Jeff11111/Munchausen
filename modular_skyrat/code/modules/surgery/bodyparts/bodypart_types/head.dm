@@ -24,7 +24,7 @@
 	//Facial hair colour and style
 	var/facial_hair_color = "000"
 	var/facial_hair_style = "Shaved"
-	//Eye Colouring
+	//Eyes
 	var/obj/item/bodypart/left_eye/left_eye
 	var/obj/item/bodypart/right_eye/right_eye
 	//Jaw
@@ -34,7 +34,6 @@
 	var/lip_color = "white"
 	//If the head is a special sprite
 	var/custom_head
-	//skyrat edit
 	wound_resistance = 10
 	specific_locations = list("left eyebrow", "right eyebrow", "cheekbone", "neck", "throat", "jawline", "entire face", "forehead")
 	max_cavity_size = WEIGHT_CLASS_SMALL
