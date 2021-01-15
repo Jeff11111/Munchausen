@@ -73,7 +73,7 @@
 				playsound(target, 'modular_skyrat/sound/gore/flesh.ogg', 75, 0)
 			else if(BP.body_zone == BODY_ZONE_CHEST)
 				for(var/obj/item/bodypart/other_part in victim.bodyparts)
-					if(other_part.body_zone = BODY_ZONE_CHEST)
+					if(other_part.body_zone == BODY_ZONE_CHEST)
 						continue
 					if(!other_part.is_stump())
 						return FALSE
