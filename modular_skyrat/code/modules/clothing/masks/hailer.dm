@@ -163,5 +163,5 @@
 	desc = "Part of corporate's plan to scare employees into submission. The effectiveness of this plan so far has been doubtful."
 	icon = 'modular_skyrat/icons/obj/clothing/enforcer.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/enforcer.dmi'
-	icon_state = "hunk_helmet"
+	icon_state = "hunk_mask"
 	mutantrace_variation = STYLE_NO_ANTHRO_ICON
