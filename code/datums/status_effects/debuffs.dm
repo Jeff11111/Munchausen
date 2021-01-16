@@ -104,6 +104,7 @@
 /datum/status_effect/incapacitating/sleeping/on_remove()
 	. = ..()
 	SEND_SIGNAL(owner,COMSIG_LIVING_STOP_UNCONSCIOUS)
+	owner?.hud_used?.sleeping?.update_icon()
 
 /datum/status_effect/staggered
 	id = "staggered"

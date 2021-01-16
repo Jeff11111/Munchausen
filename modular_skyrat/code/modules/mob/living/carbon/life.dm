@@ -44,5 +44,5 @@
 	miasma_turf.air_update_turf()
 
 /mob/living/carbon/proc/handle_sleeping()
-	if(sleeping && AmountSleeping() < 4 SECONDS)
-		SetSleeping(4 SECONDS)
+	if(sleeping && AmountSleeping() < 8 SECONDS)
+		SetSleeping(8 SECONDS)
