@@ -357,7 +357,7 @@
 			wash_obj(AM)
 
 /obj/machinery/shower/proc/wash_obj(obj/O)
-	if(!istype(O))
+	if(!istype(O) || QDELETED(O))
 		return
 	. = SEND_SIGNAL(O, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_WEAK)
 	. = O.clean_blood()
