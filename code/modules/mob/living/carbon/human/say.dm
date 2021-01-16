@@ -25,6 +25,8 @@
 		var/obj/item/clothing/mask/infiltrator/V = wear_mask
 		if(V.voice_unknown)
 			return ("Unknown")
+		else
+			return real_name
 	if(CHECK_BITFIELD(wear_mask?.flags_inv, HIDEFACE))
 		return ("Unknown")
 	if(mind)
