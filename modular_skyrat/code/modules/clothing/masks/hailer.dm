@@ -112,7 +112,6 @@
 		saved_screams = list()
 
 //Flatline implant
-
 /obj/item/implant/flatline
 	name = "flatline implant"
 	activated = 0
@@ -157,3 +156,12 @@
 	actions_types = list(/datum/action/item_action/halt)
 	flags_inv = HIDEFACIALHAIR|HIDEFACE|HIDEEYES
 	aggressiveness = 4
+
+//hunk mask
+/obj/item/clothing/mask/gas/sechailer/swat/enforcer
+	name = "enforcer mask"
+	desc = "Part of corporate's plan to scare employees into submission. The effectiveness of this plan so far has been doubtful."
+	icon = 'modular_skyrat/icons/obj/clothing/enforcer.dmi'
+	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/enforcer.dmi'
+	icon_state = "hunk_helmet"
+	mutantrace_variation = STYLE_NO_ANTHRO_ICON

@@ -10,6 +10,8 @@
 					/obj/item/melee/classic_baton/black=1,
 					)
 	suit_store = /obj/item/gun/energy/e_gun/advtaser/large
+	mask = /obj/item/clothing/mask/gas/sechailer/swat/enforcer
+	head = /obj/item/clothing/head/helmet/enforcer
 
 /obj/item/choice_beacon/warden
 	name = "lieutenant's weapon beacon"
