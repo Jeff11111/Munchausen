@@ -26,21 +26,6 @@
 	can_unsuppress = TRUE
 	obj_flags = UNIQUE_RENAME
 
-/obj/item/gun/ballistic/automatic/pistol/modular/update_icon()
-	..()
-	if(current_skin)
-		icon_state = "[unique_reskin[current_skin]][chambered ? "" : "-e"][suppressed ? "-suppressed" : ""]"
-	else
-		icon_state = "[initial(icon_state)][chambered ? "" : "-e"][suppressed ? "-suppressed" : ""]"
-	if(magazine && suppressed)
-		cut_overlays()
-		add_overlay("[unique_reskin[current_skin]]-magazine-sup")	//Yes, this means the default iconstate can't have a magazine overlay
-	else if (magazine)
-		cut_overlays()
-		add_overlay("[unique_reskin[current_skin]]-magazine")
-	else
-		cut_overlays()
-
 /obj/item/gun/ballistic/automatic/pistol/m1911
 	name = "\improper M1911"
 	desc = "A classic .45 handgun with a small magazine capacity."
