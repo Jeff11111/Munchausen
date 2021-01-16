@@ -25,8 +25,8 @@
 		var/obj/item/clothing/mask/infiltrator/V = wear_mask
 		if(V.voice_unknown)
 			return ("Unknown")
-		else
-			return real_name
+	if(CHECK_BITFIELD(wear_mask?.flags_inv, HIDEFACE))
+		return ("Unknown")
 	if(mind)
 		var/datum/antagonist/changeling/changeling = mind.has_antag_datum(/datum/antagonist/changeling)
 		if(changeling && changeling.mimicing )

@@ -55,8 +55,8 @@
 		return if_no_face
 	if( head && (head.flags_inv&HIDEFACE) )
 		return if_no_face		//Likewise for hats
-	var/obj/item/bodypart/O = get_bodypart_nostump(BODY_ZONE_HEAD)
-	if( !O || (HAS_TRAIT(src, TRAIT_DISFIGURED)) || (O.brutestate+O.burnstate)>2 || cloneloss>50 || !real_name || nameless)	//disfigured. use id-name if possible
+	var/obj/item/bodypart/HD = get_bodypart_nostump(BODY_ZONE_HEAD)
+	if( !HD || (HAS_TRAIT(src, TRAIT_DISFIGURED)) || cloneloss>50 || !real_name || nameless)	//disfigured. use id-name if possible
 		return if_no_face
 	return real_name
 
