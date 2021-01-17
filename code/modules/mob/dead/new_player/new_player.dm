@@ -491,17 +491,15 @@
 		dat += jointext(dept_dat, "")
 		dat += "</fieldset><br>"
 		column_counter++
-		if(free_space <=4)
+		if(free_space < 5)
 			free_space++
-			if(column_counter > 0 && (column_counter % 3 == 0))
+			if(column_counter > 0 && !(column_counter % 3))
 				dat += "</td><td valign='top'>"
-		if(free_space >= 5 && (free_space % 5 == 0) && (column_counter % 3 != 0))
+		if(free_space >= 5 && !(free_space % 5) && (column_counter % 3))
 			free_space = 0
 			column_counter = 0
 			dat += "</td><td valign='top'>"
-
-	dat += "</td></tr></table></center></center>"
-
+	
 	var/available_ghosts = 0
 	for(var/spawner in GLOB.mob_spawners)
 		if(!LAZYLEN(spawner))
@@ -513,7 +511,20 @@
 		break
 
 	if(!available_ghosts)
-		dat += "<div class='notice red'>There are currently no open ghost spawners.</div>"
+		dat += "<center><table><tr><td valign='top'>"
+		dat += "<fieldset style='width: 185px; border: 2px solid #ffffff; display: inline'>"
+		dat += "There are currently no open ghost spawners."
+		dat += "</fieldset><br>"
+		dat += "</td></tr></table></center>"
+		column_counter++
+		if(free_space < 5)
+			free_space++
+			if(column_counter > 0 && !(column_counter % 3))
+				dat += "</td><td valign='top'>"
+		if(free_space >= 5 && !(free_space % 5) && (column_counter % 3))
+			free_space = 0
+			column_counter = 0
+			dat += "</td><td valign='top'>"
 	else
 		var/list/categorizedJobs = list("Ghost Role" = list(jobs = list(), titles = GLOB.mob_spawners, color = "#ffffff"))
 		for(var/spawner in GLOB.mob_spawners)
@@ -535,15 +546,34 @@
 				dat += "<a class='otherPosition' style='display:block;width:170px' href='byond://?src=[REF(src)];JoinAsGhostRole=[spawner]'>[spawner]</a>"
 
 			dat += "</fieldset><br>"
+			column_counter++
+			if(free_space < 5)
+				free_space++
+				if(column_counter > 0 && !(column_counter % 3))
+					dat += "</td><td valign='top'>"
+			if(free_space >= 5 && !(free_space % 5) && (column_counter % 3))
+				free_space = 0
+				column_counter = 0
+				dat += "</td><td valign='top'>"
 		dat += "</td></tr></table></center>"
-		dat += "</div></div>"
-	
+
+	column_counter++
+	if(free_space < 5)
+		free_space++
+		if(column_counter > 0 && !(column_counter % 3))
+			dat += "</td><td valign='top'>"
+	if(free_space >= 5 && !(free_space % 5) && (column_counter % 3))
+		free_space = 0
+		column_counter = 0
+		dat += "</td><td valign='top'>"
 	dat += "<center><table><tr><td valign='top'>"
 	dat += "<fieldset style='width: 185px; border: 2px solid #ffffff; display: inline'>"
 	dat += "<legend align='center' style='color: #ffffff'>Random Job</legend>"
 	dat += "<a class='otherPosition' style='display:block;width:170px' href='byond://?src=[REF(src)];JoinAsRandom=1'>Join as Random Job</a>"
-	dat += "</fieldset>"
+	dat += "</fieldset><br>"
 	dat += "</td></tr></table></center>"
+
+	dat += "</td></tr></table></center></center>"
 	dat += "</div></div>"
 
 	var/datum/browser/popup = new(src, "latechoices", "Choose Profession", 720, 600)
