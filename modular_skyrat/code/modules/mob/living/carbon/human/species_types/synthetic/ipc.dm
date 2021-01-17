@@ -73,4 +73,5 @@
 	H.say("Unit [H.real_name] is fully functional. Have a nice day.")
 	H.dna.features["ipc_screen"] = saved_screen
 	H.update_body()
+	playsound(H, pick('modular_skyrat/sound/effects/95.ogg', 'modular_skyrat/sound/effects/xp.ogg'), 50, FALSE)
 	return 
