@@ -55,7 +55,7 @@
 	if (getOrganLoss(ORGAN_SLOT_BRAIN) >= 30) //Citadel change to make memes more often.
 		SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "brain_damage", /datum/mood_event/brain_damage)
 		if(prob(3))
-			if(prob(25))
+			if(prob(50))
 				emote("drool")
 			else
 				say(pick_list_replacements(BRAIN_DAMAGE_FILE, "brain_damage"))
