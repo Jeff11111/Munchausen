@@ -61,7 +61,7 @@
 /datum/uplink_item/dangerous/surplus_knife
 	name = "Z Hunter Surplus Knife"
 	desc = "The perfect companion for the surplus rifle. This small sized gremlin is sure to kill any NanoTrasen loyalist with disgust."
-	item = /obj/item/melee/transforming/energy/sword/cx/traitor
+	item = /obj/item/kitchen/knife/combat/zhunter
 	cost = 1
 
 /datum/uplink_item/dangerous/vintorez
