@@ -32,7 +32,8 @@
 
 /datum/quirk/Destroy()
 	STOP_PROCESSING(SSquirks, src)
-	remove()
+	if(quirk_holder)
+		remove()
 	if(quirk_holder)
 		to_chat(quirk_holder, lose_text)
 		quirk_holder.roundstart_quirks -= src
