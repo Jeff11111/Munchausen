@@ -58,6 +58,12 @@
 	item = /obj/item/melee/transforming/energy/sword/cx/traitor
 	cost = 7
 
+/datum/uplink_item/dangerous/surplus_knife
+	name = "Z Hunter Surplus Knife"
+	desc = "The perfect companion for the surplus rifle. This small sized gremlin is sure to kill any NanoTrasen loyalist with disgust."
+	item = /obj/item/melee/transforming/energy/sword/cx/traitor
+	cost = 1
+
 /datum/uplink_item/dangerous/vintorez
 	name = "9x39mm Riifle"
 	desc = "A fully-loaded MI13 Vintorez replica rifle. \

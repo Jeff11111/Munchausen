@@ -781,3 +781,12 @@
 
 /obj/item/melee/mace/get_belt_overlay()
 	return mutable_appearance('modular_skyrat/icons/obj/bobstation/melee/belt.dmi', "mace")
+
+//horrible
+/obj/item/kitchen/knife/combat/zhunter
+	name = "z-hunter brand knife"
+	desc = "Illegal in the Separated Kingdom, this surplus knife is barely able to cut through skin. It can, however, hunt many Z's."
+	icon = 'modular_skyrat/icons/obj/bobstation/melee/knife.dmi'
+	force = 10
+	throwforce = 5
+	w_class = WEIGHT_CLASS_SMALL
