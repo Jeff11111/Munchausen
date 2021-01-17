@@ -27,7 +27,11 @@
 			return ("Unknown")
 		else
 			return real_name
-	if(CHECK_BITFIELD(wear_mask?.flags_inv, HIDEFACE))
+	if(istype(wear_mask, /obj/item/clothing/mask))
+		var/obj/item/clothing/mask/chunger = wear_mask
+		if(CHECK_BITFIELD(chunger.flags_inv, HIDE_FACE) && chunger.mask_adjusted)
+			return ("Unknown")
+	else if(CHECK_BITFIELD(wear_mask?.flags_inv, HIDEFACE))
 		return ("Unknown")
 	if(mind)
 		var/datum/antagonist/changeling/changeling = mind.has_antag_datum(/datum/antagonist/changeling)
