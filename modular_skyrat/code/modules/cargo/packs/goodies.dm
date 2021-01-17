@@ -343,6 +343,13 @@
 	cost = 800
 	contains = list(/obj/item/kitchen/knife/combat)
 
+//UK worst crime pack
+/datum/supply_pack/goody/zhunter
+	name = "Z-Hunter Surplus"
+	desc = "No one wants to buy this junk and it's filling up the warehouse. Comes with 8 Z-Hunter brand knives."
+	cost = 1000
+	contains = list(/obj/item/kitchen/knife/combat/zhunter)
+
 /datum/supply_pack/goody/blackbaton
 	name = "Black Police Baton"
 	desc = "A sturdy police baton. Never know when you need it."
