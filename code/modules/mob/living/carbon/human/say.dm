@@ -29,7 +29,7 @@
 			return real_name
 	if(istype(wear_mask, /obj/item/clothing/mask))
 		var/obj/item/clothing/mask/chunger = wear_mask
-		if(CHECK_BITFIELD(chunger.flags_inv, HIDE_FACE) && chunger.mask_adjusted)
+		if(CHECK_BITFIELD(chunger.flags_inv, HIDEFACE) && chunger.mask_adjusted)
 			return ("Unknown")
 	else if(CHECK_BITFIELD(wear_mask?.flags_inv, HIDEFACE))
 		return ("Unknown")
