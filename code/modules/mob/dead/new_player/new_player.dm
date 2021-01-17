@@ -539,8 +539,8 @@
 		dat += "</div></div>"
 	
 	dat += "<center><table><tr><td valign='top'>"
-	dat += "<fieldset style='width: 185px; border: 2px solid [cat_color]; display: inline'>"
-	dat += "<legend align='center' style='color: [cat_color]'>[SSjob.name_occupations[category[1]].exp_type_department]</legend>"
+	dat += "<fieldset style='width: 185px; border: 2px solid #ffffff; display: inline'>"
+	dat += "<legend align='center' style='color: #ffffff'>Random Job</legend>"
 	dat += "<a class='otherPosition' style='display:block;width:170px' href='byond://?src=[REF(src)];JoinAsRandom=1'>Join as Random Job</a>"
 	dat += "</fieldset>"
 	dat += "</td></tr></table></center>"
