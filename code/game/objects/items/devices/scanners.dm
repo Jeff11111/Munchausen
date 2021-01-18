@@ -199,7 +199,6 @@ GENETICS SCANNER
 			dmgreport += "</table>"
 			to_chat(user, dmgreport.Join())
 
-
 	//Organ damages report
 	var/heart_ded = FALSE
 	if(iscarbon(M))
@@ -311,7 +310,7 @@ GENETICS SCANNER
 					damage_message += "\n<font color='red'>Minor [O.name] failure detected.</span>"
 
 			if(temp_message || damage_message)
-				msg += "\n<b><span class='info'>[uppertext(O.name)]:</b></span> [damage_message] [temp_message]"
+				msg += "\n\n<b><span class='info'>[uppertext(O.name)]:</b></span> [damage_message] [temp_message]"
 
 		//END; LOOK FOR MISSING ORGANS?
 		var/breathes = TRUE
