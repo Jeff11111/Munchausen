@@ -7,7 +7,7 @@
 	. = ..()
 	if(!isliving(target))
 		return ELEMENT_INCOMPATIBLE
-	RegisterSignal(target, COMSIG_ELEMENT_TRY_TEACHING, .proc/try_teaching)
+	RegisterSignal(target, COMSIG_ELEMENT_TRY_TEACHING, .proc/invoke_try_teaching)
 	RegisterSignal(target, COMSIG_ELEMENT_CHECK_TEACHING, .proc/check_teaching)
 	RegisterSignal(target, COMSIG_ELEMENT_CHECK_TAUGHT, .proc/check_being_taught)
 
@@ -20,6 +20,10 @@
 	if(source in active_students)
 		return TRUE
 	return FALSE
+
+/datum/element/teaching/proc/invoke_try_teaching(mob/living/source)
+	//sleeping on signal handlers is bad, do NOT do that.
+	INVOKE_ASYNC(src, .proc/try_teaching, source)
 
 /datum/element/teaching/proc/try_teaching(mob/living/source)
 	if(!source.mind || !source.client) //Not sapient
