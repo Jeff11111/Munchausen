@@ -1,7 +1,11 @@
 /obj/screen/teach
-	name = "wield"
+	name = "teach"
 	icon = 'modular_skyrat/icons/mob/screen/screen_nigga.dmi'
 	icon_state = "act_teach"
+
+/obj/screen/teach/Click(location, control, params)
+	. = ..()
+	SEND_SIGNAL(usr, COMSIG_ELEMENT_TRY_TEACHING)
 
 /obj/screen/teach/update_icon_state()
 	. = ..()

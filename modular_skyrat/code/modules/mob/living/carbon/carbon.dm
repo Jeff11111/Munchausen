@@ -3,6 +3,8 @@
 	. = ..()
 	//Carbon mobs always have an organ storage component - it just becomes accessible when necessary.
 	AddComponent(/datum/component/storage/concrete/organ)
+	//Carbon mobs can teach
+	AddElement(/datum/element/teaching)
 
 /mob/living/carbon/Destroy()
 	. = ..()
