@@ -69,7 +69,9 @@
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/enforcer.dmi'
 	icon_state = "doggy"
 	mutantrace_variation = STYLE_NO_ANTHRO_ICON
-	flags_inv = HIDEHAIR|HIDEFACIALHAIR|HIDEFACE|HIDESNOUT|HIDEEARS
+	flags_inv = HIDEHAIR|HIDEFACIALHAIR|HIDEFACE|HIDESNOUT|HIDEEARS|HIDEEYES
+	dynamic_hair_suffix = ""
+	dynamic_fhair_suffix = ""
 
 //hunk helmet
 /obj/item/clothing/head/helmet/enforcer
