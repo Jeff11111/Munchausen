@@ -67,22 +67,32 @@
 	var/obj/item/pda/pda = wear_id
 	var/obj/item/card/id/id = wear_id
 	var/obj/item/modular_computer/tablet/tablet = wear_id
+	var/gender_bender = p_they()
+	switch(gender_bendr)
+		if("he")
+			gender_bender = "Man"
+		if("she")
+			gender_bender = "Woman"
+		if("they")
+			gender_bender = "Creature"
+		if("it")
+			gender_bender = "Thing"
 	if(istype(wallet))
 		id = wallet.front_id
 	if(istype(id))
-		. = id.registered_name
+		. = "[id.assignment ? id.assignment : "Unknown"] [gender_bender]"
 	else if(istype(pda))
-		. = pda.owner
+		. = "[pda.ownjob ? pda.ownjob : "Unknown"] [gender_bender]"
 	else if(istype(tablet))
 		var/obj/item/computer_hardware/card_slot/card_slot = tablet.all_components[MC_CARD]
 		if(card_slot && (card_slot.stored_card2 || card_slot.stored_card))
 			if(card_slot.stored_card2) //The second card is the one used for authorization in the ID changing program, so we prioritize it here for consistency
-				. = card_slot.stored_card2.registered_name
+				. = "[card_slot.stored_card2.assignment ? card_slot.stored_card2.assignment : "Unknown"] [gender_bender]"
 			else
 				if(card_slot.stored_card)
-					. = card_slot.stored_card.registered_name
+					. = "[card_slot.stored_card.assignment ? card_slot.stored_card.assignment : "Unknown"] [gender_bender]"
 	if(!.)
-		. = if_no_id	//to prevent null-names making the mob unclickable
+		. = "[if_no_id] [gender_bender]"	//to prevent null-names making the mob unclickable
 	return
 
 //gets ID card object from special clothes slot or null.
