@@ -68,7 +68,7 @@
 	var/obj/item/card/id/id = wear_id
 	var/obj/item/modular_computer/tablet/tablet = wear_id
 	var/gender_bender = p_they()
-	switch(gender_bendr)
+	switch(gender_bender)
 		if("he")
 			gender_bender = "Man"
 		if("she")
