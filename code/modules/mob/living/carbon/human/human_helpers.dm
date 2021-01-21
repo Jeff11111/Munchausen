@@ -42,8 +42,6 @@
 	if(name_override)
 		return name_override
 	if(face_name)
-		if(id_name && (id_name != face_name))
-			return "[face_name] (as [id_name])"
 		return face_name
 	if(id_name)
 		return id_name
