@@ -89,7 +89,7 @@
 			else
 				if(card_slot.stored_card)
 					. = "[card_slot.stored_card.assignment ? card_slot.stored_card.assignment : "Unknown"] [gender_bender]"
-	if(!.)
+	if(!. && if_no_id)
 		. = "[if_no_id] [gender_bender]"	//to prevent null-names making the mob unclickable
 	return
 
