@@ -101,12 +101,11 @@
 				return TRUE
 	
 	//do not fuck someone up with tools if help intent
-	if((user.a_intent == INTENT_HELP) && I.tool_behaviour)
-		return TRUE
-	
-	//skyrat edit
-	if(!length(all_wounds) || !(user.a_intent == INTENT_HELP || user == src))
-		return ..()
+	if(!length(all_wounds))
+		if((user.a_intent == INTENT_HELP) && I.tool_behaviour)
+			return TRUE
+		else
+			return ..()
 
 	// The following priority/nonpriority searching is so that if we have two wounds on a limb that use the same item for treatment,
 	// we prefer whichever wound is not already treated. If there's no priority wounds that this can treat, go through the
