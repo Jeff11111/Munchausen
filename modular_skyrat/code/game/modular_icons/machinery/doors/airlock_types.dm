@@ -1,6 +1,7 @@
 /obj/machinery/door/airlock
 	icon = 'modular_skyrat/icons/eris/obj/doors/station/door_public.dmi'
 	overlays_file = 'modular_skyrat/icons/eris/obj/doors/station/door_overlays.dmi'
+	note_overlay_file = 'modular_skyrat/icons/eris/obj/doors/station/door_overlays.dmi'
 
 /obj/machinery/door/airlock/public
 	icon = 'modular_skyrat/icons/eris/obj/doors/station/door_glass.dmi'
