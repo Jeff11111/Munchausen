@@ -46,7 +46,7 @@
 		return
 	var/list/mob/living/students = list()
 	for(var/mob/living/carbon/C in view(1, source)) //We use view() because blind people are bad teachers
-		if(C.mind && C.client)
+		if(C.mind && C.client && (source != C))
 			students["[C.name]"] = C
 	if(!length(students))
 		to_chat(source, "<span class='warning'>There are no suitable students around me.</span>")
