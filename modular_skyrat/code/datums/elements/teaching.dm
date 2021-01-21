@@ -63,11 +63,11 @@
 	for(var/fuck in subtypesof(/datum/skills))
 		var/datum/skills/shitter = fuck
 		potential_skills[initial(shitter.name)] = fuck
-	var/potential_skill = input(source, "What should i teach?", "Master of puppets") as anything in potential_skills
-	if(!potential_skill || !potential_skills[potential_skill])
+	var/skill_string = input(source, "What should i teach?", "Master of puppets") as anything in potential_skills
+	if(!skill_string || !potential_skills[skill_string])
 		to_chat(source, "<span class='warning'>Nevermind.</span>")
 		return
-	potential_skill = potential_skills[potential_skill]
+	var/potential_skill = potential_skills[skill_string]
 	if(!puppet || QDELETED(puppet) || !source.canUseTopic(puppet, TRUE, FALSE, TRUE))
 		to_chat(source, "<span class='warning'>They are out of my reach.</span>")
 		return
@@ -90,6 +90,8 @@
 	active_students |= puppet
 	source?.hud_used?.teach?.update_icon()
 	puppet?.hud_used?.teach?.update_icon()
+	source.visible_message("<b>[source.name]</b> starts teaching <b>[puppet.name]</b> about [skill_string].", \
+						"<span class='notice'>I start teaching <b>[puppet.name]</b> about [skill_string].")
 	while(do_mob(source, puppet, timeperteach))
 		if(puppet.mind.mob_skills[potential_skill].level >= maximum_teachernus)
 			to_chat(source, "<span class='notice'>I've taught <b>[puppet.name]</b> all that i could.</span>")
