@@ -187,10 +187,12 @@
 
 	var/list/msg = list()
 	var/list/missing = ALL_BODYPARTS
+	var/list/stumps = list()
 	if(!screwy_self)
 		for(var/obj/item/bodypart/BP in bodyparts)
 			if(BP.is_stump())
 				msg += "<span class='deadsay'><B>[t_He] has a stump where [t_his] [parse_zone(BP.body_zone)] should be!</B></span>"
+				stumps |= BP.body_zone
 			if(BP.grasped_by?.grasping_mob == src)
 				msg += "[t_He] is applying pressure to his [BP.name]!"
 			missing -= BP.body_zone
@@ -222,7 +224,7 @@
 					should_msg = null
 			
 			if(SSquirks.bodypart_child_to_parent[t])
-				if(SSquirks.bodypart_child_to_parent[t] in missing) //There is already a stump parent bodypart, no need to be redundant
+				if((SSquirks.bodypart_child_to_parent[t] in missing) || (SSquirks.bodypart_child_to_parent[t] in stumps)) //There is already a stump parent bodypart, no need to be redundant
 					should_msg = null
 
 			if(should_msg)

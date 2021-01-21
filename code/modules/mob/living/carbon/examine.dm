@@ -33,27 +33,15 @@
 	var/list/msg = list()
 
 	var/list/missing = get_missing_limbs()
+	var/list/stumps = list()
 	for(var/X in bodyparts)
 		var/obj/item/bodypart/BP = X
 		missing -= BP.body_zone
-		for(var/obj/item/I in BP.embedded_objects)
-			if(I.isEmbedHarmless())
-				msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] stuck to [t_his] [BP.name]!</B>"
-			else
-				msg += "<B>[t_He] [t_has] \a [icon2html(I, user)] [I] embedded in [t_his] [BP.name]!</B>"
-		if(BP.etching)
-			msg += "<B>[t_His] [BP.name] has \"[BP.etching]\" etched on it!</B>"
 		if(BP.is_stump())
 			msg += "<B>[t_He] has a stump where [t_his] [parse_zone(BP.body_zone)] should be!</B>"
+			stumps |= BP.body_zone
 		if(BP.grasped_by?.grasping_mob == src)
 			msg += "[t_He] is applying pressure to [t_his] [BP.name]!"
-		if(BP.is_dead())
-			msg += "<span class='deadsay'><B>[t_His] [BP.name] is completely necrotic!</B></span>"
-		for(var/datum/wound/W in BP.wounds)
-			if(W.get_examine_description(user))
-				msg += "[W.get_examine_description(user)]"
-		if(BP.get_injuries_desc() != "nothing")
-			msg += "[t_He] [t_has] [BP.get_injuries_desc()] on [t_his] [BP.name]."
 		missing -= BP.body_zone
 	//british detection
 	for(var/obj/item/bodypart/teeth_part in bodyparts)
@@ -80,7 +68,7 @@
 					should_msg = null
 		
 		if(SSquirks.bodypart_child_to_parent[t])
-			if(SSquirks.bodypart_child_to_parent[t] in missing)
+			if((SSquirks.bodypart_child_to_parent[t] in missing) || (SSquirks.bodypart_child_to_parent[t] in stumps))
 				should_msg = null
 
 		if(should_msg)
