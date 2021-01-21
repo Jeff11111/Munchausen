@@ -143,26 +143,24 @@
 	var/obj/item/organ/liver/liver = getorganslot(ORGAN_SLOT_LIVER)
 	var/obj/item/organ/kidneys/kidneys = getorganslot(ORGAN_SLOT_KIDNEYS)
 	if(amount > 0 && (liver?.is_working() || kidneys?.is_working()))
-		while(amount > 0 && (liver?.is_working() || kidneys?.is_working()))
-			if(liver?.tox_dam >= liver?.max_tox_dam && kidneys?.tox_dam >= kidneys?.max_tox_dam)
-				if(kidneys.is_working())
-					var/last_damage = kidneys.damage
-					kidneys.applyOrganDamage(amount)
-					amount = kidneys.damage - last_damage
-				else if(liver?.is_working())
-					var/last_damage = liver.damage
-					liver.applyOrganDamage(amount)
-					amount = liver.damage - last_damage
-			else if(kidneys.tox_dam < kidneys.max_tox_dam)
-				amount = kidneys.add_toxins(abs(amount))
-			else if(liver?.tox_dam < liver?.max_tox_dam)
-				amount = liver.add_toxins(abs(amount))
+		if(liver?.tox_dam >= liver?.max_tox_dam && kidneys?.tox_dam >= kidneys?.max_tox_dam)
+			if(kidneys.is_working())
+				var/last_damage = kidneys.damage
+				kidneys.applyOrganDamage(amount)
+				amount = kidneys.damage - last_damage
+			else if(liver?.is_working())
+				var/last_damage = liver.damage
+				liver.applyOrganDamage(amount)
+				amount = liver.damage - last_damage
+		else if(kidneys?.tox_dam < kidneys?.max_tox_dam)
+			amount = kidneys.add_toxins(abs(amount))
+		else if(liver?.tox_dam < liver?.max_tox_dam)
+			amount = liver.add_toxins(abs(amount))
 	else if(amount < 0 && (liver?.is_working() || kidneys?.is_working()))
-		while(amount < 0 && (liver?.is_working() || kidneys?.is_working()))
-			if(liver?.tox_dam)
-				amount = liver.remove_toxins(abs(amount))
-			else if(kidneys?.tox_dam)
-				amount = kidneys.remove_toxins(abs(amount))
+		if(liver?.tox_dam)
+			amount = liver.remove_toxins(abs(amount))
+		else if(kidneys?.tox_dam)
+			amount = kidneys.remove_toxins(abs(amount))
 	if(updating_health)
 		updatehealth()
 		update_health_hud()

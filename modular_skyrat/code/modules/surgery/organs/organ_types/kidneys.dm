@@ -46,7 +46,7 @@
 
 /obj/item/organ/kidneys/proc/add_toxins(amount)
 	var/last_tox = tox_dam
-	tox_dam = min(max_tox_dam ,max(0, tox_dam + amount))
+	tox_dam = min(max_tox_dam, max(0, tox_dam + amount))
 	return (amount - (tox_dam - last_tox))
 
 /obj/item/organ/kidneys/proc/get_adrenaline_multiplier()
