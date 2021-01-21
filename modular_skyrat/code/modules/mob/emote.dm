@@ -28,7 +28,6 @@
 	sound = 'modular_skyrat/sound/emotes/voxrustle.ogg'
 
 /datum/emote/living/scream/run_emote(mob/living/user, params) //I can't not port this shit, come on.
-	. = ..()
 	sound = null
 	var/miming = user.mind ? user.mind.miming : 0
 	if(!user.is_muzzled() && !miming)
@@ -66,6 +65,7 @@
 		message = "acts out a scream."
 	else
 		message = "makes a very loud noise."
+	. = ..()
 
 /datum/emote/living/peep
 	key = "peep"

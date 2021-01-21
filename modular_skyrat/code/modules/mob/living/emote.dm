@@ -19,10 +19,10 @@
 	var/cooldown = 10
 
 /datum/emote/living/run_emote(mob/user, params)
-	. = ..()
 	if(can_run_emote(user, TRUE) && sound && (user.nextsoundemote < world.time))
 		user.nextsoundemote = world.time + cooldown
 		playsound(user.loc, sound, volume, vary)
+	. = ..()
 
 // Grunting
 /datum/emote/living/grunt
@@ -35,7 +35,6 @@
 	mob_type_allowed_typecache = list(/mob/living/carbon)
 
 /datum/emote/living/grunt/run_emote(mob/user, params)
-	. = ..()
 	//emotes are singletons so we need to clear out the sound
 	sound = null
 	if(ishuman(user))
@@ -44,10 +43,10 @@
 			sound = pick(H.dna.species.agony_moans_male)
 			if((H.gender == FEMALE) && length(H.dna.species.agony_moans_female))
 				sound = pick(H.dna.species.agony_moans_female)
+	. = ..()
 
 // Groaning
 /datum/emote/living/groan/run_emote(mob/user, params)
-	. = ..()
 	//emotes are singletons so we need to clear out the sound
 	sound = null
 	if(ishuman(user))
@@ -56,6 +55,7 @@
 			sound = pick(H.dna.species.agony_moans_male)
 			if((H.gender == FEMALE) && length(H.dna.species.agony_moans_female))
 				sound = pick(H.dna.species.agony_moans_female)
+	. = ..()
 
 // Agony screaming
 /datum/emote/living/agonyscream
@@ -68,7 +68,6 @@
 	mob_type_allowed_typecache = list(/mob/living/carbon/human)
 
 /datum/emote/living/agonyscream/run_emote(mob/user, params)
-	. = ..()
 	//emotes are singletons so we need to clear out the sound
 	sound = null
 	if(ishuman(user))
@@ -77,6 +76,8 @@
 			sound = pick(H.dna.species.agony_sounds_male)
 			if((H.gender == FEMALE) && length(H.dna.species.agony_sounds_female))
 				sound = pick(H.dna.species.agony_sounds_female)
+	. = ..()
+
 // Gargle
 /datum/emote/living/gargle
 	key = "gargle"
@@ -89,7 +90,6 @@
 	mob_type_allowed_typecache = list(/mob/living/carbon/human)
 
 /datum/emote/living/gargle/run_emote(mob/user, params)
-	. = ..()
 	//emotes are singletons so we need to clear out the sound
 	sound = null
 	if(ishuman(user))
@@ -98,6 +98,7 @@
 							'modular_skyrat/sound/gore/throat3.ogg',
 							)
 		sound = garglesound
+	. = ..()
 
 // Death rattle
 /datum/emote/living/deathrattle
@@ -111,7 +112,6 @@
 	mob_type_allowed_typecache = list(/mob/living/carbon/human)
 
 /datum/emote/living/deathrattle/run_emote(mob/user, params)
-	. = ..()
 	//emotes are singletons so we need to clear out the sound
 	sound = null
 	if(ishuman(user))
@@ -120,10 +120,10 @@
 			sound = pick(H.dna.species.death_rattles_male)
 			if((H.gender == FEMALE) && length(H.dna.species.death_rattles_female))
 				sound = pick(H.dna.species.death_rattles_female)
+	. = ..()
 
 // Death gasps make a death rattle sound
 /datum/emote/living/deathgasp/run_emote(mob/user, params)
-	. = ..()
 	//emotes are singletons so we need to clear out the sound
 	sound = null
 	if(ishuman(user))
@@ -132,10 +132,10 @@
 			sound = pick(H.dna.species.death_rattles_male)
 			if((H.gender == FEMALE) && length(H.dna.species.death_rattles_female))
 				sound = pick(H.dna.species.death_rattles_female)
+	. = ..()
 
 // Gasping makes a sound
 /datum/emote/living/gasp/run_emote(mob/user, params)
-	. = ..()
 	//emotes are singletons so we need to clear out the sound
 	sound = null
 	if(ishuman(user))
@@ -144,10 +144,10 @@
 			sound = pick(H.dna.species.agony_gasps_male)
 			if((H.gender == FEMALE) && length(H.dna.species.agony_gasps_female))
 				sound = pick(H.dna.species.agony_gasps_female)
+	. = ..()
 
 // Crying makes a sound
 /datum/emote/living/whimper/run_emote(mob/user, params)
-	. = ..()
 	//emotes are singletons so we need to clear out the sound
 	sound = null
 	if(ishuman(user))
@@ -156,9 +156,9 @@
 			sound = pick(H.dna.species.cry_male)
 			if((H.gender == FEMALE) && length(H.dna.species.cry_female))
 				sound = pick(H.dna.species.cry_female)
+	. = ..()
 
 /datum/emote/living/carbon/human/cry/run_emote(mob/user, params)
-	. = ..()
 	//emotes are singletons so we need to clear out the sound
 	sound = null
 	if(ishuman(user))
@@ -167,10 +167,10 @@
 			sound = pick(H.dna.species.cry_male)
 			if((H.gender == FEMALE) && length(H.dna.species.cry_female))
 				sound = pick(H.dna.species.cry_female)
+	. = ..()
 
 // Moaning makes a sound
 /datum/emote/living/carbon/moan/run_emote(mob/user, params)
-	. = ..()
 	//emotes are singletons so we need to clear out the sound
 	sound = null
 	if(ishuman(user))
@@ -179,10 +179,10 @@
 			sound = pick(H.dna.species.agony_moans_male)
 			if((H.gender == FEMALE) && length(H.dna.species.agony_moans_female))
 				sound = pick(H.dna.species.agony_moans_female)
+	. = ..()
 
 // Coughing, too, makes a sound
 /datum/emote/living/cough/run_emote(mob/living/user, params)
-	. = ..()
 	//emotes are singletons so we need to clear out the sound
 	sound = null
 	if(ishuman(user))
@@ -191,6 +191,7 @@
 			sound = pick(H.dna.species.coughs_male)
 			if((H.gender == FEMALE) && length(H.dna.species.coughs_female))
 				sound = pick(H.dna.species.coughs_female)
+	. = ..()
 
 // Sagging
 /datum/emote/living/sag
@@ -204,7 +205,6 @@
 	mob_type_allowed_typecache = list(/mob/living/carbon/human)
 
 /datum/emote/living/sag/run_emote(mob/user, params)
-	. = ..()
 	//emotes are singletons so we need to clear out the sound
 	sound = null
 	if(ishuman(user))
@@ -213,6 +213,7 @@
 			sound = pick(H.dna.species.death_rattles_male)
 			if((H.gender == FEMALE) && length(H.dna.species.death_rattles_female))
 				sound = pick(H.dna.species.death_rattles_female)
+	. = ..()
 
 // Death scream
 /datum/emote/living/deathscream
@@ -226,7 +227,6 @@
 	mob_type_allowed_typecache = list(/mob/living/carbon/human)
 
 /datum/emote/living/deathscream/run_emote(mob/user, params)
-	. = ..()
 	//emotes are singletons so we need to clear out the sound
 	sound = null
 	if(ishuman(user))
@@ -235,3 +235,4 @@
 			sound = pick(H.dna.species.death_screams_male)
 			if((H.gender == FEMALE) && length(H.dna.species.death_rattles_female))
 				sound = pick(H.dna.species.death_screams_female)
+	. = ..()
