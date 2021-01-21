@@ -779,7 +779,7 @@
 	total_mass = 3
 	slot_flags = ITEM_SLOT_BELT | ITEM_SLOT_BACK | ITEM_SLOT_SUITSTORE
 
-/obj/item/melee/mace/get_belt_overlay()
+/obj/item/melee/mace/get_worn_belt_overlay()
 	return mutable_appearance('modular_skyrat/icons/obj/bobstation/melee/belt.dmi', "mace")
 
 //horrible
