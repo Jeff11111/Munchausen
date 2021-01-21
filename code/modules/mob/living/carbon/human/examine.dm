@@ -194,7 +194,7 @@
 				msg += "<span class='deadsay'><B>[t_He] has a stump where [t_his] [parse_zone(BP.body_zone)] should be!</B></span>"
 				stumps |= BP.body_zone
 			if(BP.grasped_by?.grasping_mob == src)
-				msg += "[t_He] is applying pressure to his [BP.name]!"
+				msg += "[t_He] is applying pressure to [t_his] [BP.name]!"
 			missing -= BP.body_zone
 	//Teeth
 	if(!screwy_self)
