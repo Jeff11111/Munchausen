@@ -156,7 +156,7 @@
 	
 	//wearing two ear items makes you look like an idiot
 	if((istype(ears, /obj/item/radio/headset) && !(SLOT_EARS_LEFT in obscured)) && (istype(ears_extra, /obj/item/radio/headset) && !(SLOT_EARS_RIGHT in obscured)))
-		. += "<span class='warning'>[t_He] looks quite tacky wearing both \an [ears.name] and \an [ears_extra.name] on [t_his] head.</span>"
+		. += "<span class='warning'>[t_He] looks quite tacky wearing both \an [icon2html(ears, user)] [ears.name] and \an [icon2html(ears_extra, user)] [ears_extra.name] on [t_his] head.</span>"
 
 	//ID
 	if(wear_id)
