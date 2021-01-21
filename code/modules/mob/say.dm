@@ -16,6 +16,7 @@
 	set name = "say"
 	set category = "IC"
 	if(!length(message))
+		set_typing_indicator(FALSE)
 		return
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
@@ -44,6 +45,7 @@
 	set name = "me"
 	set category = "IC"
 	if(!length(message))
+		set_typing_indicator(FALSE)
 		return
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
