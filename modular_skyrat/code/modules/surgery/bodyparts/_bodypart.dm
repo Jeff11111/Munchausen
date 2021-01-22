@@ -480,6 +480,8 @@
 				. +=  "<span class='deadsay'>[src] seems to be oozing some foul pus...</span>"
 			if(INFECTION_LEVEL_THREE to INFINITY)
 				. += "<span class='deadsay'>[src] seems to be completely necrotic!</span>"
+	if(!owner)
+		. += "<span class='notice'>This bodypart can be attached on \the [parse_zone(body_zone)].</span>"
 	for(var/obj/item/bodypart/BP in src)
 		if(BP.body_zone in children_zones)
 			. += "<span class='notice'>[src] has \a [lowertext(BP.name)] attached. Use a sharp item to cut it off!</span>"
