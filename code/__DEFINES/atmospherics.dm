@@ -164,10 +164,10 @@
 
 //LAVALAND
 #define LAVALAND_EQUIPMENT_EFFECT_PRESSURE 50 //what pressure you have to be under to increase the effect of equipment meant for lavaland
-#define LAVALAND_DEFAULT_ATMOS "o2=10;n2=94;TEMP=305"
+#define LAVALAND_DEFAULT_ATMOS "o2=8;n2=96;TEMP=305"
 
 //SNOSTATION
-#define ICEMOON_DEFAULT_ATMOS "o2=17;n2=63;TEMP=180"
+#define ICEMOON_DEFAULT_ATMOS "o2=20;n2=84;TEMP=180"
 
 //ATMOSIA GAS MONITOR TAGS
 #define ATMOS_GAS_MONITOR_INPUT_O2 "o2_in"
