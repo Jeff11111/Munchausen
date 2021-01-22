@@ -422,7 +422,7 @@
 	underlay_file = 'icons/effects/bleed.dmi'
 	overlay_state = "bleed"
 	underlay_state = "bleed"
-	var/bleed_damage = 200
+	var/bleed_damage = 100
 
 /datum/status_effect/stacking/saw_bleed/fadeout_effect()
 	new /obj/effect/temp_visual/bleed(get_turf(owner))

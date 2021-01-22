@@ -7,8 +7,8 @@
 	desc = "Revised and refined by veteran miners, this crusher design has been improved in nearly everyway. Featuring a lightweight composite body and a hardened plastitanium head, this weapon is exceptional at removing life from most things."
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	armour_penetration = 15
-	detonation_damage = 60
-	backstab_bonus = 40
+	detonation_damage = 30
+	backstab_bonus = 20
 
 //legion (the big one!)
 /obj/item/crusher_trophy/golden_skull
@@ -100,7 +100,7 @@
 	desc = "It really doesn't seem like it could be worn. Suitable as a crusher trophy."
 	icon = 'modular_skyrat/icons/obj/lavaland/artefacts.dmi'
 	icon_state = "miner_mask"
-	bonus_value = 10
+	bonus_value = 5
 	denied_type = /obj/item/crusher_trophy/blaster_tubes/mask
 
 /obj/item/crusher_trophy/blaster_tubes/mask/effect_desc()
@@ -132,7 +132,7 @@
 	desc = "Somebody got glory killed. Suitable as a trophy."
 	icon = 'modular_skyrat/icons/obj/lavaland/artefacts.dmi'
 	icon_state = "impskull"
-	bonus_value = 5
+	bonus_value = 2.5
 	denied_type = /obj/item/crusher_trophy/blaster_tubes/impskull
 
 /obj/item/crusher_trophy/blaster_tubes/impskull/effect_desc()
@@ -275,7 +275,7 @@
 	desc = "The remaining horn of the Gladiator. Suitable as a crusher trophy."
 	icon = 'modular_skyrat/icons/obj/lavaland/artefacts.dmi'
 	icon_state = "horn"
-	bonus_value = 15
+	bonus_value = 7.5
 	denied_type = /obj/item/crusher_trophy/gladiator
 
 /obj/item/crusher_trophy/gladiator/effect_desc()
@@ -321,8 +321,8 @@
 	var/list/trophies = list()
 	var/charged = TRUE
 	var/charge_time = 12
-	var/detonation_damage = 65
-	var/backstab_bonus = 40
+	var/detonation_damage = 30
+	var/backstab_bonus = 20
 	var/brightness = 7
 
 /obj/item/melee/zweihander/Initialize()
@@ -433,11 +433,11 @@
 	icon = 'modular_skyrat/icons/obj/lavaland/sif.dmi'
 	icon_state = "sif_energy"
 	denied_type = /obj/item/crusher_trophy/dark_energy
-	bonus_value = 30
+	bonus_value = 15
 	var/range = 3
 
 /obj/item/crusher_trophy/dark_energy/effect_desc()
-	return "mark detonation to perform a bash dealing <b>[bonus_value]</b> - dashing through the target if possible"
+	return "mark detonation to perform a bash dealing <b>[bonus_value]</b> damage - dashing through the target if possible"
 
 /obj/item/crusher_trophy/dark_energy/on_mark_detonation(mob/living/target, mob/living/user)
 	if(!target || !user)

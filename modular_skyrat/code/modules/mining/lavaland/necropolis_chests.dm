@@ -102,7 +102,7 @@
 	item_state = "heckgun"
 	lefthand_file = 'modular_skyrat/icons/mob/inhands/weapons/guns_lefthand.dmi'
 	righthand_file = 'modular_skyrat/icons/mob/inhands/weapons/guns_righthand.dmi'
-	sharpness = SHARP_NONE
+	sharpness = SHARP_EDGED
 	force = 15
 	inhand_x_dimension = 32
 	inhand_y_dimension = 32
@@ -147,7 +147,7 @@
 	icon_state = "hook"
 	icon = 'icons/obj/lavaland/artefacts.dmi'
 	pass_flags = PASSTABLE
-	damage = 10
+	damage = 15
 	armour_penetration = 100
 	damage_type = BRUTE
 	hitsound = 'sound/effects/splat.ogg'
@@ -157,7 +157,7 @@
 /obj/item/projectile/heckhook/fire(setAngle)
 	if(firer)
 		chain = firer.Beam(src, icon_state = "chain", time = INFINITY, maxdistance = INFINITY)
-	..()
+	. = ..()
 
 /obj/item/projectile/heckhook/on_hit(atom/target)
 	. = ..()
@@ -276,24 +276,24 @@
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
 		if(H.getarmor(def_zone, "melee") < 35)
-			if((user.zone_selected != BODY_ZONE_CHEST) && (user.zone_selected != BODY_ZONE_HEAD) && (user.zone_selected != BODY_ZONE_PRECISE_GROIN))
-				..()
+			if(!(user.zone_selected in list(BODY_ZONE_PRECISE_GROIN, BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK)))
+				. = ..()
 				var/obj/item/bodypart/bodyp= H.get_bodypart(def_zone)
 				bodyp.dismember()
 		else if(user.zone_selected == BODY_ZONE_PRECISE_GROIN && H.InFullCritical())
-			..()
+			. = ..()
 			var/obj/item/bodypart/bodyp= H.get_bodypart(def_zone)
 			if(istype(bodyp))
 				bodyp.dismember()
-		else if(user.zone_selected == BODY_ZONE_HEAD && H.InFullCritical())
-			..()
+		else if(user.zone_selected in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK) && H.InFullCritical())
+			. = ..()
 			var/obj/item/bodypart/bodyp= H.get_bodypart(def_zone)
 			if(istype(bodyp))
 				bodyp.dismember()
 		else
-			..()
+			. = ..()
 	else
-		..()
+		. = ..()
 
 /obj/item/crucible/run_block(mob/living/owner, atom/object, damage, attack_text, attack_type, armour_penetration, mob/attacker, def_zone, final_block_chance, list/block_return)
 	if(!wielded)

@@ -25,8 +25,8 @@
 	icon_dead = "legionnaire_dead"
 	icon_gib = "syndicate_gib"
 	threat = 10
-	maxHealth = 800
-	health = 800
+	maxHealth = 500
+	health = 500
 	melee_damage_lower = 30
 	melee_damage_upper = 30
 	attack_verb_continuous = "slashes its arms at"

@@ -34,8 +34,8 @@ Difficulty: Medium
 	name = "ash drake"
 	desc = "Guardians of the necropolis."
 	threat = 30
-	health = 2500
-	maxHealth = 2500
+	health = 1250
+	maxHealth = 1250
 	spacewalk = TRUE
 	attack_verb_continuous = "chomps"
 	attack_verb_simple = "chomp"

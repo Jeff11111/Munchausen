@@ -38,8 +38,8 @@ Difficulty: Normal
 	name = "hierophant"
 	desc = "A massive metal club that hangs in the air as though waiting. It'll make you dance to its beat."
 	threat = 30
-	health = 2500
-	maxHealth = 2500
+	health = 1250
+	maxHealth = 1250
 	attack_verb_continuous = "clubs"
 	attack_verb_simple = "club"
 	attack_sound = 'sound/weapons/sonic_jackhammer.ogg'

@@ -218,12 +218,12 @@
 	icon_state = null
 	damage = 40
 	damage_type = BRUTE
-	flag = "bomb"
+	flag = "bullet"
 	range = 3
 	log_override = TRUE
 
 	var/pressure_decrease_active = FALSE
-	var/pressure_decrease = 0.25
+	var/pressure_decrease = 0.5
 	var/obj/item/gun/energy/kinetic_accelerator/kinetic_gun
 
 /obj/item/projectile/kinetic/Destroy()

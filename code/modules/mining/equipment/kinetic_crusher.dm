@@ -22,8 +22,8 @@
 	var/list/trophies = list()
 	var/charged = TRUE
 	var/charge_time = 15
-	var/detonation_damage = 50
-	var/backstab_bonus = 30
+	var/detonation_damage = 25
+	var/backstab_bonus = 15
 	var/light_on = FALSE
 	var/brightness_on = 7
 	var/wielded = FALSE // track wielded status on item
@@ -299,7 +299,7 @@
 	desc = "A still-searing wing from a magmawing watcher. Suitable as a trophy for a kinetic crusher."
 	icon_state = "magma_wing"
 	gender = NEUTER
-	bonus_value = 5
+	bonus_value = 2.5
 
 /obj/item/crusher_trophy/blaster_tubes/magma_wing/effect_desc()
 	return "mark detonation to make the next destabilizer shot deal <b>[bonus_value]</b> damage"
@@ -317,7 +317,7 @@
 	name = "icewing watcher wing"
 	desc = "A carefully preserved frozen wing from an icewing watcher. Suitable as a trophy for a kinetic crusher."
 	icon_state = "ice_wing"
-	bonus_value = 8
+	bonus_value = 4
 
 //legion
 /obj/item/crusher_trophy/legion_skull
@@ -357,7 +357,7 @@
 /obj/item/crusher_trophy/tail_spike
 	desc = "A spike taken from an ash drake's tail. Suitable as a trophy for a kinetic crusher."
 	denied_type = /obj/item/crusher_trophy/tail_spike
-	bonus_value = 5
+	bonus_value = 2.5
 
 /obj/item/crusher_trophy/tail_spike/effect_desc()
 	return "mark detonation to do <b>[bonus_value]</b> damage to nearby creatures and push them back"
@@ -415,7 +415,7 @@
 	icon_state = "blaster_tubes"
 	gender = PLURAL
 	denied_type = /obj/item/crusher_trophy/blaster_tubes
-	bonus_value = 15
+	bonus_value = 7.5
 	var/deadly_shot = FALSE
 
 /obj/item/crusher_trophy/blaster_tubes/effect_desc()
@@ -443,7 +443,7 @@
 	desc = "A glowing trinket that was originally the Hierophant's beacon. Suitable as a trophy for a kinetic crusher."
 	icon_state = "vortex_talisman"
 	denied_type = /obj/item/crusher_trophy/vortex_talisman
-	var/vortex_cd
+	var/vortex_cd = 0
 
 /obj/item/crusher_trophy/vortex_talisman/effect_desc()
 	return "mark detonation to create a barrier you can pass that lasts for <b>7.5 seconds</b>, with a cooldown of <b>9 seconds</b> after creation."

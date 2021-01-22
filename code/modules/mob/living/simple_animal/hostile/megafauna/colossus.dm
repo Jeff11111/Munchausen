@@ -25,8 +25,8 @@ Difficulty: Very Hard
 	name = "colossus"
 	desc = "A monstrous creature protected by heavy shielding."
 	threat = 40
-	health = 2500
-	maxHealth = 2500
+	health = 1250
+	maxHealth = 1250
 	attack_verb_continuous = "judges"
 	attack_verb_simple = "judge"
 	attack_sound = 'sound/magic/clockwork/ratvar_attack.ogg'

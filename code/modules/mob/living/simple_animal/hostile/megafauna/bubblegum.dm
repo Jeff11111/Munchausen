@@ -27,8 +27,8 @@ Difficulty: Hard
 	name = "bubblegum"
 	desc = "In what passes for a hierarchy among slaughter demons, this one is king."
 	threat = 35
-	health = 2500
-	maxHealth = 2500
+	health = 1250
+	maxHealth = 1250
 	attack_verb_continuous = "rends"
 	attack_verb_simple = "rend"
 	attack_sound = 'sound/magic/demon_attack1.ogg'

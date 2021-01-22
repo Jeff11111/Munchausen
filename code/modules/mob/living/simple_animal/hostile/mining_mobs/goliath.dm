@@ -18,8 +18,8 @@
 	friendly_verb_simple = "wail at"
 	speak_emote = list("bellows")
 	speed = 3
-	maxHealth = 300
-	health = 300
+	maxHealth = 150
+	health = 150
 	harm_intent_damage = 0
 	obj_damage = 100
 	melee_damage_lower = 18

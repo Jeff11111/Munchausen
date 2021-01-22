@@ -26,8 +26,8 @@
 	icon_dead = "egg_sac"
 	icon_gib = "syndicate_gib"
 	threat = 10
-	maxHealth = 800
-	health = 800
+	maxHealth = 500
+	health = 500
 	melee_damage_lower = 30
 	melee_damage_upper = 30
 	armour_penetration = 30
