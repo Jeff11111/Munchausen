@@ -126,7 +126,7 @@
 	name = "1.95x129mm Light Machine Gun"
 	desc = "Contains one LMG, chambered in 1.95x129mm. Never know when you need it."
 	cost = 40000
-	contains = list(/obj/item/gun/ballistic/automatic/l6_saw)
+	contains = list(/obj/item/gun/ballistic/automatic/l6_saw/unrestricted)
 
 /datum/supply_pack/goody/lmg_ammo
 	name = "1.95x129mm Ammo Boxes"
