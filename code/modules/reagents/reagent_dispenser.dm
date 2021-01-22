@@ -151,12 +151,12 @@
 			W.update_icon()
 		else
 			//You need to be a dentbrain to do fuel tank explodie funny
-			if(user.mind && (user.mind.diceroll(STAT_DATUM(int)) > DICE_CRIT_FAILURE))
+			if(user.mind && (GET_STAT_LEVEL(user, int) >= 8))
 				to_chat(user, "<span class='warning'>That would be stupid. Why would i ever do that?</span>")
 				return FALSE
 			
 			var/turf/T = get_turf(src)
-			user.visible_message("<span class='warning'>[user] catastrophically fails at refilling [user.p_their()] [W.name]!</span>", "<span class='userdanger'>That was stupid of you.</span>")
+			user.visible_message("<span class='warning'>[user] catastrophically fails at refilling [user.p_their()] [W.name]!</span>", "<span class='userdanger'>That was stupid of me.</span>")
 
 			var/message_admins = "[ADMIN_LOOKUPFLW(user)] triggered a fueltank explosion via welding tool at [ADMIN_VERBOSEJMP(T)]."
 			GLOB.bombers += message_admins
