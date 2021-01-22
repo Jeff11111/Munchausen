@@ -37,7 +37,7 @@
 	new /obj/item/clothing/gloves/color/black(src)
 	new /obj/item/clothing/gloves/color/black(src)
 	new /obj/item/clothing/gloves/color/black(src)
-	new /obj/item/clothing/suit/hooded/wintercoat/miner(src) //yes, even both mining locker types
+	new /obj/item/clothing/suit/hooded/wintercoat/miner(src)
 	new /obj/item/clothing/suit/hooded/wintercoat/miner(src)
 	new /obj/item/clothing/suit/hooded/wintercoat/miner(src)
 
@@ -50,7 +50,7 @@
 	locked = FALSE
 
 /obj/structure/closet/secure_closet/miner/PopulateContents()
-	..()
+	. = ..()
 	new /obj/item/stack/sheet/mineral/sandbags(src, 5)
 	new /obj/item/storage/box/emptysandbags(src)
 	new /obj/item/shovel(src)
@@ -60,12 +60,11 @@
 	new /obj/item/storage/bag/plants(src)
 	new /obj/item/storage/bag/ore(src)
 	new /obj/item/t_scanner/adv_mining_scanner/lesser(src)
-	new /obj/item/gun/energy/kinetic_accelerator(src)
+	new /obj/item/gun/ballistic/revolver/doublebarrel(src)
+	new /obj/item/storage/box/lethalslugs(src)
 	new /obj/item/clothing/glasses/meson(src)
 	new /obj/item/survivalcapsule(src)
 	new /obj/item/assault_pod/mining(src)
-	new /obj/item/clothing/suit/hooded/wintercoat/miner(src) //because you know you want it
-
 
 /**********************Shuttle Computer**************************/
 

@@ -816,7 +816,7 @@ obj/item/storage/box/stingbangs
 		new /obj/item/ammo_casing/shotgun/rubbershot(src)
 
 /obj/item/storage/box/lethalshot
-	name = "box of buckshot (Lethal)"
+	name = "box of buckshot"
 	desc = "A box full of lethal shots, designed for riot shotguns."
 	icon_state = "lethalshot_box"
 	illustration = null
