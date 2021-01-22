@@ -1,7 +1,7 @@
 /obj/item/clothing/under
 	icon = 'icons/obj/clothing/uniforms.dmi'
 	name = "under"
-	body_parts_covered = CHEST|GROIN|LEGS|ARMS
+	body_parts_covered = NECK|CHEST|GROIN|LEGS|ARMS
 	permeability_coefficient = 0.9
 	block_priority = BLOCK_PRIORITY_UNIFORM
 	slot_flags = ITEM_SLOT_ICLOTHING
@@ -62,7 +62,26 @@
 		adjusted = NORMAL_STYLE
 		fitted = initial(fitted)
 		if(!alt_covers_chest)
-			body_parts_covered |= CHEST
+			if(initial(body_parts_covered) & LEFT_EYE)
+				body_parts_covered |= LEFT_EYE
+			if(initial(body_parts_covered) & RIGHT_EYE)
+				body_parts_covered |= RIGHT_EYE
+			if(initial(body_parts_covered) & JAW)
+				body_parts_covered |= JAW
+			if(initial(body_parts_covered) & HEAD)
+				body_parts_covered |= HEAD
+			if(initial(body_parts_covered) & NECK)
+				body_parts_covered |= NECK
+			if(initial(body_parts_covered) & CHEST)
+				body_parts_covered |= CHEST
+			if(initial(body_parts_covered) & ARM_LEFT)
+				body_parts_covered |= ARM_LEFT
+			if(initial(body_parts_covered) & ARM_RIGHT)
+				body_parts_covered |= ARM_RIGHT
+			if(initial(body_parts_covered) & HAND_LEFT)
+				body_parts_covered |= HAND_LEFT
+			if(initial(body_parts_covered) & HAND_RIGHT)
+				body_parts_covered |= HAND_RIGHT
 	//SKYRAT EDIT
 	for(var/obj/item/clothing/accessory/attached_accessory in attached_accessories)
 		if(attached_accessory && slot != SLOT_HANDS && ishuman(user))
@@ -275,25 +294,47 @@
 	if(adjusted)
 		if(fitted != FEMALE_UNIFORM_TOP)
 			fitted = NO_FEMALE_UNIFORM
-		//skyrat edit
-	if(!alt_covers_chest) // for the special snowflake suits that expose the chest when adjusted (and also the arms, realistically)
-		body_parts_covered &= ~ARMS
-		body_parts_covered &= ~CHEST
-		mutantrace_variation &= ~USE_TAUR_CLIP_MASK //How are we supposed to see the uniform otherwise?
-		//
-	else
-		fitted = initial(fitted)
-		if(!alt_covers_chest)
-			body_parts_covered |= CHEST
-			//skyrat edit
-			body_parts_covered |= ARMS
+		if(!alt_covers_chest) // for the special snowflake suits that expose the chest when adjusted (and also the arms, realistically)
+			body_parts_covered &= ~EYES
+			body_parts_covered &= ~JAW
+			body_parts_covered &= ~HEAD
+			body_parts_covered &= ~NECK
+			body_parts_covered &= ~ARMS
+			body_parts_covered &= ~HANDS
+			body_parts_covered &= ~CHEST
+			mutantrace_variation &= ~USE_TAUR_CLIP_MASK //How are we supposed to see the uniform otherwise?
+		else
+			fitted = initial(fitted)
+			if(initial(body_parts_covered) & LEFT_EYE)
+				body_parts_covered |= LEFT_EYE
+			if(initial(body_parts_covered) & RIGHT_EYE)
+				body_parts_covered |= RIGHT_EYE
+			if(initial(body_parts_covered) & JAW)
+				body_parts_covered |= JAW
+			if(initial(body_parts_covered) & HEAD)
+				body_parts_covered |= HEAD
+			if(initial(body_parts_covered) & NECK)
+				body_parts_covered |= NECK
+			if(initial(body_parts_covered) & CHEST)
+				body_parts_covered |= CHEST
+			if(initial(body_parts_covered) & ARM_LEFT)
+				body_parts_covered |= ARM_LEFT
+			if(initial(body_parts_covered) & ARM_RIGHT)
+				body_parts_covered |= ARM_RIGHT
+			if(initial(body_parts_covered) & HAND_LEFT)
+				body_parts_covered |= HAND_LEFT
+			if(initial(body_parts_covered) & HAND_RIGHT)
+				body_parts_covered |= HAND_RIGHT
 			if(!LAZYLEN(damage_by_parts))
 				return adjusted
-			for(var/zone in list(BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)) // ugly check to make sure we don't reenable protection on a disabled part
+			for(var/zone in list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE, \
+							BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_HEAD, \
+							BODY_ZONE_PRECISE_NECK, BODY_ZONE_CHEST, \
+							BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, \
+							BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND)) // ugly check to make sure we don't reenable protection on a disabled part
 				if(damage_by_parts[zone] > limb_integrity)
 					for(var/part in zone2body_parts_covered(zone))
 						body_parts_covered &= part
-			//
 			if(initial(mutantrace_variation) & USE_TAUR_CLIP_MASK)
 				mutantrace_variation |= USE_TAUR_CLIP_MASK
 

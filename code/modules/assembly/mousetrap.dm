@@ -47,7 +47,7 @@
 		switch(type)
 			if("feet")
 				if(!H.shoes || !(H.shoes.body_parts_covered & FEET))
-					affecting = H.get_bodypart(pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
+					affecting = H.get_bodypart(pick(BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_PRECISE_R_FOOT))
 					H.DefaultCombatKnockdown(60)
 			if(BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND)
 				if(!H.gloves)

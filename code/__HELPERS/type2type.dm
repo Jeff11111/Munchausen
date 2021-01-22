@@ -350,11 +350,19 @@
 		return 0
 
 	if(bpc & FULL_BODY)
-		covered_parts |= list(BODY_ZONE_L_ARM,BODY_ZONE_R_ARM,BODY_ZONE_HEAD,BODY_ZONE_CHEST,BODY_ZONE_L_LEG,BODY_ZONE_R_LEG)
+		covered_parts |= ALL_BODYPARTS
 
 	else
+		if(bpc & LEFT_EYE)
+			covered_parts |= list(BODY_ZONE_PRECISE_LEFT_EYE)
+		if(bpc & RIGHT_EYE)
+			covered_parts |= list(BODY_ZONE_PRECISE_RIGHT_EYE)
+		if(bpc & JAW)
+			covered_parts |= list(BODY_ZONE_PRECISE_MOUTH)
 		if(bpc & HEAD)
 			covered_parts |= list(BODY_ZONE_HEAD)
+		if(bpc & NECK)
+			covered_parts |= list(BODY_ZONE_PRECISE_NECK)
 		if(bpc & CHEST)
 			covered_parts |= list(BODY_ZONE_CHEST)
 		if(bpc & GROIN)

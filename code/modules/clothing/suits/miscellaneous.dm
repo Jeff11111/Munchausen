@@ -46,7 +46,7 @@
 	name = "flash button"
 	desc = "You will learn to fear the flash."
 	icon_state = "flashsuit"
-	body_parts_covered = HEAD
+	body_parts_covered = EYES|JAW|HEAD
 	flags_inv = HIDEHAIR|HIDEEARS|HIDEFACIALHAIR|HIDEFACE|HIDEMASK
 
 /obj/item/clothing/suit/pirate
@@ -115,7 +115,7 @@
 	icon_state = "syndicate-black-red"
 	item_state = "syndicate-black-red"
 	desc = "A plastic replica of the Syndicate space suit. You'll look just like a real murderous Syndicate agent in this! This is a toy, it is not made for use in space!"
-	body_parts_covered = CHEST|ARMS|GROIN|LEGS|FEET|HANDS
+	body_parts_covered = NECK|CHEST|ARMS|GROIN|LEGS|FEET|HANDS
 	allowed = list(/obj/item/flashlight, /obj/item/tank/internals/emergency_oxygen, /obj/item/tank/internals/plasmaman, /obj/item/toy)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	resistance_flags = NONE
@@ -134,7 +134,7 @@
 	desc = "Have YOU killed a xeno today?"
 	icon_state = "imperium_monk"
 	item_state = "imperium_monk"
-	body_parts_covered = CHEST|GROIN|LEGS|ARMS
+	body_parts_covered = NECK|CHEST|GROIN|LEGS|ARMS
 	flags_inv = HIDESHOES|HIDEJUMPSUIT
 	allowed = list(/obj/item/storage/book/bible, /obj/item/nullrod, /obj/item/reagent_containers/food/drinks/bottle/holywater, /obj/item/storage/fancy/candle_box, /obj/item/candle, /obj/item/tank/internals/emergency_oxygen)
 	mutantrace_variation = NONE
@@ -144,7 +144,7 @@
 	desc = "A suit made long ago by the ancient empire KFC."
 	icon_state = "chickensuit"
 	item_state = "chickensuit"
-	body_parts_covered = CHEST|ARMS|GROIN|LEGS|FEET
+	body_parts_covered = NECK|CHEST|ARMS|GROIN|LEGS|FEET
 	flags_inv = HIDESHOES|HIDEJUMPSUIT
 
 
@@ -153,7 +153,7 @@
 	desc = "A suit that looks like a primate."
 	icon_state = "monkeysuit"
 	item_state = "monkeysuit"
-	body_parts_covered = CHEST|ARMS|GROIN|LEGS|FEET|HANDS
+	body_parts_covered = NECK|CHEST|ARMS|GROIN|LEGS|FEET|HANDS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 
 /obj/item/clothing/suit/toggle/owlwings
@@ -162,7 +162,7 @@
 	icon_state = "owl_wings"
 	item_state = "owl_wings"
 	togglename = "wings"
-	body_parts_covered = ARMS
+	body_parts_covered = NECK|CHEST|ARMS
 	actions_types = list(/datum/action/item_action/toggle_wings)
 
 /obj/item/clothing/suit/toggle/owlwings/Initialize()
@@ -257,8 +257,8 @@
 	desc = "A costume made from 'synthetic' carp scales, it smells."
 	icon_state = "carp_casual"
 	item_state = "labcoat"
-	body_parts_covered = CHEST|GROIN|ARMS|LEGS|FEET
-	cold_protection = CHEST|GROIN|ARMS
+	body_parts_covered = NECK|CHEST|GROIN|ARMS|LEGS|FEET
+	cold_protection = NECK|CHEST|GROIN|ARMS|LEGS|FEET
 	min_cold_protection_temperature = FIRE_SUIT_MIN_TEMP_PROTECT	//Space carp like space, so you should too
 	allowed = list(/obj/item/tank/internals/emergency_oxygen, /obj/item/tank/internals/plasmaman, /obj/item/gun/ballistic/automatic/speargun)
 	hoodtype = /obj/item/clothing/head/hooded/carp_hood
@@ -323,7 +323,7 @@
 	name = "bloated human head"
 	desc = "A horribly bloated and mismatched human head."
 	icon_state = "lingspacehelmet"
-	body_parts_covered = HEAD
+	body_parts_covered = EYES|JAW|HEAD
 	flags_cover = HEADCOVERSEYES
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 
@@ -969,7 +969,7 @@
 	icon_state = "assu_suit"
 	item_state = "assu_suit"
 	blood_overlay_type = "armor"
-	body_parts_covered = CHEST|GROIN|ARMS|LEGS
+	body_parts_covered = NECK|CHEST|GROIN|ARMS|LEGS
 	flags_inv = HIDEJUMPSUIT
 	resistance_flags = NONE
 

@@ -549,7 +549,7 @@
 	desc = "A tough, hard covering of black chitin."
 	icon_state = "lingarmor"
 	item_flags = DROPDEL
-	body_parts_covered = CHEST|GROIN|LEGS|FEET|ARMS|HANDS
+	body_parts_covered = NECK|CHEST|GROIN|LEGS|FEET|ARMS|HANDS
 	armor = list("melee" = 70, "bullet" = 60, "laser" = 30, "energy" = 40, "bomb" = 10, "bio" = 4, "rad" = 0, "fire" = 50, "acid" = 90)
 	flags_inv = HIDEJUMPSUIT
 	cold_protection = 0

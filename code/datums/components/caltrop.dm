@@ -37,28 +37,21 @@
 		if(O.is_robotic_limb())
 			return
 
-		var/feetCover = (H.wear_suit && (H.wear_suit.body_parts_covered & FEET)) || (H.w_uniform && (H.w_uniform.body_parts_covered & FEET) || (H.shoes && (H.shoes.body_parts_covered & FEET)))
+		var/feetCover = (H.wear_suit && (H.wear_suit.body_parts_covered & FEET)) || (H.w_uniform && (H.w_uniform.body_parts_covered & FEET) || (H.shoes && (H.shoes.body_parts_covered & FEET)) || HAS_TRAIT(H, TRAIT_HARD_SOLES))
 
 		if(!(flags & CALTROP_BYPASS_SHOES) && feetCover)
 			return
 
 		if((H.movement_type & FLYING) || H.buckled)
 			return
-		//Skyrat edit - hardened soles trait
-		if(HAS_TRAIT(H, TRAIT_HARD_SOLES))
-			return
-		//
 
 		var/damage = rand(min_damage, max_damage)
 		if(HAS_TRAIT(H, TRAIT_LIGHT_STEP))
 			damage *= 0.75
-		//skyrat edit
 		if(H.w_socks)
 			if(H.w_socks.body_parts_covered & FEET)
 				damage *= 0.75
-		//
 		H.apply_damage(damage, BRUTE, picked_def_zone, wound_bonus = CANT_WOUND) //skyrat edit
-
 		if(cooldown < world.time - 10) //cooldown to avoid message spam.
 			if(!H.incapacitated(ignore_restraints = TRUE))
 				H.visible_message("<span class='danger'>[H] steps on [A].</span>", \

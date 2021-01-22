@@ -106,7 +106,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	throw_speed = 0.5
 	item_state = "cigoff"
 	w_class = WEIGHT_CLASS_TINY
-	body_parts_covered = null
+	body_parts_covered = NONE
 	grind_results = list()
 	var/lit = FALSE
 	var/starts_lit = FALSE
