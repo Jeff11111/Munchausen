@@ -33,7 +33,7 @@
 	stop_sound_channel(CHANNEL_HEARTBEAT)
 	var/obj/item/organ/heart/H = getorganslot(ORGAN_SLOT_HEART)
 	if(H)
-		H.beat = BEAT_NONE
+		H.Stop()
 
 	. = ..()
 
