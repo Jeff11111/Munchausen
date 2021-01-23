@@ -18,8 +18,8 @@
 	throw_message = "does nothing against the hardened skin of"
 	vision_range = 5
 	speed = 1
-	maxHealth = 150
-	health = 150
+	maxHealth = 75
+	health = 75
 	harm_intent_damage = 15
 	obj_damage = 60
 	melee_damage_lower = 15

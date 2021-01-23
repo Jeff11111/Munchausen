@@ -23,8 +23,8 @@
 	icon_aggro = "candy"
 	icon_dead = "candy_dead"
 	icon_gib = "syndicate_gib"
-	maxHealth = 800
-	health = 800
+	maxHealth = 450
+	health = 450
 	melee_damage_lower = 30
 	melee_damage_upper = 30
 	attack_verb_continuous = "punches"

@@ -26,8 +26,8 @@ Difficulty: Medium
 	name = "Glaurung"
 	desc = "An ancient Ash Drake untouched except for age. It's eyes glow a soft blue color as opposed to a regular yellow. It carries itself with more strength than the standard drake, eyeing those who come near with caution. Perhaps it is smarter and capable of speech?"
 	threat = 5
-	health = 2000
-	maxHealth = 2000
+	health = 1000
+	maxHealth = 1000
 	spacewalk = TRUE
 	initial_language_holder = /datum/language_holder/dragon
 	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE

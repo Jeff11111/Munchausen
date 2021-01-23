@@ -185,12 +185,12 @@
 			icon = 'modular_skyrat/icons/mob/lavaland/64x64megafauna.dmi'
 			pixel_x = -16
 			pixel_y = -8
-			maxHealth = 350
+			maxHealth = 175
 		if(1)
 			icon = 'modular_skyrat/icons/mob/lavaland/lavaland_monsters.dmi'
 			pixel_x = 0
 			pixel_y = 0
-			maxHealth = 200
+			maxHealth = 100
 	visible_message("<span class='boldannounce'>This is getting out of hands. Now there are three of them!</span>")
 	for(var/i in 1 to 2) //Create three skulls in total
 		var/mob/living/simple_animal/hostile/megafauna/legion/hard/L = new(loc)

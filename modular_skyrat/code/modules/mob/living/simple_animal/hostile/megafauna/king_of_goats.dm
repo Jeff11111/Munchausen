@@ -38,13 +38,13 @@ Difficulty: Insanely Hard
 	response_harm_continuous = "assaults"
 	response_harm_simple = "assault"
 	attack_sound = 'sound/weapons/punch1.ogg'
-	health = 500
+	health = 250
 	a_intent = INTENT_HARM
 	sentience_type = SENTIENCE_BOSS
 	stat_attack = DEAD
 	wander = FALSE
 	movement_type = GROUND
-	maxHealth = 500
+	maxHealth = 250
 	armour_penetration = 35
 	melee_damage_lower = 35
 	melee_damage_upper = 55
@@ -83,8 +83,8 @@ Difficulty: Insanely Hard
 	icon_state = "king_goat2"
 	icon_living = "king_goat2"
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/slab = 4, /obj/item/clothing/head/goatpelt/king = 1)
-	health = 750
-	maxHealth = 750
+	health = 375
+	maxHealth = 375
 	armour_penetration = 50
 	melee_damage_lower = 40
 	melee_damage_upper = 60
@@ -127,8 +127,8 @@ Difficulty: Insanely Hard
 	stat_attack = DEAD
 	wander = FALSE
 	robust_searching = TRUE
-	health = 125
-	maxHealth = 125
+	health = 75
+	maxHealth = 75
 	minbodytemp = 0
 	maxbodytemp = INFINITY
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
@@ -142,8 +142,8 @@ Difficulty: Insanely Hard
 	icon_state = "goat_guard_m"
 	icon_living = "goat_guard_m"
 	icon_dead = "goat_guard_m_dead"
-	health = 200
-	maxHealth = 200
+	health = 100
+	maxHealth = 100
 	armour_penetration = 15
 	melee_damage_lower = 15
 	melee_damage_upper = 20
@@ -223,7 +223,7 @@ Difficulty: Insanely Hard
 /mob/living/simple_animal/hostile/megafauna/king/phase2/proc/phase3_transition()
 	phase3 = TRUE
 	spellscast = 0
-	maxHealth = 750
+	maxHealth = 375
 	revive(TRUE)
 	current_song = 'modular_skyrat/sound/music/Visager-Miniboss_Fight.ogg'
 	current_song_length = 1759
@@ -276,7 +276,7 @@ Difficulty: Insanely Hard
 			L.stop_sound_channel(CHANNEL_JUKEBOX)
 	if(move_to_delay < 3)
 		move_to_delay += 0.2
-	if(!phase3 && ((health <= 150 && spellscast == 5) || stat == DEAD)) //begin phase 3, reset spell limit and heal
+	if(!phase3 && ((health <= 75 && spellscast == 5) || stat == DEAD)) //begin phase 3, reset spell limit and heal
 		phase3_transition()
 	if(!.)
 		return FALSE

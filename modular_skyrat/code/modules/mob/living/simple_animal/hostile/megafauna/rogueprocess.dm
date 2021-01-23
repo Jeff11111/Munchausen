@@ -1,8 +1,8 @@
 /mob/living/simple_animal/hostile/megafauna/rogueprocess
 	name = "Rogue Process"
 	desc = "Once an experimental mecha carrying an advanced mining AI, now it's out for blood."
-	health = 2500
-	maxHealth = 2500
+	health = 1250
+	maxHealth = 1250
 	movement_type = GROUND
 	attack_verb_continuous = "drills"
 	attack_verb_simple = "drill"

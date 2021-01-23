@@ -16,8 +16,8 @@
 	speak_emote = list("moans")
 	speed = 1
 	move_to_delay = 3
-	maxHealth = 200
-	health = 200
+	maxHealth = 100
+	health = 100
 	obj_damage = 100
 	melee_damage_lower = 20
 	melee_damage_upper = 20
