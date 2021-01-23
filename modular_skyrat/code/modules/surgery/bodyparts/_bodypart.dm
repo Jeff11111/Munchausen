@@ -720,7 +720,7 @@
 		// Slow healing
 		var/heal_amt = 0
 		// If damage >= 50 AFTER treatment then it's probably too severe to heal within the timeframe of a round.
-		if(!owner.chem_effects[CE_TOXIN] && IN.can_autoheal() && IN.wound_damage() && (IN.damage/max_damage) < 0.5)
+		if(!owner.chem_effects[CE_TOXIN] && IN.can_autoheal() && IN.wound_damage() && (IN.wound_damage()/max_damage) < 0.5)
 			heal_amt += 0.05
 			if(owner.IsSleeping()) // sleepy niggas heal quadruple
 				heal_amt *= 4
