@@ -88,6 +88,7 @@
 	fire_sound = 'modular_skyrat/sound/guns/pistol1.ogg'
 	mag_type = /obj/item/ammo_box/magazine/m9mm/small
 	can_suppress = FALSE
+	w_class = WEIGHT_CLASS_SMALL
 
 //M1911
 /obj/item/gun/ballistic/automatic/pistol/m1911
