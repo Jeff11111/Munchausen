@@ -174,7 +174,7 @@
 			var/mob/living/carbon/carbon_mob = user
 			c_intent = carbon_mob.combat_intent
 			var/modifier = 0
-			if(c_intent == CI_AIMED)
+			if((c_intent == CI_AIMED) && CHECK_BITFIELD(attackchain_flags, ATTACKCHAIN_RIGHTCLICK))
 				modifier += 6
 			
 			//Chance to miss the attack entirely, based on a diceroll
@@ -206,7 +206,7 @@
 							multi = melee.level/(MAX_SKILL/2)
 					changeNext_move(CLICK_CD_MELEE * multi)
 		affecting = get_bodypart(ran_zone(check_zone(user.zone_selected), ran_zone_prob))
-	var/target_area = parse_zone(check_zone(user.zone_selected)) //our intended target
+	var/target_area = parse_zone(affecting.body_zone) //our intended target
 
 	SEND_SIGNAL(I, COMSIG_ITEM_ATTACK_ZONE, src, user, affecting)
 

@@ -129,7 +129,7 @@
 	var/obj/item/organ/brain/brain = null
 
 	/// If something is currently grasping this bodypart and trying to staunch bleeding
-	var/obj/item/grab/grasped_by
+	var/obj/item/grab/grasped_by = null
 
 	/// How much pain this limb is feeling
 	var/pain_dam = 0
@@ -808,11 +808,8 @@
 	switch(animal_origin)
 		if(ALIEN_BODYPART,LARVA_BODYPART) //aliens take double burn //nothing can burn with so much snowflake code around
 			burn *= 2
-	/*
-	// START WOUND HANDLING
-	*/
 
-	// what kind of wounds we're gonna roll for, take the greater between brute and burn, then if it's brute, we subdivide based on sharpness
+	// what kind of wounds and injuries we're gonna roll for, take the greater between brute and burn, then if it's brute, we subdivide based on sharpness
 	var/wounding_type = WOUND_NONE
 	if(brute || burn)
 		wounding_type = (brute > burn ? WOUND_BLUNT : WOUND_BURN)
@@ -823,88 +820,15 @@
 
 	var/easy_dismember = HAS_TRAIT(owner, TRAIT_EASYDISMEMBER) // if we have easydismember, we don't reduce damage when redirecting damage to different types (slashing weapons on mangled/skinless limbs attack at 100% instead of 50%)
 
-	// first we check the sharpness var to see if we're slashing or piercing rather than plain blunt
+	//First we check the sharpness var to see if we're slashing or piercing rather than plain blunt
 	if(wounding_type == WOUND_BLUNT)
 		if(sharpness == SHARP_EDGED)
 			wounding_type = WOUND_SLASH
 		else if(sharpness == SHARP_POINTY)
 			wounding_type = WOUND_PIERCE
 
-	//We check all wound-related traits to multiply damage adequately.
-	if(body_zone == BODY_ZONE_PRECISE_MOUTH && HAS_TRAIT(owner, TRAIT_GLASSJAW))
-		wounding_dmg *= 2
-	if(wounding_type == WOUND_BLUNT && HAS_TRAIT(owner, TRAIT_EASYBLUNT))
-		wounding_dmg *= 2
-
-	//Handling for bone only/flesh only/all of them targets
-	// if we're bone only, all cutting attacks go straight to the bone
-	if((bio_state & BIO_BONE) && !(bio_state & BIO_FLESH))
-		if(wounding_type == WOUND_SLASH)
-			wounding_type = WOUND_BLUNT
-			if(!easy_dismember)
-				wounding_dmg *= 0.5
-		else if(wounding_type == WOUND_PIERCE)
-			wounding_type = WOUND_BLUNT
-			if(!easy_dismember)
-				wounding_dmg *= 0.75
-
-		if(mangled_state & BODYPART_MANGLED_BONE)
-			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
-			if(try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
-				return
-	// slime people p much they dont have bone
-	else if((bio_state & BIO_FLESH) && !(bio_state & BIO_BONE))
-		if(wounding_type == WOUND_BLUNT)
-			wounding_type = WOUND_SLASH
-			if(!easy_dismember)
-				wounding_dmg *= 0.5
-		else if(wounding_type == WOUND_PIERCE)
-			wounding_dmg *= 1.5 // it's easy to puncture into plain flesh
-
-		if(mangled_state & BODYPART_MANGLED_MUSCLE)
-			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
-			if(try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
-				return
-	// standard humanoids
-	else if(bio_state & BIO_FULL)
-		// If we've already mangled the muscle (critical slash or piercing wound), then the bone is exposed, and we can damage it with sharp weapons at a reduced rate
-		// So a big sharp weapon is still all you need to rip off a limb
-		if((mangled_state & BODYPART_MANGLED_MUSCLE) && !(mangled_state & BODYPART_MANGLED_BOTH) && sharpness)
-			playsound(src, "modular_skyrat/sound/effects/crackandbleed.ogg", 100)
-			if(wounding_type == WOUND_SLASH && !easy_dismember)
-				wounding_dmg *= 0.6 // edged weapons pass along 60% of their wounding damage to the bone since the power is spread out over a larger area
-			if(wounding_type == WOUND_PIERCE && !easy_dismember)
-				wounding_dmg *= 0.8 // piercing weapons pass along 80% of their wounding damage to the bone since it's more concentrated
-			if((wounding_type == WOUND_SLASH) || (wounding_type == WOUND_PIERCE))
-				wounding_type = WOUND_BLUNT
-			else if(wounding_type == WOUND_BLUNT)
-				wounding_type = WOUND_PIERCE
-		// A big blunt weapon too can dismember a limb
-		// If we already have a mangled bone, we start rolling (inefficiently) for slashes
-		else if((wounding_type == WOUND_BLUNT) && (mangled_state & BODYPART_MANGLED_BONE) && !(mangled_state & BODYPART_MANGLED_MUSCLE) && !sharpness)
-			playsound(src, "modular_skyrat/sound/effects/crackandbleed.ogg", 100)
-			if(!easy_dismember)
-				wounding_dmg *= 0.5
-			wounding_type = WOUND_SLASH
-
-		if(mangled_state & BODYPART_MANGLED_BOTH)
-			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
-			if(try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
-				return
-	/*
-	// END WOUND HANDLING
-	*/
-
-	// Now we have our wounding_type and are ready to carry on with wounds and dealing the actual damage
-	if(owner && wounding_dmg >= WOUND_MINIMUM_DAMAGE && wound_bonus > CANT_WOUND)
-		check_wounding(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
-		if(wounding_type in list(WOUND_SLASH, WOUND_PIERCE))
-			if(wounding_dmg >= ARTERY_MINIMUM_DAMAGE)
-				check_wounding(WOUND_ARTERY, wounding_dmg * (wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
-		if(wounding_type in list(WOUND_BLUNT, WOUND_SLASH, WOUND_PIERCE))
-			if(wounding_dmg >= TENDON_MINIMUM_DAMAGE)
-				check_wounding(WOUND_TENDON, wounding_dmg * (wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
-
+	//Now we have our wounding_type and are ready to carry on with dealing damage and then wounds
+	
 	//We add the pain values before we scale damage down
 	//Pain does not care about your feelings, nor if your limb was already damaged
 	//to it's maximum
@@ -1010,6 +934,63 @@
 	tox_dam += toxin
 	clone_dam += clone
 
+	//Damage has been dealt. Let's deal with wounding.
+	//We check all wound-related traits to multiply damage adequately.
+	if(body_zone == BODY_ZONE_PRECISE_MOUTH && HAS_TRAIT(owner, TRAIT_GLASSJAW))
+		wounding_dmg *= 2
+	if(wounding_type == WOUND_BLUNT && HAS_TRAIT(owner, TRAIT_EASYBLUNT))
+		wounding_dmg *= 2
+
+	// Standard humanoids, flesh and bone
+	if(CHECK_MULTIPLE_BITFIELDS(bio_state, BIO_FULL))
+		// If we've already mangled the muscle (critical slash or piercing wound), then the bone is exposed, and we can damage it with sharp weapons at a reduced rate
+		// So a big sharp weapon is still all you need to rip off a limb
+		if((mangled_state & BODYPART_MANGLED_MUSCLE) && !(mangled_state & BODYPART_MANGLED_BOTH) && sharpness)
+			playsound(src, "modular_skyrat/sound/effects/crackandbleed.ogg", 100)
+			if(wounding_type == WOUND_SLASH && !easy_dismember)
+				wounding_dmg *= 0.6 // edged weapons pass along 60% of their wounding damage to the bone since the power is spread out over a larger area
+			if(wounding_type == WOUND_PIERCE && !easy_dismember)
+				wounding_dmg *= 0.8 // piercing weapons pass along 80% of their wounding damage to the bone since it's more concentrated
+			if((wounding_type == WOUND_SLASH) || (wounding_type == WOUND_PIERCE))
+				wounding_type = WOUND_BLUNT
+			else if(wounding_type == WOUND_BLUNT)
+				wounding_type = WOUND_PIERCE
+		// A big blunt weapon too can dismember a limb
+		// If we already have a mangled bone, we start rolling (inefficiently) for slashes
+		else if((wounding_type == WOUND_BLUNT) && (mangled_state & BODYPART_MANGLED_BONE) && !(mangled_state & BODYPART_MANGLED_MUSCLE) && !sharpness)
+			playsound(src, "modular_skyrat/sound/effects/crackandbleed.ogg", 100)
+			if(!easy_dismember)
+				wounding_dmg *= 0.5
+			wounding_type = WOUND_SLASH
+	// Bone only, all cutting/piercing attacks go straight to the bone
+	else if(CHECK_BITFIELD(bio_state, BIO_BONE))
+		if(wounding_type == WOUND_SLASH)
+			wounding_type = WOUND_BLUNT
+			if(!easy_dismember)
+				wounding_dmg *= 0.5
+		else if(wounding_type == WOUND_PIERCE)
+			wounding_type = WOUND_BLUNT
+			if(!easy_dismember)
+				wounding_dmg *= 0.75
+	// Slime people, flesh only
+	else if(CHECK_BITFIELD(bio_state, BIO_FLESH))
+		if(wounding_type == WOUND_BLUNT)
+			wounding_type = WOUND_SLASH
+			if(!easy_dismember)
+				wounding_dmg *= 0.5
+		else if(wounding_type == WOUND_PIERCE)
+			wounding_dmg *= 1.5 // it's easy to puncture into plain flesh
+
+	// Check the wounding now
+	if(owner && wounding_dmg >= WOUND_MINIMUM_DAMAGE && wound_bonus > CANT_WOUND)
+		check_wounding(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+		if(wounding_type in list(WOUND_SLASH, WOUND_PIERCE))
+			if(wounding_dmg >= ARTERY_MINIMUM_DAMAGE)
+				check_wounding(WOUND_ARTERY, wounding_dmg * (wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
+		if(wounding_type in list(WOUND_BLUNT, WOUND_SLASH, WOUND_PIERCE))
+			if(wounding_dmg >= TENDON_MINIMUM_DAMAGE)
+				check_wounding(WOUND_TENDON, wounding_dmg * (wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
+
 	//We've dealt with everything else, so let's share the pain
 	if(!can_feel_pain())
 		//Or not - The trip was cut short
@@ -1040,6 +1021,19 @@
 			owner.update_pain()
 			. = TRUE
 
+	//Handle dismemberment if appropriate, everything is done
+	if(CHECK_MULTIPLE_BITFIELDS(bio_state, BIO_FULL))
+		if(mangled_state & BODYPART_MANGLED_BOTH)
+			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+	else if(CHECK_BITFIELD(bio_state, BIO_FLESH))
+		if(mangled_state & BODYPART_MANGLED_MUSCLE)
+			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+	else if(CHECK_BITFIELD(bio_state, BIO_BONE))
+		if(mangled_state & BODYPART_MANGLED_BONE)
+			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+	if(try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
+		return
+	
 	consider_processing()
 	update_disabled()
 	return update_bodypart_damage_state() || .
@@ -1086,8 +1080,8 @@
 	return FALSE
 
 /// Allows us to roll for and apply a wound without actually dealing damage. Used for aggregate wounding power with pellet clouds (note this doesn't let sharp go to bone)
-/obj/item/bodypart/proc/painless_wound_roll(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus, silent = FALSE)
-	if(!owner || (phantom_wounding_dmg <= WOUND_MINIMUM_DAMAGE) || (wound_bonus <= CANT_WOUND))
+/obj/item/bodypart/proc/painless_wound_roll(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus, silent = FALSE)
+	if(!owner || (wounding_dmg <= WOUND_MINIMUM_DAMAGE) || (wound_bonus <= CANT_WOUND))
 		return FALSE
 
 	var/mangled_state = get_mangled_state()
@@ -1097,49 +1091,20 @@
 
 	//We check all wound-related traits to multiply damage adequately.
 	if(body_zone == BODY_ZONE_PRECISE_MOUTH && HAS_TRAIT(owner, TRAIT_GLASSJAW))
-		phantom_wounding_dmg *= 2
+		wounding_dmg *= 2
 	if(wounding_type == WOUND_BLUNT && HAS_TRAIT(owner, TRAIT_EASYBLUNT))
-		phantom_wounding_dmg *= 2
+		wounding_dmg *= 2
 
-	//Handling for bone only/flesh only/skin only/all of them targets
-	if((bio_state & BIO_BONE) && !(bio_state & BIO_FLESH)) // if we're bone only, all cutting attacks go straight to the bone
-		if(wounding_type == WOUND_SLASH)
-			wounding_type = WOUND_BLUNT
-			if(!easy_dismember)
-				phantom_wounding_dmg *= 0.5
-		else if(wounding_type == WOUND_PIERCE)
-			wounding_type = WOUND_BLUNT
-			if(!easy_dismember)
-				phantom_wounding_dmg *= 0.75
-
-		if(mangled_state & BODYPART_MANGLED_BONE)
-			damage_integrity(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus)
-			if(try_dismember(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
-				return
-		
-	// slime people p much, they dont have bone
-	else if((bio_state & BIO_FLESH) && !(bio_state & BIO_BONE))
-		if(wounding_type == WOUND_BLUNT)
-			wounding_type = WOUND_SLASH
-			if(!easy_dismember)
-				phantom_wounding_dmg *= 0.5
-		else if(wounding_type == WOUND_PIERCE)
-			phantom_wounding_dmg *= 1.5 // it's easy to puncture into plain flesh
-		if(mangled_state & BODYPART_MANGLED_MUSCLE)
-			damage_integrity(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus)
-			if(try_dismember(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
-				return
-
-	// standard humanoids
-	else if(bio_state & BIO_FULL)
+	// Standard humanoids, flesh and bone
+	if(CHECK_MULTIPLE_BITFIELDS(bio_state, BIO_FULL))
 		// If we've already mangled the muscle (critical slash or piercing wound), then the bone is exposed, and we can damage it with sharp weapons at a reduced rate
 		// So a big sharp weapon is still all you need to rip off a limb
 		if((mangled_state & BODYPART_MANGLED_MUSCLE) && !(mangled_state & BODYPART_MANGLED_BOTH) && sharpness)
 			playsound(src, "modular_skyrat/sound/effects/crackandbleed.ogg", 100)
 			if(wounding_type == WOUND_SLASH && !easy_dismember)
-				phantom_wounding_dmg *= 0.6 // edged weapons pass along 60% of their wounding damage to the bone since the power is spread out over a larger area
+				wounding_dmg *= 0.6 // edged weapons pass along 60% of their wounding damage to the bone since the power is spread out over a larger area
 			if(wounding_type == WOUND_PIERCE && !easy_dismember)
-				phantom_wounding_dmg *= 0.8 // piercing weapons pass along 80% of their wounding damage to the bone since it's more concentrated
+				wounding_dmg *= 0.8 // piercing weapons pass along 80% of their wounding damage to the bone since it's more concentrated
 			if((wounding_type == WOUND_SLASH) || (wounding_type == WOUND_PIERCE))
 				wounding_type = WOUND_BLUNT
 			else if(wounding_type == WOUND_BLUNT)
@@ -1149,15 +1114,48 @@
 		else if((wounding_type == WOUND_BLUNT) && (mangled_state & BODYPART_MANGLED_BONE) && !(mangled_state & BODYPART_MANGLED_MUSCLE) && !sharpness)
 			playsound(src, "modular_skyrat/sound/effects/crackandbleed.ogg", 100)
 			if(!easy_dismember)
-				phantom_wounding_dmg *= 0.5
+				wounding_dmg *= 0.5
 			wounding_type = WOUND_SLASH
+	// Bone only, all cutting/piercing attacks go straight to the bone
+	else if(CHECK_BITFIELD(bio_state, BIO_BONE))
+		if(wounding_type == WOUND_SLASH)
+			wounding_type = WOUND_BLUNT
+			if(!easy_dismember)
+				wounding_dmg *= 0.5
+		else if(wounding_type == WOUND_PIERCE)
+			wounding_type = WOUND_BLUNT
+			if(!easy_dismember)
+				wounding_dmg *= 0.75
+	// Slime people, flesh only
+	else if(CHECK_BITFIELD(bio_state, BIO_FLESH))
+		if(wounding_type == WOUND_BLUNT)
+			wounding_type = WOUND_SLASH
+			if(!easy_dismember)
+				wounding_dmg *= 0.5
+		else if(wounding_type == WOUND_PIERCE)
+			wounding_dmg *= 1.5 // it's easy to puncture into plain flesh
 
+	// Check the wounding now
+	if(owner && wounding_dmg >= WOUND_MINIMUM_DAMAGE && wound_bonus > CANT_WOUND)
+		check_wounding(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+		if(wounding_type in list(WOUND_SLASH, WOUND_PIERCE))
+			if(wounding_dmg >= ARTERY_MINIMUM_DAMAGE)
+				check_wounding(WOUND_ARTERY, wounding_dmg * (wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
+		if(wounding_type in list(WOUND_BLUNT, WOUND_SLASH, WOUND_PIERCE))
+			if(wounding_dmg >= TENDON_MINIMUM_DAMAGE)
+				check_wounding(WOUND_TENDON, wounding_dmg * (wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
+	
+	//Handle dismemberment if appropriate, everything is done
+	if(CHECK_MULTIPLE_BITFIELDS(bio_state, BIO_FULL))
 		if(mangled_state & BODYPART_MANGLED_BOTH)
-			damage_integrity(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus)
-			if(try_dismember(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus))
-				return
-
-	check_wounding(wounding_type, phantom_wounding_dmg, wound_bonus, bare_wound_bonus, silent = silent)
+			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+	else if(CHECK_BITFIELD(bio_state, BIO_FLESH))
+		if(mangled_state & BODYPART_MANGLED_MUSCLE)
+			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+	else if(CHECK_BITFIELD(bio_state, BIO_BONE))
+		if(mangled_state & BODYPART_MANGLED_BONE)
+			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+	try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 
 //Proc for damaging organs inside a limb
 /obj/item/bodypart/proc/damage_organs(brute = 0, burn = 0, toxin = 0, clone = 0, wounding_type = WOUND_BLUNT)

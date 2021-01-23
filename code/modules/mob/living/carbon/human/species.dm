@@ -1892,15 +1892,12 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 		if(target.w_uniform)
 			target.w_uniform.add_fingerprint(user)
-		//skyrat edit
 		else if(target.w_underwear)
 			target.w_underwear.add_fingerprint(user)
 		else if(target.w_socks)
 			target.w_socks.add_fingerprint(user)
 		else if(target.w_shirt)
 			target.w_shirt.add_fingerprint(user)
-		//
-		//var/randomized_zone = ran_zone(user.zone_selected) CIT CHANGE - comments out to prevent compiling errors
 		SEND_SIGNAL(target, COMSIG_HUMAN_DISARM_HIT, user, user.zone_selected)
 		if(target.pulling == user)
 			target.visible_message("<span class='warning'><b>[user]</b> wrestles out of <b>[target]</b>'s grip!</span>", \
@@ -2173,9 +2170,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 					if(H.w_uniform)
 						H.w_uniform.add_mob_blood(H)
 						H.update_inv_w_uniform()
-
-		if(Iforce > 10 || Iforce >= 5 && prob(33))
-			H.forcesay(GLOB.hit_appends)	//forcesay checks stat already.
 	return TRUE
 
 /datum/species/proc/alt_spec_attack_hand(mob/living/carbon/human/M, mob/living/carbon/human/H, datum/martial_art/attacker_style)

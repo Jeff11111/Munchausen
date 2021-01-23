@@ -265,7 +265,7 @@
 			return TRUE
 	else
 		playsound(loc, 'sound/weapons/genhit.ogg', 50, 1, -1)
-	..()
+	. = ..()
 
 
 /mob/living/mech_melee_attack(obj/mecha/M)
