@@ -4,6 +4,7 @@
 	implements = list(/obj/item/bodypart = 100,
 					/obj/item/organ_storage = 100)
 	base_time = 32
+	requires_bodypart_type = 0
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED | STEP_NEEDS_BROKEN)
 
 /datum/surgery_step/replace_limb/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)

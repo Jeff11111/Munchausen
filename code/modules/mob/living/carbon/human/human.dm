@@ -955,17 +955,9 @@
 		hud_used.staminas?.update_icon()
 
 /mob/living/carbon/human/fully_heal(admin_revive = FALSE)
-	if(admin_revive)
-		regenerate_limbs()
-		regenerate_organs()
-	remove_all_embedded_objects()
-	set_heartattack(FALSE)
-	drunkenness = 0
 	for(var/datum/mutation/human/HM in dna.mutations)
 		if(HM.quality != POSITIVE)
 			dna.remove_mutation(HM.name)
-	if(blood_volume < (BLOOD_VOLUME_NORMAL*blood_ratio))
-		blood_volume = (BLOOD_VOLUME_NORMAL*blood_ratio)
 	. = ..()
 
 /mob/living/carbon/human/check_weakness(obj/item/weapon, mob/living/attacker)

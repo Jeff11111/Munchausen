@@ -145,7 +145,7 @@
 
 /datum/component/storage/proc/worn_check(obj/item/I, mob/M, no_message = FALSE)
 	. = TRUE
-	if(!istype(I) || !istype(M))
+	if(!istype(I) || !istype(M) || HAS_TRAIT(M, TRAIT_LONGARMS))
 		return TRUE
 
 	if(storage_flags & STORAGE_NO_EQUIPPED_ACCESS && (I.item_flags & IN_INVENTORY))

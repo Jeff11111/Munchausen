@@ -3,10 +3,13 @@
 	var/lisp_force = 0
 
 /datum/speech_mod/lisp/add_speech_mod(mob/living/carbon/human/M)
-	..()
+	. = ..()
 	update_lisp()
 
 /datum/speech_mod/lisp/handle_speech(datum/source, list/speech_args)
+	update_lisp()
+	if(QDELETED(src))
+		return
 	var/message = speech_args[SPEECH_MESSAGE]
 	if(message[1] != "*")
 		message = prob(lisp_force) ? replacetext(message, "f", "ph") : message

@@ -330,9 +330,9 @@
 /obj/item/bodypart/proc/replace_limb(mob/living/carbon/C, special)
 	if(!istype(C))
 		return
-	var/obj/item/bodypart/O = C.get_bodypart(body_zone)
-	if(O)
-		O.drop_limb(special, TRUE, FALSE, FALSE)
+	var/obj/item/bodypart/BP = C.get_bodypart(body_zone)
+	if(BP)
+		BP.drop_limb(special, TRUE, FALSE, FALSE)
 	attach_limb(C, special)
 
 /obj/item/bodypart/proc/attach_limb(mob/living/carbon/C, special, ignore_parent_restriction = FALSE)

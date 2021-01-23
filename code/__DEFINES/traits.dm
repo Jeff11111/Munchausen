@@ -229,6 +229,7 @@
 #define TRAIT_LOOKSVERYUNCONSCIOUS	"looks_very_unconscious" //fake shock
 #define TRAIT_LOOKSDEAD			"looks_dead" //fake death
 #define TRAIT_NOTEMPERATUREWOUNDING "no_temperature_wounding" //no temperature based wounds
+#define TRAIT_LONGARMS			"long_arms" //can reach into backpacks and duffelbags while wearing em
 //
 
 // mobility flag traits

@@ -56,18 +56,6 @@
 	if(germ_level < GERM_LEVEL_MOVE_CAP && prob(8))
 		germ_level++
 
-//Wound healing
-/mob/living/carbon/proc/can_autoheal(dam_type = BRUTE)
-	if(!dam_type)
-		return FALSE
-	. = TRUE
-	if(dam_type == BRUTE)
-		if(getBruteLoss() > (maxHealth/2))
-			. = FALSE
-	else if(dam_type == BURN)
-		if(getFireLoss() > (maxHealth/2))
-			. = FALSE
-
 //Wielding
 /mob/living/carbon/wield_active_hand()
 	var/obj/item/active = get_active_held_item()

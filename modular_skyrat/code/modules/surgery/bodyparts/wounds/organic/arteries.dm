@@ -31,7 +31,7 @@
 			qdel(src)
 			return FALSE
 		name = "Torn [capitalize(L.artery_name, TRUE)]"
-		desc = "Patient's [L.artery_name] has been violently slashed open, causing severe hemorrhaging."
+		desc = "Patient's [L.artery_name] has been violently torn, causing severe hemorrhaging."
 		switch(L.body_zone)
 			if(BODY_ZONE_PRECISE_LEFT_EYE)
 				blood_flow *= 0.35

@@ -50,7 +50,8 @@
 			return
 
 /mob/living/carbon/human/revive(full_heal = 0, admin_revive = 0)
-	if(..())
+	. = ..()
+	if(.)
 		if(dna && dna.species)
 			dna.species.spec_revival(src)
 
@@ -58,27 +59,27 @@
 	race = /datum/species/synthliz
 
 /mob/living/carbon/human/species/synthliz/mangled/Initialize()
-	..()
+	. = ..()
 	mangle()
 
 /mob/living/carbon/human/species/synth/mangled/Initialize()
-	..()
+	. = ..()
 	mangle()
 
 /mob/living/carbon/human/species/synth/military/mangled/Initialize()
-	..()
+	. = ..()
 	mangle()
 
 /mob/living/carbon/human/species/ipc/mangled/Initialize()
-	..()
+	. = ..()
 	mangle()
 
 /mob/living/carbon/human/species/android/mangled/Initialize()
-	..()
+	. = ..()
 	mangle()
 
 /mob/living/carbon/human/species/corporate/mangled/Initialize()
-	..()
+	. = ..()
 	mangle()
 
 /mob/living/carbon/human/proc/mangle()

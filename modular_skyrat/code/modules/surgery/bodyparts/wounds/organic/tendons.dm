@@ -37,7 +37,7 @@
 			qdel(src)
 			return FALSE
 		name = "Torn [capitalize(L.tendon_name, TRUE)]"
-		desc = "Patient's [L.tendon_name] has been violently slashed open, disabling the affected limb."
+		desc = "Patient's [L.tendon_name] has been violently torn, disabling the affected limb."
 		switch(L.body_zone)
 			if(BODY_ZONE_HEAD)
 				torn *= 1.5

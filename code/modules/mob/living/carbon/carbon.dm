@@ -976,11 +976,15 @@
 	if(B)
 		B.brain_death = FALSE
 	remove_all_embedded_objects()
+	shock_stage = 0
+	setPainLoss(0, FALSE)
+	janitize(0, 0, 0)
 	for(var/O in internal_organs)
 		var/obj/item/organ/organ = O
 		organ.rejecting = FALSE
 		organ.setOrganDamage(0)
 		organ.organ_flags &= ~ORGAN_CUT_AWAY
+		organ.organ_flags &= ~ORGAN_DEAD
 		organ.janitize(0, 0, 0)
 	for(var/BP in bodyparts)
 		var/obj/item/bodypart/bodypart = BP
@@ -990,14 +994,19 @@
 		bodypart.rejecting = FALSE
 		bodypart.janitize(0, 0, 0)
 		bodypart.fill_teeth()
+		bodypart.limb_flags &= ~BODYPART_CUT_AWAY
+		bodypart.limb_flags &= ~BODYPART_DEAD
+		for(var/datum/injury/IN in bodypart.injuries)
+			qdel(IN)
+		bodypart.update_injuries()
 	for(var/thing in diseases)
 		var/datum/disease/D = thing
 		if(D.severity != DISEASE_SEVERITY_POSITIVE)
 			D.cure(FALSE)
 	for(var/i in all_wounds)
-		var/datum/wound/w = i
-		if(istype(w))
-			w.remove_wound(FALSE, TRUE)
+		var/datum/wound/W = i
+		if(istype(W))
+			qdel(W)
 	if(admin_revive)
 		regenerate_limbs()
 		regenerate_organs()
@@ -1008,7 +1017,11 @@
 		if(reagents)
 			for(var/addi in reagents.addiction_list)
 				reagents.remove_addiction(addi)
+	if(blood_volume < (BLOOD_VOLUME_NORMAL*blood_ratio))
+		blood_volume = (BLOOD_VOLUME_NORMAL*blood_ratio)
+	drunkenness = 0
 	cure_all_traumas(TRAUMA_RESILIENCE_MAGIC)
+	set_heartattack(FALSE)
 	. = ..()
 	// heal ears after healing traits, since ears check TRAIT_DEAF trait
 	// when healing.

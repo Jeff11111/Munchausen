@@ -158,14 +158,14 @@
 	var/obj/item/card/id/id = H.get_idcard()
 	if(id)
 		var/datum/bank_account/B = id.registered_account
-		B.adjust_money(2000)
+		B.adjust_money(3000)
 	. = ..()
 
 //cum nuts
 /datum/quirk/gun_nut
 	name = "Gun nut"
 	desc = "<span class='info'>I have decent knowledge of how to operate and use firearms.</span>"
-	lose_text = "<span class='warning'>All I know of the fighting is lost to memories.</span>"
+	lose_text = "<span class='warning'>All I know of the shooting is lost to memories.</span>"
 	medical_condition = FALSE
 
 /datum/quirk/gun_nut/on_spawn()
@@ -234,3 +234,11 @@
 		endurance.level = clamp(endurance.level - 3, MIN_STAT, MAX_STAT)
 		dexterity.level = clamp(dexterity.level - 2, MIN_STAT, MAX_STAT)
 	. = ..()
+
+//long arms
+/datum/quirk/longarms
+	name = "Long Arms"
+	desc = "<span class='info'>I have unusually long arms and can reach into my backpack while wearing it.</span>"
+	lose_text = "<span class='warning'>My arms shorten.</span>"
+	medical_condition = TRUE
+	mob_trait = TRAIT_LONGARMS
