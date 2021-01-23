@@ -66,8 +66,8 @@
 	// Flashlight stuff
 	var/obj/item/flashlight/gun_light
 	var/mutable_appearance/flashlight_overlay
-	var/flight_x_offset = 0
-	var/flight_y_offset = 0
+	var/flight_x_offset = 15
+	var/flight_y_offset = 10
 	var/can_flashlight = TRUE
 	var/can_unflashlight = TRUE
 	var/datum/action/item_action/toggle_gunlight/alight
@@ -78,15 +78,15 @@
 	// Bayonet stuff
 	var/obj/item/kitchen/knife/bayonet
 	var/mutable_appearance/knife_overlay
-	var/knife_x_offset = 0
-	var/knife_y_offset = 0
+	var/knife_x_offset = 15
+	var/knife_y_offset = 8
 	var/can_bayonet = FALSE
 	var/can_unbayonet = TRUE
 
 	// Suppressor stuff
 	var/obj/item/suppressor/suppressed //having a suppressor means we dont make funny sound
 	var/mutable_appearance/suppressed_overlay //this ass can fart
-	var/suppressed_pixel_x = 0
+	var/suppressed_pixel_x = 4
 	var/suppressed_pixel_y = 0
 	var/sound_suppressed = 'modular_skyrat/sound/weapons/shot_silenced.ogg' //fire sound when suppressed
 	var/can_suppress = FALSE

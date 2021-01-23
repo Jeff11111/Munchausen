@@ -15,12 +15,14 @@
 	icon_state = "pistol10mm"
 	fire_sound = 'modular_skyrat/sound/guns/pistol2.ogg'
 	suppressed_pixel_x = 4
+	suppressed_pixel_y = 0
 
 //Modular pistol
 /obj/item/gun/ballistic/automatic/pistol/modular
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
 	icon_state = "modularpistol"
 	suppressed_pixel_x = 4
+	suppressed_pixel_y = 0
 
 //Stechkin APS v2
 /obj/item/gun/ballistic/automatic/pistol/cz
@@ -32,6 +34,7 @@
 	icon_state = "czauto"
 	item_state = "czauto"
 	suppressed_pixel_x = 2
+	suppressed_pixel_y = 0
 	fire_sound = 'modular_skyrat/sound/guns/pistol1.ogg'
 	can_suppress = TRUE
 	w_class = WEIGHT_CLASS_SMALL
@@ -53,6 +56,7 @@
 	burst_size = 2
 	fire_delay = 3
 	suppressed_pixel_x = 8
+	suppressed_pixel_y = 0
 	actions_types = list(/datum/action/item_action/toggle_firemode)
 	fire_sound = 'modular_skyrat/sound/guns/pistol1.ogg'
 
@@ -73,6 +77,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	mag_type = /obj/item/ammo_box/magazine/m9mm
 	suppressed_pixel_x = 5
+	suppressed_pixel_y = 0
 	can_suppress = TRUE
 
 //Nangler
@@ -101,6 +106,7 @@
 	righthand_file = 'modular_skyrat/icons/obj/bobstation/guns/inhands/pistol_righthand.dmi'
 	fire_sound = 'modular_skyrat/sound/guns/pistol2.ogg'
 	suppressed_pixel_x = 8
+	suppressed_pixel_y = 0
 
 //Kitchen gun
 /obj/item/gun/ballistic/automatic/pistol/m1911/kitchengun
@@ -133,6 +139,7 @@
 	icon_state = "deagle"
 	fire_sound = 'modular_skyrat/sound/guns/pistol2.ogg'
 	suppressed_pixel_x = 4
+	suppressed_pixel_y = 0
 
 /obj/item/gun/ballistic/automatic/pistol/deagle/gold
 	icon_state = "deagle_golden"

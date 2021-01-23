@@ -21,6 +21,7 @@
 	icon_state = "mp5"
 	item_state = "arg"
 	suppressed_pixel_x = 5
+	suppressed_pixel_y = 0
 
 //C20R
 /obj/item/gun/ballistic/automatic/c20r
