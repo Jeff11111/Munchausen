@@ -68,7 +68,7 @@
 	var/mutable_appearance/flashlight_overlay
 	var/flight_x_offset = 0
 	var/flight_y_offset = 0
-	var/can_flashlight = FALSE
+	var/can_flashlight = TRUE
 	var/can_unflashlight = TRUE
 	var/datum/action/item_action/toggle_gunlight/alight
 	var/custom_light_icon //custom flashlight icon
