@@ -72,7 +72,7 @@
 		return
 
 	var/actual_chance = embed_chance
-	if(!weapon.isEmbedHarmless()) // all the armor in the world won't save you from a kick me sign
+	if(!weapon.isEmbedHarmless() && !forced) // all the armor in the world won't save you from a kick me sign
 		var/armor = max(victim.run_armor_check(hit_zone, "bullet", silent = TRUE), victim.run_armor_check(hit_zone, "bomb", silent = TRUE)) // we'll be nice and take the better of bullet and bomb armor
 		if(armor) // we only care about armor penetration if there's actually armor to penetrate
 			var/pen_mod = -armor + weapon.armour_penetration // even a little bit of armor can make a big difference for shrapnel with large negative armor pen
@@ -145,7 +145,7 @@
 	payload.embedding = P.embedding
 	payload.updateEmbedding()
 
-	payload.tryEmbed(target = injured_part, embedded_injury = created_injury)
+	payload.tryEmbed(target = injured_part, embedded_injury = created_injury, forced = TRUE) //just force it, if we got to this proc then we already managed to create a piercing or cutting wound
 	Detach(P)
 
 /**
