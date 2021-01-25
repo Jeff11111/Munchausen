@@ -39,12 +39,12 @@
 /datum/component/riding/proc/vehicle_mob_buckle(datum/source, mob/living/M, force = FALSE)
 	handle_vehicle_offsets()
 
-/datum/component/riding/proc/handle_vehicle_layer()
+/datum/component/riding/proc/handle_vehicle_layer(forced_dir)
 	var/atom/movable/AM = parent
 	var/static/list/defaults = list(TEXT_NORTH = OBJ_LAYER, TEXT_SOUTH = ABOVE_MOB_LAYER, TEXT_EAST = ABOVE_MOB_LAYER, TEXT_WEST = ABOVE_MOB_LAYER)
-	. = defaults["[AM.dir]"]
-	if(directional_vehicle_layers["[AM.dir]"])
-		. = directional_vehicle_layers["[AM.dir]"]
+	. = defaults["[forced_dir ? forced_dir : AM.dir]"]
+	if(directional_vehicle_layers["[forced_dir ? forced_dir : AM.dir]"])
+		. = directional_vehicle_layers["[forced_dir ? forced_dir : AM.dir]"]
 	if(isnull(.))	//you can set it to null to not change it.
 		. = AM.layer
 	AM.layer = .
@@ -234,19 +234,20 @@
 	if(H.a_intent == INTENT_DISARM && (target in H.buckled_mobs))
 		force_dismount(target)
 
-/datum/component/riding/human/handle_vehicle_layer()
+/datum/component/riding/human/handle_vehicle_layer(forced_dir)
 	. = ..()
 	var/atom/movable/AM = parent
+	var/AM_dir = forced_dir ? forced_dir : AM.dir
 	if(AM.buckled_mobs && AM.buckled_mobs.len)
 		for(var/mob/M in AM.buckled_mobs) //ensure proper layering of piggyback and carry, sometimes weird offsets get applied
 			M.layer = MOB_LAYER
 		if(!AM.buckle_lying)
-			if(AM.dir == SOUTH)
+			if(AM_dir == SOUTH)
 				AM.layer = ABOVE_MOB_LAYER
 			else
 				AM.layer = OBJ_LAYER
 		else
-			if(AM.dir == NORTH)
+			if(AM_dir == NORTH)
 				AM.layer = OBJ_LAYER
 			else
 				AM.layer = ABOVE_MOB_LAYER
