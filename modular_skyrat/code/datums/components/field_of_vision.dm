@@ -23,8 +23,8 @@
 	}
 
 #define UNREGISTER_NESTED_LOCS(list, comsig, index) \
-	for(var/k in index to length(list)){\
-		var/atom/_A = list[k];\
+	for(var/k in list){\
+		var/atom/_A = k;\
 		UnregisterSignal(_A, comsig);\
 		list -= _A\
 	}
@@ -227,7 +227,7 @@
   */
 /datum/component/field_of_vision/proc/on_mob_moved(mob/source, atom/oldloc, dir, forced)
 	if(!isturf(source.loc)) //Recalculate all nested locations.
-		UNREGISTER_NESTED_LOCS( nested_locs, COMSIG_MOVABLE_MOVED, 1)
+		UNREGISTER_NESTED_LOCS(nested_locs, COMSIG_MOVABLE_MOVED, 1)
 		REGISTER_NESTED_LOCS(source, nested_locs, COMSIG_MOVABLE_MOVED, .proc/on_loc_moved)
 		var/obj/screen/topmost = nested_locs[nested_locs.len]
 		CENTERED_RENDER_SOURCE(owner_mask, topmost, src)
