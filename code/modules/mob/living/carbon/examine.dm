@@ -228,6 +228,9 @@
 	var/list/damaged_bodypart_text = list()
 	var/list/clothing_items = list(head, wear_mask, wear_neck, back)
 	for(var/obj/item/bodypart/BP in bodyparts)
+		for(var/obj/item/I in BP.embedded_objects)
+			if(I.isEmbedHarmless())
+				damaged_bodypart_text += "<span class='warning'>[t_He] [t_has] \a [icon2html(I, user)] [I] stuck to [t_his] [BP.name]!</span>"
 		if(BP.etching && !clothingonpart(BP))
 			damaged_bodypart_text += "<span class='warning'>[t_His] [BP.name] has \"[BP.etching]\" etched on it!</span>"
 		if(BP.is_dead())
