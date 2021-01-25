@@ -14,8 +14,6 @@
 			AS.caliber = caliber
 			AS.give_round(src)
 			AS.give_round(AC)
-			user.transferItemToLoc(src, AS)
-			user.transferItemToLoc(AC, AS)
 			user.put_in_hands(AS)
 			to_chat(user, "<span class='notice'>[src] has been stacked into [AS].</span>")
 		else if(!BB || !AC.BB)
@@ -37,7 +35,7 @@
 	multiload = FALSE
 
 /obj/item/ammo_box/magazine/ammo_stack/update_overlays()
-	..()
+	. = ..()
 	cut_overlays()
 	for(var/casing in stored_ammo)
 		var/obj/item/ammo_casing/AC = casing
@@ -48,7 +46,7 @@
 		add_overlay(comicao)
 
 /obj/item/ammo_box/magazine/ammo_stack/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
-	..()
+	. = ..()
 	while(length(stored_ammo))
 		var/obj/item/I = get_round()
 		I.forceMove(loc)

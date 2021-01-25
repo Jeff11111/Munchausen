@@ -57,7 +57,7 @@
 				if (box.stored_ammo.len >= box.max_ammo)
 					break
 				if (bullet.BB)
-					if (box.give_round(bullet, 0))
+					if (box.give_round(bullet, FALSE))
 						boolets++
 				else
 					continue
@@ -68,7 +68,7 @@
 				to_chat(user, "<span class='warning'>You fail to collect anything!</span>")
 	else if(istype(I, /obj/item/ammo_box/magazine/ammo_stack))
 		var/obj/item/ammo_box/stack = I
-		if(stack.give_round(src))
+		if(stack.give_round(src, FALSE))
 			to_chat(user, "<span class='notice'>I collect [src] with [stack].</span>")
 		else
 			to_chat(user, "<span class='warning'>I fail to collect [src] with [stack].</span>")
