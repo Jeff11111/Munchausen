@@ -113,7 +113,7 @@
 	
 	//flying while thrown
 	if(throwing)
-		if(!is_flying())
+		if(!is_flying(src))
 			movement_type |= FLYING
 	else
 		if(!(initial(movement_type) & FLYING))

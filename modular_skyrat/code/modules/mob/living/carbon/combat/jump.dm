@@ -52,7 +52,7 @@
 	adjustStaminaLoss(tackle_base_stamina_cost/our_dex * MAX_STAT/2)
 	playsound(src, 'sound/weapons/thudswoosh.ogg', 40, TRUE, -1)
 	RegisterSignal(src, COMSIG_MOVABLE_IMPACT, .proc/tackle_sack)
-	throw_at(A, clamp(tackle_base_range/our_dex * MAX_STAT/2, min_tackle_range, max_tackle_range), tackle_speed, src, FALSE)
+	throw_at(A, clamp(tackle_base_range/(MAX_STAT/2) * our_dex, min_tackle_range, max_tackle_range), tackle_speed, src, FALSE)
 	addtimer(CALLBACK(src, .proc/reset_tackle), tackle_base_knockdown/our_dex * MAX_STAT/2, TIMER_STOPPABLE)
 
 //Resetting our tackle
