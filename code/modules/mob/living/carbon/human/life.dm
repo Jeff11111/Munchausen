@@ -294,8 +294,8 @@
 		return
 
 	if(we_breath)
-		if(IsUnconscious() < 8 SECONDS)
-			AdjustUnconscious(80)
+		if(AmountUnconscious() < 8 SECONDS)
+			AdjustUnconscious(8 SECONDS)
 
 /mob/living/carbon/needs_heart()
 	if(HAS_TRAIT(src, TRAIT_STABLEHEART))
