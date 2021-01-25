@@ -112,7 +112,19 @@
 	
 	armor_block = min(95, armor_block)
 	if(totaldamage && !P.nodamage)
-		apply_damage(totaldamage, Pdamagetype, def_zone, armor_block, wound_bonus = Pwound_bonus, bare_wound_bonus= Pbarewound_bonus, sharpness = Psharpness)
+		var/mob/living/carbon/C = src
+		var/datum/injury/created_injury
+		var/obj/item/bodypart/BP
+		if(!istype(C))
+			apply_damage(totaldamage, Pdamagetype, def_zone, armor_block, wound_bonus = Pwound_bonus, bare_wound_bonus = Pbarewound_bonus, sharpness = Psharpness)
+		else
+			BP = get_bodypart(def_zone)
+			if(BP)
+				created_injury = BP.receive_damage(brute = (Pdamagetype == BRUTE ? totaldamage : 0), burn = (Pdamagetype == BURN ? totaldamage : 0), blocked = armor_block, wound_bonus = Pwound_bonus, bare_wound_bonus = Pbarewound_bonus, sharpness = Psharpness)
+			else
+				apply_damage(totaldamage, Pdamagetype, def_zone, armor_block, wound_bonus = Pwound_bonus, bare_wound_bonus= Pbarewound_bonus, sharpness = Psharpness)
+		if(created_injury)
+			SEND_SIGNAL(P, COMSIG_PROJECTILE_AFTER_INJURING, src, BP, created_injury)
 		if(P.dismemberment)
 			check_projectile_dismemberment(P, def_zone)
 		if((P.damage_type == BRUTE) && iscarbon(src))
@@ -140,7 +152,6 @@
 				Paralyze(P.damage)
 				DefaultCombatKnockdown(P.damage*2)
 		if((P.damage_type == BRUTE) && ((mob_biotypes & MOB_ORGANIC) || (mob_biotypes & MOB_HUMANOID)) && (totaldamage >= 10) && !P.nodamage)
-			var/mob/living/carbon/C = src
 			if(!istype(C) || (istype(C) && !C.is_asystole() && C.needs_heart() && (ishuman(C) ? !(NOBLOOD in C.dna?.species?.species_traits) : TRUE)))
 				var/obj/effect/decal/cleanable/blood/hitsplatter/B = new(loc, get_blood_dna_list())
 				B.add_blood_DNA(get_blood_dna_list())

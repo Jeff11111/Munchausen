@@ -87,7 +87,7 @@
 	var/obj/item/cavity_item
 	/// The (TG) wounds currently afflicting this body part
 	var/list/wounds = list()
-	/// The (Bay) injuries currently afflicting this boddypart
+	/// The (Bay) injuries currently afflicting this bodypart
 	var/list/injuries = list()
 	/// Number of injuries - Does not always equal length(injuries)
 	var/number_injuries = 0
@@ -916,14 +916,15 @@
 		IN.receive_damage(max(brute, burn), pain, wounding_type)
 	
 	//Brute and burn damage is associated with injuries
+	var/datum/injury/created_injury
 	if(brute)
-		var/datum/injury/ouchie = create_injury(wounding_type, brute)
-		if(!(ouchie in injuries))
-			ouchie.apply_injury(brute, src)
+		created_injury = create_injury(wounding_type, brute)
+		if(!(created_injury in injuries))
+			created_injury.apply_injury(brute, src)
 	if(burn)
-		var/datum/injury/ouchie = create_injury(wounding_type, burn)
-		if(!(ouchie in injuries))
-			ouchie.apply_injury(burn, src)
+		created_injury = create_injury(wounding_type, burn)
+		if(!(created_injury in injuries))
+			created_injury.apply_injury(burn, src)
 		if(owner && prob(burn))
 			owner.IgniteMob()
 	
@@ -1016,10 +1017,8 @@
 		owner.updatehealth()
 		if(stamina > DAMAGE_PRECISION)
 			owner.update_stamina()
-			. = TRUE
 		if(pain > DAMAGE_PRECISION)
 			owner.update_pain()
-			. = TRUE
 
 	//Handle dismemberment if appropriate, everything is done
 	if(CHECK_MULTIPLE_BITFIELDS(bio_state, BIO_FULL))
@@ -1036,7 +1035,7 @@
 	
 	consider_processing()
 	update_disabled()
-	return update_bodypart_damage_state() || .
+	return created_injury
  
 /// Creates an injury on the bodypart
 /obj/item/bodypart/proc/create_injury(injury_type = WOUND_BLUNT, damage = 0, surgical = FALSE, wound_messages = TRUE)
@@ -1356,7 +1355,8 @@
 	for(var/obj/item/organ/O in get_organs())
 		extra_pain += O.get_pain()
 	for(var/obj/item/I in embedded_objects)
-		extra_pain += 5 * I.w_class
+		if(!I.isEmbedHarmless())
+			extra_pain += 5 * I.w_class
 	return clamp((pain_dam + extra_pain) * multiplier, 0, max_pain_damage)
 
 //Returns whether or not the bodypart can feel pain
@@ -1891,17 +1891,12 @@
 	if(generic_bleedstacks > 0)
 		bleed_rate += 1
 
-	//We want an accurate reading of .len
-	listclearnulls(embedded_objects)
-	for(var/obj/item/embeddies in embedded_objects)
-		if(!embeddies.isEmbedHarmless())
-			bleed_rate += 1
-
 	for(var/thing in wounds)
 		var/datum/wound/W = thing
 		//Arteries don't give a shit about gauze so we do them later
-		if(istype(W) && !istype(W, /datum/wound/artery))
+		if(istype(W) && !(W.wound_type == WOUND_LIST_ARTERY))
 			bleed_rate += W.blood_flow
+	
 	for(var/datum/injury/IN in injuries)
 		if(IN.is_bleeding())
 			bleed_rate += IN.get_bleed_rate()

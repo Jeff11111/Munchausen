@@ -36,7 +36,7 @@
 			adjustCloneLoss(damage_amount, forced = forced)
 		if(STAMINA)
 			adjustStaminaLoss(damage_amount, forced = forced)
-	return 1
+	return TRUE
 
 /mob/living/proc/apply_damage_type(damage = 0, damagetype = BRUTE) //like apply damage except it always uses the damage procs
 	switch(damagetype)

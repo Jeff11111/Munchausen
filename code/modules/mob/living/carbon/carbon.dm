@@ -39,7 +39,8 @@
 			if(I && I.force)
 				var/d = rand(round(I.force / 4), I.force)
 				var/obj/item/bodypart/BP = get_bodypart(BODY_ZONE_CHEST)
-				if(BP.receive_damage(d, 0))
+				BP.receive_damage(d, 0)
+				if(BP.update_bodypart_damage_state())
 					update_damage_overlays()
 				visible_message("<span class='danger'>[user] attacks [src]'s stomach wall with the [I.name]!</span>", \
 									"<span class='userdanger'>[user] attacks your stomach wall with the [I.name]!</span>")

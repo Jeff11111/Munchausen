@@ -26,6 +26,7 @@
 
 /datum/component/embedded
 	dupe_mode = COMPONENT_DUPE_ALLOWED
+	var/datum/injury/injury
 	var/obj/item/bodypart/limb
 	var/obj/item/weapon
 
@@ -58,7 +59,8 @@
 			ignore_throwspeed_threshold = FALSE,
 			jostle_chance = EMBEDDED_JOSTLE_CHANCE,
 			jostle_pain_mult = EMBEDDED_JOSTLE_PAIN_MULTIPLIER,
-			pain_stam_pct = EMBEDDED_PAIN_STAM_PCT)
+			pain_stam_pct = EMBEDDED_PAIN_STAM_PCT,
+			datum/injury/supplied_injury)
 
 	if(!iscarbon(parent) || !isitem(I))
 		return COMPONENT_INCOMPATIBLE
@@ -78,12 +80,16 @@
 	src.jostle_chance = jostle_chance
 	src.jostle_pain_mult = jostle_pain_mult
 	src.pain_stam_pct = pain_stam_pct
+	src.injury = supplied_injury
 	src.weapon = I
 
 	if(!weapon.isEmbedHarmless())
 		harmful = TRUE
 
 	weapon.embedded(parent)
+	if(supplied_injury)
+		LAZYADD(supplied_injury.embedded_objects, I)
+		LAZYADD(supplied_injury.embedded_components, src)
 	START_PROCESSING(SSdcs, src)
 	var/mob/living/carbon/victim = parent
 
@@ -105,7 +111,9 @@
 		SEND_SIGNAL(victim, COMSIG_ADD_MOOD_EVENT, "embedded", /datum/mood_event/embedded)
 	if(damage > 0)
 		var/armor = victim.run_armor_check(limb.body_zone, "melee", "Your armor has protected your [limb.name].", "Your armor has softened the hit to your [limb.name].",I.armour_penetration)
-		limb.receive_damage(brute=(1-pain_stam_pct) * damage, stamina=pain_stam_pct * damage, blocked=armor, sharpness = I.get_sharpness())
+		if(injury)
+			injury.open_injury((1-pain_stam_pct) * damage)
+		limb.receive_damage(pain = pain_stam_pct * damage, blocked = armor)
 
 /datum/component/embedded/Destroy()
 	var/mob/living/carbon/victim = parent
@@ -116,6 +124,7 @@
 		UnregisterSignal(weapon, list(COMSIG_MOVABLE_MOVED, COMSIG_PARENT_QDELETING))
 	weapon = null
 	limb = null
+	injury = null
 	return ..()
 
 /datum/component/embedded/proc/embedding_message(mob/living/victim)
@@ -184,7 +193,7 @@
 		pain_chance_current *= 0.2
 
 	if(harmful && prob(pain_chance_current))
-		limb.receive_damage(brute=(1-pain_stam_pct) * damage, stamina=pain_stam_pct * damage, wound_bonus = CANT_WOUND)
+		limb.receive_damage(pain = (1-pain_stam_pct) * damage, stamina = pain_stam_pct * damage, wound_bonus = CANT_WOUND)
 		to_chat(victim, "<span class='userdanger'>[weapon] embedded in your [limb.name] hurts!</span>")
 
 	var/fall_chance_current = fall_chance
@@ -208,7 +217,8 @@
 
 	if(harmful && prob(chance))
 		var/damage = weapon.w_class * jostle_pain_mult
-		limb.receive_damage(brute=(1-pain_stam_pct) * damage, stamina=pain_stam_pct * damage, sharpness=weapon.sharpness, wound_bonus = CANT_WOUND)
+		injury.open_injury((1-pain_stam_pct) * damage)
+		limb.receive_damage(pain=pain_stam_pct * damage)
 		to_chat(victim, "<span class='userdanger'>[weapon] embedded in your [limb.name] jostles and stings!</span>")
 
 /// Called when then item randomly falls out of a carbon. This handles the damage and descriptors, then calls safe_remove()
@@ -240,7 +250,8 @@
 
 	if(harmful)
 		var/damage = weapon.w_class * remove_pain_mult
-		limb.receive_damage(brute=(1-pain_stam_pct) * damage, stamina=pain_stam_pct * damage, sharpness=SHARP_EDGED) //It hurts to rip it out, get surgery you dingus.
+		injury.open_injury((1-pain_stam_pct) * damage)
+		limb.receive_damage(pain=pain_stam_pct * damage) //It hurts to rip it out, get surgery you dingus.
 		victim.agony_scream()
 
 	victim.visible_message("<span class='notice'>[user] successfully rips [weapon] [harmful ? "out" : "off"] of [user == victim ? victim.p_their() : "[victim]'s"] [limb.name]!</span>", "<span class='notice'>You successfully remove [weapon] from [user == victim ? "your" : "[victim]'s"] [limb.name].</span>")
@@ -248,11 +259,14 @@
 
 /// This proc handles the final step and actual removal of an embedded/stuck item from a carbon, whether or not it was actually removed safely.
 /// Pass TRUE for to_hands if we want it to go to the victim's hands when they pull it out
-/datum/component/embedded/proc/safeRemove(to_hands, mob/hand_override)
+/datum/component/embedded/proc/safeRemove(to_hands = FALSE, mob/hand_override)
 	var/mob/living/carbon/victim = parent
 	limb.embedded_objects -= weapon
-	UnregisterSignal(weapon, list(COMSIG_MOVABLE_MOVED, COMSIG_PARENT_QDELETING)) // have to do it here otherwise we trigger weaponDeleted()
+	if(injury)
+		LAZYREMOVE(injury.embedded_objects, weapon)
+		LAZYREMOVE(injury.embedded_components, src)
 
+	UnregisterSignal(weapon, list(COMSIG_MOVABLE_MOVED, COMSIG_PARENT_QDELETING)) // have to do it here otherwise we trigger weaponDeleted()
 	if(!weapon.unembedded()) // if it hasn't deleted itself due to drop del
 		UnregisterSignal(weapon, list(COMSIG_MOVABLE_MOVED, COMSIG_PARENT_QDELETING))
 		if(to_hands)

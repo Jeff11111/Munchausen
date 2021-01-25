@@ -23,7 +23,7 @@
 	var/obj/item/bodypart/parent_bodypart	// the bodypart the wound is on, if on a bodypart
 	var/mob/living/carbon/parent_mob // the mob the wound is on, if on a mob
 
-	//These are defined by the wound type and should not be changed here
+	// These are defined by the wound type and should not be changed here
 	var/list/stages				// stages such as "cut", "deep cut", etc.
 	var/max_bleeding_stage = 0	// maximum stage at which bleeding should still happen. Beyond this stage bleeding is prevented.
 	var/damage_type = WOUND_SLASH	// one of WOUND_BLUNT, WOUND_SLASH, WOUND_PIERCE, WOUND_BURN
@@ -35,6 +35,10 @@
 
 	// limb status required for this injury
 	var/required_status = BODYPART_ORGANIC
+	
+	// shit that got embedded on this injury
+	var/list/embedded_objects
+	var/list/embedded_components
 
 /datum/injury/New()
 	. = ..()
@@ -52,6 +56,11 @@
 	if(parent_mob)
 		parent_mob.all_injuries -= src
 		parent_mob = null
+	embedded_objects = null
+	for(var/datum/component/embedded/embedded in embedded_components)
+		embedded.safeRemove()
+		embedded.injury = null
+	embedded_components = null
 	. = ..()
 
 //applies the injury on a limb proper
@@ -90,14 +99,16 @@
 	return (damage / amount)
 
 /datum/injury/proc/can_autoheal()
-	if(length(parent_bodypart?.embedded_objects))
-		return FALSE
+	for(var/obj/item/wpn in embedded_objects)
+		if(!wpn.isEmbedHarmless())
+			return FALSE
 	return (wound_damage() <= autoheal_cutoff) ? TRUE : (is_treated() || parent_bodypart?.limb_flags & BODYPART_HEALS_OVERKILL)
 
 // checks whether the wound has been appropriately treated
 /datum/injury/proc/is_treated()
-	if(length(parent_bodypart?.embedded_objects))
-		return FALSE
+	for(var/obj/item/wpn in embedded_objects)
+		if(!wpn.isEmbedHarmless())
+			return FALSE
 	switch(damage_type)
 		if(WOUND_BLUNT, WOUND_SLASH, WOUND_PIERCE)
 			return (is_bandaged())
@@ -121,6 +132,8 @@
 	return TRUE
 
 /datum/injury/proc/merge_injury(datum/injury/other)
+	embedded_objects = (src.embedded_objects | other.embedded_objects)
+	embedded_components = (src.embedded_components | other.embedded_components)
 	damage += other.damage
 	amount += other.amount
 	bleed_timer += other.bleed_timer
@@ -168,9 +181,10 @@
 
 // heal the given amount of damage, and if the given amount of damage was more
 // than what needed to be healed, return how much heal was left
-/datum/injury/proc/heal_damage(amount	)
-	if(length(parent_bodypart?.embedded_objects))
-		return amount // heal nothing
+/datum/injury/proc/heal_damage(amount)
+	for(var/obj/item/wpn in embedded_objects)
+		if(!wpn.isEmbedHarmless())
+			return amount // heal nothing
 
 	var/healed_damage = min(damage, amount)
 	amount -= healed_damage
@@ -190,8 +204,8 @@
 	if(src.damage_type != damage_type)
 		return FALSE	//incompatible damage types
 
-	if(src.amount > 1)
-		return FALSE	//merged wounds cannot be worsened.
+	if(amount > 1)
+		return FALSE	//multiple wounds cannot be worsened
 
 	//with 1.5*, a shallow cut will be able to carry at most 30 damage,
 	//37.5 for a deep cut
@@ -264,8 +278,8 @@
 	return TRUE
 
 /datum/injury/proc/is_bleeding()
-	for(var/obj/item/thing in parent_bodypart?.embedded_objects)
-		if(thing.w_class > WEIGHT_CLASS_SMALL)
+	for(var/obj/item/thing in embedded_objects)
+		if(thing.w_class >= WEIGHT_CLASS_SMALL)
 			return FALSE
 	if(is_bandaged() || is_clamped())
 		return FALSE
@@ -274,7 +288,11 @@
 /datum/injury/proc/get_bleed_rate()
 	if(!is_bleeding())
 		return 0
-	return max(0.1, round((bleed_rate * (wound_damage() * amount))/25, DAMAGE_PRECISION))
+	var/bad_embeddies = 0
+	for(var/obj/item/wpn in embedded_objects)
+		if(!wpn.isEmbedHarmless() && (wpn.w_class < WEIGHT_CLASS_SMALL))
+			bad_embeddies += 1
+	return max(0.1, round((bleed_rate * (wound_damage() * amount))/25 + bad_embeddies, DAMAGE_PRECISION))
 
 /datum/injury/proc/is_surgical()
 	if(CHECK_BITFIELD(injury_flags, INJURY_SURGICAL))

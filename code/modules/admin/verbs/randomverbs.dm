@@ -1386,7 +1386,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 					var/obj/item/shrapnel/shame = new /obj/item/shrapnel(C)
 					shame.name = "shrapnel of shame"
 					shame.desc = "You're shameful."
-					shame.tryEmbed(BP, TRUE, FALSE)
+					shame.tryEmbed(target = BP, forced = TRUE, silent = FALSE)
 		if(ADMIN_PUNISHMENT_NUGGET)
 			if(!iscarbon(target))
 				to_chat(usr,"<span class='warning'>This must be used on a carbon mob.</span>")

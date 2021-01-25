@@ -258,7 +258,7 @@
 			var/obj/item/bodypart/B = L.get_bodypart(def_zone)
 			// Bullets cause a lot of havoc on organs, ON TOP of what we cause by damage alone
 			if((damage_type == BRUTE) && B)
-				var/wounding = WOUND_PIERCE
+				var/wounding = WOUND_BLUNT
 				switch(get_sharpness())
 					if(SHARP_NONE)
 						wounding = WOUND_BLUNT

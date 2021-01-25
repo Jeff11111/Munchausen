@@ -354,7 +354,8 @@
 #define COMSIG_PROJECTILE_FIRE "projectile_fire"				///from the base of /obj/projectile/proc/fire(): ()
 #define COMSIG_PROJECTILE_RANGE_OUT "projectile_range_out"				// sent to targets during the process_hit proc of projectiles
 #define COMSIG_EMBED_TRY_FORCE "item_try_embed"					// sent when trying to force an embed (mainly for projectiles, only used in the embed element)
-#define COMSIG_PROJECTILE_PREHIT "com_proj_prehit"				///sent to targets during the process_hit proc of projectiles
+#define COMSIG_PROJECTILE_PREHIT "projectile_prehit"				// sent to targets during the process_hit proc of projectiles
+#define COMSIG_PROJECTILE_AFTER_INJURING "projectile_after_injury" // sent to projectiles after created an injury on a carbon mob
 
 #define COMSIG_PELLET_CLOUD_INIT "pellet_cloud_init"				// sent to targets during the process_hit proc of projectiles
 

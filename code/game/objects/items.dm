@@ -1005,14 +1005,15 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
   * Arguments:
   * * target- Either a body part, a carbon, or a closed turf. What are we hitting?
   * * forced- Do we want this to go through 100%?
+  * * embedded_injury- Injury we want to be attached to, if any
   */
-/obj/item/proc/tryEmbed(atom/target, forced=FALSE, silent=FALSE)
+/obj/item/proc/tryEmbed(atom/target, forced = FALSE, silent = FALSE, datum/injury/embedded_injury)
 	if(!isbodypart(target) && !iscarbon(target))
 		return
 	if(!forced && !LAZYLEN(embedding))
 		return
 
-	if(SEND_SIGNAL(src, COMSIG_EMBED_TRY_FORCE, target, forced, silent))
+	if(SEND_SIGNAL(src, COMSIG_EMBED_TRY_FORCE, target, forced, silent, embedded_injury))
 		return TRUE
 	failedEmbed()
 

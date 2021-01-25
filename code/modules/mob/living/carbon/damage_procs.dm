@@ -16,19 +16,31 @@
 	switch(damagetype)
 		if(BRUTE)
 			if(BP)
-				if(damage > 0 ? BP.receive_damage(brute = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness) : BP.heal_damage(brute = abs(damage_amount), only_robotic = FALSE, only_organic = FALSE))
+				if(damage > 0)
+					BP.receive_damage(brute = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness)
+				else
+					BP.heal_damage(brute = abs(damage_amount), only_robotic = FALSE, only_organic = FALSE)
+				if(BP.update_bodypart_damage_state())
 					update_damage_overlays()
 			else //no bodypart, we deal damage with a more general method.
 				adjustBruteLoss(damage_amount, forced = forced)
 		if(BURN)
 			if(BP)
-				if(damage > 0 ? BP.receive_damage(burn = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness) : BP.heal_damage(burn = abs(damage_amount), only_robotic = FALSE, only_organic = FALSE))
+				if(damage > 0)
+					BP.receive_damage(burn = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness)
+				else
+					BP.heal_damage(burn = abs(damage_amount), only_robotic = FALSE, only_organic = FALSE)
+				if(BP.update_bodypart_damage_state())	
 					update_damage_overlays()
 			else
 				adjustFireLoss(damage_amount, forced = forced)
 		if(PAIN)
 			if(BP)
-				if(damage > 0 ? BP.receive_damage(pain = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness) : BP.heal_damage(pain = abs(damage_amount), only_robotic = FALSE, only_organic = FALSE))
+				if(damage > 0)
+					BP.receive_damage(pain = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness)
+				else
+					BP.heal_damage(pain = abs(damage_amount), only_robotic = FALSE, only_organic = FALSE)
+				if(BP.update_bodypart_damage_state())
 					update_damage_overlays()
 			else
 				adjustPainLoss(damage_amount, forced = forced)
@@ -36,13 +48,21 @@
 			adjustToxLoss(damage_amount, forced = forced)
 		if(CLONE)
 			if(BP)
-				if(damage > 0 ? BP.receive_damage(clone = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness) : BP.heal_damage(clone = abs(damage_amount), only_robotic = FALSE, only_organic = TRUE))
+				if(damage > 0)
+					BP.receive_damage(clone = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness)
+				else
+					BP.heal_damage(clone = abs(damage_amount), only_robotic = FALSE, only_organic = TRUE)
+				if(BP.update_bodypart_damage_state())
 					update_damage_overlays()
 			else
 				adjustCloneLoss(damage_amount, forced = forced)
 		if(STAMINA)
 			if(BP)
-				if(damage > 0 ? BP.receive_damage(stamina = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness) : BP.heal_damage(stamina = abs(damage_amount), only_robotic = FALSE, only_organic = TRUE))
+				if(damage > 0)
+					BP.receive_damage(stamina = damage_amount, wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness)
+				else
+					BP.heal_damage(stamina = abs(damage_amount), only_robotic = FALSE, only_organic = TRUE)
+				if(BP.update_bodypart_damage_state())
 					update_damage_overlays()
 			else
 				adjustStaminaLoss(damage_amount, forced = forced)
@@ -343,7 +363,8 @@
 	if(!parts.len)
 		return
 	var/obj/item/bodypart/picked = pick(parts)
-	if(picked.receive_damage(brute = brute, burn = burn, stamina = stamina, pain = pain, toxin = toxin, clone = clone, blocked = (check_armor ? run_armor_check(picked, (brute ? "melee" : "fire")) : FALSE), wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness))
+	picked.receive_damage(brute = brute, burn = burn, stamina = stamina, pain = pain, toxin = toxin, clone = clone, blocked = (check_armor ? run_armor_check(picked, (brute ? "melee" : "fire")) : FALSE), wound_bonus = wound_bonus, bare_wound_bonus = bare_wound_bonus, sharpness = sharpness)
+	if(picked.update_bodypart_damage_state())
 		update_damage_overlays()
 
 //Heal MANY bodyparts, in random order

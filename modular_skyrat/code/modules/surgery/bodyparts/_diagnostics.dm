@@ -33,9 +33,12 @@
 			this_injury_desc = "bandaged [this_injury_desc]"
 
 		if(IN.germ_level > 600)
-			this_injury_desc = "badly infected [this_injury_desc]"
+			this_injury_desc = "<span class='deadsay'>badly infected</span> [this_injury_desc]"
 		else if(IN.germ_level > 330)
-			this_injury_desc = "lightly infected [this_injury_desc]"
+			this_injury_desc = "<span class='green'>lightly infected</span> [this_injury_desc]"
+		
+		if(length(IN.embedded_objects))
+			this_injury_desc += ", with [english_list(IN.embedded_objects)] poking out of [IN.amount > 1 ? "them" : "it"]"
 
 		if(injury_descriptors[this_injury_desc])
 			injury_descriptors[this_injury_desc] += IN.amount
@@ -58,7 +61,7 @@
 
 	for(var/injury in injury_descriptors)
 		switch(injury_descriptors[injury])
-			if(1)
+			if(-INFINITY to 1)
 				flavor_text += "a [injury]"
 			if(2)
 				flavor_text += "a pair of [injury]s"
@@ -74,9 +77,6 @@
 	user.visible_message("<span class='notice'>[user] starts inspecting [owner]'s [name] carefully.</span>")
 	if(length(get_injuries_desc()))
 		to_chat(user, "<span class='warning'>You find [get_injuries_desc()].</span>")
-		var/list/stuff = embedded_objects.Copy()
-		if(length(stuff))
-			to_chat(user, "<span class='warning'>There's [english_list(stuff)] sticking out of [owner]'s [name].</span>")
 	else
 		to_chat(user, "<span class='notice'>You find no visible wounds.</span>")
 

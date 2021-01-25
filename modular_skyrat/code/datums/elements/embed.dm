@@ -55,7 +55,7 @@
 			initialized = TRUE
 	else
 		payload_type = projectile_payload
-		RegisterSignal(target, COMSIG_PROJECTILE_SELF_ON_HIT, .proc/checkEmbedProjectile)
+		RegisterSignal(target, COMSIG_PROJECTILE_AFTER_INJURING, .proc/checkEmbedProjectile)
 
 
 /datum/element/embed/Detach(obj/target)
@@ -63,24 +63,24 @@
 	if(isitem(target) && !isprojectile(target))
 		UnregisterSignal(target, list(COMSIG_MOVABLE_IMPACT_ZONE, COMSIG_ELEMENT_ATTACH, COMSIG_MOVABLE_IMPACT, COMSIG_PARENT_EXAMINE, COMSIG_EMBED_TRY_FORCE, COMSIG_ITEM_DISABLE_EMBED))
 	else
-		UnregisterSignal(target, list(COMSIG_PROJECTILE_SELF_ON_HIT, COMSIG_ELEMENT_ATTACH))
+		UnregisterSignal(target, list(COMSIG_PROJECTILE_AFTER_INJURING, COMSIG_ELEMENT_ATTACH))
 
 
 /// Checking to see if we're gonna embed into a human
-/datum/element/embed/proc/checkEmbed(obj/item/weapon, mob/living/carbon/victim, hit_zone, datum/thrownthing/throwingdatum, forced=FALSE)
+/datum/element/embed/proc/checkEmbed(obj/item/weapon, mob/living/carbon/victim, hit_zone, datum/thrownthing/throwingdatum, forced = FALSE, datum/injury/embedded_injury)
 	if(!istype(victim) || HAS_TRAIT(victim, TRAIT_PIERCEIMMUNE))
 		return
 
 	var/actual_chance = embed_chance
-
 	if(!weapon.isEmbedHarmless()) // all the armor in the world won't save you from a kick me sign
-		var/armor = max(victim.run_armor_check(hit_zone, "bullet", silent=TRUE), victim.run_armor_check(hit_zone, "bomb", silent=TRUE)) // we'll be nice and take the better of bullet and bomb armor
-
+		var/armor = max(victim.run_armor_check(hit_zone, "bullet", silent = TRUE), victim.run_armor_check(hit_zone, "bomb", silent = TRUE)) // we'll be nice and take the better of bullet and bomb armor
 		if(armor) // we only care about armor penetration if there's actually armor to penetrate
 			var/pen_mod = -armor + weapon.armour_penetration // even a little bit of armor can make a big difference for shrapnel with large negative armor pen
 			actual_chance += pen_mod // doing the armor pen as a separate calc just in case this ever gets expanded on
 			if(actual_chance <= 0)
-				victim.visible_message("<span class='danger'>[weapon] bounces off [victim]'s armor, unable to embed!</span>", "<span class='notice'>[weapon] bounces off your armor, unable to embed!</span>", vision_distance = COMBAT_MESSAGE_RANGE)
+				victim.visible_message("<span class='danger'>[weapon] bounces off [victim]'s armor, unable to embed!</span>", \
+							"<span class='notice'>[weapon] bounces off your armor, unable to embed!</span>", \
+							vision_distance = COMBAT_MESSAGE_RANGE)
 				return
 
 	var/roll_embed = prob(actual_chance)
@@ -89,6 +89,9 @@
 		return
 
 	var/obj/item/bodypart/limb = victim.get_bodypart(hit_zone) || pick(victim.bodyparts)
+	if(CHECK_BITFIELD(limb.limb_flags, BODYPART_NOEMBED))
+		return
+	
 	victim.AddComponent(/datum/component/embedded,\
 		weapon,\
 		throwingdatum,\
@@ -102,7 +105,8 @@
 		ignore_throwspeed_threshold = ignore_throwspeed_threshold,\
 		jostle_chance = jostle_chance,\
 		jostle_pain_mult = jostle_pain_mult,\
-		pain_stam_pct = pain_stam_pct)
+		pain_stam_pct = pain_stam_pct,\
+		)
 
 	return TRUE
 
@@ -130,22 +134,18 @@
   * If we hit a valid target, we create the shrapnel_type object and immediately call tryEmbed() on it, targeting what we impacted. That will lead
   *	it to call tryForceEmbed() on its own embed element (it's out of our hands here, our projectile is done), where it will run through all the checks it needs to.
   */
-/datum/element/embed/proc/checkEmbedProjectile(obj/item/projectile/P, atom/movable/firer, atom/hit, angle, hit_zone)
-	if(!iscarbon(hit))
+/datum/element/embed/proc/checkEmbedProjectile(obj/item/projectile/P, mob/living/carbon/injured_mob, obj/item/bodypart/injured_part, datum/injury/created_injury)
+	if(!istype(injured_mob) || !istype(injured_part) || !istype(created_injury) || !(created_injury.damage_type in list(WOUND_SLASH, WOUND_PIERCE)))
 		Detach(P)
 		return // we don't care
 
-	var/obj/item/payload = new payload_type(get_turf(hit))
+	var/obj/item/payload = new payload_type(get_turf(injured_mob))
 	if(istype(payload, /obj/item/shrapnel/bullet))
 		payload.name = P.name
 	payload.embedding = P.embedding
 	payload.updateEmbedding()
-	var/mob/living/carbon/C = hit
-	var/obj/item/bodypart/limb = C.get_bodypart(hit_zone)
-	if(!limb)
-		limb = C.get_bodypart()
 
-	payload.tryEmbed(limb)
+	payload.tryEmbed(target = injured_part, embedded_injury = created_injury)
 	Detach(P)
 
 /**
@@ -160,7 +160,7 @@
   * * hit_zone- if our target is a carbon, try to hit them in this zone, if we don't have one, pick a random one. If our target is a bodypart, we already know where we're hitting.
   * * forced- if we want this to succeed 100%
   */
-/datum/element/embed/proc/tryForceEmbed(obj/item/I, atom/target, hit_zone, forced=FALSE)
+/datum/element/embed/proc/tryForceEmbed(obj/item/I, atom/target, hit_zone, forced = FALSE, datum/injury/embedded_injury)
 	var/obj/item/bodypart/limb
 	var/mob/living/carbon/C
 
@@ -177,5 +177,10 @@
 		hit_zone = limb.body_zone
 		C = limb.owner
 
-	checkEmbed(I, C, hit_zone, forced=TRUE)
+	if(istype(limb) && !I.isEmbedHarmless() && !istype(embedded_injury))
+		for(var/datum/injury/possible_embeddie in limb.injuries)
+			if(possible_embeddie.damage >= I.w_class * 5 && (possible_embeddie.damage_type in list(WOUND_SLASH, WOUND_PIERCE)))
+				embedded_injury = possible_embeddie
+				break
+	checkEmbed(I, C, hit_zone, null, TRUE, embedded_injury)
 	return TRUE
