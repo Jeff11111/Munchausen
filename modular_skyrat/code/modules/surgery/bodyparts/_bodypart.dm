@@ -1361,6 +1361,8 @@
 
 //Returns whether or not the bodypart can feel pain
 /obj/item/bodypart/proc/can_feel_pain()
+	if(is_cut_away())
+		return FALSE
 	if(owner)
 		if(!owner.can_feel_pain())
 			return FALSE
