@@ -119,7 +119,7 @@
 	if(I.damtype == BRUTE && hit_BP && hit_BP.can_dismember())
 		var/mangled_state = hit_BP.get_mangled_state()
 		var/bio_state = get_biological_state()
-		if(mangled_state == BODYPART_MANGLED_BOTH && hit_BP.body_zone != BODY_ZONE_CHEST)
+		if(CHECK_MULTIPLE_BITFIELDS(mangled_state, BODYPART_MANGLED_BOTH) && hit_BP.can_dismember(I))
 			extra_wound_details = ", threatening to sever it"
 		else if(mangled_state & BODYPART_MANGLED_BONE || (mangled_state & BODYPART_MANGLED_MUSCLE && bio_state == BIO_FLESH))
 			extra_wound_details = ", [I.get_sharpness() == SHARP_EDGED ? "slicing" : "piercing"] through remaining tissue"
