@@ -561,7 +561,8 @@ By design, d1 is the smallest direction and d2 is the highest
 		user.visible_message("<span class='notice'>[user] starts to fix some of the wires in [H]'s [affecting.name].</span>", "<span class='notice'>You start fixing some of the wires in [H]'s [affecting.name].</span>")
 		if(!do_mob(user, H, 40))
 			return
-		affecting.heal_damage(burn = 15, only_robotic = FALSE, only_organic = FALSE)
+		if(affecting.heal_damage(15, 0, 0, FALSE, FALSE, TRUE))
+			C.update_damage_overlays()
 		if(affecting.burn_dam)
 			attack(H, user)
 	else

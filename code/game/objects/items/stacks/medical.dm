@@ -38,19 +38,6 @@
 	/// Cost per injury or limb to apply healing
 	var/stackperuse = 1
 
-/obj/item/stack/medical/examine(mob/user)
-	. = ..()
-	. += "<span class='notice'>Ctrl-click \the [src] to change it's mode!</span>"
-	. += "<span class='notice'>Currently set to <b>[mode]</b> mode.</span>"
-
-/obj/item/stack/medical/CtrlClick(mob/living/user)
-	switch(mode)
-		if(MODE_MULTIPLE)
-			mode = MODE_SINGULAR
-		if(MODE_SINGULAR)
-			mode = MODE_MULTIPLE
-	to_chat(user, "<span class='notice'>You set \the [src] to <b>[mode]</b> mode.")
-
 /obj/item/stack/medical/attack(mob/living/M, mob/user)
 	. = ..()
 	if(!INTERACTING_WITH(user, M))

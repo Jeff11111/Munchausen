@@ -124,7 +124,8 @@
 			"<span class='notice'>You start fixing some of the dents on [H]'s [affecting.name].</span>")
 		if(!do_mob(user, H, 30))
 			return
-		affecting.heal_damage(brute = 15, only_robotic = FALSE, only_organic = FALSE)
+		if(affecting.heal_damage(15, 0, 0, FALSE, FALSE, TRUE))
+			C.update_damage_overlays()
 		if(affecting.brute_dam)
 			attack(H, user)
 	else
