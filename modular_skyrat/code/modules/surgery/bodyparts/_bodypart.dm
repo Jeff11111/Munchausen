@@ -307,7 +307,7 @@
 	return FALSE
 
 //Germs
-/obj/item/bodypart/janitize(add_germs, minimum_germs, maximum_germs)
+/obj/item/bodypart/janitize(add_germs, minimum_germs, maximum_germs = MAXIMUM_GERM_LEVEL)
 	. = ..()
 	if(germ_level >= INFECTION_LEVEL_THREE && !is_dead())
 		kill_limb()
