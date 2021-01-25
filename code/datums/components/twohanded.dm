@@ -165,13 +165,14 @@
 		parent_item.force = force_wielded
 	if(sharpened_increase)
 		parent_item.force += sharpened_increase
-	parent_item.name = "[parent_item.name] (Wielded)"
+	var/unwielded_name = parent_item.name
+	parent_item.name = "wielded [parent_item.name]"
 	parent_item.update_icon()
 
 	if(iscyborg(user))
-		to_chat(user, "<span class='notice'>You dedicate your module to [parent].</span>")
+		to_chat(user, "<span class='notice'>You dedicate your module to [unwielded_name].</span>")
 	else
-		to_chat(user, "<span class='notice'>You grab [parent] with both hands.</span>")
+		to_chat(user, "<span class='notice'>You grab [unwielded_name] with both hands.</span>")
 
 	// Play sound if one is set
 	if(wieldsound)
@@ -216,11 +217,11 @@
 		parent_item.force = force_unwielded
 
 	// update the items name to remove the wielded status
-	var/sf = findtext(parent_item.name, " (Wielded)", -10) // 10 == length(" (Wielded)")
+	var/sf = findtext(parent_item.name, "wielded ",)
 	if(sf)
-		parent_item.name = copytext(parent_item.name, 1, sf)
+		parent_item.name = copytext(parent_item.name, sf)
 	else
-		parent_item.name = "[initial(parent_item.name)]"
+		parent_item.name = initial(parent_item.name)
 
 	// Update icons
 	parent_item.update_icon()
