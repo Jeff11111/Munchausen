@@ -562,7 +562,7 @@ By design, d1 is the smallest direction and d2 is the highest
 		if(!do_mob(user, H, 40))
 			return
 		if(affecting.heal_damage(0, 15, 0, FALSE, FALSE, TRUE))
-			C.update_damage_overlays()
+			H.update_damage_overlays()
 		if(affecting.burn_dam)
 			attack(H, user)
 	else

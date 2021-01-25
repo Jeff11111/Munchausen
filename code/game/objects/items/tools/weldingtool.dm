@@ -125,7 +125,7 @@
 		if(!do_mob(user, H, 30))
 			return
 		if(affecting.heal_damage(15, 0, 0, FALSE, FALSE, TRUE))
-			C.update_damage_overlays()
+			H.update_damage_overlays()
 		if(affecting.brute_dam)
 			attack(H, user)
 	else
