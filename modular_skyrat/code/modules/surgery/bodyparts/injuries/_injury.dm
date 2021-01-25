@@ -99,6 +99,8 @@
 	return (damage / amount)
 
 /datum/injury/proc/can_autoheal()
+	if(CHECK_BITFIELD(required_status, BODYPART_ROBOTIC))
+		return FALSE
 	for(var/obj/item/wpn in embedded_objects)
 		if(!wpn.isEmbedHarmless())
 			return FALSE
