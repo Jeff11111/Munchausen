@@ -15,7 +15,7 @@
 			AS.give_round(src)
 			AS.give_round(AC)
 			user.put_in_hands(AS)
-			to_chat(user, "<span class='notice'>[src] has been stacked into [AS].</span>")
+			to_chat(user, "<span class='notice'>[src] has been stacked with [AC].</span>")
 		else if(caliber != AC.caliber)
 			to_chat(user, "<span class='warning'>No... I can't stack different calibers.</span>")
 		else if(!BB || !AC.BB)
