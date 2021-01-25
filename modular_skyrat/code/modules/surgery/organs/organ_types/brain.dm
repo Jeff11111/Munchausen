@@ -186,7 +186,8 @@
 		victim.Unconscious(600)
 	//Inform the victim
 	var/message = pick("... WHAT HAPPENED? ...", "... WHERE AM I? ...", "... WHO AM I? ...")
-	to_chat(victim, "<span class='deadsay'><span class='big bold'>[message]</span></span>")
+	visible_message("<span class='danger'><b>[victim]</b> sags on the ground. They will not regain consciousness any soon.</span>", \
+				"<span class='deadsay'><span class='big bold'>[message]</span></span>")
 
 /obj/item/organ/brain/Insert(mob/living/carbon/C, special = 0,no_id_transfer = FALSE, drop_if_replaced = TRUE)
 	. = ..()

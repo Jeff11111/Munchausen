@@ -19,7 +19,7 @@
 		icon_state = "[initial(icon_state)]_on"
 		name = "sleeping"
 	else
-		if(C.IsSleeping())
+		if(C.IsSleeping() || C.IsUnconscious())
 			icon_state = "[initial(icon_state)]_waking"
 			name = "waking up"
 		else

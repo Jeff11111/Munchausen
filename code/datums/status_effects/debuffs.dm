@@ -50,14 +50,31 @@
 /datum/status_effect/incapacitating/unconscious
 	id = "unconscious"
 	needs_update_stat = TRUE
+	var/mob/living/carbon/carbon_owner
+	var/mob/living/carbon/human/human_owner
+
+/datum/status_effect/incapacitating/unconscious/on_creation(mob/living/new_owner, updating_canmove)
+	. = ..()
+	if(.)
+		if(iscarbon(owner)) //to avoid repeated istypes
+			carbon_owner = owner
+		if(ishuman(owner))
+			human_owner = owner
 
 /datum/status_effect/incapacitating/unconscious/on_apply()
 	. = ..()
 	SEND_SIGNAL(owner,COMSIG_LIVING_GAIN_UNCONSCIOUS)
+	owner?.hud_used?.sleeping?.update_icon()
 
 /datum/status_effect/incapacitating/unconscious/on_remove()
 	. = ..()
 	SEND_SIGNAL(owner,COMSIG_LIVING_STOP_UNCONSCIOUS)
+	owner?.hud_used?.sleeping?.update_icon()
+
+/datum/status_effect/incapacitating/unconscious/Destroy()
+	carbon_owner = null
+	human_owner = null
+	return ..()
 
 /datum/status_effect/incapacitating/unconscious/tick()
 	if(owner.getStaminaLoss())
@@ -100,6 +117,7 @@
 /datum/status_effect/incapacitating/sleeping/on_apply()
 	. = ..()
 	SEND_SIGNAL(owner,COMSIG_LIVING_GAIN_UNCONSCIOUS)
+	owner?.hud_used?.sleeping?.update_icon()
 
 /datum/status_effect/incapacitating/sleeping/on_remove()
 	. = ..()
