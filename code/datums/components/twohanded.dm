@@ -217,9 +217,8 @@
 		parent_item.force = force_unwielded
 
 	// update the items name to remove the wielded status
-	var/sf = findtext(parent_item.name, "wielded ")
-	if(sf)
-		parent_item.name = copytext(parent_item.name, sf + 1)
+	if(findtext(parent_item.name, "wielded "))
+		parent_item.name = replacetext(parent_item.name, "wielded ", "")
 	else
 		parent_item.name = initial(parent_item.name)
 
