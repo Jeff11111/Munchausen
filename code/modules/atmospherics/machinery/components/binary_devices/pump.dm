@@ -38,6 +38,15 @@
 	if(user.canUseTopic(src, BE_CLOSE, FALSE,))
 		on = !on
 		update_icon()
+		//Area's air alarm will try to rat you out
+		for(var/obj/machinery/airalarm/alarm in get_area(src))
+			if(alarm.radio)
+				var/mob/living/carbon/human/human_user = user
+				if(istype(human_user))
+					alarm.radio.talk_into(src, "Pump activated by [human_user.get_id_name()] at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
+				else
+					if(isliving(user))
+						alarm.radio.talk_into(src, "Pipe activated at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
 		investigate_log("Pump, [src.name], turned on by [key_name(usr)] at [x], [y], [z], [A]", INVESTIGATE_ATMOS)
 		message_admins("Pump, [src.name], turned [on ? "on" : "off"] by [ADMIN_LOOKUPFLW(usr)] at [ADMIN_COORDJMP(T)], [A]")
 		return ..()
@@ -49,6 +58,15 @@
 	if(user.canUseTopic(src, BE_CLOSE, FALSE,))
 		target_pressure = MAX_OUTPUT_PRESSURE
 		to_chat(user,"<span class='notice'>You maximize the pressure on the [src].</span>")
+		//Area's air alarm will try to rat you out
+		for(var/obj/machinery/airalarm/alarm in get_area(src))
+			if(alarm.radio)
+				var/mob/living/carbon/human/human_user = user
+				if(istype(human_user))
+					alarm.radio.talk_into(src, "Pump maximized by [human_user.get_id_name()] at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
+				else
+					if(isliving(user))
+						alarm.radio.talk_into(src, "Pipe maximized at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
 		investigate_log("Pump, [src.name], was maximized by [key_name(usr)] at [x], [y], [z], [A]", INVESTIGATE_ATMOS)
 		message_admins("Pump, [src.name], was maximized by [ADMIN_LOOKUPFLW(usr)] at [ADMIN_COORDJMP(T)], [A]")
 		return TRUE
@@ -130,6 +148,15 @@
 		if("power")
 			on = !on
 			message_admins("Pump, [src.name], turned [on ? "on" : "off"] by [ADMIN_LOOKUPFLW(usr)] at [ADMIN_COORDJMP(T)], [A]")
+			//Area's air alarm will try to rat you out
+			for(var/obj/machinery/airalarm/alarm in get_area(src))
+				if(alarm.radio)
+					var/mob/living/carbon/human/human_user = usr
+					if(istype(human_user))
+						alarm.radio.talk_into(src, "Pump turned [on ? "on" : "off"] by [human_user.get_id_name()] at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
+					else
+						if(isliving(usr))
+							alarm.radio.talk_into(src, "Pipe turned [on ? "on" : "off"] at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
 			investigate_log("was turned [on ? "on" : "off"] by [key_name(usr)]", INVESTIGATE_ATMOS)
 			. = TRUE
 		if("pressure")
@@ -146,6 +173,15 @@
 				. = TRUE
 			if(.)
 				target_pressure = clamp(pressure, 0, MAX_OUTPUT_PRESSURE)
+				//Area's air alarm will try to rat you out
+				for(var/obj/machinery/airalarm/alarm in get_area(src))
+					if(alarm.radio)
+						var/mob/living/carbon/human/human_user = usr
+						if(istype(human_user))
+							alarm.radio.talk_into(src, "Pump set to [target_pressure] kPa by [human_user.get_id_name()] at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
+						else
+							if(isliving(usr))
+								alarm.radio.talk_into(src, "Pipe [target_pressure] kPa at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
 				investigate_log("was set to [target_pressure] kPa by [key_name(usr)]", INVESTIGATE_ATMOS)
 	update_icon()
 
@@ -170,6 +206,10 @@
 		target_pressure = clamp(text2num(signal.data["set_output_pressure"]),0,ONE_ATMOSPHERE*50)
 
 	if(on != old_on)
+		//Area's air alarm will try to rat you out
+		for(var/obj/machinery/airalarm/alarm in get_area(src))
+			if(alarm.radio)
+				alarm.radio.talk_into(src, "Pipe turned [on ? "on" : "off"] at [get_area_name(src, get_base_area = TRUE)] via remote signal", alarm.radio_channel)
 		investigate_log("was turned [on ? "on" : "off"] by a remote signal", INVESTIGATE_ATMOS)
 
 	if("status" in signal.data)

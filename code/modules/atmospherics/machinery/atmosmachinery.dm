@@ -200,6 +200,16 @@
 
 	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
 
+	//Area's air alarm will try to rat you out
+	for(var/obj/machinery/airalarm/alarm in get_area(src))
+		if(alarm.radio)
+			var/mob/living/carbon/human/human_user = user
+			if(istype(human_user))
+				alarm.radio.talk_into(src, "[capitalize(user.name)] being unfastened by [human_user.get_id_name()] at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
+			else
+				if(isliving(user))
+					alarm.radio.talk_into(src, "[capitalize(user.name)] being unfastened at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
+	
 	if (internal_pressure > 2*ONE_ATMOSPHERE)
 		to_chat(user, "<span class='warning'>As you begin unwrenching \the [src] a gush of air blows in your face... maybe you should reconsider?</span>")
 		unsafe_wrenching = TRUE //Oh dear oh dear

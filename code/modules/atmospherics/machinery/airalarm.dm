@@ -109,6 +109,11 @@
 		/datum/gas/pluoxium			= new/datum/tlv(-1, -1, 1000, 1000) // Unlike oxygen, pluoxium does not fuel plasma/tritium fires
 	)
 
+	var/internal_radio = TRUE
+	var/obj/item/radio/radio
+	var/radio_key = /obj/item/encryptionkey/headset_eng
+	var/radio_channel = RADIO_CHANNEL_COMMON
+
 /obj/machinery/airalarm/server // No checks here.
 	TLV = list(
 		"pressure"					= new/datum/tlv/no_checks,
@@ -211,6 +216,13 @@
 	if(name == initial(name))
 		name = "[get_area_name(src, get_base_area = TRUE)] Air Alarm"
 
+	if(internal_radio)
+		radio = new(src)
+		radio.keyslot = new radio_key
+		radio.subspace_transmission = TRUE
+		radio.canhear_range = 0
+		radio.recalculateChannels()
+	
 	power_change()
 	set_frequency(frequency)
 
@@ -417,10 +429,24 @@
 					tlv.vars[name] = -1
 				else
 					tlv.vars[name] = round(value, 0.01)
+				if(radio)
+					var/mob/living/carbon/human/user = usr
+					if(istype(user))
+						radio.talk_into(src, "Threshold value for [env]: [name] was set to [value] by [user.get_id_name()] at [get_area_name(src, get_base_area = TRUE)]", radio_channel)
+					else
+						if(isliving(usr))
+							radio.talk_into(src, "Threshold value for [env]: [name] was set to [value] at [get_area_name(src, get_base_area = TRUE)]", radio_channel)
 				investigate_log(" treshold value for [env]:[name] was set to [value] by [key_name(usr)]",INVESTIGATE_ATMOS)
 				. = TRUE
 		if("mode")
 			mode = text2num(params["mode"])
+			if(radio)
+				var/mob/living/carbon/human/user = usr
+				if(istype(user))
+					radio.talk_into(src, "Mode was set to [get_mode_name(mode)] by [user.get_id_name()] at [get_area_name(src, get_base_area = TRUE)]", radio_channel)
+				else
+					if(isliving(usr))
+						radio.talk_into(src, "Mode was set to [get_mode_name(mode)] at [get_area_name(src, get_base_area = TRUE)]", radio_channel)
 			investigate_log("was turned to [get_mode_name(mode)] mode by [key_name(usr)]",INVESTIGATE_ATMOS)
 			apply_mode()
 			. = TRUE

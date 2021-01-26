@@ -38,7 +38,16 @@
 	if(user.canUseTopic(src, BE_CLOSE, FALSE,))
 		on = !on
 		update_icon()
-		investigate_log("Volume Pump, [src.name], turned on by [key_name(usr)] at [x], [y], [z], [A]", INVESTIGATE_ATMOS)
+		//Area's air alarm will try to rat you out
+		for(var/obj/machinery/airalarm/alarm in get_area(src))
+			if(alarm.radio)
+				var/mob/living/carbon/human/human_user = user
+				if(istype(human_user))
+					alarm.radio.talk_into(src, "Volume pump turned [on ? "on" : "off"] by [human_user.get_id_name()] at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
+				else
+					if(isliving(user))
+						alarm.radio.talk_into(src, "Volume pump turned [on ? "on" : "off"] at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
+		investigate_log("Volume Pump, [src.name], turned [on ? "on" : "off"] by [key_name(usr)] at [x], [y], [z], [A]", INVESTIGATE_ATMOS)
 		message_admins("Volume Pump, [src.name], turned [on ? "on" : "off"] by [ADMIN_LOOKUPFLW(usr)] at [ADMIN_COORDJMP(T)], [A]")
 		return ..()
 
@@ -119,6 +128,15 @@
 	switch(action)
 		if("power")
 			on = !on
+			//Area's air alarm will try to rat you out
+			for(var/obj/machinery/airalarm/alarm in get_area(src))
+				if(alarm.radio)
+					var/mob/living/carbon/human/human_user = usr
+					if(istype(human_user))
+						alarm.radio.talk_into(src, "Volume pump turned [on ? "on" : "off"] by [human_user.get_id_name()] at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
+					else
+						if(isliving(usr))
+							alarm.radio.talk_into(src, "Volume pump turned [on ? "on" : "off"] at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
 			message_admins("Pump, [src.name], turned [on ? "on" : "off"] by [ADMIN_LOOKUPFLW(usr)] at [ADMIN_COORDJMP(T)], [A]")
 			investigate_log("was turned [on ? "on" : "off"] by [key_name(usr)]", INVESTIGATE_ATMOS)
 			. = TRUE
@@ -136,6 +154,15 @@
 				. = TRUE
 			if(.)
 				transfer_rate = clamp(rate, 0, MAX_TRANSFER_RATE)
+				//Area's air alarm will try to rat you out
+				for(var/obj/machinery/airalarm/alarm in get_area(src))
+					if(alarm.radio)
+						var/mob/living/carbon/human/human_user = usr
+						if(istype(human_user))
+							alarm.radio.talk_into(src, "Volume pump set to [transfer_rate] L/s by [human_user.get_id_name()] at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
+						else
+							if(isliving(usr))
+								alarm.radio.talk_into(src, "Volume pump set to [transfer_rate] L/s at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
 				investigate_log("was set to [transfer_rate] L/s by [key_name(usr)]", INVESTIGATE_ATMOS)
 	update_icon()
 
@@ -156,6 +183,10 @@
 		transfer_rate = clamp(text2num(signal.data["set_transfer_rate"]),0,air1.volume)
 
 	if(on != old_on)
+		//Area's air alarm will try to rat you out
+		for(var/obj/machinery/airalarm/alarm in get_area(src))
+			if(alarm.radio)
+				alarm.radio.talk_into(src, "Volume pump turned [on ? "on" : "off"] at [get_area_name(src, get_base_area = TRUE)] via remote signal", alarm.radio_channel)
 		investigate_log("was turned [on ? "on" : "off"] by a remote signal", INVESTIGATE_ATMOS)
 
 	if("status" in signal.data)

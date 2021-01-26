@@ -92,6 +92,15 @@
 				. = TRUE
 			if(.)
 				open_pressure = clamp(pressure, close_pressure, 50*ONE_ATMOSPHERE)
+				//Area's air alarm will try to rat you out
+				for(var/obj/machinery/airalarm/alarm in get_area(src))
+					if(alarm.radio)
+						var/mob/living/carbon/human/human_user = usr
+						if(istype(human_user))
+							alarm.radio.talk_into(src, "Relief valve open pressure set to [open_pressure] by [human_user.get_id_name()] at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
+						else
+							if(isliving(usr))
+								alarm.radio.talk_into(src, "Relief valve open pressure set to [open_pressure] at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
 				investigate_log("open pressure was set to [open_pressure] kPa by [key_name(usr)]", INVESTIGATE_ATMOS)
 		if("close_pressure")
 			var/pressure = params["close_pressure"]
@@ -107,5 +116,14 @@
 				. = TRUE
 			if(.)
 				close_pressure = clamp(pressure, 0, open_pressure)
+				//Area's air alarm will try to rat you out
+				for(var/obj/machinery/airalarm/alarm in get_area(src))
+					if(alarm.radio)
+						var/mob/living/carbon/human/human_user = usr
+						if(istype(human_user))
+							alarm.radio.talk_into(src, "Relief valve close pressure set to [close_pressure] by [human_user.get_id_name()] at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
+						else
+							if(isliving(usr))
+								alarm.radio.talk_into(src, "Relief valve close pressure set to [close_pressure] at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
 				investigate_log("close pressure was set to [close_pressure] kPa by [key_name(usr)]", INVESTIGATE_ATMOS)
 	update_icon()

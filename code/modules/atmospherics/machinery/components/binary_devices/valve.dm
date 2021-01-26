@@ -33,6 +33,10 @@ It's like a regular ol' straight pipe, but you can turn it on and off.
 	if(on)
 		on = FALSE
 		update_icon_nopipes()
+		//Area's air alarm will try to rat you out
+		for(var/obj/machinery/airalarm/alarm in get_area(src))
+			if(alarm.radio)
+				alarm.radio.talk_into(src, "Valve closed at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
 		investigate_log("was closed by [usr ? key_name(usr) : "a remote signal"]", INVESTIGATE_ATMOS)
 	else
 		on = TRUE
@@ -40,6 +44,10 @@ It's like a regular ol' straight pipe, but you can turn it on and off.
 		update_parents()
 		var/datum/pipeline/parent1 = parents[1]
 		parent1.reconcile_air()
+		//Area's air alarm will try to rat you out
+		for(var/obj/machinery/airalarm/alarm in get_area(src))
+			if(alarm.radio)
+				alarm.radio.talk_into(src, "Valve opened at [get_area_name(src, get_base_area = TRUE)]", alarm.radio_channel)
 		investigate_log("was opened by [usr ? key_name(usr) : "a remote signal"]", INVESTIGATE_ATMOS)
 
 /obj/machinery/atmospherics/components/binary/valve/interact(mob/user)
