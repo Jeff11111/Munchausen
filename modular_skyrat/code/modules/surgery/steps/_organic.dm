@@ -98,15 +98,14 @@
 	. = ..()
 	var/obj/item/bodypart/BP = target.get_bodypart(target_zone)
 	if(BP)
-		BP.open_incision()
+		BP.open_incision(user)
 		if(!length(tool.embedding))
 			tool.embedding = EMBED_NONE
 		tool.tryEmbed(target = BP, forced = TRUE, silent = TRUE, embedded_injury = BP.get_incision())
-		RegisterSignal(tool, COMSIG_ITEM_ON_EMBED_REMOVAL, .proc/unspeculumize, TRUE)
+		RegisterSignal(tool, COMSIG_ITEM_ON_EMBED_REMOVAL, /proc/unspeculumize, TRUE)
 		playsound(target, 'modular_skyrat/sound/gore/stuck2.ogg', 60, 0)
-		target.update_body()
 
-/datum/surgery_step/retract_skin/proc/unspeculumize(mob/source, obj/item/bodypart/limb)
+/proc/unspeculumize(mob/source, obj/item/bodypart/limb)
 	var/datum/injury/incision = limb?.get_incision()
 	if(incision)
 		incision.injury_flags &= ~INJURY_RETRACTED_SKIN

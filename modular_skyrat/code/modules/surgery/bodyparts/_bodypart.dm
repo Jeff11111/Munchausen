@@ -1446,13 +1446,17 @@
 //Updates an organ's brute/burn states for use by update_damage_overlays()
 //Returns 1 if we need to update overlays. 0 otherwise.
 /obj/item/bodypart/proc/update_bodypart_damage_state()
+	var/need_update = FALSE
 	var/tbrute	= round( (brute_dam/max_damage)*3, 1 )
 	var/tburn	= round( (burn_dam/max_damage)*3, 1 )
+	var/datum/injury/inj = get_incision()
+	if(inj && CHECK_BITFIELD(inj.injury_flags, INJURY_RETRACTED_SKIN))
+		need_update = TRUE
 	if((tbrute != brutestate) || (tburn != burnstate))
 		brutestate = tbrute
 		burnstate = tburn
-		return TRUE
-	return FALSE
+		need_update = TRUE
+	return need_update
 
 //Change bodypart status
 /obj/item/bodypart/proc/change_bodypart_status(new_limb_status, heal_limb, change_icon_to_default, override = TRUE)
@@ -1567,12 +1571,14 @@
 
 // open incisions and expose implants
 // this is the retract step of surgery
-/obj/item/bodypart/proc/open_incision()
+/obj/item/bodypart/proc/open_incision(mob/user)
 	var/datum/injury/IN = get_incision()
 	if(!IN)
 		return
 	
 	IN.open_injury(min(IN.damage * 2, IN.damage_list[1] - IN.damage))
+	for(var/obj/item/organ/O in get_organs())
+		O.on_find(user)
 
 /obj/item/bodypart/proc/clamp_limb()
 	for(var/datum/injury/IN in injuries)

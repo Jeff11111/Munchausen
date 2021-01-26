@@ -80,7 +80,9 @@
 				damage_overlay.add_overlay("[BP.dmg_overlay_type]_[BP.body_zone]_[BP.brutestate]0")	//we're adding icon_states of the base image as overlays
 			if(BP.burnstate)
 				damage_overlay.add_overlay("[BP.dmg_overlay_type]_[BP.body_zone]_0[BP.burnstate]")
-
+		var/datum/injury/inj = BP.get_incision()
+		if(inj && CHECK_BITFIELD(inj.injury_flags, INJURY_RETRACTED_SKIN))
+			damage_overlay.add_overlay(image('modular_skyrat/icons/mob/wound_overlays.dmi', null, "dissected_[check_zone(BP.body_zone)][length(inj.embedded_objects) ? "_r" : ""][length(BP.get_organs()) ? "" : "_empty"]"))
 	apply_overlay(DAMAGE_LAYER)
 
 /mob/living/carbon/proc/update_medicine_overlays()
@@ -92,7 +94,6 @@
 	overlays_standing[MEDICINE_LAYER] = medicine_overlays
 	overlays_standing[LOWER_MEDICINE_LAYER] = lower_medicine_overlays
 
-
 	for(var/X in bodyparts)
 		var/obj/item/bodypart/BP = X
 		if(BP.current_gauze)
@@ -102,7 +103,6 @@
 
 	apply_overlay(MEDICINE_LAYER)
 	apply_overlay(LOWER_MEDICINE_LAYER)
-
 
 /mob/living/carbon/update_inv_wear_mask()
 	remove_overlay(FACEMASK_LAYER)

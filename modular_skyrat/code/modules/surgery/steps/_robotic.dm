@@ -106,9 +106,7 @@
 	. = ..()
 	var/obj/item/bodypart/BP = target.get_bodypart(target_zone)
 	if(BP)
-		var/datum/injury/incision = BP.get_incision()
-		if(incision)
-			incision.injury_flags |= INJURY_RETRACTED_SKIN
+		BP.open_incision(user)
 
 //pry off plating
 //(mechanical equivalent of sawing through bone)

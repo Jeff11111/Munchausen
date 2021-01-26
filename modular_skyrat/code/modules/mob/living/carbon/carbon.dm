@@ -168,7 +168,7 @@
 	return
 
 /mob/living/carbon/proc/unperform_zoom() //used to unzoom when you die and stuff
-	zommed = FALSE
+	zoomed = FALSE
 	client?.change_view(CONFIG_GET(string/default_view))
 	client?.pixel_x = 0
 	client?.pixel_y = 0
