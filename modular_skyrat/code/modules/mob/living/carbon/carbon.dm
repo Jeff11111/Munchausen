@@ -1,4 +1,4 @@
-//skyrat meme
+//Poggers
 /mob/living/carbon/ComponentInitialize()
 	. = ..()
 	//Carbon mobs always have an organ storage component - it just becomes accessible when necessary.
@@ -88,7 +88,7 @@
 	. = ..()
 	//Regardless of full heal or not, we cap brain damage to 100 max
 	if(getBrainLoss() >= 100)
-		setBrainLoss(99)
+		setBrainLoss(100)
 	//Cap oxygen damage to 75
 	if(getOxyLoss() > 75)
 		setOxyLoss(75)
@@ -127,7 +127,7 @@
 		self = TRUE
 	
 	if(!user.canUseTopic(src, TRUE) || INTERACTING_WITH(user, src))
-		to_chat(user, "<span class='warning'>You're unable to check [self ? "your" : "[src]'s"] pulse.</</span>")
+		to_chat(user, "<span class='warning'>You're unable to check [self ? "your" : "<b>[src]</b>'s"] pulse.</</span>")
 		return FALSE
 	
 	if((GET_SKILL_LEVEL(user, firstaid) < 10) || (GET_STAT_LEVEL(user, int) < 8))
@@ -135,27 +135,27 @@
 		return FALSE
 	
 	if(!self)
-		user.visible_message("<span class='notice'>[user] puts \his hand on [src]'s wrist and begins counting their pulse.</span>",\
-		"<span class='notice'>You begin counting [src]'s pulse...</span>")
+		user.visible_message("<span class='notice'><b>[user]</b> puts \his hand on <b>[src]</b>'s wrist and begins counting their pulse.</span>",\
+		"<span class='notice'>You begin counting <b>[src]</b>'s pulse...</span>")
 	else
-		user.visible_message("<span class='notice'>[user] begins counting their own pulse.</span>",\
+		user.visible_message("<span class='notice'><b>[user]</b> begins counting their own pulse.</span>",\
 		"<span class='notice'>You begin counting your pulse...</span>")
 
 	var/pogtime = max(0.35, (MAX_SKILL - GET_SKILL_LEVEL(src, firstaid))/10)
 	if(!do_mob(user, src, pogtime SECONDS))
-		to_chat(user, "<span class='warning'>You failed to check [self ? "your" : "[src]'s"] pulse.</span>")
+		to_chat(user, "<span class='warning'>You failed to check [self ? "your" : "<b>[src]</b>'s"] pulse.</span>")
 		return FALSE
 
 	if(pulse())
-		to_chat(user, "<span class='notice'>[self ? "You have a" : "[src] has a"] pulse! Counting...</span>")
+		to_chat(user, "<span class='notice'>[self ? "You have a" : "<b>[src]</b> has a"] pulse! Counting...</span>")
 	else
-		to_chat(user, "<span class='danger'>[self ? "You have no" : "[src] has no"] pulse!</span>")
+		to_chat(user, "<span class='danger'>[self ? "You have no" : "<b>[src]</b> has no"] pulse!</span>")
 		return FALSE
 	
 	if(do_mob(user, src, pogtime * 5 SECONDS))
-		to_chat(user, "<span class='notice'>[self ? "Your" : "[src]'s"] pulse is approximately <b>[src.get_pulse(GETPULSE_BASIC)] BPM</b>.</span>")
+		to_chat(user, "<span class='notice'>[self ? "Your" : "<b>[src]</b>'s"] pulse is approximately <b>[src.get_pulse(GETPULSE_BASIC)] BPM</b>.</span>")
 	else
-		to_chat(user, "<span class='warning'>You failed to check [self ? "your" : "[src]'s"] pulse.</span>")
+		to_chat(user, "<span class='warning'>You failed to check [self ? "your" : "<b>[src]</b>'s"] pulse.</span>")
 
 //zoomies
 /mob/living/carbon
@@ -166,6 +166,14 @@
 /mob/living/carbon/CtrlShiftClickOn(atom/A)
 	perform_zoom(A)
 	return
+
+/mob/living/carbon/proc/unperform_zoom() //used to unzoom when you die and stuff
+	zommed = FALSE
+	client?.change_view(CONFIG_GET(string/default_view))
+	client?.pixel_x = 0
+	client?.pixel_y = 0
+	if(hud_used?.fov_holder)
+		hud_used.fov_holder.screen_loc = ui_fov
 
 /mob/living/carbon/proc/perform_zoom(atom/A)
 	//Maximum zoom is based on ranged skill
