@@ -228,8 +228,8 @@
 
 /obj/machinery/airalarm/Destroy()
 	SSradio.remove_object(src, frequency)
-	qdel(wires)
-	wires = null
+	QDEL_NULL(wires)
+	QDEL_NULL(radio)
 	return ..()
 
 /obj/machinery/airalarm/examine(mob/user)
