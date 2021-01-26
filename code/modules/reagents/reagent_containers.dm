@@ -28,7 +28,7 @@
 	if(carbonM != carbonUser)
 		if(carbonUser.zone_selected != BODY_ZONE_PRECISE_MOUTH)
 			return
-		visible_message("<span class='warning'>[carbonUser] is attempting to force [carbonM] to chug [src]'s contents!</span>")
+		visible_message("<span class='warning'><b>[carbonUser]</b> is attempting to force <b>[carbonM]</b> to chug [src]'s contents!</span>")
 		while(do_after(carbonUser, forced_time, target = carbonM) && length(reagents.reagent_list))
 			reagents.reaction(carbonM, INGEST)
 			reagents.trans_to(carbonM, 20, null, null, null, "fed by [carbonUser]")
