@@ -29,8 +29,9 @@
 		"deep cut" = 15,
 		"clotted cut" = 8,
 		"scab" = 2,
-		"fresh skin" = 0
+		"fresh scar" = 0
 		)
+	fade_away = INFINITY
 
 /datum/injury/slash/flesh
 	max_bleeding_stage = 4
@@ -40,8 +41,9 @@
 		"flesh wound" = 25,
 		"blood soaked clot" = 15,
 		"large scab" = 5,
-		"fresh skin" = 0
+		"fresh scar" = 0
 		)
+	fade_away = INFINITY
 
 /datum/injury/slash/gaping
 	max_bleeding_stage = 3

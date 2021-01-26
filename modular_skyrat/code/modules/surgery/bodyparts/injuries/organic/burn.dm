@@ -27,8 +27,9 @@
 		"ripped large burn" = 20,
 		"large burn" = 15,
 		"healing large burn" = 5,
-		"fresh skin" = 0
+		"fresh burn scar" = 0
 		)
+	fade_away = INFINITY
 
 /datum/injury/burn/severe
 	stages = list(

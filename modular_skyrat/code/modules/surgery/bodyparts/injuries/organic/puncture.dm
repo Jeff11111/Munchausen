@@ -11,7 +11,7 @@
 	stages = list(
 		"puncture" = 5,
 		"healing puncture" = 2,
-		"small scab" = 0
+		"small round scab" = 0
 		)
 
 /datum/injury/puncture/flesh
