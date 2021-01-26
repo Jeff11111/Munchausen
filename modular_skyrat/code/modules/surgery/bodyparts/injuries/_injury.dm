@@ -230,7 +230,7 @@
 	parent_bodypart?.owner?.update_damage_overlays()
 
 // opens the wound and worsens it
-/datum/injury/proc/open_injury(damage)
+/datum/injury/proc/open_injury(damage, retracting = FALSE)
 	src.damage += damage
 	bleed_timer += damage
 
@@ -239,7 +239,8 @@
 
 	desc = desc_list[current_stage]
 	min_damage = damage_list[current_stage]
-	injury_flags |= INJURY_RETRACTED_SKIN
+	if(retracting)
+		injury_flags |= INJURY_RETRACTED_SKIN
 	parent_bodypart?.update_bodypart_damage_state()
 	parent_bodypart?.owner?.update_damage_overlays()
 

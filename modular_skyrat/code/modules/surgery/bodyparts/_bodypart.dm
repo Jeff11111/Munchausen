@@ -1576,7 +1576,7 @@
 	if(!IN)
 		return
 	
-	IN.open_injury(min(IN.damage * 2, IN.damage_list[1] - IN.damage))
+	IN.open_injury(min(IN.damage * 2, IN.damage_list[1] - IN.damage), TRUE)
 	for(var/obj/item/organ/O in get_organs())
 		O.on_find(user)
 
