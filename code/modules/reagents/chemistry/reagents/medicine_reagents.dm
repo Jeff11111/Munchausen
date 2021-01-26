@@ -132,7 +132,7 @@
 	name = "Cryoxadone"
 	description = "A chemical mixture with almost magical healing powers. Its main limitation is that the patient's body temperature must be under 270K for it to metabolise correctly."
 	color = "#0000C8"
-	taste_description = "sludge"
+	taste_description = "blue gatorade"
 	pH = 11
 	value = REAGENT_VALUE_COMMON
 
