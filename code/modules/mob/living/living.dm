@@ -235,6 +235,9 @@
 					victim.DefaultCombatKnockdown(max(1, str_diff) SECONDS)
 				else
 					victim.Stumble(max(1, str_diff) SECONDS)
+			var/victimdir = victim.dir
+			victim.Move(get_step(victim, get_dir(assailant, victim)))
+			victim.setDir(victimdir)
 			return TRUE
 		else
 			assailant.visible_message("<span class='warning'><b>[assailant]</b> tries pushing past <b>[victim]</b>!</span>", \
