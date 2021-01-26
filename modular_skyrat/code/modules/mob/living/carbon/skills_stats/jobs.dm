@@ -229,9 +229,9 @@
 /datum/job/hop
 	//INTJ femboy head of staff, physically incapable but VERY smort
 	stat_str = 9
-	stat_end = 9
+	stat_end = 10
 	stat_dex = 12
-	stat_int = 11
+	stat_int = 12
 	//Passing ranged, research and chemistry skills
 	skill_ranged = JOB_SKILLPOINTS_AVERAGE
 	skill_chemistry = JOB_SKILLPOINTS_AVERAGE
