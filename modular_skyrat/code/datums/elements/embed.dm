@@ -182,5 +182,8 @@
 			if(possible_embeddie.damage >= I.w_class * 5 && (possible_embeddie.damage_type in list(WOUND_SLASH, WOUND_PIERCE)))
 				embedded_injury = possible_embeddie
 				break
+		if(!embedded_injury)
+			embedded_injury = limb.create_injury(WOUND_PIERCE, I.w_class * 5, FALSE, FALSE)
+			embedded_injury.apply_injury(I.w_class * 5, limb)
 	checkEmbed(I, C, hit_zone, null, TRUE, embedded_injury)
 	return TRUE
