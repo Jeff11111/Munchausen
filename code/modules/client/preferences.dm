@@ -1664,10 +1664,12 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						features["mcolor2"] = pref_species.default_color
 					if(features["mcolor3"] == "#000" || (!(MUTCOLORS_PARTSONLY in pref_species.species_traits)))
 						features["mcolor3"] = pref_species.default_color
-					//We reset the language if it's restricted
-					var/datum/language/L = SSlanguage.languages_by_name[language]
-					if(L && L.restricted)
-						language = ""
+					language = initial(language)
+					bloodtype = initial(bloodtype)
+					body_descriptors = list()
+					for(var/i in pref_species.descriptors)
+						var/datum/mob_descriptor/md = pref_species.descriptors[i]
+						body_descriptors[i] = md.current_value
 				SetSpecies(user)
 			else
 				SetSpecies(user)
@@ -1957,7 +1959,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						for(var/i in pref_species.descriptors)
 							var/datum/mob_descriptor/md = pref_species.descriptors[i]
 							body_descriptors[i] = md.current_value
-						//
 
 				if("custom_species")
 					var/new_species = reject_bad_name(input(user, "Choose your species subtype, if unique. This will show up on examinations and health scans. Do not abuse this:", "Character Preference", custom_species) as null|text)
