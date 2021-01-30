@@ -778,7 +778,7 @@
 	else
 		to_chat(src, "<span class='deadsay'>I am dead.</span>")
 	for(var/X in ALL_BODYPARTS)
-		var/obj/item/bodypart/LB = get_bodypart(X)
+		var/obj/item/bodypart/LB = get_bodypart_nostump(X)
 
 		if(!LB)
 			to_chat(src, "<span class='notice'>- [capitalize(parse_zone(X))]: <span class='deadsay'><b>MISSING</b></span> </span>")
