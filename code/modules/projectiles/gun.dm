@@ -767,7 +767,7 @@
 	if(!is_wielded)
 		var/spread_penalty = 4 * (weapon_weight - WEAPON_LIGHT)
 		if(ranged_skill)
-			spread_penalty *= (MAX_SKILL/2)/ranged
+			spread_penalty *= (MAX_SKILL/2)/ranged_skill
 		bonus_spread += (spread_penalty * weapon_weight)
 	if(inaccuracy_modifier <= 0)
 		return bonus_spread
