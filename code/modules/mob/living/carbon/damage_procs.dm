@@ -422,8 +422,8 @@
 		var/pain_was = picked.pain_dam
 		var/clone_was = picked.clone_dam
 
-		update |= picked.receive_damage(brute = brute_per_part, burn = burn_per_part, stamina = stamina_per_part, pain = pain_per_part, toxin = tox_per_part, clone = clone_per_part, blocked = FALSE, updating_health = FALSE)
-
+		picked.receive_damage(brute = brute_per_part, burn = burn_per_part, stamina = stamina_per_part, pain = pain_per_part, toxin = tox_per_part, clone = clone_per_part, blocked = FALSE, updating_health = FALSE)
+		update |= picked.update_bodypart_damage_state()
 		brute	= round(brute - (picked.brute_dam - brute_was), DAMAGE_PRECISION)
 		burn	= round(burn - (picked.burn_dam - burn_was), DAMAGE_PRECISION)
 		stamina = round(stamina - (picked.stamina_dam - stamina_was), DAMAGE_PRECISION)

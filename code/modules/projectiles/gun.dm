@@ -390,16 +390,16 @@
 	var/sprd = 0
 	var/randomized_gun_spread = 0
 	var/rand_spr = rand()
-	if(spread >= 1)
-		randomized_gun_spread = rand(1, spread)
-	else if(burst_size > 1 && burst_spread >= 1)
-		randomized_gun_spread = rand(1, burst_spread)
+	if(spread)
+		randomized_gun_spread = rand(0, spread)
+	else if(burst_size > 1 && burst_spread)
+		randomized_gun_spread = rand(0, burst_spread)
 	if(HAS_TRAIT(user, TRAIT_POOR_AIM)) //nice shootin' tex
 		bonus_spread += 25
 	
 	var/randomized_bonus_spread = 0
-	if(bonus_spread >= 1)
-		randomized_bonus_spread = rand(1, bonus_spread)
+	if(bonus_spread)
+		randomized_bonus_spread = rand(0, bonus_spread)
 	if(burst_size > 1)
 		before_firing(target,user)
 		do_burst_shot(user, target, message, params, zone_override, sprd, randomized_gun_spread, randomized_bonus_spread, rand_spr, 1)
@@ -410,7 +410,7 @@
 			do_burst_shot(user, target, message, params, zone_override, sprd, randomized_gun_spread, randomized_bonus_spread, rand_spr, i, stam_cost)
 	else
 		if(chambered)
-			sprd = round(rand() * DUALWIELD_PENALTY_EXTRA_MULTIPLIER * (randomized_gun_spread + randomized_bonus_spread))
+			sprd = round((rand() * pick(1, -1)) * DUALWIELD_PENALTY_EXTRA_MULTIPLIER * (randomized_gun_spread + randomized_bonus_spread))
 			before_firing(target,user)
 			if((safety && has_safety) || !chambered.fire_casing(target, user, params, , suppressed, zone_override, sprd, src))
 				shoot_with_empty_chamber(user)
@@ -443,7 +443,7 @@
 				to_chat(user, "<span class='notice'> [src] is lethally chambered! You don't want to risk harming anyone...</span>")
 				return
 		if(randomspread)
-			sprd = round(rand() * DUALWIELD_PENALTY_EXTRA_MULTIPLIER * (randomized_gun_spread + randomized_bonus_spread), 1)
+			sprd = round((rand() * pick(1, -1)) * DUALWIELD_PENALTY_EXTRA_MULTIPLIER * (randomized_gun_spread + randomized_bonus_spread), 1)
 		else //Smart spread
 			sprd = round((((rand_spr/burst_size) * iteration) - (0.5 + (rand_spr * 0.25))) * (randomized_gun_spread + randomized_bonus_spread), 1)
 		before_firing(target,user)
@@ -772,8 +772,10 @@
 	var/base_inaccuracy = weapon_weight * 30 * inaccuracy_modifier
 	var/noaim_penalty = 0 //Otherwise aiming would be meaningless for slower guns such as sniper rifles and launchers
 	//Firing guns repeatedly is bad, don't go full auto man
-	var/penalty = max(CEILING(-(world.time - (last_fire + fire_delay + GUN_AIMING_TIME)), 1 SECONDS), 0) //Time we didn't take to aim, but should have
+	var/penalty = max(-(world.time - (last_fire + fire_delay + GUN_AIMING_TIME), 0) //Time we didn't take to aim, but should have
 	if(penalty > 0)
+		if(penalty >= 1 SECONDS)
+			to_chat()
 		noaim_penalty = (penalty * 2)
 	if(SEND_SIGNAL(user, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_ACTIVE)) //To be removed in favor of something less tactless later.
 		base_inaccuracy *= 0.75
