@@ -38,7 +38,7 @@
 			this_injury_desc = "<span class='green'>lightly infected</span> [this_injury_desc]"
 		
 		if(length(IN.embedded_objects))
-			this_injury_desc += ", with [english_list(IN.embedded_objects)] poking out of [IN.amount > 1 ? "them" : "it"]"
+			this_injury_desc += " with [english_list(IN.embedded_objects)] poking out of [IN.amount > 1 ? "them" : "it"]"
 
 		if(injury_descriptors[this_injury_desc])
 			injury_descriptors[this_injury_desc] += IN.amount

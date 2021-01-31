@@ -252,7 +252,7 @@
 			if(BP.get_bleed_rate())
 				damaged_bodypart_text += "<span class='warning'>[t_He] [t_has] blood soaking through [t_his] [hidden.name] around [t_his] [BP.name]!</span>"
 		else
-			if(BP.get_injuries_desc() != "nothing")
+			if(BP.get_injuries_desc() && BP.get_injuries_desc() != "nothing")
 				damaged_bodypart_text += "<span class='danger'>[t_He] [t_has] [BP.get_injuries_desc()] on [t_his] [BP.name].</span>"
 	
 	if(length(damaged_bodypart_text))
