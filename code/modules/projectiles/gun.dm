@@ -317,14 +317,14 @@
 	var/loop_counter = 0
 
 	if(user)
-		bonus_spread = getinaccuracy(user, bonus_spread, stamloss) //CIT CHANGE - adds bonus spread while not aiming
+		bonus_spread += getinaccuracy(user, bonus_spread, stamloss)
 		bonus_spread += calculate_extra_inaccuracy(user, bonus_spread, stamloss)
 
 	//Wielding always makes you aim better, no matter the weapon size
 	if(!is_wielded)
-		var/spread_penalty = 2.5
+		var/spread_penalty = 4 * weapon_weight
 		if(ranged)
-			spread_penalty = (50/(ranged*2))
+			spread_penalty *= (MAX_SKILL/2)/ranged
 		bonus_spread += (spread_penalty * weapon_weight)
 
 	if(ishuman(user) && user.a_intent == INTENT_HARM && weapon_weight <= WEAPON_LIGHT)
@@ -769,7 +769,7 @@
 	if(inaccuracy_modifier <= 0)
 		return bonus_spread
 	var/ranged_skill = GET_SKILL_LEVEL(user, ranged)
-	var/base_inaccuracy = weapon_weight * 30 * inaccuracy_modifier
+	var/base_inaccuracy = weapon_weight * 15 * inaccuracy_modifier
 	var/noaim_penalty = 0 //Otherwise aiming would be meaningless for slower guns such as sniper rifles and launchers
 	//Firing guns repeatedly is bad, don't go full auto man
 	var/penalty = max(-(world.time - (last_fire + fire_delay + GUN_AIMING_TIME)), 0) //Time we didn't take to aim, but should have
@@ -785,9 +785,9 @@
 	if(insanity)
 		//Mood fucks up your aim if it's low enough
 		if(insanity.sanity < 50)
-			base_inaccuracy += weapon_weight * 20 * inaccuracy_modifier
+			base_inaccuracy += weapon_weight * 10 * inaccuracy_modifier
 			if(insanity.sanity < 25)
-				base_inaccuracy += weapon_weight * 15 * inaccuracy_modifier
+				base_inaccuracy += weapon_weight * 5 * inaccuracy_modifier
 	if(ranged_skill < (MAX_SKILL/2))
 		//Damn we suck huh
 		base_inaccuracy *= (MAX_SKILL - ranged_skill)/(MAX_SKILL/2)

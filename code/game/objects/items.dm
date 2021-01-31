@@ -158,8 +158,6 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 	var/skill_gain = DEF_SKILL_GAIN //base skill value gain from using this item.
 	var/canMouseDown = FALSE
 
-	//SKYRAT CHANGE
-	//self equip delay
 	//Time in ticks needed to equip something on yourself. Uses the equip_delay_self var.
 	//Set use_standard_equip_delay to false if you want to set a custom delay by changing equip_delay_self.
 	var/use_standard_equip_delay = FALSE //Basically sets the self equip delay on initialize to self_equip_mod * equip_delay_other
@@ -167,9 +165,7 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 	var/strip_self_delay = 0
 	var/use_standard_strip_self_delay = TRUE //Basically makes the unequip delay take as long as strip_self_delay_mod * equip_delay on initialize
 	var/strip_self_delay_mod = 0.85
-	//
 	var/hide_underwear_examine = FALSE
-	//
 
 /obj/item/Initialize()
 
