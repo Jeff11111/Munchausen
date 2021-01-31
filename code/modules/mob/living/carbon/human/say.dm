@@ -21,6 +21,16 @@
 				return real_name
 		else
 			return real_name
+	var/gender_bender = p_they()
+	switch(gender_bender)
+		if("he")
+			gender_bender = "Man"
+		if("she")
+			gender_bender = "Woman"
+		if("they")
+			gender_bender = "Creature"
+		if("it")
+			gender_bender = "Thing"
 	if(istype(wear_mask, /obj/item/clothing/mask/infiltrator))
 		var/obj/item/clothing/mask/infiltrator/V = wear_mask
 		if(V.voice_unknown)
@@ -30,9 +40,9 @@
 	if(istype(wear_mask, /obj/item/clothing/mask))
 		var/obj/item/clothing/mask/chunger = wear_mask
 		if(CHECK_BITFIELD(chunger.flags_inv, HIDEFACE) && (!chunger.mask_adjusted))
-			return ("Unknown")
+			return ("Unknown [gender_bender]")
 	else if(CHECK_BITFIELD(wear_mask?.flags_inv, HIDEFACE))
-		return ("Unknown")
+		return ("Unknown [gender_bender]")
 	if(mind)
 		var/datum/antagonist/changeling/changeling = mind.has_antag_datum(/datum/antagonist/changeling)
 		if(changeling && changeling.mimicing )

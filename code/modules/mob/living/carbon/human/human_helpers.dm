@@ -45,7 +45,7 @@
 		return face_name
 	if(id_name)
 		return id_name
-	return "Unknown"
+	return ("Unknown")
 
 //Returns "Unknown" if facially disfigured and real_name if not. Useful for setting name when Fluacided or when updating a human's name variable
 /mob/living/carbon/human/proc/get_face_name(if_no_face="Unknown")
