@@ -237,6 +237,7 @@
 	mag_type = /obj/item/ammo_box/magazine/m556
 	fire_sound = 'sound/weapons/gunshot_smg.ogg'
 	can_suppress = FALSE
+	weapon_weight = WEAPON_MEDIUM
 	burst_size = 3
 	burst_shot_delay = 1
 
@@ -306,7 +307,7 @@
 	if(!cover_open && istype(A, mag_type))
 		to_chat(user, "<span class='warning'>[src]'s cover is closed! You can't insert a new mag.</span>")
 		return
-	..()
+	. = ..()
 
 // SNIPER //
 
