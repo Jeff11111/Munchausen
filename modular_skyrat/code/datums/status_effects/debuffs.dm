@@ -193,7 +193,7 @@
 	if(I)
 		I.duration = max(world.time + amount, I.duration)
 	else if(amount > 0)
-		I = apply_status_effect(STATUS_EFFECT_DAZED, amount, updating)
+		I = apply_status_effect(STATUS_EFFECT_STUMBLE, amount, updating)
 	return I
 
 /mob/living/proc/SetStumble(amount, updating = TRUE, ignore_canstun = FALSE) //Sets remaining duration
