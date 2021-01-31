@@ -1445,6 +1445,9 @@
 
 //Brain is fried.
 /mob/living/carbon/nervous_system_failure()
+	var/obj/item/organ/brain/brain = getorgan(ORGAN_SLOT_BRAIN)
+	if(CHECK_BITFIELD(brain?.organ_flags, ORGAN_CUT_AWAY))
+		return TRUE
 	return (getBrainLoss() >= maxHealth * 0.75)
 
 //Replaces crit with shock
