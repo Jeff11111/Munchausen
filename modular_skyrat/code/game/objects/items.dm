@@ -90,5 +90,5 @@
 	if(istype(over, /obj/structure/table) && Adjacent(over))
 		var/obj/structure/table/tranny = over
 		forceMove(tranny.loc)
-		pixel_x = text2num(params2list["icon-x"])
-		pixel_y = text2num(params2list["icon-y"])
+		pixel_x = text2num(params2list["icon-x"]) - 16
+		pixel_y = text2num(params2list["icon-y"]) - 16
