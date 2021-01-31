@@ -73,7 +73,7 @@
 			gender_bender = "Woman"
 		if("they")
 			gender_bender = "Creature"
-		if("it")
+		else
 			gender_bender = "Thing"
 	if(istype(wallet))
 		id = wallet.front_id

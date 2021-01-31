@@ -29,7 +29,7 @@
 			gender_bender = "Woman"
 		if("they")
 			gender_bender = "Creature"
-		if("it")
+		else
 			gender_bender = "Thing"
 	if(istype(wear_mask, /obj/item/clothing/mask/infiltrator))
 		var/obj/item/clothing/mask/infiltrator/V = wear_mask
