@@ -130,3 +130,55 @@
 	. = ..()
 	if(T.germ_level)
 		T.janitize(-(reac_volume * 50))
+
+//Potassium increases pulse
+/datum/reagent/potassium/on_mob_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.add_chem_effect(CE_PULSE, 1)
+
+/datum/reagent/potassium/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.remove_chem_effect(CE_PULSE, 1)
+
+//So does sodium
+/datum/reagent/sodium/on_mob_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.add_chem_effect(CE_PULSE, 1)
+
+/datum/reagent/sodium/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.remove_chem_effect(CE_PULSE, 1)
+
+//So does sugar
+/datum/reagent/sugar/on_mob_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.add_chem_effect(CE_PULSE, 1)
+
+/datum/reagent/sugar/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.remove_chem_effect(CE_PULSE, 1)
+
+//So does nicotine
+/datum/reagent/drug/nicotine/on_mob_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.add_chem_effect(CE_PULSE, 1)
+
+/datum/reagent/drug/nicotine/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.remove_chem_effect(CE_PULSE, 1)

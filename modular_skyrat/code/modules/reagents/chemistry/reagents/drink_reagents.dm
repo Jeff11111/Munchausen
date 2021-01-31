@@ -20,6 +20,18 @@
 	M.drowsyness = max(M.drowsyness - 0.5, 0)
 	M.AdjustSleeping(-50)
 
+/datum/reagent/consumable/maint_energy/on_mob_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.add_chem_effect(CE_PULSE, 1)
+
+/datum/reagent/consumable/maint_energy/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.remove_chem_effect(CE_PULSE, 1)
+
 /datum/reagent/consumable/maint_energy/zero_fusion
 	name = "Maintenance Energy Zero Fusion"
 	description = "All the energy you need, without any calories."
@@ -132,3 +144,15 @@
 	taste_description = "bitter powder"
 	glass_name = "glass of banana peel powder"
 	description = "You took a banana peel... pulped it... baked it... Where are you going with this?"
+
+/datum/reagent/consumable/coffee/on_mob_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.add_chem_effect(CE_PULSE, 1)
+
+/datum/reagent/consumable/coffee/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.remove_chem_effect(CE_PULSE, 1)

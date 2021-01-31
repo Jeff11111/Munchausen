@@ -27,10 +27,6 @@
 					M.grab_ghost()
 					M.emote("gasp")
 					log_combat(M, M, "revived", src)
-	..()
-
-/datum/reagent/medicine/strange_reagent/on_mob_life(mob/living/carbon/M)
-	//just to override the original lmao
 	. = ..()
 
 /datum/reagent/medicine/synthflesh
@@ -38,7 +34,6 @@
 	overdose_threshold = 35 //no synth species abusing
 
 /datum/reagent/medicine/synthflesh/reaction_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
-
 	if(!iscarbon(M))
 		return ..()
 
@@ -88,14 +83,14 @@
 			if(HAS_TRAIT_FROM(M, TRAIT_HUSK, "burn") && M.getFireLoss() < THRESHOLD_UNHUSK && (vol > overdose_threshold))
 				M.cure_husk("burn")
 				M.visible_message("<span class='nicegreen'>Most of [M]'s burnt off or charred flesh has been restored!")
-	..()
+	. = ..()
 
 /datum/reagent/medicine/synthflesh/overdose_start(mob/living/M)
 	var/mob/living/carbon/human/H = M
 	if(H)
 		if((H.dna.species.type == /datum/species/synth) && (H.stat != DEAD))
 			to_chat(H, "<span class='userdanger'>You feel like you took too much of [name]!</span>")
-			overdosed = 1
+			overdosed = TRUE
 
 /datum/reagent/medicine/syndicate_nanites //Used exclusively by Syndicate medical cyborgs
 	process_flags = REAGENT_ORGANIC | REAGENT_SYNTHETIC //Let's not cripple synth ops
@@ -245,12 +240,14 @@
 	if(iscarbon(L))
 		var/mob/living/carbon/C = L
 		C.add_chem_effect(CE_PAINKILLER, 40) //Very effective painkiller
+		C.add_chem_effect(CE_PULSE, -1)
 
 /datum/reagent/medicine/paracetamol/on_mob_end_metabolize(mob/living/L)
 	. = ..()
 	if(iscarbon(L))
 		var/mob/living/carbon/C = L
 		C.remove_chem_effect(CE_PAINKILLER, 40)
+		C.remove_chem_effect(CE_PULSE, -1)
 
 /datum/reagent/medicine/paracetamol/overdose_process(mob/living/M)
 	. = ..()
@@ -294,18 +291,27 @@
 	reagent_state = LIQUID
 	color = "#430568"
 	addiction_threshold = 15
+	overdose_threshold = 20
 
 /datum/reagent/medicine/promedol/on_mob_metabolize(mob/living/L)
 	. = ..()
 	if(iscarbon(L))
 		var/mob/living/carbon/C = L
 		C.add_chem_effect(CE_PAINKILLER, 200)
+		C.add_chem_effect(CE_PULSE, -2)
 
 /datum/reagent/medicine/promedol/on_mob_end_metabolize(mob/living/L)
 	. = ..()
 	if(iscarbon(L))
 		var/mob/living/carbon/C = L
 		C.remove_chem_effect(CE_PAINKILLER, 200)
+		C.remove_chem_effect(CE_PULSE, -2)
+
+/datum/reagent/medicine/promedol/overdose_process(mob/living/M)
+	. = ..()
+	if(iscarbon(M))
+		var/mob/living/carbon/C = M
+		C.set_heartattack(TRUE)
 
 /datum/reagent/medicine/promedol/addiction_act_stage1(mob/living/M)
 	. = ..()
@@ -387,13 +393,13 @@
 	. = ..()
 	if(iscarbon(L))
 		var/mob/living/carbon/C = L
-		C.add_chem_effect(CE_PAINKILLER, 30)
+		C.add_chem_effect(CE_PAINKILLER, 50)
 
 /datum/reagent/medicine/lavaland_extract/on_mob_end_metabolize(mob/living/L)
 	. = ..()
 	if(iscarbon(L))
 		var/mob/living/carbon/C = L
-		C.remove_chem_effect(CE_PAINKILLER, 30)
+		C.remove_chem_effect(CE_PAINKILLER, 50)
 
 /datum/reagent/medicine/antitoxin/on_mob_life(mob/living/carbon/M)
 	. = ..()
@@ -437,12 +443,14 @@
 		if(iscarbon(L))
 			var/mob/living/carbon/C = L
 			C.add_chem_effect(CE_PAINKILLER, 100)
+			C.add_chem_effect(CE_PULSE, -1)
 
 /datum/reagent/medicine/cryoxadone/on_mob_end_metabolize(mob/living/L)
 	. = ..()
 	if(iscarbon(L))
 		var/mob/living/carbon/C = L
 		C.remove_chem_effect(CE_PAINKILLER, 100)
+		C.remove_chem_effect(CE_PULSE, -1)
 
 /datum/reagent/medicine/pyroxadone/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -450,12 +458,14 @@
 		var/mob/living/carbon/C = L
 		if(C.bodytemperature >= BODYTEMP_HEAT_DAMAGE_LIMIT)
 			C.add_chem_effect(CE_PAINKILLER, 100)
+			C.add_chem_effect(CE_PULSE, 1)
 
 /datum/reagent/medicine/pyroxadone/on_mob_end_metabolize(mob/living/L)
 	. = ..()
 	if(iscarbon(L))
 		var/mob/living/carbon/C = L
 		C.remove_chem_effect(CE_PAINKILLER, 100)
+		C.remove_chem_effect(CE_PULSE, 1)
 
 //Sterilizine actually does double the cleaning since it calls the parent
 /datum/reagent/space_cleaner/sterilizine/reaction_obj(obj/O, reac_volume)

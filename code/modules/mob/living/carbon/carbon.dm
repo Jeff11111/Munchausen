@@ -1372,7 +1372,7 @@
 	else
 		apparent_blood_volume = BLOOD_VOLUME_NORMAL
 
-	var/apparent_blood_volume_mod = max(0, 1 - getOxyLoss()/(maxHealth/2))
+	var/apparent_blood_volume_mod = max(0, 1 - getOxyLoss()/maxHealth)
 	var/oxygenated_mult = 0
 	if(chem_effects[CE_OXYGENATED] == 1) // Dexalin.
 		oxygenated_mult = 0.5
