@@ -30,7 +30,7 @@
 	trigger_guard = TRIGGER_GUARD_NORMAL	//trigger guard on the weapon, hulks can't fire them with their big meaty fingers
 	var/sawn_desc = null				//description change if weapon is sawn-off
 	var/sawn_off = FALSE
-	
+
 	/// can we be put into a turret
 	var/can_turret = TRUE
 	/// can we be put in a circuit
@@ -300,7 +300,7 @@
 				process_fire(user, user, FALSE, params, shot_leg)
 				user.dropItemToGround(src, TRUE)
 				return
-	
+
 	//Critical failures
 	if(user.mind)
 		switch(user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, ranged)))
@@ -319,7 +319,7 @@
 	if(user)
 		bonus_spread = getinaccuracy(user, bonus_spread, stamloss) //CIT CHANGE - adds bonus spread while not aiming
 		bonus_spread += calculate_extra_inaccuracy(user, bonus_spread, stamloss)
-	
+
 	//Wielding always makes you aim better, no matter the weapon size
 	if(!is_wielded)
 		var/spread_penalty = 2.5
@@ -396,7 +396,7 @@
 		randomized_gun_spread = rand(0, burst_spread)
 	if(HAS_TRAIT(user, TRAIT_POOR_AIM)) //nice shootin' tex
 		bonus_spread += 25
-	
+
 	var/randomized_bonus_spread = 0
 	if(bonus_spread)
 		randomized_bonus_spread = rand(0, bonus_spread)
@@ -712,7 +712,7 @@
 /obj/item/gun/proc/zoom(mob/living/user, forced_zoom)
 	if(!(user?.client))
 		return
-	
+
 	//Maximum zoom is based on ranged skill
 	if(!user.mind)
 		to_chat(user, "<span class='warning'>My mindless form cannot aim with [src].</span>")
@@ -722,7 +722,7 @@
 	if(ranged_skill <= JOB_SKILLPOINTS_NOVICE)
 		to_chat(user, "<span class='warning'>I am far too incompetent to aim with [src].</span>")
 		return FALSE
-	
+
 	var/zoomies = round(zoom_amt * ranged_skill/(MAX_SKILL/2))
 	if(!isnull(forced_zoom))
 		if(zoomed == forced_zoom)
@@ -743,7 +743,7 @@
 				_y = -zoomies
 			if(WEST)
 				_x = -zoomies
-		
+
 		if(zoom_out_amt)
 			user.client.change_view(zoom_out_amt)
 		user.client.pixel_x = world.icon_size*_x
@@ -772,7 +772,7 @@
 	var/base_inaccuracy = weapon_weight * 30 * inaccuracy_modifier
 	var/noaim_penalty = 0 //Otherwise aiming would be meaningless for slower guns such as sniper rifles and launchers
 	//Firing guns repeatedly is bad, don't go full auto man
-	var/penalty = max(-(world.time - (last_fire + fire_delay + GUN_AIMING_TIME), 0) //Time we didn't take to aim, but should have
+	var/penalty = max(-(world.time - (last_fire + fire_delay + GUN_AIMING_TIME)), 0) //Time we didn't take to aim, but should have
 	if(penalty > 0)
 		if(penalty >= 1 SECONDS)
 			to_chat()
