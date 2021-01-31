@@ -255,15 +255,19 @@
 		for(var/obj/item/bodypart/BP in src)
 			BP.update_limb(FALSE)
 			BP.update_icon_dropped()
-		update_limb(owner ? FALSE : TRUE)
-		update_icon_dropped()
+		if(owner)
+			owner.update_icon()
+		else
+			update_icon_dropped()
 	if(germ_level >= INFECTION_LEVEL_THREE)
 		kill_limb()
 		for(var/obj/item/bodypart/BP in src)
 			BP.update_limb(FALSE)
 			BP.update_icon_dropped()
-		update_limb(owner ? FALSE : TRUE)
-		update_icon_dropped()
+		if(owner)
+			owner.update_icon()
+		else
+			update_icon_dropped()
 
 //Checks to see if the bodypart is frozen from temperature
 /obj/item/bodypart/proc/is_cold()
