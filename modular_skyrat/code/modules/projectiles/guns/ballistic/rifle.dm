@@ -63,6 +63,7 @@
 	fire_sound = 'modular_skyrat/sound/guns/smg1.ogg'
 	mag_type = /obj/item/ammo_box/magazine/m762
 	slot_flags = ITEM_SLOT_BACK
+	weapon_weight = WEAPON_HEAVY
 	can_suppress = FALSE
 	burst_size = 3
 	burst_shot_delay = 1

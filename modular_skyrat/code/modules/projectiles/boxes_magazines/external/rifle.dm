@@ -24,7 +24,6 @@
 	icon_state = "lrifle"
 	caliber = "a762"
 	ammo_type = /obj/item/ammo_casing/a762
-	weapon_weight = WEAPON_HEAVY
 	max_ammo = 30
 
 /obj/item/ammo_box/magazine/m762/update_icon()
