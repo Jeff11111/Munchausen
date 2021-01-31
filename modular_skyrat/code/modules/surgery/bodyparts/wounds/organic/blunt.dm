@@ -35,7 +35,7 @@
 	base_treat_time = 4 SECONDS
 	biology_required = list(HAS_BONE)
 	required_status = BODYPART_ORGANIC
-	pain_amount = 20
+	pain_amount = 10
 	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_VISIBLE_THROUGH_CLOTHING | WOUND_MANGLES_BONE | WOUND_ACCEPTS_STUMP)
 
 /*
@@ -260,7 +260,7 @@
 	status_effect_type = /datum/status_effect/wound/blunt/moderate
 	associated_alerts = list()
 	can_self_treat = TRUE
-	pain_amount = 20
+	pain_amount = 10
 	flat_damage_roll_increase = 5
 	descriptive = "A bone is dislocated!"
 	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_VISIBLE_THROUGH_CLOTHING)
@@ -426,7 +426,7 @@
 	threshold_penalty = 15
 	status_effect_type = /datum/status_effect/wound/blunt/moderate
 	associated_alerts = list()
-	pain_amount = 20 //Hurts a lot, almost a hairline fracture
+	pain_amount = 15 //Hurts a lot, almost a hairline fracture
 
 /datum/wound/blunt/moderate/ribcage/crush()
 	if(prob(33))
@@ -520,7 +520,7 @@
 	threshold_penalty = 15
 	status_effect_type = /datum/status_effect/wound/blunt/moderate
 	associated_alerts = list()
-	pain_amount = 20 //Hurts more than your average dislocation
+	pain_amount = 15 //Hurts more than your average dislocation
 
 /datum/wound/blunt/moderate/hips/crush()
 	if(prob(33))
@@ -614,7 +614,7 @@
 	threshold_penalty = 15
 	status_effect_type = /datum/status_effect/wound/blunt/moderate
 	associated_alerts = list()
-	pain_amount = 20 //Hurts a bit more
+	pain_amount = 12 //Hurts a bit more
 	descriptive = "The jaw is dislocated!"
 
 /datum/wound/blunt/moderate/jaw/crush()
@@ -713,7 +713,7 @@
 	treat_priority = TRUE
 	brain_trauma_group = BRAIN_TRAUMA_MILD
 	trauma_cycle_cooldown = 1.5 MINUTES
-	pain_amount = 30
+	pain_amount = 20
 	flat_damage_roll_increase = 10
 	descriptive = "A bone is fractured!"
 
@@ -736,7 +736,7 @@
 	treat_priority = TRUE
 	brain_trauma_group = BRAIN_TRAUMA_SEVERE
 	trauma_cycle_cooldown = 2.5 MINUTES
-	pain_amount = 40
+	pain_amount = 30
 	flat_damage_roll_increase = 15
 	descriptive = "A bone is shattered!"
 

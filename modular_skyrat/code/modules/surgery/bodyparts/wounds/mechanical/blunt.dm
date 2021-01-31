@@ -28,7 +28,7 @@
 	biology_required = list(HAS_BONE)
 	wound_flags = (WOUND_SOUND_HINTS | WOUND_SEEPS_GAUZE | WOUND_VISIBLE_THROUGH_CLOTHING | WOUND_MANGLES_BONE)
 	required_status = BODYPART_ROBOTIC
-	pain_amount = 3
+	pain_amount = 10
 
 /*
 	Overwriting of base procs
