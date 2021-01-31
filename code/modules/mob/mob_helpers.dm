@@ -466,7 +466,9 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 		message_admins("No ghosts were willing to take control of [ADMIN_LOOKUPFLW(M)])")
 		return FALSE
 
-/proc/is_flying(mob/M = src)
+/proc/is_flying(mob/M)
+	if(!M)
+		return FALSE
 	if(M.movement_type & FLYING)
 		return TRUE
 	else

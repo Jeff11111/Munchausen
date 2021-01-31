@@ -775,7 +775,7 @@
 	var/penalty = max(-(world.time - (last_fire + fire_delay + GUN_AIMING_TIME)), 0) //Time we didn't take to aim, but should have
 	if(penalty > 0)
 		if(penalty >= 1 SECONDS)
-			to_chat()
+			to_chat(user, "<span class='warning'>I should have waited a bit more.</span>")
 		noaim_penalty = (penalty * 2)
 	if(SEND_SIGNAL(user, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_ACTIVE)) //To be removed in favor of something less tactless later.
 		base_inaccuracy *= 0.75
