@@ -774,7 +774,7 @@
 	var/base_inaccuracy = 10 * weapon_weight * inaccuracy_modifier
 	var/noaim_penalty = 0 //Otherwise aiming would be meaningless for slower guns such as sniper rifles and launchers
 	//Firing guns repeatedly is bad, don't go full auto man
-	var/penalty = max(-(world.time - (last_fire + fire_delay + GUN_AIMING_TIME)), 0) //Time we didn't take to aim, but should have
+	var/penalty = max((last_fire + fire_delay + GUN_AIMING_TIME) - world.time, 0) //Time we didn't take to aim, but should have
 	if(penalty > 0)
 		if((penalty >= 1 SECONDS) && (chambered?.BB))
 			to_chat(user, "<span class='warning'>I should have waited a bit more.</span>")
@@ -798,4 +798,4 @@
 /obj/item/gun/proc/getstamcost(mob/living/carbon/user)
 	. = recoil * 2
 	if(user && !user.has_gravity())
-		. = recoil*10
+		. = recoil * 10
