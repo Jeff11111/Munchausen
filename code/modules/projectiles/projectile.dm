@@ -767,7 +767,7 @@
 	starting = get_turf(source)
 	original = target
 	original_turf = get_turf(target)
-	original_dist = get_dist(starting, original_turf)
+	original_dist = (get_dist(starting, original_turf) + 1)
 	if(targloc || !params)
 		yo = targloc.y - curloc.y
 		xo = targloc.x - curloc.x

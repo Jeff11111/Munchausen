@@ -333,7 +333,7 @@
 			if(G == src || G.weapon_weight >= WEAPON_MEDIUM)
 				continue
 			else if(G.can_trigger_gun(user))
-				bonus_spread += (24 * G.weapon_weight * G.dualwield_spread_mult * (ranged ? ((MAX_SKILL/2)/ranged) : 1))
+				bonus_spread += (15 * G.weapon_weight * G.dualwield_spread_mult * (ranged ? ((MAX_SKILL/2)/ranged) : 1))
 				loop_counter++
 				var/stam_cost = G.getstamcost(user)
 				addtimer(CALLBACK(G, /obj/item/gun.proc/process_fire, target, user, TRUE, params, null, bonus_spread, stam_cost), loop_counter)
@@ -410,9 +410,12 @@
 			do_burst_shot(user, target, message, params, zone_override, sprd, randomized_gun_spread, randomized_bonus_spread, rand_spr, i, stam_cost)
 	else
 		if(chambered)
-			sprd = round((rand() * pick(1, -1)) * DUALWIELD_PENALTY_EXTRA_MULTIPLIER * (randomized_gun_spread + randomized_bonus_spread))
+			var/dual_wield_penalty_multiplier = 1
+			if(user.a_intent == INTENT_HARM && istype(user.get_inactive_held_item(), /obj/item/gun))
+				dual_wield_penalty_multiplier += DUALWIELD_PENALTY_EXTRA_MULTIPLIER
+			sprd = round((rand() * pick(1, -1)) * dual_wield_penalty_multiplier * (randomized_gun_spread + randomized_bonus_spread))
 			before_firing(target,user)
-			if((safety && has_safety) || !chambered.fire_casing(target, user, params, , suppressed, zone_override, sprd, src))
+			if((safety && has_safety) || !chambered.fire_casing(target, user, params, null, suppressed, zone_override, sprd, src))
 				shoot_with_empty_chamber(user)
 				return
 			else
@@ -447,7 +450,7 @@
 		else //Smart spread
 			sprd = round((((rand_spr/burst_size) * iteration) - (0.5 + (rand_spr * 0.25))) * (randomized_gun_spread + randomized_bonus_spread), 1)
 		before_firing(target,user)
-		if((safety && has_safety) || !chambered.fire_casing(target, user, params, ,suppressed, zone_override, sprd, src))
+		if((safety && has_safety) || !chambered.fire_casing(target, user, params, null, suppressed, zone_override, sprd, src))
 			shoot_with_empty_chamber(user)
 			firing = FALSE
 			return FALSE
@@ -769,12 +772,12 @@
 	if(inaccuracy_modifier <= 0)
 		return bonus_spread
 	var/ranged_skill = GET_SKILL_LEVEL(user, ranged)
-	var/base_inaccuracy = weapon_weight * 15 * inaccuracy_modifier
+	var/base_inaccuracy = 20 * weapon_weight * inaccuracy_modifier
 	var/noaim_penalty = 0 //Otherwise aiming would be meaningless for slower guns such as sniper rifles and launchers
 	//Firing guns repeatedly is bad, don't go full auto man
 	var/penalty = max(-(world.time - (last_fire + fire_delay + GUN_AIMING_TIME)), 0) //Time we didn't take to aim, but should have
 	if(penalty > 0)
-		if(penalty >= 1 SECONDS)
+		if((penalty >= 1 SECONDS) && (chambered?.BB))
 			to_chat(user, "<span class='warning'>I should have waited a bit more.</span>")
 		noaim_penalty = (penalty * 2)
 	if(SEND_SIGNAL(user, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_ACTIVE)) //To be removed in favor of something less tactless later.
@@ -790,11 +793,11 @@
 				base_inaccuracy += weapon_weight * 5 * inaccuracy_modifier
 	if(ranged_skill < (MAX_SKILL/2))
 		//Damn we suck huh
-		base_inaccuracy *= (MAX_SKILL - ranged_skill)/(MAX_SKILL/2)
+		base_inaccuracy *= (MAX_SKILL/2)/ranged_skill
 	var/mult = clamp(noaim_penalty/GUN_AIMING_TIME, 1, 4)
 	return max(bonus_spread + (base_inaccuracy * mult), 0)
 
 /obj/item/gun/proc/getstamcost(mob/living/carbon/user)
-	. = recoil
+	. = recoil * 2
 	if(user && !user.has_gravity())
-		. = recoil*5
+		. = recoil*10
