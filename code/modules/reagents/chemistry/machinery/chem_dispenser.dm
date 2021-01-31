@@ -267,12 +267,12 @@
 			if(!is_operational() || QDELETED(cell))
 				return
 			var/reagent_name = params["reagent"]
+			var/reagent = GLOB.name2reagent[reagent_name]
+			//people that suck at chemistry fuck up at chemistry
+			if((GET_SKILL_LEVEL(usr, chemistry) <= JOB_SKILLPOINTS_NOVICE) && (usr.mind?.diceroll(STAT_DATUM(int), SKILL_DATUM(chemistry), "6d6", 20) <= DICE_FAILURE))
+				reagent = pick(dispensable_reagents)
+				to_chat(usr, "<span class='warning'>[pick("Is this the right button?","No... This isn't right...", "Uhhh...", "Fnord! How do i use this thing?")]</span>")
 			if(!recording_recipe)
-				var/reagent = GLOB.name2reagent[reagent_name]
-				//people that suck at chemistry fuck up at chemistry
-				if((GET_SKILL_LEVEL(usr, chemistry) <= JOB_SKILLPOINTS_NOVICE) && (usr.mind?.diceroll(STAT_DATUM(int), SKILL_DATUM(chemistry), "6d6", 20) <= DICE_FAILURE))
-					reagent = pick(dispensable_reagents)
-					to_chat(usr, "<span class='warning'>[pick("Is this the right button?","No... This isn't right...", "Uhhh...", "Fnord! How do i use this thing?")]</span>")
 				if(beaker && dispensable_reagents.Find(reagent))
 					var/datum/reagents/R = beaker.reagents
 					var/free = R.maximum_volume - R.total_volume
@@ -313,6 +313,10 @@
 				return
 			for(var/key in chemicals_to_dispense)
 				var/reagent = GLOB.name2reagent[translate_legacy_chem_id(key)]
+				//people that suck at chemistry fuck up at chemistry
+				if((GET_SKILL_LEVEL(usr, chemistry) <= JOB_SKILLPOINTS_NOVICE) && (usr.mind?.diceroll(STAT_DATUM(int), SKILL_DATUM(chemistry), "6d6", 20) <= DICE_FAILURE))
+					reagent = pick(dispensable_reagents)
+					to_chat(usr, "<span class='warning'>[pick("Is this the right button?","No... This isn't right...", "Uhhh...", "Fnord! How do i use this thing?")]</span>")
 				var/dispense_amount = chemicals_to_dispense[key]
 				if(!dispensable_reagents.Find(reagent))
 					return
@@ -323,6 +327,9 @@
 					var/free = R.maximum_volume - R.total_volume
 					var/actual = min(dispense_amount, (cell.charge * powerefficiency)*10, free)
 					if(actual)
+						if(SSeconomy.full_ancap && !currently_linked_account.adjust_money(-actual*obamacare))
+							say("Insufficient credits to dispense reagent!")
+							return
 						if(!cell.use(actual / powerefficiency))
 							say("Not enough energy to complete operation!")
 							return
