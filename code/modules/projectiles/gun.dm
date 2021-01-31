@@ -762,15 +762,15 @@
 	last_fire = world.time
 
 /obj/item/gun/proc/getinaccuracy(mob/living/user, bonus_spread, stamloss)
+	var/ranged_skill = GET_SKILL_LEVEL(user, ranged)
 	//Wielding always makes you aim better, no matter the weapon size
 	if(!is_wielded)
 		var/spread_penalty = 4 * (weapon_weight - WEAPON_LIGHT)
-		if(ranged)
+		if(ranged_skill)
 			spread_penalty *= (MAX_SKILL/2)/ranged
 		bonus_spread += (spread_penalty * weapon_weight)
 	if(inaccuracy_modifier <= 0)
 		return bonus_spread
-	var/ranged_skill = GET_SKILL_LEVEL(user, ranged)
 	var/base_inaccuracy = 10 * weapon_weight * inaccuracy_modifier
 	var/noaim_penalty = 0 //Otherwise aiming would be meaningless for slower guns such as sniper rifles and launchers
 	//Firing guns repeatedly is bad, don't go full auto man
