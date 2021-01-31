@@ -42,11 +42,14 @@
 /// The affected is unable to move, or to use, hold, or pickup items.
 #define STATUS_EFFECT_STUN /datum/status_effect/incapacitating/stun
 
-#define STATUS_EFFECT_KNOCKDOWN /datum/status_effect/incapacitating/knockdown //the affected is unable to stand up
+/// The affected is unable to stand up
+#define STATUS_EFFECT_KNOCKDOWN /datum/status_effect/incapacitating/knockdown
 
-#define STATUS_EFFECT_IMMOBILIZED /datum/status_effect/incapacitating/immobilized //the affected is unable to move
+/// The affected is unable to move
+#define STATUS_EFFECT_IMMOBILIZED /datum/status_effect/incapacitating/immobilized
 
-#define STATUS_EFFECT_PARALYZED /datum/status_effect/incapacitating/paralyzed //the affected is unable to move, use items, or stand up.
+/// The affected is unable to move, use items, or stand up.
+#define STATUS_EFFECT_PARALYZED /datum/status_effect/incapacitating/paralyzed
 
 /// The affected is unable to use or pickup items
 #define STATUS_EFFECT_DAZED /datum/status_effect/incapacitating/dazed

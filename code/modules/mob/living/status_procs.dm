@@ -2,7 +2,7 @@
 // amount = strength
 // updating = update mobility etc etc
 // ignore_castun = same logic as Paralyze() in general
-// override_duration = If this is set, does Paralyze() for this duration.
+// override_hardstun = If this is set, does Paralyze() for this duration.
 // override_stam = If this is set, does this amount of stamina damage.
 /mob/living/proc/DefaultCombatKnockdown(amount, updating = TRUE, ignore_canknockdown = FALSE, override_hardstun, override_stamdmg)
 	if(!iscarbon(src))
