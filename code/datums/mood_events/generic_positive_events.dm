@@ -57,12 +57,12 @@
 
 /datum/mood_event/focused
 	description = "<span class='nicegreen'>I have a goal, and I will reach it, whatever it takes!</span>" //Used for syndies, nukeops etc so they can focus on their goals
-	mood_change = 12
+	mood_change = 2
 	hidden = TRUE
 
 /datum/mood_event/revolution
 	description = "<span class='nicegreen'>VIVA LA REVOLUTION!</span>"
-	mood_change = 3
+	mood_change = 2
 	hidden = TRUE
 
 /datum/mood_event/cult

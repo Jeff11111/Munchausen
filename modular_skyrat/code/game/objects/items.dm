@@ -10,16 +10,16 @@
 /obj/item
 	var/grabtext
 	var/grabsound
-	hide_underwear_examine = TRUE
 
 /obj/item/equipped(mob/user, slot)
 	. = ..()
-	if(grabtext)
-		var/t = replacetext(grabtext,"user","[user]")
-		t = replacetext(t,"src","[src.name]")
-		user.visible_message("<span class='danger'>[t]</span>")
-	if(grabsound)
-		playsound(src, grabsound, 60, 1)
+	if(src in user.held_items)
+		if(grabtext)
+			var/t = replacetext(grabtext,"user","[user]")
+			t = replacetext(t,"src","[src.name]")
+			user.visible_message("<span class='danger'>[t]</span>")
+		if(grabsound)
+			playsound(src, grabsound, rand(50, 60), 1)
 
 //Item info element
 /obj/item/ComponentInitialize()
@@ -28,6 +28,7 @@
 
 //Wielding any item very poggers
 /obj/item
+	//Can we get wielded at all?
 	var/can_wield = TRUE
 	//Variables we use for the component
 	var/ignore_attack_self_wield = TRUE				/// Set to true if the item cannot wield by attack selfing
@@ -41,7 +42,7 @@
 	var/icon_wielded = FALSE						/// The icon that will be used when wielded
 
 /obj/item/Initialize()
-	..()
+	. = ..()
 	WieldInitialize()
 
 /obj/item/proc/WieldInitialize()
@@ -89,5 +90,5 @@
 	if(istype(over, /obj/structure/table) && Adjacent(over))
 		var/obj/structure/table/tranny = over
 		forceMove(tranny.loc)
-		pixel_x = initial(pixel_x) + text2num(params2list["icon-x"])
-		pixel_y = initial(pixel_y) + text2num(params2list["icon-y"])
+		pixel_x = text2num(params2list["icon-x"])
+		pixel_y = text2num(params2list["icon-y"])

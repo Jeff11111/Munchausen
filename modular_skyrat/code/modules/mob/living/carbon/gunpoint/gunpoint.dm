@@ -1,6 +1,8 @@
-/mob/living/ShiftMiddleClickOn(atom/A)
-	src.pointed(A)
-	return
+/obj/item/gun/altafterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	if(isliving(user) && isliving(target))
+		var/mob/living/L = user
+		L.pointed(target)
+	return TRUE
 
 /mob/living/proc/DoGunpoint(atom/A, obj/item/gun/G)
 	if(A == src)

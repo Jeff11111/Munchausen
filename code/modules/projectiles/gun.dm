@@ -41,9 +41,9 @@
 	/// Weapon is burst fire if this is above 1
 	var/burst_size = 1
 	/// The time between shots in burst.
-	var/burst_shot_delay = 3
+	var/burst_shot_delay = 0.5 SECONDS
 	/// The time between firing actions, this means between bursts if this is burst weapon. The reason this is 0 is because you are still, by default, limited by clickdelay.
-	var/fire_delay = 0
+	var/fire_delay = 0.5 SECONDS
 	/// Last world.time this was fired
 	var/last_fire = 0
 	/// Currently firing, whether or not it's a burst or not.
@@ -52,7 +52,7 @@
 	var/busy_action = FALSE
 	var/weapon_weight = WEAPON_LIGHT	//used for inaccuracy and wielding requirements/penalties
 	var/spread = 0						//Spread induced by the gun itself.
-	var/burst_spread = 0				//Spread induced by the gun itself during burst fire per iteration. Only checked if spread is 0.
+	var/burst_spread = 1				//Spread induced by the gun itself during burst fire per iteration. Only checked if spread is 0.
 	var/randomspread = 1				//Set to 0 for shotguns. This is used for weapons that don't fire all their bullets at once.
 	var/inaccuracy_modifier = 1
 
@@ -223,7 +223,6 @@
 		return FALSE
 	if(!no_message)
 		to_chat(user, "<span class='danger'>*click*</span>")
-	last_fire = world.time
 	playsound(src, "gun_dry_fire", 30, 1)
 
 /obj/item/gun/proc/shoot_live_shot(mob/living/user, pointblank = FALSE, mob/pbtarget, message = 1, stam_cost = 0)
@@ -245,8 +244,9 @@
 				user.visible_message("<span class='danger'><b>[user]</b> fires [src]!</span>", null, null, COMBAT_MESSAGE_RANGE)
 
 	var/ranged = GET_SKILL_LEVEL(user, ranged)
-	if((weapon_weight >= WEAPON_HEAVY) && !is_wielded && !(ranged >= JOB_SKILLPOINTS_EXPERT))
-		user.visible_message("<span class='danger'>\The [src] falls out of <b>[user]</b>'s unskilled hands!</span>", "<span class='userdanger'>\The [src] falls out of my unskilled hands!</span>")
+	if(!is_wielded && (((weapon_weight >= WEAPON_HEAVY) && !(ranged >= JOB_SKILLPOINTS_EXPERT)) || ((weapon_weight >= WEAPON_MEDIUM) && !(ranged >= JOB_SKILLPOINTS_NOVICE))))
+		user.visible_message("<span class='danger'>\The [src] falls out of <b>[user]</b>'s unskilled hands!</span>", \
+						"<span class='userdanger'>\The [src] falls out of my unskilled hands!</span>")
 		user.dropItemToGround(src)
 
 /obj/item/gun/emp_act(severity)
@@ -318,10 +318,7 @@
 
 	if(user)
 		bonus_spread = getinaccuracy(user, bonus_spread, stamloss) //CIT CHANGE - adds bonus spread while not aiming
-	//skyrat edit full auto
-	if(user)
 		bonus_spread += calculate_extra_inaccuracy(user, bonus_spread, stamloss)
-	//
 	
 	//Wielding always makes you aim better, no matter the weapon size
 	if(!is_wielded)
@@ -354,10 +351,8 @@
 		to_chat(user, "<span class='notice'> [src] is lethally chambered! You don't want to risk harming anyone...</span>")
 		return FALSE
 
-//skyrat edit
 /obj/item/gun/proc/calculate_extra_inaccuracy()
 	return 0
-//
 
 /obj/item/gun/proc/handle_pins(mob/living/user)
 	if(no_pin_required)
@@ -380,7 +375,6 @@
 
 /obj/item/gun/proc/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0, stam_cost = 0)
 	add_fingerprint(user)
-
 	if(on_cooldown())
 		return
 	firing = TRUE
@@ -396,15 +390,18 @@
 	var/sprd = 0
 	var/randomized_gun_spread = 0
 	var/rand_spr = rand()
-	if(spread)
-		randomized_gun_spread = rand(0, spread)
-	else if(burst_size > 1 && burst_spread)
-		randomized_gun_spread = rand(0, burst_spread)
+	if(spread >= 1)
+		randomized_gun_spread = rand(1, spread)
+	else if(burst_size > 1 && burst_spread >= 1)
+		randomized_gun_spread = rand(1, burst_spread)
 	if(HAS_TRAIT(user, TRAIT_POOR_AIM)) //nice shootin' tex
 		bonus_spread += 25
 	
-	var/randomized_bonus_spread = rand(0, bonus_spread)
+	var/randomized_bonus_spread = 0
+	if(bonus_spread >= 1)
+		randomized_bonus_spread = rand(1, bonus_spread)
 	if(burst_size > 1)
+		before_firing(target,user)
 		do_burst_shot(user, target, message, params, zone_override, sprd, randomized_gun_spread, randomized_bonus_spread, rand_spr, 1)
 		for(var/i in 2 to burst_size)
 			sleep(burst_shot_delay)
@@ -413,7 +410,7 @@
 			do_burst_shot(user, target, message, params, zone_override, sprd, randomized_gun_spread, randomized_bonus_spread, rand_spr, i, stam_cost)
 	else
 		if(chambered)
-			sprd = round((rand() - 0.5) * DUALWIELD_PENALTY_EXTRA_MULTIPLIER * (randomized_gun_spread + randomized_bonus_spread))
+			sprd = round(rand() * DUALWIELD_PENALTY_EXTRA_MULTIPLIER * (randomized_gun_spread + randomized_bonus_spread))
 			before_firing(target,user)
 			if((safety && has_safety) || !chambered.fire_casing(target, user, params, , suppressed, zone_override, sprd, src))
 				shoot_with_empty_chamber(user)
@@ -446,11 +443,11 @@
 				to_chat(user, "<span class='notice'> [src] is lethally chambered! You don't want to risk harming anyone...</span>")
 				return
 		if(randomspread)
-			sprd = round((rand() - 0.5) * DUALWIELD_PENALTY_EXTRA_MULTIPLIER * (randomized_gun_spread + randomized_bonus_spread), 1)
+			sprd = round(rand() * DUALWIELD_PENALTY_EXTRA_MULTIPLIER * (randomized_gun_spread + randomized_bonus_spread), 1)
 		else //Smart spread
 			sprd = round((((rand_spr/burst_size) * iteration) - (0.5 + (rand_spr * 0.25))) * (randomized_gun_spread + randomized_bonus_spread), 1)
 		before_firing(target,user)
-		if(!chambered.fire_casing(target, user, params, ,suppressed, zone_override, sprd, src))
+		if((safety && has_safety) || !chambered.fire_casing(target, user, params, ,suppressed, zone_override, sprd, src))
 			shoot_with_empty_chamber(user)
 			firing = FALSE
 			return FALSE
@@ -762,32 +759,38 @@
 		chambered = null
 		update_icon()
 
+/obj/item/gun/pickup(mob/user)
+	. = ..()
+	//Picking up a gun, even if you're just swapping hands, changes the last_fire var
+	//Why? Because picking up a gun and firing at people instantly is terrible, you should AIM
+	last_fire = world.time
+
 /obj/item/gun/proc/getinaccuracy(mob/living/user, bonus_spread, stamloss)
-	if(inaccuracy_modifier == 0)
+	if(inaccuracy_modifier <= 0)
 		return bonus_spread
-	var/base_inaccuracy = weapon_weight * 25 * inaccuracy_modifier
-	var/aiming_delay = 0 //Otherwise aiming would be meaningless for slower guns such as sniper rifles and launchers.
-	if(fire_delay)
-		var/penalty = (last_fire + GUN_AIMING_TIME + fire_delay) - world.time
-		var/ranged = GET_SKILL_LEVEL(user, ranged)
-		//High ranged skill means we ignore accuracy penalties for burst firing
-		if(ranged <= JOB_SKILLPOINTS_EXPERT)
-			if(penalty > 0) //Yet we only penalize users firing it multiple times in a haste. fire_delay isn't necessarily cumbersomeness.
-				aiming_delay = penalty
+	var/ranged_skill = GET_SKILL_LEVEL(user, ranged)
+	var/base_inaccuracy = weapon_weight * 30 * inaccuracy_modifier
+	var/noaim_penalty = 0 //Otherwise aiming would be meaningless for slower guns such as sniper rifles and launchers
+	//Firing guns repeatedly is bad, don't go full auto man
+	var/penalty = max(CEILING(-(world.time - (last_fire + fire_delay + GUN_AIMING_TIME)), 1 SECONDS), 0) //Time we didn't take to aim, but should have
+	if(penalty > 0)
+		noaim_penalty = (penalty * 2)
 	if(SEND_SIGNAL(user, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_ACTIVE)) //To be removed in favor of something less tactless later.
-		base_inaccuracy /= 1.5
-	if(stamloss > STAMINA_NEAR_SOFTCRIT) //This can null out the above bonus.
+		base_inaccuracy *= 0.75
+	if(stamloss >= STAMINA_NEAR_SOFTCRIT) //This can null out the above bonus.
 		base_inaccuracy *= 1 + (stamloss - STAMINA_NEAR_SOFTCRIT)/(STAMINA_NEAR_CRIT - STAMINA_NEAR_SOFTCRIT)*0.5
-	var/ranged = GET_SKILL_LEVEL(user, ranged)
-	if(ranged)
-		//damn we suck huh
-		if(ranged <= JOB_SKILLPOINTS_NOVICE)
-			base_inaccuracy += (MAX_SKILL - ranged)
-		base_inaccuracy *= (ranged/(MAX_SKILL/2))
-	var/mult = max((GUN_AIMING_TIME + aiming_delay + user.last_click_move - world.time)/GUN_AIMING_TIME, -0.5) //Yes, there is a bonus for taking time aiming.
-	if(mult < 0) //accurate weapons should provide a proper bonus with negative inaccuracy. the opposite is true too.
-		mult *= 1/inaccuracy_modifier
-	return max(bonus_spread + (base_inaccuracy * mult), 0) //no negative spread.
+	var/datum/component/mood/insanity = user.GetComponent(/datum/component/mood)
+	if(insanity)
+		//Mood fucks up your aim if it's low enough
+		if(insanity.sanity < 50)
+			base_inaccuracy += weapon_weight * 20 * inaccuracy_modifier
+			if(insanity.sanity < 25)
+				base_inaccuracy += weapon_weight * 15 * inaccuracy_modifier
+	if(ranged_skill < (MAX_SKILL/2))
+		//Damn we suck huh
+		base_inaccuracy *= (MAX_SKILL - ranged_skill)/(MAX_SKILL/2)
+	var/mult = clamp(noaim_penalty/GUN_AIMING_TIME, 1, 4)
+	return max(bonus_spread + (base_inaccuracy * mult), 0)
 
 /obj/item/gun/proc/getstamcost(mob/living/carbon/user)
 	. = recoil

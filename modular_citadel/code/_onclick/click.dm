@@ -1,6 +1,6 @@
 /mob/proc/RightClickOn(atom/A, params) //mostly a copy-paste from ClickOn()
 	var/list/modifiers = params2list(params)
-	if(incapacitated(ignore_restraints = 1))
+	if(incapacitated(ignore_restraints = TRUE))
 		return
 
 	face_atom(A)
@@ -16,7 +16,7 @@
 		return M.click_action(A,src,params)
 
 	if(restrained())
-		changeNext_move(CLICK_CD_HANDCUFFED)   //Doing shit in cuffs shall be vey slow
+		changeNext_move(CLICK_CD_HANDCUFFED)   //Doing shit in cuffs shall be very slow
 		RestrainedClickOn(A)
 		return
 

@@ -440,7 +440,6 @@
 		
 		if(consciousness_msg)
 			msg += "[consciousness_msg]"
-	//
 
 	if(gunpointing)
 		msg += "<b>[t_He] [t_is] holding [gunpointing.target.name] at gunpoint with [gunpointing.aimed_gun.name]!</b>"

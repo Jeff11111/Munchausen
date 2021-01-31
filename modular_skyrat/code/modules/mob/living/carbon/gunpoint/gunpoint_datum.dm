@@ -168,7 +168,7 @@
 		Destroy()
 
 /datum/gunpoint/proc/ShootTarget()
-	next_autoshot = world.time + 5
+	next_autoshot = world.time + 0.5 SECONDS
 	log_combat(target, source, "auto-shot with aim")
 	aimed_gun.process_afterattack(target, source)
 

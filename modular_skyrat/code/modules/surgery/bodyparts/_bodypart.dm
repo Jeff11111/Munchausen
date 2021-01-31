@@ -826,6 +826,9 @@
 			wounding_type = WOUND_SLASH
 		else if(sharpness == SHARP_POINTY)
 			wounding_type = WOUND_PIERCE
+	
+	//Use this later to dismember proper
+	var/initial_wounding_type = wounding_type
 
 	//Now we have our wounding_type and are ready to carry on with dealing damage and then wounds
 	
@@ -987,10 +990,10 @@
 		check_wounding(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 		if(wounding_type in list(WOUND_SLASH, WOUND_PIERCE))
 			if(wounding_dmg >= ARTERY_MINIMUM_DAMAGE)
-				check_wounding(WOUND_ARTERY, wounding_dmg * (wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
+				check_wounding(WOUND_ARTERY, wounding_dmg * (initial_wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
 		if(wounding_type in list(WOUND_BLUNT, WOUND_SLASH, WOUND_PIERCE))
 			if(wounding_dmg >= TENDON_MINIMUM_DAMAGE)
-				check_wounding(WOUND_TENDON, wounding_dmg * (wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
+				check_wounding(WOUND_TENDON, wounding_dmg * (initial_wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
 
 	//We've dealt with everything else, so let's share the pain
 	if(!can_feel_pain())
@@ -1023,14 +1026,14 @@
 	//Handle dismemberment if appropriate, everything is done
 	if(CHECK_MULTIPLE_BITFIELDS(bio_state, BIO_FULL))
 		if(mangled_state & BODYPART_MANGLED_BOTH)
-			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+			damage_integrity(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	else if(CHECK_BITFIELD(bio_state, BIO_FLESH))
 		if(mangled_state & BODYPART_MANGLED_MUSCLE)
-			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+			damage_integrity(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	else if(CHECK_BITFIELD(bio_state, BIO_BONE))
 		if(mangled_state & BODYPART_MANGLED_BONE)
-			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
-	if(try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
+			damage_integrity(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+	if(try_dismember(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
 		return
 	
 	consider_processing()
@@ -1082,7 +1085,8 @@
 /obj/item/bodypart/proc/painless_wound_roll(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus, silent = FALSE)
 	if(!owner || (wounding_dmg <= WOUND_MINIMUM_DAMAGE) || (wound_bonus <= CANT_WOUND))
 		return FALSE
-
+	
+	var/initial_wounding_type = wounding_type
 	var/mangled_state = get_mangled_state()
 	var/bio_state = owner.get_biological_state()
 
@@ -1139,22 +1143,22 @@
 		check_wounding(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 		if(wounding_type in list(WOUND_SLASH, WOUND_PIERCE))
 			if(wounding_dmg >= ARTERY_MINIMUM_DAMAGE)
-				check_wounding(WOUND_ARTERY, wounding_dmg * (wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
+				check_wounding(WOUND_ARTERY, wounding_dmg * (initial_wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
 		if(wounding_type in list(WOUND_BLUNT, WOUND_SLASH, WOUND_PIERCE))
 			if(wounding_dmg >= TENDON_MINIMUM_DAMAGE)
-				check_wounding(WOUND_TENDON, wounding_dmg * (wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
+				check_wounding(WOUND_TENDON, wounding_dmg * (initial_wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
 	
 	//Handle dismemberment if appropriate, everything is done
 	if(CHECK_MULTIPLE_BITFIELDS(bio_state, BIO_FULL))
 		if(mangled_state & BODYPART_MANGLED_BOTH)
-			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+			damage_integrity(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	else if(CHECK_BITFIELD(bio_state, BIO_FLESH))
 		if(mangled_state & BODYPART_MANGLED_MUSCLE)
-			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+			damage_integrity(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	else if(CHECK_BITFIELD(bio_state, BIO_BONE))
 		if(mangled_state & BODYPART_MANGLED_BONE)
-			damage_integrity(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
-	try_dismember(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+			damage_integrity(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
+	try_dismember(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 
 //Proc for damaging organs inside a limb
 /obj/item/bodypart/proc/damage_organs(brute = 0, burn = 0, toxin = 0, clone = 0, wounding_type = WOUND_BLUNT)
