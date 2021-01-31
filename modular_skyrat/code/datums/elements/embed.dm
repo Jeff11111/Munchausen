@@ -106,6 +106,7 @@
 		jostle_chance = jostle_chance,\
 		jostle_pain_mult = jostle_pain_mult,\
 		pain_stam_pct = pain_stam_pct,\
+		supplied_injury = embedded_injury,\
 		)
 
 	return TRUE
