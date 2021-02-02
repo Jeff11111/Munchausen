@@ -169,10 +169,10 @@
 				return
 			var/diceroll = user.mind?.diceroll(skills = heymedic)
 			if(!(diceroll >= DICE_CRIT_SUCCESS) && !use(stackperuse))
-				to_chat(src, "<span class='warning'>All used up...</span>")
+				to_chat(user, "<span class='warning'>All used up...</span>")
 				return
 			if(diceroll >= DICE_CRIT_SUCCESS)
-				to_chat(src, "<span class='nicegreen'>I manage to economize on \the [src]'s use.</span>")
+				to_chat(user, "<span class='nicegreen'>I manage to economize on \the [src]'s use.</span>")
 			if(IN.current_stage <= IN.max_bleeding_stage)
 				user.visible_message("<span class='notice'>\The [user] bandages \a [IN.desc] on [C]'s [affecting.name].", \
 									"I bandage \a [IN.desc] on [C]'s [affecting.name].")
@@ -350,10 +350,10 @@
 				return
 			var/diceroll = user.mind?.diceroll(skills = heymedic)
 			if(!(diceroll >= DICE_CRIT_SUCCESS) && !use(stackperuse))
-				to_chat(src, "<span class='warning'>All used up...</span>")
+				to_chat(user, "<span class='warning'>All used up...</span>")
 				return
 			if(diceroll >= DICE_CRIT_SUCCESS)
-				to_chat(src, "<span class='nicegreen'>I manage to economize on \the [src]'s use.</span>")
+				to_chat(user, "<span class='nicegreen'>I manage to economize on \the [src]'s use.</span>")
 			if(IN.damage >= IN.autoheal_cutoff)
 				user.visible_message("<span class='notice'>\The [user] partially closes a wound on [C]'s [affecting.name] with \the [src].</span>", \
 				"<span class='notice'>I partially close a wound on [C]'s [affecting.name] with \the [src].</span>")
@@ -477,10 +477,10 @@
 				return
 			var/diceroll = user.mind?.diceroll(skills = heymedic)
 			if(!(diceroll >= DICE_CRIT_SUCCESS) && !use(stackperuse))
-				to_chat(src, "<span class='warning'>All used up...</span>")
+				to_chat(user, "<span class='warning'>All used up...</span>")
 				return
 			if(diceroll >= DICE_CRIT_SUCCESS)
-				to_chat(src, "<span class='nicegreen'>I manage to economize on \the [src]'s use.</span>")
+				to_chat(user, "<span class='nicegreen'>I manage to economize on \the [src]'s use.</span>")
 			user.visible_message("<span class='notice'>\The [user] salves \a [IN.desc] on [C]'s [affecting.name].", \
 								"I salve \a [IN.desc] on [C]'s [affecting.name].")
 			IN.salve()
@@ -565,10 +565,10 @@
 				return
 			var/diceroll = user.mind?.diceroll(skills = heymedic)
 			if(!(diceroll >= DICE_CRIT_SUCCESS) && !use(stackperuse))
-				to_chat(src, "<span class='warning'>All used up...</span>")
+				to_chat(user, "<span class='warning'>All used up...</span>")
 				return
 			if(diceroll >= DICE_CRIT_SUCCESS)
-				to_chat(src, "<span class='nicegreen'>I manage to economize on \the [src]'s use.</span>")
+				to_chat(user, "<span class='nicegreen'>I manage to economize on \the [src]'s use.</span>")
 			if(IN.damage >= IN.autoheal_cutoff)
 				user.visible_message("<span class='notice'>\The [user] partially bandages a wound on [C]'s [affecting.name] with \the [src].</span>", \
 				"<span class='notice'>I partially bandage a wound on [C]'s [affecting.name] with \the [src].</span>")
@@ -748,10 +748,10 @@
 				return
 			var/diceroll = user.mind?.diceroll(skills = heymedic)
 			if(!(diceroll >= DICE_CRIT_SUCCESS) && !use(stackperuse))
-				to_chat(src, "<span class='warning'>All used up...</span>")
+				to_chat(user, "<span class='warning'>All used up...</span>")
 				return
 			if(diceroll >= DICE_CRIT_SUCCESS)
-				to_chat(src, "<span class='nicegreen'>I manage to economize on \the [src]'s use.</span>")
+				to_chat(user, "<span class='nicegreen'>I manage to economize on \the [src]'s use.</span>")
 			if(IN.damage >= IN.autoheal_cutoff)
 				user.visible_message("<span class='notice'>\The [user] partially salves a wound on [C]'s [affecting.name] with \the [src].</span>", \
 				"<span class='notice'>I partially salve a wound on [C]'s [affecting.name] with \the [src].</span>")
