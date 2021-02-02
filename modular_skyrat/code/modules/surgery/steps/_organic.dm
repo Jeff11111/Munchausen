@@ -43,6 +43,8 @@
 				ouchie.injury_flags |= INJURY_SURGICAL
 				target.wound_message = ""
 				playsound(target, 'modular_skyrat/sound/gore/flesh.ogg', 75, 0)
+				if(BP.current_gauze)
+					BP.remove_gauze()
 
 //clamp bleeders
 //Not a hard requirement, just needed if you don't want your patient to bleed out
