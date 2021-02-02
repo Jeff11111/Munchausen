@@ -104,13 +104,13 @@
 	dyn_explosion(T, plasmaAmount/5)//20 plasma in a standard welder has a 4 power explosion. no breaches, but enough to kill/dismember holder
 	qdel(src)
 
-/obj/item/weldingtool/attack(mob/living/carbon/human/H, mob/user)
-	if(!istype(H))
+/obj/item/weldingtool/attack(mob/living/M, mob/living/user)
+	if(!ishuman(M))
 		return ..()
 
+	var/mob/living/carbon/human/H = M
 	var/obj/item/bodypart/affecting = H.get_bodypart(check_zone(user.zone_selected))
-
-	if(affecting?.is_robotic_limb() && (user.a_intent == INTENT_HELP))
+	if(affecting.is_robotic_limb() && (user.a_intent == INTENT_HELP))
 		if(INTERACTING_WITH(user, H))
 			to_chat(user, "<span class='warning'>You are already interacting with [H]!</span>")
 			return

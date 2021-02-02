@@ -1416,7 +1416,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		intestines_nutrition_loss = intestines.get_nutrition_loss()
 		intestines_nutrition_gain = intestines.get_nutrition_gain()
 	// nutrition decrease and satiety
-	if(H.nutrition > 0 && H.stat != DEAD && !HAS_TRAIT(H, TRAIT_NOHUNGER))
+	if(H.nutrition > 0 && H.stat != DEAD)
 		// THEY HUNGER
 		var/hunger_rate = HUNGER_FACTOR
 		var/datum/component/mood/mood = H.GetComponent(/datum/component/mood)
@@ -1477,7 +1477,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 //copypasta from handle digestion lole!
 /datum/species/proc/handle_hydration(mob/living/carbon/human/H)
-	if(HAS_TRAIT(src, TRAIT_NOHUNGER))
+	if(HAS_TRAIT(src, TRAIT_NOHYDRATION))
 		return //thirst is for BABIES (in hot cars)
 
 	var/obj/item/organ/bladder/bladder = H.getorganslot(ORGAN_SLOT_BLADDER)
@@ -1485,7 +1485,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	if(bladder)
 		bladder_hydration_loss = bladder.get_hydration_loss()
 	// hydration decrease wowie
-	if(H.hydration > 0 && H.stat != DEAD && !HAS_TRAIT(H, TRAIT_NOHUNGER))
+	if(H.hydration > 0 && H.stat != DEAD)
 		// THEY hydrate
 		var/dehydration_rate = THIRST_FACTOR
 		var/datum/component/mood/mood = H.GetComponent(/datum/component/mood)

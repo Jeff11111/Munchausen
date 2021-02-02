@@ -106,6 +106,8 @@
 	ADD_TRAIT(M.mind, TRAIT_BLOODLOSSIMMUNE, "dreamer")
 	ADD_TRAIT(M, TRAIT_NOHUNGER, "dreamer")
 	ADD_TRAIT(M.mind, TRAIT_NOHUNGER, "dreamer")
+	ADD_TRAIT(M, TRAIT_NOHYDRATION, "dreamer")
+	ADD_TRAIT(M.mind, TRAIT_NOHYDRATION, "dreamer")
 
 /datum/antagonist/dreamer/proc/grant_first_wonder_recipe(mob/living/carbon/M)
 	if(!istype(M))

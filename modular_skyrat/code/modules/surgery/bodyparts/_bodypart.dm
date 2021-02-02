@@ -1497,13 +1497,13 @@
 
 //Status related procs
 /obj/item/bodypart/proc/is_organic_limb()
-	return (status & BODYPART_ORGANIC)
+	return (CHECK_BITFIELD(status, BODYPART_ORGANIC))
 
 /obj/item/bodypart/proc/is_robotic_limb()
-	return (status & BODYPART_ROBOTIC)
+	return (CHECK_BITFIELD(status, BODYPART_ROBOTIC))
 
 /obj/item/bodypart/proc/is_synthetic_limb()
-	return (status & BODYPART_SYNTHETIC)
+	return (CHECK_BITFIELD(status, BODYPART_SYNTHETIC))
 
 /obj/item/bodypart/proc/is_mixed_limb()
 	return (is_organic_limb() && is_robotic_limb())

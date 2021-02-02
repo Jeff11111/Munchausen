@@ -161,6 +161,7 @@
 					additional_info += "<span class='info'>I feel quite hungry.</span>\n"
 				if(0 to NUTRITION_LEVEL_STARVING)
 					additional_info += "<span class='danger'>I'm starving!</span>\n"
+		if(!HAS_TRAIT(living_user, TRAIT_NOHYDRATION))
 			switch(living_user.hydration)
 				if(HYDRATION_LEVEL_FULL to INFINITY)
 					additional_info += "<span class='info'>I'm completely full!</span>\n"
