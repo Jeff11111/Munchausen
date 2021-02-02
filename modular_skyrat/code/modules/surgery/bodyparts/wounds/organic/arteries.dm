@@ -8,7 +8,7 @@
 	severity = WOUND_SEVERITY_CRITICAL
 	wound_type = WOUND_LIST_ARTERY
 	viable_zones = ALL_BODYPARTS
-	threshold_minimum = 90
+	threshold_minimum = 110
 	threshold_penalty = 0
 	infection_chance = 0
 	infection_rate = 0
