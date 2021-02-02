@@ -163,6 +163,8 @@
 
 /datum/bobux_reward/cum_shower/on_buy(client/noob)
 	. = ..()
+	SEND_SOUND(world, sound('modular_skyrat/sound/misc/coom.ogg', volume = 50))
+	to_chat(world, "<span class='hypnophrase'>I'M COOMING!!!</span>")
 	for(var/mob/living/carbon/human/coomer in GLOB.mob_living_list)
 		coomer.moan()
 		coomer.cum()
