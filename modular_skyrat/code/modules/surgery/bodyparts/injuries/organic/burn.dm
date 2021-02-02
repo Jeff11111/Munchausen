@@ -6,13 +6,21 @@
 /datum/injury/burn/is_bleeding()
 	return FALSE //burns cannot bleed
 
+/datum/injury/burn/apply_injury(our_damage, obj/item/bodypart/limb)
+	. = ..()
+	//Burn damage can cause fluid loss due to blistering and cook-off
+	if(limb.owner && (damage > 5 || damage + limb.burn_dam >= 15))
+		limb.owner.blood_volume -= (BLOOD_VOLUME_SURVIVE * damage/(owner.maxHealth/2))
+
 /datum/injury/burn/receive_damage(damage_received = 0, pain_received = 0, damage_type = WOUND_BLUNT)
 	if((damage_type == WOUND_BURN) && (wound_damage() + (damage_received/2) >= 40) && parent_bodypart && !parent_bodypart.is_dead())
 		if(parent_bodypart.is_organic_limb())
 			parent_mob?.wound_message += " \The [parent_bodypart.name] fully melts away!"
 			parent_bodypart.kill_limb()
 		else
-			parent_bodypart.dismember(BURN, TRUE, TRUE, WOUND_BURN)
+			if(parent_bodypart.can_dismember())
+				parent_mob?.wound_message += " \The [parent_bodypart.name] fully melts away!"
+				parent_bodypart.dismember(BURN, TRUE, TRUE, WOUND_BURN)
 
 /datum/injury/burn/moderate
 	stages = list(

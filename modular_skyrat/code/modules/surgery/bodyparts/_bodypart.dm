@@ -1049,10 +1049,6 @@
 	if(damage <= 0)
 		return FALSE
 	
-	//Burn damage can cause fluid loss due to blistering and cook-off
-	if(owner && injury_type == WOUND_BURN && (damage > 5 || damage + burn_dam >= 15))
-		owner.blood_volume -= (BLOOD_VOLUME_SURVIVE * damage/(owner.maxHealth/2))
-	
 	// First check whether we can widen an existing wound
 	if(!surgical && length(injuries) && prob(clamp(50 + (number_injuries-1 * 10), 50, 80)))
 		// Piercing injuries cannot merge together
