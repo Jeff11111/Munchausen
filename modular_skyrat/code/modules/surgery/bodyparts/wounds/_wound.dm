@@ -393,8 +393,9 @@
 
 /// If var/processing is TRUE, this is run on each life tick
 /datum/wound/proc/handle_process()
-	handle_germs()
-	return
+	if(germ_level)
+		handle_germs()
+		return
 
 /// Handle the effects of infections
 /datum/wound/proc/handle_germs()
