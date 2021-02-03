@@ -133,6 +133,9 @@
 		color = SKINTONE2HEX(H.skin_tone)
 	else
 		color = "[D.features["breasts_color"]]"
+	if(D.features["cyber_breasts"])
+		status |= ORGAN_ROBOTIC
+		status &= ~ORGAN_ORGANIC
 	size = D.features["breasts_size"]
 	shape = D.features["breasts_shape"]
 	if(!D.features["breasts_producing"])

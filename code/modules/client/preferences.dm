@@ -173,12 +173,14 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 		"taur" = "None",
 		"genitals_use_skintone" = FALSE,
 		"has_cock" = FALSE,
+		"cyber_cock" = FALSE,
 		"cock_shape" = DEF_COCK_SHAPE,
 		"cock_length" = COCK_SIZE_DEF,
 		"cock_diameter_ratio" = COCK_DIAMETER_RATIO_DEF,
 		"cock_color" = "fff",
 		"cock_taur" = FALSE,
 		"has_balls" = FALSE,
+		"cyber_balls" = FALSE,
 		"balls_color" = "fff",
 		"balls_shape" = DEF_BALLS_SHAPE,
 		"balls_size" = BALLS_SIZE_DEF,
@@ -186,14 +188,17 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 		"balls_cum_mult" = CUM_RATE_MULT,
 		"balls_efficiency" = CUM_EFFICIENCY,
 		"has_breasts" = FALSE,
+		"cyber_breasts" = FALSE,
 		"breasts_color" = "fff",
 		"breasts_size" = BREASTS_SIZE_DEF,
 		"breasts_shape" = DEF_BREASTS_SHAPE,
 		"breasts_producing" = FALSE,
 		"has_vag" = FALSE,
+		"cyber_vag" = FALSE,
 		"vag_shape" = DEF_VAGINA_SHAPE,
 		"vag_color" = "fff",
 		"has_womb" = FALSE,
+		"cyber_womb" = FALSE,
 		"ipc_screen" = "Sunburst",
 		"ipc_antenna" = "None",
 		"meat_type" = "Mammalian",
@@ -867,7 +872,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				dat += "<b>Your species ([pref_species.name]) does not support genitals!</b><br>"
 			else
 				if(pref_species.use_skintones)
-					dat += "<b>Genitals use skintone.</b>"
+					dat += "<b>Species uses skintoned genitals.</b>"
 				dat += "<h3>Penis</h3>"
 				dat += "<a style='display:block;width:50px' href='?_src_=prefs;preference=has_cock'>[(features["has_cock"] && pref_species.has_weiner) ? "Yes" : "No"]</a>"
 				if(features["has_cock"] && pref_species.has_weiner)
@@ -877,6 +882,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					else
 						dat += "<b>Penis Color:</b></a><BR>"
 						dat += "<span style='border: 1px solid #161616; background-color: [features["cock_color"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=cock_color;task=input'>Change</a><br>"
+					dat += "<b>Cybernetic Penis:</b> <a style='display:block;width:50px' href='?_src_=prefs;preference=cyber_cock'>[features["cyber_cock"] ? "Yes" : "No"]</a>"
 					dat += "<b>Penis Shape:</b> <a style='display:block;width:120px' href='?_src_=prefs;preference=cock_shape;task=input'>[features["cock_shape"]]</a>"
 					dat += "<b>Penis Length:</b> <a style='display:block;width:120px' href='?_src_=prefs;preference=cock_length;task=input'>[round(features["cock_length"], 1)] centimeter(s)</a>"
 					dat += "<b>Has Testicles:</b><a style='display:block;width:50px' href='?_src_=prefs;preference=has_balls'>[(features["has_balls"] && pref_species.has_balls) ? "Yes" : "No"]</a>"
@@ -887,6 +893,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						else
 							dat += "<b>Testicles Color:</b></a><BR>"
 							dat += "<span style='border: 1px solid #161616; background-color: [features["balls_color"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=balls_color;task=input'>Change</a><br>"
+						dat += "<b>Cybernetic Testes:</b> <a style='display:block;width:50px' href='?_src_=prefs;preference=cyber_balls'>[features["cyber_balls"] ? "Yes" : "No"]</a>"
 				dat += APPEARANCE_CATEGORY_COLUMN
 				dat += "<h3>Vagina</h3>"
 				dat += "<a style='display:block;width:50px' href='?_src_=prefs;preference=has_vag'>[features["has_vag"] == TRUE ? "Yes" : "No"]</a>"
@@ -898,7 +905,9 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					else
 						dat += "<b>Vagina Color:</b></a><BR>"
 						dat += "<span style='border: 1px solid #161616; background-color: [features["vag_color"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=vag_color;task=input'>Change</a><br>"
+					dat += "<b>Cybernetic Vagina:</b> <a style='display:block;width:50px' href='?_src_=prefs;preference=cyber_vag'>[features["cyber_vag"] ? "Yes" : "No"]</a>"
 					dat += "<b>Has Womb:</b><a style='display:block;width:50px' href='?_src_=prefs;preference=has_womb'>[features["has_womb"] == TRUE ? "Yes" : "No"]</a>"
+					dat += "<b>Cybernetic Womb:</b> <a style='display:block;width:50px' href='?_src_=prefs;preference=cyber_womb'>[features["cyber_womb"] ? "Yes" : "No"]</a>"
 				dat += "</td>"
 				dat += APPEARANCE_CATEGORY_COLUMN
 				dat += "<h3>Breasts</h3>"
@@ -913,6 +922,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					dat += "<b>Cup Size:</b><a style='display:block;width:50px' href='?_src_=prefs;preference=breasts_size;task=input'>[features["breasts_size"]]</a>"
 					dat += "<b>Breasts Shape:</b><a style='display:block;width:50px' href='?_src_=prefs;preference=breasts_shape;task=input'>[features["breasts_shape"]]</a>"
 					dat += "<b>Lactates:</b><a style='display:block;width:50px' href='?_src_=prefs;preference=breasts_producing'>[features["breasts_producing"] == TRUE ? "Yes" : "No"]</a>"
+					dat += "<b>Cybernetic Breasts:</b> <a style='display:block;width:50px' href='?_src_=prefs;preference=cyber_breasts'>[features["cyber_breasts"] ? "Yes" : "No"]</a>"
 				dat += "</td>"
 			dat += "</td>"
 			dat += "</tr></table>"
@@ -2450,20 +2460,36 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					features["has_cock"] = !features["has_cock"]
 					if(features["has_cock"] == FALSE)
 						features["has_balls"] = FALSE
+					if(!features["has_cock"] && !features["has_vag"])
+						to_chat(user, "<span class='danger'>Your character needs at least one main genital (vagina or penis).\nYou have been given a vagina.</span>")
+						features["has_vag"] = TRUE
+				if("cyber_cock")
+					features["cyber_cock"] = !features["cyber_cock"]
 				if("has_balls")
 					features["has_balls"] = !features["has_balls"]
+				if("cyber_balls")
+					features["cyber_balls"] = !features["cyber_balls"]
 				if("has_breasts")
 					features["has_breasts"] = !features["has_breasts"]
 					if(features["has_breasts"] == FALSE)
 						features["breasts_producing"] = FALSE
+				if("cyber_breasts")
+					features["cyber_breasts"] = !features["cyber_breasts"]
 				if("breasts_producing")
 					features["breasts_producing"] = !features["breasts_producing"]
 				if("has_vag")
 					features["has_vag"] = !features["has_vag"]
 					if(features["has_vag"] == FALSE)
 						features["has_womb"] = FALSE
+					if(!features["has_cock"] && !features["has_vag"])
+						to_chat(user, "<span class='danger'>Your character needs at least one main genital (vagina or penis).\nYou have been given a penis.</span>")
+						features["has_vag"] = TRUE
+				if("cyber_vag")
+					features["cyber_vag"] = !features["cyber_vag"]
 				if("has_womb")
 					features["has_womb"] = !features["has_womb"]
+				if("cyber_womb")
+					features["cyber_womb"] = !features["cyber_womb"]
 				if("widescreenpref")
 					widescreenpref = !widescreenpref
 					user.client.change_view(CONFIG_GET(string/default_view))

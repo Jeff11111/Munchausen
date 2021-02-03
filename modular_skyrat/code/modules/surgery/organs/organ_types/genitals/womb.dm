@@ -18,3 +18,6 @@
 			Remove()
 			qdel(src)
 			return
+	if(D.features["cyber_womb"])
+		status |= ORGAN_ROBOTIC
+		status &= ~ORGAN_ORGANIC

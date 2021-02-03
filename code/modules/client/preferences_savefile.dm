@@ -509,26 +509,31 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["feature_xeno_head"]				>> features["xenohead"]
 	//cock features
 	S["feature_has_cock"]				>> features["has_cock"]
+	S["feature_cyber_cock"]				>> features["cyber_cock"]
 	S["feature_cock_shape"]				>> features["cock_shape"]
 	S["feature_cock_color"]				>> features["cock_color"]
 	S["feature_cock_length"]			>> features["cock_length"]
 	S["feature_cock_diameter"]			>> features["cock_diameter"]
 	//balls features
 	S["feature_has_balls"]				>> features["has_balls"]
+	S["feature_cyber_balls"]			>> features["cyber_balls"]
 	S["feature_balls_color"]			>> features["balls_color"]
 	S["feature_balls_size"]				>> features["balls_size"]
 	//breasts features
 	S["feature_has_breasts"]			>> features["has_breasts"]
+	S["feature_cyber_breasts"]			>> features["cyber_breasts"]
 	S["feature_breasts_size"]			>> features["breasts_size"]
 	S["feature_breasts_shape"]			>> features["breasts_shape"]
 	S["feature_breasts_color"]			>> features["breasts_color"]
 	S["feature_breasts_producing"]		>> features["breasts_producing"]
 	//vagina features
 	S["feature_has_vag"]				>> features["has_vag"]
+	S["feature_cyber_vag"]				>> features["cyber_vag"]
 	S["feature_vag_shape"]				>> features["vag_shape"]
 	S["feature_vag_color"]				>> features["vag_color"]
 	//womb features
 	S["feature_has_womb"]				>> features["has_womb"]
+	S["feature_cyber_womb"]				>> features["cyber_womb"]
 	//ipc features
 	S["feature_ipc_chassis"]			>> features["ipc_chassis"]
 
@@ -729,25 +734,30 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["bloodreagent"]					, bloodreagent)
 
 	WRITE_FILE(S["feature_has_cock"], features["has_cock"])
+	WRITE_FILE(S["feature_cyber_cock"], features["cyber_cock"])
 	WRITE_FILE(S["feature_cock_shape"], features["cock_shape"])
 	WRITE_FILE(S["feature_cock_color"], features["cock_color"])
 	WRITE_FILE(S["feature_cock_length"], features["cock_length"])
 
 	WRITE_FILE(S["feature_has_balls"], features["has_balls"])
+	WRITE_FILE(S["feature_cyber_balls"], features["cyber_balls"])
 	WRITE_FILE(S["feature_balls_color"], features["balls_color"])
 	WRITE_FILE(S["feature_balls_size"], features["balls_size"])
 
 	WRITE_FILE(S["feature_has_breasts"], features["has_breasts"])
+	WRITE_FILE(S["feature_cyber_breasts"], features["cyber_breasts"])
 	WRITE_FILE(S["feature_breasts_size"], features["breasts_size"])
 	WRITE_FILE(S["feature_breasts_shape"], features["breasts_shape"])
 	WRITE_FILE(S["feature_breasts_color"], features["breasts_color"])
 	WRITE_FILE(S["feature_breasts_producing"], features["breasts_producing"])
 
 	WRITE_FILE(S["feature_has_vag"], features["has_vag"])
+	WRITE_FILE(S["feature_cyber_vag"], features["cyber_vag"])
 	WRITE_FILE(S["feature_vag_shape"], features["vag_shape"])
 	WRITE_FILE(S["feature_vag_color"], features["vag_color"])
 
 	WRITE_FILE(S["feature_has_womb"], features["has_womb"])
+	WRITE_FILE(S["feature_cyber_womb"], features["cyber_womb"])
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)

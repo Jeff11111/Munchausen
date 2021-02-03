@@ -77,6 +77,9 @@
 		color = SKINTONE2HEX(H.skin_tone)
 	else
 		color = "[D.features["vag_color"]]"
+	if(D.features["cyber_vag"])
+		status |= ORGAN_ROBOTIC
+		status &= ~ORGAN_ORGANIC
 	shape = "[D.features["vag_shape"]]"
 	//species has veagana type
 	//lets check if its correct

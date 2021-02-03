@@ -103,6 +103,9 @@
 		color = SKINTONE2HEX(H.skin_tone)
 	else
 		color = "[D.features["cock_color"]]"
+	if(D.features["cyber_cock"])
+		status |= ORGAN_ROBOTIC
+		status &= ~ORGAN_ORGANIC
 	length = D.features["cock_length"]
 	diameter_ratio = D.features["cock_diameter_ratio"]
 	shape = D.features["cock_shape"]

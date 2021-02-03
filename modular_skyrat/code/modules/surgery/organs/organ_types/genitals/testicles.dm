@@ -70,6 +70,9 @@
 		color = SKINTONE2HEX(H.skin_tone)
 	else
 		color = "[D.features["balls_color"]]"
+	if(D.features["cyber_balls"])
+		status |= ORGAN_ROBOTIC
+		status &= ~ORGAN_ORGANIC
 	shape = D.features["balls_shape"]
 	fluid_rate = D.features["balls_cum_rate"]
 	fluid_mult = D.features["balls_cum_mult"]
