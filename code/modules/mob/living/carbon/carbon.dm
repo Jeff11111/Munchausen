@@ -103,9 +103,12 @@
 	
 	//do not fuck someone up with tools if help intent
 	if(!length(all_wounds))
-		if((user.a_intent == INTENT_HELP) && I.tool_behaviour)
+		//This is absolute chungus niggercode 420 blaze it but i could not find a way to fix this well
+		//so we'll literally check if it's cable coil or a welding tool on a robotic limb
+		var/obj/item/bodypart/niggertard = get_bodypart(check_zone(user.zone_selected))
+		if((user.a_intent == INTENT_HELP) && I.tool_behaviour && !(niggertard?.is_robotic_limb() && (istype(I, /obj/item/stack/cable_coil) ||  istype(I, /obj/item/weldingtool))))
 			return TRUE
-		else
+		else if(!niggertard?.is_robotic_limb())
 			return ..()
 
 	// The following priority/nonpriority searching is so that if we have two wounds on a limb that use the same item for treatment,
