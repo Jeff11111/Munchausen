@@ -9,12 +9,10 @@
 	blacklisted = 1
 	limbs_id = "human"
 	skinned_type = /obj/item/stack/sheet/animalhide/human
-	//SKYRAT CHANGE - blood
 	bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "ANGL")
 	exotic_bloodtype = "ANGL"
 	exotic_blood_color = BLOOD_COLOR_ANGEL
 	rainbowblood = TRUE
-	//
 
 	var/datum/action/innate/flight/fly
 

@@ -13,12 +13,10 @@
 	inherent_traits = list(TRAIT_RADIMMUNE,TRAIT_VIRUSIMMUNE,TRAIT_NOBREATH)
 
 	dangerous_existence = 1
-	//Skyrat change - blood
 	bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "DRK")
 	exotic_bloodtype = "DRK"
 	exotic_blood_color = BLOOD_COLOR_DARK
 	languagewhitelist = list("Shadowtongue") //Skyrat change - species language whitelist
-	//
 
 /datum/species/shadow/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	. = ..()

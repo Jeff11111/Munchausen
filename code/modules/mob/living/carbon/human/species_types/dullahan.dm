@@ -14,11 +14,8 @@
 	skinned_type = /obj/item/stack/sheet/animalhide/human
 	has_field_of_vision = FALSE //Too much of a trouble, their vision is already bound to their severed head.
 	var/pumpkin = FALSE
-
 	var/obj/item/dullahan_relay/myhead
-	//Skyrat change - blood
 	bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
-	//
 
 /datum/species/dullahan/pumpkin
 	name = "Pumpkin Head Dullahan"

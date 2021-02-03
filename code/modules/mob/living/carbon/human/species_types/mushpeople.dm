@@ -21,7 +21,6 @@
 	burnmod = 1.25
 	heatmod = 1.5
 
-	var/datum/martial_art/mushpunch/mush
 	bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "SPOR")
 	exotic_bloodtype = "SPOR"
 	exotic_blood_color = BLOOD_COLOR_MUSHROOM
@@ -44,18 +43,12 @@
 		H.dna.features["caps"] = "Round"
 		handle_mutant_bodyparts(H)
 	H.faction |= "mushroom"
-	mush = new()
-	mush.teach(H, TRUE)
 	RegisterSignal(C, COMSIG_MOB_ON_NEW_MIND, .proc/on_new_mind)
-
-/datum/species/mush/proc/on_new_mind(mob/owner)
-	mush.teach(owner, TRUE) //make_temporary TRUE as it shouldn't carry over to other mobs on mind transfer_to.
 
 /datum/species/mush/on_species_loss(mob/living/carbon/C)
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_ON_NEW_MIND)
 	C.faction -= "mushroom"
-	mush.remove(C)
 	QDEL_NULL(mush)
 
 /datum/species/mush/handle_chemicals(datum/reagent/chem, mob/living/carbon/human/H)
@@ -67,4 +60,4 @@
 
 /datum/species/mush/handle_mutant_bodyparts(mob/living/carbon/human/H, forced_colour)
 	forced_colour = FALSE
-	..()
+	. = ..()

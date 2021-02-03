@@ -22,12 +22,10 @@
 	coldmod = 6   // = 3x cold damage
 	heatmod = 0.5 // = 1/4x heat damage
 	burnmod = 0.5 // = 1/2x generic burn damage
-	//Skyrat change
 	languagewhitelist = list("Slime")
 	bloodreagents = list("Synthetic Blood", "Slime Jelly Blood")
 	bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "GEL")
 	rainbowblood = TRUE
-	//
 	species_language_holder = /datum/language_holder/jelly
 	mutantbrain = /obj/item/organ/brain/jelly
 
