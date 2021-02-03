@@ -5,6 +5,8 @@
 	sexes = 0 //it gets it's sexes by the fake species
 	species_traits = list(NOTRANSSTING,NOZOMBIE,REVIVESBYHEALING,NOHUSK,ROBOTIC_LIMBS,NO_DNA_COPY,CAN_SCAR,HAS_FLESH,HAS_BONE) //all of these + whatever we inherit from the real species. I know you sick fucks want to fuck synths so yes you get genitals. Degenerates.
 	inherent_traits = list(TRAIT_RADIMMUNE,TRAIT_TOXIMMUNE,TRAIT_CLONEIMMUNE,TRAIT_DNC,TRAIT_NOHYDRATION)
+	initial_species_traits = list(NOTRANSSTING,NOZOMBIE,REVIVESBYHEALING,NOHUSK,ROBOTIC_LIMBS,NO_DNA_COPY,NOAPPENDIX) //for getting these values back for assume_disguise()
+	initial_inherent_traits = list(TRAIT_RADIMMUNE,TRAIT_TOXIMMUNE,TRAIT_CLONEIMMUNE,TRAIT_DNC,TRAIT_NOHYDRATION) //blah blah i explained above
 	inherent_biotypes = MOB_ROBOTIC|MOB_HUMANOID
 	dangerous_existence = 0 //not dangerous anymore i guess
 	blacklisted = 0 //not blacklisted anymore
@@ -15,8 +17,6 @@
 	limbs_id = "synth"
 	icon_limbs = 'modular_skyrat/icons/mob/synth_parts.dmi'
 	mutant_bodyparts = list()
-	initial_species_traits = list(NOTRANSSTING,NOZOMBIE,REVIVESBYHEALING,NOHUSK,ROBOTIC_LIMBS,NO_DNA_COPY,NOAPPENDIX) //for getting these values back for assume_disguise()
-	initial_inherent_traits = list(TRAIT_RADIMMUNE,TRAIT_TOXIMMUNE,TRAIT_CLONEIMMUNE,TRAIT_DNC,TRAIT_NOHYDRATION) //blah blah i explained above
 	disguise_fail_health = 45 //When their health gets to this level their synthflesh partially falls off
 	fake_species = null //a species to do most of our work for us, unless we're damaged
 	var/isdisguised = FALSE //boolean to help us with disguising proper
@@ -35,9 +35,6 @@
 	mutantbladder = /obj/item/organ/bladder/robot_ipc
 	//same damage as ipcs
 	coldmod = 0.5
-	burnmod = 1.25
-	heatmod = 1.25
-	brutemod = 1
 	toxmod = 0
 	clonemod = 0
 	siemens_coeff = 1.2
@@ -120,7 +117,7 @@
 	C.set_species(fake_species)
 	var/datum/component/bingus = C.GetComponent(/datum/component/boombox)
 	if(bingus)
-		bingus.RemoveComponent()
+		qdel(bingus)
 
 /datum/species/synth/proc/handle_speech(datum/source, list/speech_args)
 	if(ishuman(source))

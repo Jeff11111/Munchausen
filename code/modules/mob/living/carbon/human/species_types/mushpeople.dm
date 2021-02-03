@@ -43,13 +43,11 @@
 		H.dna.features["caps"] = "Round"
 		handle_mutant_bodyparts(H)
 	H.faction |= "mushroom"
-	RegisterSignal(C, COMSIG_MOB_ON_NEW_MIND, .proc/on_new_mind)
 
 /datum/species/mush/on_species_loss(mob/living/carbon/C)
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_ON_NEW_MIND)
 	C.faction -= "mushroom"
-	QDEL_NULL(mush)
 
 /datum/species/mush/handle_chemicals(datum/reagent/chem, mob/living/carbon/human/H)
 	if(chem.type == /datum/reagent/toxin/plantbgone/weedkiller)
