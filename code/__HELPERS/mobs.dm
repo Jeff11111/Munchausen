@@ -162,7 +162,12 @@
 			body_model = intended_gender
 		if(PLURAL)
 			body_model = pick(MALE,FEMALE)
-
+	
+	var/datum/species/specie
+	for(var/datum/species/S in GLOB.species_list)
+		if(S.id == intendedspecies)
+			specie = S
+			break
 	return(list(
 		"mcolor"			= color1,
 		"mcolor2"			= color2,
@@ -193,9 +198,9 @@
 		"xenodorsal" 		= "Standard",
 		"xenohead" 			= "Standard",
 		"xenotail" 			= "Xenomorph Tail",
-		"genitals_use_skintone"	= TRUE,
+		"genitals_use_skintone"	= (specie?.use_skintones ? TRUE : FALSE),
 		"has_cock"			= (intended_gender == MALE ? TRUE : FALSE),
-		"cock_shape"		= DEF_COCK_SHAPE,
+		"cock_shape"		= (length(specie?.weiner_type) ? pick(specie.weiner_type) : DEF_COCK_SHAPE),
 		"cock_length"		= COCK_SIZE_DEF + rand(-5, 5),
 		"cock_diameter_ratio" = COCK_DIAMETER_RATIO_DEF + rand(-5, 5),
 		"cock_color"		= pick("FFFFFF","7F7F7F", "7FFF7F", "7F7FFF", "FF7F7F", "7FFFFF", "FF7FFF", "FFFF7F"),
