@@ -455,7 +455,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				dat += "<b>Body Model:</b><a style='display:block;width:100px' href='?_src_=prefs;preference=body_model'>[features["body_model"] == MALE ? "Masculine" : "Feminine"]</a><BR>"
 			dat += "<b>Species:</b><a style='display:block;width:100px' href='?_src_=prefs;preference=species;task=menu'>[pref_species.name]</a><BR>"
 			dat += "<b>Custom Species Name:</b><a style='display:block;width:100px' href='?_src_=prefs;preference=custom_species;task=input'>[custom_species ? custom_species : "None"]</a><BR>"
-			if(LAZYLEN(pref_species.descriptors) && LAZYLEN(body_descriptors))
+			if(LAZYLEN(pref_species.descriptors))
 				dat += "<b>Descriptors:</b><BR>"
 				for(var/entry in pref_species.descriptors)
 					var/datum/mob_descriptor/descriptor = pref_species.descriptors[entry]
@@ -1587,7 +1587,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 		qdel(query_get_jobban)
 		return
 
-	//skyrat edit
 	if(href_list["preference"] == "descriptors")
 		var/desc_id = href_list["change_descriptor"]
 		if(desc_id)
@@ -1598,7 +1597,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					body_descriptors[descriptor.name] = descriptor.chargen_value_descriptors[choice]
 		ShowChoices(user)
 		return 1
-	//
 
 	else if(href_list["preference"] == "job")
 		switch(href_list["task"])
