@@ -660,6 +660,11 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		features["balls_color"] = SKINTONE2HEX(skin_tone)
 		features["vag_color"] = SKINTONE2HEX(skin_tone)
 	
+	if(!features["has_cock"] && !features["has_vag"])
+		if(gender == FEMALE)
+			features["has_vag"] = TRUE
+		else
+			features["has_cock"] = TRUE
 	joblessrole	= sanitize_integer(joblessrole, 1, 3, initial(joblessrole))
 	//Validate job prefs
 	for(var/j in job_preferences)
