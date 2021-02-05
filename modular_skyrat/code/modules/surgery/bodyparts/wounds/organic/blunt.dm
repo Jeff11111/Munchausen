@@ -717,6 +717,14 @@
 	flat_damage_roll_increase = 10
 	descriptive = "A bone is fractured!"
 
+/datum/wound/blunt/severe/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
+	if(L?.encased)
+		if(L.body_zone == BODY_ZONE_PRECISE_GROIN)
+			descriptive = "The [L.encased] are fractured!"
+		else
+			descriptive = "The [L.encased] is fractured!"
+	. = ..()
+
 /datum/wound/blunt/critical
 	name = "Compound Fracture"
 	desc = "Patient's bones have suffered multiple gruesome fractures, causing significant pain and near uselessness of limb."
@@ -742,6 +750,8 @@
 
 // doesn't make much sense for "a" bone to stick out of your head
 /datum/wound/blunt/critical/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
+	if(L?.encased)
+		descriptive = "The [L.encased] is fractured!"
 	if(L.body_zone == BODY_ZONE_HEAD)
 		occur_text = "splits open, exposing a bare, cracked skull through the flesh and blood"
 		examine_desc = "has an unsettling indent, with bits of skull poking out"
@@ -752,6 +762,7 @@
 	else if(L.body_zone == BODY_ZONE_PRECISE_GROIN)
 		occur_text = "cracks apart, exposing fragments of the pelvis to open air"
 		examine_desc = "looks mushy and mangled, parts of it exposed to the elements"
+		descriptive = "The [L.encased] are fractured!"
 	else if(L.body_zone == BODY_ZONE_PRECISE_NECK)
 		// A compound fractured neck will always instantly kill you
 		// (unless you're dreamer!)
