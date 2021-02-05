@@ -28,11 +28,11 @@
 		if(-INFINITY to 1)
 			return 2.5
 		if(2 to 5)
-			return (2.5 - (level/MAX_STAT))
+			return (2.5 - (level/(MAX_STAT/2)))
 		if(6 to 9)
-			return (2 - (level/MAX_STAT))
+			return (2 - (level/(MAX_STAT/2)))
 		if(10 to 19)
-			return (1.5 - (level/MAX_STAT))
+			return (1.5 - (level/(MAX_STAT/2)))
 		if(20 to INFINITY)
 			return max(0.1, 0.2 - max(0, (22 - level)/10))
 
