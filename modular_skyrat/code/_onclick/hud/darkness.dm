@@ -1,4 +1,4 @@
-/obj/screen/fullscreen/noise
+/obj/screen/fullscreen/darkness
 	icon = 'modular_skyrat/icons/mob/screen/screen_Full.dmi'
 	icon_state = "blackimageoverlay"
 	alpha = 0
