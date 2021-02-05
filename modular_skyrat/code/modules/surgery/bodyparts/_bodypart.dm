@@ -953,7 +953,7 @@
 	if(CHECK_MULTIPLE_BITFIELDS(bio_state, BIO_FULL))
 		// If we've already mangled the muscle (critical slash or piercing wound), then the bone is exposed, and we can damage it with sharp weapons at a reduced rate
 		// So a big sharp weapon is still all you need to rip off a limb
-		if((mangled_state & BODYPART_MANGLED_MUSCLE) && !(mangled_state & BODYPART_MANGLED_BOTH) && sharpness)
+		if((mangled_state & BODYPART_MANGLED_MUSCLE) && !(mangled_state & BODYPART_MANGLED_BONE) && sharpness)
 			playsound(src, "modular_skyrat/sound/effects/crackandbleed.ogg", 100)
 			if(wounding_type == WOUND_SLASH && !easy_dismember)
 				wounding_dmg *= 0.6 // edged weapons pass along 60% of their wounding damage to the bone since the power is spread out over a larger area
@@ -1029,13 +1029,13 @@
 
 	//Handle dismemberment if appropriate, everything is done
 	if(CHECK_MULTIPLE_BITFIELDS(bio_state, BIO_FULL))
-		if(mangled_state & BODYPART_MANGLED_BOTH)
+		if(CHECK_MULTIPLE_BITFIELDS(mangled_state, BODYPART_MANGLED_BOTH))
 			damage_integrity(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	else if(CHECK_BITFIELD(bio_state, BIO_FLESH))
-		if(mangled_state & BODYPART_MANGLED_MUSCLE)
+		if(CHECK_MULTIPLE_BITFIELDS(mangled_state, BODYPART_MANGLED_MUSCLE))
 			damage_integrity(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	else if(CHECK_BITFIELD(bio_state, BIO_BONE))
-		if(mangled_state & BODYPART_MANGLED_BONE)
+		if(CHECK_MULTIPLE_BITFIELDS(mangled_state, BODYPART_MANGLED_BONE))
 			damage_integrity(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	if(try_dismember(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
 		return
@@ -1102,7 +1102,7 @@
 	if(CHECK_MULTIPLE_BITFIELDS(bio_state, BIO_FULL))
 		// If we've already mangled the muscle (critical slash or piercing wound), then the bone is exposed, and we can damage it with sharp weapons at a reduced rate
 		// So a big sharp weapon is still all you need to rip off a limb
-		if((mangled_state & BODYPART_MANGLED_MUSCLE) && !(mangled_state & BODYPART_MANGLED_BOTH) && sharpness)
+		if((mangled_state & BODYPART_MANGLED_MUSCLE) && !(mangled_state & BODYPART_MANGLED_BONE) && sharpness)
 			playsound(src, "modular_skyrat/sound/effects/crackandbleed.ogg", 100)
 			if(wounding_type == WOUND_SLASH && !easy_dismember)
 				wounding_dmg *= 0.6 // edged weapons pass along 60% of their wounding damage to the bone since the power is spread out over a larger area
@@ -1150,13 +1150,13 @@
 	
 	//Handle dismemberment if appropriate, everything is done
 	if(CHECK_MULTIPLE_BITFIELDS(bio_state, BIO_FULL))
-		if(mangled_state & BODYPART_MANGLED_BOTH)
+		if(CHECK_MULTIPLE_BITFIELDS(mangled_state, BODYPART_MANGLED_BOTH))
 			damage_integrity(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	else if(CHECK_BITFIELD(bio_state, BIO_FLESH))
-		if(mangled_state & BODYPART_MANGLED_MUSCLE)
+		if(CHECK_MULTIPLE_BITFIELDS(mangled_state, BODYPART_MANGLED_MUSCLE))
 			damage_integrity(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	else if(CHECK_BITFIELD(bio_state, BIO_BONE))
-		if(mangled_state & BODYPART_MANGLED_BONE)
+		if(CHECK_MULTIPLE_BITFIELDS(mangled_state, BODYPART_MANGLED_BONE))
 			damage_integrity(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	try_dismember(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 
