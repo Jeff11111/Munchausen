@@ -8,6 +8,7 @@
 	safety_sound = 'modular_skyrat/sound/guns/safety2.ogg'
 	fire_sound = 'modular_skyrat/sound/guns/smg1.ogg'
 	autochamber = TRUE
+	weapon_weight = WEAPON_HEAVY
 
 /obj/item/gun/ballistic/automatic/l6_saw/update_icon()
 	. = ..()

@@ -3,7 +3,7 @@
 	generic_magazine_overlays = TRUE
 
 /obj/item/gun/ballistic/automatic/pistol/update_icon()
-	..()
+	. = ..()
 	item_state = "[initial(item_state)][suppressed ? "suppressed" : ""]"
 
 //Stechkin v2
@@ -16,6 +16,7 @@
 	fire_sound = 'modular_skyrat/sound/guns/pistol2.ogg'
 	suppressed_pixel_x = 4
 	suppressed_pixel_y = 0
+	weapon_weight = WEAPON_MEDIUM
 
 //Modular pistol
 /obj/item/gun/ballistic/automatic/pistol/modular
@@ -23,6 +24,7 @@
 	icon_state = "modularpistol"
 	suppressed_pixel_x = 4
 	suppressed_pixel_y = 0
+	weapon_weight = WEAPON_MEDIUM
 
 //Stechkin APS v2
 /obj/item/gun/ballistic/automatic/pistol/cz
@@ -42,6 +44,7 @@
 	burst_size = 3
 	fire_delay = 2
 	actions_types = list(/datum/action/item_action/toggle_firemode)
+	weapon_weight = WEAPON_MEDIUM
 
 //Glock 17
 /obj/item/gun/ballistic/automatic/pistol/cz/glock
@@ -59,10 +62,12 @@
 	suppressed_pixel_y = 0
 	actions_types = list(/datum/action/item_action/toggle_firemode)
 	fire_sound = 'modular_skyrat/sound/guns/pistol1.ogg'
+	weapon_weight = WEAPON_MEDIUM
 
 /obj/item/gun/ballistic/automatic/pistol/cz/glock/bbc
 	icon_state = "glock_bbc"
 	item_state = "glock_bbc"
+	weapon_weight = WEAPON_MEDIUM
 
 //Makarov
 /obj/item/gun/ballistic/automatic/pistol/makarov
@@ -79,6 +84,7 @@
 	suppressed_pixel_x = 5
 	suppressed_pixel_y = 0
 	can_suppress = TRUE
+	weapon_weight = WEAPON_MEDIUM
 
 //Nangler
 /obj/item/gun/ballistic/automatic/pistol/nangler
@@ -94,6 +100,7 @@
 	mag_type = /obj/item/ammo_box/magazine/m9mm/small
 	can_suppress = FALSE
 	w_class = WEIGHT_CLASS_SMALL
+	weapon_weight = WEAPON_LIGHT
 
 //M1911
 /obj/item/gun/ballistic/automatic/pistol/m1911
@@ -107,16 +114,19 @@
 	fire_sound = 'modular_skyrat/sound/guns/pistol2.ogg'
 	suppressed_pixel_x = 8
 	suppressed_pixel_y = 0
+	weapon_weight = WEAPON_MEDIUM
 
 //Kitchen gun
 /obj/item/gun/ballistic/automatic/pistol/m1911/kitchengun
 	icon_state = "bigcolt"
+	weapon_weight = WEAPON_MEDIUM
 
 //Captain's M1911
 /obj/item/gun/ballistic/automatic/pistol/m1911/captain
 	name = "\improper .45 pistol"
 	icon_state = "captain45"
 	desc = "A prized silver Colt M1911. A classy firearm fit for a king."
+	weapon_weight = WEAPON_MEDIUM
 
 //USP match
 /obj/item/gun/ballistic/automatic/pistol/uspm
@@ -140,15 +150,18 @@
 	fire_sound = 'modular_skyrat/sound/guns/pistol2.ogg'
 	suppressed_pixel_x = 4
 	suppressed_pixel_y = 0
+	weapon_weight = WEAPON_HEAVY
 
 /obj/item/gun/ballistic/automatic/pistol/deagle/gold
 	icon_state = "deagle_golden"
+	weapon_weight = WEAPON_HEAVY
 
 //AT pistol
 /obj/item/gun/ballistic/automatic/pistol/antitank
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/pistol.dmi'
 	icon_state = "antitank"
 	fire_sound = 'modular_skyrat/sound/weapons/rifle2.ogg'
+	weapon_weight = WEAPON_HEAVY
 
 //Pipe pistol
 /obj/item/gun/ballistic/automatic/pistol/makeshift
@@ -162,3 +175,4 @@
 	burst_size = 1
 	fire_delay = 3
 	actions_types = list()
+	weapon_weight = WEAPON_HEAVY

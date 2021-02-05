@@ -8,9 +8,10 @@
 	icon_state = "uzi"
 	item_state = "uzi"
 	generic_magazine_overlays = FALSE
+	weapon_weight = WEAPON_MEDIUM
 
 /obj/item/gun/ballistic/automatic/mini_uzi/update_icon()
-	..()
+	. = ..()
 	item_state = "[initial(item_state)][magazine ? "" : "-e"]"
 
 //Saber should be an MP5 that would be cool i think
@@ -22,6 +23,7 @@
 	item_state = "arg"
 	suppressed_pixel_x = 5
 	suppressed_pixel_y = 0
+	weapon_weight = WEAPON_MEDIUM
 
 //C20R
 /obj/item/gun/ballistic/automatic/c20r
@@ -32,6 +34,7 @@
 	icon_state = "c20r"
 	item_state = "c20r"
 	generic_magazine_overlays = FALSE
+	weapon_weight = WEAPON_MEDIUM
 
 //WT550 augh
 /obj/item/gun/ballistic/automatic/wt550
@@ -40,6 +43,7 @@
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/smg.dmi'
 	icon_state = "wt550"
 	item_state = "arg"
+	weapon_weight = WEAPON_SMALL
 
 //P90 thing
 /obj/item/gun/ballistic/automatic/m90
@@ -51,3 +55,4 @@
 	icon_state = "p90"
 	item_state = "p90"
 	generic_magazine_overlays = TRUE
+	weapon_weight = WEAPON_MEDIUM0

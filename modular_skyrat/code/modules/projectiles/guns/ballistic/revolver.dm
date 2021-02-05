@@ -8,6 +8,7 @@
 	var/open_sound = 'modular_skyrat/sound/guns/revolver_open.ogg'
 	var/close_sound = 'modular_skyrat/sound/guns/revolver_close.ogg'
 	var/chamber_open = FALSE
+	weapon_weight = WEAPON_MEDIUM
 
 /obj/item/gun/ballistic/revolver/do_fire(atom/target, mob/living/user, message, params, zone_override, bonus_spread, stam_cost)
 	if(chamber_open)
@@ -16,7 +17,7 @@
 		return ..()
 
 /obj/item/gun/ballistic/revolver/chamber_round(spin)
-	..()
+	. = ..()
 	update_icon()
 
 /obj/item/gun/ballistic/revolver/attack_hand(mob/user)
@@ -91,10 +92,6 @@
 	..()
 	icon_state = "[initial(icon_state)][chamber_open ? "-open-[min(6, get_ammo())]" : ""]"
 
-//Detective revomlver changes
-/obj/item/gun/ballistic/revolver/detective
-	desc = "Although far surpassed by newer firearms, this revolver is still quite effective and popular as a self defense weapon, and as an oldschool styled sidearm for military contractors. Chambering .357 in it however, is not recommended."
-
 //Contender, made by ArcLumin. Ported from hippie.
 /obj/item/gun/ballistic/revolver/doublebarrel/contender
 	name = "Contender"
@@ -107,6 +104,7 @@
 	obj_flags = UNIQUE_RENAME
 	unique_reskin = 0
 	fire_delay = 2
+	weapon_weight = WEAPON_HEAVY
 
 /obj/item/gun/ballistic/revolver/doublebarrel/contender/sawoff(mob/user)
 	to_chat(user, "<span class='warning'>Why would you mutilate this work of art?</span>")
@@ -134,6 +132,7 @@
 	fire_delay = 5
 	var/explodioprob = 50
 	var/list/blacklist = list("40mm", ".50")
+	weapon_weight = WEAPON_HEAVY
 
 /obj/item/gun/ballistic/revolver/doublebarrel/contender/box_gun/update_icon()
 	..()
@@ -217,6 +216,7 @@
 	name = "\improper .38 snubnose revolver"
 	icon_state = "snubnose_cooler"
 	unique_reskin = null
+	weapon_weight = WEAPON_SMALL
 
 //Bladerunner
 /obj/item/gun/ballistic/revolver/dual_ammo
@@ -244,6 +244,7 @@
 //Nagant
 /obj/item/gun/ballistic/revolver/nagant
 	icon_state = "miller"
+	weapon_weight = WEAPON_SMALL
 
 //new double barreled shotgun syste,
 //we interpret "chamber_open" as having the shotgun break open or not
@@ -263,6 +264,7 @@
 	fire_sound = 'modular_skyrat/sound/guns/shotgun.ogg'
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/dual
 	unique_reskin = null
+	weapon_weight = WEAPON_HEAVY
 
 /obj/item/gun/ballistic/revolver/doublebarrel/update_icon()
 	..()
@@ -276,3 +278,4 @@
 	sawn_off = TRUE
 	w_class = WEIGHT_CLASS_NORMAL
 	unique_reskin = null
+	weapon_weight = WEAPON_MEDIUM

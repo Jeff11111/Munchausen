@@ -4,7 +4,7 @@
 	var/generic_magazine_overlays = TRUE
 
 /obj/item/gun/ballistic/automatic/update_icon()
-	..()
+	. = ..()
 	icon_state = "[initial(icon_state)][chambered ? "" : "-e"]"
 
 /obj/item/gun/ballistic/automatic/build_overlays()

@@ -7,6 +7,7 @@
 	safety_sound = 'modular_skyrat/sound/guns/safety2.ogg'
 	sling_icon_state = "surplus-sling"
 	slot_flags = ITEM_SLOT_BACK
+	weapon_weight = WEAPON_HEAVY
 
 //Bolt-action rifle
 /obj/item/gun/ballistic/shotgun/boltaction
@@ -20,6 +21,7 @@
 	safety_sound = 'modular_skyrat/sound/guns/safety2.ogg'
 	fire_sound = 'modular_skyrat/sound/weapons/rifle2.ogg'
 	slot_flags = ITEM_SLOT_BACK
+	weapon_weight = WEAPON_HEAVY
 
 /obj/item/gun/ballistic/shotgun/boltaction/update_icon()
 	..()
@@ -32,6 +34,7 @@
 	desc = "A crappy 7.62mm chambered mosin nagant styled rifle. Some psychopath has turned it into a polymerized mess."
 	icon_state = "nugget_bubba"
 	item_state = "baction_polymer"
+	weapon_weight = WEAPON_HEAVY
 
 //Marlin model 1894
 /obj/item/gun/ballistic/shotgun/boltaction/marlin
@@ -39,6 +42,7 @@
 	desc = "Ye olde grandpa's rifle, but now mass-produced by \"Bubba Arms\". No matter what, it's still a good rifle."
 	icon_state = "marlin"
 	mag_type = /obj/item/ammo_box/magazine/internal/boltaction/marlin
+	weapon_weight = WEAPON_HEAVY
 
 //AR-15
 /obj/item/gun/ballistic/automatic/ar
@@ -96,6 +100,7 @@
 	can_unsuppress = FALSE
 	generic_magazine_overlays = TRUE
 	burst_size = 1 //no burst firing that's wacky
+	weapon_weight = WEAPON_MEDIUM
 
 /obj/item/gun/ballistic/automatic/vintorez/Initialize()
 	. = ..()
@@ -104,5 +109,5 @@
 	install_suppressor(nigger)
 
 /obj/item/gun/ballistic/automatic/vintorez/update_icon()
-	..()
+	. = ..()
 	item_state = "[initial(item_state)][magazine ? "" : "-e"][is_wielded ? "-wielded" : ""]"

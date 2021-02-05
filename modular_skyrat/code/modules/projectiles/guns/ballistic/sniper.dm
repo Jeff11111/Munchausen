@@ -6,7 +6,8 @@
 	icon_state = "heavysniper"
 	generic_magazine_overlays = TRUE
 	fire_sound = 'modular_skyrat/sound/weapons/rifle2.ogg'
+	weapon_weight = WEAPON_HEAVY
 
 /obj/item/gun/ballistic/automatic/sniper_rifle/update_icon()
-	..()
+	. = ..()
 	item_state = "[initial(item_state)][is_wielded ? "-wielded" : ""]"

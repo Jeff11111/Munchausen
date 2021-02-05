@@ -198,5 +198,5 @@
 	generic_magazine_overlays = FALSE
 
 /obj/item/gun/ballistic/automatic/shotgun/update_icon()
-	..()
+	. = ..()
 	item_state = "[initial(item_state)][is_wielded ? "-wielded" : ""]"
