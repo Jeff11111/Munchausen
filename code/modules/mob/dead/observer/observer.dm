@@ -54,7 +54,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	var/deadchat_name
 	var/datum/spawners_menu/spawners_menu
 	// copying the appearance of the mob
-	var/appearance/body_appearance
+	var/mutable_appearance/body_appearance
 
 /mob/dead/observer/Initialize(mapload, mob/body)
 	add_client_colour(/datum/client_colour/monochrome/wraith)
@@ -109,7 +109,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	else
 		//No body, try to copy their prefs later
 		addtimer(CALLBACK(src, /mob/dead/observer.proc/get_appearance_from_prefs), 2 SECONDS)
-		
+
 	update_icon()
 
 	if(!isturf(loc))
@@ -247,7 +247,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 			ghostimage_default.icon_state = new_form + "_nodir" //if this icon has dirs, the default ghostimage must use its nodir version or clients with the preference set to default sprites only will see the dirs
 		else
 			ghostimage_default.icon_state = new_form
-	
+
 	if(!body_appearance)
 		if(ghost_accs >= GHOST_ACCS_DIR && (icon_state in GLOB.ghost_forms_with_directions_list)) //if this icon has dirs AND the client wants to show them, we make sure we update the dir on movement
 			updatedir = 1
@@ -384,7 +384,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	if(sig_flags & COMPONENT_DO_NOT_PENALIZE_GHOSTING)
 		penalty = 0
-	
+
 	var/mob/living/carbon/poggers = src
 	if(istype(poggers) && poggers.InFullShock() && !(poggers.stat == DEAD))
 		if(poggers.InFullShock() && !(stat == DEAD))
