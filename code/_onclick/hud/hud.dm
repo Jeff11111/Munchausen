@@ -73,6 +73,7 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	var/obj/screen/staminas/staminas
 	var/obj/screen/fullscreen/pain/redpains
 	var/obj/screen/fullscreen/noise/noise_filter
+	var/obj/screen/fullscreen/darkness/darkness
 	var/obj/screen/fov_holder/fov_holder
 	var/obj/screen/fullscreen/dreamer/dreamer
 	var/obj/screen/bloodlust/bloodlust
@@ -105,6 +106,11 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	noise_filter.screen_loc = "WEST,SOUTH to EAST,NORTH"
 	noise_filter.hud = src
 	screenoverlays += noise_filter
+
+	//Also the get so fucking dark in here filter
+	darkness = new /obj/screen/fullscreen/darkness()
+	darkness.hud = src
+	screenoverlays += darkness
 
 /datum/hud/Destroy()
 	if(mymob.hud_used == src)

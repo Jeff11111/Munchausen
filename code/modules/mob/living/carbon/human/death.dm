@@ -55,10 +55,8 @@
 	
 	//Play the funny death sound
 	playsound_local(get_turf(src), 'modular_skyrat/sound/effects/death_sound.ogg', 100, 0)
-
-	//Color the client's view in greyscale
 	if(client)
-		handle_client_color()
+		add_client_colour(/datum/client_colour/monochrome)
 
 /mob/living/carbon/human/proc/makeSkeleton()
 	ADD_TRAIT(src, TRAIT_DISFIGURED, TRAIT_GENERIC)

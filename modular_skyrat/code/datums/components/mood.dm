@@ -18,6 +18,15 @@
 	var/datum/skill_modifier/great_mood/bonus
 	var/static/malus_id = 0
 	var/static/list/free_maluses = list()
+	var/static/list/insanity_sounds = list(
+		'modular_skyrat/sound/sanity/ragdoll.ogg',
+		'modular_skyrat/sound/sanity/inspectorj_foxcry.wav',
+		'modular_skyrat/sound/sanity/synthscream1.wav',
+		'modular_skyrat/sound/sanity/synthscream2.wav',
+		'modular_skyrat/sound/sanity/deathbreath.ogg',
+		'modular_skyrat/sound/sanity/seamonster.wav',
+		'modular_skyrat/sound/sanity/wheniseechungus.wav',
+	)
 
 /datum/component/mood/Initialize()
 	if(!isliving(parent))
@@ -273,24 +282,24 @@
 	var/mob/living/owner = parent
 	switch(mood_level)
 		if(1)
-			setSanity(sanity-0.2)
+			setSanity(sanity-0.6)
 		if(2)
-			setSanity(sanity-0.125, minimum=SANITY_CRAZY)
+			setSanity(sanity-0.3, minimum=SANITY_CRAZY)
 		if(3)
-			setSanity(sanity-0.075, minimum=SANITY_UNSTABLE)
+			setSanity(sanity-0.2, minimum=SANITY_UNSTABLE)
 		if(4)
-			setSanity(sanity-0.025, minimum=SANITY_DISTURBED)
+			setSanity(sanity-0.1, minimum=SANITY_DISTURBED)
 		if(5)
 			setSanity(sanity+0.1)
 		if(6)
 			setSanity(sanity+0.15)
 		if(7)
-			setSanity(sanity+0.20)
+			setSanity(sanity+0.2)
 		if(8)
 			setSanity(sanity+0.25, maximum=SANITY_GREAT)
 		if(9)
 			setSanity(sanity+0.4, maximum=SANITY_AMAZING)
-
+	HandleSanity(owner)
 	HandleNutrition(owner)
 	HandleHydration(owner)
 
@@ -358,8 +367,17 @@
 				malus.UnregisterSignal(master, COMSIG_MOB_ON_NEW_MIND)
 			free_maluses += malus
 			malus = null
-
-	//update_mood_icon()
+		switch(sanity_level)
+			if(1,2)
+				master.hud_used?.darkness.alpha = 0
+			if(3)
+				master.hud_used?.darkness.alpha = 32
+			if(4)
+				master.hud_used?.darkness.alpha = 64
+			if(5)
+				master.hud_used?.darkness.alpha = 128
+			if(6)
+				master.hud_used?.darkness.alpha = 160
 
 /datum/component/mood/proc/setInsanityEffect(newval)//More code so that the previous proc works
 	if(newval == insanity_effect)
@@ -464,6 +482,80 @@
 			add_event(null, "hydration", /datum/mood_event/thirsty)
 		if(0 to HYDRATION_LEVEL_DEHYDRATED)
 			add_event(null, "hydration", /datum/mood_event/dehydrated)
+
+/datum/component/mood/proc/HandleSanity(mob/living/carbon/human/H)
+	if(!istype(C))
+		return
+	if(sanity <= SANITY_INSANE)
+		//more hallucination hahaHAHAHAH
+		H.hallucination++
+		//red screen crazy crazy
+		if(H.client && !(locate(/datum/client_colour/sanity/crazy) in H.client_colours))
+			H.add_client_colour(/datum/client_colour/sanity/crazy)
+		//killing self
+		if(prob(1))
+			if(H.canSuicide())
+				to_chat(H, "<span class='deadsay'>I've always felt alone. My whole life. For as long as I can remember. I don't know if I like it or if I'm used to it, but I know this; being lonely does things to you. Feeling shit and bitter and angry all the time just... Eats away at you...</span>")
+				H.kill_self()
+		//screame
+		else if(prob(20))
+			H.agony_scream()
+		//brain trauma
+		else if(length(H.get_traumas()) <= 3 && prob(10))
+			H.gain_trauma_type(/datum/brain_trauma/severe, TRAUMA_RESILIENCE_LOBOTOMY)
+		//crying
+		else if(!(world.time % 4))
+			H.emote("cry")
+	if(sanity <= SANITY_CRAZY)
+		//more hallucination haha
+		if(prob(50))
+			H.hallucination++
+		//prain trauma
+		if(length(H.get_traumas()) <= 2 && prob(2))
+			H.gain_trauma_type(/datum/brain_trauma/severe, TRAUMA_RESILIENCE_SURGERY)
+		//get stunned
+		else if(prob(2))
+			to_chat(H, "<span class='deadsay'><b>I can't take this!</b></span>")
+			H.AdjustImmobilized(2 SECONDS)
+			H.AdjustDazed(3 SECONDS)
+	if(sanity <= SANITY_UNSTABLE)
+		//hallucinations begin
+		if(prob(20))
+			H.hallucination++
+		//gmod horror map sounds
+		else if(prob(3))
+			SEND_SOUND(H.client, sound(pick(insanity_sounds), channel = CHANNEL_AMBIENT))
+		//prain trauma
+		else if(length(H.get_traumas()) && prob(1))
+			H.gain_trauma_type(/datum/brain_trauma/severe, TRAUMA_RESILIENCE_BASIC)
+	if(sanity <= SANITY_DISTURBED)
+		//it's all over, but the crying
+		if(prob(1))
+			H.emote("cry")
+		else if(prob(1))
+			H.emote("sneeze")
+	if(sanity > SANITY_DISTURBED)
+		if(H.client)
+			H.remove_client_colour(/datum/client_colour/sanity/crazy)
+
+/datum/component/mood/proc/insanity_screenshake(mob/living/carbon/human/H)
+	if(!H.client)
+		return
+	var/client/C = H.client
+	var/shakeit = 0
+	while(shakeit < 10)
+		shakeit++
+		var/intensity = rand(1,3)
+		if(prob(75))
+			animate(C, pixel_y = (C.pixel_y + intensity), time = 0.5)
+			sleep(0.5)
+			animate(C, pixel_y = (C.pixel_y - intensity), time = 0.5)
+			sleep(0.5)
+		else
+			animate(C, pixel_x = (C.pixel_x + intensity), time = 0.5)
+			sleep(0.5)
+			animate(C, pixel_x = (C.pixel_x - intensity), time = 0.5)
+			sleep(0.5)
 
 /datum/component/mood/proc/update_beauty(area/A)
 	if(A.outdoors) //if we're outside, we don't care.

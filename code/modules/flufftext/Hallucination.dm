@@ -37,7 +37,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	if(world.time < next_hallucination)
 		return
 
-	var/halpick // Skyrat edit: Custom hallucination probabilities now possible
+	var/halpick
 	if(LAZYLEN(custom_hallucinations))
 		halpick = pickweight(custom_hallucinations)
 	else

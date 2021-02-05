@@ -963,6 +963,10 @@
 			dna.remove_mutation(HM.name)
 	. = ..()
 
+/mob/living/carbon/human/revive(full_heal, admin_revive)
+	. = ..()
+	remove_client_colour(/datum/client_colour/monochrome)
+
 /mob/living/carbon/human/check_weakness(obj/item/weapon, mob/living/attacker)
 	. = ..()
 	if (dna && dna.species)

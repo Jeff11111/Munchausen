@@ -57,9 +57,11 @@
 /// The affected is unable to use or pickup items, plus will fall down depending on stats
 #define STATUS_EFFECT_STUMBLE /datum/status_effect/incapacitating/dazed/stumble
 
-#define STATUS_EFFECT_UNCONSCIOUS /datum/status_effect/incapacitating/unconscious //the affected is unconscious
+/// The affected is unconscious
+#define STATUS_EFFECT_UNCONSCIOUS /datum/status_effect/incapacitating/unconscious
 
-#define STATUS_EFFECT_SLEEPING /datum/status_effect/incapacitating/sleeping //the affected is asleep
+/// The affected is asleep
+#define STATUS_EFFECT_SLEEPING /datum/status_effect/incapacitating/sleeping
 
 /// Blocks sprint
 #define STATUS_EFFECT_STAGGERED /datum/status_effect/staggered

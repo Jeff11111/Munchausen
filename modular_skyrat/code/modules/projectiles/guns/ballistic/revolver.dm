@@ -216,7 +216,7 @@
 	name = "\improper .38 snubnose revolver"
 	icon_state = "snubnose_cooler"
 	unique_reskin = null
-	weapon_weight = WEAPON_SMALL
+	weapon_weight = WEAPON_LIGHT
 
 //Bladerunner
 /obj/item/gun/ballistic/revolver/dual_ammo
@@ -244,7 +244,7 @@
 //Nagant
 /obj/item/gun/ballistic/revolver/nagant
 	icon_state = "miller"
-	weapon_weight = WEAPON_SMALL
+	weapon_weight = WEAPON_LIGHT
 
 //new double barreled shotgun syste,
 //we interpret "chamber_open" as having the shotgun break open or not

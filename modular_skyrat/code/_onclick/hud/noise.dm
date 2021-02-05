@@ -6,7 +6,6 @@
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	layer = HUD_LAYER-1
 	plane = HUD_PLANE-1
-	var/list/mutable_appearance/noise_overlays = list()
 	var/loggers = "j"
 	var/poggers = 1
 

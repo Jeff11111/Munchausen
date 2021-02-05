@@ -43,7 +43,7 @@
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/smg.dmi'
 	icon_state = "wt550"
 	item_state = "arg"
-	weapon_weight = WEAPON_SMALL
+	weapon_weight = WEAPON_LIGHT
 
 //P90 thing
 /obj/item/gun/ballistic/automatic/m90
@@ -55,4 +55,4 @@
 	icon_state = "p90"
 	item_state = "p90"
 	generic_magazine_overlays = TRUE
-	weapon_weight = WEAPON_MEDIUM0
+	weapon_weight = WEAPON_MEDIUM
