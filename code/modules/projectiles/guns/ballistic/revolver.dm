@@ -281,13 +281,6 @@
 	mag_type = /obj/item/ammo_box/magazine/internal/shot/dual
 	sawn_desc = "Omar's coming!"
 	obj_flags = UNIQUE_RENAME
-	unique_reskin = list("Default" = "dshotgun",
-						"Dark Red Finish" = "dshotgun_d",
-						"Ash" = "dshotgun_f",
-						"Faded Grey" = "dshotgun_g",
-						"Maple" = "dshotgun_l",
-						"Rosewood" = "dshotgun_p"
-						)                                                 //Skyrat edit end
 
 /obj/item/gun/ballistic/revolver/doublebarrel/attackby(obj/item/A, mob/user, params)
 	..()
