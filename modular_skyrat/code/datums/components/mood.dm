@@ -484,7 +484,7 @@
 			add_event(null, "hydration", /datum/mood_event/dehydrated)
 
 /datum/component/mood/proc/HandleSanity(mob/living/carbon/human/H)
-	if(!istype(C))
+	if(!istype(H))
 		return
 	if(sanity <= SANITY_INSANE)
 		//more hallucination hahaHAHAHAH
