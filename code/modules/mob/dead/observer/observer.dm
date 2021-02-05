@@ -10,7 +10,6 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	icon_state = "ghost"
 	layer = GHOST_LAYER
 	stat = DEAD
-	density = FALSE
 	move_resist = INFINITY
 	see_invisible = SEE_INVISIBLE_OBSERVER
 	see_in_dark = 100
@@ -55,9 +54,10 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	var/deadchat_name
 	var/datum/spawners_menu/spawners_menu
 	// copying the appearance of the mob
-	var/mutable_appearance/body_appearance
+	var/appearance/body_appearance
 
 /mob/dead/observer/Initialize(mapload, mob/body)
+	add_client_colour(/datum/client_colour/monochrome/wraith)
 	set_invisibility(GLOB.observer_default_invisibility)
 
 	verbs += list(
@@ -218,9 +218,6 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 
 	QDEL_NULL(spawners_menu)
 	return ..()
-
-/mob/dead/CanPass(atom/movable/mover, turf/target)
-	return 1
 
 /*
  * This proc will update the icon of the ghost itself, with hair overlays, as well as the ghost image.

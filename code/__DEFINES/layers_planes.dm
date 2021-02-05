@@ -28,24 +28,27 @@
 #define MOB_PLANE -6
 #define MOB_PLANE_RENDER_TARGET "MOB_PLANE"
 
-#define FIELD_OF_VISION_BLOCKER_PLANE -5
+#define GHOST_PLANE -6
+#define GHOST_PLANE_RENDER_TARGET "MOB_PLANE"
+
+#define FIELD_OF_VISION_BLOCKER_PLANE -4
 #define FIELD_OF_VISION_BLOCKER_PLANE_RENDER_TARGET "*FIELD_OF_VISION_BLOCKER_PLANE"
 
-#define FIELD_OF_VISION_PLANE -4
+#define FIELD_OF_VISION_PLANE -3
 #define FIELD_OF_VISION_PLANE_RENDER_TARGET "*FIELD_OF_VISION_PLANE"
 
-#define FIELD_OF_VISION_VISUAL_PLANE -3 //Yea, FoV does require quite a few planes to work with 513 filters to a decent degree.
+#define FIELD_OF_VISION_VISUAL_PLANE -2 //Yea, FoV does require quite a few planes to work with 513 filters to a decent degree.
 #define FIELD_OF_VISION_VISUAL_LAYER 17 //used to place the visual (not the mask) shadow cone above any other floor plane stuff.
 #define FIELD_OF_VISION_VISUAL_RENDER_TARGET "FIELD_OF_VISION_VISUAL_PLANE"
 
-#define OPENSPACE_PLANE -2 //Openspace plane below all turfs
-#define OPENSPACE_BACKDROP_PLANE -2 //Black square just over openspace plane to guaranteed cover all in openspace turf
+#define OPENSPACE_PLANE -1 //Openspace plane below all turfs
+#define OPENSPACE_BACKDROP_PLANE -1 //Black square just over openspace plane to guaranteed cover all in openspace turf
 #define OPENSPACE_LAYER 17 //Openspace layer over all
 
-#define CHAT_PLANE -1 //We don't want heard messages to be hidden by FoV.
+#define CHAT_PLANE 0 //We don't want heard messages to be hidden by FoV.
 #define CHAT_LAYER 20.35  //Legacy, it doesn't matter that much because we are displayed above the game plane anyway.
 
-#define BLACKNESS_PLANE 0 //To keep from conflicts with SEE_BLACKNESS internals
+#define BLACKNESS_PLANE 1 //To keep from conflicts with SEE_BLACKNESS internals
 #define BLACKNESS_PLANE_RENDER_TARGET "BLACKNESS_PLANE"
 
 ///Layers most often used by atoms of plane lower than GAME_PLANE

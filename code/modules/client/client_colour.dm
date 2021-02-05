@@ -117,3 +117,5 @@
 
 /datum/client_colour/monochrome/trance
 	priority = 1
+
+/datum/client_colour/monochrome/wraith
