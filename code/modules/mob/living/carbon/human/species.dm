@@ -138,7 +138,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	if(!limbs_id)
 		limbs_id = id
 
-	//skyrat change
 	//Set our descriptors proper
 	if(LAZYLEN(descriptors))
 		var/list/descriptor_datums = list()
@@ -149,7 +148,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				descriptor.current_value = descriptor.default_value
 			descriptor_datums[descriptor.name] = descriptor
 		descriptors = descriptor_datums
-	//
 
 	..()
 
