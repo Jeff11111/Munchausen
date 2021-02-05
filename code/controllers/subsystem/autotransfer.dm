@@ -12,7 +12,7 @@ SUBSYSTEM_DEF(autotransfer)
 	var/curvotes = 0
 
 /datum/controller/subsystem/autotransfer/Initialize(timeofday)
-	var/init_vote = CONFIG_GET(number/vote_autotransfer_initial)
+	var/init_vote = FALSE
 	if(!init_vote) //Autotransfer voting disabled.
 		can_fire = FALSE
 		return ..()
