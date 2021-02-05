@@ -50,9 +50,12 @@
 	if(eavesdropping_modes[message_mode])
 		eavesdrop_range = EAVESDROP_EXTRA_RANGE
 	var/list/listening = get_hearers_in_view(message_range+eavesdrop_range, source)
+	var/list/hears_muttering = list()
+	if(!(message_mode in eavesdropping_modes))
+		hears_muttering = (get_hearers_in_view(message_range+MUTTERING_RANGE, source) - listening)
 	var/list/the_dead = list()
 	var/list/dead_away = list()
-	var/list/yellareas	//CIT CHANGE - adds the ability for yelling to penetrate walls and echo throughout areas
+	var/list/yellareas = list() //CIT CHANGE - adds the ability for yelling to penetrate walls and echo throughout areas
 	if(!eavesdrop_range && say_test(message) == "2")	//CIT CHANGE - ditto
 		yellareas = get_areas_in_range(message_range*0.5, source)	//CIT CHANGE - ditto
 	for(var/_M in GLOB.player_list)
@@ -79,7 +82,7 @@
 	if(eavesdrop_range)
 		eavesdropping = stars(message)
 		eavesrendered = compose_message(src, message_language, eavesdropping, null, spans, message_mode, FALSE, source)
-
+	var/static/mutter_message = "<span class='small'>You hear distant speech.</span>"
 	var/rendered = compose_message(src, message_language, message, null, spans, message_mode, FALSE, source)
 	for(var/_AM in listening)
 		var/atom/movable/AM = _AM
@@ -93,6 +96,8 @@
 			O.HearNoPopup(rendered, src, message_language, message, null, spans, message_mode, source)
 		else
 			AM.Hear(rendered, src, message_language, message, null, spans, message_mode, source)
+	for(var/mob/M in hears_muttering)
+		M.show_message(mutter_message, MSG_AUDIBLE)
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_LIVING_SAY_SPECIAL, src, message)
 
 	//speech bubble
@@ -102,4 +107,4 @@
 			speech_bubble_recipients.Add(M.client)
 	var/image/I = image('icons/mob/talk.dmi', src, "[bubble_type][say_test(message)]", FLY_LAYER)
 	I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
-	INVOKE_ASYNC(GLOBAL_PROC, /.proc/animate_speechbubble, I, speech_bubble_recipients, 30) //skyrat-edit 
+	INVOKE_ASYNC(GLOBAL_PROC, /.proc/animate_speechbubble, I, speech_bubble_recipients, 30) //skyrat-edit
