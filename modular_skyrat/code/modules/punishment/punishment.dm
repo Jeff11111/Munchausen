@@ -29,7 +29,7 @@ GLOBAL_LIST_INIT(fraggots, world.file2list('config/fraggots.txt'))
 	if(fraggot)
 		//Earrape
 		if(prob(5))
-			var/bees = pick('modular_skyrat/sound/fraggot/p1.ogg', 'modular_skyrat/sound/fraggot/p1.ogg')
+			var/bees = pick('modular_skyrat/sound/fraggot/p1.ogg', 'modular_skyrat/sound/fraggot/p2.ogg')
 			playsound_local(get_turf(src), bees, 200)
 		//Chat spam
 		if(prob(25))

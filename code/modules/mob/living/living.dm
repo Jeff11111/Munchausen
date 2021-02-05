@@ -697,23 +697,12 @@
 		break
 	
 	if(connected_trail?.connected_trail)
-		var/dire_straits = get_dir(connected_trail.connected_trail, target_turf)
-		if(dire_straits in GLOB.diagonals)
-			var/noodir = 0
-			switch(dire_straits)
-				if(SOUTHEAST)
-					noodir = NORTHEAST
-				if(SOUTHWEST)
-					noodir = NORTHWEST
-				if(NORTHEAST)
-					noodir = SOUTHEAST
-				if(NORTHWEST)
-					noodir = SOUTHWEST
-			connected_trail.existing_dirs -= connected_trail.existing_dirs[length(connected_trail.existing_dirs)]
-			connected_trail.existing_dirs |= noodir
-			connected_trail.cut_overlays()
-			for(var/poggers in connected_trail.existing_dirs)
-				connected_trail.add_overlay(image('modular_skyrat/icons/effects/blood_fuck.dmi', trail_type, dir = poggers))
+		var/dire_straits = get_dir(connected_trail.connected_trail, target_turf) | get_dir(connected_trail, target_turf)
+		connected_trail.existing_dirs -= connected_trail.existing_dirs[length(connected_trail.existing_dirs)]
+		connected_trail.existing_dirs |= dire_straits
+		connected_trail.cut_overlays()
+		for(var/poggers in connected_trail.existing_dirs)
+			connected_trail.add_overlay(image('modular_skyrat/icons/effects/blood_fuck.dmi', trail_type, dir = poggers))
 
 	for(var/obj/effect/decal/cleanable/trail_holder/TH in target_turf)
 		if((!(newdir in TH.existing_dirs) || trail_type == "tracks_1" || trail_type == "tracks_2" || trail_type == "tracks_3") && TH.existing_dirs.len <= 16) //maximum amount of overlays is 16 (all light & heavy directions filled)
@@ -727,12 +716,12 @@
 	if(prob(4) && lying && bleed_amt && iscarbon(src))
 		var/mob/living/C = src
 		var/extra_message = (C.has_gauze() ? " and tearing into their gauze" : "")
-		C.visible_message("<span class='danger'>\The <b>[C]</b>'s wounds scrape against \the [start], worsening their situation[extra_message]!</span>", "<span class='userdanger'>Your wounds scrape against \the [start], worsening their situation[extra_message]!</span>")
+		C.visible_message("<span class='danger'><b>[C]</b>'s wounds and injuries scrape against \the [start], worsening their situation[extra_message]!</span>", "<span class='userdanger'>Your wounds scrape against \the [start], worsening their situation[extra_message]!</span>")
 
 /mob/living/carbon/human/makeTrail(turf/target_turf, turf/start, direction)
-	if((NOBLOOD in dna.species.species_traits) || !is_bleeding()) //skyrat edit
+	if((NOBLOOD in dna.species.species_traits) || !is_bleeding())
 		return
-	..()
+	. = ..()
 
 /mob/living/proc/getTrail()
 	switch(getBruteLoss())

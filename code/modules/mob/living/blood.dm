@@ -15,6 +15,9 @@
 	for(var/i in all_wounds)
 		var/datum/wound/W = i
 		. += W.drag_bleed_amt()
+	for(var/i in all_injuries)
+		var/datum/injury/IN = i
+		. += IN.drag_bleed_amt()
 
 /mob/living/carbon/monkey/handle_blood()
 	if(bodytemperature <= TCRYO || (HAS_TRAIT(src, TRAIT_HUSK))) //cryosleep or husked people do not pump the blood.

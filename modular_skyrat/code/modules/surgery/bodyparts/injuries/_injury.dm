@@ -172,6 +172,12 @@
 
 	return FALSE
 
+//bleeding from being dragged against the ground
+/datum/injury/proc/drag_bleed_amt()
+	if(!is_bleeding())
+		return FALSE
+	return CEILING(get_bleed_rate() * 0.25, 1)
+
 /datum/injury/proc/bandage()
 	injury_flags |= INJURY_BANDAGED
 
