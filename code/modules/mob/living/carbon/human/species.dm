@@ -1430,7 +1430,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(hunger_rate > 0)
 			H.adjust_defecation(hunger_rate)
 		//don't gain nutrition if full of shit
-		hunger_rate = max(0, hunger_rate - (H.defecation/DEFECATION_LEVEL_FULL * dehydration_rate))
+		hunger_rate = max(0, hunger_rate - (H.defecation/DEFECATION_LEVEL_FULL * hunger_rate))
 		H.adjust_nutrition(-hunger_rate)
 
 	if(H.nutrition > NUTRITION_LEVEL_FULL)
