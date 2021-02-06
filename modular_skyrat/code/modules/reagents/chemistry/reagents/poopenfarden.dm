@@ -8,8 +8,11 @@
 /datum/reagent/consumable/shit/reaction_mob(mob/living/M, method, reac_volume)
 	. = ..()
 	M.adjust_disgust(10)
-	if(volume >= 5)
-		M.ForceContractDisease(/datum/disease/appendicitis)
+	M.ForceContractDisease(/datum/disease/appendicitis)
+
+/datum/reagent/consumable/shit/on_mob_life(mob/living/carbon/M)
+	. = ..()
+	M.adjust_disgust(1)
 
 //PISS
 /datum/reagent/consumable/piss
@@ -21,7 +24,12 @@
 /datum/reagent/consumable/piss/reaction_mob(mob/living/M, method, reac_volume)
 	. = ..()
 	M.adjust_disgust(10)
-	M.adjust_hydration(-10)
+	M.adjust_hydration(-5)
+
+/datum/reagent/consumable/piss/on_mob_life(mob/living/carbon/M)
+	. = ..()
+	M.adjust_disgust(1)
+	M.adjust_hydration(-3)
 	if(iscarbon(M))
 		var/mob/living/carbon/C = M
 		var/obj/item/organ/kidneys/kidneys = C.getorganslot(ORGAN_SLOT_KIDNEYS)
