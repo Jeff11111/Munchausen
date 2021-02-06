@@ -99,7 +99,7 @@
 			if(fireboy.combat_intent == CI_AIMED)
 				modifier += 6
 			
-			if(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.5, GET_SKILL_LEVEL(fireboy, ranged)*1.5, dicetype = "6d6", mod = -CEILING(miss_entirely/5 + get_dist(P.starting, src)/5 + modifier, 1), crit = 20) <= DICE_CRIT_FAILURE)
+			if(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.5, GET_SKILL_LEVEL(fireboy, ranged)*1.5, dicetype = "6d6", mod = -CEILING(miss_entirely/5 + get_dist(P.starting, src)/5 + modifier, 1), crit = 18) <= DICE_CRIT_FAILURE)
 				//Missed shot
 				if(fireboy != src)
 					visible_message("<span class='danger'><b>FAILURE!</b> [P] misses <b>[src]</b> entirely!</span>")
@@ -179,7 +179,7 @@
 			
 			//Chance to miss the attack entirely, based on a diceroll
 			var/missed = FALSE
-			if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*1.5, dicetype = "6d6", mod = -(miss_entirely/5) + modifier, crit = 20) <= DICE_CRIT_FAILURE)
+			if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*1.5, dicetype = "6d6", mod = -(miss_entirely/5) + modifier, crit = 18) <= DICE_CRIT_FAILURE)
 				missed = TRUE
 			
 			if(carbon_mob.mind)

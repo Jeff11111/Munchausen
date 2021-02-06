@@ -23,7 +23,7 @@
 //Important! you should not use more than one stat in proc but if you really want to, you should multiply amount of dices and crit according to how much of them you added to the formula.
 //For example: two stats will need 6d6 dicetype and also 20 crit instead of 10.
 //REMEMBER THIS: when adding proc to action you BOUND to specify SUCCESS and CRIT_FAILURE in it! FAILURE may do nothing and CRIT_SUCCESS may be same as SUCCESS though.
-/datum/mind/proc/diceroll(stats = 0, skills = 0, dicetype = "3d6", crit = 10, mod = 0)
+/datum/mind/proc/diceroll(stats = 0, skills = 0, dicetype = "3d6", crit = 9, mod = 0)
 	//We need numbers, not paths nor datums
 	if(istype(stats, /datum))
 		var/datum/stats/states = stats
@@ -109,7 +109,7 @@
 		return
 	var/block_chance = weapon?.block_chance || 10
 	//Do a dice roll based on melee skill and dexterity, modifier being half the total damage
-	switch(diceroll(GET_STAT_LEVEL(victim, dex)*0.5, GET_SKILL_LEVEL(victim, melee)*1.5, dicetype = "6d6", mod = -abs(round(total_damage/2)) + block_chance/5, crit = 20))
+	switch(diceroll(GET_STAT_LEVEL(victim, dex)*0.5, GET_SKILL_LEVEL(victim, melee)*1.5, dicetype = "6d6", mod = -abs(round(total_damage/2)) + block_chance/5, crit = 18))
 		//Always go through, no questions asked on crit successes
 		if(DICE_CRIT_SUCCESS)
 			victim.changeNext_move(CLICK_CD_MELEE)
@@ -174,7 +174,7 @@
 		return
 	//Do a dice roll based on melee skill and dexterity, modifier being the total damage
 	//(thus parrying is almost always preferrable, unless you are unarmed)
-	switch(diceroll(GET_STAT_LEVEL(victim, dex)*1.5, GET_SKILL_LEVEL(victim, melee)*0.5, dicetype = "6d6", mod = -abs(round(total_damage)), crit = 20))
+	switch(diceroll(GET_STAT_LEVEL(victim, dex)*1.5, GET_SKILL_LEVEL(victim, melee)*0.5, dicetype = "6d6", mod = -abs(round(total_damage)), crit = 18))
 		//Always go through, no questions asked on crit successes
 		if(DICE_CRIT_SUCCESS)
 			victim.changeNext_move(CLICK_CD_MELEE)

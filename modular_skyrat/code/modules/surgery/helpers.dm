@@ -117,7 +117,7 @@
 
 	//Germ level is increased/decreased depending on a diceroll
 	if(user.mind)
-		var/diceroll = user.mind.diceroll(STAT_DATUM(int), SKILL_DATUM(surgery), "6d6", crit = 20)
+		var/diceroll = user.mind.diceroll(STAT_DATUM(int), SKILL_DATUM(surgery), "6d6", crit = 18)
 		switch(diceroll)
 			if(DICE_CRIT_SUCCESS)
 				our_germ_level *= 0

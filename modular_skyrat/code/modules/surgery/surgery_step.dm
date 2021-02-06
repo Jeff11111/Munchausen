@@ -243,7 +243,7 @@
 
 		//Dice roll
 		var/didntfuckup = TRUE
-		if(user.mind && (user.mind.diceroll(GET_STAT_LEVEL(user, int)*0.5, GET_SKILL_LEVEL(user, surgery)*1.5, dicetype = "6d6", mod = -(round(100 - prob_chance)/4), crit = 20) <= DICE_FAILURE))
+		if(user.mind && (user.mind.diceroll(GET_STAT_LEVEL(user, int)*0.5, GET_SKILL_LEVEL(user, surgery)*1.5, dicetype = "6d6", mod = -(round(100 - prob_chance)/4), crit = 18) <= DICE_FAILURE))
 			didntfuckup = FALSE
 		if(didntfuckup || (iscyborg(user) && !silicons_obey_prob && chem_check(target) && !try_to_fail))
 			if(success(user, target, target_zone, tool))

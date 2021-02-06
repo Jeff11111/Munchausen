@@ -76,7 +76,7 @@
 	if(. & BLOCK_SUCCESS)
 		return
 	if(owner.mind && final_block_chance >= 10)
-		if(owner.mind.diceroll(GET_STAT_LEVEL(owner, end)*0.5, GET_SKILL_LEVEL(owner, melee)*1.5, dicetype = "6d6", mod = CEILING(final_block_chance/5, 1), crit = 20) >= DICE_SUCCESS)
+		if(owner.mind.diceroll(GET_STAT_LEVEL(owner, end)*0.5, GET_SKILL_LEVEL(owner, melee)*1.5, dicetype = "6d6", mod = CEILING(final_block_chance/5, 1), crit = 18) >= DICE_SUCCESS)
 			owner.visible_message("<span class='danger'><b>[owner]</b> blocks [attack_text] with [src]!</span>",
 				"<span class='danger'>I block [attack_text] with [src]!</span>")
 			return . | BLOCK_SUCCESS | BLOCK_PHYSICAL_EXTERNAL
