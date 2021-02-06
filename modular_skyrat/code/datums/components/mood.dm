@@ -540,7 +540,7 @@
 			H.gain_trauma_type(/datum/brain_trauma/severe, TRAUMA_RESILIENCE_BASIC)
 	if(sanity <= SANITY_DISTURBED)
 		//it's all over, but the crying
-		if(prob(1) || (SANITY <= UNSTABLE && prob(4)))
+		if(prob(1) || (sanity <= SANITY_UNSTABLE && prob(4)))
 			H.emote("cry")
 		else if(prob(2))
 			H.emote("sneeze")
