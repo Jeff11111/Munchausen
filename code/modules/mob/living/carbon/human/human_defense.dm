@@ -99,7 +99,7 @@
 			if(fireboy.combat_intent == CI_AIMED)
 				modifier += 6
 			
-			if(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.5, GET_SKILL_LEVEL(fireboy, ranged)*1.5, dicetype = "6d6", mod = -CEILING(miss_entirely/5 + get_dist(P.starting, src)/5 + modifier, 1), crit = 18) <= DICE_CRIT_FAILURE)
+			if(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.5, GET_SKILL_LEVEL(fireboy, ranged)*1.5, dicetype = "6d6", mod = -FLOOR(miss_entirely/5 + get_dist(P.starting, src)/5 + modifier, 1), crit = 18) <= DICE_CRIT_FAILURE)
 				//Missed shot
 				if(fireboy != src)
 					visible_message("<span class='danger'><b>FAILURE!</b> [P] misses <b>[src]</b> entirely!</span>")
