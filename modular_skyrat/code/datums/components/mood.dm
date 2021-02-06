@@ -209,7 +209,7 @@
 
 ///Called after moodevent/s have been added/removed.
 /datum/component/mood/proc/update_mood()
-	var/previous_mood = mood
+	var/previous_mood_level = mood_level
 	mood = 0
 	shown_mood = 0
 	for(var/i in mood_events)
@@ -242,9 +242,9 @@
 	if(istype(L) && is_dreamer(L))
 		mood_level = MOOD_LEVEL_NEUTRAL
 		sanity = SANITY_NEUTRAL
-	if(mood > previous_mood)
+	if(mood_level > previous_mood_level)
 		to_chat(parent, "<span class='nicegreen'>My mood gets better.</span>")
-	else if(mood < previous_mood)
+	else if(mood_level < previous_mood_level)
 		to_chat(parent, "<span class='danger'>My mood gets worse.</span>")
 	update_mood_icon()
 
