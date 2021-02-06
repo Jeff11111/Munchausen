@@ -533,7 +533,7 @@
 		if(prob(3) || (sanity <= SANITY_CRAZY && prob(6)))
 			SEND_SOUND(H.client, sound(pick(insanity_sounds), channel = CHANNEL_AMBIENT))
 		//hallucinations begin
-		if(prob(50))
+		if(prob(25))
 			H.hallucination++
 		//prain trauma
 		else if(length(H.get_traumas()) && prob(2))
