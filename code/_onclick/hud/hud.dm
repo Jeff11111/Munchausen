@@ -202,6 +202,9 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 			if(noise_filter)
 				noise_filter.update_for_view(screenmob.client.view)
 				screenmob.client.screen += noise_filter
+			if(darkness)
+				darkness.update_for_view(screenmob.client.view)
+				screenmob.client.screen += darkness
 			if(fov_holder)
 				screenmob.client.screen += fov_holder
 			if(dreamer)
@@ -229,6 +232,9 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 			if(noise_filter)
 				noise_filter.update_for_view(screenmob.client.view)
 				screenmob.client.screen += noise_filter
+			if(darkness)
+				darkness.update_for_view(screenmob.client.view)
+				screenmob.client.screen += darkness
 			if(fov_holder)
 				screenmob.client.screen += fov_holder
 			if(dreamer)
@@ -262,6 +268,9 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 			if(noise_filter)
 				noise_filter.update_for_view(screenmob.client.view)
 				screenmob.client.screen += noise_filter
+			if(darkness)
+				darkness.update_for_view(screenmob.client.view)
+				screenmob.client.screen += darkness
 			if(fov_holder)
 				screenmob.client.screen += fov_holder
 			if(dreamer)
