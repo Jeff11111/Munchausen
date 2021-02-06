@@ -98,6 +98,11 @@
 /obj/effect/decal/cleanable/blood/drip/can_bloodcrawl_in()
 	return TRUE
 
+/obj/effect/decal/cleanable/blood/drip/update_icon_state()
+	. = ..()
+	if(drips >= 6)
+		icon_state = "drip[min(9, drips)]"
+
 /obj/effect/decal/cleanable/blood/gibs/human
 
 /obj/effect/decal/cleanable/blood/gibs/human/Initialize(mapload, list/datum/disease/diseases)

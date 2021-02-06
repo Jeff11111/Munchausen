@@ -376,6 +376,12 @@
 				drop.transfer_mob_blood_dna(src)
 				drop.update_icon()
 				return
+			else if(drop.drips < 9)
+				drop.drips++
+				drop.remove_overlays()
+				drop.transfer_mob_blood_dna(src)
+				drop.update_icon()
+				return
 			else
 				temp_blood_DNA = (drop.blood_DNA - "color")	//transfer dna from drip to splatter.
 				temp_blood_DNA["color"] = drop.blood_DNA["color"]
