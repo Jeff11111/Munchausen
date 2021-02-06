@@ -1430,7 +1430,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(hunger_rate > 0)
 			H.adjust_defecation(hunger_rate)
 		//don't gain nutrition if full of shit
-		hunger_rate = max(0, hunger_rate - max(0, H.nutrition - H.defecation))
+		hunger_rate = max(0, hunger_rate - max(0, (H.defecation - H.nutrition)/10))
 		H.adjust_nutrition(-hunger_rate)
 
 	if(H.nutrition > NUTRITION_LEVEL_FULL)
@@ -1484,7 +1484,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(dehydration_rate > 0)
 			H.adjust_urination(dehydration_rate)
 		//dont gain hydration if full of piss
-		dehydration_rate = max(0, dehydration_rate - max(0, H.hydration - H.urination))
+		dehydration_rate = max(0, dehydration_rate - max(0, (H.urination - H.hydration)/10))
 		H.adjust_hydration(-dehydration_rate)
 
 	H.hud_used?.hydration?.update_icon()
