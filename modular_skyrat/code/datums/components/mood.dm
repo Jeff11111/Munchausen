@@ -492,7 +492,7 @@
 			add_event(null, "hydration", /datum/mood_event/thirsty)
 		if(0 to HYDRATION_LEVEL_DEHYDRATED)
 			add_event(null, "hydration", /datum/mood_event/dehydrated)
-	switch(L.hydration)
+	switch(L.urination)
 		if(URINATION_LEVEL_PISSY to URINATION_LEVEL_VERY_PISSY)
 			add_event(null, "urination", /datum/mood_event/piss)
 		if(URINATION_LEVEL_VERY_PISSY to INFINITY)
