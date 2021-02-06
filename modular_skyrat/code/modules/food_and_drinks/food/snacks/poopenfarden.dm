@@ -14,8 +14,8 @@
 
 /obj/item/reagent_containers/food/snacks/shit/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	. = ..()
-	playsound(hit_atom, "sound/effects/squishy.ogg", 40, 1)
-	var/turf/T = get_turf(src)
+	playsound(hit_atom, "sound/effects/water_splash.ogg", 40, 1)
+	var/turf/T = get_turf(hit_atom)
 	if(!istype(T, /turf/open/space))
 		new /obj/effect/decal/cleanable/shit(T)
 	qdel(src)
