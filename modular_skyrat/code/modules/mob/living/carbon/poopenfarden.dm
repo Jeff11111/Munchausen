@@ -1,11 +1,13 @@
 //Shitting and pissing verbs
 /mob/living/carbon/verb/shit()
 	set name = "Defecate"
+	set category = "IC"
 	set desc = "You shouldn't do this while clothed."
 	return defecate(TRUE)
 
 /mob/living/carbon/verb/piss()
 	set name = "Urinate"
+	set category = "IC"
 	set desc = "You shouldn't do this while clothed."
 	return urinate(TRUE)
 
