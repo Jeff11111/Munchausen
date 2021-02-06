@@ -479,6 +479,8 @@
 			add_event(null, "defecation", /datum/mood_event/shit)
 		if(DEFECATION_LEVEL_VERY_POOPY to INFINITY)
 			add_event(null, "defecation", /datum/mood_event/veryshit)
+		else
+			clear_event(null, "defecation")
 
 /datum/component/mood/proc/HandleHydration(mob/living/L)
 	switch(L.hydration)
@@ -497,6 +499,8 @@
 			add_event(null, "urination", /datum/mood_event/piss)
 		if(URINATION_LEVEL_VERY_PISSY to INFINITY)
 			add_event(null, "urination", /datum/mood_event/verypiss)
+		else
+			clear_event(null, "urination")
 
 /datum/component/mood/proc/HandleSanity(mob/living/carbon/human/H)
 	if(!istype(H))
