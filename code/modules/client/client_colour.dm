@@ -30,6 +30,11 @@
 	sortTim(client_colours, /proc/cmp_clientcolour_priority)
 	update_client_colour()
 
+/mob/proc/has_client_colour(colour_type)
+	for(var/i in client_colours)
+		if(istype(i, colour_type))
+			return TRUE
+	return FALSE
 
 /*
 	Removes an instance of colour_type from the mob's client_colours list

@@ -291,7 +291,7 @@
 		if(2)
 			setSanity(sanity-0.3, minimum=SANITY_CRAZY)
 		if(3)
-			setSanity(sanity-0.2, minimum=SANITY_UNSTABLE)
+			setSanity(sanity-0.2, minimum=SANITY_UNSTABLE)	
 		if(4)
 			setSanity(sanity-0.1, minimum=SANITY_DISTURBED)
 		if(5)
@@ -308,7 +308,7 @@
 	HandleNutrition(owner)
 	HandleHydration(owner)
 
-/datum/component/mood/proc/setSanity(amount, minimum=SANITY_INSANE, maximum=SANITY_NEUTRAL)//I'm sure bunging this in here will have no negative repercussions.
+/datum/component/mood/proc/setSanity(amount, minimum=SANITY_LOST, maximum=SANITY_NEUTRAL)//I'm sure bunging this in here will have no negative repercussions.
 	var/mob/living/master = parent
 
 	if(amount == sanity)
@@ -397,7 +397,7 @@
 
 	insanity_effect = newval
 
-/datum/component/mood/proc/modify_sanity(datum/source, amount, minimum = SANITY_INSANE, maximum = SANITY_AMAZING)
+/datum/component/mood/proc/modify_sanity(datum/source, amount, minimum = SANITY_LOST, maximum = SANITY_AMAZING)
 	setSanity(sanity + amount, minimum, maximum)
 
 /datum/component/mood/proc/add_event(datum/source, category, type, param) //Category will override any events in the same category, should be unique unless the event is based on the same thing like hunger.
@@ -495,10 +495,10 @@
 		//more hallucination hahaHAHAHAH
 		H.hallucination++
 		//red screen crazy crazy
-		if(H.client && !(locate(/datum/client_colour/sanity/crazy) in H.client_colours))
+		if(!H.has_client_colour(/datum/client_colour/sanity/crazy))
 			H.add_client_colour(/datum/client_colour/sanity/crazy)
 		//killing self
-		if(prob(1))
+		if(prob(2))
 			if(H.canSuicide())
 				to_chat(H, "<span class='deadsay'>I've always felt alone. My whole life. For as long as I can remember. I don't know if I like it or if I'm used to it, but I know this; being lonely does things to you. Feeling shit and bitter and angry all the time just... Eats away at you...</span>")
 				H.kill_self()
@@ -512,32 +512,37 @@
 		else if(!(world.time % 4))
 			H.emote("cry")
 	if(sanity <= SANITY_CRAZY)
+		//gasping and moaning
+		if(prob(3))
+			H.emote("gasp")
+		else if(prob(2))
+			H.emote("moan")
 		//more hallucination haha
 		if(prob(50))
 			H.hallucination++
 		//prain trauma
-		if(length(H.get_traumas()) <= 2 && prob(2))
+		if(length(H.get_traumas()) <= 2 && prob(4))
 			H.gain_trauma_type(/datum/brain_trauma/severe, TRAUMA_RESILIENCE_SURGERY)
 		//get stunned
-		else if(prob(2))
-			to_chat(H, "<span class='deadsay'><b>I can't take this!</b></span>")
-			H.AdjustImmobilized(2 SECONDS)
-			H.AdjustDazed(3 SECONDS)
+		else if(prob(4))
+			to_chat(H, "<span class='deadsay'><b>I can't take this anymore!</b></span>")
+			H.AdjustImmobilized(4 SECONDS)
+			H.AdjustDazed(10 SECONDS)
 	if(sanity <= SANITY_UNSTABLE)
-		//hallucinations begin
-		if(prob(20))
-			H.hallucination++
 		//gmod horror map sounds
-		else if(prob(3))
+		if(prob(3) || (sanity <= SANITY_CRAZY && prob(6)))
 			SEND_SOUND(H.client, sound(pick(insanity_sounds), channel = CHANNEL_AMBIENT))
+		//hallucinations begin
+		if(prob(25))
+			H.hallucination++
 		//prain trauma
-		else if(length(H.get_traumas()) && prob(1))
+		else if(length(H.get_traumas()) && prob(2))
 			H.gain_trauma_type(/datum/brain_trauma/severe, TRAUMA_RESILIENCE_BASIC)
 	if(sanity <= SANITY_DISTURBED)
 		//it's all over, but the crying
-		if(prob(1))
+		if(prob(1) || (SANITY <= UNSTABLE && prob(4)))
 			H.emote("cry")
-		else if(prob(1))
+		else if(prob(2))
 			H.emote("sneeze")
 	if(sanity > SANITY_DISTURBED)
 		if(H.client)

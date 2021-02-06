@@ -146,7 +146,8 @@
 #define SANITY_DISTURBED 75
 #define SANITY_UNSTABLE 50
 #define SANITY_CRAZY 25
-#define SANITY_INSANE 0
+#define SANITY_INSANE 10
+#define SANITY_LOST 0
 
 //Nutrition levels for humans
 #define NUTRITION_LEVEL_FAT 600
