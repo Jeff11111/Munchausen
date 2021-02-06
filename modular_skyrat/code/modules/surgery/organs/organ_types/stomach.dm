@@ -24,12 +24,6 @@
 	. = ..()
 	if(!owner)
 		return
-	if(ishuman(owner))
-		var/mob/living/carbon/human/H = owner
-		if(.)
-			H.dna.species.handle_digestion(H)
-		handle_disgust(H)
-
 	if(!damage)
 		return
 	var/datum/reagent/consumable/nutriment/Nutri = locate(/datum/reagent/consumable/nutriment) in owner.reagents.reagent_list
@@ -40,7 +34,7 @@
 		owner.vomit(damage)
 		to_chat(owner, "<span class='warning'>Your stomach reels in pain as you're incapable of holding down all that food!</span>")
 
-/obj/item/organ/stomach/proc/handle_disgust(mob/living/carbon/human/H)
+/obj/item/organ/stomach/proc/handle_disgust(mob/living/carbon/H)
 	if(H.disgust)
 		var/pukeprob = 5 + 0.05 * H.disgust
 		if(H.disgust >= DISGUST_LEVEL_GROSS)
@@ -80,4 +74,4 @@
 	if(H && istype(H))
 		H.clear_alert("disgust")
 		SEND_SIGNAL(H, COMSIG_CLEAR_MOOD_EVENT, "disgust")
-	..()
+	. = ..()

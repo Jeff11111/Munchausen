@@ -101,7 +101,7 @@
 					hydration_ratio =  1
 			adjust_nutrition(-nutrition_ratio * HUNGER_FACTOR)
 			blood_volume = min((BLOOD_VOLUME_NORMAL * blood_ratio), blood_volume + spleen.get_blood() * nutrition_ratio * hydration_ratio)
-		
+
 		//Effects of low blood circulation
 		switch(get_blood_circulation())
 			if(BLOOD_VOLUME_EXCESS to BLOOD_VOLUME_MAX_LETHAL)
@@ -116,7 +116,7 @@
 			if(BLOOD_VOLUME_MAXIMUM to BLOOD_VOLUME_EXCESS)
 				if(prob(10))
 					to_chat(src, "<span class='warning'>You feel terribly bloated.</span>")
-		
+
 		//Effects of low blood oxygenation
 		var/word = pick("dizzy","woozy","faint")
 		switch(get_blood_oxygenation())
@@ -136,7 +136,7 @@
 					to_chat(src, "<span class='warning'>You feel extremely [word].</span>")
 			if(-INFINITY to BLOOD_VOLUME_SURVIVE)
 				adjustOxyLoss(10)
-		
+
 		if(get_blood_circulation() <= BLOOD_VOLUME_SURVIVE)
 			var/obj/item/organ/heart/bingus = getorganslot(ORGAN_SLOT_HEART)
 			if(bingus && !CHECK_BITFIELD(bingus.status, ORGAN_ROBOTIC))
@@ -378,7 +378,7 @@
 				return
 			else if(drop.drips < 9)
 				drop.drips++
-				drop.remove_overlays()
+				drop.overlays.Cut()
 				drop.transfer_mob_blood_dna(src)
 				drop.update_icon()
 				return

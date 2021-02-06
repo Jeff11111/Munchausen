@@ -53,12 +53,3 @@
 	description = "<span class='deadsay'><b>I saw the afterlife, and i don't like it!</b></span>"
 	mood_change = -8
 	timeout = 10 MINUTES
-
-//Hydration
-/datum/mood_event/thirsty
-	description = "<span class='warning'>I'm getting a bit thirsty.</span>"
-	mood_change = -5
-
-/datum/mood_event/dehydrated
-	description = "<span class='boldwarning'>I'm dehydrated!</span>"
-	mood_change = -10

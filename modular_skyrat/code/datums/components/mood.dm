@@ -474,6 +474,11 @@
 			add_event(null, "nutrition", /datum/mood_event/hungry)
 		if(0 to NUTRITION_LEVEL_STARVING)
 			add_event(null, "nutrition", /datum/mood_event/starving)
+	switch(L.defecation)
+		if(DEFECATION_LEVEL_POOPY to DEFECATION_LEVEL_VERY_POOPY)
+			add_event(null, "defecation", /datum/mood_event/shit)
+		if(DEFECATION_LEVEL_VERY_POOPY to INFINITY)
+			add_event(null, "defecation", /datum/mood_event/veryshit)
 
 /datum/component/mood/proc/HandleHydration(mob/living/L)
 	switch(L.hydration)
@@ -487,6 +492,11 @@
 			add_event(null, "hydration", /datum/mood_event/thirsty)
 		if(0 to HYDRATION_LEVEL_DEHYDRATED)
 			add_event(null, "hydration", /datum/mood_event/dehydrated)
+	switch(L.hydration)
+		if(URINATION_LEVEL_PISSY to URINATION_LEVEL_VERY_PISSY)
+			add_event(null, "urination", /datum/mood_event/piss)
+		if(URINATION_LEVEL_VERY_PISSY to INFINITY)
+			add_event(null, "urination", /datum/mood_event/verypiss)
 
 /datum/component/mood/proc/HandleSanity(mob/living/carbon/human/H)
 	if(!istype(H))

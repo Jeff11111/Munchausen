@@ -12,26 +12,12 @@
 	high_threshold = 40
 	maxHealth = 50
 	relative_size = 20
-	var/extra_hydration_gain = 0
-	var/extra_hydration_loss = 0
+	var/extra_urination_gain = 0
 
-/obj/item/organ/bladder/on_life()
-	. = ..()
-	if(!owner)
-		return
-	if(ishuman(owner))
-		var/mob/living/carbon/human/H = owner
-		if(.)
-			H.dna.species.handle_hydration(H)
-
-/obj/item/organ/bladder/proc/get_hydration_gain()
+/obj/item/organ/bladder/proc/get_urination_gain()
 	if(damage >= low_threshold)
-		return (1 - (1 * damage/maxHealth) + extra_hydration_gain)
+		if(!is_working())
+			return (2 + extra_urination_gain)
+		return (1 + (1 * damage/maxHealth) + extra_urination_gain)
 	else
-		return (1 + extra_hydration_gain)
-
-/obj/item/organ/bladder/proc/get_hydration_loss()
-	if(damage >= low_threshold)
-		return (1 + (1 * damage/maxHealth) + extra_hydration_loss)
-	else
-		return (1 + extra_hydration_loss)
+		return (1 + extra_urination_gain)

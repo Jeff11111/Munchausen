@@ -12,17 +12,12 @@
 	high_threshold = 40
 	maxHealth = 50
 	relative_size = 30
-	var/extra_nutrition_gain = 0
-	var/extra_nutrition_loss = 0
+	var/extra_defecation_gain = 0
 
-/obj/item/organ/intestines/proc/get_nutrition_gain()
+/obj/item/organ/intestines/proc/get_defecation_gain()
 	if(damage >= low_threshold)
-		return (1 - (1 * damage/maxHealth) + extra_nutrition_gain)
+		if(!is_working())
+			return (2 + extra_defecation_gain)
+		return (1 + (1 * damage/maxHealth) + extra_defecation_gain)
 	else
-		return (1 + extra_nutrition_gain)
-
-/obj/item/organ/intestines/proc/get_nutrition_loss()
-	if(damage >= low_threshold)
-		return (1 + (1 * damage/maxHealth) + extra_nutrition_loss)
-	else
-		return (1 + extra_nutrition_loss)
+		return (1 + extra_defecation_gain)

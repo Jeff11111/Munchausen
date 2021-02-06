@@ -17,6 +17,7 @@
 	//Kidneys work as secondary toxin sacks
 	var/tox_dam = 0 //How much toxin damage we have right now
 	var/max_tox_dam = 50 //Maximum toxin we can achieve
+	var/extra_hydration_loss = 0
 
 /obj/item/organ/kidneys/get_pain()
 	var/damage_mult = 1
@@ -76,3 +77,11 @@
 				owner.adjustToxLoss(0.5)
 			if(status & ORGAN_FAILING)
 				owner.adjustToxLoss(1)
+
+/obj/item/organ/kidneys/proc/get_hydration_loss()
+	if(damage >= low_threshold)
+		if(!is_working())
+			return (2 + extra_hydration_loss)
+		return (1 + (1 * damage/maxHealth) + extra_hydration_loss)
+	else
+		return (1 + extra_hydration_loss)

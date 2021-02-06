@@ -22,17 +22,12 @@
 
 	if(stat != DEAD)
 		handle_brain_damage()
-
-	if(stat != DEAD)
 		handle_liver()
-	
-	if(stat != DEAD)
 		handle_kidneys()
-
-	if(stat != DEAD)
+		handle_nutrition()
+		handle_hydration()
+		handle_disgust()
 		handle_shock()
-	
-	if(stat != DEAD)
 		handle_sleeping()
 
 /mob/living/carbon/PhysicalLife(seconds, times_fired)
@@ -87,7 +82,7 @@
 		return
 	if(ismob(loc))
 		return
-	
+
 	var/datum/gas_mixture/environment
 	if(loc)
 		environment = loc.return_air()
@@ -104,7 +99,7 @@
 			losebreath += 1  //You can't breath at all!
 		else if(InShock())
 			losebreath += 0.25 //You're having trouble breathing.
-	
+
 	//Suffocate
 	if(losebreath >= 1) //You've missed a breath, take oxy damage
 		losebreath--
@@ -132,7 +127,7 @@
 				loc_as_obj.handle_internal_lifeform(src,0)
 			//Do annoying breathing sounds
 			playsound(get_turf(src), 'modular_skyrat/sound/misc/tank_breathe.ogg', 40, 1, -6)
-	
+
 	check_breath(breath)
 
 	if(breath)
@@ -405,7 +400,7 @@
 				custom_pain("Pain jolts through your broken [BP.encased ? BP.encased : BP.name], staggering you!", 50, affecting = BP)
 				Stumble(10 SECONDS)
 				Stun(3 SECONDS)
-			
+
 			//Moving makes open wounds get infected much faster
 			for(var/datum/wound/W in BP.wounds)
 				if(W.infection_check())
@@ -413,7 +408,7 @@
 			for(var/datum/injury/IN in BP.injuries)
 				if(IN.infection_check())
 					IN.germ_level += IN.infection_rate
-		
+
 		//Always try to update the germ level of bodyparts
 		BP.update_germs()
 
@@ -430,7 +425,7 @@
 			var/obj/item/organ/O = V
 			if(O)
 				O.on_death() //Needed so organs decay while inside the body.
-		
+
 		//Rot the bodyparts too if we are dead
 		//This is stupid but makes my life easier
 		for(var/bopa in bodyparts)
@@ -755,6 +750,19 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 	if(prob(15))
 		to_chat(src, "<span class='danger'>You feel a stabbing pain in your abdomen!</span>")
 
+/////////////////////////////////////////////////////
+//NUTRITION/HYDRATION/DISGUST/SHITTEN/PISSEN/FARTEN//
+/////////////////////////////////////////////////////
+/mob/living/carbon/proc/handle_nutrition()
+	return dna?.species?.handle_nutrition(src)
+
+/mob/living/carbon/proc/handle_hydration()
+	return dna?.species?.handle_hydration(src)
+
+/mob/living/carbon/proc/handle_disgust()
+	var/obj/item/organ/stomach/stomach = getorganslot(ORGAN_SLOT_STOMACH)
+	return stomach.handle_disgust(src)
+
 ///////////
 //KIDNEYS//
 ///////////
@@ -795,7 +803,7 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 /mob/living/carbon/proc/can_heartattack()
 	if(!needs_heart())
 		return FALSE
-	
+
 	var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
 	if(!istype(heart))
 		return FALSE

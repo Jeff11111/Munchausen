@@ -206,6 +206,8 @@
 #define TRAIT_FAST_PUMP				"fast_pump"
 #define TRAIT_NICE_SHOT			"nice_shot" //hnnnnnnnggggg..... you're pretty good....
 //SKYRAT traits
+#define TRAIT_NOSHITTING		"no_shitten"
+#define TRAIT_NOPISSING			"no_pissen"
 #define TRAIT_NOHYDRATION		"no_hydration"
 #define TRAIT_NOPAIN			"no_pain"
 #define TRAIT_PAINGOOD			"pain_good"

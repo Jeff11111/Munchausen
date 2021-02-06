@@ -38,6 +38,8 @@
 		AA.onNewMob(src)
 	set_nutrition(rand(NUTRITION_LEVEL_START_MIN, NUTRITION_LEVEL_START_MAX))
 	set_hydration(rand(HYDRATION_LEVEL_START_MIN, HYDRATION_LEVEL_START_MAX))
+	set_defecation(rand(DEFECATION_LEVEL_START_MIN, DEFECATION_LEVEL_START_MAX))
+	set_urination(rand(URINATION_LEVEL_START_MIN, URINATION_LEVEL_START_MAX))
 	. = ..()
 	update_config_movespeed()
 	update_movespeed(TRUE)
@@ -1125,6 +1127,22 @@ GLOBAL_VAR_INIT(exploit_warn_spam_prevention, 0)
 ///Force set the mob nutrition
 /mob/proc/set_hydration(change)
 	hydration = max(0, change)
+
+///Adjust the defecation of a mob
+/mob/proc/adjust_defecation(change, max = INFINITY)
+	hydration = clamp(defecation + change, 0, max)
+
+///Force set the mob defecation
+/mob/proc/set_defecation(change)
+	defecation = max(0, change)
+
+///Adjust the urination of a mob
+/mob/proc/adjust_urination(change, max = INFINITY)
+	urination = clamp(urination + change, 0, max)
+
+///Force set the mob urination
+/mob/proc/set_urination(change)
+	urination = max(0, change)
 
 /mob/setMovetype(newval)
 	. = ..()
