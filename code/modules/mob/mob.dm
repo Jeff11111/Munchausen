@@ -1130,7 +1130,7 @@ GLOBAL_VAR_INIT(exploit_warn_spam_prevention, 0)
 
 ///Adjust the defecation of a mob
 /mob/proc/adjust_defecation(change, max = INFINITY)
-	hydration = clamp(defecation + change, 0, max)
+	defecation = clamp(defecation + change, 0, max)
 
 ///Force set the mob defecation
 /mob/proc/set_defecation(change)
