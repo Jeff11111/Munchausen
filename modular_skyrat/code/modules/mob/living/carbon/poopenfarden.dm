@@ -39,6 +39,8 @@
 		poopsock.name = "poop sock"
 		poopsock.desc = "A sock which has been used for defecation. Vile."
 		poopsock.add_atom_colour("#643200", 1)
+		poopsock.force += 10
+		poopsock.item_flags &= ~NOBLUDGEON
 	//Poo on the loo
 	else
 		visible_message("<span class='boldwarning'><b>[src]</b> poos on the loo!</span>",
