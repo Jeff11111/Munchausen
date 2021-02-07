@@ -6,8 +6,8 @@
 	maptext_width = 256
 	maptext_x = -16
 	plane = HUD_PLANE
-	var/style_carbon = "text-shadow:2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 0px 2px 0 #000,2px 0px 0 #000,0px -2px 0 #000,-2px 0px 0 #000,2px 2px 5px #000;color: #7ea1ff;"
-	var/style_atom = "text-shadow:2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 0px 2px 0 #000,2px 0px 0 #000,0px -2px 0 #000,-2px 0px 0 #000,2px 2px 5px #000;color: #85d1e4;"
+	var/style_carbon = "font-family: 'Small Fonts';font-size:12px;text-shadow: 1px 1px 0 #000000,-1px -1px 0 #000000, 2px 2px 0 #000000,-2px -2px 0 #000000;color: #7ea1ff;"
+	var/style_atom = "font-family: 'Small Fonts';font-size:12px;text-shadow: 1px 1px 0 #000000,-1px -1px 0 #000000, 2px 2px 0 #000000,-2px -2px 0 #000000;color: #85d1e4;"
 
 //OH NO NO NO
 /obj/screen/hover_tip/proc/clownify()
