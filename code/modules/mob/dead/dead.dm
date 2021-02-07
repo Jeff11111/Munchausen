@@ -5,6 +5,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 /mob/dead
 	plane = GHOST_PLANE
 	sight = SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
+	density = FALSE
 	move_resist = INFINITY
 	throwforce = 0
 
