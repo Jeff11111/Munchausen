@@ -8,7 +8,8 @@
 /datum/reagent/consumable/shit/reaction_mob(mob/living/M, method, reac_volume)
 	. = ..()
 	M.adjust_disgust(10)
-	M.ForceContractDisease(/datum/disease/appendicitis)
+	if(method == INGEST)
+		M.ForceContractDisease(/datum/disease/brainrot)
 
 /datum/reagent/consumable/shit/on_mob_life(mob/living/carbon/M)
 	. = ..()
