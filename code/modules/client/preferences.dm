@@ -171,7 +171,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 		"xenohead" = "Standard",
 		"xenotail" = "Xenomorph Tail",
 		"taur" = "None",
-		"genitals_use_skintone" = FALSE,
+		"genitals_use_skintone" = TRUE,
 		"has_cock" = FALSE,
 		"cyber_cock" = FALSE,
 		"cock_shape" = DEF_COCK_SHAPE,
@@ -1678,6 +1678,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 					for(var/i in pref_species.descriptors)
 						var/datum/mob_descriptor/md = pref_species.descriptors[i]
 						body_descriptors[i] = md.current_value
+					features["genitals_use_skintone"] = (pref_species?.use_skintones ? TRUE : FALSE)
 				SetSpecies(user)
 			else
 				SetSpecies(user)
