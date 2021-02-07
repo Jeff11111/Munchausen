@@ -1968,6 +1968,7 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 						for(var/i in pref_species.descriptors)
 							var/datum/mob_descriptor/md = pref_species.descriptors[i]
 							body_descriptors[i] = md.current_value
+						features["genitals_use_skintone"] = (pref_species?.use_skintones ? TRUE : FALSE)
 
 				if("custom_species")
 					var/new_species = reject_bad_name(input(user, "Choose your species subtype, if unique. This will show up on examinations and health scans. Do not abuse this:", "Character Preference", custom_species) as null|text)
