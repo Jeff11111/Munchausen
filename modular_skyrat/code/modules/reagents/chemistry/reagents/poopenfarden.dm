@@ -1,6 +1,6 @@
 //SHIT
 /datum/reagent/consumable/shit
-	name = "shit"
+	name = "Shit"
 	color = "#643200"
 	taste_description = "expired chocolate"
 	pH = 6.5
@@ -16,7 +16,7 @@
 
 //PISS
 /datum/reagent/consumable/piss
-	name = "piss"
+	name = "Piss"
 	color = COLOR_YELLOW
 	taste_description = "expired beer"
 	pH = 5
