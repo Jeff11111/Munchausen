@@ -208,7 +208,7 @@
 
 /obj/item/bodypart/Initialize()
 	. = ..()
-	if(starting_children.len)
+	if(length(starting_children))
 		for(var/I in starting_children)
 			new I(src)
 	if(!pain_disability_threshold)
@@ -524,7 +524,7 @@
 /obj/item/bodypart/attackby(obj/item/W, mob/user, params)
 	if(W.get_sharpness() && (user.a_intent == INTENT_HARM))
 		add_fingerprint(user)
-		if(!contents.len)
+		if(!length(contents))
 			user.visible_message("<span class='warning'><b>[user]</b> begins to butcher [src].</span>",\
 				"<span class='notice'>You begin butchering [src]...</span>")
 			if(do_after(user, 54, target = src))
@@ -1680,7 +1680,7 @@
 					I.pixel_x = px_x
 					I.pixel_y = px_y
 				standing |= subsubsubstanding
-	if(!standing.len)
+	if(!length(standing))
 		icon_state = initial(icon_state)//no overlays found, we default back to initial icon.
 		return
 	add_overlay(standing)
@@ -2029,7 +2029,7 @@
 		colorlist += ReadRGB("[H.dna.features["mcolor2"]]FF")
 		colorlist += ReadRGB("[H.dna.features["mcolor3"]]FF")
 		colorlist += list(0,0,0, S.hair_alpha)
-		for(var/index=1, index<=colorlist.len, index++)
+		for(var/index=1, index<=length(colorlist), index++)
 			colorlist[index] = colorlist[index]/255
 
 		if(S.use_skintones)
