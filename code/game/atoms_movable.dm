@@ -356,7 +356,7 @@
 		pulledby.stop_pulling()
 
 	throwing = TT
-	if(spin)
+	if(spin && !ismob(src))
 		SpinAnimation(5, 1)
 
 	SEND_SIGNAL(src, COMSIG_MOVABLE_POST_THROW, TT, spin)
