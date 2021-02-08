@@ -52,11 +52,11 @@
 			receive_damage(str*0.75)
 		user.changeNext_move(CLICK_CD_GRABBING)
 		if(user != victim)
-			user.visible_message("<span class='danger'><b>[user]</b> dislocates <b>[victim]</b>'s [name] with a sickening crack![victim.wound_message]</span>", "<span class='danger'>You dislocate <b>[victim]</b>'s [name] with a sickening crack!</span>", ignored_mobs=victim)
-			to_chat(victim, "<span class='userdanger'><b>[user]</b> dislocates your [name] with a sickening crack![victim.wound_message]</span>")
+			user.visible_message("<span class='danger'><b>[user]</b> wrenches <b>[victim]</b>'s [name] with a sickening crack![victim.wound_message]</span>", "<span class='danger'>You dislocate <b>[victim]</b>'s [name] with a sickening crack!</span>", ignored_mobs=victim)
+			to_chat(victim, "<span class='userdanger'><b>[user]</b> wrenches your [name] with a sickening crack![victim.wound_message]</span>")
 		else
-			user.visible_message("<span class='danger'><b>[user]</b> dislocates [user.p_their()] own [src.name] with a sickening crack![victim.wound_message]</span>",
-					"<span class='userdanger'>You dislocate your own [src.name]![victim.wound_message]</span>")
+			user.visible_message("<span class='danger'><b>[user]</b> wrenches [user.p_their()] own [src.name] with a sickening crack![victim.wound_message]</span>",
+					"<span class='userdanger'>You wrenches your own [src.name]![victim.wound_message]</span>")
 		//Clean the wound string too
 		victim.wound_message = ""
 	else
