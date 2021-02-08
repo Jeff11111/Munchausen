@@ -40,6 +40,8 @@
 				idiot.drop_all_held_items()
 				idiot.Immobilize(400)
 				idiot.DefaultCombatKnockdown(rand(200, 400))
+			else
+				idiot.Stun(1 SECONDS)
 		//Deal with damage
 		switch(idiot.mind.diceroll(STAT_DATUM(end)))
 			if(DICE_FAILURE)
