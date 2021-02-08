@@ -1427,7 +1427,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(ishuman(H))
 			var/mob/living/carbon/human/humie = H
 			hunger_rate *= humie.physiology.hunger_mod
-		if(hunger_rate > 0)
+		if(hunger_rate > 0 && !HAS_TRAIT(H, TRAIT_NOSHITTING))
 			H.adjust_defecation(hunger_rate)
 		H.adjust_nutrition(-hunger_rate)
 
@@ -1479,7 +1479,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(mood && mood.sanity > SANITY_DISTURBED)
 			dehydration_rate *= max(0.5, 1 - 0.002 * mood.sanity) //0.85 to 0.75
 
-		if(dehydration_rate > 0)
+		if(dehydration_rate > 0 && !HAS_TRAIT(H, TRAIT_NOPISSING))
 			H.adjust_urination(dehydration_rate)
 		H.adjust_hydration(-dehydration_rate)
 
