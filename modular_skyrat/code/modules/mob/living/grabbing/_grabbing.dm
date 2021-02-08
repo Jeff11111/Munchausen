@@ -148,6 +148,7 @@
 	//Can't grip with items in our hand
 	if(user.get_active_held_item())
 		return FALSE
+	
 	var/obj/item/bodypart/grasped_part = get_bodypart(check_zone(user.zone_selected))
 	user.changeNext_move(CLICK_CD_GRABBING)
 	playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
@@ -251,6 +252,6 @@
 
 //Stop grabbe
 /mob/living/carbon/setGrabState(newstate)
-	..()
+	. = ..()
 	if(grab_state <= GRAB_NOTGRABBING)
 		SEND_SIGNAL(src, COMSIG_LIVING_STOP_GRABBING)

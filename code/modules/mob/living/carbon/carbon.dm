@@ -188,13 +188,11 @@
 	if(istype(target, /obj/screen))
 		return
 
-	//CIT CHANGES - makes it impossible to throw while in stamina softcrit
 	if(IS_STAMCRIT(src))
 		to_chat(src, "<span class='warning'>You're too exhausted.</span>")
 		return
+	
 	var/random_turn = a_intent == INTENT_HARM
-	//END OF CIT CHANGES
-
 	var/obj/item/I = get_active_held_item()
 
 	var/atom/movable/thrown_thing
@@ -226,7 +224,6 @@
 			if(HAS_TRAIT(src, TRAIT_PACIFISM))
 				to_chat(src, "<span class='notice'>You gently let go of <b>[throwable_mob]</b>.</span>")
 				return
-			//skyrat edit
 			adjustStaminaLossBuffered(STAM_COST_THROW_MOB * ((throwable_mob.mob_size+1)**2))// throwing an entire person shall be very tiring
 			var/turf/start_T = get_turf(loc) //Get the start and target tile for the descriptors
 			var/turf/end_T = get_turf(target)
@@ -241,8 +238,7 @@
 							"<span class='danger'>You throw <b>[throwable_mob]</b>[power_throw ? " really hard!" : "."]</span>")
 			log_message("has thrown [throwable_mob] [power_throw ? "really hard" : ""]", LOG_ATTACK)
 			newtonian_move(get_dir(target, src))
-			throwable_mob.safe_throw_at(target, throwable_mob.throw_range, throwable_mob.throw_speed + power_throw, src, null, null, null, move_force)
-			//
+			throwable_mob.safe_throw_at(target, throwable_mob.throw_range, throwable_mob.throw_speed + power_throw, src, FALSE, FALSE, null, move_force)
 	else if(!CHECK_BITFIELD(I.item_flags, ABSTRACT) && !HAS_TRAIT(I, TRAIT_NODROP))
 		thrown_thing = I
 		dropItemToGround(I)
