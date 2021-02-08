@@ -101,7 +101,7 @@
 /obj/effect/decal/cleanable/blood/drip/update_icon_state()
 	. = ..()
 	if(drips >= 6)
-		icon_state = "drip[clamp(drips - 5, 1, 4)]"
+		icon_state = "bigdrip[clamp(drips - 5, 1, 4)]"
 
 /obj/effect/decal/cleanable/blood/gibs/human
 
