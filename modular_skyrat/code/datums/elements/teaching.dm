@@ -90,8 +90,8 @@
 	active_students |= puppet
 	source?.hud_used?.teach?.update_icon()
 	puppet?.hud_used?.teach?.update_icon()
-	source.visible_message("<b>[source.name]</b> starts teaching <b>[puppet.name]</b> about [skill_string].", \
-						"<span class='notice'>I start teaching <b>[puppet.name]</b> about [skill_string].")
+	source.visible_message("<b>[source.name]</b> starts teaching <b>[puppet.name]</b> about <i>[skill_string]</i>.", \
+						"<span class='notice'>I start teaching <b>[puppet.name]</b> about <i>[skill_string]</i>.")
 	while(do_mob(source, puppet, timeperteach))
 		if(puppet.mind.mob_skills[potential_skill].level >= maximum_teachernus)
 			to_chat(source, "<span class='notice'>I've taught <b>[puppet.name]</b> all that i could.</span>")
