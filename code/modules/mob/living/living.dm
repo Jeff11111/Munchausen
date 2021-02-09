@@ -630,6 +630,8 @@
 	radiation = 0
 	set_nutrition(NUTRITION_LEVEL_FED + 50)
 	set_hydration(HYDRATION_LEVEL_FULL)
+	set_urination(0)
+	set_defecation(0)
 	bodytemperature = BODYTEMP_NORMAL
 	set_blindness(0)
 	set_blurriness(0)
