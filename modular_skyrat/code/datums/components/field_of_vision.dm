@@ -112,7 +112,11 @@
   * Generates the holder and images (if not generated yet) and adds them to client.images.
   * Run when the component is registered to a player mob, or upon login.
   */
-/datum/component/field_of_vision/proc/generate_fov_holder(mob/M, _angle = 0, _shadow_angle = 0, register = TRUE)
+/datum/component/field_of_vision/proc/generate_fov_holder(mob/M, _angle = 0, _shadow_angle = 0, register = TRUE, delete_holder = FALSE)
+	if(_angle)
+		angle = _angle
+	if(_shadow_angle)
+		shadow_angle = _shadow_angle
 	if(QDELETED(fov))
 		fov = new
 		fov.hud = M.hud_used
@@ -132,14 +136,10 @@
 			adj_mask.appearance_flags = RESET_TRANSFORM
 			adj_mask.plane = FIELD_OF_VISION_BLOCKER_PLANE
 			fov.add_overlay(adj_mask)
-		if(_angle)
-			rotate_shadow_cone(_angle)
-		if(_shadow_angle)
-			shadow_angle = _shadow_angle
 	else
-		if(angle)
-			angle = _angle
-		if(shadow_angle)
+		if(angle && angle != _angle)
+			rotate_shadow_cone(_angle)
+		if(shadow_angle && shadow_angle != _shadow_angle)
 			shadow_angle = _shadow_angle
 	fov.alpha = (M.stat == DEAD) || (M.lying) ? 0 : 255
 	fov.icon_state = "[shadow_angle]"

@@ -124,3 +124,5 @@
 	priority = 1
 
 /datum/client_colour/monochrome/wraith
+
+/datum/client_colour/monochrome/blind

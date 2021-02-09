@@ -52,11 +52,13 @@
 /mob/proc/update_blindness()
 	if(eye_blind) // UNCONSCIOUS or has blind trait, or has temporary blindness
 		if(HAS_TRAIT(src, TRAIT_BLIND))
-			overlay_fullscreen("blind", /obj/screen/fullscreen/impaired)
+			overlay_fullscreen("blind", /obj/screen/fullscreen/impaired, 3)
 		else
 			overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
+		add_client_colour(/datum/client_colour/monochrome/blind)
 	else // CONSCIOUS no blind trait, no blindness
 		clear_fullscreen("blind")
+		remove_client_colour(/datum/client_colour/monochrome/blind)
 
 /**
   * Make the mobs vision blurry

@@ -140,7 +140,7 @@
 		fuck_with_fov = FALSE
 	if((eye_damaged >= BLIND_VISION_THREE) || is_disabled())
 		if(istype(other_eye) && (other_eye.eye_damaged < BLIND_VISION_THREE) && fuck_with_fov)
-			fov?.generate_fov_holder(owner, 315, FOV_180MINUS45_DEGREES, FALSE)
+			fov?.generate_fov_holder(owner, 315, FOV_180MINUS45_DEGREES, FALSE, TRUE)
 		else if(!istype(other_eye) || other_eye.eye_damaged >= BLIND_VISION_THREE)
 			owner.become_blind(EYE_DAMAGE)
 	else if(eye_damaged)
@@ -148,17 +148,17 @@
 		if(!istype(other_eye))
 			owner.overlay_fullscreen("right_eye_damage", /obj/screen/fullscreen/impaired/right, eye_damaged)
 			if(fuck_with_fov)
-				fov.generate_fov_holder(owner, 45, FOV_180PLUS45_DEGREES, FALSE)
+				fov.generate_fov_holder(owner, 45, FOV_180PLUS45_DEGREES, FALSE, TRUE)
 	else
 		owner.clear_fullscreen("left_eye_damage")
 		if(!istype(other_eye))
 			owner.clear_fullscreen("right_eye_damage")
 			if(fuck_with_fov)
-				fov.generate_fov_holder(owner, 45, FOV_180PLUS45_DEGREES, FALSE)
+				fov.generate_fov_holder(owner, 45, FOV_180PLUS45_DEGREES, FALSE, TRUE)
 	if(eye_damaged < BLIND_VISION_THREE)
 		owner.cure_blind(EYE_DAMAGE)
 		if(fuck_with_fov && fov.angle == 45)
-			fov.generate_fov_holder(owner, 0, FOV_180_DEGREES, FALSE)
+			fov.generate_fov_holder(owner, 0, FOV_180_DEGREES, FALSE, TRUE)
 	return eye_damaged
 
 #undef BLURRY_VISION_ONE
