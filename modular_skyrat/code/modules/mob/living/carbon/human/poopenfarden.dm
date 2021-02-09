@@ -62,7 +62,7 @@
 					"<span class='notice'>I piss myself...")
 		SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "piss_self", /datum/mood_event/shat_self)
 	//Gentleman's piss
-	if(urinel)
+	else if(urinel)
 		visible_message("<span class='notice'><b>[src]</b> pisses on [urinel].</span>", \
 					"<span class='notice'>I take a piss on [urinel]. Sweet relief.")
 	//Decent piss
