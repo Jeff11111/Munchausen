@@ -1760,7 +1760,7 @@ GLOBAL_LIST_INIT(food, list(
 					if(chosen)
 						chosen.add_to_prefs(user, src)
 				else if(newinput == "None")
-					if(!length(limb_augments[input]))
+					if(!length(limb_augments[refined_limbs[input]]))
 						return TRUE
 					var/datum/augment/augment = limb_augments[input][2]
 					augment.remove_from_prefs(user, src)
