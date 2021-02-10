@@ -1787,6 +1787,7 @@ GLOBAL_LIST_INIT(food, list(
 						return TRUE
 					var/datum/augment/augment = organ_augments[input][2]
 					augment.remove_from_prefs(user, src)
+		ShowChoices(user)
 		return TRUE
 	else if(href_list["preference"] == "language")
 		switch(href_list["task"])
