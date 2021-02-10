@@ -74,6 +74,8 @@
 /datum/augment/limb/robotic/apply(client/cli, datum/preferences/prefs, mob/living/carbon/C)
 	var/obj/item/bodypart/BP = new augmentation(C)
 	BP.limb_flags &= ~BODYPART_NOBLEED
+	BP.brute_reduction = 0
+	BP.burn_reduction = 0
 	BP.replace_limb(C, TRUE)
 
 /datum/augment/limb/robotic/head
