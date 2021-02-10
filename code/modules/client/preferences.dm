@@ -342,9 +342,10 @@ GLOBAL_LIST_INIT(food, list(
 			dat += "<center><h2>Augment Setup</h2>"
 			dat += "<a href='?_src_=prefs;preference=augments;task=configure'>Configure Augments</a></center>"
 			var/list/augments = list()
-			for(var/list/a in (organ_augments | limb_augments))
-				var/datum/augment/augment = a[1]
-				augments |= augment.name
+			for(var/a in organ_augments)
+				augments |= organ_augments[a][1]
+			for(var/a in limb_augments)
+				augments |= limb_augments[a][1]
 			dat += "<center><b>Current Augments:</b> [augments.len ? augments.Join(", ") : "None"]</center>"
 			dat += "<table width='100%'><tr><td width='75%' valign='top'>"
 			dat += "<h2>Identity</h2>"
@@ -1745,7 +1746,7 @@ GLOBAL_LIST_INIT(food, list(
 		if(input == "Limb")
 			var/list/refined_limbs = list()
 			for(var/a in ALL_BODYPARTS)
-				refined_limbs[check_zone(a)] = a
+				refined_limbs[parse_zone(a)] = a
 			input = input(user, "What limb?", "Cyberpunk 2077", null) as null|anything in refined_limbs
 			if(input)
 				var/list/augment_options = list()
@@ -2880,6 +2881,15 @@ GLOBAL_LIST_INIT(food, list(
 	character.give_genitals(TRUE) //character.update_genitals() is already called on genital.update_appearance()
 
 	character.dna.update_body_size(old_size)
+
+	for(var/a in organ_augments)
+		var/datum/augment/augment = organ_augments[a][2]
+		if(augment)
+			augment.apply(parent, src, character)
+	for(var/a in limb_augments)
+		var/datum/augment/augment = limb_augments[a][2]
+		if(augment)
+			augment.apply(parent, src, character)
 
 	SEND_SIGNAL(character, COMSIG_HUMAN_PREFS_COPIED_TO, src, icon_updates, roundstart_checks)
 

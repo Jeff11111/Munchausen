@@ -42,6 +42,8 @@
 	fooddislikes = SANITIZE_LIST(S["fooddislikes"])
 	if(fooddislikes.len > maxdislikes)
 		fooddislikes.Cut(maxdislikes+1)
+	limb_augments = SANITIZE_LIST(S["limb_augments"])
+	organ_augments = SANITIZE_LIST(S["organ_augments"])
 
 /datum/preferences/proc/cit_character_pref_save(savefile/S)
 	//ipcs
@@ -76,4 +78,6 @@
 	WRITE_FILE(S["alt_titles_preferences"], alt_titles_preferences)
 	WRITE_FILE(S["foodlikes"], foodlikes)
 	WRITE_FILE(S["fooddislikes"], fooddislikes)
+	WRITE_FILE(S["limb_augments"], limb_augments)
+	WRITE_FILE(S["organ_augments"], organ_augments)
 	//END OF SKYRAT CHANGES
