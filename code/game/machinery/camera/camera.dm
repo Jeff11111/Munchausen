@@ -292,6 +292,16 @@
 			new /obj/item/stack/cable_coil(loc, 2)
 	qdel(src)
 
+/obj/machinery/camera/update_icon()
+	. = ..()
+	switch(dir)
+		if(NORTH)
+			pixel_y = 21
+		if(EAST)
+			pixel_x = 10
+		if(WEST)
+			pixel_x = -10
+
 /obj/machinery/camera/update_icon_state()
 	if(!status)
 		icon_state = "[initial(icon_state)]1"
