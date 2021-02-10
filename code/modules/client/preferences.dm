@@ -1762,7 +1762,7 @@ GLOBAL_LIST_INIT(food, list(
 				else if(newinput == "None")
 					if(!length(limb_augments[refined_limbs[input]]))
 						return TRUE
-					var/datum/augment/augment = limb_augments[input][2]
+					var/datum/augment/augment = limb_augments[refined_limbs[input]][2]
 					augment.remove_from_prefs(user, src)
 		else if(input == "Organ")
 			var/list/organs = list()
