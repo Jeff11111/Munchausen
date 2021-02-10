@@ -535,6 +535,9 @@
 		if(user.loc == src) //so we don't get the message if we resisted multiple times and succeeded.
 			to_chat(user, "<span class='warning'>You fail to break out of [src]!</span>")
 
+/obj/structure/closet/alt_attack_hand(mob/user)
+	return AltClick(user)
+
 /obj/structure/closet/AltClick(mob/user)
 	. = ..()
 	if(!user.canUseTopic(src, be_close=TRUE) || !isturf(loc))
