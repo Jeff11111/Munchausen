@@ -290,14 +290,24 @@
 					break_light_tube(1)
 		spawn(1)
 			update(0)
+	update_icon()
 
 /obj/machinery/light/Destroy()
 	var/area/A = get_area(src)
 	if(A)
 		on = FALSE
-//		A.update_lights()
 	QDEL_NULL(cell)
 	return ..()
+
+/obj/machinery/light/update_icon()
+	. = ..()
+	switch(dir)
+		if(NORTH)
+			pixel_y = 21
+		if(EAST)
+			pixel_x = 10
+		if(WEST)
+			pixel_x = -10
 
 /obj/machinery/light/update_icon_state()
 	switch(status)		// set icon_states
