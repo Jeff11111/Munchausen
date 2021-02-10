@@ -339,6 +339,7 @@ GLOBAL_LIST_INIT(food, list(
 			dat += "<a href='?_src_=prefs;preference=food;task=menu'>Configure Foods</a></center>"
 			dat += "<center><b>Current Likings:</b> [foodlikes.len ? foodlikes.Join(", ") : "None"]</center>"
 			dat += "<center><b>Current Dislikings:</b> [fooddislikes.len ? fooddislikes.Join(", ") : "None"]</center>"
+			dat += "<center><h2>Augment Setup</h2>"
 			dat += "<a href='?_src_=prefs;preference=augments;task=configure'>Configure Augments</a></center>"
 			var/list/augments = list()
 			for(var/list/a in (organ_augments | limb_augments))
