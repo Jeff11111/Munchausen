@@ -35,6 +35,7 @@
 	light_burn_msg = ROBOTIC_LIGHT_BURN_MSG
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
+	render_like_organic = FALSE
 	starting_children = list(/obj/item/bodypart/l_hand/robot)
 
 /obj/item/bodypart/l_arm/robot/nochildren
@@ -63,6 +64,7 @@
 	light_burn_msg = ROBOTIC_LIGHT_BURN_MSG
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
+	render_like_organic = FALSE
 	starting_children = list()
 
 /obj/item/bodypart/r_arm/robot
@@ -88,6 +90,7 @@
 	light_burn_msg = ROBOTIC_LIGHT_BURN_MSG
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
+	render_like_organic = FALSE
 	starting_children = list(/obj/item/bodypart/r_hand/robot)
 
 /obj/item/bodypart/r_arm/robot/nochildren
@@ -116,6 +119,7 @@
 	light_burn_msg = ROBOTIC_LIGHT_BURN_MSG
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
+	render_like_organic = FALSE
 	starting_children = list()
 
 /obj/item/bodypart/l_leg/robot
@@ -141,6 +145,7 @@
 	light_burn_msg = ROBOTIC_LIGHT_BURN_MSG
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
+	render_like_organic = FALSE
 	starting_children = list(/obj/item/bodypart/l_foot/robot)
 
 /obj/item/bodypart/l_leg/robot/nochildren
@@ -169,6 +174,7 @@
 	light_burn_msg = ROBOTIC_LIGHT_BURN_MSG
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
+	render_like_organic = FALSE
 	starting_children = list()
 
 /obj/item/bodypart/r_leg/robot
@@ -194,6 +200,7 @@
 	light_burn_msg = ROBOTIC_LIGHT_BURN_MSG
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
+	render_like_organic = FALSE
 	starting_children = list(/obj/item/bodypart/r_foot/robot)
 
 /obj/item/bodypart/r_leg/robot/nochildren
@@ -222,6 +229,7 @@
 	light_burn_msg = ROBOTIC_LIGHT_BURN_MSG
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
+	render_like_organic = FALSE
 	starting_children = list()
 
 /obj/item/bodypart/chest/robot
@@ -246,6 +254,7 @@
 	light_burn_msg = ROBOTIC_LIGHT_BURN_MSG
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
+	render_like_organic = FALSE
 
 	var/wired = 0
 	var/obj/item/stock_parts/cell/cell = null
@@ -276,6 +285,7 @@
 	light_burn_msg = ROBOTIC_LIGHT_BURN_MSG
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
+	render_like_organic = FALSE
 	starting_children = list()
 
 /obj/item/bodypart/chest/robot/attackby(obj/item/W, mob/user, params)
@@ -337,6 +347,7 @@
 	light_burn_msg = ROBOTIC_LIGHT_BURN_MSG
 	medium_burn_msg = ROBOTIC_MEDIUM_BURN_MSG
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
+	render_like_organic = FALSE
 
 	var/obj/item/assembly/flash/handheld/flash1 = null
 	var/obj/item/assembly/flash/handheld/flash2 = null
