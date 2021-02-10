@@ -1,10 +1,10 @@
-/obj/item/bodypart/right_eye/robotic
+/obj/item/bodypart/right_eye/robot
 	name = "robotic eyes"
 	icon_state = "eye-c"
 	desc = "Your vision is augmented."
 	status = BODYPART_ROBOTIC | BODYPART_SYNTHETIC
 
-/obj/item/bodypart/right_eye/robotic/emp_act(severity)
+/obj/item/bodypart/right_eye/robot/emp_act(severity)
 	. = ..()
 	if(!owner || . & EMP_PROTECT_SELF)
 		return
@@ -13,14 +13,14 @@
 	if(severity == EMP_HEAVY)
 		receive_damage(brute=20)
 
-/obj/item/bodypart/right_eye/robotic/xray
+/obj/item/bodypart/right_eye/robot/xray
 	name = "\improper X-ray eyes"
 	desc = "These cybernetic eyes will give you X-ray vision. Blinking is futile."
 	eye_color = "000"
 	see_in_dark = 8
 	sight_flags = SEE_MOBS | SEE_OBJS | SEE_TURFS
 
-/obj/item/bodypart/right_eye/robotic/thermals
+/obj/item/bodypart/right_eye/robot/thermals
 	name = "thermal eyes"
 	desc = "These cybernetic eye implants will give you thermal vision. Vertical slit pupil included."
 	eye_color = "FC0"
@@ -29,7 +29,7 @@
 	flash_protect = -1
 	see_in_dark = 8
 
-/obj/item/bodypart/right_eye/robotic/flashlight
+/obj/item/bodypart/right_eye/robot/flashlight
 	name = "flashlight eyes"
 	desc = "It's two flashlights rigged together with some wire. Why would you put these in someone's head?"
 	eye_color ="fee5a3"
@@ -39,10 +39,10 @@
 	tint = INFINITY
 	var/obj/item/flashlight/eyelight/eye
 
-/obj/item/bodypart/right_eye/robotic/flashlight/emp_act(severity)
+/obj/item/bodypart/right_eye/robot/flashlight/emp_act(severity)
 	return
 
-/obj/item/bodypart/right_eye/robotic/flashlight/attach_limb(mob/living/carbon/C, special, ignore_parent_restriction)
+/obj/item/bodypart/right_eye/robot/flashlight/attach_limb(mob/living/carbon/C, special, ignore_parent_restriction)
 	. = ..()
 	if(!eye)
 		eye = new /obj/item/flashlight/eyelight()
@@ -51,7 +51,7 @@
 	eye.update_brightness(C)
 	C.become_blind("flashlight_eyes")
 
-/obj/item/bodypart/right_eye/robotic/flashlight/drop_limb(special, ignore_children, dismembered, destroyed, wounding_type)
+/obj/item/bodypart/right_eye/robot/flashlight/drop_limb(special, ignore_children, dismembered, destroyed, wounding_type)
 	. = ..()
 	if(. && !QDELETED(owner))
 		eye.on = FALSE
@@ -60,15 +60,15 @@
 		owner.cure_blind("flashlight_eyes")
 
 // Welding shield implant
-/obj/item/bodypart/right_eye/robotic/shield
+/obj/item/bodypart/right_eye/robot/shield
 	name = "shielded robotic eyes"
 	desc = "These reactive micro-shields will protect you from welders and flashes without obscuring your vision."
 	flash_protect = 2
 
-/obj/item/bodypart/right_eye/robotic/shield/emp_act(severity)
+/obj/item/bodypart/right_eye/robot/shield/emp_act(severity)
 	return
 
-/obj/item/bodypart/right_eye/robotic/glow
+/obj/item/bodypart/right_eye/robot/glow
 	name = "High Luminosity Eyes"
 	desc = "Special glowing eyes, used by snowflakes who want to be special."
 	eye_color = "000"
@@ -83,37 +83,37 @@
 	var/obj/effect/abstract/eye_lighting/on_mob
 	var/image/mob_overlay
 
-/obj/item/bodypart/right_eye/robotic/glow/Initialize()
+/obj/item/bodypart/right_eye/robot/glow/Initialize()
 	. = ..()
 	mob_overlay = image('icons/mob/human_face.dmi', "eyes_glow_gs")
 
-/obj/item/bodypart/right_eye/robotic/glow/Destroy()
+/obj/item/bodypart/right_eye/robot/glow/Destroy()
 	terminate_effects()
 	. = ..()
 
-/obj/item/bodypart/right_eye/robotic/glow/drop_limb(special, ignore_children, dismembered, destroyed, wounding_type)
+/obj/item/bodypart/right_eye/robot/glow/drop_limb(special, ignore_children, dismembered, destroyed, wounding_type)
 	terminate_effects()
 	. = ..()
 
-/obj/item/bodypart/right_eye/robotic/glow/proc/terminate_effects()
+/obj/item/bodypart/right_eye/robot/glow/proc/terminate_effects()
 	if(owner && active)
 		deactivate(TRUE)
 	active = FALSE
 	clear_visuals(TRUE)
 
-/obj/item/bodypart/right_eye/robotic/glow/ui_action_click(owner, action)
+/obj/item/bodypart/right_eye/robot/glow/ui_action_click(owner, action)
 	if(istype(action, /datum/action/item_action/organ_action/toggle))
 		toggle_active()
 	else if(istype(action, /datum/action/item_action/organ_action/use))
 		prompt_for_controls(owner)
 
-/obj/item/bodypart/right_eye/robotic/glow/proc/toggle_active()
+/obj/item/bodypart/right_eye/robot/glow/proc/toggle_active()
 	if(active)
 		deactivate()
 	else
 		activate()
 
-/obj/item/bodypart/right_eye/robotic/glow/proc/prompt_for_controls(mob/user)
+/obj/item/bodypart/right_eye/robot/glow/proc/prompt_for_controls(mob/user)
 	var/C = input(owner, "Select Color", "Select color", "#ffffff") as color|null
 	if(!C || QDELETED(src) || QDELETED(user) || QDELETED(owner) || owner != user)
 		return
@@ -124,7 +124,7 @@
 	set_distance(clamp(range, 0, max_light_beam_distance))
 	assume_rgb(C)
 
-/obj/item/bodypart/right_eye/robotic/glow/proc/assume_rgb(newcolor)
+/obj/item/bodypart/right_eye/robot/glow/proc/assume_rgb(newcolor)
 	current_color_string = newcolor
 	eye_color = RGB2EYECOLORSTRING(current_color_string)
 	sync_light_effects()
@@ -132,26 +132,26 @@
 	if(!QDELETED(owner) && ishuman(owner))		//Other carbon mobs don't have eye color.
 		owner.dna.species.handle_body(owner)
 
-/obj/item/bodypart/right_eye/robotic/glow/proc/cycle_mob_overlay()
+/obj/item/bodypart/right_eye/robot/glow/proc/cycle_mob_overlay()
 	remove_mob_overlay()
 	mob_overlay.color = current_color_string
 	add_mob_overlay()
 
-/obj/item/bodypart/right_eye/robotic/glow/proc/add_mob_overlay()
+/obj/item/bodypart/right_eye/robot/glow/proc/add_mob_overlay()
 	if(!QDELETED(owner))
 		owner.add_overlay(mob_overlay)
 
-/obj/item/bodypart/right_eye/robotic/glow/proc/remove_mob_overlay()
+/obj/item/bodypart/right_eye/robot/glow/proc/remove_mob_overlay()
 	if(!QDELETED(owner))
 		owner.cut_overlay(mob_overlay)
 
-/obj/item/bodypart/right_eye/robotic/glow/emp_act()
+/obj/item/bodypart/right_eye/robot/glow/emp_act()
 	. = ..()
 	if(!active || . & EMP_PROTECT_SELF)
 		return
 	deactivate(silent = TRUE)
 
-/obj/item/bodypart/right_eye/robotic/glow/proc/activate(silent = FALSE)
+/obj/item/bodypart/right_eye/robot/glow/proc/activate(silent = FALSE)
 	start_visuals()
 	if(!silent)
 		to_chat(owner, "<span class='warning'>Your [src] clicks and makes a whining noise, before shooting out a beam of light!</span>")
@@ -159,7 +159,7 @@
 	RegisterSignal(owner, COMSIG_ATOM_DIR_CHANGE, .proc/update_visuals)
 	cycle_mob_overlay()
 
-/obj/item/bodypart/right_eye/robotic/glow/proc/deactivate(silent = FALSE)
+/obj/item/bodypart/right_eye/robot/glow/proc/deactivate(silent = FALSE)
 	clear_visuals()
 	if(!silent)
 		to_chat(owner, "<span class='warning'>Your [src] shuts off!</span>")
@@ -167,7 +167,7 @@
 	UnregisterSignal(owner, COMSIG_ATOM_DIR_CHANGE)
 	remove_mob_overlay()
 
-/obj/item/bodypart/right_eye/robotic/glow/proc/update_visuals(datum/source, olddir, newdir)
+/obj/item/bodypart/right_eye/robot/glow/proc/update_visuals(datum/source, olddir, newdir)
 	if((LAZYLEN(eye_lighting) < light_beam_distance) || !on_mob)
 		regenerate_light_effects()
 	var/turf/scanfrom = get_turf(owner)
@@ -191,7 +191,7 @@
 		else
 			L.forceMove(scanning)
 
-/obj/item/bodypart/right_eye/robotic/glow/proc/clear_visuals(delete_everything = FALSE)
+/obj/item/bodypart/right_eye/robot/glow/proc/clear_visuals(delete_everything = FALSE)
 	if(delete_everything)
 		QDEL_LIST(eye_lighting)
 		QDEL_NULL(on_mob)
@@ -202,7 +202,7 @@
 		if(!QDELETED(on_mob))
 			on_mob.forceMove(src)
 
-/obj/item/bodypart/right_eye/robotic/glow/proc/start_visuals()
+/obj/item/bodypart/right_eye/robot/glow/proc/start_visuals()
 	if(!islist(eye_lighting))
 		regenerate_light_effects()
 	if((LAZYLEN(eye_lighting) < light_beam_distance) || !on_mob)
@@ -210,32 +210,32 @@
 	sync_light_effects()
 	update_visuals()
 
-/obj/item/bodypart/right_eye/robotic/glow/proc/set_distance(dist)
+/obj/item/bodypart/right_eye/robot/glow/proc/set_distance(dist)
 	light_beam_distance = dist
 	regenerate_light_effects()
 
-/obj/item/bodypart/right_eye/robotic/glow/proc/regenerate_light_effects()
+/obj/item/bodypart/right_eye/robot/glow/proc/regenerate_light_effects()
 	clear_visuals(TRUE)
 	on_mob = new(src)
 	for(var/i in 1 to light_beam_distance)
 		LAZYADD(eye_lighting,new /obj/effect/abstract/eye_lighting(src))
 	sync_light_effects()
 
-/obj/item/bodypart/right_eye/robotic/glow/proc/sync_light_effects()
+/obj/item/bodypart/right_eye/robot/glow/proc/sync_light_effects()
 	for(var/I in eye_lighting)
 		var/obj/effect/abstract/eye_lighting/L = I
 		L.set_light(light_object_range, light_object_power, current_color_string)
 	if(on_mob)
 		on_mob.set_light(1, 1, current_color_string)
 
-/obj/item/bodypart/right_eye/robotic/glow/attach_limb(mob/living/carbon/C, special, ignore_parent_restriction)
+/obj/item/bodypart/right_eye/robot/glow/attach_limb(mob/living/carbon/C, special, ignore_parent_restriction)
 	. = ..()
 	if(.)
 		RegisterSignal(C, COMSIG_MOB_DEATH, .proc/deactivate)
 		RegisterSignal(C, COMSIG_LIVING_GAIN_UNCONSCIOUS, .proc/deactivate)
 		RegisterSignal(C, COMSIG_LIVING_STOP_UNCONSCIOUS, .proc/active_block)
 
-/obj/item/bodypart/right_eye/robotic/glow/drop_limb(special, ignore_children, dismembered, destroyed, wounding_type)
+/obj/item/bodypart/right_eye/robot/glow/drop_limb(special, ignore_children, dismembered, destroyed, wounding_type)
 	. = ..()
 	UnregisterSignal(owner, COMSIG_MOB_DEATH)
 	UnregisterSignal(owner, COMSIG_LIVING_GAIN_UNCONSCIOUS)

@@ -3,7 +3,7 @@
 #define BACKPACK_SLOT_AMT	4
 
 GLOBAL_LIST_EMPTY(preferences_datums)
-GLOBAL_LIST_INIT(food, list( // Skyrat addition
+GLOBAL_LIST_INIT(food, list(
 		"Meat" = MEAT,
 		"Vegetables" = VEGETABLES,
 		"Raw" = RAW,
@@ -203,17 +203,19 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 		"ipc_antenna" = "None",
 		"meat_type" = "Mammalian",
 		"body_model" = MALE,
-		"ipc_chassis" = "Morpheus Cyberkinetics(Greyscale)", //SKYRAT CHANGE
+		"ipc_chassis" = "Morpheus Cyberkinetics(Greyscale)",
 		"body_size" = RESIZE_DEFAULT_SIZE
 		)
 	var/list/custom_names = list()
 	var/prefered_security_department = SEC_DEPT_RANDOM
 	var/custom_species = ""
+	var/list/organ_augments = list() //Organ slots associated with augments
+	var/list/limb_augments = list() //Body zones associated with augments
 
-	//Specials aka "QUIRKS"
+	// Specials aka "QUIRKS"
 	var/special_char = FALSE
 
-	//Job preferences 2.0 - indexed by job title , no key or value implies never
+	// Job preferences 2.0 - indexed by job title, no key or value implies never
 	var/list/job_preferences = list()
 
 	// Want randomjob if preferences already filled - Donkie
@@ -337,6 +339,12 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 			dat += "<a href='?_src_=prefs;preference=food;task=menu'>Configure Foods</a></center>"
 			dat += "<center><b>Current Likings:</b> [foodlikes.len ? foodlikes.Join(", ") : "None"]</center>"
 			dat += "<center><b>Current Dislikings:</b> [fooddislikes.len ? fooddislikes.Join(", ") : "None"]</center>"
+			dat += "<a href='?_src_=prefs;preference=augments;task=configure'>Configure Augments</a></center>"
+			var/list/augments = list()
+			for(var/list/a in (organ_augments | limb_augments))
+				var/datum/augment/augment = a[1]
+				augments |= augment.name
+			dat += "<center><b>Current Augments:</b> [augments.len ? augments.Join(", ") : "None"]</center>"
 			dat += "<table width='100%'><tr><td width='75%' valign='top'>"
 			dat += "<h2>Identity</h2>"
 			if(jobban_isbanned(user, "appearance"))
@@ -1693,7 +1701,6 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 			NP << browse(null, "window=playersetup") //closes the player setup window
 			NP.new_player_panel()
 		return TRUE
-	//SKYRAT CHANGE - food prefs and language pref
 	else if(href_list["preference"] == "food")
 		switch(href_list["task"])
 			if("close")
@@ -1731,6 +1738,53 @@ GLOBAL_LIST_INIT(food, list( // Skyrat addition
 				SetFood(user)
 			else
 				SetFood(user)
+		return TRUE
+	else if(href_list["preference"] == "augments")
+		var/input = input(user, "What do you wish to augment?", "Cyberpunk 2077", null) as null|anything in list("Limb", "Organ")
+		if(input == "Limb")
+			var/list/refined_limbs = list()
+			for(var/a in ALL_BODYPARTS)
+				refined_limbs[check_zone(a)] = a
+			input = input(user, "What limb?", "Cyberpunk 2077", null) as null|anything in refined_limbs
+			if(input)
+				var/list/augment_options = list()
+				for(var/a in GLOB.augment_datums)
+					var/datum/augment/augment = a
+					if(augment.limb && augment.slot == refined_limbs[input])
+						augment_options[augment.name] = augment
+				var/newinput = input(user, "What augment?", "Cyberpunk 2077", null) as null|anything in (augment_options + "None")
+				if(newinput && newinput != "None")
+					var/datum/augment/chosen = augment_options[newinput]
+					if(chosen)
+						chosen.add_to_prefs(user, src)
+				else if(newinput == "None")
+					if(!length(limb_augments[input]))
+						return TRUE
+					var/datum/augment/augment = limb_augments[input][2]
+					augment.remove_from_prefs(user, src)
+		else if(input == "Organ")
+			var/list/organs = list()
+			for(var/a in GLOB.augment_datums)
+				var/datum/augment/augment = a
+				if(!augment.limb)
+					organs |= augment.slot
+			input = input(user, "What organ?", "Cyberpunk 2077", null) as null|anything in organs
+			if(input)
+				var/list/augment_options = list()
+				for(var/a in GLOB.augment_datums)
+					var/datum/augment/augment = a
+					if(!augment.limb && augment.slot == input)
+						augment_options[augment.name] = augment
+				var/newinput = input(user, "What augment?", "Cyberpunk 2077", null) as null|anything in (augment_options + "None")
+				if(newinput && newinput != "None")
+					var/datum/augment/chosen = augment_options[newinput]
+					if(chosen)
+						chosen.add_to_prefs(user, src)
+				else if(newinput == "None")
+					if(!length(organ_augments[input]))
+						return TRUE
+					var/datum/augment/augment = organ_augments[input][2]
+					augment.remove_from_prefs(user, src)
 		return TRUE
 	else if(href_list["preference"] == "language")
 		switch(href_list["task"])

@@ -404,7 +404,7 @@
 
 /datum/crafting_recipe/left_flashlight_eyes
 	name = "Left Flashlight Eye"
-	result = /obj/item/bodypart/left_eye/robotic/flashlight
+	result = /obj/item/bodypart/left_eye/robot/flashlight
 	time = 10
 	reqs = list(
 		/obj/item/flashlight = 1,
@@ -415,7 +415,7 @@
 
 /datum/crafting_recipe/right_flashlight_eyes
 	name = "Right Flashlight Eye"
-	result = /obj/item/bodypart/right_eye/robotic/flashlight
+	result = /obj/item/bodypart/right_eye/robot/flashlight
 	time = 10
 	reqs = list(
 		/obj/item/flashlight = 1,

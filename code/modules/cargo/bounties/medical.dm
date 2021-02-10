@@ -37,7 +37,7 @@
 	reward = 3000
 	required_count = 3
 	wanted_types = list(/obj/item/bodypart/left_eye, /obj/item/bodypart/right_eye)
-	exclude_types = list(/obj/item/bodypart/left_eye/robotic, /obj/item/bodypart/right_eye/robotic)
+	exclude_types = list(/obj/item/bodypart/left_eye/robot, /obj/item/bodypart/right_eye/robot)
 
 /datum/bounty/item/medical/tongue
 	name = "Tongues"

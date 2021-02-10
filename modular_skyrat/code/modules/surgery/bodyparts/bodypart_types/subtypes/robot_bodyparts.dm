@@ -20,7 +20,8 @@
 	icon = 'modular_skyrat/icons/mob/augments/augments.dmi'
 	flags_1 = CONDUCT_1
 	icon_state = "borg_l_arm"
-	status = BODYPART_ROBOTIC | BODYPART_NOBLEED
+	status = BODYPART_ROBOTIC
+	limb_flags = BODYPART_NOBLEED
 
 	brute_reduction = 2
 	burn_reduction = 1
@@ -36,6 +37,9 @@
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
 	starting_children = list(/obj/item/bodypart/l_hand/robot)
 
+/obj/item/bodypart/l_arm/robot/nochildren
+	starting_children = null
+
 /obj/item/bodypart/l_hand/robot
 	name = "cyborg left hand"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
@@ -44,7 +48,8 @@
 	icon = 'modular_skyrat/icons/mob/augments/augments.dmi'
 	flags_1 = CONDUCT_1
 	icon_state = "borg_l_hand"
-	status = BODYPART_ROBOTIC | BODYPART_NOBLEED
+	status = BODYPART_ROBOTIC
+	limb_flags = BODYPART_NOBLEED
 
 	brute_reduction = 2
 	burn_reduction = 1
@@ -68,7 +73,8 @@
 	icon = 'modular_skyrat/icons/mob/augments/augments.dmi'
 	flags_1 = CONDUCT_1
 	icon_state = "borg_r_arm"
-	status = BODYPART_ROBOTIC | BODYPART_NOBLEED
+	status = BODYPART_ROBOTIC
+	limb_flags = BODYPART_NOBLEED
 
 	brute_reduction = 2
 	burn_reduction = 1
@@ -84,6 +90,9 @@
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
 	starting_children = list(/obj/item/bodypart/r_hand/robot)
 
+/obj/item/bodypart/r_arm/robot/nochildren
+	starting_children = null
+
 /obj/item/bodypart/r_hand/robot
 	name = "cyborg right hand"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
@@ -92,7 +101,8 @@
 	icon = 'modular_skyrat/icons/mob/augments/augments.dmi'
 	flags_1 = CONDUCT_1
 	icon_state = "borg_r_hand"
-	status = BODYPART_ROBOTIC | BODYPART_NOBLEED
+	status = BODYPART_ROBOTIC
+	limb_flags = BODYPART_NOBLEED
 
 	brute_reduction = 2
 	burn_reduction = 1
@@ -116,7 +126,8 @@
 	icon = 'modular_skyrat/icons/mob/augments/augments.dmi'
 	flags_1 = CONDUCT_1
 	icon_state = "borg_l_leg"
-	status = BODYPART_ROBOTIC | BODYPART_NOBLEED
+	status = BODYPART_ROBOTIC
+	limb_flags = BODYPART_NOBLEED
 
 	brute_reduction = 2
 	burn_reduction = 1
@@ -132,6 +143,9 @@
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
 	starting_children = list(/obj/item/bodypart/l_foot/robot)
 
+/obj/item/bodypart/l_leg/robot/nochildren
+	starting_children = null
+
 /obj/item/bodypart/l_foot/robot
 	name = "cyborg left foot"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
@@ -140,7 +154,8 @@
 	icon = 'modular_skyrat/icons/mob/augments/augments.dmi'
 	flags_1 = CONDUCT_1
 	icon_state = "borg_l_foot"
-	status = BODYPART_ROBOTIC | BODYPART_NOBLEED
+	status = BODYPART_ROBOTIC
+	limb_flags = BODYPART_NOBLEED
 
 	brute_reduction = 2
 	burn_reduction = 1
@@ -164,7 +179,8 @@
 	icon = 'modular_skyrat/icons/mob/augments/augments.dmi'
 	flags_1 = CONDUCT_1
 	icon_state = "borg_r_leg"
-	status = BODYPART_ROBOTIC | BODYPART_NOBLEED
+	status = BODYPART_ROBOTIC
+	limb_flags = BODYPART_NOBLEED
 
 	brute_reduction = 2
 	burn_reduction = 1
@@ -180,6 +196,9 @@
 	heavy_burn_msg = ROBOTIC_HEAVY_BURN_MSG
 	starting_children = list(/obj/item/bodypart/r_foot/robot)
 
+/obj/item/bodypart/r_leg/robot/nochildren
+	starting_children = null
+
 /obj/item/bodypart/r_foot/robot
 	name = "cyborg right foot"
 	desc = "A skeletal limb wrapped in pseudomuscles, with a low-conductivity case."
@@ -188,7 +207,8 @@
 	icon = 'modular_skyrat/icons/mob/augments/augments.dmi'
 	flags_1 = CONDUCT_1
 	icon_state = "borg_r_foot"
-	status = BODYPART_ROBOTIC | BODYPART_NOBLEED
+	status = BODYPART_ROBOTIC
+	limb_flags = BODYPART_NOBLEED
 
 	brute_reduction = 2
 	burn_reduction = 1
@@ -211,7 +231,8 @@
 	icon = 'modular_skyrat/icons/mob/augments/augments.dmi'
 	flags_1 = CONDUCT_1
 	icon_state = "borg_chest"
-	status = BODYPART_ROBOTIC | BODYPART_NOBLEED
+	status = BODYPART_ROBOTIC
+	limb_flags = BODYPART_NOBLEED
 
 	brute_reduction = 2
 	burn_reduction = 1
@@ -230,6 +251,9 @@
 	var/obj/item/stock_parts/cell/cell = null
 	starting_children = list(/obj/item/bodypart/groin/robot)
 
+/obj/item/bodypart/chest/robot/nochildren
+	starting_children = null
+
 /obj/item/bodypart/groin/robot
 	name = "cyborg groin"
 	desc = "A heavily reinforced case containing cyborg logic boards."
@@ -237,7 +261,8 @@
 	icon = 'modular_skyrat/icons/mob/augments/augments.dmi'
 	flags_1 = CONDUCT_1
 	icon_state = "borg_groin"
-	status = BODYPART_ROBOTIC | BODYPART_NOBLEED
+	status = BODYPART_ROBOTIC
+	limb_flags = BODYPART_NOBLEED
 
 	brute_reduction = 2
 	burn_reduction = 1
@@ -297,7 +322,8 @@
 	icon = 'modular_skyrat/icons/mob/augments/augments.dmi'
 	flags_1 = CONDUCT_1
 	icon_state = "borg_head"
-	status = BODYPART_ROBOTIC | BODYPART_NOBLEED
+	status = BODYPART_ROBOTIC
+	limb_flags = BODYPART_NOBLEED
 
 	brute_reduction = 5
 	burn_reduction = 4
@@ -314,7 +340,10 @@
 
 	var/obj/item/assembly/flash/handheld/flash1 = null
 	var/obj/item/assembly/flash/handheld/flash2 = null
-	starting_children = list(/obj/item/bodypart/left_eye/robotic, /obj/item/bodypart/right_eye/robotic, /obj/item/bodypart/mouth/robot)
+	starting_children = list(/obj/item/bodypart/left_eye/robot, /obj/item/bodypart/right_eye/robot, /obj/item/bodypart/mouth/robot)
+
+/obj/item/bodypart/head/robot/nochildren
+	starting_children = null
 
 /obj/item/bodypart/head/robot/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/assembly/flash/handheld))
@@ -375,7 +404,8 @@
 	icon = 'modular_skyrat/icons/obj/surgery.dmi'
 	flags_1 = CONDUCT_1
 	icon_state = "jaw-c"
-	status = BODYPART_ROBOTIC | BODYPART_NOBLEED
+	status = BODYPART_ROBOTIC
+	limb_flags = BODYPART_NOBLEED
 
 /obj/item/bodypart/neck/robot
 	name = "cyborg neck"
@@ -384,7 +414,8 @@
 	icon = 'modular_skyrat/icons/obj/surgery.dmi'
 	flags_1 = CONDUCT_1
 	icon_state = "vertebrae-c"
-	status = BODYPART_ROBOTIC | BODYPART_NOBLEED
+	status = BODYPART_ROBOTIC
+	limb_flags = BODYPART_NOBLEED
 
 // Surplus limbs
 /obj/item/bodypart/l_arm/robot/surplus

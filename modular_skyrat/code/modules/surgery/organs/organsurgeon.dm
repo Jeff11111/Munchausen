@@ -85,13 +85,13 @@
 /obj/item/limbsurgeon/gloweyes
 	desc = "A single use autosurgeon that contains a luminiscent left eye. A screwdriver can be used to remove it, but implants can't be placed back in."
 	uses = 1
-	starting_bodypart = /obj/item/bodypart/left_eye/robotic/glow
+	starting_bodypart = /obj/item/bodypart/left_eye/robot/glow
 
 /obj/item/limbsurgeon/thermal_eyes
-	starting_bodypart = /obj/item/bodypart/left_eye/robotic/thermals
+	starting_bodypart = /obj/item/bodypart/left_eye/robot/thermals
 
 /obj/item/limbsurgeon/xray_eyes
-	starting_bodypart = /obj/item/bodypart/left_eye/robotic/xray
+	starting_bodypart = /obj/item/bodypart/left_eye/robot/xray
 
 /obj/item/autosurgeon/anti_stun
 	starting_organ = /obj/item/organ/cyberimp/brain/anti_stun

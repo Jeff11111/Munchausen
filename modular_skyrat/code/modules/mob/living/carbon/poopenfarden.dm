@@ -23,7 +23,7 @@
 	var/obj/item/organ/intestines = getorganslot(ORGAN_SLOT_INTESTINES)
 	if(!intestines || !intestines.is_working())
 		if(intentional)
-			to_chat(src, "<span class='warning'>I don't have functional intestines!/span>")
+			to_chat(src, "<span class='warning'>I don't have functional intestines!</span>")
 		return
 	var/obj/item/clothing/underwear/socks/poopsock = locate() in get_turf(src)
 	var/obj/structure/toilet/toiler = locate() in get_turf(src)
@@ -62,7 +62,7 @@
 	var/obj/item/organ/bladder/bladder = getorganslot(ORGAN_SLOT_BLADDER)
 	if(!bladder || !bladder.is_working())
 		if(intentional)
-			to_chat(src, "<span class='warning'>I don't have a functional bladder!/span>")
+			to_chat(src, "<span class='warning'>I don't have a functional bladder!</span>")
 		return
 	var/obj/item/organ/genital/penis = getorganslot(ORGAN_SLOT_PENIS)
 	var/obj/structure/sink/sinker = locate() in get_turf(src)

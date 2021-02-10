@@ -309,8 +309,8 @@ mob/living/carbon/human/dummy/travelling_trader/animal_hunter/Initialize()
 		/obj/item/organ/brain = 1,
 		/obj/item/bodypart/head = 1)
 	possible_rewards = list(/obj/item/organ/cyberimp/mouth/breathing_tube = 1,
-		/obj/item/bodypart/left_eye/robotic/thermals = 1,
-		/obj/item/bodypart/right_eye/robotic/thermals = 1,
+		/obj/item/bodypart/left_eye/robot/thermals = 1,
+		/obj/item/bodypart/right_eye/robot/thermals = 1,
 		/obj/item/organ/cyberimp/arm/toolset = 1,
 		/obj/item/organ/cyberimp/arm/surgery = 1,
 		/obj/item/organ/cyberimp/arm/janitor = 1,

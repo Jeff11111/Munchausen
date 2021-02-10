@@ -60,7 +60,7 @@
 /datum/outfit/synthetic/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	if(visualsOnly)
 		return
-	var/obj/item/bodypart/left_eye/robotic/glow/eyes = new()
+	var/obj/item/bodypart/left_eye/robot/glow/eyes = new()
 	eyes.attach_limb(H, TRUE)
 
 /datum/outfit/spacepol
