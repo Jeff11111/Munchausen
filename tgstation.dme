@@ -3612,6 +3612,7 @@
 #include "modular_skyrat\code\game\modular_icons\machinery\conveyor.dm"
 #include "modular_skyrat\code\game\modular_icons\machinery\disposals.dm"
 #include "modular_skyrat\code\game\modular_icons\machinery\intercom.dm"
+#include "modular_skyrat\code\game\modular_icons\machinery\light_switch.dm"
 #include "modular_skyrat\code\game\modular_icons\machinery\newscaster.dm"
 #include "modular_skyrat\code\game\modular_icons\machinery\requests_console.dm"
 #include "modular_skyrat\code\game\modular_icons\machinery\status_display.dm"
