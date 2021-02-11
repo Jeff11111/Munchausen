@@ -196,7 +196,7 @@
 	switch(tdir)
 		if(NORTH)
 			pixel_x = 0
-			pixel_y = 24
+			pixel_y = 21
 		if(SOUTH)
 			pixel_x = 0
 			pixel_y = -21
