@@ -73,7 +73,7 @@
 				thing.drop_limb(special, ignore_children, dismembered, destroyed)
 				thing.forceMove(src)
 				thing.on_transfer_to_limb(src)
-		C.updatehealth()
+	C.updatehealth()
 
 	for(var/obj/item/I in embedded_objects)
 		embedded_objects -= I

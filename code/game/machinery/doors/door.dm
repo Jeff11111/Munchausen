@@ -69,8 +69,14 @@
 			for(var/obj/O in T)
 				for(var/b_type in blend_objects)
 					if(istype(O, b_type))
-						success = TRUE
-						break
+						if(istype(O, /obj/structure/window))
+							var/obj/structure/window/W = O
+							if(W.fulltile)
+								success = TRUE
+								break
+						else
+							success = TRUE
+							break
 				if(success)
 					break
 		if(success)

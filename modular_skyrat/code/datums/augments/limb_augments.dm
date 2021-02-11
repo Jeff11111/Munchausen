@@ -76,7 +76,10 @@
 	BP.limb_flags &= ~BODYPART_NOBLEED
 	BP.brute_reduction = 0
 	BP.burn_reduction = 0
-	BP.replace_limb(C, TRUE)
+	var/obj/item/bodypart/old_BP = C.get_bodypart(slot)
+	if(old_BP)
+		old_BP.drop_limb(TRUE, TRUE, FALSE, TRUE)
+	BP.attach_limb(C, TRUE)
 
 /datum/augment/limb/robotic/head
 	name = "Cybernetic Head"
