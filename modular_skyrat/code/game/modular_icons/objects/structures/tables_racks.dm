@@ -17,3 +17,6 @@
 /obj/structure/table/reinforced
 	icon = 'modular_skyrat/icons/goon/obj/smooth_structures/reinforced_table.dmi'
 	icon_state = "table"
+
+/obj/structure/rack
+	icon = 'modular_skyrat/icons/eris/obj/objects.dmi'
