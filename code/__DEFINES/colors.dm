@@ -65,3 +65,20 @@
 #define COLOR_ASSEMBLY_BLUE    "#38559E"
 #define COLOR_ASSEMBLY_PURPLE  "#6F6192"
 #define COLOR_ASSEMBLY_PINK    "#ff4adc"
+
+//Colors used by structures
+#define COLOR_HULL             "#436b8e"
+#define COLOR_AMBER            "#ffbf00"
+#define COLOR_COMMAND_BLUE     "#46698c"
+#define COLOR_SKY_BLUE         "#5ca1cc"
+#define COLOR_DEEP_SKY_BLUE	   "#3c86b4"
+#define COLOR_CIVIE_GREEN      "#b7f27d"
+#define COLOR_TITANIUM         "#d1e6e3"
+#define COLOR_WHITE			   "#ffffff"
+#define COLOR_OFF_WHITE		   "#f6fffe"
+
+#define COLOR_VIOLET			"#9933ff"
+#define GLASS_COLOR            "#74b1ee"
+#define GLASS_COLOR_PHORON     "#7c3a9a"
+#define GLASS_COLOR_TINTED     "#222222"
+#define GLASS_COLOR_FROSTED    "#ffffff"

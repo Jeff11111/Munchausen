@@ -39,6 +39,14 @@
 	var/unres_sides = 0 //Unrestricted sides. A bitflag for which direction (if any) can open the door with no access
 	ricochet_chance_mod = 0.8
 
+	/// 3/4ths stuff
+	var/static/list/blend_objects = list(/obj/structure/table/low_wall, \
+										/obj/structure/grille, \
+										/obj/structure/window, \
+										/obj/structure/door_assembly, \
+										/obj/machinery/door/airlock,\
+										)
+
 /obj/machinery/door/alt_attack_hand(mob/user)
 	if(allowed(user))
 		if(locked)
@@ -52,6 +60,31 @@
 			var/obj/machinery/door/airlock/lockboy = src
 			playsound(lockboy,lockboy.doorDeni,50,0,3)
 	return TRUE
+
+/obj/machinery/door/proc/update_dir()
+	var/final_dir = SOUTH
+	var/connections = list()
+	for(var/direction in GLOB.cardinals)
+		var/turf/T = get_step(src, direction)
+		var/success = FALSE
+
+		if(istype(T, /turf/closed/wall))
+			success = TRUE
+		else
+			for(var/obj/O in T)
+				for(var/b_type in blend_objects)
+					if(istype(O, b_type))
+						success = TRUE
+						break
+				if(success)
+					break
+		if(success)
+			connections |= direction
+	if((WEST in connections) || (EAST in connections))
+		final_dir = SOUTH
+	else if((NORTH in connections) || (SOUTH in connections))
+		final_dir = WEST
+	setDir(final_dir)
 
 /obj/machinery/door/examine(mob/user)
 	. = ..()

@@ -1,7 +1,6 @@
 /obj/structure/door_assembly/door_assembly_public
 	name = "public airlock assembly"
 	icon = 'icons/obj/doors/airlocks/station2/glass.dmi'
-	overlays_file = 'icons/obj/doors/airlocks/station2/overlays.dmi'
 	glass_type = /obj/machinery/door/airlock/public/glass
 	airlock_type = /obj/machinery/door/airlock/public
 
@@ -79,7 +78,6 @@
 	name = "external airlock assembly"
 	icon = 'icons/obj/doors/airlocks/external/external.dmi'
 	base_name = "external airlock"
-	overlays_file = 'icons/obj/doors/airlocks/external/overlays.dmi'
 	glass_type = /obj/machinery/door/airlock/external/glass
 	airlock_type = /obj/machinery/door/airlock/external
 
@@ -94,7 +92,6 @@
 	name = "airtight hatch assembly"
 	icon = 'icons/obj/doors/airlocks/hatch/centcom.dmi'
 	base_name = "airtight hatch"
-	overlays_file = 'icons/obj/doors/airlocks/hatch/overlays.dmi'
 	airlock_type = /obj/machinery/door/airlock/hatch
 	noglass = TRUE
 
@@ -102,7 +99,6 @@
 	name = "maintenance hatch assembly"
 	icon = 'icons/obj/doors/airlocks/hatch/maintenance.dmi'
 	base_name = "maintenance hatch"
-	overlays_file = 'icons/obj/doors/airlocks/hatch/overlays.dmi'
 	airlock_type = /obj/machinery/door/airlock/maintenance_hatch
 	noglass = TRUE
 
@@ -110,7 +106,6 @@
 	name = "high security airlock assembly"
 	icon = 'icons/obj/doors/airlocks/highsec/highsec.dmi'
 	base_name = "high security airlock"
-	overlays_file = 'icons/obj/doors/airlocks/highsec/overlays.dmi'
 	airlock_type = /obj/machinery/door/airlock/highsecurity
 	noglass = TRUE
 	material_type = /obj/item/stack/sheet/plasteel
@@ -120,7 +115,6 @@
 	name = "vault door assembly"
 	icon = 'icons/obj/doors/airlocks/vault/vault.dmi'
 	base_name = "vault door"
-	overlays_file = 'icons/obj/doors/airlocks/vault/overlays.dmi'
 	airlock_type = /obj/machinery/door/airlock/vault
 	noglass = TRUE
 	material_type = /obj/item/stack/sheet/plasteel
@@ -130,7 +124,6 @@
 	name = "shuttle airlock assembly"
 	icon = 'icons/obj/doors/airlocks/shuttle/shuttle.dmi'
 	base_name = "shuttle airlock"
-	overlays_file = 'icons/obj/doors/airlocks/shuttle/overlays.dmi'
 	airlock_type = /obj/machinery/door/airlock/shuttle
 	glass_type = /obj/machinery/door/airlock/shuttle/glass
 
@@ -138,13 +131,11 @@
 	name = "cult airlock assembly"
 	icon = 'icons/obj/doors/airlocks/cult/runed/cult.dmi'
 	base_name = "cult airlock"
-	overlays_file = 'icons/obj/doors/airlocks/cult/runed/overlays.dmi'
 	airlock_type = /obj/machinery/door/airlock/cult
 	glass_type = /obj/machinery/door/airlock/cult/glass
 
 /obj/structure/door_assembly/door_assembly_cult/unruned
 	icon = 'icons/obj/doors/airlocks/cult/unruned/cult.dmi'
-	overlays_file = 'icons/obj/doors/airlocks/cult/unruned/overlays.dmi'
 	airlock_type = /obj/machinery/door/airlock/cult/unruned
 	glass_type = /obj/machinery/door/airlock/cult/unruned/glass
 
@@ -157,13 +148,11 @@
 
 /obj/structure/door_assembly/door_assembly_centcom
 	icon = 'icons/obj/doors/airlocks/centcom/centcom.dmi'
-	overlays_file = 'icons/obj/doors/airlocks/centcom/overlays.dmi'
 	airlock_type = /obj/machinery/door/airlock/centcom
 	noglass = TRUE
 
 /obj/structure/door_assembly/door_assembly_grunge
 	icon = 'icons/obj/doors/airlocks/centcom/centcom.dmi'
-	overlays_file = 'icons/obj/doors/airlocks/centcom/overlays.dmi'
 	airlock_type = /obj/machinery/door/airlock/grunge
 	noglass = TRUE
 
@@ -228,7 +217,6 @@
 	name = "titanium airlock assembly"
 	icon = 'icons/obj/doors/airlocks/shuttle/shuttle.dmi'
 	base_name = "shuttle airlock"
-	overlays_file = 'icons/obj/doors/airlocks/shuttle/overlays.dmi'
 	glass_type = /obj/machinery/door/airlock/titanium/glass
 	airlock_type = /obj/machinery/door/airlock/titanium
 	mineral = "titanium"

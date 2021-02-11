@@ -118,7 +118,6 @@
 	name = "pod airlock assembly"
 	icon = 'icons/obj/doors/airlocks/survival/survival.dmi'
 	base_name = "pod airlock"
-	overlays_file = 'icons/obj/doors/airlocks/survival/survival_overlays.dmi'
 	airlock_type = /obj/machinery/door/airlock/survival_pod
 	glass_type = /obj/machinery/door/airlock/survival_pod/glass
 

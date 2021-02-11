@@ -2,7 +2,6 @@
 	name = "airlock assembly"
 	icon = 'icons/obj/doors/airlocks/station/public.dmi'
 	icon_state = "construction"
-	var/overlays_file = 'icons/obj/doors/airlocks/station/overlays.dmi'
 	anchored = FALSE
 	density = TRUE
 	max_integrity = 200
@@ -20,10 +19,17 @@
 	var/material_type = /obj/item/stack/sheet/metal
 	var/material_amt = 4
 
+	var/door_color = ""
+	var/glass_color = ""
+	var/color_file = 'modular_skyrat/icons/bay/obj/doors/station/color.dmi'
+	var/fill_file = 'modular_skyrat/icons/bay/obj/doors/station/fill_steel.dmi'
+	var/glass_file = 'modular_skyrat/icons/bay/obj/doors/station/fill_glass.dmi'
+	var/panel_file = 'modular_skyrat/icons/bay/obj/doors/station/panel.dmi'
+
 /obj/structure/door_assembly/New()
 	update_icon()
 	update_name()
-	..()
+	. = ..()
 
 /obj/structure/door_assembly/examine(mob/user)
 	. = ..()
@@ -263,11 +269,19 @@
 */
 /obj/structure/door_assembly/update_overlays()
 	. = ..()
-	if(!glass)
-		. += get_airlock_overlay("fill_construction", icon)
+	if(door_color)
+		. += get_airlock_overlay("construction", color_file)
+	else if(!glass)
+		var/mutable_appearance/fuck = get_airlock_overlay("construction", fill_file)
+		if(door_color)
+			fuck.color = door_color
+		. += fuck
 	else if(glass)
-		. += get_airlock_overlay("glass_construction", overlays_file)
-	. += get_airlock_overlay("panel_c[state+1]", overlays_file)
+		var/mutable_appearance/fuck = get_airlock_overlay("construction", glass_file)
+		if(glass_color)
+			fuck.color = glass_color
+		. += fuck
+	. += get_airlock_overlay("construction[state]", panel_file)
 
 /obj/structure/door_assembly/proc/update_name()
 	name = ""

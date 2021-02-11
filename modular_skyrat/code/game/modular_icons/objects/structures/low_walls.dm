@@ -20,6 +20,7 @@
 	plane = WALL_PLANE
 	layer =	LOW_WALL_LAYER
 	canSmoothWith = list(
+	/obj/structure/grille,
 	/obj/structure/window/fulltile,
 	/obj/structure/window/reinforced/fulltile,
 	/obj/structure/window/reinforced/tinted/fulltile,
@@ -74,7 +75,7 @@
 		canSmoothWith |= typesof(/obj/structure/falsewall)
 		canSmoothWith |= typesof(/turf/closed/indestructible/riveted)
 		canSmoothWith |= typesof(/obj/structure/table/low_wall)
-	update_overlays()
+	update_icon()
 
 /obj/structure/table/low_wall/proc/calculate_wall_adjacencies()
 	var/adjacencies = 0

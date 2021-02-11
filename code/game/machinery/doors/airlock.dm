@@ -78,15 +78,37 @@
 	var/abandoned = FALSE
 	var/doorOpen = 'modular_skyrat/sound/machinery/airlock_open.ogg'
 	var/doorClose = 'modular_skyrat/sound/machinery/airlock_close.ogg'
-	var/doorDeni = 'modular_skyrat/sound/machinery/airlock_deny.ogg' // i'm thinkin' Deni's
+	var/doorDeni = 'modular_skyrat/sound/machinery/airlock_deny.ogg'
 	var/boltUp = 'modular_skyrat/sound/machinery/airlock_bolt.ogg'
 	var/boltDown = 'modular_skyrat/sound/machinery/airlock_bolt.ogg'
 	var/noPower = 'modular_skyrat/sound/machinery/airlock_nopower.ogg'
 	var/previous_airlock = /obj/structure/door_assembly //what airlock assembly mineral plating was applied to
 	var/wiretypepath = /datum/wires/airlock // which set of per round randomized wires this airlock type has.
-	var/airlock_material //material of inner filling; if its an airlock with glass, this should be set to "glass"
+	var/airlock_material = "" //material of inner filling; if its an airlock with glass, this should be set to "glass"
+
+	var/door_color = ""
+	var/stripe_color = ""
+	var/symbol_color = ""
+	var/glass_color = ""
+
 	var/overlays_file = 'icons/obj/doors/airlocks/station/overlays.dmi'
 	var/note_overlay_file = 'icons/obj/doors/airlocks/station/overlays.dmi' //Used for papers and photos pinned to the airlock
+	var/fill_file = 'modular_skyrat/icons/bay/obj/doors/station/fill_steel.dmi'
+	var/color_file = 'modular_skyrat/icons/bay/obj/doors/station/color.dmi'
+	var/color_fill_file = 'modular_skyrat/icons/bay/obj/doors/station/fill_color.dmi'
+	var/stripe_file = 'modular_skyrat/icons/bay/obj/doors/station/stripe.dmi'
+	var/stripe_fill_file = 'modular_skyrat/icons/bay/obj/doors/station/fill_stripe.dmi'
+	var/glass_file = 'modular_skyrat/icons/bay/obj/doors/station/fill_glass.dmi'
+	var/bolts_file = 'modular_skyrat/icons/bay/obj/doors/station/lights_bolts.dmi'
+	var/deny_file = 'modular_skyrat/icons/bay/obj/doors/station/lights_deny.dmi'
+	var/emergency_file = 'modular_skyrat/icons/bay/obj/doors/station/lights_emergency.dmi'
+	var/lights_file = 'modular_skyrat/icons/bay/obj/doors/station/lights_green.dmi'
+	var/panel_file = 'modular_skyrat/icons/bay/obj/doors/station/panel.dmi'
+	var/panel_protected_file = 'modular_skyrat/icons/bay/obj/doors/station/panel.dmi'
+	var/sparks_damaged_file = 'modular_skyrat/icons/bay/obj/doors/station/sparks_damaged.dmi'
+	var/sparks_broken_file = 'modular_skyrat/icons/bay/obj/doors/station/sparks_broken.dmi'
+	var/welded_file = 'modular_skyrat/icons/bay/obj/doors/station/welded.dmi'
+	var/emag_file = 'modular_skyrat/icons/bay/obj/doors/station/emag.dmi'
 
 	var/cyclelinkeddir = 0
 	var/obj/machinery/door/airlock/cyclelinkedairlock
@@ -102,7 +124,6 @@
 	locked = FALSE
 
 	var/static/list/airlock_overlays = list()
-
 	var/initialMalfunctionProb = 5
 
 /obj/machinery/door/airlock/Initialize(mapload)
@@ -455,162 +476,289 @@
 			icon_state = ""
 		if(AIRLOCK_DENY, AIRLOCK_OPENING, AIRLOCK_CLOSING, AIRLOCK_EMAG)
 			icon_state = "nonexistenticonstate" //MADNESS
+	update_dir()
 	set_airlock_overlays(state)
 
 /obj/machinery/door/airlock/proc/set_airlock_overlays(state)
 	var/mutable_appearance/frame_overlay
+	var/mutable_appearance/color_overlay
 	var/mutable_appearance/filling_overlay
+	var/mutable_appearance/stripe_overlay
+	var/mutable_appearance/stripe_filling_overlay
 	var/mutable_appearance/lights_overlay
 	var/mutable_appearance/panel_overlay
 	var/mutable_appearance/weld_overlay
-	var/mutable_appearance/damag_overlay
+	var/mutable_appearance/damage_overlay
 	var/mutable_appearance/sparks_overlay
 	var/mutable_appearance/note_overlay
 	var/notetype = note_type()
 
 	switch(state)
 		if(AIRLOCK_CLOSED)
-			frame_overlay = get_airlock_overlay("closed", icon)
-			if(airlock_material)
-				filling_overlay = get_airlock_overlay("[airlock_material]_closed", overlays_file)
+			frame_overlay = get_airlock_overlay("closed", icon, icon_dir = src.dir)
+			if(door_color)
+				color_overlay = get_airlock_overlay("closed", color_file, icon_dir = src.dir)
+				color_overlay.color = door_color
+			if(!airlock_material)
+				if(door_color)
+					filling_overlay = get_airlock_overlay("closed", color_fill_file, icon_dir = src.dir)
+				else
+					filling_overlay = get_airlock_overlay("closed", fill_file, icon_dir = src.dir)
+			else if(airlock_material == "glass")
+				filling_overlay = get_airlock_overlay("closed", glass_file, icon_dir = src.dir)
 			else
-				filling_overlay = get_airlock_overlay("fill_closed", icon)
+				if(door_color)
+					filling_overlay = get_airlock_overlay("[airlock_material]__closed", color_fill_file, icon_dir = src.dir)
+				else
+					filling_overlay = get_airlock_overlay("[airlock_material]__closed", fill_file, icon_dir = src.dir)
+			if(door_color && (!airlock_material || airlock_material != "glass"))
+				filling_overlay.color = door_color
+			else if((airlock_material == "glass") && glass_color)
+				filling_overlay.color = glass_color
+			if(stripe_color)
+				stripe_overlay = get_airlock_overlay("closed", stripe_file, icon_dir = src.dir)
+				if(!airlock_material || airlock_material != "glass")
+					stripe_filling_overlay = get_airlock_overlay("closed", stripe_fill_file, icon_dir = src.dir)
 			if(panel_open)
 				if(security_level)
-					panel_overlay = get_airlock_overlay("panel_closed_protected", overlays_file)
+					panel_overlay = get_airlock_overlay("closed", panel_protected_file, icon_dir = src.dir)
 				else
-					panel_overlay = get_airlock_overlay("panel_closed", overlays_file)
+					panel_overlay = get_airlock_overlay("closed", panel_file, icon_dir = src.dir)
 			if(welded)
-				weld_overlay = get_airlock_overlay("welded", overlays_file)
+				weld_overlay = get_airlock_overlay("closed", welded_file, icon_dir = src.dir)
 			if(obj_integrity < integrity_failure * max_integrity)
-				damag_overlay = get_airlock_overlay("sparks_broken", overlays_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE)
+				damage_overlay = get_airlock_overlay("closed", sparks_broken_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE, icon_dir = src.dir)
 			else if(obj_integrity < (0.75 * max_integrity))
-				damag_overlay = get_airlock_overlay("sparks_damaged", overlays_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE)
+				damage_overlay = get_airlock_overlay("closed", sparks_damaged_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE, icon_dir = src.dir)
 			if(lights && hasPower())
-
 				if(locked)
-					lights_overlay = get_airlock_overlay("lights_bolts", overlays_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE)
+					lights_overlay = get_airlock_overlay("closed", bolts_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE, icon_dir = src.dir)
 				else if(emergency)
-					lights_overlay = get_airlock_overlay("lights_emergency", overlays_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE)
+					lights_overlay = get_airlock_overlay("closed", emergency_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE, icon_dir = src.dir)
 			if(note)
-				note_overlay = get_airlock_overlay(notetype, note_overlay_file)
+				note_overlay = get_airlock_overlay(notetype, note_overlay_file, icon_dir = src.dir)
 
 		if(AIRLOCK_DENY)
 			if(!hasPower())
 				return
-			frame_overlay = get_airlock_overlay("closed", icon)
-			if(airlock_material)
-				filling_overlay = get_airlock_overlay("[airlock_material]_closed", overlays_file)
+			frame_overlay = get_airlock_overlay("closed", icon, icon_dir = src.dir)
+			if(door_color)
+				color_overlay = get_airlock_overlay("closed", color_file, icon_dir = src.dir)
+				color_overlay.color = door_color
+			if(!airlock_material)
+				if(door_color)
+					filling_overlay = get_airlock_overlay("closed", color_fill_file, icon_dir = src.dir)
+				else
+					filling_overlay = get_airlock_overlay("closed", fill_file, icon_dir = src.dir)
+			else if(airlock_material == "glass")
+				filling_overlay = get_airlock_overlay("closed", glass_file, icon_dir = src.dir)
 			else
-				filling_overlay = get_airlock_overlay("fill_closed", icon)
+				if(door_color)
+					filling_overlay = get_airlock_overlay("[airlock_material]__closed", color_fill_file, icon_dir = src.dir)
+				else
+					filling_overlay = get_airlock_overlay("[airlock_material]_closed", fill_file, icon_dir = src.dir)
+			if(door_color && (!airlock_material || airlock_material != "glass"))
+				filling_overlay.color = door_color
+			else if((airlock_material == "glass") && glass_color)
+				filling_overlay.color = glass_color
+			if(stripe_color)
+				stripe_overlay = get_airlock_overlay("closed", stripe_file, icon_dir = src.dir)
+				if(!airlock_material || airlock_material != "glass")
+					stripe_filling_overlay = get_airlock_overlay("closed", stripe_fill_file, icon_dir = src.dir)
 			if(panel_open)
 				if(security_level)
-					panel_overlay = get_airlock_overlay("panel_closed_protected", overlays_file)
+					panel_overlay = get_airlock_overlay("closed", panel_protected_file, icon_dir = src.dir)
 				else
-					panel_overlay = get_airlock_overlay("panel_closed", overlays_file)
+					panel_overlay = get_airlock_overlay("closed", panel_file, icon_dir = src.dir)
 			if(obj_integrity < integrity_failure * max_integrity)
-				damag_overlay = get_airlock_overlay("sparks_broken", overlays_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE)
+				damage_overlay = get_airlock_overlay("closed", sparks_broken_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE, icon_dir = src.dir)
 			else if(obj_integrity < (0.75 * max_integrity))
-				damag_overlay = get_airlock_overlay("sparks_damaged", overlays_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE)
+				damage_overlay = get_airlock_overlay("closed", sparks_damaged_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE, icon_dir = src.dir)
 			if(welded)
-				weld_overlay = get_airlock_overlay("welded", overlays_file)
-			lights_overlay = get_airlock_overlay("lights_denied", overlays_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE)
+				weld_overlay = get_airlock_overlay("closed", welded_file)
+			lights_overlay = get_airlock_overlay("deny", deny_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE, icon_dir = src.dir)
 			if(note)
-				note_overlay = get_airlock_overlay(notetype, note_overlay_file)
+				note_overlay = get_airlock_overlay(notetype, note_overlay_file, icon_dir = src.dir)
 
 		if(AIRLOCK_EMAG)
-			frame_overlay = get_airlock_overlay("closed", icon)
-			sparks_overlay = get_airlock_overlay("sparks", overlays_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE)
-			if(airlock_material)
-				filling_overlay = get_airlock_overlay("[airlock_material]_closed", overlays_file)
+			frame_overlay = get_airlock_overlay("closed", icon, icon_dir = src.dir)
+			if(door_color)
+				color_overlay = get_airlock_overlay("closed", color_file, icon_dir = src.dir)
+				color_overlay.color = door_color
+			if(!airlock_material)
+				if(door_color)
+					filling_overlay = get_airlock_overlay("closed", color_fill_file, icon_dir = src.dir)
+				else
+					filling_overlay = get_airlock_overlay("closed", fill_file, icon_dir = src.dir)
+			else if(airlock_material == "glass")
+				filling_overlay = get_airlock_overlay("closed", glass_file, icon_dir = src.dir)
 			else
-				filling_overlay = get_airlock_overlay("fill_closed", icon)
+				if(door_color)
+					filling_overlay = get_airlock_overlay("[airlock_material]__closed", color_fill_file, icon_dir = src.dir)
+				else
+					filling_overlay = get_airlock_overlay("[airlock_material]__closed", fill_file, icon_dir = src.dir)
+			if(door_color && (!airlock_material || airlock_material != "glass"))
+				filling_overlay.color = door_color
+			else if((airlock_material == "glass") && glass_color)
+				filling_overlay.color = glass_color
+			if(stripe_color)
+				stripe_overlay = get_airlock_overlay("closed", stripe_file, icon_dir = src.dir)
+				if(!airlock_material || airlock_material != "glass")
+					stripe_filling_overlay = get_airlock_overlay("closed", stripe_fill_file, icon_dir = src.dir)
 			if(panel_open)
 				if(security_level)
-					panel_overlay = get_airlock_overlay("panel_closed_protected", overlays_file)
+					panel_overlay = get_airlock_overlay("closed", panel_protected_file, icon_dir = src.dir)
 				else
-					panel_overlay = get_airlock_overlay("panel_closed", overlays_file)
-			if(obj_integrity < integrity_failure * max_integrity)
-				damag_overlay = get_airlock_overlay("sparks_broken", overlays_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE)
-			else if(obj_integrity < (0.75 * max_integrity))
-				damag_overlay = get_airlock_overlay("sparks_damaged", overlays_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE)
+					panel_overlay = get_airlock_overlay("closed", panel_file, icon_dir = src.dir)
 			if(welded)
-				weld_overlay = get_airlock_overlay("welded", overlays_file)
+				weld_overlay = get_airlock_overlay("closed", welded_file, icon_dir = src.dir)
+			if(lights && hasPower())
+				lights_overlay = get_airlock_overlay("deny", emag_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE, icon_dir = src.dir)
 			if(note)
-				note_overlay = get_airlock_overlay(notetype, note_overlay_file)
+				note_overlay = get_airlock_overlay(notetype, note_overlay_file, icon_dir = src.dir)
 
 		if(AIRLOCK_CLOSING)
-			frame_overlay = get_airlock_overlay("closing", icon)
-			if(airlock_material)
-				filling_overlay = get_airlock_overlay("[airlock_material]_closing", overlays_file)
+			frame_overlay = get_airlock_overlay("closing", icon, icon_dir = src.dir)
+			if(door_color)
+				color_overlay = get_airlock_overlay("closing", color_file, icon_dir = src.dir)
+				color_overlay.color = door_color
+			if(!airlock_material)
+				if(door_color)
+					filling_overlay = get_airlock_overlay("closed", color_fill_file, icon_dir = src.dir)
+				else
+					filling_overlay = get_airlock_overlay("closing", fill_file, icon_dir = src.dir)
+			else if(airlock_material == "glass")
+				filling_overlay = get_airlock_overlay("closing", glass_file, icon_dir = src.dir)
 			else
-				filling_overlay = get_airlock_overlay("fill_closing", icon)
-			if(lights && hasPower())
-				lights_overlay = get_airlock_overlay("lights_closing", overlays_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE)
+				if(door_color)
+					filling_overlay = get_airlock_overlay("[airlock_material]__closed", color_fill_file, icon_dir = src.dir)
+				else
+					filling_overlay = get_airlock_overlay("[airlock_material]__closing", fill_file, icon_dir = src.dir)
+			if(door_color && (!airlock_material || airlock_material != "glass"))
+				filling_overlay.color = door_color
+			else if((airlock_material == "glass") && glass_color)
+				filling_overlay.color = glass_color
+			if(stripe_color)
+				stripe_overlay = get_airlock_overlay("closing", stripe_file, icon_dir = src.dir)
+				if(!airlock_material || airlock_material != "glass")
+					stripe_filling_overlay = get_airlock_overlay("closing", stripe_fill_file, icon_dir = src.dir)
 			if(panel_open)
 				if(security_level)
-					panel_overlay = get_airlock_overlay("panel_closing_protected", overlays_file)
+					panel_overlay = get_airlock_overlay("closing", panel_protected_file, icon_dir = src.dir)
 				else
-					panel_overlay = get_airlock_overlay("panel_closing", overlays_file)
+					panel_overlay = get_airlock_overlay("closing", panel_file, icon_dir = src.dir)
+			if(lights && hasPower())
+				lights_overlay = get_airlock_overlay("closing", lights_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE, icon_dir = src.dir)
 			if(note)
-				note_overlay = get_airlock_overlay("[notetype]_closing", note_overlay_file)
+				note_overlay = get_airlock_overlay(notetype, note_overlay_file, icon_dir = src.dir)
 
 		if(AIRLOCK_OPEN)
-			frame_overlay = get_airlock_overlay("open", icon)
-			if(airlock_material)
-				filling_overlay = get_airlock_overlay("[airlock_material]_open", overlays_file)
+			frame_overlay = get_airlock_overlay("open", icon, icon_dir = src.dir)
+			if(door_color)
+				color_overlay = get_airlock_overlay("open", color_file, icon_dir = src.dir)
+				color_overlay.color = door_color
+			if(!airlock_material)
+				if(door_color)
+					filling_overlay = get_airlock_overlay("closed", color_fill_file, icon_dir = src.dir)
+				else
+					filling_overlay = get_airlock_overlay("open", fill_file, icon_dir = src.dir)
+			else if(airlock_material == "glass")
+				filling_overlay = get_airlock_overlay("open", glass_file, icon_dir = src.dir)
 			else
-				filling_overlay = get_airlock_overlay("fill_open", icon)
+				if(door_color)
+					filling_overlay = get_airlock_overlay("[airlock_material]__closed", color_fill_file, icon_dir = src.dir)
+				else
+					filling_overlay = get_airlock_overlay("[airlock_material]__open", fill_file, icon_dir = src.dir)
+			if(door_color && (!airlock_material || airlock_material != "glass"))
+				filling_overlay.color = door_color
+			else if((airlock_material == "glass") && glass_color)
+				filling_overlay.color = glass_color
+			if(stripe_color)
+				stripe_overlay = get_airlock_overlay("open", stripe_file, icon_dir = src.dir)
+				if(!airlock_material || airlock_material != "glass")
+					stripe_filling_overlay = get_airlock_overlay("open", stripe_fill_file, icon_dir = src.dir)
 			if(panel_open)
 				if(security_level)
-					panel_overlay = get_airlock_overlay("panel_open_protected", overlays_file)
+					panel_overlay = get_airlock_overlay("open", panel_protected_file, icon_dir = src.dir)
 				else
-					panel_overlay = get_airlock_overlay("panel_open", overlays_file)
-			if(obj_integrity < (0.75 * max_integrity))
-				damag_overlay = get_airlock_overlay("sparks_open", overlays_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE)
+					panel_overlay = get_airlock_overlay("open", panel_file, icon_dir = src.dir)
+			if(obj_integrity < (0.75 * max_integrity) && (obj_integrity > integrity_failure * max_integrity))
+				damage_overlay = get_airlock_overlay("open", sparks_damaged_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE, icon_dir = src.dir)
 			if(note)
-				note_overlay = get_airlock_overlay("[notetype]_open", note_overlay_file)
+				note_overlay = get_airlock_overlay(notetype, note_overlay_file, icon_dir = src.dir)
 
 		if(AIRLOCK_OPENING)
-			frame_overlay = get_airlock_overlay("opening", icon)
-			if(airlock_material)
-				filling_overlay = get_airlock_overlay("[airlock_material]_opening", overlays_file)
+			frame_overlay = get_airlock_overlay("opening", icon, icon_dir = src.dir)
+			if(door_color)
+				color_overlay = get_airlock_overlay("opening", color_file, icon_dir = src.dir)
+				color_overlay.color = door_color
+			if(!airlock_material)
+				if(door_color)
+					filling_overlay = get_airlock_overlay("opening", color_fill_file, icon_dir = src.dir)
+				else
+					filling_overlay = get_airlock_overlay("opening", fill_file, icon_dir = src.dir)
+			else if(airlock_material == "glass")
+				filling_overlay = get_airlock_overlay("opening", glass_file, icon_dir = src.dir)
 			else
-				filling_overlay = get_airlock_overlay("fill_opening", icon)
-			if(lights && hasPower())
-				lights_overlay = get_airlock_overlay("lights_opening", overlays_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE)
+				if(door_color)
+					filling_overlay = get_airlock_overlay("[airlock_material]__closed", color_fill_file, icon_dir = src.dir)
+				else
+					filling_overlay = get_airlock_overlay("[airlock_material]__opening", fill_file, icon_dir = src.dir)
+			if(door_color && (!airlock_material || airlock_material != "glass"))
+				filling_overlay.color = door_color
+			else if((airlock_material == "glass") && glass_color)
+				filling_overlay.color = glass_color
+			if(stripe_color)
+				stripe_overlay = get_airlock_overlay("opening", stripe_file, icon_dir = src.dir)
+				if(!airlock_material || airlock_material != "glass")
+					stripe_filling_overlay = get_airlock_overlay("opening", stripe_fill_file, icon_dir = src.dir)
 			if(panel_open)
 				if(security_level)
-					panel_overlay = get_airlock_overlay("panel_opening_protected", overlays_file)
+					panel_overlay = get_airlock_overlay("opening", panel_protected_file, icon_dir = src.dir)
 				else
-					panel_overlay = get_airlock_overlay("panel_opening", overlays_file)
+					panel_overlay = get_airlock_overlay("opening", panel_file, icon_dir = src.dir)
+			if(lights && hasPower())
+				lights_overlay = get_airlock_overlay("opening", lights_file, EMISSIVE_UNBLOCKABLE_LAYER, EMISSIVE_UNBLOCKABLE_PLANE, icon_dir = src.dir)
 			if(note)
-				note_overlay = get_airlock_overlay("[notetype]_opening", note_overlay_file)
+				note_overlay = get_airlock_overlay(notetype, note_overlay_file, icon_dir = src.dir)
 
 	cut_overlays()
 	add_overlay(frame_overlay)
+	if(color_overlay)
+		add_overlay(color_overlay)
+	if(stripe_overlay)
+		add_overlay(stripe_overlay)
 	add_overlay(filling_overlay)
+	if(stripe_filling_overlay)
+		add_overlay(stripe_filling_overlay)
 	if(lights_overlay)
 		add_overlay(lights_overlay)
 		var/mutable_appearance/lights_vis = mutable_appearance(lights_overlay.icon, lights_overlay.icon_state)
+		lights_vis.dir = src.dir
 		add_overlay(lights_vis)
-	add_overlay(panel_overlay)
-	add_overlay(weld_overlay)
-	add_overlay(sparks_overlay)
-	if(damag_overlay)
-		add_overlay(damag_overlay)
-		var/mutable_appearance/damage_vis = mutable_appearance(damag_overlay.icon, damag_overlay.icon_state)
+	if(panel_overlay)
+		add_overlay(panel_overlay)
+	if(weld_overlay)
+		add_overlay(weld_overlay)
+	if(sparks_overlay)
+		add_overlay(sparks_overlay)
+	if(damage_overlay)
+		add_overlay(damage_overlay)
+		var/mutable_appearance/damage_vis = mutable_appearance(damage_overlay.icon, damage_overlay.icon_state)
 		add_overlay(damage_vis)
-	add_overlay(note_overlay)
+	if(note_overlay)
+		add_overlay(note_overlay)
 	check_unres()
 
-/proc/get_airlock_overlay(icon_state, icon_file, targetlayer = FLOAT_LAYER, targetplane = FLOAT_PLANE)
+/proc/get_airlock_overlay(icon_state, icon_file, targetlayer = FLOAT_LAYER, targetplane = FLOAT_PLANE, icon_dir = SOUTH)
 	var/obj/machinery/door/airlock/A
 	pass(A)	//suppress unused warning
 	var/list/airlock_overlays = A.airlock_overlays
-	var/iconkey = "[icon_state][icon_file]"
+	var/iconkey = "[icon_state][icon_file][icon_dir]"
 	if((!(. = airlock_overlays[iconkey])))
-		. = airlock_overlays[iconkey] = mutable_appearance(icon_file, icon_state, targetlayer, targetplane)
+		var/mutable_appearance/fuck = mutable_appearance(icon_file, icon_state, targetlayer, targetplane)
+		fuck.dir = icon_dir
+		. = airlock_overlays[iconkey] = fuck
 
 /obj/machinery/door/airlock/proc/check_unres() //unrestricted sides. This overlay indicates which directions the player can access even without an ID
 	if(hasPower() && unres_sides)
@@ -816,7 +964,7 @@
 		set_electrified(ELECTRIFIED_PERMANENT)
 	updateDialog()
 
-/obj/machinery/door/airlock/Topic(href, href_list, var/nowindow = 0)
+/obj/machinery/door/airlock/Topic(href, href_list, nowindow = 0)
 	// If you add an if(..()) check you must first remove the var/nowindow parameter.
 	// Otherwise it will runtime with this kind of error: null.Topic()
 	if(!nowindow)
