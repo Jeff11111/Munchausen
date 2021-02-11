@@ -1,2 +1,2 @@
 /obj/machinery/light_switch
-	icon = 'modular_skyrat/icons/eris/obj/light_switch.dmi'
+	icon = 'modular_skyrat/icons/eris/obj/lightswitch.dmi'
