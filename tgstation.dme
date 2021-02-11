@@ -3614,6 +3614,7 @@
 #include "modular_skyrat\code\game\modular_icons\machinery\intercom.dm"
 #include "modular_skyrat\code\game\modular_icons\machinery\newscaster.dm"
 #include "modular_skyrat\code\game\modular_icons\machinery\atmospherics\canister.dm"
+#include "modular_skyrat\code\game\modular_icons\machinery\doors\airlock_sensors.dm"
 #include "modular_skyrat\code\game\modular_icons\machinery\doors\airlock_types.dm"
 #include "modular_skyrat\code\game\modular_icons\machinery\doors\firedoor.dm"
 #include "modular_skyrat\code\game\modular_icons\objects\effects\spawners\structure.dm"
