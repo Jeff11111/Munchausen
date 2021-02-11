@@ -192,21 +192,20 @@
 	wires = new /datum/wires/apc(src)
 	// offset 24 pixels in direction of dir
 	// this allows the APC to be embedded in a wall, yet still inside an area
-	setDir(SOUTH)
-
+	setDir(tdir)
 	switch(tdir)
 		if(NORTH)
 			pixel_x = 0
-			pixel_y = 22
+			pixel_y = 24
 		if(SOUTH)
 			pixel_x = 0
-			pixel_y = -22
+			pixel_y = -21
 		if(EAST)
 			pixel_y = 0
-			pixel_x = 22
+			pixel_x = 20
 		if(WEST)
 			pixel_y = 0
-			pixel_x = -22
+			pixel_x = -20
 
 /obj/machinery/power/apc/Destroy()
 	GLOB.apcs_list -= src

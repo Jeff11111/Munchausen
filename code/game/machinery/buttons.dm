@@ -30,8 +30,8 @@
 
 	if(built)
 		setDir(ndir)
-		pixel_x = (dir & 3)? 0 : (dir == 4 ? -24 : 24)
-		pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
+		pixel_x = (dir & 3)? 0 : (dir == 4 ? -20 : 20)
+		pixel_y = (dir & 3)? (dir ==1 ? -21 : 28) : 0
 		panel_open = TRUE
 		update_icon()
 

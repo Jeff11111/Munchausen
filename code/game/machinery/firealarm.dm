@@ -61,8 +61,8 @@
 	if(building)
 		buildstage = 0
 		panel_open = TRUE
-		pixel_x = (dir & 3)? 0 : (dir == 4 ? -21 : 21)
-		pixel_y = (dir & 3)? (dir ==1 ? -21 : 21) : 0
+		pixel_x = (dir & 3)? 0 : (dir == 4 ? -20 : 20)
+		pixel_y = (dir & 3)? (dir ==1 ? -21 : 24) : 0
 	update_icon()
 	myarea = get_base_area(src)
 	LAZYADD(myarea.firealarms, src)

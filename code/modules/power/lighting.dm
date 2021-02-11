@@ -305,9 +305,11 @@
 		if(NORTH)
 			pixel_y = 21
 		if(EAST)
-			pixel_x = 10
+			pixel_x = 9
 		if(WEST)
-			pixel_x = -10
+			pixel_x = -9
+		if(SOUTH)
+			pixel_x = 1
 
 /obj/machinery/light/update_icon_state()
 	switch(status)		// set icon_states

@@ -71,6 +71,7 @@
 
 	if(mapload && is_station_level(z) && prob(3) && !start_active)
 		toggle_cam()
+	update_icon()
 
 /obj/machinery/camera/Destroy()
 	if(can_use())
@@ -295,12 +296,12 @@
 /obj/machinery/camera/update_icon()
 	. = ..()
 	switch(dir)
-		if(NORTH)
-			pixel_y = 21
 		if(EAST)
-			pixel_x = 10
-		if(WEST)
 			pixel_x = -10
+		if(WEST)
+			pixel_x = 10
+		if(SOUTH)
+			pixel_y = 21
 
 /obj/machinery/camera/update_icon_state()
 	if(!status)

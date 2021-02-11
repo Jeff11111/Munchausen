@@ -16,6 +16,7 @@
 	lights_file = 'modular_skyrat/icons/bay/obj/doors/external/lights_green.dmi'
 	emergency_file = 'modular_skyrat/icons/bay/obj/doors/external/lights_emergency.dmi'
 	emag_file = 'modular_skyrat/icons/bay/obj/doors/external/emag.dmi'
+	door_color = COLOR_RED_LIGHT
 
 /obj/machinery/door/airlock/centcom
 	icon = 'modular_skyrat/icons/bay/obj/doors/centcomm/door.dmi'

@@ -211,7 +211,7 @@
 		buildstage = 0
 		panel_open = TRUE
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -21 : 21)
-		pixel_y = (dir & 3)? (dir == 1 ? -21 : 21) : 0
+		pixel_y = (dir & 3)? (dir == 1 ? -18 : 24) : 0
 
 	if(name == initial(name))
 		name = "[get_area_name(src, get_base_area = TRUE)] Air Alarm"
