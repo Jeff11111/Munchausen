@@ -36,6 +36,7 @@
 /obj/machinery/door/firedoor/Initialize()
 	. = ..()
 	CalculateAffectingAreas()
+	update_icon()
 
 /obj/machinery/door/firedoor/examine(mob/user)
 	. = ..()
