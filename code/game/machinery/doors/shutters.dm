@@ -10,6 +10,12 @@
 	max_integrity = 100
 	opensound = 'modular_skyrat/sound/machinery/shutters_open.ogg' //SKYRAT CHANGE - Various poddoor sounds
 	closesound = 'modular_skyrat/sound/machinery/shutters_close.ogg' //SKYRAT CHANGE - Various poddoor sounds
+	blend_objects = list(/obj/structure/table/low_wall, \
+										/obj/structure/grille, \
+										/obj/structure/window, \
+										/obj/structure/door_assembly, \
+										/obj/machinery/door/poddoor,\
+										)
 
 /obj/machinery/door/poddoor/shutters/preopen
 	icon_state = "open"
