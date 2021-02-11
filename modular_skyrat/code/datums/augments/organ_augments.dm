@@ -1,6 +1,6 @@
 /// General organ augments
 /datum/augment/organ
-	limb = TRUE
+	limb = FALSE
 
 /// Missing organ base
 /datum/augment/organ/missing
