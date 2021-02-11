@@ -517,8 +517,10 @@
 				filling_overlay.color = glass_color
 			if(stripe_color)
 				stripe_overlay = get_airlock_overlay("closed", stripe_file, icon_dir = src.dir)
+				stripe_overlay.color = stripe_color
 				if(!airlock_material || airlock_material != "glass")
 					stripe_filling_overlay = get_airlock_overlay("closed", stripe_fill_file, icon_dir = src.dir)
+					stripe_filling_overlay.color = stripe_color
 			if(panel_open)
 				if(security_level)
 					panel_overlay = get_airlock_overlay("closed", panel_protected_file, icon_dir = src.dir)
@@ -563,8 +565,10 @@
 				filling_overlay.color = glass_color
 			if(stripe_color)
 				stripe_overlay = get_airlock_overlay("closed", stripe_file, icon_dir = src.dir)
+				stripe_overlay.color = stripe_color
 				if(!airlock_material || airlock_material != "glass")
 					stripe_filling_overlay = get_airlock_overlay("closed", stripe_fill_file, icon_dir = src.dir)
+					stripe_filling_overlay.color = stripe_color
 			if(panel_open)
 				if(security_level)
 					panel_overlay = get_airlock_overlay("closed", panel_protected_file, icon_dir = src.dir)
@@ -603,8 +607,10 @@
 				filling_overlay.color = glass_color
 			if(stripe_color)
 				stripe_overlay = get_airlock_overlay("closed", stripe_file, icon_dir = src.dir)
+				stripe_overlay.color = stripe_color
 				if(!airlock_material || airlock_material != "glass")
 					stripe_filling_overlay = get_airlock_overlay("closed", stripe_fill_file, icon_dir = src.dir)
+					stripe_filling_overlay.color = stripe_color
 			if(panel_open)
 				if(security_level)
 					panel_overlay = get_airlock_overlay("closed", panel_protected_file, icon_dir = src.dir)
@@ -640,8 +646,10 @@
 				filling_overlay.color = glass_color
 			if(stripe_color)
 				stripe_overlay = get_airlock_overlay("closing", stripe_file, icon_dir = src.dir)
+				stripe_overlay.color = stripe_color
 				if(!airlock_material || airlock_material != "glass")
 					stripe_filling_overlay = get_airlock_overlay("closing", stripe_fill_file, icon_dir = src.dir)
+					stripe_filling_overlay.color = stripe_color
 			if(panel_open)
 				if(security_level)
 					panel_overlay = get_airlock_overlay("closing", panel_protected_file, icon_dir = src.dir)
@@ -675,8 +683,10 @@
 				filling_overlay.color = glass_color
 			if(stripe_color)
 				stripe_overlay = get_airlock_overlay("open", stripe_file, icon_dir = src.dir)
+				stripe_overlay.color = stripe_color
 				if(!airlock_material || airlock_material != "glass")
 					stripe_filling_overlay = get_airlock_overlay("open", stripe_fill_file, icon_dir = src.dir)
+					stripe_filling_overlay.color = stripe_color
 			if(panel_open)
 				if(security_level)
 					panel_overlay = get_airlock_overlay("open", panel_protected_file, icon_dir = src.dir)
@@ -710,8 +720,10 @@
 				filling_overlay.color = glass_color
 			if(stripe_color)
 				stripe_overlay = get_airlock_overlay("opening", stripe_file, icon_dir = src.dir)
+				stripe_overlay.color = stripe_color
 				if(!airlock_material || airlock_material != "glass")
 					stripe_filling_overlay = get_airlock_overlay("opening", stripe_fill_file, icon_dir = src.dir)
+					stripe_filling_overlay.color = stripe_color
 			if(panel_open)
 				if(security_level)
 					panel_overlay = get_airlock_overlay("opening", panel_protected_file, icon_dir = src.dir)
