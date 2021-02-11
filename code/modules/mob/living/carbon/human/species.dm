@@ -1567,7 +1567,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 // ATTACK PROCS //
 //////////////////
 
-/datum/species/proc/help(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
+/datum/species/proc/help(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style, rightclick = FALSE)
 	if(attacker_style && attacker_style.help_act(user,target)) // SKYRAT EDIT
 		return TRUE
 
@@ -1597,7 +1597,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 					log_combat(user, target, "shaked")
 				return TRUE
 
-/datum/species/proc/grab(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
+/datum/species/proc/grab(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style, rightclick = FALSE)
 	if(target.check_martial_melee_block())
 		target.visible_message("<span class='warning'><b>[target]</b> blocks <b>[user]</b>'s grab attempt!</span>", target = user, \
 			target_message = "<span class='warning'><b>[target]</b> blocks your grab attempt!</span>")
@@ -1634,7 +1634,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		target.grabbedby(user)
 		return 1
 
-/datum/species/proc/harm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
+/datum/species/proc/harm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style, rightclick = FALSE)
 	if(!attacker_style && HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, "<span class='warning'>I don't want to harm <b>[target]</b>!</span>")
 		return FALSE
@@ -1698,12 +1698,12 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		damage *= str_mod
 
 		//Combat intents change how much your fisto deals
-		var/c_intent = user.combat_intent
-		switch(c_intent)
-			if(CI_STRONG)
-				damage *= 1.5 //fuck it
-			if(CI_WEAK)
-				damage *= 0.25
+		if(rightclick)
+			switch(user.combat_intent)
+				if(CI_STRONG)
+					damage *= 1.5 //fuck it
+				if(CI_WEAK)
+					damage *= 0.25
 
 		var/punchedstam = target.getStaminaLoss()
 		var/punchedbrute = target.getBruteLoss()
@@ -1751,7 +1751,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 		//good modifier if aimed
 		var/modifier = 0
-		if(user.combat_intent == CI_AIMED)
+		if(rightclick && (user.combat_intent == CI_AIMED))
 			modifier += 6
 
 		//Dice roll to see if we fuck up
@@ -1836,7 +1836,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 /datum/species/proc/spec_unarmedattacked(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	return
 
-/datum/species/proc/disarm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
+/datum/species/proc/disarm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style, rightclick = FALSE)
 	// CITADEL EDIT slap mouthy gits and booty
 	var/aim_for_mouth = user.zone_selected == "mouth"
 	var/target_on_help = target.a_intent == INTENT_HELP
@@ -1990,7 +1990,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 /datum/species/proc/spec_hitby(atom/movable/AM, mob/living/carbon/human/H)
 	return
 
-/datum/species/proc/spec_attack_hand(mob/living/carbon/human/M, mob/living/carbon/human/H, datum/martial_art/attacker_style)
+/datum/species/proc/spec_attack_hand(mob/living/carbon/human/M, mob/living/carbon/human/H, datum/martial_art/attacker_style, rightclick = FALSE)
 	if(!istype(M))
 		return
 	CHECK_DNA_AND_SPECIES(M)
@@ -2004,29 +2004,29 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			attacker_style = null
 	switch(M.a_intent)
 		if(INTENT_HELP)
-			help(M, H, attacker_style)
+			help(M, H, attacker_style, rightclick)
 
 		if(INTENT_GRAB)
-			grab(M, H, attacker_style)
+			grab(M, H, attacker_style, rightclick)
 
 		if(INTENT_HARM)
 			switch(M.special_attack)
 				if(SPECIAL_ATK_NONE)
-					harm(M, H, attacker_style)
+					harm(M, H, attacker_style, rightclick)
 				if(SPECIAL_ATK_KICK)
-					kick(M, H, attacker_style)
+					kick(M, H, attacker_style, rightclick)
 				if(SPECIAL_ATK_BITE)
-					bite(M, H, attacker_style)
+					bite(M, H, attacker_style, rightclick)
 
 		if(INTENT_DISARM)
-			disarm(M, H, attacker_style)
+			disarm(M, H, attacker_style, rightclick)
 
 /datum/species/proc/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H, attackchain_flags = NONE, damage_multiplier = 1)
 	var/totitemdamage = H.pre_attacked_by(I, user) * damage_multiplier
 	// Allows you to put in item-specific reactions based on species
 	if(user != H)
 		var/list/block_return = list()
-		if(H.mob_run_block(I, totitemdamage, "the [I.name]", ((attackchain_flags & ATTACKCHAIN_PARRY_COUNTERATTACK)? ATTACK_TYPE_PARRY_COUNTERATTACK : NONE) | ATTACK_TYPE_MELEE, I.armour_penetration, user, affecting?.body_zone, block_return) & BLOCK_SUCCESS)
+		if(H.mob_run_block(I, totitemdamage, "the [I.name]", ((attackchain_flags & ATTACKCHAIN_PARRY_COUNTERATTACK) ? ATTACK_TYPE_PARRY_COUNTERATTACK : NONE) | ATTACK_TYPE_MELEE, I.armour_penetration, user, affecting?.body_zone, block_return) & BLOCK_SUCCESS)
 			return 0
 		totitemdamage = block_calculate_resultant_damage(totitemdamage, block_return)
 
@@ -2209,12 +2209,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		return TRUE
 	if(M.mind)
 		attacker_style = M.mind.martial_art
-	if((M != H) && M.a_intent != INTENT_HELP && (H.mob_run_block(M, 0, "[M]", ATTACK_TYPE_UNARMED, 0, M, M.zone_selected, null) & BLOCK_SUCCESS))
-		log_combat(M, H, "attempted to touch")
-		H.visible_message("<span class='warning'><b>[M]</b> attempted to touch [H]</b>!</span>", \
-			"<span class='warning'><b>[M]</b> attempted to touch me!</span>", target = M, \
-			target_message = "<span class='warning'>I attempted to touch <b>[H]</b>!</span>")
-		return TRUE
 	switch(M.a_intent)
 		if(INTENT_HELP)
 			if(M == H)

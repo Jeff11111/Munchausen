@@ -203,7 +203,7 @@
 					if(user.mind)
 						var/datum/skills/melee/melee = GET_SKILL(user, melee)
 						if(melee)
-							multi = melee.level/(MAX_SKILL/2)
+							multi = melee.level/(MAX_SKILL/4)
 					changeNext_move(CLICK_CD_MELEE * multi)
 		affecting = get_bodypart(ran_zone(check_zone(user.zone_selected), ran_zone_prob))
 	var/target_area = parse_zone(affecting.body_zone) //our intended target

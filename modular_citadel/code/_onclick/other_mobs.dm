@@ -1,4 +1,4 @@
-/mob/living/carbon/human/AltUnarmedAttack(atom/A, proximity)
+/mob/living/carbon/human/AltUnarmedAttack(atom/A, proximity, attackchain_flags)
 	if(!has_active_hand())
 		to_chat(src, "<span class='notice'>You look at the state of the universe and sigh.</span>") //lets face it, people rarely ever see this message in its intended condition.
 		return TRUE

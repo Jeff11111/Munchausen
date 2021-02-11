@@ -286,10 +286,10 @@
 	H.emote("deathscream")
 
 //Kicking
-/datum/species/proc/kick(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
+/datum/species/proc/kick(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style, rightclick = FALSE)
 	if(!user.get_bodypart(BODY_ZONE_PRECISE_L_FOOT) && !user.get_bodypart(BODY_ZONE_PRECISE_R_FOOT))
 		to_chat(user, "<span class='warning'>I can't kick without feet!</span>")
-		return FALSE // You need at least one foot to kick with. 
+		return FALSE // You need at least one foot to kick with.
 	if(!target.lying && !(GET_SKILL_LEVEL(user, melee) >= JOB_SKILLPOINTS_TRAINED) && !(user.zone_selected in list(BODY_ZONE_PRECISE_GROIN, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_R_FOOT)))
 		to_chat(user, "<span class='warning'>I can't kick above [target]'s waist!</span>")
 		return FALSE // You can't kick above their waist if you ain't skilled
@@ -362,12 +362,12 @@
 		damage *= str_mod
 
 		//Combat intents change how much your boot deals
-		var/c_intent = user.combat_intent
-		switch(c_intent)
-			if(CI_STRONG)
-				damage *= 1.5 //fuck it
-			if(CI_WEAK)
-				damage *= 0.25
+		if(rightclick)
+			switch(user.combat_intent)
+				if(CI_STRONG)
+					damage *= 1.5 //fuck it
+				if(CI_WEAK)
+					damage *= 0.25
 
 		var/kickedstam = target.getStaminaLoss()
 		var/kickedbrute = target.getBruteLoss()
@@ -388,7 +388,7 @@
 				if(DICE_CRIT_FAILURE)
 					damage *= 0.4
 					pitiful = TRUE
-		
+
 		//Shoes with the force var modify total damage
 		if(user.shoes)
 			damage += S.force
@@ -417,13 +417,13 @@
 
 		//good modifier if aimed
 		var/modifier = 0
-		if(user.combat_intent == CI_AIMED)
+		if(rightclick && (user.combat_intent == CI_AIMED))
 			modifier += 6
-		
+
 		//Dice roll to see if we fuck up
 		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*1.5, dicetype = "6d6", mod = -(miss_entirely/5) + modifier, crit = 18) <= DICE_CRIT_FAILURE)
 			missed = TRUE
-		
+
 		if(!damage || !affecting || (missed && target != user))//future-proofing for species that have 0 damage/weird cases where no zone is targeted
 			playsound(target.loc, user.dna.species.miss_sound, 25, TRUE, -1)
 			target.visible_message("<span class='danger'><b>[user]</b>'s [atk_verb] misses <b>[target]</b>!</span>", \
@@ -455,11 +455,11 @@
 
 		if(user.limb_destroyer)
 			target.dismembering_strike(user, affecting.body_zone)
-		
+
 		target.apply_damage(damage, BRUTE, affecting, armor_block, wound_bonus = atk_wound_bonus, bare_wound_bonus = atk_barewound_bonus, sharpness = atk_sharpness)
 		target.apply_damage(damage*2, STAMINA, affecting, armor_block)
 		log_combat(user, target, "kicked")
-		
+
 		//Knockdown and stuff
 		target.do_stat_effects(user, null, damage, affecting)
 
@@ -467,10 +467,10 @@
 		target.visible_message("<span class='danger'><b>[user]</b>[pitiful ? " pitifully" : ""] [user.dna.species.kick_verb_continuous] <b>[target]</b> on their [affecting.name]![target.wound_message]</span>", \
 					"<span class='userdanger'><b>[user]</b>[pitiful ? " pitifully" : ""] [user.dna.species.kick_verb_continuous]s me on my [affecting.name]![target.wound_message]</span>", null, COMBAT_MESSAGE_RANGE, null, \
 					user, "<span class='danger'>I[pitiful ? " pitifully" : ""] [user.dna.species.kick_verb] <b>[target]</b> on their [affecting.name]![target.wound_message]</span>")
-		
+
 		//Clean the descriptive string
 		target.wound_message = ""
-		
+
 		if((target.stat != DEAD) && damage >= (user.dna.species.punchstunthreshold*1.5))
 			if((kickedstam > 50) && prob(kickedstam*0.5)) //If our punch victim has been hit above the threshold, and they have more than 50 stamina damage, roll for stun, probability of 1% per 2 stamina damage
 				target.visible_message("<span class='danger'><b>[user]</b> knocks [target] down!</span>", \
@@ -495,7 +495,7 @@
 			target.forcesay(GLOB.hit_appends)
 
 //Biting
-/datum/species/proc/bite(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
+/datum/species/proc/bite(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style, rightclick = FALSE)
 	if(!attacker_style && HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, "<span class='warning'>I don't want to harm [target]!</span>")
 		return FALSE
@@ -567,12 +567,12 @@
 		damage *= str_mod
 
 		//Combat intents change how much your boot deals
-		var/c_intent = user.combat_intent
-		switch(c_intent)
-			if(CI_STRONG)
-				damage *= 2 //fuck it
-			if(CI_WEAK)
-				damage *= 0.25
+		if(rightclick)
+			switch(user.combat_intent)
+				if(CI_STRONG)
+					damage *= 2 //fuck it
+				if(CI_WEAK)
+					damage *= 0.25
 
 		//CITADEL CHANGES - makes resting and disabled combat mode reduce punch damage, makes being out of combat mode result in you taking more damage
 		if(SEND_SIGNAL(target, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
@@ -590,7 +590,7 @@
 				if(DICE_CRIT_FAILURE)
 					damage *= 0.4
 					pitiful = TRUE
-		
+
 		//The probability of hitting the correct zone depends on dexterity
 		//and also on which limb we aim at
 		//since this is a bite, chance to miss is doubled
@@ -615,13 +615,13 @@
 
 		//good modifier if aimed
 		var/modifier = 0
-		if(user.combat_intent == CI_AIMED)
+		if(rightclick && (user.combat_intent == CI_AIMED))
 			modifier += 6
-		
+
 		//Dice roll to see if we fuck up
 		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*1.5, dicetype = "6d6", mod = -(miss_entirely/5) + modifier, crit = 18) <= DICE_CRIT_FAILURE)
 			missed = TRUE
-		
+
 		if(!damage || !affecting || (missed && target != user))//future-proofing for species that have 0 damage/weird cases where no zone is targeted
 			playsound(target.loc, user.dna.species.miss_sound, 25, TRUE, -1)
 			target.visible_message("<span class='danger'><b>[user]</b>'s [atk_verb] misses <b>[target]</b>!</span>", \
@@ -644,21 +644,21 @@
 			atk_wound_bonus = max(0, atk_wound_bonus - armor_block/100 * damage)
 			atk_barewound_bonus = 0
 			atk_sharpness = SHARP_NONE
-		
+
 		armor_block = min(95, armor_block)
 		playsound(target.loc, 'sound/weapons/bite.ogg', 25, 1, -1)
-		
+
 		target.lastattacker = user.real_name
 		target.lastattackerckey = user.ckey
 		user.dna.species.spec_unarmedattacked(user, target)
 
 		if(user.limb_destroyer)
 			target.dismembering_strike(user, affecting.body_zone)
-		
+
 		target.apply_damage(damage, BRUTE, affecting, armor_block, wound_bonus = atk_wound_bonus, bare_wound_bonus = atk_barewound_bonus, sharpness = atk_sharpness)
 		target.apply_damage(damage*2, STAMINA, affecting, armor_block)
 		log_combat(user, target, "bitten")
-		
+
 		//Knockdown and stuff
 		target.do_stat_effects(user, null, damage, affecting)
 
