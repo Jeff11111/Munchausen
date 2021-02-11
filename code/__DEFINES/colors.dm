@@ -76,6 +76,7 @@
 #define COLOR_TITANIUM         "#d1e6e3"
 #define COLOR_WHITE			   "#ffffff"
 #define COLOR_OFF_WHITE		   "#f6fffe"
+#define COLOR_NT_RED           "#9d2300"
 
 #define COLOR_VIOLET			"#9933ff"
 #define GLASS_COLOR            "#74b1ee"

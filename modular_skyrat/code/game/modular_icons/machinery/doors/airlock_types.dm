@@ -96,7 +96,7 @@
 
 /obj/machinery/door/airlock/security
 	icon = 'modular_skyrat/icons/bay/obj/doors/station/door.dmi'
-	door_color = COLOR_RED_LIGHT
+	door_color = COLOR_NT_RED
 
 /obj/machinery/door/airlock/engineering
 	icon = 'modular_skyrat/icons/bay/obj/doors/station/door.dmi'

@@ -19,7 +19,7 @@
 
 /obj/structure/door_assembly/door_assembly_sec
 	icon = 'modular_skyrat/icons/bay/obj/doors/station/door.dmi'
-	door_color = COLOR_RED_LIGHT
+	door_color = COLOR_NT_RED
 
 /obj/structure/door_assembly/door_assembly_eng
 	icon = 'modular_skyrat/icons/bay/obj/doors/station/door.dmi'
