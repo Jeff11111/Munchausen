@@ -26,6 +26,12 @@
 	var/nextstate = null
 	var/boltslocked = TRUE
 	var/list/affecting_areas
+	blend_objects = list(/obj/structure/table/low_wall, \
+										/obj/structure/grille, \
+										/obj/structure/window, \
+										/obj/structure/door_assembly, \
+										/obj/machinery/door/firedoor,\
+										)
 
 /obj/machinery/door/firedoor/Initialize()
 	. = ..()
@@ -167,15 +173,19 @@
 /obj/machinery/door/firedoor/do_animate(animation)
 	switch(animation)
 		if("opening")
-			flick("door_opening", src)
+			flick("opening", src)
 		if("closing")
-			flick("door_closing", src)
+			flick("closing", src)
+
+/obj/machinery/door/firedoor/update_icon()
+	update_dir()
+	. = ..()
 
 /obj/machinery/door/firedoor/update_icon_state()
 	if(density)
-		icon_state = "door_closed"
+		icon_state = "closed"
 	else
-		icon_state = "door_open"
+		icon_state = "open"
 
 /obj/machinery/door/firedoor/update_overlays()
 	. = ..()
@@ -289,7 +299,7 @@
 			. += "<span class='notice'>There are no <i>firelock electronics</i> in the frame. The frame could be <b>cut</b> apart.</span>"
 
 /obj/structure/firelock_frame/update_icon_state()
-	icon_state = "frame[constructionStep]"
+	icon_state = "construction"
 
 /obj/structure/firelock_frame/attackby(obj/item/C, mob/user)
 	switch(constructionStep)

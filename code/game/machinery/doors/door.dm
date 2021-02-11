@@ -40,12 +40,7 @@
 	ricochet_chance_mod = 0.8
 
 	/// 3/4ths stuff
-	var/static/list/blend_objects = list(/obj/structure/table/low_wall, \
-										/obj/structure/grille, \
-										/obj/structure/window, \
-										/obj/structure/door_assembly, \
-										/obj/machinery/door/airlock,\
-										)
+	var/list/blend_objects = null
 
 /obj/machinery/door/alt_attack_hand(mob/user)
 	if(allowed(user))
@@ -354,12 +349,10 @@
 /obj/machinery/door/proc/crush()
 	for(var/mob/living/L in get_turf(src))
 		L.visible_message("<span class='warning'>[src] closes on [L], crushing [L.p_them()]!</span>", "<span class='userdanger'>[src] closes on you and crushes you!</span>")
-		//skyrat edit
 		if(iscarbon(L))
 			var/mob/living/carbon/C = L
 			for(var/datum/wound/W in C.all_wounds)
 				W.crush(DOOR_CRUSH_DAMAGE)
-		//
 		if(isalien(L))  //For xenos
 			L.adjustBruteLoss(DOOR_CRUSH_DAMAGE * 1.5) //Xenos go into crit after aproximately the same amount of crushes as humans.
 			L.emote("roar")

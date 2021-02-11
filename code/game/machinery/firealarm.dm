@@ -15,7 +15,7 @@
 /obj/machinery/firealarm
 	name = "fire alarm"
 	desc = "<i>\"Pull this in case of emergency\"</i>. Thus, keep pulling it forever."
-	icon = 'modular_skyrat/icons/obj/monitors.dmi' //Skyrat change
+	icon = 'modular_skyrat/icons/obj/monitors.dmi'
 	icon_state = "fire0"
 	plane = ABOVE_WALL_PLANE
 	max_integrity = 250
@@ -36,7 +36,7 @@
 	var/last_alarm = 0
 	var/area/myarea = null
 	var/datum/looping_sound/firealarm/soundloop
-//Skyrat changes start
+
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..()
 	if(GLOB.security_level == SEC_LEVEL_GREEN)
@@ -53,7 +53,7 @@
 		. += "The current alert level is red!"
 	if(GLOB.security_level == SEC_LEVEL_DELTA)
 		. += "The current alert level is delta! Evacuate!"
-//Skyrat changes stop
+
 /obj/machinery/firealarm/Initialize(mapload, dir, building)
 	. = ..()
 	if(dir)

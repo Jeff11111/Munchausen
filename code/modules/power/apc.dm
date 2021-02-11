@@ -197,16 +197,16 @@
 	switch(tdir)
 		if(NORTH)
 			pixel_x = 0
-			pixel_y = 23
+			pixel_y = 22
 		if(SOUTH)
 			pixel_x = 0
-			pixel_y = -23
+			pixel_y = -22
 		if(EAST)
 			pixel_y = 0
-			pixel_x = 24
+			pixel_x = 22
 		if(WEST)
 			pixel_y = 0
-			pixel_x = -25
+			pixel_x = -22
 
 /obj/machinery/power/apc/Destroy()
 	GLOB.apcs_list -= src

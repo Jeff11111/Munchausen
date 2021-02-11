@@ -125,6 +125,12 @@
 
 	var/static/list/airlock_overlays = list()
 	var/initialMalfunctionProb = 5
+	blend_objects = list(/obj/structure/table/low_wall, \
+										/obj/structure/grille, \
+										/obj/structure/window, \
+										/obj/structure/door_assembly, \
+										/obj/machinery/door/airlock,\
+										)
 
 /obj/machinery/door/airlock/Initialize(mapload)
 	. = ..()
@@ -463,6 +469,7 @@
 		return FALSE
 
 /obj/machinery/door/airlock/update_icon(state=0, override=0)
+	update_dir()
 	if(operating && !override)
 		return
 	switch(state)
@@ -476,7 +483,6 @@
 			icon_state = ""
 		if(AIRLOCK_DENY, AIRLOCK_OPENING, AIRLOCK_CLOSING, AIRLOCK_EMAG)
 			icon_state = "nonexistenticonstate" //MADNESS
-	update_dir()
 	set_airlock_overlays(state)
 
 /obj/machinery/door/airlock/proc/set_airlock_overlays(state)
