@@ -75,7 +75,7 @@
 		canSmoothWith |= typesof(/obj/structure/falsewall)
 		canSmoothWith |= typesof(/turf/closed/indestructible/riveted)
 		canSmoothWith |= typesof(/obj/structure/table/low_wall)
-	update_icon()
+	update_overlays()
 
 /obj/structure/table/low_wall/proc/calculate_wall_adjacencies()
 	var/adjacencies = 0
