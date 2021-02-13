@@ -189,7 +189,7 @@
 	// A backwards depth-limited breadth-first-search to see if the target is
 	// logically "in" anything adjacent to us.
 	var/list/direct_access = DirectAccess()
-	var/depth = 1 + (view_only ? STORAGE_VIEW_DEPTH : INVENTORY_DEPTH)
+	var/depth = (view_only ? STORAGE_VIEW_DEPTH : INVENTORY_DEPTH)
 
 	var/list/closed = list()
 	var/list/checking = list(ultimate_target)
