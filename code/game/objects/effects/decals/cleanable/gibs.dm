@@ -98,6 +98,11 @@
 /obj/effect/decal/cleanable/blood/drip/can_bloodcrawl_in()
 	return TRUE
 
+/obj/effect/decal/cleanable/blood/drip/update_icon()
+	. = ..()
+	if(drips >= 6)
+		icon = 'modular_skyrat/icons/effects/blood_fuck.dmi'
+
 /obj/effect/decal/cleanable/blood/drip/update_icon_state()
 	. = ..()
 	if(drips >= 6)
