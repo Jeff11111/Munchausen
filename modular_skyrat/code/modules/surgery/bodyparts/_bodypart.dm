@@ -1404,7 +1404,7 @@
 			return BODYPART_DISABLED_WOUND
 	if(can_dismember())
 		. = disabled //inertia, to avoid limbs healing 0.1 damage and being re-enabled
-		if(parent_bodyzone && (parent_bodyzone != BODY_ZONE_CHEST))
+		if(parent_bodyzone && (parent_bodyzone != BODY_ZONE_CHEST) && (parent_bodyzone != BODY_ZONE_HEAD))
 			if(!(owner.get_bodypart(parent_bodyzone)))
 				return BODYPART_DISABLED_DAMAGE
 			else
