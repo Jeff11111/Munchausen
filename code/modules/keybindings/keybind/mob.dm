@@ -39,7 +39,7 @@
 	return TRUE
 
 /datum/keybinding/mob/swap_hands
-	hotkey_keys = list("Spacebar", "Northeast") // PAGEUP
+	hotkey_keys = list("Space", "Northeast") // PAGEUP
 	name = "swap_hands"
 	full_name = "Swap hands"
 	description = ""
