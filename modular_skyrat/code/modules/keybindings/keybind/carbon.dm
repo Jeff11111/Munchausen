@@ -1,5 +1,5 @@
 /datum/keybinding/carbon/wield_act
-	hotkey_keys = list("CtrlX")
+	hotkey_keys = list("X")
 	name = "wield_act"
 	full_name = "Wield active item"
 	description = "Wield the item in your active hand."
@@ -12,7 +12,7 @@
 	return TRUE
 
 /datum/keybinding/carbon/fixeye
-	hotkey_keys = list("CtrlC")
+	hotkey_keys = list("CtrlF")
 	name = "fixeye"
 	full_name = "Fix Eye"
 	description = "Fix the direction you're staring at."
