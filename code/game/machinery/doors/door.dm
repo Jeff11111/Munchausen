@@ -81,10 +81,10 @@
 					break
 		if(success)
 			connections |= direction
-	if((WEST in connections) || (EAST in connections))
-		final_dir = SOUTH
-	else if((NORTH in connections) || (SOUTH in connections))
+	if((NORTH in connections) || (SOUTH in connections))
 		final_dir = WEST
+	else if((WEST in connections) || (EAST in connections))
+		final_dir = SOUTH
 	setDir(final_dir)
 
 /obj/machinery/door/examine(mob/user)
