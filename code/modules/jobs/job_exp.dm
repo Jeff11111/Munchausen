@@ -42,7 +42,7 @@ GLOBAL_PROTECT(exp_to_update)
 /proc/job_is_xp_locked(jobtitle)
 	if(!CONFIG_GET(flag/use_exp_restrictions_heads) && (jobtitle in (GLOB.command_positions | GLOB.security_positions | list("AI"))))
 		return FALSE
-	if(!CONFIG_GET(flag/use_exp_restrictions_other) && !(jobtitle in (GLOB.command_positions | GLOB.security_positions | list("AI"))))
+	if(!CONFIG_GET(flag/use_exp_restrictions_other) && (jobtitle in GLOB.security_positions))
 		return FALSE
 	return TRUE
 
