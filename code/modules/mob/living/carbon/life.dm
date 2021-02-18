@@ -396,7 +396,7 @@
 			. |= BP.on_life()
 		if(!lying && !buckled && (world.time - last_move_time <= 2 SECONDS))
 			//Moving around with broken bones won't do you any good
-			if(stat < UNCONSCIOUS && BP.is_broken() && BP.get_organs() && prob(15) && can_feel_pain() && chem_effects[CE_PAINKILLER] < 50)
+			if(stat < UNCONSCIOUS && BP.is_broken() && BP.get_organs() && prob(10) && can_feel_pain() && chem_effects[CE_PAINKILLER] < 50)
 				custom_pain("Pain jolts through your broken [BP.encased ? BP.encased : BP.name], staggering you!", 50, affecting = BP)
 				Stumble(10 SECONDS)
 				Stun(3 SECONDS)
