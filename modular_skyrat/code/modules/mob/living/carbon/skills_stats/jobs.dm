@@ -69,13 +69,6 @@
 
 //Point value assignment
 /datum/job/assistant
-	//Assistants have WACKY stats
-	stat_variance_negative = 4
-	stat_variance_positive = 4
-	stat_str = 8 //str needs to be limited because 12 str is already *very* good
-	//But they suck at everything
-	skill_variance_negative = 2
-	skill_variance_positive = 2
 	skill_melee = JOB_SKILLPOINTS_NOVICE
 	skill_gaming = JOB_STATPOINTS_AVERAGE
 
@@ -253,7 +246,7 @@
 	stat_str = 9
 	stat_end = 14
 	//Average construction and electronics i guess?
-	skill_melee = JOB_SKILLPOINTS_WORTHLESS
+	skill_melee = JOB_SKILLPOINTS_NOVICE
 	skill_construction = JOB_SKILLPOINTS_AVERAGE
 	skill_electronics = JOB_SKILLPOINTS_AVERAGE
 
