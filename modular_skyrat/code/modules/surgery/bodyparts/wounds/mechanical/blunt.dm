@@ -439,6 +439,8 @@
 	limb.receive_damage(15, stamina=75, wound_bonus=CANT_WOUND)
 	if(!wrenched)
 		wrenched = TRUE
+		if(severity <= WOUND_SEVERITY_MODERATE)
+			qdel(src)
 
 /// if someone is using sticky tape on our wound
 /datum/wound/mechanical/blunt/tape(obj/item/stack/sticky_tape/I, mob/user)
