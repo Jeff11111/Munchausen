@@ -6,6 +6,7 @@
 	maptext_width = 256
 	maptext_height = 64
 	maptext_x = -16
+	maptext_y = -8
 	plane = HUD_PLANE
 	var/style_carbon = "font-family: \"Small Fonts\";font-size:12px;text-shadow: 1px 1px 0 #000000,-1px -1px 0 #000000, 2px 2px 0 #000000,-2px -2px 0 #000000;color: #7ea1ff;"
 	var/style_atom = "font-family: \"Small Fonts\";font-size:12px;text-shadow: 1px 1px 0 #000000,-1px -1px 0 #000000, 2px 2px 0 #000000,-2px -2px 0 #000000;color: #85d1e4;"
