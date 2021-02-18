@@ -174,7 +174,7 @@
 		msg += ", <span class='notice'>and the joints appear to be held together with sticky tape</span>"
 	else if(wrenched)
 		msg += ", <span class='notice'>and it appears to be tightly secured to avoid further damage</span>"
-	return "<B>[msg]!</B>"
+	return "<span class='danger'><B>[msg]!</B></span>"
 
 /*
 	New common procs for /datum/wound/mechanical/blunt/
