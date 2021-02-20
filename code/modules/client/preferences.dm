@@ -2881,6 +2881,12 @@ GLOBAL_LIST_INIT(food, list(
 	if(pref_species.mutant_bodyparts["meat_type"])
 		character.type_of_meat = GLOB.meat_types[features["meat_type"]]
 
+	//no robotic dummies please
+	if(istype(character, /mob/living/carbon/human/dummy))
+		for(var/obj/item/bodypart/BP in character.bodyparts)
+			BP.drop_limb(TRUE, TRUE, FALSE, TRUE)
+		character.regenerate_limbs()
+	
 	character.give_genitals(TRUE) //character.update_genitals() is already called on genital.update_appearance()
 
 	character.dna.update_body_size(old_size)
