@@ -315,7 +315,12 @@
 	. = ..()
 	if(germ_level >= INFECTION_LEVEL_THREE && !is_dead())
 		kill_limb()
-	update_limb(owner ? FALSE : TRUE)
+	var/already_rot = (species_id == "rot")
+	update_limb(!owner)
+	if(owner && !already_rot && (species_id == "rot"))
+		owner?.regenerate_icons()
+	else if(!owner)
+		update_icon_dropped()
 
 /obj/item/bodypart/proc/handle_antibiotics()
 	if(!owner || (owner.stat == DEAD) || !germ_level)
@@ -558,7 +563,8 @@
 		playsound(get_turf(src), 'sound/misc/splort.ogg', 50, 1, -1)
 	pixel_x = rand(-3, 3)
 	pixel_y = rand(-3, 3)
-	update_limb(owner ? FALSE : TRUE)
+	update_limb(!owner)
+	update_icon_dropped()
 
 //empties the bodypart from its organs and other things inside it
 /obj/item/bodypart/proc/drop_organs(mob/user, violent_removal)
@@ -597,7 +603,7 @@
 			BP.update_icon_dropped()
 	if(cavity_item)
 		cavity_item = null
-	update_limb(owner ? FALSE : TRUE)
+	update_limb(!owner)
 	update_icon_dropped()
 
 /obj/item/bodypart/proc/get_organs()
@@ -1566,12 +1572,21 @@
 
 /obj/item/bodypart/proc/kill_limb()
 	limb_flags |= BODYPART_DEAD
-	update_limb(owner ? FALSE : TRUE)
-	owner?.update_icon()
+	var/already_rot = (species_id == "rot")
+	update_limb(!owner)
+	if(owner && !already_rot && (species_id == "rot"))
+		owner?.regenerate_icons()
+	else if(!owner)
+		update_icon_dropped()
 
 /obj/item/bodypart/proc/revive_limb()
 	limb_flags &= ~BODYPART_DEAD
-	update_limb(owner ? FALSE : TRUE)
+	var/already_rot = (species_id == "rot")
+	update_limb(!owner)
+	if(owner && already_rot && (species_id != "rot"))
+		owner?.regenerate_icons()
+	else if(!owner)
+		update_icon_dropped()
 
 // open incisions and expose implants
 // this is the retract step of surgery

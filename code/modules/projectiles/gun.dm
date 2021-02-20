@@ -190,7 +190,7 @@
 	if(has_safety)
 		. += "It's safety is [safety ? "<span class='green'><b>enabled</b></span>" : "<span class='red'><b>disabled</b></span>"]."
 	if(gun_light)
-		. += "It has \a [gun_light] attached, at [gun_light.powercell ? gunlight.powercell.percent() : 0 ]% power."
+		. += "It has \a [gun_light] attached, at [gun_light.powercell ? gun_light.powercell.percent() : 0 ]% power."
 	if(suppressed)
 		. += "It is suppressed with \a <i>[suppressed]</i>."
 	if(bayonet)
