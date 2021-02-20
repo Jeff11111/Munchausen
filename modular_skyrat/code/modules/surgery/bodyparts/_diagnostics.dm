@@ -28,16 +28,16 @@
 
 		if(IN.is_bleeding())
 			if(IN.wound_damage() > IN.bleed_threshold)
-				this_injury_desc = "<b>badly bleeding</b> [this_injury_desc]"
+				this_injury_desc = "<b><i>badly bleeding</i></b> [this_injury_desc]"
 			else
 				this_injury_desc = "<b>bleeding</b> [this_injury_desc]"
 		if(IN.is_bandaged())
 			this_injury_desc = "<span class='white'>bandaged</span> [this_injury_desc]"
 
 		if(IN.germ_level >= INFECTION_LEVEL_TWO)
-			this_injury_desc = "<span class='deadsay'>badly infected</span> [this_injury_desc]"
+			this_injury_desc = "<span class='deadsay'><b>badly infected</b></span> [this_injury_desc]"
 		else if(IN.germ_level >= INFECTION_LEVEL_ONE)
-			this_injury_desc = "<span class='deadsay'>lightly infected</span> [this_injury_desc]"
+			this_injury_desc = "<span class='deadsay'>infected</span> [this_injury_desc]"
 		
 		if(length(IN.embedded_objects))
 			var/list/chung = list()
