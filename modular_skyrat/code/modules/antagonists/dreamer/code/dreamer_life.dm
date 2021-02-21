@@ -10,17 +10,18 @@ GLOBAL_LIST_INIT(dreamer_bans, world.file2list('modular_skyrat/code/modules/anta
 	var/waking_up = FALSE
 
 /datum/antagonist/dreamer/process()
+	if(!owner?.current)
+		return
 	handle_dreamer()
 
 /datum/antagonist/dreamer/proc/handle_dreamer()
-	if(owner?.current)
-		if((last_ambience + ambience_duration) <= world.time)
-			play_nice_noises()
-		if(SEND_SIGNAL(owner.current, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_ACTIVE) || waking_up)
-			INVOKE_ASYNC(src, .proc/handle_dreamer_screenshake)
-		INVOKE_ASYNC(src, .proc/handle_dreamer_hallucinations)
-		if(waking_up)
-			INVOKE_ASYNC(src, .proc/handle_dreamer_waking_up)
+	if((last_ambience + ambience_duration) <= world.time)
+		play_nice_noises()
+	if(SEND_SIGNAL(owner.current, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_ACTIVE) || waking_up)
+		INVOKE_ASYNC(src, .proc/handle_dreamer_screenshake)
+	INVOKE_ASYNC(src, .proc/handle_dreamer_hallucinations)
+	if(waking_up)
+		INVOKE_ASYNC(src, .proc/handle_dreamer_waking_up)
 
 /datum/antagonist/dreamer/proc/handle_dreamer_hallucinations()
 	if(dreamer_dreaming)

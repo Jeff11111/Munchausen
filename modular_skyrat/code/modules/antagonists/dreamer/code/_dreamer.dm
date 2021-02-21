@@ -194,7 +194,7 @@
 	SSticker.Reboot("The Dreamer has awakened.", "The Dreamer has awakened.", delay = 60 SECONDS)
 
 /datum/antagonist/dreamer/proc/cant_wake_up()
-	if(!iscarbon(owner.current))
+	if(!iscarbon(owner?.current))
 		return
 	to_chat(owner.current, "<span class='deadsay'><span class='big bold'>I CAN'T WAKE UP.</span></span>")
 	sleep(20)
@@ -227,6 +227,8 @@
 
 /datum/antagonist/dreamer/greet()
 	. = ..()
+	if(!owner?.current)
+		return
 	owner.current.playsound_local(owner.current, 'modular_skyrat/code/modules/antagonists/dreamer/sound/dreamer_warning.ogg', 100, 0)
 	to_chat(owner.current, "<span class='danger'><b>Recently I've been visited by a lot of VISIONS. They're all about another WORLD, ANOTHER life. I will do EVERYTHING to know the TRUTH, and return to the REAL world.</b></span>")
 	if(length(objectives))
@@ -234,6 +236,8 @@
 	play_nice_noises()
 
 /datum/antagonist/dreamer/proc/play_nice_noises()
+	if(!owner?.current)
+		return
 	owner.current.playsound_local(owner.current, ambience, 65, 0, CHANNEL_AMBIENCE)
 	last_ambience = world.time
 
@@ -251,8 +255,12 @@
 	STOP_PROCESSING(SSprocessing, src)
 
 /datum/antagonist/dreamer/proc/activate_bloodlust()
-	owner.current?.hud_used?.bloodlust?.icon_state = initial(owner.current.hud_used.bloodlust.icon_state)
-	owner.current?.hud_used?.bloodlust?.alpha = 255
+	if(!owner?.current)
+		return
+	owner.current.hud_used?.bloodlust?.icon_state = initial(owner.current.hud_used.bloodlust.icon_state)
+	owner.current.hud_used?.bloodlust?.alpha = 255
 
 /datum/antagonist/dreamer/proc/deactivate_bloodlust()
-	owner.current?.hud_used?.bloodlust?.alpha = 0
+	if(!owner?.current)
+		return
+	owner.current.hud_used?.bloodlust?.alpha = 0
