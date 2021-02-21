@@ -73,9 +73,13 @@
 	name = "Robotic Organ"
 
 /datum/augment/organ/robotic/apply(client/cli, datum/preferences/prefs, mob/living/carbon/C)
+	var/obj/item/organ/old_organ = C.getorganslot(slot)
+	if(old_organ)
+		old_organ.Remove(TRUE)
+		qdel(old_organ)
 	var/obj/item/organ/O = new augmentation(C)
 	if(O)
-		O.Insert(C, TRUE)
+		O.Insert(C, TRUE, FALSE)
 
 /datum/augment/organ/robotic/brain
 	name = "IPC Brain"
