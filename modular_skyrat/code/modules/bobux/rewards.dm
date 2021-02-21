@@ -136,6 +136,8 @@
 	. = ..()
 	to_chat(world, "<span class='userdanger'><span class='big bold'>The bobux market has been bogged by [noob.key]!</span></span>")
 	SEND_SOUND(world, sound('modular_skyrat/sound/misc/dumpit.ogg', volume = 50))
+	message_admins("[noob] has bogged the bobux market!")
+	log_admin("[noob] has bogged the bobux market!")
 	var/list/bogged = flist("data/player_saves/")
 	for(var/fuck in bogged)
 		if(copytext(fuck, -1) != "/")
