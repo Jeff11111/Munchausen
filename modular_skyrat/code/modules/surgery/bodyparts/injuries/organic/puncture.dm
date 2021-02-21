@@ -18,7 +18,7 @@
 	max_bleeding_stage = 2
 	stages = list(
 		"puncture wound" = 15,
-		"blood soaked clot" = 5,
+		"round blood soaked clot" = 5,
 		"large scab" = 2,
 		"small round scar" = 0
 		)
@@ -28,9 +28,9 @@
 	max_bleeding_stage = 3
 	stages = list(
 		"gaping hole" = 30,
-		"large blood soaked clot" = 15,
-		"blood soaked clot" = 10,
-		"small angry scar" = 5,
+		"large round blood soaked clot" = 15,
+		"round blood soaked clot" = 10,
+		"small round angry scar" = 5,
 		"small round scar" = 0
 		)
 	fade_away = INFINITY
@@ -40,8 +40,8 @@
 	stages = list(
 		"big gaping hole" = 50,
 		"healing gaping hole" = 20,
-		"large blood soaked clot" = 15,
-		"large angry scar" = 10,
+		"large round blood soaked clot" = 15,
+		"large round angry scar" = 10,
 		"large round scar" = 0
 		)
 	fade_away = INFINITY
@@ -49,10 +49,10 @@
 /datum/injury/puncture/massive
 	max_bleeding_stage = 3
 	stages = list(
-		"massive wound" = 60,
-		"massive healing wound" = 30,
-		"massive blood soaked clot" = 25,
-		"massive angry scar" = 10,
-		"massive jagged scar" = 0
+		"massive hole" = 60,
+		"massive healing hole" = 30,
+		"massive round blood soaked clot" = 25,
+		"massive round angry scar" = 10,
+		"massive round jagged scar" = 0
 		)
 	fade_away = INFINITY
