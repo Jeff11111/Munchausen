@@ -170,8 +170,8 @@
 
 /obj/item/organ/heart/proc/handle_pulse()
 	// Pulse mod starts out as just the chemical effect amount
-	var/pulse_mod = owner.chem_effects[CE_PULSE]
 	var/is_stable = owner.chem_effects[CE_STABLE] || (owner && HAS_TRAIT(owner, TRAIT_STABLEHEART))
+	var/pulse_mod = (is_stable ? 0 : owner.chem_effects[CE_PULSE])
 		
 	// If you have enough heart chemicals to be over 2, you're likely to take extra damage.
 	if(pulse_mod > 2 && !is_stable)
@@ -180,12 +180,13 @@
 			applyOrganDamage(0.5)
 	
 	// Now pulse mod is impacted by shock stage and other things too
-	if(owner.shock_stage > SHOCK_STAGE_2)
-		pulse_mod++
-	if(owner.shock_stage > SHOCK_STAGE_5)
-		pulse_mod++
-
 	var/oxy = owner.get_blood_oxygenation()
+	if(!is_stable)
+		if(owner.shock_stage > SHOCK_STAGE_2)
+			pulse_mod++
+		if(owner.shock_stage > SHOCK_STAGE_5)
+			pulse_mod++
+	
 	if(oxy < BLOOD_VOLUME_OKAY) //Brain wants us to get MOAR OXY
 		pulse_mod++
 	if(oxy < BLOOD_VOLUME_BAD) //MOAR
