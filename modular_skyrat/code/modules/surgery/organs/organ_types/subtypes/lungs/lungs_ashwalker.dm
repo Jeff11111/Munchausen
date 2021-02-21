@@ -4,8 +4,6 @@
 	desc = "blackened lungs identical from specimens recovered from lavaland, unsuited to higher air pressures."
 	icon_state = "lungs-ll"
 	safe_oxygen_min = 3	//able to handle much thinner oxygen, something something ash storm adaptation
-	safe_oxygen_max = 18 // Air standard is 22kpA of O2, LL is 14kpA
-	safe_nitro_max = 28 // Air standard is 82kpA of N2, LL is 23kpA
 
 	cold_level_1_threshold = 280 // Ash Lizards can't take the cold very well, station air is only just warm enough
 	cold_level_2_threshold = 240
