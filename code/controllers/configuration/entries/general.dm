@@ -202,16 +202,16 @@
 /datum/config_entry/string/banappeals
 
 /datum/config_entry/string/wikiurl
-	config_entry_value = "https://discord.gg/Ng5QenfzEh"
+	config_entry_value = "https://discord.gg/bz9a9XkJef"
 
 /datum/config_entry/string/wikiurltg
-	config_entry_value = "https://discord.gg/Ng5QenfzEh"
+	config_entry_value = "https://discord.gg/bz9a9XkJef"
 
 /datum/config_entry/string/forumurl
-	config_entry_value = "https://discord.gg/Ng5QenfzEh"
+	config_entry_value = "https://discord.gg/bz9a9XkJef"
 
 /datum/config_entry/string/rulesurl
-	config_entry_value = "https://discord.gg/Ng5QenfzEh"
+	config_entry_value = "https://discord.gg/bz9a9XkJef"
 
 /datum/config_entry/string/githuburl
 	config_entry_value = "https://gitlab.com/bobstation/bobstation"
