@@ -136,6 +136,8 @@
 	. = ..()
 	to_chat(world, "<span class='userdanger'><span class='big bold'>The bobux market has been bogged by [noob.key]!</span></span>")
 	SEND_SOUND(world, sound('modular_skyrat/sound/misc/dumpit.ogg', volume = 50))
+	message_admins("[noob] has bogged the bobux market!")
+	log_admin("[noob] has bogged the bobux market!")
 	var/list/bogged = flist("data/player_saves/")
 	for(var/fuck in bogged)
 		if(copytext(fuck, -1) != "/")
@@ -159,12 +161,14 @@
 	desc = "Make everyone cum."
 	buy_message = "I'M COOOOOOOOOOOOOMING"
 	id = "coom"
-	cost = 20
+	cost = 25
 
 /datum/bobux_reward/cum_shower/on_buy(client/noob)
 	. = ..()
-	SEND_SOUND(world, sound('modular_skyrat/sound/misc/coom.ogg', volume = 50))
-	to_chat(world, "<span class='hypnophrase'>I'M COOMING!!!</span>")
+	message_admins("[noob] has made everyone COOM.")
+	log_admin("[noob] has made everyone COOM.")
+	SEND_SOUND(world, sound('modular_skyrat/sound/misc/coom.ogg', volume = 50)) //todo: delay the actual event so it lines up with the sounds and then keeps triggering the coom
+	to_chat(world, "<span class='reallybig hypnophrase'>I'M COOMING!!!</span>")
 	for(var/mob/living/carbon/human/coomer in GLOB.mob_living_list)
 		coomer.moan()
 		coomer.cum()

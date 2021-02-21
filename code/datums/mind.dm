@@ -1512,17 +1512,24 @@ GLOBAL_LIST(objective_choices)
 				if(choice)
 					var/secondchoice = input(usr, "Display a message to the target?") as text|null
 					prefs.adjust_bobux(choice, (secondchoice ? "<span class='bobux'>[secondchoice]</span>" : null))
+					message_admins("[key_name_admin(usr)] gave [current] [choice] bobux.")
+					log_admin("[key_name(usr)] gave [current] [choice] bobux.")
 			if("remove")
 				var/choice = -abs(input(usr, "How much to remove?", "No Bobux", 0) as num)
 				if(choice)
 					var/secondchoice = input(usr, "Display a message to the target?") as text|null
 					prefs.adjust_bobux(choice, (secondchoice ? "<span class='bobux'>[secondchoice]</span>" : null))
+					message_admins("[key_name_admin(usr)] removed [choice] bobux from [current].")
+					log_admin("[key_name(usr)] removed [choice] bobux from [current].")
 			if("set")
 				var/choice =  input(usr, "How much to set?", "All Bobux", 0) as num
 				if(choice)
 					var/secondchoice = input(usr, "Display a message to the target?") as text|null
 					choice = (choice - prefs.bobux_amount)
 					prefs.adjust_bobux(choice, (secondchoice ? "<span class='bobux'>[secondchoice]</span>" : null))
+					message_admins("[key_name_admin(usr)] set [current]'s bobux to[choice].")
+					log_admin("[key_name(usr)] set [current]'s bobux to [choice].")
+					
 		bobux_panel()
 	//Something in here might have changed your mob
 	if(self_antagging && (!usr || !usr.client) && current.client)
