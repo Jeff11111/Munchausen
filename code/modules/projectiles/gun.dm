@@ -188,7 +188,13 @@
 	else
 		. += "It doesn't have a firing pin installed, and won't fire."
 	if(has_safety)
-		. += "It's safety is [safety ? "enabled" : "disabled"]."
+		. += "It's safety is [safety ? "<span class='green'><b>enabled</b></span>" : "<span class='red'><b>disabled</b></span>"]."
+	if(gun_light)
+		. += "It has \a [gun_light] attached, at [gun_light.powercell ? gun_light.powercell.percent() : 0 ]% power."
+	if(suppressed)
+		. += "It is suppressed with \a <i>[suppressed]</i>."
+	if(bayonet)
+		. += "It has \a <i>[bayonet]</i> attached as a bayonet."
 
 /obj/item/gun/rightclick_attack_self(mob/user)
 	return perform_safety(user)

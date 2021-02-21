@@ -80,10 +80,12 @@
 	if(owner && HAS_TRAIT_FROM(owner, TRAIT_DISFIGURED, "rotten"))
 		REMOVE_TRAIT(owner, TRAIT_DISFIGURED, "rotten")
 
-/obj/item/bodypart/head/decay()
+/obj/item/bodypart/head/janitize(add_germs, minimum_germs, maximum_germs)
 	. = ..()
 	if(owner && (germ_level >= INFECTION_LEVEL_TWO) && !HAS_TRAIT_FROM(owner, TRAIT_DISFIGURED, "rotten"))
 		ADD_TRAIT(owner, TRAIT_DISFIGURED, "rotten")
+	else if(owner && (germ_level < INFECTION_LEVEL_TWO && HAS_TRAIT_FROM(owner, TRAIT_DISFIGURED, "rotten")))
+		REMOVE_TRAIT(owner, TRAIT_DISFIGURED, "rotten")
 
 /obj/item/bodypart/head/update_limb(dropping_limb, mob/living/carbon/source)
 	. = ..()

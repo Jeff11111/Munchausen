@@ -4,6 +4,10 @@
 		if(intentional)
 			to_chat(src, "<span class='notice'>I don't have to.</span>")
 		return
+	if(HAS_TRAIT(src, TRAIT_NOSHITTING))
+		if(intentional)
+			to_chat(src, "<span class='notice'>I never have to.</span>")
+		return
 	var/obj/item/organ/intestines = getorganslot(ORGAN_SLOT_INTESTINES)
 	if(!intestines || !intestines.is_working())
 		if(intentional)
@@ -45,6 +49,10 @@
 	if(urination <= 30)
 		if(intentional)
 			to_chat(src, "<span class='notice'>I don't have to.</span>")
+		return
+	if(HAS_TRAIT(src, TRAIT_NOPISSING))
+		if(intentional)
+			to_chat(src, "<span class='notice'>I never have to.</span>")
 		return
 	var/obj/item/organ/bladder/bladder = getorganslot(ORGAN_SLOT_BLADDER)
 	if(!bladder || !bladder.is_working())

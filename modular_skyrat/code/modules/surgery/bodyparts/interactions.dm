@@ -52,7 +52,7 @@
 			receive_damage(str*0.75)
 		user.changeNext_move(CLICK_CD_GRABBING)
 		if(user != victim)
-			user.visible_message("<span class='danger'><b>[user]</b> wrenches <b>[victim]</b>'s [name]![victim.wound_message]</span>", "<span class='danger'>You dislocate <b>[victim]</b>'s [name] with a sickening crack!</span>", ignored_mobs=victim)
+			user.visible_message("<span class='danger'><b>[user]</b> wrenches <b>[victim]</b>'s [name]![victim.wound_message]</span>", "<span class='danger'>You wrench <b>[victim]</b>'s [name]![victim.wound_message]</span>", ignored_mobs=victim)
 			to_chat(victim, "<span class='userdanger'><b>[user]</b> wrenches your [name]![victim.wound_message]</span>")
 		else
 			user.visible_message("<span class='danger'><b>[user]</b> wrenches [user.p_their()] own [src.name] crack![victim.wound_message]</span>",
@@ -72,13 +72,13 @@
 				return W.chiropractice(user)		
 		var/str = GET_STAT_LEVEL(user, str)
 		if(str)
-			receive_damage(str)
+			receive_damage(str/2)
 		user.changeNext_move(CLICK_CD_GRABBING)
 		if(user != victim)
-			user.visible_message("<span class='danger'><b>[user]</b> wrenches <b>[victim]</b>'s [name]![victim.wound_message]</span>", "<span class='danger'>You wrench <b>[victim]</b>'s [name] around painfully![victim.wound_message]</span>", ignored_mobs=victim)
+			user.visible_message("<span class='danger'><b>[user]</b> wrenches <b>[victim]</b>'s [name]![victim.wound_message]</span>", "<span class='danger'>You wrench <b>[victim]</b>'s [name]![victim.wound_message]</span>", ignored_mobs=victim)
 			to_chat(victim, "<span class='userdanger'><b>[user]</b> wrenches your [name]![victim.wound_message]</span>")
 		else
-			user.visible_message("<span class='danger'><b>[user]</b> wrenches [user.p_their()] own [src.name] around painfully![victim.wound_message]</span>",
+			user.visible_message("<span class='danger'><b>[user]</b> wrenches [user.p_their()] own [src.name]![victim.wound_message]</span>",
 								"<span class='userdanger'>You wrench your own [src.name]![victim.wound_message]</span>")
 		//Clean the wound string too
 		victim.wound_message = ""

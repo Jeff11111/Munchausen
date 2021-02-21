@@ -174,7 +174,7 @@
 		msg += ", <span class='notice'>and the joints appear to be held together with sticky tape</span>"
 	else if(wrenched)
 		msg += ", <span class='notice'>and it appears to be tightly secured to avoid further damage</span>"
-	return "<B>[msg]!</B>"
+	return "<span class='danger'><B>[msg]!</B></span>"
 
 /*
 	New common procs for /datum/wound/mechanical/blunt/
@@ -327,12 +327,12 @@
 			replace_wound(/datum/wound/blunt/critical)
 		else
 			replace_wound(/datum/wound/blunt/severe)
-		user.visible_message("<span class='danger'><b>[user]</b> torques <b>[victim]</b>'s disconnected [funky_kong.name] actuators with a loud pop![victim.wound_message]</span>", "<span class='danger'>I torque <b>[victim]</b>'s disconnected [funky_kong.name] actuators with a loud pop![victim.wound_message]</span>", ignored_mobs=victim)
+		user.visible_message("<span class='danger'><b>[user]</b> snaps <b>[victim]</b>'s disconnected [funky_kong.name] actuators with a loud pop![victim.wound_message]</span>", "<span class='danger'>I snap <b>[victim]</b>'s disconnected [funky_kong.name] actuators with a loud pop![victim.wound_message]</span>", ignored_mobs=victim)
 		to_chat(victim, "<span class='userdanger'><b>[user]</b> snaps my dislocated [funky_kong.name] with a sickening crack![victim.wound_message]</span>")
 		funky_kong.receive_damage(brute=GET_STAT_LEVEL(user, str)*0.75, wound_bonus = CANT_WOUND)
 	else
-		user.visible_message("<span class='danger'><b>[user]</b> grinds <b>[victim]</b>'s disconnected [limb.name] actuators around![victim.wound_message]</span>", "<span class='danger'>I grind <b>[victim]</b>'s disconnected [limb.name] actuators around painfully![victim.wound_message]</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='userdanger'><b>[user]</b> grinds my dislocated [limb.name] actuators around![victim.wound_message]</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> grinds <b>[victim]</b>'s disconnected [limb.name] actuators![victim.wound_message]</span>", "<span class='danger'>I grind <b>[victim]</b>'s disconnected [limb.name] actuators![victim.wound_message]</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> grinds my dislocated [limb.name] actuators![victim.wound_message]</span>")
 		limb.receive_damage(brute=GET_STAT_LEVEL(user, str)*0.5, wound_bonus = CANT_WOUND)
 	//Clean the wound string either way
 	victim.wound_message = ""
@@ -439,6 +439,8 @@
 	limb.receive_damage(15, stamina=75, wound_bonus=CANT_WOUND)
 	if(!wrenched)
 		wrenched = TRUE
+		if(severity <= WOUND_SEVERITY_MODERATE)
+			qdel(src)
 
 /// if someone is using sticky tape on our wound
 /datum/wound/mechanical/blunt/tape(obj/item/stack/sticky_tape/I, mob/user)

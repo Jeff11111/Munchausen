@@ -21,23 +21,29 @@
 	var/list/injury_descriptors = list()
 	for(var/datum/injury/IN in injuries)
 		var/this_injury_desc = IN.desc
+		if(IN.current_stage <= 1)
+			this_injury_desc = "<span class='notice'><i>[this_injury_desc]</i></span>"
 		if(IN.damage_type == WOUND_BURN && IN.is_salved())
-			this_injury_desc = "salved [this_injury_desc]"
+			this_injury_desc = "<span class='nicegreen'>salved</span> [this_injury_desc]"
 
 		if(IN.is_bleeding())
 			if(IN.wound_damage() > IN.bleed_threshold)
-				this_injury_desc = "<b>bleeding</b> [this_injury_desc]"
+				this_injury_desc = "<b><i>badly bleeding</i></b> [this_injury_desc]"
 			else
-				this_injury_desc = "bleeding [this_injury_desc]"
-		else if(IN.is_bandaged())
-			this_injury_desc = "bandaged [this_injury_desc]"
+				this_injury_desc = "<b>bleeding</b> [this_injury_desc]"
+		if(IN.is_bandaged())
+			this_injury_desc = "<span class='white'>bandaged</span> [this_injury_desc]"
 
 		if(IN.germ_level >= INFECTION_LEVEL_TWO)
-			this_injury_desc = "<span class='deadsay'>badly infected</span> [this_injury_desc]"
+			this_injury_desc = "<span class='deadsay'><b>badly infected</b></span> [this_injury_desc]"
 		else if(IN.germ_level >= INFECTION_LEVEL_ONE)
-			this_injury_desc = "<span class='green'>lightly infected</span> [this_injury_desc]"
+			this_injury_desc = "<span class='deadsay'>infected</span> [this_injury_desc]"
 		
 		if(length(IN.embedded_objects))
+			var/list/chung = list()
+			for(var/item in IN.embedded_objects)
+				var/obj/I = item
+				chung += "\a [I]"
 			this_injury_desc += " with [english_list(IN.embedded_objects)] poking out of [IN.amount > 1 ? "them" : "it"]"
 
 		if(injury_descriptors[this_injury_desc])

@@ -86,7 +86,6 @@
 
 /datum/component/overlay_lighting/proc/get_new_turfs()
 	if(!istype(current_holder) || QDELETED(current_holder))
-		qdel(src)
 		return
 	for(var/turf/lit_turf in RANGE_TURFS(lumcount_range, current_holder.loc))
 		lit_turf.dynamic_lumcount += lum_power
@@ -118,7 +117,7 @@
 		if(turned_on)
 			remove_dynamic_lumi(current_holder)
 	current_holder = new_holder
-	if(new_holder == null)
+	if(!new_holder)
 		//visible_mask.moveToNullspace() //Not how vis_contents work, lol
 		clean_old_turfs()
 	else
@@ -131,7 +130,6 @@
 /datum/component/overlay_lighting/proc/check_holder()
 	var/atom/movable/A = parent
 	if(!istype(A) || QDELETED(A))
-		qdel(src)
 		return
 	if(isturf(A.loc))
 		set_holder(A)

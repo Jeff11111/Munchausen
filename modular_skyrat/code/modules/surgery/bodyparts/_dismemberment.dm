@@ -208,7 +208,7 @@
 	
 	//If we have a compound fracture or, then deal more integrity damage
 	if((locate(/datum/wound/blunt/critical) in wounds) || (locate(/datum/wound/mechanical/blunt/critical) in wounds))
-		wounding_dmg *= 1.35
+		wounding_dmg *= 1.25
 	
 	//Damage the integrity with the wounding damage
 	limb_integrity = max(0, limb_integrity - wounding_dmg)
