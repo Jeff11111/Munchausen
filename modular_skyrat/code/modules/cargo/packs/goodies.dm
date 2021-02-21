@@ -304,11 +304,23 @@
 	contains = list(/obj/item/gun/ballistic/automatic/pistol/makarov)
 
 /datum/supply_pack/goody/makarov_ammo
-	name = "9mm Pistol Magazines"
+	name = "Standard 9mm Pistol Magazines"
 	desc = "Contains 2 Makarov magazines. Never know when you need it."
 	cost = 2000
 	contains = list(/obj/item/ammo_box/magazine/m9mm,
 					/obj/item/ammo_box/magazine/m9mm)
+
+/datum/supply_pack/goody/glock
+	name = "Burstfire 9mm Pistol"
+	desc = "Contains one Lawman 17 pistol. Never know when you need it."
+	cost = 6000
+	contains = list(/obj/item/gun/ballistic/automatic/pistol/cz/glock)
+
+/datum/supply_pack/goody/glock
+	name = "Burstfire 9mm Pistol (Black Paint)"
+	desc = "Contains one black Lawman 17 pistol. Never know when you need it."
+	cost = 6000
+	contains = list(/obj/item/gun/ballistic/automatic/pistol/cz/glock/bbc)
 
 /datum/supply_pack/goody/m50ae_pistol
 	name = ".50 AE Pistol"
