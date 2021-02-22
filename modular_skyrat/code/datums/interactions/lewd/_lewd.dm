@@ -761,7 +761,7 @@
 
 /mob/living/proc/set_is_fucking(mob/living/partner, orifice, obj/item/organ/genital/genepool)
 	//ADVANCED ERP LOGGING
-	message_admins("[ADMIN_LOOKUPFLW(src)] has started fucking [ADMIN_LOOKUPFLW(target)][genepool ? " with [p_their()] [genepool.name]" : ""], target orifice being [orifice].")
+	message_admins("[ADMIN_LOOKUPFLW(src)] has started fucking [ADMIN_LOOKUPFLW(partner)][genepool ? " with [p_their()] [genepool.name]" : ""], target orifice being [orifice].")
 	last_partner = partner
 	last_orifice = orifice
 	last_genital = genepool

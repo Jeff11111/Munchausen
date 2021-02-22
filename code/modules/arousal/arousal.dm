@@ -44,7 +44,7 @@
 	R.clear_reagents()
 	if(!Process_Spacemove(turn(dir, 180)))
 		newtonian_move(turn(dir, 180))
-	message_admins("[ADMIN_LOOKUPFLW(src)] came[target ?  " on [ismob(partner) ? "[ADMIN_LOOKUPFLW(partner)]" : "[partner]"]" : " alone"][G ? " with [p_their()] [G.name]" : ""][spill ? ", spilling [p_their()] juices" : ""]. ")
+	message_admins("[ADMIN_LOOKUPFLW(src)] came[target ?  " on [ismob(target) ? "[ADMIN_LOOKUPFLW(target)]" : "[target]"]" : " alone"][G ? " with [p_their()] [G.name]" : ""][spill ? ", spilling [p_their()] juices" : ""]. ")
 	SEND_SIGNAL(src, COMSIG_HUMAN_CUMMED, target, G)
 
 /mob/living/carbon/human/proc/mob_climax_outside(obj/item/organ/genital/G, mb_time = 30) //This is used for forced orgasms and other hands-free climaxes
