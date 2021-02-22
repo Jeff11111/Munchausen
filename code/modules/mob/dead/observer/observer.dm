@@ -43,7 +43,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	var/facial_hair_color
 	var/mutable_appearance/facial_hair_overlay
 
-	var/updatedir = 1						//Do we have to update our dir as the ghost moves around?
+	var/updatedir = TRUE						//Do we have to update our dir as the ghost moves around?
 	var/lastsetting = null	//Stores the last setting that ghost_others was set to, for a little more efficiency when we update ghost images. Null means no update is necessary
 
 	//We store copies of the ghost display preferences locally so they can be referred to even if no client is connected.
@@ -54,7 +54,8 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	// of the mob
 	var/deadchat_name
 	var/datum/spawners_menu/spawners_menu
-	// copying the appearance of the mob
+	// copying the appearance of a mob
+	var/copying_mob = FALSE
 	var/mutable_appearance/body_appearance
 
 /mob/dead/observer/Initialize(mapload, mob/body)
@@ -100,9 +101,12 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 				icon_state = ""
 				body_appearance = copy_appearance(living_body.appearance)
 				appearance = body_appearance
+				copying_mob = TRUE
 			else
 				icon = living_body.icon
 				icon_state = living_body.icon_state
+				copying_mob = TRUE
+				add_filter("wraith_blur", 0, WRAITH_BLUR)
 		else
 			//No body, try to copy their prefs later
 			addtimer(CALLBACK(src, /mob/dead/observer.proc/get_appearance_from_prefs), 2 SECONDS)
@@ -111,7 +115,6 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 		addtimer(CALLBACK(src, /mob/dead/observer.proc/get_appearance_from_prefs), 2 SECONDS)
 
 	update_icon()
-	add_filter("wraith_blur", 0, WRAITH_BLUR)
 	if(!isturf(loc))
 		var/turf/T
 		var/list/turfs = get_area_turfs(/area/shuttle/arrival)
@@ -174,6 +177,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	MA.appearance_flags |= KEEP_TOGETHER
 	MA.alpha = 127
 	MA.plane = MOB_PLANE
+	add_filter("wraith_blur", 0, WRAITH_BLUR)
 
 	return MA
 
@@ -238,7 +242,6 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 		cut_overlay(facial_hair_overlay)
 		facial_hair_overlay = null
 
-
 	if(new_form)
 		icon_state = new_form
 		if(icon_state in GLOB.ghost_forms_with_directions_list)
@@ -246,14 +249,14 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 		else
 			ghostimage_default.icon_state = new_form
 
-	if(!body_appearance)
+	if(!body_appearance && !copying_mob)
 		if(ghost_accs >= GHOST_ACCS_DIR && (icon_state in GLOB.ghost_forms_with_directions_list)) //if this icon has dirs AND the client wants to show them, we make sure we update the dir on movement
-			updatedir = 1
+			updatedir = TRUE
 		else
-			updatedir = 0	//stop updating the dir in case we want to show accessories with dirs on a ghost sprite without dirs
-			setDir(2 		)//reset the dir to its default so the sprites all properly align up
+			updatedir = FALSE	//stop updating the dir in case we want to show accessories with dirs on a ghost sprite without dirs
+			setDir(2)//reset the dir to its default so the sprites all properly align up
 
-	if(!body_appearance)
+	if(!body_appearance && !copying_mob)
 		if(ghost_accs == GHOST_ACCS_FULL && (icon_state in GLOB.ghost_forms_with_accessories_list)) //check if this form supports accessories and if the client wants to show them
 			var/datum/sprite_accessory/S
 			if(facial_hair_style)
@@ -272,9 +275,11 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 						hair_overlay.color = sanitize_hexcolor(hair_color)
 					hair_overlay.alpha = 200
 					add_overlay(hair_overlay)
-	else
+	else if(body_appearance)
 		appearance = body_appearance
 		icon_state = ""
+		updatedir = TRUE
+	else if(copying_mob)
 		updatedir = TRUE
 
 /*
