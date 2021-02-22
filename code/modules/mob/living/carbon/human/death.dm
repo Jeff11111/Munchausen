@@ -32,7 +32,7 @@
 		return
 	stop_sound_channel(CHANNEL_HEARTBEAT)
 	var/obj/item/organ/heart/H = getorganslot(ORGAN_SLOT_HEART)
-	if(H)
+	if(H && H.pulse)
 		H.Stop()
 
 	. = ..()
