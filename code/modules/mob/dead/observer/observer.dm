@@ -111,7 +111,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 		addtimer(CALLBACK(src, /mob/dead/observer.proc/get_appearance_from_prefs), 2 SECONDS)
 
 	update_icon()
-
+	add_filter("wraith_blur", 0, WRAITH_BLUR)
 	if(!isturf(loc))
 		var/turf/T
 		var/list/turfs = get_area_turfs(/area/shuttle/arrival)
@@ -143,11 +143,8 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	. = ..()
 	AddElement(/datum/element/ghost_role_eligibility)
 	grant_all_languages()
-
-	// Skyrat change START
 	RegisterSignal(src, COMSIG_CLICK_CTRL_SHIFT, .proc/on_click_ctrl_shift)
 	RegisterSignal(src, COMSIG_CLICK_CTRL, .proc/on_click_ctrl)
-	// Skyrat change END
 
 // This seems stupid, but it's the easiest way to avoid absolutely ridiculous shit from happening
 // Copying an appearance directly from a mob includes it's verb list, it's invisibility, it's alpha, and it's density
