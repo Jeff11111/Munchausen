@@ -164,7 +164,7 @@
 		if(WOUND_BLUNT)
 			return prob(damage/2)
 		if(WOUND_BURN)
-			return prob(damage*2.5)
+			return prob(damage*2)
 		if(WOUND_SLASH)
 			return prob(damage)
 		if(WOUND_PIERCE)
@@ -186,6 +186,7 @@
 
 /datum/injury/proc/disinfect()
 	injury_flags |= INJURY_DISINFECTED
+	germ_level = 0
 
 // heal the given amount of damage, and if the given amount of damage was more
 // than what needed to be healed, return how much heal was left

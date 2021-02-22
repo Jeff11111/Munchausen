@@ -2,6 +2,25 @@
 /datum/injury/burn
 	damage_type = WOUND_BURN
 	max_bleeding_stage = 0
+	infection_rate = 2
+
+/datum/injury/burn/infection_check()
+	if(is_treated() && damage < 25)	//anything less than a FUCK burn isn't infectable if treated properly
+		return FALSE
+	if(required_status & BODYPART_ROBOTIC) //Robotic injury
+		return FALSE
+
+	switch(damage_type)
+		if(WOUND_BLUNT)
+			return prob(damage/2)
+		if(WOUND_BURN)
+			return prob(damage*2)
+		if(WOUND_SLASH)
+			return prob(damage)
+		if(WOUND_PIERCE)
+			return prob(damage*1.25)
+
+	return FALSE
 
 /datum/injury/burn/is_bleeding()
 	return FALSE //burns cannot bleed
