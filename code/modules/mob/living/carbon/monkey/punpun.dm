@@ -1,12 +1,12 @@
 /mob/living/carbon/monkey/punpun //except for a few special persistence features, pun pun is just a normal monkey
-	name = "Pun Pun" //C A N O N
+	name = "Chimpraps" //C A N O N
 	unique_name = 0
 	var/ancestor_name
 	var/ancestor_chain = 1
 	var/relic_hat	//Note: these two are paths
 	var/relic_mask
 	var/memory_saved = FALSE
-	var/list/pet_monkey_names = list("Pun Pun", "Bubbles", "Mojo", "George", "Darwin", "Aldo", "Caeser", "Kanzi", "Kong", "Terk", "Grodd", "Mala", "Bojangles", "Coco", "Able", "Baker", "Scatter", "Norbit", "Travis")
+	var/list/pet_monkey_names = list("Chimpraps", "Bubbles", "Mojo", "George", "Darwin", "Aldo", "Caeser", "Kanzi", "Kong", "Terk", "Grodd", "Mala", "Bojangles", "Coco", "Able", "Baker", "Scatter", "Norbit", "Travis")
 	var/list/rare_pet_monkey_names = list("Professor Bobo", "Deempisi's Revenge", "Furious George", "King Louie", "Dr. Zaius", "Jimmy Rustles", "Dinner", "Lanky")
 
 /mob/living/carbon/monkey/punpun/Initialize()
