@@ -44,7 +44,7 @@
 			for(var/item in IN.embedded_objects)
 				var/obj/I = item
 				chung += "\a [I]"
-			this_injury_desc += " with [english_list(IN.embedded_objects)] poking out of [IN.amount > 1 ? "them" : "it"]"
+			this_injury_desc += " with [english_list(chung)] poking out of [IN.amount > 1 ? "them" : "it"]"
 
 		if(injury_descriptors[this_injury_desc])
 			injury_descriptors[this_injury_desc] += IN.amount
