@@ -1,5 +1,5 @@
 /datum/keybinding/mob/toggle_zone
-	hotkey_keys = list("CtrlF")
+	hotkey_keys = list("ShiftF")
 	name = "toggle_zone_select"
 	full_name = "Toggle zone select"
 	description = "Change your zone selection to the next one."

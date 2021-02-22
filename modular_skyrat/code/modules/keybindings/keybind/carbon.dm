@@ -12,7 +12,7 @@
 	return TRUE
 
 /datum/keybinding/carbon/fixeye
-	hotkey_keys = list("CtrlF")
+	hotkey_keys = list("F")
 	name = "fixeye"
 	full_name = "Fix Eye"
 	description = "Fix the direction you're staring at."
