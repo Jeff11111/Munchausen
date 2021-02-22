@@ -23795,11 +23795,6 @@
 /obj/machinery/door/airlock/external,
 /turf/open/floor/plating,
 /area/hallway/primary/aft)
-"joR" = (
-/obj/structure/ladder,
-/obj/effect/turf_decal/stripes/line,
-/turf/open/floor/plating/snowed/smoothed/icemoon,
-/area/icemoon/surface/outdoors)
 "joT" = (
 /obj/structure/cable{
 	icon_state = "0-2"
@@ -26617,13 +26612,10 @@
 /area/maintenance/disposal)
 "kEd" = (
 /obj/structure/rack,
-/obj/item/gun/energy/e_gun/advtaser{
-	pixel_x = -3;
-	pixel_y = 3
-	},
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
+/obj/item/gun/ballistic/automatic/pistol/cz/glock/bbc,
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/security/armory)
 "kEf" = (
@@ -27351,6 +27343,15 @@
 	},
 /turf/open/floor/wood,
 /area/icemoon/surface/outdoors)
+"kXL" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/maintenance/port/central)
 "kXY" = (
 /obj/structure/cable{
 	icon_state = "1-8"
@@ -29472,32 +29473,6 @@
 /turf/open/floor/plasteel/dark,
 /area/security/main)
 "lZi" = (
-/obj/item/clothing/suit/armor/vest{
-	pixel_x = -8;
-	pixel_y = -2
-	},
-/obj/item/clothing/suit/armor/vest{
-	pixel_y = -2
-	},
-/obj/item/clothing/suit/armor/vest{
-	pixel_x = 8;
-	pixel_y = -2
-	},
-/obj/item/clothing/head/helmet{
-	layer = 3.00001;
-	pixel_x = -9;
-	pixel_y = 7
-	},
-/obj/item/clothing/head/helmet{
-	layer = 3.00001;
-	pixel_x = -1;
-	pixel_y = 7
-	},
-/obj/item/clothing/head/helmet{
-	layer = 3.00001;
-	pixel_x = 8;
-	pixel_y = 7
-	},
 /obj/structure/extinguisher_cabinet{
 	pixel_x = 27
 	},
@@ -32633,12 +32608,10 @@
 /area/maintenance/port/fore)
 "nyZ" = (
 /obj/structure/rack,
-/obj/item/gun/energy/laser{
-	pixel_y = 6
-	},
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
+/obj/item/gun/ballistic/automatic/ar,
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/security/armory)
 "nzn" = (
@@ -33525,17 +33498,6 @@
 /turf/open/floor/plasteel/dark,
 /area/medical/storage)
 "nQM" = (
-/obj/item/shield/riot{
-	pixel_x = -8;
-	pixel_y = 2
-	},
-/obj/item/shield/riot{
-	pixel_y = 2
-	},
-/obj/item/shield/riot{
-	pixel_x = 8;
-	pixel_y = 2
-	},
 /obj/structure/rack,
 /obj/structure/sign/nanotrasen{
 	pixel_x = 32
@@ -45329,31 +45291,6 @@
 /turf/open/floor/plasteel,
 /area/quartermaster/sorting)
 "toz" = (
-/obj/item/clothing/suit/armor/bulletproof{
-	pixel_x = -7;
-	pixel_y = -2
-	},
-/obj/item/clothing/suit/armor/bulletproof{
-	pixel_y = -2
-	},
-/obj/item/clothing/suit/armor/bulletproof{
-	pixel_x = 7;
-	pixel_y = -2
-	},
-/obj/item/clothing/head/helmet/alt{
-	layer = 3.00001;
-	pixel_x = -8;
-	pixel_y = 7
-	},
-/obj/item/clothing/head/helmet/alt{
-	layer = 3.00001;
-	pixel_y = 7
-	},
-/obj/item/clothing/head/helmet/alt{
-	layer = 3.00001;
-	pixel_x = 8;
-	pixel_y = 7
-	},
 /obj/structure/rack,
 /obj/structure/reagent_dispensers/peppertank{
 	pixel_x = 32
@@ -46758,6 +46695,11 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/port)
+"tYn" = (
+/obj/structure/ladder,
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/plating/snowed/smoothed/icemoon,
+/area/icemoon/surface/outdoors)
 "tYo" = (
 /obj/effect/landmark/event_spawn,
 /obj/machinery/button/door{
@@ -51821,15 +51763,6 @@
 	},
 /turf/open/floor/carpet,
 /area/hallway/primary/port)
-"wrL" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/obj/structure/railing{
-	dir = 4
-	},
-/turf/open/floor/plating,
-/area/maintenance/port/central)
 "wrN" = (
 /obj/effect/turf_decal/tile/brown{
 	dir = 1
@@ -53375,9 +53308,6 @@
 /area/hallway/primary/starboard)
 "xfE" = (
 /obj/structure/rack,
-/obj/item/gun/energy/e_gun{
-	pixel_y = 5
-	},
 /obj/structure/cable{
 	icon_state = "1-2"
 	},
@@ -54145,28 +54075,6 @@
 /turf/open/floor/plasteel/dark,
 /area/security/brig)
 "xBv" = (
-/obj/item/clothing/suit/armor/riot{
-	pixel_x = -4;
-	pixel_y = -1
-	},
-/obj/item/clothing/suit/armor/riot{
-	pixel_y = -1
-	},
-/obj/item/clothing/suit/armor/riot{
-	pixel_x = 4;
-	pixel_y = -1
-	},
-/obj/item/clothing/head/helmet/riot{
-	pixel_x = -5;
-	pixel_y = 6
-	},
-/obj/item/clothing/head/helmet/riot{
-	pixel_y = 6
-	},
-/obj/item/clothing/head/helmet/riot{
-	pixel_x = 5;
-	pixel_y = 6
-	},
 /obj/structure/rack,
 /obj/item/storage/secure/safe{
 	pixel_x = 32
@@ -74916,7 +74824,7 @@ ydp
 ydp
 ydp
 ydp
-joR
+tYn
 bum
 bmP
 kuK
@@ -79333,8 +79241,8 @@ gdQ
 nLS
 nLS
 gdq
-wrL
-wrL
+kXL
+kXL
 nLS
 gdQ
 nLS
