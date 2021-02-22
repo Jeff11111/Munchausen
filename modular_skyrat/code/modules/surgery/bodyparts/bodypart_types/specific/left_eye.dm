@@ -118,7 +118,7 @@
 		return
 	
 	var/obj/item/bodypart/right_eye/other_eye = owner.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
-	switch(get_damage())
+	switch(get_damage(include_pain = TRUE))
 		if(-INFINITY to max_damage/4)
 			eye_damaged = FALSE
 		if(max_damage/4 to max_damage/2)
@@ -129,6 +129,8 @@
 			eye_damaged = BLIND_VISION_THREE
 		else
 			eye_damaged = FALSE
+	if(is_disabled() || current_gauze)
+		eye_damaged = BLIND_VISION_THREE
 	var/datum/component/field_of_vision/fov = owner.GetComponent(/datum/component/field_of_vision)
 	var/fuck_with_fov = TRUE
 	var/mob/living/carbon/human/humie = owner
@@ -138,7 +140,7 @@
 			fuck_with_fov = FALSE
 	if(!istype(fov))
 		fuck_with_fov = FALSE
-	if((eye_damaged >= BLIND_VISION_THREE) || is_disabled())
+	if(eye_damaged >= BLIND_VISION_THREE)
 		if(istype(other_eye) && (other_eye.eye_damaged < BLIND_VISION_THREE) && fuck_with_fov)
 			fov?.generate_fov_holder(owner, 0, FOV_180MINUS45_DEGREES, FALSE, TRUE)
 		else if(!istype(other_eye) || other_eye.eye_damaged >= BLIND_VISION_THREE)
