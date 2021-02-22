@@ -7,6 +7,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	name = "ghost"
 	desc = "It's a g-g-g-g-ghooooost!" //jinkies!
 	icon = 'icons/mob/mob.dmi'
+	layer = GHOST_LAYER
 	icon_state = "ghost"
 	stat = DEAD
 	move_resist = INFINITY
