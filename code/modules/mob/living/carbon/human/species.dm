@@ -1784,7 +1784,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			atk_sharpness = SHARP_NONE
 
 		armor_block = min(95, armor_block)
-		playsound(target.loc, user.dna.species.attack_sound, 25, 1, -1)
+		playsound(target.loc, pick(user.dna.species.attack_sound), 25, 1, -1)
 
 		target.lastattacker = user.real_name
 		target.lastattackerckey = user.ckey
@@ -1875,7 +1875,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			var/turf/yoink = pick(dodge_turfs)
 			//We moved to the tile, therefore we parried successfully
 			if(target.Move(yoink, get_dir(target, yoink)))
-				playsound(get_turf(target), miss_sound, 70)
+				playsound(get_turf(target), pick(miss_sound), 70)
 				target.visible_message("<span class='danger'><b>[target]</b> dodges <b>[user]</b>!</span>")
 				return 0
 
