@@ -739,8 +739,6 @@
 	visible_message(message = "<span class='userlove'><b>\The [src]</b> [message]</span>", ignored_mobs = get_unconsenting())
 	multiorgasms += 1
 
-	message_admins("[ADMIN_LOOKUPFLW(src)] came[partner && partner != src ?  " on [partner]" : ""]. ")
-
 	if(multiorgasms > (sexual_potency * 0.34)) //AAAAA, WE DONT WANT NEGATIVES HERE, RE
 		refractory_period = world.time + rand(300, 900) - sexual_potency//sex cooldown
 		src.set_drugginess(rand(20, 30))
@@ -761,7 +759,9 @@
 		return TRUE
 	return FALSE
 
-/mob/living/proc/set_is_fucking(mob/living/partner, orifice, var/obj/item/organ/genital/genepool)
+/mob/living/proc/set_is_fucking(mob/living/partner, orifice, obj/item/organ/genital/genepool)
+	//ADVANCED ERP LOGGING
+	message_admins("[ADMIN_LOOKUPFLW(src)] has started fucking [ADMIN_LOOKUPFLW(target)][genepool ? " with [p_their()] [genepool.name]" : "".], target orifice being [orifice].")
 	last_partner = partner
 	last_orifice = orifice
 	last_genital = genepool
@@ -999,7 +999,7 @@
 						peepee = pardner.getorganslot(ORGAN_SLOT_VAGINA)
 					if("penis")
 						peepee = pardner.getorganslot(ORGAN_SLOT_PENIS)
-		set_is_fucking(partner , CUM_TARGET_MOUTH, peepee)
+		set_is_fucking(partner, CUM_TARGET_MOUTH, peepee)
 
 	playlewdinteractionsound(loc, pick('modular_skyrat/sound/interactions/oral1.ogg',
 						'modular_skyrat/sound/interactions/oral2.ogg'), 70, 1, -1)
@@ -1066,10 +1066,7 @@
 						peepee = pardner.getorganslot(ORGAN_SLOT_VAGINA)
 					if("penis")
 						peepee = pardner.getorganslot(ORGAN_SLOT_PENIS)
-		set_is_fucking(partner , THIGH_SMOTHERING, peepee)
-
-
-
+		set_is_fucking(partner, THIGH_SMOTHERING, peepee)
 
 	var file = pick('modular_skyrat/sound/interactions/bj10.ogg',
 					'modular_skyrat/sound/interactions/bj3.ogg',
@@ -1347,7 +1344,7 @@
 		message = "[pick(
 			"grabs the back of \the <b>[partner]</b>'s head and forces it into their asscheeks.",
 			"squats down and plants their ass right on \the <b>[partner]</b>'s face")]"
-		set_is_fucking(partner , GRINDING_FACE_WITH_ANUS, null)
+		set_is_fucking(partner, GRINDING_FACE_WITH_ANUS, null)
 
 	playlewdinteractionsound(loc, pick('modular_skyrat/sound/interactions/squelch1.ogg',
 						'modular_skyrat/sound/interactions/squelch2.ogg',
@@ -1393,7 +1390,7 @@
 			message = "[pick(list("pulls their bare feet out of <b>[partner]</b>'s mouth and rests them on their face instead.",
 				"retracts their bare feet from <b>[partner]</b>'s mouth and grinds them into their face instead."))]</span>"
 
-		set_is_fucking(partner , GRINDING_FACE_WITH_FEET, null)
+		set_is_fucking(partner, GRINDING_FACE_WITH_FEET, null)
 
 	else
 		if(src.get_item_by_slot(SLOT_SHOES) != null)
@@ -1438,7 +1435,7 @@
 			message = "[pick(list("pries open <b>[partner]</b>'s mouth with their toes and shoves their bare foot in.",
 				"presses down their foot even harder, cramming their foot into <b>[partner]</b>'s mouth."))]</span>"
 
-		set_is_fucking(partner , GRINDING_MOUTH_WITH_FEET, null)
+		set_is_fucking(partner, GRINDING_MOUTH_WITH_FEET, null)
 
 	else
 		if(src.get_item_by_slot(SLOT_SHOES) != null)
@@ -1448,7 +1445,7 @@
 			message = "[pick(list("rubs their dirty bare feet across <b>[partner]</b>'s face before prying them into their muzzle.",
 				"forces their barefeet into <b>[partner]</b>'s mouth.",
 				"covers <b>[partner]</b>'s mouth and nose with their foot until they gasp for breath, then shoves both feet inside before they can react."))]</span>"
-		set_is_fucking(partner , GRINDING_MOUTH_WITH_FEET, null)
+		set_is_fucking(partner, GRINDING_MOUTH_WITH_FEET, null)
 
 	playlewdinteractionsound(loc, pick('modular_skyrat/sound/interactions/foot_wet1.ogg',
 						'modular_skyrat/sound/interactions/foot_wet2.ogg',
