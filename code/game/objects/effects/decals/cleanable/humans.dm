@@ -71,6 +71,7 @@
 		floor.update_dirtiness()
 
 /obj/effect/decal/cleanable/blood/update_icon()
+	. = ..()
 	color = blood_DNA_to_color()
 
 /obj/effect/decal/cleanable/blood/old
