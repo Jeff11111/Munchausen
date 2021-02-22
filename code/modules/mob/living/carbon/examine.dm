@@ -234,7 +234,7 @@
 		if(BP.etching && !clothingonpart(BP))
 			damaged_bodypart_text += "<span class='warning'>[t_His] [BP.name] has \"[BP.etching]\" etched on it!</span>"
 		if(BP.is_dead())
-			damaged_bodypart_text += "<span class='deadsay'><B>[t_His] [BP.name] is completely necrotic!</B></span>"
+			damaged_bodypart_text += "<span class='danger'><B>[t_His] [BP.name] is <span class='deadsay'>completely necrotic!</span></B></span>"
 		var/obj/item/hidden
 		for(var/obj/item/clothing/I in clothing_items)
 			if(I && CHECK_BITFIELD(I.body_parts_covered, BP.body_part) && (CHECK_BITFIELD(I.clothing_flags, THICKMATERIAL)))

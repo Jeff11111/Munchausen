@@ -1,3 +1,41 @@
+//Examine stuff
+/obj/item/bodypart/examine(mob/user)
+	. = ..()
+	if(get_dist(user, src) <= 2)
+		var/ouchies = get_injuries_desc()
+		if(ouchies && ouchies != "nothing")
+			. += "<span class='warning'>[src.name] has [ouchies] visible on it.</span>"
+		var/list/woundies = list()
+		for(var/datum/wound/W in wounds)
+			woundies += lowertext(W.name)
+		if(length(woundies))
+			. += "<span class='warning'>[src.name] is suffering with [english_list(woundies)]."
+	if(etching)
+		. += "<span class='notice'>[src.name] has <b>\"[etching]\"</b> inscribed on it.</span>"
+	if((status & BODYPART_ROBOTIC) && (status & BODYPART_ORGANIC))
+		. += "<span class='notice'>[src.name] is seemingly of both inorganic and organic nature.</span>"
+	else if(status & BODYPART_ROBOTIC)
+		. += "<span class='notice'>[src.name] is seemingly of inorganic nature.</span>"
+	else if(status & BODYPART_ORGANIC)
+		. += "<span class='notice'>[src.name] is seemingly of organic nature.</span>"
+	if(limb_flags & BODYPART_NOBLEED)
+		. += "<span class='notice'>[src.name] is impervious to [status & BODYPART_ORGANIC ? "bleeding" : "leakage"].</span>"
+	if(limb_flags & BODYPART_DEAD)
+		. += "<span class='deadsay'>[src.name] seems to have decayed, reaching a necrotic state...</span>"
+	else if(germ_level)
+		switch(germ_level)
+			if(INFECTION_LEVEL_ONE to INFECTION_LEVEL_TWO)
+				. +=  "<span class='deadsay'>[src.name] seems to be mildly infected.</span>"
+			if(INFECTION_LEVEL_TWO to INFECTION_LEVEL_THREE)
+				. +=  "<span class='deadsay'>[src.name] seems to be oozing some foul pus...</span>"
+			if(INFECTION_LEVEL_THREE to INFINITY)
+				. += "<span class='deadsay'>[src.name] seems to be completely necrotic!</span>"
+	if(!owner)
+		. += "<span class='notice'>This bodypart can be attached on \the [parse_zone(body_zone)].</span>"
+	for(var/obj/item/bodypart/BP in src)
+		if(BP.body_zone in children_zones)
+			. += "<span class='notice'>[src.name] has \a [lowertext(BP.name)] attached. Use a sharp item to cut it off!</span>"
+
 //Used by some medical tools
 /obj/item/bodypart/proc/listen()
 	var/list/sounds = list()
