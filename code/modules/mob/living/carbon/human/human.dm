@@ -807,11 +807,11 @@
 				var/diceroll = mind?.diceroll(heyeinstein, heymedic, "6d6", 20, mod = heart_exposed_mod)
 				if((diceroll >= DICE_SUCCESS) || !mind)
 					if(prob(40) || (diceroll >= DICE_CRIT_SUCCESS))
-						if(they_heart.Restart() && C.revive())
+						if(they_heart?.Restart() && C.revive())
 							C.grab_ghost()
 							C.visible_message("<span class='warning'><b>[C]</b> limply spasms their muscles.</span>", \
 											"<span class='userdanger'>My muscles spasm as i am brought back to life!</span>")
-						they_heart.artificial_pump(src)
+						they_heart?.artificial_pump(src)
 						if(getBrainLoss() >= 100)
 							setBrainLoss(99)
 				else
