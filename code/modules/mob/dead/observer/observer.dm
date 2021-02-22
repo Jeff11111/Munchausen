@@ -8,8 +8,6 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	desc = "It's a g-g-g-g-ghooooost!" //jinkies!
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "ghost"
-	plane = GHOST_PLANE
-	layer = GHOST_LAYER
 	stat = DEAD
 	move_resist = INFINITY
 	see_invisible = SEE_INVISIBLE_OBSERVER
@@ -152,8 +150,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 // You'd be right, but that's fucking BYOND for you.
 /mob/dead/observer/proc/copy_appearance(mutable_appearance/COPY)
 	var/mutable_appearance/MA = new(src)
-	
-	MA.plane = GHOST_PLANE
+
 	MA.appearance_flags = COPY.appearance_flags
 	MA.blend_mode = COPY.blend_mode
 	MA.color = COPY.color
