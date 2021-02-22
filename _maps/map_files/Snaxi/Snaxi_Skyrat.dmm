@@ -3974,7 +3974,10 @@
 /obj/machinery/atmospherics/pipe/simple/cyan/hidden{
 	dir = 6
 	},
-/turf/open/floor/plating/asteroid/snow/icemoon,
+/obj/structure/railing{
+	dir = 1
+	},
+/turf/open/floor/plating/snowed/smoothed/icemoon,
 /area/icemoon/surface/outdoors)
 "bdd" = (
 /obj/structure/cable{
@@ -4284,7 +4287,10 @@
 /obj/machinery/atmospherics/pipe/simple/cyan/hidden{
 	dir = 4
 	},
-/turf/open/floor/plating/asteroid/snow/icemoon,
+/obj/structure/railing{
+	dir = 1
+	},
+/turf/open/floor/plating/snowed/smoothed/icemoon,
 /area/icemoon/surface/outdoors)
 "bmW" = (
 /obj/machinery/firealarm{
@@ -4474,21 +4480,18 @@
 /turf/open/floor/plasteel,
 /area/quartermaster/miningdock)
 "bra" = (
-/obj/structure/window/reinforced,
 /obj/machinery/door/firedoor/border_only{
 	name = "south facing firelock"
 	},
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer3{
 	dir = 8
 	},
+/obj/structure/railing,
 /turf/open/floor/plasteel,
 /area/quartermaster/miningdock)
 "bri" = (
 /obj/structure/cable{
 	icon_state = "4-8"
-	},
-/obj/structure/window/reinforced{
-	dir = 1
 	},
 /obj/machinery/door/firedoor/border_only{
 	dir = 1;
@@ -4502,6 +4505,9 @@
 	},
 /obj/structure/cable{
 	icon_state = "2-8"
+	},
+/obj/structure/railing{
+	dir = 1
 	},
 /turf/open/floor/plasteel,
 /area/quartermaster/miningdock)
@@ -8426,25 +8432,6 @@
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3,
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/turret_protected/ai_upload_foyer)
-"cqt" = (
-/obj/structure/cable{
-	icon_state = "4-8"
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/machinery/door/firedoor/border_only{
-	dir = 1;
-	name = "north facing firelock"
-	},
-/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
-	dir = 4
-	},
-/turf/open/floor/plasteel,
-/area/quartermaster/miningdock)
 "cqG" = (
 /obj/structure/disposalpipe/sorting/mail{
 	dir = 8;
@@ -10178,9 +10165,6 @@
 /turf/open/floor/plating/snowed/smoothed/icemoon,
 /area/icemoon/surface/outdoors)
 "cZN" = (
-/obj/structure/window/reinforced{
-	dir = 1
-	},
 /obj/structure/cable{
 	icon_state = "4-8"
 	},
@@ -10193,6 +10177,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
 	dir = 4
+	},
+/obj/structure/railing{
+	dir = 1
 	},
 /turf/open/floor/plasteel,
 /area/quartermaster/miningdock)
@@ -13909,6 +13896,15 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/aft/secondary)
+"eOA" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/maintenance/port/central)
 "eOK" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable{
@@ -14901,12 +14897,6 @@
 "fnc" = (
 /obj/structure/rack,
 /obj/item/storage/box/flashes,
-/obj/item/gun/energy/e_gun/dragnet{
-	pixel_y = 4
-	},
-/obj/item/gun/energy/e_gun/dragnet{
-	pixel_y = -3
-	},
 /turf/open/floor/plasteel/dark,
 /area/ai_monitored/security/armory)
 "fne" = (
@@ -16734,6 +16724,12 @@
 /area/security/checkpoint/supply)
 "gdq" = (
 /obj/structure/ladder,
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/structure/railing{
+	dir = 4
+	},
 /turf/open/floor/plating,
 /area/maintenance/port/central)
 "gdE" = (
@@ -23683,7 +23679,6 @@
 /turf/open/floor/plasteel/grimy,
 /area/crew_quarters/bar)
 "jkL" = (
-/obj/structure/window/reinforced,
 /obj/machinery/door/firedoor/border_only{
 	name = "south facing firelock"
 	},
@@ -23693,6 +23688,7 @@
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
 	dir = 4
 	},
+/obj/structure/railing,
 /turf/open/floor/plasteel,
 /area/quartermaster/miningdock)
 "jkO" = (
@@ -28380,6 +28376,11 @@
 	},
 /turf/open/floor/plasteel,
 /area/maintenance/department/electrical)
+"lxm" = (
+/obj/structure/ladder,
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/plating/snowed/smoothed/icemoon,
+/area/icemoon/surface/outdoors)
 "lxz" = (
 /obj/structure/window/plasma/reinforced{
 	dir = 8
@@ -30768,6 +30769,7 @@
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
 	dir = 6
 	},
+/obj/structure/railing/corner,
 /turf/open/floor/plasteel,
 /area/quartermaster/miningdock)
 "mEI" = (
@@ -31429,7 +31431,10 @@
 /obj/structure/disposalpipe/trunk{
 	dir = 8
 	},
-/turf/open/floor/plating/asteroid/snow/icemoon,
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/turf/open/floor/plating/snowed/smoothed/icemoon,
 /area/medical/virology)
 "mVb" = (
 /obj/effect/turf_decal/tile/red{
@@ -38837,7 +38842,10 @@
 /obj/structure/disposalpipe/segment{
 	dir = 6
 	},
-/turf/open/floor/plating/asteroid/snow/icemoon,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/open/floor/plating/snowed/smoothed/icemoon,
 /area/medical/virology)
 "qiw" = (
 /turf/open/floor/plasteel/stairs/left{
@@ -47603,6 +47611,9 @@
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
 	dir = 5
 	},
+/obj/structure/railing/corner{
+	dir = 4
+	},
 /turf/open/floor/plasteel,
 /area/quartermaster/miningdock)
 "uuD" = (
@@ -53777,10 +53788,10 @@
 /turf/open/floor/plasteel/dark,
 /area/security/prison)
 "xpl" = (
-/obj/structure/window/reinforced,
 /obj/machinery/door/firedoor/border_only{
 	name = "south facing firelock"
 	},
+/obj/structure/railing,
 /turf/open/floor/plasteel,
 /area/quartermaster/miningdock)
 "xpU" = (
@@ -74154,7 +74165,7 @@ ydp
 ydp
 ydp
 ydp
-ydp
+xUL
 qip
 tGK
 beD
@@ -74411,9 +74422,9 @@ ydp
 ydp
 ydp
 ydp
-ydp
+bCk
 mTw
-avT
+frY
 vjS
 gNb
 uYa
@@ -74668,8 +74679,8 @@ ydp
 ydp
 ydp
 ydp
-ydp
-avT
+eWH
+bum
 bcR
 fnQ
 eSJ
@@ -74925,8 +74936,8 @@ ydp
 ydp
 ydp
 ydp
-ydp
-ydp
+lxm
+bum
 bmP
 kuK
 lBe
@@ -79342,8 +79353,8 @@ gdQ
 nLS
 nLS
 gdq
-gdQ
-gdQ
+eOA
+eOA
 nLS
 gdQ
 nLS
@@ -94282,7 +94293,7 @@ qJV
 xpl
 xRH
 xRH
-cqt
+cZN
 bEi
 bLT
 bLT
