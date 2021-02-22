@@ -89,8 +89,11 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 	var/attack_verb = "punch"	// punch-specific attack verb
 	var/attack_verb_continuous = "punches"
-	var/sound/attack_sound = 'modular_skyrat/sound/gore/punch1.ogg'
-	var/sound/miss_sound = 'modular_skyrat/sound/gore/punchmiss.ogg'
+	var/static/list/sound/attack_sound = list('modular_skyrat/sound/gore/melee1.ogg', \
+											'modular_skyrat/sound/gore/melee2.ogg', \
+											'modular_skyrat/sound/gore/melee3.ogg', \
+											)
+	var/static/list/sound/miss_sound = list('modular_skyrat/sound/gore/punchmiss.ogg')
 
 	var/list/mob/living/ignored_by = list()	// list of mobs that will ignore this species
 

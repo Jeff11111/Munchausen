@@ -5,8 +5,6 @@
 	default_color = "59CE00"
 	species_traits = list(MUTCOLORS,EYECOLOR,CAN_SCAR,HAS_FLESH)
 	attack_verb = "slash"
-	attack_sound = 'sound/weapons/slice.ogg'
-	miss_sound = 'sound/weapons/slashmiss.ogg'
 	burnmod = 1.25
 	heatmod = 1.5
 	meat = /obj/item/reagent_containers/food/snacks/meat/slab/human/mutant/plant

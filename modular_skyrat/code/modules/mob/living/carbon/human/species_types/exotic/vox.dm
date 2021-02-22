@@ -14,8 +14,6 @@
 	breathid = "n2"
 	mutant_bodyparts = list("mcolor" = "0F0", "mcolor2" = "0F0", "mcolor3" = "0F0", "legs" = "Vox", "mam_body_markings" = "Vox", "mam_tail" = "Vox", "mam_snouts" = "Vox", "spines" = "Vox Bands")
 	attack_verb = "slash"
-	attack_sound = 'sound/weapons/slash.ogg'
-	miss_sound = 'sound/weapons/slashmiss.ogg'
 	exotic_bloodtype = "SY" //synthetic, oxygenless blood
 	rainbowblood = TRUE
 	liked_food = MEAT | FRIED
