@@ -104,15 +104,25 @@
 					injury_descriptors["[english_list(bits)] visible in the wounds"] = 1
 
 	for(var/injury in injury_descriptors)
+		var/found_color = findtext(injury, "style='color: [COLOR_PALE_RED_GRAY]'")
 		switch(injury_descriptors[injury])
 			if(-INFINITY to 1)
 				flavor_text += "a [injury]"
 			if(2)
-				flavor_text += "a pair of [injury]s"
+				if(found_color)
+					flavor_text += "a pair of [injury]<span style='color: [COLOR_PALE_RED_GRAY]'>s</span>"
+				else
+					flavor_text += "a pair of [injury]s"
 			if(3 to 5)
-				flavor_text += "several [injury]s"
+				if(found_color)
+					flavor_text += "several [injury]<span style='color: [COLOR_PALE_RED_GRAY]'>s</span>"
+				else
+					flavor_text += "several [injury]s"
 			if(6 to INFINITY)
-				flavor_text += "a ton of [injury]\s"
+				if(found_color)
+					flavor_text += "a ton of [injury]<span style='color: [COLOR_PALE_RED_GRAY]'>s</span>"
+				else
+					flavor_text += "a ton of [injury]s"
 
 	return english_list(flavor_text)
 
