@@ -121,11 +121,25 @@
 	list_reagents = list(/datum/reagent/medicine/salbutamol = 30)
 	roundstart = TRUE
 
+/obj/item/reagent_containers/pill/perfluorodecalin
+	name = "perfluorodecalin pill"
+	desc = "Used to treat oxygen deprivation."
+	icon_state = "pill16"
+	list_reagents = list(/datum/reagent/medicine/perfluorodecalin = 20)
+	roundstart = TRUE
+
 /obj/item/reagent_containers/pill/charcoal
 	name = "charcoal pill"
 	desc = "Neutralizes many common toxins."
 	icon_state = "pill17"
 	list_reagents = list(/datum/reagent/medicine/charcoal = 10)
+	roundstart = TRUE
+
+/obj/item/reagent_containers/pill/antitox
+	name = "antitox pill"
+	desc = "Neutralizes many common toxins."
+	icon_state = "pill17"
+	list_reagents = list(/datum/reagent/medicine/antitoxin = 15)
 	roundstart = TRUE
 
 /obj/item/reagent_containers/pill/epinephrine

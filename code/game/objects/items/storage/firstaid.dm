@@ -39,10 +39,10 @@
 	new /obj/item/stack/medical/gauze(src)
 	new /obj/item/stack/medical/suture(src)
 	new /obj/item/stack/medical/suture(src)
+	new /obj/item/stack/medical/ointment(src)
 	new /obj/item/stack/medical/mesh(src)
 	new /obj/item/stack/medical/mesh(src)
 	new /obj/item/reagent_containers/hypospray/medipen(src)
-	new /obj/item/healthanalyzer(src)
 
 /obj/item/storage/firstaid/ancient
 	icon_state = "firstaid"
@@ -76,10 +76,10 @@
 	new /obj/item/stack/medical/gauze/adv(src)
 	new /obj/item/stack/medical/mesh/advanced(src)
 	new /obj/item/stack/medical/mesh(src)
-	new /obj/item/reagent_containers/medspray/sterilizine(src)
+	new /obj/item/stack/medical/ointment(src)
+	new /obj/item/reagent_containers/pill/patch/silver_sulf(src)
 	new /obj/item/reagent_containers/pill/oxandrolone(src)
 	new /obj/item/reagent_containers/hypospray/medipen(src)
-	new /obj/item/healthanalyzer(src)
 
 /obj/item/storage/firstaid/toxin
 	name = "toxin treatment kit"
@@ -95,11 +95,12 @@
 /obj/item/storage/firstaid/toxin/PopulateContents()
 	if(empty)
 		return
-	for(var/i in 1 to 4)
+	for(var/i in 1 to 3)
 		new /obj/item/reagent_containers/syringe/charcoal(src)
-	for(var/i in 1 to 2)
-		new /obj/item/storage/pill_bottle/charcoal(src)
-	new /obj/item/healthanalyzer(src)
+	new /obj/item/reagent_containers/syringe/calomel(src)
+	new /obj/item/reagent_containers/syringe/antiviral(src)
+	new /obj/item/storage/pill_bottle/charcoal(src)
+	new /obj/item/storage/pill_bottle/antitox(src)
 
 /obj/item/storage/firstaid/radbgone
 	name = "radiation treatment kit"
@@ -120,12 +121,12 @@
 	if(prob(80))
 		new /obj/item/reagent_containers/pill/antirad_plus(src)
 	new /obj/item/reagent_containers/syringe/charcoal(src)
+	new /obj/item/reagent_containers/syringe/antitox(src)
 	new /obj/item/storage/pill_bottle/charcoal(src)
 	new /obj/item/reagent_containers/pill/mutadone(src)
 	new /obj/item/reagent_containers/pill/antirad(src)
+	new /obj/item/reagent_containers/pill/antirad(src)
 	new /obj/item/reagent_containers/food/drinks/bottle/vodka(src)
-	new /obj/item/healthanalyzer(src)
-
 
 /obj/item/storage/firstaid/o2
 	name = "oxygen deprivation treatment kit"
@@ -141,12 +142,12 @@
 /obj/item/storage/firstaid/o2/PopulateContents()
 	if(empty)
 		return
-	new /obj/item/stack/medical/fixovein(src)
 	for(var/i in 1 to 3)
 		new /obj/item/reagent_containers/pill/salbutamol(src)
+	new /obj/item/reagent_containers/pill/perfluorodecalin(src)
+	new /obj/item/reagent_containers/syringe/dexalin(src)
 	new /obj/item/reagent_containers/hypospray/medipen(src)
 	new /obj/item/reagent_containers/hypospray/medipen(src)
-	new /obj/item/healthanalyzer(src)
 
 /obj/item/storage/firstaid/brute
 	name = "brute trauma treatment kit"
@@ -165,10 +166,10 @@
 	new /obj/item/stack/medical/gauze/adv(src)
 	new /obj/item/stack/medical/suture/medicated(src)
 	new /obj/item/stack/medical/suture(src)
+	new /obj/item/stack/medical/bruise_pack
 	new /obj/item/stack/sticky_tape/surgical(src)
 	new /obj/item/stack/medical/bone_gel(src)
 	new /obj/item/bonesetter(src)
-	new /obj/item/healthanalyzer(src)
 
 /obj/item/storage/firstaid/tactical
 	name = "combat medical kit"
@@ -187,13 +188,15 @@
 	if(empty)
 		return
 	new /obj/item/stack/medical/gauze/adv(src)
+	new /obj/item/stack/medical/suture/medicated(src)
+	new /obj/item/stack/medical/suture/medicated(src)
+	new /obj/item/stack/medical/mesh/advanced(src)
+	new /obj/item/stack/medical/mesh/advanced(src)
 	new /obj/item/defibrillator/compact/combat/loaded(src)
 	new /obj/item/reagent_containers/hypospray/combat/omnizine(src)
-	new /obj/item/stack/medical/mesh/advanced(src)
-	new /obj/item/stack/medical/suture/medicated(src)
-	new /obj/item/healthanalyzer/advanced(src)
-	new /obj/item/reagent_containers/syringe/lethal/choral(src) // what the fuck does anyone use this piece of shit for
+	new /obj/item/reagent_containers/syringe/lethal/choral(src)
 	new /obj/item/clothing/glasses/hud/health/night/syndicate(src)
+	new /obj/item/healthanalyzer/advanced(src)
 
 /obj/item/storage/firstaid/tactical/nukeop
 	name = "improved combat medical kit"
@@ -202,13 +205,15 @@
 	if(empty)
 		return
 	new /obj/item/stack/medical/gauze/adv(src)
+	new /obj/item/stack/medical/suture/medicated(src)
+	new /obj/item/stack/medical/suture/medicated(src)
+	new /obj/item/stack/medical/mesh/advanced(src)
+	new /obj/item/stack/medical/mesh/advanced(src)
 	new /obj/item/defibrillator/compact/combat/loaded(src)
 	new /obj/item/reagent_containers/hypospray/combat(src)
-	new /obj/item/stack/medical/mesh/advanced(src)
-	new /obj/item/stack/medical/suture/medicated(src)
-	new /obj/item/healthanalyzer/advanced(src)
-	new /obj/item/reagent_containers/syringe/lethal/choral(src) // what the fuck does anyone use this piece of shit for
+	new /obj/item/reagent_containers/syringe/lethal/choral(src)
 	new /obj/item/clothing/glasses/hud/health/night/syndicate(src)
+	new /obj/item/healthanalyzer/advanced(src)
 
 /*
  * Pill Bottles
@@ -244,6 +249,14 @@
 /obj/item/storage/pill_bottle/charcoal/PopulateContents()
 	for(var/i in 1 to 7)
 		new /obj/item/reagent_containers/pill/charcoal(src)
+
+/obj/item/storage/pill_bottle/antitox
+	name = "bottle of antitox pills"
+	desc = "Contains pills used to counter toxins."
+
+/obj/item/storage/pill_bottle/antitox/PopulateContents()
+	for(var/i in 1 to 7)
+		new /obj/item/reagent_containers/pill/antitox(src)
 
 /obj/item/storage/pill_bottle/antirad
 	name = "bottle of charcoal pills"
