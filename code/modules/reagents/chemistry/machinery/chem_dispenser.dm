@@ -278,7 +278,7 @@
 					var/free = R.maximum_volume - R.total_volume
 					var/actual = min(amount, (cell.charge * powerefficiency)*10, free)
 
-					if(SSeconomy.full_ancap && !currently_linked_account.adjust_money(-actual*obamacare))
+					if(SSeconomy.full_ancap && (currently_linked_account && !currently_linked_account.adjust_money(-actual*obamacare)))
 						say("Insufficient credits to dispense reagent!")
 						return
 					if(!cell.use(actual / powerefficiency))
@@ -327,7 +327,7 @@
 					var/free = R.maximum_volume - R.total_volume
 					var/actual = min(dispense_amount, (cell.charge * powerefficiency)*10, free)
 					if(actual)
-						if(SSeconomy.full_ancap && !currently_linked_account.adjust_money(-actual*obamacare))
+						if(SSeconomy.full_ancap && (currently_linked_account && !currently_linked_account.adjust_money(-actual*obamacare)))
 							say("Insufficient credits to dispense reagent!")
 							return
 						if(!cell.use(actual / powerefficiency))
@@ -551,6 +551,7 @@
 		/datum/reagent/medicine/cryoxadone,
 		/datum/reagent/iron
 	)
+	dep_id = ACCOUNT_CIV
 
 /obj/machinery/chem_dispenser/drinks/fullupgrade //fully ugpraded stock parts, emagged
 	desc = "Contains a large reservoir of soft drinks. This model has had its safeties shorted out."
@@ -743,6 +744,7 @@
 		/datum/reagent/toxin/histamine,
 		/datum/reagent/medicine/morphine
 	)
+	dep_id = null
 
 /obj/machinery/chem_dispenser/abductor/Initialize()
 	. = ..()
@@ -810,3 +812,4 @@
 		/datum/reagent/toxin/carpotoxin,
 		/datum/reagent/medicine/morphine
 	)
+	dep_id = ACCOUNT_CIV
