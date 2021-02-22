@@ -98,7 +98,7 @@
 	//Let's delay for a bit. Give them 10 minutes to think or so.
 	owner.objectives_hidden = TRUE
 	if(SSticker.current_state <= GAME_STATE_SETTING_UP)
-		sleep(rand(5, 15) MINUTES)
+		sleep(pick(5, 10, 15) MINUTES)
 	to_chat(owner.current, "<B><font size=3 color=red>... I'm not like these people ...</font></B>")
 	sleep(2 SECONDS)
 	owner.current.playsound_local(owner.current, 'modular_skyrat/sound/misc/villain.ogg', 100, 0)
