@@ -101,7 +101,6 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 				body_appearance = copy_appearance(living_body.appearance)
 				appearance = body_appearance
 			else
-				body_appearance = living_body.appearance
 				icon = living_body.icon
 				icon_state = living_body.icon_state
 		else
@@ -478,7 +477,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	transfer_ckey(mind.current, FALSE)
 	return 1
 
-/mob/dead/observer/proc/notify_cloning(var/message, var/sound, var/atom/source, flashwindow = TRUE)
+/mob/dead/observer/proc/notify_cloning(message, sound, atom/source, flashwindow = TRUE)
 	if(flashwindow)
 		window_flash(client)
 	if(message)

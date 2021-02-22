@@ -125,6 +125,9 @@
 	screen_loc = "WEST,SOUTH to EAST,NORTH"
 	icon_state = "blurry"
 
+/obj/screen/fullscreen/ghost
+	icon_state = "ghost"
+
 /obj/screen/fullscreen/flash
 	icon = 'icons/mob/screen_gen.dmi'
 	screen_loc = "WEST,SOUTH to EAST,NORTH"

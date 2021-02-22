@@ -531,7 +531,6 @@ mob/visible_message(message, self_message, blind_message, vision_distance = DEFA
 		return
 
 	M.key = key
-//	M.Login()	//wat
 	return
 
 /mob/proc/transfer_ckey(mob/new_mob, send_signal = TRUE)
@@ -548,6 +547,8 @@ mob/visible_message(message, self_message, blind_message, vision_distance = DEFA
 	new_mob.ckey = ckey
 	if(send_signal)
 		SEND_SIGNAL(src, COMSIG_MOB_KEY_CHANGE, new_mob, src)
+	if(isobserver(new_mob))
+		new_mob.overlay_fullscreen("wraith_filter", /obj/screen/fullscreen, pick(1, 2))
 	return TRUE
 
 /mob/verb/cancel_camera()
