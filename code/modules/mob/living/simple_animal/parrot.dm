@@ -877,8 +877,8 @@
  * Sub-types
  */
 /mob/living/simple_animal/parrot/Poly
-	name = "Poly"
-	desc = "Poly the Parrot. An expert on quantum cracker theory."
+	name = "Polyushko"
+	desc = "Polyushko the parrot - The best friend of Nayu the fox."
 	speak = list("Poly wanna cracker!", ":e Check the crystal, you chucklefucks!",":e Wire the solars, you lazy bums!",":e WHO TOOK THE DAMN HARDSUITS?",":e OH GOD ITS ABOUT TO DELAMINATE CALL THE SHUTTLE")
 	gold_core_spawnable = NO_SPAWN
 	speak_chance = 3
@@ -980,7 +980,7 @@
 	qdel(src)
 
 /mob/living/simple_animal/parrot/Poly/ghost
-	name = "The Ghost of Poly"
+	name = "The Ghost of Polyushko"
 	desc = "Doomed to squawk the Earth."
 	color = "#FFFFFF77"
 	speak_chance = 20
