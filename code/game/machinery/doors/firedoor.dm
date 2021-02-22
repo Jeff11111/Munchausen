@@ -234,7 +234,7 @@
 	CanAtmosPass = ATMOS_PASS_PROC
 
 /obj/machinery/door/firedoor/border_only/closed
-	icon_state = "door_closed"
+	icon_state = "closed"
 	opacity = TRUE
 	density = TRUE
 
