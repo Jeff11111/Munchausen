@@ -32,7 +32,7 @@
 			else
 				this_injury_desc = "<b>bleeding</b> [this_injury_desc]"
 		if(IN.is_bandaged())
-			this_injury_desc = "<span class='white'>bandaged</span> [this_injury_desc]"
+			this_injury_desc = "<span style='color: [COLOR_ASSEMBLY_WHITE]'>bandaged</span> [this_injury_desc]"
 
 		if(IN.germ_level >= INFECTION_LEVEL_TWO)
 			this_injury_desc = "<span class='deadsay'><b>badly infected</b></span> [this_injury_desc]"
