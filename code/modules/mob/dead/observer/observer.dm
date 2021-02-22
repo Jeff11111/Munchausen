@@ -7,6 +7,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	name = "ghost"
 	desc = "It's a g-g-g-g-ghooooost!" //jinkies!
 	icon = 'icons/mob/mob.dmi'
+	plane = MOB_PLANE
 	layer = GHOST_LAYER
 	icon_state = "ghost"
 	stat = DEAD
@@ -172,6 +173,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	MA.underlays = COPY.underlays
 	MA.appearance_flags |= KEEP_TOGETHER
 	MA.alpha = 127
+	MA.plane = MOB_PLANE
 
 	return MA
 
