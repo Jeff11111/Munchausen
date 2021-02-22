@@ -70,7 +70,7 @@
 		return
 	
 	var/mob/living/carbon/target = hit
-	var/roll = mind?.diceroll(GET_STAT_LEVEL(src, dex), mod = -GET_STAT_LEVEL(target, dex)/2) || DICE_SUCCESS
+	var/roll = mind?.diceroll(GET_STAT_LEVEL(src, dex), GET_SKILL_LEVEL(src, melee), mod = -GET_STAT_LEVEL(target, dex)) || DICE_SUCCESS
 	tackling = FALSE
 
 	switch(roll)
