@@ -13896,15 +13896,6 @@
 	},
 /turf/open/floor/plating,
 /area/maintenance/aft/secondary)
-"eOA" = (
-/obj/effect/turf_decal/stripes/line{
-	dir = 4
-	},
-/obj/structure/railing{
-	dir = 4
-	},
-/turf/open/floor/plating,
-/area/maintenance/port/central)
 "eOK" = (
 /obj/effect/spawner/structure/window/reinforced,
 /obj/structure/cable{
@@ -23004,16 +22995,9 @@
 /obj/structure/rack,
 /obj/item/storage/box/rubbershot,
 /obj/item/storage/box/rubbershot,
-/obj/item/storage/box/rubbershot,
-/obj/item/storage/box/rubbershot,
 /obj/item/gun/ballistic/shotgun/riot{
 	pixel_x = 3;
 	pixel_y = 6
-	},
-/obj/item/gun/ballistic/shotgun/riot,
-/obj/item/gun/ballistic/shotgun/riot{
-	pixel_x = -3;
-	pixel_y = -6
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -23811,6 +23795,11 @@
 /obj/machinery/door/airlock/external,
 /turf/open/floor/plating,
 /area/hallway/primary/aft)
+"joR" = (
+/obj/structure/ladder,
+/obj/effect/turf_decal/stripes/line,
+/turf/open/floor/plating/snowed/smoothed/icemoon,
+/area/icemoon/surface/outdoors)
 "joT" = (
 /obj/structure/cable{
 	icon_state = "0-2"
@@ -26628,14 +26617,9 @@
 /area/maintenance/disposal)
 "kEd" = (
 /obj/structure/rack,
-/obj/item/gun/energy/e_gun/advtaser,
 /obj/item/gun/energy/e_gun/advtaser{
 	pixel_x = -3;
 	pixel_y = 3
-	},
-/obj/item/gun/energy/e_gun/advtaser{
-	pixel_x = 3;
-	pixel_y = -3
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -28376,11 +28360,6 @@
 	},
 /turf/open/floor/plasteel,
 /area/maintenance/department/electrical)
-"lxm" = (
-/obj/structure/ladder,
-/obj/effect/turf_decal/stripes/line,
-/turf/open/floor/plating/snowed/smoothed/icemoon,
-/area/icemoon/surface/outdoors)
 "lxz" = (
 /obj/structure/window/plasma/reinforced{
 	dir = 8
@@ -32656,10 +32635,6 @@
 /obj/structure/rack,
 /obj/item/gun/energy/laser{
 	pixel_y = 6
-	},
-/obj/item/gun/energy/laser,
-/obj/item/gun/energy/laser{
-	pixel_y = -6
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -51846,6 +51821,15 @@
 	},
 /turf/open/floor/carpet,
 /area/hallway/primary/port)
+"wrL" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 4
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/open/floor/plating,
+/area/maintenance/port/central)
 "wrN" = (
 /obj/effect/turf_decal/tile/brown{
 	dir = 1
@@ -53393,10 +53377,6 @@
 /obj/structure/rack,
 /obj/item/gun/energy/e_gun{
 	pixel_y = 5
-	},
-/obj/item/gun/energy/e_gun,
-/obj/item/gun/energy/e_gun{
-	pixel_y = -5
 	},
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -74936,7 +74916,7 @@ ydp
 ydp
 ydp
 ydp
-lxm
+joR
 bum
 bmP
 kuK
@@ -79353,8 +79333,8 @@ gdQ
 nLS
 nLS
 gdq
-eOA
-eOA
+wrL
+wrL
 nLS
 gdQ
 nLS
