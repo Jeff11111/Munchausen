@@ -68,7 +68,7 @@
 	if(covered_groin)
 		visible_message("<span class='notice'><b>[src]</b> pisses [p_their()] pants.</span>", \
 					"<span class='notice'>I piss myself...")
-		SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "piss_self", /datum/mood_event/piss_self)
+		SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "piss_self", /datum/mood_event/pissed_self)
 	//Gentleman's piss
 	else if(urinel)
 		visible_message("<span class='notice'><b>[src]</b> pisses on [urinel].</span>", \

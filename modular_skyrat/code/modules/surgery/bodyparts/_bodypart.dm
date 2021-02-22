@@ -906,7 +906,7 @@
 		created_injury = create_injury(wounding_type, burn)
 		if(!(created_injury in injuries))
 			created_injury.apply_injury(burn, src)
-		if(owner && prob(burn))
+		if(owner && prob(burn * 2))
 			owner.IgniteMob()
 	
 	//Sync the bodypart's damage with the wounds we have created

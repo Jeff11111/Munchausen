@@ -5,7 +5,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_names)
 GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 #define BURN_WOUND_ROLL_MULT 10
-#define SPECIFY_BODYPART_BURN_PROB 50
+#define SPECIFY_BODYPART_BURN_PROB 80
 
 /datum/species
 	var/id	// if the game needs to manually check your race to do something not included in a proc here, it will use this
@@ -2442,9 +2442,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		var/obj/item/bodypart/BP
 		if(length(H.bodyparts) && prob(SPECIFY_BODYPART_BURN_PROB))
 			BP = pick(H.bodyparts)
-		H.apply_damage(damage = burn_damage, damagetype = BURN, def_zone = BP, wound_bonus = CANT_WOUND)
-		if(!HAS_TRAIT(H, TRAIT_NOTEMPERATUREWOUNDING) && BP)
-			BP.painless_wound_roll(WOUND_BURN, burn_damage * BURN_WOUND_ROLL_MULT)
+		H.apply_damage(damage = burn_damage, damagetype = BURN, def_zone = BP)
 
 	else if(H.bodytemperature < BODYTEMP_COLD_DAMAGE_LIMIT && !HAS_TRAIT(H, TRAIT_RESISTCOLD))
 		SEND_SIGNAL(H, COMSIG_CLEAR_MOOD_EVENT, "hot")
@@ -2456,17 +2454,11 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			BP = pick(H.bodyparts)
 		switch(H.bodytemperature)
 			if(200 to BODYTEMP_COLD_DAMAGE_LIMIT)
-				H.apply_damage(damage = COLD_DAMAGE_LEVEL_1*coldmod*H.physiology.cold_mod, damagetype = BURN, def_zone = BP, wound_bonus = CANT_WOUND)
-				if(!HAS_TRAIT(H, TRAIT_NOTEMPERATUREWOUNDING) && BP)
-					BP.painless_wound_roll(WOUND_BURN, COLD_DAMAGE_LEVEL_1*coldmod*H.physiology.cold_mod*BURN_WOUND_ROLL_MULT)
+				H.apply_damage(damage = COLD_DAMAGE_LEVEL_1*coldmod*H.physiology.cold_mod, damagetype = BURN, def_zone = BP)
 			if(120 to 200)
-				H.apply_damage(damage = COLD_DAMAGE_LEVEL_2*coldmod*H.physiology.cold_mod, damagetype = BURN, def_zone = BP, wound_bonus = CANT_WOUND)
-				if(!HAS_TRAIT(H, TRAIT_NOTEMPERATUREWOUNDING) && BP)
-					BP.painless_wound_roll(WOUND_BURN, COLD_DAMAGE_LEVEL_2*coldmod*H.physiology.cold_mod*BURN_WOUND_ROLL_MULT)
+				H.apply_damage(damage = COLD_DAMAGE_LEVEL_2*coldmod*H.physiology.cold_mod, damagetype = BURN, def_zone = BP)
 			else
-				H.apply_damage(damage = COLD_DAMAGE_LEVEL_3*coldmod*H.physiology.cold_mod, damagetype = BURN, def_zone = BP, wound_bonus = CANT_WOUND)
-				if(!HAS_TRAIT(H, TRAIT_NOTEMPERATUREWOUNDING) && BP)
-					BP.painless_wound_roll(WOUND_BURN, COLD_DAMAGE_LEVEL_3*coldmod*H.physiology.cold_mod*BURN_WOUND_ROLL_MULT)
+				H.apply_damage(damage = COLD_DAMAGE_LEVEL_3*coldmod*H.physiology.cold_mod, damagetype = BURN, def_zone = BP)
 	else
 		H.remove_movespeed_modifier(/datum/movespeed_modifier/cold)
 		SEND_SIGNAL(H, COMSIG_CLEAR_MOOD_EVENT, "cold")
