@@ -2,7 +2,7 @@
 	name = "Torn Artery"
 	desc = "Patient's artery has been violently slashed open, causing severe hemorrhaging."
 	treat_text = "Immediate inciosion of the limb followed by suturing or fix o' veining the torn artery."
-	examine_desc = "is bleeding profusely"
+	examine_desc = "is <span style='color: [COLOR_RED_LIGHT]'><i>bleeding profusely</i></span>"
 	occur_text = "is violently torn, severing an artery"
 	sound_effect = 'modular_skyrat/sound/gore/artery.ogg'
 	severity = WOUND_SEVERITY_CRITICAL
