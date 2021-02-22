@@ -22,7 +22,7 @@
 	for(var/datum/injury/IN in injuries)
 		var/this_injury_desc = IN.desc
 		if((IN.can_autoheal()) && (IN.current_stage >= length(IN.stages)) && (IN.damage < 5))
-			this_injury_desc = "<span class='notice'><i>[this_injury_desc]</i></span>"
+			this_injury_desc = "<span style='color: [COLOR_PALE_RED_GRAY]'>[this_injury_desc]</span>"
 		if(IN.damage_type == WOUND_BURN && IN.is_salved())
 			this_injury_desc = "<span class='nicegreen'>salved</span> [this_injury_desc]"
 
