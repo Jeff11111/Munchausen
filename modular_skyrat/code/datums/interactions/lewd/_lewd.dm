@@ -761,7 +761,7 @@
 
 /mob/living/proc/set_is_fucking(mob/living/partner, orifice, obj/item/organ/genital/genepool)
 	//ADVANCED ERP LOGGING
-	message_admins("[ADMIN_LOOKUPFLW(src)] has started fucking [ADMIN_LOOKUPFLW(target)][genepool ? " with [p_their()] [genepool.name]" : "".], target orifice being [orifice].")
+	message_admins("[ADMIN_LOOKUPFLW(src)] has started fucking [ADMIN_LOOKUPFLW(target)][genepool ? " with [p_their()] [genepool.name]" : ""], target orifice being [orifice].")
 	last_partner = partner
 	last_orifice = orifice
 	last_genital = genepool
@@ -826,7 +826,7 @@
 							"kisses \the <b>[partner]</b>'s delicate folds.",
 							"tastes \the <b>[partner]</b>.",
 						)
-					else 
+					else
 						improv = TRUE
 				if("penis")
 					if(partner.has_penis())
@@ -839,7 +839,7 @@
 							"kisses the base of \the <b>[partner]</b>'s shaft.",
 							"takes \the <b>[partner]</b> deeper into their mouth.",
 						)
-					else 
+					else
 						improv = TRUE
 			if(improv)
 				// get confused about how to do the sex
@@ -989,7 +989,7 @@
 						message = "shoves their cock into \the <b>[partner]</b>'s mouth"
 				else
 					improv = TRUE
-		if(improv)	
+		if(improv)
 			message = "shoves their crotch into \the <b>[partner]</b>'s face."
 		else
 			if(ishuman(partner))
@@ -1055,7 +1055,7 @@
 						"locks their legs around \the <b>[partner]</b>'s head before pulling it into their fat package, smothering them."))
 				else
 					improv = TRUE
-				
+
 		if(improv)
 			message = "deviously locks their legs around \the <b>[partner]</b>'s head and smothers it in their thighs."
 		else
@@ -1315,7 +1315,7 @@
 
 /mob/living/proc/do_breastfuck(mob/living/partner)
 	var/message
-	
+
 	if(is_fucking(partner, CUM_TARGET_BREASTS))
 		message = "[pick("fucks \the <b>[partner]</b>'s' breasts.",
 			"grinds their cock between \the <b>[partner]</b>'s boobs.",
