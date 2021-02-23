@@ -177,7 +177,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	MA.appearance_flags |= KEEP_TOGETHER
 	MA.alpha = 127
 	MA.plane = MOB_PLANE
-	MA.add_filter("wraith_blur", 0, WRAITH_BLUR)
+	MA.filters += filter(type = "blur", size = 1)
 
 	return MA
 
