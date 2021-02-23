@@ -1,7 +1,8 @@
 /datum/antagonist/nukeop/on_gain()
 	. = ..()
 	if(owner)
-		for(var/datum/stats/stat in owner.mob_stats)
+		for(var/statt in owner.mob_stats)
+			var/datum/stats/stat = statt
 			if(stat.fake_type)
 				continue
 			stat.level = min(stat.level + rand(4, 10), MAX_STAT)
