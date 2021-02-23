@@ -105,6 +105,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 			else
 				icon = living_body.icon
 				icon_state = living_body.icon_state
+				alpha = 127
 				copying_mob = TRUE
 				add_filter("wraith_blur", 0, WRAITH_BLUR)
 		else
