@@ -24,7 +24,9 @@
 /mob/living/mouth_is_free()
 	if(istype(src, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = src
-		return !H.wear_mask
+		var/obj/item/clothing/mask/mask = H.wear_mask
+		if(!mask || mask.mask_adjusted)
+			return TRUE
 	else
 		return TRUE
 
