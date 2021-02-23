@@ -152,7 +152,6 @@
 	if(is_treated() && damage < 25)	//anything less than a flesh wound (or equivalent) isn't infectable if treated properly
 		return FALSE
 	if(is_disinfected())
-		germ_level = 0	//reset this, just in case
 		return FALSE
 	if(required_status & BODYPART_ROBOTIC) //Robotic injury
 		return FALSE
