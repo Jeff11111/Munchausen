@@ -191,7 +191,10 @@
 	if(!screwy_self)
 		for(var/obj/item/bodypart/BP in bodyparts)
 			if(BP.is_stump())
-				msg += "<span class='deadsay'><B>[t_He] has a stump where [t_his] [parse_zone(BP.body_zone)] should be!</B></span>"
+				if(BP.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK))
+					msg += "<span class='deadsay'><B>[t_He] has a stump where [t_his] [parse_zone(BP.body_zone)] should be!</B></span>"
+				else
+					msg += "<B>[t_He] has a stump where [t_his] [parse_zone(BP.body_zone)] should be!</B>"
 				stumps |= BP.body_zone
 			if(BP.grasped_by?.grasping_mob == src)
 				msg += "[t_He] is applying pressure to [t_his] [BP.name]!"
