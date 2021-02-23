@@ -1719,7 +1719,7 @@
 
 	//check if there's gauze, and if we should destroy or damage it, before we apply any wounds
 	if(current_gauze && check_gauze)
-		if(prob(base_roll/4))
+		if(prob(base_roll/2))
 			if(prob(base_roll/2))
 				owner.visible_message("<span class='danger'>\The [current_gauze] on [owner]'s [src.name] shreds apart completely!</span>", "<span class='userdanger'>\The [current_gauze] on your [src.name] gets completely shredded!</span>")
 				var/obj/item/reagent_containers/rag/R = new /obj/item/reagent_containers/rag()
@@ -1738,7 +1738,7 @@
 				var/datum/wound/woundie = i
 				if(istype(woundie) && CHECK_BITFIELD(woundie.wound_flags, WOUND_SEEPS_GAUZE))
 					seep_gauze(current_gauze.absorption_rate * (0.25 * woundie.severity))
-			seep_gauze(current_gauze.absorption_rate * round(damage/25, 1))
+			seep_gauze(current_gauze.absorption_rate * round(damage/10, 1))
 
 	// quick re-check to see if bare_wound_bonus applies, for the benefit of log_wound(), see about getting the check from check_woundings_mods() somehow
 	if(ishuman(owner))
