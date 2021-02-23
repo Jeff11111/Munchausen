@@ -20,7 +20,7 @@
 	var/static/list/emote_list = list()
 	var/static/regex/stop_bad_mime = regex(@"says|exclaims|yells|asks")
 
-	var/chat_popup = TRUE //Skyrat edit
+	var/chat_popup = TRUE
 	var/image_popup
 
 /datum/emote/New()

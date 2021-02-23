@@ -556,5 +556,10 @@
 		return
 	
 	sound = null
-	var/brap = rand(1,5)
+	var/brap = rand(1, 5)
+	user.adjust_nutrition(-brap)
 	user.atmos_spawn_air("miasma=[brap];TEMP=310.15")
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if(H.mind?.diceroll(STAT_DATUM(end)) <= DICE_CRIT_FAILURE)
+			H.defecate(FALSE)
