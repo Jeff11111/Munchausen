@@ -5,6 +5,9 @@
 /datum/skills/ranged
 	name = "Ranged Combat"
 
+/datum/skills/throwing
+	name = "Throwing"
+
 /datum/skills/firstaid
 	name = "Medicine"
 
