@@ -13,6 +13,7 @@
 	var/skill_variance_negative = 2 //How much we can vary negatively
 	var/skill_melee = JOB_SKILLPOINTS_HORRENDOUS
 	var/skill_ranged = JOB_SKILLPOINTS_HORRENDOUS
+	var/skill_throwing = JOB_SKILLPOINTS_HORRENDOUS
 	var/skill_firstaid = JOB_SKILLPOINTS_HORRENDOUS
 	var/skill_surgery = JOB_SKILLPOINTS_HORRENDOUS
 	var/skill_chemistry = JOB_SKILLPOINTS_HORRENDOUS
@@ -49,6 +50,7 @@
 	var/list/all_skills = list(
 							SKILL_DATUM(melee) = skill_melee,
 							SKILL_DATUM(ranged) = skill_ranged,
+							SKILL_DATUM(throwing) = skill_throwing,
 							SKILL_DATUM(firstaid) = skill_firstaid,
 							SKILL_DATUM(surgery) = skill_surgery,
 							SKILL_DATUM(chemistry) = skill_chemistry,
@@ -174,6 +176,7 @@
 	//Uhhh... godlike gaming?...
 	skill_melee = JOB_SKILLPOINTS_WORTHLESS
 	skill_gaming = JOB_SKILLPOINTS_LEGENDARY
+	skill_throwing = JOB_SKILLPOINTS_EXPERT
 
 //Either gets ridiculously low or ridiculously high strength, no inbetween
 /datum/job/clown/special_assign_skills_stats(mob/living/H)

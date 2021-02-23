@@ -92,8 +92,7 @@
 			var/obj/item/bodypart/supposed_to_affect = get_bodypart(P.def_zone)
 			if(supposed_to_affect)
 				miss_entirely = supposed_to_affect.miss_entirely_prob
-			miss_entirely /= (lying ? 5 : 1)
-
+			miss_entirely *= (lying ? 0.2 : 1)
 			//good modifier if aimed
 			var/modifier = 0
 			if(fireboy.combat_intent == CI_AIMED)
@@ -167,8 +166,7 @@
 			ran_zone_prob = supposed_to_affect.zone_prob
 			extra_zone_prob = supposed_to_affect.extra_zone_prob
 			miss_entirely = supposed_to_affect.miss_entirely_prob
-		miss_entirely /= (lying ? 5 : 1)
-
+		miss_entirely *= (lying ? 0.2 : 1)
 		var/c_intent = CI_DEFAULT
 		if(iscarbon(user))
 			var/mob/living/carbon/carbon_mob = user

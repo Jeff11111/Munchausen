@@ -404,7 +404,7 @@
 			ran_zone_prob = supposed_to_affect.zone_prob
 			extra_zone_prob = supposed_to_affect.extra_zone_prob
 			miss_entirely = supposed_to_affect.miss_entirely_prob
-		miss_entirely /= (target.lying ? 5 : 1)
+		miss_entirely *= (target.lying ? 0.2 : 1)
 		if(user.mind)
 			var/datum/stats/dex/dex = GET_STAT(user, dex)
 			if(dex)
@@ -593,7 +593,7 @@
 
 		//The probability of hitting the correct zone depends on dexterity
 		//and also on which limb we aim at
-		//since this is a bite, chance to miss is doubled
+		//since this is a bite, chance to miss is almost doubled
 		var/obj/item/bodypart/supposed_to_affect = target.get_bodypart(user.zone_selected)
 		var/ran_zone_prob = 35
 		var/extra_zone_prob = 25
@@ -602,7 +602,7 @@
 			ran_zone_prob = supposed_to_affect.zone_prob
 			extra_zone_prob = supposed_to_affect.extra_zone_prob
 			miss_entirely = supposed_to_affect.miss_entirely_prob
-		miss_entirely /= (target.lying ? 5 : 1)
+		miss_entirely *= (target.lying ? 0.2 : 1)
 		if(user.mind)
 			var/datum/stats/dex/dex = GET_STAT(user, dex)
 			if(dex)

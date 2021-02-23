@@ -66,6 +66,7 @@
 	stat_dex = 11
 	stat_int = 5
 	skill_melee = 13
+	skill_throwing = 13
 	skill_firstaid = 13
 	skill_construction = 6
 	skill_cooking = 8

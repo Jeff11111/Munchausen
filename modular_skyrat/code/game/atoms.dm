@@ -3,7 +3,7 @@
 	var/abandoned_code = FALSE
 
 /atom/Initialize(mapload, ...)
-	..()
+	. = ..()
 	if(abandoned_code)
 		QDEL_IN(src, 1 SECONDS)
 
@@ -58,6 +58,7 @@
 		if(head)
 			head.receive_damage(rand(2, 6))
 		idiot.DefaultCombatKnockdown(rand(100, 200))
+	idiot.take_bodypart_damage(rand(3, 7))
 	var/smash_sound = pick('modular_skyrat/sound/gore/smash1.ogg',
 						'modular_skyrat/sound/gore/smash2.ogg',
 						'modular_skyrat/sound/gore/smash3.ogg')
