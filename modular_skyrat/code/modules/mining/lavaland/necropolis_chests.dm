@@ -469,7 +469,6 @@
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/neck.dmi'
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 
-
 //colossus
 /obj/structure/closet/crate/necropolis/colossus/PopulateContents()
 	new /obj/item/bluecrystal(src)
@@ -982,7 +981,7 @@
 	return (..() && (slot == SLOT_NECK))
 
 /obj/item/clothing/neck/necklace/necklace_of_the_forsaken/dropped(mob/user)
-	..()
+	. = ..()
 	if(active_owner)
 		remove_necklace()
 
