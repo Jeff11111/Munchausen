@@ -14006,13 +14006,13 @@
 /turf/closed/wall,
 /area/maintenance/disposal/incinerator)
 "eRX" = (
-/obj/machinery/cryopod,
 /obj/machinery/light_switch{
 	pixel_x = -24
 	},
 /obj/structure/window{
 	dir = 1
 	},
+/obj/machinery/cryopod,
 /turf/open/floor/plasteel/dark,
 /area/shuttle/arrival)
 "eSq" = (
@@ -19398,10 +19398,10 @@
 /turf/open/floor/plating,
 /area/engine/engineering)
 "hsC" = (
-/obj/machinery/cryopod,
 /obj/structure/window/reinforced{
 	dir = 1
 	},
+/obj/machinery/cryopod,
 /turf/open/floor/plasteel/dark,
 /area/shuttle/arrival)
 "hsP" = (
@@ -21138,13 +21138,6 @@
 /obj/item/pen,
 /turf/open/floor/plasteel/cult,
 /area/lawoffice)
-"ibi" = (
-/obj/machinery/cryopod,
-/obj/structure/window{
-	dir = 1
-	},
-/turf/open/floor/plasteel/dark,
-/area/shuttle/arrival)
 "icb" = (
 /obj/structure/closet/secure_closet/captains,
 /turf/open/floor/carpet,
@@ -27886,7 +27879,6 @@
 /area/maintenance/port/aft)
 "llo" = (
 /obj/machinery/cryopod,
-/obj/structure/window/reinforced,
 /turf/open/floor/plasteel/dark,
 /area/shuttle/arrival)
 "llu" = (
@@ -29141,13 +29133,10 @@
 /turf/open/floor/plating/snowed/smoothed/icemoon,
 /area/hallway/secondary/exit/departure_lounge)
 "lSs" = (
-/obj/machinery/cryopod,
-/obj/structure/window{
-	dir = 1
-	},
 /obj/machinery/light/small{
 	dir = 8
 	},
+/obj/machinery/cryopod,
 /turf/open/floor/plasteel/dark,
 /area/shuttle/arrival)
 "lSt" = (
@@ -30512,13 +30501,10 @@
 	name = "Arcade Room"
 	})
 "mzQ" = (
-/obj/machinery/cryopod,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
 /obj/machinery/light/small{
 	dir = 4
 	},
+/obj/machinery/cryopod,
 /turf/open/floor/plasteel/dark,
 /area/shuttle/arrival)
 "mAh" = (
@@ -30607,14 +30593,11 @@
 /turf/open/floor/wood,
 /area/security/courtroom)
 "mCK" = (
-/obj/machinery/cryopod,
-/obj/structure/window{
-	dir = 1
-	},
 /obj/machinery/airalarm{
 	dir = 4;
 	pixel_x = -23
 	},
+/obj/machinery/cryopod,
 /turf/open/floor/plasteel/dark,
 /area/shuttle/arrival)
 "mDm" = (
@@ -32390,14 +32373,12 @@
 /turf/open/floor/plasteel,
 /area/quartermaster/storage)
 "nsz" = (
-/obj/machinery/cryopod,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = 24
 	},
+/obj/structure/window/reinforced,
+/obj/machinery/cryopod,
 /turf/open/floor/plasteel/dark,
 /area/shuttle/arrival)
 "nsB" = (
@@ -53228,6 +53209,11 @@
 	},
 /turf/open/floor/carpet/black,
 /area/crew_quarters/heads/hos)
+"xdv" = (
+/obj/structure/window/reinforced,
+/obj/machinery/cryopod,
+/turf/open/floor/plasteel/dark,
+/area/shuttle/arrival)
 "xdD" = (
 /obj/machinery/atmospherics/pipe/manifold/scrubbers/visible{
 	dir = 4
@@ -84137,10 +84123,10 @@ lzB
 xSP
 wZm
 eRX
-ibi
+llo
 lSs
 mCK
-ibi
+xdv
 nIO
 rte
 xty
