@@ -3,6 +3,9 @@
 	name = "glasses"
 	icon = 'icons/obj/clothing/glasses.dmi'
 	w_class = WEIGHT_CLASS_SMALL
+	body_parts_covered = EYES
+	cold_protection = EYES
+	heat_protection = EYES
 	flags_inv = EYES
 	flags_cover = GLASSESCOVERSEYES
 	slot_flags = ITEM_SLOT_EYES

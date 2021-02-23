@@ -1114,10 +1114,8 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(!I.species_exception || !is_type_in_list(src, I.species_exception))
 			return FALSE
 
-	//skyrat edit
 	var/num_hands = H.get_num_hands(FALSE)
 	var/num_feet = H.get_num_feet(FALSE)
-	//
 
 	switch(slot)
 		if(SLOT_HANDS)
@@ -1215,7 +1213,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			if(!H.get_bodypart_nostump(BODY_ZONE_HEAD))
 				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
-		//skyrat edit
 		if(SLOT_EARS_RIGHT)
 			if(H.ears_extra)
 				return FALSE
@@ -1235,6 +1232,8 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				return FALSE
 			if( !(I.slot_flags & ITEM_SLOT_SOCKS) )
 				return FALSE
+			if(num_feet < 2)
+				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_W_SHIRT)
 			if(H.w_shirt)
@@ -1242,7 +1241,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			if( !(I.slot_flags & ITEM_SLOT_SHIRT) )
 				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
-		//
 		if(SLOT_W_UNIFORM)
 			if(H.w_uniform)
 				return FALSE
@@ -1320,7 +1318,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				return TRUE
 			if(I.w_class > WEIGHT_CLASS_BULKY)
 				if(!disable_warning)
-					to_chat(H, "The [I.name] is too big to attach.") //should be src?
+					to_chat(H, "The [I.name] is too big to attach.")
 				return FALSE
 			return FALSE
 		if(SLOT_HANDCUFFED)
@@ -1328,7 +1326,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				return FALSE
 			if(!istype(I, /obj/item/restraints/handcuffs))
 				return FALSE
-			if(num_hands < 2) //skyrat edit
+			if(num_hands < 2)
 				return FALSE
 			return TRUE
 		if(SLOT_LEGCUFFED)
@@ -1336,7 +1334,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				return FALSE
 			if(!istype(I, /obj/item/restraints/legcuffs))
 				return FALSE
-			if(num_feet < 2) //skyrat edit
+			if(num_feet < 2)
 				return FALSE
 			return TRUE
 		if(SLOT_IN_BACKPACK)
