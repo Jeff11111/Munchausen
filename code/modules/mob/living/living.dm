@@ -700,6 +700,8 @@
 	
 	if(connected_trail?.connected_trail)
 		var/dire_straits = get_dir(connected_trail.connected_trail, target_turf) | get_dir(connected_trail, target_turf)
+		if(get_dir(connected_trail.connected_trail, connected_trail) & SOUTH)
+			dire_straits = turn(dire_straits, 180)
 		connected_trail.existing_dirs -= connected_trail.existing_dirs[length(connected_trail.existing_dirs)]
 		connected_trail.existing_dirs |= dire_straits
 		connected_trail.cut_overlays()
