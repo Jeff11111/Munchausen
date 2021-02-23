@@ -24501,6 +24501,9 @@
 	pixel_y = 4
 	},
 /obj/item/pen,
+/obj/machinery/light/small{
+	dir = 1
+	},
 /turf/open/floor/plasteel/dark,
 /area/medical/morgue)
 "jFZ" = (
@@ -45678,12 +45681,6 @@
 /turf/open/floor/engine,
 /area/engine/engineering)
 "tyH" = (
-/obj/structure/bodycontainer/morgue{
-	dir = 2
-	},
-/obj/machinery/light/small{
-	dir = 1
-	},
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
 	},
@@ -45692,6 +45689,14 @@
 	},
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
+	},
+/obj/structure/bodycontainer/crematorium{
+	id = "crematoriumMorgue"
+	},
+/obj/machinery/button/crematorium{
+	id = "crematoriumMorgue";
+	pixel_y = 24;
+	req_access_txt = "5"
 	},
 /turf/open/floor/plasteel/dark,
 /area/medical/morgue)
