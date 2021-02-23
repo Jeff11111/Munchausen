@@ -32,7 +32,7 @@
 		limb.owner.blood_volume -= (BLOOD_VOLUME_SURVIVE * damage/(limb.owner.maxHealth/2))
 
 /datum/injury/burn/receive_damage(damage_received = 0, pain_received = 0, damage_type = WOUND_BLUNT)
-	if((damage_type == WOUND_BURN) && (wound_damage() + damage_received >= 40) && parent_bodypart && !parent_bodypart.is_dead())
+	if((damage_type == WOUND_BURN) && (damage + damage_received >= 40) && parent_bodypart && !parent_bodypart.is_dead())
 		if(parent_bodypart.is_organic_limb())
 			parent_mob?.wound_message += " \The [parent_bodypart.name] fully melts away!"
 			parent_bodypart.kill_limb()
