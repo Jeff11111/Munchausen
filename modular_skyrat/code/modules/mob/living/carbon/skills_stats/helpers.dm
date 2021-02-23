@@ -108,8 +108,8 @@
 	if(victim.stat >= UNCONSCIOUS)
 		return
 	var/block_chance = weapon?.block_chance || 10
-	//Do a dice roll based on melee skill and dexterity, modifier being half the total damage
-	switch(diceroll(GET_STAT_LEVEL(victim, dex)*0.5, GET_SKILL_LEVEL(victim, melee)*1.5, dicetype = "6d6", mod = -abs(round(total_damage/2)) + block_chance/5, crit = 18))
+	//Do a dice roll based on melee skill and dexterity, modifier being (total_damage/4)
+	switch(diceroll(GET_STAT_LEVEL(victim, dex)*0.5, GET_SKILL_LEVEL(victim, melee)*1.5, dicetype = "6d6", mod = -abs(round(total_damage/4)) + block_chance/5, crit = 18))
 		//Always go through, no questions asked on crit successes
 		if(DICE_CRIT_SUCCESS)
 			victim.changeNext_move(CLICK_CD_MELEE)
@@ -172,9 +172,9 @@
 	//Victim is unconscious, can't dodge
 	if(victim.stat >= UNCONSCIOUS)
 		return
-	//Do a dice roll based on melee skill and dexterity, modifier being the total damage
+	//Do a dice roll based on melee skill and dexterity, modifier being (total_damage/4)
 	//(thus parrying is almost always preferrable, unless you are unarmed)
-	switch(diceroll(GET_STAT_LEVEL(victim, dex)*1.5, GET_SKILL_LEVEL(victim, melee)*0.5, dicetype = "6d6", mod = -abs(round(total_damage)), crit = 18))
+	switch(diceroll(GET_STAT_LEVEL(victim, dex)*1.5, GET_SKILL_LEVEL(victim, melee)*0.5, dicetype = "6d6", mod = -abs(round(total_damage/4)), crit = 18))
 		//Always go through, no questions asked on crit successes
 		if(DICE_CRIT_SUCCESS)
 			victim.changeNext_move(CLICK_CD_MELEE)

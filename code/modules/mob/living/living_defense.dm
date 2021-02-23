@@ -187,6 +187,9 @@
 	var/impacting_zone = ran_zone(BODY_ZONE_CHEST, 65)//Hits a random part of the body, geared towards the chest
 	var/list/block_return = list()
 	var/total_damage = I.throwforce
+	if(ishuman(throwingdatum.thrower))
+		var/mob/living/L = throwingdatum.thrower
+		total_damage *= GET_STAT_LEVEL(L, str)/(MAX_STAT/2)
 	if(mob_run_block(AM, throwpower, "\the [AM.name]", ATTACK_TYPE_THROWN, 0, throwingdatum?.thrower, impacting_zone, block_return) & BLOCK_SUCCESS)
 		hitpush = FALSE
 		skipcatch = TRUE
@@ -201,13 +204,11 @@
 		if(!skipcatch && isturf(I.loc) && catch_item(I))
 			return TRUE
 		
-		var/damage_caused = I.throwforce
 		var/dtype = BRUTE
 		var/zone = ran_zone(BODY_ZONE_CHEST, 65)//Hits a random part of the body, geared towards the chest
 		//If it was thrown by a human mob, let's do something a bit more involved
 		if(throwingdatum?.thrower?.mind && ishuman(throwingdatum.thrower) && iscarbon(src))
 			var/mob/living/carbon/human/assailant = throwingdatum.thrower
-			damage_caused *= (GET_STAT_LEVEL(assailant, str)/(MAX_STAT/2))
 			var/mob/living/carbon/victim = src
 			var/ran_zone_prob = 50
 			var/extra_zone_prob = 50
@@ -236,7 +237,7 @@
 			if(dex)
 				ran_zone_prob = dex.get_ran_zone_prob(ran_zone_prob, extra_zone_prob)
 			zone = ran_zone(check_zone(assailant.zone_selected), ran_zone_prob)
-		if(iscarbon(src) && mind?.handle_dodge(src, I, damage_caused, throwingdatum.thrower))
+		if(iscarbon(src) && mind?.handle_dodge(src, I, total_damage, throwingdatum.thrower))
 			//le cops
 			var/mob/living/carbon/victim = src
 			//Make the victim step to an adjacent tile because ooooooh dodge
