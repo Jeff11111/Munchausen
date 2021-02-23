@@ -47621,6 +47621,9 @@
 /obj/item/radio/intercom{
 	pixel_y = 25
 	},
+/obj/machinery/light/small{
+	dir = 1
+	},
 /turf/open/floor/plating,
 /area/hallway/secondary/exit/departure_lounge)
 "uxO" = (
