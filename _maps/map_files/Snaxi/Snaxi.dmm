@@ -6507,6 +6507,12 @@
 /area/lawoffice)
 "bJQ" = (
 /obj/effect/turf_decal/delivery/red,
+/obj/machinery/door/airlock/external{
+	name = "Cryogenics"
+	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 4
+	},
 /turf/open/floor/plasteel/dark,
 /area/shuttle/arrival)
 "bKl" = (
@@ -47864,6 +47870,12 @@
 /area/crew_quarters/dorms)
 "uFq" = (
 /obj/effect/turf_decal/delivery/red,
+/obj/machinery/door/airlock/external{
+	name = "Cryogenics"
+	},
+/obj/effect/mapping_helpers/airlock/cyclelink_helper{
+	dir = 8
+	},
 /turf/open/floor/plasteel/dark,
 /area/hallway/secondary/exit/departure_lounge)
 "uFT" = (
@@ -48184,13 +48196,13 @@
 /turf/open/floor/plasteel/dark,
 /area/hallway/primary/starboard/aft)
 "uNq" = (
-/obj/machinery/door/airlock/glass_large{
-	dir = 8
-	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 4
 	},
 /obj/effect/turf_decal/delivery/red,
+/obj/machinery/door/airlock/external{
+	name = "Cryogenics"
+	},
 /turf/open/floor/plasteel/dark,
 /area/shuttle/arrival)
 "uOy" = (
@@ -52816,13 +52828,13 @@
 /turf/open/floor/plating,
 /area/maintenance/starboard/fore)
 "wSI" = (
-/obj/machinery/door/airlock/glass_large{
-	dir = 8
-	},
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
 	dir = 8
 	},
 /obj/effect/turf_decal/delivery/red,
+/obj/machinery/door/airlock/external{
+	name = "Cryogenics"
+	},
 /turf/open/floor/plasteel/dark,
 /area/hallway/secondary/exit/departure_lounge)
 "wTe" = (
