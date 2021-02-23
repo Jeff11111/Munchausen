@@ -3676,6 +3676,12 @@
 	},
 /turf/open/floor/plating,
 /area/hallway/primary/port)
+"tx" = (
+/obj/machinery/atm{
+	pixel_y = 28
+	},
+/turf/open/floor/plasteel,
+/area/mine/living_quarters)
 "tA" = (
 /obj/structure/reagent_dispensers/watertank,
 /turf/open/floor/plating,
@@ -5088,6 +5094,14 @@
 	},
 /turf/open/floor/plasteel/white,
 /area/science/mixing)
+"BO" = (
+/obj/machinery/atm{
+	pixel_y = 28
+	},
+/turf/open/floor/plasteel/dark,
+/area/chapel/main/monastery{
+	name = "Monastery Basement"
+	})
 "BQ" = (
 /obj/structure/table,
 /obj/item/kitchen/rollingpin,
@@ -8998,6 +9012,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
 	dir = 4
+	},
+/obj/machinery/atm{
+	pixel_y = 28
 	},
 /turf/open/floor/plasteel,
 /area/xenoarch/arch)
@@ -42101,7 +42118,7 @@ nd
 su
 wZ
 nd
-sa
+tx
 HF
 LI
 nd
@@ -62675,7 +62692,7 @@ kS
 kS
 kS
 no
-Hf
+BO
 PM
 kS
 PA

@@ -2328,6 +2328,9 @@
 /obj/effect/turf_decal/tile/blue{
 	dir = 1
 	},
+/obj/machinery/atm{
+	pixel_y = 28
+	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/port)
 "aDa" = (
@@ -9233,6 +9236,12 @@
 	},
 /turf/open/floor/engine/vacuum,
 /area/maintenance/disposal/incinerator)
+"cIu" = (
+/obj/machinery/atm{
+	pixel_y = 28
+	},
+/turf/open/floor/plasteel/dark,
+/area/chapel/main/monastery)
 "cIH" = (
 /obj/effect/spawner/lootdrop/maintenance,
 /obj/structure/closet/crate,
@@ -10456,6 +10465,18 @@
 /obj/machinery/door/airlock/external,
 /turf/open/floor/plating,
 /area/hallway/primary/aft)
+"dhg" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer3{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/supply/hidden/layer1{
+	dir = 4
+	},
+/obj/machinery/atm{
+	pixel_y = 28
+	},
+/turf/open/floor/wood,
+/area/crew_quarters/bar)
 "dhX" = (
 /obj/structure/disposalpipe/segment{
 	dir = 6
@@ -24714,6 +24735,15 @@
 	icon_state = "platingdmg3"
 	},
 /area/maintenance/disposal)
+"jLI" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/machinery/atm{
+	pixel_x = -28
+	},
+/turf/open/floor/plasteel,
+/area/hallway/secondary/exit/departure_lounge)
 "jLV" = (
 /obj/structure/rack,
 /obj/effect/spawner/lootdrop/maintenance,
@@ -25047,6 +25077,12 @@
 /obj/machinery/light/small,
 /turf/open/floor/wood,
 /area/library)
+"jTf" = (
+/obj/machinery/atm{
+	pixel_y = 28
+	},
+/turf/open/floor/plasteel,
+/area/hallway/secondary/exit/departure_lounge)
 "jTh" = (
 /obj/structure/disposalpipe/segment{
 	dir = 6
@@ -28888,6 +28924,9 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/tile/green,
+/obj/machinery/atm{
+	pixel_y = 28
+	},
 /turf/open/floor/plasteel/white,
 /area/medical/medbay/central)
 "lIJ" = (
@@ -30628,6 +30667,15 @@
 	},
 /turf/open/floor/plating/snowed/smoothed/icemoon,
 /area/icemoon/surface/outdoors)
+"mDG" = (
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/machinery/atm{
+	pixel_x = -28
+	},
+/turf/open/floor/wood,
+/area/chapel/dock)
 "mDJ" = (
 /obj/structure/cable{
 	icon_state = "4-8"
@@ -36766,6 +36814,9 @@
 /obj/effect/turf_decal/trimline/red/filled/corner{
 	dir = 8
 	},
+/obj/machinery/atm{
+	pixel_y = 28
+	},
 /turf/open/floor/plasteel/dark,
 /area/shuttle/arrival)
 "pqe" = (
@@ -39791,6 +39842,18 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/crew_quarters/dorms)
+"qHM" = (
+/obj/effect/turf_decal/tile/blue{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/blue{
+	dir = 4
+	},
+/obj/machinery/atm{
+	pixel_y = 28
+	},
+/turf/open/floor/plasteel/dark,
+/area/bridge)
 "qHO" = (
 /obj/item/kirbyplants{
 	icon_state = "plant-21"
@@ -41052,6 +41115,9 @@
 	},
 /obj/machinery/camera{
 	c_tag = "Southeastern Hall 2"
+	},
+/obj/machinery/atm{
+	pixel_y = 28
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/central)
@@ -49134,6 +49200,12 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/starboard)
+"vjG" = (
+/obj/machinery/atm{
+	pixel_y = 28
+	},
+/turf/open/floor/plasteel,
+/area/hallway/primary/aft)
 "vjQ" = (
 /obj/structure/closet/secure_closet/exile,
 /obj/machinery/light{
@@ -54473,6 +54545,9 @@
 /obj/machinery/camera{
 	c_tag = "Medbay South";
 	network = list("ss13","medbay")
+	},
+/obj/machinery/atm{
+	pixel_y = 28
 	},
 /turf/open/floor/plasteel/white,
 /area/medical/medbay/central)
@@ -87217,7 +87292,7 @@ aXh
 rqE
 ifT
 rqE
-fPp
+jLI
 rqE
 wbE
 wbE
@@ -89066,7 +89141,7 @@ tNf
 bUL
 cgZ
 iIS
-cmU
+qHM
 oiq
 ckX
 clV
@@ -91850,7 +91925,7 @@ avT
 avT
 avT
 bok
-rqE
+jTf
 rqE
 bok
 vAs
@@ -94453,7 +94528,7 @@ wlV
 wlV
 doP
 doP
-kaF
+vjG
 kTT
 tNf
 xTw
@@ -101285,7 +101360,7 @@ lGc
 wcS
 wHQ
 cKk
-tpf
+dhg
 fPD
 fPD
 fPD
@@ -101652,7 +101727,7 @@ adH
 lFc
 ycZ
 whR
-teB
+mDG
 kef
 dNf
 dNf
@@ -107048,7 +107123,7 @@ wcK
 wcK
 wcK
 wcK
-nVs
+cIu
 laC
 oGu
 nsF
