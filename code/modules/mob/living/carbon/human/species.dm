@@ -2436,7 +2436,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			burn_damage = max(log(2-firemodifier,(H.bodytemperature-BODYTEMP_NORMAL))-5,0) // this can go below 5 at log 2.5
 		burn_damage = burn_damage * heatmod * H.physiology.heat_mod
 		if (H.stat < UNCONSCIOUS && (prob(burn_damage) * 5) / 4) //40% for level 3 damage on humans
-			H.emote("scream")
+			H.emote("agonyscream")
 		var/obj/item/bodypart/BP
 		if(length(H.bodyparts) && prob(SPECIFY_BODYPART_BURN_PROB))
 			BP = pick(H.bodyparts)
@@ -2594,7 +2594,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 
 ////////////
-//Stun//
+////Stun////
 ////////////
 
 /datum/species/proc/spec_stun(mob/living/carbon/human/H,amount)
