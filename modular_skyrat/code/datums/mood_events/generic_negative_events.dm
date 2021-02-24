@@ -45,7 +45,7 @@
 	timeout = 10 MINUTES
 
 /datum/mood_event/saw_dead/lesser
-	mood_change = -4
+	mood_change = -3
 	timeout = 5 MINUTES
 
 //Died
