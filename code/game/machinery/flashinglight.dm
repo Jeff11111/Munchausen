@@ -21,7 +21,7 @@
 
 /obj/machinery/flashinglight/Initialize()
 	. = ..()
-	AddComponent(/datum/component/overlay_lighting, strobe_color, strobe_power, strobe_power, FALSE)
+	AddComponent(/datum/component/overlay_lighting, strobe_color, strobe_range, strobe_power, FALSE)
 
 /obj/machinery/flashinglight/attackby(obj/item/I, mob/living/user, params) //delete this later on
 	. = ..()
