@@ -538,7 +538,7 @@
 
 //empties the bodypart from its organs and other things inside it
 /obj/item/bodypart/proc/drop_organs(mob/user, violent_removal)
-	var/turf/T = get_turf(src) || get_turf(src.loc)
+	var/turf/T = get_turf(src)
 	if(!is_robotic_limb())
 		playsound(T, 'sound/misc/splort.ogg', 50, 1, -1)
 	if(current_gauze)

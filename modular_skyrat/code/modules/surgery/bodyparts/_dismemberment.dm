@@ -154,7 +154,6 @@
 	limb_integrity = max_integrity
 	
 	if(is_pseudopart)
-		drop_organs(C) //Pseudoparts shouldn't have organs, but just in case
 		qdel(src)
 		return
 
