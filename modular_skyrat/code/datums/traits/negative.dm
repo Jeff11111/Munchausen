@@ -444,7 +444,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	gain_text = "<span class='userlove'>You are feeling extra wild.</span>"
 	lose_text = "<span class='purple'>You don't feel that burning sensation anymore.</span>"
 	var/ineedsex = 0 //0-100
-	var/needsex_increase = 0.15 //how much we increase our need for sex per on_process
+	var/needsex_increase = 0.1 //how much we increase our need for sex per on_process
 
 /datum/quirk/libido/special_requirement_check(mob/living/carbon/human/imbecile)
 	. = ..()
@@ -466,6 +466,9 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	if(ineedsex == 10)
 		to_chat(quirk_holder, "<span class='userlove'>I can't stop thinking about hot single ladies in my area...</span>")
 	else if(ineedsex == 25)
+		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "orgasm", /datum/mood_event/blueballs)
+		to_chat(quirk_holder, "<span class='userlove'>Hot catgirls... MMmm...</span>")
+	else if(ineedsex == 35)
 		if(quirk_holder.has_penis())
 			to_chat(quirk_holder, "<span class='userlove'>My cock is THROBBING.</span>")
 		else if(quirk_holder.has_vagina())
@@ -475,12 +478,14 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	else if(ineedsex == 50)
 		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "orgasm", /datum/mood_event/blueballs)
 		to_chat(quirk_holder, "<span class='userlove'>I NEED TO CUM, JIZZ AND SPUNK.</span>")
+	else if(ineedsex == 65)
+		to_chat(quirk_holder, "<span class='userlove'>JUST A CRUMB OF PUSSY.</span>")
 	else if(ineedsex == 75)
 		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "orgasm", /datum/mood_event/blueballs/bad)
 		to_chat(quirk_holder, "<span class='userlove'>EARTHLY PLEASURES CONSUME ME.</span>")
 	else if(ineedsex == 99)
 		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "orgasm", /datum/mood_event/blueballs/cbt)
-		to_chat(quirk_holder, "<span class='userlove'>I AM GOING TO FUCKING RAPE A CREWMEMBER.</span>")
+		to_chat(quirk_holder, "<span class='userlove'>I AM GOING TO FUCKING RAPE SOMEONE.</span>")
 
 /datum/quirk/libido/proc/cummed(atom/target, obj/item/organ/genital/G, spill = TRUE)
 	//We can only sate our lust by actually having sex...
