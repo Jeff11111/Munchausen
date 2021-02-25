@@ -480,7 +480,6 @@ SUBSYSTEM_DEF(job)
 	for(var/datum/data/record/record in GLOB.data_core.general)
 		if(H.real_name == record.fields["name"])
 			H.fraggotify(H.real_name)
-			H.client?.prefs?.adjust_bobux(-10)
 			break
 	return H
 /*
