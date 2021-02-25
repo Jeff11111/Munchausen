@@ -726,7 +726,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			bodyparts_to_add -= "snout"
 
 	if(mutant_bodyparts["frills"])
-		if(!H.dna.features["frills"] || H.dna.features["frills"] == "None" || !istype(HD) || (HD.is_organic_limb() && !HD.render_like_organic)) //skyrat change
+		if(!H.dna.features["frills"] || H.dna.features["frills"] == "None" || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic)) //skyrat change
 			bodyparts_to_add -= "frills"
 
 	if(mutant_bodyparts["horns"])
