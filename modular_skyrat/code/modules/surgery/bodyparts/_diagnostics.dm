@@ -61,9 +61,6 @@
 		var/this_injury_desc = IN.desc
 		if((IN.can_autoheal()) && (IN.current_stage >= length(IN.stages)) && (IN.damage < 5))
 			this_injury_desc = "<span style='color: [COLOR_PALE_RED_GRAY]'>[this_injury_desc]</span>"
-		if(IN.damage_type == WOUND_BURN && IN.is_salved())
-			this_injury_desc = "<span class='nicegreen'>salved</span> [this_injury_desc]"
-
 		if(IN.is_bleeding())
 			if(IN.wound_damage() > IN.bleed_threshold)
 				this_injury_desc = "<b><i>badly bleeding</i></b> [this_injury_desc]"
@@ -71,7 +68,9 @@
 				this_injury_desc = "<b>bleeding</b> [this_injury_desc]"
 		if(IN.is_bandaged())
 			this_injury_desc = "<span style='color: [COLOR_ASSEMBLY_WHITE]'>bandaged</span> [this_injury_desc]"
-
+		if(IN.is_salved())
+			this_injury_desc = "<span class='nicegreen'>salved</span> [this_injury_desc]"
+		
 		if(IN.germ_level >= INFECTION_LEVEL_TWO)
 			this_injury_desc = "<span class='deadsay'><b>badly infected</b></span> [this_injury_desc]"
 		else if(IN.germ_level >= INFECTION_LEVEL_ONE)
