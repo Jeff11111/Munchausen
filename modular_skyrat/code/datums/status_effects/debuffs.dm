@@ -275,9 +275,9 @@
 					var/obj/screen/plane_master/servant = serve
 					var/matrix/old_transform = servant.transform
 					var/matrix/new_transform = servant.transform.Translate(offsets_x[i], offsets_y[i])
-					animate(servant, servant.transform = new_transform, 2 SECONDS)
+					animate(servant, transform = new_transform, 2 SECONDS)
 					sleep(2 SECONDS)
-					animate(servant, servant.transform = old_transform, 2 SECONDS)
+					animate(servant, transform = old_transform, 2 SECONDS)
 
 /datum/status_effect/incapacitating/rapedhead/on_remove()
 	if(length(screens) && length(new_screens))
