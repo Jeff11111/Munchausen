@@ -444,7 +444,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	gain_text = "<span class='userlove'>You are feeling extra wild.</span>"
 	lose_text = "<span class='purple'>You don't feel that burning sensation anymore.</span>"
 	var/ineedsex = 0 //0-100
-	var/needsex_increase = 0.1 //how much we increase our need for sex per on_process
+	var/needsex_increase = 0.15 //how much we increase our need for sex per on_process
 
 /datum/quirk/libido/special_requirement_check(mob/living/carbon/human/imbecile)
 	. = ..()
@@ -484,7 +484,6 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 
 /datum/quirk/libido/proc/cummed(atom/target, obj/item/organ/genital/G, spill = TRUE)
 	//We can only sate our lust by actually having sex...
-	//However, masturbating does still give you a mood boost.
 	if(target)
 		ineedsex = 0
 		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "orgasm", /datum/mood_event/orgasm/nympho)
