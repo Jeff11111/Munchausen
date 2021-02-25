@@ -212,13 +212,13 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 
 //Blabla i'm crazy now
 /datum/quirk/insanity
-	name = "Reality Dissociation Syndrome"
+	name = "Schizophrenia"
 	desc = "I suffer from a severe disorder that causes very vivid hallucinations. Mindbreaker toxin can suppress its effects, and i am immune to mindbreaker's hallucinogenic properties."
 	value = -2
 	//no mob trait because it's handled uniquely
 	gain_text = "<span class='userdanger'>...</span>"
 	lose_text = "<span class='notice'>You feel in tune with the world again.</span>"
-	medical_record_text = "Patient suffers from acute Reality Dissociation Syndrome and experiences vivid hallucinations."
+	medical_record_text = "Patient suffers from acute psychotic episodes and experiences vivid hallucinations."
 
 /datum/quirk/insanity/on_process()
 	if(quirk_holder.reagents.has_reagent(/datum/reagent/toxin/mindbreaker))
