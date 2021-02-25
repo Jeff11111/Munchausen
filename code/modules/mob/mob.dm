@@ -548,7 +548,7 @@ mob/visible_message(message, self_message, blind_message, vision_distance = DEFA
 	if(send_signal)
 		SEND_SIGNAL(src, COMSIG_MOB_KEY_CHANGE, new_mob, src)
 	if(isobserver(new_mob))
-		new_mob.overlay_fullscreen("wraith_filter", /obj/screen/fullscreen, pick(1, 2))
+		new_mob.overlay_fullscreen("wraith_filter", /obj/screen/fullscreen/wraith, pick(1, 2))
 	return TRUE
 
 /mob/verb/cancel_camera()

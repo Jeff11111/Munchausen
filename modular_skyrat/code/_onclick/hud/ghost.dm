@@ -23,3 +23,7 @@
 	using.screen_loc = ui_ghost_eventsignup
 	using.hud = src
 	static_inventory += using
+
+/obj/screen/fullscreen/wraith
+	icon = 'modular_skyrat/icons/mob/screen/screen_full.dmi'
+	icon_state = "ghost"
