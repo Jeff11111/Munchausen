@@ -130,6 +130,8 @@
 		if((P.damage_type == BRUTE) && iscarbon(src))
 			// Always stumble when shot
 			Stumble(P.damage)
+			if(BP?.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE))
+				Rapehead(P.damage + 1 SECONDS)
 			// Do a diceroll to decide whether we get paralyzed/knocked down
 			if(mind)
 				switch(mind.diceroll(STAT_DATUM(end), mod = -min(15, P.damage*0.2)))

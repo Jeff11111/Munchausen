@@ -246,14 +246,13 @@
 		new_screens = list()
 		screens = list(owner.hud_used.plane_masters["[FLOOR_PLANE]"], owner.hud_used.plane_masters["[ABOVE_FLOOR_PLANE]"],
 					owner.hud_used.plane_masters["[OPENSPACE_PLANE]"], owner.hud_used.plane_masters["[GAME_PLANE]"],
-					owner.hud_used.plane_masters["[MOB_PLANE]"],
-					owner.hud_used.plane_masters["[FIELD_OF_VISION_PLANE]"], owner.hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"],
+					owner.hud_used.plane_masters["[MOB_PLANE]"], owner.hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"],
 					owner.hud_used.plane_masters["[WALL_PLANE]"], owner.hud_used.plane_masters["[ABOVE_WALL_PLANE]"])
 		for(var/obj/screen/plane_master/master in screens)
 			new_screens["[master.plane]"] = list()
 			for(var/i in 1 to min(intensity, length(alphas)))
 				var/obj/screen/plane_master/servant = new /obj/screen/plane_master()
-				servant.alpha = min(150, round(150/intensity) * ((intensity - i) + 1))
+				servant.alpha = alphas[i]
 				servant.render_source = master.render_target
 				servant.plane = CAMERA_STATIC_PLANE
 				new_screens["[master.plane]"] += servant
@@ -265,10 +264,10 @@
 	if(length(screens))
 		var/list/offsets_x = list()
 		for(var/i in 1 to min(intensity, length(alphas)))
-			offsets_x += rand(-64, 64)
+			offsets_x += rand(-16, 16)
 		var/list/offsets_y = list()
 		for(var/i in 1 to min(intensity, length(alphas)))
-			offsets_y += rand(-64, 64)
+			offsets_y += rand(-16, 16)
 		for(var/obj/screen/plane_master/master in screens)
 			var/list/servants = new_screens["[master.plane]"]
 			var/i = 0

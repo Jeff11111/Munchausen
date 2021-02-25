@@ -460,7 +460,8 @@
 	var/effect_amount = intensity - ear_safety
 	if(effect_amount > 0)
 		if(stun_pwr)
-			DefaultCombatKnockdown(stun_pwr*effect_amount)
+			adjustStaminaLoss(-round(stun_pwr*effect_amount/10))
+			Stumble(stun_pwr*effect_amount*2)
 
 		if(istype(ears) && (deafen_pwr || damage_pwr))
 			var/ear_damage = damage_pwr * effect_amount

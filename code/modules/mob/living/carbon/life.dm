@@ -398,9 +398,11 @@
 			//Moving around with broken bones won't do you any good
 			if(stat < UNCONSCIOUS && BP.disabled && prob(20) && can_feel_pain() && BP.is_broken() && BP.get_organs() && chem_effects[CE_PAINKILLER] < 50)
 				custom_pain("Pain jolts through your broken [BP.encased ? BP.encased : BP.name], staggering you!", 40, affecting = BP)
-				Stumble(6 SECONDS)
+				Stumble(4 SECONDS)
+				Rapehead(8 SECONDS)
 				Stun(3 SECONDS)
 				BP.damage_organs(brute = rand(3, 5), wounding_type = WOUND_PIERCE)
+				sound_hint(src, src)
 
 			//Moving makes open wounds get infected much faster
 			for(var/datum/wound/W in BP.wounds)
