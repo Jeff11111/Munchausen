@@ -95,15 +95,15 @@
 	msg += "<span class='notice'><b>My thoughts</b></span>\n"
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		msg += "<span class='info'>I remember my name, it is [H.real_name].</span>\n"
-		msg += "<span class='info'>I am, chronologically, [H.age] years old.</span>\n"
+		msg += "<span class='info'>I remember my name, it is <b>[H.real_name]</b>.</span>\n"
+		msg += "<span class='info'>I am, chronologically, <b>[H.age]</b> years old.</span>\n"
 		if(H.mind.assigned_role)
-			msg += "<span class='info'>I'm \a [H.mind.assigned_role] by trade.</span>\n"
-			if(H.mind.special_role && !H.mind.objectives_hidden)
-				msg += "<span class='info'>I am also \a <span class='red'>[H.mind.special_role]</span>.</span>\n"
-		else if(H.mind.special_role && !H.mind.objectives_hidden)
-			msg += "<span class='info'>I am \a <span class='red'>[H.mind.special_role]</span>.</span>\n"
-		msg += "<span class='info'>My blood type is [H.dna.blood_type].</span>\n"
+			msg += "<span class='info'>I'm \a <b>[H.mind.assigned_role]</b> by trade.</span>\n"
+		for(var/datum/antagonist/antag in H.mind.antag_datums)
+			msg += "<span class='info'>I am also \a <span class='red'>[lowertext(antag.name)]</span>.</span>\n"
+		msg += "<span class='info'>My blood type is <span class='pink'>[H.dna.blood_type]</span>.</span>\n"
+		msg += "<span class='info'>My gender is <i>[lowertext(H.gender)]</i>.</span>\n"
+		msg += "<span class='info'>My species is <i>[lowertext(H.dna.species.name)]</i>.</span>\n"
 		if(length(H.roundstart_quirks))
 			msg += "<span class='info'>I am special: [H.get_trait_string(FALSE, FALSE)].</span>\n"
 	msg += "<span class='notice'><b>My current mood: </b></span>\n" //Short term

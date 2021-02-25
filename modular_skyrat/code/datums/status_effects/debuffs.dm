@@ -285,7 +285,8 @@
 	if(length(screens) && length(new_screens))
 		for(var/obj/screen/plane_master/master in screens)
 			owner?.client?.screen -= new_screens["[master.plane]"]
-			QDEL_LIST(new_screens["[master.plane]"])
+			for(var/bingus in new_screens["[master.plane]"])
+				qdel(bingus)
 	screens = null
 	new_screens = null
 	. = ..()

@@ -771,8 +771,9 @@
 			"<span class='notice'><b>I check myself.</b></span>")
 	
 	to_chat(src, "<span class='info'>*---------*</span>")
+	to_chat(src, "<span class='info'>Let's see how i am doing.</span>")
 	if(stat < DEAD)
-		to_chat(src, "<span class='info'>I am still alive.</span>")
+		to_chat(src, "<span class='info'>I am still alive[stat < UNCONSCIOUS ? "" : ", but i am unconscious"].</span>")
 	else
 		to_chat(src, "<span class='deadsay'>I am dead.</span>")
 	for(var/X in ALL_BODYPARTS)
@@ -825,11 +826,11 @@
 			if(paindamage >= (limb_max_pain*0.75))
 				status += "<span class='userdanger'><b>[uppertext(LB.heavy_pain_msg)]</b></span>"
 			else if(paindamage >= (limb_max_pain*0.5))
-				status += "<span class='userdanger'>[uppertext(LB.heavy_pain_msg)]</span>"
-			else if(burndamage >= (limb_max_pain*0.25))
-				status += "<span class='danger'>[uppertext(LB.medium_pain_msg)]</span>"
-			else if(burndamage > 0)
-				status += "<span class='warning'>[uppertext(LB.light_pain_msg)]</span>"
+				status += "<span class='danger'><b>[uppertext(LB.heavy_pain_msg)]</b></span>"
+			else if(paindamage >= (limb_max_pain*0.25))
+				status += "<span class='danger'>[lowertext(LB.medium_pain_msg)]</span>"
+			else if(paindamage > 0)
+				status += "<span style='color: [COLOR_RED_GRAY]'><span class='small'>[lowertext(LB.light_pain_msg)]</span></span>"
 
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF) && length(LB.wounds))
 			for(var/thing in LB.wounds)
