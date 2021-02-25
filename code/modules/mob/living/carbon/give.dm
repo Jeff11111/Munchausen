@@ -7,7 +7,6 @@
 
 /mob/living/proc/give_item(mob/living/carbon/user)
 
-
 /mob/living/carbon/give_item(mob/living/carbon/user)
 	if(!istype(user))
 		return
