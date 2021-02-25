@@ -170,9 +170,11 @@
 						if(custom_tone)
 							H.skin_tone = custom_tone
 							H.dna.skin_tone_override = custom_tone
+							H.update_genitals()
 					else
 						H.skin_tone = new_s_tone
 						H.dna.update_ui_block(DNA_SKIN_TONE_BLOCK)
+						H.update_genitals()
 
 			if(MUTCOLORS in H.dna.species.species_traits)
 				var/new_mutantcolor = input(user, "Choose your skin color:", "Race change","#"+H.dna.features["mcolor"]) as color|null

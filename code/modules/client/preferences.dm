@@ -881,14 +881,12 @@ GLOBAL_LIST_INIT(food, list(
 			if(NOGENITALS in pref_species.species_traits)
 				dat += "<b>Your species ([pref_species.name]) does not support genitals!</b><br>"
 			else
-				if(pref_species.use_skintones)
-					dat += "<b>Species uses skintoned genitals.</b>"
 				dat += "<h3>Penis</h3>"
 				dat += "<a style='display:block;width:50px' href='?_src_=prefs;preference=has_cock'>[(features["has_cock"] && pref_species.has_weiner) ? "Yes" : "No"]</a>"
 				if(features["has_cock"] && pref_species.has_weiner)
 					if(pref_species.use_skintones || features["genitals_use_skintone"])
 						dat += "<b>Penis Color:</b></a><BR>"
-						dat += "<span style='border: 1px solid #161616; background-color: [SKINTONE2HEX(skin_tone)];'>&nbsp;&nbsp;&nbsp;</span>(Skin tone overriding)</a><br>"
+						dat += "<span style='border: 1px solid #161616; background-color: [SKINTONE2HEX(skin_tone)];'>&nbsp;&nbsp;&nbsp;</span> (Species uses skin tones</a><br>"
 					else
 						dat += "<b>Penis Color:</b></a><BR>"
 						dat += "<span style='border: 1px solid #161616; background-color: [features["cock_color"]];'>&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=cock_color;task=input'>Change</a><br>"

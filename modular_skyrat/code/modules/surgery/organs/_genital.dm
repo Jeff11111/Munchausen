@@ -268,8 +268,8 @@
 			if(do_center)
 				genital_overlay = center_image(genital_overlay, dim_x, dim_y)
 
-			if(dna.species.use_skintones && dna.features["genitals_use_skintone"])
-				genital_overlay.color = SKINTONE2HEX(skin_tone)
+			if(dna.species.use_skintones)
+				genital_overlay.color = dna.skin_tone_override || SKINTONE2HEX(skin_tone)
 			else
 				switch(S.color_src)
 					if("cock_color")
