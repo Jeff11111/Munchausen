@@ -166,12 +166,14 @@
 		var/mob/living/C = owner
 		if(C.mind)
 			switch(C.mind.diceroll(STAT_DATUM(end)))
-				if(DICE_FAILURE)
-					C.DefaultCombatKnockdown(250)
 				if(DICE_CRIT_FAILURE)
-					C.DefaultCombatKnockdown(500)
+					C.DefaultCombatKnockdown(50)
+				if(DICE_FAILURE)
+					C.DefaultCombatKnockdown(25)
+				if(DICE_SUCCESS)
+					C.DefaultCombatKnockdown(10)
 		else
-			C.DefaultCombatKnockdown(200)
+			C.DefaultCombatKnockdown(20)
 
 /mob/living/proc/IsStumble() //If we're stumbling
 	return has_status_effect(STATUS_EFFECT_STUMBLE)
@@ -226,4 +228,117 @@
 		I.duration += amount
 	else if(amount > 0)
 		I = apply_status_effect(STATUS_EFFECT_STUMBLE, amount, updating)
+	return I
+
+//head bad
+/datum/status_effect/incapacitating/rapedhead
+	id = "raped_head"
+	tick_interval = 4 SECONDS
+	var/intensity = 3
+	var/list/screens = null
+	var/list/new_screens = null
+	blocks_sprint = TRUE
+
+/datum/status_effect/incapacitating/rapedhead/on_apply()
+	. = ..()
+	if(owner?.hud_used)
+		new_screens = list()
+		screens = list(owner.hud_used.plane_masters["[FLOOR_PLANE]"], owner.hud_used.plane_masters["[GAME_PLANE]"],
+						owner.hud_used.plane_masters["[MOB_PLANE]"], owner.hud_used.plane_masters["[LIGHTING_PLANE]"],
+						owner.hud_used.plane_masters["[WALL_PLANE]"], owner.hud_used.plane_masters["[ABOVE_WALL_PLANE]"])
+		for(var/obj/screen/plane_master/master in screens)
+			new_screens["[master.plane]"] = list()
+			for(var/i in 1 to intensity)
+				var/obj/screen/plane_master/servant = new /obj/screen/plane_master()
+				servant.alpha = min(150, round(150/intensity) * ((intensity - i) + 1))
+				servant.render_source = master.render_target
+				servant.plane = master.plane + 1
+				new_screens["[master.plane]"] += servant
+				owner.client?.screen += servant
+		tick()
+
+/datum/status_effect/incapacitating/rapedhead/tick()
+	. = ..()
+	if(length(screens))
+		var/list/offsets_x = list()
+		for(var/i in 1 to intensity)
+			offsets_x += rand(-64, 64)
+		var/list/offsets_y = list()
+		for(var/i in 1 to intensity)
+			offsets_y += rand(-64, 64)
+		for(var/obj/screen/plane_master/master in screens)
+			var/list/servants = new_screens["[master.plane]"]
+			var/i = 0
+			spawn(0)
+				for(var/serve in servants)
+					i++
+					var/obj/screen/plane_master/servant = serve
+					var/matrix/old_transform = servant.transform
+					var/matrix/new_transform = servant.transform.Translate(offsets_x[i], offsets_y[i])
+					animate(servant, servant.transform = new_transform, 2 SECONDS)
+					sleep(2 SECONDS)
+					animate(servant, servant.transform = old_transform, 2 SECONDS)
+
+/datum/status_effect/incapacitating/rapedhead/on_remove()
+	if(length(screens) && length(new_screens))
+		for(var/obj/screen/plane_master/master in screens)
+			owner?.client?.screen -= new_screens["[master.plane]"]
+			QDEL_LIST(new_screens["[master.plane]"])
+	screens = null
+	new_screens = null
+	. = ..()
+
+/mob/living/proc/IsRapedhead() //If we're stumbling
+	return has_status_effect(STATUS_EFFECT_RAPEDHEAD)
+
+/mob/living/proc/AmountRapedhead() //How many deciseconds remain in our Dazed status effect
+	var/datum/status_effect/incapacitating/rapedhead/I = IsRapedhead()
+	if(I)
+		return I.duration - world.time
+	return 0
+
+/mob/living/proc/Rapehead(amount, updating = TRUE, ignore_canstun = FALSE) //Can't go below remaining duration
+	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_DAZE, amount, updating, ignore_canstun) & COMPONENT_NO_STUN)
+		return
+	if(!ignore_canstun && (!(status_flags & CANKNOCKDOWN) || HAS_TRAIT(src, TRAIT_STUNIMMUNE)))
+		return
+	if(absorb_stun(amount, ignore_canstun))
+		return
+	var/datum/status_effect/incapacitating/rapedhead/I = IsRapedhead()
+	if(I)
+		I.duration = max(world.time + amount, I.duration)
+	else if(amount > 0)
+		I = apply_status_effect(STATUS_EFFECT_RAPEDHEAD, amount, updating)
+	return I
+
+/mob/living/proc/SetRapedhead(amount, updating = TRUE, ignore_canstun = FALSE) //Sets remaining duration
+	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_DAZE, amount, updating, ignore_canstun) & COMPONENT_NO_STUN)
+		return
+	if(!ignore_canstun && (!(status_flags & CANKNOCKDOWN) || HAS_TRAIT(src, TRAIT_STUNIMMUNE)))
+		return
+	var/datum/status_effect/incapacitating/rapedhead/I = IsRapedhead()
+	if(amount <= 0)
+		if(I)
+			qdel(I)
+	else
+		if(absorb_stun(amount, ignore_canstun))
+			return
+		if(I)
+			I.duration = world.time + amount
+		else
+			I = apply_status_effect(STATUS_EFFECT_RAPEDHEAD, amount, updating)
+	return I
+
+/mob/living/proc/AdjustRapedhead(amount, updating = TRUE, ignore_canstun = FALSE) //Adds to remaining duration
+	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_DAZE, amount, updating, ignore_canstun) & COMPONENT_NO_STUN)
+		return
+	if(!ignore_canstun && (!(status_flags & CANKNOCKDOWN) || HAS_TRAIT(src, TRAIT_STUNIMMUNE)))
+		return
+	if(absorb_stun(amount, ignore_canstun))
+		return
+	var/datum/status_effect/incapacitating/rapedhead/I = IsRapedhead()
+	if(I)
+		I.duration += amount
+	else if(amount > 0)
+		I = apply_status_effect(STATUS_EFFECT_RAPEDHEAD, amount, updating)
 	return I

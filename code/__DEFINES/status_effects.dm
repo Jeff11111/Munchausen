@@ -57,6 +57,9 @@
 /// The affected is unable to use or pickup items, plus will fall down depending on stats
 #define STATUS_EFFECT_STUMBLE /datum/status_effect/incapacitating/dazed/stumble
 
+/// The affected has a crazy wacky shaky screen
+#define STATUS_EFFECT_RAPEDHEAD /datum/status_effect/incapacitating/rapedhead
+
 /// The affected is unconscious
 #define STATUS_EFFECT_UNCONSCIOUS /datum/status_effect/incapacitating/unconscious
 

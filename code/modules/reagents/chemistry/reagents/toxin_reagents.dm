@@ -786,8 +786,8 @@
 	if(M.hud_used)
 		if(current_cycle >= 5 && current_cycle % 3 == 0)
 			var/list/screens = list(M.hud_used.plane_masters["[FLOOR_PLANE]"], M.hud_used.plane_masters["[GAME_PLANE]"],
-									M.hud_used.plane_masters["[LIGHTING_PLANE]"], M.hud_used.plane_masters["[WALL_PLANE]"],
-									M.hud_used.plane_masters["[ABOVE_WALL_PLANE]"])	
+									M.hud_used.plane_masters["[MOB_PLANE]"], M.hud_used.plane_masters["[LIGHTING_PLANE]"],
+									M.hud_used.plane_masters["[WALL_PLANE]"], M.hud_used.plane_masters["[ABOVE_WALL_PLANE]"])	
 			var/matrix/skew = matrix()
 			var/intensity = 8
 			skew.set_skew(rand(-intensity,intensity), rand(-intensity,intensity))
