@@ -62,7 +62,6 @@
 #define ABOVE_NORMAL_TURF_LAYER 2.08
 #define GAS_PIPE_HIDDEN_LAYER 2.35
 #define WIRE_LAYER 2.4
-//skyrat edit
 #define WIRE_TERMINAL_LAYER 2.42
 #define GAS_SCRUBBER_LAYER 2.43
 #define GAS_PIPE_VISIBLE_LAYER 2.4
@@ -72,7 +71,6 @@
 #define POD_DOOR_LAYER 2.48
 #define LATTICE_LAYER 2.5
 #define WINDOW_LAYER 2.6
-//
 
 #define LOW_OBJ_LAYER 2.5
 #define LOW_SIGIL_LAYER 2.52
