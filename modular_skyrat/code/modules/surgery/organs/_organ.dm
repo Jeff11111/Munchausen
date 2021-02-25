@@ -103,7 +103,7 @@
 /obj/item/organ/proc/transfer_to_limb(obj/item/bodypart/LB, mob/living/carbon/C)
 	if(!istype(LB))
 		return FALSE
-	Remove()
+	Remove(FALSE)
 	forceMove(LB)
 
 /obj/item/organ/proc/get_pain()

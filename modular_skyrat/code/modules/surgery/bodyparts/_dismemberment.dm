@@ -132,8 +132,12 @@
 	
 	update_icon_dropped()
 	if(destroyed)
-		for(var/obj/item/organ/O in src)
-			qdel(O)
+		for(var/item in src)
+			if(istype(item, /obj/item/organ) || istype(item, /obj/item/bodypart))
+				qdel(item)
+			else if(isitem(item))
+				var/obj/item/I = item
+				I.forceMove(get_turf(src))
 	
 	C.update_health_hud() //update the healthdoll
 	C.update_body()

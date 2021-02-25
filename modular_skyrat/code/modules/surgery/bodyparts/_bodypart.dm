@@ -472,6 +472,8 @@
 		owner = null
 	if(cavity_item)
 		QDEL_NULL(cavity_item)
+	for(var/atom/A in src)
+		qdel(A)
 	for(var/datum/wound/W in wounds)
 		qdel(W)
 	for(var/datum/injury/IN in injuries)
