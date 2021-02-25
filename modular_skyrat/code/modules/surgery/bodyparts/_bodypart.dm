@@ -559,18 +559,18 @@
 				brain.moveToNullspace()
 			brain = null
 			update_icon_dropped()
-		else
-			if(istype(I, /obj/item/reagent_containers/pill))
-				for(var/datum/action/item_action/hands_free/activate_pill/AP in I.actions)
-					qdel(AP)
-			if(istype(T))
-				I.forceMove(T)
-			else
-				I.moveToNullspace()
-		if(istype(I, /obj/item/bodypart))
+			continue
+		if(istype(I, /obj/item/reagent_containers/pill))
+			for(var/datum/action/item_action/hands_free/activate_pill/AP in I.actions)
+				qdel(AP)
+		else if(istype(I, /obj/item/bodypart))
 			var/obj/item/bodypart/BP = I
 			BP.update_limb(TRUE)
 			BP.update_icon_dropped()
+		if(istype(T))
+			I.forceMove(T)
+		else
+			I.moveToNullspace()
 	if(cavity_item)
 		cavity_item = null
 	update_limb(!owner)
