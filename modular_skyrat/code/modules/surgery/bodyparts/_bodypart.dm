@@ -705,7 +705,7 @@
 			if(owner.IsSleeping()) // sleepy niggas heal quadruple
 				heal_amt *= 4
 		heal_amt = CEILING(heal_amt, 0.1)
-		if(IN.can_autoheal())
+		if(heal_amt)
 			IN.heal_damage(heal_amt)
 
 		// Bleeding
