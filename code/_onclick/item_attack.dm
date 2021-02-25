@@ -447,7 +447,7 @@
 		if(knockback_tiles > 1)
 			Stumble(knockback_tiles * 10)
 			if(affecting?.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE))
-				Rapehead(knockback_tiles + * 15)
+				Rapehead(knockback_tiles * 15)
 			sound_hint(src, user)
 		var/turf/target_turf = get_ranged_target_turf(src, get_dir(user, src), knockback_tiles)
 		throw_at(target_turf, knockback_tiles, 1, user, spin = FALSE)
