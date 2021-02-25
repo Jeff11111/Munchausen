@@ -66,6 +66,7 @@
 		W.remove_wound(TRUE)
 	
 	owner = null
+	var/turf/turf = get_turf(C)
 	if(!ignore_children)
 		for(var/BP in children_zones)
 			var/obj/item/bodypart/thing = C.get_bodypart(BP)
@@ -74,10 +75,12 @@
 				thing.forceMove(src)
 				thing.on_transfer_to_limb(src)
 	C.updatehealth()
-
 	for(var/obj/item/I in embedded_objects)
 		embedded_objects -= I
-		I.forceMove(get_turf(src))
+		if(istype(turf))
+			I.forceMove(turf)
+		else
+			I.moveToNullspace()
 		I.unembedded()
 	if(!C.has_embedded_objects())
 		C.clear_alert("embeddedobject")
@@ -131,13 +134,17 @@
 		ouchie.apply_injury(stump.max_damage / 2, stump)
 	
 	update_icon_dropped()
+	var/turf/T = get_turf(src)
 	if(destroyed)
 		for(var/item in src)
 			if(istype(item, /obj/item/organ) || istype(item, /obj/item/bodypart))
 				qdel(item)
 			else if(isitem(item))
 				var/obj/item/I = item
-				I.forceMove(get_turf(src))
+				if(istype(T))
+					I.forceMove(T)
+				else
+					I.moveToNullspace()
 	
 	C.update_health_hud() //update the healthdoll
 	C.update_body()

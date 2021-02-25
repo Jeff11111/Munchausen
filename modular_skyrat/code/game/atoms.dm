@@ -58,6 +58,7 @@
 					idiot.take_bodypart_damage((MAX_STAT - GET_STAT_LEVEL(idiot, end)) * 2)
 			else
 				idiot.take_bodypart_damage(rand(3, 5))
+		idiot.Rapehead(6 SECONDS)
 	else
 		idiot.DefaultCombatKnockdown(30)
 		idiot.take_bodypart_damage(rand(3, 5))

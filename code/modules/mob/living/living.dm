@@ -233,8 +233,11 @@
 									target_message = "<span class='userdanger'>You are violently shoved down by <b>[assailant]</b>!</span>")
 				if(prob(str_diff * 10))
 					victim.DefaultCombatKnockdown(max(1, str_diff) SECONDS)
+					sound_hint(assailant, victim)
 				else
 					victim.Stumble(max(1, str_diff) SECONDS)
+					sound_hint(assailant, victim)
+					sound_hint(victim, assailant)
 			var/victimdir = victim.dir
 			victim.Move(get_step(victim, get_dir(assailant, victim)))
 			victim.setDir(victimdir)
