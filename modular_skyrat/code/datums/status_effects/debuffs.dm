@@ -234,6 +234,7 @@
 /datum/status_effect/incapacitating/rapedhead
 	id = "raped_head"
 	tick_interval = 4 SECONDS
+	var/static/list/alphas = list(128, 65, 64, 32, 16)
 	var/intensity = 3
 	var/list/screens = null
 	var/list/new_screens = null
@@ -243,16 +244,18 @@
 	. = ..()
 	if(owner?.hud_used)
 		new_screens = list()
-		screens = list(owner.hud_used.plane_masters["[FLOOR_PLANE]"], owner.hud_used.plane_masters["[GAME_PLANE]"],
-						owner.hud_used.plane_masters["[MOB_PLANE]"], owner.hud_used.plane_masters["[LIGHTING_PLANE]"],
-						owner.hud_used.plane_masters["[WALL_PLANE]"], owner.hud_used.plane_masters["[ABOVE_WALL_PLANE]"])
+		screens = list(owner.hud_used.plane_masters["[FLOOR_PLANE]"], owner.hud_used.plane_masters["[ABOVE_FLOOR_PLANE]"],
+					owner.hud_used.plane_masters["[OPENSPACE_PLANE]"], owner.hud_used.plane_masters["[GAME_PLANE]"],
+					owner.hud_used.plane_masters["[MOB_PLANE]"],
+					owner.hud_used.plane_masters["[FIELD_OF_VISION_PLANE]"], owner.hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"],
+					owner.hud_used.plane_masters["[WALL_PLANE]"], owner.hud_used.plane_masters["[ABOVE_WALL_PLANE]"])
 		for(var/obj/screen/plane_master/master in screens)
 			new_screens["[master.plane]"] = list()
-			for(var/i in 1 to intensity)
+			for(var/i in 1 to min(intensity, length(alphas)))
 				var/obj/screen/plane_master/servant = new /obj/screen/plane_master()
 				servant.alpha = min(150, round(150/intensity) * ((intensity - i) + 1))
 				servant.render_source = master.render_target
-				servant.plane = master.plane + 1
+				servant.plane = master.plane + i
 				new_screens["[master.plane]"] += servant
 				owner.client?.screen += servant
 		tick()
@@ -261,10 +264,10 @@
 	. = ..()
 	if(length(screens))
 		var/list/offsets_x = list()
-		for(var/i in 1 to intensity)
+		for(var/i in 1 to min(intensity, length(alphas)))
 			offsets_x += rand(-64, 64)
 		var/list/offsets_y = list()
-		for(var/i in 1 to intensity)
+		for(var/i in 1 to min(intensity, length(alphas)))
 			offsets_y += rand(-64, 64)
 		for(var/obj/screen/plane_master/master in screens)
 			var/list/servants = new_screens["[master.plane]"]

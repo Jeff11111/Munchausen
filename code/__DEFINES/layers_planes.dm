@@ -43,6 +43,7 @@
 #define OPENSPACE_LAYER 17 //Openspace layer over all
 
 #define CHAT_PLANE 0 //We don't want heard messages to be hidden by FoV.
+#define CHAT_PLANE_RENDER_TARGET "CHAT_PLANE"
 #define CHAT_LAYER 20.35  //Legacy, it doesn't matter that much because we are displayed above the game plane anyway.
 
 #define BLACKNESS_PLANE 1 //To keep from conflicts with SEE_BLACKNESS internals

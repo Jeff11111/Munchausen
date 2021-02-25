@@ -47,12 +47,14 @@
 /obj/screen/plane_master/floor
 	name = "floor plane master"
 	plane = FLOOR_PLANE
+	render_target = FLOOR_PLANE_RENDER_TARGET
 	appearance_flags = PLANE_MASTER
 	blend_mode = BLEND_OVERLAY
 
 /obj/screen/plane_master/wall
 	name = "wall plane master"
 	plane = WALL_PLANE
+	render_target = WALL_PLANE_RENDER_TARGET
 	appearance_flags = PLANE_MASTER
 
 /obj/screen/plane_master/wall/backdrop(mob/mymob)
@@ -67,6 +69,7 @@
 /obj/screen/plane_master/above_wall
 	name = "above wall plane master"
 	plane = ABOVE_WALL_PLANE
+	render_target = ABOVE_WALL_PLANE_RENDER_TARGET
 	appearance_flags = PLANE_MASTER
 
 /obj/screen/plane_master/above_wall/backdrop(mob/mymob)
@@ -79,6 +82,7 @@
 /obj/screen/plane_master/game_world
 	name = "game world plane master"
 	plane = GAME_PLANE
+	render_target = GAME_PLANE_RENDER_TARGET
 	appearance_flags = PLANE_MASTER //should use client color
 	blend_mode = BLEND_OVERLAY
 
@@ -92,6 +96,7 @@
 /obj/screen/plane_master/mobs
 	name = "mobs plane master"
 	plane = MOB_PLANE
+	render_target = MOB_PLANE_RENDER_TARGET
 	appearance_flags = PLANE_MASTER //should use client color
 	blend_mode = BLEND_OVERLAY
 
@@ -111,6 +116,7 @@
 /obj/screen/plane_master/chat_messages
 	name = "chat messages plane master"
 	plane = CHAT_PLANE
+	render_target = CHAT_PLANE_RENDER_TARGET
 	appearance_flags = PLANE_MASTER
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
@@ -136,6 +142,7 @@
 /obj/screen/plane_master/field_of_vision_visual
 	name = "field of vision visual plane master"
 	plane = FIELD_OF_VISION_VISUAL_PLANE
+	render_target = FIELD_OF_VISION_VISUAL_RENDER_TARGET
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/screen/plane_master/field_of_vision_visual/Initialize()
@@ -146,6 +153,7 @@
 /obj/screen/plane_master/lighting
 	name = "lighting plane master"
 	plane = LIGHTING_PLANE
+	render_target = LIGHTING_RENDER_TARGET
 	blend_mode = BLEND_MULTIPLY
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
@@ -203,12 +211,14 @@
 /obj/screen/plane_master/parallax
 	name = "parallax plane master"
 	plane = PLANE_SPACE_PARALLAX
+	render_target = PLANE_SPACE_PARALLAX_RENDER_TARGET
 	blend_mode = BLEND_MULTIPLY
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 /obj/screen/plane_master/parallax_white
 	name = "parallax whitifier plane master"
 	plane = PLANE_SPACE
+	render_target = PLANE_SPACE_RENDER_TARGET
 
 /obj/screen/plane_master/lighting/backdrop(mob/mymob)
 	mymob.overlay_fullscreen("lighting_backdrop_lit", /obj/screen/fullscreen/lighting_backdrop/lit)
@@ -217,5 +227,6 @@
 /obj/screen/plane_master/camera_static
 	name = "camera static plane master"
 	plane = CAMERA_STATIC_PLANE
+	render_target = CAMERA_STATIC_RENDER_TARGET
 	appearance_flags = PLANE_MASTER
 	blend_mode = BLEND_OVERLAY
