@@ -487,4 +487,4 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	//However, masturbating does still give you a mood boost.
 	if(target)
 		ineedsex = 0
-	SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "orgasm", /datum/mood_event/orgasm/nympho)
+		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "orgasm", /datum/mood_event/orgasm/nympho)
