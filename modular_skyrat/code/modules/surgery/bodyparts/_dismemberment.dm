@@ -80,7 +80,7 @@
 		if(istype(turf))
 			I.forceMove(turf)
 		else
-			I.moveToNullspace
+			I.moveToNullspace()
 		I.unembedded()
 	if(!C.has_embedded_objects())
 		C.clear_alert("embeddedobject")
