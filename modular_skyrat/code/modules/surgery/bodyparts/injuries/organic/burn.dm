@@ -32,12 +32,20 @@
 		limb.owner.blood_volume -= (BLOOD_VOLUME_SURVIVE * damage/(limb.owner.maxHealth/2))
 
 /datum/injury/burn/receive_damage(damage_received = 0, pain_received = 0, damage_type = WOUND_BLUNT)
-	if((damage_type == WOUND_BURN) && (wound_damage() + damage_received >= 40) && parent_bodypart && !parent_bodypart.is_dead())
-		if(parent_bodypart.is_organic_limb())
-			parent_mob?.wound_message += " \The [parent_bodypart.name] fully melts away!"
-			parent_bodypart.kill_limb()
-		else
-			if(parent_bodypart.can_dismember())
+	if(wound_damage() + damage_received >= 40 && parent_bodypart)
+		if(!parent_bodypart.is_dead()))
+			if(parent_bodypart.is_organic_limb())
+				parent_mob?.wound_message += " \The [parent_bodypart.name] partially melts away!"
+				parent_bodypart.kill_limb()
+			else
+				if(parent_bodypart.can_dismember())
+					parent_mob?.wound_message += " \The [parent_bodypart.name] fully melts away!"
+					parent_bodypart.apply_dismember(WOUND_BURN)
+		else if(parent_bodypart.can_dismember())
+			if(parent_bodypart.is_organic_limb())
+				parent_mob?.wound_message += " \The [parent_bodypart.name] partially melts away!"
+				parent_bodypart.kill_limb()
+			else
 				parent_mob?.wound_message += " \The [parent_bodypart.name] fully melts away!"
 				parent_bodypart.apply_dismember(WOUND_BURN)
 

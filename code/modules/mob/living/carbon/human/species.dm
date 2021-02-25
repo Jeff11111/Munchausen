@@ -1762,7 +1762,8 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(!damage || !affecting || (missed && target != user))//future-proofing for species that have 0 damage/weird cases where no zone is targeted
 			playsound(target.loc, user.dna.species.miss_sound, 25, TRUE, -1)
 			target.visible_message("<span class='danger'><b>[user]</b>'s [atk_verb] misses <b>[target]</b>!</span>", \
-							"<span class='danger'>I avoid <b>[user]</b>'s [atk_verb]!</span>", "<span class='hear'>I hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, null, \
+							"<span class='danger'><b>[user]</b>'s misses [user.p_their()] [atk_verb] against me!</span>", \
+							"<span class='hear'>I hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, null, \
 							user, "<span class='warning'>My [atk_verb] misses <b>[target]</b>!</span>")
 			log_combat(user, target, "attempted to punch")
 			return FALSE

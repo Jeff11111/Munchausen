@@ -186,7 +186,8 @@
 					ran_zone_prob = dex.get_ran_zone_prob(ran_zone_prob, extra_zone_prob)
 			if(missed && (user != src))
 				visible_message("<span class='danger'><b>[user]</b> misses <b>[src]</b> with [I]!</span>", \
-							"<span class='danger'>I avoid <b>[user]</b>'s attack with [I]!</span>", "<span class='hear'>I hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, null, \
+							"<span class='danger'><b>[user]</b>'s misses me with [I]!</span>", \
+							"<span class='hear'>I hear a swoosh!</span>", COMBAT_MESSAGE_RANGE, null, \
 							user, "<span class='warning'>I miss <b>[src]</b> with [I]!</span>")
 				var/swing_sound = pick('modular_skyrat/sound/attack/swing_01.ogg',
 									'modular_skyrat/sound/attack/swing_02.ogg',
