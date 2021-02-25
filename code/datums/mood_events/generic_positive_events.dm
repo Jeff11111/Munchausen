@@ -167,7 +167,7 @@
 /datum/mood_event/orgasm
 	description = "<span class='userlove'>I came!</span>"
 	mood_change = 4
-	timeout = 10 MINUTES
+	timeout = 5 MINUTES
 
 /datum/mood_event/hope_lavaland
 	description = "<span class='nicegreen'>What a peculiar emblem.  It makes me feel hopeful for my future.</span>"
