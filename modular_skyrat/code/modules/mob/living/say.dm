@@ -82,7 +82,7 @@
 	if(eavesdrop_range)
 		eavesdropping = stars(message)
 		eavesrendered = compose_message(src, message_language, eavesdropping, null, spans, message_mode, FALSE, source)
-	var/static/mutter_message = "<span style='font-size: 85%'><i><b>You hear distant speech.</b></i></span>"
+	var/static/mutter_message = "<span style='font-size: 85%'><i>You hear distant speech.</i></span>"
 	var/rendered = compose_message(src, message_language, message, null, spans, message_mode, FALSE, source)
 	for(var/_AM in listening)
 		var/atom/movable/AM = _AM
