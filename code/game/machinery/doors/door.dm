@@ -51,9 +51,6 @@
 	else
 		if(density)
 			do_animate("deny")
-		else if(istype(src, /obj/machinery/door/airlock))
-			var/obj/machinery/door/airlock/lockboy = src
-			playsound(lockboy,lockboy.doorDeni,50,0,3)
 	return TRUE
 
 /obj/machinery/door/proc/update_dir()

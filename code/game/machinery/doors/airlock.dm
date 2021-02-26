@@ -194,6 +194,20 @@
 	. = ..()
 	AddComponent(/datum/component/ntnet_interface)
 
+/obj/machinery/door/airlock/alt_attack_hand(mob/user)
+	if(wires.is_cut(WIRE_BOLTS))
+		return TRUE
+	if(allowed(user))
+		if(locked)
+			unlock()
+		else
+			lock()
+	else
+		if(density)
+			do_animate("deny")
+			playsound(lockboy,lockboy.doorDeni,50,0,3)
+	return TRUE
+
 /obj/machinery/door/airlock/proc/update_other_id()
 	for(var/obj/machinery/door/airlock/A in GLOB.airlocks)
 		if(A.closeOtherId == closeOtherId && A != src)
@@ -1483,7 +1497,7 @@
 		update_icon(AIRLOCK_CLOSED, 1)
 	obj_flags |= EMAGGED
 	lights = FALSE
-	locked = TRUE
+	unlock()
 	loseMainPower()
 	loseBackupPower()
 
