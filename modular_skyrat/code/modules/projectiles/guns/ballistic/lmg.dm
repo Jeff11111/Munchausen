@@ -16,4 +16,4 @@
 	item_state = "pk[magazine ? "" : "-e"][is_wielded ? "-wielded" : ""]"
 
 /obj/item/gun/ballistic/automatic/l6_saw/build_magazine_overlay()
-	. = mutable_appearance(icon, "[initial(icon_state)]-mag[CEILING(magazine.ammo_count(), 25)]")
+	. = mutable_appearance(icon, "[initial(icon_state)]-mag[CEILING(magazine.ammo_count()*2, 25)]")
