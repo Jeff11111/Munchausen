@@ -89,9 +89,11 @@
 	if(!client)
 		return
 	var/list/screens = list(hud_used.plane_masters["[FLOOR_PLANE]"], hud_used.plane_masters["[ABOVE_FLOOR_PLANE]"],
-					hud_used.plane_masters["[OPENSPACE_PLANE]"], hud_used.plane_masters["[GAME_PLANE]"],
-					hud_used.plane_masters["[MOB_PLANE]"], hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"],
-					hud_used.plane_masters["[WALL_PLANE]"], hud_used.plane_masters["[ABOVE_WALL_PLANE]"])
+					hud_used.plane_masters["[WALL_PLANE]"], hud_used.plane_masters["[ABOVE_WALL_PLANE]"],
+					hud_used.plane_masters["[GAME_PLANE]"], hud_used.plane_masters["[MOB_PLANE]"],
+					hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"], hud_used.plane_masters["[OPENSPACE_PLANE]"], 
+					hud_used.plane_masters["[CHAT_PLANE]"], hud_used.plane_masters["[LIGHTING_PLANE]"],
+					)
 	for(var/A in screens)
 		var/obj/screen/plane_master/P = A
 		P.add_filter("blurry_eyes", 2, EYE_BLUR(clamp(eye_blurry*0.1,0.6,3)))
@@ -100,9 +102,11 @@
 	if(!client)
 		return
 	var/list/screens = list(hud_used.plane_masters["[FLOOR_PLANE]"], hud_used.plane_masters["[ABOVE_FLOOR_PLANE]"],
-					hud_used.plane_masters["[OPENSPACE_PLANE]"], hud_used.plane_masters["[GAME_PLANE]"],
-					hud_used.plane_masters["[MOB_PLANE]"], hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"],
-					hud_used.plane_masters["[WALL_PLANE]"], hud_used.plane_masters["[ABOVE_WALL_PLANE]"])
+					hud_used.plane_masters["[WALL_PLANE]"], hud_used.plane_masters["[ABOVE_WALL_PLANE]"],
+					hud_used.plane_masters["[GAME_PLANE]"], hud_used.plane_masters["[MOB_PLANE]"],
+					hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"], hud_used.plane_masters["[OPENSPACE_PLANE]"], 
+					hud_used.plane_masters["[CHAT_PLANE]"], hud_used.plane_masters["[LIGHTING_PLANE]"],
+					)
 	for(var/A in screens)
 		var/obj/screen/plane_master/P = A
 		P.remove_filter("blurry_eyes")

@@ -59,7 +59,6 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	var/mutable_appearance/body_appearance
 
 /mob/dead/observer/Initialize(mapload, mob/body)
-	add_client_colour(/datum/client_colour/monochrome/wraith)
 	set_invisibility(GLOB.observer_default_invisibility)
 
 	verbs += list(

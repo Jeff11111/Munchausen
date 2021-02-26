@@ -755,9 +755,11 @@
 	if(M.hud_used)
 		if(current_cycle >= 20 && current_cycle%20 == 0)
 			var/list/screens = list(M.hud_used.plane_masters["[FLOOR_PLANE]"], M.hud_used.plane_masters["[ABOVE_FLOOR_PLANE]"],
-					M.hud_used.plane_masters["[OPENSPACE_PLANE]"], M.hud_used.plane_masters["[GAME_PLANE]"],
-					M.hud_used.plane_masters["[MOB_PLANE]"], M.hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"],
-					M.hud_used.plane_masters["[WALL_PLANE]"], M.hud_used.plane_masters["[ABOVE_WALL_PLANE]"])
+					M.hud_used.plane_masters["[WALL_PLANE]"], M.hud_used.plane_masters["[ABOVE_WALL_PLANE]"],
+					M.hud_used.plane_masters["[GAME_PLANE]"], M.hud_used.plane_masters["[MOB_PLANE]"],
+					M.hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"], M.hud_used.plane_masters["[OPENSPACE_PLANE]"], 
+					M.hud_used.plane_masters["[CHAT_PLANE]"], M.hud_used.plane_masters["[LIGHTING_PLANE]"],
+					)
 			var/rotation = min(round(current_cycle/20), 89) // By this point the player is probably puking and quitting anyway
 			for(var/whole_screen in screens)
 				animate(whole_screen, transform = matrix(rotation, MATRIX_ROTATE), time = 5, easing = QUAD_EASING, loop = -1)
@@ -767,9 +769,11 @@
 /datum/reagent/toxin/rotatium/on_mob_end_metabolize(mob/living/M)
 	if(M && M.hud_used)
 		var/list/screens = list(M.hud_used.plane_masters["[FLOOR_PLANE]"], M.hud_used.plane_masters["[ABOVE_FLOOR_PLANE]"],
-					M.hud_used.plane_masters["[OPENSPACE_PLANE]"], M.hud_used.plane_masters["[GAME_PLANE]"],
-					M.hud_used.plane_masters["[MOB_PLANE]"], M.hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"],
-					M.hud_used.plane_masters["[WALL_PLANE]"], M.hud_used.plane_masters["[ABOVE_WALL_PLANE]"])
+					M.hud_used.plane_masters["[WALL_PLANE]"], M.hud_used.plane_masters["[ABOVE_WALL_PLANE]"],
+					M.hud_used.plane_masters["[GAME_PLANE]"], M.hud_used.plane_masters["[MOB_PLANE]"],
+					M.hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"], M.hud_used.plane_masters["[OPENSPACE_PLANE]"], 
+					M.hud_used.plane_masters["[CHAT_PLANE]"], M.hud_used.plane_masters["[LIGHTING_PLANE]"],
+					)
 		for(var/whole_screen in screens)
 			animate(whole_screen, transform = matrix(), time = 5, easing = QUAD_EASING)
 	..()
@@ -788,9 +792,11 @@
 	if(M.hud_used)
 		if(current_cycle >= 5 && current_cycle % 3 == 0)
 			var/list/screens = list(M.hud_used.plane_masters["[FLOOR_PLANE]"], M.hud_used.plane_masters["[ABOVE_FLOOR_PLANE]"],
-					M.hud_used.plane_masters["[OPENSPACE_PLANE]"], M.hud_used.plane_masters["[GAME_PLANE]"],
-					M.hud_used.plane_masters["[MOB_PLANE]"], M.hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"],
-					M.hud_used.plane_masters["[WALL_PLANE]"], M.hud_used.plane_masters["[ABOVE_WALL_PLANE]"])	
+					M.hud_used.plane_masters["[WALL_PLANE]"], M.hud_used.plane_masters["[ABOVE_WALL_PLANE]"],
+					M.hud_used.plane_masters["[GAME_PLANE]"], M.hud_used.plane_masters["[MOB_PLANE]"],
+					M.hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"], M.hud_used.plane_masters["[OPENSPACE_PLANE]"], 
+					M.hud_used.plane_masters["[CHAT_PLANE]"], M.hud_used.plane_masters["[LIGHTING_PLANE]"],
+					)	
 			var/matrix/skew = matrix()
 			var/intensity = 8
 			skew.set_skew(rand(-intensity,intensity), rand(-intensity,intensity))
@@ -809,9 +815,11 @@
 /datum/reagent/toxin/skewium/on_mob_end_metabolize(mob/living/M)
 	if(M && M.hud_used)
 		var/list/screens = list(M.hud_used.plane_masters["[FLOOR_PLANE]"], M.hud_used.plane_masters["[ABOVE_FLOOR_PLANE]"],
-					M.hud_used.plane_masters["[OPENSPACE_PLANE]"], M.hud_used.plane_masters["[GAME_PLANE]"],
-					M.hud_used.plane_masters["[MOB_PLANE]"], M.hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"],
-					M.hud_used.plane_masters["[WALL_PLANE]"], M.hud_used.plane_masters["[ABOVE_WALL_PLANE]"])
+					M.hud_used.plane_masters["[WALL_PLANE]"], M.hud_used.plane_masters["[ABOVE_WALL_PLANE]"],
+					M.hud_used.plane_masters["[GAME_PLANE]"], M.hud_used.plane_masters["[MOB_PLANE]"],
+					M.hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"], M.hud_used.plane_masters["[OPENSPACE_PLANE]"], 
+					M.hud_used.plane_masters["[CHAT_PLANE]"], M.hud_used.plane_masters["[LIGHTING_PLANE]"],
+					)
 		for(var/whole_screen in screens)
 			animate(whole_screen, transform = matrix(), time = 5, easing = QUAD_EASING)
 	..()

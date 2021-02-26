@@ -27,3 +27,4 @@
 /obj/screen/fullscreen/wraith
 	icon = 'modular_skyrat/icons/mob/screen/screen_full.dmi'
 	icon_state = "ghost"
+	show_when_dead = TRUE
