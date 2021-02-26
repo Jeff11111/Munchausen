@@ -635,8 +635,8 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 			//variables for eye colors, since i want to make sleepy niggas have eyelids instead of showing the eyes
 			//(they are sleepy silly they cant eye)
-			var/left_eye_color = ((EYECOLOR in species_traits) ? sanitize_hexcolor(H.left_eye_color) : null)
-			var/right_eye_color = ((EYECOLOR in species_traits) ? sanitize_hexcolor(H.right_eye_color) : null)
+			var/left_eye_color = ((EYECOLOR in species_traits) ? sanitize_hexcolor(H.left_eye_color) : "#000000")
+			var/right_eye_color = ((EYECOLOR in species_traits) ? sanitize_hexcolor(H.right_eye_color) : "#000000")
 
 			//sleepy mode activate
 			if((H.stat > CONSCIOUS) && ishuman(H))
