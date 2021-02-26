@@ -177,6 +177,7 @@
 	set waitfor = FALSE
 
 	to_chat(world, "<BR><BR><BR><span class='big bold'>The round has ended.</span>")
+	toggle_ooc(TRUE)
 	if(LAZYLEN(GLOB.round_end_notifiees))
 		world.TgsTargetedChatBroadcast("[GLOB.round_end_notifiees.Join(", ")] the round has ended.", FALSE)
 
@@ -189,7 +190,6 @@
 	display_report(popcount)
 
 	CHECK_TICK
-	/* Skyrat change, removed.
 	// Add AntagHUD to everyone, see who was really evil the whole time!
 	for(var/datum/atom_hud/antag/H in GLOB.huds)
 		for(var/m in GLOB.player_list)
@@ -197,7 +197,6 @@
 			H.add_hud_to(M)
 
 	CHECK_TICK
-	*/
 	//Set news report and mode result
 	mode.set_round_result()
 

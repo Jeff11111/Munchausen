@@ -333,6 +333,7 @@ SUBSYSTEM_DEF(ticker)
 	
 	PostSetup()
 	SSshuttle.realtimeofstart = world.realtime
+	toggle_ooc(FALSE)
 
 	return TRUE
 
