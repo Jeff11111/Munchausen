@@ -201,7 +201,8 @@
 	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
 
 	//Area's air alarm will try to rat you out
-	for(var/obj/machinery/airalarm/alarm in get_area(src))
+	var/area/A = get_area(src)
+	for(var/obj/machinery/airalarm/alarm in A.contents)
 		if(alarm.powered() && alarm.radio)
 			var/mob/living/carbon/human/human_user = user
 			if(istype(human_user))
