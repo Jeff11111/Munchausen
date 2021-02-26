@@ -126,7 +126,7 @@
 	pulse = PULSE_NONE
 	if(owner)
 		to_chat(owner, "<span class='userdanger'><b>MY HEART HAS STOPPED!</b></span>")
-	update_icon()
+	owner?.update_pain()
 	if(CHECK_BITFIELD(organ_flags, ORGAN_VITAL))
 		owner.death()
 	return TRUE
@@ -138,7 +138,7 @@
 		to_chat(owner, "<span class='userdanger'><b>My heart beats again!</b></span>")
 	if(!old_pulse && pulse)
 		last_arrest = world.time
-	update_icon()
+	owner?.update_pain()
 	return TRUE
 
 /obj/item/organ/heart/proc/HeartStrengthMessage()

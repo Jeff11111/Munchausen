@@ -886,7 +886,7 @@
 		return
 	if(hud_used.healths)
 		if(stat != DEAD)
-			. = 1
+			. = TRUE
 			switch(pulse())
 				if(PULSE_NONE)
 					hud_used.healths.icon_state = "health7"

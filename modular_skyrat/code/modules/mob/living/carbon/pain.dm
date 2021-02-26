@@ -92,7 +92,7 @@
 		SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "pain", /datum/mood_event/painbad)
 	if(hud_used.pains)
 		if(stat != DEAD)
-			. = 1
+			. = TRUE
 			if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF))
 				switch(get_shock())
 					if(-INFINITY to 5)
@@ -111,9 +111,10 @@
 						hud_used.pains.icon_state = "pain6"
 			else
 				hud_used.pains.icon_state = "pain0"
-			//modo waker
 			if(HAS_TRAIT(src, TRAIT_NOPAIN))
 				hud_used.pains.icon_state = "paind"
+			else if(!pulse())
+				hud_used.pains.icon_state = "paindd"
 		else
 			hud_used.pains.icon_state = "pain7"
 
