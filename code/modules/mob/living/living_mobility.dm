@@ -124,7 +124,7 @@
 	else
 		mobility_flags |= MOBILITY_UI|MOBILITY_PULL
 	
-	var/canitem_general = !paralyze && !stun && conscious && !(stat_softcrit) && !chokehold && !restrained && has_arms && !(combat_flags & COMBAT_FLAG_HARD_STAMCRIT)
+	var/canitem_general = !paralyze && !stun && conscious && !(stat_softcrit) && !chokehold && !restrained && has_hands && !(combat_flags & COMBAT_FLAG_HARD_STAMCRIT)
 	if(canitem_general)
 		mobility_flags |= (MOBILITY_USE | MOBILITY_PICKUP | MOBILITY_STORAGE | MOBILITY_HOLD)
 	else
@@ -135,9 +135,6 @@
 	if(HAS_TRAIT(src, TRAIT_MOBILITY_NOPICKUP))
 		DISABLE_BITFIELD(mobility_flags, MOBILITY_PICKUP)
 	if(HAS_TRAIT(src, TRAIT_MOBILITY_NOUSE))
-		DISABLE_BITFIELD(mobility_flags, MOBILITY_USE)
-
-	if(daze)
 		DISABLE_BITFIELD(mobility_flags, MOBILITY_USE)
 
 	//Handle update-effects.
