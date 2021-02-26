@@ -162,7 +162,7 @@
 	desc = "Make everyone cum."
 	buy_message = "I'M COOOOOOOOOOOOOMING"
 	id = "coom"
-	cost = 25
+	cost = 20
 	single_use = TRUE
 
 /datum/bobux_reward/cum_shower/on_buy(client/noob)
