@@ -167,7 +167,8 @@
 	. = ..()
 	message_admins("[noob] has made everyone COOM.")
 	log_admin("[noob] has made everyone COOM.")
-	SEND_SOUND(world, sound('modular_skyrat/sound/misc/coom.ogg', volume = 50)) //todo: delay the actual event so it lines up with the sounds and then keeps triggering the coom
+	var/cumsound = pick('modular_skyrat/sound/misc/coom.ogg','modular_skyrat/sound/misc/bobcoomer.ogg')
+	SEND_SOUND(world, sound(cumsound, volume = 50))
 	to_chat(world, "<span class='reallybig hypnophrase'>I'M COOMING!!!</span>")
 	for(var/mob/living/carbon/human/coomer in GLOB.mob_living_list)
 		coomer.moan()
