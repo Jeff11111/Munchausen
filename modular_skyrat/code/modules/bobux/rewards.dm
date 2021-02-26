@@ -131,6 +131,7 @@
 	buy_message = "You're a big guy."
 	id = "market_crash"
 	cost = 50
+	single_use = TRUE
 
 /datum/bobux_reward/market_crash/on_buy(client/noob)
 	. = ..()
@@ -161,7 +162,8 @@
 	desc = "Make everyone cum."
 	buy_message = "I'M COOOOOOOOOOOOOMING"
 	id = "coom"
-	cost = 20
+	cost = 25
+	single_use = TRUE
 
 /datum/bobux_reward/cum_shower/on_buy(client/noob)
 	. = ..()
