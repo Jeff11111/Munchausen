@@ -5,7 +5,7 @@
 	layer =	WALL_WINDOW_LAYER
 
 /obj/structure/window/Initialize(mapload, direct)
-	..()
+	. = ..()
 	if(!fulltile)
 		layer = ABOVE_OBJ_LAYER //Just above doors
 		plane = GAME_PLANE

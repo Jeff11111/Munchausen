@@ -119,7 +119,13 @@
 
 /obj/structure/extinguisher_cabinet/update_icon_state()
 	if(!opened)
-		icon_state = "extinguisher_closed"
+		if(stored_extinguisher)
+			if(istype(stored_extinguisher, /obj/item/extinguisher/mini))
+				icon_state = "extinguisher_closed_mini"
+			else
+				icon_state = "extinguisher_closed_full"
+		else
+			icon_state = "extinguisher_closed"
 		return
 	if(stored_extinguisher)
 		if(istype(stored_extinguisher, /obj/item/extinguisher/mini))
