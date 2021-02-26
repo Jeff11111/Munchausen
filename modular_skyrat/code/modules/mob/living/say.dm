@@ -41,7 +41,8 @@
 		return FALSE
 	else
 		cringecount = max(0, cringecount - 1)
-		if(. = ..())
+		. = ..()
+		if(..())
 			sound_hint(src, src)
 
 //Stuff
