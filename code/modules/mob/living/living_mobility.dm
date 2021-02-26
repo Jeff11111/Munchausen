@@ -69,7 +69,8 @@
 	var/stun = IsStun()
 	var/paralyze = IsParalyzed()
 	var/knockdown = IsKnockdown()
-	var/daze = IsDazed() || IsStumble()
+	var/daze = IsDazed()
+	var/stumble = IsStumble()
 	var/immobilize = IsImmobilized()
 
 	var/chokehold = pulledby && pulledby.grab_state >= GRAB_NECK
