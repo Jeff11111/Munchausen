@@ -218,7 +218,8 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		spans |= SPAN_ITALICS
 
 	send_speech(message, message_range, src, bubble_type, spans, language, message_mode)
-
+	sound_hint(src, src)
+	
 	if(succumbed)
 		succumb()
 		to_chat(src, compose_message(src, language, message, null, spans, message_mode))

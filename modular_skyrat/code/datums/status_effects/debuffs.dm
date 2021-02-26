@@ -262,26 +262,32 @@
 /datum/status_effect/incapacitating/rapedhead/tick()
 	. = ..()
 	if(length(screens))
-		var/list/offsets_x = list()
-		for(var/i in 1 to min(intensity, length(alphas)))
-			offsets_x += rand(-16, 16)
-		var/list/offsets_y = list()
-		for(var/i in 1 to min(intensity, length(alphas)))
-			offsets_y += rand(-16, 16)
-		for(var/obj/screen/plane_master/master in screens)
-			var/list/servants = new_screens["[master.plane]"]
-			var/i = 0
-			spawn(0)
-				for(var/serve in servants)
-					i++
-					var/obj/screen/plane_master/servant = serve
-					var/matrix/old_transform = servant.transform
-					var/matrix/new_transform = servant.transform.Translate(offsets_x[i], offsets_y[i])
-					animate(servant, transform = new_transform, 2 SECONDS)
-					sleep(2 SECONDS)
-					animate(servant, transform = old_transform, 2 SECONDS)
+		INVOKE_ASYNC(src, .proc/rape_head)
+
+/datum/status_effect/incapacitating/rapedhead/proc/rape_head()
+	var/list/offsets_x = list()
+	for(var/i in 1 to min(intensity, length(alphas)))
+		offsets_x += rand(-16, 16)
+	var/list/offsets_y = list()
+	for(var/i in 1 to min(intensity, length(alphas)))
+		offsets_y += rand(-16, 16)
+	for(var/obj/screen/plane_master/master in screens)
+		var/list/servants = new_screens["[master.plane]"]
+		var/i = 0
+		spawn(0)
+			for(var/serve in servants)
+				i++
+				var/obj/screen/plane_master/servant = serve
+				var/matrix/old_transform = servant.transform
+				var/matrix/new_transform = servant.transform.Translate(offsets_x[i], offsets_y[i])
+				animate(servant, transform = new_transform, 2 SECONDS)
+				sleep(2 SECONDS)
+				animate(servant, transform = old_transform, 2 SECONDS)
+		sleep(4 SECONDS)
 
 /datum/status_effect/incapacitating/rapedhead/on_remove()
+	//do it one last time so it looks smooth
+	rape_head()
 	if(length(screens) && length(new_screens))
 		for(var/obj/screen/plane_master/master in screens)
 			owner?.client?.screen -= new_screens["[master.plane]"]

@@ -41,9 +41,7 @@
 		return FALSE
 	else
 		cringecount = max(0, cringecount - 1)
-		. = ..()
-		if(.)
-			sound_hint(src, src)
+		return ..()
 
 //Stuff
 /mob/living/send_speech(message, message_range = 6, obj/source = src, bubble_type = bubble_icon, list/spans, datum/language/message_language=null, message_mode)

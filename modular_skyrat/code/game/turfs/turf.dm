@@ -49,6 +49,7 @@
 					head.receive_damage(rand(3, 7))
 				else
 					C.adjustBruteLoss(rand(3, 7))
+			C.Rapehead(2 SECONDS)
 			var/smash_sound = pick('modular_skyrat/sound/gore/smash1.ogg',
 						'modular_skyrat/sound/gore/smash2.ogg',
 						'modular_skyrat/sound/gore/smash3.ogg')
