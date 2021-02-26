@@ -79,7 +79,7 @@
 	//extra endurance
 	stat_end = JOB_STATPOINTS_TRAINED
 	//Fantastic construction, trained electronics
-	skill_melee = 8
+	skill_melee = JOB_SKILLPOINTS_NOVICE
 	skill_construction = JOB_SKILLPOINTS_EXPERT
 	skill_electronics = JOB_SKILLPOINTS_TRAINED
 
@@ -155,8 +155,8 @@
 	stat_int = 12
 	stat_dex = 8
 	//Godlike construction and electronics
-	skill_melee = 8
-	skill_ranged = 8
+	skill_melee = JOB_SKILLPOINTS_NOVICE
+	skill_ranged = JOB_SKILLPOINTS_NOVICE
 	skill_construction = 18
 	skill_electronics = 18
 
@@ -164,7 +164,7 @@
 	//High intellect, average everything else
 	stat_int = 12
 	//Godlike surgery, expert chemistry and firstaid
-	skill_ranged = 8
+	skill_melee = JOB_SKILLPOINTS_NOVICE
 	skill_surgery = 18
 	skill_chemistry = JOB_SKILLPOINTS_EXPERT
 	skill_firstaid = JOB_SKILLPOINTS_EXPERT
@@ -180,8 +180,7 @@
 
 //Either gets ridiculously low or ridiculously high strength, no inbetween
 /datum/job/clown/special_assign_skills_stats(mob/living/H)
-	var/fiddy = prob(66)
-	if(fiddy)
+	if(prob(66))
 		var/datum/stats/str/str = GET_STAT(H, str)
 		if(str)
 			str.level = rand(2, 6)
@@ -240,7 +239,7 @@
 	stat_str = 14
 	stat_end = 14
 	//Godlike melee and ranged, average firstaid
-	skill_melee = 18
+	skill_melee = JOB_SKILLPOINTS_EXPERT
 	skill_ranged = JOB_SKILLPOINTS_EXPERT
 	skill_firstaid = JOB_SKILLPOINTS_AVERAGE
 
@@ -311,7 +310,7 @@
 	stat_str = JOB_STATPOINTS_TRAINED
 	stat_end = JOB_STATPOINTS_TRAINED
 	//Decent construction and electronics
-	skill_melee = 8
+	skill_melee = JOB_SKILLPOINTS_NOVICE
 	skill_ranged = JOB_SKILLPOINTS_AVERAGE
 	skill_construction = JOB_SKILLPOINTS_TRAINED
 	skill_electronics = JOB_SKILLPOINTS_TRAINED
