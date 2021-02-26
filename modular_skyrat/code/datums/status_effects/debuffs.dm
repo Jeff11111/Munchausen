@@ -283,7 +283,7 @@
 				animate(servant, transform = new_transform, 2 SECONDS)
 				sleep(2 SECONDS)
 				animate(servant, transform = old_transform, 2 SECONDS)
-		sleep(4 SECONDS)
+	sleep(4 SECONDS)
 
 /datum/status_effect/incapacitating/rapedhead/on_remove()
 	//do it one last time so it looks smooth
