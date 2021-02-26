@@ -22,7 +22,7 @@
 	var/list/bobs_type = null
 	var/has_vegana = TRUE
 	var/list/vegana_type = null
-	var/has_womber = TRUE
+	var/has_whopper = TRUE
 	var/static/list/pain_emote_by_power = list(
 	"100" = "agonyscream",
 	"90" = "whimper",

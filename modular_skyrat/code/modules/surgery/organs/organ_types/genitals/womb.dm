@@ -14,7 +14,7 @@
 	var/datum/species/S = D.species
 	if(S)
 		//commies stole the means of reproduction again idk
-		if(!S.has_womber)
+		if(!S.has_whopper)
 			Remove()
 			qdel(src)
 			return

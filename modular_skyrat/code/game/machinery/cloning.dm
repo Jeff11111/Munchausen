@@ -236,7 +236,6 @@
 
 		H.set_cloned_appearance()
 		H.give_genitals(TRUE)
-
 		H.suiciding = FALSE
 	attempting = FALSE
 	return TRUE
