@@ -37,6 +37,14 @@
 	var/area/myarea = null
 	var/datum/looping_sound/firealarm/soundloop
 
+	// copied from flashinglight.dm but idc
+	var/strobe_color = "#ffffff"
+	var/strobe_range = 4
+	var/strobe_power = 4
+	var/strobe_active = FALSE
+	var/timeon = 1
+	var/timeoff = 20
+
 /obj/machinery/firealarm/examine(mob/user)
 	. = ..()
 	if(GLOB.security_level == SEC_LEVEL_GREEN)
@@ -67,6 +75,7 @@
 	myarea = get_base_area(src)
 	LAZYADD(myarea.firealarms, src)
 	soundloop = new(list(src), FALSE)
+	AddComponent(/datum/component/overlay_lighting, strobe_color, strobe_range, strobe_power, FALSE)
 
 /obj/machinery/firealarm/Destroy()
 	LAZYREMOVE(myarea.firealarms, src)
@@ -326,9 +335,24 @@
 	if(fire)
 		set_light(l_power = 0.8)
 		soundloop.start()
+		strobe_active = TRUE
+		strobe_flash_on()
 	else
 		set_light(l_power = 0)
 		soundloop.stop()
+		strobe_active = FALSE
+		strobe_flash_off()
+
+/obj/machinery/firealarm/proc/strobe_flash_on()
+	if(strobe_active)
+		var/datum/component/overlay_lighting/OL = GetComponent(/datum/component/overlay_lighting)
+		OL.strobe_flash_on()
+		addtimer(CALLBACK(src, .proc/strobe_flash_off), timeon)
+
+/obj/machinery/firealarm/proc/strobe_flash_off()
+	var/datum/component/overlay_lighting/OL = GetComponent(/datum/component/overlay_lighting)
+	OL.strobe_flash_off()
+	addtimer(CALLBACK(src, .proc/strobe_flash_on), timeoff)
 
 /*
  * Return of Party button
