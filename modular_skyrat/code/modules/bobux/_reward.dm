@@ -7,10 +7,17 @@
 	var/cost = 1
 	var/unbuyable = FALSE //Used for "rewards" that you don't buy, but rather gain by the subsystem
 	//Will mostly be used for negative stuff for people that have a negative bobux balance
+	var/single_use = FALSE
+	var/used_up = FALSE
 
 //do the stuff that happens when you buy the reward here wahoo
 /datum/bobux_reward/proc/on_buy(client/noob)
 	. = TRUE
+	if(single_use)
+		if(used_up)
+			to_chat(noob, "<span class='warning'> This reward cannot be bought!</span>")
+			return FALSE
+		used_up = TRUE
 	if(ismob(noob))
 		var/mob/M = noob
 		noob = M.client
