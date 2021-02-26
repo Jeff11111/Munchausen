@@ -346,12 +346,12 @@
 /obj/machinery/firealarm/proc/strobe_flash_on()
 	if(strobe_active)
 		var/datum/component/overlay_lighting/OL = GetComponent(/datum/component/overlay_lighting)
-		OL.strobe_flash_on()
+		OL.turn_on()
 		addtimer(CALLBACK(src, .proc/strobe_flash_off), timeon)
 
 /obj/machinery/firealarm/proc/strobe_flash_off()
 	var/datum/component/overlay_lighting/OL = GetComponent(/datum/component/overlay_lighting)
-	OL.strobe_flash_off()
+	OL.turn_off()
 	addtimer(CALLBACK(src, .proc/strobe_flash_on), timeoff)
 
 /*
