@@ -15,6 +15,7 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	/datum/hallucination/bolts = 7,
 	/datum/hallucination/items_other = 7,
 	/datum/hallucination/husks = 7,
+	/datum/hallucination/bobux = 5,
 	/datum/hallucination/items = 4,
 	/datum/hallucination/fire = 3,
 	/datum/hallucination/self_delusion = 2,
@@ -1354,3 +1355,22 @@ GLOBAL_LIST_INIT(hallucination_list, list(
 	if(target.client)
 		target.client.images.Remove(image)
 	return ..()
+
+/datum/hallucination/bobux
+
+/datum/hallucination/bobux/New(mob/living/carbon/C, forced = TRUE)
+	set waitfor = FALSE
+	. = ..()
+	var/messages_positive = list("You have seen a fraggot die!", "Good job!")
+	var/messages_negative = list("Why the fuck did you do that?", "Wasted opportunity!", "That wasn't very nice.")
+	var/message
+	var/bobux_amount = rand(1,10)
+	if(prob(50))
+		message = pick(messages_positive)
+		message += " +[bobux_amount] bobux!"
+	else
+		message = pick(messages_negative)
+		message += " -[bobux_amount] bobux!"
+	to_chat(C, "<span class='bobux'>[message]</span>")
+	qdel(src)
+	
