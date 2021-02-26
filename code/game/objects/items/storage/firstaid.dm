@@ -39,9 +39,9 @@
 	new /obj/item/stack/medical/gauze(src)
 	new /obj/item/stack/medical/suture(src)
 	new /obj/item/stack/medical/suture(src)
+	new /obj/item/stack/medical/mesh(src)
+	new /obj/item/stack/medical/mesh(src)
 	new /obj/item/stack/medical/ointment(src)
-	new /obj/item/stack/medical/mesh(src)
-	new /obj/item/stack/medical/mesh(src)
 	new /obj/item/reagent_containers/hypospray/medipen(src)
 
 /obj/item/storage/firstaid/ancient
@@ -76,9 +76,9 @@
 	new /obj/item/stack/medical/gauze/adv(src)
 	new /obj/item/stack/medical/mesh/advanced(src)
 	new /obj/item/stack/medical/mesh(src)
+	new /obj/item/stack/medical/mesh(src)
 	new /obj/item/stack/medical/ointment(src)
 	new /obj/item/reagent_containers/pill/patch/silver_sulf(src)
-	new /obj/item/reagent_containers/pill/oxandrolone(src)
 	new /obj/item/reagent_containers/hypospray/medipen(src)
 
 /obj/item/storage/firstaid/toxin
@@ -95,10 +95,10 @@
 /obj/item/storage/firstaid/toxin/PopulateContents()
 	if(empty)
 		return
-	for(var/i in 1 to 3)
-		new /obj/item/reagent_containers/syringe/charcoal(src)
 	new /obj/item/reagent_containers/syringe/calomel(src)
 	new /obj/item/reagent_containers/syringe/antiviral(src)
+	for(var/i in 1 to 3)
+		new /obj/item/reagent_containers/syringe/charcoal(src)
 	new /obj/item/storage/pill_bottle/charcoal(src)
 	new /obj/item/storage/pill_bottle/antitox(src)
 
@@ -116,13 +116,13 @@
 /obj/item/storage/firstaid/radbgone/PopulateContents()
 	if(empty)
 		return
+	new /obj/item/reagent_containers/syringe/charcoal(src)
+	new /obj/item/reagent_containers/syringe/antitox(src)
+	new /obj/item/storage/pill_bottle/charcoal(src)
 	if(prob(50))
 		new /obj/item/reagent_containers/pill/mutarad(src)
 	if(prob(80))
 		new /obj/item/reagent_containers/pill/antirad_plus(src)
-	new /obj/item/reagent_containers/syringe/charcoal(src)
-	new /obj/item/reagent_containers/syringe/antitox(src)
-	new /obj/item/storage/pill_bottle/charcoal(src)
 	new /obj/item/reagent_containers/pill/mutadone(src)
 	new /obj/item/reagent_containers/pill/antirad(src)
 	new /obj/item/reagent_containers/pill/antirad(src)
@@ -144,8 +144,8 @@
 		return
 	for(var/i in 1 to 3)
 		new /obj/item/reagent_containers/pill/salbutamol(src)
-	new /obj/item/reagent_containers/pill/perfluorodecalin(src)
 	new /obj/item/reagent_containers/syringe/dexalin(src)
+	new /obj/item/reagent_containers/pill/perfluorodecalin(src)
 	new /obj/item/reagent_containers/hypospray/medipen(src)
 	new /obj/item/reagent_containers/hypospray/medipen(src)
 
@@ -163,13 +163,13 @@
 /obj/item/storage/firstaid/brute/PopulateContents()
 	if(empty)
 		return
+	new /obj/item/bonesetter(src)
 	new /obj/item/stack/medical/gauze/adv(src)
+	new /obj/item/stack/medical/gauze/splint(src)
 	new /obj/item/stack/medical/suture/medicated(src)
 	new /obj/item/stack/medical/suture(src)
-	new /obj/item/stack/medical/bruise_pack
-	new /obj/item/stack/sticky_tape/surgical(src)
-	new /obj/item/stack/medical/bone_gel(src)
-	new /obj/item/bonesetter(src)
+	new /obj/item/stack/medical/suture(src)
+	new /obj/item/stack/medical/bruise_pack(src)
 
 /obj/item/storage/firstaid/tactical
 	name = "combat medical kit"
@@ -304,7 +304,7 @@
 
 /obj/item/storage/pill_bottle/mining/PopulateContents()
 	new /obj/item/reagent_containers/pill/patch/silver_sulf(src)
-	for(var/i in 1 to 3)
+	for(var/i in 1 to 4)
 		new /obj/item/reagent_containers/pill/patch/styptic(src)
 
 /obj/item/storage/pill_bottle/zoom
