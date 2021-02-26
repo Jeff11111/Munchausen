@@ -24,32 +24,17 @@
 			if(!BP || INTERACTING_WITH(user, victim))
 				return FALSE
 			var/datum/skills/surgery/choppa = GET_SKILL_LEVEL(user, surgery)
-			var/time = 2 SECONDS
-			if(victim.stat >= UNCONSCIOUS)
+			var/time = 3 SECONDS
+			if(victim.stat < UNCONSCIOUS)
 				time *= 3
 			time *= clamp((MAX_STAT/2)/choppa, 0.25, 2)
 			var/diceroll = user.mind.diceroll(skills = SKILL_DATUM(surgery))
-			if(BP.can_dismember())
-				user.visible_message("<span class='danger'><b>[user]</b> starts severing <b>[target]</b>'s [BP.name]!</span>", \
-									"<span class='warning'>I start severing <b>\the [target]</b>'s [BP.name]...</span>", \
-									target = target, \
-									target_message = "<span class='userdanger'><b>[user]</b> starts severing my [BP.name]!</span>")
-				if(!do_mob(user, victim, time))
-					to_chat(user, "<span class='warning'>I must stand still!</span>")
-					return FALSE
-				if(diceroll <= DICE_CRIT_FAILURE)
-					user.visible_message("<span class='danger'><b>[user]</b> botches the dismemberment!</span>", 
-										"<span class='warning'>Oh no - I fucked up...</span>")
-					if(prob(40))
-						BP.create_injury(WOUND_SLASH, force * 2, FALSE, FALSE)
-					return FALSE
-				BP.apply_dismember(WOUND_SLASH)
-				user.put_in_hands(BP)
-			else if(BP.encased && !BP.get_incision(TRUE) && BP.get_organs())
+			playsound(target, 'modular_skyrat/sound/gore/dissection.ogg', 100, 0)
+			if(BP.encased && !BP.get_incision(TRUE) && BP.get_organs())
 				user.visible_message("<span class='danger'><b>[user]</b> starts dissecting <b>[target]</b>'s [BP.name]!</span>", \
 									"<span class='warning'>I start dissecting <b>\the [target]</b>'s [BP.name]...</span>", \
 									target = target, \
-									target_message = "<span class='userdanger'><b>[user]</b> starts dissecting my [BP.name]!</span>")
+									target_message = "<span class='userdanger'><span class='big'><b>[user]</b> starts dissecting my [BP.name]!</span></span>")
 				if(!do_mob(user, victim, time))
 					to_chat(user, "<span class='warning'>I must stand still!</span>")
 					return FALSE
@@ -71,6 +56,22 @@
 						chungus.apply_wound(BP, TRUE)
 				victim.wound_message = ""
 				playsound(target, 'modular_skyrat/sound/gore/flesh.ogg', 75, 0)
+			else if(BP.can_dismember())
+				user.visible_message("<span class='danger'><b>[user]</b> starts severing <b>[target]</b>'s [BP.name]!</span>", \
+									"<span class='warning'>I start severing <b>\the [target]</b>'s [BP.name]...</span>", \
+									target = target, \
+									target_message = "<span class='userdanger'><span class='big'><b>[user]</b> starts severing my [BP.name]!</span></span>")
+				if(!do_mob(user, victim, time))
+					to_chat(user, "<span class='warning'>I must stand still!</span>")
+					return FALSE
+				if(diceroll <= DICE_CRIT_FAILURE)
+					user.visible_message("<span class='danger'><b>[user]</b> botches the dismemberment!</span>", 
+										"<span class='warning'>Oh no - I fucked up...</span>")
+					if(prob(40))
+						BP.create_injury(WOUND_SLASH, force * 2, FALSE, FALSE)
+					return FALSE
+				BP.apply_dismember(WOUND_SLASH)
+				user.put_in_hands(BP)
 			else if(BP.body_zone == BODY_ZONE_CHEST)
 				for(var/obj/item/bodypart/other_part in victim.bodyparts)
 					if(other_part.body_zone == BODY_ZONE_CHEST)
@@ -80,7 +81,7 @@
 				user.visible_message("<span class='danger'><b>[user]</b> starts slicing <b>[target]</b> into a bloody carcass!</span>", \
 									"<span class='warning'>I start slicing <b>[target]</b> into a carccass...</span>", \
 									target = target, \
-									target_message = "<span class='userdanger'><b>[user]</b> starts dissecting me into a carcass!</span>")
+									target_message = "<span class='userdanger'><span class='big'><b>[user]</b> starts dissecting me into a carcass!</span></span>")
 				if(!do_mob(user, victim, time))
 					to_chat(user, "<span class='warning'>I must stand still!</span>")
 					return FALSE
