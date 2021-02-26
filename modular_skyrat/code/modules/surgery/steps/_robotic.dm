@@ -44,6 +44,8 @@
 				ouchie.apply_injury(BP.max_damage * 0.4, BP)
 				ouchie.injury_flags |= INJURY_SURGICAL
 				target.wound_message = ""
+				if(BP.current_gauze)
+					BP.remove_gauze()
 
 //prepare electronics
 //(mechanical equivalente of clamp bleeders)
