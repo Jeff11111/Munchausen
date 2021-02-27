@@ -310,7 +310,7 @@ GENETICS SCANNER
 					damage_message += "\n<font color='red'>Minor [O.name] failure detected.</span>"
 
 			if(temp_message || damage_message)
-				msg += "\n\n<b><span class='info'>[uppertext(O.name)]:</b></span> [damage_message] [temp_message]"
+				msg += "\n\n<b><span class='info'>[uppertext(O.name)]:</b></span> [damage_message] [temp_message]\n"
 
 		//END; LOOK FOR MISSING ORGANS?
 		var/breathes = TRUE
@@ -331,9 +331,11 @@ GENETICS SCANNER
 		if(!M.get_bodypart_nostump(BODY_ZONE_PRECISE_RIGHT_EYE))
 			msg += "\n<span class='alert'><b>Subject's right eye is missing.</b></span>"
 		if(!M.getorganslot(ORGAN_SLOT_EARS))
-			msg += "\n<span class='alert'><b>Subject does not have ears.</b></span>"
+			msg += "\n<span class='alert'><b>Subject's ears are missing!.</b></span>"
 		if(!M.getorganslot(ORGAN_SLOT_BRAIN))
 			msg += "\n<span class='alert'><b>Subject's brain is missing!</b></span>"
+		if(!M.getorganslot(ORGAN_SLOT_TONGUE))
+			msg += "\n<span class='alert'><b>Subject's tongue is missing!</b></span>"
 		if(has_liver && !M.getorganslot(ORGAN_SLOT_LIVER))
 			msg += "\n<span class='alert'><b>Subject's liver is missing!</b></span>"
 		if(blooded && !M.getorganslot(ORGAN_SLOT_HEART))
