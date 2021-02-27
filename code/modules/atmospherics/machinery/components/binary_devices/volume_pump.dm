@@ -39,7 +39,6 @@
 		on = !on
 		update_icon()
 		//Area's air alarm will try to rat you out
-		var/area/A = get_area(src)
 		for(var/obj/machinery/airalarm/alarm in A.contents)
 			if(alarm.powered() && alarm.radio)
 				var/mob/living/carbon/human/human_user = user
@@ -130,7 +129,6 @@
 		if("power")
 			on = !on
 			//Area's air alarm will try to rat you out
-			var/area/A = get_area(src)
 			for(var/obj/machinery/airalarm/alarm in A.contents)
 				if(alarm.powered() && alarm.radio)
 					var/mob/living/carbon/human/human_user = usr
@@ -157,7 +155,6 @@
 			if(.)
 				transfer_rate = clamp(rate, 0, MAX_TRANSFER_RATE)
 				//Area's air alarm will try to rat you out
-				var/area/A = get_area(src)
 				for(var/obj/machinery/airalarm/alarm in A.contents)
 					if(alarm.powered() && alarm.radio)
 						var/mob/living/carbon/human/human_user = usr

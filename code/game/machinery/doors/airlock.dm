@@ -205,7 +205,7 @@
 	else
 		if(density)
 			do_animate("deny")
-			playsound(lockboy,lockboy.doorDeni,50,0,3)
+			playsound(src, doorDeni,50,0,3)
 	return TRUE
 
 /obj/machinery/door/airlock/proc/update_other_id()

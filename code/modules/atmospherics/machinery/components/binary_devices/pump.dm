@@ -39,7 +39,6 @@
 		on = !on
 		update_icon()
 		//Area's air alarm will try to rat you out
-		var/area/A = get_area(src)
 		for(var/obj/machinery/airalarm/alarm in A.contents)
 			if(alarm.powered() && alarm.radio)
 				var/mob/living/carbon/human/human_user = user
@@ -60,7 +59,6 @@
 		target_pressure = MAX_OUTPUT_PRESSURE
 		to_chat(user,"<span class='notice'>You maximize the pressure on the [src].</span>")
 		//Area's air alarm will try to rat you out
-		var/area/A = get_area(src)
 		for(var/obj/machinery/airalarm/alarm in A.contents)
 			if(alarm.powered() && alarm.radio)
 				var/mob/living/carbon/human/human_user = user
@@ -151,7 +149,6 @@
 			on = !on
 			message_admins("Pump, [src.name], turned [on ? "on" : "off"] by [ADMIN_LOOKUPFLW(usr)] at [ADMIN_COORDJMP(T)], [A]")
 			//Area's air alarm will try to rat you out
-			var/area/A = get_area(src)
 			for(var/obj/machinery/airalarm/alarm in A.contents)
 				if(alarm.powered() && alarm.radio)
 					var/mob/living/carbon/human/human_user = usr
@@ -177,7 +174,6 @@
 			if(.)
 				target_pressure = clamp(pressure, 0, MAX_OUTPUT_PRESSURE)
 				//Area's air alarm will try to rat you out
-				var/area/A = get_area(src)
 				for(var/obj/machinery/airalarm/alarm in A.contents)
 					if(alarm.powered() && alarm.radio)
 						var/mob/living/carbon/human/human_user = usr
