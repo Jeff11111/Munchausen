@@ -256,7 +256,7 @@
 				var/obj/screen/plane_master/servant = new /obj/screen/plane_master()
 				servant.alpha = alphas[i]
 				servant.render_source = master.render_target
-				servant.plane = CAMERA_STATIC_PLANE
+				servant.plane = ABOVE_LIGHTING_PLANE
 				new_screens["[master.plane]"] += servant
 				owner.client?.screen += servant
 		tick()
