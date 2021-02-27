@@ -125,7 +125,7 @@
 /obj/item/organ/heart/proc/Stop()
 	pulse = PULSE_NONE
 	if(owner)
-		to_chat(owner, "<span class='userdanger'><b>MY HEART HAS STOPPED!</b></span>")
+		to_chat(owner, "<span class='userdanger'><b>I am knocking on death's door!</b></span>")
 	owner?.update_pain()
 	if(CHECK_BITFIELD(organ_flags, ORGAN_VITAL))
 		owner.death()
