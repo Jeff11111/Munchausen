@@ -29,6 +29,7 @@
 	display_order = JOB_DISPLAY_ORDER_CAPTAIN
 
 	threat = 5
+	important_job = TRUE
 
 /datum/job/captain/get_access()
 	return get_all_accesses()

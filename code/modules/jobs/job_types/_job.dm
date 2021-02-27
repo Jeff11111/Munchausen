@@ -15,7 +15,7 @@
 	//Bitflags for the job
 	var/flag = NONE //Deprecated
 	var/department_flag = NONE //Deprecated
-//	var/auto_deadmin_role_flags = NONE
+	//var/auto_deadmin_role_flags = NONE
 
 	//Players will be allowed to spawn in as jobs that are set to "Station"
 	var/faction = "None"
@@ -71,6 +71,9 @@
 
 	/// Starting skill modifiers.
 	var/list/starting_modifiers
+
+	/// Job cannot be joined without being part of the whitelist
+	var/important_job = FALSE
 
 //Only override this proc
 //H is usually a human unless an /equip override transformed it

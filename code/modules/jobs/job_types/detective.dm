@@ -24,6 +24,7 @@
 
 	display_order = JOB_DISPLAY_ORDER_DETECTIVE
 	threat = 1
+	important_job = TRUE
 
 /datum/outfit/job/detective
 	name = "Detective"

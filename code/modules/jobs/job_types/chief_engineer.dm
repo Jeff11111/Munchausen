@@ -33,6 +33,7 @@
 
 	display_order = JOB_DISPLAY_ORDER_CHIEF_ENGINEER
 	threat = 2
+	important_job = TRUE
 
 /datum/outfit/job/ce
 	name = "Senior Engineer"

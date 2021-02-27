@@ -32,6 +32,7 @@
 
 	display_order = JOB_DISPLAY_ORDER_HEAD_OF_SECURITY
 	threat = 3
+	important_job = TRUE
 
 /datum/outfit/job/hos
 	name = "Chief Enforcer"

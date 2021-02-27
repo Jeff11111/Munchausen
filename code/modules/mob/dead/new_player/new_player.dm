@@ -312,6 +312,8 @@
 			return "[jobtitle] is available."
 		if(JOB_UNAVAILABLE_GENERIC)
 			return "[jobtitle] is unavailable."
+		if(JOB_UNAVAILABLE_WHITELIST)
+			return "[jobtitle] is a whitelisted job."
 		if(JOB_UNAVAILABLE_BANNED)
 			return "You are currently banned from [jobtitle]."
 		if(JOB_UNAVAILABLE_PLAYTIME)
@@ -341,6 +343,8 @@
 		return JOB_UNAVAILABLE_BANNED
 	if(QDELETED(src))
 		return JOB_UNAVAILABLE_GENERIC
+	if(!job.is_whitelisted(client))
+		return JOB_UNAVAILABLE_WHITELIST
 	if(!job.player_old_enough(client))
 		return JOB_UNAVAILABLE_ACCOUNTAGE
 	if(job.required_playtime_remaining(client))

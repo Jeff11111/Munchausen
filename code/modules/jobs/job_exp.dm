@@ -1,8 +1,14 @@
 GLOBAL_LIST_EMPTY(exp_to_update)
+GLOBAL_LIST_INIT(whitelisted_keys, world.file2list("config/important_job_whitelist.txt"))
 GLOBAL_PROTECT(exp_to_update)
 
-
 // Procs
+/datum/job/proc/is_whitelisted(client/C)
+	if(important_job && !C.check_rights(R_ADMIN))
+		if(!(C.key in GLOB.whitelisted_keys))
+			return FALSE
+	return TRUE
+
 /datum/job/proc/required_playtime_remaining(client/C)
 	if(!C)
 		return 0

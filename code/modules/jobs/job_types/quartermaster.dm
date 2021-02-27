@@ -29,6 +29,7 @@
 
 	display_order = JOB_DISPLAY_ORDER_QUARTERMASTER
 	threat = 5 //Gun man
+	important_job = TRUE
 
 /datum/outfit/job/quartermaster
 	name = "Logistics Officer"

@@ -20,6 +20,7 @@
 
 	display_order = JOB_DISPLAY_ORDER_CLOWN
 	threat = 0 // honk
+	important_job = TRUE //lmao "important"
 
 /datum/outfit/job/clown
 	name = "Jester"

@@ -31,6 +31,7 @@
 	threat = 2
 
 	starting_modifiers = list(/datum/skill_modifier/job/surgery, /datum/skill_modifier/job/affinity/surgery)
+	important_job = TRUE
 
 /datum/outfit/job/cmo
 	name = "Chief Medical Officer"

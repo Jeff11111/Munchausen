@@ -35,6 +35,7 @@
 
 	display_order = JOB_DISPLAY_ORDER_HEAD_OF_PERSONNEL
 	threat = 2
+	important_job = TRUE
 
 
 /datum/outfit/job/hop

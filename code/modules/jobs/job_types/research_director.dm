@@ -33,6 +33,7 @@
 
 	display_order = JOB_DISPLAY_ORDER_RESEARCH_DIRECTOR
 	threat = 5
+	important_job = TRUE
 
 /datum/outfit/job/rd
 	name = "Research Director"

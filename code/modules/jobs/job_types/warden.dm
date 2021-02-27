@@ -25,6 +25,7 @@
 
 	display_order = JOB_DISPLAY_ORDER_WARDEN
 	threat = 2
+	important_job = TRUE
 
 /datum/job/warden/get_access()
 	var/list/L = list()
