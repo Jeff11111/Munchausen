@@ -30,13 +30,13 @@
 		if(3,4)
 			return "incompetent"
 		if(5,6)
-			return "a novice"
-		if(7,8)
 			return "unskilled"
+		if(7,8)
+			return "novice"
 		if(9,10)
-			return "good enough"
+			return "average"
 		if(11,12)
-			return "adept"
+			return "competent"
 		if(13,14)
 			return "versed"
 		if(15,16)

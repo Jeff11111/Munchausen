@@ -311,9 +311,8 @@
 	if(user.mind)
 		switch(user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, ranged)))
 			if(DICE_CRIT_FAILURE)
-				to_chat(user, "<span class='userdanger'><b>CRITICAL FAILURE!</b> Misfire!</span>")
-				shoot_with_empty_chamber(target, no_message = TRUE)
-				process_chamber(user)
+				to_chat(user, "<span class='userdanger'><b>CRITICAL FAILURE!</b></span>")
+				process_fire(user, user)
 				return
 
 	var/ranged = GET_SKILL_LEVEL(user, ranged)
