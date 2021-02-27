@@ -48,7 +48,7 @@
 			return TRUE
 		if(istype(H) && !ignore_clothes && H.clothingonpart(BP))
 			. = FALSE
-		if(!CHECK_BITFIELD(BP?.status, requires_bodypart_type))
+		if(requires_bodypart_type && !CHECK_BITFIELD(BP?.status, requires_bodypart_type))
 			. = FALSE
 		if(CHECK_BITFIELD(surgery_flags, STEP_NEEDS_ENCASED) && !BP?.encased)
 			. = FALSE
