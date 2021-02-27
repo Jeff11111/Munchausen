@@ -370,16 +370,17 @@
 			on_ricochet(A)
 			ignore_source_check = TRUE
 			decayedRange = max(0, decayedRange - reflect_range_decrease)
-			//skyurethra edit
 			ricochet_chance *= ricochet_decay_chance
 			damage *= ricochet_decay_damage
-			//
 			range = decayedRange
 			if(hitscan)
 				store_hitscan_collision(pcache)
 			return TRUE
 
 	var/distance = get_dist(T, starting) // Get the distance between the turf shot from and the mob we hit and use that for the calculations.
+	if(distance > original_dist)
+		qdel(src)
+		return
 	if(def_zone && ishuman(firer))
 		//Ran zone is a shitty proc that does not follow the laws of physics
 		var/mob/living/carbon/human/school_shooter = firer
@@ -709,11 +710,6 @@
 		else
 			pixel_x = traj_px
 			pixel_y = traj_py
-	
-	//I am a fucking demented retard
-	//anyways projectiles only go as far as the original distance between firer and target
-	if(ismob(firer) && get_dist(starting, get_turf(src)) >= original_dist)
-		return on_range()
 
 /obj/item/projectile/proc/set_homing_target(atom/A)
 	if(!A || (!isturf(A) && !isturf(A.loc)))
@@ -767,7 +763,7 @@
 	starting = get_turf(source)
 	original = target
 	original_turf = get_turf(target)
-	original_dist = (get_dist(starting, original_turf) + 1)
+	original_dist = get_dist(starting, original_turf)
 	if(targloc || !params)
 		yo = targloc.y - curloc.y
 		xo = targloc.x - curloc.x
@@ -831,7 +827,11 @@
 		if(temporary_unstoppable_movement)
 			temporary_unstoppable_movement = FALSE
 			DISABLE_BITFIELD(movement_type, UNSTOPPABLE)
-		if(fired && can_hit_target(original, permutated, TRUE))
+		//I am a fucking demented retard
+		//anyways projectiles only go as far as the original distance between firer and target
+		if(ismob(firer) && get_dist(starting, get_turf(src)) > original_dist)
+			return on_range()
+		else if(fired && can_hit_target(original, permutated, TRUE))
 			Bump(original)
 
 /obj/item/projectile/Destroy()
