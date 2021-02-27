@@ -87,6 +87,7 @@
 	//Intents and selected zones are saved on a hand by hand basis
 	var/hand_index_to_intent = list(INTENT_HELP, INTENT_HELP)
 	var/hand_index_to_zone = list(BODY_ZONE_CHEST, BODY_ZONE_CHEST)
+	var/hand_index_to_throw = list(FALSE, FALSE)
 
 	var/bloody_hands = 0
 

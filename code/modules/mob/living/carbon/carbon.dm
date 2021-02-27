@@ -65,6 +65,11 @@
 	//Update intent and zone selected according to the zone saved
 	var/woah = min(length(hand_index_to_intent), active_hand_index)
 	a_intent_change(hand_index_to_intent[woah])
+	woah = min(length(hand_index_to_throw), active_hand_index)
+	if(hand_index_to_throw[woah])
+		throw_mode_on()
+	else
+		throw_mode_off()
 	woah = min(length(hand_index_to_zone), active_hand_index)
 	if(hud_used)
 		var/obj/screen/zone_sel/bingus = hud_used.zone_select
@@ -168,12 +173,14 @@
 
 /mob/living/carbon/proc/throw_mode_off()
 	in_throw_mode = FALSE
+	hand_index_to_throw[active_hand_index] = FALSE
 	if(client && hud_used)
 		hud_used.throw_icon.icon_state = "act_throw"
 
 
 /mob/living/carbon/proc/throw_mode_on()
 	in_throw_mode = TRUE
+	hand_index_to_throw[active_hand_index] = TRUE
 	if(client && hud_used)
 		hud_used.throw_icon.icon_state = "act_throw_on"
 
