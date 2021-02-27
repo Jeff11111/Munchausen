@@ -75,7 +75,7 @@
 /datum/nanite_rule/pulse/check_rule()
 	if(iscarbon(program.host_mob))
 		var/mob/living/carbon/C = program.host_mob
-		if(C.pulse() <= PULSE_NONE)
+		if(!C.pulse())
 			return TRUE
 	return FALSE
 
