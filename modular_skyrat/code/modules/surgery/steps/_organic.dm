@@ -104,7 +104,7 @@
 		if(!length(tool.embedding))
 			tool.embedding = EMBED_NONE
 		tool.tryEmbed(target = BP, forced = TRUE, silent = TRUE, embedded_injury = BP.get_incision())
-		RegisterSignal(tool, COMSIG_ITEM_ON_EMBED_REMOVAL, /proc/unspeculumize, TRUE)
+		RegisterSignal(tool, COMSIG_ITEM_ON_EMBED_REMOVAL, /obj/item/proc/unspeculumize, TRUE)
 		playsound(target, 'modular_skyrat/sound/gore/stuck2.ogg', 60, 0)
 
 /obj/item/proc/unspeculumize(mob/source, obj/item/bodypart/limb)
