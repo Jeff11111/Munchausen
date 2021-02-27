@@ -71,7 +71,8 @@
 
 //Point value assignment
 /datum/job/assistant
-	skill_melee = JOB_SKILLPOINTS_NOVICE
+	skill_melee = JOB_STATPOINTS_WORTHLESS
+	skill_electronics = JOB_STATPOINTS_WORTHLESS
 	skill_gaming = JOB_STATPOINTS_AVERAGE
 
 /datum/job/atmos
