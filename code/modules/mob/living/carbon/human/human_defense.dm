@@ -831,7 +831,7 @@
 			else if(paindamage >= (limb_max_pain*0.25))
 				status += "<span class='danger'>[lowertext(LB.medium_pain_msg)]</span>"
 			else if(paindamage > 0)
-				status += "<span style='color: [COLOR_RED_GRAY]'><span style='font-size: 90%;'>[lowertext(LB.light_pain_msg)]</span></span>"
+				status += "<span style='color: [COLOR_RED_GRAY]'><span style='font-size: 85%;'>[lowertext(LB.light_pain_msg)]</span></span>"
 
 		if(!HAS_TRAIT(src, TRAIT_SCREWY_CHECKSELF) && length(LB.wounds))
 			for(var/thing in LB.wounds)
