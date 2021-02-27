@@ -232,8 +232,7 @@
 		..()
 
 /obj/item/crusher_trophy/proc/add_to(obj/item/kinetic_crusher/H, mob/living/user)
-	for(var/t in H.trophies)
-		var/obj/item/crusher_trophy/T = t
+	for(var/obj/item/crusher_trophy/T in H.trophies)
 		if(istype(T, denied_type) || istype(src, T.denied_type))
 			to_chat(user, "<span class='warning'>You can't seem to attach [src] to [H]. Maybe remove a few trophies?</span>")
 			return FALSE
