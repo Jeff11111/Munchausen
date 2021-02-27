@@ -4,7 +4,7 @@ GLOBAL_PROTECT(exp_to_update)
 
 // Procs
 /datum/job/proc/is_whitelisted(client/C)
-	if(important_job && !C.check_rights(R_ADMIN))
+	if(important_job && !(C.rights & R_ADMIN))
 		if(!(C.key in GLOB.whitelisted_keys))
 			return FALSE
 	return TRUE
