@@ -10,7 +10,6 @@
 		}
 	],
 	"files.exclude": {
-		// "**/_maps": true
 		"**.dmm": true
 	}
 }
