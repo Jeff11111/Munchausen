@@ -305,7 +305,7 @@
 			suppress_text += " and [suppress_limbs[num_suppress].name]"
 	
 	suppress_text += "[num_suppress == 1 ? " is impervious to bleeding" : " are impervious to bleeding"]"
-	suppress_text += ".</B></span>\n"
+	suppress_text += ".</B></span>"
 	if(num_suppress)
 		. += suppress_text
 	
