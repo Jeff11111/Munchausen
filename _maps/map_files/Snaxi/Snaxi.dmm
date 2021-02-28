@@ -32264,10 +32264,10 @@
 /area/quartermaster/sorting)
 "noB" = (
 /obj/effect/turf_decal/bot,
-/mob/living/simple_animal/sloth/paperwork,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/mob/living/simple_animal/pet/caracal/floppa,
 /turf/open/floor/plasteel,
 /area/quartermaster/storage)
 "noG" = (
