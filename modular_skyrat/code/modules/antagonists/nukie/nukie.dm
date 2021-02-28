@@ -2,7 +2,7 @@
 	. = ..()
 	if(owner)
 		for(var/statt in owner.mob_stats)
-			var/datum/stats/stat = statt
+			var/datum/stats/stat = owner.mob_stats[statt]
 			if(stat.fake_type)
 				continue
 			stat.level = min(stat.level + rand(4, 10), MAX_STAT)

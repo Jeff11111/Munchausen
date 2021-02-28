@@ -1,7 +1,8 @@
 /datum/antagonist/traitor/on_gain()
 	. = ..()
 	if(owner)
-		for(var/datum/stats/stat in owner.mob_stats)
+		for(var/statt in owner.mob_stats)
+			var/datum/stats/stat = owner.mob_stats[statt]
 			if(stat.fake_type)
 				continue
 			stat.level = min(stat.level + 1, MAX_STAT)
