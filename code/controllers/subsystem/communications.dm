@@ -55,6 +55,7 @@ SUBSYSTEM_DEF(communications)
 				P.name = "paper - '[sending.title]'"
 				P.info = sending.content
 				P.update_icon()
+				playsound(src, 'modular_skyrat/sound/machinery/printer_dotmatrix.ogg', 50, 1)
 
 #undef COMMUNICATION_COOLDOWN
 #undef COMMUNICATION_COOLDOWN_AI
