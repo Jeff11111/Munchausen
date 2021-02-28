@@ -89,6 +89,8 @@ SUBSYSTEM_DEF(job)
 		var/datum/job/job = GetJob(rank)
 		if(!job)
 			return FALSE
+		if(!job.is_whitelisted(player.client))
+			return FALSE
 		if(jobban_isbanned(player, rank) || QDELETED(player))
 			return FALSE
 		if(!job.player_old_enough(player.client))
