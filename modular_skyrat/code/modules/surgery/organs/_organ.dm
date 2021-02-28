@@ -257,8 +257,9 @@
 		handle_antibiotics()
 		handle_rejection()
 		handle_germ_effects()
-	else
+	else if(!can_decay())
 		germ_level = 0
+		return
 	if(CHECK_BITFIELD(organ_flags, ORGAN_FAILING | ORGAN_DEAD) || !owner)
 		return FALSE
 	if(!is_cold() && damage)
