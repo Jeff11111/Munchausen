@@ -11375,9 +11375,6 @@
 /turf/open/floor/plasteel,
 /area/medical/chemistry)
 "dCM" = (
-/obj/machinery/status_display/supply{
-	pixel_x = 32
-	},
 /obj/effect/turf_decal/tile/brown,
 /obj/machinery/rnd/production/techfab/department/cargo,
 /turf/open/floor/plasteel,
@@ -32264,10 +32261,10 @@
 /area/quartermaster/sorting)
 "noB" = (
 /obj/effect/turf_decal/bot,
-/mob/living/simple_animal/sloth/paperwork,
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/mob/living/simple_animal/pet/caracal/floppa,
 /turf/open/floor/plasteel,
 /area/quartermaster/storage)
 "noG" = (
@@ -33714,6 +33711,19 @@
 /obj/machinery/light,
 /turf/open/floor/plating/asteroid/snow/icemoon,
 /area/hallway/secondary/exit/departure_lounge)
+"nTL" = (
+/obj/structure/cable{
+	icon_state = "4-8"
+	},
+/obj/effect/turf_decal/tile/brown,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/status_display/supply{
+	pixel_y = -32
+	},
+/turf/open/floor/plasteel,
+/area/quartermaster/storage)
 "nTQ" = (
 /obj/structure/cable{
 	icon_state = "1-2"
@@ -99549,7 +99559,7 @@ pJS
 cWG
 gdL
 nMJ
-iCO
+nTL
 pJS
 wYk
 pqj
