@@ -291,6 +291,15 @@
 /obj/machinery/light/floor,
 /turf/open/floor/plating/snowed/smoothed/icemoon,
 /area/icemoon/underground/unexplored/rivers)
+"bV" = (
+/obj/structure/chair{
+	dir = 4
+	},
+/obj/machinery/atm{
+	pixel_x = -28
+	},
+/turf/open/floor/plasteel,
+/area/mine/living_quarters)
 "bZ" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 6
@@ -1196,6 +1205,9 @@
 	},
 /obj/effect/turf_decal/tile/brown{
 	dir = 8
+	},
+/obj/machinery/atm{
+	pixel_x = -28
 	},
 /turf/open/floor/plasteel,
 /area/mine/production)
@@ -3844,6 +3856,15 @@
 	},
 /obj/structure/cable{
 	icon_state = "1-8"
+	},
+/turf/open/floor/plasteel,
+/area/hallway/primary/port)
+"uB" = (
+/obj/structure/cable{
+	icon_state = "1-2"
+	},
+/obj/machinery/atm{
+	pixel_x = -28
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/port)
@@ -7147,7 +7168,6 @@
 	name = "Wolf Pit Access";
 	req_access_txt = "2"
 	},
-/obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plating,
 /area/security/execution/education)
 "Mi" = (
@@ -23815,7 +23835,7 @@ nT
 nT
 nT
 KG
-jf
+uB
 Ni
 jf
 jf
@@ -40326,7 +40346,7 @@ nd
 Ow
 Rx
 sa
-Rx
+bV
 ry
 WO
 op
