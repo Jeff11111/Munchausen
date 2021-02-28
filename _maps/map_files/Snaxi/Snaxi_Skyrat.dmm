@@ -43269,6 +43269,12 @@
 /obj/structure/fans/tiny,
 /turf/open/floor/plating,
 /area/security/execution/education)
+"sni" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/open/floor/plating/asteroid/snow/icemoon,
+/area/shuttle/arrival)
 "snB" = (
 /obj/effect/landmark/blobstart,
 /obj/structure/cable{
@@ -83673,8 +83679,8 @@ ydp
 ydp
 ydp
 ydp
-ydp
-ydp
+avT
+avT
 avT
 avT
 avT
@@ -84191,7 +84197,7 @@ nIO
 rte
 xty
 xSP
-avT
+sni
 avT
 wql
 wql
@@ -85476,7 +85482,7 @@ pln
 rIa
 ePV
 tUy
-avT
+sni
 avT
 avT
 bwt
