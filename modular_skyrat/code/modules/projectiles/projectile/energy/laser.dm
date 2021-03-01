@@ -15,8 +15,8 @@
 /obj/item/projectile/beam/disabler
 	icon = 'modular_skyrat/icons/obj/bobstation/guns/projectiles/projectiles.dmi'
 	icon_state = "sparq"
-	damage_type = PAIN
-	damage = 56
+	damage = 0
+	pain = 70
 	wound_bonus = 0
 	bare_wound_bonus = 0
 	pixels_per_second = TILES_TO_PIXELS(22) //very fast lol
@@ -40,7 +40,8 @@
 //hellfire disabler
 /obj/item/projectile/beam/disabler/hellfire
 	name = "hellfire disabler beam"
-	damage = 34
+	damage = 0
+	pain = 85
 	light_color = LIGHT_COLOR_ORANGE
 	eyeblur = 2
 
@@ -57,7 +58,8 @@
 
 /obj/item/projectile/beam/disabler/hellfire/ultra
 	name = "deluxe hellfire disabler beam"
-	damage = 75
+	damage = 0
+	pain = 100
 	color = LIGHT_COLOR_PURPLE
 	light_color = LIGHT_COLOR_PURPLE
 	eyeblur = 6
