@@ -64,11 +64,20 @@
 	var/obj/structure/toilet/toiler = locate() in get_turf(src)
 	var/obj/structure/urinal/urinel = locate() in get_turf(src)
 	var/covered_groin = clothingonpart(get_bodypart(BODY_ZONE_PRECISE_GROIN))
-	//Shit yourself
+	//Groin "covered"
 	if(covered_groin)
-		visible_message("<span class='notice'><b>[src]</b> pisses [p_their()] pants.</span>", \
-					"<span class='notice'>I piss myself...")
-		SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "piss_self", /datum/mood_event/pissed_self)
+		// Do not piss self if doing it infront of urinal.
+		// Just pull down your pants and piss, then pull it back up like everyone else, dumbass.
+		if (urinel && penis)
+			visible_message("<span class='notice'><b>[src]</b> pisses on [urinel] after putting his pants down.</span>", \
+					"<span class='notice'>I pull down my pants and take a piss on [urinel]. Sweet relief.")
+		else if (toiler && penis)
+			visible_message("<span class='notice'><b>[src]</b> pisses on [toiler] after putting his pants down.</span>", \
+					"<span class='notice'>I pull down my pants and take a piss on [toiler]. Sweet relief.")
+		else
+			visible_message("<span class='notice'><b>[src]</b> pisses [p_their()] pants.</span>", \
+						"<span class='notice'>I piss myself...")
+			SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "piss_self", /datum/mood_event/pissed_self)
 	//Gentleman's piss
 	else if(urinel)
 		visible_message("<span class='notice'><b>[src]</b> pisses on [urinel].</span>", \
