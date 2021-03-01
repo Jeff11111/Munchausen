@@ -242,3 +242,17 @@
 	lose_text = "<span class='warning'>My arms shorten.</span>"
 	medical_condition = TRUE
 	mob_trait = TRAIT_LONGARMS
+
+//balls of steel
+/datum/quirk/steelballs
+	name = "Balls Of Steel"
+	desc = "<span class='info'>I have unusually strong genitalia.</span>"
+	lose_text = "<span class='warning'>My balls soften up.</span>"
+	medical_condition = TRUE
+
+/datum/quirk/steelballs/add()
+	. = ..()
+	var/mob/living/carbon/C = quirk_holder
+	if(istype(C))
+		for(var/obj/item/organ/genital/peepee in C.internal_organs)
+			peepee.pain_multiplier = 0
