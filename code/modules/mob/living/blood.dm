@@ -30,11 +30,7 @@
 		temp_bleed += BP.get_bleed_rate()
 		BP.generic_bleedstacks = max(0, BP.generic_bleedstacks - 1)
 		if(BP.current_gauze)
-			for(var/ouchie in BP.injuries)
-				var/datum/injury/IN = ouchie
-				if(!IN.is_bleeding())
-					continue
-				BP.seep_gauze(BP.current_gauze.absorption_rate * (IN.get_bleed_rate() * 0.75))
+			BP.seep_gauze(BP.current_gauze.absorption_rate * (BP.get_bleed_rate() * 0.75))
 	bleed(temp_bleed)
 
 	//Blood regeneration if there is some space
