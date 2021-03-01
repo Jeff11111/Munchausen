@@ -21,6 +21,7 @@
 		icon_state = "extinguisher_empty"
 	else
 		stored_extinguisher = new /obj/item/extinguisher(src)
+	update_icon()
 
 /obj/structure/extinguisher_cabinet/examine(mob/user)
 	. = ..()
