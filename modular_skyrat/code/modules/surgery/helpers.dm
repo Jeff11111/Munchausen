@@ -95,7 +95,8 @@
 		our_germ_level += tool.germ_level
 	
 	//Germs from the dirtiness on the surgery room
-	for(var/turf/open/floor/floor in view(2, get_turf(BP.owner)))
+	for(var/turf/open/floor/floor in range(2, get_turf(BP.owner)))
+		floor.update_dirtiness()
 		our_germ_level += floor.dirtiness
 	
 	//Germs from the wounds on the bodypart
