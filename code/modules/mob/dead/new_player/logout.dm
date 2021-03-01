@@ -1,5 +1,5 @@
 /mob/dead/new_player/Logout()
-	to_chat(world, "<span class='ooc'><span class='prefix'>OOC:</span> [client.key] has left the lobby. So long, gay bowser.</span>")
+	to_chat(world, "<span class='ooc'><span class='prefix'>OOC:</span> [key] has left the lobby. So long, gay bowser.</span>")
 	ready = 0
 	. = ..()
 	if(!spawning)//Here so that if they are spawning and log out, the other procs can play out and they will have a mob to come back to.
