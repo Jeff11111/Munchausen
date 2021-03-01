@@ -200,10 +200,12 @@
 /obj/machinery/door/firedoor/open()
 	. = ..()
 	latetoggle()
+	playsound(src.loc, 'sound/machines/firedoor_open.ogg', 90, 1)
 
 /obj/machinery/door/firedoor/close()
 	. = ..()
 	latetoggle()
+	playsound(src.loc, 'sound/machines/firedoor_open.ogg', 90, 1)
 
 /obj/machinery/door/firedoor/deconstruct(disassembled = TRUE)
 	if(!(flags_1 & NODECONSTRUCT_1))

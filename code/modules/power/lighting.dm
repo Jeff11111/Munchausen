@@ -374,6 +374,7 @@
 			else
 				use_power = ACTIVE_POWER_USE
 				set_light(BR, PO, CO)
+				playsound(src.loc, 'sound/machines/light_on.ogg', 65, 1)
 	else if(has_emergency_power(LIGHT_EMERGENCY_POWER_USE) && !turned_off())
 		use_power = IDLE_POWER_USE
 		emergency_mode = TRUE
