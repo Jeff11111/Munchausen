@@ -5,6 +5,13 @@
 	caliber = "mm195129"
 	max_ammo = 50
 
+/obj/item/ammo_box/magazine/mm195x129/update_icon_state()
+	switch(multiple_sprites)
+		if(1)
+			icon_state = "[initial(icon_state)]-[stored_ammo.len * 2]"
+		if(2)
+			icon_state = "[initial(icon_state)]-[stored_ammo.len ? "[max_ammo * 2]" : "0"]"
+
 /obj/item/ammo_box/magazine/mm195x129/hollow
 	name = "box magazine (Hollow-Point 1.95x129mm)"
 	ammo_type = /obj/item/ammo_casing/mm195x129/hollow
