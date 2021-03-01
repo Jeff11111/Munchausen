@@ -112,7 +112,7 @@
 	var/internal_radio = TRUE
 	var/obj/item/radio/radio
 	var/radio_key = /obj/item/encryptionkey/headset_eng
-	var/radio_channel = RADIO_CHANNEL_COMMON
+	var/radio_channel = null
 
 /obj/machinery/airalarm/server // No checks here.
 	TLV = list(
