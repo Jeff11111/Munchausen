@@ -39,7 +39,7 @@
 		on = !on
 		update_icon()
 		//Area's air alarm will try to rat you out
-		for(var/obj/machinery/airalarm/alarm in A.contents)
+		for(var/obj/machinery/airalarm/alarm in range(10, src))
 			if(alarm.powered() && alarm.radio)
 				var/mob/living/carbon/human/human_user = user
 				if(istype(human_user))
@@ -59,7 +59,7 @@
 		target_pressure = MAX_OUTPUT_PRESSURE
 		to_chat(user,"<span class='notice'>You maximize the pressure on the [src].</span>")
 		//Area's air alarm will try to rat you out
-		for(var/obj/machinery/airalarm/alarm in A.contents)
+		for(var/obj/machinery/airalarm/alarm in range(10, src)))
 			if(alarm.powered() && alarm.radio)
 				var/mob/living/carbon/human/human_user = user
 				if(istype(human_user))
@@ -149,7 +149,7 @@
 			on = !on
 			message_admins("Pump, [src.name], turned [on ? "on" : "off"] by [ADMIN_LOOKUPFLW(usr)] at [ADMIN_COORDJMP(T)], [A]")
 			//Area's air alarm will try to rat you out
-			for(var/obj/machinery/airalarm/alarm in A.contents)
+			for(var/obj/machinery/airalarm/alarm in range(10, src)))
 				if(alarm.powered() && alarm.radio)
 					var/mob/living/carbon/human/human_user = usr
 					if(istype(human_user))
@@ -174,7 +174,7 @@
 			if(.)
 				target_pressure = clamp(pressure, 0, MAX_OUTPUT_PRESSURE)
 				//Area's air alarm will try to rat you out
-				for(var/obj/machinery/airalarm/alarm in A.contents)
+				for(var/obj/machinery/airalarm/alarm in range(10, src)))
 					if(alarm.powered() && alarm.radio)
 						var/mob/living/carbon/human/human_user = usr
 						if(istype(human_user))
@@ -207,8 +207,7 @@
 
 	if(on != old_on)
 		//Area's air alarm will try to rat you out
-		var/area/A = get_area(src)
-		for(var/obj/machinery/airalarm/alarm in A.contents)
+		for(var/obj/machinery/airalarm/alarm in range(10, src)))
 			if(alarm.powered() && alarm.radio)
 				alarm.radio.talk_into(alarm, "Pipe turned [on ? "on" : "off"] at [get_area_name(alarm, get_base_area = TRUE)] via remote signal", alarm.radio_channel)
 		investigate_log("was turned [on ? "on" : "off"] by a remote signal", INVESTIGATE_ATMOS)

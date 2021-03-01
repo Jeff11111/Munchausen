@@ -39,7 +39,7 @@
 		on = !on
 		update_icon()
 		//Area's air alarm will try to rat you out
-		for(var/obj/machinery/airalarm/alarm in A.contents)
+		for(var/obj/machinery/airalarm/alarm in range(10, src)))
 			if(alarm.powered() && alarm.radio)
 				var/mob/living/carbon/human/human_user = user
 				if(istype(human_user))
@@ -129,7 +129,7 @@
 		if("power")
 			on = !on
 			//Area's air alarm will try to rat you out
-			for(var/obj/machinery/airalarm/alarm in A.contents)
+			for(var/obj/machinery/airalarm/alarm in range(10, src)))
 				if(alarm.powered() && alarm.radio)
 					var/mob/living/carbon/human/human_user = usr
 					if(istype(human_user))
@@ -155,7 +155,7 @@
 			if(.)
 				transfer_rate = clamp(rate, 0, MAX_TRANSFER_RATE)
 				//Area's air alarm will try to rat you out
-				for(var/obj/machinery/airalarm/alarm in A.contents)
+				for(var/obj/machinery/airalarm/alarm in range(10, src)))
 					if(alarm.powered() && alarm.radio)
 						var/mob/living/carbon/human/human_user = usr
 						if(istype(human_user))
@@ -184,8 +184,7 @@
 
 	if(on != old_on)
 		//Area's air alarm will try to rat you out
-		var/area/A = get_area(src)
-		for(var/obj/machinery/airalarm/alarm in A.contents)
+		for(var/obj/machinery/airalarm/alarm in range(10, src)))
 			if(alarm.powered() && alarm.radio)
 				alarm.radio.talk_into(alarm, "Volume pump turned [on ? "on" : "off"] at [get_area_name(alarm, get_base_area = TRUE)] via remote signal", alarm.radio_channel)
 		investigate_log("was turned [on ? "on" : "off"] by a remote signal", INVESTIGATE_ATMOS)

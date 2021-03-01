@@ -93,8 +93,7 @@
 			if(.)
 				open_pressure = clamp(pressure, close_pressure, 50*ONE_ATMOSPHERE)
 				//Area's air alarm will try to rat you out
-				var/area/A = get_area(src)
-				for(var/obj/machinery/airalarm/alarm in A.contents)
+				for(var/obj/machinery/airalarm/alarm in range(10, src)))
 					if(alarm.powered() && alarm.radio)
 						var/mob/living/carbon/human/human_user = usr
 						if(istype(human_user))
@@ -118,8 +117,7 @@
 			if(.)
 				close_pressure = clamp(pressure, 0, open_pressure)
 				//Area's air alarm will try to rat you out
-				var/area/A = get_area(src)
-				for(var/obj/machinery/airalarm/alarm in A.contents)
+				for(var/obj/machinery/airalarm/alarm in range(10, src)))
 					if(alarm.powered() && alarm.radio)
 						var/mob/living/carbon/human/human_user = usr
 						if(istype(human_user))
