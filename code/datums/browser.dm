@@ -52,10 +52,7 @@
 	register_asset("[ckey(name)].js", file)
 
 /datum/browser/proc/set_content(ncontent)
-	if(iscarbon(user) && user.mind && (GET_STAT_LEVEL(user, int) <= JOB_STATPOINTS_WORTHLESS))
-		content = "<h1><span style='font-family: 'Comic Sans MS', 'Comic Sans', cursive;'>DUM DUM MODE. ME DUM DUM.</span></h1>"
-	else
-		content = ncontent
+	content = ncontent
 
 /datum/browser/proc/add_content(ncontent)
 	content += ncontent

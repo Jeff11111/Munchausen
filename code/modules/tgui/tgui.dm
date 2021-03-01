@@ -82,9 +82,6 @@
 	if(height)
 		src.height = height
 	
-	if(user?.mind && (GET_STAT_LEVEL(user, int) <= JOB_STATPOINTS_WORTHLESS))
-		src.scrambled = TRUE
-	
 	src.master_ui = master_ui
 	if(master_ui)
 		master_ui.children += src
