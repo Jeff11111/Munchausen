@@ -215,7 +215,7 @@
 
 ///Remove a specific embedded item from the carbon mob
 /mob/living/carbon/proc/remove_embedded_object(obj/item/I)
-	SEND_SIGNAL(src, COMSIG_CARBON_EMBED_REMOVAL, I)
+	SEND_SIGNAL(src, COMSIG_CARBON_EMBED_REMOVAL, FALSE)
 
 ///Remove all embedded objects from all limbs on the carbon mob
 /mob/living/carbon/proc/remove_all_embedded_objects()

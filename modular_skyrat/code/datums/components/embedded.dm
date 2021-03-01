@@ -230,7 +230,7 @@
 		limb.receive_damage(brute=(1-pain_stam_pct) * damage, stamina=pain_stam_pct * damage, sharpness=SHARP_EDGED) // can wound
 
 	victim.visible_message("<span class='danger'>[weapon] falls [harmful ? "out" : "off"] of [victim.name]'s [limb.name]!</span>", "<span class='userdanger'>[weapon] falls [harmful ? "out" : "off"] of your [limb.name]!</span>")
-	safeRemove()
+	safeRemove(parent)
 
 /// Called when a carbon with an object embedded/stuck to them inspects themselves and clicks the appropriate link to begin ripping the item out. This handles the ripping attempt, descriptors, and dealing damage, then calls safe_remove()
 /datum/component/embedded/proc/ripOut(datum/source, obj/item/I, obj/item/bodypart/limb, mob/living/user)
@@ -255,11 +255,11 @@
 		victim.agony_scream()
 
 	victim.visible_message("<span class='notice'>[user] successfully rips [weapon] [harmful ? "out" : "off"] of [user == victim ? victim.p_their() : "[victim]'s"] [limb.name]!</span>", "<span class='notice'>You successfully remove [weapon] from [user == victim ? "your" : "[victim]'s"] [limb.name].</span>")
-	safeRemove(TRUE, hand_override = (istype(user) ? user : null))
+	safeRemove(parent, TRUE, hand_override = (istype(user) ? user : null))
 
 /// This proc handles the final step and actual removal of an embedded/stuck item from a carbon, whether or not it was actually removed safely.
 /// Pass TRUE for to_hands if we want it to go to the victim's hands when they pull it out
-/datum/component/embedded/proc/safeRemove(to_hands = FALSE, mob/hand_override)
+/datum/component/embedded/proc/safeRemove(datum/source, to_hands = FALSE, mob/hand_override)
 	var/mob/living/carbon/victim = parent
 	limb.embedded_objects -= weapon
 	if(injury)
