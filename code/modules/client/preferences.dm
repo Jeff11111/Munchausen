@@ -2843,12 +2843,12 @@ GLOBAL_LIST_INIT(food, list(
 
 	character.left_eye_color = left_eye_color
 	character.right_eye_color = right_eye_color
-	var/obj/item/bodypart/left_eye/LE = character.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+	var/obj/item/bodypart/left_eye/LE = character.get_bodypart_nostump(BODY_ZONE_PRECISE_LEFT_EYE)
 	if(LE)
 		if(!initial(LE.eye_color))
 			LE.eye_color = left_eye_color
 		LE.old_eye_color = left_eye_color
-	var/obj/item/bodypart/right_eye/RE = character.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
+	var/obj/item/bodypart/right_eye/RE = character.get_bodypart_nostump(BODY_ZONE_PRECISE_LEFT_EYE)
 	if(RE)
 		if(!initial(RE.eye_color))
 			RE.eye_color = right_eye_color
@@ -2886,9 +2886,7 @@ GLOBAL_LIST_INIT(food, list(
 		character.regenerate_limbs()
 	
 	character.give_genitals(TRUE) //character.update_genitals() is already called on genital.update_appearance()
-
 	character.dna.update_body_size(old_size)
-
 	for(var/a in organ_augments)
 		var/datum/augment/augment = organ_augments[a][2]
 		if(augment)
@@ -2902,7 +2900,7 @@ GLOBAL_LIST_INIT(food, list(
 
 	//let's be sure the character updates
 	if(icon_updates)
-		character.update_body()
+		character.update_body(TRUE)
 		character.update_hair()
 	if(auto_hiss)
 		character.toggle_hiss()
