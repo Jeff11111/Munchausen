@@ -130,7 +130,7 @@
 		return
 	var/obj/item/organ/lungs/breathe_organ = getorganslot(ORGAN_SLOT_LUNGS)
 	if(breathe_organ)
-		breathe_organ.oxygen_deprivation = 0
+		breathe_organ.remove_oxygen_deprivation(breathe_organ.oxygen_deprivation)
 		if(amount > 0)
 			breathe_organ.add_oxygen_deprivation(abs(amount))
 	if(updating_health)
