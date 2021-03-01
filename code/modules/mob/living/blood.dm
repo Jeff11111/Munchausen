@@ -176,15 +176,14 @@
 			var/datum/reagent/R = GLOB.chemical_reagents_list[get_blood_id()]
 			if(istype(R) && isturf(loc) && splatter)
 				R.reaction_turf(get_turf(src), amt * EXOTIC_BLEED_MULTIPLIER)
-				if(amt >= 1)
-					var/bloodsound = pick('modular_skyrat/sound/gore/blood1.ogg',
-									'modular_skyrat/sound/gore/blood2.ogg',
-									'modular_skyrat/sound/gore/blood3.ogg',
-									'modular_skyrat/sound/gore/blood4.ogg',
-									'modular_skyrat/sound/gore/blood5.ogg',
-									'modular_skyrat/sound/gore/blood6.ogg',
-									)
-					playsound(get_turf(src), bloodsound, 100)
+				var/bloodsound = pick('modular_skyrat/sound/gore/blood1.ogg',
+								'modular_skyrat/sound/gore/blood2.ogg',
+								'modular_skyrat/sound/gore/blood3.ogg',
+								'modular_skyrat/sound/gore/blood4.ogg',
+								'modular_skyrat/sound/gore/blood5.ogg',
+								'modular_skyrat/sound/gore/blood6.ogg',
+								)
+				playsound(get_turf(src), bloodsound, 100, 0, -3)
 
 /mob/living/proc/restore_blood()
 	blood_volume = initial(blood_volume)
