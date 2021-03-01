@@ -33,5 +33,8 @@
 			postfix = "soon"
 		to_chat(src, "Please set up your character and select \"Ready\". The game will start [postfix].")
 	
+	to_chat(world, "<span class='ooc'><span class='prefix'>OOC:</span> [client.key] has joined the lobby.</span>")
+
+	//We do a little trolling
 	if(prob(1))
 		client << link(CONFIG_GET(string/downwardspiralurl))
