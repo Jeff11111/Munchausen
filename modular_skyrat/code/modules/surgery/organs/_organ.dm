@@ -124,9 +124,6 @@
 /obj/item/organ/proc/is_robotic()
 	return (status & ORGAN_ROBOTIC)
 
-/obj/item/organ/proc/is_synthetic()
-	return (organ_flags & ORGAN_SYNTHETIC)
-
 /obj/item/organ/proc/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = FALSE)
 	if(!iscarbon(M) || owner == M)
 		return FALSE
@@ -202,7 +199,7 @@
 		kill_organ()
 
 /obj/item/organ/proc/can_decay()
-	if(CHECK_BITFIELD(organ_flags, ORGAN_NO_SPOIL | ORGAN_SYNTHETIC | ORGAN_FAILING | ORGAN_DEAD))
+	if(CHECK_BITFIELD(organ_flags, ORGAN_NO_SPOIL | ORGAN_FAILING | ORGAN_DEAD))
 		return FALSE
 	if(is_robotic())
 		return FALSE
@@ -259,9 +256,9 @@
 		handle_germ_effects()
 	else if(!can_decay())
 		germ_level = 0
-		return
+		return TRUE
 	if(CHECK_BITFIELD(organ_flags, ORGAN_FAILING | ORGAN_DEAD) || !owner)
-		return FALSE
+		return TRUE
 	if(!is_cold() && damage)
 		///Damage decrements by a percent of its maxhealth
 		var/healing_amount = -(maxHealth * healing_factor)

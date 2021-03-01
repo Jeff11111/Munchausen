@@ -9,7 +9,7 @@
 	modifies_speech = TRUE
 	taste_sensitivity = 25 // not as good as an organic tongue
 	maxHealth = 100 //RoboTongue!
-	organ_flags = ORGAN_SYNTHETIC
+	status = ORGAN_ROBOTIC
 
 /obj/item/organ/tongue/robot_ipc/handle_speech(datum/source, list/speech_args)
 	speech_args[SPEECH_SPANS] |= SPAN_ROBOT 
@@ -20,4 +20,4 @@
 	say_mod = "beeps"
 	desc = "A voice synthesizer used by IPCs to smoothly interface with organic lifeforms."
 	electronics_magic = FALSE
-	organ_flags = ORGAN_SYNTHETIC
+	status = ORGAN_ROBOTIC

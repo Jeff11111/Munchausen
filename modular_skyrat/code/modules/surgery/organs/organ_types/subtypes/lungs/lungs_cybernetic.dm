@@ -2,7 +2,7 @@
 	name = "cybernetic lungs"
 	desc = "A cybernetic version of the lungs found in traditional humanoid entities. It functions the same as an organic lung and is merely meant as a replacement."
 	icon_state = "lungs-c"
-	organ_flags = ORGAN_SYNTHETIC
+	status = ORGAN_ROBOTIC
 	maxHealth = 400
 	safe_oxygen_min = 13
 

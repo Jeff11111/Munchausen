@@ -5,7 +5,7 @@
 	icon_state = "tongue-c"
 	taste_sensitivity = 10
 	maxHealth = 60 //It's robotic!
-	organ_flags = ORGAN_SYNTHETIC
+	status = ORGAN_ROBOTIC
 
 /obj/item/organ/tongue/cybernetic/emp_act(severity)
 	. = ..()

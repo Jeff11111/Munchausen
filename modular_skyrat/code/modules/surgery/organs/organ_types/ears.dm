@@ -45,8 +45,8 @@
 			adjustEarDamage(0, 4)
 			SEND_SOUND(owner, sound('sound/weapons/flash_ring.ogg'))
 			to_chat(owner, "<span class='warning'>The ringing in your ears grows louder, blocking out any external noises for a moment.</span>")
-	else if(!. && !deaf)
-		deaf = 1	//stop being not deaf you deaf idiot
+	else if(!. && !deaf) //stop being not deaf you deaf idiot
+		deaf = 1
 
 /obj/item/organ/ears/proc/restoreEars()
 	deaf = 0

@@ -1,7 +1,6 @@
 /obj/item/organ/liver/robot_ipc
 	name = "ipc liver"
 	desc = "An electronic device that processes the beneficial chemicals for the synthetic user."
-	organ_flags = ORGAN_SYNTHETIC
 	status = ORGAN_ROBOTIC
 	icon = 'modular_skyrat/icons/obj/surgery.dmi'
 	icon_state = "liver-c"

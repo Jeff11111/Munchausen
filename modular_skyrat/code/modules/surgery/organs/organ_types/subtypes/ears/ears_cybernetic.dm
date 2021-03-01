@@ -3,7 +3,7 @@
 	icon_state = "ears-c"
 	desc = "a basic cybernetic designed to mimic the operation of ears."
 	damage_multiplier = 0.9
-	organ_flags = ORGAN_SYNTHETIC
+	status = ORGAN_ROBOTIC
 
 /obj/item/organ/ears/cybernetic/upgraded
 	name = "upgraded cybernetic ears"

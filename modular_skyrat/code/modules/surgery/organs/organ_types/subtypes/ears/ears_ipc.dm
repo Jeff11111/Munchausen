@@ -7,7 +7,6 @@
 	slot = ORGAN_SLOT_EARS
 	gender = PLURAL
 	status = ORGAN_ROBOTIC
-	organ_flags = ORGAN_SYNTHETIC
 
 /obj/item/organ/ears/robot_ipc/emp_act(severity)
 	. = ..()

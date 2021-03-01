@@ -1,7 +1,7 @@
 /obj/item/organ/heart/freedom
 	name = "heart of freedom"
 	desc = "This heart pumps with the passion to give... something freedom."
-	organ_flags = ORGAN_SYNTHETIC //the power of freedom prevents heart attacks
+	status = ORGAN_ROBOTIC
 	var/min_next_adrenaline = 0
 
 /obj/item/organ/heart/freedom/on_life()

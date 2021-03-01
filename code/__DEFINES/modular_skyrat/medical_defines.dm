@@ -97,16 +97,15 @@
 #define ORGAN_ROBOTIC   (1<<1)
 
 //Flags for the organ_flags var on /obj/item/organ
-#define ORGAN_SYNTHETIC			(1<<0)	//Synthetic organs, or cybernetic organs. Reacts to EMPs and don't deteriorate or heal
-#define ORGAN_FROZEN			(1<<1)	//Frozen organs, don't deteriorate
-#define ORGAN_FAILING			(1<<2)	//Failing organs perform damaging effects until replaced or fixed
-#define ORGAN_DEAD				(1<<3)  //Not only is the organ failing, it is completely septic and spreading it around
-#define ORGAN_EXTERNAL			(1<<4)	//Was this organ implanted/inserted/etc, if true will not be removed during species change.
-#define ORGAN_VITAL				(1<<5)	//Currently only the brain
-#define ORGAN_NO_SPOIL			(1<<6)	//Do not spoil under any circumstances
-#define ORGAN_NO_DISMEMBERMENT	(1<<7)	//Immune to disembowelment.
-#define ORGAN_EDIBLE			(1<<8)	//is a snack? :D
-#define ORGAN_CUT_AWAY			(1<<9)	//Required for ogan manipulation
+#define ORGAN_FROZEN			(1<<0)	//Frozen organs, don't deteriorate
+#define ORGAN_FAILING			(1<<1)	//Failing organs perform damaging effects until replaced or fixed
+#define ORGAN_DEAD				(1<<2)  //Not only is the organ failing, it is completely septic and spreading it around
+#define ORGAN_EXTERNAL			(1<<3)	//Was this organ implanted/inserted/etc, if true will not be removed during species change.
+#define ORGAN_VITAL				(1<<4)	//Currently only the brain
+#define ORGAN_NO_SPOIL			(1<<5)	//Do not spoil under any circumstances
+#define ORGAN_NO_DISMEMBERMENT	(1<<6)	//Immune to disembowelment.
+#define ORGAN_EDIBLE			(1<<7)	//is a snack? :D
+#define ORGAN_CUT_AWAY			(1<<8)	//Required for ogan manipulation
 
 //Bodypart status flags
 #define BODYPART_ORGANIC	(1<<0)
