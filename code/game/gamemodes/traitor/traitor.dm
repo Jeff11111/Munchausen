@@ -12,12 +12,11 @@
 	false_report_weight = 20 //Reports of traitors are pretty common.
 	restricted_jobs = list("Cyborg")//They are part of the AI if he is traitor so are they, they use to get double chances
 	protected_jobs = list("Enforcer", "Lieutenant", "Detective", "Chief Enforcer", "Captain", "Head of Personnel", "Senior Engineer", "Chief Medical Officer", "Research Director", "Logistics Officer")	//citadel change - adds HoP, CE, CMO, and RD to ling role blacklist
-	required_players = 0
+	required_players = 15
 	required_enemies = 1
 	recommended_enemies = 4
 	reroll_friendly = 1
 	enemy_minimum_age = 0
-	// SKYRAT EDIT: Credits
 	title_icon = "traitor"
 
 	announce_span = "danger"
