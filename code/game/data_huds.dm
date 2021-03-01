@@ -103,7 +103,7 @@
 	if(M.stat == DEAD || (HAS_TRAIT(M, TRAIT_FAKEDEATH)))
 		return "health-100" //what's our health? it doesn't matter, we're dead, or faking
 	var/maxi_health = M.getMaxHealth()
-	var/cur_health = M.get_physical_damage()
+	var/cur_health = (ishuman(M) ? M.getBrainLoss() : M.get_physical_damage())
 	if(iscarbon(M) && cur_health < 0)
 		maxi_health = 100 //so crit shows up right for aliens and other high-health carbon mobs; noncarbons don't have crit.
 	var/resulthealth = (cur_health / maxi_health) * 100
