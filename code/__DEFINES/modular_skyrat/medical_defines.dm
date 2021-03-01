@@ -110,7 +110,6 @@
 //Bodypart status flags
 #define BODYPART_ORGANIC	(1<<0)
 #define BODYPART_ROBOTIC	(1<<1)
-#define BODYPART_SYNTHETIC	(1<<2)
 
 //Flags for the limb_flags var on /obj/item/bodypart
 #define	BODYPART_VITAL		(1<<0) //Kills the owner if destroyed or dismembered

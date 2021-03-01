@@ -612,7 +612,7 @@
 
 //The bodypart can rot and get infected
 /obj/item/bodypart/proc/can_decay()
-	if(CHECK_BITFIELD(status, BODYPART_ROBOTIC | BODYPART_SYNTHETIC) || CHECK_BITFIELD(limb_flags, BODYPART_DEAD))
+	if(CHECK_BITFIELD(status, BODYPART_ROBOTIC) || CHECK_BITFIELD(limb_flags, BODYPART_DEAD))
 		return FALSE
 	if(owner?.reagents?.has_reagent(/datum/reagent/medicine/preservahyde) || owner?.reagents?.has_reagent(/datum/reagent/toxin/formaldehyde))
 		return FALSE
@@ -1473,9 +1473,6 @@
 
 /obj/item/bodypart/proc/is_robotic_limb()
 	return (CHECK_BITFIELD(status, BODYPART_ROBOTIC))
-
-/obj/item/bodypart/proc/is_synthetic_limb()
-	return (CHECK_BITFIELD(status, BODYPART_SYNTHETIC))
 
 /obj/item/bodypart/proc/is_mixed_limb()
 	return (is_organic_limb() && is_robotic_limb())

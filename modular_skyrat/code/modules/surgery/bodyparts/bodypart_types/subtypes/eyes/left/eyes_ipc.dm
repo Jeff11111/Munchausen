@@ -1,9 +1,9 @@
 /obj/item/bodypart/left_eye/robot_ipc
-	name = "robotic eyes"
+	name = "robotic left eye"
 	icon = 'modular_skyrat/icons/obj/surgery.dmi'
 	icon_state = "eye-c"
 	desc = "A very basic set of optical sensors with no extra vision modes or functions."
-	status = BODYPART_ROBOTIC | BODYPART_SYNTHETIC
+	status = BODYPART_ROBOTIC
 
 /obj/item/bodypart/left_eye/emp_act(severity)
 	. = ..()
