@@ -49,12 +49,10 @@
 #define MOB_REPTILE		(1 << 8)
 #define MOB_SPIRIT		(1 << 9)
 
-//skyrat edit
 #define DEFAULT_BODYPART_ICON 'modular_skyrat/icons/mob/human_parts.dmi'
 #define DEFAULT_BODYPART_ICON_ORGANIC 'modular_skyrat/icons/mob/human_parts_greyscale.dmi'
 #define DEFAULT_BODYPART_ICON_ROBOTIC 'modular_skyrat/icons/mob/augments/augments.dmi'
 #define DEFAULT_BODYPART_ICON_CITADEL 'modular_skyrat/icons/mob/mutant_bodyparts.dmi'
-//
 
 #define MONKEY_BODYPART "monkey"
 #define ALIEN_BODYPART "alien"

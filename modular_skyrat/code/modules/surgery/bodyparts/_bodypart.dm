@@ -2033,7 +2033,7 @@
 		else
 			species_color = ""
 
-		if(base_bp_icon != DEFAULT_BODYPART_ICON)
+		if(!(base_bp_icon in list(DEFAULT_BODYPART_ICON, DEFAULT_BODYPART_ICON_ROBOTIC)))
 			color_src = mut_colors ? MUTCOLORS : ((H.dna.skin_tone_override && S.use_skintones == USE_SKINTONES_GRAYSCALE_CUSTOM) ? CUSTOM_SKINTONE : SKINTONE)
 
 		if(S.mutant_bodyparts["legs"])
