@@ -167,6 +167,10 @@
 
 /datum/bobux_reward/cum_shower/on_buy(client/noob)
 	. = ..()
+	if(noob.key == "Subaruuuuu")
+		to_chat(noob, "<span class='bobux'>fuck you lol!!!!!</span>")
+		message_admins("[noob] tried to make everyone coom, too bad!")
+		return FALSE
 	message_admins("[noob] has made everyone COOM.")
 	log_admin("[noob] has made everyone COOM.")
 	var/cumsound = pick('modular_skyrat/sound/misc/coom.ogg','modular_skyrat/sound/misc/bobcoomer.ogg')
