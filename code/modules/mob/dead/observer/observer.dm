@@ -4,8 +4,8 @@ GLOBAL_LIST_EMPTY(ghost_images_simple) //this is a list of all ghost images as t
 GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 
 /mob/dead/observer
-	name = "ghost"
-	desc = "It's a g-g-g-g-ghooooost!" //jinkies!
+	name = "lost soul"
+	desc = "An aimless soul trying to find their peace."
 	icon = 'icons/mob/mob.dmi'
 	plane = MOB_PLANE
 	layer = GHOST_LAYER
@@ -195,7 +195,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 
 /mob/dead/observer/get_photo_description(obj/item/camera/camera)
 	if(!invisibility || camera.see_ghosts)
-		return "You can also see a g-g-g-g-ghooooost!"
+		return "You can also see a lost soul!"
 
 /mob/dead/observer/narsie_act()
 	var/old_color = color
