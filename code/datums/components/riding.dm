@@ -210,7 +210,7 @@
 
 /datum/component/riding/human/proc/update_dir(mob/source, dir, newdir)
 	handle_vehicle_offsets(newdir)
-	handle_vehicle_layer()
+	handle_vehicle_layer(newdir)
 
 /datum/component/riding/human/vehicle_mob_unbuckle(datum/source, mob/living/M, force = FALSE)
 	var/mob/living/carbon/human/H = parent
