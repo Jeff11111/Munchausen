@@ -14,14 +14,13 @@
 	miss_entirely_prob = 25
 	zone_prob = 35
 	extra_zone_prob = 65
-	limb_flags = 0
 	stam_heal_tick = 2
-	var/obj/item/stack/sticky_tape/tapered = null
 	amputation_point = "face"
 	joint_name = "ramus"
 	artery_name = "facial artery"
 	tendon_name = "lateral ligament"
 	cavity_name = "dental"
+	var/obj/item/stack/sticky_tape/tapered = null
 
 /obj/item/bodypart/mouth/get_limb_icon(dropped)
 	if(dropped && !istype(loc, /obj/item/bodypart))
