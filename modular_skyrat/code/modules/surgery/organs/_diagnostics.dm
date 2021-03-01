@@ -7,15 +7,13 @@
 	. = list()
 	if(is_robotic())
 		. += do_tag ? "<span class='notice'>Mechanical</span>" : "Mechanical"
-	if(is_synthetic())
-		. += do_tag ? "<span class='notice'>Synthetic</span>" : "Synthetic"
-	
+
 	if(CHECK_BITFIELD(organ_flags, ORGAN_DEAD))
 		if(can_recover())
 			. += do_tag ? "<span class='danger'>Decaying</span>" : "Decaying"
 		else
 			. += do_tag ? "<span class='deadsay'>Necrotic</span>" : "Necrotic"
-	
+
 	if(CHECK_BITFIELD(organ_flags, ORGAN_CUT_AWAY))
 		. += do_tag ? "<span class='danger'>Severed</span>" : "Severed"
 
@@ -34,7 +32,7 @@
 			. += do_tag ? "<span class='deadsay'>Acute Infection++</span>" : "Acute Infection++"
 		if(INFECTION_LEVEL_THREE to INFINITY)
 			. += do_tag ? "<span class='deadsay'><b>Septic</b></span>" : "Septic"
-	
+
 	if(rejecting)
 		. += do_tag ? "<span class='danger'><b>Genetic Rejection</b></span>" : "Genetic Rejection"
 

@@ -292,7 +292,7 @@
 
 	if(germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(virus_immunity*0.3))
 		germ_level--
-	
+
 	if(germ_level >= INFECTION_LEVEL_ONE/2)
 		//Aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes, when immunity is full.
 		if(antibiotics < 5 && prob(round(germ_level/6 * owner.immunity_weakness() * 0.01)))
@@ -300,7 +300,7 @@
 				germ_level += clamp(round(1/virus_immunity), 1, 10) // Immunity starts at 100. This doubles infection rate at 50% immunity. Rounded to nearest whole.
 			else // Will only trigger if immunity has hit zero. Once it does, 10x infection rate.
 				germ_level += 10
-	
+
 	if(germ_level >= INFECTION_LEVEL_ONE)
 		var/fever_temperature = (BODYTEMP_HEAT_DAMAGE_LIMIT - BODYTEMP_NORMAL - 5)* min(germ_level/INFECTION_LEVEL_TWO, 1) + BODYTEMP_NORMAL
 		owner.bodytemperature += clamp((fever_temperature - T20C)/BODYTEMP_COLD_DIVISOR + 1, 0, fever_temperature - owner.bodytemperature)
@@ -315,7 +315,7 @@
 		//The bodypart deals with dealing raw toxin damage, let's not stack onto the problem now
 		if(prob(3))
 			applyOrganDamage(2)
-	
+
 	//Organ is just completely dead by this point
 	if(germ_level >= INFECTION_LEVEL_THREE)
 		kill_organ()
@@ -327,9 +327,9 @@
 
 //Rejection
 /obj/item/organ/proc/handle_rejection()
-	if(is_robotic() || is_synthetic())
+	if(is_robotic())
 		return
-	
+
 	// Process unsuitable transplants. TODO: consider some kind of
 	// immunosuppressant that changes transplant data to make it match.
 	var/antibiotics = owner.get_antibiotics()
@@ -339,7 +339,7 @@
 			original_dna = owner.dna
 			original_species = owner.dna?.species
 		return
-	
+
 	if(original_dna)
 		if(!rejecting)
 			if(original_dna && !(owner.dna.blood_type in get_safe_blood(original_dna?.blood_type)))
@@ -375,7 +375,7 @@
 			etching = "[badboy]"
 			user.visible_message("<span class='notice'><b>[user]</b> etches something on \the [src] with \the [I].</span>", \
 					" <span class='notice'>You etch <b>\"[badboy]\"</b> on [src] with \the [I]. Hehe.</span>")
-			return TRUE		
+			return TRUE
 		else
 			return ..()
 	else if(!owner && I.get_sharpness() && (user.a_intent == INTENT_HARM))
