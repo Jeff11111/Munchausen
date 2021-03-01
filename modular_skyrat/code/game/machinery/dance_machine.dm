@@ -1,3 +1,11 @@
+//Jukebox sprite, thanks redrick
+/obj/machinery/jukebox
+	icon = 'modular_skyrat/icons/obj/jukebox.dmi'
+	icon_state = "jukebox"
+
+/obj/machinery/jukebox/disco
+	icon = 'icons/obj/stationobjs.dmi'
+
 //Jukeboxes work as boomboxes
 /obj/machinery/jukebox/ComponentInitialize()
 	. = ..()
@@ -11,7 +19,7 @@
 	add_fingerprint(usr)
 	switch(href_list["action"])
 		if("toggle")
-			if (QDELETED(src))
+			if(QDELETED(src))
 				return
 			if(!active)
 				if(stop > world.time)
