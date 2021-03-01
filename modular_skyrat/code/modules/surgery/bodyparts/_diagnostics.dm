@@ -195,8 +195,6 @@
 	. = list()
 	if(is_robotic_limb())
 		. += do_tag ? "<span class='info'>Mechanical</span>" : "Mechanical"
-	if(is_synthetic_limb())
-		. += do_tag ? "<span class='info'>Synthetic</span>" : "Synthetic"
 	
 	if(CHECK_BITFIELD(limb_flags, BODYPART_DEAD))
 		if(can_recover())

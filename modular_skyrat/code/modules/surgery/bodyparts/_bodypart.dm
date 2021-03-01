@@ -407,7 +407,7 @@
 
 //Rejection
 /obj/item/bodypart/proc/handle_rejection()
-	if(is_robotic_limb() || is_synthetic_limb())
+	if(is_robotic_limb())
 		return
 	
 	// Process unsuitable transplants. TODO: consider some kind of
