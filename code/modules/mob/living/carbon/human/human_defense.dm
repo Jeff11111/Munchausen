@@ -772,7 +772,7 @@
 			"<span class='notice'><b>I check myself.</b></span>")
 	
 	to_chat(src, "<span class='info'>*---------*</span>")
-	to_chat(src, "<span class='info'>Let's see how i am doing.</span>")
+	to_chat(src, "<span class='info'>Let's see how I am doing.</span>")
 	if(stat < DEAD)
 		to_chat(src, "<span class='info'>I am still alive[stat < UNCONSCIOUS ? "" : ", but i am unconscious"].</span>")
 	else
