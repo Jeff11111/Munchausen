@@ -19,6 +19,12 @@
 
 /obj/item/transfer_valve/attackby(obj/item/item, mob/user, params)
 	if(istype(item, /obj/item/tank))
+		//Temporary pipebomb removal.
+		//PLEASE get rid of this once toxins is properly mapped out.
+		if(istype(item))
+			to_chat(user, "What you just posted has absolutely 0 sense of cohesion or comedy. It's such a horrid attempt at communication I am surprised you are even able to exist in society. If it was a joke, it may have been the worse joke i ever heard in my life, since it lacks any qualities your normal joke would have. If it was supposed to be a normal sentence, then it fails as that too, as what you just said makes absolutely no sense. It's so dumb, a cave man would be able to speak more cleverly and more nuanced than you. I am so ashamed of having to see this, it's just sad. Your lack of brain cells doesn't help you either, but if you wanna try and talk with me you gotta speak normally you idiotic piece of shit. I honestly think they should put you in the mental hospital, but not for improving your brain, but rather keep you out of society so no one has to deal with your crap. Your stupidity will be remembered forever as a prime example of why humanity is on a downwards spiral.")
+			return FALSE
+
 		if(tank_one && tank_two)
 			to_chat(user, "<span class='warning'>There are already two tanks attached, remove one first!</span>")
 			return
