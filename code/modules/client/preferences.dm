@@ -17,7 +17,7 @@ GLOBAL_LIST_INIT(food, list(
 		"Gross" = GROSS,
 		"Toxic" = TOXIC,
 		"Pineapple" = PINEAPPLE,
-		"Breakfast" = BREAKFAST
+		"Breakfast" = BREAKFAST,
 	))
 
 /datum/preferences

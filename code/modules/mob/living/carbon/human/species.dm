@@ -642,7 +642,9 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			if((H.stat > CONSCIOUS) && ishuman(H))
 				var/neweyecolor = sanitize_hexcolor(SKINTONE2HEX(H.skin_tone))
 				if(H.dna.skin_tone_override)
-					neweyecolor = sanitize_hexcolor(H.dna.features["mcolor"])
+					neweyecolor = sanitize_hexcolor(SKINTONE2HEX(H.dna.skin_tone_override))
+				else
+					neweyecolor = sanitize_hexcolor(SKINTONE2HEX(H.dna.features["mcolor"]))
 				left_eye_color = neweyecolor
 				right_eye_color = neweyecolor
 

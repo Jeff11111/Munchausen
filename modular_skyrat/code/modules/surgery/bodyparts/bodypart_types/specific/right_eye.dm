@@ -65,11 +65,11 @@
 		return
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		old_eye_color = H.left_eye_color
+		old_eye_color = H.right_eye_color
 		if(eye_color)
-			H.left_eye_color = eye_color
+			H.right_eye_color = eye_color
 		else
-			eye_color = H.left_eye_color
+			eye_color = H.right_eye_color
 		H.dna?.species?.handle_body(H) //regenerate eyeballs overlays
 	check_damage()
 	C.update_tint()
@@ -84,7 +84,7 @@
 	C?.cure_blind(EYE_DAMAGE)
 	if(ishuman(C) && eye_color && old_eye_color)
 		var/mob/living/carbon/human/H = C
-		H.left_eye_color = old_eye_color
+		H.right_eye_color = old_eye_color
 		if(!special)
 			H.dna.species.handle_body(H)
 	C?.update_tint()
