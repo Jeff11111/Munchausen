@@ -5,4 +5,11 @@
 	status = ORGAN_ROBOTIC
 
 /obj/item/organ/kidneys/robot_ipc/emp_act(severity)
-	applyOrganDamage(severity * 10)
+	. = ..()
+	if(. & EMP_PROTECT_SELF)
+		return
+	switch(severity)
+		if(1)
+			applyOrganDamage(maxHealth*0.75)
+		if(2)
+			applyOrganDamage(0.35 * maxHealth)

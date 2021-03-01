@@ -21,6 +21,6 @@
 		return
 	switch(severity)
 		if(1)
-			damage+=100
+			applyOrganDamage(maxHealth*0.75)
 		if(2)
-			damage+=50
+			applyOrganDamage(0.35 * maxHealth)

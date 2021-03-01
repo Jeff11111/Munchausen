@@ -75,7 +75,7 @@
 		if(prob(33))
 			if(damage >= high_threshold)
 				owner.adjustToxLoss(0.5)
-			if(status & ORGAN_FAILING)
+			if(organ_flags & ORGAN_FAILING)
 				owner.adjustToxLoss(1)
 
 /obj/item/organ/kidneys/proc/get_hydration_loss()
