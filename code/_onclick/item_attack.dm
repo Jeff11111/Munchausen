@@ -183,11 +183,8 @@
 	var/pitiful = FALSE
 	if(user.mind && GET_STAT_LEVEL(user, str) < 10)
 		switch(user.mind.diceroll(STAT_DATUM(str)))
-			if(DICE_FAILURE)
-				totitemdamage *= 0.7
-				pitiful = TRUE
 			if(DICE_CRIT_FAILURE)
-				totitemdamage *= 0.25
+				totitemdamage *= 0.75
 				pitiful = TRUE
 	if(totitemdamage)
 		visible_message("<span class='danger'><b>[user]</b> has[pitiful ? " pitifully" : ""] hit [src] with [I]!</span>", null, null, COMBAT_MESSAGE_RANGE)

@@ -386,7 +386,7 @@
 		if(user.mind && GET_STAT_LEVEL(user, str) < 10)
 			switch(user.mind.diceroll(STAT_DATUM(str)))
 				if(DICE_CRIT_FAILURE)
-					damage *= 0.4
+					damage *= 0.75
 					pitiful = TRUE
 
 		//Shoes with the force var modify total damage
@@ -588,7 +588,7 @@
 		if(user.mind && GET_STAT_LEVEL(user, str) <= 10)
 			switch(user.mind.diceroll(STAT_DATUM(str)))
 				if(DICE_CRIT_FAILURE)
-					damage *= 0.4
+					damage *= 0.75
 					pitiful = TRUE
 
 		//The probability of hitting the correct zone depends on dexterity

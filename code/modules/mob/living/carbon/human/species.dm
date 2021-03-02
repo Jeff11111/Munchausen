@@ -1725,7 +1725,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(user.mind && GET_STAT_LEVEL(user, str) < 10)
 			switch(user.mind.diceroll(STAT_DATUM(str)))
 				if(DICE_CRIT_FAILURE)
-					damage *= 0.4
+					damage *= 0.75
 					pitiful = TRUE
 
 		//Gloves with the force var modify total damage
