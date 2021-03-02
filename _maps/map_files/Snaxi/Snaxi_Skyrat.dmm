@@ -35726,7 +35726,7 @@
 /turf/open/floor/plating,
 /area/security/brig)
 "oLA" = (
-/turf/open/floor/plasteel/showroomfloor/shower,
+/turf/open/floor/plasteel/showroomfloor,
 /area/security/prison)
 "oLB" = (
 /obj/structure/cable{
