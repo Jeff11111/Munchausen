@@ -355,6 +355,36 @@
 	cost = 800
 	contains = list(/obj/item/kitchen/knife/combat)
 
+/datum/supply_pack/goody/energy_sword
+	name = "Energy Sword"
+	desc = "An energy sword. Never know when you need it."
+	cost = 2000
+	contains = list(/obj/item/melee/transforming/energy/sword)
+
+/datum/supply_pack/goody/energy_cutlass
+	name = "Energy Cutlass"
+	desc = "An energy cutlass. Never know when you need it."
+	cost = 2000
+	contains = list(/obj/item/melee/transforming/energy/sword/pirate)
+
+/datum/supply_pack/goody/ne_blade
+	name = "Non-eutactic Blade"
+	desc = "Non-eutactic blade. Never know when you need it."
+	cost = 2000
+	contains = list(/obj/item/melee/transforming/energy/sword/cx)
+
+/datum/supply_pack/goody/dt_blade
+	name = "Dragon's Tooth Sword"
+	desc = "An improved model of the non-eutactic blade. Never know when you need it."
+	cost = 4500
+	contains = list(/obj/item/melee/transforming/energy/sword/cx/traitor)
+
+/datum/supply_pack/goody/officer_sabre
+	name = "Officer's Sabre"
+	desc = "A sabre with an accompanying. Never know when you need it."
+	cost = 5000
+	contains = list(/obj/item/storage/belt/sabre)
+
 //UK worst crime pack
 /datum/supply_pack/goody/zhunter
 	name = "Z-Hunter Surplus"

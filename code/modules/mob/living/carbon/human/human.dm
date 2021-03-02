@@ -804,7 +804,7 @@
 				else
 					to_chat(C, "<span class='unconscious'>I feel my chest being pushed on...</span>")
 				
-				var/diceroll = mind?.diceroll(heyeinstein, heymedic, "6d6", 18, mod = heart_exposed_mod)
+				var/diceroll = mind?.diceroll(heyeinstein * 0.5, heymedic * 1.5, "6d6", 18, mod = heart_exposed_mod)
 				if((diceroll >= DICE_SUCCESS) || !mind)
 					if(prob(40) || (diceroll >= DICE_CRIT_SUCCESS))
 						if(they_heart?.Restart() && C.revive())
