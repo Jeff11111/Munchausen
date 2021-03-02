@@ -333,9 +333,19 @@
 	if(germ_level < INFECTION_LEVEL_ONE)
 		germ_level = 0	//cure instantly
 	else
-		germ_level -= antibiotics * SANITIZATION_ANTIBIOTIC	//at germ_level == 500 and 50 antibiotic, this should cure the infection in 5 minutes
+		janitize(-antibiotics * SANITIZATION_ANTIBIOTIC)	//at germ_level == 500 and 50 antibiotic, this should cure the infection in 5 minutes
+		for(var/in in injuries)
+			var/datum/injury/IN = in
+			IN.germ_level -= antibiotics * SANITIZATION_ANTIBIOTIC
+			if(IN.germ_level < 0)
+				IN.germ_level = 0
 	if(owner && owner.lying)
-		germ_level -= SANITIZATION_LYING
+		janitize(-SANITIZATION_LYING)
+		for(var/in in injuries)
+			var/datum/injury/IN = in
+			IN.germ_level -= SANITIZATION_LYING
+			if(IN.germ_level < 0)
+				IN.germ_level = 0
 	germ_level = max(0, germ_level)
 
 /obj/item/bodypart/proc/handle_germ_effects()
