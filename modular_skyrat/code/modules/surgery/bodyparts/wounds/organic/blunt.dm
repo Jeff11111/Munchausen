@@ -367,8 +367,8 @@
 		else
 			replace_wound(/datum/wound/blunt/severe, silent = TRUE)
 		funky_kong.receive_damage(brute=GET_STAT_LEVEL(user, str)*0.75, wound_bonus = CANT_WOUND)
-		user.visible_message("<span class='danger'><b>[user]</b> snaps <b>[victim]</b>'s dislocated [funky_kong.name] with a sickening crack![victim.wound_message]</span>", "<span class='danger'>I snap <b>[victim]</b>'s dislocated [funky_kong.name] with a sickening crack![victim.wound_message]</span>", ignored_mobs=victim)
-		to_chat(victim, "<span class='userdanger'><b>[user]</b> snaps my dislocated [funky_kong.name] with a sickening crack![victim.wound_message]</span>")
+		user.visible_message("<span class='danger'><b>[user]</b> snaps <b>[victim]</b>'s dislocated [funky_kong.name] with a sickening crack![funky_kong.owner?.wound_message]</span>", "<span class='danger'>I snap <b>[victim]</b>'s dislocated [funky_kong.name] with a sickening crack![funky_kong.owner?.wound_message]</span>", ignored_mobs=victim)
+		to_chat(victim, "<span class='userdanger'><b>[user]</b> snaps my dislocated [funky_kong.name] with a sickening crack![funky_kong.owner?.wound_message]</span>")
 	else
 		user.visible_message("<span class='danger'><b>[user]</b> wrenches <b>[victim]</b>'s dislocated [limb.name]![victim.wound_message]</span>", \
 						"<span class='danger'>I wrench <b>[victim]</b>'s dislocated [limb.name]![victim.wound_message]</span>", ignored_mobs=victim)
