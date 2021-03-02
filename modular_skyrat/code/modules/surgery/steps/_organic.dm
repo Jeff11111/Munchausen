@@ -246,7 +246,7 @@
 		return FALSE
 	var/mob/living/carbon/C = target
 	var/obj/item/bodypart/BP = C.get_bodypart(user.zone_selected)
-	if(BP.is_disinfected())
+	if(BP.is_disinfected() && BP.is_salved())
 		return FALSE
 
 /datum/surgery_step/disinfect_injuries/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool)
@@ -260,4 +260,5 @@
 		"[user] sterilizes the injuries on [target]'s [parse_zone(target_zone)]!")
 	var/obj/item/bodypart/BP = target.get_bodypart(target_zone)
 	BP?.disinfect_limb()
+	BP?.salve_limb()
 	return TRUE
