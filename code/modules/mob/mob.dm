@@ -380,7 +380,6 @@ mob/visible_message(message, self_message, blind_message, vision_distance = DEFA
 		if(flags & COMPONENT_EXAMINATE_BLIND)
 			to_chat(src, "<span class='warning'>Something is there but you can't see it!</span>")
 		return
-	//skyrat edit
 	var/list/result
 	if(client)
 		LAZYINITLIST(client.recent_examines)
@@ -394,7 +393,6 @@ mob/visible_message(message, self_message, blind_message, vision_distance = DEFA
 			result = A.examine_more(src)
 	else
 		result = A.examine(src) // if a tree is examined but no client is there to see it, did the tree ever really exist?
-	//
 	if(isliving(src))
 		var/mob/living/L = src
 		L.on_examine_atom(A)

@@ -15,7 +15,7 @@
 	appearance_flags = APPEARANCE_UI
 	var/obj/master = null	//A reference to the object in the slot. Grabs or items, generally.
 	var/datum/hud/hud = null // A reference to the owner HUD, if any.
-
+	
 /obj/screen/take_damage()
 	return
 
@@ -25,6 +25,9 @@
 	return ..()
 
 /obj/screen/examine(mob/user)
+	return list()
+
+/obj/screen/examine_more(mob/user)
 	return list()
 
 /obj/screen/orbit()

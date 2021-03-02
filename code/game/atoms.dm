@@ -393,7 +393,7 @@
 /atom/proc/examine_more(mob/user)
 	. = list()
 	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE_MORE, user, .)
-	if(!LAZYLEN(.)) // lol ..length
+	if(!LAZYLEN(.)) // lol... length
 		return DEFAULT_EXAMINE_MORE
 
 /// Updates the icon of the atom
