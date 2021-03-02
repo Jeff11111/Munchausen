@@ -256,7 +256,8 @@
 				var/obj/screen/plane_master/servant = new /obj/screen/plane_master()
 				servant.alpha = alphas[i]
 				servant.render_source = master.render_target
-				servant.plane = CHAT_PLANE
+				servant.plane = FULLSCREEN_PLANE
+				servant.mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 				new_screens["[master.plane]"] += servant
 				owner.client?.screen += servant
 		tick()
