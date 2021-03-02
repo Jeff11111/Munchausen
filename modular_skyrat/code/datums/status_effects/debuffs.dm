@@ -247,7 +247,7 @@
 		screens = list(owner.hud_used.plane_masters["[FLOOR_PLANE]"], owner.hud_used.plane_masters["[ABOVE_FLOOR_PLANE]"],
 					owner.hud_used.plane_masters["[WALL_PLANE]"], owner.hud_used.plane_masters["[ABOVE_WALL_PLANE]"],
 					owner.hud_used.plane_masters["[GAME_PLANE]"], owner.hud_used.plane_masters["[MOB_PLANE]"],
-					owner.hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"], owner.hud_used.plane_masters["[OPENSPACE_PLANE]"], 
+					owner.hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"], owner.hud_used.plane_masters["[OPENSPACE_BACKDROP_PLANE]"], 
 					owner.hud_used.plane_masters["[CHAT_PLANE]"], owner.hud_used.plane_masters["[LIGHTING_PLANE]"],
 					)
 		for(var/obj/screen/plane_master/master in screens)

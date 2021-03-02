@@ -39,7 +39,9 @@
 #define FIELD_OF_VISION_VISUAL_RENDER_TARGET "FIELD_OF_VISION_VISUAL_PLANE"
 
 #define OPENSPACE_PLANE -2 //Openspace plane below all turfs
+#define OPENSPACE_PLANE_RENDER_TARGET "OPENSPACE_PLANE" //Openspace plane below all turfs
 #define OPENSPACE_BACKDROP_PLANE -1 //Black square just over openspace plane to guaranteed cover all in openspace turf
+#define OPENSPACE_BACKDROP_PLANE_RENDER_TARGET "OPENSPACE_BACKDROP_PLANE" //Black square just over openspace plane to guaranteed cover all in openspace turf
 #define OPENSPACE_LAYER 17 //Openspace layer over all
 
 #define CHAT_PLANE 0 //We don't want heard messages to be hidden by FoV.

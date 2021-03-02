@@ -20,6 +20,7 @@
 /obj/screen/plane_master/openspace
 	name = "open space plane master"
 	plane = OPENSPACE_BACKDROP_PLANE
+	render_source = OPENSPACE_BACKDROP_PLANE_RENDER_TARGET
 	appearance_flags = PLANE_MASTER
 	blend_mode = BLEND_MULTIPLY
 	alpha = 255
