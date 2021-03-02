@@ -701,9 +701,9 @@
 		var/heal_amt = 0
 		// If damage >= 50 AFTER treatment then it's probably too severe to heal within the timeframe of a round.
 		if(!owner.chem_effects[CE_TOXIN] && IN.can_autoheal() && IN.wound_damage() && (IN.wound_damage()/max_damage) < 0.5)
-			heal_amt += 0.05
+			heal_amt += 0.02
 			if(owner.IsSleeping()) // sleepy niggas heal quadruple
-				heal_amt *= 4
+				heal_amt *= 10
 		heal_amt = CEILING(heal_amt, 0.1)
 		if(heal_amt)
 			IN.heal_damage(heal_amt)
