@@ -105,7 +105,7 @@
 		for(var/datum/surgery_step/S in GLOB.surgery_steps)
 			if(S.try_op(user, src, user.zone_selected, user.get_active_held_item()))
 				return TRUE
-	
+
 	//do not fuck someone up with tools if help intent
 	if(!length(all_wounds))
 		//This is absolute chungus niggercode 420 blaze it but i could not find a way to fix this well
@@ -198,7 +198,7 @@
 	if(IS_STAMCRIT(src))
 		to_chat(src, "<span class='warning'>You're too exhausted.</span>")
 		return
-	
+
 	var/random_turn = a_intent == INTENT_HARM
 	var/obj/item/I = get_active_held_item()
 
@@ -210,7 +210,7 @@
 		if(holder.held_mob)
 			throwable_mob = holder.held_mob
 			holder.release()
-	
+
 	if(istype(I, /obj/item/grab))
 		var/obj/item/grab/grabby = I
 		if(grabby.grasped_mob && (grabby.grasped_mob != src))
@@ -700,11 +700,9 @@
 
 	sight = initial(sight)
 	lighting_alpha = initial(lighting_alpha)
-	var/obj/item/bodypart/left_eye/LE = get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
-	var/obj/item/bodypart/right_eye/RE = get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
-	if(!LE && !RE)
-		update_tint()
-	else
+	var/obj/item/bodypart/left_eye/LE = get_bodypart_nostump(BODY_ZONE_PRECISE_LEFT_EYE)
+	var/obj/item/bodypart/right_eye/RE = get_bodypart_nostump(BODY_ZONE_PRECISE_RIGHT_EYE)
+	if(LE || RE)
 		see_invisible = LE?.see_invisible || RE?.see_invisible
 		see_in_dark = LE?.see_in_dark || RE?.see_in_dark
 		sight |= LE?.sight_flags | RE?.sight_flags
@@ -737,6 +735,7 @@
 			if(M.name == XRAY)
 				sight |= (SEE_TURFS|SEE_MOBS|SEE_OBJS)
 				see_in_dark = max(see_in_dark, 8)
+
 	if(HAS_TRAIT(src, TRAIT_THERMAL_VISION))
 		sight |= (SEE_MOBS)
 		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE)
@@ -763,6 +762,47 @@
 	else
 		cure_blind(EYES_COVERED)
 		clear_fullscreen("tint", 0)
+
+/mob/living/carbon/proc/update_eyes()
+	var/obj/item/bodypart/left_eye/LE = get_bodypart_nostump(BODY_ZONE_PRECISE_LEFT_EYE)
+	var/obj/item/bodypart/right_eye/RE = get_bodypart_nostump(BODY_ZONE_PRECISE_RIGHT_EYE)
+	var/left_damage = (LE ? LE.eye_damaged : 3)
+	var/right_damage = (RE ? RE.eye_damaged : 3)
+	if((left_damage >= 3) && (right_damage >= 3))
+		become_blind(EYE_DAMAGE)
+		return TRUE
+	else
+		cure_blind(EYE_DAMAGE)
+
+	var/fuck_with_fov = TRUE
+	var/mob/living/carbon/human/humie = src
+	if(istype(humie))
+		var/obj/item/clothing/head/beanie = humie.head
+		if(istype(beanie) && beanie.fov_angle && beanie.fov_shadow_angle)
+			fuck_with_fov = FALSE
+
+	var/datum/component/field_of_vision/fov = GetComponent(/datum/component/field_of_vision)
+	if(fuck_with_fov && fov)
+		if(left_damage >= 3)
+			fov.generate_fov_holder(src, 0, FOV_180PLUS45_DEGREES, FALSE, TRUE)
+		else if(right_damage >= 3)
+			fov.generate_fov_holder(src, 0, FOV_180MINUS45_DEGREES, FALSE, TRUE)
+
+	if(left_damage in 1 to 2)
+		overlay_fullscreen("left_eye_damage", /obj/screen/fullscreen/impaired/left, left_damage)
+	else if(!left_damage)
+		clear_fullscreen("left_eye_damage")
+		if(fuck_with_fov && fov.shadow_angle == FOV_180PLUS45_DEGREES)
+			fov.generate_fov_holder(src, 0, FOV_180_DEGREES, FALSE, TRUE)
+
+	if(right_damage in 1 to 2)
+		overlay_fullscreen("right_eye_damage", /obj/screen/fullscreen/impaired/right, right_damage)
+	else if(!right_damage)
+		clear_fullscreen("right_eye_damage")
+		if(fuck_with_fov && fov.shadow_angle == FOV_180MINUS45_DEGREES)
+			fov.generate_fov_holder(src, 0, FOV_180_DEGREES, FALSE, TRUE)
+
+	return TRUE
 
 /mob/living/carbon/proc/get_total_tint()
 	. = 0
@@ -1320,7 +1360,7 @@
 /mob/living/carbon/is_asystole()
 	if(!needs_heart() || HAS_TRAIT(src, TRAIT_STABLEHEART))
 		return FALSE
-	
+
 	var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
 	if(!istype(heart) || !heart.is_working())
 		return TRUE
@@ -1335,7 +1375,7 @@
 		return BLOOD_VOLUME_NORMAL
 	if(HAS_TRAIT(src, TRAIT_STABLEHEART))
 		return blood_volume
-	
+
 	if(!heart && needs_heart())
 		return 0.25 * apparent_blood_volume
 
@@ -1355,7 +1395,7 @@
 				pulse_mod *= 1.1
 			if(PULSE_2FAST, PULSE_THREADY)
 				pulse_mod *= 1.25
-	
+
 	apparent_blood_volume *= pulse_mod
 	apparent_blood_volume *= max(0.3, (1-(heart.damage / heart.maxHealth)))
 
@@ -1420,7 +1460,7 @@
 			return rand(120, 160)
 		if(PULSE_THREADY)
 			return PULSE_MAX_BPM
-	
+
 	return 0
 
 //Generates realistic-ish pulse output based on preset levels as text

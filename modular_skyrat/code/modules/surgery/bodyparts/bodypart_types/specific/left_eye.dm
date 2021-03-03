@@ -41,7 +41,7 @@
 	var/eye_damaged	= 0	//indicates that our eyes are undergoing some level of negative effect
 
 /obj/item/bodypart/left_eye/get_mangled_state()
-	return BODYPART_MANGLED_BOTH
+	return (..() | BODYPART_MANGLED_BONE)
 
 /obj/item/bodypart/left_eye/get_limb_icon(dropped)
 	if(dropped && !istype(loc, /obj/item/bodypart))
@@ -55,7 +55,7 @@
 		return ..()
 	cut_overlays()
 	icon_state = initial(icon_state)//default to dismembered eye sprite
-	var/mutable_appearance/iris = mutable_appearance(icon, "eye-iris", GAME_PLANE, plane, eye_color || old_eye_color)
+	var/mutable_appearance/iris = mutable_appearance(icon, "eye-iris", layer+1, GAME_PLANE, plane, eye_color || old_eye_color)
 	add_overlay(iris)
 	return
 
@@ -74,14 +74,13 @@
 	check_damage()
 	C.update_tint()
 	C.update_sight()
+	C.update_eyes()
 
 /obj/item/bodypart/left_eye/drop_limb(special, ignore_children, dismembered, destroyed, wounding_type)
 	var/mob/living/carbon/C = owner
 	. = ..()
 	if(QDELETED(C))
 		return
-	C?.clear_fullscreen("left_eye_damage")
-	C?.cure_blind(EYE_DAMAGE)
 	if(ishuman(C) && eye_color && old_eye_color)
 		var/mob/living/carbon/human/H = C
 		H.left_eye_color = old_eye_color
@@ -89,9 +88,7 @@
 			H.dna.species.handle_body(H)
 	C?.update_tint()
 	C?.update_sight()
-	var/obj/item/bodypart/right_eye/other_eye = C?.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
-	if(istype(other_eye))
-		other_eye?.check_damage()
+	C?.update_eyes()
 
 /obj/item/bodypart/left_eye/receive_damage(brute = 0, burn = 0, stamina = 0, blocked = 0, updating_health = TRUE, required_status = null, wound_bonus = 0, bare_wound_bonus = 0, sharpness = SHARP_NONE, spread_damage = TRUE, pain = 0, toxin = 0, clone = 0)
 	. = ..()
@@ -117,6 +114,7 @@
 	if(!owner)
 		return
 	
+	var/old_dam = eye_damaged
 	var/obj/item/bodypart/right_eye/other_eye = owner.get_bodypart(BODY_ZONE_PRECISE_RIGHT_EYE)
 	switch(get_damage(include_pain = TRUE))
 		if(-INFINITY to max_damage/4)
@@ -131,36 +129,8 @@
 			eye_damaged = FALSE
 	if(is_disabled() || current_gauze)
 		eye_damaged = BLIND_VISION_THREE
-	var/datum/component/field_of_vision/fov = owner.GetComponent(/datum/component/field_of_vision)
-	var/fuck_with_fov = TRUE
-	var/mob/living/carbon/human/humie = owner
-	if(istype(humie))
-		var/obj/item/clothing/head/beanie = humie.head
-		if(istype(beanie) && beanie.fov_angle && beanie.fov_shadow_angle)
-			fuck_with_fov = FALSE
-	if(!istype(fov))
-		fuck_with_fov = FALSE
-	if(eye_damaged >= BLIND_VISION_THREE)
-		if(istype(other_eye) && (other_eye.eye_damaged < BLIND_VISION_THREE) && fuck_with_fov)
-			fov?.generate_fov_holder(owner, 0, FOV_180MINUS45_DEGREES, FALSE, TRUE)
-		else if(!istype(other_eye) || other_eye.eye_damaged >= BLIND_VISION_THREE)
-			owner.become_blind(EYE_DAMAGE)
-	else if(eye_damaged)
-		owner.overlay_fullscreen("left_eye_damage", /obj/screen/fullscreen/impaired/left, eye_damaged)
-		if(!istype(other_eye))
-			owner.overlay_fullscreen("right_eye_damage", /obj/screen/fullscreen/impaired/right, eye_damaged)
-			if(fuck_with_fov)
-				fov.generate_fov_holder(owner, 0, FOV_180PLUS45_DEGREES, FALSE, TRUE)
-	else
-		owner.clear_fullscreen("left_eye_damage")
-		if(!istype(other_eye))
-			owner.clear_fullscreen("right_eye_damage")
-			if(fuck_with_fov)
-				fov.generate_fov_holder(owner, 0, FOV_180PLUS45_DEGREES, FALSE, TRUE)
-	if(eye_damaged < BLIND_VISION_THREE)
-		owner.cure_blind(EYE_DAMAGE)
-		if(fuck_with_fov && fov.shadow_angle == FOV_180PLUS45_DEGREES)
-			fov.generate_fov_holder(owner, 0, FOV_180_DEGREES, FALSE, TRUE)
+	if(owner && (old_dam != eye_damaged))
+		owner?.update_eyes()
 	return eye_damaged
 
 #undef BLURRY_VISION_ONE
