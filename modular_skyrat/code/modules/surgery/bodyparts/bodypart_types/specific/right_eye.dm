@@ -113,9 +113,8 @@
 /obj/item/bodypart/right_eye/proc/check_damage()
 	if(!owner)
 		return
-	
+
 	var/old_dam = eye_damaged
-	var/obj/item/bodypart/left_eye/other_eye = owner.get_bodypart(BODY_ZONE_PRECISE_LEFT_EYE)
 	switch(get_damage(include_pain = TRUE))
 		if(-INFINITY to max_damage/4)
 			eye_damaged = FALSE
