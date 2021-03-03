@@ -184,12 +184,12 @@
 
 /obj/screen/alert/hot
 	name = "Too Hot"
-	desc = "You're flaming hot! Get somewhere cooler and take off any insulating clothing like a fire suit."
+	desc = "You feel flaming hot! Get somewhere cooler and take off any insulating clothing like a fire suit."
 	icon_state = "hot"
 
 /obj/screen/alert/cold
 	name = "Too Cold"
-	desc = "You're freezing cold! Get somewhere warmer and take off any insulating clothing like a space suit."
+	desc = "You feel freezing cold! Get somewhere warmer and take off any insulating clothing like a space suit."
 	icon_state = "cold"
 
 /obj/screen/alert/lowpressure
