@@ -22,7 +22,7 @@
 	response_harm_simple = "kick"
 	gold_core_spawnable = FRIENDLY_SPAWN
 	footstep_type = FOOTSTEP_MOB_CLAW
-	var/held_icon = "fox" //Skyratchange
+	var/held_icon = "fox"
 
 /mob/living/simple_animal/pet/fox/ComponentInitialize()
 	. = ..()
@@ -31,8 +31,10 @@
 
 //quotefox
 /mob/living/simple_animal/pet/fox/Renault
-	name = "Quotefox"
-	desc = "Quotefox, the Captain's abominable nigger-lipped creature."
+	name = "Simon"
+	desc = "Simon - The really really funny polish white fox."
+	icon = 'modular_skyrat/icons/mob/fox.dmi'
+	icon_state "simon"
 	gender = MALE
 	gold_core_spawnable = NO_SPAWN
 	unique_pet = TRUE
