@@ -60,12 +60,13 @@
 		// No heart? You are going to have a very bad time. Not 100% lethal because heart transplants should be a thing.
 		var/blood_volume = owner.get_blood_oxygenation()
 		if(blood_volume < BLOOD_VOLUME_SURVIVE)
-			if(!owner.chem_effects[CE_STABLE] || prob(60))
+			if(!owner.chem_effects[CE_STABLE] || prob(50))
 				oxygen_reserve = max(0, oxygen_reserve-1)
 		else
-			oxygen_reserve = min(initial(oxygen_reserve), oxygen_reserve+1)
+			oxygen_reserve = min(initial(oxygen_reserve), oxygen_reserve + 1)
 		if(!oxygen_reserve) //(hardcrit)
-			owner.Stun(500)
+			if(owner.IsUnconscious() < 4 SECONDS)
+				owner.SetUnconscious(4 SECONDS)
 		var/can_heal = damage && brain_can_heal && (damage < maxHealth) && (damage % damage_threshold_value || owner.chem_effects[CE_BRAIN_REGEN] || (!past_damage_threshold(3) && owner.chem_effects[CE_STABLE]))
 		var/damprob = 0
 		//Effects of bloodloss
@@ -114,11 +115,9 @@
 		if(d > 10)
 			// Choose between sudden death and sagging
 			if(prob(50))
-				spawn(0)
-					handle_sudden_death(owner, d)
+				INVOKE_ASYNC(src, .proc/handle_sudden_death, owner, d)
 			else
-				spawn(0)
-					handle_sagging(owner, d)
+				INVOKE_ASYNC(src, .proc/handle_sagging, owner, d)
 
 /obj/item/organ/brain/proc/handle_sudden_death(mob/living/carbon/victim, damage_suffered)
 	//Roll endurance to see if we die suddenly

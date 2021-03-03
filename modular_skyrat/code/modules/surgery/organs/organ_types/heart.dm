@@ -156,12 +156,6 @@
 	handle_pulse()
 	if(pulse)
 		handle_heartbeat()
-		if(pulse >= PULSE_THREADY)
-			if(prob(5))
-				applyOrganDamage(0.5)
-		else if(pulse >= PULSE_2FAST)
-			if(prob(1))
-				applyOrganDamage(0.5)
 
 /obj/item/organ/heart/proc/can_stop() //Can the heart stop beating? Used to prevent bloodsucker hearts from failing under normal circumstances
 	. = TRUE
@@ -177,7 +171,7 @@
 	if(pulse_mod > 2 && !is_stable)
 		var/damage_chance = (pulse_mod - 2) ** 2
 		if(prob(damage_chance))
-			applyOrganDamage(0.5)
+			applyOrganDamage(1)
 	
 	// Now pulse mod is impacted by shock stage and other things too
 	var/oxy = owner.get_blood_oxygenation()
@@ -193,26 +187,18 @@
 		pulse_mod++
 
 	if(HAS_TRAIT(owner, TRAIT_FAKEDEATH) || owner.chem_effects[CE_NOPULSE])
-		pulse = clamp(PULSE_NONE + pulse_mod, PULSE_NONE, PULSE_2FAST) //Pretend that we're dead. unlike actual death, can be inflienced by meds
+		pulse = clamp(PULSE_NONE + pulse_mod, PULSE_NONE, PULSE_2FAST) //Pretend that we're dead. unlike actual death, can be infuenced by meds
 		return
 
-	//If heart is stopped, it isn't going to restart itself randomly.
+	// If our heart is stopped, it isn't going to restart itself randomly.
 	if(pulse == PULSE_NONE)
 		return
-	//And if it's beating, let's see if it should
-	else
-		var/should_stop = (owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE) && prob(25) //cardiovascular shock, not enough liquid to pump
-		should_stop = should_stop || prob(max(0, owner.getBrainLoss() - owner.maxHealth * 0.65)) //brain failing to work heart properly
-		should_stop = should_stop || ((pulse >= PULSE_THREADY) && prob(5)) //erratic heart patterns, usually caused by oxyloss
-		if(should_stop && can_stop()) // The heart has stopped due to going into traumatic or cardiovascular shock.
-			Stop()
-			return
 
 	// Pulse normally shouldn't go above PULSE_2FAST
 	pulse = clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_2FAST)
 
 	// If fibrillation, then it can be PULSE_THREADY
-	var/fibrillation = (oxy <= BLOOD_VOLUME_SURVIVE) || (prob(5) && owner.shock_stage > SHOCK_STAGE_6)
+	var/fibrillation = (oxy <= BLOOD_VOLUME_SURVIVE) || (prob(30) && owner.shock_stage > SHOCK_STAGE_6)
 	if(pulse && fibrillation)	//I SAID MOAR OXYGEN
 		pulse = PULSE_THREADY
 
@@ -223,6 +209,25 @@
 		else
 			pulse++
 
+	// Thready pulse can damage us
+	if(pulse >= PULSE_THREADY)
+		if(prob(5))
+			applyOrganDamage(1)
+	else if(pulse >= PULSE_2FAST)
+		if(prob(1))
+			applyOrganDamage(1)
+
+	// Finally, check if we should go into cardiac arrest
+	var/should_stop = (owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE) && prob(40) //cardiovascular shock, not enough liquid to pump
+	should_stop = should_stop || prob(max(0, owner.getBrainLoss() - owner.maxHealth * 0.65)) //brain failing to work heart properly
+	should_stop = should_stop || ((pulse >= PULSE_THREADY) && prob(5)) //erratic heart patterns, usually caused by oxyloss
+	if(should_stop && can_stop()) // The heart has stopped due to going into traumatic or cardiovascular shock
+		Stop()
+		return
+	else if(pulse < PULSE_NONE) // no pulse means we are already having a cardiac arrest moment
+		Stop()
+		return
+
 /obj/item/organ/heart/proc/handle_heartbeat()
 	if((pulse >= PULSE_2FAST) || (owner.shock_stage >= SHOCK_STAGE_1))
 		//PULSE_THREADY - maximum value for pulse, currently it's 5.
@@ -230,12 +235,12 @@
 		//Divided by 2, otherwise it is too slow.
 		var/rate = (PULSE_THREADY - pulse)/2
 		if(owner.chem_effects[CE_PULSE] > 2)
-			heartbeat++
+			heartbeat = TRUE
 
 		if(heartbeat >= rate)
-			heartbeat = 0
+			heartbeat = FALSE
 		else
-			heartbeat++
+			heartbeat = TRUE
 	
 	if(!is_working())	//heart broke, stopped beating, death imminent
 		if(owner.stat == CONSCIOUS)
@@ -245,19 +250,22 @@
 
 	if(owner.client && heartbeat)
 		failed = FALSE
-		var/sound/slowbeat = sound('sound/health/slowbeat.ogg', repeat = TRUE)
-		var/sound/fastbeat = sound('sound/health/fastbeat.ogg', repeat = TRUE)
+		var/static/sound/slowbeat
+		if(!slowbeat)
+			slowbeat = sound('sound/health/slowbeat.ogg', repeat = TRUE)
+		var/static/sound/fastbeat
+		if(!fastbeat)
+			fastbeat = sound('sound/health/fastbeat.ogg', repeat = TRUE)
 
 		if(owner.InCritical() && beat != BEAT_SLOW)
 			beat = BEAT_SLOW
-			owner.playsound_local(get_turf(owner), slowbeat,40,0, channel = CHANNEL_HEARTBEAT)
+			owner.playsound_local(get_turf(owner), slowbeat, 60, 0, channel = CHANNEL_HEARTBEAT)
 		else if(!owner.InCritical() && beat == BEAT_SLOW)
 			owner.stop_sound_channel(CHANNEL_HEARTBEAT)
 			beat = BEAT_NONE
-
-		if(owner.jitteriness)
+		else if(owner.jitteriness)
 			if(owner.health > HEALTH_THRESHOLD_FULLCRIT && (!beat || beat == BEAT_SLOW))
-				owner.playsound_local(get_turf(owner),fastbeat,40,0, channel = CHANNEL_HEARTBEAT)
+				owner.playsound_local(get_turf(owner), fastbeat, 60, 0, channel = CHANNEL_HEARTBEAT)
 				beat = BEAT_FAST
 		else if(beat == BEAT_FAST)
 			owner.stop_sound_channel(CHANNEL_HEARTBEAT)

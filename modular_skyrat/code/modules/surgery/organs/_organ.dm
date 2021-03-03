@@ -539,11 +539,11 @@
 			return now_fixed
 
 //Runs some code on the organ when damage is taken/healed
-/obj/item/organ/proc/onDamage(var/d, var/maximum = maxHealth)
+/obj/item/organ/proc/onDamage(d, maximum = maxHealth)
 	return
 
 //Runs some code on the organ when damage is taken/healed
-/obj/item/organ/proc/onSetDamage(var/d, var/maximum = maxHealth)
+/obj/item/organ/proc/onSetDamage(d, maximum = maxHealth)
 	return
 
 //Looking for brains?

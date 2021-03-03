@@ -226,6 +226,18 @@
 		M.adjustToxLoss(reac_volume * 0.8)
 
 //Painkiller medicine
+/datum/reagent/medicine/mine_salve/on_mob_metabolize(mob/living/M)
+	. =..()
+	if(iscarbon(M))
+		var/mob/living/carbon/C = M
+		C.add_chem_effect(CE_PAINKILLER, 60)
+
+/datum/reagent/medicine/mine_salve/on_mob_end_metabolize(mob/living/M)
+	. = ..()
+	if(iscarbon(M))
+		var/mob/living/carbon/N = M
+		N.remove_chem_effect(CE_PAINKILLER, 60)
+
 /datum/reagent/medicine/paracetamol
 	name = "Paracetamol"
 	description = "Most probably know this as Tylenol, but this chemical is a mild, simple painkiller."
@@ -648,3 +660,28 @@
 	if(iscarbon(L))
 		var/mob/living/carbon/C = L
 		C.remove_chem_effect(CE_OXYGENATED, 2)
+
+//Other chem effects
+/datum/reagent/medicine/mannitol/on_mob_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.add_chem_effect(CE_BRAIN_REGEN)
+
+/datum/reagent/medicine/mannitol/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.remove_chem_effect(CE_BRAIN_REGEN)
+
+/datum/reagent/medicine/neurine/on_mob_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.add_chem_effect(CE_BRAIN_REGEN)
+
+/datum/reagent/medicine/neurine/on_mob_end_metabolize(mob/living/L)
+	. = ..()
+	if(iscarbon(L))
+		var/mob/living/carbon/C = L
+		C.remove_chem_effect(CE_BRAIN_REGEN)
