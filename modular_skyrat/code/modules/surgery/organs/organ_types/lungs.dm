@@ -97,7 +97,7 @@
 
 // Returns a percentage value for use by GetOxyloss().
 /obj/item/organ/lungs/proc/get_oxygen_deprivation()
-	if(!is_broken())
+	if(is_broken())
 		return 100
 	return round((oxygen_deprivation/owner.maxHealth)*100)
 
