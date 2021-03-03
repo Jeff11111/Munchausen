@@ -33,7 +33,7 @@
 /mob/living/simple_animal/pet/fox/Renault
 	name = "Simon"
 	desc = "Simon - The really really funny polish white fox."
-	icon = 'modular_skyrat/icons/mob/fox.dmi'
+	icon = 'modular_skyrat/icons/mob/simon.dmi'
 	icon_state = "simon"
 	gender = MALE
 	gold_core_spawnable = NO_SPAWN

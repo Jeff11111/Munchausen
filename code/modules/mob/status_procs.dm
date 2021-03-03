@@ -94,8 +94,7 @@
 					hud_used.plane_masters["[FIELD_OF_VISION_VISUAL_PLANE]"], hud_used.plane_masters["[OPENSPACE_BACKDROP_PLANE]"], 
 					hud_used.plane_masters["[CHAT_PLANE]"], hud_used.plane_masters["[LIGHTING_PLANE]"],
 					)
-	for(var/A in screens)
-		var/obj/screen/plane_master/P = A
+	for(var/obj/screen/plane_master/P in screens)
 		P.add_filter("blurry_eyes", 2, EYE_BLUR(clamp(eye_blurry*0.1,0.6,3)))
 
 /mob/proc/remove_eyeblur()
