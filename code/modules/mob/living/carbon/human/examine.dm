@@ -275,7 +275,7 @@
 
 	//ok lets follow the same pattern of the previous insane coder
 	if(hydration < HYDRATION_LEVEL_DEHYDRATED - 50)
-		msg += "[t_He] [t_is] severely dehydrated."
+		msg += "[t_He] [t_is] severely parched."
 	else if(hydration >= HYDRATION_LEVEL_FULL)
 		//no message for being full of water because that would be fucking stupid
 		if(user.hydration < HYDRATION_LEVEL_DEHYDRATED - 50)
