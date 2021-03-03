@@ -52,6 +52,12 @@
 	appearance_flags = PLANE_MASTER
 	blend_mode = BLEND_OVERLAY
 
+/obj/screen/plane_master/above_floor
+	name = "above floor plane master"
+	plane = ABOVE_FLOOR_PLANE
+	render_target = ABOVE_FLOOR_PLANE_RENDER_TARGET
+	appearance_flags = PLANE_MASTER
+
 /obj/screen/plane_master/wall
 	name = "wall plane master"
 	plane = WALL_PLANE
