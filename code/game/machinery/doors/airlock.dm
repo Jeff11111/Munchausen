@@ -650,7 +650,7 @@
 				color_overlay.color = door_color
 			if(!airlock_material)
 				if(door_color)
-					filling_overlay = get_airlock_overlay("closed", color_fill_file, icon_dir = src.dir)
+					filling_overlay = get_airlock_overlay("closing", color_fill_file, icon_dir = src.dir)
 				else
 					filling_overlay = get_airlock_overlay("closing", fill_file, icon_dir = src.dir)
 			else if(airlock_material == "glass")
