@@ -122,7 +122,7 @@
 	var/render_like_organic = FALSE
 	/// This is used for pseudolimbs. Basically replaces the mob overlay icon with this.
 	var/mutable_appearance/custom_overlay = null
-	
+
 	/// These were head vars before, but i had to generify behavior for edge cases
 	/// (IPCs have their brain in da chest)
 	var/mob/living/brain/brainmob = null
@@ -334,8 +334,8 @@
 		germ_level = 0	//cure instantly
 	else
 		janitize(-antibiotics * SANITIZATION_ANTIBIOTIC)	//at germ_level == 500 and 50 antibiotic, this should cure the infection in 5 minutes
-		for(var/in in injuries)
-			var/datum/injury/IN = in
+		for(var/fuck in injuries)
+			var/datum/injury/IN = fuck
 			IN.germ_level -= antibiotics * SANITIZATION_ANTIBIOTIC
 			if(IN.germ_level < 0)
 				IN.germ_level = 0
@@ -419,7 +419,7 @@
 /obj/item/bodypart/proc/handle_rejection()
 	if(is_robotic_limb())
 		return
-	
+
 	// Process unsuitable transplants. TODO: consider some kind of
 	// immunosuppressant that changes transplant data to make it match.
 	if(owner.virus_immunity() < 10) //for now just having shit immunity will suppress it
@@ -672,7 +672,7 @@
 	for(var/obj/item/embeddies in embedded_objects)
 		if(!embeddies.isEmbedHarmless())
 			owner_germ_level += (embeddies.germ_level/5)
-	
+
 	//Open wounds can become infected
 	for(var/datum/wound/W in wounds)
 		if(istype(T) && W.infection_check() && (max(2*T.dirtiness, owner_germ_level) > W.germ_level))
@@ -682,12 +682,12 @@
 	for(var/datum/injury/IN in injuries)
 		if(istype(T) && IN.infection_check() && (max(2*T.dirtiness, owner_germ_level) > IN.germ_level))
 			IN.germ_level += IN.infection_rate
-	
+
 	//If we have antibiotics, then skip over, the infection is going away
 	var/antibiotics = owner.get_antibiotics()
 	if(antibiotics > 0)
 		return
-	
+
 	for(var/datum/wound/W in wounds)
 		//Infected wounds raise the bodypart's germ level
 		if(W.germ_level > germ_level || prob(min(W.germ_level, 40)))
@@ -706,7 +706,7 @@
 		if(IN.damage <= 0 && IN.created && (IN.created + IN.fade_away <= world.time || is_robotic_limb()))
 			qdel(IN)
 			continue
-		
+
 		// Slow healing
 		var/heal_amt = 0
 		// If damage >= 50 AFTER treatment then it's probably too severe to heal within the timeframe of a round.
@@ -721,7 +721,7 @@
 		// Bleeding
 		if(owner && !(ishuman(owner) && (NOBLOOD in owner.dna?.species?.species_traits)))
 			IN.bleed_timer--
-	
+
 	// Sync the limb's damage with its injuries
 	update_damages()
 	if(owner && update_bodypart_damage_state())
@@ -735,12 +735,12 @@
 	for(var/datum/injury/IN in injuries)
 		if(IN.damage <= 0)
 			continue
-		
+
 		if(IN.damage_type != WOUND_BURN)
 			brute_dam += IN.damage
 		else
 			burn_dam += IN.damage
-		
+
 		number_injuries += IN.amount
 
 //Teeth if applicable
@@ -816,12 +816,12 @@
 			wounding_type = WOUND_SLASH
 		else if(sharpness == SHARP_POINTY)
 			wounding_type = WOUND_PIERCE
-	
+
 	//Use this later to dismember proper
 	var/initial_wounding_type = wounding_type
 
 	//Now we have our wounding_type and are ready to carry on with dealing damage and then wounds
-	
+
 	//We add the pain values before we scale damage down
 	//Pain does not care about your feelings, nor if your limb was already damaged
 	//to it's maximum
@@ -876,7 +876,7 @@
 			spreadable_limbs |= parent_bodyzone
 		if(length(children_zones))
 			spreadable_limbs |= children_zones
-			
+
 		//Hitting the head should not spread to the eyes
 		spreadable_limbs -= list(BODY_ZONE_PRECISE_LEFT_EYE, BODY_ZONE_PRECISE_RIGHT_EYE)
 
@@ -886,7 +886,7 @@
 			var/obj/item/bodypart/BP = owner.get_bodypart(i)
 			if(BP && ((BP.brute_dam + BP.burn_dam) < BP.max_damage))
 				spreadable_limbs |= BP
-		
+
 		//We have the limbs. Now we divide the damage appropriately between children and parent.
 		if(length(spreadable_limbs))
 			extrabrute = round(extrabrute/length(spreadable_limbs), 1)
@@ -907,7 +907,7 @@
 	for(var/i in injuries)
 		var/datum/injury/IN = i
 		IN.receive_damage(max(brute, burn), pain, wounding_type)
-	
+
 	//Brute and burn damage is associated with injuries
 	var/datum/injury/created_injury
 	if(brute)
@@ -920,7 +920,7 @@
 			created_injury.apply_injury(burn, src)
 		if(owner && prob(burn * 2))
 			owner.IgniteMob()
-	
+
 	//Sync the bodypart's damage with the wounds we have created
 	update_damages()
 
@@ -1025,16 +1025,16 @@
 			damage_integrity(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	if(try_dismember(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
 		return
-	
+
 	consider_processing()
 	update_disabled()
 	return created_injury
- 
+
 /// Creates an injury on the bodypart
 /obj/item/bodypart/proc/create_injury(injury_type = WOUND_BLUNT, damage = 0, surgical = FALSE, wound_messages = TRUE)
 	if(damage <= 0)
 		return FALSE
-	
+
 	// First check whether we can widen an existing wound
 	if(!surgical && length(injuries) && prob(clamp(50 + (number_injuries-1 * 10), 50, 80)))
 		// Piercing injuries cannot merge together
@@ -1050,7 +1050,7 @@
 				if(owner && wound_messages && prob(25 + damage))
 					owner.wound_message += " \The [IN.desc] on [src] worsens!"
 				return IN
-	
+
 	//Creating injury
 	var/wound_type = get_injury_type(injury_type, damage)
 	if(wound_type)
@@ -1071,7 +1071,7 @@
 /obj/item/bodypart/proc/painless_wound_roll(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus, silent = FALSE)
 	if(!owner || (wounding_dmg <= WOUND_MINIMUM_DAMAGE) || (wound_bonus <= CANT_WOUND))
 		return FALSE
-	
+
 	var/initial_wounding_type = wounding_type
 	var/mangled_state = get_mangled_state()
 	var/bio_state = owner.get_biological_state()
@@ -1133,7 +1133,7 @@
 		if(wounding_type in list(WOUND_BLUNT, WOUND_SLASH, WOUND_PIERCE))
 			if(wounding_dmg >= TENDON_MINIMUM_DAMAGE)
 				check_wounding(WOUND_TENDON, wounding_dmg * (initial_wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
-	
+
 	//Handle dismemberment if appropriate, everything is done
 	if(CHECK_MULTIPLE_BITFIELDS(bio_state, BIO_FULL))
 		if(CHECK_MULTIPLE_BITFIELDS(mangled_state, BODYPART_MANGLED_BOTH))
@@ -1222,14 +1222,14 @@
 		if(IN.damage_type == WOUND_BURN)
 			continue
 		brute = IN.heal_damage(brute)
-	
+
 	for(var/datum/injury/IN in injuries)
 		if(burn <= 0)
 			break
 		if(IN.damage_type != WOUND_BURN)
 			continue
 		burn = IN.heal_damage(burn)
-	
+
 	limb_integrity = round(min(limb_integrity + brute + burn, max_limb_integrity))
 	stamina_dam = round(max(stamina_dam - stamina, 0), DAMAGE_PRECISION)
 	pain_dam = round(max(pain_dam - pain, 0), DAMAGE_PRECISION)
@@ -1525,7 +1525,7 @@
 	for(var/datum/injury/IN in injuries)
 		if(!IN.is_bandaged())
 			return FALSE
-	
+
 /obj/item/bodypart/proc/is_salved()
 	. = TRUE
 	for(var/datum/injury/IN in injuries)
@@ -1571,7 +1571,7 @@
 	var/datum/injury/IN = get_incision()
 	if(!IN)
 		return
-	
+
 	IN.open_injury(min(IN.damage * 2, IN.damage_list[1] - IN.damage), TRUE)
 	for(var/obj/item/organ/O in get_organs())
 		O.on_find(user)
@@ -1767,7 +1767,7 @@
 		if(!(body_zone in possible_wound.viable_zones)) //Applying this wound won't even work, let's try the next one
 			qdel(possible_wound)
 			continue
-		
+
 		var/datum/wound/replaced_wound
 		for(var/i in wounds)
 			var/datum/wound/existing_wound = i
@@ -1900,17 +1900,17 @@
 		//Arteries don't give a shit about gauze so we do them later
 		if(istype(W) && !(W.wound_type == WOUND_LIST_ARTERY))
 			bleed_rate += W.blood_flow
-	
+
 	for(var/datum/injury/IN in injuries)
 		if(IN.is_bleeding())
 			bleed_rate += IN.get_bleed_rate()
-	
+
 	if(current_gauze)
 		bleed_rate = max(0, bleed_rate - current_gauze.absorption_rate)
-	
+
 	if(!CHECK_BITFIELD(owner.mobility_flags, MOBILITY_STAND))
 		bleed_rate *= 0.75
-	
+
 	if(grasped_by)
 		bleed_rate *= 0.75
 
@@ -1981,7 +1981,7 @@
 	else if(owner)
 		C = owner
 		no_update = FALSE
-	
+
 	if(!C)
 		no_update = TRUE
 
@@ -2003,7 +2003,7 @@
 		no_update = TRUE
 		body_markings = "husk" // reeee
 		aux_marking = "husk"
-	
+
 	if(no_update)
 		return
 
@@ -2096,10 +2096,10 @@
 
 /obj/item/bodypart/proc/get_limb_icon(dropped)
 	cut_overlays()
-	
+
 	if(is_stump()) //Stumps have no icons... YET!
 		return FALSE
-	
+
 	icon_state = "" //to erase the default sprite, we're building the visual aspects of the bodypart through overlays alone.
 
 	. = list()
