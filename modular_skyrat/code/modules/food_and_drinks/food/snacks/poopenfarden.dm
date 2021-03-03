@@ -14,8 +14,11 @@
 
 /obj/item/reagent_containers/food/snacks/shit/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	. = ..()
-	playsound(hit_atom, "sound/effects/water_splash.ogg", 40, 1)
+	playsound(hit_atom, "sound/effects/water_splash.ogg", 50, 0)
 	var/turf/T = get_turf(hit_atom)
 	if(!istype(T, /turf/open/space))
-		new /obj/effect/decal/cleanable/shit(T)
+		var/obj/effect/decal/cleanable/shit/shit = new /obj/effect/decal/cleanable/shit(T)
+		if(istype(T, /turf/closed/wall))
+			shit.lyer = T.layer + 1
+			shit.plane = T.plane
 	qdel(src)
