@@ -34,7 +34,7 @@
 	name = "Simon"
 	desc = "Simon - The really really funny polish white fox."
 	icon = 'modular_skyrat/icons/mob/fox.dmi'
-	icon_state "simon"
+	icon_state = "simon"
 	gender = MALE
 	gold_core_spawnable = NO_SPAWN
 	unique_pet = TRUE
