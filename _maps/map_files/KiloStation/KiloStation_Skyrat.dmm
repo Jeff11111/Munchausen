@@ -67652,6 +67652,10 @@
 /obj/machinery/rnd/production/techfab/department/cargo,
 /turf/open/floor/plasteel/dark,
 /area/quartermaster/storage)
+"vQo" = (
+/mob/living/simple_animal/cockroach/carlos,
+/turf/open/floor/plasteel/dark,
+/area/maintenance/starboard/fore)
 "whZ" = (
 /obj/effect/turf_decal/tile/green{
 	dir = 8
@@ -100205,7 +100209,7 @@ cIX
 cIV
 cDT
 iSg
-cEs
+vQo
 cJD
 cEs
 cEg

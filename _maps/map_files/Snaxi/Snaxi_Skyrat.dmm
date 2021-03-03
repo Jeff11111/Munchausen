@@ -28318,6 +28318,10 @@
 	},
 /turf/open/floor/plasteel,
 /area/maintenance/disposal/incinerator)
+"lqD" = (
+/mob/living/simple_animal/cockroach/carlos,
+/turf/open/floor/plating,
+/area/maintenance/aft)
 "lqG" = (
 /obj/machinery/door/airlock/maintenance/abandoned,
 /turf/open/floor/plating,
@@ -94888,7 +94892,7 @@ bPn
 drn
 hyd
 wlV
-wlV
+lqD
 ycc
 doP
 wlV

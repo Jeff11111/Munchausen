@@ -262,6 +262,9 @@
 	else
 		return TRUE
 
+/obj/machinery/door/firedoor/border_only/update_dir()
+	return //stops them from messing up and changing directions, mostly on snaxi
+	
 /obj/machinery/door/firedoor/heavy
 	name = "heavy firelock"
 	icon = 'icons/obj/doors/Doorfire.dmi'

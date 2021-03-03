@@ -57,3 +57,8 @@
 
 /mob/living/simple_animal/cockroach/ex_act() //Explosions are a terrible way to handle a cockroach.
 	return
+
+/mob/living/simple_animal/cockroach/carlos
+	name = "carlos"
+	desc = "On the way."
+	health = 10

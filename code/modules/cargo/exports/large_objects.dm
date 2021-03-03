@@ -174,7 +174,7 @@
 	worth += gases[/datum/gas/bz]*3
 	worth += gases[/datum/gas/stimulum]*25
 	worth += gases[/datum/gas/hypernoblium]*1000
-	worth += gases[/datum/gas/miasma]*2
+	// worth += gases[/datum/gas/miasma]*2 sir this is a wendys
 	worth += gases[/datum/gas/tritium]*7
 	worth += gases[/datum/gas/pluoxium]*6
 	worth += gases[/datum/gas/nitryl]*30

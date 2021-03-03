@@ -18595,6 +18595,9 @@
 /obj/effect/turf_decal/tile/green{
 	dir = 1
 	},
+/obj/machinery/atm{
+	pixel_y = 28
+	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/port/aft)
 "aDl" = (
@@ -27673,6 +27676,7 @@
 /turf/open/floor/plasteel,
 /area/medical/chemistry)
 "aRj" = (
+/mob/living/simple_animal/cockroach/carlos,
 /turf/open/floor/wood{
 	icon_state = "wood-broken2"
 	},
@@ -31185,6 +31189,9 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 1
 	},
+/obj/machinery/atm{
+	pixel_y = 28
+	},
 /turf/open/floor/plasteel/white,
 /area/science/research)
 "aXD" = (
@@ -32884,6 +32891,9 @@
 	dir = 1
 	},
 /obj/effect/turf_decal/trimline/red/filled/corner,
+/obj/machinery/atm{
+	pixel_y = 28
+	},
 /turf/open/floor/plasteel/dark,
 /area/shuttle/arrival)
 "bao" = (
@@ -35328,6 +35338,9 @@
 /obj/structure/chair/wood/normal{
 	dir = 8
 	},
+/obj/machinery/atm{
+	pixel_y = 28
+	},
 /turf/open/floor/plasteel/chapel{
 	dir = 4
 	},
@@ -36046,6 +36059,9 @@
 /obj/effect/turf_decal/tile/neutral,
 /obj/effect/turf_decal/tile/neutral{
 	dir = 8
+	},
+/obj/machinery/atm{
+	pixel_y = 28
 	},
 /turf/open/floor/plasteel,
 /area/hallway/secondary/entry)
@@ -39479,6 +39495,17 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/starboard)
+"dDo" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden,
+/obj/structure/cable/white{
+	icon_state = "1-2"
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/machinery/atm{
+	pixel_x = 28
+	},
+/turf/open/floor/plasteel,
+/area/hallway/primary/starboard/fore)
 "dFV" = (
 /obj/machinery/atmospherics/pipe/simple/green/visible{
 	dir = 4
@@ -39579,6 +39606,22 @@
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
 /turf/open/floor/plating,
 /area/maintenance/starboard/aft)
+"esL" = (
+/obj/effect/turf_decal/tile/red{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/red,
+/obj/effect/turf_decal/tile/yellow{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/yellow{
+	dir = 8
+	},
+/obj/machinery/atm{
+	pixel_x = -28
+	},
+/turf/open/floor/plasteel,
+/area/crew_quarters/bar/atrium)
 "eva" = (
 /obj/machinery/atmospherics/pipe/simple/green/visible{
 	dir = 4
@@ -40146,6 +40189,15 @@
 /obj/effect/turf_decal/tile/neutral,
 /turf/open/floor/plasteel,
 /area/hallway/primary/aft)
+"hgW" = (
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/machinery/atm{
+	pixel_y = 28
+	},
+/turf/open/floor/plasteel,
+/area/crew_quarters/dorms)
 "hhM" = (
 /turf/closed/mineral/random/labormineral,
 /area/science/test_area)
@@ -40775,6 +40827,18 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/engine/atmos)
+"kzJ" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
+/obj/machinery/door/firedoor,
+/obj/effect/turf_decal/stripes/line,
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/machinery/atm{
+	pixel_x = -28
+	},
+/turf/open/floor/plasteel,
+/area/hallway/primary/starboard/fore)
 "kCG" = (
 /obj/machinery/atmospherics/pipe/simple/general/visible{
 	dir = 9
@@ -41982,6 +42046,19 @@
 /obj/machinery/atmospherics/components/unary/outlet_injector/atmos/mix_input,
 /turf/open/floor/engine/vacuum,
 /area/engine/atmos)
+"rZv" = (
+/obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/machinery/atm{
+	pixel_y = 28
+	},
+/turf/open/floor/plasteel,
+/area/hallway/primary/aft)
 "sak" = (
 /obj/effect/landmark/event_spawn,
 /obj/effect/turf_decal/tile/blue{
@@ -42027,6 +42104,9 @@
 	},
 /obj/effect/turf_decal/tile/neutral{
 	dir = 4
+	},
+/obj/machinery/atm{
+	pixel_y = 28
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/starboard)
@@ -45202,6 +45282,20 @@
 	},
 /turf/open/floor/plasteel/dark,
 /area/engine/atmos)
+"uTl" = (
+/obj/machinery/atmospherics/pipe/simple/supply/hidden{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/red{
+	dir = 4
+	},
+/obj/machinery/atm{
+	pixel_y = 28
+	},
+/turf/open/floor/plasteel/white/corner{
+	dir = 1
+	},
+/area/hallway/secondary/exit)
 "uTF" = (
 /obj/machinery/door/window/southleft{
 	name = "Mass Driver Door";
@@ -83809,7 +83903,7 @@ awQ
 axI
 ayA
 awQ
-aAH
+hgW
 aBQ
 awQ
 aDH
@@ -86897,7 +86991,7 @@ aAN
 aBY
 avi
 aAR
-asg
+esL
 aFN
 aAR
 aHR
@@ -87431,7 +87525,7 @@ aUy
 aUy
 aWQ
 tWh
-aYc
+rZv
 iey
 sKB
 baI
@@ -91248,7 +91342,7 @@ ajF
 akJ
 bxz
 amt
-ank
+kzJ
 anZ
 aoZ
 aqh
@@ -91516,7 +91610,7 @@ aup
 avu
 atp
 gMe
-arj
+dDo
 arj
 sEJ
 aBa
@@ -93323,7 +93417,7 @@ sFT
 sGy
 sHb
 aRz
-bxM
+uTl
 bsC
 axW
 aae

@@ -55582,6 +55582,11 @@
 	},
 /turf/open/floor/plasteel,
 /area/hallway/primary/central)
+"hFN" = (
+/obj/structure/table_frame/wood,
+/mob/living/simple_animal/cockroach/carlos,
+/turf/open/floor/wood,
+/area/maintenance/department/engine)
 "hGv" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on{
 	dir = 4
@@ -89831,7 +89836,7 @@ bME
 fef
 fmh
 bNU
-nYb
+hFN
 dSr
 fmh
 dJm
