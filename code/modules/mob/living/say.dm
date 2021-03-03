@@ -342,9 +342,9 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	return 1
 
 /mob/living/proc/get_key(message)
-	var/key = message[1]
+	var/key = lowertext(message[1])
 	if(key in GLOB.department_radio_prefixes)
-		return lowertext(message[1 + length(key)])
+		return key
 
 /mob/living/proc/get_message_language(message)
 	if(message[1] == ",")
