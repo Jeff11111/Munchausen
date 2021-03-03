@@ -133,7 +133,6 @@
 		var/datum/injury/ouchie = stump.create_injury(wounding_type, stump.max_damage / 2, FALSE, TRUE)
 		ouchie.apply_injury(stump.max_damage / 2, stump)
 	
-	update_icon_dropped()
 	var/turf/T = get_turf(src)
 	if(destroyed)
 		for(var/item in src)
@@ -166,6 +165,7 @@
 
 	if(istype(Tsec))
 		forceMove(Tsec)
+	update_icon_dropped()
 	
 /**
   * get_mangled_state() is relevant for flesh and bone bodyparts, and returns whether this bodypart has mangled skin, mangled bone, or both (or neither i guess)
