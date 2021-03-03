@@ -341,8 +341,8 @@
 				IN.germ_level = 0
 	if(owner && owner.lying)
 		janitize(-SANITIZATION_LYING)
-		for(var/in in injuries)
-			var/datum/injury/IN = in
+		for(var/fuck in injuries)
+			var/datum/injury/IN = fuck
 			IN.germ_level -= SANITIZATION_LYING
 			if(IN.germ_level < 0)
 				IN.germ_level = 0
@@ -1517,7 +1517,7 @@
 /obj/item/bodypart/proc/is_dislocated()
 	. = FALSE
 	for(var/datum/wound/W in wounds)
-		if(W.severity == WOUND_SEVERITY_MODERATE && (istype(W, /datum/wound/blunt) || istype(W, /datum/wound/mechanical/blunt))) //We have a dislocation/fracture
+		if(istype(W, /datum/wound/blunt) || istype(W, /datum/wound/mechanical/blunt)) //We have a dislocation/fracture
 			return TRUE
 
 /obj/item/bodypart/proc/is_bandaged()
