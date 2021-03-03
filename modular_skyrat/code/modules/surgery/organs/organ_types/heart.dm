@@ -193,7 +193,18 @@
 	// If our heart is stopped, it isn't going to restart itself randomly.
 	if(pulse == PULSE_NONE)
 		return
-
+	// Else, check if it should be working at all
+	else
+		var/should_stop = (owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE) && prob(40) //cardiovascular shock, not enough liquid to pump
+		should_stop = should_stop || prob(max(0, owner.getBrainLoss() - owner.maxHealth * 0.65)) //brain failing to work heart properly
+		should_stop = should_stop || ((pulse >= PULSE_THREADY) && prob(5)) //erratic heart patterns, usually caused by oxyloss
+		if(should_stop && can_stop()) // The heart has stopped due to going into traumatic or cardiovascular shock
+			Stop()
+			return
+		else if(pulse < PULSE_NONE) // no pulse means we are already having a cardiac arrest moment
+			Stop()
+			return
+		
 	// Pulse normally shouldn't go above PULSE_2FAST
 	pulse = clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_2FAST)
 
@@ -216,17 +227,6 @@
 	else if(pulse >= PULSE_2FAST)
 		if(prob(1))
 			applyOrganDamage(1)
-
-	// Finally, check if we should go into cardiac arrest
-	var/should_stop = (owner.get_blood_circulation() < BLOOD_VOLUME_SURVIVE) && prob(40) //cardiovascular shock, not enough liquid to pump
-	should_stop = should_stop || prob(max(0, owner.getBrainLoss() - owner.maxHealth * 0.65)) //brain failing to work heart properly
-	should_stop = should_stop || ((pulse >= PULSE_THREADY) && prob(5)) //erratic heart patterns, usually caused by oxyloss
-	if(should_stop && can_stop()) // The heart has stopped due to going into traumatic or cardiovascular shock
-		Stop()
-		return
-	else if(pulse < PULSE_NONE) // no pulse means we are already having a cardiac arrest moment
-		Stop()
-		return
 
 /obj/item/organ/heart/proc/handle_heartbeat()
 	if((pulse >= PULSE_2FAST) || (owner.shock_stage >= SHOCK_STAGE_1))
