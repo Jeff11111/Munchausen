@@ -76545,6 +76545,10 @@
 	},
 /turf/open/floor/plating,
 /area/hallway/secondary/entry)
+"ehZ" = (
+/mob/living/simple_animal/cockroach/carlos,
+/turf/open/floor/plating,
+/area/maintenance/starboard/aft)
 "eiS" = (
 /turf/open/floor/plasteel,
 /area/crew_quarters/toilet/auxiliary)
@@ -118085,7 +118089,7 @@ dvY
 cky
 ciL
 dwX
-ciL
+ehZ
 ciL
 cou
 csb

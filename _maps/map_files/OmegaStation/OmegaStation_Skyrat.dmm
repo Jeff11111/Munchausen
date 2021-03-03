@@ -27673,6 +27673,7 @@
 /turf/open/floor/plasteel,
 /area/medical/chemistry)
 "aRj" = (
+/mob/living/simple_animal/cockroach/carlos,
 /turf/open/floor/wood{
 	icon_state = "wood-broken2"
 	},

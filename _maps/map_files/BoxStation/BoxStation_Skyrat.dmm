@@ -65008,6 +65008,10 @@
 /obj/structure/dresser,
 /turf/open/floor/carpet/black,
 /area/maintenance/bar)
+"wXZ" = (
+/mob/living/simple_animal/cockroach/carlos,
+/turf/open/floor/plating,
+/area/maintenance/aft)
 "wYs" = (
 /obj/machinery/chem_master/condimaster{
 	name = "HoochMaster 2000"
@@ -97440,7 +97444,7 @@ aXf
 bCv
 bDP
 bCv
-bAw
+wXZ
 bHV
 bJw
 bKC
