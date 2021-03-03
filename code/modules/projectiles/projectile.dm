@@ -378,7 +378,7 @@
 			return TRUE
 
 	var/distance = get_dist(T, starting) // Get the distance between the turf shot from and the mob we hit and use that for the calculations.
-	if(distance > original_dist)
+	if(ismob(firer) && distance > original_dist)
 		qdel(src)
 		return
 	if(def_zone && ishuman(firer))
