@@ -254,12 +254,14 @@
 /datum/reagent/water/on_mob_life(mob/living/carbon/M)
 	. = ..()
 	var/obj/item/organ/spleen/spleen = M.getorganslot(ORGAN_SLOT_SPLEEN)
-	if(M.blood_volume && spleen)
-		M.blood_volume += (spleen.get_blood()/spleen.blood_amount) // water is good for you!
+	if(iscarbon(M))
+		var/mob/living/carbon/C = M
+		if(spleen && C.blood_volume && C.blood_volume * C.blood_ratio < BLOOD_VOLUME_NORMAL && !AmBloodsucker(C))
+			C.blood_volume += spleen.get_blood() // Water is good for you!
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
-		if(isslimeperson(H) && spleen)
-			M.blood_volume += (spleen.get_blood()) // water is REALLY good for you!
+		if(spleen && isslimeperson(H))
+			M.blood_volume += spleen.get_blood() // water is REALLY good for you!
 	//warter....
 	M.adjust_hydration(hydration_gain * metabolization_rate, INFINITY)
 
@@ -441,7 +443,7 @@
 		if(ishuman(M) && M.blood_volume < (BLOOD_VOLUME_NORMAL*M.blood_ratio))
 			var/obj/item/organ/spleen/spleen = M.getorganslot(ORGAN_SLOT_SPLEEN)
 			if(spleen)
-				M.blood_volume += (6 * spleen.get_blood())
+				M.blood_volume += (5 * spleen.get_blood())
 	else  // Will deal about 90 damage when 50 units are thrown
 		M.adjustBrainLoss(3, 150)
 		M.adjustToxLoss(2, FALSE)
@@ -1089,10 +1091,10 @@
 /datum/reagent/iron/on_mob_life(mob/living/carbon/C)
 	if((HAS_TRAIT(C, TRAIT_NOMARROW)))
 		return
-	if(C.blood_volume < (BLOOD_VOLUME_NORMAL*C.blood_ratio) && !AmBloodsucker(C))
+	if(C.blood_volume && C.blood_volume && C.blood_ratio < BLOOD_VOLUME_NORMAL && !AmBloodsucker(C))
 		var/obj/item/organ/spleen/spleen = C.getorganslot(ORGAN_SLOT_SPLEEN)
 		if(spleen)
-			C.blood_volume += (spleen.get_blood()/2)
+			C.blood_volume += (spleen.get_blood()*1.5)
 	..()
 
 /datum/reagent/iron/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
