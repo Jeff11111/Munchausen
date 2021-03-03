@@ -19,6 +19,6 @@
 	if(!istype(T, /turf/open/space))
 		var/obj/effect/decal/cleanable/shit/shit = new /obj/effect/decal/cleanable/shit(T)
 		if(istype(T, /turf/closed/wall))
-			shit.lyer = T.layer + 1
+			shit.layer = T.layer + 1
 			shit.plane = T.plane
 	qdel(src)
