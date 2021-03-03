@@ -333,7 +333,7 @@
 	if(!istype(niggertwo) || !istype(nigger))
 		return
 	
-	if(niggertwo.incapacitated() || !A.Adjacent(user) || niggertwo.lying)
+	if(niggertwo.incapacitated() || !A.Adjacent(user) || niggertwo.lying || (niggertwo.a_intent != INTENT_GRAB))
 		return
 
 	var/list/params_list = params2list(params)
