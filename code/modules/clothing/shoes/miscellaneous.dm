@@ -138,28 +138,6 @@
 	permeability_coefficient = 0.05 //Thick soles, and covers the ankle
 	pocket_storage_component_path = /datum/component/storage/concrete/pockets/shoes
 
-/obj/item/clothing/shoes/jackboots/ComponentInitialize()
-	. = ..()
-	//We don't want it to squeak when attacked and stuff, but i don't think it warrants
-	//new code
-	var/datum/component/squeak/bingus = AddComponent(/datum/component/squeak, list('sound/effects/jackboot1.ogg'=1,'sound/effects/jackboot2.ogg'=1), 30)
-	bingus.UnregisterSignal(src, list(COMSIG_ITEM_ATTACK, COMSIG_ITEM_ATTACK_OBJ, COMSIG_ITEM_HIT_REACT, COMSIG_ITEM_ATTACK_SELF, COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_DROPPED))
-
-// yeet the component when taped
-// made this share functionality with any shoe because its cool i think
-/obj/item/clothing/shoes/attackby(obj/item/W, mob/user, params)
-	. = ..()
-	if(istype(W, /obj/item/stack/sticky_tape) && GetComponent(/datum/component/squeak))
-		var/obj/item/stack/sticky_tape/S = W
-		if(S.get_amount() < 5)
-			to_chat(user, "<span class='warning'>You need five bits of tape to cover the bottom of the [src]!</span>")
-			return FALSE
-		else if(S.use_tool(src, user, 30, 5))
-			var/datum/component/squeak/squeaky = GetComponent(/datum/component/squeak)
-			qdel(squeaky)
-			to_chat(user, "<span class='notice'>You tape the bottom of the [src]!</span>")
-			return TRUE
-
 /obj/item/clothing/shoes/jackboots/fast
 	slowdown = -1
 

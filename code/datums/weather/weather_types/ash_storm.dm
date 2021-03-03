@@ -98,7 +98,7 @@
 		if(!IS_STAMCRIT(L))
 			L.adjustStaminaLossBuffered(4)
 		return
-	L.adjustFireLoss(4)
+	L.take_bodypart_damage(0, 5)
 
 
 //Emberfalls are the result of an ash storm passing by close to the playable area of lavaland. They have a 10% chance to trigger in place of an ash storm.

@@ -121,8 +121,8 @@
 
 /datum/job/cargo_tech
 	//Better str and end, at the cost of int and dex
-	stat_str = JOB_STATPOINTS_TRAINED
-	stat_end = JOB_STATPOINTS_TRAINED
+	stat_str = 12
+	stat_end = 12
 	stat_dex = 8
 	stat_int = 8
 	//Decent construction and electronics
@@ -364,9 +364,10 @@
 	skill_firstaid = 8
 
 /datum/job/mining
-	//Better str and end, at the cost of int
-	stat_str = 11
-	stat_end = 11
+	//Better str and end, at the cost of int and dex
+	stat_str = JOB_STATPOINTS_TRAINED
+	stat_end = JOB_STATPOINTS_TRAINED
+	stat_dex = 8
 	stat_int = 8
 	//Decent melee and ranged, novice firstaid
 	skill_melee = JOB_SKILLPOINTS_TRAINED

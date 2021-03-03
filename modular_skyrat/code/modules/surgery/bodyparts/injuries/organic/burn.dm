@@ -2,7 +2,7 @@
 /datum/injury/burn
 	damage_type = WOUND_BURN
 	max_bleeding_stage = 0
-	infection_rate = 2
+	infection_rate = 2.5
 
 /datum/injury/burn/infection_check()
 	if(is_treated() && damage < 25)	//anything less than a FUCK burn isn't infectable if treated properly
@@ -28,7 +28,7 @@
 /datum/injury/burn/apply_injury(our_damage, obj/item/bodypart/limb)
 	. = ..()
 	//Burn damage can cause fluid loss due to blistering and cook-off
-	if(limb.owner && (damage > 5 || damage + limb.burn_dam >= 15))
+	if(limb.owner && (damage >= 5 || damage + limb.burn_dam >= 20))
 		limb.owner.blood_volume -= (BLOOD_VOLUME_SURVIVE * damage/(limb.owner.maxHealth/2))
 		if(limb.owner.blood_volume < 0)
 			limb.owner.blood_volume = 0

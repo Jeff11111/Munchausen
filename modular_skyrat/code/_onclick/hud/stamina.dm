@@ -8,7 +8,7 @@
 
 /obj/screen/staminas/Initialize()
 	. = ..()
-	overfatigue_appearance = mutable_appearance(icon, "overfatigue16")
+	overfatigue_appearance = mutable_appearance(icon, "overfatigue10")
 
 /obj/screen/staminas/Click(location,control,params)
 	var/list/paramslist = params2list(params)
@@ -41,17 +41,17 @@
 		return
 	
 	//Fatigue
-	if(user.stat == DEAD || (user.combat_flags & COMBAT_FLAG_HARD_STAMCRIT) || (user.hal_screwyhud in 1 to 2))
+	if(user.stat >= DEAD || (user.combat_flags & COMBAT_FLAG_HARD_STAMCRIT) || (user.hal_screwyhud in 1 to 2))
 		icon_state = "fatigue0"
 	else if((user.hal_screwyhud == SCREWYHUD_HEALTHY) || HAS_TRAIT(hud?.mymob, TRAIT_SCREWY_CHECKSELF))
 		icon_state = "fatigue10"
 	else
-		icon_state = "fatigue[clamp(10 - CEILING(user.getStaminaLoss() / 10, 1), 0, 10)]"
+		icon_state = "fatigue[clamp(10 - CEILING(user.getStaminaLoss()/STAMINA_SOFTCRIT, 1), 0, 10)]"
 
 	//Over fatigue
-	if(user.stat == DEAD || (user.combat_flags & COMBAT_FLAG_HARD_STAMCRIT) || (user.hal_screwyhud in 1 to 2))
+	if(user.stat >= DEAD || (user.combat_flags & COMBAT_FLAG_HARD_STAMCRIT) || (user.hal_screwyhud in 1 to 2))
 		overfatigue_appearance.icon_state = "overfatigue0"
 	else if((user.hal_screwyhud == SCREWYHUD_HEALTHY) || HAS_TRAIT(hud?.mymob, TRAIT_SCREWY_CHECKSELF))
 		overfatigue_appearance.icon_state = "overfatigue10"
 	else
-		overfatigue_appearance.icon_state = "overfatigue[clamp(CEILING((1 - (user.bufferedstam / user.stambuffer)) * 10, 1), 0, 16)]"
+		overfatigue_appearance.icon_state = "overfatigue[clamp(CEILING((1 - (user.bufferedstam / user.stambuffer)) * 10, 1), 0, 10)]"

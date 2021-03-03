@@ -34,4 +34,4 @@
 		return
 	if(!L.client) //Only sentient people are going along with it!
 		return
-	L.adjustFireLoss(3)
+	L.take_bodypart_damage(0, 5)

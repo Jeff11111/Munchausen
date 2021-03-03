@@ -45,7 +45,7 @@
 	return base_prob + (level_prob * level/MAX_STAT)
 
 /datum/stats/dex/proc/get_click_mod()
-	return round(1.25 - (0.5 * level/MAX_STAT), 0.1) //Varies from 1.25 to 0.75 depending on how good/bad we are
+	return round(1.25 - (0.75 * level/MAX_STAT), 0.1) //Varies from 1.25 to 0.5 depending on how good/bad we are
 
 /datum/stats/dex/proc/get_base_miss_chance()
 	return (20 - level)

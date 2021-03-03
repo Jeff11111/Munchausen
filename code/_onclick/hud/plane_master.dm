@@ -50,7 +50,6 @@
 	plane = FLOOR_PLANE
 	render_target = FLOOR_PLANE_RENDER_TARGET
 	appearance_flags = PLANE_MASTER
-	blend_mode = BLEND_OVERLAY
 
 /obj/screen/plane_master/above_floor
 	name = "above floor plane master"

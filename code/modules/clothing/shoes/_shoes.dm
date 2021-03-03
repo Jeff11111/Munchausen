@@ -20,6 +20,21 @@
 	var/last_blood_DNA = ""	//same as last one
 	var/last_blood_color = ""
 
+// yeet the component when taped
+// made this share functionality with any shoe because its cool i think
+/obj/item/clothing/shoes/attackby(obj/item/W, mob/user, params)
+	if(istype(W, /obj/item/stack/sticky_tape) && GetComponent(/datum/component/squeak))
+		var/obj/item/stack/sticky_tape/S = W
+		if(S.get_amount() < 5)
+			to_chat(user, "<span class='warning'>You need five bits of tape to cover the bottom of the [src]!</span>")
+			return FALSE
+		else if(S.use_tool(src, user, 30, 5))
+			var/datum/component/squeak/squeaky = GetComponent(/datum/component/squeak)
+			qdel(squeaky)
+			to_chat(user, "<span class='notice'>You tape the bottom of the [src]!</span>")
+			return TRUE
+	. = ..()
+
 /obj/item/clothing/shoes/ComponentInitialize()
 	. = ..()
 	RegisterSignal(src, COMSIG_COMPONENT_CLEAN_ACT, /atom.proc/clean_blood)

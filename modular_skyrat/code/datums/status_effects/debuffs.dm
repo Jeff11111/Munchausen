@@ -277,9 +277,9 @@
 	for(var/obj/screen/plane_master/master in screens)
 		var/list/servants = new_screens["[master.plane]"]
 		var/i = 0
-		spawn(0)
-			for(var/serve in servants)
-				i++
+		for(var/serve in servants)
+			i++
+			spawn(0)
 				var/obj/screen/plane_master/servant = serve
 				var/matrix/old_transform = servant.transform
 				var/matrix/new_transform = servant.transform.Translate(offsets_x[i], offsets_y[i])
@@ -289,8 +289,6 @@
 	sleep(4 SECONDS)
 
 /datum/status_effect/incapacitating/rapedhead/on_remove()
-	//do it one last time so it looks smooth
-	rape_head()
 	if(length(screens) && length(new_screens))
 		for(var/obj/screen/plane_master/master in screens)
 			owner?.client?.screen -= new_screens["[master.plane]"]
