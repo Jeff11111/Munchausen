@@ -4,7 +4,7 @@
 	limb_flags = 0
 	max_damage = 10 //placeholder to avoid runtimes, actually set on dismemberment of a limb
 
-/obj/item/bodypart/on_transfer_to_limb(obj/item/bodypart/BP)
+/obj/item/bodypart/stump/on_transfer_to_limb(obj/item/bodypart/BP)
 	. = ..()
 	qdel(src)
 

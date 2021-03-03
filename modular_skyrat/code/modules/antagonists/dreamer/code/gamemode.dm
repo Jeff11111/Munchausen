@@ -8,7 +8,7 @@
 	announce_text = "A psychopathic killer is among the crew. He speaks of another world, of bizarre visions - What could it mean?"
 	false_report_weight = 0 //You can't really report a dreamer
 	protected_jobs = list("Cyborg", "AI")
-	required_players = 15 //Minimum for a decent round tbh
+	required_players = 12 //Minimum for a decent round tbh
 	required_enemies = 1 //One dreamer only
 	recommended_enemies = 1 //One dreamer only
 
