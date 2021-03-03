@@ -1378,11 +1378,11 @@
 	else
 		apparent_blood_volume = BLOOD_VOLUME_NORMAL
 
-	var/apparent_blood_volume_mod = max(0, 1 - getOxyLoss()/maxHealth)
+	var/apparent_blood_volume_mod = max(0, 1 - round(getOxyLoss()/maxHealth, DAMAGE_PRECISION))
 	var/oxygenated_mult = 0
-	if(chem_effects[CE_OXYGENATED] == 1) // Dexalin.
+	if(chem_effects[CE_OXYGENATED] == 1) // Dexalin
 		oxygenated_mult = 0.5
-	else if(chem_effects[CE_OXYGENATED] >= 2) // Dexplus.
+	else if(chem_effects[CE_OXYGENATED] >= 2) // Dexalin plus
 		oxygenated_mult = 0.8
 	apparent_blood_volume_mod += (apparent_blood_volume_mod * oxygenated_mult)
 	apparent_blood_volume = apparent_blood_volume * apparent_blood_volume_mod

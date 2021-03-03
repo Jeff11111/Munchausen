@@ -69,7 +69,7 @@
 		revive_organ()
 
 /obj/item/organ/proc/is_working()
-	return (!CHECK_BITFIELD(organ_flags, ORGAN_FAILING | ORGAN_CUT_AWAY | ORGAN_DEAD))
+	return (!CHECK_BITFIELD(organ_flags, ORGAN_FAILING | ORGAN_CUT_AWAY | ORGAN_DEAD) && (damage < high_threshold))
 
 /obj/item/organ/proc/is_bruised()
 	return (damage >= low_threshold)

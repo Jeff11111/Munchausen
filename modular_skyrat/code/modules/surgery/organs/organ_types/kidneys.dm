@@ -70,7 +70,7 @@
 			else if(damage >= high_threshold)
 				owner.adjustToxLoss(bad_reagents[i] * 3)
 
-	//If your kidneys aren't working, your body's going to have a hard time cleaning your blood.
+	//If your kidneys aren't working, your body's going to have a hard time
 	if(!owner.chem_effects[CE_ANTITOX])
 		if(prob(33))
 			if(damage >= high_threshold)

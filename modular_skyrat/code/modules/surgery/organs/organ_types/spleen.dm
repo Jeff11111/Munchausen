@@ -13,9 +13,15 @@
 	relative_size = 8
 	var/blood_amount = 0.5
 
+/obj/item/organ/spleen/on_life()
+	. = ..()
+	if(is_working())
+		if(owner.owner.chem_effects[CE_BLOODRESTORE])
+			owner.blood_volume += (get_blood() * owner.chem_effects[CE_BLOODRESTORE])/50
+
 /obj/item/organ/spleen/proc/get_blood()
 	var/blood = blood_amount
-	if(is_broken())
+	if(!is_working())
 		blood = 0
 	else if(is_bruised())
 		blood *= (damage/maxHealth)
