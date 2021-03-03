@@ -401,7 +401,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 /datum/quirk/british/on_spawn()
 	. = ..()
 	var/mob/living/carbon/human/H = quirk_holder
-	var/obj/item/bodypart/feefh = H.get_bodypart_nostump(BODY_ZONE_HEAD)
+	var/obj/item/bodypart/feefh = H.get_bodypart_nostump(BODY_ZONE_PRECISE_MOUTH)
 	QDEL_NULL(feefh.teeth_object)
 	feefh.update_teeth()
 
