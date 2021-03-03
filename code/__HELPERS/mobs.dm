@@ -202,7 +202,7 @@
 		"has_cock"			= (intended_gender == MALE ? TRUE : FALSE),
 		"cock_shape"		= (length(specie?.weiner_type) ? pick(specie.weiner_type) : DEF_COCK_SHAPE),
 		"cock_length"		= COCK_SIZE_DEF + rand(-5, 5),
-		"cock_diameter_ratio" = COCK_DIAMETER_RATIO_DEF + rand(-5, 5),
+		"cock_diameter_ratio" = COCK_DIAMETER_RATIO_DEF * COCK_SIZE_DEF,
 		"cock_color"		= pick("FFFFFF","7F7F7F", "7FFF7F", "7F7FFF", "FF7F7F", "7FFFFF", "FF7FFF", "FFFF7F"),
 		"cock_taur"			= FALSE,
 		"has_balls" 		= (intended_gender == MALE ? TRUE : FALSE),
