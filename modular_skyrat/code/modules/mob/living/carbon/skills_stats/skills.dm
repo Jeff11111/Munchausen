@@ -18,7 +18,7 @@
 	name = "Surgery"
 
 /datum/skills/surgery/proc/no_anesthesia_punishment()
-	return (0.2 + round(0.6 * MAX_SKILL/max(5, level), 0.1))
+	return (0.2 + CEILING((MAX_SKILL - level) * 0.03, 0.1))
 
 /datum/skills/surgery/proc/get_speed_mod()
 	return clamp((MAX_SKILL/2)/max(1, level), 0.35, 3)
