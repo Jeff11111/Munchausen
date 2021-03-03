@@ -16,7 +16,7 @@
 /obj/item/organ/spleen/on_life()
 	. = ..()
 	if(is_working())
-		if(owner.owner.chem_effects[CE_BLOODRESTORE])
+		if(owner.chem_effects[CE_BLOODRESTORE])
 			owner.blood_volume += (get_blood() * owner.chem_effects[CE_BLOODRESTORE])/50
 
 /obj/item/organ/spleen/proc/get_blood()
