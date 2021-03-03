@@ -221,7 +221,7 @@
 	// only dismemberment and disembowelment wounds will ignore preexisting ones at the moment
 	if(!ignore_preexisting)
 		for(var/datum/wound/preexisting_wound in L.wounds)
-			if((preexisting_wound.type == type) && (preexisting_wound != old_wound))
+			if((preexisting_wound.wound_type == wound_type) && (preexisting_wound != old_wound))
 				qdel(src)
 				return
 

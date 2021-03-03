@@ -1517,7 +1517,7 @@
 /obj/item/bodypart/proc/is_dislocated()
 	. = FALSE
 	for(var/datum/wound/W in wounds)
-		if(istype(W, /datum/wound/blunt) || istype(W, /datum/wound/mechanical/blunt)) //We have a dislocation/fracture
+		if(W.severity == WOUND_SEVERITY_MODERATE && (istype(W, /datum/wound/blunt) || istype(W, /datum/wound/mechanical/blunt))) //We have a dislocation/fracture
 			return TRUE
 
 /obj/item/bodypart/proc/is_bandaged()

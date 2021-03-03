@@ -812,23 +812,38 @@
 							C.visible_message("<span class='warning'><b>[C]</b> limply spasms their muscles.</span>", \
 											"<span class='userdanger'>My muscles spasm as i am brought back to life!</span>")
 						they_heart?.artificial_pump(src)
-						if(getBrainLoss() >= 100)
-							setBrainLoss(99)
+						if(C.getBrainLoss() >= 100)
+							C.setBrainLoss(99)
 				else
 					var/obj/item/bodypart/chest/affected = C.get_bodypart(BODY_ZONE_CHEST)
-					if((diceroll <= DICE_CRIT_FAILURE) && !affected.is_broken())
-						visible_message("<span class='danger'><b>[src]</b> botches the CPR, cracking <b>[C]</b>'s ribs!</span>", \
-									"<span class='danger'>I botch the CPR, cracking <b>[C]</b>'s ribs!</span>",
-									target = C, target_message = "<span class='userdanger'><b>[src]</b> botches the CPR and cracks my ribs!</span>")
-						var/datum/wound/fracture
-						if(affected.is_organic_limb())
-							var/fucked_up = (prob(heyheavy*3) ? /datum/wound/blunt/critical : /datum/wound/blunt/severe)
-							fracture = new fucked_up()
-						else
-							var/fucked_up = (prob(heyheavy*3) ? /datum/wound/mechanical/blunt/critical : /datum/wound/mechanical/blunt/severe)
-							fracture = new fucked_up()
-						fracture.apply_wound(affected, TRUE)
-						C.wound_message = ""
+					if(!affected.is_dislocated() && !affected.is_broken())
+						if(diceroll <= DICE_CRIT_FAILURE)
+							visible_message("<span class='danger'><b>[src]</b> botches the CPR, cracking <b>[C]</b>'s ribs!</span>", \
+										"<span class='danger'>I botch the CPR, cracking <b>[C]</b>'s ribs!</span>",
+										target = C, target_message = "<span class='userdanger'><b>[src]</b> botches the CPR and cracks my ribs!</span>")
+							var/datum/wound/fracture
+							if(affected.is_organic_limb())
+								var/fucked_up = (prob(heyheavy*2) ? /datum/wound/blunt/severe : /datum/wound/blunt/moderate)
+								fracture = new fucked_up()
+							else
+								var/fucked_up = (prob(heyheavy*2) ? /datum/wound/mechanical/blunt/severe : /datum/wound/mechanical/blunt/moderate)
+								fracture = new fucked_up()
+							fracture.apply_wound(affected, TRUE)
+							C.wound_message = ""
+					else if(!affected.is_broken())
+						if(diceroll <= DICE_CRIT_FAILURE)
+							visible_message("<span class='danger'><b>[src]</b> botches the CPR, cracking <b>[C]</b>'s ribs!</span>", \
+										"<span class='danger'>I botch the CPR, cracking <b>[C]</b>'s ribs!</span>",
+										target = C, target_message = "<span class='userdanger'><b>[src]</b> botches the CPR and cracks my ribs!</span>")
+							var/datum/wound/fracture
+							if(affected.is_organic_limb())
+								var/fucked_up = (prob(heyheavy*2.5) ? /datum/wound/blunt/critical : /datum/wound/blunt/severe)
+								fracture = new fucked_up()
+							else
+								var/fucked_up = (prob(heyheavy*2.5) ? /datum/wound/mechanical/blunt/critical : /datum/wound/mechanical/blunt/severe)
+								fracture = new fucked_up()
+							fracture.apply_wound(affected, TRUE)
+							C.wound_message = ""
 
 /mob/living/carbon/human/cuff_resist(obj/item/I)
 	if(dna && dna.check_mutation(HULK))
