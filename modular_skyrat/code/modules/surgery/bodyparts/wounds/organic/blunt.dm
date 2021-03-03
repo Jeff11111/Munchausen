@@ -752,7 +752,10 @@
 // doesn't make much sense for "a" bone to stick out of your head
 /datum/wound/blunt/critical/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
 	if(L?.encased)
-		descriptive = "The [L.encased] is fractured!"
+		if(L.body_zone == BODY_ZONE_PRECISE_GROIN)
+			descriptive = "The [L.encased] are shattered!"
+		else
+			descriptive = "The [L.encased] is shattered!"
 	if(L.body_zone == BODY_ZONE_HEAD)
 		occur_text = "splits open, exposing a bare, cracked skull through the flesh and blood"
 		examine_desc = "has an unsettling indent, with bits of skull poking out"
