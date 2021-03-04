@@ -89,9 +89,9 @@ SUBSYSTEM_DEF(job)
 		var/datum/job/job = GetJob(rank)
 		if(!job)
 			return FALSE
-		if(!job.is_whitelisted(player.client))
-			return FALSE
 		if(jobban_isbanned(player, rank) || QDELETED(player))
+			return FALSE
+		if(!job.is_whitelisted(player.client))
 			return FALSE
 		if(!job.player_old_enough(player.client))
 			return FALSE
@@ -114,6 +114,9 @@ SUBSYSTEM_DEF(job)
 	for(var/mob/dead/new_player/player in unassigned)
 		if(jobban_isbanned(player, job.title) || QDELETED(player))
 			JobDebug("FOC isbanned failed, Player: [player]")
+			continue
+		if(!job.is_whitelisted(player.client))
+			JobDebug("FOC player not whitelisted, Player: [player]")
 			continue
 		if(!job.player_old_enough(player.client))
 			JobDebug("FOC player not old enough, Player: [player]")
@@ -154,7 +157,11 @@ SUBSYSTEM_DEF(job)
 				break
 			JobDebug("GRJ isbanned failed, Player: [player], Job: [job.title]")
 			continue
-
+		
+		if(!job.is_whitelisted(player.client))
+			JobDebug("GRJ player not whitelisted, Player: [player]")
+			continue
+		
 		if(!job.player_old_enough(player.client))
 			JobDebug("GRJ player not old enough, Player: [player]")
 			continue
@@ -204,8 +211,8 @@ SUBSYSTEM_DEF(job)
 				continue
 			var/mob/dead/new_player/candidate = pick(candidates)
 			if(AssignRole(candidate, command_position))
-				return 1
-	return 0
+				return TRUE
+	return FALSE
 
 
 //This proc is called at the start of the level loop of DivideOccupations() and will cause head jobs to be checked before any other jobs of the same level
@@ -337,6 +344,10 @@ SUBSYSTEM_DEF(job)
 					JobDebug("DO player deleted during job ban check")
 					break
 
+				if(!job.is_whitelisted(player.client))
+					JobDebug("DO player not whitelisted, Player: [player], Job:[job.title]")
+					continue
+				
 				if(!job.player_old_enough(player.client))
 					JobDebug("DO player not old enough, Player: [player], Job:[job.title]")
 					continue
@@ -545,6 +556,9 @@ SUBSYSTEM_DEF(job)
 				continue //This player is not ready
 			if(jobban_isbanned(player, job.title) || QDELETED(player))
 				banned++
+				continue
+			if(!job.is_whitelisted(player.client))
+				young++
 				continue
 			if(!job.player_old_enough(player.client))
 				young++

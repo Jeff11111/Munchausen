@@ -585,7 +585,7 @@
 	if(!owner)
 		return FALSE
 
-	var/list/our_organs = list()
+	var/list/our_organs
 	for(var/X in owner.internal_organs)
 		var/obj/item/organ/O = X
 		if(!istype(O))
@@ -594,8 +594,7 @@
 		if(org_zone == body_zone)
 			LAZYADD(our_organs, O)
 
-	if(length(our_organs))
-		return our_organs
+	return our_organs
 
 /obj/item/bodypart/proc/consider_processing()
 	if(stamina_dam > DAMAGE_PRECISION)

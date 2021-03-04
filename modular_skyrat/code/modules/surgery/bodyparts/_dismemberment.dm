@@ -97,11 +97,8 @@
 				var/datum/mutation/human/MT = X
 				if(MT.limb_req && MT.limb_req == body_zone)
 					C.dna.force_lose(MT)
-		for(var/X in C.internal_organs) //internal organs inside the dismembered limb are dropped.
+		for(var/X in get_organs()) //internal organs inside the dismembered limb are dropped.
 			var/obj/item/organ/O = X
-			var/org_zone = check_zone(O.zone)
-			if(org_zone != body_zone)
-				continue
 			O.transfer_to_limb(src, C)
 
 	limb_flags |= BODYPART_CUT_AWAY

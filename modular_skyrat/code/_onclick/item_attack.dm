@@ -41,8 +41,8 @@
 				if(diceroll <= DICE_CRIT_FAILURE)
 					user.visible_message("<span class='danger'><b>[user]</b> botches the dissection!</span>", 
 										"<span class='warning'>Oh no - I fucked up...</span>")
-					if(prob(40))
-						BP.create_injury(WOUND_SLASH, force * 2, FALSE, FALSE)
+					var/datum/injury/IN = BP.create_injury(WOUND_SLASH, force * 2.5, FALSE, FALSE)
+					IN.apply_injury(force * 2.5, BP)
 					return FALSE
 				var/datum/injury/ouchie = BP.create_injury(WOUND_SLASH, BP.max_damage * 0.75, TRUE)
 				ouchie.apply_injury(BP.max_damage * 0.75, BP)
@@ -67,8 +67,8 @@
 				if(diceroll <= DICE_CRIT_FAILURE)
 					user.visible_message("<span class='danger'><b>[user]</b> botches the dismemberment!</span>", 
 										"<span class='warning'>Oh no - I fucked up...</span>")
-					if(prob(40))
-						BP.create_injury(WOUND_SLASH, force * 2, FALSE, FALSE)
+					var/datum/injury/IN = BP.create_injury(WOUND_SLASH, force * 2.5, FALSE, FALSE)
+					IN.apply_injury(force * 2.5, BP)
 					return FALSE
 				BP.apply_dismember(WOUND_SLASH)
 				user.put_in_hands(BP)
@@ -88,8 +88,8 @@
 				if(diceroll <= DICE_FAILURE)
 					user.visible_message("<span class='danger'><b>[user]</b> botches the dissection!</span>", 
 										"<span class='warning'>Oh no - I fucked up...</span>")
-					if(prob(40))
-						BP.create_injury(WOUND_SLASH, force * 2, FALSE, FALSE)
+					var/datum/injury/IN = BP.create_injury(WOUND_SLASH, force * 2.5, FALSE, FALSE)
+					IN.apply_injury(force * 2.5, BP)
 					return FALSE
 				BP.drop_limb(TRUE)
 				user.put_in_hands(BP)
