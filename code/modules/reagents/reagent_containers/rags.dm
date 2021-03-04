@@ -31,12 +31,7 @@
 	. = ..()
 	if(!proximity)
 		return
-	if(istype(A, /obj/item/reagent_containers/glass))
-		if(A.name == initial(A.name))
-			to_chat(user, "<span class='notice'>It's pretty clean already.</span>")
-			return
-		else if(length(A.reagents.reagent_list))
-			return
+	if(istype(A, /obj/item/reagent_containers/food/drinks/drinkingglass) && (A.name != initial(A.name)) && !length(A.reagents.reagent_list))
 		to_chat(user, "<span class='notice'>You wipe down \the [A.name]</span>")
 		A.name = initial(A.name)
 		A.icon = initial(A.icon)
@@ -66,7 +61,6 @@
 		if(do_after(user, action_speed, target = A))
 			user.visible_message("[user] finishes wiping off [A]!", "<span class='notice'>You finish wiping off [A].</span>")
 			SEND_SIGNAL(A, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_MEDIUM)
-	return
 
 /obj/item/reagent_containers/rag/alt_pre_attack(mob/living/M, mob/living/user, params)
 	if(istype(M) && user.a_intent == INTENT_HELP)
