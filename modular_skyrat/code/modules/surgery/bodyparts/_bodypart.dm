@@ -647,7 +647,7 @@
 		update_injuries()
 
 /obj/item/bodypart/proc/update_germs()
-	if(!can_decay()
+	if(!can_decay())
 		return
 	//Cryo stops germs from moving and doing their bad stuffs
 	if(owner.bodytemperature <= 170)
