@@ -336,17 +336,12 @@
 		janitize(-antibiotics * SANITIZATION_ANTIBIOTIC)	//at germ_level == 500 and 50 antibiotic, this should cure the infection in 5 minutes
 		for(var/fuck in injuries)
 			var/datum/injury/IN = fuck
-			IN.germ_level -= antibiotics * SANITIZATION_ANTIBIOTIC
-			if(IN.germ_level < 0)
-				IN.germ_level = 0
+			IN.germ_level = clamp(IN.germ_level - antibiotics, 0, INFECTION_LEVEL_THREE)
 	if(owner && owner.lying)
 		janitize(-SANITIZATION_LYING)
 		for(var/fuck in injuries)
 			var/datum/injury/IN = fuck
-			IN.germ_level -= SANITIZATION_LYING
-			if(IN.germ_level < 0)
-				IN.germ_level = 0
-	germ_level = max(0, germ_level)
+			IN.germ_level = clamp(IN.germ_level - SANITIZATION_LYING, 0, INFECTION_LEVEL_THREE)
 
 /obj/item/bodypart/proc/handle_germ_effects()
 	//Handle infection effects
@@ -652,8 +647,7 @@
 		update_injuries()
 
 /obj/item/bodypart/proc/update_germs()
-	if(!can_decay())
-		germ_level = 0
+	if(!can_decay()
 		return
 	//Cryo stops germs from moving and doing their bad stuffs
 	if(owner.bodytemperature <= 170)
@@ -676,12 +670,12 @@
 	//Open wounds can become infected
 	for(var/datum/wound/W in wounds)
 		if(istype(T) && W.infection_check() && (max(2*T.dirtiness, owner_germ_level) > W.germ_level))
-			W.germ_level += W.infection_rate
+			W.germ_level = clamp(W.germ_level + W.infection_rate, 0, INFECTION_LEVEL_THREE)
 
 	//Open injuries can become infected, regardless of antibiotics
 	for(var/datum/injury/IN in injuries)
 		if(istype(T) && IN.infection_check() && (max(2*T.dirtiness, owner_germ_level) > IN.germ_level))
-			IN.germ_level += IN.infection_rate
+			IN.germ_level = clamp(IN.germ_level + IN.infection_rate, 0, INFECTION_LEVEL_THREE)
 
 	//If we have antibiotics, then skip over, the infection is going away
 	var/antibiotics = owner.get_antibiotics()

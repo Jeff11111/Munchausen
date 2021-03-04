@@ -54,6 +54,7 @@
 		parent_bodypart.injuries -= src
 		parent_bodypart = null
 	if(parent_mob)
+		UnregisterSignal(parent_mob, COMSIG_MOVABLE_MOVED)
 		parent_mob.all_injuries -= src
 		parent_mob = null
 	embedded_objects = null
@@ -78,7 +79,13 @@
 		if(parent_bodypart.owner)
 			parent_mob = parent_bodypart.owner
 			parent_bodypart.owner.all_injuries += src
+			RegisterSignal(parent_mob, COMSIG_MOVABLE_MOVED, .proc/on_move)
 			sound_hint(parent_mob, parent_mob)
+
+//makes the injury get infected more when the victim is moving around
+/datum/injury/proc/on_move(mob/living/carbon/source)
+	if(parent_bodypart && prob(10) && infection_check())
+		germ_level = clamp(germ_level + infection_rate, 0, INFECTION_LEVEL_THREE)
 
 //special proc for when the parent bodypart receives some damage
 /datum/injury/proc/receive_damage(damage_received = 0, pain_received = 0, damage_type = WOUND_BLUNT)

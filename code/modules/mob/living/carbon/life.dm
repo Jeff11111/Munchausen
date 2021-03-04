@@ -12,7 +12,7 @@
 		return
 	handle_blood()
 	// handle_blood *could* kill us.
-	// we should probably have a better system for if we need to check for death or something in the future hmw
+	// we should probably have a better system for if we need to check for death or something in the future hm
 	if(stat != DEAD)
 		var/bprv = handle_bodyparts()
 		if(bprv & BODYPART_LIFE_UPDATE_HEALTH)
@@ -38,7 +38,7 @@
 		update_damage_hud()
 	// Increase germ_level regularly
 	if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
-		germ_level++
+		germ_level += 1
 
 //Procs called while dead
 /mob/living/carbon/proc/handle_death()
@@ -394,24 +394,7 @@
 		var/obj/item/bodypart/BP = I
 		if(BP.needs_processing)
 			. |= BP.on_life()
-		if(!lying && !buckled && (world.time - last_move_time <= 2 SECONDS))
-			//Moving around with broken bones won't do you any good
-			if(stat < UNCONSCIOUS && BP.disabled && prob(20) && can_feel_pain() && BP.is_broken() && BP.get_organs() && chem_effects[CE_PAINKILLER] < 50)
-				custom_pain("Pain jolts through your broken [BP.encased ? BP.encased : BP.name], staggering you!", 40, affecting = BP)
-				Stumble(4 SECONDS)
-				Rapehead(8 SECONDS)
-				Stun(3 SECONDS)
-				BP.damage_organs(brute = rand(3, 5), wounding_type = WOUND_PIERCE)
-				sound_hint(src, src)
-
-			//Moving makes open wounds get infected much faster
-			for(var/datum/wound/W in BP.wounds)
-				if(W.infection_check())
-					W.germ_level += W.infection_rate
-			for(var/datum/injury/IN in BP.injuries)
-				if(IN.infection_check())
-					IN.germ_level += IN.infection_rate
-
+		
 		//Always try to update the germ level of bodyparts
 		BP.update_germs()
 

@@ -413,7 +413,7 @@
 
 	// sanitization is checked after the clearing check but before the rest, because we freeze the effects of infection while we have sanitization
 	if(sanitization > 0)
-		var/bandage_factor = (limb.current_gauze ? limb.current_gauze.splint_factor : 1)
+		var/bandage_factor = (limb.current_gauze ? limb.current_gauze.absorption_rate : 0.1)
 		germ_level = max(0, germ_level - WOUND_INFECTION_SANITIZATION_RATE)
 		sanitization = max(0, sanitization - (WOUND_INFECTION_SANITIZATION_RATE * bandage_factor))
 		return

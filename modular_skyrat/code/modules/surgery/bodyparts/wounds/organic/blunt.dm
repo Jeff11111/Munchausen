@@ -54,24 +54,26 @@
 	if(severity >= WOUND_SEVERITY_SEVERE && affected && (!affected.current_gauze || affected.current_gauze.splint_factor > 0.35))
 		return TRUE
 
-/datum/wound/blunt/wound_injury(datum/wound/old_wound = null)
-	if(limb.body_zone == BODY_ZONE_HEAD && brain_trauma_group)
+/datum/wound/blunt/apply_wound(obj/item/bodypart/L, silent, datum/wound/old_wound, smited)
+	. = ..()
+	if(L.body_zone == BODY_ZONE_HEAD && brain_trauma_group)
 		processes = TRUE
 		active_trauma = victim.gain_trauma_type(brain_trauma_group, TRAUMA_RESILIENCE_WOUND)
 		next_trauma_cycle = world.time + (rand(100-WOUND_BONE_HEAD_TIME_VARIANCE, 100+WOUND_BONE_HEAD_TIME_VARIANCE) * 0.01 * trauma_cycle_cooldown)
 
+	RegisterSignal(victim, COMSIG_MOVABLE_MOVED, .proc/jostle_bone)
 	RegisterSignal(victim, COMSIG_HUMAN_EARLY_UNARMED_ATTACK, .proc/attack_with_hurt_hand)
 	var/obj/item/bodypart/child
-	if(length(limb.children_zones))
-		child = victim.get_bodypart(limb.children_zones[1])
-	if((limb.held_index && victim.get_item_for_held_index(limb.held_index) && (disabling || prob(30 * severity))) || (child && child.held_index && victim.get_item_for_held_index(child.held_index) && (disabling || prob(30 * severity))))
-		var/obj/item/I = victim.get_item_for_held_index(limb.held_index)
+	if(length(L.children_zones))
+		child = victim.get_bodypart(L.children_zones[1])
+	if((L.held_index && victim.get_item_for_held_index(L.held_index) && (disabling || prob(30 * severity))) || (child && child.held_index && victim.get_item_for_held_index(child.held_index) && (disabling || prob(30 * severity))))
+		var/obj/item/I = victim.get_item_for_held_index(L.held_index)
 		if(istype(I, /obj/item/offhand))
 			I = victim.get_inactive_held_item()
 
 		if(I && victim.dropItemToGround(I))
 			victim.visible_message("<span class='danger'><b>[victim]</b> drops [I] in shock!</span>", \
-								"<span class='userdanger'>The force on my [limb.name] causes me to drop [I]!</span>", \
+								"<span class='userdanger'>The force on my [L.name] causes me to drop [I]!</span>", \
 								vision_distance=COMBAT_MESSAGE_RANGE)
 	
 	if(severity >= WOUND_SEVERITY_SEVERE)
@@ -98,6 +100,7 @@
 	QDEL_NULL(active_trauma)
 	if(victim)
 		UnregisterSignal(victim, COMSIG_HUMAN_EARLY_UNARMED_ATTACK)
+		UnregisterSignal(victim, COMSIG_MOVABLE_MOVED)
 	return ..()
 
 /datum/wound/blunt/handle_process()
@@ -118,9 +121,9 @@
 	if(GET_STAT_LEVEL(victim, end) >= ((MAX_STAT/4)*3))
 		regen_points_current += 0.2
 	
-	if(prob(severity * 1.5))
+	if(prob(severity * 3))
 		victim.custom_pain("I feel a sharp pain on my [limb] as my bones reform!", \
-					max(1, severity - WOUND_SEVERITY_TRIVIAL) * 15)
+					max(1, severity - WOUND_SEVERITY_TRIVIAL) * 15, affecting = limb)
 
 	if(regen_points_current > regen_points_needed)
 		if(!victim || !limb)
@@ -128,6 +131,17 @@
 			return
 		to_chat(victim, "<span class='green'>My [limb.name] has recovered from my [lowertext(name)]!</span>")
 		remove_wound()
+
+/// Jostling
+/datum/wound/blunt/proc/jostle_bone(mob/living/carbon/source)
+	if(source.stat < UNCONSCIOUS && limb.disabled && prob(4 * (severity - WOUND_SEVERITY_MODERATE)) && source.can_feel_pain() && limb.get_organs() && (source.chem_effects[CE_PAINKILLER] < 50))
+		source.custom_pain("Pain jolts through your broken [limb.encased ? limb.encased : limb.name], staggering you!", 40, affecting = limb)
+		source.Stumble(4 SECONDS)
+		if(limb.body_zone in list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH))
+			source.Rapehead(8 SECONDS)
+		source.Stun(3 SECONDS)
+		limb.damage_organs(brute = rand(3, 5), wounding_type = WOUND_PIERCE)
+		sound_hint(source, source)
 
 /// If we're a human who's punching something with a broken arm, we might hurt ourselves doing so
 /datum/wound/blunt/proc/attack_with_hurt_hand(mob/M, atom/target, proximity)

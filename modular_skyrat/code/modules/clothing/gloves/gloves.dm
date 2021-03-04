@@ -239,7 +239,7 @@
 //CE gloves
 /obj/item/clothing/gloves/color/black/ce
 	name = "impact gloves"
-	desc = "Thick black leather gloves, for insecure doggies who keep changing this desc to be less insecure."
+	desc = "Thick  impact-resistant black leather gloves. Fancy."
 	armor = list("melee" = 20, "bullet" = 20, "laser" = 10, "energy" = 10, "bomb" = 30, "bio" = 60, "rad" = 20, "fire" = 100, "acid" = 50, "wound" = 10)
 	icon = 'modular_skyrat/icons/obj/clothing/gloves.dmi'
 	mob_overlay_icon = 'modular_skyrat/icons/mob/clothing/hands.dmi'
@@ -247,3 +247,7 @@
 	item_state = "comfy"
 	siemens_coefficient = 0.5
 	force = 5
+
+//Tacklers
+/obj/item/clothing/gloves/tackler/combat
+	armor = list("melee" = 25, "bullet" = 25, "laser" = 10, "energy" = 10, "bomb" = 30, "bio" = 60, "rad" = 20, "fire" = 100, "acid" = 50, "wound" = 10)

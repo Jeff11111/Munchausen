@@ -26,7 +26,7 @@
 	desc = "Ooga booga rock crush bone."
 	self_delay = 90
 	other_delay = 45
-	absorption_rate = 0.10
+	absorption_rate = 0.1
 	absorption_capacity = 3.5
 	splint_factor = 0.3
 	novariants = TRUE

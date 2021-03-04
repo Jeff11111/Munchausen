@@ -126,10 +126,10 @@
 	stat_dex = 8
 	stat_int = 8
 	//Decent construction and electronics
-	skill_melee = 8
-	skill_ranged = 8
-	skill_construction = JOB_SKILLPOINTS_TRAINED
-	skill_electronics = JOB_SKILLPOINTS_TRAINED
+	skill_melee = JOB_SKILLPOINTS_NOVICE
+	skill_ranged = JOB_SKILLPOINTS_NOVICE
+	skill_construction = JOB_SKILLPOINTS_AVERAGE
+	skill_electronics = JOB_SKILLPOINTS_AVERAGE
 
 /datum/job/chaplain
 	//Decent stats, god blessed them
@@ -248,10 +248,10 @@
 	//Decent endurance, below average strength
 	stat_str = 9
 	stat_end = 14
-	//Average construction and electronics i guess?
+	//aaaaaaaa
 	skill_melee = JOB_SKILLPOINTS_NOVICE
-	skill_construction = JOB_SKILLPOINTS_AVERAGE
-	skill_electronics = JOB_SKILLPOINTS_AVERAGE
+	skill_construction = JOB_SKILLPOINTS_NOVICE
+	skill_electronics = JOB_SKILLPOINTS_NOVICE
 
 /datum/job/lawyer
 	//Uhhh... decent research and ranged?
