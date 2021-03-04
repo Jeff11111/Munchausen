@@ -228,7 +228,7 @@
 //The lab cage and captains display case do not spawn with electronics, which is why req_access is needed.
 /obj/structure/displaycase/captain
 	alert = TRUE
-	start_showpiece_type = /obj/item/gun/ballistic/automatic/pistol/m1911/captain
+	start_showpiece_type = /obj/item/gun/ballistic/automatic/pistol/m1911/sig
 	req_access = list(ACCESS_CAPTAIN)
 
 /obj/structure/displaycase/labcage

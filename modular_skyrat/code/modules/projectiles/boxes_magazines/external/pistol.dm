@@ -16,7 +16,7 @@
 //USP-Match
 /obj/item/ammo_box/magazine/usp
 	name = "USP magazine (.45)"
-	desc = "A magazine for the security USP Match."
+	desc = "A magazine for the USP Match."
 	icon = 'modular_skyrat/icons/obj/ammo.dmi'
 	icon_state = "uspm-15"
 	ammo_type = /obj/item/ammo_casing/c45
@@ -32,8 +32,14 @@
 	icon_state = "pistol45_r"
 
 /obj/item/ammo_box/magazine/m45/update_icon()
-	..()
-	icon_state = "[initial(icon_state)]-[round(ammo_count(), 2)]"
+	. = ..()
+	icon_state = "[initial(icon_state)]-[CEILING(ammo_count(), 2)]"
+
+//Sig Sauer
+/obj/item/ammo_box/magazine/m45/extended
+	name = "high-capacity handgun magazine (.45)"
+	icon_state = "pistol45big"
+	max_ammo = 12
 
 //Stechkin
 /obj/item/ammo_box/magazine/m10mm
