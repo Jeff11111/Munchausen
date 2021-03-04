@@ -280,7 +280,6 @@ TOGGLE_CHECKBOX(/datum/verbs/menu/Settings, toggle_fullscreen)()
 	usr.client.prefs.save_preferences()
 	to_chat(src, "Fullscreen [usr.client.prefs.fullscreenpref ? "enabled" : "disabled"].")
 	usr.client.fullscreen()
-	usr.client.fit_viewport()
 	SSblackbox.record_feedback("nested tally", "fullscreen toggle", 1, list("Toggle Fullscreen", "[usr.client.prefs.fullscreenpref ? "Enabled" : "Disabled"]"))
 
 /datum/verbs/menu/Settings/toggle_fullscreen/Get_checked(client/C)

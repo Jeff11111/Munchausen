@@ -1032,3 +1032,4 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		winset(src, "mainwindow", "is-maximized=true")
 	else
 		winset(src, "mainwindow", "is-maximized=false;can-resize=true;titlebar=true;statusbar=false;menu=menu")
+	fit_viewport()
