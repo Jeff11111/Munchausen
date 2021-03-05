@@ -14,7 +14,7 @@ GLOBAL_LIST_EMPTY(objectives)
 	var/completable = TRUE				//Whether this objective shows greentext when completed
 	var/martyr_compatible = FALSE		//If the objective is compatible with martyr objective, i.e. if you can still do it while dead.
 	var/bobux_reward = 1			 	//how much bobux this objective nets the antag on completion
-	var/bobux_penalty = 1					//how much bobux the antag loses on failure
+	var/bobux_penalty = 0					//how much bobux the antag loses on failure
 	var/flavor = "Objective" //Gets listed as [flavor] #1 etc thats cool i think
 
 /datum/objective/New(var/text)
@@ -520,7 +520,7 @@ GLOBAL_LIST_EMPTY(objectives)
 	name = "nuclear"
 	explanation_text = "Destroy the station with a nuclear device."
 	bobux_reward = 5
-	bobux_penalty = 3
+	bobux_penalty = 0
 	martyr_compatible = TRUE
 
 /datum/objective/nuclear/check_completion()
