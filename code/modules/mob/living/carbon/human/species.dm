@@ -4,8 +4,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 GLOBAL_LIST_EMPTY(roundstart_race_names)
 GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
-#define BURN_WOUND_ROLL_MULT 10
-#define SPECIFY_BODYPART_BURN_PROB 90
+#define SPECIFY_BODYPART_BURN_PROB 95
 
 /datum/species
 	var/id	// if the game needs to manually check your race to do something not included in a proc here, it will use this
@@ -2405,7 +2404,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				H.adjust_bodytemperature((thermal_protection+1)*natural + min(thermal_protection * (loc_temp - H.bodytemperature) / BODYTEMP_HEAT_DIVISOR, BODYTEMP_HEATING_MAX))
 			else //we're sweating, insulation hinders out ability to reduce heat - but will reduce the amount of heat we get from the environment
 				H.adjust_bodytemperature(natural*(1/(thermal_protection+1)) + min(thermal_protection * (loc_temp - H.bodytemperature) / BODYTEMP_HEAT_DIVISOR, BODYTEMP_HEATING_MAX))
-		switch((loc_temp - H.bodytemperature)*thermal_protection)
+		switch((H.bodytemperature - BODYTEMP_NORMAL)*thermal_protection)
 			if(-INFINITY to -50)
 				H.throw_alert("temp", /obj/screen/alert/cold, 3)
 			if(-50 to -35)
@@ -2641,5 +2640,4 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	if(HAS_BONE in species_traits)
 		. |= BIO_BONE
 
-#undef BURN_WOUND_ROLL_MULT
 #undef SPECIFY_BODYPART_BURN_PROB

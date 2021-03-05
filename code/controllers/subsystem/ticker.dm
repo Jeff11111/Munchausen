@@ -243,7 +243,7 @@ SUBSYSTEM_DEF(ticker)
 
 		if(!mode)
 			if(!runnable_modes.len)
-				to_chat(world, "<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby.")
+				to_chat(world, "<B>Unable to choose playable game mode.</B>\nReverting to pre-game lobby and changing mode to extended.")
 				mode = config.pick_mode()
 				return 0
 			mode = pickweight(runnable_modes)
@@ -253,9 +253,9 @@ SUBSYSTEM_DEF(ticker)
 	else
 		mode = config.pick_mode(GLOB.master_mode)
 		if(!mode.can_start())
-			to_chat(world, "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players and [mode.required_enemies] eligible antagonists needed. Reverting to pre-game lobby.")
+			to_chat(world, "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players and [mode.required_enemies] eligible antagonists needed. Reverting to pre-game lobby and changing mode to extended.")
 			qdel(mode)
-			mode = null
+			mode = config.pick_mode()
 			SSjob.ResetOccupations()
 			return 0
 
