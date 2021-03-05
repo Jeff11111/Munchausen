@@ -131,7 +131,7 @@
 //Sig sauer .45
 /obj/item/gun/ballistic/automatic/pistol/m1911/sig
 	name = "\improper tactical .45 pistol"
-	icon_state = "sig"
+	icon_state = "sig45"
 	mag_type = /obj/item/ammo_box/magazine/m45/extended
 	desc = "The NT320 - A modern .45 pistol that accepts large capacity 12 round magazines."
 	weapon_weight = WEAPON_MEDIUM
