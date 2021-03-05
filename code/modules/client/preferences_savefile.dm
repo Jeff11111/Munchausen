@@ -665,6 +665,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 			features["has_vag"] = TRUE
 		else
 			features["has_cock"] = TRUE
+			features["has_balls"] = TRUE
 	joblessrole	= sanitize_integer(joblessrole, 1, 3, initial(joblessrole))
 	//Validate job prefs
 	for(var/j in job_preferences)

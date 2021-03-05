@@ -2542,6 +2542,7 @@ GLOBAL_LIST_INIT(food, list(
 					if(!features["has_cock"] && !features["has_vag"])
 						to_chat(user, "<span class='danger'>Your character needs at least one main genital (vagina or penis).\nYou have been given a penis.</span>")
 						features["has_cock"] = TRUE
+						features["has_balls"] = TRUE
 				if("cyber_vag")
 					features["cyber_vag"] = !features["cyber_vag"]
 				if("has_womb")
