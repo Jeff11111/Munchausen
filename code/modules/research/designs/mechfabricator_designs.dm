@@ -12,7 +12,7 @@
 	name = "Cyborg Head"
 	id = "borg_head"
 	build_type = MECHFAB
-	build_path = /obj/item/bodypart/head/robot
+	build_path = /obj/item/bodypart/neck/robot
 	materials = list(/datum/material/iron=5000)
 	construction_time = 350
 	category = list("Cyborg")
