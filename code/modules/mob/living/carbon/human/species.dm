@@ -2413,11 +2413,11 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				H.throw_alert("temp", /obj/screen/alert/cold, 1)
 			if(-20 to 0) //This is the sweet spot where air is considered normal
 				H.clear_alert("temp")
-			if(0 to 15) //When the air around you matches your body's temperature, you'll start to feel warm.
+			if(0 to 20) //When the air around you matches your body's temperature, you'll start to feel warm.
 				H.throw_alert("temp", /obj/screen/alert/hot, 1)
-			if(15 to 30)
+			if(20 to 35)
 				H.throw_alert("temp", /obj/screen/alert/hot, 2)
-			if(30 to INFINITY)
+			if(35 to INFINITY)
 				H.throw_alert("temp", /obj/screen/alert/hot, 3)
 
 	// +/- 50 degrees from 310K is the 'safe' zone, where no damage is dealt.
