@@ -86,9 +86,9 @@
 		H.left_eye_color = old_eye_color
 		if(!special)
 			H.dna.species.handle_body(H)
-	C?.update_tint()
-	C?.update_sight()
-	C?.update_eyes()
+	C.update_tint()
+	C.update_sight()
+	C.update_eyes()
 
 /obj/item/bodypart/left_eye/receive_damage(brute = 0, burn = 0, stamina = 0, blocked = 0, updating_health = TRUE, required_status = null, wound_bonus = 0, bare_wound_bonus = 0, sharpness = SHARP_NONE, spread_damage = TRUE, pain = 0, toxin = 0, clone = 0)
 	. = ..()

@@ -792,14 +792,14 @@
 		overlay_fullscreen("left_eye_damage", /obj/screen/fullscreen/impaired/left, left_damage)
 	else if(!left_damage)
 		clear_fullscreen("left_eye_damage")
-		if(fuck_with_fov && fov.shadow_angle == FOV_180PLUS45_DEGREES)
+		if(fuck_with_fov && fov && fov.shadow_angle == FOV_180PLUS45_DEGREES)
 			fov.generate_fov_holder(src, 0, FOV_180_DEGREES, FALSE, TRUE)
 
 	if(right_damage in 1 to 2)
 		overlay_fullscreen("right_eye_damage", /obj/screen/fullscreen/impaired/right, right_damage)
 	else if(!right_damage)
 		clear_fullscreen("right_eye_damage")
-		if(fuck_with_fov && fov.shadow_angle == FOV_180MINUS45_DEGREES)
+		if(fuck_with_fov && fov && fov.shadow_angle == FOV_180MINUS45_DEGREES)
 			fov.generate_fov_holder(src, 0, FOV_180_DEGREES, FALSE, TRUE)
 
 	return TRUE
