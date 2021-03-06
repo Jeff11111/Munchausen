@@ -45,7 +45,7 @@
 	mood_change = -5
 
 /datum/mood_event/veryshit
-	description = "<span class='boldwarning'>My anus is <b>BLEEDING</b>!</span>"
+	description = "<span class='boldwarning'>My anus is <b>BLEEDING!</b></span>"
 	mood_change = -8
 
 /datum/mood_event/shat_self
