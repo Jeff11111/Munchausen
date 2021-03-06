@@ -429,6 +429,9 @@
 	limb_flags = BODYPART_NOBLEED
 	starting_children = list(/obj/item/bodypart/head/robot)
 
+/obj/item/bodypart/neck/robot/nochildren
+	starting_children = null
+
 // Surplus limbs
 /obj/item/bodypart/l_arm/robot/surplus
 	name = "surplus prosthetic left arm"

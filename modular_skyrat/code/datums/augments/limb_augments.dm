@@ -104,7 +104,7 @@
 /datum/augment/limb/robotic/neck
 	name = "Cybernetic Neck"
 	slot = BODY_ZONE_PRECISE_NECK
-	augmentation = /obj/item/bodypart/neck/robot
+	augmentation = /obj/item/bodypart/neck/robot/nochildren
 
 /datum/augment/limb/robotic/r_arm
 	name = "Cybernetic Right Arm"
