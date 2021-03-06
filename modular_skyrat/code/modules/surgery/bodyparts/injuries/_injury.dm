@@ -247,7 +247,7 @@
 	src.damage += damage
 	bleed_timer += damage
 
-	while(current_stage > 1 && damage_list[current_stage-1] <= src.damage / amount)
+	while(current_stage > 1 && damage_list[current_stage-1 < src.damage / amount)
 		current_stage--
 
 	desc = desc_list[current_stage]
