@@ -159,7 +159,7 @@
 		REGISTER_NESTED_LOCS(M, nested_locs, COMSIG_MOVABLE_MOVED, .proc/on_loc_moved)
 		A = nested_locs[nested_locs.len]
 	CENTERED_RENDER_SOURCE(owner_mask, A, src)
-	if(M.client?.view != "[current_fov_size[1]]x[current_fov_size[2]]")
+	if(M.client?.view && M.client.view != "[current_fov_size[1]]x[current_fov_size[2]]")
 		resize_fov(current_fov_size, getviewsize(M.client.view))
 	M.hud_used?.fov_holder = fov
 	M.hud_used?.show_hud(HUD_STYLE_STANDARD)
