@@ -552,7 +552,7 @@
 	. = ..()
 	var/brap = rand(1, 5)
 	user.adjust_nutrition(-brap * 2)
-	playsound(src, pick('sound/voice/fart.ogg', 'sound/voice/fart2.ogg'), 50, FALSE)
+	playsound(src, pick('sound/voice/fart.ogg', 'sound/voice/fart2.ogg'), brap * 20, FALSE)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.mind?.diceroll(STAT_DATUM(end)) <= DICE_FAILURE)
