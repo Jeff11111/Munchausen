@@ -158,7 +158,7 @@
 				if(S && H && S.clothing_flags & LAVAPROTECT && H.clothing_flags & LAVAPROTECT)
 					return
 
-			L.adjustFireLoss(20)
+			L.take_bodypart_damage(0, 20)
 			if(L) //mobs turning into object corpses could get deleted here.
 				L.adjust_fire_stacks(20)
 				L.IgniteMob()
