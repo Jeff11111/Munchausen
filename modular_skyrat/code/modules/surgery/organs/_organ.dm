@@ -61,7 +61,7 @@
 		Remove(TRUE)
 	return ..()
 
-/obj/item/organ/janitize(add_germs, minimum_germs, maximum_germs)
+/obj/item/organ/janitize(add_germs, minimum_germs = 0, maximum_germs = MAXIMUM_GERM_LEVEL)
 	. = ..()
 	if(germ_level >= INFECTION_LEVEL_THREE)
 		kill_organ()
@@ -192,9 +192,9 @@
 	is_cold()
 	if((organ_flags & ORGAN_FROZEN) || (organ_flags & ORGAN_DEAD))
 		return
-	germ_level += rand(MIN_ORGAN_DECAY_INFECTION,MAX_ORGAN_DECAY_INFECTION)
+	janitize(rand(MIN_ORGAN_DECAY_INFECTION,MAX_ORGAN_DECAY_INFECTION))
 	if(germ_level >= INFECTION_LEVEL_TWO)
-		germ_level += rand(MIN_ORGAN_DECAY_INFECTION,MAX_ORGAN_DECAY_INFECTION)
+		janitize(rand(MIN_ORGAN_DECAY_INFECTION,MAX_ORGAN_DECAY_INFECTION))
 	if(germ_level >= INFECTION_LEVEL_THREE)
 		kill_organ()
 
