@@ -182,7 +182,7 @@
 /datum/injury/proc/drag_bleed_amt()
 	if(!is_bleeding())
 		return FALSE
-	return CEILING(get_bleed_rate() * 0.25, 1)
+	return CEILING(get_bleed_rate() * 0.5, 1)
 
 /datum/injury/proc/bandage()
 	injury_flags |= INJURY_BANDAGED
@@ -312,7 +312,7 @@
 	for(var/obj/item/wpn in embedded_objects)
 		if(!wpn.isEmbedHarmless() && (wpn.w_class < WEIGHT_CLASS_SMALL))
 			bad_embeddies += 1
-	return max(0.1, round((bleed_rate * (wound_damage() * amount))/25 + bad_embeddies, DAMAGE_PRECISION))
+	return max(0.1, round((bleed_rate * damage)/25 + bad_embeddies, DAMAGE_PRECISION))
 
 /datum/injury/proc/is_surgical()
 	if(CHECK_BITFIELD(injury_flags, INJURY_SURGICAL))
