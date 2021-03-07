@@ -375,6 +375,7 @@
 				. += "<span class='notice'>It has [reagents.total_volume] unit\s left.</span>"
 			else
 				. += "<span class='danger'>It's empty.</span>"
+	
 	if(isliving(user))
 		var/mob/living/L = user
 		L.on_examine_atom(src)
