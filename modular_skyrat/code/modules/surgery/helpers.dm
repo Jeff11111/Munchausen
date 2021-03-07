@@ -89,16 +89,16 @@
 	var/our_germ_level = user.germ_level
 	if(user.gloves)
 		our_germ_level = user.gloves.germ_level
-	
+
 	//Germs from the tool
 	if(tool?.germ_level && (tool.germ_level >= our_germ_level))
 		our_germ_level += tool.germ_level
-	
+
 	//Germs from the dirtiness on the surgery room
 	for(var/turf/open/floor/floor in range(1, get_turf(BP.owner)))
 		floor.update_dirtiness()
 		our_germ_level += floor.dirtiness
-	
+
 	//Germs from the wounds on the bodypart
 	for(var/datum/wound/W in BP.wounds)
 		our_germ_level += W.germ_level
@@ -106,11 +106,11 @@
 	//Germs from the injuries on the bodypart
 	for(var/datum/injury/IN in BP.injuries)
 		our_germ_level += IN.germ_level
-	
+
 	//Germs from organs inside the bodypart
 	for(var/obj/item/organ/O in BP.get_organs())
 		our_germ_level += O.germ_level
-	
+
 	//Divide it by 10 to be reasonable
 	our_germ_level = CEILING(our_germ_level/10, 1)
 
@@ -121,7 +121,7 @@
 
 	//Germ level is increased/decreased depending on a diceroll
 	if(user.mind)
-		var/diceroll = user.mind.diceroll(GET_STAT_LEVEL(user, int)*0.5, GET_STAT_LEVEL(user, surgery)*1.5, "6d6", crit = 18)
+		var/diceroll = user.mind.diceroll(GET_STAT_LEVEL(user, int)*0.5, GET_SKILL_LEVEL(user, surgery)*1.5, "6d6", crit = 18)
 		switch(diceroll)
 			if(DICE_CRIT_SUCCESS)
 				our_germ_level *= 0
@@ -137,18 +137,18 @@
 		return
 
 	. = TRUE
-	
+
 	//If we still have germs, let's get that W
 	//First, infect the wounds on the bodypart
 	for(var/datum/wound/W in BP.wounds)
 		if(W.germ_level < INFECTION_LEVEL_TWO)
 			W.germ_level += our_germ_level
-	
+
 	//Then the injuries
 	for(var/datum/injury/IN in BP.injuries)
 		if(IN.germ_level < INFECTION_LEVEL_TWO)
 			IN.germ_level += our_germ_level
-	
+
 	//Infect the organs on the bodypart
 	for(var/obj/item/organ/O in BP.get_organs())
 		if(O.germ_level < INFECTION_LEVEL_TWO)
