@@ -29,7 +29,17 @@
 					if(0 to 15)
 						return /datum/injury/puncture/small
 			if(WOUND_BLUNT)
-				return /datum/injury/bruise
+				switch(damage)
+					if(80 to INFINITY)
+						return /datum/injury/bruise/monumental
+					if(50 to 80)
+						return /datum/injury/bruise/huge
+					if(30 to 50)
+						return /datum/injury/bruise/large
+					if(10 to 20)
+						return /datum/injury/bruise/moderate
+					if(0 to 10)
+						return /datum/injury/bruise/small
 			if(WOUND_BURN)
 				switch(damage)
 					if(50 to INFINITY)
@@ -71,7 +81,17 @@
 					if(0 to 15)
 						return /datum/injury/puncture/small/mechanical
 			if(WOUND_BLUNT)
-				return /datum/injury/bruise/mechanical
+				switch(damage)
+					if(80 to INFINITY)
+						return /datum/injury/bruise/monumental/mechanical
+					if(50 to 80)
+						return /datum/injury/bruise/huge/mechanical
+					if(30 to 50)
+						return /datum/injury/bruise/large/mechanical
+					if(10 to 20)
+						return /datum/injury/bruise/moderate/mechanical
+					if(0 to 10)
+						return /datum/injury/bruise/small/mechanical
 			if(WOUND_BURN)
 				switch(damage)
 					if(50 to INFINITY)

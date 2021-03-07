@@ -91,22 +91,25 @@
 		our_germ_level = user.gloves.germ_level
 	
 	//Germs from the tool
-	if(tool && (tool.germ_level >= our_germ_level))
+	if(tool?.germ_level && (tool.germ_level >= our_germ_level))
 		our_germ_level += tool.germ_level
 	
 	//Germs from the dirtiness on the surgery room
-	for(var/turf/open/floor/floor in range(2, get_turf(BP.owner)))
+	for(var/turf/open/floor/floor in range(1, get_turf(BP.owner)))
 		floor.update_dirtiness()
 		our_germ_level += floor.dirtiness
 	
 	//Germs from the wounds on the bodypart
 	for(var/datum/wound/W in BP.wounds)
 		our_germ_level += W.germ_level
+
+	//Germs from the injuries on the bodypart
+	for(var/datum/injury/IN in BP.injuries)
+		our_germ_level += IN.germ_level
 	
 	//Germs from organs inside the bodypart
 	for(var/obj/item/organ/O in BP.get_organs())
-		if(O.germ_level)
-			our_germ_level += O.germ_level
+		our_germ_level += O.germ_level
 	
 	//Divide it by 10 to be reasonable
 	our_germ_level = CEILING(our_germ_level/10, 1)
@@ -114,7 +117,7 @@
 	//If the patient has antibiotics, kill germs by an amount equal to 10x the antibiotic force
 	//e.g. nalixidic acid has 35 force, thus would decrease germs here by 350
 	var/antibiotics = BP.owner.get_antibiotics()
-	our_germ_level = max(0, our_germ_level - antibiotics)
+	our_germ_level = max(0, our_germ_level - (antibiotics * 10))
 
 	//Germ level is increased/decreased depending on a diceroll
 	if(user.mind)
@@ -129,6 +132,7 @@
 			if(DICE_CRIT_FAILURE)
 				our_germ_level *= 2
 
+	//This amount is not meaningful enough to cause an infection
 	if(our_germ_level <= (WOUND_SANITIZATION_STERILIZER/2))
 		return
 
@@ -139,6 +143,11 @@
 	for(var/datum/wound/W in BP.wounds)
 		if(W.germ_level < INFECTION_LEVEL_TWO)
 			W.germ_level += our_germ_level
+	
+	//Then the injuries
+	for(var/datum/injury/IN in BP.injuries)
+		if(IN.germ_level < INFECTION_LEVEL_TWO)
+			IN.germ_level += our_germ_level
 	
 	//Infect the organs on the bodypart
 	for(var/obj/item/organ/O in BP.get_organs())
