@@ -2411,9 +2411,9 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				H.throw_alert("temp", /obj/screen/alert/cold, 2)
 			if(-35 to -20)
 				H.throw_alert("temp", /obj/screen/alert/cold, 1)
-			if(-20 to 0) //This is the sweet spot where air is considered normal
+			if(-20 to 10) //This is the sweet spot where air is considered normal
 				H.clear_alert("temp")
-			if(0 to 20) //When the air around you matches your body's temperature, you'll start to feel warm.
+			if(10 to 20) //When the air around you matches your body's temperature, you'll start to feel warm.
 				H.throw_alert("temp", /obj/screen/alert/hot, 1)
 			if(20 to 35)
 				H.throw_alert("temp", /obj/screen/alert/hot, 2)
