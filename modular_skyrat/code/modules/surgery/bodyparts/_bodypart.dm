@@ -905,11 +905,11 @@
 	var/datum/injury/created_injury
 	if(brute)
 		created_injury = create_injury(wounding_type, brute)
-		if(!(created_injury in injuries))
+		if(created_injury && !(created_injury in injuries))
 			created_injury.apply_injury(brute, src)
 	if(burn)
 		created_injury = create_injury(wounding_type, burn)
-		if(!(created_injury in injuries))
+		if(created_injury && !(created_injury in injuries))
 			created_injury.apply_injury(burn, src)
 		if(owner && prob(burn * 2))
 			owner.IgniteMob()
