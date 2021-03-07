@@ -4,7 +4,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 GLOBAL_LIST_EMPTY(roundstart_race_names)
 GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
-#define SPECIFY_BODYPART_BURN_PROB 95
+#define SPECIFY_BODYPART_BURN_PROB 90
+#define SPECIFY_BODYPART_PRESSURE_PROB 90
 
 /datum/species
 	var/id	// if the game needs to manually check your race to do something not included in a proc here, it will use this
@@ -2473,7 +2474,10 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			if(!HAS_TRAIT(H, TRAIT_RESISTHIGHPRESSURE))
 				H.throw_alert("pressure", /obj/screen/alert/highpressure, 2)
 				var/applydam = (min(((adjusted_pressure / HAZARD_HIGH_PRESSURE) -1 ) * PRESSURE_DAMAGE_COEFFICIENT, MAX_HIGH_PRESSURE_DAMAGE) * H.physiology.pressure_mod)
-				H.apply_damage(damage = applydam, damagetype = BRUTE, wound_bonus = CANT_WOUND)
+				var/obj/item/bodypart/BP
+				if(length(H.bodyparts) && prob(SPECIFY_BODYPART_PRESSURE_PROB))
+					BP = pick(H.bodyparts)
+				H.apply_damage(damage = applydam, damagetype = BRUTE, wound_bonus = CANT_WOUND, def_zone = BP)
 			else
 				H.clear_alert("pressure")
 		if(WARNING_HIGH_PRESSURE to HAZARD_HIGH_PRESSURE)
@@ -2488,7 +2492,10 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			else
 				H.throw_alert("pressure", /obj/screen/alert/lowpressure, 2)
 				var/applydam = LOW_PRESSURE_DAMAGE * H.physiology.pressure_mod
-				H.apply_damage(damage = applydam, damagetype = BRUTE, wound_bonus = CANT_WOUND)
+				var/obj/item/bodypart/BP
+				if(length(H.bodyparts) && prob(SPECIFY_BODYPART_PRESSURE_PROB))
+					BP = pick(H.bodyparts)
+				H.apply_damage(damage = applydam, damagetype = BRUTE, wound_bonus = CANT_WOUND, def_zone = BP)
 
 //////////
 // FIRE //
