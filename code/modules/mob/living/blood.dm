@@ -5,7 +5,6 @@
 #define EXOTIC_BLEED_MULTIPLIER 4 //Multiplies the actually bled amount by this number for the purposes of turf reaction calculations.
 
 
-//skyrat edit
 ///Returns how much blood we're losing from being dragged a tile, from [mob/living/proc/makeTrail]
 /mob/living/proc/get_bleed_amount(brute_ratio)
 	return max(1, brute_ratio * 2)

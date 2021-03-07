@@ -104,11 +104,6 @@
 	random_icon_states = null
 	beauty = -50
 	var/list/existing_dirs = list()
-	var/obj/effect/decal/cleanable/trail_holder/connected_trail
-
-/obj/effect/decal/cleanable/trail_holder/Destroy(force)
-	. = ..()
-	connected_trail = null
 
 /obj/effect/decal/cleanable/trail_holder/verb/run_finger()
 	set category = "Object"

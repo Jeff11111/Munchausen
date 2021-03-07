@@ -664,24 +664,26 @@
 		SEND_SIGNAL(item, COMSIG_ITEM_WEARERCROSSED, AM)
 
 /mob/living/proc/makeTrail(turf/target_turf, turf/start, direction)
-	if(!has_gravity() || !isturf(start) || !blood_volume)
-		return
-	var/blood_exists = FALSE
-
-	for(var/obj/effect/decal/cleanable/trail_holder/C in target_turf) //checks for blood splatter already on the floor
-		blood_exists = TRUE
-		break
-
-	var/trail_type = getTrail()
-	if(!trail_type)
+	if(!has_gravity() || !istype(start) || !istype(target_turf) || blood_volume <= 0)
 		return
 	
+	//get brute ratio
 	var/brute_ratio = round(getBruteLoss() / maxHealth, 0.1)
 	if(blood_volume < max(BLOOD_VOLUME_NORMAL*(1 - brute_ratio * 0.25), 0))//don't leave trail if blood volume below a threshold
 		return
 	
+	//get trail type
+	var/trail_type = getTrail()
+	if(!trail_type)
+		return
+	
+	//subtract from blood volume
 	var/bleed_amt = get_bleed_amount(brute_ratio)
-	blood_volume = max(blood_volume - bleed_amt, 0) 					//that depends on our brute damage.
+	blood_volume = max(blood_volume - bleed_amt, 0) //that depends on our brute damage.
+
+	//deal with starting tile
+	var/blood_exists = locate(/obj/effect/decal/cleanable/trail_holder) in start
+	
 	var/newdir = get_dir(start, target_turf)
 	if(newdir != direction)
 		newdir = newdir | direction
@@ -691,32 +693,17 @@
 			newdir = EAST
 		
 	if((newdir in GLOB.cardinals) && (prob(50)))
-		newdir = turn(get_dir(target_turf, start), 180)
+		newdir = turn(newdir, 180)
 	
 	if(!blood_exists)
-		new /obj/effect/decal/cleanable/trail_holder(target_turf, get_static_viruses())
+		new /obj/effect/decal/cleanable/trail_holder(start, get_static_viruses())
 	
-	var/obj/effect/decal/cleanable/trail_holder/connected_trail
-	for(var/obj/effect/decal/cleanable/trail_holder/nice in start)
-		connected_trail = nice
-		break
+	var/obj/effect/decal/cleanable/trail_holder/TH  = locate(/obj/effect/decal/cleanable/trail_holder) in start
+	if((!(newdir in TH.existing_dirs) || trail_type == "tracks_1" || trail_type == "tracks_2" || trail_type == "tracks_3") && TH.existing_dirs.len <= 16) //maximum amount of overlays is 16 (all light & heavy directions filled)
+		TH.existing_dirs |= newdir
+		TH.add_overlay(image('modular_skyrat/icons/effects/blood_fuck.dmi', trail_type, dir = newdir))
+		TH.transfer_mob_blood_dna(src)
 	
-	if(connected_trail?.connected_trail)
-		var/dire_straits = get_dir(connected_trail.connected_trail, connected_trail) | get_dir(connected_trail, target_turf)
-		connected_trail.existing_dirs -= connected_trail.existing_dirs[length(connected_trail.existing_dirs)]
-		connected_trail.existing_dirs |= dire_straits
-		connected_trail.cut_overlays()
-		for(var/poggers in connected_trail.existing_dirs)
-			connected_trail.add_overlay(image('modular_skyrat/icons/effects/blood_fuck.dmi', trail_type, dir = poggers))
-
-	for(var/obj/effect/decal/cleanable/trail_holder/TH in target_turf)
-		if((!(newdir in TH.existing_dirs) || trail_type == "tracks_1" || trail_type == "tracks_2" || trail_type == "tracks_3") && TH.existing_dirs.len <= 16) //maximum amount of overlays is 16 (all light & heavy directions filled)
-			TH.existing_dirs |= newdir
-			TH.add_overlay(image('modular_skyrat/icons/effects/blood_fuck.dmi', trail_type, dir = newdir))
-			TH.transfer_mob_blood_dna(src)
-			if(connected_trail)
-				TH.connected_trail = connected_trail
-
 	//warn the player occasionally about dragging being bad
 	if(prob(4) && lying && bleed_amt && iscarbon(src))
 		var/mob/living/C = src
