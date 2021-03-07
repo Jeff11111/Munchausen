@@ -550,14 +550,9 @@
 
 /datum/emote/living/fart/run_emote(mob/living/user, params)
 	. = ..()
-	sound = pick('sound/voice/fart.ogg', 'sound/voice/fart2.ogg')
-	if(!.)
-		sound = null
-		return
-	
-	sound = null
 	var/brap = rand(1, 5)
 	user.adjust_nutrition(-brap * 2)
+	playsound(src, pick('sound/voice/fart.ogg', 'sound/voice/fart2.ogg'), 50, FALSE)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.mind?.diceroll(STAT_DATUM(end)) <= DICE_FAILURE)
