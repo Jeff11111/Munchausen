@@ -74,6 +74,8 @@
 			this_injury_desc = "<span style='color: [COLOR_ASSEMBLY_WHITE]'>bandaged</span> [this_injury_desc]"
 		if(IN.is_salved())
 			this_injury_desc = "<span class='nicegreen'>salved</span> [this_injury_desc]"
+		if(IN.is_disinfected())
+			this_injury_desc = "<span style='color: [COLOR_BLUE_LIGHT]'>disinfected</span> [this_injury_desc]"
 		
 		if(IN.germ_level >= INFECTION_LEVEL_TWO)
 			this_injury_desc = "<span class='deadsay'><b>badly infected</b></span> [this_injury_desc]"

@@ -25,6 +25,15 @@
 /datum/injury/burn/is_bleeding()
 	return FALSE //burns cannot bleed
 
+//Burns can only heal if treated, or if the limb has BODYPART_HEALS_OVERKILL
+/datum/injury/can_autoheal()
+	if(CHECK_BITFIELD(required_status, BODYPART_ROBOTIC))
+		return FALSE
+	for(var/obj/item/wpn in embedded_objects)
+		if(!wpn.isEmbedHarmless())
+			return FALSE
+	return (is_treated() || parent_bodypart?.limb_flags & BODYPART_HEALS_OVERKILL)
+
 /datum/injury/burn/apply_injury(our_damage, obj/item/bodypart/limb)
 	. = ..()
 	//Burn damage can cause fluid loss due to blistering and cook-off
