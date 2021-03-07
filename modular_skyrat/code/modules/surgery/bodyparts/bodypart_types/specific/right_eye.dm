@@ -116,20 +116,20 @@
 
 	var/old_dam = eye_damaged
 	switch(get_damage(include_pain = TRUE))
-		if(-INFINITY to max_damage/4)
+		if(-INFINITY to 5)
 			eye_damaged = FALSE
-		if(max_damage/4 to max_damage/2)
+		if(5 to 10)
 			eye_damaged = BLURRY_VISION_ONE
-		if(max_damage/2 to max_damage)
+		if(10 to 15)
 			eye_damaged = BLURRY_VISION_TWO
-		if(max_damage to INFINITY)
+		if(15 to INFINITY)
 			eye_damaged = BLIND_VISION_THREE
 		else
 			eye_damaged = FALSE
-	if(is_disabled() || current_gauze)
+	if(is_disabled() || current_gauze || grasped_by)
 		eye_damaged = BLIND_VISION_THREE
 	if(owner && (old_dam != eye_damaged))
-		owner?.update_eyes()
+		owner.update_eyes()
 	return eye_damaged
 
 #undef BLURRY_VISION_ONE

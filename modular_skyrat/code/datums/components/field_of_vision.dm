@@ -114,7 +114,9 @@
   */
 /datum/component/field_of_vision/proc/generate_fov_holder(mob/M, _angle = 0, _shadow_angle = 0, register = TRUE, delete_holder = FALSE)
 	if(delete_holder)
-		qdel(fov)
+		M.client?.screen -= fov
+		QDEL_NULL(M.hud_used?.fov_holder)
+		QDEL_NULL(fov)
 	if(_angle)
 		angle = _angle
 	if(_shadow_angle)
