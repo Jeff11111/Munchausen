@@ -60,13 +60,29 @@
 		if(C.get_item_for_held_index(held_index))
 			C.dropItemToGround(owner.get_item_for_held_index(held_index), TRUE, TRUE)
 		C.hand_bodyparts[held_index] = null
-	
+	if(cavity_item)
+		if(istype(Tsec))
+			cavity_item.forceMove(Tsec)
+		else
+			qdel(cavity_item)
+		cavity_item = null
+	for(var/i in injuries)
+		C.all_injuries -= i
 	for(var/thing in wounds)
 		var/datum/wound/W = thing
 		W.remove_wound(TRUE)
+	for(var/X in get_organs()) //internal organs inside the dismembered limb are dropped.
+		var/obj/item/organ/O = X
+		O.transfer_to_limb(src, C)
 	
 	owner = null
-	var/turf/turf = get_turf(C)
+	for(var/obj/item/I in embedded_objects)
+		embedded_objects -= I
+		if(istype(Tsec))
+			I.forceMove(Tsec)
+		else
+			I.moveToNullspace()
+		I.unembedded()
 	if(!ignore_children)
 		for(var/BP in children_zones)
 			var/obj/item/bodypart/thing = C.get_bodypart(BP)
@@ -75,19 +91,9 @@
 				thing.forceMove(src)
 				thing.on_transfer_to_limb(src)
 	C.updatehealth()
-	for(var/obj/item/I in embedded_objects)
-		embedded_objects -= I
-		if(istype(turf))
-			I.forceMove(turf)
-		else
-			I.moveToNullspace()
-		I.unembedded()
 	if(!C.has_embedded_objects())
 		C.clear_alert("embeddedobject")
 		SEND_SIGNAL(C, COMSIG_CLEAR_MOOD_EVENT, "embedded")
-
-	for(var/i in injuries)
-		C.all_injuries -= i
 	
 	if(!special)
 		if(CHECK_BITFIELD(limb_flags, BODYPART_VITAL))
@@ -97,9 +103,6 @@
 				var/datum/mutation/human/MT = X
 				if(MT.limb_req && MT.limb_req == body_zone)
 					C.dna.force_lose(MT)
-		for(var/X in get_organs()) //internal organs inside the dismembered limb are dropped.
-			var/obj/item/organ/O = X
-			O.transfer_to_limb(src, C)
 
 	limb_flags |= BODYPART_CUT_AWAY
 	if(dismembered && !is_stump() && can_stump()) //Not a clean chopping off
@@ -130,15 +133,16 @@
 		var/datum/injury/ouchie = stump.create_injury(wounding_type, stump.max_damage / 2, FALSE, TRUE)
 		ouchie.apply_injury(stump.max_damage / 2, stump)
 	
-	var/turf/T = get_turf(src)
 	if(destroyed)
+		QDEL_NULL(teeth_object)
+		QDEL_NULL(teeth_mod)
 		for(var/item in src)
 			if(istype(item, /obj/item/organ) || istype(item, /obj/item/bodypart))
 				qdel(item)
 			else if(isitem(item))
 				var/obj/item/I = item
-				if(istype(T))
-					I.forceMove(T)
+				if(istype(Tsec))
+					I.forceMove(Tsec)
 				else
 					I.moveToNullspace()
 	
@@ -147,23 +151,19 @@
 	C.update_hair()
 	C.update_mobility()
 
-	if(!Tsec || destroyed)	// Tsec = null happens when a "dummy human" used for rendering icons on prefs screen gets its limbs replaced.
+	if(!istype(Tsec) || destroyed || is_pseudopart)	// Tsec = null happens when a "dummy human" used for rendering icons on prefs screen gets its limbs replaced.
 		qdel(src)
 		return
 
 	//Start processing rotting... if we didn't get destroyed
 	START_PROCESSING(SSobj, src)
+
 	//Also, recover integrity
 	limb_integrity = max_integrity
-	
-	if(is_pseudopart)
-		qdel(src)
-		return
 
-	if(istype(Tsec))
-		forceMove(Tsec)
+	forceMove(Tsec)
 	update_icon_dropped()
-	
+
 /**
   * get_mangled_state() is relevant for flesh and bone bodyparts, and returns whether this bodypart has mangled skin, mangled bone, or both (or neither i guess)
   *
