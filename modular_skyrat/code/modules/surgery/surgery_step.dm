@@ -226,7 +226,7 @@
 		prob_chance *= get_surgery_probability_multiplier(src, target, user)
 
 		var/mob/living/carbon/C = target
-		if(istype(C) && C.can_feel_pain() && affecting && affecting.is_organic_limb() && (target.stat <= UNCONSCIOUS) && (target.mob_biotypes & MOB_ORGANIC) && !target.InFullCritical() && !HAS_TRAIT(target, TRAIT_PAINKILLER) && !(target.chem_effects[CE_PAINKILLER] >= 50))
+		if(istype(C) && C.can_feel_pain() && affecting && affecting.is_organic_limb() && (target.stat <= UNCONSCIOUS) && (target.mob_biotypes & MOB_ORGANIC) && !target.InFullCritical() && !HAS_TRAIT(target, TRAIT_PAINKILLER) && (target.chem_effects[CE_PAINKILLER] < 50))
 			if(user.mind)
 				var/datum/skills/surgery/surgerye = GET_SKILL(user, surgery)
 				if(surgerye && surgerye.level <= 10)
