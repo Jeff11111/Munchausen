@@ -75,7 +75,7 @@
 	return (damage >= low_threshold)
 
 /obj/item/organ/proc/is_broken()
-	return (CHECK_BITFIELD(organ_flags, ORGAN_FAILING | ORGAN_CUT_AWAY) || (damage >= high_threshold))
+	return (CHECK_BITFIELD(organ_flags, ORGAN_FAILING | ORGAN_CUT_AWAY | ORGAN_DEAD) || (damage >= high_threshold))
 
 /obj/item/organ/proc/is_dead()
 	return (CHECK_BITFIELD(organ_flags, ORGAN_DEAD))
@@ -366,6 +366,10 @@
 /obj/item/organ/proc/OnEatFrom(eater, feeder)
 	useable = FALSE //You can't use it anymore after eating it you spaztic
 
+/obj/item/organ/pickup(mob/user)
+	. = ..()
+	organ_flags |= ORGAN_CUT_AWAY
+	
 /obj/item/organ/attackby(obj/item/I, mob/living/user, params)
 	. = ..()
 	if(istype(I, /obj/item/pen))

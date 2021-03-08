@@ -308,15 +308,17 @@
 		if(!istype(O))
 			if(bodypart_affected?.cavity_item == AM)
 				bodypart_affected.cavity_item = null
+				AM.stored_in = null
 				return
 			return FALSE
 		var/mob/living/carbon/carbon_parent = parent
-		if(!carbon_parent.IsUnconscious() && (carbon_parent.chem_effects[CE_PAINKILLER] < 30))
+		if(!carbon_parent.IsUnconscious() && (carbon_parent.chem_effects[CE_PAINKILLER] < 50))
 			carbon_parent.death_scream()
 			carbon_parent.custom_pain("MY [capitalize(O.name)] HURTS!", rand(30, 40))
 		if(!CHECK_BITFIELD(O.organ_flags, ORGAN_CUT_AWAY) && bodypart_affected)
 			for(var/datum/injury/fucked in bodypart_affected.wounds)
 				fucked.open_injury(rand(5, 15))
+			O.applyOrganDamage(rand(10, 20))
 		O.stored_in = null
 		O.Remove(FALSE)
 		O.organ_flags |= ORGAN_CUT_AWAY
@@ -344,7 +346,7 @@
 		nigger.attack_hand(niggertwo)
 	else
 		playsound(A, pick(rustle_sound), 50, 1, -5)
-		nigger.attackby(niggertwo.get_active_held_item(), niggertwo)
+		nigger.attackby(niggertwo.get_active_held_item(), niggertwo, params)
 	return TRUE
 
 //AAAAAAAA
