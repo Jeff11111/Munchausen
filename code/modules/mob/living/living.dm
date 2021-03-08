@@ -700,9 +700,31 @@
 	
 	var/obj/effect/decal/cleanable/trail_holder/TH  = locate(/obj/effect/decal/cleanable/trail_holder) in start
 	if((!(newdir in TH.existing_dirs) || trail_type == "tracks_1" || trail_type == "tracks_2" || trail_type == "tracks_3") && TH.existing_dirs.len <= 16) //maximum amount of overlays is 16 (all light & heavy directions filled)
+		if(TH.fresh_out_of_comptom)
+			TH.existing_dirs -= TH.existing_dirs[length(TH.existing_dirs)]
+			TH.cut_overlays()
+			for(var/epicdir in TH.existing_dirs)
+				TH.add_overlay(image('modular_skyrat/icons/effects/blood_fuck.dmi', trail_type, dir = epicdir))
 		TH.existing_dirs |= newdir
 		TH.add_overlay(image('modular_skyrat/icons/effects/blood_fuck.dmi', trail_type, dir = newdir))
 		TH.transfer_mob_blood_dna(src)
+		TH.fresh_out_of_comptom = FALSE
+	
+	//create a trail in the target turf, but this one is rather simple
+	blood_exists = locate(/obj/effect/decal/cleanable/trail_holder) in target_turf
+	newdir = direction
+	if((newdir in GLOB.cardinals) && (prob(50)))
+		newdir = turn(newdir, 180)
+	
+	if(!blood_exists)
+		new /obj/effect/decal/cleanable/trail_holder(target_turf, get_static_viruses())
+	
+	TH = locate(/obj/effect/decal/cleanable/trail_holder) in target_turf
+	if((!(newdir in TH.existing_dirs) || trail_type == "tracks_1" || trail_type == "tracks_2" || trail_type == "tracks_3") && TH.existing_dirs.len <= 16) //maximum amount of overlays is 16 (all light & heavy directions filled)
+		TH.existing_dirs |= newdir
+		TH.add_overlay(image('modular_skyrat/icons/effects/blood_fuck.dmi', trail_type, dir = newdir))
+		TH.transfer_mob_blood_dna(src)
+		TH.fresh_out_of_comptom = TRUE
 	
 	//warn the player occasionally about dragging being bad
 	if(prob(4) && lying && bleed_amt && iscarbon(src))

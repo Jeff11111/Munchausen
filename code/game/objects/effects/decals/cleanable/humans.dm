@@ -104,6 +104,7 @@
 	random_icon_states = null
 	beauty = -50
 	var/list/existing_dirs = list()
+	var/fresh_out_of_comptom = FALSE //used to track whether or not the overlays should be replaced when dragged
 
 /obj/effect/decal/cleanable/trail_holder/verb/run_finger()
 	set category = "Object"
