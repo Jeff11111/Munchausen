@@ -307,8 +307,8 @@
 		var/obj/item/organ/O = AM
 		if(!istype(O))
 			if(bodypart_affected?.cavity_item == AM)
+				bodypart_affected.cavity_item.stored_in = null
 				bodypart_affected.cavity_item = null
-				AM.stored_in = null
 				return
 			return FALSE
 		var/mob/living/carbon/carbon_parent = parent
