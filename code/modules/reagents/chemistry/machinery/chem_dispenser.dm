@@ -238,7 +238,7 @@
 		var/datum/reagent/temp = GLOB.chemical_reagents_list[re]
 		if(temp)
 			var/chemname = temp.name
-			if((is_hallucinating && prob(5)) || (GET_SKILL_LEVEL(user, chemistry) <= JOB_SKILLPOINTS_NOVICE && (user.mind?.diceroll(STAT_DATUM(int), SKILL_DATUM(chemistry), "6d6", 20) <= DICE_FAILURE)))
+			if((is_hallucinating && prob(5)) || (GET_SKILL_LEVEL(user, chemistry) < JOB_SKILLPOINTS_NOVICE && (user.mind?.diceroll(STAT_DATUM(int), SKILL_DATUM(chemistry), "6d6", 20) <= DICE_FAILURE)))
 				chemname = "[pick_list_replacements("hallucination.json", "chemicals")]"
 			chemicals.Add(list(list("title" = chemname, "id" = ckey(temp.name))))
 	data["chemicals"] = chemicals
@@ -258,7 +258,7 @@
 			if(target in beaker.possible_transfer_amounts)
 				amount = target
 				//people that suck at chemistry fuck up at chemistry
-				if((GET_SKILL_LEVEL(usr, chemistry) <= JOB_SKILLPOINTS_NOVICE) && (usr.mind?.diceroll(STAT_DATUM(int), SKILL_DATUM(chemistry), "6d6", 20) <= DICE_FAILURE))
+				if((GET_SKILL_LEVEL(usr, chemistry) < JOB_SKILLPOINTS_NOVICE) && (usr.mind?.diceroll(STAT_DATUM(int), SKILL_DATUM(chemistry), "6d6", 20) <= DICE_FAILURE))
 					to_chat(usr, "<span class='warning'>[pick("Uhhh...", "Hnggg...", "Fnord!", "Augh!", "Ugh!")]</span>")
 					amount = pick(beaker.possible_transfer_amounts)
 				work_animation()
@@ -269,7 +269,7 @@
 			var/reagent_name = params["reagent"]
 			var/reagent = GLOB.name2reagent[reagent_name]
 			//people that suck at chemistry fuck up at chemistry
-			if((GET_SKILL_LEVEL(usr, chemistry) <= JOB_SKILLPOINTS_NOVICE) && (usr.mind?.diceroll(STAT_DATUM(int), SKILL_DATUM(chemistry), "6d6", 20) <= DICE_FAILURE))
+			if((GET_SKILL_LEVEL(usr, chemistry) < JOB_SKILLPOINTS_NOVICE) && (usr.mind?.diceroll(STAT_DATUM(int), SKILL_DATUM(chemistry), "6d6", 20) <= DICE_FAILURE))
 				reagent = pick(dispensable_reagents)
 				to_chat(usr, "<span class='warning'>[pick("Is this the right button?","No... This isn't right...", "Uhhh...", "Fnord! How do i use this thing?")]</span>")
 			if(!recording_recipe)
@@ -314,7 +314,7 @@
 			for(var/key in chemicals_to_dispense)
 				var/reagent = GLOB.name2reagent[translate_legacy_chem_id(key)]
 				//people that suck at chemistry fuck up at chemistry
-				if((GET_SKILL_LEVEL(usr, chemistry) <= JOB_SKILLPOINTS_NOVICE) && (usr.mind?.diceroll(STAT_DATUM(int), SKILL_DATUM(chemistry), "6d6", 20) <= DICE_FAILURE))
+				if((GET_SKILL_LEVEL(usr, chemistry) < JOB_SKILLPOINTS_NOVICE) && (usr.mind?.diceroll(STAT_DATUM(int), SKILL_DATUM(chemistry), "6d6", 20) <= DICE_FAILURE))
 					reagent = pick(dispensable_reagents)
 					to_chat(usr, "<span class='warning'>[pick("Is this the right button?","No... This isn't right...", "Uhhh...", "Fnord! How do i use this thing?")]</span>")
 				var/dispense_amount = chemicals_to_dispense[key]
