@@ -71,9 +71,9 @@
 
 //Point value assignment
 /datum/job/assistant
-	skill_melee = JOB_STATPOINTS_WORTHLESS
-	skill_electronics = JOB_STATPOINTS_WORTHLESS
-	skill_gaming = JOB_STATPOINTS_AVERAGE
+	skill_melee = JOB_SKILLPOINTS_WORTHLESS
+	skill_electronics = JOB_SKILLPOINTS_WORTHLESS
+	skill_gaming = JOB_SKILLPOINTS_WORTHLESS
 
 /datum/job/atmos
 	//Average stats all around, save for
@@ -92,9 +92,7 @@
 	//Good ranged because who's gonna stop the drink flinging
 	//Good cooking because burbger
 	//Also little variance
-	skill_variance_negative = 1
-	skill_variance_positive = 1
-	skill_melee = 8
+	skill_melee = JOB_SKILLPOINTS_NOVICE
 	skill_chemistry = JOB_SKILLPOINTS_AVERAGE
 	skill_ranged = JOB_SKILLPOINTS_TRAINED
 	skill_cooking = JOB_SKILLPOINTS_TRAINED
@@ -107,9 +105,8 @@
 
 /datum/job/captain
 	//A fucking chad, stats are great all around
-	stat_variance_negative = 1
-	stat_str = 14
-	stat_end = 14
+	stat_str = JOB_STATPOINTS_PROFICIENT
+	stat_end = JOB_STATPOINTS_PROFICIENT
 	stat_dex = 13
 	stat_int = 13
 	//Godlike melee, expert ranged and research, good first aid
@@ -121,10 +118,10 @@
 
 /datum/job/cargo_tech
 	//Better str and end, at the cost of int and dex
-	stat_str = 12
-	stat_end = 12
-	stat_dex = 8
-	stat_int = 8
+	stat_str = JOB_STATPOINTS_TRAINED
+	stat_end = JOB_STATPOINTS_TRAINED
+	stat_dex = JOB_STATPOINTS_NOVICE
+	stat_int = JOB_STATPOINTS_NOVICE
 	//Decent construction and electronics
 	skill_melee = JOB_SKILLPOINTS_NOVICE
 	skill_ranged = JOB_SKILLPOINTS_NOVICE
@@ -135,17 +132,18 @@
 	//Decent stats, god blessed them
 	stat_variance_negative = 1
 	//Decent first aid and cooking
-	skill_melee = 8
+	skill_melee = JOB_SKILLPOINTS_NOVICE
 	skill_firstaid = JOB_SKILLPOINTS_TRAINED
 	skill_cooking = JOB_SKILLPOINTS_TRAINED
 
 /datum/job/chemist
 	//INTJ, physically incapable but smort
-	stat_str = 8
-	stat_end = 8
+	stat_str = JOB_STATPOINTS_NOVICE
+	stat_end = JOB_STATPOINTS_NOVICE
 	stat_dex = JOB_STATPOINTS_TRAINED
 	stat_int = JOB_STATPOINTS_EXPERT
 	//Expert chemistry, good firstaid, novice surgery
+	skill_ranged = JOB_SKILLPOINTS_NOVICE
 	skill_chemistry = JOB_SKILLPOINTS_EXPERT
 	skill_firstaid = JOB_SKILLPOINTS_TRAINED
 	skill_surgery = JOB_SKILLPOINTS_NOVICE
@@ -153,8 +151,8 @@
 /datum/job/chief_engineer
 	//Decent endurance and intellect
 	stat_end = 13
-	stat_int = 12
-	stat_dex = 8
+	stat_int = JOB_STATPOINTS_TRAINED
+	stat_dex = JOB_STATPOINTS_NOVICE
 	//Godlike construction and electronics
 	skill_melee = JOB_SKILLPOINTS_NOVICE
 	skill_ranged = JOB_SKILLPOINTS_NOVICE
@@ -163,17 +161,17 @@
 
 /datum/job/cmo
 	//High intellect, average everything else
-	stat_int = 12
+	stat_int = JOB_STATPOINTS_TRAINED
 	//Godlike surgery, expert chemistry and firstaid
 	skill_melee = JOB_SKILLPOINTS_NOVICE
-	skill_surgery = 18
+	skill_surgery = JOB_SKILLPOINTS_MASTER
 	skill_chemistry = JOB_SKILLPOINTS_EXPERT
 	skill_firstaid = JOB_SKILLPOINTS_EXPERT
 
 /datum/job/clown
 	//Absolutely braindead, but high endurance to survive all the beating up
-	stat_end = 14
-	stat_int = 6
+	stat_end = JOB_STATPOINTS_PROFICIENT
+	stat_int = JOB_STATPOINTS_WORTHLESS
 	//Uhhh... godlike gaming?...
 	skill_melee = JOB_SKILLPOINTS_WORTHLESS
 	skill_gaming = JOB_SKILLPOINTS_LEGENDARY
@@ -199,13 +197,13 @@
 
 /datum/job/curator
 	//High intellect, but literally no skills
-	stat_int = 16
+	stat_int = JOB_STATPOINTS_EXPERT
 
 /datum/job/detective
 	//Low str and end, high int and dex
 	stat_str = 9
 	stat_end = 9
-	stat_dex = 14
+	stat_dex = JOB_STATPOINTS_PROFICIENT
 	stat_int = 11
 	//Expert ranged, average melee
 	skill_melee = JOB_SKILLPOINTS_AVERAGE
@@ -213,8 +211,8 @@
 
 /datum/job/geneticist
 	//INTJ, physically incapable but smort
-	stat_str = 8
-	stat_end = 8
+	stat_str = JOB_STATPOINTS_NOVICE
+	stat_end = JOB_STATPOINTS_NOVICE
 	stat_dex = JOB_STATPOINTS_TRAINED
 	stat_int = JOB_STATPOINTS_EXPERT
 	//Expert research, good firstaid, novice surgery
@@ -225,9 +223,9 @@
 /datum/job/hop
 	//INTJ femboy head of staff, physically incapable but VERY smort
 	stat_str = 9
-	stat_end = 10
-	stat_dex = 12
-	stat_int = 12
+	stat_end = JOB_STATPOINTS_AVERAGE
+	stat_dex = 11
+	stat_int = JOB_STATPOINTS_TRAINED
 	//Passing ranged, research and chemistry skills
 	skill_ranged = JOB_SKILLPOINTS_AVERAGE
 	skill_chemistry = JOB_SKILLPOINTS_AVERAGE
@@ -237,8 +235,8 @@
 	//Chad, high strength and endurance, little variance
 	stat_variance_negative = 1
 	stat_variance_positive = 1
-	stat_str = 14
-	stat_end = 14
+	stat_str = JOB_STATPOINTS_PROFICIENT
+	stat_end = JOB_STATPOINTS_PROFICIENT
 	//Godlike melee and ranged, average firstaid
 	skill_melee = JOB_SKILLPOINTS_EXPERT
 	skill_ranged = JOB_SKILLPOINTS_EXPERT
@@ -247,7 +245,7 @@
 /datum/job/janitor
 	//Decent endurance, below average strength
 	stat_str = 9
-	stat_end = 14
+	stat_end = JOB_STATPOINTS_TRAINED
 	//aaaaaaaa
 	skill_melee = JOB_SKILLPOINTS_NOVICE
 	skill_construction = JOB_SKILLPOINTS_NOVICE
@@ -267,8 +265,8 @@
 //Mime does the same meme as the clown
 /datum/job/mime
 	//Absolutely braindead, but high endurance to survive all the beating up
-	stat_end = 14
-	stat_int = 6
+	stat_end = JOB_STATPOINTS_PROFICIENT
+	stat_int = JOB_STATPOINTS_WORTHLESS
 	//Uhhh... godlike gaming?...
 	skill_melee = JOB_SKILLPOINTS_NOVICE
 	skill_gaming = JOB_SKILLPOINTS_LEGENDARY
@@ -289,19 +287,20 @@
 /datum/job/paramedic
 	//Good endurance and str
 	stat_str = 11
-	stat_end = 12
+	stat_end = JOB_STATPOINTS_TRAINED
 	//Decent melee and chemistry, expert surgery and expert first aid
-	skill_melee = JOB_SKILLPOINTS_NOVICE
-	skill_chemistry = JOB_SKILLPOINTS_AVERAGE
+	skill_melee = JOB_SKILLPOINTS_AVERAGE
+	skill_ranged = JOB_SKILLPOINTS_NOVICE
+	skill_chemistry = JOB_SKILLPOINTS_NOVICE
 	skill_firstaid = JOB_SKILLPOINTS_EXPERT
 	skill_surgery = JOB_SKILLPOINTS_AVERAGE
 
 /datum/job/brig_physician
 	//Good endurance and str
 	stat_str = 11
-	stat_end = 12
+	stat_end = JOB_STATPOINTS_TRAINED
 	//Good melee and ranged, decent surgery and expert first aid
-	skill_melee = JOB_SKILLPOINTS_NOVICE
+	skill_melee = JOB_SKILLPOINTS_AVERAGE
 	skill_ranged = JOB_SKILLPOINTS_AVERAGE
 	skill_firstaid = JOB_SKILLPOINTS_EXPERT
 	skill_surgery = JOB_SKILLPOINTS_AVERAGE
@@ -320,11 +319,11 @@
 	//INTJ femboy head of staff, physically incapable but VERY smort
 	stat_str = 9
 	stat_end = 9
-	stat_dex = 12
+	stat_dex = JOB_STATPOINTS_TRAINED
 	stat_int = 15
 	//Amazing research and chemistry
-	skill_ranged = 10
-	skill_research = 18
+	skill_ranged = JOB_SKILLPOINTS_TRAINED
+	skill_research = JOB_SKILLPOINTS_MASTER
 	skill_chemistry = JOB_SKILLPOINTS_EXPERT
 	skill_electronics = JOB_SKILLPOINTS_EXPERT
 	skill_surgery = JOB_SKILLPOINTS_TRAINED
@@ -338,8 +337,8 @@
 	//Godlike electronics, expert research, trained surgery
 	skill_ranged = JOB_SKILLPOINTS_NOVICE
 	skill_surgery = JOB_SKILLPOINTS_TRAINED
-	skill_research = 12
-	skill_electronics = 18
+	skill_research = JOB_SKILLPOINTS_NOVICE
+	skill_electronics = JOB_SKILLPOINTS_EXPERT
 
 /datum/job/scientist
 	//INTJ, physically incapable but smort
@@ -349,37 +348,37 @@
 	stat_int = 11
 	//Good research, expert electronics
 	skill_research = 15
-	skill_electronics = JOB_SKILLPOINTS_EXPERT
 	skill_chemistry = JOB_SKILLPOINTS_AVERAGE
+	skill_electronics = JOB_SKILLPOINTS_EXPERT
 
 /datum/job/officer
 	//Better str and end, at the cost of int and dex
 	stat_str = JOB_STATPOINTS_TRAINED
 	stat_end = JOB_STATPOINTS_TRAINED
-	stat_dex = 8
-	stat_int = 8
+	stat_dex = JOB_STATPOINTS_NOVICE
+	stat_int = JOB_STATPOINTS_NOVICE
 	//Decent melee and ranged, novice firstaid
 	skill_melee = JOB_SKILLPOINTS_TRAINED
 	skill_ranged = JOB_SKILLPOINTS_TRAINED
-	skill_firstaid = 8
+	skill_firstaid = JOB_SKILLPOINTS_NOVICE
 
 /datum/job/mining
 	//Better str and end, at the cost of int and dex
 	stat_str = JOB_STATPOINTS_TRAINED
 	stat_end = JOB_STATPOINTS_TRAINED
-	stat_dex = 8
-	stat_int = 8
+	stat_dex = JOB_STATPOINTS_NOVICE
+	stat_int = JOB_STATPOINTS_NOVICE
 	//Decent melee and ranged, novice firstaid
 	skill_melee = JOB_SKILLPOINTS_TRAINED
 	skill_ranged = JOB_SKILLPOINTS_TRAINED
-	skill_firstaid = 8
+	skill_firstaid = JOB_SKILLPOINTS_NOVICE
 
 /datum/job/engineer
 	//Average stats all around, save for
 	//extra endurance
 	stat_end = JOB_STATPOINTS_TRAINED
 	//Fantastic construction, trained electronics
-	skill_melee = 8
+	skill_melee = JOB_SKILLPOINTS_NOVICE
 	skill_construction = JOB_SKILLPOINTS_EXPERT
 	skill_electronics = JOB_SKILLPOINTS_TRAINED
 
@@ -407,8 +406,8 @@
 
 /datum/job/warden
 	//Better str and end, at the cost of int
-	stat_str = 12
-	stat_end = 12
+	stat_str = JOB_STATPOINTS_TRAINED
+	stat_end = JOB_STATPOINTS_TRAINED
 	stat_int = 8
 	//Great melee, trained ranged
 	skill_melee = JOB_SKILLPOINTS_EXPERT
@@ -419,7 +418,7 @@
 	//Better str and end, at the cost of int
 	stat_str = JOB_STATPOINTS_TRAINED
 	stat_end = JOB_STATPOINTS_TRAINED
-	stat_int = 8
+	stat_int = JOB_STATPOINTS_NOVICE
 	//Decent melee and ranged
 	skill_melee = JOB_SKILLPOINTS_TRAINED
 	skill_ranged = JOB_SKILLPOINTS_TRAINED
