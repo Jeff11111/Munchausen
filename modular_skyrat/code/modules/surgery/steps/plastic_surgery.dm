@@ -1,7 +1,7 @@
 //reshape_face
 /datum/surgery_step/reshape_face
 	name = "Reshape face"
-	implements = list(/obj/item/stack/medical/mesh = 100)
+	implements = list(/obj/item/stack/medical/mesh = 90)
 	possible_locs = list(BODY_ZONE_HEAD)
 	requires_bodypart_type = BODYPART_ORGANIC
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED)

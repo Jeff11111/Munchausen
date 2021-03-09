@@ -1,7 +1,7 @@
 // Set bones
 /datum/surgery_step/set_bones
 	name = "Set bones"
-	implements = list(TOOL_BONESET = 100, /obj/item/stack/sticky_tape/surgical = 80, /obj/item/stack/sticky_tape/super = 50, /obj/item/stack/sticky_tape = 30)
+	implements = list(TOOL_BONESET = 90, /obj/item/stack/sticky_tape/surgical = 70, /obj/item/stack/sticky_tape/super = 50, /obj/item/stack/sticky_tape = 30)
 	base_time = 40
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_BROKEN) //i hate black people
 
@@ -42,7 +42,7 @@
 // Gel le bone
 /datum/surgery_step/gel_bones
 	name = "Gel bones"
-	implements = list(/obj/item/stack/medical/bone_gel = 100, /obj/item/stack/sticky_tape/surgical = 100, /obj/item/stack/sticky_tape/super = 50, /obj/item/stack/sticky_tape = 30)
+	implements = list(/obj/item/stack/medical/bone_gel = 90, /obj/item/stack/sticky_tape/surgical = 85, /obj/item/stack/sticky_tape/super = 50, /obj/item/stack/sticky_tape = 30)
 	base_time = 40
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_BROKEN | STEP_NEEDS_SET_BONES) //i still hate black people
 

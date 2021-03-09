@@ -1,8 +1,8 @@
 //niggers
 /datum/surgery_step/replace_limb
 	name = "Replace limb"
-	implements = list(/obj/item/bodypart = 100,
-					/obj/item/organ_storage = 100)
+	implements = list(/obj/item/bodypart = 85,
+					/obj/item/organ_storage = 90)
 	base_time = 32
 	requires_bodypart_type = 0
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED | STEP_NEEDS_BROKEN)

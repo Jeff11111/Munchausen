@@ -1,7 +1,7 @@
 //REDPILL
 /datum/surgery_step/insert_pill
 	name = "Insert pill"
-	implements = list(/obj/item/reagent_containers/pill = 100)
+	implements = list(/obj/item/reagent_containers/pill = 90)
 	base_time = 16
 	possible_locs = list(BODY_ZONE_PRECISE_MOUTH)
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED | STEP_NEEDS_DRILLED)

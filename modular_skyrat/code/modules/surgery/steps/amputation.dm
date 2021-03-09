@@ -1,7 +1,7 @@
 //amputate limb
 /datum/surgery_step/sever_limb
 	name = "Sever limb"
-	implements = list(TOOL_SAW = 100, /obj/item/melee/transforming/energy/sword/cyborg/saw = 100, /obj/item/melee/arm_blade = 80, /obj/item/chainsaw = 80, /obj/item/mounted_chainsaw = 80, /obj/item/fireaxe = 50, /obj/item/hatchet = 40, /obj/item/kitchen/knife/butcher = 25)
+	implements = list(TOOL_SAW = 90, /obj/item/melee/transforming/energy/sword/cyborg/saw = 90, /obj/item/melee/arm_blade = 75, /obj/item/chainsaw = 75, /obj/item/mounted_chainsaw = 75, /obj/item/fireaxe = 50, /obj/item/hatchet = 40, /obj/item/kitchen/knife/butcher = 25)
 	base_time = 64
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	possible_locs = AMPUTATE_BODYPARTS

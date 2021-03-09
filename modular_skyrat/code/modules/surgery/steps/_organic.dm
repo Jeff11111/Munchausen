@@ -3,9 +3,9 @@
 //make incision
 /datum/surgery_step/incise
 	name = "Make incision"
-	implements = list(TOOL_SCALPEL = 100, /obj/item/melee/transforming/energy/sword = 75, /obj/item/kitchen/knife = 65,
+	implements = list(TOOL_SCALPEL = 90, /obj/item/melee/transforming/energy/sword = 75, /obj/item/kitchen/knife = 65,
 		/obj/item/shard = 45, /obj/item = 30) // 30% success with any sharp item.
-	base_time = 16
+	base_time = 14
 	surgery_flags = 0 //fucking FAGS
 
 /datum/surgery_step/incise/validate_target(mob/living/target, mob/user)
@@ -50,7 +50,7 @@
 //Not a hard requirement, just needed if you don't want your patient to bleed out
 /datum/surgery_step/clamp_bleeders
 	name = "Clamp bleeders"
-	implements = list(TOOL_HEMOSTAT = 100, TOOL_WIRECUTTER = 60, /obj/item/stack/packageWrap = 35, /obj/item/stack/cable_coil = 15)
+	implements = list(TOOL_HEMOSTAT = 85, TOOL_WIRECUTTER = 60, /obj/item/stack/packageWrap = 35, /obj/item/stack/cable_coil = 15)
 	base_time = 24
 
 /datum/surgery_step/clamp_bleeders/validate_target(mob/living/target, mob/user)
@@ -78,8 +78,8 @@
 //retract skin
 /datum/surgery_step/retract_skin
 	name = "Retract skin"
-	implements = list(TOOL_RETRACTOR = 100, TOOL_SCREWDRIVER = 45, TOOL_WIRECUTTER = 35)
-	base_time = 24
+	implements = list(TOOL_RETRACTOR = 90, TOOL_SCREWDRIVER = 45, TOOL_WIRECUTTER = 35)
+	base_time = 34
 
 /datum/surgery_step/retract_skin/validate_target(mob/living/target, mob/user)
 	. = ..()
@@ -118,8 +118,8 @@
 //saw bone
 /datum/surgery_step/saw
 	name = "Saw bone"
-	implements = list(TOOL_SAW = 100, /obj/item/melee/arm_blade = 75, /obj/item/fireaxe = 50, /obj/item/hatchet = 35, /obj/item/kitchen/knife/butcher = 25)
-	base_time = 54
+	implements = list(TOOL_SAW = 90, /obj/item/melee/arm_blade = 75, /obj/item/fireaxe = 50, /obj/item/hatchet = 35, /obj/item/kitchen/knife/butcher = 25)
+	base_time = 64
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED)
 
 /datum/surgery_step/saw/validate_target(mob/living/target, mob/user)
@@ -152,8 +152,8 @@
 //drill bone
 /datum/surgery_step/drill
 	name = "Drill bone"
-	implements = list(TOOL_DRILL = 100, /obj/item/screwdriver/power = 80, /obj/item/pickaxe/drill = 60, TOOL_SCREWDRIVER = 20)
-	base_time = 30
+	implements = list(TOOL_DRILL = 90, /obj/item/screwdriver/power = 80, /obj/item/pickaxe/drill = 60, TOOL_SCREWDRIVER = 20)
+	base_time = 40
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_RETRACTED)
 
 /datum/surgery_step/drill/validate_target(mob/living/target, mob/user)
@@ -182,8 +182,8 @@
 //Cauterize incision
 /datum/surgery_step/close
 	name = "Cauterize"
-	implements = list(TOOL_CAUTERY = 100, /obj/item/gun/energy/laser = 80, /obj/item = 70) // 70% success with any hot item.
-	base_time = 24
+	implements = list(TOOL_CAUTERY = 90, /obj/item/gun/energy/laser = 80, /obj/item = 70) // 70% success with any hot item.
+	base_time = 30
 
 /datum/surgery_step/close/validate_target(mob/living/target, mob/user)
 	. = ..()
@@ -224,7 +224,7 @@
 /datum/surgery_step/disinfect_injuries
 	name = "Disinfect injuries"
 	implements = list(/obj/item/reagent_containers = 100)
-	base_time = 40
+	base_time = 20
 	surgery_flags = 0
 
 /datum/surgery_step/disinfect_injuries/tool_check(mob/user, obj/item/tool, mob/living/carbon/target)

@@ -2,7 +2,7 @@
 //(but robotic)
 /datum/surgery_step/mechanic_set_bones
 	name = "Add plating"
-	implements = list(/obj/item/stack/sheet/metal = 100)
+	implements = list(/obj/item/stack/sheet/metal = 90)
 	base_time = 24
 	requires_bodypart_type = BODYPART_ROBOTIC
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_BROKEN) //i hate black people
@@ -46,7 +46,7 @@
 		plat.use(metalamount)
 	return ..()
 
-/datum/surgery_step/mechanic_set_bones/failure(mob/user, mob/living/target, target_zone, obj/item/tool, var/fail_prob = 0)
+/datum/surgery_step/mechanic_set_bones/failure(mob/user, mob/living/target, target_zone, obj/item/tool)
 	. = ..()
 	if(istype(tool, /obj/item/stack))
 		var/obj/item/stack/used_stack = tool
@@ -56,7 +56,7 @@
 //(but robotic)
 /datum/surgery_step/mechanic_gel_bones
 	name = "Apply nanopaste"
-	implements = list(/obj/item/stack/medical/nanopaste = 100, /obj/item/stack/sticky_tape/surgical = 80, /obj/item/stack/sticky_tape = 60)
+	implements = list(/obj/item/stack/medical/nanopaste = 90, /obj/item/stack/sticky_tape/surgical = 80, /obj/item/stack/sticky_tape = 60)
 	base_time = 40
 	requires_bodypart_type = BODYPART_ROBOTIC
 	surgery_flags = (STEP_NEEDS_INCISED | STEP_NEEDS_BROKEN | STEP_NEEDS_SET_BONES) //i still hate black people
@@ -83,7 +83,7 @@
 		incision.injury_flags &= ~INJURY_SET_BONES
 	return ..()
 
-/datum/surgery_step/mechanic_gel_bones/failure(mob/user, mob/living/target, target_zone, obj/item/tool, var/fail_prob = 0)
+/datum/surgery_step/mechanic_gel_bones/failure(mob/user, mob/living/target, target_zone, obj/item/tool)
 	. = ..()
 	if(istype(tool, /obj/item/stack))
 		var/obj/item/stack/used_stack = tool

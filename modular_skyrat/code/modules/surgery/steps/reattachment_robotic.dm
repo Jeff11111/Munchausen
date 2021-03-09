@@ -2,7 +2,7 @@
 //(but robotic)
 /datum/surgery_step/mechanic_sew_limb
 	name = "Weld limb"
-	implements = list(TOOL_WELDER = 100)
+	implements = list(TOOL_WELDER = 90)
 	base_time = 32
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	possible_locs = ALL_BODYPARTS

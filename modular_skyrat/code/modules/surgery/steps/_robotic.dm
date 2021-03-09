@@ -2,7 +2,7 @@
 /datum/surgery_step/mechanic_incise
 	name = "Unscrew shell"
 	implements = list(
-		TOOL_SCREWDRIVER		= 100,
+		TOOL_SCREWDRIVER		= 90,
 		TOOL_SCALPEL 		= 75, // med borgs could try to unscrew shell with scalpel
 		/obj/item/kitchen/knife	= 50,
 		/obj/item				= 10) // 10% success with any sharp item.
@@ -52,7 +52,7 @@
 /datum/surgery_step/mechanic_clamp_bleeders
 	name = "Prepare electronics"
 	implements = list(
-		TOOL_MULTITOOL = 100,
+		TOOL_MULTITOOL = 90,
 		TOOL_HEMOSTAT = 10) // try to reboot internal controllers via short circuit with some conductor
 	base_time = 24
 	requires_bodypart_type = BODYPART_ROBOTIC
@@ -84,7 +84,7 @@
 /datum/surgery_step/mechanic_retract_skin
 	name = "Unwrench bolts"
 	implements = list(
-		TOOL_WRENCH = 100,
+		TOOL_WRENCH = 90,
 		TOOL_RETRACTOR = 10)
 	base_time = 24
 	requires_bodypart_type = BODYPART_ROBOTIC
@@ -115,7 +115,7 @@
 /datum/surgery_step/mechanic_saw
 	name = "Pry off plating"
 	implements = list(
-		TOOL_CROWBAR = 100,
+		TOOL_CROWBAR = 90,
 		TOOL_HEMOSTAT = 10)
 	base_time = 24
 	requires_bodypart_type = BODYPART_ROBOTIC
@@ -152,7 +152,7 @@
 /datum/surgery_step/mechanic_close
 	name = "Screw shell"
 	implements = list(
-		TOOL_SCREWDRIVER		= 100,
+		TOOL_SCREWDRIVER		= 90,
 		TOOL_SCALPEL 		= 75,
 		/obj/item/kitchen/knife	= 50,
 		/obj/item				= 10) // 10% success with any sharp item.

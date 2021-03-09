@@ -2,7 +2,7 @@
 //(but robotic)
 /datum/surgery_step/mechanic_sever_limb
 	name = "Sever limb"
-	implements = list(TOOL_WIRECUTTER = 100, TOOL_SCALPEL = 60)
+	implements = list(TOOL_WIRECUTTER = 90, TOOL_SCALPEL = 60)
 	base_time = 64
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	possible_locs = AMPUTATE_BODYPARTS

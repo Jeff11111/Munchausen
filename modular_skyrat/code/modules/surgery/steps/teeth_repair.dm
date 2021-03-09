@@ -1,7 +1,7 @@
 //British repair
 /datum/surgery_step/insert_teeth
 	name = "Fix teeth"
-	implements = list(/obj/item/stack/teeth = 100)
+	implements = list(/obj/item/stack/teeth = 80)
 	base_time = 40
 	possible_locs = list(BODY_ZONE_PRECISE_MOUTH)
 	requires_bodypart_type = 0

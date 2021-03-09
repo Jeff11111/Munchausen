@@ -143,6 +143,9 @@
 	display_results(user, target, "<span class='warning'>You screw up!</span>",
 		"<span class='warning'>[user] screws up!</span>",
 		"[user] finishes.", TRUE) //By default the patient will notice if the wrong thing has been cut
+	var/obj/item/bodypart/limb = target.get_bodypart(target_zone)
+	if(limb)
+		limb.receive_damage(brute = (25 - GET_SKILL_LEVEL(user, surgery)), sharpness = SHARP_EDGED)
 	return FALSE
 
 /datum/surgery_step/proc/tool_check(mob/user, obj/item/tool, mob/living/carbon/target)
