@@ -12,7 +12,7 @@
 	return urinate(TRUE)
 
 /mob/living/carbon/proc/defecate(intentional = FALSE)
-	if(defecation <= 30)
+	if(defecation < 30)
 		if(intentional)
 			to_chat(src, "<span class='notice'>I don't have to.</span>")
 		return
@@ -51,7 +51,7 @@
 	playsound(get_turf(src), 'modular_skyrat/sound/effects/poo.ogg', 80)
 
 /mob/living/carbon/proc/urinate(intentional = FALSE)
-	if(urination <= 30)
+	if(urination < 30)
 		if(intentional)
 			to_chat(src, "<span class='notice'>I don't have to.</span>")
 		return

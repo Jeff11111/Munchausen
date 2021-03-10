@@ -14,6 +14,7 @@
 	reagents.add_reagent(/datum/reagent/consumable/shit,10)
 	for(var/obj/effect/decal/cleanable/shit/shit in src.loc)
 		if(shit != src)
+			shit.reagents.trans_to(src, shit.reagents.maximum_volume)
 			qdel(shit)
 
 //PISS DECAL
@@ -32,4 +33,5 @@
 	reagents.add_reagent(/datum/reagent/consumable/piss,10)
 	for(var/obj/effect/decal/cleanable/piss/piss in src.loc)
 		if(piss != src)
+			piss.reagents.trans_to(src, piss.reagents.maximum_volume)
 			qdel(piss)
