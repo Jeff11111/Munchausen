@@ -775,11 +775,9 @@
 		cure_blind(EYE_DAMAGE)
 
 	var/fuck_with_fov = TRUE
-	var/mob/living/carbon/human/humie = src
-	if(istype(humie))
-		var/obj/item/clothing/head/beanie = humie.head
-		if(istype(beanie) && beanie.fov_angle && beanie.fov_shadow_angle)
-			fuck_with_fov = FALSE
+	var/obj/item/clothing/head/beanie = head
+	if(istype(beanie) && beanie.fov_angle && beanie.fov_shadow_angle)
+		fuck_with_fov = FALSE
 
 	var/datum/component/field_of_vision/fov = GetComponent(/datum/component/field_of_vision)
 	if(fuck_with_fov && fov)
@@ -788,19 +786,19 @@
 		else if(right_damage >= 3)
 			fov.generate_fov_holder(M = src, _angle = 0, _shadow_angle = FOV_180MINUS45_DEGREES, register = FALSE, delete_holder = TRUE)
 
-	if(left_damage in 1 to 2)
+	if((left_damage in 1 to 2) && !fov)
 		overlay_fullscreen("left_eye_damage", /obj/screen/fullscreen/impaired/left, left_damage)
-	else if(!left_damage)
+	else
 		clear_fullscreen("left_eye_damage")
-		if(fuck_with_fov && fov && fov.shadow_angle == FOV_180PLUS45_DEGREES)
-			fov.generate_fov_holder(M = src, _angle = 0, _shadow_angle = FOV_90_DEGREES, register = FALSE, delete_holder = TRUE)
+	if(!left_damage && fuck_with_fov && fov && fov.shadow_angle == FOV_180PLUS45_DEGREES)
+		fov.generate_fov_holder(M = src, _angle = 0, _shadow_angle = FOV_90_DEGREES, register = FALSE, delete_holder = TRUE)
 
-	if(right_damage in 1 to 2)
+	if((right_damage in 1 to 2) && !fov)
 		overlay_fullscreen("right_eye_damage", /obj/screen/fullscreen/impaired/right, right_damage)
-	else if(!right_damage)
+	else
 		clear_fullscreen("right_eye_damage")
-		if(fuck_with_fov && fov && fov.shadow_angle == FOV_180MINUS45_DEGREES)
-			fov.generate_fov_holder(M = src, _angle = 0, _shadow_angle = FOV_90_DEGREES, register = FALSE, delete_holder = TRUE)
+	if(!right_damage && fuck_with_fov && fov && fov.shadow_angle == FOV_180MINUS45_DEGREES)
+		fov.generate_fov_holder(M = src, _angle = 0, _shadow_angle = FOV_90_DEGREES, register = FALSE, delete_holder = TRUE)
 
 	return TRUE
 
