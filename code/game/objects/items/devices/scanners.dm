@@ -473,7 +473,7 @@ GENETICS SCANNER
 /proc/chemscan(mob/living/user, mob/living/M)
 	if(istype(M))
 		if(M.reagents)
-			var/msg = "<span class='info'>*---------*\n"
+			var/msg = "<span class='info'>*---------*"
 			if(M.reagents.reagent_list.len)
 				var/list/datum/reagent/reagents = list()
 				for(var/datum/reagent/R in M.reagents.reagent_list)
@@ -482,36 +482,36 @@ GENETICS SCANNER
 					reagents += R
 
 				if(length(reagents))
-					msg += "<span class='notice'>Subject contains the following reagents:</span>\n"
+					msg += "\n<span class='notice'>Subject contains the following reagents:</span>"
 					for(var/datum/reagent/R in reagents)
-						msg += "<span class='notice'>[R.volume] units of [R.name][R.overdosed == 1 ? "</span> - <span class='boldannounce'>OVERDOSING</span>" : ".</span>"]\n"
+						msg += "\n<span class='notice'>[R.volume] units of [R.name][R.overdosed == 1 ? "</span> - <span class='boldannounce'>OVERDOSING</span>" : ".</span>"]"
 				else
-					msg += "<span class='notice'>Subject contains no reagents.</span>\n"
+					msg += "\n<span class='notice'>Subject contains no reagents.</span>"
 
 			else
-				msg += "<span class='notice'>Subject contains no reagents.</span>\n"
+				msg += "\n<span class='notice'>Subject contains no reagents.</span>"
 			if(M.reagents.addiction_list.len)
-				msg += "<span class='boldannounce'>Subject is addicted to the following reagents:</span>\n"
+				msg += "\n<span class='boldannounce'>Subject is addicted to the following reagents:</span>"
 				for(var/datum/reagent/R in M.reagents.addiction_list)
-					msg += "<span class='danger'>[R.name]</span>\n"
+					msg += "\n<span class='danger'>[R.name] (Addiction Stage [R.addiction_stage])</span>"
 			else
-				msg += "<span class='notice'>Subject is not addicted to any reagents.</span>\n"
+				msg += "\n<span class='notice'>Subject is not addicted to any reagents.</span"
 
 			var/datum/reagent/impure/fermiTox/F = M.reagents.has_reagent(/datum/reagent/impure/fermiTox)
 			if(istype(F,/datum/reagent/impure/fermiTox))
 				switch(F.volume)
 					if(5 to 10)
-						msg += "<span class='notice'>Subject contains a low amount of toxic isomers.</span>\n"
+						msg += "\n<span class='notice'>Subject contains a low amount of toxic isomers.</span>"
 					if(10 to 25)
-						msg += "<span class='danger'>Subject contains toxic isomers.</span>\n"
+						msg += "\n<span class='danger'>Subject contains toxic isomers.</span>"
 					if(25 to 50)
-						msg += "<span class='danger'>Subject contains a substantial amount of toxic isomers.</span>\n"
+						msg += "\n<span class='danger'>Subject contains a substantial amount of toxic isomers.</span>"
 					if(50 to 95)
-						msg += "<span class='danger'>Subject contains a high amount of toxic isomers.</span>\n"
+						msg += "\n<span class='danger'>Subject contains a high amount of toxic isomers.</span>"
 					if(95 to INFINITY)
-						msg += "<span class='danger'>Subject contains a extremely dangerous amount of toxic isomers.</span>\n"
+						msg += "\n<span class='danger'>Subject contains a extremely dangerous amount of toxic isomers.</span>"
 
-			msg += "*---------*</span>"
+			msg += "\n*---------*</span>"
 			to_chat(user, msg)
 
 /proc/painscan(mob/user, mob/living/M, advanced = FALSE)
