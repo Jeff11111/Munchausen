@@ -181,12 +181,11 @@
 
 /obj/item/gun/examine(mob/user)
 	. = ..()
-	if(no_pin_required)
-		return
-	if(pin)
-		. += "It has \a [pin] installed."
-	else
-		. += "It doesn't have a firing pin installed, and won't fire."
+	if(!no_pin_required)
+		if(pin)
+			. += "It has \a [pin] installed."
+		else
+			. += "It doesn't have a firing pin installed, and won't fire."
 	if(has_safety)
 		. += "It's safety is [safety ? "<span class='green'><b>enabled</b></span>" : "<span class='red'><b>disabled</b></span>"]."
 	if(gun_light)
@@ -195,6 +194,13 @@
 		. += "It is suppressed with \a <i>[suppressed]</i>."
 	if(bayonet)
 		. += "It has \a <i>[bayonet]</i> attached as a bayonet."
+	switch(weapon_weight)
+		if(WEAPON_HEAVY)
+			. += "It is a <b>heavy</b> weapon."
+		if(WEAPON_MEDIUM)
+			. += "It is a <b>medium-weight</b> weapon."
+		if(WEAPON_LIGHT)
+			. += "It is a <b>lightweight</b> weapon."
 
 /obj/item/gun/rightclick_attack_self(mob/user)
 	return perform_safety(user)

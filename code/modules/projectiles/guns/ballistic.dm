@@ -137,12 +137,12 @@
 
 /obj/item/gun/ballistic/proc/round_check(mob/user)
 	. = ""
-	if((user.mind && GET_SKILL_LEVEL(user, ranged) >= 8) || isobserver(user))
+	if((user.mind && GET_SKILL_LEVEL(user, ranged) >= JOB_SKILLPOINTS_NOVICE) || isobserver(user))
 		. += "It has [get_ammo()] round\s remaining."
 	else
 		. += "I'm not sure how many rounds are loaded on [src]."
 
-/obj/item/gun/ballistic/proc/get_ammo(countchambered = 1)
+/obj/item/gun/ballistic/proc/get_ammo(countchambered = TRUE)
 	var/boolets = 0 //mature var names for mature people
 	if (chambered && countchambered)
 		boolets++

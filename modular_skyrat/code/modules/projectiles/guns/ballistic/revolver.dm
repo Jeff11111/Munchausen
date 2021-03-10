@@ -67,9 +67,10 @@
 
 /obj/item/gun/ballistic/revolver/round_check(mob/user)
 	. = ""
-	if((user.mind && GET_SKILL_LEVEL(user, ranged) >= 8) || chamber_open || isobserver(user))
+	if((user.mind && GET_SKILL_LEVEL(user, ranged) >= JOB_SKILLPOINTS_NOVICE) || chamber_open || isobserver(user))
 		. += "It has [get_ammo()] round\s remaining."
-		. += " [get_ammo(0,0)] of those are live rounds."
+		if(GET_SKILL_LEVEL(user, ranged) >= JOB_SKILLPOINTS_TRAINED)
+			. += "[get_ammo(FALSE,FALSE)] of those are live rounds."
 	else
 		. += "I'm not sure how many rounds are loaded on [src]."
 
