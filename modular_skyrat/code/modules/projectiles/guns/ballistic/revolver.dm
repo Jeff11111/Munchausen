@@ -69,7 +69,7 @@
 	. = ""
 	if((user.mind && GET_SKILL_LEVEL(user, ranged) >= JOB_SKILLPOINTS_NOVICE) || chamber_open || isobserver(user))
 		. += "It has [get_ammo()] round\s remaining."
-		if(GET_SKILL_LEVEL(user, ranged) >= JOB_SKILLPOINTS_TRAINED)
+		if((GET_SKILL_LEVEL(user, ranged) >= JOB_SKILLPOINTS_TRAINED) || chamber_open)
 			. += "[get_ammo(FALSE,FALSE)] of those are live rounds."
 	else
 		. += "I'm not sure how many rounds are loaded on [src]."
