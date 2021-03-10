@@ -582,10 +582,10 @@
 			infection_level = "<span class='deadsay'>LOSS IMMINENT</span>"
 	if(strikes_to_lose_limb <= 0)
 		infection_level = "<span class='deadsay'>The infection is total. The bodypart is lost. Amputate or augment limb immediately.</span>"
-	. = "Type: [name]\nSeverity: [severity_text()]\nDescription: [desc]\nRecommended Treatment: [treat_text]\nInfection Level: [infection_level]\n"
+	. = "Type: [name]\nSeverity: [severity_text()]\nDescription: [desc]\nRecommended Treatment: [treat_text]\nInfection Level: [infection_level]"
 	if((germ_level >= WOUND_INFECTION_MODERATE) && (sanitization < germ_level))
-		. += "<div class='ml-3'>"
-		. += "\tSurgical debridement, antiobiotics/sterilizers, or regenerative mesh will rid infection. Paramedic UV penlights are also effective.\n"
+		. += "\n<div class='ml-3'>"
+		. += "\tSurgical debridement, antiobiotics/sterilizers, or regenerative mesh will rid infection. Paramedic UV penlights are also effective."
 		. += "</div>"
 
 /datum/wound/proc/severity_text()
