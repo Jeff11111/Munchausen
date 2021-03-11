@@ -16,24 +16,7 @@
 //Trust me, you need one. Period. If you don't think you do, you're doing something extremely wrong.
 /obj/screen/plane_master/proc/backdrop(mob/mymob)
 
-///Things rendered on "openspace"; holes in multi-z
-/obj/screen/plane_master/openspace
-	name = "open space plane master"
-	plane = OPENSPACE_BACKDROP_PLANE
-	render_source = OPENSPACE_BACKDROP_PLANE_RENDER_TARGET
-	appearance_flags = PLANE_MASTER
-	blend_mode = BLEND_MULTIPLY
-	alpha = 255
-
-/obj/screen/plane_master/openspace/Initialize()
-	. = ..()
-	filters += filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE)
-
-/obj/screen/plane_master/openspace/backdrop(mob/mymob)
-	filters += filter(type = "drop_shadow", color = "#04080FAA", size = -10)
-	filters += filter(type = "drop_shadow", color = "#04080FAA", size = -15)
-	filters += filter(type = "drop_shadow", color = "#04080FAA", size = -20)
-
+//General procs
 /obj/screen/plane_master/proc/outline(_size, _color)
 	filters += filter(type = "outline", size = _size, color = _color)
 
@@ -42,6 +25,24 @@
 
 /obj/screen/plane_master/proc/clear_filters()
 	filters = list()
+
+///Things rendered on "openspace"; holes in multi-z
+/obj/screen/plane_master/openspace_backdrop
+	name = "open space plane master"
+	plane = OPENSPACE_BACKDROP_PLANE
+	render_source = OPENSPACE_BACKDROP_PLANE_RENDER_TARGET
+	appearance_flags = PLANE_MASTER
+	blend_mode = BLEND_MULTIPLY
+	alpha = 255
+
+/obj/screen/plane_master/openspace_backdrop/Initialize()
+	. = ..()
+	add_filter("vision_cone", 100, filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
+
+/obj/screen/plane_master/openspace_backdrop/backdrop(mob/mymob)
+	add_filter("first_stage_openspace", 1, filter(type = "drop_shadow", color = "#04080FAA", size = -10))
+	add_filter("second_stage_openspace", 2, filter(type = "drop_shadow", color = "#04080FAA", size = -15))
+	add_filter("third_stage_openspace", 2, filter(type = "drop_shadow", color = "#04080FAA", size = -20))
 
 ///Contains just the floor
 /obj/screen/plane_master/floor
@@ -107,7 +108,7 @@
 
 /obj/screen/plane_master/mobs/Initialize()
 	. = ..()
-	add_filter("vision_cone", 100, list(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
+	add_filter("vision_cone", 100, filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
 
 /obj/screen/plane_master/mobs/backdrop(mob/mymob)
 	if(mymob?.client?.prefs.ambientocclusion)
@@ -134,7 +135,7 @@
 
 /obj/screen/plane_master/field_of_vision/Initialize()
 	. = ..()
-	filters += filter(type="alpha", render_source=FIELD_OF_VISION_BLOCKER_PLANE_RENDER_TARGET, flags=MASK_INVERSE)
+	add_filter("vision_cone", 100, filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
 
 ///Used to display the owner and its adjacent surroundings through the FoV plane mask.
 /obj/screen/plane_master/field_of_vision_blocker
@@ -152,7 +153,7 @@
 
 /obj/screen/plane_master/field_of_vision_visual/Initialize()
 	. = ..()
-	filters += filter(type="alpha", render_source=FIELD_OF_VISION_BLOCKER_PLANE_RENDER_TARGET, flags=MASK_INVERSE)
+	add_filter("vision_cone", 100, filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
 
 ///Contains all lighting objects
 /obj/screen/plane_master/lighting
@@ -164,8 +165,8 @@
 
 /obj/screen/plane_master/lighting/Initialize()
 	. = ..()
-	filters += filter(type="alpha", render_source=EMISSIVE_RENDER_TARGET, flags=MASK_INVERSE)
-	filters += filter(type="alpha", render_source=EMISSIVE_UNBLOCKABLE_RENDER_TARGET, flags=MASK_INVERSE)
+	add_filter("vision_cone", 100, filter(type="alpha", render_source=EMISSIVE_RENDER_TARGET, flags=MASK_INVERSE))
+	add_filter("vision_cone", 100, filter(type="alpha", render_source=EMISSIVE_UNBLOCKABLE_RENDER_TARGET, flags=MASK_INVERSE))
 
 /**
   * Things placed on this mask the lighting plane. Doesn't render directly.
@@ -181,8 +182,8 @@
 
 /obj/screen/plane_master/emissive/Initialize()
 	. = ..()
-	filters += filter(type="alpha", render_source=EMISSIVE_BLOCKER_RENDER_TARGET, flags=MASK_INVERSE)
-	filters += filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE)
+	add_filter("vision_cone", 100, filter(type="alpha", render_source=EMISSIVE_BLOCKER_RENDER_TARGET, flags=MASK_INVERSE))
+	add_filter("vision_cone", 100, filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
 
 /**
   * Things placed on this always mask the lighting plane. Doesn't render directly.
@@ -199,7 +200,7 @@
 
 /obj/screen/plane_master/emissive_unblockable/Initialize()
 	. = ..()
-	filters += filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE)
+	add_filter("vision_cone", 100, filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
 
 /**
   * Things placed on this layer mask the emissive layer. Doesn't render directly
