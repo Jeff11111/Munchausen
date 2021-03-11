@@ -4,6 +4,7 @@
 	treat_text = "Incision of the limb followed by suturing or fix o' veining of the tendon.."
 	examine_desc = null
 	occur_text = "is violently torn, severing a tendon"
+	sound_effect = 'modular_skyrat/sound/gore/tendon.wav'
 	severity = WOUND_SEVERITY_CRITICAL
 	wound_type = WOUND_LIST_TENDON
 	viable_zones =	ALL_BODYPARTS
