@@ -137,8 +137,8 @@
 	icon_living = "dwarf_legion"
 	icon_aggro = "dwarf_legion"
 	icon_dead = "dwarf_legion"
-	maxHealth = 60
-	health = 60
+	maxHealth = 30
+	health = 30
 	speed = 2 //faster!
 	move_to_delay = 10 //actually faster!
 	crusher_drop_mod = 20
@@ -242,8 +242,8 @@
 	icon_living = "legion"
 	icon_dead = "legion"
 	threat = 5
-	health = 450
-	maxHealth = 450
+	health = 225
+	maxHealth = 225
 	melee_damage_lower = 20
 	melee_damage_upper = 20
 	anchored = FALSE

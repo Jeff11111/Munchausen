@@ -115,8 +115,8 @@
 	icon_living = "Goliath"
 	icon_aggro = "Goliath_alert"
 	icon_dead = "Goliath_dead"
-	maxHealth = 400
-	health = 400
+	maxHealth = 200
+	health = 200
 	speed = 4
 	ranged_cooldown_time = 80
 	pre_attack_icon = "Goliath_preattack"

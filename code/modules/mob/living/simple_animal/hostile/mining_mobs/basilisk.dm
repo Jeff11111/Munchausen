@@ -128,8 +128,8 @@
 	icon_living = "watcher_magmawing"
 	icon_aggro = "watcher_magmawing"
 	icon_dead = "watcher_magmawing_dead"
-	maxHealth = 215 //Compensate for the lack of slowdown on projectiles with a bit of extra health
-	health = 215
+	maxHealth = 110 //Compensate for the lack of slowdown on projectiles with a bit of extra health
+	health = 110
 	light_range = 3
 	light_power = 2.5
 	light_color = LIGHT_COLOR_LAVA
@@ -144,8 +144,8 @@
 	icon_living = "watcher_icewing"
 	icon_aggro = "watcher_icewing"
 	icon_dead = "watcher_icewing_dead"
-	maxHealth = 170
-	health = 170
+	maxHealth = 90
+	health = 90
 	projectiletype = /obj/item/projectile/temp/basilisk/icewing
 	butcher_results = list(/obj/item/stack/ore/diamond = 5, /obj/item/stack/sheet/bone = 1) //No sinew; the wings are too fragile to be usable
 	crusher_loot = /obj/item/crusher_trophy/watcher_wing/ice_wing
