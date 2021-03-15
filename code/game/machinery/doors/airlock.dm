@@ -195,7 +195,7 @@
 	AddComponent(/datum/component/ntnet_interface)
 
 /obj/machinery/door/airlock/alt_attack_hand(mob/user)
-	if(wires.is_cut(WIRE_BOLTS))
+	if(wires.is_cut(WIRE_BOLTS) || !powered())
 		return TRUE
 	if(allowed(user))
 		if(locked)
