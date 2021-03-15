@@ -973,7 +973,7 @@
 		check_wounding(wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 		if(wounding_type in list(WOUND_SLASH, WOUND_PIERCE))
 			if(wounding_dmg >= ARTERY_MINIMUM_DAMAGE)
-				check_wounding(WOUND_ARTERY, wounding_dmg * (initial_wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
+				check_wounding(WOUND_ARTERY, wounding_dmg * (initial_wounding_type == WOUND_PIERCE ? 0.75 : 1), wound_bonus, bare_wound_bonus)
 		if(wounding_type in list(WOUND_BLUNT, WOUND_SLASH, WOUND_PIERCE))
 			if(wounding_dmg >= TENDON_MINIMUM_DAMAGE)
 				check_wounding(WOUND_TENDON, wounding_dmg * (initial_wounding_type == WOUND_PIERCE ? 0.5 : 1), wound_bonus, bare_wound_bonus)
