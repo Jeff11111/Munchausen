@@ -1,7 +1,7 @@
 /datum/traitor_class/human/assassin
 	name = "Donk Corporative"
 	employer = "Donk Corporation"
-	weight = 0
+	weight = 5
 	chaos = 1
 	threat  = 2
 
