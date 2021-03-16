@@ -418,7 +418,7 @@
 		//good modifier if aimed
 		var/modifier = 0
 		if(rightclick && (user.combat_intent == CI_AIMED))
-			modifier += 6
+			modifier += 5
 
 		//Dice roll to see if we fuck up
 		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*1.5, dicetype = "6d6", mod = -(miss_entirely/5) + modifier, crit = 18) <= DICE_CRIT_FAILURE)
@@ -616,7 +616,7 @@
 		//good modifier if aimed
 		var/modifier = 0
 		if(rightclick && (user.combat_intent == CI_AIMED))
-			modifier += 6
+			modifier += 5
 
 		//Dice roll to see if we fuck up
 		if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*1.5, dicetype = "6d6", mod = -(miss_entirely/5) + modifier, crit = 18) <= DICE_CRIT_FAILURE)

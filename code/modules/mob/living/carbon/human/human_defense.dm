@@ -81,12 +81,6 @@
 	if(P.firer && ishuman(P.firer))
 		var/mob/living/carbon/human/fireboy = P.firer
 		if(fireboy.mind)
-			var/victim_dex = 10
-			if(mind)
-				victim_dex = GET_STAT_LEVEL(src, dex)
-			//Victims being held at gunpoint are less likely to have the shots miss them
-			if(length(gunpointed))
-				victim_dex -= GET_SKILL_LEVEL(fireboy, ranged)
 			//We already dealt with hitting the wrong zone, so let's deal with missing entirely
 			var/miss_entirely = 10
 			var/obj/item/bodypart/supposed_to_affect = get_bodypart(P.def_zone)
@@ -96,7 +90,11 @@
 			//good modifier if aimed
 			var/modifier = 0
 			if(fireboy.combat_intent == CI_AIMED)
-				modifier += 6
+				modifier += 5
+			//another good modifier if gunpoiting
+			for(var/datum/gunpoint/gp in gunpointed)
+				if((gp.source == fireboy) && (gp.next_autoshot <= world.time))
+					modifier += 5
 			
 			if(fireboy.mind.diceroll(GET_STAT_LEVEL(fireboy, dex)*0.5, GET_SKILL_LEVEL(fireboy, ranged)*1.5, dicetype = "6d6", mod = -FLOOR(miss_entirely/5 + get_dist(P.starting, src)/5 + modifier, 1), crit = 18) <= DICE_CRIT_FAILURE)
 				//Missed shot

@@ -2,7 +2,7 @@
 	icon = 'modular_skyrat/icons/mob/targeted.dmi'
 	icon_state = "locking"
 	layer = FLY_LAYER
-	plane = GAME_PLANE
+	plane = MOB_PLANE
 	appearance_flags = APPEARANCE_UI_IGNORE_ALPHA | KEEP_APART
 	mouse_opacity = 0
 

@@ -224,7 +224,7 @@
 			//good modifier if aimed
 			var/modifier = 0
 			if(assailant.combat_intent == CI_AIMED)
-				modifier += 6
+				modifier += 5
 			
 			if(assailant.mind.diceroll(GET_STAT_LEVEL(assailant, dex)*0.5, GET_SKILL_LEVEL(assailant, throwing)*1.5, dicetype = "6d6", mod = -FLOOR(miss_entirely/5 + throwingdatum.dist_travelled/5, 1) + modifier, crit = 18) <= DICE_CRIT_FAILURE)
 				blocked = 100
@@ -233,8 +233,8 @@
 									'modular_skyrat/sound/attack/swing_03.ogg',
 									)
 				playsound(get_turf(victim), swing_sound, 50)
-				visible_message("<span class='warning'>\The [I.name] misses [victim] entirely!</span>", \
-								"<span class='userdanger'>\The [I.name] misses you entirely!</span>")
+				visible_message("<span class='warning'><b>FAILURE!</b> \The [I.name] misses [victim] entirely!</span>", \
+								"<span class='userdanger'><b>FAILURE!</b> \The [I.name] misses you entirely!</span>")
 			var/datum/stats/dex/dex = GET_STAT(assailant, dex)
 			if(dex)
 				ran_zone_prob = dex.get_ran_zone_prob(ran_zone_prob, extra_zone_prob)
