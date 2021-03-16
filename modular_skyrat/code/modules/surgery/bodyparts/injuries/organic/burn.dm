@@ -28,7 +28,7 @@
 	return FALSE //burns cannot bleed
 
 //Burns can only heal if treated, or if the limb has BODYPART_HEALS_OVERKILL
-/datum/injury/can_autoheal()
+/datum/injury/burn/can_autoheal()
 	if(CHECK_BITFIELD(required_status, BODYPART_ROBOTIC))
 		return FALSE
 	for(var/obj/item/wpn in embedded_objects)
