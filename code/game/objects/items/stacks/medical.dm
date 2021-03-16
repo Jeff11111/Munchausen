@@ -295,7 +295,7 @@
 	singular_name = "sterilized medical gauze"
 	icon = 'modular_skyrat/icons/obj/medical.dmi'
 	icon_state = "adv_gauze"
-	heal_brute = 6
+	heal_brute = 5
 	self_delay = 22.5
 	other_delay = 15
 	absorption_rate = 0.4
@@ -357,7 +357,7 @@
 			if(IN.damage >= IN.autoheal_cutoff)
 				user.visible_message("<span class='notice'>\The [user] partially closes a wound on [C]'s [affecting.name] with \the [src].</span>", \
 				"<span class='notice'>I partially close a wound on [C]'s [affecting.name] with \the [src].</span>")
-				IN.heal_damage(rand(10, heal_brute))
+				IN.heal_damage(rand(heal_brute/2, heal_brute))
 			else
 				user.visible_message("<span class='notice'>\The [user] closes a wound on [C]'s [affecting.name] with \the [src].</span>", \
 				"<span class='notice'>I close a wound on [C]'s [affecting.name] with \the [src].</span>")
@@ -387,8 +387,8 @@
 	name = "emergency suture"
 	desc = "A value pack of cheap sutures, not very good at repairing damage, but still decent at stopping bleeding."
 	heal_brute = 5
-	amount = 5
-	max_amount = 5
+	amount = 6
+	max_amount = 6
 
 /obj/item/stack/medical/suture/medicated
 	name = "medicated suture"
@@ -425,7 +425,7 @@
 
 /obj/item/stack/medical/ointment
 	name = "ointment"
-	desc = "Basic burn ointment, rated effective for second degree burns with proper bandaging, though it's still an effective stabilizer for worse injuries. Not terribly good at outright healing, however."
+	desc = "Basic burn ointment, rated effective for second degree burns, though it's still an effective stabilizer for worse injuries. Not terribly good at outright healing, however."
 	gender = PLURAL
 	singular_name = "ointment"
 	icon_state = "ointment"
@@ -438,9 +438,10 @@
 	amount = 12
 	max_amount = 12
 	heal_burn = 10
-	flesh_regeneration = 2.5
-	sanitization = 0.75
-	grind_results = list(/datum/reagent/medicine/silver_sulfadiazine = 10)
+	flesh_regeneration = 2
+	sanitization = 1.5 //Doesn't actually matter much, straight up disinfects
+	grind_results = list(/datum/reagent/medicine/spaceacillin = 5)
+	repeating = FALSE
 
 /obj/item/stack/medical/ointment/one
 	amount = 1
@@ -470,7 +471,7 @@
 	if(affecting.brute_dam || affecting.burn_dam)
 		var/heymedic = GET_SKILL_LEVEL(user, firstaid)
 		for(var/datum/injury/IN in affecting.injuries)
-			if(IN.is_salved())
+			if(IN.is_salved() && IN.is_disinfected())
 				continue
 			if(!do_mob(user, C, 1 SECONDS - (heymedic/4)))
 				to_chat(user, "<span class='warning'>I must stand still!</span>")
@@ -512,9 +513,9 @@
 	heal_burn = 10
 	max_amount = 16
 	repeating = TRUE
-	sanitization = 1
+	sanitization = 0.75
 	flesh_regeneration = 3
-	grind_results = list(/datum/reagent/medicine/spaceacillin = 2)
+	grind_results = list(/datum/reagent/medicine/silver_sulfadiazine = 5)
 	var/is_open = TRUE ///This var determines if the sterile packaging of the mesh has been opened.
 
 /obj/item/stack/medical/mesh/heal(mob/living/M, mob/user, silent = FALSE, obj/item/bodypart/specific_part)
@@ -533,7 +534,7 @@
 			return FALSE
 		if(!silent)
 			user.visible_message("<span class='green'>[user] applies \the [src] on [M].</span>", "<span class='green'>You apply \the [src] on [M].</span>")
-		M.heal_bodypart_damage(0, heal_burn)
+		M.heal_bodypart_damage(heal_brute, heal_burn)
 		use(stackperuse)
 		return TRUE
 
@@ -572,10 +573,12 @@
 			if(IN.damage >= IN.autoheal_cutoff)
 				user.visible_message("<span class='notice'>\The [user] partially bandages a wound on [C]'s [affecting.name] with \the [src].</span>", \
 				"<span class='notice'>I partially bandage a wound on [C]'s [affecting.name] with \the [src].</span>")
-				IN.heal_damage(rand(10, heal_burn))
+				IN.heal_damage(rand(heal_burn/2, heal_burn))
+				IN.germ_level = max(0, IN.germ_level - (WOUND_SANITIZATION_STERILIZER * sanitization))
 			else
 				user.visible_message("<span class='notice'>\The [user] bandages a wound on [C]'s [affecting.name] with \the [src].</span>", \
 				"<span class='notice'>I bandage a wound on [C]'s [affecting.name] with \the [src].</span>")
+				IN.germ_level = max(0, IN.germ_level - (WOUND_SANITIZATION_STERILIZER * sanitization))
 				if(!IN.damage)
 					qdel(IN)
 				else if(IN.damage <= IN.autoheal_cutoff)
@@ -605,9 +608,10 @@
 	gender = PLURAL
 	singular_name = "advanced regenerative mesh"
 	icon_state = "aloe_mesh"
-	sanitization = 1.5
-	heal_burn = 15
-	grind_results = list(/datum/reagent/consumable/aloejuice = 1)
+	heal_burn = 20
+	sanitization = 1.25
+	flesh_regeneration = 3.5
+	grind_results = list(/datum/reagent/consumable/aloejuice = 5, /datum/reagent/medicine/spaceacillin = 5)
 
 /obj/item/stack/medical/mesh/advanced/one
 	amount = 1
@@ -666,26 +670,6 @@
 		return
 	. = ..()
 
-/obj/item/stack/medical/mesh/advanced
-	name = "advanced regenerative mesh"
-	desc = "An advanced mesh made with aloe extracts and sterilizing chemicals, used to treat burns."
-	gender = PLURAL
-	singular_name = "advanced regenerative mesh"
-	icon_state = "aloe_mesh"
-	heal_burn = 20
-	sanitization = 1.25
-	flesh_regeneration = 3.5
-	grind_results = list(/datum/reagent/consumable/aloejuice = 5)
-
-/obj/item/stack/medical/mesh/advanced/one
-	amount = 1
-
-/obj/item/stack/medical/mesh/advanced/update_icon_state()
-	if(!is_open)
-		icon_state = "aloe_mesh_closed"
-	else
-		return ..()
-
 /obj/item/stack/medical/aloe
 	name = "aloe cream"
 	desc = "A healing paste you can apply on wounds."
@@ -696,13 +680,16 @@
 	novariants = TRUE
 	amount = 16
 	max_amount = 16
-	var/heal = 3
+	heal_brute = 6
+	heal_burn = 6
+	sanitization = 1.5
 	grind_results = list(/datum/reagent/consumable/aloejuice = 1)
+	repeating = FALSE
 
 /obj/item/stack/medical/aloe/heal(mob/living/M, mob/user, silent = FALSE, obj/item/bodypart/specific_part)
 	. = ..()
 	if(iscarbon(M))
-		return heal_carbon(M, user, heal, heal, FALSE, (mode == MODE_MULTIPLE ? TRUE : FALSE))
+		return heal_carbon(M, user, heal_brute, heal_burn, FALSE, (mode == MODE_MULTIPLE ? TRUE : FALSE))
 	if(isanimal(M))
 		var/mob/living/simple_animal/critter = M
 		if (!(critter.healable))
@@ -715,7 +702,7 @@
 			return FALSE
 		if(!silent)
 			user.visible_message("<span class='green'>[user] applies \the [src] on [M].</span>", "<span class='green'>You apply \the [src] on [M].</span>")
-		M.heal_bodypart_damage(heal, heal)
+		M.heal_bodypart_damage(heal_brute, heal_burn)
 		use(stackperuse)
 		return TRUE
 
@@ -755,10 +742,15 @@
 			if(IN.damage >= IN.autoheal_cutoff)
 				user.visible_message("<span class='notice'>\The [user] partially salves a wound on [C]'s [affecting.name] with \the [src].</span>", \
 				"<span class='notice'>I partially salve a wound on [C]'s [affecting.name] with \the [src].</span>")
-				IN.heal_damage(rand(10, heal_burn))
+				if(IN.damage_type == WOUND_BURN)
+					IN.heal_damage(rand(heal_burn/2, heal_burn))
+				else
+					IN.heal_damage(rand(heal_brute/2, heal_brute))
+				IN.germ_level = max(0, IN.germ_level - (WOUND_SANITIZATION_STERILIZER * sanitization))
 			else
 				user.visible_message("<span class='notice'>\The [user] salves a wound on [C]'s [affecting.name] with \the [src].</span>", \
 				"<span class='notice'>I salve a wound on [C]'s [affecting.name] with \the [src].</span>")
+				IN.germ_level = max(0, IN.germ_level - (WOUND_SANITIZATION_STERILIZER * sanitization))
 				if(!IN.damage)
 					qdel(IN)
 				else if(IN.damage <= IN.autoheal_cutoff)
