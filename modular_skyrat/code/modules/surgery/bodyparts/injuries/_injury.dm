@@ -19,7 +19,7 @@
 	var/amount = 1				// number of wounds of this type
 	var/germ_level = 0			// amount of germs in the wound
 	var/infection_rate = 1		// rate of infection for this wound
-	var/fade_away = 10 MINUTES  // time it takes for the injury to fade away once healed up
+	var/fade_away = 5 MINUTES  // time it takes for the injury to fade away once healed up
 	var/obj/item/bodypart/parent_bodypart	// the bodypart the wound is on, if on a bodypart
 	var/mob/living/carbon/parent_mob // the mob the wound is on, if on a mob
 
