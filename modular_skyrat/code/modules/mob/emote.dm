@@ -45,7 +45,7 @@
 		if(istype(user, /mob/living/simple_animal/hostile/gorilla))
 			sound = 'sound/creatures/gorilla.ogg'
 		if(ishuman(user))
-			user.adjustOxyLoss(5)
+			user.adjustOxyLoss(3)
 			var/mob/living/carbon/human/H = user
 			var/datum/species/userspecies = H.dna.species
 			if(H)
