@@ -7,6 +7,8 @@
 /datum/injury/burn/infection_check()
 	if(is_treated() && damage < 25)	//anything less than a FUCK burn isn't infectable if treated properly
 		return FALSE
+	if(is_disinfected())
+		return FALSE
 	if(required_status & BODYPART_ROBOTIC) //Robotic injury
 		return FALSE
 

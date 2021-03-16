@@ -182,7 +182,7 @@
 /datum/injury/proc/drag_bleed_amt()
 	if(!is_bleeding())
 		return FALSE
-	return CEILING(get_bleed_rate() * 0.5, 1)
+	return CEILING(get_bleed_rate() * 0.35, 1)
 
 /datum/injury/proc/bandage()
 	injury_flags |= INJURY_BANDAGED
@@ -320,7 +320,7 @@
 	return FALSE
 
 /datum/injury/proc/is_disinfected()
-	if(CHECK_BITFIELD(injury_flags, INJURY_DISINFECTED))
+	if(CHECK_BITFIELD(injury_flags, INJURY_DISINFECTED) && (germ_level <= 0))
 		return TRUE
 	return FALSE
 

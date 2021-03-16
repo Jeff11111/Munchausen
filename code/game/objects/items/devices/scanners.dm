@@ -398,13 +398,18 @@ GENETICS SCANNER
 	if(iscarbon(M))
 		var/mob/living/carbon/C = M
 		for(var/obj/item/bodypart/BP in C.bodyparts)
-			if(BP.germ_level || BP.is_dead())
+			if(BP.is_dead())
+				msg += "\n<span class='deadsay'><b>Subject's [BP.name] is necrotic!</b></span>"
+			else if(BP.germ_level)
 				msg += "\n<span class='green'>Subject's [BP.name] is infected. Perform a wellbeing scan for more information.</span>"
 			for(var/datum/injury/IN in BP.injuries)
-				if(IN.germ_level)
+				if(IN.germ_level && !(IN.is_disinfected() || IN.is_salved()))
 					msg += "\n<span class='green'>Subject's [BP.name] has an infected injury. Disinfection is recommended.</span>"
-		for(var/obj/item/organ/O in C.bodyparts)
-			if(O.germ_level || O.is_dead())
+					break
+		for(var/obj/item/organ/O in C.internal_organs)
+			if(O.is_dead())
+				msg += "\n<span class='green'><b>Subject's [O.name] is necrotic!</b></span>"
+			else if(O.germ_level)
 				msg += "\n<span class='green'>Subject's [O.name] is infected. Perform a wellbeing scan for more information.</span>"
 	
 	// Time of death
