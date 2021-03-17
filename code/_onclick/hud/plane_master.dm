@@ -165,8 +165,8 @@
 
 /obj/screen/plane_master/lighting/Initialize()
 	. = ..()
-	add_filter("vision_cone", 100, filter(type="alpha", render_source=EMISSIVE_RENDER_TARGET, flags=MASK_INVERSE))
-	add_filter("vision_cone", 100, filter(type="alpha", render_source=EMISSIVE_UNBLOCKABLE_RENDER_TARGET, flags=MASK_INVERSE))
+	add_filter("vision_cone", 0, filter(type="alpha", render_source=EMISSIVE_RENDER_TARGET, flags=MASK_INVERSE))
+	add_filter("vision_cone", 0, filter(type="alpha", render_source=EMISSIVE_UNBLOCKABLE_RENDER_TARGET, flags=MASK_INVERSE))
 
 /**
   * Things placed on this mask the lighting plane. Doesn't render directly.
