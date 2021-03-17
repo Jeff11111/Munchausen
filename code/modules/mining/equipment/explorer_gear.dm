@@ -154,6 +154,7 @@
 	desc = "A face-covering plate that can be connected to an air supply. Intended for use with the SEVA Suit."
 	icon_state = "seva"
 	item_state = "seva"
+	armor = list("melee" = 10, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 5, "bio" = 50, "rad" = 0, "fire" = 20, "acid" = 40, "wound" = 5)
 	resistance_flags = FIRE_PROOF
 
 /****************Exo-Suit and Mask****************/
@@ -182,4 +183,5 @@
 	desc = "A face-covering mask that can be connected to an air supply. Intended for use with the Exosuit."
 	icon_state = "exo"
 	item_state = "exo"
+	armor = list("melee" = 10, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 5, "bio" = 50, "rad" = 0, "fire" = 20, "acid" = 40, "wound" = 5)
 	resistance_flags = FIRE_PROOF
