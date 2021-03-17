@@ -1011,10 +1011,10 @@
 		if(CHECK_MULTIPLE_BITFIELDS(mangled_state, BODYPART_MANGLED_BOTH))
 			damage_integrity(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	else if(CHECK_BITFIELD(bio_state, BIO_FLESH))
-		if(CHECK_MULTIPLE_BITFIELDS(mangled_state, BODYPART_MANGLED_MUSCLE))
+		if(CHECK_BITFIELD(mangled_state, BODYPART_MANGLED_MUSCLE))
 			damage_integrity(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	else if(CHECK_BITFIELD(bio_state, BIO_BONE))
-		if(CHECK_MULTIPLE_BITFIELDS(mangled_state, BODYPART_MANGLED_BONE))
+		if(CHECK_BITFIELD(mangled_state, BODYPART_MANGLED_BONE))
 			damage_integrity(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus)
 	if(try_dismember(initial_wounding_type, wounding_dmg, wound_bonus, bare_wound_bonus))
 		return
