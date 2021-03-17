@@ -190,7 +190,7 @@
 			. |= BODYPART_MANGLED_BONE
 
 	for(var/datum/injury/IN in injuries)
-		if((IN.damage_type in list(WOUND_SLASH, WOUND_PIERCE)) && (IN.damage >= required_muscle_severity))
+		if(((IN.damage_type in list(WOUND_SLASH, WOUND_PIERCE)) && (IN.damage >= required_muscle_severity)) || ((IN.damage_type == WOUND_BLUNT) && (IN.damage >= required_muscle_severity * 1.5)))
 			. |= BODYPART_MANGLED_MUSCLE
 /**
   * damage_integrity() is used, once we've confirmed that a flesh and bone bodypart has both the skin, muscle and bone mangled,
