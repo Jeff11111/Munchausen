@@ -823,7 +823,7 @@
 										target = C, target_message = "<span class='userdanger'><b>[src]</b> botches the CPR and cracks my ribs!</span>")
 							var/datum/wound/fracture
 							if(affected.is_organic_limb())
-								var/fucked_up = (prob(heyheavy*2) ? /datum/wound/blunt/severe : /datum/wound/blunt/moderate)
+								var/fucked_up = (prob(heyheavy*2) ? /datum/wound/blunt/severe : /datum/wound/blunt/moderate/ribcage)
 								fracture = new fucked_up()
 							else
 								var/fucked_up = (prob(heyheavy*2) ? /datum/wound/mechanical/blunt/severe : /datum/wound/mechanical/blunt/moderate)
