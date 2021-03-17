@@ -16,7 +16,7 @@
 	var/sound  // Sound to play when emote is called
 	var/vary = 0 // Probably shouldn't vary cause it sounds wacky
 	var/volume = 50
-	var/cooldown = 10
+	var/cooldown = 1 SECONDS
 
 /datum/emote/living/run_emote(mob/user, params)
 	if(can_run_emote(user, TRUE) && sound && (user.nextsoundemote < world.time))
