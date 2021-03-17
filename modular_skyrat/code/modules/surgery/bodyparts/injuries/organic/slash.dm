@@ -3,11 +3,6 @@
 	bleed_threshold = 5
 	damage_type = WOUND_SLASH
 
-/datum/injury/slash/bandage()
-	. = ..()
-	if(!autoheal_cutoff)
-		autoheal_cutoff = initial(autoheal_cutoff)
-
 /datum/injury/slash/small
 	// link wound descriptions to amounts of damage
 	// Minor cuts have max_bleeding_stage set to the stage that bears the wound type's name.
