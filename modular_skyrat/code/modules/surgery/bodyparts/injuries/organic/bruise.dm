@@ -21,7 +21,7 @@
 		"small healing bruise" = 5,
 		"small hematoma" = 0
 		)
-	max_bleeding_stage = 1
+	max_bleeding_stage = 2
 
 /datum/injury/bruise/large
 	stages = list(
@@ -33,7 +33,7 @@
 		"small healing bruise" = 5,
 		"small hematoma" = 0
 		)
-	max_bleeding_stage = 2
+	max_bleeding_stage = 3
 	fade_away = INFINITY
 
 /datum/injury/bruise/huge
@@ -47,7 +47,7 @@
 		"mild healing bruise" = 5,
 		"mild hematoma" = 0
 		)
-	max_bleeding_stage = 3
+	max_bleeding_stage = 4
 	fade_away = INFINITY
 
 /datum/injury/bruise/monumental
@@ -61,5 +61,5 @@
 		"moderate healing bruise" = 5,
 		"moderate hematoma" = 0
 		)
-	max_bleeding_stage = 3
+	max_bleeding_stage = 4
 	fade_away = INFINITY
