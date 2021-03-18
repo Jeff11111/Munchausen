@@ -923,7 +923,7 @@
 
 	//Damage has been dealt. Let's deal with wounding.
 	//We check all wound-related traits to multiply damage adequately.
-	if(body_zone == BODY_ZONE_PRECISE_MOUTH && HAS_TRAIT(owner, TRAIT_GLASSJAW))
+	if((body_zone == BODY_ZONE_PRECISE_MOUTH || body_zone == BODY_ZONE_HEAD) && HAS_TRAIT(owner, TRAIT_GLASSJAW))
 		wounding_dmg *= 2
 	if(wounding_type == WOUND_BLUNT && HAS_TRAIT(owner, TRAIT_EASYBLUNT))
 		wounding_dmg *= 2
