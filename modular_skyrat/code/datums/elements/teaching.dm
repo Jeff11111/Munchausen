@@ -45,7 +45,7 @@
 		to_chat(source, "<span class='danger'>Uhhhh...???</span>")
 		return
 	var/list/mob/living/students = list()
-	for(var/mob/living/carbon/C in view(1, source)) //We use view() because blind people are bad teachers
+	for(var/mob/living/carbon/C in fov_viewers(1, source)) //We use view() because blind people are bad teachers
 		if(C.mind && C.client && (source != C))
 			students["[C.name]"] = C
 	if(!length(students))
