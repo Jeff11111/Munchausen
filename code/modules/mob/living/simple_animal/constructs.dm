@@ -17,7 +17,7 @@
 	speed = 0
 	spacewalk = TRUE
 	a_intent = INTENT_HARM
-	stop_automated_movement = 1
+	stop_automated_movement = TRUE
 	status_flags = CANPUSH
 	attack_sound = 'sound/weapons/punch1.ogg'
 	see_in_dark = 7
@@ -26,7 +26,7 @@
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	minbodytemp = 0
 	maxbodytemp = INFINITY
-	healable = 0
+	healable = FALSE
 	faction = list("cult")
 	movement_type = FLYING
 	pressure_resistance = 100

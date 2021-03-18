@@ -12,7 +12,7 @@
 	icon_dead = "morph_dead"
 	speed = 2
 	a_intent = INTENT_HARM
-	stop_automated_movement = 1
+	stop_automated_movement = TRUE
 	status_flags = CANPUSH
 	pass_flags = PASSTABLE
 	ventcrawler = VENTCRAWLER_ALWAYS
@@ -20,7 +20,7 @@
 	minbodytemp = 0
 	maxHealth = 150
 	health = 150
-	healable = 0
+	healable = FALSE
 	obj_damage = 50
 	melee_damage_lower = 20
 	melee_damage_upper = 20

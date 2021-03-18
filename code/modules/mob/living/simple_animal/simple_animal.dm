@@ -27,11 +27,11 @@
 	var/turns_per_move = 1
 	var/turns_since_move = 0
 	///Use this to temporarely stop random movement or to if you write special movement code for animals.
-	var/stop_automated_movement = 0
+	var/stop_automated_movement = FALSE
 	///Does the mob wander around when idle?
-	var/wander = 1
+	var/wander = TRUE
 	///When set to 1 this stops the animal from moving when someone is pulling it.
-	var/stop_automated_movement_when_pulled = 1
+	var/stop_automated_movement_when_pulled = TRUE
 
 	///When someone interacts with the simple animal.
 	///Help-intent verb in present continuous tense.
@@ -55,7 +55,7 @@
 	var/maxbodytemp = 350
 
 	///Healable by medical stacks? Defaults to yes.
-	var/healable = 1
+	var/healable = TRUE
 
 	///Atmos effect - Yes, you can make creatures that require plasma or co2 to survive. N2O is a trace gas and handled separately, hence why it isn't here. It'd be hard to add it. Hard and me don't mix (Yes, yes make all the dick jokes you want with that.) - Errorage
 	var/list/atmos_requirements = list("min_oxy" = 5, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 1, "min_co2" = 0, "max_co2" = 5, "min_n2" = 0, "max_n2" = 0) //Leaving something at 0 means it's off - has no maximum
@@ -130,9 +130,6 @@
 
 	///convenience var for forcibly waking up an idling AI on next check.
 	var/shouldwakeup = FALSE
-
-	///Domestication.
-	var/tame = 0
 
 	///I don't want to confuse this with client registered_z.
 	var/my_z
@@ -598,7 +595,7 @@
 
 /mob/living/simple_animal/relaymove(mob/user, direction)
 	var/datum/component/riding/riding_datum = GetComponent(/datum/component/riding)
-	if(tame && riding_datum)
+	if(riding_datum)
 		riding_datum.handle_ride(user, direction)
 
 /mob/living/simple_animal/buckle_mob(mob/living/buckled_mob, force = 0, check_loc = 1)

@@ -41,8 +41,8 @@
 	attack_verb_continuous = "bites"
 	attack_verb_simple = "bite"
 	speak_emote = list("clatters")
-	stop_automated_movement = 1
-	wander = 0
+	stop_automated_movement = TRUE
+	wander = FALSE
 	var/attempt_open = FALSE
 
 // Pickup loot

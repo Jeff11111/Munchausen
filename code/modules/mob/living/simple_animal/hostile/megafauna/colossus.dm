@@ -642,7 +642,7 @@ Difficulty: Very Hard
 	obj_damage = 0
 	environment_smash = ENVIRONMENT_SMASH_NONE
 	AIStatus = AI_OFF
-	stop_automated_movement = 1
+	stop_automated_movement = TRUE
 	var/heal_power = 5
 
 /mob/living/simple_animal/hostile/lightgeist/Initialize()

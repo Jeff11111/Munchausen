@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile
 	faction = list("hostile")
-	stop_automated_movement_when_pulled = 0
+	stop_automated_movement_when_pulled = FALSE
 	obj_damage = 40
 	environment_smash = ENVIRONMENT_SMASH_STRUCTURES //Bitflags. Set to ENVIRONMENT_SMASH_STRUCTURES to break closets,tables,racks, etc; ENVIRONMENT_SMASH_WALLS for walls; ENVIRONMENT_SMASH_RWALLS for rwalls
 	var/threat = 0 // for dynamic
@@ -278,7 +278,7 @@
 		AttackingTarget()
 
 /mob/living/simple_animal/hostile/proc/MoveToTarget(list/possible_targets)//Step 5, handle movement between us and our target
-	stop_automated_movement = 1
+	stop_automated_movement = TRUE
 	if(!target || !CanAttack(target))
 		LoseTarget()
 		return 0
@@ -357,7 +357,7 @@
 
 
 /mob/living/simple_animal/hostile/proc/LoseAggro()
-	stop_automated_movement = 0
+	stop_automated_movement = FALSE
 	vision_range = initial(vision_range)
 	taunt_chance = initial(taunt_chance)
 

@@ -30,7 +30,7 @@
 	melee_damage_lower = 1
 	melee_damage_upper = 2
 	environment_smash = ENVIRONMENT_SMASH_NONE
-	stop_automated_movement_when_pulled = 1
+	stop_automated_movement_when_pulled = TRUE
 	blood_volume = BLOOD_VOLUME_NORMAL
 	var/obj/item/udder/udder = null
 	var/datum/reagent/milk_reagent = /datum/reagent/consumable/milk
