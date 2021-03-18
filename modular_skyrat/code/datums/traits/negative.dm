@@ -541,6 +541,6 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	name = "Acid Victim"
 	desc = "As a victim of an acid attack, years ago - My face is now unrecognizable..."
 	value = -1
-	medical_record_text = "Patient's face has been burned into unrecognition."
+	medical_record_text = "Patient's face has been chemically burnt into unrecognition."
 	mob_trait = TRAIT_DISFIGURED
 	medical_condition = TRUE
