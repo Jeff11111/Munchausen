@@ -76,10 +76,10 @@
 	var/master_skill = source.mind.mob_skills[potential_skill].level
 	var/timeperteach = CEILING(20 SECONDS * max(0.1, 1 - puppet_IQ/MAX_STAT), 1 SECONDS) //stupidity of the student affects how quickly they learn
 	var/maximum_teachernus = min(20, FLOOR(master_skill * (0.8 * master_IQ/MAX_STAT), 1)) //stupidity of the teacher affects how much the student can learn out of their full skill bingus
-	if(master_IQ <= 5)
+	if(master_IQ <= JOB_STATPOINTS_NOVICE)
 		to_chat(source, "<span class='warning'>Me are too dumb to teach.</span>")
 		return
-	if(puppet_IQ <= 5)
+	if(puppet_IQ <= JOB_STATPOINTS_NOVICE)
 		to_chat(source, "<span class='warning'>I'd need a degree in special education to teach this imbecile.</span>")
 		return
 	if(check_being_taught(puppet)) //Can't perform multi-task teaching
