@@ -338,3 +338,11 @@
 	. = ..()
 	var/datum/stats/dex/dex = GET_STAT(quirk_holder, dex)
 	dex?.level += rand(1, 2)
+
+//sprint free
+/datum/quirk/marathoner
+	name = "Marathoner"
+	desc = "I am incredibly athletic, and running does not tire me."
+	value = 2
+	mob_trait = TRAIT_FREESPRINT
+	medical_condition = FALSE
