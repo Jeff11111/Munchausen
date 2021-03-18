@@ -1072,7 +1072,7 @@
 	var/easy_dismember = HAS_TRAIT(owner, TRAIT_EASYDISMEMBER) // if we have easydismember, we don't reduce damage when redirecting damage to different types (slashing weapons on mangled/skinless limbs attack at 100% instead of 50%)
 
 	//We check all wound-related traits to multiply damage adequately.
-	if(body_zone == BODY_ZONE_PRECISE_MOUTH && HAS_TRAIT(owner, TRAIT_GLASSJAW))
+	if((body_zone == BODY_ZONE_PRECISE_MOUTH || body_zone == BODY_ZONE_HEAD) && HAS_TRAIT(owner, TRAIT_GLASSJAW))
 		wounding_dmg *= 2
 	if(wounding_type == WOUND_BLUNT && HAS_TRAIT(owner, TRAIT_EASYBLUNT))
 		wounding_dmg *= 2
