@@ -71,7 +71,7 @@
 		determined_mod = 0.65
 	if(next_foot == right_foot)
 		owner.client.move_delay += slowdown_right * determined_mod
-		next_foot = left_leg
+		next_foot = left_foot
 	else if(next_foot == left_foot)
 		owner.client.move_delay += slowdown_left * determined_mod
 		next_foot = right_foot
