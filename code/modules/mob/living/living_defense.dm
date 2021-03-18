@@ -227,7 +227,7 @@
 				modifier += 5
 			
 			if(assailant.mind.diceroll(GET_STAT_LEVEL(assailant, dex)*0.5, GET_SKILL_LEVEL(assailant, throwing)*1.5, dicetype = "6d6", mod = -FLOOR(miss_entirely/5 + throwingdatum.dist_travelled/5, 1) + modifier, crit = 18) <= DICE_CRIT_FAILURE)
-				blocked = 100
+				blocked = TRUE
 				var/swing_sound = pick('modular_skyrat/sound/attack/swing_01.ogg',
 									'modular_skyrat/sound/attack/swing_02.ogg',
 									'modular_skyrat/sound/attack/swing_03.ogg',
@@ -252,7 +252,7 @@
 				var/turf/yoink = pick(dodge_turfs)
 				//We moved to the tile, therefore we dodged successfully
 				if(Move(yoink, get_dir(src, yoink)))
-					blocked = 100
+					blocked = TRUE
 					playsound(get_turf(src), victim.dna?.species?.miss_sound, 70)
 					visible_message("<span class='danger'>[victim] dodges [I]!</span>")
 		
@@ -267,13 +267,15 @@
 			if(!nosell_hit)
 				visible_message("<span class='danger'><b>[src]</b> is hit by [I]!</span>", \
 								"<span class='userdanger'>You're hit by [I]!</span>")
-				if(!I.throwforce)
+				if(!total_damage)
 					return
 
 				var/armor = run_armor_check(zone, "melee", "Your armor has protected your [parse_zone(zone)].", "Your armor has softened hit to your [parse_zone(zone)].",I.armour_penetration)
-				apply_damage(I.throwforce, dtype, zone, armor, sharpness=I.get_sharpness(), wound_bonus=(nosell_hit * CANT_WOUND))
+				apply_damage(total_damage, dtype, zone, armor, sharpness = I.get_sharpness(), wound_bonus = I.wound_bonus, bare_wound_bonus = I.bare_wound_bonus)
 			
 		else
+			hitpush = FALSE
+			skipcatch = TRUE
 			return TRUE
 	else
 		playsound(loc, 'sound/weapons/genhit.ogg', 50, 1, -1)

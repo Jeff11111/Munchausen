@@ -119,6 +119,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	gain_text = "<span class='danger'>Things far away from me start looking blurry.</span>"
 	lose_text = "<span class='notice'>I start seeing faraway things normally again.</span>"
 	medical_record_text = "Patient requires prescription glasses in order to counteract nearsightedness."
+	medical_condition = TRUE
 
 /datum/quirk/nearsighted/add()
 	quirk_holder.become_nearsighted(ROUNDSTART_TRAIT)
@@ -129,6 +130,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	desc = "As far as i can remember, i've always been afraid of the dark. While in the dark without a light source, i instinctually act careful, and constantly feel a sense of dread."
 	value = -1
 	medical_record_text = "Patient demonstrates an abnormal fear of the dark."
+	medical_condition = TRUE
 
 /datum/quirk/nyctophobia/on_process()
 	var/mob/living/carbon/human/H = quirk_holder
@@ -152,6 +154,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	gain_text = "<span class='danger'>The safety of light feels off...</span>"
 	lose_text = "<span class='notice'>Enlightening.</span>"
 	medical_record_text = "Despite my warnings, the patient refuses turn on the lights, only to end up rolling down a full flight of stairs and into the cellar."
+	medical_condition = TRUE
 
 /datum/quirk/lightless/on_process()
 	var/turf/T = get_turf(quirk_holder)
@@ -168,6 +171,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	value = -1
 	mob_trait = TRAIT_POOR_AIM
 	medical_record_text = "Patient possesses a strong tremor in both hands."
+	medical_condition = TRUE
 
 //Slender man lol
 /datum/quirk/prosopagnosia
@@ -176,13 +180,16 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	value = -1
 	mob_trait = TRAIT_PROSOPAGNOSIA
 	medical_record_text = "Patient suffers from prosopagnosia and cannot recognize faces."
+	medical_condition = TRUE
 
 //Liveleak victim
 /datum/quirk/prosthetic_limb
 	name = "Prosthetic Limb"
-	desc = "An accident caused me to lose one of my limbs. Because of this, i now have a prosthetic."
+	desc = "An accident caused me to lose one of my limbs. Because of this, i now have an admittedly cheap prosthetic."
 	value = -1
 	var/slot_string = "limb"
+	medical_record_text = "Patient is a carrier of a surplus prosthetic."
+	medical_condition = TRUE
 
 /datum/quirk/prosthetic_limb/on_spawn()
 	var/mob/living/carbon/human/H = quirk_holder
@@ -219,6 +226,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	gain_text = "<span class='userdanger'>...</span>"
 	lose_text = "<span class='notice'>You feel in tune with the world again.</span>"
 	medical_record_text = "Patient suffers from acute psychotic episodes and experiences vivid hallucinations."
+	medical_condition = TRUE
 
 /datum/quirk/insanity/on_process()
 	if(quirk_holder.reagents.has_reagent(/datum/reagent/toxin/mindbreaker))
@@ -233,11 +241,12 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 //Don't hug me, i'm scared
 /datum/quirk/phobia
 	name = "Phobia"
-	desc = "I've had a traumatic past, one that has scarred you for life, and cripples you when dealing with your greatest fears."
+	desc = "I've had a traumatic past, one that has scarred me for life, and cripples me when dealing with my greatest fears."
 	value = -2 // It can hardstun you. You can be a job that your phobia targets...
-	gain_text = "<span class='danger'>I begin to tremble as an immeasurable fear grips your mind.</span>"
+	gain_text = "<span class='danger'>I begin to tremble as an immeasurable fear grips my mind.</span>"
 	lose_text = "<span class='notice'>My confidence wipes away the fear that had been plaguing me.</span>"
 	medical_record_text = "Patient has an extreme or irrational fear and aversion to an undefined stimuli."
+	medical_condition = TRUE
 	var/datum/brain_trauma/mild/phobia/phobia
 
 /datum/quirk/phobia/post_add()
@@ -258,6 +267,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	gain_text = "<span class='danger'>I find myself unable to speak!</span>"
 	lose_text = "<span class='notice'>I feel a growing strength in my vocal chords.</span>"
 	medical_record_text = "Functionally mute, patient is unable to use their voice in any capacity."
+	medical_condition = TRUE
 	var/datum/speech_mod/torn_vocal_cords/gargles
 
 /datum/quirk/mute/add()
@@ -276,16 +286,18 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	gain_text = "<span class='danger'>There's a lot on my mind right now.</span>"
 	lose_text = "<span class='notice'>My mind finally feels calm.</span>"
 	medical_record_text = "Patient's mind is in a vulnerable state, and cannot recover from traumatic events."
+	medical_condition = TRUE
 
 //Ligger faggot
 /datum/quirk/coldblooded
 	name = "Cold-blooded"
 	desc = "My body doesn't create its own internal heat, requiring external heat regulation."
 	value = -2
-	medical_record_text = "Patient is ectothermic."
 	mob_trait = TRAIT_COLDBLOODED
+	medical_record_text = "Patient is ectothermic."
 	gain_text = "<span class='notice'>I feel cold-blooded.</span>"
 	lose_text = "<span class='notice'>I feel more warm-blooded.</span>"
+	medical_condition = TRUE
 
 //Clumsy
 /datum/quirk/disaster_artist
@@ -294,6 +306,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	value = -2
 	mob_trait = TRAIT_CLUMSY
 	medical_record_text = "Patient lacks proper spatial awareness."
+	medical_condition = TRUE
 
 //Can't see mood
 /datum/quirk/screwy_mood
@@ -302,6 +315,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	value = -1
 	mob_trait = TRAIT_SCREWY_MOOD
 	medical_record_text = "Patient is incapable of communicating their emotions."
+	medical_condition = TRUE
 
 //Hemophilia
 /datum/quirk/hemophiliac
@@ -310,6 +324,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	value = -3
 	mob_trait = TRAIT_HEMOPHILIA
 	medical_record_text = "Patient has abnormal blood coagulation behavior."
+	medical_condition = TRUE
 
 //Asthma
 /datum/quirk/asthmatic
@@ -318,6 +333,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	value = -2
 	mob_trait = TRAIT_ASTHMATIC
 	medical_record_text = "Patient is asthmatic."
+	medical_condition = TRUE
 
 //Frail
 /datum/quirk/frail
@@ -328,6 +344,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	gain_text = "<span class='danger'>You feel frail.</span>"
 	lose_text = "<span class='notice'>You feel sturdy again.</span>"
 	medical_record_text = "Patient's body is fragile, and tends to suffer more damage from all sources."
+	medical_condition = TRUE
 
 //Xavleg
 /datum/quirk/xavlegbmaofffassssitimiwoamndutroabcwapwaeiippohfffx
@@ -381,11 +398,15 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	gain_text = "<span class='notice'>Your spirit gets too scarred to accept revival.</span>"
 	lose_text = "<span class='notice'>You can feel your soul healing again.</span>"
 	mob_trait = TRAIT_DNR
+	medical_record_text = "Patient has signed a Do Not Revive contract."
+	medical_condition = TRUE
 
 //Fetal alcohol syndrome
 /datum/quirk/fas
 	name = "Fetal Alcohol Syndrome"
 	desc = "<span class='warning'>I have fetal alcohol syndrome. My mother didn't care for me.</span>"
+	medical_record_text = "Patient was diagnosed with FAS at birth."
+	medical_condition = TRUE
 
 /datum/quirk/fas/on_spawn()
 	. = ..()
@@ -395,7 +416,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 //British
 /datum/quirk/british
 	name = "British"
-	desc = "<span class='warning'>The tea has completely rotted away my gums, and my teeth are gone.</span>"
+	desc = "<span class='warning'>The tea has completely rotted away me gums, and me teeth are gone.</span>"
 	medical_condition = FALSE
 
 /datum/quirk/british/on_spawn()
@@ -411,6 +432,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	desc = "<span class='warning'>I am anemic, my body cannot produce enough blood and I am lethargic.</span>"
 	lose_text = "<span class='info'>Oh good, I am no longer anemic.</span>"
 	medical_record_text = "Patient is anemic."
+	medical_condition = TRUE
 
 /datum/quirk/anemic/on_process()
 	var/mob/living/carbon/human/H = quirk_holder
@@ -443,6 +465,8 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	mob_trait = TRAIT_PERMABONER
 	gain_text = "<span class='userlove'>You are feeling extra wild.</span>"
 	lose_text = "<span class='purple'>You don't feel that burning sensation anymore.</span>"
+	medical_record_text = "Patient exhibits symptoms of nymphomania."
+	medical_condition = TRUE
 	var/ineedsex = 0 //0-100
 	var/needsex_increase = 0.1 //how much we increase our need for sex per on_process
 
@@ -504,9 +528,28 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	gain_text = "<span class='userdanger'>I feel a splitting headache.</span>"
 	lose_text = "<span class='green'>My terrible headache fades away.</span>"
 	medical_record_text = "Patient's nervous cells are incapable of replenishing themselves."
+	medical_condition = TRUE
 
 /datum/quirk/weakmind/on_spawn()
 	. = ..()
 	var/mob/living/carbon/carbon_mob = quirk_holder
 	var/obj/item/organ/brain/brain = carbon_mob.getorganslot(ORGAN_SLOT_BRAIN)
 	brain?.brain_can_heal = FALSE
+
+//acid attack moment
+/datum/quirk/acid_victim
+	name = "Acid Victim"
+	desc = "As a victim of an acid attack, years ago - My face is now unrecognizable..."
+	value = -1
+	medical_record_text = "Patient's face has been burned into unrecognition."
+	mob_trait = TRAIT_DISFIGURED
+	medical_condition = TRUE
+
+//amputated limb
+/datum/quirk/acid_victim
+	name = "Acid Victim"
+	desc = "As a victim of an acid attack, years ago - My face is now unrecognizable..."
+	value = -1
+	medical_record_text = "Patient's face has been burned into unrecognition."
+	mob_trait = TRAIT_DISFIGURED
+	medical_condition = TRUE

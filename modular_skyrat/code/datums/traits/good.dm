@@ -10,9 +10,10 @@
 	medical_record_text = "Patient was administered the Apathy Evaluation Scale but did not bother to complete it."
 
 /datum/quirk/apathetic/add()
-	var/datum/component/mood/mood = quirk_holder.GetComponent(/datum/component/mood)
-	if(mood)
-		mood.mood_modifier = 0.5
+	if(quirk_holder)
+		var/datum/component/mood/mood = quirk_holder.GetComponent(/datum/component/mood)
+		if(mood)
+			mood.mood_modifier = 0.5
 
 /datum/quirk/apathetic/remove()
 	if(quirk_holder)
@@ -29,6 +30,7 @@
 	gain_text = "<span class='notice'>I feel like a drink would do me good.</span>"
 	lose_text = "<span class='danger'>I no longer feel like drinking would ease my pain.</span>"
 	medical_record_text = "Patient has unusually efficient liver metabolism and can slowly regenerate wounds by drinking alcoholic beverages."
+	medical_condition = TRUE
 
 //Know what is up with people etc
 /datum/quirk/empath
@@ -93,6 +95,7 @@
 	gain_text = "<span class='notice'>I feel full of blood!</span>"
 	lose_text = "<span class='notice'>I feel like my blood pressure went down.</span>"
 	medical_record_text = "Patient's blood tests report an abnormal concentration of red blood cells in their bloodstream."
+	medical_condition = TRUE
 
 /datum/quirk/bloodpressure/add()
 	quirk_holder.blood_ratio = 1.2
@@ -132,6 +135,7 @@
 	name = "Masochism"
 	desc = "<span class='info'>I am wired differently. Pain still hurts, but it hurts so good.</span>"
 	value = 1
+	medical_record_text = "Patient exhibits symptoms of masochism, but will still suffer negative effects from pain."
 	mob_trait = TRAIT_PAINGOOD
 
 //no pain no gain
@@ -139,6 +143,8 @@
 	name = "The Painless"
 	desc = "<span class='info'>I can't feel pain at all, I am numb to everything.</span>"
 	value = 4
+	medical_record_text = "Patient is immune to all sources of pain. Frequent check-ups are recommended."
+	medical_condition = TRUE
 
 /datum/quirk/painless/on_spawn()
 	. = ..()
@@ -194,8 +200,8 @@
 	name = "Self-defense trained"
 	desc = "<span class='info'>I am trained in self defense.</span>"
 	lose_text = "<span class='warning'>All I know of the fighting is lost to memories.</span>"
-	medical_condition = FALSE
 	value = 2
+	medical_condition = FALSE
 
 /datum/quirk/self_defense/on_spawn()
 	. = ..()
@@ -245,9 +251,10 @@
 	name = "Long Arms"
 	desc = "<span class='info'>I have unusually long arms and can reach into my backpack while wearing it.</span>"
 	lose_text = "<span class='warning'>My arms shorten.</span>"
-	value = 1
-	medical_condition = TRUE
 	mob_trait = TRAIT_LONGARMS
+	value = 1
+	medical_record_text = "Patient's arms are unusually flexible."
+	medical_condition = TRUE
 
 //balls of steel
 /datum/quirk/steelballs
@@ -255,6 +262,7 @@
 	desc = "<span class='info'>I have unusually strong genitalia.</span>"
 	lose_text = "<span class='warning'>My balls soften up.</span>"
 	value = 1
+	medical_record_text = "Patient's genitals appear immune to pain."
 	medical_condition = TRUE
 
 /datum/quirk/steelballs/add()
@@ -273,9 +281,60 @@
 	gain_text = "<span class='green'>I feel quite smart and energized.</span>"
 	lose_text = "<span class='danger'>I no longer feel smart, and i need caffeine...</span>"
 	medical_record_text = "Patient's nervous cells exhibit inhuman regenerative capabilities."
+	medical_condition = TRUE
 
 /datum/quirk/rational/on_spawn()
 	. = ..()
 	var/datum/stats/int/int = GET_STAT(quirk_holder, int)
 	if(int)
-		int.level += 2
+		int.level += rand(1,2)
+
+//america
+/datum/quirk/second_amendment
+	name = "Second Amendment Rights"
+	desc = "The station is a dangerous place - My gun shall keep me safe."
+	value = 3
+	medical_condition = FALSE
+	var/static/list/possible_guns = list(/obj/item/gun/energy/e_gun, \
+									/obj/item/gun/ballistic/automatic/pistol/nangler, \
+									/obj/item/gun/ballistic/automatic/pistol/makarov, \
+									/obj/item/gun/ballistic/automatic/pistol/m1911, \
+									/obj/item/gun/ballistic/shotgun/lethal, \
+									/obj/item/gun/ballistic/revolver/doublebarrel, \
+									/obj/item/gun/ballistic/automatic/wt550, \
+									/obj/item/gun/ballistic/automatic/mini_uzi, \
+									)
+
+/datum/quirk/second_amendment/New(mob/living/quirk_mob, spawn_effects)
+	. = ..()
+	if(prob(25))
+		desc = "Only my weapon understands me."
+
+/datum/quirk/second_amendment/on_spawn()
+	. = ..()
+	var/gun = pick(possible_guns)
+	new gun(get_turf(quirk_holder))
+
+//juggling
+/datum/quirk/juggler
+	name = "Jugglernaut"
+	desc = "People have always called me a clown - But i'll be damned if i ain't the best one."
+	value = 2
+	medical_condition = FALSE
+
+/datum/quirk/juggler/on_spawn()
+	. = ..()
+	var/datum/skills/throwing/throwing = GET_SKILL(quirk_holder, throwing)
+	throwing?.level += rand(10, 14)
+
+//dextrous
+/datum/quirk/dextrous
+	name = "Dextrous"
+	desc = "I am quicker on my feet and faster with my hands than most."
+	value = 1
+	medical_condition = FALSE
+
+/datum/quirk/dextrous/on_spawn()
+	. = ..()
+	var/datum/stats/dex/dex = GET_STAT(quirk_holder, dex)
+	dex?.level += rand(1, 2)

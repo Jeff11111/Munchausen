@@ -11,6 +11,7 @@
 	gain_text = "<span class='notice'>You can't taste anything!</span>"
 	lose_text = "<span class='notice'>You can taste again!</span>"
 	medical_record_text = "Patient suffers from ageusia and is incapable of tasting food or reagents."
+	medical_condition = TRUE
 
 //videogames are art
 /datum/quirk/snob
@@ -31,6 +32,7 @@
 	gain_text = "<span class='notice'>You start craving something that tastes strange.</span>"
 	lose_text = "<span class='notice'>You feel like eating normal food again.</span>"
 	medical_record_text = "Patient demonstrates irregular nutrition preferences."
+	medical_condition = TRUE
 
 /datum/quirk/deviant_tastes/add()
 	var/mob/living/carbon/human/H = quirk_holder
@@ -52,6 +54,7 @@
 	desc = "You suffer from full colorblindness, and perceive nearly the entire world in blacks and whites."
 	value = 0
 	medical_record_text = "Patient is afflicted with almost complete color blindness."
+	medical_condition = TRUE
 
 /datum/quirk/monochromatic/add()
 	quirk_holder.add_client_colour(/datum/client_colour/monochrome)
@@ -74,6 +77,7 @@
 	mob_trait = TRAIT_ALCOHOL_LIGHTWEIGHT
 	gain_text = "<span class='notice'>You feel woozy thinking of alcohol.</span>"
 	lose_text = "<span class='notice'>You regain your stomach for drinks.</span>"
+	medical_condition = FALSE
 
 //synth thing (doing it as an actual species thing would be wayyy harder to do).
 /datum/quirk/synthetic
@@ -82,6 +86,8 @@
 	value = 0
 	mob_trait = TRAIT_SYNTH
 	languagewhitelist = list("Encoded Audio Language")
+	medical_record_text = "Patient is a synthetic, disguised as an organic for blending purposes."
+	medical_condition = TRUE
 	var/list/blacklistedspecies = list(/datum/species/synth, /datum/species/android, /datum/species/ipc, /datum/species/synthliz, /datum/species/shadow, /datum/species/plasmaman, /datum/species/jelly, /datum/species/jelly/slime)
 
 /datum/quirk/synthetic/special_requirement_check(mob/living/carbon/human/imbecile)
@@ -119,6 +125,7 @@
 	desc = "At random intervals, you suffer uncontrollable bursts of laughter."
 	value = 0
 	medical_record_text = "Patient suffers with sudden and uncontrollable bursts of laughter."
+	medical_condition = TRUE
 	var/pcooldown = 0
 	var/pcooldown_time = 60 SECONDS
 
@@ -170,7 +177,7 @@
 	var/flipped = FALSE
 
 /obj/item/paper/joker/update_icon()
-	..()
+	. = ..()
 	icon_state = "joker"
 
 /obj/item/paper/joker/AltClick(mob/living/carbon/user, obj/item/I)
@@ -221,3 +228,32 @@
 	. = ..()
 	quirk_holder.mind.add_antag_datum(/datum/antagonist/schizoid)
 	quirk_holder.mind.announce_objectives()
+
+//Sickly child
+/datum/quirk/sickly_child
+	name = "Sickly Child"
+	desc = "Throughout my whole life, i've been susceptible to diseases and infections. While my endurance falters, this has given me incredible medical knowledge."
+	value = 0
+	gain_text = "<span class='warning'>I feel medically inclined... But also sick.</span>"
+	lose_text = "<span class='danger'>I no longer feel terrible, but i also feel worse at medicine.</span>"
+	medical_record_text = "Patient is sickly and easily harmed."
+	medical_condition = TRUE
+
+/datum/quirk/sickly_child/on_spawn()
+	. = ..()
+	var/datum/stats/end/end = GET_STAT(quirk_holder, end)
+	end?.level -= 2
+	var/datum/skills/firstaid/firstaid = GET_SKILL(quirk_holder, firstaid)
+	firstaid?.level += rand(6, 10)
+
+//Emotional
+/datum/quirk/emotional
+	name = "Emotional"
+	desc = "I am very emotional! Positive or negative, everything hits my psyche like a truck."
+	value = 0
+	gain_text = "<span class='warning'>I feel very dramatic!</span>"
+	lose_text = "<span class='danger'>Life feels a bit less intense.</span>"
+	medical_record_text = "Patient exhibits severe mood swings."
+	mob_trait = TRAIT_EMOTIONAL
+	mood_quirk = TRUE
+	medical_condition = TRUE

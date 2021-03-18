@@ -10,6 +10,9 @@
 	var/obj/item/bodypart/BP = C.get_bodypart(slot)
 	if(BP)
 		BP.drop_limb(FALSE, FALSE, FALSE, TRUE)
+		if(BP.body_zone in list(BODY_ZONE_PRECISE_GROIN, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT))
+			new /obj/vehicle/ridden/wheelchair(get_turf(C))
+			new /obj/item/cane(get_turf(C))
 
 /datum/augment/limb/amputated/head
 	name = "Amputated Head"
