@@ -544,12 +544,3 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	medical_record_text = "Patient's face has been burned into unrecognition."
 	mob_trait = TRAIT_DISFIGURED
 	medical_condition = TRUE
-
-//amputated limb
-/datum/quirk/acid_victim
-	name = "Acid Victim"
-	desc = "As a victim of an acid attack, years ago - My face is now unrecognizable..."
-	value = -1
-	medical_record_text = "Patient's face has been burned into unrecognition."
-	mob_trait = TRAIT_DISFIGURED
-	medical_condition = TRUE
