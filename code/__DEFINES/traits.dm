@@ -233,6 +233,7 @@
 #define TRAIT_LOOKSDEAD			"looks_dead" //fake death
 #define TRAIT_NOTEMPERATUREWOUNDING "no_temperature_wounding" //no temperature based wounds
 #define TRAIT_LONGARMS			"long_arms" //can reach into backpacks and duffelbags while wearing em
+#define TRAIT_STRONGMINDED		"strong_minded" //always regen brain damage
 //
 
 // mobility flag traits

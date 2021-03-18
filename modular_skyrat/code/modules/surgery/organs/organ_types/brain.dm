@@ -67,7 +67,7 @@
 		if(!oxygen_reserve) //(hardcrit)
 			if(owner.AmountUnconscious() < 4 SECONDS)
 				owner.SetUnconscious(4 SECONDS)
-		var/can_heal = damage && brain_can_heal && (damage < maxHealth) && (damage % damage_threshold_value || owner.chem_effects[CE_BRAIN_REGEN] || (!past_damage_threshold(3) && owner.chem_effects[CE_STABLE]))
+		var/can_heal = damage && brain_can_heal && (damage < maxHealth) && (damage % damage_threshold_value || owner.chem_effects[CE_BRAIN_REGEN] || HAS_TRAIT(owner, TRAIT_STRONGMINDED) || (!past_damage_threshold(3) && owner.chem_effects[CE_STABLE]))
 		var/damprob = 0
 		//Effects of bloodloss
 		switch(blood_volume)

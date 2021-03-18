@@ -439,7 +439,7 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 /datum/quirk/libido
 	name = "Nymphomania"
 	desc = "I love sex."
-	value = 0
+	value = -1
 	mob_trait = TRAIT_PERMABONER
 	gain_text = "<span class='userlove'>You are feeling extra wild.</span>"
 	lose_text = "<span class='purple'>You don't feel that burning sensation anymore.</span>"
@@ -495,3 +495,18 @@ GLOBAL_LIST_EMPTY(family_heirlooms)
 	if(target)
 		ineedsex = 0
 		SEND_SIGNAL(quirk_holder, COMSIG_ADD_MOOD_EVENT, "orgasm", /datum/mood_event/orgasm/nympho)
+
+//brain hurty
+/datum/quirk/weakmind
+	name = "Weak-Minded"
+	desc = "My brain is fragile, and cannot heal without the use of medicines."
+	value = -2
+	gain_text = "<span class='userdanger'>I feel a splitting headache.</span>"
+	lose_text = "<span class='green'>My terrible headache fades away.</span>"
+	medical_record_text = "Patient's nervous cells are incapable of replenishing themselves."
+
+/datum/quirk/weakmind/on_spawn()
+	. = ..()
+	var/mob/living/carbon/carbon_mob = quirk_holder
+	var/obj/item/organ/brain/brain = carbon_mob.getorganslot(ORGAN_SLOT_BRAIN)
+	brain?.brain_can_heal = FALSE

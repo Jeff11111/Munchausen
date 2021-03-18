@@ -106,6 +106,7 @@
 /datum/quirk/steel_fists
 	name = "Fists of Steel"
 	desc = "<span class='info'>I am exceptionally good at unarmed combat. My punches hurt more.</span>"
+	value = 1
 	medical_condition = FALSE
 
 /datum/quirk/steel_fists/on_spawn()
@@ -130,12 +131,14 @@
 /datum/quirk/maso
 	name = "Masochism"
 	desc = "<span class='info'>I am wired differently. Pain still hurts, but it hurts so good.</span>"
+	value = 1
 	mob_trait = TRAIT_PAINGOOD
 
 //no pain no gain
 /datum/quirk/painless
 	name = "The Painless"
 	desc = "<span class='info'>I can't feel pain at all, I am numb to everything.</span>"
+	value = 4
 
 /datum/quirk/painless/on_spawn()
 	. = ..()
@@ -152,6 +155,7 @@
 	name = "Wealthy"
 	desc = "<span class='info'>I was born to a wealthy family! I have savings to spare.</span>"
 	medical_condition = FALSE
+	value = 2
 
 /datum/quirk/wealthy/on_spawn()
 	var/mob/living/carbon/human/H = quirk_holder
@@ -191,6 +195,7 @@
 	desc = "<span class='info'>I am trained in self defense.</span>"
 	lose_text = "<span class='warning'>All I know of the fighting is lost to memories.</span>"
 	medical_condition = FALSE
+	value = 2
 
 /datum/quirk/self_defense/on_spawn()
 	. = ..()
@@ -240,6 +245,7 @@
 	name = "Long Arms"
 	desc = "<span class='info'>I have unusually long arms and can reach into my backpack while wearing it.</span>"
 	lose_text = "<span class='warning'>My arms shorten.</span>"
+	value = 1
 	medical_condition = TRUE
 	mob_trait = TRAIT_LONGARMS
 
@@ -248,6 +254,7 @@
 	name = "Balls Of Steel"
 	desc = "<span class='info'>I have unusually strong genitalia.</span>"
 	lose_text = "<span class='warning'>My balls soften up.</span>"
+	value = 1
 	medical_condition = TRUE
 
 /datum/quirk/steelballs/add()
@@ -256,3 +263,19 @@
 	if(istype(C))
 		for(var/obj/item/organ/genital/peepee in C.internal_organs)
 			peepee.pain_multiplier = 0
+
+//brain good
+/datum/quirk/rational
+	name = "Rational"
+	desc = "My nervous system has incredible regenerative capabilities. It has also affected my intellect for the better."
+	value = 2
+	mob_trait = TRAIT_STRONGMINDED
+	gain_text = "<span class='green'>I feel quite smart and energized.</span>"
+	lose_text = "<span class='danger'>I no longer feel smart, and i need caffeine...</span>"
+	medical_record_text = "Patient's nervous cells exhibit inhuman regenerative capabilities."
+
+/datum/quirk/rational/on_spawn()
+	. = ..()
+	var/datum/stats/int/int = GET_STAT(quirk_holder, int)
+	if(int)
+		int.level += 2
