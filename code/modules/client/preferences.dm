@@ -374,7 +374,7 @@ GLOBAL_LIST_INIT(food, list(
 
 			dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender;task=input'>[gender == MALE ? "Male" : "Female"]</a><BR>"
 			dat += "<b>Additional Language:</b> <a href='?_src_=prefs;preference=language;task=menu'><b>[language ? language : "None"]</b></a><BR>"
-			dat += "<b>Age:</b> <a style='display:block;width:30px' href='?_src_=prefs;preference=age;task=input'>[age]</a>"
+			dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a>"
 
 			dat += "<h2>Additional Preferences</h2>"
 			dat += "<b>Auto-Hiss:</b> <a href='?_src_=prefs;preference=auto_hiss'>[auto_hiss ? "Yes" : "No"]</a>"
@@ -1275,8 +1275,8 @@ GLOBAL_LIST_INIT(food, list(
 	dat += "</center>"
 
 	winshow(user, "preferences_window", TRUE)
-	var/datum/browser/popup = new(user, "preferences_browser", "<div align='center'>Character Setup</div>", 640, 850)
-	popup.set_window_options("can_close=0")
+	var/datum/browser/popup = new(user, "preferences_browser", "<div align='center'>Character Setup</div>", 560, 750)
+	popup.set_window_options("can_close=0;can_minimize=0;can_maximize=0;titlebar=0")
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
 
