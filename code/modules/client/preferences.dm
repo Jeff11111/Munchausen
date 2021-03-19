@@ -379,7 +379,7 @@ GLOBAL_LIST_INIT(food, list(
 			dat += "<h2>Additional Preferences</h2>"
 			dat += "<b>Auto-Hiss:</b> <a href='?_src_=prefs;preference=auto_hiss'>[auto_hiss ? "Yes" : "No"]</a>"
 			dat += "</td>"
-			
+
 			dat += "<td width='75%' valign='top'>"
 			dat += "<h2>Special Names:</h2>"
 			var/old_group
@@ -393,7 +393,7 @@ GLOBAL_LIST_INIT(food, list(
 				dat += "<b>[namedata["pref_name"]]:</b> <a href ='?_src_=prefs;preference=[custom_name_id];task=input'>[custom_names[custom_name_id]]</a> "
 			dat += "<h2>Job Preferences</h2>"
 			dat += "<b>Preferred Security Department:</b> <a href='?_src_=prefs;preference=sec_dept;task=input'>[prefered_security_department]</a><br>"
-			
+
 			var/mob/dead/new_player/NP = user
 			if(istype(NP))
 				dat += "<h2>Game</h2>"
@@ -405,7 +405,6 @@ GLOBAL_LIST_INIT(food, list(
 						dat += "<a href='?_src_=prefs;preference=trait'>Yes</a> | <b>No</b> "
 					dat += "\]<br>"
 				if(SSticker.current_state <= GAME_STATE_PREGAME)
-					var/mob/dead/new_player/NP = user
 					switch(NP.ready)
 						if(PLAYER_NOT_READY)
 							dat += "\[[LINKIFY_READY("Ready", PLAYER_READY_TO_PLAY, user)] | <b>Not Ready</b> \]<br>"
@@ -420,7 +419,7 @@ GLOBAL_LIST_INIT(food, list(
 					dat += "\[<a href='byond://?src=[REF(user)];manifest=1'>Crew Manifest</a>\]<br>"
 					dat += "\[<a href='byond://?src=[REF(user)];late_join=1'>Join Game</a>\]<br>"
 					dat += "\[[LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE, user)]\]"
-				
+
 			dat += "</td>"
 			dat += "</tr>"
 			dat += "</table>"
