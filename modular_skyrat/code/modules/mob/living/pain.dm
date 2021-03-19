@@ -47,9 +47,9 @@
 
 // Message is the custom message to be displayed
 // Power decides how much painkillers will stop the message
-// Force means it ignores anti-spam timer
+// Forced means it ignores anti-spam timer
 // Robo_message is the message that gets used if it's a robotic limb instead
-/mob/living/proc/custom_pain(message, power, force, obj/item/bodypart/affecting, nopainloss, robo_mesage)
+/mob/living/proc/custom_pain(message, power, forced, obj/item/bodypart/affecting, nopainloss, robo_mesage)
 	if((!message && !robo_mesage) || (stat >= UNCONSCIOUS) || !can_feel_pain() || chem_effects[CE_PAINKILLER] > power)
 		return FALSE
 	
@@ -72,7 +72,7 @@
 			adjustPainLoss(CEILING(power/2, 1))
 
 	// Anti message spam checks
-	if(force || (message != last_pain_message) || (world.time >= next_pain_time))
+	if(forced || (message != last_pain_message) || (world.time >= next_pain_time))
 		last_pain_message = message
 		if(world.time >= next_pain_message_time)
 			to_chat(src, "<span class='userdanger'>[message]</span>")
