@@ -42,7 +42,7 @@
 /obj/screen/plane_master/openspace_backdrop/backdrop(mob/mymob)
 	add_filter("first_stage_openspace", 1, list(type = "drop_shadow", color = "#04080FAA", size = -10))
 	add_filter("second_stage_openspace", 2, list(type = "drop_shadow", color = "#04080FAA", size = -15))
-	add_filter("third_stage_openspace", 3, v(type = "drop_shadow", color = "#04080FAA", size = -20))
+	add_filter("third_stage_openspace", 3, list(type = "drop_shadow", color = "#04080FAA", size = -20))
 
 ///Contains just the floor
 /obj/screen/plane_master/floor
