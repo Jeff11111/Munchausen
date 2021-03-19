@@ -14,7 +14,7 @@
 	response_harm_continuous = "hits"
 	response_harm_simple = "hit"
 	a_intent = INTENT_HARM
-	healable = 0
+	healable = FALSE
 	speed = 0
 	maxHealth = 40
 	health = 40

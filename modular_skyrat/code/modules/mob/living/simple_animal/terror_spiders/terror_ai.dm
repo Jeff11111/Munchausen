@@ -109,16 +109,16 @@
 			if(entry_vent)
 				if(spider_steps_taken > spider_max_steps)
 					path_to_vent = 0
-					stop_automated_movement = 0
+					stop_automated_movement = FALSE
 					spider_steps_taken = 0
 					path_to_vent = 0
 					entry_vent = null
 				else if(get_dist(src, entry_vent) <= 1)
 					path_to_vent = 0
-					stop_automated_movement = 1
+					stop_automated_movement = TRUE
 					spider_steps_taken = 0
 					spawn(50)
-						stop_automated_movement = 0
+						stop_automated_movement = FALSE
 					TSVentCrawlRandom(entry_vent)
 				else
 					spider_steps_taken++
@@ -206,7 +206,7 @@
 				spider_steps_taken = 0
 				cocoon_target = null
 				busy = 0
-				stop_automated_movement = 0
+				stop_automated_movement = FALSE
 			else
 				spider_steps_taken++
 				CreatePath(cocoon_target)
@@ -228,7 +228,7 @@
 		if(istype(O, /obj/item) || istype(O, /obj/structure) || istype(O, /obj/machinery))
 			if(!istype(O, /obj/item/paper))
 				cocoon_target = O
-				stop_automated_movement = 1
+				stop_automated_movement = TRUE
 				spider_steps_taken = 0
 				return
 

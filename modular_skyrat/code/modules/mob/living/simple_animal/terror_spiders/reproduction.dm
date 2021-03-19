@@ -175,7 +175,7 @@
 // --------------------------------------------------------------------------------
 
 /mob/living/simple_animal/hostile/poison/terror_spider/proc/DoLayTerrorEggs(lay_type, lay_number)
-	stop_automated_movement = 1
+	stop_automated_movement = TRUE
 	var/obj/structure/spider/eggcluster/terror_eggcluster/C = new /obj/structure/spider/eggcluster/terror_eggcluster(get_turf(src))
 	C.spiderling_type = lay_type
 	C.spiderling_number = lay_number
@@ -186,7 +186,7 @@
 		C.amount_grown = 250
 		C.spider_growinstantly = 1
 	spawn(10)
-		stop_automated_movement = 0
+		stop_automated_movement = FALSE
 
 /obj/structure/spider/eggcluster/terror_eggcluster
 	name = "terror egg cluster"

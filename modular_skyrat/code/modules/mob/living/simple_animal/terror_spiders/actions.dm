@@ -206,7 +206,7 @@
 			return
 		busy = SPINNING_COCOON
 		visible_message("<span class='notice'>[src] begins to secrete a sticky substance around [cocoon_target].</span>")
-		stop_automated_movement = 1
+		stop_automated_movement = TRUE
 		walk(src,0)
 		if(do_after(src, 40, target = cocoon_target.loc))
 			if(busy == SPINNING_COCOON)
@@ -244,7 +244,7 @@
 						C.icon_state = pick("cocoon_large1","cocoon_large2","cocoon_large3")
 		cocoon_target = null
 		busy = 0
-		stop_automated_movement = 0
+		stop_automated_movement = FALSE
 
 /mob/living/simple_animal/hostile/poison/terror_spider/proc/DoVentSmash()
 	var/valid_target = FALSE
