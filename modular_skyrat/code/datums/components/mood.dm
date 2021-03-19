@@ -416,7 +416,7 @@
 			return 0 //Don't have to update the event.
 	the_event = new type(src, param)//This causes a runtime for some reason, was this me? No - there's an event floating around missing a definition.
 	
-	if(HAS_TRAIT(source, TRAIT_EMOTIONAL))
+	if(HAS_TRAIT(parent, TRAIT_EMOTIONAL))
 		the_event.mood_change *= 2
 	
 	mood_events[category] = the_event
