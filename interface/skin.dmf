@@ -321,7 +321,9 @@ window "preferences_window"
 		size = 960x1000
 		anchor1 = 0,0
 		anchor2 = 75,100
-		saved-params = ""
+		saved-params = "is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
 	elem "character_preview_map"
 		type = MAP
 		pos = 960,0
