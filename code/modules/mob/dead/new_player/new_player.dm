@@ -1,5 +1,3 @@
-#define LINKIFY_READY(string, value) "<a href='byond://?src=[REF(src)];ready=[value]'>[string]</a>"
-
 /mob/dead/new_player
 	var/ready = 0
 	var/spawning = 0//Referenced when you want to delete the new_player later on in the code.
@@ -41,17 +39,17 @@
 			output += "<center><p><b>Be Special:</b> <a href='?_src_=prefs;preference=trait'>[client?.prefs?.special_char ? "<b>Yes</b>" : "No"]</a></p></center>"
 		switch(ready)
 			if(PLAYER_NOT_READY)
-				output += "<p>\[ [LINKIFY_READY("Ready", PLAYER_READY_TO_PLAY)] | <b>Not Ready</b> | [LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE)] \]</p>"
+				output += "<p>\[ [LINKIFY_READY("Ready", PLAYER_READY_TO_PLAY, src)] | <b>Not Ready</b> | [LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE, src)] \]</p>"
 			if(PLAYER_READY_TO_PLAY)
-				output += "<p>\[ <b>Ready</b> | [LINKIFY_READY("Not Ready", PLAYER_NOT_READY)] | [LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE)] \]</p>"
+				output += "<p>\[ <b>Ready</b> | [LINKIFY_READY("Not Ready", PLAYER_NOT_READY, src)] | [LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE, src)] \]</p>"
 			if(PLAYER_READY_TO_OBSERVE)
-				output += "<p>\[ [LINKIFY_READY("Ready", PLAYER_READY_TO_PLAY)] | [LINKIFY_READY("Not Ready", PLAYER_NOT_READY)] | <b> Observe </b> \]</p>"
+				output += "<p>\[ [LINKIFY_READY("Ready", PLAYER_READY_TO_PLAY, src)] | [LINKIFY_READY("Not Ready", PLAYER_NOT_READY, src)] | <b> Observe </b> \]</p>"
 	else
 		output += "<p><a href='byond://?src=[REF(src)];manifest=1'>View the Crew Manifest</a></p>"
 		if(CONFIG_GET(flag/roundstart_traits))
 			output += "<center><p><b>Be Special:</b> <a href='?_src_=prefs;preference=trait'>[client?.prefs?.special_char ? "<b>Yes</b>" : "No"]</a></p></center>"
 		output += "<p><a href='byond://?src=[REF(src)];late_join=1'>Join Game!</a></p>"
-		output += "<p>[LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE)]</p>"
+		output += "<p>[LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE, src)]</p>"
 
 	if(!IsGuestKey(src.key))
 		if (SSdbcore.Connect())
@@ -75,11 +73,7 @@
 
 	output += "</center>"
 
-	//src << browse(output,"window=playersetup;size=210x240;can_close=0")
-	var/datum/browser/popup = new(src, "playersetup", "<div align='center'>New Player Options</div>", 250, 300)
-	popup.set_window_options("can_close=0")
-	popup.set_content(output)
-	popup.open(FALSE)
+	client?.prefs?.ShowChoices(src)
 
 /mob/dead/new_player/Topic(href, href_list[])
 	if(src != usr)

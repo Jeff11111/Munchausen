@@ -1,3 +1,4 @@
+#define LINKIFY_READY(string, value, user) "<a href='byond://?src=[REF(user)];ready=[value]'>[string]</a>"
 #define DEFAULT_SLOT_AMT	2
 #define HANDS_SLOT_AMT		2
 #define BACKPACK_SLOT_AMT	4
@@ -323,7 +324,7 @@ GLOBAL_LIST_INIT(food, list(
 					var/unspaced_slots = 0
 					for(var/i=1, i<=max_save_slots, i++)
 						unspaced_slots++
-						if(unspaced_slots > 4)
+						if(unspaced_slots > 6)
 							dat += "<br>"
 							unspaced_slots = 0
 						S.cd = "/character[i]"
@@ -333,12 +334,19 @@ GLOBAL_LIST_INIT(food, list(
 						dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;num=[i];' [i == default_slot ? "class='linkOn'" : ""]>[name]</a> "
 					dat += "</center>"
 
+			dat += "<hr>"
 			dat += "<center><h2>Occupation Choices</h2>"
 			dat += "<a href='?_src_=prefs;preference=job;task=menu'>Set Occupation Preferences</a><br></center>"
+
+			dat += "<table width='100%'>"
+			dat += "<tr>"
+			dat += "<td width='50%' valign='top'>"
 			dat += "<center><h2>Food Setup</h2>"
 			dat += "<a href='?_src_=prefs;preference=food;task=menu'>Configure Foods</a></center>"
 			dat += "<center><b>Current Likings:</b> [foodlikes.len ? foodlikes.Join(", ") : "None"]</center>"
 			dat += "<center><b>Current Dislikings:</b> [fooddislikes.len ? fooddislikes.Join(", ") : "None"]</center>"
+			dat += "</td>"
+			dat += "<td width='50%' valign='top'>"
 			dat += "<center><h2>Augment Setup</h2>"
 			dat += "<a href='?_src_=prefs;preference=augments;task=configure'>Configure Augments</a></center>"
 			var/list/augments = list()
@@ -347,25 +355,35 @@ GLOBAL_LIST_INIT(food, list(
 			for(var/a in limb_augments)
 				augments |= limb_augments[a][1]
 			dat += "<center><b>Current Augments:</b> [augments.len ? augments.Join(", ") : "None"]</center>"
-			dat += "<table width='100%'><tr><td width='75%' valign='top'>"
+			dat += "</td>"
+			dat += "</table>"
+			dat += "<hr>"
+
+			dat += "<table width='100%'>"
+			dat += "<tr>"
+			dat += "<td width='75%' valign='top'>"
 			dat += "<h2>Identity</h2>"
 			if(jobban_isbanned(user, "appearance"))
 				dat += "<b>You are banned from using custom names and appearances. You can continue to adjust your characters, but you will be randomised once you join the game.</b><br>"
-			dat += "<a style='display:block;width:100px' href='?_src_=prefs;preference=name;task=random'>Random Name</A> "
 			dat += "<b>Always Random Name:</b> <a href='?_src_=prefs;preference=name'>[be_random_name ? "Yes" : "No"]</a><BR>"
 
 			dat += "<b>[nameless ? "Default designation" : "Name"]:</b>"
-			dat += " <a href='?_src_=prefs;preference=name;task=input'>[real_name]</a><BR>"
+			dat += " <a href='?_src_=prefs;preference=name;task=input'>[real_name]</a>"
+			dat += " <a style='display:block;width:100px' href='?_src_=prefs;preference=name;task=random'>Random Name</a>"
+			dat += "<br>"
 
 			dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender;task=input'>[gender == MALE ? "Male" : "Female"]</a><BR>"
 			dat += "<b>Additional Language:</b> <a href='?_src_=prefs;preference=language;task=menu'><b>[language ? language : "None"]</b></a><BR>"
 			dat += "<b>Age:</b> <a style='display:block;width:30px' href='?_src_=prefs;preference=age;task=input'>[age]</a>"
+
 			dat += "<h2>Additional Preferences</h2>"
 			dat += "<b>Auto-Hiss:</b> <a href='?_src_=prefs;preference=auto_hiss'>[auto_hiss ? "Yes" : "No"]</a>"
-
+			dat += "</td>"
+			
+			dat += "<td width='75%' valign='top'>"
 			dat += "<h2>Special Names:</h2>"
 			var/old_group
-			for(var/custom_name_id in (GLOB.preferences_custom_names - list("religion", "deity"))) //skyrat edit
+			for(var/custom_name_id in (GLOB.preferences_custom_names - list("religion", "deity", "mime"))) //skyrat edit
 				var/namedata = GLOB.preferences_custom_names[custom_name_id]
 				if(!old_group)
 					old_group = namedata["group"]
@@ -374,9 +392,38 @@ GLOBAL_LIST_INIT(food, list(
 					dat += "<br>"
 				dat += "<b>[namedata["pref_name"]]:</b> <a href ='?_src_=prefs;preference=[custom_name_id];task=input'>[custom_names[custom_name_id]]</a> "
 			dat += "<h2>Job Preferences</h2>"
-			dat += "<b>Preferred Security Department:</b> <a href='?_src_=prefs;preference=sec_dept;task=input'>[prefered_security_department]</a><BR></td>"
-			dat += "</tr></table>"
-	
+			dat += "<b>Preferred Security Department:</b> <a href='?_src_=prefs;preference=sec_dept;task=input'>[prefered_security_department]</a><br>"
+			
+			var/mob/dead/new_player/NP = user
+			if(istype(NP))
+				dat += "<h2>Game</h2>"
+				if(CONFIG_GET(flag/roundstart_traits))
+					dat += "<b>Be Special:</b> \["
+					if(special_char)
+						dat += " <b>Yes</b> | <a href='?_src_=prefs;preference=trait'>No</a>"
+					else
+						dat += "<a href='?_src_=prefs;preference=trait'>Yes</a> | <b>No</b> "
+					dat += "\]<br>"
+				if(SSticker.current_state <= GAME_STATE_PREGAME)
+					var/mob/dead/new_player/NP = user
+					switch(NP.ready)
+						if(PLAYER_NOT_READY)
+							dat += "\[[LINKIFY_READY("Ready", PLAYER_READY_TO_PLAY, user)] | <b>Not Ready</b> \]<br>"
+							dat += "\[[LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE, user)]\]"
+						if(PLAYER_READY_TO_PLAY)
+							dat += "\[ <b>Ready</b> | [LINKIFY_READY("Not Ready", PLAYER_NOT_READY, user)]\]<br>"
+							dat += "\[[LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE, user)]\]"
+						if(PLAYER_READY_TO_OBSERVE)
+							dat += "\[[LINKIFY_READY("Ready", PLAYER_READY_TO_PLAY, user)] | [LINKIFY_READY("Not Ready", PLAYER_NOT_READY, user)]\]<br>"
+							dat += "<b>\[Observe\]</b>"
+				else
+					dat += "\[<a href='byond://?src=[REF(user)];manifest=1'>Crew Manifest</a>\]<br>"
+					dat += "\[<a href='byond://?src=[REF(user)];late_join=1'>Join Game</a>\]<br>"
+					dat += "\[[LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE, user)]\]"
+				
+			dat += "</td>"
+			dat += "</tr>"
+			dat += "</table>"
 		if(1) //Character Appearance
 			if(path)
 				var/savefile/S = new /savefile(path)
@@ -1152,7 +1199,7 @@ GLOBAL_LIST_INIT(food, list(
 							dat += "</font>"
 				dat += "</td><td><font size=2><i>[gear.description]</i></font></td></tr>"
 			dat += "</table>"
-		
+
 		if(4) // Keybindings
 			dat += "<b>Keybindings:</b> <a href='?_src_=prefs;preference=hotkeys'>[(hotkeys) ? "Hotkeys" : "Input"]</a><br>"
 			dat += "Keybindings mode controls how the game behaves with tab and map/input focus.<br>If it is on <b>Hotkeys</b>, the game will always attempt to force you to map focus, meaning keypresses are sent \
@@ -1229,10 +1276,10 @@ GLOBAL_LIST_INIT(food, list(
 	dat += "</center>"
 
 	winshow(user, "preferences_window", TRUE)
-	var/datum/browser/popup = new(user, "preferences_browser", "<div align='center'>Character Setup</div>", 640, 770)
+	var/datum/browser/popup = new(user, "preferences_browser", "<div align='center'>Character Setup</div>", 640, 850)
+	popup.set_window_options("can_close=0")
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
-	onclose(user, "preferences_window", src)
 
 #undef APPEARANCE_CATEGORY_COLUMN
 #undef MAX_MUTANT_ROWS
@@ -1980,12 +2027,12 @@ GLOBAL_LIST_INIT(food, list(
 
 				if("cycle_bg")
 					bgstate = next_list_item(bgstate, bgstate_options)
-				
+
 				if("left_eye")
 					var/new_eyes = input(user, "Choose your character's left eye colour:", "Character Preference", left_eye_color) as color|null
 					if(new_eyes)
 						left_eye_color = sanitize_hexcolor(new_eyes)
-				
+
 				if("right_eye")
 					var/new_eyes = input(user, "Choose your character's right eye colour:", "Character Preference", right_eye_color) as color|null
 					if(new_eyes)
@@ -2723,7 +2770,7 @@ GLOBAL_LIST_INIT(food, list(
 
 				if("pull_requests")
 					chat_toggles ^= CHAT_PULLR
-				
+
 				if("allow_midround_antag")
 					toggles ^= MIDROUND_ANTAG
 
@@ -2861,7 +2908,7 @@ GLOBAL_LIST_INIT(food, list(
 	character.dna.skin_tone_override = use_custom_skin_tone ? skin_tone : null
 	character.hair_style = hair_style
 	character.facial_hair_style = facial_hair_style
-	
+
 	var/datum/species/chosen_species
 	if(!roundstart_checks || (pref_species.id in GLOB.roundstart_races))
 		chosen_species = pref_species.type
@@ -2886,7 +2933,7 @@ GLOBAL_LIST_INIT(food, list(
 		for(var/obj/item/bodypart/BP in character.bodyparts)
 			BP.drop_limb(TRUE, TRUE, FALSE, TRUE)
 		character.regenerate_limbs()
-	
+
 	character.give_genitals(TRUE) //character.update_genitals() is already called on genital.update_appearance()
 	character.dna.update_body_size(old_size)
 	for(var/a in organ_augments)
@@ -2906,7 +2953,7 @@ GLOBAL_LIST_INIT(food, list(
 		character.update_hair()
 	if(auto_hiss)
 		character.toggle_hiss()
-	
+
 	//owai detection (kills owai)
 	if(findtext(real_name, "Owai"))
 		character.death()
