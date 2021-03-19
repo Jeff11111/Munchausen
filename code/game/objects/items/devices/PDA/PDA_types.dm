@@ -1,23 +1,7 @@
-//Clown PDA is slippery.
 /obj/item/pda/clown
 	name = "jester PDA"
-	default_cartridge = /obj/item/cartridge/virus/clown
 	inserted_item = /obj/item/toy/crayon/rainbow
 	icon_state = "pda-clown"
-	desc = "A portable microcomputer by Thinktronic Systems, LTD. The surface is coated with polytetrafluoroethylene and banana drippings."
-	ttone = "honk"
-	var/slipvictims = list() //CIT CHANGE - makes clown PDAs track unique people slipped
-
-/obj/item/pda/clown/Initialize()
-	. = ..()
-	AddComponent(/datum/component/slippery, 120, NO_SLIP_WHEN_WALKING|SLIP_WHEN_JOGGING, CALLBACK(src, .proc/AfterSlip))
-
-/obj/item/pda/clown/proc/AfterSlip(mob/living/carbon/human/M)
-	if (istype(M) && (M.real_name != owner))
-		slipvictims |= M //CIT CHANGE - makes clown PDAs track unique people slipped
-		var/obj/item/cartridge/virus/clown/cart = cartridge
-		if(istype(cart) && cart.charges < 5)
-			cart.charges++
 
 //Mime PDA sends "silent" messages.
 /obj/item/pda/mime
