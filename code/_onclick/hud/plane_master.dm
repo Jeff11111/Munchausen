@@ -181,9 +181,9 @@
 	render_target = EMISSIVE_RENDER_TARGET
 
 /obj/screen/plane_master/emissive/Initialize()
-	. = ..())
+	. = ..()
 	add_filter("vision_cone", 1, filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
-	add_filter("vision_cone", 2, filter(type="alpha", render_source=EMISSIVE_BLOCKER_RENDER_TARGET, flags=MASK_INVERSE)
+	add_filter("vision_cone", 2, filter(type="alpha", render_source=EMISSIVE_BLOCKER_RENDER_TARGET, flags=MASK_INVERSE))
 
 /**
   * Things placed on this always mask the lighting plane. Doesn't render directly.
