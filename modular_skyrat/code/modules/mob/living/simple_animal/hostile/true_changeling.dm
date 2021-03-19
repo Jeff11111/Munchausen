@@ -17,7 +17,7 @@
 	mob_biotypes = MOB_ORGANIC
 	speed = 1
 	a_intent = "harm"
-	stop_automated_movement = 1
+	stop_automated_movement = TRUE
 	status_flags = CANPUSH
 	ventcrawler = 2
 	see_in_dark = 8
@@ -26,13 +26,13 @@
 	minbodytemp = 0
 	maxHealth = 500 //Very durable
 	health = 500
-	healable = 0
+	healable = FALSE
 	environment_smash = 1
 	melee_damage_lower = 20
 	melee_damage_upper = 20
 //	see_in_dark = 8
 //	see_invisible = SEE_INVISIBLE_MINIMUM
-	wander = 0
+	wander = FALSE
 	attack_verb_continuous = "rips into"
 	attack_verb_simple = "rip into"
 	attack_sound = 'sound/effects/blobattack.ogg'

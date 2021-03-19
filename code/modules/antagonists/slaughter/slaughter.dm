@@ -18,7 +18,7 @@
 	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	speed = 1
 	a_intent = INTENT_HARM
-	stop_automated_movement = 1
+	stop_automated_movement = TRUE
 	status_flags = CANPUSH
 	attack_sound = 'sound/magic/demon_attack1.ogg'
 	var/feast_sound = 'sound/magic/demon_consume.ogg'
@@ -31,7 +31,7 @@
 	attack_verb_simple = "wildly tear into"
 	maxHealth = 200
 	health = 200
-	healable = 0
+	healable = FALSE
 	environment_smash = ENVIRONMENT_SMASH_STRUCTURES
 	obj_damage = 50
 	see_in_dark = 8

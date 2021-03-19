@@ -27,10 +27,10 @@
 	health = 30
 	maxHealth = 30
 	unsuitable_atmos_damage = 0
-	wander = 0
+	wander = FALSE
 	speed = 0
 	ventcrawler = VENTCRAWLER_ALWAYS
-	healable = 0
+	healable = FALSE
 	density = FALSE
 	pass_flags = PASSTABLE | PASSMOB
 	sight = (SEE_TURFS | SEE_OBJS)

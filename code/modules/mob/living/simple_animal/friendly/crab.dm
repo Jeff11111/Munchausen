@@ -18,7 +18,7 @@
 	response_disarm_simple = "gently push aside"
 	response_harm_continuous = "stomps"
 	response_harm_continuous = "stomp"
-	stop_automated_movement = 1
+	stop_automated_movement = TRUE
 	friendly_verb_continuous = "pinches"
 	friendly_verb_simple = "pinch"
 	ventcrawler = VENTCRAWLER_ALWAYS

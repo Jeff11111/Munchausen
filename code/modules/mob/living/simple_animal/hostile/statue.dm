@@ -18,7 +18,7 @@
 	speed = -1
 	maxHealth = 50000
 	health = 50000
-	healable = 0
+	healable = FALSE
 	blood_volume = 0
 
 	harm_intent_damage = 10
