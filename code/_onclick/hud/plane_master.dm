@@ -37,12 +37,12 @@
 
 /obj/screen/plane_master/openspace_backdrop/Initialize()
 	. = ..()
-	add_filter("vision_cone", 4, filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
+	add_filter("vision_cone", 4, list(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
 
 /obj/screen/plane_master/openspace_backdrop/backdrop(mob/mymob)
-	add_filter("first_stage_openspace", 1, filter(type = "drop_shadow", color = "#04080FAA", size = -10))
-	add_filter("second_stage_openspace", 2, filter(type = "drop_shadow", color = "#04080FAA", size = -15))
-	add_filter("third_stage_openspace", 3, filter(type = "drop_shadow", color = "#04080FAA", size = -20))
+	add_filter("first_stage_openspace", 1, list(type = "drop_shadow", color = "#04080FAA", size = -10))
+	add_filter("second_stage_openspace", 2, list(type = "drop_shadow", color = "#04080FAA", size = -15))
+	add_filter("third_stage_openspace", 3, v(type = "drop_shadow", color = "#04080FAA", size = -20))
 
 ///Contains just the floor
 /obj/screen/plane_master/floor
@@ -108,7 +108,7 @@
 
 /obj/screen/plane_master/mobs/Initialize()
 	. = ..()
-	add_filter("vision_cone", 2, filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
+	add_filter("vision_cone", 2, list(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
 
 /obj/screen/plane_master/mobs/backdrop(mob/mymob)
 	if(mymob?.client?.prefs.ambientocclusion)
@@ -135,7 +135,7 @@
 
 /obj/screen/plane_master/field_of_vision/Initialize()
 	. = ..()
-	add_filter("vision_cone", 1, filter(type="alpha", render_source=FIELD_OF_VISION_BLOCKER_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
+	add_filter("vision_cone", 1, list(type="alpha", render_source=FIELD_OF_VISION_BLOCKER_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
 
 ///Used to display the owner and its adjacent surroundings through the FoV plane mask.
 /obj/screen/plane_master/field_of_vision_blocker
@@ -153,7 +153,7 @@
 
 /obj/screen/plane_master/field_of_vision_visual/Initialize()
 	. = ..()
-	add_filter("vision_cone", 1, filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
+	add_filter("vision_cone", 1, list(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
 
 ///Contains all lighting objects
 /obj/screen/plane_master/lighting
@@ -165,8 +165,8 @@
 
 /obj/screen/plane_master/lighting/Initialize()
 	. = ..()
-	add_filter("vision_cone", 1, filter(type="alpha", render_source=EMISSIVE_UNBLOCKABLE_RENDER_TARGET, flags=MASK_INVERSE))
-	add_filter("vision_cone", 2, filter(type="alpha", render_source=EMISSIVE_RENDER_TARGET, flags=MASK_INVERSE))
+	add_filter("vision_cone", 1, list(type="alpha", render_source=EMISSIVE_UNBLOCKABLE_RENDER_TARGET, flags=MASK_INVERSE))
+	add_filter("vision_cone", 2, list(type="alpha", render_source=EMISSIVE_RENDER_TARGET, flags=MASK_INVERSE))
 
 /**
   * Things placed on this mask the lighting plane. Doesn't render directly.
@@ -182,8 +182,8 @@
 
 /obj/screen/plane_master/emissive/Initialize()
 	. = ..()
-	add_filter("vision_cone", 1, filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
-	add_filter("vision_cone", 2, filter(type="alpha", render_source=EMISSIVE_BLOCKER_RENDER_TARGET, flags=MASK_INVERSE))
+	add_filter("vision_cone", 1, list(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
+	add_filter("vision_cone", 2, list(type="alpha", render_source=EMISSIVE_BLOCKER_RENDER_TARGET, flags=MASK_INVERSE))
 
 /**
   * Things placed on this always mask the lighting plane. Doesn't render directly.
@@ -200,7 +200,7 @@
 
 /obj/screen/plane_master/emissive_unblockable/Initialize()
 	. = ..()
-	add_filter("vision_cone", 1, filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
+	add_filter("vision_cone", 1, list(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
 
 /**
   * Things placed on this layer mask the emissive layer. Doesn't render directly
