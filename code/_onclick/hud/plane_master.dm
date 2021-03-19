@@ -135,7 +135,7 @@
 
 /obj/screen/plane_master/field_of_vision/Initialize()
 	. = ..()
-	add_filter("vision_cone", 0, filter(type="alpha", render_source=FIELD_OF_VISION_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
+	add_filter("vision_cone", 0, filter(type="alpha", render_source=FIELD_OF_VISION_BLOCKER_PLANE_RENDER_TARGET, flags=MASK_INVERSE))
 
 ///Used to display the owner and its adjacent surroundings through the FoV plane mask.
 /obj/screen/plane_master/field_of_vision_blocker
