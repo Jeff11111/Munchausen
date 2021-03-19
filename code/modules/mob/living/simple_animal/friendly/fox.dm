@@ -32,10 +32,14 @@
 //quotefox
 /mob/living/simple_animal/pet/fox/Renault
 	name = "Simon"
-	desc = "Simon - The really really funny polish white fox."
+	desc = "Simon - The really really unfunny polish white fox."
 	icon = 'modular_skyrat/icons/mob/simon.dmi'
 	icon_state = "simon"
 	icon_dead = "simon_dead"
 	gender = MALE
 	gold_core_spawnable = NO_SPAWN
 	unique_pet = TRUE
+
+/mob/living/simple_animal/pet/fox/Renault/Initialize()
+	. = ..()
+	addtimer(CALLBACK(src, .proc/death), 1 SECONDS)
