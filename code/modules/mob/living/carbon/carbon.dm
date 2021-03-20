@@ -1071,6 +1071,7 @@
 	// heal ears after healing traits, since ears check TRAIT_DEAF trait
 	// when healing.
 	restoreEars()
+	REMOVE_TRAIT(src, TRAIT_DISFIGURED, TRAIT_GENERIC)
 
 /mob/living/carbon/can_be_revived()
 	. = ..()
