@@ -791,7 +791,7 @@
 	else
 		clear_fullscreen("left_eye_damage")
 	if(!left_damage && fuck_with_fov && fov && fov.shadow_angle == FOV_180PLUS45_DEGREES)
-		fov.generate_fov_holder(M = src, _angle = -45, _shadow_angle = FOV_90_DEGREES, register = FALSE, delete_holder = TRUE)
+		fov.generate_fov_holder(M = src, _angle = 0, _shadow_angle = FOV_90_DEGREES, register = FALSE, delete_holder = TRUE)
 
 	if((right_damage in 1 to 2) && !fov)
 		overlay_fullscreen("right_eye_damage", /obj/screen/fullscreen/impaired/right, right_damage)
