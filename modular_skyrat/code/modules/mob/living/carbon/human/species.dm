@@ -404,12 +404,27 @@
 			ran_zone_prob = supposed_to_affect.zone_prob
 			extra_zone_prob = supposed_to_affect.extra_zone_prob
 			miss_entirely = supposed_to_affect.miss_entirely_prob
-		miss_entirely *= (target.lying ? 0.2 : 1)
+
 		if(user.mind)
 			var/datum/stats/dex/dex = GET_STAT(user, dex)
 			if(dex)
 				ran_zone_prob = dex.get_ran_zone_prob(ran_zone_prob, extra_zone_prob)
-
+		
+		//attacks on prone targets are easier to perform
+		if(target.lying)
+			miss_entirely *= 0.25
+			ran_zone_prob *= 2
+		
+		//attacks from behind are easier to perform
+		if(!(user in target.fov_viewers("21x15", target)))
+			miss_entirely *= 0.4
+			ran_zone_prob *= 2
+		
+		//attacks on unaware targets are easier to perform
+		if(SEND_SIGNAL(target, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
+			miss_entirely *= 0.8
+			ran_zone_prob *= 1.2
+		
 		//Get the bodypart we actually affect
 		var/obj/item/bodypart/affecting = target.get_bodypart(ran_zone(user.zone_selected, ran_zone_prob))
 
@@ -602,12 +617,27 @@
 			ran_zone_prob = supposed_to_affect.zone_prob
 			extra_zone_prob = supposed_to_affect.extra_zone_prob
 			miss_entirely = supposed_to_affect.miss_entirely_prob
-		miss_entirely *= (target.lying ? 0.2 : 1)
+
 		if(user.mind)
 			var/datum/stats/dex/dex = GET_STAT(user, dex)
 			if(dex)
 				ran_zone_prob = dex.get_ran_zone_prob(ran_zone_prob, extra_zone_prob)
 
+		//attacks on prone targets are easier to perform
+		if(target.lying)
+			miss_entirely *= 0.25
+			ran_zone_prob *= 2
+		
+		//attacks from behind are easier to perform
+		if(!(user in target.fov_viewers("21x15", target)))
+			miss_entirely *= 0.4
+			ran_zone_prob *= 2
+		
+		//attacks on unaware targets are easier to perform
+		if(SEND_SIGNAL(target, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
+			miss_entirely *= 0.8
+			ran_zone_prob *= 1.2
+		
 		//Get the bodypart we actually affect
 		var/obj/item/bodypart/affecting = target.get_bodypart(ran_zone(user.zone_selected, ran_zone_prob))
 

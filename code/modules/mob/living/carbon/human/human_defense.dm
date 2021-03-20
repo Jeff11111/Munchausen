@@ -164,24 +164,39 @@
 			ran_zone_prob = supposed_to_affect.zone_prob
 			extra_zone_prob = supposed_to_affect.extra_zone_prob
 			miss_entirely = supposed_to_affect.miss_entirely_prob
-		miss_entirely *= (lying ? 0.2 : 1)
 		var/c_intent = CI_DEFAULT
 		if(iscarbon(user))
 			var/mob/living/carbon/carbon_mob = user
 			c_intent = carbon_mob.combat_intent
 			var/modifier = 0
 			if((c_intent == CI_AIMED) && CHECK_BITFIELD(attackchain_flags, ATTACKCHAIN_RIGHTCLICK))
-				modifier += 6
+				modifier += 5
+			
+			if(carbon_mob.mind)
+				var/datum/stats/dex/dex = GET_STAT(carbon_mob, dex)
+				if(dex)
+					ran_zone_prob = dex.get_ran_zone_prob(ran_zone_prob, extra_zone_prob)
+			
+			//attacks on prone targets are easier to perform
+			if(lying)
+				miss_entirely *= 0.25
+				ran_zone_prob *= 2
+
+			//attacks from behind are easier to perform
+			if(!(carbon_mob in fov_viewers("21x15", src)))
+				miss_entirely *= 0.4
+				ran_zone_prob *= 2
+			
+			//attacks on unaware targets are easier to perform
+			if(SEND_SIGNAL(src, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
+				miss_entirely *= 0.8
+				ran_zone_prob *= 1.2
 			
 			//Chance to miss the attack entirely, based on a diceroll
 			var/missed = FALSE
 			if(user.mind && user.mind.diceroll(GET_STAT_LEVEL(user, dex)*0.5, GET_SKILL_LEVEL(user, melee)*1.5, dicetype = "6d6", mod = -(miss_entirely/5) + modifier, crit = 18) <= DICE_CRIT_FAILURE)
 				missed = TRUE
 			
-			if(carbon_mob.mind)
-				var/datum/stats/dex/dex = GET_STAT(carbon_mob, dex)
-				if(dex)
-					ran_zone_prob = dex.get_ran_zone_prob(ran_zone_prob, extra_zone_prob)
 			if(missed && (user != src))
 				visible_message("<span class='danger'><b>[user]</b> misses <b>[src]</b> with [I]!</span>", \
 							"<span class='danger'><b>[user]</b>'s misses me with [I]!</span>", \

@@ -381,19 +381,34 @@
 	if(ismob(firer) && distance > original_dist)
 		qdel(src)
 		return
-	if(def_zone && ishuman(firer))
+	if(def_zone && ishuman(firer) && ishuman(A))
 		//Ran zone is a shitty proc that does not follow the laws of physics
 		var/mob/living/carbon/human/school_shooter = firer
-		var/obj/item/bodypart/supposed_to_affect = SSquirks.associated_bodyparts[check_zone(def_zone)]
+		var/mob/living/carbon/human/victim = A
+		var/obj/item/bodypart/supposed_to_affect = victim.get_bodypart(check_zone(def_zone))
 		var/ran_zone_prob = 50
 		var/extra_zone_prob = 50
 		if(supposed_to_affect)
 			ran_zone_prob = supposed_to_affect.zone_prob
 			extra_zone_prob = supposed_to_affect.extra_zone_prob
+		
 		var/datum/stats/dex/dex = GET_STAT(school_shooter, dex)
 		if(dex)
 			ran_zone_prob = dex.get_ran_zone_prob(ran_zone_prob, extra_zone_prob)
-		def_zone = ran_zone(def_zone, (max(ran_zone_prob-(4*distance), 0) * zone_accuracy_factor))
+		
+		//attacks on prone targets are easier to perform
+		if(victim.lying)
+			ran_zone_prob *= 1.5
+		
+		//attacks from behind are easier to perform
+		if(!(user in victim.fov_viewers("21x15", target)))
+			ran_zone_prob *= 2
+		
+		//attacks on unaware targets are easier to perform
+		if(SEND_SIGNAL(victim, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
+			ran_zone_prob *= 1.5
+			
+		def_zone = ran_zone(def_zone, (max(ran_zone_prob-(2*distance), 0) * zone_accuracy_factor))
 	else if(def_zone)
 		//Firer is dumb and mindless so we don't follow the laws of physics
 		def_zone = ran_zone(def_zone, max(100-(7*distance), 5) * zone_accuracy_factor)
