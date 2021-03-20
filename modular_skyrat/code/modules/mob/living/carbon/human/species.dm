@@ -416,7 +416,7 @@
 			ran_zone_prob *= 2
 		
 		//attacks from behind are easier to perform
-		if(!(user in target.fov_viewers("21x15", target)))
+		if(!(user in target.fov_viewers(world.view, target)))
 			miss_entirely *= 0.4
 			ran_zone_prob *= 2
 		
@@ -629,7 +629,7 @@
 			ran_zone_prob *= 2
 		
 		//attacks from behind are easier to perform
-		if(!(user in target.fov_viewers("21x15", target)))
+		if(!(user in target.fov_viewers(world.view, target)))
 			miss_entirely *= 0.4
 			ran_zone_prob *= 2
 		

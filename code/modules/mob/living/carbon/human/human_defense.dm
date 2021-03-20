@@ -183,7 +183,7 @@
 				ran_zone_prob *= 2
 
 			//attacks from behind are easier to perform
-			if(!(carbon_mob in fov_viewers("21x15", src)))
+			if(!(carbon_mob in fov_viewers(world.view, src)))
 				miss_entirely *= 0.4
 				ran_zone_prob *= 2
 			

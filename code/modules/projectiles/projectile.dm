@@ -401,7 +401,7 @@
 			ran_zone_prob *= 1.5
 		
 		//attacks from behind are easier to perform
-		if(!(user in victim.fov_viewers("21x15", target)))
+		if(!(user in victim.fov_viewers(world.view, target)))
 			ran_zone_prob *= 2
 		
 		//attacks on unaware targets are easier to perform

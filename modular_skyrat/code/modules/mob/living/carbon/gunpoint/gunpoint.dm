@@ -26,7 +26,7 @@
 		if(notice)
 			to_chat(src, "<span class='warning'>I need to be standing to get a good aim!</span>")
 		return FALSE
-	if(!(L in fov_viewers(8, src)))
+	if(!(L in fov_viewers(world.view, src)))
 		if(notice)
 			to_chat(src, "<span class='warning'>My target is out of my view!</span>")
 		return FALSE

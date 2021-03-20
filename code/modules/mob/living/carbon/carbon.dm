@@ -782,16 +782,16 @@
 	var/datum/component/field_of_vision/fov = GetComponent(/datum/component/field_of_vision)
 	if(fuck_with_fov && fov)
 		if(left_damage >= 3)
-			fov.generate_fov_holder(M = src, _angle = 0, _shadow_angle = FOV_180PLUS45_DEGREES, register = FALSE, delete_holder = TRUE)
+			fov.generate_fov_holder(M = src, _angle = 45, _shadow_angle = FOV_180PLUS45_DEGREES, register = FALSE, delete_holder = TRUE)
 		else if(right_damage >= 3)
-			fov.generate_fov_holder(M = src, _angle = 0, _shadow_angle = FOV_180MINUS45_DEGREES, register = FALSE, delete_holder = TRUE)
+			fov.generate_fov_holder(M = src, _angle = -45, _shadow_angle = FOV_180MINUS45_DEGREES, register = FALSE, delete_holder = TRUE)
 
 	if((left_damage in 1 to 2) && !fov)
 		overlay_fullscreen("left_eye_damage", /obj/screen/fullscreen/impaired/left, left_damage)
 	else
 		clear_fullscreen("left_eye_damage")
 	if(!left_damage && fuck_with_fov && fov && fov.shadow_angle == FOV_180PLUS45_DEGREES)
-		fov.generate_fov_holder(M = src, _angle = 0, _shadow_angle = FOV_90_DEGREES, register = FALSE, delete_holder = TRUE)
+		fov.generate_fov_holder(M = src, _angle = -45, _shadow_angle = FOV_90_DEGREES, register = FALSE, delete_holder = TRUE)
 
 	if((right_damage in 1 to 2) && !fov)
 		overlay_fullscreen("right_eye_damage", /obj/screen/fullscreen/impaired/right, right_damage)
