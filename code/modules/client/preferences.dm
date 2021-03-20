@@ -247,7 +247,7 @@ GLOBAL_LIST_INIT(food, list(
 	//backgrounds
 	var/mutable_appearance/character_background
 	var/bgstate = "steel"
-	var/list/bgstate_options = list("steel", "plating", "white", "reinforced", "dark", "000", "midgrey", "FFF")
+	var/list/bgstate_options = list("steel", "plating", "reinforced", "white", "dark", "000", "midgrey", "FFF")
 
 	var/show_mismatched_markings = FALSE //determines whether or not the markings lists should show markings that don't match the currently selected species. Intentionally left unsaved.
 
