@@ -246,8 +246,8 @@ GLOBAL_LIST_INIT(food, list(
 
 	//backgrounds
 	var/mutable_appearance/character_background
-	var/icon/bgstate = "steel"
-	var/list/bgstate_options = list("000", "midgrey", "FFF", "white", "steel", "techmaint", "dark", "plating", "reinforced")
+	var/bgstate = "steel"
+	var/list/bgstate_options = list("steel", "plating", "white", "reinforced", "dark", "000", "midgrey", "FFF")
 
 	var/show_mismatched_markings = FALSE //determines whether or not the markings lists should show markings that don't match the currently selected species. Intentionally left unsaved.
 
@@ -361,7 +361,7 @@ GLOBAL_LIST_INIT(food, list(
 
 			dat += "<table width='100%'>"
 			dat += "<tr>"
-			dat += "<td width='75%' valign='top'>"
+			dat += "<td width='50%' valign='top'>"
 			dat += "<h2>Identity</h2>"
 			if(jobban_isbanned(user, "appearance"))
 				dat += "<b>You are banned from using custom names and appearances. You can continue to adjust your characters, but you will be randomised once you join the game.</b><br>"
@@ -380,23 +380,20 @@ GLOBAL_LIST_INIT(food, list(
 			dat += "<b>Auto-Hiss:</b> <a href='?_src_=prefs;preference=auto_hiss'>[auto_hiss ? "Yes" : "No"]</a>"
 			dat += "</td>"
 
-			dat += "<td width='75%' valign='top'>"
+			dat += "<td width='50%' valign='top'>"
 			dat += "<h2>Special Names:</h2>"
-			var/old_group
-			for(var/custom_name_id in (GLOB.preferences_custom_names - list("religion", "deity", "mime"))) //skyrat edit
+			for(var/custom_name_id in (GLOB.preferences_custom_names - list("religion", "deity", "mime")))
 				var/namedata = GLOB.preferences_custom_names[custom_name_id]
-				if(!old_group)
-					old_group = namedata["group"]
-				else if(old_group != namedata["group"])
-					old_group = namedata["group"]
-					dat += "<br>"
-				dat += "<b>[namedata["pref_name"]]:</b> <a href ='?_src_=prefs;preference=[custom_name_id];task=input'>[custom_names[custom_name_id]]</a> "
+				dat += "<br><b>[namedata["pref_name"]]:</b> <a href ='?_src_=prefs;preference=[custom_name_id];task=input'>[custom_names[custom_name_id]]</a>"
+			
+			dat += "<br>"
 			dat += "<h2>Job Preferences</h2>"
 			dat += "<b>Preferred Security Department:</b> <a href='?_src_=prefs;preference=sec_dept;task=input'>[prefered_security_department]</a><br>"
 
 			var/mob/dead/new_player/NP = user
+			dat += "<span align='right'>"
+			dat += "<h2>Game</h2>"
 			if(istype(NP))
-				dat += "<h2>Game</h2>"
 				if(CONFIG_GET(flag/roundstart_traits))
 					dat += "<b>Be Special:</b> \["
 					if(special_char)
@@ -419,7 +416,9 @@ GLOBAL_LIST_INIT(food, list(
 					dat += "\[<a href='byond://?src=[REF(user)];manifest=1'>Crew Manifest</a>\]<br>"
 					dat += "\[<a href='byond://?src=[REF(user)];late_join=1'>Join Game</a>\]<br>"
 					dat += "\[[LINKIFY_READY("Observe", PLAYER_READY_TO_OBSERVE, user)]\]"
-
+			else
+				dat += "\[<a href='?_src_=prefs;close_setup=1'>Done</a>\]"
+			dat += "</span>"
 			dat += "</td>"
 			dat += "</tr>"
 			dat += "</table>"
@@ -521,7 +520,9 @@ GLOBAL_LIST_INIT(food, list(
 				dat += "<BR>"
 			dat += "<b>Random Body:</b><a style='display:block;width:100px' href='?_src_=prefs;preference=all;task=random'>Randomize!</A><BR>"
 			dat += "<b>Always Random Body:</b><a href='?_src_=prefs;preference=all'>[be_random_body ? "Yes" : "No"]</A><BR>"
-			dat += "<br><b>Cycle background:</b><a style='display:block;width:100px' href='?_src_=prefs;preference=cycle_bg;task=input'>[bgstate]</a><BR>"
+			dat += "<br><b>Cycle background:</b><br>"
+			dat += "[icon2html(character_background, user)] "
+			dat += "<a href='?_src_=prefs;preference=cycle_bg;task=input'>[bgstate]</a><BR>"
 
 			var/use_skintones = pref_species.use_skintones
 			if(use_skintones)
@@ -1620,6 +1621,11 @@ GLOBAL_LIST_INIT(food, list(
 			C.clear_character_previews()
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
+	if(href_list["close_setup"])
+		user << browse(null, "window=preferences_window") //closes char setup window
+		user << browse(null, "window=preferences_browser") //closes char setup window
+		return TRUE
+	
 	if(href_list["jobbancheck"])
 		var/job = sanitizeSQL(href_list["jobbancheck"])
 		var/sql_ckey = sanitizeSQL(user.ckey)

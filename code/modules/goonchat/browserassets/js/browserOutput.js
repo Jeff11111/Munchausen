@@ -75,8 +75,6 @@ var opts = {
 // Array of names for chat display color presets.
 // If not set to normal, a CSS file `browserOutput_${name}.css` will be added to the head.
 var colorPresets = [
-	'normal',
-	'light',
 	'dark'
 ]
 
