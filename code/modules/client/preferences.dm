@@ -1276,7 +1276,7 @@ GLOBAL_LIST_INIT(food, list(
 
 	winshow(user, "preferences_window", TRUE)
 	var/datum/browser/popup = new(user, "preferences_browser", "<div align='center'>Character Setup</div>", 560, 750)
-	popup.set_window_options("can_close=0;can_minimize=0;can_maximize=0;titlebar=0")
+	popup.set_window_options("can_close=0;can_minimize=0;can_maximize=0;titlebar=0;statusbar=0")
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
 

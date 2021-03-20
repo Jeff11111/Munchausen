@@ -314,16 +314,21 @@ window "preferences_window"
 		anchor2 = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
 		statusbar = false
+		can-close = false
+		can-minimize = false
 	elem "preferences_browser"
 		type = BROWSER
 		pos = 0,0
 		size = 960x1000
 		anchor1 = 0,0
 		anchor2 = 75,100
-		saved-params = "is-minimized;is-maximized"
+		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
+		can-close = false
+		can-minimize = false
 	elem "character_preview_map"
 		type = MAP
 		pos = 960,0
