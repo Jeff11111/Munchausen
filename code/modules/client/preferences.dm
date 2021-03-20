@@ -369,7 +369,7 @@ GLOBAL_LIST_INIT(food, list(
 
 			dat += "<b>[nameless ? "Default designation" : "Name"]:</b>"
 			dat += " <a href='?_src_=prefs;preference=name;task=input'>[real_name]</a>"
-			dat += " <a style='display:block;width:100px' href='?_src_=prefs;preference=name;task=random'>Random Name</a>"
+			dat += " <a href='?_src_=prefs;preference=name;task=random'>Random</a>"
 			dat += "<br>"
 
 			dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender;task=input'>[gender == MALE ? "Male" : "Female"]</a><BR>"
