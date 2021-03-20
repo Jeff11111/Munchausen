@@ -635,6 +635,7 @@
 
 
 /mob/dead/new_player/proc/close_spawn_windows()
+	src << browse(null, "window=preferences_window") //closes char setup window
 	src << browse(null, "window=preferences_browser") //closes char setup window
 	src << browse(null, "window=playersetup") //closes the player setup window
 	src << browse(null, "window=preferences") //closes job selection

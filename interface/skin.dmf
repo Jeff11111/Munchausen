@@ -314,7 +314,7 @@ window "preferences_window"
 		anchor2 = none
 		is-visible = false
 		saved-params = "pos;size;is-minimized;is-maximized"
-		titlebar = false
+		titlebar = true
 		statusbar = false
 		can-close = false
 		can-minimize = false
