@@ -713,7 +713,7 @@
 		newdir = turn(newdir, 180)
 	
 	if((!(newdir in TH.existing_dirs) || trail_type == "tracks_1" || trail_type == "tracks_2" || trail_type == "tracks_3") && TH.existing_dirs.len <= 16) //maximum amount of overlays is 16 (all light & heavy directions filled)
-		if(TH.back_trail)
+		if(TH.back_trail && length(TH.existing_dirs))
 			TH.existing_dirs -= TH.existing_dirs[length(TH.existing_dirs)]
 			TH.cut_overlays()
 			for(var/epicdir in TH.existing_dirs)
