@@ -22,7 +22,7 @@
 
 	var/dice = DICE_SUCCESS
 	if(user.mind)
-		dice = user.mind.diceroll(GET_STAT_LEVEL(user, str), GET_SKILL_LEVEL(user, melee), "6d6", 20)
+		dice = user.mind.diceroll(GET_STAT_LEVEL(user, str), GET_SKILL_LEVEL(user, melee), "6d6", 18)
 	
 	if((!is_dislocated() && !is_broken()) && (dice >= DICE_SUCCESS) && (user.a_intent != INTENT_HELP))
 		var/datum/wound/W

@@ -37,6 +37,7 @@
 	if(ispath(skills))
 		var/datum/skills/skill = mob_skills[skills]
 		skills = skill.level
+	
 	//Get the carbon mob, if the mind controls one
 	var/mob/living/carbon/carbonmob = current
 	if(!istype(carbonmob))
@@ -71,12 +72,12 @@
 	
 	//Finally, return whether it was a failure or a success
 	if(dice <= sum)
-		if(dice <= sum - crit || dice <= 4)
+		if(dice <= sum - crit)
 			return DICE_CRIT_SUCCESS
 		else
 			return DICE_SUCCESS
 	else
-		if(dice >= sum + crit || dice >= 17)
+		if(dice >= sum + crit)
 			return DICE_CRIT_FAILURE
 		else
 			return DICE_FAILURE
