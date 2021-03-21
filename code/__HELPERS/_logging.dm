@@ -109,10 +109,6 @@
 		//WRITE_LOG(GLOB.world_game_log, "EMOTE: [text]") //Skyrat edit
 		SSlogging.logging_emote(text) //Skyrat edit
 
-/proc/log_subtler(text)
-	if (CONFIG_GET(flag/log_emote))
-		WRITE_LOG(GLOB.world_game_log, "EMOTE (SUBTLER): [text]")
-
 /proc/log_prayer(text)
 	if (CONFIG_GET(flag/log_prayer))
 		WRITE_LOG(GLOB.world_game_log, "PRAY: [text]")
