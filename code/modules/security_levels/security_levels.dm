@@ -21,7 +21,7 @@ GLOBAL_LIST_INIT(all_security_levels, list("green", "blue", "violet", "orange", 
 	if(level >= SEC_LEVEL_GREEN && level <= SEC_LEVEL_DELTA && level != GLOB.security_level)
 		var/string_level = LvlToString(level)
 		var/seclevelup = TRUE
-		if(GLOB.security_level <= level)
+		if(GLOB.security_level >= level)
 			seclevelup = FALSE
 		
 		var/announce_title = "Attention! Alert level [seclevelup ? "elevated" : "lowered"] to [string_level]:"
