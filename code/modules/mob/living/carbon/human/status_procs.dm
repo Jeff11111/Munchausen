@@ -24,7 +24,7 @@
 		update_hair()
 
 /mob/living/carbon/human/become_husk(source)
-	if(istype(dna.species, /datum/species/skeleton)) //skeletons shouldn't be husks.
+	if(NOBLOOD in dna.species.species_traits)
 		cure_husk()
 		return
 	. = ..()
