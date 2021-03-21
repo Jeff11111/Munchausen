@@ -310,10 +310,10 @@
 				playsound(loc, hitsound, volume, 1, -1)
 			L.visible_message("<span class='danger'><b>[L]</b> is hit by \a [src][organ_hit_text]![wound_message]</span>", \
 					"<span class='userdanger'><b>[L]</b> is hit by \a [src][organ_hit_text]![wound_message]</span>", null, COMBAT_MESSAGE_RANGE)
-		
+
 		if(candink && def_zone == BODY_ZONE_HEAD)
 			playsound(src, 'sound/weapons/dink.ogg', 30, 1)
-		
+
 		if(iscarbon(L))
 			var/mob/living/carbon/C = L
 			C.wound_message = ""
@@ -391,23 +391,23 @@
 		if(supposed_to_affect)
 			ran_zone_prob = supposed_to_affect.zone_prob
 			extra_zone_prob = supposed_to_affect.extra_zone_prob
-		
+
 		var/datum/stats/dex/dex = GET_STAT(school_shooter, dex)
 		if(dex)
 			ran_zone_prob = dex.get_ran_zone_prob(ran_zone_prob, extra_zone_prob)
-		
+
 		//attacks on prone targets are easier to perform
 		if(victim.lying)
 			ran_zone_prob *= 1.5
-		
+
 		//attacks from behind are easier to perform
-		if(!(user in victim.fov_viewers(world.view, target)))
+		if(!(school_shooter in fov_viewers(world.view, victim)))
 			ran_zone_prob *= 2
-		
+
 		//attacks on unaware targets are easier to perform
 		if(SEND_SIGNAL(victim, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
 			ran_zone_prob *= 1.5
-			
+
 		def_zone = ran_zone(def_zone, (max(ran_zone_prob-(2*distance), 0) * zone_accuracy_factor))
 	else if(def_zone)
 		//Firer is dumb and mindless so we don't follow the laws of physics
@@ -497,7 +497,7 @@
 	if((flag in list("energy", "laser")) && (A.flags_ricochet & RICOCHET_SHINY))
 	//
 		return TRUE
-	
+
 	//skyrat edit another one lol
 	if((flag in list("bomb", "bullet")) && (A.flags_ricochet & RICOCHET_HARD))
 		return TRUE

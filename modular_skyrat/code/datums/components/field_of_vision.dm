@@ -283,8 +283,9 @@
 	var/dir = (mob.dir & (EAST|WEST)) || mob.dir;\
 	var/_degree = -angle;\
 	var/real_shadow_angle = shadow_angle;\
-	if(findtext(real_shadow_angle, "_"));\
+	if(findtext(real_shadow_angle, "_")){\
 		real_shadow_angle = copytext(real_shadow_angle, findtext(real_shadow_angle, "_") - 1);\
+	}\
 	var/_half = text2num(real_shadow_angle)/2;\
 	switch(dir){\
 		if(EAST){\

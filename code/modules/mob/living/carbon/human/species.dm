@@ -1742,7 +1742,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			ran_zone_prob = supposed_to_affect.zone_prob
 			extra_zone_prob = supposed_to_affect.extra_zone_prob
 			miss_entirely = supposed_to_affect.miss_entirely_prob
-		
+
 		if(user.mind)
 			var/datum/stats/dex/dex = GET_STAT(user, dex)
 			if(dex)
@@ -1754,15 +1754,15 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			ran_zone_prob *= 2
 
 		//attacks from behind are easier to perform
-		if(!(user in target.fov_viewers(world.view, target)))
+		if(!(user in fov_viewers(world.view, target)))
 			miss_entirely *= 0.4
 			ran_zone_prob *= 2
-		
+
 		//attacks on unaware targets are easier to perform
 		if(SEND_SIGNAL(target, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
 			miss_entirely *= 0.8
 			ran_zone_prob *= 1.2
-		
+
 		//Get the bodypart we actually affect
 		var/obj/item/bodypart/affecting = target.get_bodypart(ran_zone(user.zone_selected, ran_zone_prob))
 		var/missed = FALSE
