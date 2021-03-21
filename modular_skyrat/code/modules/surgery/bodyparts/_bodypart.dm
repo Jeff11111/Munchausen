@@ -1390,7 +1390,7 @@
 				var/obj/item/bodypart/parent = owner.get_bodypart(parent_bodyzone)
 				if(parent.is_disabled())
 					return parent.is_disabled()
-		if(get_damage(include_stamina = TRUE) >= ((max_damage * (HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE) ? 0.6 : 1) * (owner?.mind ? (2 - GET_STAT(owner, end).get_shock_mult()) : 1)))) //Easy limb disable disables the limb at 40% health instead of 0%
+		if(stamina_dam >= ((max_damage * (HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE) ? 0.6 : 1) * (owner?.mind ? (2 - GET_STAT(owner, end).get_shock_mult()) : 1)))) //Easy limb disable disables the limb at 40% health instead of 0%
 			if(!last_maxed)
 				last_maxed = TRUE
 				owner?.emote("scream")
