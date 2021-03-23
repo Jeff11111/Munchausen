@@ -295,8 +295,8 @@
 	H.dna.add_mutation(DWARFISM)
 
 /obj/effect/mob_spawn/human/corpse/damaged/legioninfested/Initialize()
-	var/type = pickweight(list("Miner" = 45, "Ashwalker" = 10, "Golem" = 10,"Clown" = 10, pick(list("Shadow", "YeOlde","Operative", "Cultist", "Lavaknight")) = 4, "Assistant" = 20, "Beelegion" = 1))
-	switch(type)
+	var/type = pickweight(list("Miner" = 75, "Ashwalker" = 15, "Golem" = 6, "Assistant" = 3, pick(list("Shadow", "YeOlde","Operative", "Cultist", "Lavaknight", "Jester")) = 1))
+	switch(type) //TODO: clean this up
 		if("Miner")
 			mob_species = pickweight(list(/datum/species/human = 70, /datum/species/lizard = 26, /datum/species/fly = 2, /datum/species/plasmaman = 2))
 			if(mob_species == /datum/species/plasmaman)
@@ -315,7 +315,6 @@
 			if(mob_species != /datum/species/lizard)
 				shoes = /obj/item/clothing/shoes/workboots/mining
 			gloves = /obj/item/clothing/gloves/color/black
-			mask = /obj/item/clothing/mask/gas/explorer
 			if(prob(20))
 				suit = pickweight(list(/obj/item/clothing/suit/hooded/explorer/standard = 6, /obj/item/clothing/suit/hooded/cloak/goliath = 2, /obj/item/clothing/suit/hooded/explorer/exo = 6, /obj/item/clothing/suit/hooded/explorer/seva = 6))
 			if(prob(30))
@@ -324,10 +323,8 @@
 				l_pocket = pickweight(list(/obj/item/stack/spacecash/c1000 = 7, /obj/item/reagent_containers/hypospray/medipen/survival = 2, /obj/item/borg/upgrade/modkit/cooldown = 1 ))
 		if("Ashwalker")
 			mob_species = /datum/species/lizard/ashwalker
-			uniform = /obj/item/clothing/under/costume/gladiator/ash_walker
-			if(prob(95))
-				head = /obj/item/clothing/head/helmet/gladiator
-			else
+			outfit = /datum/outfit/ashwalker
+			if(prob(5))
 				head = /obj/item/clothing/head/helmet/skull
 				suit = /obj/item/clothing/suit/armor/bone
 				gloves = /obj/item/clothing/gloves/bracer
@@ -339,19 +336,6 @@
 				r_pocket = /obj/item/kitchen/knife/combat/bone
 			if(prob(30))
 				l_pocket = /obj/item/kitchen/knife/combat/bone
-		if("Jester")
-			name = pick(GLOB.clown_names)
-			outfit = /datum/outfit/job/clown
-			belt = null
-			backpack_contents = list()
-			if(prob(70))
-				backpack_contents += pick(list(/obj/item/stamp/clown = 1, /obj/item/reagent_containers/spray/waterflower = 1, /obj/item/reagent_containers/food/snacks/grown/banana = 1, /obj/item/megaphone/clown = 1, /obj/item/reagent_containers/food/drinks/soda_cans/canned_laughter = 1, /obj/item/pneumatic_cannon/pie = 1))
-			if(prob(30))
-				backpack_contents += list(/obj/item/stack/sheet/mineral/bananium = pickweight(list( 1 = 3, 2 = 2, 3 = 1)))
-			if(prob(10))
-				l_pocket = pickweight(list(/obj/item/bikehorn/golden = 3, /obj/item/bikehorn/airhorn= 1 ))
-			if(prob(10))
-				r_pocket = /obj/item/implanter/sad_trombone
 		if("Golem")
 			mob_species = pick(list(/datum/species/golem/adamantine, /datum/species/golem/plasma, /datum/species/golem/diamond, /datum/species/golem/gold, /datum/species/golem/silver, /datum/species/golem/plasteel, /datum/species/golem/titanium, /datum/species/golem/plastitanium))
 			if(prob(30))
@@ -362,6 +346,29 @@
 				neck = /obj/item/bedsheet/rd/royal_cape
 			if(prob(10))
 				l_pocket = pick(list(/obj/item/crowbar/power, /obj/item/wrench/power, /obj/item/weldingtool/experimental))
+		if("Assistant")
+			uniform = /obj/item/clothing/under/color/grey
+			belt = /obj/item/tank/internals/emergency_oxygen
+			mask = /obj/item/clothing/mask/gas
+			ears = /obj/item/radio/headset
+			gloves = /obj/item/clothing/gloves/color/fyellow
+			id = /obj/item/card/id/silver/reaper //looks cool and has a fancy name but only a 1% chance
+			if(prob(99))
+				id = /obj/item/card/id
+				id_job = "Assisant"
+			if(prob(95))
+				head = /obj/item/clothing/head/hardhat/red
+			if(prob(5))
+				gloves = /obj/item/clothing/gloves/color/yellow
+			if(prob(10))
+				back = /obj/item/spear
+			else if(prob(80)) //Now they dont always have a backpack
+				back = /obj/item/storage/backpack
+				backpack_contents = list(/obj/item/stack/cable_coil = 1, /obj/item/assembly/flash = 1, /obj/item/storage/fancy/donut_box = 1, /obj/item/storage/fancy/cigarettes/cigpack_shadyjims = 1, /obj/item/lighter = 1)
+			if(prob(90))
+				r_pocket = /obj/item/kitchen/knife
+			if(prob(60))
+				l_pocket = /obj/item/soap/homemade
 		if("YeOlde")
 			mob_gender = FEMALE
 			uniform = /obj/item/clothing/under/costume/maid
@@ -404,41 +411,15 @@
 			suit_store = /obj/item/tank/internals/oxygen
 			id = /obj/item/card/id/knight
 			id_job = "Knight"
-		if("Assistant")
-			uniform = /obj/item/clothing/under/color/grey
-			belt = /obj/item/tank/internals/emergency_oxygen
-			mask = /obj/item/clothing/mask/gas
-			ears = /obj/item/radio/headset
-			gloves = /obj/item/clothing/gloves/color/fyellow
-			id = /obj/item/card/id/silver/reaper //looks cool and has a fancy name but only a 1% chance
-			if(prob(99))
-				id = /obj/item/card/id
-				id_job = "Assisant"
-			if(prob(95))
-				head = /obj/item/clothing/head/hardhat/red
-			if(prob(5))
-				gloves = /obj/item/clothing/gloves/color/yellow
+		if("Jester")
+			name = pick(GLOB.clown_names)
+			outfit = /datum/outfit/job/clown
+			belt = null
+			backpack_contents = list()
+			if(prob(70))
+				backpack_contents += pick(list(/obj/item/stamp/clown = 1, /obj/item/reagent_containers/spray/waterflower = 1, /obj/item/reagent_containers/food/snacks/grown/banana = 1, /obj/item/megaphone/clown = 1, /obj/item/reagent_containers/food/drinks/soda_cans/canned_laughter = 1))
 			if(prob(10))
-				back = /obj/item/spear
-			else if(prob(80)) //Now they dont always have a backpack
-				back = /obj/item/storage/backpack
-				backpack_contents = list(/obj/item/stack/cable_coil = 1, /obj/item/assembly/flash = 1, /obj/item/storage/fancy/donut_box = 1, /obj/item/storage/fancy/cigarettes/cigpack_shadyjims = 1, /obj/item/lighter = 1)
-			if(prob(90))
-				r_pocket = /obj/item/kitchen/knife
-			if(prob(60))
-				l_pocket = /obj/item/soap/homemade
-
-		if("Beelegion")
-			uniform = /obj/item/clothing/under/color/yellow
-			suit = /obj/item/clothing/suit/hooded/bee_costume
-			shoes = /obj/item/clothing/shoes/sneakers/yellow
-			gloves = /obj/item/clothing/gloves/color/yellow
-			ears = /obj/item/radio/headset
-			belt = /obj/item/storage/belt/fannypack/yellow
-			id_job = "Assisant"
-			id = /obj/item/card/id
-			l_pocket = /obj/item/reagent_containers/food/drinks/soda_cans/buzz_fuzz
-			mask = /obj/item/clothing/mask/rat/bee
+				l_pocket = pickweight(list(/obj/item/bikehorn/golden = 3, /obj/item/bikehorn/airhorn= 1))
 	. = ..()
 
 // Snow Legion
