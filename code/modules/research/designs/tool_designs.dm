@@ -265,9 +265,6 @@
 	category = list("Tool Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL | DEPARTMENTAL_FLAG_SCIENCE
 
-////////////////////////
-//Skyrat Surgery Tools//
-////////////////////////
 /datum/design/fixovein
 	name = "Fix O' Vein"
 	desc = "Synthetic veins for repairing non-synthetic veins."

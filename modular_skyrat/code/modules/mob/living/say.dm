@@ -56,16 +56,16 @@
 		hears_muttering = (get_hearers_in_view(message_range+MUTTERING_RANGE, source) - listening)
 	var/list/the_dead = list()
 	var/list/dead_away = list()
-	var/list/yellareas = list() //CIT CHANGE - adds the ability for yelling to penetrate walls and echo throughout areas
-	if(!eavesdrop_range && say_test(message) == "2")	//CIT CHANGE - ditto
-		yellareas = get_areas_in_range(message_range*0.5, source)	//CIT CHANGE - ditto
+	var/list/yellareas = list() //adds the ability for yelling to penetrate walls and echo throughout areas
+	if(!eavesdrop_range && say_test(message) == "2")
+		yellareas = get_areas_in_range(message_range*0.5, source)
 	for(var/_M in GLOB.player_list)
 		var/mob/M = _M
 		if(M.stat != DEAD) //not dead, not important
-			if(yellareas)	//CIT CHANGE - see above. makes yelling penetrate walls
-				var/area/A = get_area(M)	//CIT CHANGE - ditto
-				if(istype(A) && A.ambientsounds != SPACE && (A in yellareas))	//CIT CHANGE - ditto
-					listening |= M	//CIT CHANGE - ditto
+			if(yellareas)
+				var/area/A = get_area(M)
+				if(istype(A) && A.ambientsounds != SPACE && (A in yellareas))
+					listening |= M
 			continue
 		if(!M.client || !client) //client is so that ghosts don't have to listen to mice
 			continue
@@ -108,4 +108,4 @@
 			speech_bubble_recipients.Add(M.client)
 	var/image/I = image('icons/mob/talk.dmi', src, "[bubble_type][say_test(message)]", FLY_LAYER)
 	I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
-	INVOKE_ASYNC(GLOBAL_PROC, /.proc/animate_speechbubble, I, speech_bubble_recipients, 30) //skyrat-edit
+	INVOKE_ASYNC(GLOBAL_PROC, /.proc/animate_speechbubble, I, speech_bubble_recipients, 30)

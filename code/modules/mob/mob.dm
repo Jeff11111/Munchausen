@@ -9,7 +9,7 @@
 	movespeed_modification = null
 	for (var/alert in alerts)
 		clear_alert(alert, TRUE)
-	QDEL_LIST(mob_spell_list) //Skyrat edit to appease the GC
+	QDEL_LIST(mob_spell_list)
 	if(observers && observers.len)
 		for(var/M in observers)
 			var/mob/dead/observe = M
@@ -20,7 +20,7 @@
 	client_colours = null
 	ghostize()
 	..()
-	return QDEL_HINT_QUEUE //Skyrat change
+	return QDEL_HINT_QUEUE
 
 /mob/Initialize()
 	GLOB.mob_list += src
@@ -131,11 +131,11 @@
   * * target (optional) is the other mob involved with the visible message. For example, the attacker in many combat messages.
   * * target_message (optional) is what the target mob will see e.g. "[src] does something to you!"
   */
-/atom/proc/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, ignored_mobs, mob/target, target_message, user_msg, runechat_popup) //SKYRAT CHANGE
+/atom/proc/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, ignored_mobs, mob/target, target_message, user_msg, runechat_popup)
 	var/turf/T = get_turf(src)
 	if(!T)
 		return
-	var/final_msg = user_msg ? "<b>[src]</b> " + message : message //SKYRAT CHANGE
+	var/final_msg = user_msg ? "<b>[src]</b> " + message : message
 	var/list/hearers = get_hearers_in_view(vision_distance, src) //caches the hearers and then removes ignored mobs.
 	if(!length(hearers))
 		return
@@ -167,17 +167,17 @@
 			msg = blind_message
 		if(!msg)
 			continue
-		if (runechat_popup && M.client?.prefs.chat_on_map && (M.client.prefs.see_chat_non_mob || ismob(src)) && M.client.prefs.see_chat_emotes) //SKYRAT CHANGE
-			M.create_chat_message(src, null, msg, list("emote", "italics"), null) //Skyrat change
-		M.show_message(final_msg, MSG_VISUAL,blind_message, MSG_AUDIBLE) //SKYRAT CHANGE
+		if (runechat_popup && M.client?.prefs.chat_on_map && (M.client.prefs.see_chat_non_mob || ismob(src)) && M.client.prefs.see_chat_emotes)
+			M.create_chat_message(src, null, msg, list("emote", "italics"), null)
+		M.show_message(final_msg, MSG_VISUAL,blind_message, MSG_AUDIBLE)
 
 ///Adds the functionality to self_message.
-mob/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs, mob/target, target_message, user_msg, runechat_popup) //SKYRAT CHANGE
+mob/visible_message(message, self_message, blind_message, vision_distance = DEFAULT_MESSAGE_RANGE, list/ignored_mobs, mob/target, target_message, user_msg, runechat_popup)
 	. = ..()
 	if(self_message && target != src)
-		if (runechat_popup && client?.prefs.chat_on_map && client.prefs.see_chat_emotes) //SKYRAT CHANGE
-			create_chat_message(src, null, self_message, list("emote", "italics"), null) //Skyrat change
-		show_message(user_msg ? "<b>[src]</b> " + self_message : self_message, MSG_VISUAL, blind_message, MSG_AUDIBLE) //SKYRAT CHANGE
+		if (runechat_popup && client?.prefs.chat_on_map && client.prefs.see_chat_emotes)
+			create_chat_message(src, null, self_message, list("emote", "italics"), null)
+		show_message(user_msg ? "<b>[src]</b> " + self_message : self_message, MSG_VISUAL, blind_message, MSG_AUDIBLE)
 
 /**
   * Show a message to all mobs in earshot of this atom
@@ -190,11 +190,11 @@ mob/visible_message(message, self_message, blind_message, vision_distance = DEFA
   * * hearing_distance (optional) is the range, how many tiles away the message can be heard.
   * * ignored_mobs (optional) doesn't show any message to any given mob in the list.
   */
-/atom/proc/audible_message(message, deaf_message, hearing_distance = DEFAULT_MESSAGE_RANGE, self_message, ignored_mobs, user_msg, runechat_popup) //SKYRAT CHANGE
+/atom/proc/audible_message(message, deaf_message, hearing_distance = DEFAULT_MESSAGE_RANGE, self_message, ignored_mobs, user_msg, runechat_popup)
 	var/turf/T = get_turf(src)
 	if(!T)
 		return
-	var/final_msg = user_msg ? "<b>[src]</b> " + message : message //SKYRAT CHANGE
+	var/final_msg = user_msg ? "<b>[src]</b> " + message : message
 	var/list/hearers = get_hearers_in_view(hearing_distance, src)
 	if(!length(hearers))
 		return
@@ -202,9 +202,9 @@ mob/visible_message(message, self_message, blind_message, vision_distance = DEFA
 	if(self_message)
 		hearers -= src
 	for(var/mob/M in hearers)
-		if (runechat_popup && M.client?.prefs.chat_on_map && (M.client.prefs.see_chat_non_mob || ismob(src)) && M.client.prefs.see_chat_emotes) //SKYRAT CHANGE
-			M.create_chat_message(src, null, message, list("emote", "italics"), null) //Skyrat change
-		M.show_message(final_msg, MSG_AUDIBLE, deaf_message, MSG_VISUAL) //SKYRAT CHANGE
+		if (runechat_popup && M.client?.prefs.chat_on_map && (M.client.prefs.see_chat_non_mob || ismob(src)) && M.client.prefs.see_chat_emotes)
+			M.create_chat_message(src, null, message, list("emote", "italics"), null)
+		M.show_message(final_msg, MSG_AUDIBLE, deaf_message, MSG_VISUAL)
 
 /**
   * Show a message to all mobs in earshot of this one
@@ -218,11 +218,11 @@ mob/visible_message(message, self_message, blind_message, vision_distance = DEFA
   * * hearing_distance (optional) is the range, how many tiles away the message can be heard.
   * * ignored_mobs (optional) doesn't show any message to any given mob in the list.
   */
-/mob/audible_message(message, deaf_message, hearing_distance = DEFAULT_MESSAGE_RANGE, self_message, list/ignored_mobs, user_msg, runechat_popup) //SKYRAT CHANGE
+/mob/audible_message(message, deaf_message, hearing_distance = DEFAULT_MESSAGE_RANGE, self_message, list/ignored_mobs, user_msg, runechat_popup)
 	. = ..()
 	if(self_message)
-		if (runechat_popup && client?.prefs.chat_on_map && client.prefs.see_chat_emotes) //SKYRAT CHANGE
-			create_chat_message(src, null, self_message, list("emote", "italics"), null) //Skyrat change
+		if (runechat_popup && client?.prefs.chat_on_map && client.prefs.see_chat_emotes)
+			create_chat_message(src, null, self_message, list("emote", "italics"), null)
 		show_message(user_msg ? "<b>[src]</b> " + self_message : self_message, MSG_AUDIBLE, deaf_message, MSG_VISUAL)
 
 /mob/proc/get_item_by_slot(slot_id)
@@ -288,7 +288,6 @@ mob/visible_message(message, self_message, blind_message, vision_distance = DEFA
 	var/slot_priority = W.slot_equipment_priority
 
 	if(!slot_priority)
-		//skyrat edit
 		slot_priority = list( \
 			SLOT_BACK, SLOT_WEAR_ID,\
 			SLOT_W_UNDERWEAR,\
@@ -304,7 +303,6 @@ mob/visible_message(message, self_message, blind_message, vision_distance = DEFA
 			SLOT_L_STORE, SLOT_R_STORE,\
 			SLOT_GENERC_DEXTROUS_STORAGE\
 		)
-		//
 
 	for(var/slot in slot_priority)
 		if(equip_to_slot_if_possible(W, slot, 0, 1, 1)) //qdel_on_fail = 0; disable_warning = 1; redraw_mob = 1
@@ -473,11 +471,9 @@ mob/visible_message(message, self_message, blind_message, vision_distance = DEFA
 	set category = "IC"
 	set desc = "View your character's notes memory."
 	if(mind)
-//SKYRAT CHANGES BEGIN
 		var/datum/browser/popup = new(src, "memory", "Memory and Notes")
 		popup.set_content(mind.show_memory())
 		popup.open()
-//SKYRAT CHANGES END
 	else
 		to_chat(src, "You don't have a mind datum for some reason, so you can't look at your notes, if you had any.")
 
@@ -651,7 +647,7 @@ GLOBAL_VAR_INIT(exploit_warn_spam_prevention, 0)
 		L += "Round ID: [GLOB.round_id || "NULL"]"
 		L += SStime_track.stat_time_text
 		L += SSshuttle.emergency_shuttle_stat_text
-		L += "Connected players: [GLOB.clients.len]" // Skyrat-edit -- hope it won't shit on the performance or anything
+		L += "Connected players: [GLOB.clients.len]"
 		stat(null, "[L.Join("\n\n")]")
 
 	if(client.holder)

@@ -92,9 +92,7 @@
 						"Black and Silver" = "pen-fountain-b",
 						"Command Blue" = "pen-fountain-cb"
 						)
-	//skyrat edit
 	embedding = list("embed_chance" = 75)
-	//
 
 /obj/item/pen/fountain/captain/Initialize()
 	. = ..()
@@ -200,9 +198,7 @@
 		w_class = initial(w_class)
 		name = initial(name)
 		hitsound = initial(hitsound)
-		//skyrat edit
 		embedding = list(embed_chance = EMBED_CHANCE)
-		//
 		throwforce = initial(throwforce)
 		playsound(user, 'sound/weapons/saberoff.ogg', 5, 1)
 		to_chat(user, "<span class='warning'>[src] can now be concealed.</span>")

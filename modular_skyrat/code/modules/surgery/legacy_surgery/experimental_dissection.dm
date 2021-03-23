@@ -8,7 +8,7 @@
 				/datum/surgery_step/clamp_bleeders,
 				/datum/surgery_step/dissection,
 				/datum/surgery_step/close)
-	possible_locs = TORSO_BODYPARTS //skyrat edit
+	possible_locs = TORSO_BODYPARTS
 	requires_bodypart_type = BODYPART_ORGANIC
 	target_mobtypes = list(/mob/living) //Feel free to dissect devils but they're magic.
 	replaced_by = /datum/surgery/advanced/experimental_dissection/adv
@@ -52,8 +52,6 @@
 				cost = (BASE_HUMAN_REWARD*4)
 			else if(isgolem(H) || iszombie(H))
 				cost = (BASE_HUMAN_REWARD*3)
-			/*else if(isjellyperson(H) || ispodperson(H)) CITADEL CHANGE: jelly and pod being available roundstart shouldn't give additional points
-				cost = (BASE_HUMAN_REWARD*2)*/
 	else
 		cost = (BASE_HUMAN_REWARD * 0.6)
 
@@ -78,7 +76,7 @@
 	"[user] dissects [target]!")
 	SSresearch.science_tech.add_point_list(list(TECHWEB_POINT_TYPE_GENERIC = points_earned))
 	var/obj/item/bodypart/L = target.get_bodypart(BODY_ZONE_CHEST)
-	target.apply_damage(80, BRUTE, L, wound_bonus=CANT_WOUND) //skyrat edit
+	target.apply_damage(80, BRUTE, L, wound_bonus=CANT_WOUND)
 	ADD_TRAIT(target, TRAIT_DISSECTED, "[surgery.name]")
 	repeatable = FALSE
 	return TRUE
@@ -89,7 +87,7 @@
 	"[user] dissects [target], but looks a little dissapointed.")
 	SSresearch.science_tech.add_point_list(list(TECHWEB_POINT_TYPE_GENERIC = (round(check_value(target, surgery) * 0.01))))
 	var/obj/item/bodypart/L = target.get_bodypart(BODY_ZONE_CHEST)
-	target.apply_damage(80, BRUTE, L, wound_bonus=CANT_WOUND) //skyrat edit
+	target.apply_damage(80, BRUTE, L, wound_bonus=CANT_WOUND)
 	return TRUE
 
 /datum/surgery/advanced/experimental_dissection/adv

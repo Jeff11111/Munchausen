@@ -115,7 +115,7 @@
 	updateUsrDialog()
 	return TRUE
 
-/obj/machinery/mecha_part_fabricator/Topic(href, href_list)  // Skyrat edit -- BEGIN -- Moved to modular_skyrat/code/game/mecha/mech_fabricator.dm
+/obj/machinery/mecha_part_fabricator/Topic(href, href_list)
 	if(..())
 		return
 	if(href_list["part_set"])

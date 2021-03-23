@@ -77,8 +77,6 @@
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/insect_fluff, GLOB.insect_fluffs_list)
 	if(!GLOB.insect_markings_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/insect_markings, GLOB.insect_markings_list)
-
-	//CIT CHANGES - genitals and such
 	if(!GLOB.cock_shapes_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/penis, GLOB.cock_shapes_list)
 	if(!GLOB.balls_shapes_list.len)
@@ -99,12 +97,8 @@
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/mam_ears, GLOB.mam_ears_list)
 	if(!GLOB.mam_snouts_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/mam_snouts, GLOB.mam_snouts_list)
-
-	//Skyrat changes
 	if(!GLOB.ipc_chassis_list.len)
 		init_sprite_accessory_subtypes(/datum/sprite_accessory/ipc_chassis, GLOB.ipc_chassis_list)
-
-	//End of skyrat changes
 
 	//snowflake check so people's ckey features don't get randomly put on unmonkeys/spawns
 	var/list/snowflake_mam_tails_list = list()
@@ -227,7 +221,7 @@
 		"silicon_flavor_text"		= "",
 		"meat_type"			= "Mammalian",
 		"body_model"		= body_model,
-		"ipc_chassis" 		= "Morpheus Cyberkinetics(Greyscale)", //SKYRAT CHANGE
+		"ipc_chassis" 		= "Morpheus Cyberkinetics(Greyscale)",
 		"body_size"			= RESIZE_DEFAULT_SIZE
 		))
 

@@ -11,12 +11,12 @@
 	projectile_type = /obj/item/projectile/beam/laser
 	e_cost = 200
 	select_name = "kill"
-//Skyrat Edit Start
+
 /obj/item/ammo_casing/energy/lasergun/improvised
 	projectile_type = /obj/item/projectile/beam/weak/burst
 	e_cost = 40
 	select_name = "kill"
-//Skyrat Edit End
+
 /obj/item/ammo_casing/energy/laser/hos
 	e_cost = 100
 
@@ -85,7 +85,6 @@
 	select_name = "MINDFUCK"
 	fire_sound = 'sound/weapons/laser.ogg'
 
-//skyrat edit
 /obj/item/ammo_casing/energy/laser/hellfire
 	projectile_type = /obj/item/projectile/beam/laser/hellfire
 	e_cost = 130

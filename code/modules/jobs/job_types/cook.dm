@@ -12,8 +12,8 @@
 
 	outfit = /datum/outfit/job/cook
 
-	access = list(ACCESS_HYDROPONICS, ACCESS_BAR, ACCESS_KITCHEN, ACCESS_MINERAL_STOREROOM) //Skyrat Edit, No Morgue Access
-	minimal_access = list(ACCESS_KITCHEN, ACCESS_MINERAL_STOREROOM) //Skyrat Edit, No Morgue Access
+	access = list(ACCESS_HYDROPONICS, ACCESS_BAR, ACCESS_KITCHEN, ACCESS_MINERAL_STOREROOM)
+	minimal_access = list(ACCESS_KITCHEN, ACCESS_MINERAL_STOREROOM)
 	paycheck = PAYCHECK_EASY
 	paycheck_department = ACCOUNT_SRV
 

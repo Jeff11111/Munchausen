@@ -45,15 +45,6 @@
 	message = "mawps annoyingly."
 	emote_type = EMOTE_AUDIBLE
 
-/datum/emote/living/carbon/human/mawp/run_emote(mob/living/user, params)
-	. = ..()
-	/* skyrat edit - this is cancer
-	if(.)
-		if(ishuman(user))
-			if(prob(10))
-				user.adjustEarDamage(-5, -5)
-	*/
-
 /datum/emote/living/carbon/human/mumble
 	key = "mumble"
 	key_third_person = "mumbles"

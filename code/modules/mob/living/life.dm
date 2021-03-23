@@ -200,7 +200,6 @@
 		var/grav_stregth = gravity - GRAVITY_DAMAGE_TRESHOLD
 		adjustBruteLoss(min(grav_stregth,3))
 
-//skyrat edit
 /mob/living/proc/handle_wounds()
 	return
 

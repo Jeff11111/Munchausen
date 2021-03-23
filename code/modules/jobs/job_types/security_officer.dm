@@ -1,17 +1,15 @@
 /datum/job/officer
 	title = "Enforcer"
 	flag = OFFICER
-//	auto_deadmin_role_flags = DEADMIN_POSITION_SECURITY
 	department_head = list("Chief Enforcer")
 	department_flag = ENGSEC
 	faction = "Station"
-	// Skyrat EDIT: from 5 to 8
 	total_positions = 8 //Handled in /datum/controller/occupations/proc/setup_officer_positions()
 	spawn_positions = 8 //Handled in /datum/controller/occupations/proc/setup_officer_positions()
 	supervisors = "the Chief Enforcer, and the head of your assigned department (if applicable)"
 	selection_color = "#c02f2f"
 	minimal_player_age = 7
-	exp_requirements = 120 //SKYRAT CHANGE - lowers security exp requirement
+	exp_requirements = 120 
 	exp_type = EXP_TYPE_CREW
 
 	outfit = /datum/outfit/job/security
@@ -83,7 +81,7 @@ GLOBAL_LIST_INIT(available_depts, list(SEC_DEPT_ENGINEERING, SEC_DEPT_MEDICAL, S
 	if(ears)
 		if(H.ears)
 			qdel(H.ears)
-		H.equip_to_slot_or_del(new ears(H),SLOT_EARS_LEFT) //skyrat edit
+		H.equip_to_slot_or_del(new ears(H),SLOT_EARS_LEFT)
 
 	var/obj/item/card/id/W = H.wear_id
 	W.access |= dep_access

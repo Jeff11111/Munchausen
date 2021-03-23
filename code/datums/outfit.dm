@@ -24,17 +24,13 @@
 	var/box // Internals box. Will be inserted at the start of backpack_contents
 	var/list/implants = null
 	var/accessory = null
-
 	var/can_be_admin_equipped = TRUE // Set to FALSE if your outfit requires runtime parameters
 	var/list/chameleon_extras //extra types for chameleon outfit changes, mostly guns
-
-	//skyrat edit
 	var/underwear = null
 	var/socks = null
 	var/shirt = null
 	var/ears_extra = null
 	var/wrists = null
-	//
 
 /datum/outfit/proc/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE, client/preference_source)
 	//to be overridden for customization depending on client prefs,species etc
@@ -67,14 +63,13 @@
 	if(neck)
 		H.equip_to_slot_or_del(new neck(H),SLOT_NECK)
 	if(ears)
-		H.equip_to_slot_or_del(new ears(H),SLOT_EARS_LEFT) //skyrat edit
+		H.equip_to_slot_or_del(new ears(H),SLOT_EARS_LEFT)
 	if(glasses)
 		H.equip_to_slot_or_del(new glasses(H),SLOT_GLASSES)
 	if(id)
 		H.equip_to_slot_or_del(new id(H),SLOT_WEAR_ID)
 	if(suit_store)
 		H.equip_to_slot_or_del(new suit_store(H),SLOT_S_STORE)
-	//skyrat edit
 	if(ears_extra)
 		H.equip_to_slot_or_del(new ears(H),SLOT_EARS_RIGHT)
 	if(underwear)
@@ -85,7 +80,6 @@
 		H.equip_to_slot_or_del(new shirt(H),SLOT_W_SHIRT)
 	if(wrists)
 		H.equip_to_slot_or_del(new wrists(H),SLOT_WRISTS)
-	//
 
 	if(accessory)
 		var/obj/item/clothing/under/U = H.w_uniform
@@ -165,7 +159,6 @@
 		H.shoes.add_fingerprint(H,1)
 	if(H.gloves)
 		H.gloves.add_fingerprint(H,1)
-	//skyrat edit
 	if(H.wrists)
 		H.wrists.add_fingerprint(H,1)
 	if(H.w_socks)
@@ -176,7 +169,6 @@
 		H.w_shirt.add_fingerprint(H,1)
 	if(H.ears_extra)
 		H.ears_extra.add_fingerprint(H,1)
-	//
 	if(H.ears)
 		H.ears.add_fingerprint(H,1)
 	if(H.glasses)
@@ -196,7 +188,7 @@
 	return 1
 
 /datum/outfit/proc/get_chameleon_disguise_info()
-	var/list/types = list(uniform, underwear, socks, shirt, ears_extra, suit, back, belt, gloves, wrists, shoes, head, mask, neck, ears, glasses, id, l_pocket, r_pocket, suit_store, r_hand, l_hand) //skyrat edit
+	var/list/types = list(uniform, underwear, socks, shirt, ears_extra, suit, back, belt, gloves, wrists, shoes, head, mask, neck, ears, glasses, id, l_pocket, r_pocket, suit_store, r_hand, l_hand)
 	types += chameleon_extras
 	listclearnulls(types)
 	return types

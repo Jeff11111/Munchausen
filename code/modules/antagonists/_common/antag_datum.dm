@@ -23,16 +23,11 @@ GLOBAL_LIST_EMPTY(antagonists)
 	var/show_name_in_check_antagonists = FALSE //Will append antagonist name in admin listings - use for categories that share more than one antag type
 	var/list/blacklisted_quirks = list() // Quirks that will be removed upon gaining this antag. Pacifist is default.
 	var/threat = 0 // Amount of threat this antag poses, for dynamic mode
-// SKYRAT CHANGES BEGIN
 	/// Lazy list for antagonists to request the admins objectives.
 	var/list/requested_objective_changes
-// SKYRAT CHANGES END
 	var/list/skill_modifiers
-
-//SKYRAT CHANGES BEGIN
 	///Possible values: NONE, CAN_SEE_EXPOITABLE_INFO
 	var/antag_flags = CAN_SEE_EXPOITABLE_INFO
-//SKYRANT CHANGES END
 
 /datum/antagonist/New()
 	GLOB.antagonists += src
@@ -40,9 +35,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 
 /datum/antagonist/Destroy()
 	GLOB.antagonists -= src
-//SKYRAT CHANGES BEGIN
 	owner?.do_remove_antag_datum(src)
-//SKYRAT CHANGES END
 	owner = null
 	return ..()
 
@@ -100,11 +93,9 @@ GLOBAL_LIST_EMPTY(antagonists)
 	remove_blacklisted_quirks()
 	if(is_banned(owner.current) && replace_banned)
 		replace_banned_player()
-	//Skyrat changes - warns the antag banned player if the role doesn't ghost him
 	else if (is_banned(owner.current))
 		to_chat(owner, "<span class='boldwarning'>You are currently banned from antagonist roles and it's likely you've been converted. Please stay at your best behaviour, remember our rules and guidelines.")
 		message_admins("([key_name_admin(owner.current)]), as an antag banned player became a [src.name].")
-	//Skyrat changes END
 	if(skill_modifiers)
 		for(var/A in skill_modifiers)
 			ADD_SINGLETON_SKILL_MODIFIER(owner, A, type)
@@ -133,9 +124,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 	remove_innate_effects()
 	clear_antag_moodies()
 	if(owner)
-//SKYRAT CHANGES BEGIN
 		owner.do_remove_antag_datum(src)
-//SKYRAT CHANGES END
 		for(var/A in skill_modifiers)
 			owner.remove_skill_modifier(GET_SKILL_MOD_ID(A, type))
 		if(!silent && owner.current)

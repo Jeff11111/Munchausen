@@ -12,7 +12,6 @@
 		features["mcolor3"] = pick("FFFFFF","7F7F7F", "7FFF7F", "7F7FFF", "FF7F7F", "7FFFFF", "FF7FFF", "FFFF7F")
 	features["mcolor2"]	= sanitize_hexcolor(features["mcolor2"], 6, TRUE)
 	features["mcolor3"]	= sanitize_hexcolor(features["mcolor3"], 6, TRUE)
-	//SKYRAT CHANGES
 	S["enable_personal_chat_color"]			>> enable_personal_chat_color
 	S["personal_chat_color"]			>> personal_chat_color
 
@@ -63,7 +62,6 @@
 	WRITE_FILE(S["feature_xeno_tail"], features["xenotail"])
 	WRITE_FILE(S["feature_xeno_dors"], features["xenodorsal"])
 	WRITE_FILE(S["feature_xeno_head"], features["xenohead"])
-	
 	//SKYRAT CHANGES
 	WRITE_FILE(S["feature_ipc_chassis"], features["ipc_chassis"])
 	WRITE_FILE(S["security_records"], security_records)
@@ -80,4 +78,3 @@
 	WRITE_FILE(S["fooddislikes"], fooddislikes)
 	WRITE_FILE(S["limb_augments"], limb_augments)
 	WRITE_FILE(S["organ_augments"], organ_augments)
-	//END OF SKYRAT CHANGES

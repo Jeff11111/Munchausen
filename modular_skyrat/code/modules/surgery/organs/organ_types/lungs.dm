@@ -301,7 +301,7 @@
 
 		//Too much nitrogen!
 		if(safe_nitro_max)
-			if(N2_pp > safe_nitro_max && !(safe_nitro_max == 0)) //Skyrat edit
+			if(N2_pp > safe_nitro_max && !(safe_nitro_max == 0))
 				var/ratio = (breath_gases[/datum/gas/nitrogen]/safe_nitro_max) * 10
 				H.apply_damage_type(clamp(ratio, nitro_breath_dam_min, nitro_breath_dam_max), nitro_damage_type)
 				H.throw_alert("too_much_nitro", /obj/screen/alert/too_much_nitro)
@@ -330,7 +330,7 @@
 
 		//CO2 does not affect failed_last_breath. So if there was enough oxygen in the air but too much co2, this will hurt you, but only once per 4 ticks, instead of once per tick.
 		if(safe_co2_max)
-			if(CO2_pp > safe_co2_max && !(safe_co2_max == 0)) //Skyrat edit
+			if(CO2_pp > safe_co2_max && !(safe_co2_max == 0))
 				if(!H.co2overloadtime) // If it's the first breath with too much CO2 in it, lets start a counter, then have them pass out after 12s or so.
 					H.co2overloadtime = world.time
 				else if(world.time - H.co2overloadtime > 120)
@@ -368,7 +368,7 @@
 
 		//Too much toxins!
 		if(safe_toxins_max)
-			if(Toxins_pp > safe_toxins_max && !(safe_toxins_max == 0)) //skyrat edit
+			if(Toxins_pp > safe_toxins_max && !(safe_toxins_max == 0))
 				var/ratio = (breath_gases[/datum/gas/plasma]/safe_toxins_max) * 10
 				H.apply_damage_type(clamp(ratio, tox_breath_dam_min, tox_breath_dam_max), tox_damage_type)
 				H.throw_alert("too_much_tox", /obj/screen/alert/too_much_tox)

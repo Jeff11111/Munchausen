@@ -20,7 +20,7 @@
 
 /obj/item/clothing/head/hardhat/ComponentInitialize()
 	. = ..()
-	AddComponent(/datum/component/overlay_lighting, light_color, brightness_on, power_on, FALSE) //Skyrat change
+	AddComponent(/datum/component/overlay_lighting, light_color, brightness_on, power_on, FALSE)
 	AddElement(/datum/element/update_icon_updates_onmob)
 
 /obj/item/clothing/head/hardhat/attack_self(mob/living/user)

@@ -47,7 +47,6 @@ GLOBAL_LIST_INIT(bsatmos_pipe_recipes, list(
 	)
 ))
 
-// SKYRAT CHANGE: Made BSRPD into a subtype of RPD, additionally made it work at range.
 /obj/item/pipe_dispenser/bluespace
 	name = "Bluespace Rapid Piping Device (BSRPD)"
 	desc = "A device used to rapidly pipe things at a distance."
@@ -65,7 +64,6 @@ GLOBAL_LIST_INIT(bsatmos_pipe_recipes, list(
 	playsound(src, 'sound/items/pshoom.ogg', 30, TRUE)
 	dispense(target, user)
 
-// End skyrat edit 
 #undef ATMOS_CATEGORY
 #undef DISPOSALS_CATEGORY
 #undef TRANSIT_CATEGORY

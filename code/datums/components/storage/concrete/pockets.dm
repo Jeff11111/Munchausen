@@ -47,7 +47,7 @@
 	attack_hand_interact = FALSE
 	quickdraw = TRUE
 	silent = TRUE
-// SKYRAT EDIT: Removing "/obj/item/gun/ballistic/automatic/pistol, /obj/item/gun/ballistic/automatic/magrifle/pistol" from the holding. //And also the mini e-guns
+	
 /datum/component/storage/concrete/pockets/shoes/Initialize()
 	. = ..()
 	cant_hold = typecacheof(list(/obj/item/screwdriver/power))

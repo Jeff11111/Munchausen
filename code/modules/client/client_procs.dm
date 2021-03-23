@@ -1,7 +1,7 @@
 	////////////
 	//SECURITY//
 	////////////
-#define UPLOAD_LIMIT		5242880	//Restricts client uploads to the server to 5MB //skyrat-edit
+#define UPLOAD_LIMIT		5242880
 
 GLOBAL_LIST_INIT(blacklisted_builds, list(
 	"1407" = "bug preventing client display overrides from working leads to clients being able to see things/mobs they shouldn't be able to see",
@@ -78,7 +78,6 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 	if(!(href_list["_src_"] == "chat" && href_list["proc"] == "ping" && LAZYLEN(href_list) == 2))
 		log_href("[src] (usr:[usr]\[[COORD(usr)]\]) : [hsrc ? "[hsrc] " : ""][href]")
 
-	// Skyrat change START
 	// Show tickets
 	if(href_list["my_ahelp_tickets"])
 		GLOB.ahelp_tickets.BrowserPlayerTickets()
@@ -91,7 +90,6 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 		switch(href_list["ahelp_action"])
 			if("player_ticket")
 				AH.PlayerTicketPanel()
-	// Skyrat change END
 	//byond bug ID:2256651
 	if (asset_cache_job && (asset_cache_job in completed_asset_jobs))
 		to_chat(src, "<span class='danger'>An error has been detected in how your client is receiving resources. Attempting to correct.... (If you keep seeing these messages you might want to close byond and reconnect)</span>")
@@ -115,25 +113,20 @@ GLOBAL_LIST_INIT(blacklisted_builds, list(
 
 	// Admin PM
 	if(href_list["priv_msg"])
-		// Skyrat change START
 		var/ahelp_ref = href_list["ahelp_player"]
 		var/datum/admin_help/AH = locate(ahelp_ref)
 
 		cmd_admin_pm(href_list["priv_msg"],null,AH)
-		// Skyrat change END
-
-	// CITADEL Start - Mentor PM
 	if (citadel_client_procs(href_list))
 		return
-	// CITADEL End
 
 	switch(href_list["_src_"])
 		if("holder")
 			hsrc = holder
 		if("usr")
 			hsrc = mob
-		if("mentor") // CITADEL
-			hsrc = mentor_datum // CITADEL END
+		if("mentor")
+			hsrc = mentor_datum
 		if("prefs")
 			if (inprefs)
 				return
@@ -229,7 +222,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 #endif
 
 /client/New(TopicData)
-	world.SetConfig("APP/admin", ckey, "role=admin")			//CITADEL EDIT - Allows admins to reboot in OOM situations
+	world.SetConfig("APP/admin", ckey, "role=admin")			//Allows admins to reboot in OOM situations
 	var/tdata = TopicData //save this for later use
 	chatOutput = new /datum/chatOutput(src)
 	TopicData = null							//Prevent calls to client.Topic from connect
@@ -244,15 +237,13 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	var/connecting_admin = FALSE //because de-admined admins connecting should be treated like admins.
 	//Admin Authorisation
 	holder = GLOB.admin_datums[ckey]
-	var/debug_tools_allowed = FALSE			//CITADEL EDIT
+	var/debug_tools_allowed = FALSE
 	if(holder)
 		GLOB.admins |= src
 		holder.owner = src
 		connecting_admin = TRUE
-		//CITADEL EDIT
 		if(check_rights_for(src, R_DEBUG))
 			debug_tools_allowed = TRUE
-		//END CITADEL EDIT
 	else if(GLOB.deadmins[ckey])
 		verbs += /client/proc/readmin
 		connecting_admin = TRUE
@@ -267,12 +258,10 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 				to_chat(world, "Autoadmin rank not found")
 			else
 				new /datum/admins(autorank, ckey)
-	//CITADEL EDIT
 	if(check_rights_for(src, R_DEBUG))	//check if autoadmin gave us it
 		debug_tools_allowed = TRUE
 	if(!debug_tools_allowed)
 		world.SetConfig("APP/admin", ckey, null)
-	//END CITADEL EDIT
 	if(CONFIG_GET(flag/enable_localhost_rank) && !connecting_admin)
 		var/localhost_addresses = list("127.0.0.1", "::1")
 		if(isnull(address) || (address in localhost_addresses))
@@ -501,9 +490,6 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 //////////////
 
 /client/Del()
-	// SKYRAT EDIT: Credits
-	//if(credits)
-		//QDEL_LIST(credits)
 	log_access("Logout: [key_name(src)]")
 	if(holder)
 		adminGreet(1)
@@ -577,7 +563,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	if(!query_client_in_db.NextRow())
 		if (CONFIG_GET(flag/panic_bunker) && !holder && !GLOB.deadmins[ckey] && !(ckey in GLOB.bunker_passthrough))
 			log_access("Failed Login: [key] - [address] - New account attempting to connect during panic bunker")
-			message_admins("<span class='adminnotice'>Failed Login: [key] - [address] - New account attempting to connect during panic bunker</span>") //skyrat-edit
+			message_admins("<span class='adminnotice'>Failed Login: [key] - [address] - New account attempting to connect during panic bunker</span>")
 			var/list/connectiontopic_a = params2list(connectiontopic)
 			var/list/panic_addr = CONFIG_GET(string/panic_server_address)
 			if(panic_addr && !connectiontopic_a["redirect"])
@@ -826,11 +812,8 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 					log_game("[key_name(src)] is using the middle click aimbot exploit")
 					message_admins("[ADMIN_LOOKUPFLW(src)] [ADMIN_KICK(usr)] is using the middle click aimbot exploit</span>")
 					add_system_note("aimbot", "Is using the middle click aimbot exploit")
-					//log_click(object, location, control, params, src, "lockout (spam - minute ab c [ab] s [middragtime])", TRUE) //SKYRAT CHANGE
-				//else //SKYRAT CHANGE
-					//log_click(object, location, control, params, src, "lockout (spam - minute)", TRUE) //SKYRAT CHANGE
-				log_game("[key_name(src)] Has hit the per-minute click limit of [mcl] clicks in a given game minute")
-				message_admins("[ADMIN_LOOKUPFLW(src)] [ADMIN_KICK(usr)] Has hit the per-minute click limit of [mcl] clicks in a given game minute")
+				log_game("[key_name(src)] has hit the per-minute click limit of [mcl] clicks in a given game minute")
+				message_admins("[ADMIN_LOOKUPFLW(src)] [ADMIN_KICK(usr)] has hit the per-minute click limit of [mcl] clicks in a given game minute")
 			to_chat(src, "<span class='danger'>[msg]</span>")
 			return
 
@@ -847,12 +830,8 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 			to_chat(src, "<span class='danger'>Your previous click was ignored because you've done too many in a second</span>")
 			return
 
-	if(ab) //Citadel edit, things with stuff.
-		//log_click(object, location, control, params, src, "dropped (ab c [ab] s [middragtime])", TRUE) //SKYRAT CHANGE
+	if(ab)
 		return
-
-	//if(prefs.log_clicks) //SKYRAT EDIT
-		//log_click(object, location, control, params, src) //SKYRAT EDIT
 
 	if (prefs.hotkeys)
 		// If hotkey mode is enabled, then clicking the map will automatically

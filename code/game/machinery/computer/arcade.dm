@@ -2,12 +2,10 @@
 #define ARCADE_WEIGHT_USELESS 2
 #define ARCADE_WEIGHT_RARE 1
 #define ARCADE_RATIO_PLUSH 0.20 // average 1 out of 6 wins is a plush.
-
-// Skyrat Change BEGIN
 #define ARCADE_TICKET_DISPENSE_BEST rand(17-30)
 #define ARCADE_TICKET_DISPENSE_MED rand(11, 16)
 #define ARCADE_TICKET_DISPENSE_LOW rand(5,10)
-// Skyrat Change END
+
 
 /obj/machinery/computer/arcade
 	name = "random arcade"
@@ -93,7 +91,7 @@
 		var/list/gameodds = list(/obj/item/circuitboard/computer/arcade/battle = 33,
 								/obj/item/circuitboard/computer/arcade/orion_trail = 33,
 								/obj/item/circuitboard/computer/arcade/minesweeper = 0,
-								/obj/item/circuitboard/computer/arcade/tetris = 33, // Skyrat addition
+								/obj/item/circuitboard/computer/arcade/tetris = 33,
 								/obj/item/circuitboard/computer/arcade/amputation = 1)
 		var/thegame = pickweight(gameodds)
 		var/obj/item/circuitboard/CB = new thegame()
@@ -104,27 +102,6 @@
 	//Nevertheless, this keeps its ratio constant with the sum of all the others prizes.
 	prizes[/obj/item/toy/plush/random] = counterlist_sum(prizes) * ARCADE_RATIO_PLUSH
 	Reset()
-
-/* Moved to Modular Skyrat
-/obj/machinery/computer/arcade/proc/prizevend(mob/user, list/rarity_classes)
-	SEND_SIGNAL(user, COMSIG_ADD_MOOD_EVENT, "arcade", /datum/mood_event/arcade)
-
-	if(prob(1) && prob(1) && prob(1)) //Proper 1 in a million
-		new /obj/item/gun/energy/pulse/prize(src)
-		SSmedals.UnlockMedal(MEDAL_PULSE, usr.client)
-
-	if(!contents.len)
-		var/prize_amount
-		if(score)
-			prize_amount = score
-		else
-			prize_amount = rand(10, 30)
-		new prize(get_turf(src), prize_amount)
-	else
-		var/atom/movable/prize = pick(contents)
-		visible_message("<span class='notice'>[src] dispenses [prize]!</span>", "<span class='notice'>You hear a chime and a clunk.</span>")
-		prize.forceMove(get_turf(src))
-*/
 
 /obj/machinery/computer/arcade/emp_act(severity)
 	. = ..()
@@ -140,6 +117,6 @@
 
 
 	for(var/i = num_of_prizes; i > 0; i--)
-		prizevend() // Skyrat change
+		prizevend()
 
 	explosion(loc, -1, 0, 1+num_of_prizes, flame_range = 1+num_of_prizes)

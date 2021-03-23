@@ -70,9 +70,9 @@
 	var/heater_turf
 	switch(dir)
 		if(NORTH)
-			heater_turf = get_offset_target_turf(src, 0, -1) //Skyrat Edit: value changed from 0, 1 to 0, -1 because the engine exhaust connected to the heater
+			heater_turf = get_offset_target_turf(src, 0, -1)
 		if(SOUTH)
-			heater_turf = get_offset_target_turf(src, 0, 1)// Skyrat Edit: value changed from 0, -1 to 0, 1 they should be looking for the turf opposite to where they're facing.
+			heater_turf = get_offset_target_turf(src, 0, 1)
 		if(EAST)
 			heater_turf = get_offset_target_turf(src, 1, 0)
 		if(WEST)

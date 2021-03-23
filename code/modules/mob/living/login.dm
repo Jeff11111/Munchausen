@@ -2,10 +2,8 @@
 	..()
 	//Mind updates
 	sync_mind()
-//SKYRAT CHANGES BEGIN
 	if(mind.memory || mind.antag_datums)
 		to_chat(src, "<i>[mind.show_memory()]</i>")
-//SKYRAT CHANGES END
 
 	//Round specific stuff
 	if(SSticker.mode)
@@ -27,4 +25,4 @@
 	if(ranged_ability)
 		ranged_ability.add_ranged_ability(src, "<span class='notice'>You currently have <b>[ranged_ability]</b> active!</span>")
 
-	set_ssd_indicator(FALSE) //SKYRAT CHANGE - ssd indicator
+	set_ssd_indicator(FALSE)

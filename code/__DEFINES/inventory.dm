@@ -36,7 +36,7 @@
 								//SLOT_HANDS as a slot will pick ANY available hand
 #define SLOT_BELT			5
 #define SLOT_WEAR_ID		6
-#define SLOT_EARS_LEFT		7 //skyrat edit
+#define SLOT_EARS_LEFT		7
 #define SLOT_GLASSES		8
 #define SLOT_GLOVES			9
 #define SLOT_NECK			10
@@ -72,12 +72,10 @@
 			. = ITEM_SLOT_BELT
 		if(SLOT_WEAR_ID)
 			. = ITEM_SLOT_ID
-		//skyrat edit
 		if(SLOT_EARS_RIGHT)
 			. = ITEM_SLOT_EARS
 		if(SLOT_EARS_LEFT)
 			. = ITEM_SLOT_EARS
-		//
 		if(SLOT_GLASSES)
 			. = ITEM_SLOT_EYES
 		if(SLOT_GLOVES)
@@ -238,7 +236,7 @@ GLOBAL_LIST_INIT(security_vest_allowed, typecacheof(list(
 	/obj/item/restraints/handcuffs,
 	/obj/item/tank/internals/emergency_oxygen,
 	/obj/item/tank/internals/plasmaman,
-	/obj/item/blunderbuss))) //skyrat edit wink wink :)
+	/obj/item/blunderbuss)))
 
 GLOBAL_LIST_INIT(security_wintercoat_allowed, typecacheof(list(
 	/obj/item/ammo_box,

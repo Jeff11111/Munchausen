@@ -7,7 +7,7 @@
 
 /mob/living/carbon/human/Initialize()
 	verbs += /mob/living/proc/lay_down
-	verbs += /mob/living/proc/surrender //Skyrat change
+	verbs += /mob/living/proc/surrender
 
 	//initialize limbs first
 	create_bodyparts()
@@ -144,7 +144,6 @@
 		dat += "<tr><td><font color=grey><B>Eyes:</B></font></td><td><font color=grey>Obscured</font></td></tr>"
 	else
 		dat += "<tr><td><B>Eyes:</B></td><td><A href='?src=[REF(src)];item=[SLOT_GLASSES]'>[(glasses && !(glasses.item_flags & ABSTRACT))	? glasses : "<font color=grey>Empty</font>"]</A></td></tr>"
-	//skyrat edit
 	if(SLOT_EARS_LEFT in obscured)
 		dat += "<tr><td><font color=grey><B>Left ear:</B></font></td><td><font color=grey>Obscured</font></td></tr>"
 	else
@@ -154,7 +153,6 @@
 		dat += "<tr><td><font color=grey><B>Right ear:</B></font></td><td><font color=grey>Obscured</font></td></tr>"
 	else
 		dat += "<tr><td><B>Right ear:</B></td><td><A href='?src=[REF(src)];item=[SLOT_EARS_RIGHT]'>[(ears_extra && !(ears_extra.item_flags & ABSTRACT))		? ears_extra		: "<font color=grey>Empty</font>"]</A></td></tr>"
-	//
 	dat += "<tr><td>&nbsp;</td></tr>"
 
 	dat += "<tr><td><B>Exosuit:</B></td><td><A href='?src=[REF(src)];item=[SLOT_WEAR_SUIT]'>[(wear_suit && !(wear_suit.item_flags & ABSTRACT)) ? wear_suit : "<font color=grey>Empty</font>"]</A>"
@@ -179,17 +177,14 @@
 		dat += "<tr><td><font color=grey><B>Gloves:</B></font></td><td><font color=grey>Obscured</font></td></tr>"
 	else
 		dat += "<tr><td><B>Gloves:</B></td><td><A href='?src=[REF(src)];item=[SLOT_GLOVES]'>[(gloves && !(gloves.item_flags & ABSTRACT))		? gloves	: "<font color=grey>Empty</font>"]</A></td></tr>"
-	//skyrat edit
 	if(SLOT_WRISTS in obscured)
 		dat += "<tr><td><font color=grey><B>Wrists:</B></font></td><td><font color=grey>Obscured</font></td></tr>"
 	else
 		dat += "<tr><td><B>Wrists:</B></td><td><A href='?src=[REF(src)];item=[SLOT_WRISTS]'>[(wrists && !(wrists.item_flags & ABSTRACT)) ? wrists : "<font color=grey>Empty</font>"]</A></td></tr>"
-	//
 	if(SLOT_W_UNIFORM in obscured)
 		dat += "<tr><td><font color=grey><B>Uniform:</B></font></td><td><font color=grey>Obscured</font></td></tr>"
 	else
 		dat += "<tr><td><B>Uniform:</B></td><td><A href='?src=[REF(src)];item=[SLOT_W_UNIFORM]'>[(w_uniform && !(w_uniform.item_flags & ABSTRACT)) ? w_uniform : "<font color=grey>Empty</font>"]</A></td></tr>"
-	//skyrat edit
 	var/undies_hidden = underwear_hidden()
 	if((SLOT_W_UNDERWEAR in obscured) || undies_hidden)
 		dat += "<tr><td><font color=grey><B>Underwear:</B></font></td><td><font color=grey>Obscured</font></td></tr>"
@@ -203,7 +198,6 @@
 		dat += "<tr><td><font color=grey><B>Shirt:</B></font></td><td><font color=grey>Obscured</font></td></tr>"
 	else
 		dat += "<tr><td><B>Shirt:</B></td><td><A href='?src=[REF(src)];item=[SLOT_W_SHIRT]'>[(w_shirt && !(w_shirt.item_flags & ABSTRACT)) ? w_shirt : "<font color=grey>Empty</font>"]</A></td></tr>"
-	//
 	if((w_uniform == null && !(dna && dna.species.nojumpsuit)) || (SLOT_W_UNIFORM in obscured))
 		dat += "<tr><td><font color=grey>&nbsp;&#8627;<B>Pockets:</B></font></td></tr>"
 		dat += "<tr><td><font color=grey>&nbsp;&#8627;<B>ID:</B></font></td></tr>"
@@ -334,7 +328,7 @@
 				if (!strip_silence)
 					to_chat(src, "<span class='warning'>You feel your [pocket_side] pocket being fumbled with!</span>")
 
-	..()	//CITADEL CHANGE - removes a tab from behind this ..() so that flavortext can actually be examined
+	..()
 
 
 ///////HUDs///////
@@ -578,20 +572,17 @@
 	if(wear_suit)
 		if(wear_suit.flags_inv & HIDEGLOVES)
 			obscured |= SLOT_GLOVES
-		//skyrat edit
 		if(wear_suit.flags_inv & HIDEWRISTS)
 			obscured |= SLOT_WRISTS
 		if(wear_suit.flags_inv & HIDEUNDERWEAR)
 			obscured |= SLOT_W_UNDERWEAR
 			obscured |= SLOT_W_SHIRT
 			obscured |= SLOT_W_SOCKS
-		//
 		if(wear_suit.flags_inv & HIDEJUMPSUIT)
 			obscured |= SLOT_W_UNIFORM
 		if(wear_suit.flags_inv & HIDESHOES)
 			obscured |= SLOT_SHOES
 	
-	//skyrat edit
 	if(w_uniform)
 		if(w_uniform.flags_inv & HIDEGLOVES)
 			obscured |= SLOT_GLOVES
@@ -601,7 +592,6 @@
 			obscured |= SLOT_W_UNDERWEAR
 			obscured |= SLOT_W_SHIRT
 			obscured |= SLOT_W_SOCKS
-	//
 
 	if(head)
 		if(head.flags_inv & HIDEMASK)
@@ -609,10 +599,8 @@
 		if(head.flags_inv & HIDEEYES)
 			obscured |= SLOT_GLASSES
 		if(head.flags_inv & HIDEEARS)
-			//skyrat edit
 			obscured |= SLOT_EARS_LEFT
 			obscured |= SLOT_EARS_RIGHT
-			//
 
 	if(wear_mask)
 		if(wear_mask.flags_inv & HIDEEYES)
@@ -929,7 +917,7 @@
 		return
 	else
 		if(hud_used.healths)
-			var/health_amount = min(get_physical_damage(), maxHealth - clamp(getStaminaLoss()-50, 0, 80))//CIT CHANGE - makes staminaloss have less of an impact on the health hud
+			var/health_amount = min(get_physical_damage(), maxHealth - clamp(getStaminaLoss()-50, 0, 80))
 			if(..(health_amount)) //not dead
 				switch(hal_screwyhud)
 					if(SCREWYHUD_CRIT)
@@ -1199,9 +1187,9 @@
 		remove_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown)
 		remove_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown_flying)
 		return
-	var/stambufferinfluence = (bufferedstam*(100/stambuffer))*0.2 //CIT CHANGE - makes stamina buffer influence movedelay
+	var/stambufferinfluence = (bufferedstam*(100/stambuffer))*0.2 //makes stamina buffer influence movedelay
 	if(!HAS_TRAIT(src, TRAIT_IGNOREDAMAGESLOWDOWN))	//if we want to ignore slowdown from damage, but not from equipment
-		var/health = ((maxHealth + stambufferinfluence) - get_shock() - (getStaminaLoss()*0.75))//CIT CHANGE - reduces the impact of staminaloss and makes stamina buffer influence it
+		var/health = ((maxHealth + stambufferinfluence) - get_shock() - (getStaminaLoss()*0.75))//reduces the impact of staminaloss and makes stamina buffer influence it
 		if(health < (maxHealth - PAIN_GIVES_IN))
 			add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown, TRUE, ((maxHealth-health)-39) / 75)
 			add_or_update_variable_movespeed_modifier(/datum/movespeed_modifier/damage_slowdown_flying, TRUE, ((maxHealth-health)-39) / 25)
@@ -1407,7 +1395,6 @@
 /mob/living/carbon/human/species/roundstartslime
 	race = /datum/species/jelly/roundstartslime
 
-//skyrat edit
 /mob/living/carbon/human/is_bleeding()
 	if(NOBLOOD in dna.species.species_traits)
 		return FALSE
@@ -1429,7 +1416,6 @@
 /mob/living/carbon/human/needs_lungs()
 	return !HAS_TRAIT(src, TRAIT_NOBREATH)
 
-//skyrat species
 /mob/living/carbon/human/species/humanoid
 	race = /datum/species/human/humanoid
 

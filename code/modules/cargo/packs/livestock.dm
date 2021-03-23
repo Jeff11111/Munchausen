@@ -12,7 +12,7 @@
 
 /datum/supply_pack/critter/animal_feed
 	name = "Animal Feed Crate"
-	desc = "Food for livestock like cows and hens. Contains fifty Wheat bundles and fifty Oat bundles." //Skyrat change, fixes typo and grammatical error
+	desc = "Food for livestock like cows and hens. Contains fifty Wheat bundles and fifty Oat bundles."
 	cost = 1500
 	contains = list(/obj/item/reagent_containers/food/snacks/grown/wheat,
 					/obj/item/reagent_containers/food/snacks/grown/oat)
@@ -77,7 +77,7 @@
 
 /datum/supply_pack/critter/crab
 	name = "Crab Rocket"
-	desc = "Craaaabb Rocket!" //Skyrat Change, fixed the autistic meltdown that the person who made this crate was having
+	desc = "Craaaabb Rocket!"
 	cost = 5000
 	contains = list(/mob/living/simple_animal/crab)
 	crate_name = "look sir free crabs"
@@ -157,7 +157,7 @@
 
 /datum/supply_pack/critter/snake
 	name = "Snake Crate"
-	desc = "Tired of these MOTHERFUCKING snakes on this MOTHERFUCKING space station? Then this isn't the crate for you. Contains three poisonous snakes." //Skyrat change, fixed grammatical error
+	desc = "Tired of these MOTHERFUCKING snakes on this MOTHERFUCKING space station? Then this isn't the crate for you. Contains three poisonous snakes."
 	cost = 3000
 	contains = list(/mob/living/simple_animal/hostile/retaliate/poison/snake,
 					/mob/living/simple_animal/hostile/retaliate/poison/snake,
@@ -166,7 +166,7 @@
 
 /datum/supply_pack/critter/mouse
 	name = "Mouse Crate"
-	desc = "Good for snakes and lizards of all ages. Contains twelve feeder mice." //Skyrat change, changed number for consistency
+	desc = "Good for snakes and lizards of all ages. Contains twelve feeder mice."
 	cost = 2000
 	contains = list(/mob/living/simple_animal/mouse,)
 	crate_name = "mouse crate"

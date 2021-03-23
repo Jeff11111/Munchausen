@@ -26,7 +26,6 @@ SUBSYSTEM_DEF(research)
 	var/list/techweb_nodes_hidden = list()		//Node ids that should be hidden by default.
 	var/list/techweb_nodes_experimental = list()	//Node ids that are exclusive to the BEPIS.
 
-	//SKYRAT CHANGE
 	//PROBLEM COMPUTER CHARGES
 	var/problem_computer_max_charges = 5
 	var/problem_computer_charges = 5
@@ -37,7 +36,6 @@ SUBSYSTEM_DEF(research)
 	/obj/item/assembly/signaler/anomaly            = list(TECHWEB_POINT_TYPE_GENERIC = 10000),
 
 	/obj/item/stock_parts/cell/high/plus/argent    = list(TECHWEB_POINT_TYPE_GENERIC = 10000),
-	//END SKYRAT CHANGE
 	//   -   Slime Extracts!   - Basics
 	/obj/item/slime_extract/grey                   = list(TECHWEB_POINT_TYPE_GENERIC = 500),
 	/obj/item/slime_extract/metal                  = list(TECHWEB_POINT_TYPE_GENERIC = 750),
@@ -295,7 +293,7 @@ SUBSYSTEM_DEF(research)
 	var/list/errored_datums = list()
 	var/list/point_types = list()				//typecache style type = TRUE list
 	//----------------------------------------------
-	var/list/single_server_income = list(TECHWEB_POINT_TYPE_GENERIC = 35)	//citadel edit - techwebs nerf
+	var/list/single_server_income = list(TECHWEB_POINT_TYPE_GENERIC = 35)
 	var/multiserver_calculation = FALSE
 	var/last_income
 	//^^^^^^^^ ALL OF THESE ARE PER SECOND! ^^^^^^^^
@@ -347,7 +345,6 @@ SUBSYSTEM_DEF(research)
 			bitcoins[i] *= income_time_difference / 10
 		science_tech.add_point_list(bitcoins)
 	last_income = world.time
-	// Skyrat change. Handles Problem Computer charges here
 	if(problem_computer_charges < problem_computer_max_charges && world.time >= problem_computer_next_charge_time)
 		problem_computer_next_charge_time = world.time + problem_computer_charge_time
 		problem_computer_charges += 1

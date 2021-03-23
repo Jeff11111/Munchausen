@@ -19,7 +19,7 @@
 			jobs_to_revolt = list("Stowaway")
 			nation_name = pick("Assa", "Mainte", "Tunnel", "Gris", "Grey", "Liath", "Grigio", "Ass", "Assi")
 		if("white")
-			jobs_to_revolt = list("Chief Medical Officer", "Medical Doctor", "Chemist", "Geneticist", "Paramedic", "Virologist", "Psychologist") //Skyrat change
+			jobs_to_revolt = list("Chief Medical Officer", "Medical Doctor", "Chemist", "Geneticist", "Paramedic", "Virologist", "Psychologist")
 			nation_name = pick("Mede", "Healtha", "Recova", "Chemi", "Geneti", "Viro", "Psych")
 		if("yellow")
 			jobs_to_revolt = list("Senior Engineer", "Station Engineer", "Atmospheric Technician")

@@ -7,7 +7,7 @@
 	gamemode_blacklist = list("nuclear")
 
 /datum/round_event/ghost_role/fugitives
-	minimum_required = 1
+	minimum_required = 4
 	role_name = "fugitive"
 	fakeable = FALSE
 
@@ -22,11 +22,6 @@
 	var/turf/landing_turf = pick(possible_spawns)
 	var/list/possible_backstories = list()
 	var/list/candidates = get_candidates(ROLE_TRAITOR, null, ROLE_TRAITOR)
-	if(candidates.len >= 1) //solo refugees
-		if(prob(0)) // Skyrat Edit: Changes probability of Waldo from 30% to 0%
-			possible_backstories.Add("waldo") //less common as it comes with magicks and is kind of immershun shattering
-		else //For accurate deadchat feedback
-			minimum_required = 4
 	if(candidates.len >= 4)//group refugees
 		possible_backstories.Add("prisoner", "cultist", "synth")
 	if(!possible_backstories.len)
@@ -38,8 +33,6 @@
 	switch(backstory)
 		if("synth")
 			leader = pick_n_take(candidates)
-		if("waldo")
-			member_size = 0 //solo refugees have no leader so the member_size gets bumped to one a bit later
 	var/list/members = list()
 	var/list/spawned_mobs = list()
 	if(isnull(leader))

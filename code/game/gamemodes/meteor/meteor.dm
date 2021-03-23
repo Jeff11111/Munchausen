@@ -6,7 +6,6 @@
 	var/nometeors = 0
 	var/rampupdelta = 5
 	required_players = 0
-	// SKYRAT EDIT: Credits
 	title_icon = "meteor"
 
 	announce_span = "danger"

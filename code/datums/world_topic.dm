@@ -163,7 +163,7 @@
 		GLOB.topic_status_lastcache = world.time + 5
 	. = list()
 	.["version"] = GLOB.game_version
-	.["mode"] = "hidden"	//CIT CHANGE - hides the gamemode in topic() calls to prevent meta'ing the gamemode
+	.["mode"] = "hidden"	//hides the gamemode in topic() calls to prevent meta'ing the gamemode
 	.["respawn"] = config ? !CONFIG_GET(flag/norespawn) : FALSE
 	.["enter"] = GLOB.enter_allowed
 	.["vote"] = CONFIG_GET(flag/allow_vote_mode)

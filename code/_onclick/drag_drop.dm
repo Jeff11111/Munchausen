@@ -24,10 +24,8 @@
 	return
 
 /client/MouseDown(object, location, control, params)
-	//Skyrat changes
 	if(mob)
 		SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_MOUSEDOWN, object, location, control, params)
-	//End of skyrat changes
 	if (mouse_down_icon)
 		mouse_pointer_icon = mouse_down_icon
 	var/delay = mob.CanMobAutoclick(object, location, params)
@@ -42,10 +40,8 @@
 		active_mousedown_item.onMouseDown(object, location, params, mob)
 
 /client/MouseUp(object, location, control, params)
-	//Skyrat changes
 	if(mob)
 		SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_MOUSEUP, object, location, control, params)
-	//End of skyrat changes
 	if (mouse_up_icon)
 		mouse_pointer_icon = mouse_up_icon
 	selected_target[1] = null
@@ -90,16 +86,6 @@
 /obj/screen/click_catcher/IsAutoclickable()
 	. = 1
 
-//Please don't roast me too hard
-/*/client/MouseMove(object,location,control,params) //Skyrat change - lag begone!
-	mouseParams = params
-	mouseLocation = location
-	//mouseObject = object //Skyrat change
-	mouseControlObject = control
-	if(mob)
-		SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_MOUSEMOVE, object, location, control, params)
-	..()*/
-
 /client/MouseDrag(src_object,atom/over_object,src_location,over_location,src_control,over_control,params)
 	var/list/L = params2list(params)
 	if (L["middle"])
@@ -111,7 +97,6 @@
 			middragatom = null
 	mouseParams = params
 	mouseLocation = over_location
-	//mouseObject = over_object //Skyrat change
 	mouseControlObject = over_control
 	if(selected_target[1] && over_object && over_object.IsAutoclickable())
 		selected_target[1] = over_object

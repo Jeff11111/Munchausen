@@ -94,7 +94,6 @@ GLOBAL_LIST_INIT(freqtospan, list(
 
 	var/spanned = attach_spans(input, spans)
 	return "[say_mod(input, message_mode)][spanned ? ", \"[spanned]\"" : ""]"
-	// Citadel edit [spanned ? ", \"[spanned]\"" : ""]"
 
 #define ENCODE_HTML_EPHASIS(input, char, html, varname) \
 	var/static/regex/##varname = regex("[char]{2}(.+?)[char]{2}", "g");\

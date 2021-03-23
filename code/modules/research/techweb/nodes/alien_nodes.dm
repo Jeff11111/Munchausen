@@ -1,6 +1,5 @@
 
 ////////////////////////Alien technology////////////////////////
-// SKYRAT EDIT: Makes Alien tools separated. Reason: xenoarch.
 /datum/techweb_node/alientech //AYYYYYYYYLMAOO tech
 	id = "alientech"
 	display_name = "Alien Technology"

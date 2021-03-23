@@ -152,7 +152,6 @@ There are several things that need to be remembered:
 	apply_overlay(UNIFORM_LAYER)
 	update_mutant_bodyparts()
 
-//skyrat edit
 /mob/living/carbon/human/update_inv_w_underwear()
 	remove_overlay(UNDERWEAR_LAYER)
 
@@ -290,8 +289,6 @@ There are several things that need to be remembered:
 
 	apply_overlay(SHIRT_LAYER)
 	update_mutant_bodyparts()
-//
-
 /mob/living/carbon/human/update_inv_wear_id()
 	remove_overlay(ID_LAYER)
 
@@ -348,7 +345,6 @@ There are several things that need to be remembered:
 	overlays_standing[GLOVES_LAYER] = gloves_overlay
 	apply_overlay(GLOVES_LAYER)
 
-//skyrat edit
 /mob/living/carbon/human/update_inv_wrists()
 	remove_overlay(WRISTS_LAYER)
 
@@ -380,7 +376,6 @@ There are several things that need to be remembered:
 			wrists_overlay.pixel_y += dna.species.offset_features[OFFSET_WRISTS][2]
 	overlays_standing[WRISTS_LAYER] = wrists_overlay
 	apply_overlay(WRISTS_LAYER)
-//
 
 /mob/living/carbon/human/update_inv_glasses()
 	remove_overlay(GLASSES_LAYER)
@@ -393,18 +388,16 @@ There are several things that need to be remembered:
 		inv.update_icon()
 
 	if(glasses)
-		//SKYRAT CHANGE - vox stuff
 		var/alt_icon = 'icons/mob/clothing/eyes.dmi'
 		if(dna.species.id == "vox")
 			alt_icon = 'modular_skyrat/icons/mob/clothing/eyes_vox.dmi'
-		//End of SKYRAT changes
 		glasses.screen_loc = ui_glasses		//...draw the item in the inventory screen
 		if(client && hud_used && hud_used.hud_shown)
 			if(hud_used.inventory_shown)			//if the inventory is open ...
 				client.screen += glasses				//Either way, add the item to the HUD
 		update_observer_view(glasses,1)
 		if(!(head && (head.flags_inv & HIDEEYES)) && !(wear_mask && (wear_mask.flags_inv & HIDEEYES)))
-			overlays_standing[GLASSES_LAYER] = glasses.build_worn_icon(default_layer = GLASSES_LAYER, default_icon_file = alt_icon, override_state = glasses.icon_state) //Skyrat change - vox stuff
+			overlays_standing[GLASSES_LAYER] = glasses.build_worn_icon(default_layer = GLASSES_LAYER, default_icon_file = alt_icon, override_state = glasses.icon_state)
 		var/mutable_appearance/glasses_overlay = overlays_standing[GLASSES_LAYER]
 		if(glasses_overlay)
 			if(OFFSET_GLASSES in dna.species.offset_features)
@@ -556,10 +549,8 @@ There are several things that need to be remembered:
 		if(muzzled && H.mutantrace_variation & STYLE_MUZZLE && !(H.mutantrace_variation & STYLE_NO_ANTHRO_ICON))
 			alt_icon = H.anthro_mob_worn_overlay || 'icons/mob/clothing/head_muzzled.dmi'
 			variation_flag |= STYLE_MUZZLE
-		//SKYRAT CHANGES - vox custom sprites
 		if(dna.species.id == "vox")
 			alt_icon = 'modular_skyrat/icons/mob/clothing/head_vox.dmi'
-		//End of SKYRAT changes
 
 		overlays_standing[HEAD_LAYER] = H.build_worn_icon(HEAD_LAYER, alt_icon, FALSE, NO_FEMALE_UNIFORM, H.icon_state, variation_flag, FALSE)
 		var/mutable_appearance/head_overlay = overlays_standing[HEAD_LAYER]
@@ -718,10 +709,8 @@ There are several things that need to be remembered:
 		if(muzzled && M.mutantrace_variation & STYLE_MUZZLE && !(M.mutantrace_variation & STYLE_NO_ANTHRO_ICON))
 			alt_icon = M.anthro_mob_worn_overlay || 'icons/mob/clothing/mask_muzzled.dmi'
 			variation_flag |= STYLE_MUZZLE
-		//SKYRAT CHANGES - vox custom sprites
 		if(dna.species.id == "vox")
 			alt_icon = 'modular_skyrat/icons/mob/clothing/mask_vox.dmi'
-		//End of SKYRAT changes
 
 		var/mutable_appearance/mask_overlay = M.build_worn_icon(FACEMASK_LAYER, alt_icon, FALSE, NO_FEMALE_UNIFORM, wear_mask.icon_state, variation_flag, FALSE)
 

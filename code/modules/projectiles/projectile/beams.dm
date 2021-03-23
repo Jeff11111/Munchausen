@@ -3,7 +3,6 @@
 	icon_state = "laser"
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 20
-	//light_range = 2 //Skyrat change
 	damage_type = BURN
 	flag = "laser"
 	eyeblur = 2
@@ -12,10 +11,8 @@
 	ricochets_max = 50	//Honk!
 	ricochet_chance = 80
 	is_reflectable = TRUE
-	//skyrat edit
 	wound_bonus = 30
 	bare_wound_bonus = 15
-	//
 
 /obj/item/projectile/beam/Initialize()
 	. = ..()
@@ -27,7 +24,6 @@
 	muzzle_type = /obj/effect/projectile/muzzle/laser
 	impact_type = /obj/effect/projectile/impact/laser
 
-//skyrat edit bruh
 //overclocked laser, does a bit more damage but has much higher wound power (5 vs -20)
 /obj/item/projectile/beam/laser/hellfire
 	name = "hellfire laser"
@@ -38,7 +34,6 @@
 /obj/item/projectile/beam/laser/hellfire/Initialize()
 	. = ..()
 	transform *= 2
-//
 
 /obj/item/projectile/beam/laser/heavylaser
 	name = "heavy laser"
@@ -47,9 +42,7 @@
 	tracer_type = /obj/effect/projectile/tracer/heavy_laser
 	muzzle_type = /obj/effect/projectile/muzzle/heavy_laser
 	impact_type = /obj/effect/projectile/impact/heavy_laser
-	//skyrat edit
 	wound_bonus = 20
-	//
 
 /obj/item/projectile/beam/laser/on_hit(atom/target, blocked = FALSE)
 	. = ..()
@@ -61,12 +54,12 @@
 
 /obj/item/projectile/beam/weak
 	damage = 15
-//Skyrat Edit Start
+
 /obj/item/projectile/beam/weak/burst
 	name = "weak laser"
 	damage = 7
 	wound_bonus = -50
-//Skyrat Edit End
+
 /obj/item/projectile/beam/weak/penetrator
 	armour_penetration = 50
 
@@ -97,7 +90,7 @@
 /obj/item/projectile/beam/disabler
 	name = "disabler beam"
 	icon_state = "omnilaser"
-	damage = 28 // Citadel change for balance from 36
+	damage = 28
 	damage_type = STAMINA
 	flag = "energy"
 	hitsound = 'sound/weapons/tap.ogg'
@@ -118,10 +111,8 @@
 	tracer_type = /obj/effect/projectile/tracer/pulse
 	muzzle_type = /obj/effect/projectile/muzzle/pulse
 	impact_type = /obj/effect/projectile/impact/pulse
-	//skyrat edit
 	wound_bonus = -40
 	bare_wound_bonus = 70
-	//
 
 /obj/item/projectile/beam/pulse/on_hit(atom/target, blocked = FALSE)
 	. = ..()

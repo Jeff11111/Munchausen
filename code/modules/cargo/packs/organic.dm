@@ -41,7 +41,7 @@
 
 /datum/supply_pack/organic/randomized/candy
 	name = "Candy Crate"
-	desc = "For people that have an insatiable sweet tooth! Has ten candies to be eaten up." //Skyrat change, removes duplicate punctuation
+	desc = "For people that have an insatiable sweet tooth! Has ten candies to be eaten up."
 	cost = 2500
 	num_contained = 10
 	contains = list(/obj/item/reagent_containers/food/snacks/candy,
@@ -214,7 +214,7 @@
 
 /datum/supply_pack/organic/fakemeat
 	name = "Meat Crate 'Synthetic'"
-	desc = "Run outta meat already? Keep the lizards content with this freezer filled with cruelty-free and chemically compounded meat! Contains 12 slabs of meat product, and 4 slabs of *carp*." //Skyrat change, adds "and" for grammatical correctness
+	desc = "Run outta meat already? Keep the lizards content with this freezer filled with cruelty-free and chemically compounded meat! Contains 12 slabs of meat product, and 4 slabs of *carp*."
 	cost = 1200 // Buying 3 food crates nets you 9 meat for 900 points, plus like, 6 bags of rice, flour, and egg boxes. This is 12 for 500, but you -only- get meat and carp.
 	contains = list(/obj/item/reagent_containers/food/snacks/meat/slab/meatproduct,
 					/obj/item/reagent_containers/food/snacks/meat/slab/meatproduct,
@@ -301,7 +301,7 @@
 
 /datum/supply_pack/organic/hydroponics/maintgarden
 	name = "Maintenance Garden Crate"
-	desc = "Set up your own tiny paradise with this do-it-yourself botany kit. Contains sandstone for dirt plots, pest spray, ammonia, a portable seed generator, basic botanical tools, and some seeds to start off with." //Skyrat change, fixes grammatical error
+	desc = "Set up your own tiny paradise with this do-it-yourself botany kit. Contains sandstone for dirt plots, pest spray, ammonia, a portable seed generator, basic botanical tools, and some seeds to start off with."
 	cost = 2700
 	contains = list(/obj/item/storage/bag/plants/portaseeder,
 					/obj/item/reagent_containers/spray/pestspray,
@@ -396,7 +396,7 @@
 
 /datum/supply_pack/organic/vday
 	name = "Surplus Valentine Crate"
-	desc = "Turns out we have warehouses of this love-y dove-y crap. We're sending out small bargain buddle of Valentine gear. This crate has two boxes of chocolate, three poppy flowers, five candy hearts, and three cards." //Skyrat change, fixes grammatical error
+	desc = "Turns out we have warehouses of this love-y dove-y crap. We're sending out small bargain buddle of Valentine gear. This crate has two boxes of chocolate, three poppy flowers, five candy hearts, and three cards."
 	cost = 3000
 	contraband = TRUE
 	contains = list(/obj/item/storage/fancy/heart_box,

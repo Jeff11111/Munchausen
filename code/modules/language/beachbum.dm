@@ -4,7 +4,7 @@
 	speech_verb = "mumbles"
 	ask_verb = "grills"
 	exclaim_verb = "hollers"
-	sing_verb = "parties" // Skyrat edit
+	sing_verb = "parties"
 	key = "u"
 	space_chance = 85
 	default_priority = 90
@@ -21,6 +21,4 @@
 					"tail", "trim", "tube", "wobble", "roll", "gnarly", "epic")
 
 	icon_state = "beach"
-	//SKYRAT CHANGE - language restriction
 	restricted = FALSE
-	//

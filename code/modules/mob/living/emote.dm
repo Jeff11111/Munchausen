@@ -217,7 +217,7 @@
 
 /datum/emote/living/audio_emote/laugh/run_emote(mob/user, params)
 	. = ..()
-	if(. && iscarbon(user)) //Citadel Edit because this is hilarious
+	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
 		if(iscatperson(C))	//we ask for is cat first because they're a subtype that tests true for ishumanbasic because HERESY
 			playsound(C, pick('sound/voice/catpeople/nyahaha1.ogg',
@@ -226,7 +226,7 @@
 			'sound/voice/catpeople/nyahehe.ogg'),
 			50, 1)
 			return
-		else if(isinsect(C)) //skyrat edit
+		else if(isinsect(C))
 			playsound(C, 'sound/voice/moth/mothlaugh.ogg', 50, 1)
 		else if(ishumanbasic(C))
 			if(user.gender == FEMALE)
@@ -242,9 +242,9 @@
 
 /datum/emote/living/audio_emote/chitter/run_emote(mob/user, params)
 	. = ..()
-	if(. && iscarbon(user)) //Citadel Edit because this is hilarious
+	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(isinsect(C)) //skyrat edit
+		if(isinsect(C))
 			playsound(C, 'sound/voice/moth/mothchitter.ogg', 50, 1)
 
 /datum/emote/living/look
@@ -302,7 +302,6 @@
 	key = "shake"
 	key_third_person = "shakes"
 	message = "shakes their head."
-//	emote_type = EMOTE_AUDIBLE // Skyrat change // ??
 
 /datum/emote/living/shiver
 	key = "shiver"
@@ -371,20 +370,18 @@
 	key = "surrender"
 	key_third_person = "surrenders"
 	message = "puts their hands on their head and falls to the ground, they surrender!"
-//	emote_type = EMOTE_AUDIBLE //Skyrat change
 
 /datum/emote/living/surrender/run_emote(mob/user, params)
 	. = ..()
 	if(. && isliving(user))
 		var/mob/living/L = user
-		//Skyrat change start
 		if(L.client?.prefs?.autostand)
 			if(!(L.combat_flags & COMBAT_FLAG_INTENTIONALLY_RESTING))
 				TOGGLE_BITFIELD(L.combat_flags, COMBAT_FLAG_INTENTIONALLY_RESTING)
 		L.DefaultCombatKnockdown(200)
-		L.Stun(20) //Skyrat Change
+		L.Stun(20)
 		SEND_SIGNAL(src, COMSIG_DISABLE_COMBAT_MODE)
-		//Skyrat change stop
+
 /datum/emote/living/sway
 	key = "sway"
 	key_third_person = "sways"

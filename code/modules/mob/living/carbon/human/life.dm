@@ -52,7 +52,7 @@
 	else if(eye_blurry)			//blurry eyes heal slowly
 		adjust_blurriness(-1)
 
-	if (getOrganLoss(ORGAN_SLOT_BRAIN) >= 30) //Citadel change to make memes more often.
+	if (getOrganLoss(ORGAN_SLOT_BRAIN) >= 30)
 		SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "brain_damage", /datum/mood_event/brain_damage)
 		if(prob(3))
 			if(prob(50))
@@ -147,7 +147,6 @@
 	if(w_uniform)
 		if(w_uniform.max_heat_protection_temperature && w_uniform.max_heat_protection_temperature >= temperature)
 			thermal_protection_flags |= w_uniform.heat_protection
-	//skyrat edit
 	if(w_underwear)
 		if(w_underwear.max_heat_protection_temperature && w_underwear.max_heat_protection_temperature >= temperature)
 			thermal_protection_flags |= w_underwear.heat_protection
@@ -160,7 +159,6 @@
 	if(wrists)
 		if(wrists.max_heat_protection_temperature && wrists.max_heat_protection_temperature >= temperature)
 			thermal_protection_flags |= wrists.heat_protection
-	//
 	if(shoes)
 		if(shoes.max_heat_protection_temperature && shoes.max_heat_protection_temperature >= temperature)
 			thermal_protection_flags |= shoes.heat_protection

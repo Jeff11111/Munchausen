@@ -1,4 +1,3 @@
-//idk whole file was skyrat edit ed
 /obj/effect/mine
 	name = "dummy mine"
 	desc = "Better stay away from that thing."

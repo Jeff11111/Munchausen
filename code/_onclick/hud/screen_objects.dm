@@ -156,7 +156,7 @@
 	var/image/item_overlay = image(holding)
 	item_overlay.alpha = 92
 
-	if(!user.can_equip(holding, slot_id, TRUE, TRUE)) //skyrat change
+	if(!user.can_equip(holding, slot_id, TRUE, TRUE))
 		item_overlay.color = "#FF0000"
 	else
 		item_overlay.color = "#00ff00"
@@ -467,7 +467,6 @@
 		hovering = null
 
 /obj/screen/zone_sel/proc/get_zone_at(icon_x, icon_y)
-	//skyrat edit - more bodyparts
 	switch(icon_y)
 		if(5) //Feet
 			switch(icon_x)

@@ -59,13 +59,11 @@ SUBSYSTEM_DEF(shuttle)
 
 	var/realtimeofstart = 0
 
-	//SKYRAT CHANGE
 	//PROBLEM COMPUTER CHARGES
 	var/problem_computer_max_charges = 5
 	var/problem_computer_charges = 5
 	var/problem_computer_charge_time = 90 SECONDS
 	var/problem_computer_next_charge_time = 0
-	//END SKYRAT CHANGE
 
 /datum/controller/subsystem/shuttle/Initialize(timeofday)
 	ordernum = rand(1, 9000)
@@ -119,11 +117,9 @@ SUBSYSTEM_DEF(shuttle)
 				qdel(T, force=TRUE)
 	CheckAutoEvac()
 
-	// Skyrat change. Handles Problem Computer charges here
 	if(problem_computer_charges < problem_computer_max_charges && world.time >= problem_computer_next_charge_time)
 		problem_computer_next_charge_time = world.time + problem_computer_charge_time
 		problem_computer_charges += 1
-	// End Skyrat change.
 
 	var/esETA = emergency?.getModeStr()
 	emergency_shuttle_stat_text = "[esETA? "[esETA] [emergency.getTimerStr()]" : ""]"
@@ -312,14 +308,12 @@ SUBSYSTEM_DEF(shuttle)
 		if(SEC_LEVEL_BLUE)
 			if(emergency.timeLeft(1) < emergencyCallTime * 0.6)
 				return
-		//Skyrat change start
 		if(SEC_LEVEL_ORANGE)
 			if(emergency.timeLeft(1) < emergencyCallTime * 0.4)
 				return
 		if(SEC_LEVEL_VIOLET)
 			if(emergency.timeLeft(1) < emergencyCallTime * 0.4)
 				return
-		//Skyrat change stop
 		if(SEC_LEVEL_AMBER)
 			if(emergency.timeLeft(1) < emergencyCallTime * 0.4)
 				return
@@ -473,11 +467,6 @@ SUBSYSTEM_DEF(shuttle)
 		if(EAST, WEST)
 			transit_width += M.height
 			transit_height += M.width
-
-/*
-	to_chat(world, "The attempted transit dock will be [transit_width] width, and \)
-		[transit_height] in height. The travel dir is [travel_dir]."
-*/
 
 	var/transit_path = /turf/open/space/transit
 	var/border_path = /turf/open/space/transit/border
@@ -663,7 +652,7 @@ SUBSYSTEM_DEF(shuttle)
 
 	QDEL_LIST(remove_images)
 
-/datum/controller/subsystem/shuttle/proc/autoEnd() //CIT CHANGE - allows shift to end without being a proper shuttle call?
+/datum/controller/subsystem/shuttle/proc/autoEnd() //allows shift to end without being a proper shuttle call?
 	if(EMERGENCY_IDLE_OR_RECALLED)
 		SSshuttle.emergency.request(silent = TRUE)
 		priority_announce("The shift has come to an end and the shuttle is fueling. [GLOB.security_level == SEC_LEVEL_RED ? "Red Alert state confirmed: Dispatching priority shuttle. " : "" ]It will arrive in [emergency.timeLeft(600)] minutes.", null, "shuttlecalled", "Priority")

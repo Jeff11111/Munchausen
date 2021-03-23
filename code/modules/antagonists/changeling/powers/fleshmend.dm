@@ -1,8 +1,6 @@
 /obj/effect/proc_holder/changeling/fleshmend
 	name = "Fleshmend"
-	//skyrat edit
 	desc = "Our flesh rapidly regenerates, healing our burns, bruises, and shortness of breath, as well as hiding all of our scars. Costs 20 chemicals."
-	//
 	helptext = "If we are on fire, the healing effect will not function. Does not regrow limbs or restore lost blood."
 	chemical_cost = 20
 	loudness = 2

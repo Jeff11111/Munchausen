@@ -6,7 +6,7 @@
 	return	//no
 
 /////////////////////////////////// STUN ////////////////////////////////////
-/* CIT CHANGE - removes xeno stun immunity
+/*removes xeno stun immunity //ARTI - check if it actually makes sense
 /mob/living/carbon/alien/Stun(amount, updating = 1, ignore_canstun = 0)
 	. = ..()
 	if(!.)

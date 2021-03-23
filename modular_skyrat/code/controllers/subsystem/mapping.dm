@@ -107,7 +107,7 @@ SUBSYSTEM_DEF(mapping)
 		seedRuins(lava_ruins, CONFIG_GET(number/lavaland_budget), list(/area/lavaland/surface/outdoors/unexplored), lava_ruins_templates)
 		for (var/lava_z in lava_ruins)
 			spawn_rivers(lava_z)
-	// SKYRAT CHANGES
+
 	var/list/lava_jungle_ruins = levels_by_trait(ZTRAIT_LAVA_JUNGLE_RUINS)
 	if (lava_jungle_ruins.len)
 		for (var/lava_z in lava_jungle_ruins)

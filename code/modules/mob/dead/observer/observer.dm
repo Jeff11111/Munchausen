@@ -954,13 +954,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	else
 		to_chat(usr, "Can't become a pAI candidate while not dead!")
 
-// Skyrat change - moved to modular/signals.
-/*
-/mob/dead/observer/CtrlShiftClick(mob/user)
-	if(isobserver(user) && check_rights(R_SPAWN))
-		change_mob_type( /mob/living/carbon/human , null, null, TRUE) //always delmob, ghosts shouldn't be left lingering
-*/
-
 /mob/dead/observer/examine(mob/user)
 	. = ..()
 	if(!invisibility)

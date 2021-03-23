@@ -6,7 +6,7 @@
 	gamemode_blacklist = list("dynamic")
 	min_players = 25
 
-/datum/round_event/vent_clog	//skyrats change begin
+/datum/round_event/vent_clog
 	announceWhen	= 1
 	startWhen		= 5
 	endWhen			= 35
@@ -59,52 +59,9 @@
 
 	)
 	//needs to be chemid unit checked at some point	
-	//skyrats change end
 
 /datum/round_event/vent_clog/announce()
 	priority_announce("The scrubbers network is experiencing a backpressure surge. Some ejection of contents may occur.", "Atmospherics alert")
-
-/* MODULAR SKYRAT CHANGE
-/datum/round_event/vent_clog/setup()
-	endWhen = rand(120, 180)
-	for(var/obj/machinery/atmospherics/components/unary/vent_scrubber/temp_vent in GLOB.machines)
-		var/turf/T = get_turf(temp_vent)
-		var/area/A = T.loc
-		if(T && is_station_level(T.z) && !temp_vent.welded && !A.safe)
-			vents += temp_vent
-
-	if(!vents.len)
-		return kill()
-
-/datum/round_event/vent_clog/tick()
-
-	if(!vents.len)
-		return kill()
-
-	CHECK_TICK
-
-	var/obj/machinery/atmospherics/components/unary/vent = pick(vents)
-	vents -= vent
-
-	if(!vent || vent.welded)
-		return
-
-	var/turf/T = get_turf(vent)
-	if(!T)
-		return
-
-	var/datum/reagents/R = new/datum/reagents(1000)
-	R.my_atom = vent
-	if (prob(randomProbability))
-		R.add_reagent(get_random_reagent_id(), reagentsAmount)
-	else
-		R.add_reagent(pick(saferChems), reagentsAmount)
-
-	var/datum/effect_system/smoke_spread/chem/smoke_machine/C = new
-	C.set_up(R,16,1,T)
-	C.start()
-	playsound(T, 'sound/effects/smoke.ogg', 50, 1, -3)
-*/
 
 /datum/round_event_control/vent_clog/threatening
 	name = "Clogged Vents: Threatening"

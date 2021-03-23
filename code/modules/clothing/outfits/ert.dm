@@ -43,7 +43,7 @@
 	R.recalculateChannels()
 
 /datum/outfit/ert/commander/alert
-	name = "ERT Commander - Elevated Alert" //Skyrat change
+	name = "ERT Commander - Elevated Alert"
 
 	suit = /obj/item/clothing/suit/space/hardsuit/ert/alert
 	glasses = /obj/item/clothing/glasses/thermal/eyepatch
@@ -53,7 +53,7 @@
 		/obj/item/gun/energy/e_gun=1)
 	l_pocket = /obj/item/melee/transforming/energy/sword/saber
 
-/datum/outfit/ert/commander/alert/delta //Skyrat change
+/datum/outfit/ert/commander/alert/delta
 	name = "ERT Commander - Delta Alert"
 	backpack_contents = list(/obj/item/storage/box/engineer=1,\
 		/obj/item/melee/baton/loaded=1,\
@@ -85,7 +85,7 @@
 	R.recalculateChannels()
 
 /datum/outfit/ert/security/alert
-	name = "ERT Security - Elevated Alert" //Skyrat change
+	name = "ERT Security - Elevated Alert"
 
 	suit = /obj/item/clothing/suit/space/hardsuit/ert/alert/sec
 	backpack_contents = list(/obj/item/storage/box/engineer=1,\
@@ -94,7 +94,7 @@
 		/obj/item/melee/baton/loaded=1,\
 		/obj/item/gun/energy/e_gun/stun=1)
 
-/datum/outfit/ert/security/alert/delta //Skyrat change
+/datum/outfit/ert/security/alert/delta
 	name = "ERT Security - Delta Alert"
 	backpack_contents = list(/obj/item/storage/box/engineer=1,\
 		/obj/item/storage/box/handcuffs=1,\
@@ -129,7 +129,7 @@
 	R.recalculateChannels()
 
 /datum/outfit/ert/medic/alert
-	name = "ERT Medic - Elevated Alert" //Skyrat change
+	name = "ERT Medic - Elevated Alert"
 
 	suit = /obj/item/clothing/suit/space/hardsuit/ert/alert/med
 	backpack_contents = list(/obj/item/storage/box/engineer=1,\
@@ -139,7 +139,7 @@
 		/obj/item/reagent_containers/hypospray/combat/nanites=1,\
 		/obj/item/gun/medbeam=1)
 
-/datum/outfit/ert/medic/alert/delta //Skyratchange
+/datum/outfit/ert/medic/alert/delta
 	name = "ERT Medic - Delta Alert"
 	backpack_contents = list(/obj/item/storage/box/engineer=1,\
 		/obj/item/melee/baton/loaded=1,\
@@ -176,7 +176,7 @@
 	R.recalculateChannels()
 
 /datum/outfit/ert/engineer/alert
-	name = "ERT Engineer - Elevated Alert" //Skyrat change
+	name = "ERT Engineer - Elevated Alert"
 
 	suit = /obj/item/clothing/suit/space/hardsuit/ert/alert/engi
 	backpack_contents = list(/obj/item/storage/box/engineer=1,\
@@ -186,7 +186,7 @@
 		/obj/item/pipe_dispenser/bluespace=1,\
 		/obj/item/construction/rcd/combat=1)
 
-/datum/outfit/ert/engineer/alert/delta //Skyrat change
+/datum/outfit/ert/engineer/alert/delta
 	name = "ERT Engineer - Delta Alert"
 	backpack_contents = list(/obj/item/storage/box/engineer=1,\
 		/obj/item/melee/baton/loaded=1,\

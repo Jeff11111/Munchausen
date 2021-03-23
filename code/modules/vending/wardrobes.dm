@@ -10,7 +10,6 @@
 /obj/machinery/vending/wardrobe/canLoadItem(obj/item/I,mob/user)
 	return (I.type in products)
 
-// SKYRAT EDIT: Courier Bags
 /obj/machinery/vending/wardrobe/sec_wardrobe
 	name = "\improper SecDrobe"
 	desc = "A vending machine for security and security-related clothing!"
@@ -22,7 +21,6 @@
 					/obj/item/storage/backpack/satchel/sec = 5,
 					/obj/item/storage/backpack/duffelbag/sec = 5,
 					/obj/item/storage/backpack/courier/sec = 5,
-// SKYRAT EDIT CLOSE
 					/obj/item/clothing/under/rank/security/officer = 5,
 					/obj/item/clothing/shoes/jackboots = 5,
 					/obj/item/clothing/head/beret/sec =5,
@@ -40,7 +38,7 @@
 
 /obj/item/vending_refill/wardrobe/sec_wardrobe
 	machine_name = "SecDrobe"
-// SKYRAT EDIT: Courier Bags
+
 /obj/machinery/vending/wardrobe/medi_wardrobe
 	name = "\improper MediDrobe"
 	desc = "A vending machine rumoured to be capable of dispensing clothing for medical personnel."
@@ -53,7 +51,6 @@
 					/obj/item/storage/backpack/medic = 5,
 					/obj/item/storage/backpack/satchel/med = 5,
 					/obj/item/storage/backpack/courier/med = 5,
-					// SKYRAT EDIT CLOSE
 					/obj/item/clothing/suit/hooded/wintercoat/medical = 5,
 					/obj/item/clothing/suit/hooded/wintercoat/paramedic = 2,
 					/obj/item/clothing/under/rank/medical/doctor/nurse = 5,
@@ -77,7 +74,7 @@
 
 /obj/item/vending_refill/wardrobe/medi_wardrobe
 	machine_name = "MediDrobe"
-// SKYRAT EDIT: Courier Bags
+
 /obj/machinery/vending/wardrobe/engi_wardrobe
 	name = "EngiDrobe"
 	desc = "A vending machine renowned for vending industrial grade clothing."
@@ -90,7 +87,6 @@
 					/obj/item/storage/backpack/industrial = 3,
 					/obj/item/storage/backpack/satchel/eng = 3,
 					/obj/item/storage/backpack/courier/engi = 3,
-					// SKYRAT EDIT CLOSE
 					/obj/item/clothing/suit/hooded/wintercoat/engineering = 3,
 					/obj/item/clothing/under/rank/engineering/engineer = 5,
 					/obj/item/clothing/suit/hazardvest = 5,
@@ -103,7 +99,7 @@
 
 /obj/item/vending_refill/wardrobe/engi_wardrobe
 	machine_name = "EngiDrobe"
-// SKYRAT EDIT: Courier Bags
+
 /obj/machinery/vending/wardrobe/atmos_wardrobe
 	name = "AtmosDrobe"
 	desc = "This relatively unknown vending machine delivers clothing for Atmospherics Technicians, an equally unknown job."
@@ -116,7 +112,6 @@
 					/obj/item/storage/backpack/satchel/eng = 3,
 					/obj/item/storage/backpack/industrial = 3,
 					/obj/item/storage/backpack/courier/engi = 3,
-					// SKYRAT EDIT CLOSE
 					/obj/item/clothing/head/hardhat/weldhat/dblue = 3,
 					/obj/item/clothing/suit/hooded/wintercoat/engineering/atmos = 3,
 					/obj/item/clothing/under/rank/engineering/atmospheric_technician = 5,
@@ -169,7 +164,7 @@
 
 /obj/item/vending_refill/wardrobe/robo_wardrobe
 	machine_name = "RoboDrobe"
-// SKYRAT EDIT: Courier Bags
+
 /obj/machinery/vending/wardrobe/science_wardrobe
 	name = "SciDrobe"
 	desc = "A simple vending machine suitable to dispense well tailored science clothing. Endorsed by Cubans."
@@ -181,7 +176,6 @@
 					/obj/item/storage/backpack/science = 3,
 					/obj/item/storage/backpack/satchel/tox = 3,
 					/obj/item/storage/backpack/courier/sci = 3,
-					// SKYRAT EDIT CLOSE
 					/obj/item/clothing/suit/hooded/wintercoat/science = 3,
 					/obj/item/clothing/under/rank/rnd/scientist = 4,
 					/obj/item/clothing/suit/toggle/labcoat/science = 4,
@@ -194,7 +188,7 @@
 
 /obj/item/vending_refill/wardrobe/science_wardrobe
 	machine_name = "SciDrobe"
-// SKYRAT EDIT: Courier Bags
+
 /obj/machinery/vending/wardrobe/hydro_wardrobe
 	name = "Hydrobe"
 	desc = "A machine with a catchy name. It dispenses botany related clothing and gear."
@@ -204,7 +198,6 @@
 	products = list(/obj/item/storage/backpack/botany = 3,
 					/obj/item/storage/backpack/satchel/hyd = 3,
 					/obj/item/storage/backpack/courier/hydr = 3,
-					// SKYRAT EDIT CLOSE
 					/obj/item/clothing/suit/hooded/wintercoat/hydro = 2,
 					/obj/item/clothing/suit/apron = 3,
 					/obj/item/clothing/suit/apron/overalls = 5,
@@ -378,7 +371,7 @@
 
 /obj/item/vending_refill/wardrobe/chap_wardrobe
 	machine_name = "ChapDrobe"
-// SKYRAT EDIT: Courier Bags
+
 /obj/machinery/vending/wardrobe/chem_wardrobe
 	name = "ChemDrobe"
 	desc = "A vending machine for dispensing chemistry related clothing."
@@ -394,7 +387,6 @@
 					/obj/item/storage/backpack/satchel/chem = 3,
 					/obj/item/storage/bag/chemistry = 3,
 					/obj/item/storage/backpack/courier/chem = 3,
-					// SKYRAT EDIT CLOSE
 					/obj/item/fermichem/pHbooklet = 3)//pH indicator)
 	refill_canister = /obj/item/vending_refill/wardrobe/chem_wardrobe
 	payment_department = ACCOUNT_MED
@@ -421,7 +413,7 @@
 
 /obj/item/vending_refill/wardrobe/gene_wardrobe
 	machine_name = "GeneDrobe"
-// SKYRAT EDIT: Courier Bags
+
 /obj/machinery/vending/wardrobe/viro_wardrobe
 	name = "ViroDrobe"
 	desc = "An unsterilized machine for dispending virology related clothing."
@@ -437,14 +429,13 @@
 					/obj/item/storage/backpack/virology = 3,
 					/obj/item/storage/backpack/satchel/vir = 3,
 					/obj/item/storage/backpack/courier/viro = 3)
-					// SKYRAT EDIT CLOSE
 	refill_canister = /obj/item/vending_refill/wardrobe/viro_wardrobe
 	payment_department = ACCOUNT_MED
 	cost_multiplier_per_dept = list(ACCOUNT_MED = 0.35)
 
 /obj/item/vending_refill/wardrobe/viro_wardrobe
 	machine_name = "ViroDrobe"
-// SKYRAT EDIT: Courier Bags
+
 /obj/machinery/vending/wardrobe/cap_wardrobe
 	name = "Captain's Wardrobe"
 	desc = "The latest and greatest in Nanotrasen fashion for your great leader."
@@ -457,7 +448,6 @@
 					/obj/item/storage/backpack/satchel/cap = 1,
 					/obj/item/storage/backpack/duffelbag/captain = 1,
 					/obj/item/storage/backpack/courier/com = 1,
-					// SKYRAT EDIT CLOSE
 					/obj/item/clothing/neck/cloak/cap = 1,
 					/obj/item/clothing/shoes/sneakers/brown = 2,
 					/obj/item/clothing/under/rank/captain = 1,

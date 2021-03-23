@@ -151,7 +151,7 @@ var/horse_stance_effects = FALSE // ensures the horse stance gains it effect
 		add_exp(8, A, D)
 		if(D.gender == FEMALE)
 			D.visible_message("<span class='notice'>[A] scares [D] and they sheepishly fall over.</span>", \
-									"<span class='userdanger'>[A] 'surprised' [D]!</span>") // we're not citadel
+									"<span class='userdanger'>[A] 'surprised' [D]!</span>")
 			A.say("BOO!", ignore_spam = TRUE, forced = "armstrong")
 		else
 			A.do_attack_animation(D, ATTACK_EFFECT_KICK)

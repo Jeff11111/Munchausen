@@ -203,9 +203,9 @@
 	var/static/regex/clap_words = regex("clap|applaud")
 	var/static/regex/honk_words = regex("ho+nk") //hooooooonk
 	var/static/regex/multispin_words = regex("like a record baby|right round")
-	var/static/regex/dab_words = regex("dab|mood") //CITADEL CHANGE
-	var/static/regex/snap_words = regex("snap") //CITADEL CHANGE
-	var/static/regex/bwoink_words = regex("what the fuck are you doing|bwoink|hey you got a moment?") //CITADEL CHANGE
+	var/static/regex/dab_words = regex("dab|mood")
+	var/static/regex/snap_words = regex("snap")
+	var/static/regex/bwoink_words = regex("what the fuck are you doing|bwoink|hey you got a moment?")
 
 	var/i = 0
 	//STUN
@@ -267,16 +267,14 @@
 		cooldown = COOLDOWN_DAMAGE
 		for(var/V in listeners)
 			var/mob/living/L = V
-			L.apply_damage(15 * power_multiplier, def_zone = BODY_ZONE_CHEST, wound_bonus=CANT_WOUND) //skyrat edit
+			L.apply_damage(15 * power_multiplier, def_zone = BODY_ZONE_CHEST, wound_bonus=CANT_WOUND)
 
 	//BLEED
 	else if((findtext(message, bleed_words)))
 		cooldown = COOLDOWN_DAMAGE
 		for(var/mob/living/carbon/human/H in listeners)
-			//skyrat edit
 			var/obj/item/bodypart/BP = pick(H.bodyparts)
 			BP.generic_bleedstacks += 5
-			//
 
 	//FIRE
 	else if((findtext(message, burn_words)))
@@ -541,7 +539,6 @@
 	else if((findtext(message, bwoink_words)))
 		cooldown = COOLDOWN_MEME
 		addtimer(CALLBACK(GLOBAL_PROC, .proc/playsound, get_turf(user), 'sound/effects/adminhelp.ogg', 300, 1), 25)
-	//END CITADEL CHANGES
 
 	else
 		cooldown = COOLDOWN_NONE

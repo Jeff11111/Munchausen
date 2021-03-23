@@ -38,7 +38,7 @@
 
 /obj/item/weldingtool/Initialize()
 	. = ..()
-	AddComponent(/datum/component/overlay_lighting, LIGHT_COLOR_FIRE, light_intensity, 0.75, FALSE) //Skyrat change
+	AddComponent(/datum/component/overlay_lighting, LIGHT_COLOR_FIRE, light_intensity, 0.75, FALSE)
 	create_reagents(max_fuel)
 	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
 	update_icon()

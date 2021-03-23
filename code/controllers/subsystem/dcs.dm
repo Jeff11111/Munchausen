@@ -8,7 +8,6 @@ PROCESSING_SUBSYSTEM_DEF(dcs)
 	comp_lookup = SSdcs.comp_lookup
 
 /datum/controller/subsystem/processing/dcs/proc/GetElement(list/arguments)
-	//skyrat edit
 	if(!istype(arguments) || !arguments.len)
 		return
 	//
@@ -42,14 +41,14 @@ PROCESSING_SUBSYSTEM_DEF(dcs)
 		if(istext(key))
 			value = arguments[key]
 		if(!(istext(key) || isnum(key)))
-			if(islist(key)) // CITADEL EDIT
+			if(islist(key))
 				key = deep_list2params(key)
 			else
 				key = REF(key)
 		key = "[key]" // Key is stringified so numbers dont break things
 		if(!isnull(value))
 			if(!(istext(value) || isnum(value)))
-				if(islist(value)) // CITADEL EDIT
+				if(islist(value))
 					value = deep_list2params(value)
 				else
 					value = REF(value)

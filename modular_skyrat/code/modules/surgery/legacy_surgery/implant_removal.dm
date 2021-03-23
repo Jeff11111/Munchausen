@@ -6,7 +6,7 @@
 				/datum/surgery_step/extract_implant,
 				/datum/surgery_step/close)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	possible_locs = TORSO_BODYPARTS //SKYRAT EDIT
+	possible_locs = TORSO_BODYPARTS
 	requires_bodypart_type = BODYPART_ORGANIC
 
 //extract implant

@@ -168,28 +168,6 @@ Borg Hypospray
 	bypass_protection = 1
 	accepts_reagent_upgrades = FALSE
 
-/*
-Borg Shaker
-*/
-/* moved to modular_skyrat
-/obj/item/reagent_containers/borghypo/borgshaker
-	name = "cyborg shaker"
-	desc = "An advanced drink synthesizer and mixer."
-	icon = 'icons/obj/drinks.dmi'
-	icon_state = "shaker"
-	possible_transfer_amounts = list(5,10,20)
-	charge_cost = 20 //Lots of reagents all regenerating at once, so the charge cost is lower. They also regenerate faster.
-	recharge_time = 3
-	accepts_reagent_upgrades = FALSE
-	reagent_ids = list(/datum/reagent/consumable/ethanol/beer, /datum/reagent/consumable/orangejuice, /datum/reagent/consumable/grenadine,
-						/datum/reagent/consumable/limejuice, /datum/reagent/consumable/tomatojuice, /datum/reagent/consumable/space_cola,
-						/datum/reagent/consumable/tonic, /datum/reagent/consumable/sodawater, /datum/reagent/consumable/ice,
-						/datum/reagent/consumable/cream, /datum/reagent/consumable/ethanol/whiskey, /datum/reagent/consumable/ethanol/vodka,
-						/datum/reagent/consumable/ethanol/rum, /datum/reagent/consumable/ethanol/gin, /datum/reagent/consumable/ethanol/tequila,
-						/datum/reagent/consumable/ethanol/vermouth, /datum/reagent/consumable/ethanol/wine, /datum/reagent/consumable/ethanol/kahlua,
-						/datum/reagent/consumable/ethanol/cognac, /datum/reagent/consumable/ethanol/ale, /datum/reagent/consumable/milk,
-						/datum/reagent/consumable/coffee, /datum/reagent/consumable/banana, /datum/reagent/consumable/lemonjuice)
-*/
 /obj/item/reagent_containers/borghypo/borgshaker/attack(mob/M, mob/user)
 	return //Can't inject stuff with a shaker, can we? //not with that attitude
 
@@ -233,18 +211,7 @@ Borg Shaker
 
 	if(empty)
 		to_chat(usr, "<span class='warning'>It is currently empty! Please allow some time for the synthesizer to produce more.</span>")
-/* moved to modular_skyrat
-/obj/item/reagent_containers/borghypo/borgshaker/hacked
-	name = "cyborg shaker"
-	desc = "Will mix drinks that knock them dead."
-	icon = 'icons/obj/drinks.dmi'
-	icon_state = "threemileislandglass"
-	possible_transfer_amounts = list(5,10,20)
-	charge_cost = 20 //Lots of reagents all regenerating at once, so the charge cost is lower. They also regenerate faster.
-	recharge_time = 3
-	accepts_reagent_upgrades = FALSE
-	reagent_ids = list(/datum/reagent/toxin/fakebeer, /datum/reagent/consumable/ethanol/fernet)
-*/
+
 /obj/item/reagent_containers/borghypo/peace
 	name = "Peace Hypospray"
 

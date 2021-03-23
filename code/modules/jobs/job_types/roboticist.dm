@@ -8,7 +8,7 @@
 	spawn_positions = 2
 	supervisors = "the research director"
 	selection_color = "#9574cd"
-	exp_requirements = 120 //SKYRAT CHANGE - upping the exp time on jobs
+	exp_requirements = 120
 	exp_type = EXP_TYPE_CREW
 
 	outfit = /datum/outfit/job/roboticist
@@ -43,8 +43,8 @@
 	uniform = /obj/item/clothing/under/rank/rnd/roboticist
 	suit = /obj/item/clothing/suit/toggle/labcoat
 
-	backpack = /obj/item/storage/backpack/science/robo //SKYRAT CHANGE - Roboticist Bags (CHANGE)
-	satchel = /obj/item/storage/backpack/satchel/tox/robo //SKYRAT CHANGE - Roboticist Bags (CHANGE)
-	duffelbag = /obj/item/storage/backpack/duffel/robo //SKYRAT CHANGE - Roboticist Bags (ADDITION)
+	backpack = /obj/item/storage/backpack/science/robo
+	satchel = /obj/item/storage/backpack/satchel/tox/robo
+	duffelbag = /obj/item/storage/backpack/duffel/robo
 
 	pda_slot = SLOT_L_STORE

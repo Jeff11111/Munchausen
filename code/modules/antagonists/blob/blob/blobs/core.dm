@@ -3,7 +3,7 @@
 	icon = 'icons/mob/blob.dmi'
 	icon_state = "blank_blob"
 	desc = "A huge, pulsating yellow mass."
-	max_integrity = 600	// Skyrat Edit: 400 to 600.
+	max_integrity = 600
 	armor = list("melee" = 30, "bullet" = 30, "laser" = 20, "energy" = 5, "bomb" = 70, "bio" = 0, "rad" = 0, "fire" = 75, "acid" = 90) // Last stand
 	explosion_block = 6
 	point_return = -1
@@ -18,8 +18,7 @@
 		return INITIALIZE_HINT_QDEL
 	if(overmind)
 		update_icon()
-	//addtimer(CALLBACK(src, .proc/generate_announcement), 1800) // this is 3 minutes
-	addtimer(CALLBACK(src, .proc/generate_announcement), 5 MINUTES) // this is 5 minutes SKYRAT EDIT - BLOB
+	addtimer(CALLBACK(src, .proc/generate_announcement), 5 MINUTES)
 	. = ..()
 
 /obj/structure/blob/core/proc/generate_announcement()
@@ -66,8 +65,7 @@
 		overmind.update_health_hud()
 	Pulse_Area(overmind, 12, 4, 3)
 	for(var/obj/structure/blob/normal/B in range(1, src))
-		//if(prob(5))
-		if(prob(10)) //SKYRAT EDIT - BLOB
+		if(prob(10))
 			B.change_to(/obj/structure/blob/shield/core, overmind)
 	..()
 

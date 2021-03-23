@@ -174,7 +174,6 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 	if(dt == PIPE_UNARY_FLIPPABLE)
 		icon_state = "[icon_state]_preview"
 
-// SKYRAT CHANGE: Made BSRPD into a subtype of RPD, additionally made it work at range.
 /obj/item/pipe_dispenser
 	name = "Rapid Piping Device (RPD)"
 	desc = "A device used to rapidly pipe things."
@@ -209,7 +208,7 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 	var/static/datum/pipe_info/first_disposal
 	var/static/datum/pipe_info/first_transit
 	var/mode = BUILD_MODE | DESTROY_MODE | WRENCH_MODE
-	var/has_bluespace_pipe = FALSE // Skyrat
+	var/has_bluespace_pipe = FALSE
 
 /obj/item/pipe_dispenser/New()
 	. = ..()
@@ -267,7 +266,7 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 	var/list/recipes
 	switch(category)
 		if(ATMOS_CATEGORY)
-			if(has_bluespace_pipe) // stupid skyrat edit
+			if(has_bluespace_pipe)
 				recipes = GLOB.bsatmos_pipe_recipes
 			else
 				recipes = GLOB.atmos_pipe_recipes
@@ -311,7 +310,7 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 		if("pipe_type")
 			var/static/list/recipes
 			if(!recipes)
-				if(has_bluespace_pipe) // skyrat hack
+				if(has_bluespace_pipe)
 					recipes = GLOB.disposal_pipe_recipes + GLOB.bsatmos_pipe_recipes + GLOB.transit_tube_recipes
 				else
 					recipes = GLOB.disposal_pipe_recipes + GLOB.atmos_pipe_recipes + GLOB.transit_tube_recipes
@@ -334,7 +333,7 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 		playsound(get_turf(src), 'sound/effects/pop.ogg', 50, 0)
 	return TRUE
 
-/obj/item/pipe_dispenser/pre_attack(atom/A, mob/user) // Skyrat: All functionality moved to proc/dispense
+/obj/item/pipe_dispenser/pre_attack(atom/A, mob/user)
 	dispense(A, user)
 
 /obj/item/pipe_dispenser/proc/dispense(atom/A, mob/user)
@@ -481,8 +480,7 @@ GLOBAL_LIST_INIT(transit_tube_recipes, list(
 					return
 
 			else
-				return 
-// End skyrat edit
+				return
 
 /obj/item/pipe_dispenser/proc/activate()
 	playsound(get_turf(src), 'sound/items/deconstruct.ogg', 50, 1)

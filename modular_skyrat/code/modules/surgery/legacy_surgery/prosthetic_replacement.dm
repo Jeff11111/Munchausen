@@ -6,7 +6,7 @@
 				/datum/surgery_step/add_prosthetic,
 				/datum/surgery_step/close)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	possible_locs = ALL_BODYPARTS //skyrat edit
+	possible_locs = ALL_BODYPARTS
 	requires_bodypart = FALSE //need a missing limb
 	requires_bodypart_type = 0
 
@@ -58,12 +58,10 @@
 			display_results(user, target, "<span class ='notice'>You begin to replace [target]'s [parse_zone(target_zone)] with [tool]...</span>",
 				"[user] begins to replace [target]'s [parse_zone(target_zone)] with [tool].",
 				"[user] begins to replace [target]'s [parse_zone(target_zone)].")
-		//skyrat edit
 		else if(target_zone in BP.children_zones)
 			display_results(user, target, "<span class ='notice'>You begin to replace [target]'s [parse_zone(BP.children_zones[1])] with [tool]...</span>",
 				"[user] begins to replace [target]'s [parse_zone(BP.children_zones[1])] with [tool].",
 				"[user] begins to replace [target]'s [parse_zone(BP.children_zones[1])].")
-		//
 		else
 			to_chat(user, "<span class='warning'>[tool] isn't the right type for [parse_zone(target_zone)].</span>")
 			return -1
@@ -80,7 +78,6 @@
 		tool = tool.contents[1]
 	if(istype(tool, /obj/item/bodypart) && user.temporarilyRemoveItemFromInventory(tool))
 		var/obj/item/bodypart/L = tool
-		//skyrat edit
 		var/bruh = null
 		if(target_zone != L.body_zone)
 			if(target_zone in L.children_zones)
@@ -92,7 +89,6 @@
 						bruh = fosterchild
 		else
 			L.attach_limb(target)
-		//
 		if(organ_rejection_dam)
 			target.adjustToxLoss(organ_rejection_dam)
 		display_results(user, target, "<span class='notice'>You succeed in replacing [target]'s [parse_zone(target_zone)].</span>",

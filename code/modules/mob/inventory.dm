@@ -206,7 +206,7 @@
 
 
 /mob/proc/put_in_hand_check(obj/item/I)
-	if(incapacitated() && !(I.item_flags&ABSTRACT)) //Cit change - Changes lying to incapacitated so that it's plausible to pick things up while on the ground
+	if(incapacitated() && !(I.item_flags&ABSTRACT))
 		return FALSE
 	if(!istype(I))
 		return FALSE
@@ -297,17 +297,17 @@
 
 //for when you want the item to end up on the ground
 //will force move the item to the ground and call the turf's Entered
-/mob/proc/dropItemToGround(obj/item/I, force = FALSE, ignore_strip_self = TRUE) //skyrat edit
+/mob/proc/dropItemToGround(obj/item/I, force = FALSE, ignore_strip_self = TRUE)
 	return doUnEquip(I, force, drop_location(), FALSE, ignore_strip_self)
 
 //for when the item will be immediately placed in a loc other than the ground
-/mob/proc/transferItemToLoc(obj/item/I, newloc = null, force = FALSE, ignore_strip_self = TRUE) //skyrat edit
+/mob/proc/transferItemToLoc(obj/item/I, newloc = null, force = FALSE, ignore_strip_self = TRUE)
 	return doUnEquip(I, force, newloc, FALSE, ignore_strip_self)
 
 //visibly unequips I but it is NOT MOVED AND REMAINS IN SRC
 //item MUST BE FORCEMOVE'D OR QDEL'D
-/mob/proc/temporarilyRemoveItemFromInventory(obj/item/I, force = FALSE, idrop = TRUE, ignore_strip_self = TRUE) //skyrat edit
-	return doUnEquip(I, force, null, TRUE, idrop, ignore_strip_self) //skyrat edit
+/mob/proc/temporarilyRemoveItemFromInventory(obj/item/I, force = FALSE, idrop = TRUE, ignore_strip_self = TRUE)
+	return doUnEquip(I, force, null, TRUE, idrop, ignore_strip_self)
 
 //DO NOT CALL THIS PROC
 //use one of the above 3 helper procs
@@ -385,7 +385,6 @@
 		items += wear_suit
 	if(w_uniform)
 		items += w_uniform
-	//skyrat edit
 	if(ears_extra)
 		items += ears_extra
 	if(w_underwear)
@@ -396,7 +395,6 @@
 		items += w_shirt
 	if(wrists)
 		items += wrists
-	//
 	if(include_pockets)
 		if(l_store)
 			items += l_store

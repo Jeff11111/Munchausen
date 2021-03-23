@@ -4,7 +4,7 @@
 	desc = "All the tools you need to create your own robot army."
 	icon_state = "robotics"
 	icon_deny = "robotics-deny"
-	products = list(/obj/item/clothing/suit/toggle/labcoat = 4, //edited by skyrat
+	products = list(/obj/item/clothing/suit/toggle/labcoat = 4,
 					/obj/item/clothing/under/rank/rnd/roboticist = 4,
 					/obj/item/stack/cable_coil = 4,
 					/obj/item/assembly/flash/handheld = 4,

@@ -297,15 +297,13 @@
 
 	if(!check_has_body_select())
 		return
-	//skyrat edit
 	var/next_in_line
 	if(mob.zone_selected == BODY_ZONE_R_ARM)
 		next_in_line = BODY_ZONE_PRECISE_R_HAND
 	else
 		next_in_line = BODY_ZONE_R_ARM
-	//
 	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
-	selector.set_selected_zone(next_in_line, mob) //skyrat edit
+	selector.set_selected_zone(next_in_line, mob)
 
 /client/verb/body_chest()
 	set name = "body-chest"
@@ -313,7 +311,6 @@
 
 	if(!check_has_body_select())
 		return
-	//skyrat edit
 	var/next_in_line
 	if(mob.zone_selected == BODY_ZONE_PRECISE_NECK)
 		next_in_line = BODY_ZONE_CHEST
@@ -323,7 +320,7 @@
 		next_in_line = BODY_ZONE_PRECISE_NECK
 	//
 	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
-	selector.set_selected_zone(next_in_line, mob) //skyrat edit
+	selector.set_selected_zone(next_in_line, mob)
 
 /client/verb/body_l_arm()
 	set name = "body-l-arm"
@@ -331,15 +328,13 @@
 
 	if(!check_has_body_select())
 		return
-	//skyrat edit
 	var/next_in_line
 	if(mob.zone_selected == BODY_ZONE_L_ARM)
 		next_in_line = BODY_ZONE_PRECISE_L_HAND
 	else
 		next_in_line = BODY_ZONE_L_ARM
-	//
 	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
-	selector.set_selected_zone(next_in_line, mob) //skyrat edit
+	selector.set_selected_zone(next_in_line, mob)
 
 /client/verb/body_r_leg()
 	set name = "body-r-leg"
@@ -347,15 +342,13 @@
 
 	if(!check_has_body_select())
 		return
-	//skyrat edit
 	var/next_in_line
 	if(mob.zone_selected == BODY_ZONE_R_LEG)
 		next_in_line = BODY_ZONE_PRECISE_R_FOOT
 	else
 		next_in_line = BODY_ZONE_R_LEG
-	//
 	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
-	selector.set_selected_zone(next_in_line, mob) //skyrat edit
+	selector.set_selected_zone(next_in_line, mob)
 
 /client/verb/body_groin()
 	set name = "body-groin"
@@ -371,15 +364,13 @@
 	set name = "body-l-leg"
 	set hidden = 1
 
-	//skyrat edit
 	var/next_in_line
 	if(mob.zone_selected == BODY_ZONE_L_LEG)
 		next_in_line = BODY_ZONE_PRECISE_L_FOOT
 	else
 		next_in_line = BODY_ZONE_L_LEG
-	//
 	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
-	selector.set_selected_zone(next_in_line, mob) //skyrat edit
+	selector.set_selected_zone(next_in_line, mob)
 
 /client/verb/toggle_walk_run()
 	set name = "toggle-walk-run"

@@ -18,9 +18,7 @@
 	var/state_wielded = FALSE						/// The item state that will be used when wielded
 	var/obj/item/offhand/offhand_item = null		/// Reference to the offhand created for the item
 	var/sharpened_increase = 0						/// The amount of increase recived from sharpening the item
-	//SKYRAT CHANGES - Option to avoid attack self activation
 	var/ignore_attack_self = FALSE					/// We only register the attack self signal if this is false
-	//END OF SKYRAT CHANGES
 
 /**
  * Two Handed component
@@ -37,7 +35,7 @@
  */
 /datum/component/two_handed/Initialize(require_twohands=FALSE, wieldsound=FALSE, unwieldsound=FALSE, attacksound=FALSE, \
 										force_multiplier=0, force_wielded=0, force_unwielded=0, icon_wielded=FALSE,\
-										ignore_attack_self=FALSE, state_wielded=FALSE) //skyrat change - ignore_attack_self
+										ignore_attack_self=FALSE, state_wielded=FALSE)
 	if(!isitem(parent))
 		return COMPONENT_INCOMPATIBLE
 
@@ -49,14 +47,12 @@
 	src.force_wielded = force_wielded
 	src.force_unwielded = force_unwielded
 	src.icon_wielded = icon_wielded
-	//skyrat change
 	src.ignore_attack_self = ignore_attack_self
 	src.state_wielded = state_wielded
-	//skyrat changes end
 
 // Inherit the new values passed to the component
 /datum/component/two_handed/InheritComponent(datum/component/two_handed/new_comp, original, require_twohands, wieldsound, unwieldsound, \
-											force_multiplier, force_wielded, force_unwielded, icon_wielded, ignore_attack_self, state_wielded) //skyrat change - ignore_attack_self
+											force_multiplier, force_wielded, force_unwielded, icon_wielded, ignore_attack_self, state_wielded)
 	if(!original)
 		return
 	if(require_twohands)
@@ -84,10 +80,8 @@
 /datum/component/two_handed/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, .proc/on_equip)
 	RegisterSignal(parent, COMSIG_ITEM_DROPPED, .proc/on_drop)
-	//skyrat edit
 	if(!ignore_attack_self)
 		RegisterSignal(parent, COMSIG_ITEM_ATTACK_SELF, .proc/on_attack_self)
-	//
 	RegisterSignal(parent, COMSIG_ITEM_ATTACK, .proc/on_attack)
 	RegisterSignal(parent, COMSIG_ATOM_UPDATE_ICON, .proc/on_update_icon)
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, .proc/on_moved)

@@ -60,7 +60,7 @@
 		to_chat(user, "<span class='notice'>You clear all active holograms.</span>")
 
 
-/obj/item/holosign_creator/examine(mob/user) // Skyrat change
+/obj/item/holosign_creator/examine(mob/user)
 	. = ..()
 	. += "<span class='notice'>It is currently maintaining <b>[signs.len]</b> projections.</span>"
 

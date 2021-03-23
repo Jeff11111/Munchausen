@@ -242,9 +242,7 @@
 	max_integrity = 200
 	armor = list("melee" = 0, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 100, "acid" = 30)
 	resistance_flags = FIRE_PROOF
-	//skyrat edit
 	wound_bonus = -20
-	//
 
 /obj/item/twohanded/fireaxe/Initialize()
 	. = ..()
@@ -310,10 +308,8 @@
 	var/spinnable = TRUE
 	total_mass = 0.4 //Survival flashlights typically weigh around 5 ounces.
 	var/total_mass_on = 3.4
-	//skyrat edit
 	wound_bonus = -110
 	bare_wound_bonus = 20
-	//
 
 /datum/block_parry_data/dual_esword
 	block_damage_absorption = 2
@@ -646,10 +642,8 @@
 	var/obj/item/grenade/explosive = null
 	var/war_cry = "AAAAARGH!!!"
 	var/icon_prefix = "spearglass"
-	//skyrat edit
 	wound_bonus = -25
 	bare_wound_bonus = 15
-	//
 
 /obj/item/twohanded/spear/Initialize()
 	. = ..()
@@ -663,8 +657,6 @@
 		return
 	. = ..()
 
-//Citadel additions : attack_self and rightclick_attack_self
-
 /obj/item/twohanded/rightclick_attack_self(mob/user)
 	if(wielded) //Trying to unwield it
 		unwield(user)
@@ -674,7 +666,7 @@
 
 /obj/item/twohanded/spear/suicide_act(mob/living/carbon/user)
 	user.visible_message("<span class='suicide'>[user] begins to sword-swallow \the [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
-	if(explosive) //Citadel Edit removes qdel and explosive.forcemove(AM)
+	if(explosive)
 		user.say("[war_cry]", forced="spear warcry")
 		explosive.prime(user)
 		user.gib()
@@ -698,11 +690,11 @@
 		return
 	if(isopenturf(AM)) //So you can actually melee with it
 		return
-	if(explosive && wielded) //Citadel edit removes qdel and explosive.forcemove(AM)
+	if(explosive && wielded)
 		user.say("[war_cry]", forced="spear warcry")
 		explosive.prime()
 
-/obj/item/twohanded/spear/grenade_prime_react(obj/item/grenade/nade) //Citadel edit, removes throw_impact because memes
+/obj/item/twohanded/spear/grenade_prime_react(obj/item/grenade/nade)
 	nade.forceMove(get_turf(src))
 	qdel(src)
 
@@ -720,7 +712,6 @@
 
 /obj/item/twohanded/spear/CheckParts(list/parts_list)
 	var/obj/item/shard/tip = locate() in parts_list
-//SKYRAT CHANGES BEGIN - GC issues fixing
 	if(tip)
 		if (istype(tip, /obj/item/shard/plasma))
 			force_wielded = 19
@@ -730,7 +721,6 @@
 			icon_prefix = "spearplasma"
 		parts_list -= tip
 		qdel(tip)
-//SKIRAT CHANGES END
 	var/obj/item/twohanded/spear/S = locate() in parts_list
 	if(S)
 		if(S.explosive)
@@ -1267,9 +1257,9 @@
 		turn_off()
 
 /obj/item/twohanded/electrostaff/attack(mob/living/target, mob/living/user)
-	if(IS_STAMCRIT(user))//CIT CHANGE - makes it impossible to baton in stamina softcrit
-		to_chat(user, "<span class='danger'>You're too exhausted to use [src] properly.</span>")//CIT CHANGE - ditto
-		return //CIT CHANGE - ditto
+	if(IS_STAMCRIT(user))//makes it impossible to baton in stamina softcrit
+		to_chat(user, "<span class='danger'>You're too exhausted to use [src] properly.</span>")
+		return
 	if(on && HAS_TRAIT(user, TRAIT_CLUMSY) && prob(50))
 		clowning_around(user)			//ouch!
 		return

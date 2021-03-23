@@ -456,8 +456,8 @@ SUBSYSTEM_DEF(job)
 		H.mind.assigned_role = rank
 
 	if(job)
-		if(!job.dresscodecompliant)// CIT CHANGE - dress code compliance
-			equip_loadout(N, H) // CIT CHANGE - allows players to spawn with loadout items
+		if(!job.dresscodecompliant)
+			equip_loadout(N, H)
 		var/new_mob = job.equip(H, null, null, joined_late , null, M.client)
 		if(ismob(new_mob))
 			H = new_mob
@@ -481,10 +481,10 @@ SUBSYSTEM_DEF(job)
 		H.add_memory("My account ID is [wageslave.account_id].")
 	
 	if(job && H)
-		if(job.dresscodecompliant)// CIT CHANGE - dress code compliance
-			equip_loadout(N, H) // CIT CHANGE - allows players to spawn with loadout items
+		if(job.dresscodecompliant)
+			equip_loadout(N, H)
 		job.after_spawn(H, M, joined_late) // note: this happens before the mob has a key! M will always have a client, H might not.
-		equip_loadout(N, H, TRUE)//CIT CHANGE - makes players spawn with in-backpack loadout items properly. A little hacky but it works
+		equip_loadout(N, H, TRUE)
 	
 	if(SSaspects.chosen_aspect)
 		SSaspects.chosen_aspect.post_equip(H, M.client, joined_late)
@@ -495,19 +495,6 @@ SUBSYSTEM_DEF(job)
 			H.fraggotify(H.real_name)
 			break
 	return H
-/*
-/datum/controller/subsystem/job/proc/handle_auto_deadmin_roles(client/C, rank)
-	if(!C?.holder)
-		return TRUE
-	var/datum/job/job = GetJob(rank)
-	if(!job)
-		return
-	if((job.auto_deadmin_role_flags & DEADMIN_POSITION_HEAD) && (CONFIG_GET(flag/auto_deadmin_heads) || (C.prefs?.toggles & DEADMIN_POSITION_HEAD)))
-		return C.holder.auto_deadmin()
-	else if((job.auto_deadmin_role_flags & DEADMIN_POSITION_SECURITY) && (CONFIG_GET(flag/auto_deadmin_security) || (C.prefs?.toggles & DEADMIN_POSITION_SECURITY)))
-		return C.holder.auto_deadmin()
-	else if((job.auto_deadmin_role_flags & DEADMIN_POSITION_SILICON) && (CONFIG_GET(flag/auto_deadmin_silicons) || (C.prefs?.toggles & DEADMIN_POSITION_SILICON))) //in the event there's ever psuedo-silicon roles added, ie synths.
-		return C.holder.auto_deadmin()*/
 
 /datum/controller/subsystem/job/proc/setup_officer_positions()
 	var/datum/job/J = SSjob.GetJob("Enforcer")
@@ -728,11 +715,9 @@ SUBSYSTEM_DEF(job)
 			if(!permitted)
 				continue
 			var/obj/item/I = new G.path
-			//skyrat edit
 			if(G.has_colors)
 				if(the_mob.client.prefs.color_gear[G.name])
 					I.color = the_mob.client.prefs.color_gear[G.name]
-			//
 			if(!M.equip_to_slot_if_possible(I, G.category, disable_warning = TRUE, bypass_equip_delay_self = TRUE)) // If the job's dresscode compliant, try to put it in its slot, first
 				if(iscarbon(M))
 					var/mob/living/carbon/C = M

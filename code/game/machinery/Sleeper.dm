@@ -67,7 +67,7 @@
 		I += M.rating
 
 	efficiency = initial(efficiency)* E
-	min_health = initial(min_health) - (10*(E-1)) // CIT CHANGE - changes min health equation to be min_health - (matterbin rating * 10)
+	min_health = initial(min_health) - (10*(E-1))
 	available_chems = list()
 	for(var/i in 1 to I)
 		available_chems |= possible_chems[i]
@@ -385,12 +385,6 @@
 	var/list/av_chem = available_chems.Copy()
 	for(var/chem in av_chem)
 		chem_buttons[chem] = pick_n_take(av_chem) //no dupes, allow for random buttons to still be correct
-
-/* SEE MODULAR SKYRAT FILE
-/obj/machinery/sleeper/syndie
-	icon_state = "sleeper_s"
-	controls_inside = TRUE
-*/
 
 /obj/machinery/sleeper/syndie/Initialize()
 	. = ..()

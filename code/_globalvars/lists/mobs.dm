@@ -40,7 +40,7 @@ GLOBAL_LIST_EMPTY(latejoin_ai_cores)
 
 GLOBAL_LIST_EMPTY(mob_config_movespeed_type_lookup)
 
-GLOBAL_LIST_EMPTY(latejoiners) //CIT CHANGE - All latejoining people, for traitor-target purposes.
+GLOBAL_LIST_EMPTY(latejoiners) //All latejoining people, for traitor-target purposes.
 
 /proc/update_config_movespeed_type_lookup(update_mobs = TRUE)
 	// NOTE: This is entirely based on the fact that byond typesof/subtypesof gets longer/deeper paths before shallower ones.

@@ -613,7 +613,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set category = "Admin"
 	set name = "Manage Job Slots"
 
-	if(!check_rights(R_DEBUG|R_SERVER)) //Skyrat change
+	if(!check_rights(R_DEBUG|R_SERVER))
 		return
 	holder.manage_free_slots()
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Manage Job Slots") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -745,7 +745,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set name = "Make Everyone Random"
 	set desc = "Make everyone have a random appearance. You can only use this before rounds!"
 
-	if(!check_rights(R_SERVER)) //Skyrat change
+	if(!check_rights(R_SERVER))
 		return
 
 	if(SSticker.HasRoundStarted())
@@ -799,7 +799,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!check_rights(R_ADMIN))
 		return
 
-	var/level = input("Select security level to change to","Set Security Level") as null|anything in GLOB.all_security_levels //Skyrat change
+	var/level = input("Select security level to change to","Set Security Level") as null|anything in GLOB.all_security_levels
 	if(level)
 		set_security_level(level)
 
@@ -1363,8 +1363,6 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 			target.turn_into_pickle()
 		if(ADMIN_PUNISHMENT_FRY)
 			target.fry()
-		
-		//skyrat punishments
 		if(ADMIN_PUNISHMENT_CRACK)
 			if(!iscarbon(target))
 				to_chat(usr,"<span class='warning'>This must be used on a carbon mob.</span>")

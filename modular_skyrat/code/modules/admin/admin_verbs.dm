@@ -100,7 +100,7 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/cmd_change_command_name,
 	/client/proc/fax_panel,
 	/client/proc/cmd_admin_toggle_fov,
-	/client/proc/roll_dices					//CIT CHANGE - Adds dice verb
+	/client/proc/roll_dices
 	))
 
 /world/proc/AVerbsServer()
@@ -255,8 +255,8 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/fax_panel,
 	/client/proc/roll_dices,
 	/datum/admins/proc/toggleMulticam,
-	/client/proc/cmd_admin_man_up, //CIT CHANGE - adds man up verb
-	/client/proc/cmd_admin_man_up_global //CIT CHANGE - ditto
+	/client/proc/cmd_admin_man_up,
+	/client/proc/cmd_admin_man_up_global
 	))
 
 /client/proc/cmd_loud_admin_say(msg as text)

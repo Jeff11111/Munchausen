@@ -155,7 +155,7 @@
 		/obj/item/stock_parts/micro_laser = 1,
 		/obj/item/stock_parts/capacitor = 1,
 		/obj/item/stack/cable_coil = 3,
-		/obj/item/stock_parts/cell = 1) // Skyrat edit: adds cell to recipe
+		/obj/item/stock_parts/cell = 1)
 	def_components = list(/obj/item/stock_parts/cell = /obj/item/stock_parts/cell/high)
 	needs_anchored = FALSE
 
@@ -237,7 +237,7 @@
 		/obj/item/stock_parts/capacitor = 2,
 		/obj/item/stack/sheet/glass = 1)
 	def_components = list(/obj/item/stack/ore/bluespace_crystal = /obj/item/stack/ore/bluespace_crystal/artificial)
-// SKYRAT EDIT - Changing our vendors switch
+
 /obj/item/circuitboard/machine/vendor
 	name = "Custom Vendor (Machine Board)"
 	desc = "You can turn the \"brand selection\" dial using a screwdriver."
@@ -313,7 +313,7 @@
 			set_type(typepath)
 			break
 	return ..()
-// SKYRAT EDIT END
+
 /obj/item/circuitboard/machine/mech_recharger
 	name = "Mechbay Recharger (Machine Board)"
 	build_path = /obj/machinery/mech_bay_recharge_port
@@ -1099,12 +1099,7 @@
 		/obj/item/stock_parts/capacitor = 1,
 		/obj/item/stack/cable_coil = 5,
 		/obj/item/reagent_containers/glass/beaker = 6) //So it can hold lots of chems
-/* skyrat edit - removing this and placing it in the actual vending circuit
-/obj/item/circuitboard/machine/kinkmate
-	name = "Kinkmate Vendor (Machine Board)"
-	build_path = /obj/machinery/vending/kink
-	req_components = list(/obj/item/vending_refill/kink = 1)
-*/
+
 /obj/item/circuitboard/machine/autolathe/toy
 	name = "Autoylathe (Machine Board)"
 	build_path = /obj/machinery/autolathe/toy

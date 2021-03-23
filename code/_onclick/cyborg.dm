@@ -98,28 +98,28 @@
 //Give cyborgs hotkey clicks without breaking existing uses of hotkey clicks
 // for non-doors/apcs
 /mob/living/silicon/robot/CtrlShiftClickOn(atom/A)
-	if(isturf(A)) // Skyrat edit
-		var/obj/machinery/door/airlock/airlock = locate(/obj/machinery/door/airlock) in A // Skyrat edit
+	if(isturf(A))
+		var/obj/machinery/door/airlock/airlock = locate(/obj/machinery/door/airlock) in A
 		if(airlock)
 			airlock.BorgCtrlShiftClick(src)
 	else
-		A.BorgCtrlShiftClick(src) // End of skyrat edit
+		A.BorgCtrlShiftClick(src)
 
 /mob/living/silicon/robot/ShiftClickOn(atom/A)
-	if(isturf(A)) // Skyrat edit
-		var/obj/machinery/door/airlock/airlock = locate(/obj/machinery/door/airlock) in A // Skyrat edit
+	if(isturf(A))
+		var/obj/machinery/door/airlock/airlock = locate(/obj/machinery/door/airlock) in A 
 		if(airlock)
 			airlock.BorgShiftClick(src)
 	else
-		A.BorgShiftClick(src) // End of skyrat edit
+		A.BorgShiftClick(src)
 	
 /mob/living/silicon/robot/CtrlClickOn(atom/A)
-	if(isturf(A)) // Skyrat edit
-		var/obj/machinery/door/airlock/airlock = locate(/obj/machinery/door/airlock) in A // Skyrat edit
+	if(isturf(A))
+		var/obj/machinery/door/airlock/airlock = locate(/obj/machinery/door/airlock) in A
 		if(airlock)
 			airlock.BorgCtrlClick(src)
 	else
-		A.BorgCtrlClick(src) // End of skyrat edit
+		A.BorgCtrlClick(src)
 
 /mob/living/silicon/robot/AltClickOn(atom/A)
 	if(!A.BorgAltClick(src))

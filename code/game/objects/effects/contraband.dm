@@ -2,7 +2,6 @@
 #define PLACE_SPEED 37
 
 // The poster item
-// SKYRAT EDIT: Moving icon to be modular
 /obj/item/poster
 	name = "poorly coded poster"
 	desc = "You probably shouldn't be holding this."
@@ -669,7 +668,6 @@
 	desc = "An advertisement for NanoTrasen Storm. A premium infantry helmet, It contains a rebreather and full head coverage for use on harsh environments where the air isn't always safe to breathe."
 	icon_state = "poster44_legit"
 
-// SKYRAT EDIT: More Posters.
 /obj/structure/sign/poster/contraband/goldstar
 	name = "Gold Star"
 	desc = "A poster of a golden star."

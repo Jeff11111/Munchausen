@@ -5,7 +5,7 @@
 	icon_deny = "med-deny"
 	product_ads = "Go save some lives!;The best stuff for your medbay.;Only the finest tools.;Natural chemicals!;This stuff saves lives.;Don't you want some?;Ping!"
 	req_access = list(ACCESS_MEDICAL)
-	products = list(/obj/item/stack/medical/gauze = 8, //Edited by Skyrat
+	products = list(/obj/item/stack/medical/gauze = 8,
 					/obj/item/reagent_containers/medspray/styptic = 2,
 					/obj/item/reagent_containers/medspray/silver_sulf = 2,
 					/obj/item/reagent_containers/medspray/sterilizine = 1,

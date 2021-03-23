@@ -124,27 +124,6 @@
 	user.nextsoundemote = world.time + 7
 	playsound(user, 'modular_citadel/sound/voice/weh.ogg', 50, 1, -1)
 
-// Skyrat change start
-/* MOVED TO MODULAR (modular_skyrat/code/modules/mob/emote.dm)
-/datum/emote/living/peep
-	key = "peep"
-	key_third_person = "peeps like a bird"
-	message = "peeps like a bird!"
-	emote_type = EMOTE_AUDIBLE
-	muzzle_ignore = FALSE
-	restraint_check = FALSE
-	mob_type_allowed_typecache = list(/mob/living/carbon, /mob/living/silicon/pai)
-
-/datum/emote/living/peep/run_emote(mob/living/user, params)
-	if(!(. = ..()))
-		return
-	if(user.nextsoundemote >= world.time)
-		return
-	user.nextsoundemote = world.time + 7
-	playsound(user, 'modular_citadel/sound/voice/peep.ogg', 50, 1, -1)
-*/
-// Skyrat change stop
-
 /datum/emote/living/dab
 	key = "dab"
 	key_third_person = "suddenly hits a dab"

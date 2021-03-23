@@ -12,8 +12,8 @@
 #define ROBOTICIST		(1<<8)
 #define AI_JF			(1<<9)
 #define CYBORG			(1<<10)
-#define BLUESHIELD		(1<<11) //Skyrat change
-#define PRISONER		(1<<12) //Skyrat change
+#define BLUESHIELD		(1<<11)
+#define PRISONER		(1<<12)
 
 
 #define MEDSCI			(1<<1)
@@ -26,8 +26,8 @@
 #define GENETICIST		(1<<5)
 #define VIROLOGIST		(1<<6)
 #define PARAMEDIC		(1<<7)
-#define PSYCHOLOGIST    (1<<8) //Skyrat change
-#define BRIG_PHYSICIAN	(1<<9) //Skyrat change
+#define PSYCHOLOGIST    (1<<8)
+#define BRIG_PHYSICIAN	(1<<9)
 
 
 #define CIVILIAN		(1<<2)
@@ -66,8 +66,6 @@
 #define JOB_DISPLAY_ORDER_HEAD_OF_PERSONNEL 3
 #define JOB_DISPLAY_ORDER_QUARTERMASTER 4
 #define JOB_DISPLAY_ORDER_CARGO_TECHNICIAN 5
-
-//Skyrat change, adds mining foreman, mining engineer, and Psych. List shifted down appropriately
 #define JOB_DISPLAY_ORDER_MINER_FOREMAN 6
 #define JOB_DISPLAY_ORDER_SHAFT_MINER 7
 #define JOB_DISPLAY_ORDER_MINER_ENGINEER 8
@@ -102,4 +100,3 @@
 #define JOB_DISPLAY_ORDER_BRIG_PHYSICIAN 37
 #define JOB_DISPLAY_ORDER_BLUESHIELD 38
 #define JOB_DISPLAY_ORDER_PRISONER 39
-//Skyrat change stop

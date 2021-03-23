@@ -29,11 +29,9 @@
 
 */
 
-//SKYRAT CHANGES BEGIN
 #define AMBITION_COOLDOWN_TIME (5 SECONDS)
 #define OBJECTIVES_COOLDOWN_TIME (2 SECONDS)
 #define ADMIN_PING_COOLDOWN_TIME (10 MINUTES)
-//SKYRAT CHANGES END
 
 /datum/mind
 	var/key
@@ -65,11 +63,8 @@
 	var/datum/language_holder/language_holder
 	var/unconvertable = FALSE
 	var/late_joiner = FALSE
-
-//SKYRAT CHANGES
 	var/appear_in_round_end_report = TRUE
 	var/mob/original_character
-//END OF SKYRAT CHANGES
 
 	var/force_escaped = FALSE  // Set by Into The Sunset command of the shuttle manipulator
 	var/list/learned_recipes //List of learned recipe TYPES.
@@ -77,10 +72,8 @@
 	/// Our skill holder.
 	var/datum/skill_holder/skill_holder
 
-// SKYRAT CHANGES BEGIN
 	/// Lazy list for antagonists to set goals they wish to achieve, to be shown at the round-end report.
 	var/list/ambitions
-// SKYRAT CHANGES END
 
 	/// Combat music
 	var/combat_music = 'modular_skyrat/sound/music/ritual.ogg'
@@ -149,15 +142,11 @@
 		LAZYCLEARLIST(new_character.client.recent_examines)
 	current.update_atom_languages()
 
-//CIT CHANGE - makes arousal update when transfering bodies
 	if(isliving(new_character)) //New humans and such are by default enabled arousal. Let's always use the new mind's prefs.
 		var/mob/living/L = new_character
 		if(L.client?.prefs && L.client.prefs.auto_ooc && L.client.prefs.chat_toggles & CHAT_OOC)
 			DISABLE_BITFIELD(L.client.prefs.chat_toggles,CHAT_OOC)
-
-//SKYRAT CHANGES
 	appear_in_round_end_report = current.client?.prefs?.appear_in_round_end_report
-//END OF SKYRAT CHANGES
 
 	SEND_SIGNAL(src, COMSIG_MIND_TRANSFER, new_character, old_character)
 	SEND_SIGNAL(new_character, COMSIG_MOB_ON_NEW_MIND)
@@ -189,9 +178,7 @@
 		qdel(A)
 		return
 	A.owner = src
-//SKYRAT CHANGES BEGIN
 	do_add_antag_datum(A)
-//SKYRAT CHANGES END
 	A.create_team(team)
 	var/datum/team/antag_team = A.get_team()
 	if(antag_team)
@@ -199,7 +186,6 @@
 	A.on_gain()
 	return A
 
-//SKYRAT CHANGES BEGIN
 /datum/mind/proc/do_add_antag_datum(instanced_datum)
 	. = LAZYLEN(antag_datums)
 	LAZYADD(antag_datums, instanced_datum)
@@ -212,13 +198,11 @@
 		A.on_removal()
 		return TRUE
 
-//SKYRAT CHANGES BEGIN
 /datum/mind/proc/do_remove_antag_datum(instanced_datum)
 	. = LAZYLEN(antag_datums)
 	LAZYREMOVE(antag_datums, instanced_datum)
 	if(. && !LAZYLEN(antag_datums))
 		ambitions = null
-//SKYRAT CHANGES END
 
 /datum/mind/proc/remove_all_antag_datums() //For the Lazy amongst us.
 	for(var/a in antag_datums)
@@ -386,10 +370,8 @@
 		message_admins("[ADMIN_LOOKUPFLW(current)] has been created by [ADMIN_LOOKUPFLW(creator)], an antagonist.")
 		to_chat(current, "<span class='userdanger'>Despite your creators current allegiances, your true master remains [creator.real_name]. If their loyalties change, so do yours. This will never change unless your creator's body is destroyed.</span>")
 
-//SKYRAT CHANGES BEGIN
 /datum/mind/proc/show_memory()
 	var/list/output = list("<B>[current.real_name]'s Memories:</B><br>")
-//SKYRAT CHANGES END
 	output += memory
 
 
@@ -410,7 +392,6 @@
 					output += "<li>Conspirator: [M.name]</li>"
 				output += "</ul>"
 
-//SKYRAT CHANGES BEGIN
 	if(LAZYLEN(ambitions))
 		for(var/count in 1 to LAZYLEN(ambitions))
 			output += "<br><B>Ambition #[count]</B>: [ambitions[count]]"
@@ -528,7 +509,7 @@ GLOBAL_LIST(objective_player_choices)
 		/datum/objective/christchurch,
 		/datum/objective/steal,
 		/datum/objective/download,
-		/datum/objective/blackmail_implant //SKYRAT ADDITION
+		/datum/objective/blackmail_implant
 		)
 
 	for(var/t in allowed_types)
@@ -556,7 +537,7 @@ GLOBAL_LIST(objective_choices)
 		/datum/objective/download,
 		/datum/objective/nuclear,
 		/datum/objective/absorb,
-		/datum/objective/blackmail_implant //SKYRAT ADDITION
+		/datum/objective/blackmail_implant
 		)
 
 	for(var/t in allowed_types)
@@ -575,10 +556,8 @@ GLOBAL_LIST(objective_choices)
 			continue
 		to_chat(current, "<span class='boldnotice'>You seem to have unanswered change requests. If there are online admins another gentle reminder might be in order.</span>")
 		break
-//SKYRAT CHANGES END
 
 /datum/mind/Topic(href, href_list)
-//SKYRAT CHANGES BEGIN
 	if (href_list["refresh_obj_amb"])
 		do_edit_objectives_ambitions()
 		return
@@ -1308,9 +1287,6 @@ GLOBAL_LIST(objective_choices)
 		do_edit_objectives_ambitions()
 		return
 
-
-//SKYRAT CHANGES END
-
 	if(href_list["add_antag"])
 		add_antag_wrapper(text2path(href_list["add_antag"]),usr)
 	if(href_list["remove_antag"])
@@ -1370,7 +1346,6 @@ GLOBAL_LIST(objective_choices)
 						else
 							target_antag = target
 
-//SKYRAT CHANGES BEGIN
 		if(!GLOB.objective_choices)
 			populate_objective_choices()
 
@@ -1379,7 +1354,6 @@ GLOBAL_LIST(objective_choices)
 
 		var/selected_type = input("Select objective type:", "Objective type", def_value) as null|anything in GLOB.objective_choices
 		selected_type = GLOB.objective_choices[selected_type]
-//SKYRAT CHANGES END
 
 		if (!selected_type)
 			return
@@ -1408,11 +1382,9 @@ GLOBAL_LIST(objective_choices)
 			message_admins("[key_name_admin(usr)] edited [current]'s objective to [new_objective.explanation_text]")
 			log_admin("[key_name(usr)] edited [current]'s objective to [new_objective.explanation_text]")
 
-//SKYRAT CHANGES BEGIN
 		if(href_list["ambition_panel"])
 			do_edit_objectives_ambitions()
 			return
-//SKYRAT CHANGES END
 
 	else if(href_list["traitor_class"])
 		var/static/list/choices
@@ -1597,7 +1569,6 @@ GLOBAL_LIST(objective_choices)
 	add_antag_datum(head)
 	special_role = ROLE_REV_HEAD
 
-// Skyrat change
 /datum/mind/proc/AddSpell(obj/effect/proc_holder/spell/S, give_mind = TRUE)
 	if(give_mind)
 		spell_list += S
@@ -1708,9 +1679,7 @@ GLOBAL_LIST(objective_choices)
 	if(!mind.name)
 		mind.name = real_name
 	mind.current = src
-//SKYRAT CHANGES
 	mind.appear_in_round_end_report = client?.prefs?.appear_in_round_end_report
-//END OF SKYRAT CHANGES
 
 /mob/living/carbon/mind_initialize()
 	..()
@@ -1738,6 +1707,4 @@ GLOBAL_LIST(objective_choices)
 	mind.assigned_role = ROLE_PAI
 	mind.special_role = ""
 
-//SKYRAT CHANGES BEGIN
 #undef AMBITION_COOLDOWN_TIME
-//SKYRAT CHANGES END

@@ -84,15 +84,6 @@
 /datum/holiday/groundhog/getStationPrefix()
 	return pick("Deja Vu") //I have been to this place before
 
-/* /datum/holiday/valentines // BEGIN skyrat-edit
-	name = VALENTINES
-	begin_day = 13
-	end_day = 15
-	begin_month = FEBRUARY
-
-/datum/holiday/valentines/getStationPrefix()
-	return pick("Love","Amore","Single","Smootch","Hug") */ // END skyrat-edit
-
 /datum/holiday/birthday
 	name = "Birthday of Space Station 13"
 	begin_day = 16

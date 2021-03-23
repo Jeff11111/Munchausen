@@ -8,7 +8,7 @@
 	spawn_positions = 3
 	supervisors = "the senior engineer"
 	selection_color = "#ff9b3d"
-	exp_requirements = 120 //SKYRAT CHANGE - upping the exp time on jobs
+	exp_requirements = 120
 	exp_type = EXP_TYPE_CREW
 
 	outfit = /datum/outfit/job/atmos

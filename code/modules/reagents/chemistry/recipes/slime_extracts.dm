@@ -70,10 +70,10 @@
 	required_other = TRUE
 	required_container = /obj/item/slime_extract/green
 
-/datum/chemical_reaction/slime/slimeanthro //skyrat edit
+/datum/chemical_reaction/slime/slimeanthro
 	name = "Anthro Mutation Toxin"
-	id = /datum/reagent/mutationtoxin/anthro //skyrat edit
-	results = list(/datum/reagent/mutationtoxin/anthro = 1) //skyrat edit
+	id = /datum/reagent/mutationtoxin/anthro
+	results = list(/datum/reagent/mutationtoxin/anthro = 1)
 	required_reagents = list(/datum/reagent/water = 1)
 	required_other = TRUE
 	required_container = /obj/item/slime_extract/green

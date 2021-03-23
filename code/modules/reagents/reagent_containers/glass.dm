@@ -304,7 +304,7 @@
 		SLOT_BELT, SLOT_S_STORE,\
 		SLOT_L_STORE, SLOT_R_STORE,\
 		SLOT_GENERC_DEXTROUS_STORAGE
-	) //skyrat edit
+	)
 	container_flags = APTFT_ALTCLICK|APTFT_VERB
 	container_HP = 1
 

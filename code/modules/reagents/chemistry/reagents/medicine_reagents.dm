@@ -152,12 +152,10 @@
 		M.adjustFireLoss(-power, 0)
 		M.adjustToxLoss(-power, 0, TRUE) //heals TOXINLOVERs
 		M.adjustCloneLoss(-power, 0)
-		//skyrat edit
 		for(var/i in M.all_wounds)
 			var/datum/wound/W = i
 			if(istype(W))
 				W.on_xadone(power)
-		//
 		REMOVE_TRAIT(M, TRAIT_DISFIGURED, TRAIT_GENERIC) //fixes common causes for disfiguration
 		. = 1
 	metabolization_rate = REAGENTS_METABOLISM * (0.00001 * (M.bodytemperature ** 2) + 0.5)
@@ -214,12 +212,10 @@
 		M.adjustFireLoss(-1.5 * power, 0)
 		M.adjustToxLoss(-power, 0, TRUE)
 		M.adjustCloneLoss(-power, 0)
-		//skyrat edit
 		for(var/i in M.all_wounds)
 			var/datum/wound/W = i
 			if(istype(W))
 				W.on_xadone(power)
-		//
 		REMOVE_TRAIT(M, TRAIT_DISFIGURED, TRAIT_GENERIC)
 		. = 1
 	..()
@@ -436,7 +432,7 @@
 
 /datum/reagent/medicine/mine_salve
 	name = "Miner's Salve"
-	description = "A powerful painkiller. Restores bruising and burns in addition to making the patient believe they are fully healed. Also great for treating severe burn wounds in a pinch." //skyrat edit
+	description = "A powerful painkiller. Restores bruising and burns in addition to making the patient believe they are fully healed. Also great for treating severe burn wounds in a pinch."
 	reagent_state = LIQUID
 	color = "#6D6374"
 	metabolization_rate = 0.4 * REAGENTS_METABOLISM
@@ -458,7 +454,7 @@
 				to_chat(M, "<span class='warning'>Your stomach feels empty and cramps!</span>")
 		else
 			if(show_message)
-				to_chat(M, "<span class='danger'>You feel your injuries fade away to nothing!</span>" ) //skyrat edit
+				to_chat(M, "<span class='danger'>You feel your injuries fade away to nothing!</span>" )
 	. = ..()
 			
 /datum/reagent/medicine/mine_salve/on_mob_end_metabolize(mob/living/M)
@@ -469,42 +465,11 @@
 
 /datum/reagent/medicine/synthflesh
 	name = "Synthflesh"
-	//description = "Has a 100% chance of healing large amounts of brute and burn damage very quickly. One unit of the chemical will heal one point of damage. Touch application only." Skyrat modular edit.
 	reagent_state = LIQUID
 	color = "#FFEBEB"
 	pH = 11.5
 	metabolization_rate = 5 * REAGENTS_METABOLISM
-	//overdose_threshold = 40 Skyrat modular edit
 	value = REAGENT_VALUE_COMMON
-
-/* SKYRAT MODULAR EDIT
-/datum/reagent/medicine/synthflesh/reaction_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1)
-	if(iscarbon(M))
-		if (M.stat == DEAD)
-			show_message = 0
-		if(method in list(INGEST, VAPOR))
-			var/mob/living/carbon/C = M
-			C.losebreath++
-			C.emote("cough")
-			to_chat(M, "<span class='danger'>You feel your throat closing up!</span>")
-		else if(method == INJECT)
-			return
-		else if(method in list(PATCH, TOUCH))
-			M.adjustBruteLoss(-1 * reac_volume)
-			M.adjustFireLoss(-1 * reac_volume)
-			if(show_message)
-				to_chat(M, "<span class='danger'>You feel your burns and bruises healing! It stings like hell!</span>")
-			SEND_SIGNAL(M, COMSIG_ADD_MOOD_EVENT, "painful_medicine", /datum/mood_event/painful_medicine)
-			var/vol = reac_volume + M.reagents.get_reagent_amount(/datum/reagent/medicine/synthflesh)
-			//Has to be at less than THRESHOLD_UNHUSK burn damage and have 100 synthflesh before unhusking. Corpses dont metabolize.
-			if(HAS_TRAIT_FROM(M, TRAIT_HUSK, "burn") && M.getFireLoss() < THRESHOLD_UNHUSK && (vol > 100))
-				M.cure_husk("burn")
-				M.visible_message("<span class='nicegreen'>Most of [M]'s burnt off or charred flesh has been restored.")
-	..()
-
-/datum/reagent/medicine/synthflesh/overdose_start(mob/living/M)
-	metabolization_rate = 15 * REAGENTS_METABOLISM
-*/
 
 /datum/reagent/medicine/charcoal
 	name = "Charcoal"
@@ -776,20 +741,16 @@
 
 /datum/reagent/medicine/morphine/on_mob_metabolize(mob/living/L)
 	..()
-	//SKYRAT EDIT, Painkiller.
 	if(iscarbon(L))
 		var/mob/living/carbon/C = L
 		C.add_chem_effect(CE_PAINKILLER, 100) //Morphine is very strong.
-	//
 	L.add_movespeed_mod_immunities(type, list(/datum/movespeed_modifier/damage_slowdown, /datum/movespeed_modifier/damage_slowdown_flying, /datum/movespeed_modifier/monkey_health_speedmod))
 
 /datum/reagent/medicine/morphine/on_mob_end_metabolize(mob/living/L)
 	L.remove_movespeed_mod_immunities(type, list(/datum/movespeed_modifier/damage_slowdown, /datum/movespeed_modifier/damage_slowdown_flying, /datum/movespeed_modifier/monkey_health_speedmod))
-	//SKYRAT EDIT, Painkiller.
 	if(iscarbon(L))
 		var/mob/living/carbon/C = L
 		C.remove_chem_effect(CE_PAINKILLER, 100) //Morphine is very strong.
-	//
 	..()
 
 /datum/reagent/medicine/morphine/on_mob_life(mob/living/carbon/M)
@@ -942,50 +903,12 @@
 
 /datum/reagent/medicine/strange_reagent
 	name = "Strange Reagent"
-	//description = "A miracle drug capable of bringing the dead back to life. Only functions when applied by patch or spray, if the target has less than 100 brute and burn damage (independent of one another) and hasn't been husked. Causes slight damage to the living." SKYRAT EDIT: Outdated description.
 	reagent_state = LIQUID
 	color = "#A0E85E"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	taste_description = "magnets"
 	pH = 0
 	value = REAGENT_VALUE_RARE
-	
-/* SKYRAT EDIT: op pls nerf, see modular file of medicine_reagents
-/datum/reagent/medicine/strange_reagent/reaction_mob(mob/living/M, method=TOUCH, reac_volume)
-	if(M.stat == DEAD)
-		if(M.suiciding || M.hellbound) //they are never coming back
-			M.visible_message("<span class='warning'>[M]'s body does not react...</span>")
-			return
-		if(M.getBruteLoss() >= 100 || M.getFireLoss() >= 100 || HAS_TRAIT(M, TRAIT_HUSK)) //body is too damaged to be revived
-			M.visible_message("<span class='warning'>[M]'s body convulses a bit, and then falls still once more.</span>")
-			M.do_jitter_animation(10)
-			return
-		else
-			M.visible_message("<span class='warning'>[M]'s body starts convulsing!</span>")
-			M.notify_ghost_cloning(source = M)
-			M.do_jitter_animation(10)
-			addtimer(CALLBACK(M, /mob/living/carbon.proc/do_jitter_animation, 10), 40) //jitter immediately, then again after 4 and 8 seconds
-			addtimer(CALLBACK(M, /mob/living/carbon.proc/do_jitter_animation, 10), 80)
-
-			spawn(100) //so the ghost has time to re-enter
-				if(iscarbon(M))
-					var/mob/living/carbon/C = M
-					if(!(C.dna && C.dna.species && (NOBLOOD in C.dna.species.species_traits)))
-						C.blood_volume = max(C.blood_volume, BLOOD_VOLUME_NORMAL*C.blood_ratio) //so you don't instantly re-die from a lack of blood
-					for(var/organ in C.internal_organs)
-						var/obj/item/organ/O = organ
-						if(O.damage > O.maxHealth/2)
-							O.setOrganDamage(O.maxHealth/2) //so you don't instantly die from organ damage when being revived
-
-				M.adjustOxyLoss(-20, 0)
-				M.adjustToxLoss(-20, 0)
-				M.updatehealth()
-				if(M.revive())
-					M.grab_ghost()
-					M.emote("gasp")
-					log_combat(M, M, "revived", src)
-	..()
-*/
 
 /datum/reagent/medicine/strange_reagent/on_mob_life(mob/living/carbon/M)
 	M.adjustBruteLoss(0.5*REM, 0)
@@ -1300,7 +1223,7 @@
 	reagent_state = LIQUID
 	metabolization_rate = 1 * REAGENTS_METABOLISM
 	color = "#91D865"
-	overdose_threshold = 20  //SKYRAT CHANGE
+	overdose_threshold = 20
 	taste_description = "jelly"
 	pH = 11.8
 	value = REAGENT_VALUE_UNCOMMON
@@ -1604,7 +1527,6 @@
 /datum/reagent/medicine/polypyr/on_mob_life(mob/living/carbon/M) //I wanted a collection of small positive effects, this is as hard to obtain as coniine after all.
 	M.adjustOrganLoss(ORGAN_SLOT_LUNGS, -0.25)
 	M.adjustBruteLoss(-0.35, 0)
-	//skyrat edit
 	if(prob(50))
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
@@ -1612,7 +1534,6 @@
 				var/obj/item/bodypart/BP = x
 				if(istype(BP))
 					BP.generic_bleedstacks += 5
-	//
 	..()
 	. = 1
 
@@ -1629,7 +1550,6 @@
 	..()
 	. = 1
 
-//skyrat edit
 // handled in cut wounds process
 
 // helps bleeding wounds clot faster

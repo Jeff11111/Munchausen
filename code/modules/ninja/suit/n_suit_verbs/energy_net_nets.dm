@@ -53,41 +53,10 @@ It is possible to destroy the net by the occupant or someone else.
 	if(ishuman(affecting))
 		var/mob/living/carbon/human/H = affecting
 		for(var/obj/item/W in H)
-			if(W == H.w_uniform || W == H.shoes || W == H.w_underwear) //skyrat edit
+			if(W == H.w_uniform || W == H.shoes || W == H.w_underwear)
 				continue//So all they're left with are shoes and uniform.
 			H.dropItemToGround(W)
 		H.dna.species.give_important_for_life(H)	// After we remove items, at least give them what they need to live.
-/*
-	var/datum/antagonist/antag_datum
-	for(var/datum/antagonist/ninja/AD in GLOB.antagonists) //Because only ninjas get capture objectives; They're not doable without the suit.
-		if(AD.owner == master)
-			antag_datum = AD
-			break
-	for(var/datum/objective/capture/capture in antag_datum)
-		if(istype(affecting, /mob/living/carbon/human)) //Humans.
-			if(affecting.stat == DEAD)//Dead folks are worth less.
-				capture.captured_amount+=0.5
-				continue
-			capture.captured_amount+=1
-		if(istype(affecting, /mob/living/carbon/monkey)) //Monkeys are almost worthless, you failure.
-			capture.captured_amount+=0.1
-		if(istype(affecting, /mob/living/carbon/alien/larva)) //Larva are important for research.
-			if(affecting.stat == DEAD)
-				capture.captured_amount+=0.5
-				continue
-			capture.captured_amount+=1
-		if(istype(affecting, /mob/living/carbon/alien/humanoid)) //Aliens are worth twice as much as humans.
-			if(istype(affecting, /mob/living/carbon/alien/humanoid/royal/queen)) //Queens are worth three times as much as humans.
-				if(affecting.stat == DEAD)
-					capture.captured_amount+=1.5
-				else
-					capture.captured_amount+=3
-				continue
-			if(affecting.stat == DEAD)
-				capture.captured_amount+=1
-				continue
-			capture.captured_amount+=2
-*/
 
 	affecting.revive(1, 1)	//Basically a revive and full heal, including limbs/organs
 							//In case people who have been captured dead want to hang out at the holding area

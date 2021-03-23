@@ -127,7 +127,6 @@
 	damage = 4
 	stamina = 1
 
-//skyrat fucking edit
 /obj/item/projectile/bullet/shotgun_slug/executioner
 	name = "executioner slug" // admin only, can dismember limbs
 	sharpness = SHARP_EDGED

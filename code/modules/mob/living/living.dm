@@ -112,7 +112,6 @@
 						to_chat(src, "<span class='warning'>[L] is restraining [P], you cannot push past.</span>")
 					return TRUE
 
-		//SKYRAT CHANGES START
 		if(L.gunpointed.len)
 			var/is_pointing = FALSE
 			for(var/datum/gunpoint/gp in L.gunpointed)
@@ -127,8 +126,6 @@
 			if(!(world.time % 5))
 				to_chat(src, "<span class='warning'>[L] is holding someone at gunpoint, you cannot push past.</span>")
 			return TRUE
-		//END OF SKYRAT CHANGES
-	//CIT CHANGES START HERE - makes it so resting stops you from moving through standing folks without a short delay
 		if(!CHECK_MOBILITY(src, MOBILITY_STAND) && CHECK_MOBILITY(L, MOBILITY_STAND))
 			var/origtargetloc = L.loc
 			if(!pulledby)
@@ -151,7 +148,6 @@
 				pass_flags &= ~PASSMOB
 			DISABLE_BITFIELD(combat_flags, COMBAT_FLAG_ATTEMPTING_CRAWL)
 			return TRUE
-	//END OF CIT CHANGES
 
 	if(moving_diagonally)//no mob swap during diagonal moves.
 		return TRUE
@@ -529,25 +525,14 @@
 
 // MOB PROCS //END
 
-//Skyrat change start
 /mob/living/proc/surrender()
 	set name = "Surrender"
 	set category = "IC"
 
 	emote("surrender")
-//Skyrat change stop
 
 /mob/proc/get_contents()
 
-/*CIT CHANGE - comments out lay_down proc to be modified in modular_citadel
-/mob/living/proc/lay_down()
-	set name = "Rest"
-	set category = "IC"
-
-	resting = !resting
-	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"].</span>")
-	update_canmove()
-*/
 
 //Recursive function to find everything a mob is holding. Really shitty proc tbh.
 /mob/living/get_contents()
@@ -814,12 +799,12 @@
 			// Give clickdelay
 			return TRUE
 
-	if(resting) //cit change - allows resisting out of resting
-		resist_a_rest() // ditto
+	if(resting) //allows resisting out of resting
+		resist_a_rest()
 		// DO NOT GIVE CLCIKDELAY - resist_a_rest() handles spam prevention. Somewhat.
 		return FALSE
 
-	if(CHECK_MOBILITY(src, MOBILITY_USE)) //Citadel Change for embedded removal memes - requires being able to use items. //skyrat edit
+	if(CHECK_MOBILITY(src, MOBILITY_USE))
 		// DO NOT GIVE DEFAULT CLICKDELAY - This is a combat action.
 		changeNext_move(CLICK_CD_MELEE)
 		return FALSE
@@ -896,7 +881,7 @@
 	else
 		throw_alert("gravity", /obj/screen/alert/weightless)
 	if(!override && !is_flying(src))
-		INVOKE_ASYNC(src, /atom/movable.proc/float, !has_gravity) //skyratfix
+		INVOKE_ASYNC(src, /atom/movable.proc/float, !has_gravity)
 
 /mob/living/float(on)
 	if(throwing)
@@ -1375,7 +1360,6 @@
 		</font>
 	"}
 
-//skyrat funny
 /// Only defined for carbons who can wear masks and helmets, we just assume other mobs have visible faces
 /mob/living/proc/is_face_visible()
 	return TRUE

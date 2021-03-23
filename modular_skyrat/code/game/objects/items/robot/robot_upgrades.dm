@@ -74,7 +74,7 @@
 	. = ..()
 	if(.)
 		var/obj/item/pipe_dispenser/PD = locate() in R
-		var/obj/item/pipe_dispenser/bluespace/BD = locate() in R // Skyrat edit
+		var/obj/item/pipe_dispenser/bluespace/BD = locate() in R
 		if(!PD)
 			PD = locate() in R.module
 		if(!BD)
@@ -91,7 +91,7 @@
 /obj/item/borg/upgrade/bsrpd/deactivate(mob/living/silicon/robot/R, user = usr)
 	. = ..()
 	if (.)
-		for(var/obj/item/pipe_dispenser/bluespace/BD in R.module) // Skyrat edit
+		for(var/obj/item/pipe_dispenser/bluespace/BD in R.module)
 			R.module.remove_module(BD, TRUE)
 
 		var/obj/item/pipe_dispenser/PD = new (R.module)

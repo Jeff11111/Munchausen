@@ -47,7 +47,7 @@
 			return
 	if(SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_SELF, user) & COMPONENT_NO_INTERACT)
 		return
-	SEND_SIGNAL(user, COMSIG_MOB_ITEM_ATTACK_SELF, src) //Skyrat change
+	SEND_SIGNAL(user, COMSIG_MOB_ITEM_ATTACK_SELF, src)
 	interact(user)
 
 /obj/item/proc/pre_attack(atom/A, mob/living/user, params) //do stuff before attackby!
@@ -107,7 +107,7 @@
 	log_combat(user, M, "attacked", src.name, "(INTENT: [uppertext(user.a_intent)]) (DAMTYPE: [uppertext(damtype)])")
 	add_fingerprint(user)
 
-	var/weight = getweight(user, STAM_COST_ATTACK_MOB_MULT, attackchain_flags = attackchain_flags) //CIT CHANGE - makes attacking things cause stamina loss
+	var/weight = getweight(user, STAM_COST_ATTACK_MOB_MULT, attackchain_flags = attackchain_flags) //makes attacking things cause stamina loss
 	if(weight)
 		user.adjustStaminaLossBuffered(weight)
 
@@ -122,7 +122,7 @@
 		user.changeNext_move(click_delay)
 	var/weight = getweight(user, STAM_COST_ATTACK_OBJ_MULT)
 	if(weight)
-		user.adjustStaminaLossBuffered(weight)//CIT CHANGE - makes attacking things cause stamina loss
+		user.adjustStaminaLossBuffered(weight)//makes attacking things cause stamina loss
 
 /atom/movable/proc/attacked_by()
 	return
@@ -317,8 +317,8 @@
 			continue
 		user.mind.auto_gain_experience(skill, I.skill_gain)
 
-// Proximity_flag is 1 if this afterattack was called on something adjacent, in your square, or on your person.		//Skyrat Edit
-// Click parameters is the params string from byond Click() code, see that documentation.		//Skyrat Edit
+// Proximity_flag is 1 if this afterattack was called on something adjacent, in your square, or on your person.
+// Click parameters is the params string from byond Click() code, see that documentation.
 /**
   * Called after attacking something if the melee attack chain isn't interrupted before.
   * Also called when clicking on something with an item without being in melee range
@@ -348,7 +348,7 @@
 		message_verb = "[pick(I.attack_verb)]"
 	if(current_force < I.force * FEEBLE_ATTACK_MSG_THRESHOLD)
 		message_verb = "[pick("feebly", "limply", "saplessly")] [message_verb]"
-	if(!I.force) //skyrat edit
+	if(!I.force)
 		return
 	var/message_hit_area = ""
 	if(hit_area)

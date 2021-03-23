@@ -62,12 +62,10 @@ Bonus
 	if(pain)
 		M.adjustStaminaLoss(get_damage)
 	if(bleed)
-		//skyrat edit
 		if(iscarbon(M))
 			var/mob/living/carbon/H = M
 			var/obj/item/bodypart/random_part = pick(H.bodyparts)
 			random_part.generic_bleedstacks += 5 * power
-		//
 	return 1
 
 /*

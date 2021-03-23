@@ -43,7 +43,6 @@
 #define IGNORE_HAT_TOSS			(1<<9)	//Hats with negative effects when worn (i.e the tinfoil hat).
 #define SCAN_REAGENTS			(1<<10)	// Allows helmets and glasses to scan reagents.
 
-//skyrat flags
 /// Integrity defines for clothing (not flags but close enough)
 #define CLOTHING_PRISTINE	0 // We have no damage on the clothing
 #define CLOTHING_DAMAGED	1 // There's some damage on the clothing but it still has at least one functioning bodypart and can be equipped

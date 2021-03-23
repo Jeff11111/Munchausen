@@ -27,17 +27,14 @@
 		C.blood_volume -= 0.2
 		C.adjustStaminaLoss(-15)
 		// Stop Bleeding
-		//skyrat edit
 		if(istype(H) && H.get_total_bleed_rate() > 0 && rand(20) == 0)
 			for(var/x in H.bodyparts)
 				var/obj/item/bodypart/BP = x
 				if(istype(BP))
 					BP.generic_bleedstacks -= 5
-			//
 		C.Jitter(5)
 		sleep(10)
 	// DONE!
-	//DeactivatePower(owner)
 
 /datum/action/bloodsucker/vassal/recuperate/ContinueActive(mob/living/user, mob/living/target)
 	return ..() && user.stat <= DEAD && user.blood_volume > 500

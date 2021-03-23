@@ -56,7 +56,6 @@ SUBSYSTEM_DEF(atoms)
 			A.LateInitialize()
 		testing("Late initialized [late_loaders.len] atoms")
 		late_loaders.Cut()
-	//skyrat edit
 	var/list/bruh = list(/mob/living/simple_animal/hostile/megafauna/dragon = 0,\
 						/mob/living/simple_animal/hostile/megafauna/colossus = 0,\
 						/mob/living/simple_animal/hostile/megafauna/bubblegum = 0)

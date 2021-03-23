@@ -219,8 +219,8 @@
 					C.total_damage += detonation_damage
 				L.apply_damage(detonation_damage, BRUTE, blocked = def_check)
 
-			if(user && lavaland_equipment_pressure_check(get_turf(user))) //CIT CHANGE - makes sure below only happens in low pressure environments
-				user.adjustStaminaLoss(-30)//CIT CHANGE - makes crushers heal stamina
+			if(user && lavaland_equipment_pressure_check(get_turf(user))) //ARTI - check for sense
+				user.adjustStaminaLoss(-30)
 	SEND_SIGNAL(src, COMSIG_ITEM_AFTERATTACK, target, user, proximity_flag, clickparams)
 	SEND_SIGNAL(user, COMSIG_MOB_ITEM_AFTERATTACK, target, user, proximity_flag, clickparams)
 
@@ -417,8 +417,8 @@
 					C.total_damage += detonation_damage
 				L.apply_damage(detonation_damage, BRUTE, blocked = def_check)
 
-			if(user && lavaland_equipment_pressure_check(get_turf(user))) //CIT CHANGE - makes sure below only happens in low pressure environments
-				user.adjustStaminaLoss(-30)//CIT CHANGE - makes crushers heal stamina
+			if(user && lavaland_equipment_pressure_check(get_turf(user))) //ARTI
+				user.adjustStaminaLoss(-30)// makes crushers heal stamina
 
 /obj/item/melee/zweihander/proc/Recharge()
 	if(!charged)

@@ -4,7 +4,7 @@
 	name = ".45 bullet"
 	damage = 30
 	wound_bonus = 10 //stopping power
-	stamina = 8 //Skyrat edit: Stopping power.
+	stamina = 8
 
 /obj/item/projectile/bullet/c45_cleaning
 	name = ".45 bullet"
@@ -40,7 +40,6 @@
 					SEND_SIGNAL(cleaned_human.w_uniform, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_WEAK)
 					cleaned_human.w_uniform.clean_blood()
 					cleaned_human.update_inv_w_uniform()
-				//skyrat edit
 				else if(cleaned_human.w_underwear)
 					SEND_SIGNAL(cleaned_human.w_underwear, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_WEAK)
 					cleaned_human.w_underwear.clean_blood()
@@ -57,7 +56,6 @@
 					SEND_SIGNAL(cleaned_human.wrists, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_WEAK)
 					cleaned_human.wrists.clean_blood()
 					cleaned_human.update_inv_wrists()
-				//
 				if(cleaned_human.shoes)
 					SEND_SIGNAL(cleaned_human.shoes, COMSIG_COMPONENT_CLEAN_ACT, CLEAN_WEAK)
 					cleaned_human.shoes.clean_blood()
