@@ -48,4 +48,4 @@ GLOBAL_LIST_INIT(preferences_custom_names, list(
 	"ai" = list("pref_name" = "AI", "qdesc" = "ai name", "allow_numbers" = TRUE , "group" = "silicons", "allow_null" = FALSE),
 	"religion" = list("pref_name" = "Religion", "qdesc" = "religion" , "allow_numbers" = TRUE , "group" = "chaplain", "allow_null" = FALSE),
 	"deity" = list("pref_name" = "Deity", "qdesc" = "deity", "allow_numbers" = TRUE , "group" = "chaplain", "allow_null" = FALSE)
-	)) //skyrat edit - generalized religion and deity
+	))

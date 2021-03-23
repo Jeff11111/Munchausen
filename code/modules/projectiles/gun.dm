@@ -1,10 +1,8 @@
 
 #define DUALWIELD_PENALTY_EXTRA_MULTIPLIER 1.4
-//woops skyrat defines
 #define SEMIAUTO	1
 #define ROUNDBURST	2
 #define FULLAUTO	3
-//
 
 /obj/item/gun
 	name = "gun"
@@ -241,9 +239,9 @@
 	if(recoil)
 		shake_camera(user, recoil + 1, recoil)
 
-	if(stam_cost) //CIT CHANGE - makes gun recoil cause staminaloss
+	if(stam_cost)
 		var/safe_cost = clamp(stam_cost, 0, STAMINA_NEAR_CRIT - user.getStaminaLoss())*(firing && burst_size >= 2 ? 1/burst_size : 1)
-		user.adjustStaminaLossBuffered(safe_cost) //CIT CHANGE - ditto
+		user.adjustStaminaLossBuffered(safe_cost)
 
 	if(suppressed)
 		playsound(user, fire_sound, 10, 1)

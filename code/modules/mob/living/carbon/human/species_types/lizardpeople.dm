@@ -26,12 +26,8 @@
 	languagewhitelist = list("Draconic")
 
 /datum/species/lizard/after_equip_job(datum/job/J, mob/living/carbon/human/H)
-	//H.grant_language(/datum/language/draconic)
 	species_language_holder = /datum/language_holder/lizard
-/*
-/datum/species/lizard/after_equip_job(datum/job/J, mob/living/carbon/human/H)
-	H.grant_language(/datum/language/draconic) SKYRAT CHANGE= We have an additional language option for this
-*/
+
 /datum/species/lizard/random_name(gender,unique,lastname)
 	if(unique)
 		return random_unique_lizard_name(gender)
@@ -96,9 +92,4 @@
 	if((C.dna.features["spines"] != "None" ) && (C.dna.features["tail_lizard"] == "None")) //tbh, it's kinda ugly for them not to have a tail yet have floating spines
 		C.dna.features["tail_lizard"] = "Smooth"
 		C.update_body()
-	/*if(C.dna.features["legs"] != "digitigrade") //Skyrat change - comments this out cause im pretty sure this will bug them out either by update_body being called too soon or no capitalisation on the legs, and we've got a fix for this in modular_skyrat
-		C.dna.features["legs"] = "digitigrade"
-		for(var/obj/item/bodypart/leggie in C.bodyparts)
-			if(leggie.body_zone == BODY_ZONE_L_LEG || leggie.body_zone == BODY_ZONE_R_LEG)
-				leggie.update_limb(FALSE, C)*/
 	return ..()

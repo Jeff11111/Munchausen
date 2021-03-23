@@ -97,14 +97,12 @@ GLOBAL_VAR(antag_prototypes)
 		alert("This mind doesn't have a mob, or is deleted! For some reason!", "Edit Memory")
 		return
 
-//SKYRAT CHANGES BEGIN
 	var/list/out = list(
 		"<B>[name]</B>[(current && (current.real_name!=name))?" (as [current.real_name])":""]<br>\
 		Mind currently owned by key: [key] [active?"(synced)":"(not synced)"]<br>\
 		Assigned role: [assigned_role]. <a href='?src=[REF(src)];role_edit=1'>Edit</a><br>\
 		Faction and special role: <b><font color='red'>[special_role]</font></b><br>"
 		)
-//SKYRAT CHANGES END
 
 	var/special_statuses = get_special_statuses()
 	if(length(special_statuses))
@@ -207,7 +205,6 @@ GLOBAL_VAR(antag_prototypes)
 		uplink_info += "." //hiel grammar
 
 		out += uplink_info + "<br>"
-//SKYRAT CHANGES BEGIN
 	//Ambitions
 	out += "<b>[current.real_name]'s Ambitions:</b> <a href='?src=[REF(src)];edit_ambitions_panel=1'>Edit Ambitions</a><br><ul>"
 	if(!LAZYLEN(ambitions))
@@ -226,6 +223,5 @@ GLOBAL_VAR(antag_prototypes)
 
 	var/datum/browser/panel = new(usr, "traitorpanel", "", 600, 600)
 	panel.set_content(out.Join())
-//SKYRAT CHANGES END
 	panel.open()
 	return

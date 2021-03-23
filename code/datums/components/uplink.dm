@@ -187,7 +187,6 @@ GLOBAL_LIST_EMPTY(uplinks)
 					continue
 					if(is_inaccessible)
 						continue
-			//skyrat edit
 			if(I.restricted_species.len)
 				if(ishuman(user))
 					var/is_inaccessible = TRUE
@@ -198,7 +197,6 @@ GLOBAL_LIST_EMPTY(uplinks)
 							break
 					if(is_inaccessible)
 						continue
-			//
 			cat["items"] += list(list(
 				"name" = I.name,
 				"cost" = I.cost,

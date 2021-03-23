@@ -11,11 +11,9 @@
 	heat_capacity = 312500 //a little over 5 cm thick , 312500 for 1 m by 2.5 m by 0.25 m plasteel wall
 
 	baseturfs = /turf/open/floor/plating
-	//skyrat edit
 	///lower numbers are harder. Used to determine the probability of a hulk smashing through. Also, (hardness - 40) is used as a modifier for objects trying to embed in this (hardness of 30 results in a -10% chance)
 	var/hardness = 40
 	flags_ricochet = RICOCHET_HARD
-	//
 	var/slicing_duration = 100  //default time taken to slice the wall
 	var/sheet_type = /obj/item/stack/sheet/metal
 	var/sheet_amount = 2
@@ -157,8 +155,6 @@
 	. = ..()
 	if(.)
 		return
-		
-	// Skyrat change
 	if(user.a_intent != INTENT_HARM)
 		to_chat(user, "<span class='notice'>You push at the wall...</span>") 
 		user.changeNext_move(CLICK_CD_MELEE)
@@ -166,7 +162,6 @@
 			to_chat(user, "<span class='notice'>...but nothing happens!</span>")
 			playsound(src, 'sound/weapons/genhit.ogg', 25, 1)
 			add_fingerprint(user)
-	//
 
 /turf/closed/wall/attackby(obj/item/W, mob/user, params)
 	user.changeNext_move(CLICK_CD_MELEE)

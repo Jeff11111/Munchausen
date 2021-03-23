@@ -158,9 +158,7 @@
 	shout_syndicate_crap(user)
 	explosion(user,0,2,0) //Cheap explosion imitation because putting prime(mob/living/lanced_by) here causes runtimes
 	user.gib(1, 1)
-	//skyrat edit
 	qdel(src)
-	//
 
 /obj/item/grenade/plastic/update_icon_state()
 	if(nadeassembly)

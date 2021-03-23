@@ -14,10 +14,8 @@
 	var/w_class_on = WEIGHT_CLASS_BULKY
 	var/clumsy_check = TRUE
 	var/total_mass_on //Total mass in ounces when transformed. Primarily for balance purposes. Don't think about it too hard.
-	//skyrat edit
 	wound_bonus = -30
 	bare_wound_bonus = 40
-	//
 
 /obj/item/melee/transforming/Initialize()
 	. = ..()
@@ -27,10 +25,8 @@
 	else
 		if(attack_verb_off.len)
 			attack_verb = attack_verb_off
-		//skyrat edit
 		if(embedding)
 			updateEmbedding()
-		//
 	if(sharpness)
 		AddComponent(/datum/component/butchering, 50, 100, 0, hitsound)
 
@@ -65,10 +61,8 @@
 			updateEmbedding()
 		icon_state = icon_state_on
 		w_class = w_class_on
-		//skyrat edit
 		if(embedding)
 			updateEmbedding()
-		//
 	else
 		force = initial(force)
 		throwforce = initial(throwforce)
@@ -81,10 +75,9 @@
 		icon_state = initial(icon_state)
 		w_class = initial(w_class)
 		total_mass = initial(total_mass)
-		//skyrat edit
 		if(embedding)
 			disableEmbedding()
-		//
+
 	transform_messages(user, supress_message_text)
 	add_fingerprint(user)
 	return TRUE

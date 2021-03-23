@@ -4,7 +4,7 @@
 	speech_verb = "tones"
 	ask_verb = "tones inquisitively"
 	exclaim_verb = "tones loudly"
-	sing_verb = "tones melodically" // Skyrat edit
+	sing_verb = "tones melodically"
 	spans = list(SPAN_ROBOT)
 	key = "s"
 	flags = NO_STUTTER
@@ -13,9 +13,7 @@
 	default_priority = 60
 
 	icon_state = "swarmer"
-	//SKYRAT CHANGE - language restriction
 	restricted = TRUE
-	//
 
 	// since various flats and sharps are the same,
 	// all non-accidental notes are doubled in the list

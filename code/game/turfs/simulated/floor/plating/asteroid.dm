@@ -335,39 +335,7 @@
 		if(!spawned_flora) // no rocks beneath mob spawners / mobs.
 			SpawnMonster(T)
 	T.ChangeTurf(turf_type, null, CHANGETURF_IGNORE_AIR)
-/*
-/// Spawns a random mob or megafauna in the tunnel
-/turf/open/floor/plating/asteroid/airless/cave/proc/SpawnMonster(turf/T)
-	if(!isarea(loc))
-		return
-	var/area/A = loc
-	if(prob(30))
-		if(!A.mob_spawn_allowed)
-			return
-		var/randumb = pickweight(mob_spawn_list)
-		if(!randumb)
-			return
-		while(randumb == SPAWN_MEGAFAUNA)
-			if(A.megafauna_spawn_allowed && megafauna_spawn_list && megafauna_spawn_list.len) //this is danger. it's boss time.
-				var/maybe_boss = pickweight(megafauna_spawn_list)
-				if(megafauna_spawn_list[maybe_boss])
-					randumb = maybe_boss
-					if(ispath(maybe_boss, /mob/living/simple_animal/hostile/megafauna/bubblegum)) //there can be only one bubblegum, so don't waste spawns on it
-						megafauna_spawn_list[maybe_boss] = 0
-			else //this is not danger, don't spawn a boss, spawn something else
-				randumb = pickweight(mob_spawn_list)
 
-		for(var/mob/living/simple_animal/hostile/H in urange(12,T)) //prevents mob clumps
-			if((ispath(randumb, /mob/living/simple_animal/hostile/megafauna) || ismegafauna(H)) && get_dist(src, H) <= 7)
-				return //if there's a megafauna within standard view don't spawn anything at all
-			if(ispath(randumb, /mob/living/simple_animal/hostile/asteroid) || istype(H, /mob/living/simple_animal/hostile/asteroid))
-				return //if the random is a standard mob, avoid spawning if there's another one within 12 tiles
-			if((ispath(randumb, /obj/structure/spawner/lavaland) || istype(H, /obj/structure/spawner/lavaland)) && get_dist(src, H) <= 2)
-				return //prevents tendrils spawning in each other's collapse range
-
-		new randumb(T)
-	return TRUE
-*/ //moved to modular_skyrat
 #undef SPAWN_MEGAFAUNA
 #undef SPAWN_BUBBLEGUM
 

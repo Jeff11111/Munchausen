@@ -27,16 +27,15 @@
 /obj/machinery/space_heater/get_cell()
 	return cell
 
-/obj/machinery/space_heater/Initialize() // Skyrat change: cell change
-	. = ..()
+/obj/machinery/space_heater/Initialize()
 	update_icon()
 
-/obj/machinery/space_heater/on_construction() // Skyrat change: cell change
+/obj/machinery/space_heater/on_construction()
 	panel_open = TRUE
 	update_icon()
 	return ..()
 
-/obj/machinery/space_heater/on_deconstruction() // Skyrat change: cell change
+/obj/machinery/space_heater/on_deconstruction()
 	cell = null
 	return ..()
 
@@ -116,7 +115,7 @@
 		laser += M.rating
 	for(var/obj/item/stock_parts/capacitor/M in component_parts)
 		cap += M.rating
-	for(var/obj/item/stock_parts/cell/P in component_parts) // Skyrat change
+	for(var/obj/item/stock_parts/cell/P in component_parts)
 		cell = P
 
 	heatingPower = laser * 40000

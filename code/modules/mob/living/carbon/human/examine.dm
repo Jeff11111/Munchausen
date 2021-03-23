@@ -9,16 +9,15 @@
 	var/t_is = p_are()
 	var/screwy_self = ((user == src) && (HAS_TRAIT(user, TRAIT_SCREWY_CHECKSELF)))
 	var/obscure_name
-	var/species_visible //Skyrat edit
-	var/species_name_string //Skyrat edit
+	var/species_visible
+	var/species_name_string
 
 	if(isliving(user))
 		var/mob/living/L = user
 		if(HAS_TRAIT(L, TRAIT_PROSOPAGNOSIA))
 			obscure_name = TRUE
 
-	var/skipface = (wear_mask && (wear_mask.flags_inv & HIDEFACE)) || (head && (head.flags_inv & HIDEFACE)) //skyrat - moved this higher
-	//Skyrat stuff
+	var/skipface = (wear_mask && (wear_mask.flags_inv & HIDEFACE)) || (head && (head.flags_inv & HIDEFACE))
 	if(skipface || get_visible_name() == "Unknown")
 		species_visible = FALSE
 	else
@@ -30,9 +29,8 @@
 		species_name_string = ", [prefix_a_or_an(dna.species.name)] <EM>[dna.species.name]</EM>!"
 	if(is_dreamer(user) && prob(25))
 		species_name_string = ", a disgusting pig!"
-	//End of skyrat stuff
 
-	. = list("<span class='info'>*---------*\nThis is <EM>[!obscure_name ? name : "Unknown"]</EM>[species_name_string]") //Skyrat edit
+	. = list("<span class='info'>*---------*\nThis is <EM>[!obscure_name ? name : "Unknown"]</EM>[species_name_string]")
 
 	var/vampDesc = ReturnVampExamine(user) // Vamps recognize the names of other vamps.
 	var/vassDesc = ReturnVassalExamine(user) // Vassals recognize each other's marks.
@@ -54,7 +52,6 @@
 	//Wrist slot because you're epic
 	if(wrists && !(SLOT_WRISTS in obscured))
 		. += "[t_He] [t_is] wearing [wrists.get_examine_string(user)]."
-	//End of skyrat changes
 
 	//uniform
 	if(w_uniform && !(SLOT_W_UNIFORM in obscured))
@@ -147,7 +144,7 @@
 				. += "<b><font color=orange>[t_His] eyes are flickering a bright yellow!</font></b>"
 
 	//ears
-	if(ears && !(SLOT_EARS_LEFT in obscured)) //skyrat edit
+	if(ears && !(SLOT_EARS_LEFT in obscured))
 		. += "[t_He] [t_has] [ears.get_examine_string(user)] on [t_his] left ear."
 	
 	//extra ear slot haha
@@ -168,12 +165,10 @@
 		if(!isnull(effects_exam))
 			. += effects_exam
 
-	//CIT CHANGES START HERE - adds genital details to examine text
 	if(LAZYLEN(internal_organs))
 		for(var/obj/item/organ/genital/dicc in internal_organs)
 			if(istype(dicc) && dicc.is_exposed())
 				. |= dicc.genital_examine(user)
-	//END OF CIT CHANGES
 
 	//Jitters
 	if(!screwy_self)
@@ -544,7 +539,6 @@
 		. += "<span class='info'><b>Traits:</b> [traitstring]</span>"
 
 	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .) //This also handles flavor texts now
-	//SKYRAT EDIT - admin lookup on records/extra flavor
 	if(client)
 		var/list/line = list()
 		if(user.client?.holder && isobserver(user))
@@ -569,7 +563,6 @@
 				break
 		if(length(line))
 			. += line.Join("")
-	//END OF SKYRAT EDIT
 	. += "*---------*</span>"
 
 /mob/living/proc/status_effect_examines(pronoun_replacement) //You can include this in any mob's examine() to show the examine texts of status effects!
@@ -584,7 +577,6 @@
 	if(dat.len)
 		return dat.Join("\n")
 
-//skyrat edit - baystation descriptors, examine more stuff
 /mob/living/carbon/human/proc/show_descriptors_to(mob/user)
 	. = list()
 	if(LAZYLEN(dna?.species?.descriptors))

@@ -4,7 +4,7 @@
 				/datum/surgery_step/cut_wires,
 				/datum/surgery_step/mechanic_sever_limb)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	possible_locs = AMPUTATE_BODYPARTS //skyrat edit
+	possible_locs = AMPUTATE_BODYPARTS
 	requires_bodypart_type = BODYPART_ROBOTIC
 
 /datum/surgery_step/mechanic_sever_limb

@@ -37,7 +37,7 @@
 	var/independent = FALSE  // If true, can say/hear on the special CentCom channel.
 	var/syndie = FALSE  // If true, hears all well-known channels automatically, and can say/hear on the Syndicate channel.
 	var/list/channels = list()  // Map from name (see communications.dm) to on/off. First entry is current department (:h).
-	var/list/extra_channels = list() //Skyrat change //Allows indivudal channels, used for borgs
+	var/list/extra_channels = list() //Allows indivudal channels, used for borgs
 	var/list/secure_radio_connections
 
 	var/const/FREQ_LISTENING = 1
@@ -69,12 +69,10 @@
 			syndie = TRUE
 		if(keyslot.independent)
 			independent = TRUE
-	//Skyrat edit start
 	if(extra_channels)
 		for(var/ch_name in extra_channels)
 			if(!(ch_name in channels))
 				channels[ch_name] = extra_channels[ch_name]
-	//Skyrat edit end
 	for(var/ch_name in channels)
 		secure_radio_connections[ch_name] = add_radio(src, GLOB.radiochannels[ch_name])
 
@@ -201,12 +199,12 @@
 					recalculateChannels()
 				. = TRUE
 
-/obj/item/radio/talk_into(atom/movable/M, message, channel, list/spans, datum/language/language, direct = TRUE) //Skyrat change
+/obj/item/radio/talk_into(atom/movable/M, message, channel, list/spans, datum/language/language, direct = TRUE)
 	if(!spans)
 		spans = list(M.speech_span)
 	if(!language)
 		language = M.get_selected_language()
-	SEND_SIGNAL(M, COMSIG_MOVABLE_RADIO_TALK_INTO, src, message, channel, spans, language, direct) //Skyrat change
+	SEND_SIGNAL(M, COMSIG_MOVABLE_RADIO_TALK_INTO, src, message, channel, spans, language, direct)
 	INVOKE_ASYNC(src, .proc/talk_into_impl, M, message, channel, spans.Copy(), language)
 	return ITALICS | REDUCE_RANGE
 
@@ -306,7 +304,7 @@
 			if (idx && (idx % 2) == (message_mode == MODE_L_HAND))
 				return
 
-	talk_into(speaker, raw_message, , spans, language=message_language, direct=FALSE) // Skyrat edit -- differentiate between things spoken into radios directly vs overheard by an intercom/station-bounced 
+	talk_into(speaker, raw_message, , spans, language=message_language, direct=FALSE)
 
 // Checks if this radio can receive on the given frequency.
 /obj/item/radio/proc/can_receive(freq, level)
@@ -378,21 +376,13 @@
 /obj/item/radio/borg
 	name = "cyborg radio"
 	subspace_switchable = TRUE
-	subspace_transmission = TRUE //Skyrat change
+	subspace_transmission = TRUE
 	dog_fashion = null
-	canhear_range = 1 //Skyrat change //Giving away private channels is bad, nerfed range for borgs
+	canhear_range = 1 //Giving away private channels is bad, nerfed range for borgs
 
 /obj/item/radio/borg/Initialize(mapload)
 	. = ..()
-/*     Skyrat change, code no longer applies
-/obj/item/radio/borg/syndicate
-	syndie = 1
-	keyslot = new /obj/item/encryptionkey/syndicate
 
-/obj/item/radio/borg/syndicate/Initialize()
-	. = ..()
-	set_frequency(FREQ_SYNDICATE)
-*/
 /obj/item/radio/borg/attackby(obj/item/W, mob/user, params)
 
 	if(istype(W, /obj/item/screwdriver))

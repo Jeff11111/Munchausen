@@ -80,6 +80,4 @@
 			if(visible)
 				if(world.time >= combatmessagecooldown)
 					combatmessagecooldown = world.time + 10 SECONDS
-					//SKYRAT CHANGES - no more friendly message when help intent
 					visible_message("<span class='warning'><b>[src]</b> [resting ? "tenses up" : (prob(95)? "drops into a combative stance" : (prob(95)? "poses aggressively" : "asserts dominance with their pose"))].</span>")
-					//END OF SKYRAT CHANGES

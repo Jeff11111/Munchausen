@@ -2,9 +2,7 @@
 	name = "Accessory"
 	desc = "Something has gone wrong!"
 	icon = 'icons/obj/clothing/accessories.dmi'
-	//skyrat edit
 	mob_overlay_icon = 'icons/mob/clothing/accessories.dmi'
-	//
 	icon_state = "plasma"
 	item_state = ""	//no inhands
 	slot_flags = 0
@@ -12,9 +10,7 @@
 	var/above_suit = FALSE
 	var/minimize_when_attached = TRUE // TRUE if shown as a small icon in corner, FALSE if overlayed
 	var/datum/component/storage/detached_pockets
-	//skyrat edit
 	var/current_uniform = null
-	//
 
 /obj/item/clothing/accessory/proc/attach(obj/item/clothing/under/U, user)
 	var/datum/component/storage/storage = GetComponent(/datum/component/storage)
@@ -23,11 +19,9 @@
 			return FALSE
 		U.TakeComponent(storage)
 		detached_pockets = storage
-	//SKYRAT EDIT
 	U.attached_accessories |= src
 	force_unto(U)
 	current_uniform = U
-	//SKYRAT EDIT END
 	forceMove(U)
 
 	if (islist(U.armor) || isnull(U.armor)) 										// This proc can run before /obj/Initialize has run for U and src,
@@ -48,13 +42,10 @@
 		TakeComponent(detached_pockets)
 
 	U.armor = U.armor.detachArmor(armor)
-	//SKYRAT EDIT
 	current_uniform = null
-	//SKYRAT EDIT END
 
 	if(isliving(user))
 		on_uniform_dropped(U, user)
-
 	if(minimize_when_attached)
 		transform *= 2
 		pixel_x = 0
@@ -72,7 +63,7 @@
 			Y.alpha = attached_accessory.alpha
 			Y.color = attached_accessory.color
 			U.accessory_overlay.add_overlay(Y)
-//SKYRAT EDIT
+
 /obj/item/clothing/accessory/proc/force_unto(obj/item/clothing/under/U)
 	layer = FLOAT_LAYER
 	plane = FLOAT_PLANE
@@ -98,7 +89,6 @@
 					pixel_x += rand(-16, 16)
 					pixel_y += rand(-16, 16)
 	U.add_overlay(src)
-//SKYRAT EDIT END
 
 /obj/item/clothing/accessory/proc/on_uniform_equip(obj/item/clothing/under/U, user)
 	return

@@ -72,22 +72,22 @@
 /obj/machinery/computer/camera_advanced/xenobio/GrantActions(mob/living/user)
 	..()
 
-	if(slime_up_action && (upgradetier & XENOBIO_UPGRADE_SLIMEBASIC)) //CIT CHANGE - makes slime-related actions require XENOBIO_UPGRADE_SLIMEBASIC
+	if(slime_up_action && (upgradetier & XENOBIO_UPGRADE_SLIMEBASIC))
 		slime_up_action.target = src
 		slime_up_action.Grant(user)
 		actions += slime_up_action
 
-	if(slime_place_action && (upgradetier & XENOBIO_UPGRADE_SLIMEBASIC)) //CIT CHANGE - makes slime-related actions require XENOBIO_UPGRADE_SLIMEBASIC
+	if(slime_place_action && (upgradetier & XENOBIO_UPGRADE_SLIMEBASIC))
 		slime_place_action.target = src
 		slime_place_action.Grant(user)
 		actions += slime_place_action
 
-	if(feed_slime_action && (upgradetier & XENOBIO_UPGRADE_MONKEYS)) //CIT CHANGE - makes monkey-related actions require XENOBIO_UPGRADE_MONKEYS
+	if(feed_slime_action && (upgradetier & XENOBIO_UPGRADE_MONKEYS))
 		feed_slime_action.target = src
 		feed_slime_action.Grant(user)
 		actions += feed_slime_action
 
-	if(monkey_recycle_action && (upgradetier & XENOBIO_UPGRADE_MONKEYS)) //CIT CHANGE - makes monkey-related actions require XENOBIO_UPGRADE_MONKEYS
+	if(monkey_recycle_action && (upgradetier & XENOBIO_UPGRADE_MONKEYS))
 		monkey_recycle_action.target = src
 		monkey_recycle_action.Grant(user)
 		actions += monkey_recycle_action
@@ -97,7 +97,7 @@
 		scan_action.Grant(user)
 		actions += scan_action
 
-	if(potion_action && (upgradetier & XENOBIO_UPGRADE_SLIMEADV)) // CIT CHANGE - makes giving slimes potions via console require XENOBIO_UPGRADE_SLIMEADV
+	if(potion_action && (upgradetier & XENOBIO_UPGRADE_SLIMEADV))
 		potion_action.target = src
 		potion_action.Grant(user)
 		actions += potion_action
@@ -146,12 +146,12 @@
 		else
 			to_chat(user, "<span class='warning'>[src] already has the contents of [O] installed!</span>")
 		return
-	if(istype(O, /obj/item/reagent_containers/food/snacks/cube/monkey) && (upgradetier & XENOBIO_UPGRADE_MONKEYS)) //CIT CHANGE - makes monkey-related actions require XENOBIO_UPGRADE_MONKEYS
+	if(istype(O, /obj/item/reagent_containers/food/snacks/cube/monkey) && (upgradetier & XENOBIO_UPGRADE_MONKEYS))
 		monkeys++
 		to_chat(user, "<span class='notice'>You feed [O] to [src]. It now has [monkeys] monkey cubes stored.</span>")
 		qdel(O)
 		return
-	else if(istype(O, /obj/item/storage/bag) && (upgradetier & XENOBIO_UPGRADE_MONKEYS)) //CIT CHANGE - makes monkey-related actions require XENOBIO_UPGRADE_MONKEYS
+	else if(istype(O, /obj/item/storage/bag) && (upgradetier & XENOBIO_UPGRADE_MONKEYS))
 		var/obj/item/storage/P = O
 		var/loaded = FALSE
 		for(var/obj/G in P.contents)
@@ -162,7 +162,7 @@
 		if(loaded)
 			to_chat(user, "<span class='notice'>You fill [src] with the monkey cubes stored in [O]. [src] now has [monkeys] monkey cubes stored.</span>")
 		return
-	else if(istype(O, /obj/item/slimepotion/slime)  && (upgradetier & XENOBIO_UPGRADE_SLIMEADV)) // CIT CHANGE - makes giving slimes potions via console require XENOBIO_UPGRADE_SLIMEADV
+	else if(istype(O, /obj/item/slimepotion/slime)  && (upgradetier & XENOBIO_UPGRADE_SLIMEADV))
 		var/replaced = FALSE
 		if(user && !user.transferItemToLoc(O, src))
 			return
@@ -234,7 +234,7 @@
 
 	if(GLOB.cameranet.checkTurfVis(remote_eye.loc))
 		if(X.monkeys >= 1)
-			var/mob/living/carbon/monkey/food = SSrecycling.deploy_monkey(remote_eye.loc, TRUE, owner) //Skyrat change
+			var/mob/living/carbon/monkey/food = SSrecycling.deploy_monkey(remote_eye.loc, TRUE, owner)
 			if (!QDELETED(food))
 				food.LAssailant = WEAKREF(C)
 				X.monkeys --
@@ -262,7 +262,7 @@
 			if(M.stat)
 				M.visible_message("[M] vanishes as [M.p_theyre()] reclaimed for recycling!")
 				X.monkeys = round(X.monkeys + 0.2,0.1)
-				SSrecycling.recycle_monkey(M) //Skyrat change
+				SSrecycling.recycle_monkey(M)
 	else
 		to_chat(owner, "<span class='warning'>Target is not near a camera. Cannot proceed.</span>")
 
@@ -399,7 +399,7 @@
 
 //Feeds a potion to slime
 /obj/machinery/computer/camera_advanced/xenobio/proc/XenoSlimeClickAlt(mob/living/user, mob/living/simple_animal/slime/S)
-	if(!(upgradetier & XENOBIO_UPGRADE_SLIMEADV)) //CIT CHANGE - makes slime-related actions require XENOBIO_UPGRADE_SLIMEADV
+	if(!(upgradetier & XENOBIO_UPGRADE_SLIMEADV))
 		to_chat(user, "<span class='warning'>This console does not have the advanced slime upgrade.</span>")
 		return
 	if(!GLOB.cameranet.checkTurfVis(S.loc))
@@ -417,7 +417,7 @@
 
 //Picks up slime
 /obj/machinery/computer/camera_advanced/xenobio/proc/XenoSlimeClickShift(mob/living/user, mob/living/simple_animal/slime/S)
-	if(!(upgradetier & XENOBIO_UPGRADE_SLIMEBASIC)) //CIT CHANGE - makes slime-related actions require XENOBIO_UPGRADE_SLIMEBASIC
+	if(!(upgradetier & XENOBIO_UPGRADE_SLIMEBASIC))
 		to_chat(user, "<span class='warning'>This console does not have the basic slime upgrade.</span>")
 		return
 	if(!GLOB.cameranet.checkTurfVis(S.loc))
@@ -442,7 +442,7 @@
 
 //Place slimes
 /obj/machinery/computer/camera_advanced/xenobio/proc/XenoTurfClickShift(mob/living/user, turf/open/T)
-	if(!(upgradetier & XENOBIO_UPGRADE_SLIMEBASIC)) //CIT CHANGE - makes slime-related actions require XENOBIO_UPGRADE_SLIMEBASIC
+	if(!(upgradetier & XENOBIO_UPGRADE_SLIMEBASIC))
 		to_chat(user, "<span class='warning'>This console does not have the basic slime upgrade.</span>")
 		return
 	if(!GLOB.cameranet.checkTurfVis(T))
@@ -460,7 +460,7 @@
 
 //Place monkey
 /obj/machinery/computer/camera_advanced/xenobio/proc/XenoTurfClickCtrl(mob/living/user, turf/open/T)
-	if(!(upgradetier & XENOBIO_UPGRADE_MONKEYS)) // CIT CHANGE - makes monkey-related actions require XENOBIO_UPGRADE_MONKEYS
+	if(!(upgradetier & XENOBIO_UPGRADE_MONKEYS))
 		to_chat(user, "<span class='warning'>This console does not have the monkey upgrade.</span>")
 		return
 	if(!GLOB.cameranet.checkTurfVis(T))
@@ -483,7 +483,7 @@
 
 //Pick up monkey
 /obj/machinery/computer/camera_advanced/xenobio/proc/XenoMonkeyClickCtrl(mob/living/user, mob/living/carbon/monkey/M)
-	if(!(upgradetier & XENOBIO_UPGRADE_MONKEYS)) // CIT CHANGE - makes monkey-related actions require XENOBIO_UPGRADE_MONKEYS
+	if(!(upgradetier & XENOBIO_UPGRADE_MONKEYS))
 		to_chat(user, "<span class='warning'>This console does not have the monkey upgrade.</span>")
 		return
 	if(!isturf(M.loc) || !GLOB.cameranet.checkTurfVis(M.loc))

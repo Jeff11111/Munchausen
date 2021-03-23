@@ -252,7 +252,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 
 	SSvis_overlays.remove_vis_overlay(src, managed_vis_overlays)
 	if(!(stat & BROKEN) && powered())
-		SSvis_overlays.add_vis_overlay(src, icon, light_mask, ABOVE_LIGHTING_LAYER, ABOVE_LIGHTING_PLANE) //SKYRAT CHANGE reverts emissive
+		SSvis_overlays.add_vis_overlay(src, icon, light_mask, ABOVE_LIGHTING_LAYER, ABOVE_LIGHTING_PLANE)
 
 /obj/machinery/vending/obj_break(damage_flag)
 	. = ..()
@@ -538,7 +538,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 							qdel(O)
 							new /obj/effect/gibspawner/human/bodypartless(get_turf(C))
 
-				C.apply_damage(max(0, squish_damage - crit_rebate), forced=TRUE) //skyrat edit
+				C.apply_damage(max(0, squish_damage - crit_rebate), forced=TRUE)
 				C.AddElement(/datum/element/squish, 18 SECONDS)
 			else
 				L.visible_message("<span class='danger'>[L] is crushed by [src]!</span>", \
@@ -804,7 +804,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 			else
 				to_chat(usr, "<span class='warning'>[capitalize(R.name)] falls onto the floor!</span>")
 
-			playsound(src, 'sound/machines/machine_vend.ogg', 50, 1) //SKYRAT CHANGE - vendor noise
+			playsound(src, 'sound/machines/machine_vend.ogg', 50, 1)
 
 			SSblackbox.record_feedback("nested tally", "vending_machine_usage", 1, list("[type]", "[R.product_path]"))
 			vend_ready = TRUE

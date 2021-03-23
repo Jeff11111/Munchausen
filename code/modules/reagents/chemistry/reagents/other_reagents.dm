@@ -45,13 +45,11 @@
 			C.blood_volume = min(C.blood_volume + round(reac_volume, 0.1), BLOOD_VOLUME_MAXIMUM * C.blood_ratio)
 			// we don't care about bloodtype here, we're just refilling the mob
 			
-			//skyrat edit - we try to revive the carbon mob if it happens to be a synthetic
+			//we try to revive the carbon mob if it happens to be a synthetic
 			if(length(C.dna?.species?.species_traits) && (ROBOTIC_LIMBS in C.dna.species.species_traits) && length(C.bodyparts))
 				var/obj/item/bodypart/affecting = C.bodyparts[1]
 				if(istype(affecting))
 					affecting.heal_damage(0, 0, 0, TRUE, FALSE, FALSE)
-			//skyrat edit end
-
 	if(reac_volume >= 10 && istype(L) && method != INJECT)
 		L.add_blood_DNA(list("color" = data["bloodcolor"] || BLOOD_COLOR_HUMAN, data["blood_DNA"] = data["blood_type"]))
 
@@ -726,12 +724,11 @@
 	race = /datum/species/android
 	mutationtext = "<span class='danger'>The pain subsides. You feel... artificial.</span>"
 
-//Citadel Races
-/datum/reagent/mutationtoxin/anthro //skyrat edit
-	name = "Anthro Mutation Toxin" //skyrat edit
+/datum/reagent/mutationtoxin/anthro
+	name = "Anthro Mutation Toxin"
 	description = "A glowing toxin."
 	color = "#5EFF3B" //RGB: 94, 255, 59
-	race = /datum/species/anthro //skyrat edit
+	race = /datum/species/anthro
 	mutationtext = "<span class='danger'>The pain subsides. You feel... fluffier.</span>"
 
 /datum/reagent/mutationtoxin/insect
@@ -1483,12 +1480,12 @@
 
 /datum/reagent/stimulum/on_mob_metabolize(mob/living/L)
 	..()
-	L.add_movespeed_modifier(/datum/movespeed_modifier/reagent/stimulum) // Skyrat
+	L.add_movespeed_modifier(/datum/movespeed_modifier/reagent/stimulum)
 	ADD_TRAIT(L, TRAIT_STUNIMMUNE, type)
 	ADD_TRAIT(L, TRAIT_SLEEPIMMUNE, type)
 
 /datum/reagent/stimulum/on_mob_end_metabolize(mob/living/L)
-	L.remove_movespeed_modifier(/datum/movespeed_modifier/reagent/stimulum) // Skyrat
+	L.remove_movespeed_modifier(/datum/movespeed_modifier/reagent/stimulum)
 	REMOVE_TRAIT(L, TRAIT_STUNIMMUNE, type)
 	REMOVE_TRAIT(L, TRAIT_SLEEPIMMUNE, type)
 	..()
@@ -2002,27 +1999,6 @@
 	value = REAGENT_VALUE_COMMON
 	taste_description = "bitterness" // apparently what viagra tastes like
 
-/* moved to modular_skyrat
-/datum/reagent/growthserum/on_mob_life(mob/living/carbon/H)
-	var/newsize = current_size
-	switch(volume)
-		if(0 to 19)
-			newsize = 1.25*RESIZE_DEFAULT_SIZE
-		if(20 to 49)
-			newsize = 1.5*RESIZE_DEFAULT_SIZE
-		if(50 to 99)
-			newsize = 2*RESIZE_DEFAULT_SIZE
-		if(100 to 199)
-			newsize = 2.5*RESIZE_DEFAULT_SIZE
-		if(200 to INFINITY)
-			newsize = 3.5*RESIZE_DEFAULT_SIZE
-
-	H.resize = newsize/current_size
-	current_size = newsize
-	H.update_transform()
-	..()
-*/
-
 /datum/reagent/growthserum/on_mob_end_metabolize(mob/living/M)
 	M.resize = RESIZE_DEFAULT_SIZE/current_size
 	current_size = RESIZE_DEFAULT_SIZE
@@ -2143,20 +2119,6 @@
 		to_chat(M, "You should sit down and take a rest...")
 	..()
 
-/* SEE MODULAR SKYRAT
-/datum/reagent/tranquility
-	name = "Tranquility"
-	description = "A highly mutative liquid of unknown origin."
-	color = "#9A6750" //RGB: 154, 103, 80
-	taste_description = "inner peace"
-	can_synth = FALSE
-	value = REAGENT_VALUE_GLORIOUS
-
-/datum/reagent/tranquility/reaction_mob(mob/living/L, method=TOUCH, reac_volume, show_message = 1, touch_protection = 0)
-	if(method==PATCH || method==INGEST || method==INJECT || (method == VAPOR && prob(min(reac_volume,100)*(1 - touch_protection))))
-		L.ForceContractDisease(new /datum/disease/transformation/gondola(), FALSE, TRUE)
-*/
-
 /datum/reagent/moonsugar
 	name = "Moonsugar"
 	description = "The primary precursor for an ancient feline delicacy known as skooma. While it has no notable effects on it's own, mixing it with morphine in a chilled container may yield interesting results."
@@ -2230,14 +2192,6 @@
 			to_chat(M, "<span class='userlove'>You feel like playing with your [G.name]!</span>")
 
 	..()
-
-/* /datum/reagent/preservahyde // Skyrat Edit - Relocated to modular_skyrat's medicine_reagents.dm
-	name = "Preservahyde"
-	description = "A powerful preservation agent, utilizing the preservative effects of formaldehyde with significantly less of the histamine."
-	reagent_state = LIQUID
-	color = "#f7685e"
-	metabolization_rate = REAGENTS_METABOLISM * 0.25 */ 
-
 
 //body bluids
 /datum/reagent/consumable/semen
@@ -2337,7 +2291,6 @@
 	color = "#E6E6DA"
 	taste_mult = 0
 
-//skyrat edit
 /datum/reagent/determination
 	name = "Determination"
 	description = "For when you need to push on a little more. Do NOT allow near plants."

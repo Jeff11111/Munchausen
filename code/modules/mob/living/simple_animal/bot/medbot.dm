@@ -391,7 +391,7 @@
 	playsound(src, 'sound/machines/warning-buzzer.ogg', 50)
 	user.visible_message("<span class='danger'>[user] tips over <b>[src]</b>!</span>", "<span class='danger'>You tip <b>[src]</b> over!</span>")
 	mode = BOT_TIPPED
-	tipper_name = user.name // Skyrat fix
+	tipper_name = user.name
 	var/matrix/mat = transform
 	transform = mat.Turn(180)
 

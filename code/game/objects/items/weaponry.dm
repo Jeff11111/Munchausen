@@ -116,7 +116,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		loc.layer = LARGE_MOB_LAYER //NO HIDING BEHIND PLANTS FOR YOU, DICKWEED (HA GET IT, BECAUSE WEEDS ARE PLANTS)
 		for(var/obj/item/bodypart/BP in H.bodyparts)
 			BP.limb_flags |= BODYPART_NOBLEED //AND WE WON'T BLEED OUT LIKE COWARDS
-		H.adjustStaminaLoss(-50) //CIT CHANGE - AND MAY HE NEVER SUCCUMB TO EXHAUSTION
+		H.adjustStaminaLoss(-50) //AND MAY HE NEVER SUCCUMB TO EXHAUSTION
 	else
 		if(!(flags_1 & ADMIN_SPAWNED_1))
 			qdel(src)
@@ -272,15 +272,12 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	var/quick_parry = FALSE // false = default parry, true = really small parry window
 	item_flags = ITEM_CAN_PARRY
 	block_parry_data = /datum/block_parry_data/bokken
-	//bare_wound_bonus = 0 SKYRAT EDIT - NO PARRY
-	//wound_bonus = 0 SKYRAT EDIT - NO PARRY
 
 /datum/block_parry_data/bokken // fucked up parry data, emphasizing quicker, shorter parries
 	parry_stamina_cost = 8 // be wise about when you parry, though, else you won't be able to fight enough to make it count
 	parry_time_windup = 0
 	parry_time_active = 10 // small parry window
 	parry_time_spindown = 0
-	// parry_flags = PARRY_DEFAULT_HANDLE_FEEDBACK		// bokken users can no longer strike while parrying
 	parry_time_perfect = 1.5
 	parry_time_perfect_leeway = 1
 	parry_imperfect_falloff_percent = 7.5
@@ -309,14 +306,10 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 		force -= 2
 		damtype = BRUTE
 		attack_verb = list("bashed", "smashed", "attacked")
-	//	bare_wound_bonus = 15 // having your leg smacked by a wooden stick is probably not great for it if it's naked - SKYRAT EDIT - NO PARRY
-	//	wound_bonus = 0 SKYRAT EDIT - NO PARRY
 	else
 		force += 2
 		damtype = STAMINA
 		attack_verb = list("whacked", "smacked", "struck")
-	//	bare_wound_bonus = 0 SKYRAT EDIT - NO PARRY
-	//	wound_bonus = 0 SKYRAT EDIT - NO PARRY
 	to_chat(user, "<span class='notice'>[src] is now [harm ? "harmful" : "not quite as harmful"].</span>")
 
 /obj/item/melee/bokken/AltClick(mob/user)
@@ -762,7 +755,7 @@ for further reading, please see: https://github.com/tgstation/tgstation/pull/301
 	spider_panic = typecacheof(list(
 					/mob/living/simple_animal/banana_spider,
 					/mob/living/simple_animal/hostile/poison/giant_spider,
-					/mob/living/simple_animal/hostile/poison/terror_spider, //Skyrat addition, spiders are now spiders to a flyswatter
+					/mob/living/simple_animal/hostile/poison/terror_spider,
 	))
 
 /obj/item/melee/flyswatter/afterattack(atom/target, mob/user, proximity_flag)

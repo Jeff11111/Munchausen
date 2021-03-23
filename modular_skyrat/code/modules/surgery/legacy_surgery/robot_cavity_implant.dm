@@ -7,7 +7,7 @@
 				/datum/surgery_step/mechanic_wrench,
 				/datum/surgery_step/mechanic_close)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	possible_locs = ALL_BODYPARTS //skyrat edit
+	possible_locs = ALL_BODYPARTS
 	requires_bodypart_type = BODYPART_ROBOTIC
 
 //handle cavity
@@ -26,7 +26,7 @@
 	return !tool.get_temperature()
 
 /datum/surgery_step/mechanic_handle_cavity/preop(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	var/obj/item/bodypart/CH = target.get_bodypart(target_zone) //skyrat edit
+	var/obj/item/bodypart/CH = target.get_bodypart(target_zone)
 	IC = CH.cavity_item
 	if(tool)
 		display_results(user, target, "<span class='notice'>You begin to insert [tool] into [target]'s [target_zone]...</span>",
@@ -38,7 +38,7 @@
 			"[user] looks for something in [target]'s [target_zone].")
 
 /datum/surgery_step/mechanic_handle_cavity/success(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	var/obj/item/bodypart/CH = target.get_bodypart(target_zone) //skyrat edit
+	var/obj/item/bodypart/CH = target.get_bodypart(target_zone)
 	if(tool)
 		if(IC || tool.w_class > CH.max_cavity_size || HAS_TRAIT(tool, TRAIT_NODROP) || istype(tool, /obj/item/organ))
 			to_chat(user, "<span class='warning'>You can't seem to fit [tool] in [target]'s [target_zone]!</span>")

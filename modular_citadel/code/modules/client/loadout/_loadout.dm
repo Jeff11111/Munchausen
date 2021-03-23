@@ -60,10 +60,8 @@ GLOBAL_LIST_EMPTY(loadout_whitelist_ids)
 
 	var/restricted_desc
 
-	//skyrat edit
 	var/has_colors = FALSE
 	var/color = "#FFFFFF"
-	//
 
 /datum/gear/New()
 	if(isnull(donoritem))

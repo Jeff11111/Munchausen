@@ -194,7 +194,7 @@
 
 /datum/config_entry/string/alert_blue_downto
 	config_entry_value = "Significant confirmed threats have been neutralized. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still permitted."
-//Skyrat change start
+
 /datum/config_entry/string/alert_amber_upto
 	config_entry_value = "A major security emergency has developed. Security staff may have weapons unholstered at all times. Random searches are allowed and advised."
 
@@ -212,7 +212,7 @@
 
 /datum/config_entry/string/alert_violet_downto
 	config_entry_value = "A major medical emergency has developed. Non-medical personnel are required to obey all relevant instructions from medical staff."
-//Skyrat change stop
+
 /datum/config_entry/string/alert_red_upto
 	config_entry_value = "There is an immediate serious threat to the station. Security is now authorized to use lethal force. Additionally, access requirements on some machines have been lifted."
 
@@ -318,11 +318,8 @@
 	movedelay_type = /mob/living/simple_animal/slime
 /datum/config_entry/number/outdated_movedelay/animal_delay
 	movedelay_type = /mob/living/simple_animal
-/////////////////////////////////////////////////
-//Skyrat changes
 /datum/config_entry/number/projectile_speed_modifier
 	config_entry_value = 1
-//End of skyrat changes
 
 /datum/config_entry/flag/roundstart_away	//Will random away mission be loaded.
 
@@ -484,7 +481,7 @@
 /datum/config_entry/keyed_list/breasts_cups_prefs
 	key_mode = KEY_MODE_TEXT
 	value_mode = VALUE_MODE_FLAG
-	config_entry_value = list("a", "b", "c", "d", "e", "f", "g", "h", "i", "j") //keep these lowercase //Skyrat edit, added 5 new sizes
+	config_entry_value = list("a", "b", "c", "d", "e", "f", "g", "h", "i", "j") //keep these lowercase
 
 /datum/config_entry/number/penis_min_centimeters_prefs
 	config_entry_value = 1

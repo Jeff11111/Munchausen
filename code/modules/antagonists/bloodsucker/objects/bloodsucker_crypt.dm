@@ -66,33 +66,6 @@
 /obj/structure/bloodsucker
 	var/mob/living/owner
 
-/*
-/obj/structure/bloodsucker/bloodthrone
-	name = "wicked throne"
-	desc = "Twisted metal shards jut from the arm rests. Very uncomfortable looking. It would take a sadistic sort to sit on this jagged piece of furniture."
-
-/obj/structure/bloodsucker/bloodaltar
-	name = "bloody altar"
-	desc = "It is marble, lined with basalt, and radiates an unnerving chill that puts your skin on edge."
-
-/obj/structure/bloodsucker/bloodstatue
-	name = "bloody countenance"
-	desc = "It looks upsettingly familiar..."
-
-/obj/structure/bloodsucker/bloodportrait
-	name = "oil portrait"
-	desc = "A disturbingly familiar face stares back at you. On second thought, the reds don't seem to be painted in oil..."
-
-/obj/structure/bloodsucker/bloodbrazer
-	name = "lit brazer"
-	desc = "It burns slowly, but doesn't radiate any heat."
-
-/obj/structure/bloodsucker/bloodmirror
-	name = "faded mirror"
-	desc = "You get the sense that the foggy reflection looking back at you has an alien intelligence to it."
-*/
-
-
 /obj/structure/bloodsucker/vassalrack
 	name = "persuasion rack"
 	desc = "If this wasn't meant for torture, then someone has some fairly horrifying hobbies."
@@ -118,16 +91,12 @@
 	var/datum/antagonist/bloodsucker/B = user.mind.has_antag_datum(ANTAG_DATUM_BLOODSUCKER)
 	. = ..()
 	if(B || isobserver(user))
-		. += {"<span class='cult'>This is the vassal rack, which allows you to thrall crewmembers into servants in your service.</span>"} //SKYRAT CHANGE - MORE NEUTRAL WORDING
+		. += {"<span class='cult'>This is the vassal rack, which allows you to thrall crewmembers into servants in your service.</span>"}
 		. += {"<span class='cult'>You need to first secure the vassal rack by clicking on it while it is in your lair.</span>"}
 		. += {"<span class='cult'>Simply click and hold on a victim, and then drag their sprite on the vassal rack. Alt click on the vassal rack to unbuckle them.</span>"}
 		. += {"<span class='cult'>Make sure that the victim is handcuffed, or else they can simply run away or resist, as the process is not instant.</span>"}
 		. += {"<span class='cult'>To convert the victim, simply click on the vassal rack itself. Sharp weapons work faster than other tools.</span>"}
 		. += {"<span class='cult'> You have only the power for [B.bloodsucker_level - B.count_vassals(user.mind)] vassals</span>"}
-/*	if(user.mind.has_antag_datum(ANTAG_DATUM_VASSAL)
-	. += {"<span class='cult'>This is the vassal rack, which allows your master to thrall crewmembers into his minions.\n
-	Aid your master in bringing their victims here and keeping them secure.\n
-	You can secure victims to the vassal rack by click dragging the victim onto the rack while it is secured</span>"} */
 
 /obj/structure/bloodsucker/vassalrack/MouseDrop_T(atom/movable/O, mob/user)
 	if(!O.Adjacent(src) || O == user || !isliving(O) || !isliving(user) || useLock || has_buckled_mobs() || user.incapacitated())
@@ -167,10 +136,9 @@
 		return
 	// Attempt Buckle
 	user.visible_message("<span class='notice'>[user] straps [M] into the rack.</span>", \
-			  		 "<span class='boldnotice'>You secure [M] tightly in place.</span>") //SKYRAT CHANGE - MORE NEUTRAL WORDING
+			  		 "<span class='boldnotice'>You secure [M] tightly in place.</span>")
 
 	playsound(src.loc, 'sound/effects/pop_expl.ogg', 25, 1)
-	//M.forceMove(drop_location()) <--- CANT DO! This cancels the buckle_mob() we JUST did (even if we foced the move)
 	M.setDir(2)
 	density = TRUE
 	var/matrix/m180 = matrix(M.transform)
@@ -218,9 +186,6 @@
 	return ..()
 
 /obj/structure/bloodsucker/vassalrack/attack_hand(mob/user)
-	//. = ..()	// Taken from sacrificial altar in divine.dm
-	//if(.)
-	//	return
 	// Go away. Torturing.
 	if(useLock)
 		return
@@ -263,7 +228,7 @@
 	var/datum/antagonist/bloodsucker/B = user.mind.has_antag_datum(ANTAG_DATUM_BLOODSUCKER)
 	// Check Bloodmob/living/M, force = FALSE, check_loc = TRUE
 	if(user.blood_volume < CONVERT_COST + 5)
-		to_chat(user, "<span class='notice'>You don't have enough blood to initiate the ritual with [target].</span>") //SKYRAT CHANGE - MORE NEUTRAL WORDING
+		to_chat(user, "<span class='notice'>You don't have enough blood to initiate the ritual with [target].</span>")
 		return
 	if(B.count_vassals(user.mind) > B.bloodsucker_level)
 		to_chat(user, "<span class='notice'>Your power is yet too weak to bring more vassals under your control....</span>")
@@ -284,17 +249,17 @@
 			if(convert_progress <= 0)
 				// FAIL: Can't be Vassal
 				if(!SSticker.mode.can_make_vassal(target, user, display_warning = FALSE) || HAS_TRAIT(target, TRAIT_MINDSHIELD)) // If I'm an unconvertable Antag ONLY
-					to_chat(user, "<span class='danger'>[target] doesn't respond to your ritual. It doesn't appear they can be converted to follow you, they either have a mindshield or their external loyalties are too difficult for you to break.<i>\[ALT+click to release\]</span>") //SKYRAT CHANGE - MORE NEUTRAL WORDING
+					to_chat(user, "<span class='danger'>[target] doesn't respond to your ritual. It doesn't appear they can be converted to follow you, they either have a mindshield or their external loyalties are too difficult for you to break.<i>\[ALT+click to release\]</span>")
 					convert_progress ++ // Pop it back up some. Avoids wasting Blood on a lost cause.
 				// SUCCESS: All done!
 				else
 					if(RequireDisloyalty(target))
-						to_chat(user, "<span class='boldwarning'>[target] has external loyalties! [target.p_they(TRUE)] will require more effort to force under your command!</span>") //SKYRAT CHANGE - MORE NEUTRAL WORDING
+						to_chat(user, "<span class='boldwarning'>[target] has external loyalties! [target.p_they(TRUE)] will require more effort to force under your command!</span>")
 					else
-						to_chat(user, "<span class='notice'>[target] looks ready for the ritual.</span>") //SKYRAT CHANGE - MORE NEUTRAL WORDING
+						to_chat(user, "<span class='notice'>[target] looks ready for the ritual.</span>")
 			// Still Need More Persuasion...
 			else
-				to_chat(user, "<span class='notice'>[target] could use [convert_progress == 1?"a little":"some"] more time.</span>") //SKYRAT CHANGE - MORE NEUTRAL WORDING
+				to_chat(user, "<span class='notice'>[target] could use [convert_progress == 1?"a little":"some"] more time.</span>")
 		useLock = FALSE
 		return
 	// Check: Mindshield & Antag
@@ -302,38 +267,31 @@
 		if(!do_disloyalty(user,target))
 			to_chat(user, "<span class='danger'><i>The ritual has been interrupted!</i></span>")
 		else if (!disloyalty_confirm)
-			to_chat(user, "<span class='danger'>[target] refuses to give into your ritual. A little bit more effort may suffice.</span>") //SKYRAT CHANGE - MORE NEUTRAL WORDING
+			to_chat(user, "<span class='danger'>[target] refuses to give into your ritual. A little bit more effort may suffice.</span>")
 		else
-			to_chat(user, "<span class='notice'>[target] looks ready for the ritual.</span>") //SKYRAT CHANGE - MORE NEUTRAL WORDING
+			to_chat(user, "<span class='notice'>[target] looks ready for the ritual.</span>")
 		useLock = FALSE
 		return
 	// Check: Blood
 	if(user.blood_volume < CONVERT_COST)
-		to_chat(user, "<span class='notice'>You don't have enough blood to initiate the ritual with [target], you need [CONVERT_COST - user.blood_volume] units more!</span>") //SKYRAT CHANGE - MORE NEUTRAL WORDING
+		to_chat(user, "<span class='notice'>You don't have enough blood to initiate the ritual with [target], you need [CONVERT_COST - user.blood_volume] units more!</span>")
 		useLock = FALSE
 		return
 	B.AddBloodVolume(-CONVERT_COST)
 	target.add_mob_blood(user, "<span class='danger'>Youve used [CONVERT_COST] amount of blood to gain a new vassal!</span>")
 	to_chat(user, )
 	user.visible_message("<span class='notice'>[user] paints a bloody rune on [target]'s forehead, marking them as a vassal!</span>", \
-				  	  "<span class='notice'>You paint a bloody rune across [target]'s forehead. They are now under your command.</span>") //SKYRAT CHANGE - MORE NEUTRAL WORDING
+				  	  "<span class='notice'>You paint a bloody rune across [target]'s forehead. They are now under your command.</span>")
 	if(!do_mob(user, src, 50))
 		to_chat(user, "<span class='danger'><i>The ritual has been interrupted!</i></span>")
 		useLock = FALSE
 		return
 	// Convert to Vassal!
 	if(B && B.attempt_turn_vassal(target))
-		//remove_loyalties(target) // In case of Mindshield, or appropriate Antag (Traitor, Internal, etc)
-		//if (!target.buckled)
-		//	to_chat(user, "<span class='danger'><i>The ritual has been interrupted!</i></span>")
-		//	useLock = FALSE
-		//	return
 		user.playsound_local(null, 'sound/effects/explosion_distant.ogg', 40, TRUE)
 		target.playsound_local(null, 'sound/effects/explosion_distant.ogg', 40, TRUE)
 		target.playsound_local(null, 'sound/effects/singlebeat.ogg', 40, TRUE)
 		target.Jitter(25)
-		//target.emote("laugh") SKYRAT CHANGE - MORE NEUTRAL WORDING
-		//remove_victim(target) // Remove on CLICK ONLY!
 	useLock = FALSE
 
 #undef CONVERT_COST
@@ -360,7 +318,6 @@
 	if(I)
 		torture_time -= I.force / 4
 		torture_dmg_brute += I.force / 4
-		//torture_dmg_burn += I.
 		if(I.sharpness == SHARP_EDGED)
 			torture_time -= 1
 		else if(I.sharpness == SHARP_POINTY)
@@ -392,13 +349,10 @@
 	// OFFER YES/NO NOW!
 	spawn(10)
 		if(useLock && target && target.client) // Are we still torturing? Did we cancel? Are they still here?
-			to_chat(user, "<span class='notice'>[target] has been given the opportunity for service. You await their decision...</span>") //SKYRAT CHANGE - MORE NEUTRAL WORDING
-			var/alert_text = "You are being tortured! Do you want to give in and agree to serve [user]?" //SKYRAT CHANGE - MORE NEUTRAL WORDING
-		/*	if(HAS_TRAIT(target, TRAIT_MINDSHIELD))
-				alert_text += "\n\nYou will no longer be loyal to the station!"
-			if(SSticker.mode.AmValidAntag(target.mind))  */
+			to_chat(user, "<span class='notice'>[target] has been given the opportunity for service. You await their decision...</span>")
+			var/alert_text = "You are being tortured! Do you want to give in and agree to serve [user]?"
 			alert_text += "\n\nYou will not lose your current objectives, but they come second to the orders of your new commander!"
-			switch(alert(target, alert_text,"The pain is starting to become unbearable!","FINE!", "NEVER!")) //SKYRAT CHANGE - MORE NEUTRAL WORDING
+			switch(alert(target, alert_text,"The pain is starting to become unbearable!","FINE!", "NEVER!"))
 				if("FINE!")
 					disloyalty_accept(target)
 				else
@@ -418,9 +372,6 @@
 		return
 	// NOTE: You can say YES after torture. It'll apply to next time.
 	disloyalty_confirm = TRUE
-	/*if(HAS_TRAIT(target, TRAIT_MINDSHIELD))
-		to_chat(target, "<span class='boldnotice'>You give in to the will of your torturer. If they are successful, you will no longer be loyal to the station!</span>")
-*/
 /obj/structure/bloodsucker/vassalrack/proc/disloyalty_refuse(mob/living/target)
 	// FAILSAFE: Still on the rack?
 	if(!(locate(target) in buckled_mobs))
@@ -428,7 +379,7 @@
 	// Failsafe: You already said YES.
 	if(disloyalty_confirm)
 		return
-	to_chat(target, "<span class='notice'>You refuse to give in!</span>") //SKYRAT CHANGE - MORE NEUTRAL WORDING ------- END OF SKYRAT CHANGES
+	to_chat(target, "<span class='notice'>You refuse to give in!</span>")
 
 
 /obj/structure/bloodsucker/vassalrack/proc/remove_loyalties(mob/living/target)
@@ -451,8 +402,6 @@
 	density = FALSE
 	anchored = FALSE
 	var/lit = FALSE
-///obj/structure/bloodsucker/candelabrum/is_hot() // candle.dm
-	//return FALSE
 
 /obj/structure/bloodsucker/candelabrum/Destroy()
 	STOP_PROCESSING(SSobj, src)
@@ -465,9 +414,6 @@
 	if((AmBloodsucker(user)) || isobserver(user))
 		. += {"<span class='cult'>This is a magical candle which drains at the sanity of mortals who are not under your command while it is active.</span>"}
 		. += {"<span class='cult'>You can alt click on it from any range to turn it on remotely, or simply be next to it and click on it to turn it on and off normally.</span>"}
-/*	if(user.mind.has_antag_datum(ANTAG_DATUM_VASSAL)
-		. += {"<span class='cult'>This is a magical candle which drains at the sanity of the fools who havent yet accepted your master, as long as it is active.\n
-		You can turn it on and off by clicking on it while you are next to it</span>"} */
 
 /obj/structure/bloodsucker/candelabrum/attack_hand(mob/user)
 	var/datum/antagonist/vassal/T = user.mind.has_antag_datum(ANTAG_DATUM_VASSAL)

@@ -103,14 +103,13 @@ GLOBAL_LIST_EMPTY(explosions)
 	// 3/7/14 will calculate to 80 + 35
 
 	var/far_dist = 0
-	far_dist += heavy_impact_range * 15 // Skyrat edit: carry the sound further
+	far_dist += heavy_impact_range * 15
 	far_dist += devastation_range * 20
 
 	if(!silent)
 		var/frequency = get_rand_frequency()
 		var/sound/explosion_sound = sound(get_sfx("explosion"))
 		var/sound/far_explosion_sound = sound('sound/effects/explosionfar.ogg')
-		// Skyrat changes
 		var/sound/creaking_explosion_sound = sound(get_sfx("explosion_creaking"))
 		var/sound/hull_creaking_sound = sound(get_sfx("hull_creaking"))
 		var/sound/explosion_echo_sound = sound('sound/effects/explosion_distant.ogg')
@@ -119,7 +118,6 @@ GLOBAL_LIST_EMPTY(explosions)
 		
 		if(prob(devastation_range*30+heavy_impact_range*5) && on_station) // Huge explosions are near guaranteed to make the station creak and whine, smaller ones might.
 			creaking_explosion = TRUE // prob over 100 always returns true
-		// End skyrat changes
 
 		for(var/mob/M in GLOB.player_list)
 			// Double check for client
@@ -136,7 +134,6 @@ GLOBAL_LIST_EMPTY(explosions)
 						shake_camera(M, 25, clamp(baseshakeamount, 0, 10))
 				// You hear a far explosion if you're outside the blast radius. Small bombs shouldn't be heard all over the station.
 
-				// Skyrat change: Most of this sound code
 				else if(dist <= far_dist)
 					var/far_volume = clamp(far_dist/2, 40, 60) // Volume is based on explosion size and dist
 					if(creaking_explosion)
@@ -161,7 +158,6 @@ GLOBAL_LIST_EMPTY(explosions)
 
 				if(creaking_explosion) // 5 seconds after the bang, the station begins to creak
 					addtimer(CALLBACK(M, /mob/proc/playsound_local, epicenter, null, rand(25, 40), 1, frequency, null, null, FALSE, hull_creaking_sound, null, null, null, null, 0), 5 SECONDS)
-				// End skyrat changes
 			EX_PREPROCESS_CHECK_TICK
 
 	//postpone processing for a bit

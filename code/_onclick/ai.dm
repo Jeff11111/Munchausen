@@ -109,28 +109,28 @@
 */
 
 /mob/living/silicon/ai/CtrlShiftClickOn(var/atom/A)
-	if(isturf(A)) // Skyrat edit
+	if(isturf(A))
 		var/obj/machinery/door/airlock/airlock = locate(/obj/machinery/door/airlock) in A 
 		if(airlock)
 			airlock.AICtrlShiftClick(src)
 	else
-		A.AICtrlShiftClick(src) // End of skyrat edit
+		A.AICtrlShiftClick(src)
 
 /mob/living/silicon/ai/ShiftClickOn(var/atom/A)
-	if(isturf(A)) // Skyrat edit
+	if(isturf(A))
 		var/obj/machinery/door/airlock/airlock = locate(/obj/machinery/door/airlock) in A 
 		if(airlock)
 			airlock.AIShiftClick(src)
 	else
-		A.AIShiftClick(src) // End of skyrat edit
+		A.AIShiftClick(src)
 
 /mob/living/silicon/ai/CtrlClickOn(var/atom/A)
-	if(isturf(A)) // Skyrat edit
+	if(isturf(A))
 		var/obj/machinery/door/airlock/airlock = locate(/obj/machinery/door/airlock) in A 
 		if(airlock)
 			airlock.AICtrlClick(src)
 	else
-		A.AICtrlClick(src) // End of skyrat edit
+		A.AICtrlClick(src)
 
 /mob/living/silicon/ai/AltClickOn(var/atom/A)
 	if(!A.AIAltClick(src))

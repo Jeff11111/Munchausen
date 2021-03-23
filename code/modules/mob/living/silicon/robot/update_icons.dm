@@ -2,7 +2,6 @@
 /mob/living/silicon/robot/update_icons()
 	cut_overlays()
 	icon_state = module.cyborg_base_icon
-	//Citadel changes start here - Allows modules to use different icon files, and allows modules to specify a pixel offset
 	icon = (module.cyborg_icon_override ? module.cyborg_icon_override : initial(icon))
 	if(laser)
 		add_overlay("laser")//Is this even used??? - Yes borg/inventory.dm
@@ -18,7 +17,6 @@
 
 	if(module.cyborg_pixel_offset)
 		pixel_x = module.cyborg_pixel_offset
-	//End of citadel changes
 
 	if(module.cyborg_base_icon == "robot")
 		icon = 'icons/mob/robots.dmi'

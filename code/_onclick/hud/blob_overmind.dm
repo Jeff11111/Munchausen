@@ -54,7 +54,7 @@
 /obj/screen/blob/Blobbernaut
 	icon_state = "ui_blobbernaut"
 	name = "Produce Blobbernaut (40)"
-	desc = "Produces a strong, smart player-controlled blobbernaut from a factory blob for 40 resources.<br>The factory blob used will become fragile and unable to produce spores."	//Skyrat Edit: Now states the blobbernaut is player-controlled.
+	desc = "Produces a strong, smart player-controlled blobbernaut from a factory blob for 40 resources.<br>The factory blob used will become fragile and unable to produce spores."
 
 /obj/screen/blob/Blobbernaut/Click()
 	if(isovermind(usr))
@@ -63,8 +63,8 @@
 
 /obj/screen/blob/ResourceBlob
 	icon_state = "ui_resource"
-	name = "Produce Resource Blob (25)"	//Skyrat Edit: Cost down to 30 from 40.
-	desc = "Produces a resource blob for 25 resources.<br>Resource blobs will give you resources every few seconds. The closer to a node, the more resources."	//Skyrat Edit: Instructs the player that they should be built next to nodes.
+	name = "Produce Resource Blob (25)"
+	desc = "Produces a resource blob for 25 resources.<br>Resource blobs will give you resources every few seconds. The closer to a node, the more resources."
 
 /obj/screen/blob/ResourceBlob/Click()
 	if(isovermind(usr))
@@ -73,7 +73,7 @@
 
 /obj/screen/blob/NodeBlob
 	icon_state = "ui_node"
-	name = "Produce Node Blob (40)"	//Skyrat Edit: Cost down to 40 from 50.
+	name = "Produce Node Blob (40)"
 	desc = "Produces a node blob for 40 resources.<br>Node blobs will expand and activate nearby resource and factory blobs."
 
 /obj/screen/blob/NodeBlob/Click()
@@ -83,7 +83,7 @@
 
 /obj/screen/blob/FactoryBlob
 	icon_state = "ui_factory"
-	name = "Produce Factory Blob (50)"	//Skyrat Edit: Cost down to 50 from 60.
+	name = "Produce Factory Blob (50)"
 	desc = "Produces a factory blob for 50 resources.<br>Factory blobs will produce spores every few seconds."
 
 /obj/screen/blob/FactoryBlob/Click()

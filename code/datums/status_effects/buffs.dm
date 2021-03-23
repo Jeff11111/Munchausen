@@ -313,7 +313,7 @@
 		owner.toxloss *= 10
 		owner.oxyloss *= 10
 		owner.cloneloss *= 10
-		owner.staminaloss += -10 // CIT CHANGE - makes blooddrunk status effect not exhaust you
+		owner.staminaloss += -10 //makes blooddrunk status effect not exhaust you
 		owner.updatehealth()
 		last_health = owner.health
 		last_bruteloss = owner.getBruteLoss()
@@ -371,7 +371,7 @@
 
 		var/new_staminaloss = owner.getStaminaLoss()
 		if(new_staminaloss < last_staminaloss)
-			var/heal_amount = -5 // CIT CHANGE - makes blood drunk status effect not exhaust you
+			var/heal_amount = -5
 			owner.adjustStaminaLoss(heal_amount, FALSE)
 			new_staminaloss = owner.getStaminaLoss()
 			needs_health_update = TRUE
@@ -458,12 +458,11 @@
 	owner.adjustBruteLoss(-10, FALSE)
 	owner.adjustFireLoss(-5, FALSE)
 	owner.adjustOxyLoss(-10)
-	//skyrat edit - this is extremely yikes but i'll have to fix it later.
+	//TODO: fix it, not later, now
 	if(!iscarbon(owner))
 		return
 	var/mob/living/carbon/C = owner
 	QDEL_LIST(C.all_scars)
-	//
 
 /obj/screen/alert/status_effect/fleshmend
 	name = "Fleshmend"

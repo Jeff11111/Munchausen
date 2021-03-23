@@ -281,7 +281,6 @@
 				vol_each_max = min(60, vol_each_max)
 			else if (item_type == "smartDart")
 				vol_each_max = min(20, vol_each_max)
-			// SKYRAT EDIT: Medipens/injectors
 			else if (item_type == "injector")
 				vol_each_max = min(10, vol_each_max)
 			else
@@ -386,7 +385,6 @@
 					P.mode=!mode
 					P.update_icon()
 				return TRUE
-			// SKYRAT EDIT: Medipens/injectors
 			if(item_type == "injector")
 				for(var/datum/reagent/M in reagents.reagent_list)
 					if(!istype(M, /datum/reagent/medicine))

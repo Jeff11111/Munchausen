@@ -42,7 +42,6 @@
 	build_path = /obj/item/melee/synthetic_arm_blade
 	category = list("other","emagged")
 
-//skyrat designs
 /datum/design/teeth
 	name = "Teeth"
 	id = "teeth"

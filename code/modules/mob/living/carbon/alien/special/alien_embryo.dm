@@ -107,8 +107,8 @@
 		B.drop_organs(owner) //Lets still make the death gruesome and impossible to just simply defib someone.
 		owner.death(FALSE) //Just in case some freak occurance occurs where you somehow survive all your organs being removed from you and the 100-300 brute damage.
 	else //When it is removed via surgery at a late stage, rather than forced.
-		new_xeno.visible_message("<span class='danger'>[owner] violently retches up [new_xeno]!</span>", "<span class='userdanger'>You exit [owner], your previous host.</span>") //skyrat-edit
-		owner.adjustBruteLoss(60) //skyrat-edit
+		new_xeno.visible_message("<span class='danger'>[owner] violently retches up [new_xeno]!</span>", "<span class='userdanger'>You exit [owner], your previous host.</span>")
+		owner.adjustBruteLoss(60)
 	old_owner.cut_overlay(overlay)
 	qdel(src)
 

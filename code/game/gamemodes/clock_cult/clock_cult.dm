@@ -146,7 +146,6 @@ Credit where due:
 	var/servants_to_serve = list()
 	var/roundstart_player_count
 	var/ark_time //In minutes, how long the Ark waits before activation; this is equal to 30 + (number of players / 5) (max 40 mins.)
-	// SKYRAT EDIT: Credits
 	title_icon = "clockcult"
 
 	var/datum/team/clockcult/main_clockcult
@@ -357,7 +356,7 @@ Credit where due:
 	if(!is_servant_of_ratvar(target) && !isobserver(target))
 		return "<HTML><HEAD><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)]<HR>[stamps]</BODY></HTML>"
 	return ..()
-// SKYRAT EDIT: Credits
+
 /datum/game_mode/clockwork_cult/generate_credit_text()
 	var/list/round_credits = list()
 	var/len_before_addition

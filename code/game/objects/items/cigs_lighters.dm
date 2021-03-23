@@ -515,7 +515,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/lighter/Initialize()
 	. = ..()
-	AddComponent(/datum/component/overlay_lighting, LIGHT_COLOR_FIRE, 2, 0.6, FALSE) //Skyrat change
+	AddComponent(/datum/component/overlay_lighting, LIGHT_COLOR_FIRE, 2, 0.6, FALSE)
 	if(!overlay_state)
 		overlay_state = pick(overlay_list)
 	update_icon()

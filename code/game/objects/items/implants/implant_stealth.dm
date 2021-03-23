@@ -26,7 +26,6 @@
 	qdel(src)
 
 /obj/structure/closet/cardboard/agent/process()
-	//alpha = max(0, alpha - 50) //Citadel edit
 	animate(src, , alpha = alpha - 50, time = 3)
 
 /obj/structure/closet/cardboard/agent/Move()

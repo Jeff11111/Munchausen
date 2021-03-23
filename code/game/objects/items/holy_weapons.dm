@@ -11,7 +11,6 @@
 	strip_delay = 80
 	dog_fashion = null
 
-// CITADEL CHANGES: More variants
 /obj/item/clothing/head/helmet/chaplain/bland
 	icon_state = "knight_generic"
 	item_state = "knight_generic"
@@ -27,7 +26,6 @@
 	desc = "Helfen, Wehren, Heilen."
 	icon_state = "knight_winged"
 	item_state = "knight_winged"
-// CITADEL CHANGES ENDS HERE
 
 /obj/item/clothing/suit/armor/riot/chaplain
 	name = "crusader armour"
@@ -36,7 +34,6 @@
 	item_state = "knight_templar"
 	allowed = list(/obj/item/storage/book/bible, HOLY_WEAPONS, /obj/item/reagent_containers/food/drinks/bottle/holywater, /obj/item/storage/fancy/candle_box, /obj/item/candle, /obj/item/tank/internals/emergency_oxygen, /obj/item/tank/internals/plasmaman)
 
-// CITADEL CHANGES: More variants
 /obj/item/clothing/suit/armor/riot/chaplain/teutonic
 	desc = "Help, Defend, Heal!"
 	icon_state = "knight_teutonic"
@@ -49,7 +46,6 @@
 /obj/item/clothing/suit/armor/riot/chaplain/hospitaller
 	icon_state = "knight_hospitaller"
 	item_state = "knight_hospitaller"
-// CITADEL CHANGES ENDS HERE
 
 /obj/item/choice_beacon/holy
 	name = "armaments beacon"
@@ -89,7 +85,6 @@
 	new /obj/item/clothing/head/helmet/chaplain(src)
 	new /obj/item/clothing/suit/armor/riot/chaplain(src)
 
-// CITADEL CHANGES: More Variants
 /obj/item/storage/box/holy/teutonic
 	name = "Teutonic Kit"
 
@@ -103,7 +98,6 @@
 /obj/item/storage/box/holy/hospitaller/PopulateContents()
 	new /obj/item/clothing/head/helmet/chaplain/bland(src)
 	new /obj/item/clothing/suit/armor/riot/chaplain/hospitaller(src)
-// CITADEL CHANGES ENDS HERE
 
 /obj/item/storage/box/holy/student
 	name = "Profane Scholar Kit"
@@ -227,9 +221,7 @@
 	obj_flags = UNIQUE_RENAME
 	var/chaplain_spawnable = TRUE
 	total_mass = TOTAL_MASS_MEDIEVAL_WEAPON
-	//skyrat edit
 	wound_bonus = -10
-	//
 
 /obj/item/nullrod/Initialize()
 	. = ..()
@@ -661,10 +653,8 @@
 	w_class = WEIGHT_CLASS_HUGE
 	sharpness = SHARP_EDGED
 	total_mass = TOTAL_MASS_HAND_REPLACEMENT
-	//skyrat edit
 	wound_bonus = -20
 	bare_wound_bonus = 25
-	//
 
 /obj/item/nullrod/armblade/Initialize()
 	. = ..()
@@ -807,9 +797,7 @@
 	force = 4
 	throwforce = 0
 	attack_verb = list("whipped", "repented", "lashed", "flagellated")
-	//skyrat edit - wowie the first wrist slot item
 	slot_flags = ITEM_SLOT_WRISTS
-	//
 	var/praying = FALSE
 	var/deity_name = "Coderbus" //This is the default, hopefully won't actually appear if the religion subsystem is running properly
 

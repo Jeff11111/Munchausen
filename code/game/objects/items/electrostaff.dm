@@ -170,9 +170,9 @@
 		turn_off()
 
 /obj/item/electrostaff/attack(mob/living/target, mob/living/user)
-	if(IS_STAMCRIT(user))//CIT CHANGE - makes it impossible to baton in stamina softcrit
-		to_chat(user, "<span class='danger'>You're too exhausted to use [src] properly.</span>")//CIT CHANGE - ditto
-		return //CIT CHANGE - ditto
+	if(IS_STAMCRIT(user))//makes it impossible to baton in stamina softcrit
+		to_chat(user, "<span class='danger'>You're too exhausted to use [src] properly.</span>")
+		return
 	if(on && HAS_TRAIT(user, TRAIT_CLUMSY) && prob(50))
 		clowning_around(user)			//ouch!
 		return

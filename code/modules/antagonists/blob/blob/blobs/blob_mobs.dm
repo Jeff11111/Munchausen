@@ -127,7 +127,7 @@
 	melee_damage_lower += 8
 	melee_damage_upper += 11
 	movement_type = GROUND
-	death_cloud_size = 1 //SKYRAT EDIT - BLOB
+	death_cloud_size = 1
 	icon = H.icon
 	icon_state = "zombie"
 	H.hair_style = null

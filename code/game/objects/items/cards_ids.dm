@@ -216,10 +216,8 @@
 			registered_account = new /datum/bank_account/remote/non_transferable(pick(GLOB.redacted_strings))
 
 /obj/item/card/id/Destroy()
-	//Skyrat change - proper GC
 	if(registered_account)
 		registered_account.bank_cards -= src
-	//End of skyrat change
 	if(bank_support == ID_LOCKED_BANK_ACCOUNT)
 		QDEL_NULL(registered_account)
 	else
@@ -743,7 +741,7 @@
 /obj/item/card/id/away/old
 	name = "a perfectly generic identification card"
 	desc = "A perfectly generic identification card. Looks like it could use some flavor."
-	icon_state = "centcom_old" //Skyrat change
+	icon_state = "centcom_old"
 
 /obj/item/card/id/away/old/sec
 	name = "Charlie Station Security Officer's ID card"
@@ -795,7 +793,6 @@
 /obj/item/card/id/departmental_budget/update_label()
 	return
 
-// SKYRAT EDIT - ATMs
 /obj/item/card/id/departmental_budget/civ
 
 /obj/item/card/id/departmental_budget/eng
@@ -821,13 +818,12 @@
 /obj/item/card/id/departmental_budget/sec
 	department_ID = ACCOUNT_SEC
 	department_name = ACCOUNT_SEC_NAME
-// SKYRAT EDIT END
 
 //Polychromatic Knight Badge
 
 /obj/item/card/id/knight
 	name = "knight badge"
-	icon = 'icons/obj/card.dmi' //Skyrat change
+	icon = 'icons/obj/card.dmi'
 	icon_state = "knight"
 	desc = "A badge denoting the owner as a knight! It has a strip for swiping like an ID"
 	var/id_color = "#00FF00" //defaults to green

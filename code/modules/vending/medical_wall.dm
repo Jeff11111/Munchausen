@@ -4,7 +4,7 @@
 	icon_state = "wallmed"
 	icon_deny = "wallmed-deny"
 	density = FALSE
-	products = list(/obj/item/reagent_containers/medspray/styptic = 2, //Edited by Skyrat
+	products = list(/obj/item/reagent_containers/medspray/styptic = 2,
 					/obj/item/reagent_containers/medspray/silver_sulf = 2,
 					/obj/item/reagent_containers/medspray/sterilizine = 1,
 					/obj/item/reagent_containers/pill/patch/styptic = 5,
@@ -31,7 +31,7 @@
 	icon_state = "refill_medical"
 
 /obj/machinery/vending/wallmed/pubby
-	products = list(/obj/item/reagent_containers/pill/patch/styptic = 1, //Edited by Skyrat
+	products = list(/obj/item/reagent_containers/pill/patch/styptic = 1,
 					/obj/item/reagent_containers/pill/patch/silver_sulf = 1,
 					/obj/item/reagent_containers/medspray/sterilizine = 1,
 					/obj/item/reagent_containers/syringe = 3,)

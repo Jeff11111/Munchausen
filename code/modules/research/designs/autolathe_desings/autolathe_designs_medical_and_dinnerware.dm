@@ -189,7 +189,6 @@
 	category = list("initial","Medical","Medical Designs")
 	departmental_flags = DEPARTMENTAL_FLAG_MEDICAL
 
-//skyrat edit
 /datum/design/bonesetter
 	name = "Bonesetter"
 	id = "bonesetter"

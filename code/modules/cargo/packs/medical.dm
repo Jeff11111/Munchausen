@@ -39,7 +39,6 @@
 					/obj/item/reagent_containers/blood/OMinus,
 					/obj/item/reagent_containers/blood/lizard,
 					/obj/item/reagent_containers/blood/jellyblood,
-					//skyrat edit
 					/obj/item/reagent_containers/blood/insect,
 					/obj/item/stack/medical/bone_gel,
 					/obj/item/stack/medical/bone_gel)
@@ -48,7 +47,7 @@
 
 /datum/supply_pack/medical/chemical
 	name = "Chemical Starter Kit Crate"
-	desc = "Contains twelve different chemicals for all the fun experiments you can make." //Skyrat change, fixed grammatical error
+	desc = "Contains twelve different chemicals for all the fun experiments you can make."
 	cost = 1700
 	contains = list(/obj/item/reagent_containers/glass/bottle/hydrogen,
 					/obj/item/reagent_containers/glass/bottle/carbon,
@@ -122,7 +121,7 @@
 
 /datum/supply_pack/medical/adv_surgery_tools
 	name = "Med-Co Advanced Surgery Tools"
-	desc = "A full set of Med-Co advanced surgery tools, this crate also comes with a spray of synthflesh as well as a can of sterilizine. Requires Surgery access to open." //Skyrat change, grammatical error and adds a word that somebody forgot to include
+	desc = "A full set of Med-Co advanced surgery tools, this crate also comes with a spray of synthflesh as well as a can of sterilizine. Requires Surgery access to open."
 	cost = 5500
 	access = ACCESS_SURGERY
 	contains = list(/obj/item/storage/belt/medical/surgery_belt_adv,
@@ -133,7 +132,7 @@
 
 /datum/supply_pack/medical/surgery
 	name = "Surgical Supplies Crate"
-	desc = "Do you want to perform surgery but don't have one of those fancy shmancy degrees? Just get started with this crate containing a medical duffelbag, Sterilizine spray and collapsible roller bed." //Skyrat change, fixes grammatical error
+	desc = "Do you want to perform surgery but don't have one of those fancy shmancy degrees? Just get started with this crate containing a medical duffelbag, Sterilizine spray and collapsible roller bed."
 	cost = 1300
 	contains = list(/obj/item/storage/backpack/duffelbag/med/surgery,
 					/obj/item/reagent_containers/medspray/sterilizine,
@@ -177,7 +176,7 @@
 
 /datum/supply_pack/medical/virus
 	name = "Virus Crate"
-	desc = "Contains twelve different bottles containing several viral samples for virology research. Also includes seven beakers and syringes. Balled-up jeans not included. Requires CMO access to open." //Skyrat change, fixes grammatical error
+	desc = "Contains twelve different bottles containing several viral samples for virology research. Also includes seven beakers and syringes. Balled-up jeans not included. Requires CMO access to open."
 	cost = 2500
 	access = ACCESS_CMO
 	contains = list(/obj/item/reagent_containers/glass/bottle/flu_virion,
@@ -202,7 +201,7 @@
 
 /datum/supply_pack/medical/anitvirus
 	name = "Virus Containment Crate"
-	desc = "Viro let out a death plague Mk II again? Someone didn't wash their hands? Old plagues born anew? Well, this crate is for you! Hope you cure it before it breaks out of the station. Has two bio suits, a box of needles and beakers, five spaceacillin needles, and a medibot. Requires medical access to open" //Skyrat change, changed formatting
+	desc = "Viro let out a death plague Mk II again? Someone didn't wash their hands? Old plagues born anew? Well, this crate is for you! Hope you cure it before it breaks out of the station. Has two bio suits, a box of needles and beakers, five spaceacillin needles, and a medibot. Requires medical access to open"
 	cost = 3000
 	access = ACCESS_MEDICAL
 	contains = list(/mob/living/simple_animal/bot/medbot,

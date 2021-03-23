@@ -36,10 +36,8 @@
 
 	fair_market_price = 10
 	payment_department = ACCOUNT_MED
-	//skyrat edit
 	///Cryo will continue to treat people with 0 damage but existing wounds, but will sound off when damage healing is done in case doctors want to directly treat the wounds instead
 	var/treating_wounds = FALSE
-	//
 	var/datum/looping_sound/cryotube/soundloop
 
 /obj/machinery/atmospherics/components/unary/cryo_cell/Initialize()
@@ -180,7 +178,6 @@
 		return
 
 	if(mob_occupant.get_physical_damage() >= mob_occupant.getMaxHealth()) // Don't bother with fully healed people.
-		//skyrat edit
 		if(iscarbon(mob_occupant))
 			var/mob/living/carbon/C = mob_occupant
 			if(C.all_wounds && C.all_wounds.len)
@@ -202,7 +199,6 @@
 				open_machine()
 			radio.talk_into(src, msg, radio_channel)
 			return
-		//
 
 	var/datum/gas_mixture/air1 = airs[1]
 
@@ -281,9 +277,7 @@
 	playsound(src, 'sound/machines/openhiss.ogg', 25, 0)
 
 /obj/machinery/atmospherics/components/unary/cryo_cell/close_machine(mob/living/carbon/user)
-	//skyrat edit
 	treating_wounds = FALSE
-	//
 	if((isnull(user) || istype(user)) && state_open && !panel_open)
 		..(user)
 		reagent_transfer = 0

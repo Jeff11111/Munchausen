@@ -82,11 +82,11 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	return new_msg
 
 /mob/living/say(message, bubble_type,var/list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
-	var/static/list/crit_allowed_modes = list(MODE_WHISPER = TRUE, MODE_CHANGELING = TRUE, MODE_ALIEN = TRUE, MODE_TERROR_SPIDER = TRUE) //skyrat change
-	var/static/list/unconscious_allowed_modes = list(MODE_CHANGELING = TRUE, MODE_ALIEN = TRUE, MODE_TERROR_SPIDER = TRUE) //skyrat change
+	var/static/list/crit_allowed_modes = list(MODE_WHISPER = TRUE, MODE_CHANGELING = TRUE, MODE_ALIEN = TRUE, MODE_TERROR_SPIDER = TRUE)
+	var/static/list/unconscious_allowed_modes = list(MODE_CHANGELING = TRUE, MODE_ALIEN = TRUE, MODE_TERROR_SPIDER = TRUE)
 	var/talk_key = get_key(message)
 
-	var/static/list/one_character_prefix = list(MODE_HEADSET = TRUE, MODE_ROBOT = TRUE, MODE_WHISPER = TRUE, MODE_SING = TRUE) // Skyrat edit: MODE_SING
+	var/static/list/one_character_prefix = list(MODE_HEADSET = TRUE, MODE_ROBOT = TRUE, MODE_WHISPER = TRUE, MODE_SING = TRUE)
 	if(sanitize)
 		message = trim(copytext_char(sanitize(message), 1, MAX_MESSAGE_LEN))
 	if(!message || message == "")
@@ -136,7 +136,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		if(can_speak_language(message_language))
 			language = message_language
 		var/datum/language/langguage = GLOB.language_datum_instances[message_language]
-		message = copytext_char(message, length(langguage.key) + 2) //skyrat edit
+		message = copytext_char(message, length(langguage.key) + 2)
 
 		// Trim the space if they said ",0 I LOVE LANGUAGES"
 		message = trim_left(message)
@@ -188,7 +188,6 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		var/datum/language/L = GLOB.language_datum_instances[language]
 		spans |= L.spans
 
-// Skyrat edits
 	if(message_mode == MODE_SING)
 	#if DM_VERSION < 513
 		var/randomnote = "~"
@@ -197,7 +196,6 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	#endif
 		spans |= SPAN_SINGING
 		message = "[randomnote] [message] [randomnote]"
-// End of Skyrat edits
 
 	var/radio_return = radio(message, message_mode, spans, language)
 	if(radio_return & ITALICS)
@@ -258,60 +256,6 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	show_message(message, MSG_AUDIBLE, deaf_message, deaf_type)
 	return message
 
-/*****moved to modular_skyrat*******
-/mob/living/send_speech(message, message_range = 6, obj/source = src, bubble_type = bubble_icon, list/spans, datum/language/message_language=null, message_mode)
-	var/static/list/eavesdropping_modes = list(MODE_WHISPER = TRUE, MODE_WHISPER_CRIT = TRUE)
-	var/eavesdrop_range = 0
-	if(eavesdropping_modes[message_mode])
-		eavesdrop_range = EAVESDROP_EXTRA_RANGE
-	var/list/listening = get_hearers_in_view(message_range+eavesdrop_range, source)
-	var/list/the_dead = list()
-	var/list/yellareas	//CIT CHANGE - adds the ability for yelling to penetrate walls and echo throughout areas
-	if(!eavesdrop_range && say_test(message) == "2")	//CIT CHANGE - ditto
-		yellareas = get_areas_in_range(message_range*0.5, source)	//CIT CHANGE - ditto
-	for(var/_M in GLOB.player_list)
-		var/mob/M = _M
-		if(M.stat != DEAD) //not dead, not important
-			if(yellareas)	//CIT CHANGE - see above. makes yelling penetrate walls
-				var/area/A = get_area(M)	//CIT CHANGE - ditto
-				if(istype(A) && A.ambientsounds != SPACE && (A in yellareas))	//CIT CHANGE - ditto
-					listening |= M	//CIT CHANGE - ditto
-			continue
-		if(!M.client || !client) //client is so that ghosts don't have to listen to mice
-			continue
-		if(get_dist(M, source) > 7 || M.z != z) //they're out of range of normal hearing
-			if(eavesdropping_modes[message_mode] && !(M.client.prefs.chat_toggles & CHAT_GHOSTWHISPER)) //they're whispering and we have hearing whispers at any range off
-				continue
-			if(!(M.client.prefs.chat_toggles & CHAT_GHOSTEARS)) //they're talking normally and we have hearing at any range off
-				continue
-		listening |= M
-		the_dead[M] = TRUE
-
-	var/eavesdropping
-	var/eavesrendered
-	if(eavesdrop_range)
-		eavesdropping = stars(message)
-		eavesrendered = compose_message(src, message_language, eavesdropping, null, spans, message_mode, FALSE, source)
-
-	var/rendered = compose_message(src, message_language, message, null, spans, message_mode, FALSE, source)
-	for(var/_AM in listening)
-		var/atom/movable/AM = _AM
-		if(eavesdrop_range && get_dist(source, AM) > message_range && !(the_dead[AM]))
-			AM.Hear(eavesrendered, src, message_language, eavesdropping, null, spans, message_mode, source)
-		else
-			AM.Hear(rendered, src, message_language, message, null, spans, message_mode, source)
-	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_LIVING_SAY_SPECIAL, src, message)
-
-	//speech bubble
-	var/list/speech_bubble_recipients = list()
-	for(var/mob/M in listening)
-		if(M.client && !M.client.prefs.chat_on_map)
-			speech_bubble_recipients.Add(M.client)
-	var/image/I = image('icons/mob/talk.dmi', src, "[bubble_type][say_test(message)]", FLY_LAYER)
-	I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
-	INVOKE_ASYNC(GLOBAL_PROC, /.proc/animate_speechbubble, I, speech_bubble_recipients, 30) //skyrat-edit
-********/
-
 /mob/proc/binarycheck()
 	return FALSE
 
@@ -348,11 +292,9 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 
 /mob/living/proc/get_message_language(message)
 	if(message[1] == ",")
-		//skyrat edit - fucking hate this i want to use multichar keys
 		var/list/bruh = splittext_char(message, " ", 2)
 		if(length(bruh))
 			var/key = bruh[1]
-		//
 			for(var/ld in GLOB.all_languages)
 				var/datum/language/LD = ld
 				if(initial(LD.key) == key)
@@ -428,10 +370,9 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 			. = "stammers"
 		else if(derpspeech)
 			. = "gibbers"
-		// Skyrat edits
 		else if(message_mode == MODE_SING)
 			. = verb_sing
-		// End of Skyrat edits
+
 /mob/living/whisper(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
 	say("#[message]", bubble_type, spans, sanitize, language, ignore_spam, forced)
 

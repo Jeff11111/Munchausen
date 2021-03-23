@@ -22,10 +22,8 @@
 	reach = 2
 	w_class = WEIGHT_CLASS_NORMAL
 	attack_verb = list("flogged", "whipped", "lashed", "disciplined")
-	//skyrat edit
 	wound_bonus = 15
 	bare_wound_bonus = 10
-	//
 	hitsound = 'sound/weapons/chainhit.ogg'
 	custom_materials = list(/datum/material/iron = 1000)
 
@@ -300,90 +298,7 @@
 // Are we applying any special effects when we stun to silicon
 /obj/item/melee/classic_baton/proc/additional_effects_silicon(mob/living/target, mob/living/user)
 	return
-/* Fuck stun combat.
-/obj/item/melee/classic_baton/attack(mob/living/target, mob/living/user)
-	if(!on)
-		return ..()
 
-	if(IS_STAMCRIT(user))//CIT CHANGE - makes batons unusuable in stamina softcrit
-		to_chat(user, "<span class='warning'>You're too exhausted for that.</span>")//CIT CHANGE - ditto
-		return //CIT CHANGE - ditto
-
-	add_fingerprint(user)
-	if((HAS_TRAIT(user, TRAIT_CLUMSY)) && prob(50))
-		to_chat(user, "<span class ='danger'>You club yourself over the head.</span>")
-		var/mob/living/C = target
-		if(istype(C) && target.chem_effects[CE_PAINKILLER] < 35)
-			var/apply_knock = 60 * force * max(0.1, 1 - (target.chem_effects[CE_PAINKILLER]/100))
-			user.DefaultCombatKnockdown(apply_knock)
-		else if(!istype(C))
-			user.DefaultCombatKnockdown(60 * force)
-		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
-			H.apply_damage(2*force, BRUTE, BODY_ZONE_HEAD)
-		else
-			user.take_bodypart_damage(2*force)
-		return
-	if(iscyborg(target))
-		if(user.a_intent != INTENT_HARM)	// We don't stun if we're on harm.
-			if(affect_silicon)
-				var/list/desc = get_silicon_stun_description(target, user)
-				target.flash_act(affect_silicon = TRUE)
-				target.Stun(stun_time_silicon)
-				additional_effects_silicon(target, user)
-				user.visible_message(desc["visible"], desc["local"])
-				playsound(get_turf(src), on_stun_sound, 100, TRUE, -1)
-				if(stun_animation)
-					user.do_attack_animation(target)
-			else
-				..()
-		else
-			..()
-		return
-	if(!isliving(target))
-		return
-	if(user.a_intent == INTENT_HARM)
-		if(!..() || !iscyborg(target))
-			return
-	else
-		if(cooldown_check < world.time)
-			if(target.mob_run_block(src, 0, "[user]'s [name]", ATTACK_TYPE_MELEE, 0, user, null, null) & BLOCK_SUCCESS)
-				playsound(target, 'sound/weapons/genhit.ogg', 50, 1)
-				return
-			if(ishuman(target))
-				var/mob/living/carbon/human/H = target
-				if(check_martial_counter(H, user))
-					return
-			var/list/desc = get_stun_description(target, user)
-			if(stun_animation)
-				user.do_attack_animation(target)
-			playsound(get_turf(src), on_stun_sound, 75, 1, -1)
-			var/mob/living/carbon/C = target
-			if(istype(C) && target.chem_effects[CE_PAINKILLER] < 35)
-				var/apply_knock = max(0.1, 1 - (C.chem_effects[CE_PAINKILLER]/100)) * softstun_ds
-				target.DefaultCombatKnockdown(apply_knock, TRUE, FALSE, hardstun_ds, stam_dmg)
-			else if(!istype(C))
-				target.DefaultCombatKnockdown(softstun_ds, TRUE, FALSE, hardstun_ds, stam_dmg)
-			if(iscarbon(target))
-				var/obj/item/bodypart/bodypart = C.get_bodypart(user.zone_selected)
-				var/apply_pain = pain * max(0.1, 1 - (C.chem_effects[CE_PAINKILLER]/100))
-				if(bodypart)
-					bodypart.receive_damage(pain = apply_pain)
-			additional_effects_carbon(target, user)
-			log_combat(user, target, "stunned", src)
-			add_fingerprint(user)
-			target.visible_message(desc["visible"], desc["local"])
-			if(!iscarbon(user))
-				target.LAssailant = null
-			else
-				target.LAssailant = WEAKREF(user)
-			cooldown_check = world.time + cooldown
-			user.adjustStaminaLossBuffered(getweight(user, STAM_COST_BATON_MOB_MULT))
-		else
-			var/wait_desc = get_wait_description()
-			if(wait_desc)
-				to_chat(user, wait_desc)
-*/
 /obj/item/melee/classic_baton/telescopic
 	name = "telescopic baton"
 	desc = "A compact yet robust personal defense weapon. Can be concealed when folded."
@@ -405,9 +320,7 @@
 	force_off = 0
 	weight_class_on = WEIGHT_CLASS_BULKY
 	total_mass = TOTAL_MASS_NORMAL_ITEM
-	//skyrat edit
 	bare_wound_bonus = 5
-	//
 
 /obj/item/melee/classic_baton/telescopic/suicide_act(mob/user)
 	var/mob/living/carbon/human/H = user

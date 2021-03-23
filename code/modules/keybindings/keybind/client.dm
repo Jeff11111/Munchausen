@@ -11,8 +11,6 @@
 /datum/keybinding/client/admin_help/down(client/user)
 	user.get_adminhelp()
 	return TRUE
-	
-//SKYRAT EDIT START.
 
 /client/proc/get_msay()
 	var/msg = input(src, "", "Mentorsay") as text
@@ -28,7 +26,6 @@
 	user.get_msay()
 	return TRUE
 
-//SKYRAT EDIT END.
 /datum/keybinding/client/screenshot
 	hotkey_keys = list("F2")
 	name = "screenshot"

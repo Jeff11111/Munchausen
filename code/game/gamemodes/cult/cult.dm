@@ -49,7 +49,6 @@
 	announce_text = "Some crew members are trying to start a cult to Nar'Sie!\n\
 	<span class='cult'>Cultists</span>: Carry out Nar'Sie's will.\n\
 	<span class='notice'>Crew</span>: Prevent the cult from expanding and drive it out."
-	// SKYRAT EDIT: Credits
 	title_icon = "cult"
 
 	var/finished = 0
@@ -166,7 +165,7 @@
 			the cult of Nar'Sie. If evidence of this cult is discovered aboard your station, extreme caution and extreme vigilance must be taken going forward, and all resources should be \
 			devoted to stopping this cult. Note that holy water seems to weaken and eventually return the minds of cultists that ingest it, and mindshield implants will prevent conversion \
 			altogether."
-// SKYRAT EDIT: Credits
+
 /datum/game_mode/cult/generate_credit_text()
 	var/list/round_credits = list()
 	var/len_before_addition

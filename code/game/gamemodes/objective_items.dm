@@ -66,9 +66,9 @@
 
 /datum/objective_item/steal/hypo
 	name = "the Chief Medical Officer's MKII hypospray."
-	targetitem = /obj/item/hypospray/mkii/CMO //CITADEL EDIT, changing theft objective for the Hypo MK II
+	targetitem = /obj/item/hypospray/mkii/CMO
 	difficulty = 5
-	excludefromjob = list("Chief Medical Officer", "Medical Doctor", "Chemist", "Virologist", "Geneticist", "Psychologist") //Skyrat change
+	excludefromjob = list("Chief Medical Officer", "Medical Doctor", "Chemist", "Virologist", "Geneticist", "Psychologist")
 
 /datum/objective_item/steal/nukedisc
 	name = "the nuclear authentication disk."

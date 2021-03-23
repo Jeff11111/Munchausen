@@ -16,7 +16,7 @@
 	bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-", "DRK")
 	exotic_bloodtype = "DRK"
 	exotic_blood_color = BLOOD_COLOR_DARK
-	languagewhitelist = list("Shadowtongue") //Skyrat change - species language whitelist
+	languagewhitelist = list("Shadowtongue")
 
 /datum/species/shadow/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	. = ..()

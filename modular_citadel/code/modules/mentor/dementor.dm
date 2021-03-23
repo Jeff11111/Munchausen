@@ -15,6 +15,6 @@
 	if(!is_mentor())
 		return
 	add_mentor_verbs()
-	if(!check_rights(R_ADMIN)) // Skyrat change, stops admins from listing in mentors
+	if(!check_rights(R_ADMIN))
 		GLOB.mentors += src
 	verbs -= /client/proc/cmd_mentor_rementor

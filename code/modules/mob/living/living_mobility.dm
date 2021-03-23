@@ -166,8 +166,8 @@
 	lying_prev = lying
 
 	// Handle citadel autoresist
-	if(CHECK_MOBILITY(src, MOBILITY_MOVE) && !(combat_flags & COMBAT_FLAG_INTENTIONALLY_RESTING) && canstand_involuntary && iscarbon(src) && client?.prefs?.autostand)//CIT CHANGE - adds autostanding as a preference
-		addtimer(CALLBACK(src, .proc/resist_a_rest, TRUE), 0) //CIT CHANGE - ditto
+	if(CHECK_MOBILITY(src, MOBILITY_MOVE) && !(combat_flags & COMBAT_FLAG_INTENTIONALLY_RESTING) && canstand_involuntary && iscarbon(src) && client?.prefs?.autostand)
+		addtimer(CALLBACK(src, .proc/resist_a_rest, TRUE), 0)
 
 	// Movespeed mods based on arms/legs quantity
 	if(!get_feet_ignore())
@@ -193,6 +193,6 @@
 		else
 			remove_movespeed_modifier(/datum/movespeed_modifier/limbless)
 
-	SEND_SIGNAL(src, COMSIG_LIVING_UPDATED_MOBILITY, mobility_flags) //Skyrat change
+	SEND_SIGNAL(src, COMSIG_LIVING_UPDATED_MOBILITY, mobility_flags)
 
 	return mobility_flags

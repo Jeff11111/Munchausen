@@ -413,11 +413,8 @@
 
 	if(humanc && CONFIG_GET(flag/roundstart_traits))
 		SSquirks.AssignQuirks(humanc, humanc.client, TRUE, FALSE, job, FALSE)
-	//skyrat change
 	if(humanc)
 		SSlanguage.AssignLanguage(humanc, humanc.client, TRUE, FALSE, job, FALSE)
-	//
-
 	log_manifest(character.mind.key,character.mind,character,latejoin = TRUE)
 
 /mob/dead/new_player/proc/AddEmploymentContract(mob/living/carbon/human/employee)
@@ -436,12 +433,10 @@
 			level = "green"
 		if(SEC_LEVEL_BLUE)
 			level = "blue"
-		//Skyrat change start
 		if(SEC_LEVEL_ORANGE)
 			level = "orange"
 		if(SEC_LEVEL_VIOLET)
 			level = "violet"
-		//Skyrat change stop
 		if(SEC_LEVEL_AMBER)
 			level = "amber"
 		if(SEC_LEVEL_RED)

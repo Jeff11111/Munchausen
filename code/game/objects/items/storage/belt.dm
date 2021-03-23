@@ -83,7 +83,7 @@
 	new /obj/item/multitool(src)
 	new /obj/item/stack/cable_coil(src,30,pick("red","yellow","orange"))
 	new /obj/item/extinguisher/mini(src)
-	new /obj/item/analyzer/ranged(src) // Skyrat change
+	new /obj/item/analyzer/ranged(src)
 	//much roomier now that we've managed to remove two tools
 
 /obj/item/storage/belt/utility/full/PopulateContents()
@@ -142,7 +142,7 @@
 	. = ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.max_w_class = WEIGHT_CLASS_BULKY
-	STR.can_hold = typecacheof(list( //skyrat edited
+	STR.can_hold = typecacheof(list(
 		/obj/item/healthanalyzer,
 		/obj/item/dnainjector,
 		/obj/item/reagent_containers/dropper,
@@ -493,8 +493,8 @@
 		/obj/item/stack/tile/plasteel,
 		/obj/item/grenade/chem_grenade/metalfoam,
 		/obj/item/grenade/chem_grenade/smart_metal_foam,
-		/obj/item/storage/bag/construction, //Skyrat edit
-		/obj/item/pipe_dispenser/bluespace //Skyrat edit
+		/obj/item/storage/bag/construction,
+		/obj/item/pipe_dispenser/bluespace
 		))
 
 /obj/item/storage/belt/grenade

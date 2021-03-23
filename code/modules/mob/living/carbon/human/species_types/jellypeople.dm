@@ -16,7 +16,7 @@
 	exotic_blood_color = BLOOD_COLOR_SLIME
 	damage_overlay_type = ""
 	var/datum/action/innate/regenerate_limbs/regenerate_limbs
-	var/datum/action/innate/slime_change/slime_change	//CIT CHANGE
+	var/datum/action/innate/slime_change/slime_change
 	liked_food = TOXIC | MEAT
 	toxic_food = null
 	coldmod = 6   // = 3x cold damage
@@ -38,21 +38,19 @@
 /datum/species/jelly/on_species_loss(mob/living/carbon/C)
 	if(regenerate_limbs)
 		regenerate_limbs.Remove(C)
-	if(slime_change)	//CIT CHANGE
-		slime_change.Remove(C)	//CIT CHANGE
-	//C.remove_language(/datum/language/slime) SKYRAT CHANGE= We have an additional language option for this
+	if(slime_change)
+		slime_change.Remove(C)
 	C.faction -= "slime"
 	..()
 	C.faction -= "slime"
 
 /datum/species/jelly/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
-	//C.grant_language(/datum/language/slime) SKYRAT CHANGE= We have an additional language option for this
 	if(ishuman(C))
 		regenerate_limbs = new
 		regenerate_limbs.Grant(C)
-		slime_change = new	//CIT CHANGE
-		slime_change.Grant(C)	//CIT CHANGE
+		slime_change = new
+		slime_change.Grant(C)
 	C.faction |= "slime"
 
 /datum/species/jelly/handle_body(mob/living/carbon/human/H)
@@ -629,7 +627,6 @@
 		var/new_length = input(owner, "Penis length in centimeters:\n([min_D]-[max_D])", "Genital Alteration") as num|null
 		if(new_length)
 			H.dna.features["cock_length"] = clamp(round(new_length, 0.1), min_D, max_D)
-		//Skyrat edit end
 		H.update_genitals()
 		H.apply_overlay()
 		H.give_genital(/obj/item/organ/genital/testicles)

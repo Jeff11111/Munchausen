@@ -35,7 +35,7 @@
 
 /datum/supply_pack/misc/book_crate
 	name = "Book Crate"
-	desc = "Surplus from the Nanotrasen Archives. These five books are sure to be good reads." //Skyrat change, fixes grammatical error
+	desc = "Surplus from the Nanotrasen Archives. These five books are sure to be good reads."
 	cost = 1500
 	contains = list(/obj/item/book/codex_gigas,
 					/obj/item/book/manual/random/,
@@ -46,7 +46,7 @@
 
 /datum/supply_pack/misc/paper
 	name = "Bureaucracy Crate"
-	desc = "High stacks of papers on your desk Are a big problem - make it pea-sized with these bureaucratic supplies! Contains five pens, some camera film, hand labeler supplies, a paper bin, three folders, two clipboards and two stamps as well as a briefcase."//Skyrat change, fixes capitalization errors
+	desc = "High stacks of papers on your desk Are a big problem - make it pea-sized with these bureaucratic supplies! Contains five pens, some camera film, hand labeler supplies, a paper bin, three folders, two clipboards and two stamps as well as a briefcase."
 	cost = 1500
 	contains = list(/obj/structure/filingcabinet/chestdrawer/wheeled,
 					/obj/item/camera_film,
@@ -224,7 +224,7 @@
 
 /datum/supply_pack/misc/diamondring
 	name = "Diamond Ring"
-	desc = "Show them your love is like a diamond: unbreakable and everlasting. Shipped straight from child slave cartels in the space african mines." //Skyrat change, fixes grammatical error
+	desc = "Show them your love is like a diamond: unbreakable and everlasting. Shipped straight from child slave cartels in the space african mines."
 	cost = 10000
 	contains = list(/obj/item/storage/fancy/ringbox/diamond)
 	crate_name = "diamond ring crate"
@@ -247,7 +247,7 @@
 
 /datum/supply_pack/misc/funeral
 	name = "Funeral Supplies"
-	desc = "Mourn your dead properly by sending them off with love filled notes, clean clothes, and a proper ceremony. Contains two candle packs, funeral garb, flowers, a paperbin , and crayons to help aid in religious rituals. Coffin included." //Skyrat change, fixes typo
+	desc = "Mourn your dead properly by sending them off with love filled notes, clean clothes, and a proper ceremony. Contains two candle packs, funeral garb, flowers, a paperbin , and crayons to help aid in religious rituals. Coffin included."
 	cost = 1200
 	contains = list(/obj/item/clothing/under/misc/burial,
 					/obj/item/storage/fancy/candle_box,
@@ -304,7 +304,7 @@
 
 /datum/supply_pack/misc/religious_supplies
 	name = "Religious Supplies Crate"
-	desc = "Keep your local chaplain happy and well-supplied, lest they call down divine judgement upon your cargo bay. Contains two bottles of holy water, bibles, chaplain robes, and burial garmets." //Skyrat Change, clarifies judgement and fixes grammatical error
+	desc = "Keep your local chaplain happy and well-supplied, lest they call down divine judgement upon your cargo bay. Contains two bottles of holy water, bibles, chaplain robes, and burial garmets."
 	cost = 4000	// it costs so much because the Space Church needs funding to build a cathedral
 	contains = list(/obj/item/reagent_containers/food/drinks/bottle/holywater,
 					/obj/item/reagent_containers/food/drinks/bottle/holywater,
@@ -388,7 +388,7 @@
 
 /datum/supply_pack/misc/noslipfloor
 	name = "High-traction Floor Tiles"
-	desc = "Makes Slippin' Jimmy a thing of the past with sixty industrial-grade anti-slip floortiles!" //Skyrat change, added BCS reference
+	desc = "Makes Slippin' Jimmy a thing of the past with sixty industrial-grade anti-slip floortiles!"
 	cost = 2000
 	contains = list(/obj/item/stack/tile/noslip/thirty,
 					/obj/item/stack/tile/noslip/thirty)
@@ -400,7 +400,7 @@
 
 /datum/supply_pack/misc/lewd
 	name = "Lewd Crate" // OwO
-	desc = "Pssst. Want to have a good time with your sluts? Well I got what you want! Maid clothing, dildos, collars and more!" //Skyrat change, fixed grammatical error
+	desc = "Pssst. Want to have a good time with your sluts? Well I got what you want! Maid clothing, dildos, collars and more!"
 	cost = 5250
 	contraband = TRUE
 	contains = list(/obj/item/dildo/custom,
@@ -422,7 +422,7 @@
 
 /datum/supply_pack/misc/lewdkeg
 	name = "Lewd Deluxe Keg"
-	desc = "That other stuff not getting you ready? Well I have a Chemslut making tons of the good stuff."
+	desc = "That other stuff not getting you ready? Well, I have a Chemslut making tons of the good stuff."
 	cost = 7500 //It can be a weapon
 	contraband = TRUE
 	contains = list(/obj/structure/reagent_dispensers/keg/aphro/strong)

@@ -5,7 +5,7 @@
 	speech_verb = "expresses"
 	ask_verb = "inquires"
 	exclaim_verb = "declares"
-	sing_verb = "serenades" // Skyrat edit
+	sing_verb = "serenades"
 	key = "h"
 	space_chance = 20
 	syllables = list(

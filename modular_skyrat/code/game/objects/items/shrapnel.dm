@@ -31,10 +31,8 @@
 	shrapnel_type = /obj/item/shrapnel
 	ricochet_incidence_leeway = 60
 	hit_stunned_targets = TRUE
-	//skyrat edit
 	sharpness = SHARP_EDGED
 	wound_bonus = 30
-	//
 
 /obj/item/projectile/bullet/shrapnel/mega
 	name = "flying shrapnel hunk"

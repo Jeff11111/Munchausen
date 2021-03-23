@@ -8,7 +8,7 @@
 				/datum/surgery_step/close)
 
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	possible_locs = TORSO_BODYPARTS //skyrat edit
+	possible_locs = TORSO_BODYPARTS
 
 /datum/surgery/advanced/viral_bonding/can_start(mob/user, mob/living/carbon/target, obj/item/tool)
 	if(!..())

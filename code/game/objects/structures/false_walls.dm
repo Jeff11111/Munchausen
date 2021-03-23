@@ -41,24 +41,6 @@
 	new /obj/structure/falsewall/brass(loc)
 	qdel(src)
 
-/* Moved to Modular Skyrat
-/obj/structure/falsewall/attack_hand(mob/user)
-	if(opening)
-		return
-	. = ..()
-	if(.)
-		return
-
-	opening = TRUE
-	update_icon()
-	if(!density)
-		var/srcturf = get_turf(src)
-		for(var/mob/living/obstacle in srcturf) //Stop people from using this as a shield
-			opening = FALSE
-			return
-	addtimer(CALLBACK(src, /obj/structure/falsewall/proc/toggle_open), 5)
-*/
-
 /obj/structure/falsewall/proc/toggle_open()
 	if(!QDELETED(src))
 		density = !density

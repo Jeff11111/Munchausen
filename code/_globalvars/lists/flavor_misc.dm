@@ -39,10 +39,7 @@ GLOBAL_LIST_EMPTY(insect_wings_list)
 GLOBAL_LIST_EMPTY(insect_fluffs_list)
 GLOBAL_LIST_EMPTY(insect_markings_list)
 GLOBAL_LIST_EMPTY(caps_list)
-
-//Skyrat changes
 GLOBAL_LIST_EMPTY(ipc_chassis_list)
-//End of skyrat changes
 
 GLOBAL_LIST_INIT(ghost_forms_with_directions_list, list("ghost")) //stores the ghost forms that support directional sprites
 GLOBAL_LIST_INIT(ghost_forms_with_accessories_list, list("ghost")) //stores the ghost forms that support hair and other such things
@@ -129,13 +126,11 @@ GLOBAL_LIST_INIT(security_depts_prefs, list(SEC_DEPT_RANDOM, SEC_DEPT_NONE, SEC_
 #define DBACKPACK "Department Backpack"
 #define DSATCHEL "Department Satchel"
 #define DDUFFELBAG "Department Duffel Bag"
-// SKYRAT EDIT: Courier Bags and Polychromics
 #define PLYSBP "Polychromic Backpack"
 #define PLYSS "Polychromic Satchel"
 #define PLYSCB "Polychromic Courier Bag"
 #define PLYSDB "Polychromic Duffel Bag"
 GLOBAL_LIST_INIT(backbaglist, list(DBACKPACK, DSATCHEL, DDUFFELBAG, GBACKPACK, GSATCHEL, GDUFFELBAG, LSATCHEL, PLYSBP, PLYSS, PLYSCB, PLYSDB))
-// SKYRAT EDIT CLOSE
 
 //Suit/Skirt
 #define PREF_SUIT "Jumpsuit"
@@ -234,14 +229,7 @@ GLOBAL_LIST_INIT(admiral_messages, list("Do you know how expensive these station
 
 GLOBAL_LIST_INIT(redacted_strings, list("\[REDACTED\]", "\[CLASSIFIED\]", "\[ARCHIVED\]", "\[EXPLETIVE DELETED\]", "\[EXPUNGED\]", "\[INFORMATION ABOVE YOUR SECURITY CLEARANCE\]", "\[MOVE ALONG CITIZEN\]", "\[NOTHING TO SEE HERE\]", "\[ACCESS DENIED\]"))
 
-// Skyrat changes. Please, consult with loredevs if you want add faction(s) to this list.
 GLOBAL_LIST_INIT(factions_list, list("NanoTrasen", "Syndicate", "Free Trade Union", "None (Freelancer)"))
-// End of Skyrat changes
 
 GLOBAL_LIST_INIT(wisdoms, world.file2list("strings/wisdoms.txt"))
-
-//Skyrat change - comments extra speech/tongue stuff out
-/*GLOBAL_LIST_INIT(speech_verbs, list("default","says","gibbers", "states", "chitters", "declares", "bellows", "buzzes" ,"beeps", "chirps" ,"hisses" ,"poofs" ,"rattles", "mewls" ,"barks", "blorbles", "squeaks", "squawks", "flutters"))
-
-GLOBAL_LIST_INIT(roundstart_tongues, list("default","human tongue" = /obj/item/organ/tongue, "lizard tongue" = /obj/item/organ/tongue/lizard, "skeleton tongue" = /obj/item/organ/tongue/bone, "fly tongue" = /obj/item/organ/tongue/fly, "ipc tongue" = /obj/item/organ/tongue/robot/ipc))*/
 

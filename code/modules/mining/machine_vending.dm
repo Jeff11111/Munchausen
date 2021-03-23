@@ -301,8 +301,6 @@
 	new /obj/item/kitchen/knife/combat/survival(src)
 	new /obj/item/flashlight/seclite(src)
 
-	//CITADEL ADDITIONS BELOW
-
 /obj/item/storage/backpack/duffelbag/mining_cloned
 	name = "mining replacement kit"
 	desc = "A large bag that has advance tools and a spare jumpsuit, boots, and gloves for a newly cloned miner to get back in the field. Even has a new ID!"

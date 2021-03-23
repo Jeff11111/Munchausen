@@ -81,7 +81,7 @@
 
 /datum/supply_pack/engine/PA
 	name = "Particle Accelerator Crate"
-	desc = "A supermassive black hole or hyper-powered teslaball is the perfect way to spice up any party! This \"My First Apocalypse\" kit contains everything you need to build your own Particle Accelerator! Ages 10 and up." //Skyrat change, fixed grammatical error
+	desc = "A supermassive black hole or hyper-powered teslaball is the perfect way to spice up any party! This \"My First Apocalypse\" kit contains everything you need to build your own Particle Accelerator! Ages 10 and up."
 	cost = 3750
 	contains = list(/obj/structure/particle_accelerator/fuel_chamber,
 					/obj/machinery/particle_accelerator/control_box,

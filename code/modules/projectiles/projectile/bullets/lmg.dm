@@ -25,25 +25,24 @@
 
 /obj/item/projectile/bullet/mm195x129
 	name = "1.95x129mm bullet"
-	damage = 35 //Skyrat Edit: LMGs should be for suppressive fire, please no 3 shot crits on the 60 round gun.
+	damage = 35
 	armour_penetration = 5
 
 /obj/item/projectile/bullet/mm195x129_ap
 	name = "1.95x129mm armor-piercing bullet"
-	damage = 30       //Skyrat Edit: Less damage, but surpasses five points above the bulletproof gear.
+	damage = 30
 	armour_penetration = 65
 
 /obj/item/projectile/bullet/mm195x129_hp
 	name = "1.95x129mm hollow-point bullet"
-	damage = 40   //Skyrat Edit: 3 shot crits, but bulletproof gear completely negates it.
+	damage = 40
 	armour_penetration = -60
 
 /obj/item/projectile/bullet/incendiary/mm195x129
 	name = "1.95x129mm incendiary bullet"
-	damage = 15   //Skyrat Edit: 5 less damage, but double the firestacks. Burn baby burn!
+	damage = 15
 	fire_stacks = 6
 
-//skyrat edit
 /obj/item/projectile/bullet/mm712x82/match
 	name = "7.12x82mm match bullet"
 	ricochets_max = 2

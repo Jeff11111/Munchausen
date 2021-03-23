@@ -80,8 +80,7 @@
 		return FALSE
 	var/client/C = controller.client
 	if(C)
-		//var/atom/A = C.mouseObject //Skyrat change - no mouse object
-		var/turf/T = C.mouseLocation //Skyrat change
+		var/turf/T = C.mouseLocation
 		if(istype(T))	//They're hovering over something in the map.
 			direction_track(controller, T)
 			calculated_projectile_vars = calculate_projectile_angle_and_pixel_offsets(controller, C.mouseParams)

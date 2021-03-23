@@ -330,4 +330,3 @@
 		if(AM.density)
 			return 1
 	return 0
-// Skyrat edit -- moved to modular_skyrat because of the fax port -- BEGIN

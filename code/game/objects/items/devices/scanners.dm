@@ -436,7 +436,7 @@ GENETICS SCANNER
 		var/blood_typepath = C.get_blood_id()
 		if(blood_typepath)
 			if(ishuman(C))
-				if(H.is_bleeding()) //skyrat edit
+				if(H.is_bleeding())
 					msg += "\n<span class='danger'>Subject is bleeding!</span>"
 			var/blood_percent =  round((C.scan_blood_volume() / (BLOOD_VOLUME_NORMAL * C.blood_ratio))*100)
 			var/blood_type = C.dna.blood_type
@@ -622,7 +622,6 @@ GENETICS SCANNER
 	if (user.stat || user.eye_blind)
 		return
 
-	// Skyrat change: Functionality moved down to proc/scan_turf()
 	var/turf/location = get_turf(user)
 	if(!istype(location))
 		return
@@ -734,7 +733,6 @@ GENETICS SCANNER
 			to_chat(user, "<span class='notice'>Power of the last fusion reaction: [fusion_power]\n This power indicates it was a [tier]-tier fusion reaction.</span>")
 	return
 
-// Skyrat change
 /obj/item/analyzer/proc/scan_turf(mob/user, turf/location)
 	var/datum/gas_mixture/environment = location.return_air()
 	var/pressure = environment.return_pressure()
@@ -802,7 +800,6 @@ GENETICS SCANNER
 	// Tool act didn't scan it, so let's get it's turf.
 	var/turf/location = get_turf(target)
 	scan_turf(user, location)
-// End skyrat change
 
 //slime scanner
 

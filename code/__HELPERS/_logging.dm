@@ -67,8 +67,7 @@
 		WRITE_LOG(GLOB.world_virus_log, "VIRUS: [text]")
 
 /proc/log_asset(text)
-	//WRITE_LOG(GLOB.world_asset_log, "ASSET: [text]") //Skyrat change
-	SSlogging.logging_asset(text) //Skyrat change
+	SSlogging.logging_asset(text)
 
 /proc/log_access(text)
 	if (CONFIG_GET(flag/log_access))
@@ -79,22 +78,16 @@
 		WRITE_LOG(GLOB.world_game_log, "LAW: [text]")
 
 /proc/log_attack(text)
-	//SKYRAT CHANGES - incorporates this into a smart system
 	if (CONFIG_GET(flag/log_attack))
-		//WRITE_LOG(GLOB.world_attack_log, "ATTACK: [text]")
 		SSlogging.logging_attack(text)
-	//END OF SKYRAT CHANGES
 
 /proc/log_manifest(ckey, datum/mind/mind,mob/body, latejoin = FALSE)
 	if (CONFIG_GET(flag/log_manifest))
 		WRITE_LOG(GLOB.world_manifest_log, "[ckey] \\ [body.real_name] \\ [mind.assigned_role] \\ [mind.special_role ? mind.special_role : "NONE"] \\ [latejoin ? "LATEJOIN":"ROUNDSTART"]")
 
 /proc/log_say(text)
-	//SKYRAT CHANGES - incorporates this to a smart system
 	if (CONFIG_GET(flag/log_say))
-		//WRITE_LOG(GLOB.world_game_log, "SAY: [text]")
 		SSlogging.logging_say(text)
-	//END OF SKYRAT CHANGES
 
 /proc/log_ooc(text)
 	if (CONFIG_GET(flag/log_ooc))
@@ -106,8 +99,7 @@
 
 /proc/log_emote(text)
 	if (CONFIG_GET(flag/log_emote))
-		//WRITE_LOG(GLOB.world_game_log, "EMOTE: [text]") //Skyrat edit
-		SSlogging.logging_emote(text) //Skyrat edit
+		SSlogging.logging_emote(text)
 
 /proc/log_subtler(text)
 	if (CONFIG_GET(flag/log_emote))
@@ -147,10 +139,7 @@
 	WRITE_LOG(GLOB.world_game_log, "TOPIC: [text]")
 
 /proc/log_href(text)
-	//SKYRAT CHANGES - incorporates this into a smart system
-	//WRITE_LOG(GLOB.world_href_log, "HREF: [text]")
 	SSlogging.logging_href(text)
-	//END OF SKYRAT CHANGES
 
 /proc/log_sql(text)
 	WRITE_LOG(GLOB.sql_error_log, "SQL: [text]")
@@ -191,8 +180,7 @@
 	WRITE_LOG(GLOB.world_map_error_log, text)
 
 /proc/log_reagent(text)
-	//WRITE_LOG(GLOB.reagent_log, text) //Skyrat change
-	SSlogging.logging_reagent(text) //Skyrat change
+	SSlogging.logging_reagent(text)
 
 /proc/log_reagent_transfer(text)
 	log_reagent("TRANSFER: [text]")
@@ -212,13 +200,13 @@
 
 
 /* Helper procs for building detailed log lines */
-/proc/key_name(whom, include_link = null, include_name = TRUE, ticket) // Skyrat change
+/proc/key_name(whom, include_link = null, include_name = TRUE, ticket)
 	var/mob/M
 	var/client/C
 	var/key
 	var/ckey
 	var/fallback_name
-	var/datum/admin_help/AH = ticket // Skyrat change
+	var/datum/admin_help/AH = ticket
 
 	if(!whom)
 		return "*null*"
@@ -270,11 +258,11 @@
 	if(key)
 		if(C && C.holder && C.holder.fakekey && !include_name)
 			if(include_link)
-				. += "<a href='?priv_msg=[C.findStealthKey()];ahelp_player=[REF(AH)]'>" // Skyrat change
+				. += "<a href='?priv_msg=[C.findStealthKey()];ahelp_player=[REF(AH)]'>"
 			. += "Administrator"
 		else
 			if(include_link)
-				. += "<a href='?priv_msg=[ckey];ahelp_player=[REF(AH)]'>" // Skyrat change
+				. += "<a href='?priv_msg=[ckey];ahelp_player=[REF(AH)]'>"
 			. += key
 		if(!C)
 			. += "\[DC\]"
@@ -295,7 +283,7 @@
 
 	return .
 
-/proc/key_name_admin(whom, include_name = TRUE, ticket) // Skyrat change
+/proc/key_name_admin(whom, include_name = TRUE, ticket)
 	return key_name(whom, TRUE, include_name, ticket)
 
 /proc/loc_name(atom/A)
@@ -311,7 +299,6 @@
 	else if(A.loc)
 		return "(UNKNOWN (?, ?, ?))"
 
-//skyrat stuff
 /proc/log_wounded(text)
 	if (CONFIG_GET(flag/log_attack))
 		WRITE_LOG(GLOB.world_attack_log, "WOUND: [text]")

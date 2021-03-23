@@ -131,7 +131,7 @@
 /obj/item/flamethrower/analyzer_act(mob/living/user, obj/item/I)
 	if(ptank)
 		ptank.analyzer_act(user, I)
-	return TRUE // Skyrat change
+	return TRUE
 
 
 /obj/item/flamethrower/attack_self(mob/user)

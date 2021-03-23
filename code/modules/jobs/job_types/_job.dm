@@ -219,7 +219,6 @@
 			back = satchel //Department satchel
 		if(DDUFFELBAG)
 			back = duffelbag //Department duffel bag
-		// SKYRAT EDIT: Courier Bags and Polychromics
 		if(PLYSBP)
 			back = /obj/item/storage/backpack/polychromic //Polychromic Backpack
 		if(PLYSS)
@@ -228,7 +227,6 @@
 			back = /obj/item/storage/backpack/courier/polychromic //Polychromic Courier bag
 		if(PLYSDB)
 			back = /obj/item/storage/backpack/duffelbag/polychromic //Polychromic Duffel bag
-		// SKYRAT EDIT CLOSE
 		else
 			back = backpack //Department backpack
 
@@ -251,13 +249,11 @@
 		C.access = J.get_access()
 		shuffle_inplace(C.access) // Shuffle access list to make NTNet passkeys less predictable
 		C.registered_name = H.real_name
-		//Skyrat change
 		C.assignment = J.title
 		if(preference_source && preference_source.prefs && preference_source.prefs.alt_titles_preferences[J.title])
 			C.update_label(C.registered_name, preference_source.prefs.alt_titles_preferences[J.title])
 		else
 			C.update_label()
-		//End of skyrat change
 		if(J.title != "Stowaway")
 			for(var/A in SSeconomy.bank_accounts)
 				var/datum/bank_account/B = A
@@ -270,12 +266,10 @@
 	var/obj/item/pda/PDA = H.get_item_by_slot(pda_slot)
 	if(istype(PDA))
 		PDA.owner = H.real_name
-		//Skyrat change
 		if(preference_source && preference_source.prefs && preference_source.prefs.alt_titles_preferences[J.title])
 			PDA.ownjob = preference_source.prefs.alt_titles_preferences[J.title]
 		else
 			PDA.ownjob = J.title
-		//End of skyrat change
 		PDA.update_label()
 		if(preference_source && !PDA.equipped) //PDA's screen color, font style and look depend on client preferences.
 			PDA.update_style(preference_source)

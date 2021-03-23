@@ -42,10 +42,8 @@
 #define MODE_ALIEN "alientalk"
 #define MODE_HOLOPAD "holopad"
 
-//skyrat change start
 #define MODE_TERROR_SPIDER "terrortalk"
 #define MODE_KEY_TERROR_SPIDER "w"
-//skyrat change stop
 
 #define MODE_CHANGELING "changeling"
 #define MODE_KEY_CHANGELING "g"
@@ -56,7 +54,7 @@
 
 #define MODE_MONKEY "monkeyhive"
 
-#define MODE_SING "%" // Skyrat edit
+#define MODE_SING "%"
 
 //Spans. Robot speech, italics, etc. Applied in compose_message().
 #define SPAN_ROBOT "robot"
@@ -67,7 +65,7 @@
 #define SPAN_REALLYBIG "reallybig"
 #define SPAN_COMMAND "command_headset"
 #define SPAN_CLOWN "clown"
-#define SPAN_SINGING "singing" // Skyrat edit
+#define SPAN_SINGING "singing"
 
 //bitflag #defines for return value of the radio() proc.
 #define ITALICS 1
@@ -95,12 +93,10 @@
 #define EMOTE_AUDIBLE 2
 
 //Don't set this very much higher then 1024 unless you like inviting people in to dos your server with message spam
-//SKYRAT CHANGES BEGIN
 #define MAX_AMBITION_LEN		1024
-//SKYRAT CHANGES END
-#define MAX_MESSAGE_LEN			2048		//Citadel edit: What's the WORST that could happen?
-#define MAX_FLAVOR_LEN			4096		//double the maximum message length.
-#define MAX_TASTE_LEN			40 //lick... vore... ew...
+#define MAX_MESSAGE_LEN			2048
+#define MAX_FLAVOR_LEN			4096	//double the maximum message length.
+#define MAX_TASTE_LEN			40		//lick... vore... ew...
 #define MAX_NAME_LEN			42
 #define MAX_BROADCAST_LEN		512
 #define MAX_CHARTER_LEN			80

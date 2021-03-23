@@ -9,7 +9,7 @@
 	supervisors = "the chief medical officer"
 	selection_color = "#74b5e0"
 	exp_type = EXP_TYPE_CREW
-	exp_requirements = 120 //SKYRAT CHANGE - upping the exp time on jobs
+	exp_requirements = 120
 
 	outfit = /datum/outfit/job/virologist
 

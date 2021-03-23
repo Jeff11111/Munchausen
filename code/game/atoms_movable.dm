@@ -16,7 +16,7 @@
 	var/verb_ask = "asks"
 	var/verb_exclaim = "exclaims"
 	var/verb_whisper = "whispers"
-	var/verb_sing = "sings" // Skyrat edit
+	var/verb_sing = "sings"
 	var/verb_yell = "yells"
 	var/speech_span
 	var/inertia_dir = 0
@@ -148,87 +148,7 @@
 				return TRUE
 			return FALSE
 	return ..()
-/* New grabbing system in modular_skyrat
-/atom/movable/proc/start_pulling(atom/movable/AM, state, force = move_force, supress_message = FALSE)
-	if(QDELETED(AM))
-		return FALSE
-	if(!(AM.can_be_pulled(src, state, force)))
-		return FALSE
 
-	// If we're pulling something then drop what we're currently pulling and pull this instead.
-	if(pulling)
-		if(state == 0)
-			stop_pulling()
-			return FALSE
-		// Are we trying to pull something we are already pulling? Then enter grab cycle and end.
-		if(AM == pulling)
-			setGrabState(state)
-			if(istype(AM,/mob/living))
-				var/mob/living/AMob = AM
-				AMob.grabbedby(src)
-			return TRUE
-		stop_pulling()
-	if(AM.pulledby)
-		log_combat(AM, AM.pulledby, "pulled from", src)
-		AM.pulledby.stop_pulling() //an object can't be pulled by two mobs at once.
-	pulling = AM
-	AM.pulledby = src
-	setGrabState(state)
-	if(ismob(AM))
-		var/mob/M = AM
-		log_combat(src, M, "grabbed", addition="passive grab")
-		if(!supress_message)
-			visible_message("<span class='warning'>[src] has grabbed [M] passively!</span>")
-	return TRUE
-
-/atom/movable/proc/stop_pulling()
-	if(!pulling)
-		return
-	pulling.pulledby = null
-	var/mob/living/ex_pulled = pulling
-	pulling = null
-	setGrabState(0)
-	if(isliving(ex_pulled))
-		var/mob/living/L = ex_pulled
-		L.update_mobility()// mob gets up if it was lyng down in a chokehold
-
-/atom/movable/proc/Move_Pulled(atom/A)
-	if(!pulling)
-		return
-	if(pulling.anchored || pulling.move_resist > move_force || !pulling.Adjacent(src))
-		stop_pulling()
-		return
-	if(isliving(pulling))
-		var/mob/living/L = pulling
-		if(L.buckled && L.buckled.buckle_prevents_pull) //if they're buckled to something that disallows pulling, prevent it
-			stop_pulling()
-			return
-	if(A == loc && pulling.density)
-		return
-	if(!Process_Spacemove(get_dir(pulling.loc, A)))
-		return
-	step(pulling, get_dir(pulling.loc, A))
-	return TRUE
-
-/atom/movable/proc/check_pulling()
-	if(pulling)
-		var/atom/movable/pullee = pulling
-		if(pullee && get_dist(src, pullee) > 1)
-			stop_pulling()
-			return
-		if(!isturf(loc))
-			stop_pulling()
-			return
-		if(pullee && !isturf(pullee.loc) && pullee.loc != loc) //to be removed once all code that changes an object's loc uses forceMove().
-			log_game("DEBUG:[src]'s pull on [pullee] wasn't broken despite [pullee] being in [pullee.loc]. Pull stopped manually.")
-			stop_pulling()
-			return
-		if(pulling.anchored || pulling.move_resist > move_force)
-			stop_pulling()
-			return
-	if(pulledby && moving_diagonally != FIRST_DIAG_STEP && get_dist(src, pulledby) > 1)		//separated from our puller and not in the middle of a diagonal move.
-		pulledby.stop_pulling()
-*/
 /atom/movable/Destroy(force)
 	QDEL_NULL(proximity_monitor)
 	QDEL_NULL(language_holder)
@@ -606,21 +526,7 @@
 //Returns an atom's power cell, if it has one. Overload for individual items.
 /atom/movable/proc/get_cell()
 	return
-/* New grabbing in modular_skyrat
-/atom/movable/proc/can_be_pulled(user, grab_state, force)
-	if(src == user || !isturf(loc))
-		return FALSE
-	if(anchored || throwing)
-		return FALSE
-	if(force < (move_resist * MOVE_FORCE_PULL_RATIO))
-		return FALSE
-	return TRUE
 
-/// Updates the grab state of the movable
-/// This exists to act as a hook for behaviour
-/atom/movable/proc/setGrabState(newstate)
-	grab_state = newstate
-*/
 /obj/item/proc/do_pickup_animation(atom/target)
 	set waitfor = FALSE
 	if(!istype(loc, /turf))

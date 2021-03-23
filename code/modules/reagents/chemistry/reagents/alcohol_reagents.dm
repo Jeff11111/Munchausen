@@ -1,6 +1,6 @@
 #define ALCOHOL_THRESHOLD_MODIFIER 0.05 //Greater numbers mean that less alcohol has greater intoxication potential
 #define ALCOHOL_RATE 0.005 //The rate at which alcohol affects you
-#define ALCOHOL_EXPONENT 1.25 //The exponent applied to boozepwr to make higher volume alcohol atleast a little bit damaging. //SKYRAT CHANGE
+#define ALCOHOL_EXPONENT 1.25 //The exponent applied to boozepwr to make higher volume alcohol atleast a little bit damaging.
 
 ////////////// I don't know who made this header before I refactored alcohols but I'm going to fucking strangle them because it was so ugly, holy Christ
 // ALCOHOLS //
@@ -50,8 +50,8 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		var/booze_power = boozepwr
 		if(HAS_TRAIT(C, TRAIT_ALCOHOL_TOLERANCE)) //we're an accomplished drinker
 			booze_power *= 0.7
-		else if(HAS_TRAIT(C, TRAIT_ALCOHOL_LIGHTWEIGHT)) //Skyrat change
-			booze_power *= 2 //Skyrat change
+		else if(HAS_TRAIT(C, TRAIT_ALCOHOL_LIGHTWEIGHT))
+			booze_power *= 2
 		C.drunkenness = max((C.drunkenness + (sqrt(volume) * booze_power * ALCOHOL_RATE)), 0) //Volume, power, and server alcohol rate effect how quickly one gets drunk
 		var/obj/item/organ/liver/L = C.getorganslot(ORGAN_SLOT_LIVER)
 		if(L)

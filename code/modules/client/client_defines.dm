@@ -76,11 +76,10 @@
 	var/list/clicklimiter
 
 	var/datum/chatOutput/chatOutput
-	// SKYRAT EDIT: Credits
 	//var/list/credits //lazy list of all credit object bound to this client
 
 	var/datum/player_details/player_details //these persist between logins/logouts during the same round.
-	var/aooc_name // Skyrat edit
+	var/aooc_name
 
 	var/list/char_render_holders			//Should only be a key-value list of north/south/east/west = obj/screen.
 
@@ -112,7 +111,6 @@
 	///Used in MouseDrag to preserve the last mouse-entered location.
 	var/mouseLocation = null
 	///Used in MouseDrag to preserve the last mouse-entered object.
-	//var/mouseObject = null //Skyrat change - this messes up with GC and isnt really used
 	var/mouseControlObject = null
 	//Middle-mouse-button click dragtime control for aimbot exploit detection.
 	var/middragtime = 0

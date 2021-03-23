@@ -2,7 +2,7 @@
 	name = "Spawn Swarmer Shell"
 	typepath = /datum/round_event/spawn_swarmer
 	weight = 7
-	max_occurrences = 0 //Only once okay fam // Skyrat edit - Pass on it being a random event.
+	max_occurrences = 0
 	earliest_start = 30 MINUTES
 	min_players = 35
 	gamemode_blacklist = list("dynamic")

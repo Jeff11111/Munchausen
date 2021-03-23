@@ -68,9 +68,7 @@
 	user.copy_languages(target, LANGUAGE_ABSORB)
 
 	if(target.mind && user.mind)//if the victim and user have minds
-//SKYRAT CHANGES BEGIN
 		to_chat(user, "<i>[target.mind.show_memory()]</i>") //I can read your mind, kekeke. Output all their notes.
-//SKYRAT CHANGES END
 
 		//Some of target's recent speech, so the changeling can attempt to imitate them better.
 		//Recent as opposed to all because rounds tend to have a LOT of text.

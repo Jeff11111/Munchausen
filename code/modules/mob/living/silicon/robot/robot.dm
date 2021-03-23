@@ -15,7 +15,7 @@
 
 	wires = new /datum/wires/robot(src)
 	AddElement(/datum/element/empprotection, EMP_PROTECT_WIRES)
-	AddComponent(/datum/component/overlay_lighting, light_color, light_range, light_power, FALSE) //Skyrat change
+	AddComponent(/datum/component/overlay_lighting, light_color, light_range, light_power, FALSE)
 
 	robot_modules_background = new()
 	robot_modules_background.icon_state = "block"
@@ -71,7 +71,7 @@
 	toner = tonermax
 	diag_hud_set_borgcell()
 
-	verbs += /mob/living/proc/lay_down //CITADEL EDIT gimmie rest verb kthx
+	verbs += /mob/living/proc/lay_down
 	verbs += /mob/living/silicon/robot/proc/rest_style
 
 //If there's an MMI in the robot, have it ejected when the mob goes away. --NEO
@@ -92,11 +92,9 @@
 			ghostize()
 			stack_trace("Borg MMI lacked a brainmob")
 		mmi = null
-	//CITADEL EDIT: Cyborgs drop encryption keys on destroy
 	if(istype(radio) && istype(radio.keyslot))
 		radio.keyslot.forceMove(T)
 		radio.keyslot = null
-	//END CITADEL EDIT
 	if(connected_ai)
 		connected_ai.connected_robots -= src
 	if(shell)
@@ -537,7 +535,7 @@
 
 /mob/living/silicon/robot/proc/self_destruct()
 	if(emagged)
-		return to_chat(usr, "<span class='notice'>Unable to execute selfdestruct sequence</span>") //skyrat addition
+		return to_chat(usr, "<span class='notice'>Unable to execute selfdestruct sequence</span>")
 	else
 		explosion(src.loc,-1,0,2)
 	gib()
@@ -573,7 +571,7 @@
 	// They stay locked down if their wire is cut.
 	if(emagged)
 		state = 0
-		to_chat(usr, "<span class='notice'>Unable to engage lockdown protocol</span>") // Skyrat addition 
+		to_chat(usr, "<span class='notice'>Unable to engage lockdown protocol</span>")
 	if(wires.is_cut(WIRE_LOCKDOWN))
 		state = 1
 	if(state)
@@ -729,7 +727,6 @@
 /mob/living/silicon/robot/modules/syndicate/Initialize()
 	. = ..()
 	cell = new /obj/item/stock_parts/cell/hyper(src, 25000)
-//	radio = new /obj/item/radio/borg/syndicate(src) //Skyrat change
 	laws = new /datum/ai_laws/syndicate_override()
 	addtimer(CALLBACK(src, .proc/show_playstyle), 5)
 
@@ -895,11 +892,6 @@
 	shown_robot_modules = FALSE
 	if(hud_used)
 		hud_used.update_robot_modules_display()
-
-	/*if (hasExpanded) Skyrat edit
-		resize = 0.5
-		hasExpanded = FALSE
-		update_transform()*/
 	module.transform_to(/obj/item/robot_module)
 
 	// Remove upgrades.
@@ -925,7 +917,7 @@
 	designation = module.name
 	if(hands)
 		hands.icon_state = module.moduleselect_icon
-		hands.icon = (module.moduleselect_alternate_icon ? module.moduleselect_alternate_icon : initial(hands.icon)) //CITADEL CHANGE - allows module select icons to use a different icon file
+		hands.icon = (module.moduleselect_alternate_icon ? module.moduleselect_alternate_icon : initial(hands.icon)) //allows module select icons to use a different icon file
 	if(module.can_be_pushed)
 		status_flags |= CANPUSH
 	else
@@ -1004,7 +996,6 @@
 	desc = "Stop controlling your shell and resume normal core operations."
 	icon_icon = 'icons/mob/actions/actions_AI.dmi'
 	button_icon_state = "ai_core"
-	//required_mobility_flags = NONE // Skyrat edit -- I like this, personally.
 
 /datum/action/innate/undeployment/Trigger()
 	if(!..())

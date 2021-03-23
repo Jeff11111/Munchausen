@@ -1,4 +1,3 @@
-//skyrat edit
 /*
 	Bones
 */

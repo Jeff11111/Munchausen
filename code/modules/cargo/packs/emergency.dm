@@ -82,7 +82,7 @@
 
 /datum/supply_pack/emergency/medemergencylite
 	name = "Emergency Medical Supplies (Lite)"
-	desc = "A less than optimal set of tools for emergency care. Contains a box of bodybags, some normal (and advanced) health analyzers, healing sprays, a single first aid kit, charcoal, some gauze, a bottle of toxins, and some spare medipens." //Skyrat change, fixed grammatical error
+	desc = "A less than optimal set of tools for emergency care. Contains a box of bodybags, some normal (and advanced) health analyzers, healing sprays, a single first aid kit, charcoal, some gauze, a bottle of toxins, and some spare medipens."
 	cost = 2800
 	contains = list(/obj/item/storage/box/bodybags,
 					/obj/item/stack/medical/gauze,
@@ -106,7 +106,7 @@
 
 /datum/supply_pack/emergency/radiatione_emergency
 	name = "Emergency Radiation Protection Crate"
-	desc = "Survive the Nuclear Apocalypse and Supermatter Engine alike with two sets of Radiation suits. Each set contains a helmet, suit, and Geiger counter. We'll even throw in a few pill bottles that are able to handles radiation and the affects of the poisoning." //Skyrat change, fixed grammatical error
+	desc = "Survive the Nuclear Apocalypse and Supermatter Engine alike with two sets of Radiation suits. Each set contains a helmet, suit, and Geiger counter. We'll even throw in a few pill bottles that are able to handles radiation and the affects of the poisoning."
 	cost = 2500
 	contains = list(/obj/item/clothing/head/radiation,
 					/obj/item/clothing/head/radiation,
@@ -121,7 +121,7 @@
 
 /datum/supply_pack/emergency/rcds
 	name = "Emergency RCDs"
-	desc = "Bombs going off on station? SME blown and now you need to fix the hole it left behind? Well this crate has a pair of RCDs to be able to easily fix up any problem you may have!" //Skyrat change, fixed typo
+	desc = "Bombs going off on station? SME blown and now you need to fix the hole it left behind? Well this crate has a pair of RCDs to be able to easily fix up any problem you may have!"
 	cost = 1500
 	contains = list(/obj/item/construction/rcd,
 					/obj/item/construction/rcd)
@@ -276,7 +276,7 @@
 
 /datum/supply_pack/emergency/spacejets
 	name = "Spare EVA Jetpacks"
-	desc = "Contains three EVA grade jetpacks. Requires EVA access to open." //Skyrat change, fixed 2 typos
+	desc = "Contains three EVA grade jetpacks. Requires EVA access to open."
 	cost = 2000
 	access = ACCESS_EVA
 	contains = list(/obj/item/tank/jetpack/carbondioxide/eva,
@@ -301,7 +301,7 @@
 
 /datum/supply_pack/emergency/weedcontrol
 	name = "Weed Control Crate"
-	desc = "Keep those invasive species OUT. Contains a scythe, gasmask, two sprays of Plant-B-Gone, and two anti-weed chemical grenades. Warranty void if used on ambrosia. Requires Hydroponics access to open." //Skyrat change, fixed grammmatical error
+	desc = "Keep those invasive species OUT. Contains a scythe, gasmask, two sprays of Plant-B-Gone, and two anti-weed chemical grenades. Warranty void if used on ambrosia. Requires Hydroponics access to open."
 	cost = 1800
 	access = ACCESS_HYDROPONICS
 	contains = list(/obj/item/scythe,

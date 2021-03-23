@@ -39,10 +39,8 @@
 	/// A weak reference to another datum
 	var/datum/weakref/weak_reference
 
-//SKYRAT CHANGES BEGIN
 	///Lazy associative list of currently active cooldowns.
 	var/list/cooldowns
-//SKYRAT CHANGES END
 
 #ifdef TESTING
 	var/running_find_references
@@ -207,7 +205,6 @@
 	else
 		return returned
 
-//SKYRAT CHANGES BEGIN
 /**
   * Callback called by a timer to end an associative-list-indexed cooldown.
   *
@@ -238,4 +235,3 @@
 		return
 	SEND_SIGNAL(source, COMSIG_CD_RESET(index), S_TIMER_COOLDOWN_TIMELEFT(source, index))
 	TIMER_COOLDOWN_END(source, index)
-//SKYRAT CHANGES END

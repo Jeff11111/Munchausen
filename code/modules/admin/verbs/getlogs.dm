@@ -4,7 +4,7 @@
 	set desc = "View/retrieve logfiles."
 	set category = "Admin"
 
-	SSlogging.update_logs() //SKYRAT CHANGE
+	SSlogging.update_logs()
 
 	browseserverlogs()
 
@@ -13,7 +13,7 @@
 	set desc = "View/retrieve logfiles for the current round."
 	set category = "Admin"
 
-	SSlogging.update_logs() //SKYRAT CHANGE
+	SSlogging.update_logs()
 
 	browseserverlogs("[GLOB.log_directory]/")
 

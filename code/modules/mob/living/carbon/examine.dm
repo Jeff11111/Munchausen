@@ -215,7 +215,6 @@
 	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, .)
 	. += "*---------*</span>"
 
-//skyrat edit
 /mob/living/carbon/examine_more(mob/user)
 	. = list("<span class='notice'><i><b>I examine [src] closer, and note the following...</b></i></span>", "<span class='notice'>*---------*</span>")
 	

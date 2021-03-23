@@ -35,7 +35,7 @@
 	cmd_admin_pm(targets[target],null)
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Admin PM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/cmd_ahelp_reply(whom, ticket) // Skyrat change
+/client/proc/cmd_ahelp_reply(whom, ticket)
 	if(prefs.muted & MUTE_ADMINHELP)
 		to_chat(src, "<span class='danger'>Error: Admin-PM: You are unable to use admin PM-s (muted).</span>")
 		return
@@ -51,13 +51,11 @@
 			to_chat(src, "<span class='danger'>Error: Admin-PM: Client not found.</span>")
 		return
 
-	var/datum/admin_help/AH = ticket // Skyrat change
+	var/datum/admin_help/AH = ticket
 
-	// Skyrat change START
 	if(AH.state != AHELP_ACTIVE)
 		to_chat(src, "<span class='danger'>This is no longer an active ticket, it would need to be reopened, or another ticket will need to be made.</span>")
 		return
-	// Skyrat change END
 
 	if(AH)
 		message_admins("[key_name_admin(src)] has started replying to [key_name(C, 0, 0)]'s admin help.")
@@ -65,7 +63,7 @@
 	if (!msg)
 		message_admins("[key_name_admin(src)] has cancelled their reply to [key_name(C, 0, 0)]'s admin help.")
 		return
-	cmd_admin_pm(whom, msg, ticket) // Skyrat change
+	cmd_admin_pm(whom, msg, ticket)
 
 //takes input from cmd_admin_pm_context, cmd_admin_pm_panel or /client/Topic and sends them a PM.
 //Fetching a message if needed. src is the sender and C is the target client
@@ -74,7 +72,7 @@
 		to_chat(src, "<span class='danger'>Error: Admin-PM: You are unable to use admin PM-s (muted).</span>")
 		return
 
-	var/datum/admin_help/AH = ticket // Skyrat change
+	var/datum/admin_help/AH = ticket 
 
 	if(!holder && !AH)	//no ticket? https://www.youtube.com/watch?v=iHSPf6x1Fdo
 		to_chat(src, "<span class='danger'>You can no longer reply to this ticket, please open another one by using the Adminhelp verb if need be.</span>")
@@ -116,7 +114,7 @@
 					to_chat(src, msg)
 				return
 			else if(msg) // you want to continue if there's no message instead of returning now
-				AH.MessageNoRecipient(msg) // Skyrat change
+				AH.MessageNoRecipient(msg)
 				return
 
 		//get message text, limit it's length.and clean/escape html
@@ -134,7 +132,7 @@
 				if(holder)
 					to_chat(src, "<span class='danger'>Error: Admin-PM: Client not found.</span>")
 				else
-					AH.MessageNoRecipient(msg) // Skyrat change
+					AH.MessageNoRecipient(msg)
 				return
 
 	if (src.handle_spam_prevention(msg,MUTE_ADMINHELP))
@@ -155,24 +153,24 @@
 
 	if(irc)
 		to_chat(src, "<span class='notice'>PM to-<b>Admins</b>: <span class='linkify'>[rawmsg]</span></span>")
-		admin_ticket_log(src, "<font color='red'>Reply PM from-<b>[key_name(src, TRUE, TRUE)] to <i>IRC</i>: [keywordparsedmsg]</font>", AH) // Skyrat change
+		admin_ticket_log(src, "<font color='red'>Reply PM from-<b>[key_name(src, TRUE, TRUE)] to <i>IRC</i>: [keywordparsedmsg]</font>", AH)
 		ircreplyamount--
 		send2irc("[AH ? "#[AH.id] " : ""]Reply: [ckey]", rawmsg)
 	else
 		if(recipient.holder)
 			if(holder)	//both are admins
-				to_chat(recipient, "<span class='danger'>Admin PM from-<b>[key_name(src, recipient, 1, AH)]</b>: <span class='linkify'>[keywordparsedmsg]</span></span>") // Skyrat change
-				to_chat(src, "<span class='notice'>Admin PM to-<b>[key_name(recipient, src, 1, AH)]</b>: <span class='linkify'>[keywordparsedmsg]</span></span>") // Skyrat change
+				to_chat(recipient, "<span class='danger'>Admin PM from-<b>[key_name(src, recipient, 1, AH)]</b>: <span class='linkify'>[keywordparsedmsg]</span></span>")
+				to_chat(src, "<span class='notice'>Admin PM to-<b>[key_name(recipient, src, 1, AH)]</b>: <span class='linkify'>[keywordparsedmsg]</span></span>")
 
 				//omg this is dumb, just fill in both their tickets
 				var/interaction_message = "<font color='purple'>PM from-<b>[key_name(src, recipient, 1)]</b> to-<b>[key_name(recipient, src, 1)]</b>: [keywordparsedmsg]</font>"
-				admin_ticket_log(src, interaction_message, AH) // Skyrat change
+				admin_ticket_log(src, interaction_message, AH)
 				if(recipient != src)	//reeee
-					admin_ticket_log(recipient, interaction_message, AH) // Skyrat change
+					admin_ticket_log(recipient, interaction_message, AH)
 
 			else		//recipient is an admin but sender is not
-				var/replymsg = "Reply PM from-<b>[key_name(src, recipient, 1, AH)]</b>: <span class='linkify'>[keywordparsedmsg]</span>" // Skyrat change
-				admin_ticket_log(src, "<font color='red'>[replymsg]</font>", AH) // Skyrat change
+				var/replymsg = "Reply PM from-<b>[key_name(src, recipient, 1, AH)]</b>: <span class='linkify'>[keywordparsedmsg]</span>"
+				admin_ticket_log(src, "<font color='red'>[replymsg]</font>", AH)
 				to_chat(recipient, "<span class='danger'>[replymsg]</span>")
 				to_chat(src, "<span class='notice'>PM to-<b>Admins</b>: <span class='linkify'>[msg]</span></span>")
 
@@ -182,10 +180,8 @@
 
 		else
 			if(holder)	//sender is an admin but recipient is not. Do BIG RED TEXT
-				if (!AH) //SKYRAT EDIT
-					AH = new /datum/admin_help(msg, recipient, TRUE, src) //SKYRAT EDIT - new variable
-
-				// Skyrat change START
+				if (!AH)
+					AH = new /datum/admin_help(msg, recipient, TRUE, src)
 				if(AH.handler)
 					if(AH.handler != usr.ckey)
 						var/response = alert(usr, "This ticket is already being handled by [AH.handler]. Do you want to continue?", "Ticket already assigned", "Yes", "No")
@@ -194,14 +190,13 @@
 							return
 				else
 					AH.HandleIssue()
-				// Skyrat change END
 
 				to_chat(recipient, "<font color='red' size='4'><b>-- Administrator private message --</b></font>")
-				to_chat(recipient, "<span class='danger'>Admin PM from-<b>[key_name(src, recipient, 0, AH)]</b>: <span class='linkify'>[msg]</span></span>") // Skyrat change
-				to_chat(recipient, "<span class='danger'><i>Click on the administrator's name to reply, or see all of your tickets in the admin column.</i></span>") // Skyrat change
-				to_chat(src, "<span class='notice'>Admin PM to-<b>[key_name(recipient, src, 1, AH)]</b>: <span class='linkify'>[msg]</span></span>") // Skyrat change
+				to_chat(recipient, "<span class='danger'>Admin PM from-<b>[key_name(src, recipient, 0, AH)]</b>: <span class='linkify'>[msg]</span></span>")
+				to_chat(recipient, "<span class='danger'><i>Click on the administrator's name to reply, or see all of your tickets in the admin column.</i></span>")
+				to_chat(src, "<span class='notice'>Admin PM to-<b>[key_name(recipient, src, 1, AH)]</b>: <span class='linkify'>[msg]</span></span>")
 
-				admin_ticket_log(recipient, "<font color='purple'>PM From [key_name_admin(src, ticket=AH)]: [keywordparsedmsg]</font>", AH) // Skyrat change
+				admin_ticket_log(recipient, "<font color='purple'>PM From [key_name_admin(src, ticket=AH)]: [keywordparsedmsg]</font>", AH)
 
 				//always play non-admin recipients the adminhelp sound
 				SEND_SOUND(recipient, sound('sound/effects/adminhelp.ogg'))
@@ -214,7 +209,7 @@
 						var/reply = stripped_multiline_input(recipient, msg,"Admin PM from-[sendername]", "")		//show message and await a reply
 						if(recipient && reply)
 							if(sender)
-								recipient.cmd_admin_pm(sender,reply, AH)	//sender is still about, let's reply to them --- Skyrat change
+								recipient.cmd_admin_pm(sender,reply, AH)	//sender is still about, let's reply to them
 							else
 								adminhelp(reply)													//sender has left, adminhelp instead
 						return
@@ -239,9 +234,9 @@
 
 #define IRC_AHELP_USAGE "Usage: ticket <close|resolve|icissue|reject|reopen \[ticket #\]|list>"
 /proc/IrcPm(target,msg,sender)
-	var/datum/admin_help/ticket = target // Skyrat change
+	var/datum/admin_help/ticket = target
 
-	target = ckey(ticket.initiator_ckey) // Skyrat change
+	target = ckey(ticket.initiator_ckey)
 	var/client/C = GLOB.directory[target]
 
 	var/compliant_msg = trim(lowertext(msg))
@@ -317,10 +312,10 @@
 	msg = emoji_parse(msg)
 
 	to_chat(C, "<font color='red' size='4'><b>-- Administrator private message --</b></font>")
-	to_chat(C, "<span class='adminsay'>Admin PM from-<b><a href='?priv_msg=[stealthkey];ahelp_player=[REF(ticket)]'>[adminname]</A></b>: [msg]</span>") // Skyrat change
+	to_chat(C, "<span class='adminsay'>Admin PM from-<b><a href='?priv_msg=[stealthkey];ahelp_player=[REF(ticket)]'>[adminname]</A></b>: [msg]</span>")
 	to_chat(C, "<span class='adminsay'><i>Click on the administrator's name to reply.</i></span>")
 
-	admin_ticket_log(C, "<font color='purple'>PM From [irc_tagged]: [msg]</font>", ticket) // Skyrat change
+	admin_ticket_log(C, "<font color='purple'>PM From [irc_tagged]: [msg]</font>", ticket)
 
 	window_flash(C, ignorepref = TRUE)
 	//always play non-admin recipients the adminhelp sound

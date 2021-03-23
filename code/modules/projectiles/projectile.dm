@@ -171,7 +171,7 @@
 	. = ..()
 	permutated = list()
 	decayedRange = range
-	pixels_per_second *= CONFIG_GET(number/projectile_speed_modifier) //Skyrat changes
+	pixels_per_second *= CONFIG_GET(number/projectile_speed_modifier)
 
 /obj/item/projectile/ComponentInitialize()
 	. = ..()
@@ -190,9 +190,7 @@
 	if(embedding)
 		embedding["embed_chance"] += embed_falloff_tile
 	if(range <= 0 && loc)
-		//skyrat edit
 		SEND_SIGNAL(src, COMSIG_PROJECTILE_RANGE_OUT)
-		//
 		on_range()
 
 /obj/item/projectile/proc/on_range() //if we want there to be effects when they reach the end of their range
@@ -363,7 +361,7 @@
 	if(!trajectory)
 		return
 	var/turf/T = get_turf(A)
-	if(ricochets < ricochets_max && check_ricochet_flag(A) && check_ricochet(A)) //more like cryrat edit because this is making me cry
+	if(ricochets < ricochets_max && check_ricochet_flag(A) && check_ricochet(A))
 		var/datum/point/pcache = trajectory.copy_to()
 		ricochets++
 		if(A.handle_ricochet(src))
@@ -482,26 +480,19 @@
 		return T
 	//Returns null if nothing at all was found.
 
-/obj/item/projectile/proc/check_ricochet(atom/A) //skyrat edit
-	//skyrat edit
+/obj/item/projectile/proc/check_ricochet(atom/A)
 	var/chance = ricochet_chance * A.ricochet_chance_mod
 	if(firer && HAS_TRAIT(firer, TRAIT_NICE_SHOT))
 		chance += NICE_SHOT_RICOCHET_BONUS
 	if(prob(chance))
-	//
 		return TRUE
 	return FALSE
 
 /obj/item/projectile/proc/check_ricochet_flag(atom/A)
-	//skyrat edit
 	if((flag in list("energy", "laser")) && (A.flags_ricochet & RICOCHET_SHINY))
-	//
 		return TRUE
-
-	//skyrat edit another one lol
 	if((flag in list("bomb", "bullet")) && (A.flags_ricochet & RICOCHET_HARD))
 		return TRUE
-	//
 	return FALSE
 
 /// one move is a tile.
@@ -759,13 +750,11 @@
 	else
 		var/mob/living/L = target
 		if(!direct_target && !L.density)
-			//skyrat edit bing bing wahoo
 			var/checking = NONE
 			if(!hit_stunned_targets)
 				checking = MOBILITY_USE | MOBILITY_MOVE | MOBILITY_STAND
 			if(!((L.mobility_flags & checking) == checking) || !(L.stat == CONSCIOUS))		//If they're able to 1. stand or 2. use items or 3. move, AND they are not softcrit,  they are not stunned enough to dodge projectiles passing over.
 				return FALSE
-			//
 	return TRUE
 
 //Spread is FORCED!

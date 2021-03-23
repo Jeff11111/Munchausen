@@ -4,7 +4,7 @@
 	speech_verb = "chitters"
 	ask_verb = "chitters inquisitively"
 	exclaim_verb = "chitters loudly"
-	sing_verb = "chimes" // Skyrat edit
+	sing_verb = "chimes"
 	spans = list(SPAN_ROBOT)
 	key = "d"
 	flags = NO_STUTTER
@@ -15,6 +15,4 @@
 	default_priority = 20
 
 	icon_state = "drone"
-	//SKYRAT CHANGE - language restriction
 	restricted = TRUE
-	//

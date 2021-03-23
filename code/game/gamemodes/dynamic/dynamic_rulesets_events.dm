@@ -3,8 +3,8 @@
 	var/typepath // typepath of the event
 	var/triggering
 	var/earliest_start = 20 MINUTES
-	var/occurances_current = 0 //Don't touch this. Skyrat Change.
-	var/occurances_max = 0 //Maximum occurances for this event. Set to 0 to allow an infinite amount of this event. Skyrat change.
+	var/occurances_current = 0 //Don't touch this.
+	var/occurances_max = 0 //Maximum occurances for this event. Set to 0 to allow an infinite amount of this event.
 
 /datum/dynamic_ruleset/event/get_blackbox_info()
 	var/list/ruleset_data = list()
@@ -32,10 +32,8 @@
 	if (!forced)
 		if(earliest_start >= world.time-SSticker.round_start_time)
 			return FALSE
-		//Start of Skyrat Change
 		if(occurances_max && occurances_current > occurances_max)
 			return FALSE
-		//End of Skyrat Change
 		var/job_check = 0
 		if (enemy_roles.len > 0)
 			for (var/mob/M in mode.current_players[CURRENT_LIVING_PLAYERS])
@@ -70,7 +68,7 @@
 	requirements = list(70,60,50,50,40,40,40,30,20,15)
 	property_weights = list("story_potential" = 1, "trust" = 1, "chaos" = 1)
 	high_population_requirement = 15
-	occurances_max = 1 //Skyrat change.
+	occurances_max = 1
 
 /datum/dynamic_ruleset/event/pirates/ready(forced = FALSE)
 	if (!SSmapping.empty_space)
@@ -94,8 +92,8 @@
 	requirements = list(70,60,50,50,40,40,40,30,20,15)
 	high_population_requirement = 15
 	property_weights = list("chaos" = 1, "valid" = 1)
-	earliest_start = 30 MINUTES //Skyrat change.
-	occurances_max = 2 //Skyrat change.
+	earliest_start = 30 MINUTES
+	occurances_max = 2
 
 //////////////////////////////////////////////
 //                                          //
@@ -116,7 +114,7 @@
 	high_population_requirement = 5
 	repeatable = TRUE
 	property_weights = list("chaos" = 1, "extended" = 2)
-	occurances_max = 2 //Skyrat change.
+	occurances_max = 2
 
 /datum/dynamic_ruleset/event/ventclog/ready()
 	if(mode.threat_level > 30 && mode.threat >= 5 && prob(20))
@@ -156,7 +154,7 @@
 	repeatable = TRUE
 	property_weights = list("story_potential" = 1, "extended" = 1)
 	always_max_weight = TRUE
-	occurances_max = 3 //Skyrat change.
+	occurances_max = 3
 
 //////////////////////////////////////////////
 //                                          //
@@ -177,7 +175,7 @@
 	requirements = list(60,50,40,30,30,30,30,30,30,30)
 	high_population_requirement = 30
 	property_weights = list("extended" = -2)
-	occurances_max = 2 //Skyrat change.
+	occurances_max = 2
 
 /datum/dynamic_ruleset/event/meteor_wave/ready()
 	if(world.time-SSticker.round_start_time > 35 MINUTES && mode.threat_level > 40 && mode.threat >= 25 && prob(30))
@@ -213,7 +211,7 @@
 	high_population_requirement = 5
 	repeatable = TRUE
 	property_weights = list("extended" = 1)
-	occurances_max = 3 //Skyrat change.
+	occurances_max = 3
 
 /datum/dynamic_ruleset/event/anomaly_flux
 	name = "Anomaly: Hyper-Energetic Flux"
@@ -228,7 +226,7 @@
 	high_population_requirement = 10
 	repeatable = TRUE
 	property_weights = list("extended" = 1)
-	occurances_max = 2 //Skyrat change.
+	occurances_max = 2
 
 /datum/dynamic_ruleset/event/anomaly_gravitational
 	name = "Anomaly: Gravitational"
@@ -241,7 +239,7 @@
 	high_population_requirement = 5
 	repeatable = TRUE
 	property_weights = list("extended" = 1)
-	occurances_max = 3 //Skyrat change.
+	occurances_max = 3
 
 /datum/dynamic_ruleset/event/anomaly_pyroclastic
 	name = "Anomaly: Pyroclastic"
@@ -256,7 +254,7 @@
 	high_population_requirement = 10
 	repeatable = TRUE
 	property_weights = list("extended" = 1)
-	occurances_max = 2 //Skyrat change.
+	occurances_max = 2
 
 /datum/dynamic_ruleset/event/anomaly_vortex
 	name = "Anomaly: Vortex"
@@ -271,7 +269,7 @@
 	high_population_requirement = 10
 	repeatable = TRUE
 	property_weights = list("extended" = 1)
-	occurances_max = 2 //Skyrat change.
+	occurances_max = 2
 
 //////////////////////////////////////////////
 //                                          //
@@ -292,7 +290,7 @@
 	high_population_requirement = 10
 	repeatable = TRUE
 	property_weights = list("extended" = -1, "chaos" = 1)
-	occurances_max = 1 //Skyrat change.
+	occurances_max = 1
 
 /datum/dynamic_ruleset/event/carp_migration
 	name = "Carp Migration"
@@ -306,7 +304,7 @@
 	earliest_start = 10 MINUTES
 	repeatable = TRUE
 	property_weights = list("extended" = 1)
-	occurances_max = 3 //Skyrat change.
+	occurances_max = 3
 
 /datum/dynamic_ruleset/event/communications_blackout
 	name = "Communications Blackout"
@@ -321,7 +319,7 @@
 	high_population_requirement = 5
 	repeatable = TRUE
 	property_weights = list("extended" = 1, "chaos" = 1)
-	occurances_max = 5 //Skyrat change.
+	occurances_max = 5
 
 /datum/dynamic_ruleset/event/processor_overload
 	name = "Processor Overload"
@@ -337,7 +335,7 @@
 	repeatable = TRUE
 	property_weights = list("extended" = 1, "chaos" = 1)
 	always_max_weight = TRUE
-	occurances_max = 2 //Skyrat change.
+	occurances_max = 2
 
 /datum/dynamic_ruleset/event/space_dust
 	name = "Minor Space Dust"
@@ -354,7 +352,7 @@
 	earliest_start = 0 MINUTES
 	property_weights = list("extended" = 1)
 	always_max_weight = TRUE
-	occurances_max = 0 //Skyrat change.
+	occurances_max = 0
 
 /datum/dynamic_ruleset/event/major_dust
 	name = "Major Space Dust"
@@ -369,7 +367,7 @@
 	high_population_requirement = 10
 	repeatable = TRUE
 	property_weights = list("extended" = 1)
-	occurances_max = 3 //Skyrat change.
+	occurances_max = 3
 
 /datum/dynamic_ruleset/event/electrical_storm
 	name = "Electrical Storm"
@@ -384,7 +382,7 @@
 	high_population_requirement = 5
 	repeatable = TRUE
 	property_weights = list("extended" = 1)
-	occurances_max = 2 //Skyrat change.
+	occurances_max = 2
 
 /datum/dynamic_ruleset/event/heart_attack
 	name = "Random Heart Attack"
@@ -400,7 +398,7 @@
 	repeatable = TRUE
 	property_weights = list("extended" = 1)
 	always_max_weight = TRUE
-	occurances_max = 4 //Skyrat change.
+	occurances_max = 4
 
 /datum/dynamic_ruleset/event/radiation_storm
 	name = "Radiation Storm"
@@ -413,7 +411,7 @@
 	requirements = list(5,5,5,5,5,5,5,5,5,5)
 	high_population_requirement = 5
 	property_weights = list("extended" = 1,"chaos" = 1)
-	occurances_max = 2 //Skyrat change.
+	occurances_max = 2
 
 /datum/dynamic_ruleset/event/portal_storm_syndicate
 	name = "Portal Storm"
@@ -427,7 +425,7 @@
 	high_population_requirement =  30
 	earliest_start = 30 MINUTES
 	property_weights = list("teamwork" = 1,"chaos" = 1, "extended" = -1)
-	occurances_max = 1 //Skyrat change.
+	occurances_max = 1
 
 /datum/dynamic_ruleset/event/wormholes
 	name = "Wormholes"
@@ -440,7 +438,7 @@
 	requirements = list(5,5,5,5,5,5,5,5,5,5)
 	high_population_requirement =  5
 	property_weights = list("extended" = 1)
-	occurances_max = 2 //Skyrat change.
+	occurances_max = 2
 
 /datum/dynamic_ruleset/event/swarmers
 	name = "Swarmers"
@@ -454,7 +452,7 @@
 	requirements = list(101,101,101,101,101,101,101,101,101,101)
 	high_population_requirement =  5
 	property_weights = list("extended" = -2)
-	occurances_max = 1 //Skyrat change.
+	occurances_max = 1
 
 /datum/dynamic_ruleset/event/sentient_disease
 	name = "Sentient Disease"
@@ -468,7 +466,7 @@
 	requirements = list(30,30,20,20,15,10,10,10,10,5) // yes, it can even happen in "extended"!
 	property_weights = list("story_potential" = 1, "extended" = 1, "valid" = -2)
 	high_population_requirement = 5
-	occurances_max = 1 //Skyrat change.
+	occurances_max = 1
 
 /datum/dynamic_ruleset/event/revenant
 	name = "Revenant"
@@ -482,4 +480,4 @@
 	requirements = list(30,30,30,30,20,15,15,15,15,15)
 	high_population_requirement = 15
 	property_weights = list("story_potential" = -2, "extended" = -1)
-	occurances_max = 1 //Skyrat change.
+	occurances_max = 1

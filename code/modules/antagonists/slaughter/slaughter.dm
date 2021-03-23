@@ -43,14 +43,13 @@
 							Pulling a dead or unconscious mob while you enter a pool will pull them in with you, allowing you to feast and regain your health. \
 							You move quickly upon leaving a pool of blood, but the material world will soon sap your strength and leave you sluggish. \
 							You gain strength the more attacks you land on live humanoids, though this resets when you return to the blood zone. You can also \
-							launch a devastating slam attack with ctrl+shift+click, capable of smashing bones in one strike.</B>" //skyrat edit
+							launch a devastating slam attack with ctrl+shift+click, capable of smashing bones in one strike.</B>"
 
 	loot = list(/obj/effect/decal/cleanable/blood, \
 				/obj/effect/decal/cleanable/blood/innards, \
 				/obj/item/organ/heart/demon)
 	del_on_death = 1
 	deathmessage = "screams in anger as it collapses into a puddle of viscera!"
-	//skyrat edit
 	melee_damage_lower = 15 // reduced from 30 to 15 with wounds since they get big buffs to slicing wounds... unless...
 	melee_damage_upper = 15
 	wound_bonus = 0
@@ -66,17 +65,14 @@
 	var/wound_bonus_per_hit = 5
 	/// How much our wound_bonus hitstreak bonus caps at (peak demonry)
 	var/wound_bonus_hitstreak_max = 12
-	//
 
 /mob/living/simple_animal/slaughter/Initialize()
 	..()
 	var/obj/effect/proc_holder/spell/bloodcrawl/bloodspell = new
 	AddSpell(bloodspell)
-	//skyrat edit
 	if(prob(25))
 		melee_damage_lower = 20
 		melee_damage_upper = 30
-	//
 	if(istype(loc, /obj/effect/dummy/phased_mob/slaughter))
 		bloodspell.phased = TRUE
 
@@ -213,7 +209,6 @@
 		victim.exit_blood_effect()
 		victim.visible_message("[victim] falls out of the air, covered in blood, looking highly confused. And dead.")
 
-//skyrat poopoo
 /mob/living/simple_animal/slaughter/CtrlShiftClickOn(atom/A)
 	if(!isliving(A))
 		return ..()

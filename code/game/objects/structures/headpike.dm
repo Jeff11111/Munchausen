@@ -13,7 +13,6 @@
 	icon_state = "headpike-bone"
 	bonespear = TRUE
 
-//SKYRAT CHANGES BEGIN
 /obj/structure/headpike/CheckParts(list/parts_list)
 	victim = locate(/obj/item/bodypart/head) in parts_list
 	name = "[victim.name] on a spear"
@@ -23,7 +22,6 @@
 	else
 		spear = locate(/obj/item/spear) in parts_list
 	return ..()
-//SKYRAT CHANGES END
 
 /obj/structure/headpike/Initialize()
 	. = ..()

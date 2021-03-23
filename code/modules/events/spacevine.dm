@@ -23,10 +23,8 @@
 	if(turfs.len) //Pick a turf to spawn at if we can
 		var/turf/T = pick(turfs)
 		new /datum/spacevine_controller(T, list(pick(subtypesof(/datum/spacevine_mutation))), rand(30,100), rand(5,10), src) //spawn a controller at turf with randomized stats and a single random mutation
-		// SKYRAT EDIT - VINES - START
 		for(var/i in 1 to 2)
 			new /mob/living/simple_animal/hostile/venus_human_trap/ghost_playable(T)
-		// SKYRAT EDIT - VINES - END
 
 
 
@@ -272,17 +270,9 @@
 		new/obj/structure/alien/resin/flower_bud_enemy(get_turf(holder))
 
 /datum/spacevine_mutation/flowering/on_cross(obj/structure/spacevine/holder, mob/living/crosser)
-	/* SKYRAT EDIT - VINES
-	if(istype(crosser, /mob/living/simple_animal/hostile/venus_human_trap)) //skyrat change: flowering vines heal flytraps 10% on cross
-		if(crosser.health == crosser.maxHealth)
-			return
-		crosser.health = clamp((crosser.health + crosser.maxHealth * 0.1), crosser.health, crosser.maxHealth)
-		to_chat(crosser, "<span class='notice'>The flowering vines attempt to regenerate some of your wounds!</span>")
-		return
-	SKYRAT EDIT - VINES */
 	if(prob(25))
 		holder.entangle(crosser)
-//SKYRAT EDIT - VINES - START
+
 /datum/spacevine_mutation/slipping
 	name = "slipping"
 	hue = "#97eaff"
@@ -296,7 +286,7 @@
 		var/mob/living/carbon/human/H = crosser
 		H.slip(10)
 		to_chat(H, "<span class='alert'>The vines slip you!</span>")
-//SKYRAT EDIT - VINES - END
+
 // SPACE VINES (Note that this code is very similar to Biomass code)
 /obj/structure/spacevine
 	name = "space vines"
@@ -381,15 +371,13 @@
 		return
 	for(var/datum/spacevine_mutation/SM in mutations)
 		SM.on_cross(src, AM)
-	//SKYRAT EDIT START - VINES
-	if(istype(AM, /mob/living/simple_animal/hostile/venus_human_trap)) //skyrat change: vines heal flytraps 10% on cross
+	if(istype(AM, /mob/living/simple_animal/hostile/venus_human_trap))
 		var/mob/living/simple_animal/hostile/venus_human_trap/VS = AM
 		if(VS.health == VS.maxHealth)
 			return
 		VS.health = clamp((VS.health + VS.maxHealth * 0.1), VS.health, VS.maxHealth)
 		to_chat(VS, "<span class='notice'>The vines attempt to regenerate some of your wounds!</span>")
 		return
-	//SKYRAT EDIT END - VINES
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
 /obj/structure/spacevine/attack_hand(mob/user)
@@ -511,8 +499,7 @@
 		for(var/datum/spacevine_mutation/SM in SV.mutations)
 			SM.process_mutation(SV)
 		if(SV.energy < 2) //If tile isn't fully grown
-			//if(prob(20)) // SKYRAT EDIT - VINES (ORIGINAL)
-			if(prob(35)) // SKYRAT EDIT - VINES
+			if(prob(35))
 				SV.grow()
 		else //If tile is fully grown
 			SV.entangle_mob()

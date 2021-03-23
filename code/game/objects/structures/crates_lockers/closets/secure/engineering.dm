@@ -5,10 +5,8 @@
 
 /obj/structure/closet/secure_closet/engineering_chief/PopulateContents()
 	..()
-	//SKYRAT EDIT - ATMS
 	new /obj/item/card/id/departmental_budget/eng(src)
-	new /obj/item/pipe_dispenser/bluespace(src) // SKYRAT: CE gets BPRPD instead of RPD, since they start with all other power tools too
-	//SKYRAT EDIT END
+	new /obj/item/pipe_dispenser/bluespace(src)
 	new /obj/item/clothing/neck/cloak/ce(src)
 	new /obj/item/clothing/head/beret/ce(src)
 	new /obj/item/clothing/under/rank/engineering/chief_engineer(src)
