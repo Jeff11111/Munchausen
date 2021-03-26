@@ -10,7 +10,7 @@
 
 /obj/item/melee/transforming/energy/Initialize()
 	. = ..()
-	AddComponent(/datum/component/overlay_lighting, light_color, brightness_on, 1, FALSE) //Skyrat change
+	AddComponent(/datum/component/overlay_lighting, light_color, brightness_on, 1, FALSE)
 	total_mass_on = (total_mass_on ? total_mass_on : (w_class_on * 0.75))
 	if(active)
 		if(sword_color)
@@ -105,10 +105,8 @@
 	attack_verb_off = list("tapped", "poked")
 	throw_speed = 3
 	throw_range = 5
-	//skyrat edit
 	sharpness = SHARP_EDGED
 	embedding = list("embed_chance" = 75, "impact_pain_mult" = 10)
-	//
 	armour_penetration = 35
 	item_flags = NEEDS_PERMIT | ITEM_CAN_PARRY
 	block_parry_data = /datum/block_parry_data/energy_sword

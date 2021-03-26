@@ -8,7 +8,7 @@
 	id = "bsrpd"
 	build_type = PROTOLATHE
 	materials = list(/datum/material/iron = 75000, /datum/material/glass = 37500, /datum/material/bluespace = 1000)
-	build_path = /obj/item/pipe_dispenser/bluespace // Skyrat edit
+	build_path = /obj/item/pipe_dispenser/bluespace
 	category = list("Tool Designs")
 	departmental_flags =  DEPARTMENTAL_FLAG_ENGINEERING
 

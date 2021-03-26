@@ -30,7 +30,7 @@
 	var/locked = FALSE
 	var/allow_switch_interact = TRUE
 
-	var/projectile_type = /obj/item/projectile/beam/emitter //Skyrat change, GC unfuck edition
+	var/projectile_type = /obj/item/projectile/beam/emitter
 	var/projectile_sound = 'sound/weapons/emitter.ogg'
 	var/datum/effect_system/spark_spread/sparks
 

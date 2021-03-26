@@ -348,44 +348,6 @@
 			if(!.)
 				return FALSE //to differentiate between no internals and active, but empty internals
 
-/* MODULAR SKYRAT
-// Make corpses rot, emitting miasma
-/mob/living/carbon/proc/rot()
-	// Properly stored corpses shouldn't create miasma
-	if(istype(loc, /obj/structure/closet/crate/coffin)|| istype(loc, /obj/structure/closet/body_bag) || istype(loc, /obj/structure/bodycontainer))
-		return
-
-	// No decay if formaldehyde/preservahyde in corpse or when the corpse is charred
-	if(reagents.has_reagent(/datum/reagent/toxin/formaldehyde, 1) || HAS_TRAIT(src, TRAIT_HUSK) || reagents.has_reagent(/datum/reagent/preservahyde, 1))
-		return
-
-	// Also no decay if corpse chilled or not organic/undead
-	if((bodytemperature <= T0C-10) || !(mob_biotypes & (MOB_ORGANIC|MOB_UNDEAD)))
-		return
-
-	// Wait a bit before decaying
-	if(world.time - timeofdeath < 1200)
-		return
-
-	var/deceasedturf = get_turf(src)
-
-	// Closed turfs don't have any air in them, so no gas building up
-	if(!istype(deceasedturf,/turf/open))
-		return
-
-	var/turf/open/miasma_turf = deceasedturf
-
-	var/datum/gas_mixture/stank = new
-
-	stank.gases[/datum/gas/miasma] = 0.1
-
-	stank.temperature = BODYTEMP_NORMAL
-
-	miasma_turf.assume_air(stank)
-
-	miasma_turf.air_update_turf()
-*/
-
 /mob/living/carbon/proc/handle_blood()
 	return
 
@@ -405,7 +367,7 @@
 			if(O)
 				O.on_life()
 	else
-		if(reagents.has_reagent(/datum/reagent/toxin/formaldehyde, 1) || reagents.has_reagent(/datum/reagent/medicine/preservahyde, 1)) // No  organ decay if the body contains formaldehyde. Or preservahyde. Skyrat Edit - repaths perservahyde
+		if(reagents.has_reagent(/datum/reagent/toxin/formaldehyde, 1) || reagents.has_reagent(/datum/reagent/medicine/preservahyde, 1)) // No  organ decay if the body contains formaldehyde. Or preservahyde.
 			return
 		for(var/V in internal_organs)
 			var/obj/item/organ/O = V
@@ -537,18 +499,15 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 //this updates all special effects: stun, sleeping, knockdown, druggy, stuttering, etc..
 /mob/living/carbon/handle_status_effects()
 	..()
-	if(getStaminaLoss() && !SEND_SIGNAL(src, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_ACTIVE))		//CIT CHANGE - prevents stamina regen while combat mode is active
+	if(getStaminaLoss() && !SEND_SIGNAL(src, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_ACTIVE))		//prevents stamina regen while combat mode is active
 		adjustStaminaLoss(!CHECK_MOBILITY(src, MOBILITY_STAND) ? ((combat_flags & COMBAT_FLAG_HARD_STAMCRIT) ? STAM_RECOVERY_STAM_CRIT : STAM_RECOVERY_RESTING) : STAM_RECOVERY_NORMAL)
 
 	if(!(combat_flags & COMBAT_FLAG_HARD_STAMCRIT) && incomingstammult != 1)
 		incomingstammult = max(0.01, incomingstammult)
 		incomingstammult = min(1, incomingstammult*2)
-
-	//CIT CHANGES START HERE. STAMINA BUFFER STUFF
 	if(bufferedstam && world.time > stambufferregentime)
 		var/drainrate = max((bufferedstam*(bufferedstam/(5)))*0.1,1)
 		bufferedstam = max(bufferedstam - drainrate, 0)
-	//END OF CIT CHANGES
 
 	var/restingpwr = 1 + 4 * !CHECK_MOBILITY(src, MOBILITY_STAND)
 
@@ -623,7 +582,7 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 		handle_hallucinations()
 
 	if(drunkenness)
-		drunkenness = max(drunkenness - (drunkenness * 0.01), 0) //skyrat-edit
+		drunkenness = max(drunkenness - (drunkenness * 0.01), 0)
 		if(drunkenness <= 121 && drunkenness >= 30)
 			throw_alert("drunk", /obj/screen/alert/drunk)
 		else if(drunkenness > 121)
@@ -632,7 +591,7 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 		else if(drunkenness <= 20) //drunk goes away very slowly so we need to be nice here to the players and NOT pollute their screen
 			clear_alert("drunk")
 			remove_chem_effect(CE_PAINKILLER, 25)
-		if(drunkenness >= 40) //skyrat-edit
+		if(drunkenness >= 40)
 			SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "drunk", /datum/mood_event/drunk)
 			jitteriness = max(jitteriness - 3, 0)
 			if(HAS_TRAIT(src, TRAIT_DRUNK_HEALING))
@@ -641,22 +600,22 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 
 		if(mind && (mind.assigned_role == "Scientist" || mind.assigned_role == "Research Director"))
 			if(SSresearch.science_tech)
-				if(drunkenness >= 40 && drunkenness <= 60) //skyrat-edit
+				if(drunkenness >= 40 && drunkenness <= 60)
 					drunkenness = round(drunkenness, 0.01)
 					var/ballmer_percent = 0
-					if(drunkenness == 50) // why run math if I dont have to //skyrat-edit
+					if(drunkenness == 50) // why run math if I dont have to
 						ballmer_percent = 1
 					else
 						ballmer_percent = (-abs(drunkenness - 13.35) / 0.9) + 1
 					if(prob(5))
 						say(pick(GLOB.ballmer_good_msg), forced = "ballmer")
 					SSresearch.science_tech.add_point_list(list(TECHWEB_POINT_TYPE_GENERIC = BALLMER_POINTS * ballmer_percent))
-				if(drunkenness > 70) // by this point you're into windows ME territory //skyrat-edit
+				if(drunkenness > 70) // by this point you're into windows ME territory
 					if(prob(5))
 						SSresearch.science_tech.remove_point_list(list(TECHWEB_POINT_TYPE_GENERIC = BALLMER_POINTS))
 						say(pick(GLOB.ballmer_windows_me_msg), forced = "ballmer")
 
-		if(drunkenness >= 81) //skyrat-edit
+		if(drunkenness >= 81)
 			if(prob(25))
 				confused += 2
 			Dizzy(10)
@@ -664,28 +623,28 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 				adjustBruteLoss(-0.3, FALSE)
 				adjustFireLoss(-0.15, FALSE)
 
-		if(drunkenness >= 121) //skyrat-edit
+		if(drunkenness >= 121)
 			if(prob(5))
 				confused += 10
 				vomit()
 			Dizzy(25)
 
-		if(drunkenness >= 161) //skyrat-edit
+		if(drunkenness >= 161)
 			if(prob(50))
 				blur_eyes(5)
 			if(HAS_TRAIT(src, TRAIT_DRUNK_HEALING))
 				adjustBruteLoss(-0.4, FALSE)
 				adjustFireLoss(-0.2, FALSE)
 
-		if(drunkenness >= 201) //skyrat-edit
+		if(drunkenness >= 201)
 			blur_eyes(5)
 
-		if(drunkenness >= 251) //skyrat-edit
+		if(drunkenness >= 251)
 			adjustToxLoss(0.2)
 			if(prob(5) && !stat)
 				to_chat(src, "<span class='warning'>Maybe you should lie down for a bit...</span>")
 
-		if(drunkenness >= 301) //skyrat-edit
+		if(drunkenness >= 301)
 			adjustBrainLoss(0.4, 60)
 			if(prob(20) && !stat)
 				if(SSshuttle.emergency.mode == SHUTTLE_DOCKED && is_station_level(z)) //QoL mainly
@@ -694,7 +653,7 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 					to_chat(src, "<span class='warning'>Just a quick nap...</span>")
 					Sleeping(900)
 
-		if(drunkenness >= 401) //skyrat-edit
+		if(drunkenness >= 401)
 			adjustToxLoss(4) //Let's be honest you shouldn't be alive by now
 		else
 			SEND_SIGNAL(src, COMSIG_CLEAR_MOOD_EVENT, "drunk")
@@ -819,7 +778,6 @@ GLOBAL_LIST_INIT(ballmer_windows_me_msg, list("Yo man, what if, we like, uh, put
 	else
 		heart.Restart()
 
-//skyrat edit
 /mob/living/carbon/handle_wounds()
 	for(var/thing in all_wounds)
 		var/datum/wound/W = thing

@@ -18,20 +18,16 @@
 			return belt
 		if(SLOT_WEAR_ID)
 			return wear_id
-		if(SLOT_EARS_LEFT) //skyrat edit
+		if(SLOT_EARS_LEFT)
 			return ears
-		//skyrat edit
 		if(SLOT_EARS_RIGHT)
 			return ears_extra
-		//
 		if(SLOT_GLASSES)
 			return glasses
 		if(SLOT_GLOVES)
 			return gloves
-		//skyrat edit
 		if(SLOT_WRISTS)
 			return wrists
-		//
 		if(SLOT_HEAD)
 			return head
 		if(SLOT_SHOES)
@@ -40,14 +36,12 @@
 			return wear_suit
 		if(SLOT_W_UNIFORM)
 			return w_uniform
-		//skyrat edit
 		if(SLOT_W_UNDERWEAR)
 			return w_underwear
 		if(SLOT_W_SOCKS)
 			return w_socks
 		if(SLOT_W_SHIRT)
 			return w_shirt
-		//
 		if(SLOT_L_STORE)
 			return l_store
 		if(SLOT_R_STORE)
@@ -77,7 +71,7 @@
 		w_underwear,
 		w_socks,
 		w_shirt,
-		) //skyrat edit
+		)
 
 /mob/living/carbon/human/proc/get_head_slots()
 	return list(
@@ -87,7 +81,7 @@
 		glasses,
 		ears,
 		ears_extra,
-		) //skyrat edit
+		)
 
 /mob/living/carbon/human/proc/get_storage_slots()
 	return list(
@@ -113,14 +107,12 @@
 			wear_id = I
 			sec_hud_set_ID()
 			update_inv_wear_id()
-		//skyrat edit
 		if(SLOT_EARS_LEFT)
 			ears = I
 			update_inv_ears()
 		if(SLOT_EARS_RIGHT)
 			ears_extra = I
 			update_inv_ears_extra()
-		//
 		if(SLOT_GLASSES)
 			glasses = I
 			var/obj/item/clothing/glasses/G = I
@@ -137,11 +129,9 @@
 		if(SLOT_GLOVES)
 			gloves = I
 			update_inv_gloves()
-		//skyrat edit
 		if(SLOT_WRISTS)
 			wrists = I
 			update_inv_wrists()
-		//
 		if(SLOT_SHOES)
 			shoes = I
 			update_inv_shoes()
@@ -157,7 +147,6 @@
 			w_uniform = I
 			update_suit_sensors()
 			update_inv_w_uniform()
-		//skyrat edit
 		if(SLOT_W_UNDERWEAR)
 			w_underwear = I
 			update_inv_w_underwear()
@@ -167,7 +156,6 @@
 		if(SLOT_W_SHIRT)
 			w_shirt = I
 			update_inv_w_shirt()
-		//
 		if(SLOT_L_STORE)
 			l_store = I
 			update_inv_pockets()
@@ -229,7 +217,6 @@
 		update_suit_sensors()
 		if(!QDELETED(src))
 			update_inv_w_uniform()
-	//skyrat edit
 	else if(I == w_underwear)
 		w_underwear = null
 		if(!QDELETED(src))
@@ -246,7 +233,6 @@
 		wrists = null
 		if(!QDELETED(src))
 			update_inv_wrists()
-	//
 	else if(I == gloves)
 		gloves = null
 		if(!QDELETED(src))
@@ -269,12 +255,10 @@
 		ears = null
 		if(!QDELETED(src))
 			update_inv_ears()
-	//skyrat edit
 	else if(I == ears_extra)
 		ears_extra = null
 		if(!QDELETED(src))
 			update_inv_ears_extra()
-	//
 	else if(I == shoes)
 		shoes = null
 		if(!QDELETED(src))

@@ -1,6 +1,4 @@
-//CITADEL EDIT
 GLOBAL_LIST_EMPTY(objectives)
-//END EDIT
 
 /datum/objective
 	var/datum/mind/owner				//The primary owner of the objective. !!SOMEWHAT DEPRECATED!! Prefer using 'team' for new code.
@@ -18,7 +16,7 @@ GLOBAL_LIST_EMPTY(objectives)
 	var/flavor = "Objective" //Gets listed as [flavor] #1 etc thats cool i think
 
 /datum/objective/New(var/text)
-	GLOB.objectives += src // CITADEL EDIT FOR CRYOPODS
+	GLOB.objectives += src
 	if(text)
 		explanation_text = text
 
@@ -127,7 +125,7 @@ GLOBAL_LIST_EMPTY(objectives)
 	if(possible_targets.len > 0)
 		target = pick(possible_targets)
 	else
-		target = null//we'd rather have no target than an invalid one // CITADEL EDIT
+		target = null//we'd rather have no target than an invalid one
 	update_explanation_text()
 	return target
 
@@ -1204,7 +1202,7 @@ GLOBAL_LIST_EMPTY(possible_sabotages)
 	switch(owner.assigned_role)
 		if("Station Engineer", "Atmospheric Technician")
 			. += world.file2list("strings/flavor_objectives/traitor/engineering.txt")
-		if("Medical Doctor","Chemist","Virologist","Geneticist", "Psychologist") // Skyrat change
+		if("Medical Doctor","Chemist","Virologist","Geneticist", "Psychologist")
 			. += world.file2list("strings/flavor_objectives/traitor/medical.txt")
 		if("Scientist","Roboticist","Geneticist")
 			. += world.file2list("strings/flavor_objectives/traitor/science.txt")

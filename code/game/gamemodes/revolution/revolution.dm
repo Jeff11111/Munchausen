@@ -223,7 +223,7 @@
 					N.timer_set = 200
 					N.set_safety()
 					N.set_active()
-// SKYRAT EDIT: Credits
+
 /datum/game_mode/revolution/generate_credit_text()
 	var/list/round_credits = list()
 	var/len_before_addition

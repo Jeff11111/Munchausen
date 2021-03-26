@@ -30,7 +30,7 @@
 	possible_locs = list(BODY_ZONE_PRECISE_NECK, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, \
 					BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, \
 					BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_L_FOOT, \
-					BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_R_FOOT) //skyrat edit
+					BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_R_FOOT)
 	steps = list(
 		/datum/surgery_step/incise,
 		/datum/surgery_step/retract_skin,

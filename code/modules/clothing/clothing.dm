@@ -4,7 +4,7 @@
 	max_integrity = 200
 	integrity_failure = 0.4
 	block_priority = BLOCK_PRIORITY_CLOTHING
-	//var/damaged_clothes = 0 //similar to machine's BROKEN stat and structure's broken var skyrat edit
+	//var/damaged_clothes = 0 //similar to machine's BROKEN stat and structure's broken var
 	var/flash_protect = 0		//What level of bright light protection item has. 1 = Flashers, Flashes, & Flashbangs | 2 = Welding | -1 = OH GOD WELDING BURNT OUT MY RETINAS
 	var/tint = 0				//Sets the item's level of visual impairment tint, normally set to the same as flash_protect
 	var/up = 0					//but separated to allow items to protect but not impair vision, like space helmets
@@ -47,7 +47,6 @@
 	//Add a "exclude" string to do the opposite, making it only only species listed that can't wear it.
 	//You append this to clothing objects.
 
-	//skyrat edit 
 	var/damaged_clothes = CLOTHING_PRISTINE //similar to machine's BROKEN stat and structure's broken var
 	/// What items can be consumed to repair this clothing (must by an /obj/item/stack)
 	var/repairable_by = /obj/item/stack/sheet/cloth
@@ -95,7 +94,6 @@
 		return ..()
 
 /obj/item/clothing/attackby(obj/item/W, mob/user, params)
-	//skyrat edit weehoo
 	if(damaged_clothes && istype(W, repairable_by))
 		var/obj/item/stack/S = W
 		switch(damaged_clothes)
@@ -111,7 +109,6 @@
 					if(S.use(3))
 						repair(user, params)
 		return 1
-	//
 	return ..()
 
 /obj/item/clothing/Destroy()
@@ -122,9 +119,7 @@
 	..()
 	if(!istype(user))
 		return
-	//skyrat edit
 	UnregisterSignal(user, COMSIG_MOVABLE_MOVED)
-	//
 	if(LAZYLEN(user_vars_remembered))
 		for(var/variable in user_vars_remembered)
 			if(variable in user.vars)
@@ -147,7 +142,6 @@
 
 /obj/item/clothing/examine(mob/user)
 	. = ..()
-	//skyrat edit
 	if(damaged_clothes == CLOTHING_SHREDDED)
 		. += "<span class='warning'><b>It is completely shredded and requires mending before it can be worn again!</b></span>"
 		return
@@ -161,7 +155,6 @@
 				. += "<span class='warning'>The [zone_name] is heavily shredded!</span>"
 			if(30 to 59)
 				. += "<span class='danger'>The [zone_name] is partially shredded.</span>"
-	//
 	var/datum/component/storage/pockets = GetComponent(/datum/component/storage)
 	if(pockets)
 		var/list/how_cool_are_your_threads = list("<span class='notice'>")
@@ -179,10 +172,8 @@
 		. += how_cool_are_your_threads.Join()
 
 /obj/item/clothing/obj_break(damage_flag)
-	//skyrat edit
 	damaged_clothes = CLOTHING_DAMAGED
 	update_clothes_damaged_state()
-	//
 	if(ismob(loc)) //It's not important enough to warrant a message if nobody's wearing it
 		var/mob/M = loc
 		to_chat(M, "<span class='warning'>Your [name] starts to fall apart!</span>")
@@ -263,13 +254,12 @@ BLIND     // can't see anything
 
 
 /obj/item/clothing/obj_destruction(damage_flag)
-	if(damage_flag == "bomb") //skyrat edit
+	if(damage_flag == "bomb")
 		var/turf/T = get_turf(src)
 		spawn(1) //so the shred survives potential turf change from the explosion.
 			var/obj/effect/decal/cleanable/shreds/Shreds = new(T)
 			Shreds.desc = "The sad remains of what used to be [name]."
 		deconstruct(FALSE)
-	//skyrat edit
 	else if(!(damage_flag in list("acid", "fire")))
 		damaged_clothes = CLOTHING_SHREDDED
 		body_parts_covered = NONE
@@ -280,7 +270,6 @@ BLIND     // can't see anything
 			var/mob/M = loc
 			M.visible_message("<span class='danger'>[M]'s [src.name] falls off, completely shredded!</span>", "<span class='warning'><b>Your [src.name] falls off, completely shredded!</b></span>", vision_distance = COMBAT_MESSAGE_RANGE)
 			M.dropItemToGround(src)
-	//
 	else
 		..()
 
@@ -319,7 +308,6 @@ BLIND     // can't see anything
 
 	return TRUE
 
-//skyrat edit h
 /// Set the clothing's integrity back to 100%, remove all damage to bodyparts, and generally fix it up
 /obj/item/clothing/proc/repair(mob/user, params)
 	damaged_clothes = CLOTHING_PRISTINE

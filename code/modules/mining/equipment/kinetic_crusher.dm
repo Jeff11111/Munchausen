@@ -42,7 +42,7 @@
 /obj/item/kinetic_crusher/ComponentInitialize()
 	. = ..()
 	AddComponent(/datum/component/butchering, 60, 110) //technically it's huge and bulky, but this provides an incentive to use it
-	AddComponent(/datum/component/overlay_lighting, "#FFFFFF", brightness_on, 1, FALSE) //Skyrat change
+	AddComponent(/datum/component/overlay_lighting, "#FFFFFF", brightness_on, 1, FALSE)
 	AddComponent(/datum/component/two_handed, force_unwielded=0, force_wielded=20)
 
 /obj/item/kinetic_crusher/Destroy()
@@ -145,8 +145,8 @@
 					C.total_damage += detonation_damage
 				L.apply_damage(detonation_damage, BRUTE, blocked = def_check)
 
-			if(user && lavaland_equipment_pressure_check(get_turf(user))) //CIT CHANGE - makes sure below only happens in low pressure environments
-				user.adjustStaminaLoss(-30)//CIT CHANGE - makes crushers heal stamina
+			if(user && lavaland_equipment_pressure_check(get_turf(user))) //ARTI - check if it's actually fucking good
+				user.adjustStaminaLoss(-30)
 
 /obj/item/kinetic_crusher/proc/Recharge()
 	if(!charged)

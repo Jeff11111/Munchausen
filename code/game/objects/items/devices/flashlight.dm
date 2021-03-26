@@ -27,7 +27,7 @@
 		on = TRUE
 	if(!powercell)
 		powercell = new starting_cell(src)
-	AddComponent(/datum/component/overlay_lighting, light_color, brightness_on, flashlight_power, FALSE) //Skyrat change
+	AddComponent(/datum/component/overlay_lighting, light_color, brightness_on, flashlight_power, FALSE)
 	update_brightness()
 
 /obj/item/flashlight/proc/update_brightness(mob/user)
@@ -241,7 +241,7 @@
 		var/T = get_turf(target)
 		if(locate(/mob/living) in T)
 			new /obj/effect/temp_visual/medical_holosign(T,user) //produce a holographic glow
-			holo_cooldown = world.time + 10 SECONDS //skyrat change
+			holo_cooldown = world.time + 10 SECONDS
 			return
 
 /obj/effect/temp_visual/medical_holosign
@@ -418,7 +418,6 @@
 	color = LIGHT_COLOR_GREEN
 	light_color = LIGHT_COLOR_GREEN
 
-//Skyrat edit - möth
 /obj/item/flashlight/lantern/heirloom_moth
 	name = "old lantern"
 	desc = "An old lantern that has seen plenty of use."
@@ -433,7 +432,6 @@
 	icon_state = "syndilantern"
 	item_state = "syndilantern"
 	brightness_on = 10
-//
 
 /obj/item/flashlight/slime
 	gender = PLURAL
@@ -620,7 +618,7 @@
 	item_state = "flashdark"
 	brightness_on = 2.5
 	flashlight_power = -3
-	color = "#000000" //Skyrat change
+	color = "#000000"
 
 /obj/item/flashlight/eyelight
 	name = "eyelight"

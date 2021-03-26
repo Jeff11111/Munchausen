@@ -191,9 +191,7 @@
 						dat += "<br>General Record Lost!<br>"
 					if((istype(active2, /datum/data/record) && GLOB.data_core.security.Find(active2)))
 						dat += "<font size='4'><b>Security Data</b></font>"
-						//Skyrat changes
 						dat += "<br>Security Records: <A href='?src=[REF(src)];choice=View Past Security'>View</A>"
-						//End of skyrat changes
 						dat += "<br>Criminal Status: <A href='?src=[REF(src)];choice=Edit Field;field=criminal'>[active2.fields["criminal"]]</A>"
 						dat += "<br><br>Minor Crimes: <A href='?src=[REF(src)];choice=Edit Field;field=mi_crim_add'>Add New</A>"
 
@@ -273,7 +271,6 @@ What a mess.*/
 	if(usr.contents.Find(src) || (in_range(src, usr) && isturf(loc)) || hasSiliconAccessInArea(usr) || IsAdminGhost(usr))
 		usr.set_machine(src)
 		switch(href_list["choice"])
-			//SKYRAT EDIT
 			if("View Past Security")
 				if(istype(active2, /datum/data/record))
 					temp = "<h5>Security Records:</h5>"
@@ -287,7 +284,6 @@ What a mess.*/
 					temp += "<ul>"
 					temp += "<li>[active1.fields["past_records"]]</li>"
 					temp += "</ul>"
-			//END OF SKYRAT EDIT
 // SORTING!
 			if("Sorting")
 				// Reverse the order if clicked twice
@@ -372,19 +368,15 @@ What a mess.*/
 						P.info += text("Name: [] ID: []<BR>\nGender: []<BR>\nAge: []<BR>", active1.fields["name"], active1.fields["id"], active1.fields["gender"], active1.fields["age"])
 						P.info += "\nSpecies: [active1.fields["species"]]<BR>"
 						P.info += text("\nFingerprint: []<BR>\nPhysical Status: []<BR>\nMental Status: []<BR>", active1.fields["fingerprint"], active1.fields["p_stat"], active1.fields["m_stat"])
-						//SKYRAT EDIT
 						if(!(active1.fields["past_records"] == ""))
 							P.info += "\nGeneral Records:\n[active1.fields["past_records"]]\n"
-						//END OF SKYRAT EDIT
 					else
 						P.info += "<B>General Record Lost!</B><BR>"
 					if((istype(active2, /datum/data/record) && GLOB.data_core.security.Find(active2)))
-						P.info += text("<BR>\n<CENTER><B>Security Data</B></CENTER><BR>\n") //Skyrat -split
-						//SKYRAT EDIT
+						P.info += text("<BR>\n<CENTER><B>Security Data</B></CENTER><BR>\n")
 						if(!(active2.fields["past_records"] == ""))
 							P.info += "\nSecurity Records:\n[active2.fields["past_records"]]\n"
-						//END OF SKYRAT EDIT
-						P.info += text("Criminal Status: []", active2.fields["criminal"]) //Skyrat -split
+						P.info += text("Criminal Status: []", active2.fields["criminal"])
 
 						P.info += "<BR>\n<BR>\nMinor Crimes:<BR>\n"
 						P.info +={"<table style="text-align:center;" border="1" cellspacing="0" width="100%">

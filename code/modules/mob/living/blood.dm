@@ -187,13 +187,11 @@
 /mob/living/proc/restore_blood()
 	blood_volume = initial(blood_volume)
 
-/mob/living/carbon/restore_blood() //skyrat edit
+/mob/living/carbon/restore_blood()
 	blood_volume = (BLOOD_VOLUME_NORMAL * blood_ratio)
-	//skyrat edit
 	for(var/i in bodyparts)
 		var/obj/item/bodypart/BP = i
 		BP.generic_bleedstacks = 0
-	//
 
 /****************************************************
 				BLOOD TRANSFERS
@@ -252,13 +250,11 @@
 			blood_data["viruses"] += D.Copy()
 
 		blood_data["blood_DNA"] = dna.unique_enzymes
-		//skyrat edit
 		blood_data["bloodcolor"] = dna.species.exotic_blood_color
 		if(dna.blood_color)
 			blood_data["bloodcolor"] = dna.blood_color
 		if(!blood_data["bloodcolor"])
 			blood_data["bloodcolor"] = BLOOD_COLOR_HUMAN
-		//
 		if(disease_resistances && disease_resistances.len)
 			blood_data["resistances"] = disease_resistances.Copy()
 		var/list/temp_chem = list()
@@ -336,7 +332,6 @@
 		"SY" = list("SY"),
 		"GEL" = list("GEL","SY"),
 		"BUG" = list("BUG", "SY"),
-		//Skyrat change - more blood
 		"PL" = list("PL", "SY"),
 		"AL" = list("AL", "SY"),
 		"GREY" = list("GREY", "SY"),

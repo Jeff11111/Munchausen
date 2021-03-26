@@ -235,12 +235,6 @@
 
 	G.AddComponent(/datum/component/slippery, min(stun_len,140), NONE, CALLBACK(src, .proc/handle_slip, G))
 
-/*moved to modular_skyrat
-/datum/plant_gene/trait/slip/proc/handle_slip(obj/item/reagent_containers/food/snacks/grown/G, mob/M)
-	for(var/datum/plant_gene/trait/T in G.seed.genes)
-		T.on_slip(G, M)
-*/
-
 /datum/plant_gene/trait/cell_charge
 	// Cell recharging trait. Charges all mob's power cells to (potency*rate)% mark when eaten.
 	// Generates sparks on squash.
@@ -441,17 +435,6 @@
 
 /datum/plant_gene/trait/smoke
 	name = "gaseous decomposition"
-
-/**** moved to modular_skyrat
-/datum/plant_gene/trait/smoke/on_squash(obj/item/reagent_containers/food/snacks/grown/G, atom/target)
-	var/datum/effect_system/smoke_spread/chem/S = new
-	var/splat_location = get_turf(target)
-	var/smoke_amount = round(sqrt(G.seed.potency * 0.1), 1)
-	S.attach(splat_location)
-	S.set_up(G.reagents, smoke_amount, splat_location, 0)
-	S.start()
-	G.reagents.clear_reagents()
-*/
 
 /datum/plant_gene/trait/fire_resistance // Lavaland
 	name = "Fire Resistance"

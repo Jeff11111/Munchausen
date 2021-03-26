@@ -2,7 +2,7 @@
 
 /obj/item/projectile/bullet/n762
 	name = "7.62x38mmR bullet"
-	damage = 50     //Skyrat edit: Weaker than .357 but still very effective
+	damage = 50
 	wound_bonus = -15
 
 // .50AE (Desert Eagle)
@@ -10,7 +10,7 @@
 /obj/item/projectile/bullet/a50AE
 	name = ".50AE bullet"
 	damage = 65
-	armour_penetration = 30     //Skyrat edit: It's .50 AE, seriously? Why did it have no AP?
+	armour_penetration = 30
 
 // .38 (Detective's Gun)
 
@@ -64,7 +64,7 @@
 
 /obj/item/projectile/bullet/c38/rubber
 	name = ".38 rubber bullet"
-	damage = 12      //Skyrat edit: A rubber pistol bullet of this caliber should NOT deal 15 brute.
+	damage = 12
 	stamina = 15
 	pain = 56
 	embedding = EMBED_NONE
@@ -115,7 +115,7 @@
 
 /obj/item/projectile/bullet/a357
 	name = ".357 bullet"
-	damage = 58  //Skyrat edit: Now it's 116 brute in 2 shots instead of a 2-shot critical, this lets the .357 round be outstanding against slightly injured targets but not 2-shot a fullhealth guy.
+	damage = 58
 	wound_bonus = -10
 
 /obj/item/projectile/bullet/a357/ap

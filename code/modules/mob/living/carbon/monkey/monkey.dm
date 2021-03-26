@@ -177,14 +177,14 @@
 	if(prob(10))
 		var/obj/item/clothing/head/helmet/justice/escape/helmet = new(src)
 		equip_to_slot_or_del(helmet,SLOT_HEAD)
-		helmet.attack_self(src) // todo encapsulate toggle
+		helmet.attack_self(src) //TODO: encapsulate toggle
 
 /mob/living/carbon/monkey/coder
 	name = "coder monkey"
 	aggressive = TRUE
 	verb_say = "criticizes"
 
-/mob/living/carbon/monkey/coder/Initialize() //Skyrats edit, donor hair removed.
+/mob/living/carbon/monkey/coder/Initialize()
 	. = ..()
 	var/list/possible_hats = list(
 		/obj/item/clothing/head/cone = 2,

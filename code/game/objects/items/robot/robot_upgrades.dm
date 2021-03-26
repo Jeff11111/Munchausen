@@ -78,9 +78,6 @@
 			to_chat(R, "<span class='notice'>A VTEC unit is already installed!</span>")
 			to_chat(user, "<span class='notice'>There's no room for another VTEC unit!</span>")
 			return FALSE
-
-		//R.speed = -2 // Gotta go fast.
-        //Citadel change - makes vtecs give an ability rather than reducing the borg's speed instantly
 		R.AddAbility(new/obj/effect/proc_holder/silicon/cyborg/vtecControl)
 		R.cansprint = 0
 
@@ -536,48 +533,6 @@
 	name = "borg expander"
 	desc = "A cyborg resizer, it makes a cyborg huge."
 	icon_state = "cyborg_upgrade3"
-/* moved to modular_skyrat
-/obj/item/borg/upgrade/expand/action(mob/living/silicon/robot/R, user = usr)
-	. = ..()
-	if(.)
-
-		if(R.hasExpanded)
-			to_chat(usr, "<span class='notice'>This unit already has an expand module installed!</span>")
-			return FALSE
-
-<<<<<<< HEAD
-		if(R.hasShrunk)
-			to_chat(usr, "<span class='notice'>This unit already has an shrink module installed!</span>")
-			return FALSE
-
-		R.notransform = TRUE
-=======
-		R.mob_transforming = TRUE
->>>>>>> 2cd18f3dba... Merge pull request #12557 from silicons/life
-		var/prev_locked_down = R.locked_down
-		R.SetLockdown(1)
-		R.anchored = TRUE
-		var/datum/effect_system/smoke_spread/smoke = new
-		smoke.set_up(1, R.loc)
-		smoke.start()
-		sleep(2)
-		for(var/i in 1 to 4)
-			playsound(R, pick('sound/items/drill_use.ogg', 'sound/items/jaws_cut.ogg', 'sound/items/jaws_pry.ogg', 'sound/items/welder.ogg', 'sound/items/ratchet.ogg'), 80, 1, -1)
-			sleep(12)
-		if(!prev_locked_down)
-			R.SetLockdown(0)
-		R.anchored = FALSE
-		R.mob_transforming = FALSE
-		R.resize = 2
-		R.hasExpanded = TRUE
-		R.update_transform()
-
-/obj/item/borg/upgrade/expand/deactivate(mob/living/silicon/robot/R, user = usr)
-	. = ..()
-	if (.)
-		R.resize = 0.5
-		R.hasExpanded = FALSE
-		R.update_transform()*/
 
 /obj/item/borg/upgrade/rped
 	name = "engineering cyborg BSRPED"

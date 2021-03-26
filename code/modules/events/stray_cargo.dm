@@ -70,7 +70,7 @@
 		var/list/safe_area_types = typecacheof(list(
 		/area/ai_monitored/turret_protected/ai,
 		/area/ai_monitored/turret_protected/ai_upload,
-		/area/crew_quarters/dorms, // Skyrat Edit
+		/area/crew_quarters/dorms,
 		/area/engine,
 		/area/shuttle)
 		)
@@ -86,8 +86,8 @@
 /datum/round_event_control/stray_cargo/syndicate
 	name = "Stray Syndicate Cargo Pod"
 	typepath = /datum/round_event/stray_cargo/syndicate
-	weight = 0 //Upstream Edit, turns weight from 6 to 0 to disable
-	max_occurrences = 1 //Upstream Edit, turns max occurances from 1 to 0 to disable.
+	weight = 0
+	max_occurrences = 1
 	earliest_start = 30 MINUTES
 
 /datum/round_event/stray_cargo/syndicate

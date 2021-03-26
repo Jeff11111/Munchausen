@@ -50,7 +50,7 @@
 						</div>
 						</body>
 						</html>
-					 "} //SKYRAT CHANGE - FUNNY MECH GPS
+					 "}
 
 
 
@@ -151,7 +151,6 @@
 		. += "<div id='[REF(MT)]'>[MT.get_equip_info()]</div>"
 	. += "</div>"
 
-//SKYRAT CHANGE - funny gps
 //terrible html formatting below, be warned.
 /obj/mecha/proc/gps_info()
 	var/obj/item/mecha_parts/mecha_equipment/gps/funny = null

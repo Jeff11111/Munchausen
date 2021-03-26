@@ -232,8 +232,6 @@
 /obj/item/storage/pill_bottle/ComponentInitialize()
 	. = ..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	//STR.storage_flags = STORAGE_FLAGS_VOLUME_DEFAULT //Skyrat change
-	//STR.max_volume = STORAGE_VOLUME_PILL_BOTTLE //Skyrat change
 	STR.allow_quick_gather = TRUE
 	STR.click_gather = TRUE
 	STR.can_hold = typecacheof(list(/obj/item/reagent_containers/pill, /obj/item/dice))
@@ -580,7 +578,6 @@
 	for(var/i in 1 to 7)
 		new /obj/item/reagent_containers/glass/bottle/vial/small( src )
 
-//skyrat edit
 /obj/item/storage/firstaid/emergency
 	icon_state = "medbriefcase"
 	name = "emergency first-aid kit"

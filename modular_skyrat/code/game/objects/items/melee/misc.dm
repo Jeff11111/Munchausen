@@ -60,7 +60,7 @@
     if(!HAS_TRAIT(user, TRAIT_MINDSHIELD))
         clowning_around(user)
         return TRUE
-    if(IS_STAMCRIT(user))            //CIT CHANGE - makes it impossible to baton in stamina softcrit
+    if(IS_STAMCRIT(user))
         to_chat(user, "<span class='danger'>You're too exhausted for that.</span>")
         return TRUE
     if(ishuman(M))
@@ -70,7 +70,7 @@
     if(turned_on)
         if(baton_stun(M, user, disarming))
             user.do_attack_animation(M)
-            user.adjustStaminaLossBuffered(getweight())        //CIT CHANGE - makes stunbatonning others cost stamina
+            user.adjustStaminaLossBuffered(getweight())
     else if(user.a_intent != INTENT_HARM)            //they'll try to bash in the last proc.
         M.visible_message("<span class='warning'>[user] has prodded [M] with [src]. Luckily it was off.</span>", \
                         "<span class='warning'>[user] has prodded you with [src]. Luckily it was off</span>")

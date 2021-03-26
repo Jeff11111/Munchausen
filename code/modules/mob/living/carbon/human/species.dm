@@ -17,7 +17,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	var/has_field_of_vision = TRUE
 
 	//Species Icon Drawing Offsets - Pixel X, Pixel Y, Aka X = Horizontal and Y = Vertical, from bottom left corner
-	var/list/offset_features = list( //skyrat edit
+	var/list/offset_features = list(
 		OFFSET_UNIFORM = list(0,0),
 		OFFSET_UNDERWEAR = list(0,0),
 		OFFSET_SOCKS = list(0,0),
@@ -162,9 +162,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(S.check_roundstart_eligible())
 			GLOB.roundstart_races |= S.id
 			GLOB.roundstart_race_names["[S.name]"] = S.id
-			//skyrat edit
 			GLOB.roundstart_race_datums["[S.id]"] = S
-			//
 	if(!GLOB.roundstart_races.len)
 		GLOB.roundstart_races += "human"
 
@@ -486,7 +484,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	var/dynamic_fhair_suffix = ""
 
 	//for augmented heads
-	if(HD.is_robotic_limb() && !HD.render_like_organic) //Skyrat change, robo limbs that render like organic
+	if(HD.is_robotic_limb() && !HD.render_like_organic)
 		return
 
 	//we check if our hat or helmet hides our facial hair.
@@ -724,19 +722,19 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			bodyparts_to_add -= "waggingspines"
 
 	if(mutant_bodyparts["snout"]) //Take a closer look at that snout!
-		if((H.wear_mask && (H.wear_mask.flags_inv & HIDESNOUT)) || (H.head && (H.head.flags_inv & HIDESNOUT)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic)) //Skyrat change, robo limbs that render like organic
+		if((H.wear_mask && (H.wear_mask.flags_inv & HIDESNOUT)) || (H.head && (H.head.flags_inv & HIDESNOUT)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic))
 			bodyparts_to_add -= "snout"
 
 	if(mutant_bodyparts["frills"])
-		if(!H.dna.features["frills"] || H.dna.features["frills"] == "None" || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic)) //skyrat change
+		if(!H.dna.features["frills"] || H.dna.features["frills"] == "None" || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic))
 			bodyparts_to_add -= "frills"
 
 	if(mutant_bodyparts["horns"])
-		if(!H.dna.features["horns"] || H.dna.features["horns"] == "None" || H.head && (H.head.flags_inv & HIDEHAIR) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEHAIR)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic)) //skyrat change
+		if(!H.dna.features["horns"] || H.dna.features["horns"] == "None" || H.head && (H.head.flags_inv & HIDEHAIR) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEHAIR)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic))
 			bodyparts_to_add -= "horns"
 
 	if(mutant_bodyparts["ears"])
-		if(!H.dna.features["ears"] || H.dna.features["ears"] == "None" || H.head && (H.head.flags_inv & HIDEEARS) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEEARS)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic)) //skyrat change
+		if(!H.dna.features["ears"] || H.dna.features["ears"] == "None" || H.head && (H.head.flags_inv & HIDEEARS) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEEARS)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic))
 			bodyparts_to_add -= "ears"
 
 	if(mutant_bodyparts["wings"])
@@ -753,7 +751,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(!H.dna.features["insect_fluff"] || H.dna.features["insect_fluff"] == "None" || H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
 			bodyparts_to_add -= "insect_fluff"
 
-	//CITADEL EDIT
 	//Race specific bodyparts:
 	//Synthetics
 	if(mutant_bodyparts["ipc_screen"])
@@ -764,7 +761,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		if(!H.dna.features["xenodorsal"] || H.dna.features["xenodorsal"] == "None" || (H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT)))
 			bodyparts_to_add -= "xenodorsal"
 	if(mutant_bodyparts["xenohead"])//This is an overlay for different castes using different head crests
-		if(!H.dna.features["xenohead"] || H.dna.features["xenohead"] == "None" || H.head && (H.head.flags_inv & HIDEHAIR) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEHAIR)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic)) //skyrat change
+		if(!H.dna.features["xenohead"] || H.dna.features["xenohead"] == "None" || H.head && (H.head.flags_inv & HIDEHAIR) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEHAIR)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic))
 			bodyparts_to_add -= "xenohead"
 	if(mutant_bodyparts["xenotail"])
 		if(!H.dna.features["xenotail"] || H.dna.features["xenotail"] == "None" || H.wear_suit && (H.wear_suit.flags_inv & HIDEJUMPSUIT))
@@ -782,11 +779,11 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			bodyparts_to_add -= "mam_waggingtail"
 
 	if(mutant_bodyparts["mam_ears"])
-		if(!H.dna.features["mam_ears"] || H.dna.features["mam_ears"] == "None" || H.head && (H.head.flags_inv & HIDEEARS) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEEARS)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic)) //skyrat change
+		if(!H.dna.features["mam_ears"] || H.dna.features["mam_ears"] == "None" || H.head && (H.head.flags_inv & HIDEEARS) || (H.wear_mask && (H.wear_mask.flags_inv & HIDEEARS)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic))
 			bodyparts_to_add -= "mam_ears"
 
 	if(mutant_bodyparts["mam_snouts"]) //Take a closer look at that snout!
-		if((H.wear_mask && (H.wear_mask.flags_inv & HIDESNOUT)) || (H.head && (H.head.flags_inv & HIDESNOUT)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic)) //Skyrat change, robo limbs that render like organic
+		if((H.wear_mask && (H.wear_mask.flags_inv & HIDESNOUT)) || (H.head && (H.head.flags_inv & HIDESNOUT)) || !istype(HD) || (HD.is_robotic_limb() && !HD.render_like_organic))
 			bodyparts_to_add -= "mam_snouts"
 
 	if(mutant_bodyparts["taur"])
@@ -1155,7 +1152,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				return FALSE
 			if( !(I.slot_flags & ITEM_SLOT_GLOVES) )
 				return FALSE
-			if(num_hands < 2) //skyrat edit
+			if(num_hands < 2)
 				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_WRISTS)
@@ -1171,7 +1168,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				return FALSE
 			if( !(I.slot_flags & ITEM_SLOT_FEET) )
 				return FALSE
-			if(num_feet < 2) //skyrat edit
+			if(num_feet < 2)
 				return FALSE
 			if(DIGITIGRADE in species_traits)
 				if(!is_species(H, /datum/species/lizard/ashwalker))
@@ -1207,7 +1204,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			if(!H.get_bodypart_nostump(BODY_ZONE_HEAD))
 				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
-		if(SLOT_EARS_LEFT) //skyrat edit
+		if(SLOT_EARS_LEFT)
 			if(H.ears)
 				return FALSE
 			if(!(I.slot_flags & ITEM_SLOT_EARS))
@@ -1362,12 +1359,10 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	if(chem.type == exotic_blood && !istype(exotic_blood, /datum/reagent/blood))
 		H.blood_volume = min(H.blood_volume + round(chem.volume, 0.1), BLOOD_VOLUME_MAXIMUM)
 		H.reagents.del_reagent(chem.type)
-		//skyrat edit - we try to revive the carbon mob if it happens to be a synthetic
 		if(length(species_traits) && (ROBOTIC_LIMBS in species_traits) && length(H.bodyparts))
 			var/obj/item/bodypart/affecting = H.bodyparts[1]
 			if(istype(affecting))
 				affecting.heal_damage(0, 0, 0, TRUE, FALSE, FALSE)
-		//skyrat edit end
 		return TRUE
 	return FALSE
 
@@ -1571,7 +1566,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 //////////////////
 
 /datum/species/proc/help(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style, rightclick = FALSE)
-	if(attacker_style && attacker_style.help_act(user,target)) // SKYRAT EDIT
+	if(attacker_style && attacker_style.help_act(user,target))
 		return TRUE
 
 	var/we_breathe = !HAS_TRAIT(user, TRAIT_NOBREATH)
@@ -1641,9 +1636,9 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	if(!attacker_style && HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, "<span class='warning'>I don't want to harm <b>[target]</b>!</span>")
 		return FALSE
-	if(IS_STAMCRIT(user)) //CITADEL CHANGE - makes it impossible to punch while in stamina softcrit
-		to_chat(user, "<span class='warning'>I'm too exhausted!</span>") //CITADEL CHANGE - ditto
-		return FALSE //CITADEL CHANGE - ditto
+	if(IS_STAMCRIT(user))
+		to_chat(user, "<span class='warning'>I'm too exhausted!</span>")
+		return FALSE
 	if(target.check_martial_melee_block())
 		target.visible_message("<span class='warning'><b>[target]</b> blocks <b>[user]</b>'s attack!</span>", target = user, \
 			target_message = "<span class='warning'><b>[target]</b> blocks your attack!</span>")
@@ -1674,7 +1669,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 				target.visible_message("<span class='danger'><b>[target]</b> dodges <b>[user]</b>!</span>")
 				return FALSE
 
-	if(HAS_TRAIT(user, TRAIT_PUGILIST))//CITADEL CHANGE - makes punching cause staminaloss but funny martial artist types get a discount
+	if(HAS_TRAIT(user, TRAIT_PUGILIST))
 		user.adjustStaminaLossBuffered(1.5)
 	else
 		user.adjustStaminaLossBuffered(3.5)
@@ -1711,14 +1706,13 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 		var/punchedstam = target.getStaminaLoss()
 		var/punchedbrute = target.getBruteLoss()
 
-		//CITADEL CHANGES - makes resting and disabled combat mode reduce punch damage, makes being out of combat mode result in you taking more damage
+		//makes resting and disabled combat mode reduce punch damage, makes being out of combat mode result in you taking more damage
 		if(SEND_SIGNAL(target, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
 			damage *= 1.1
 		if(!CHECK_MOBILITY(user, MOBILITY_STAND))
 			damage *= 0.75
 		if(SEND_SIGNAL(user, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
 			damage *= 0.9
-		//END OF CITADEL CHANGES
 
 		//If the user has bad st, sometimes... the attack gets really shit
 		var/pitiful = FALSE
@@ -1856,7 +1850,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	return
 
 /datum/species/proc/disarm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style, rightclick = FALSE)
-	// CITADEL EDIT slap mouthy gits and booty
 	var/aim_for_mouth = user.zone_selected == "mouth"
 	var/target_on_help = target.a_intent == INTENT_HELP
 	var/target_aiming_for_mouth = target.zone_selected == "mouth"
@@ -1865,7 +1858,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	var/aim_for_groin  = user.zone_selected == "groin"
 	var/target_aiming_for_groin = target.zone_selected == "groin"
 
-	if(target.check_martial_melee_block()) //END EDIT
+	if(target.check_martial_melee_block())
 		target.visible_message("<span class='warning'><b>[target]</b> blocks <b>[user]</b>'s disarm attempt!</span>", target = user, \
 			target_message = "<span class='warning'><b>[target]</b> blocks your disarm attempt!</span>")
 		return FALSE
@@ -1928,7 +1921,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 	else
 		user.do_attack_animation(target, ATTACK_EFFECT_DISARM)
 
-		if(HAS_TRAIT(user, TRAIT_PUGILIST))//CITADEL CHANGE - makes disarmspam cause staminaloss, pugilists can do it almost effortlessly
+		if(HAS_TRAIT(user, TRAIT_PUGILIST))
 			user.adjustStaminaLossBuffered(1)
 		else
 			user.adjustStaminaLossBuffered(3)
@@ -1954,12 +1947,12 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			log_combat(user, target, "disarmed out of grab from")
 			return
 		var/randn = rand(1, 100)
-		if(SEND_SIGNAL(target, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE)) // CITADEL CHANGE
-			randn += -10 //CITADEL CHANGE - being out of combat mode makes it easier for you to get disarmed
-		if(!CHECK_MOBILITY(user, MOBILITY_STAND)) //CITADEL CHANGE
-			randn += 100 //CITADEL CHANGE - No kosher disarming if you're resting
-		if(SEND_SIGNAL(user, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE)) //CITADEL CHANGE
-			randn += 25 //CITADEL CHANGE - Makes it harder to disarm outside of combat mode
+		if(SEND_SIGNAL(target, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
+			randn += -10 //being out of combat mode makes it easier for you to get disarmed
+		if(!CHECK_MOBILITY(user, MOBILITY_STAND))
+			randn += 100 //No kosher disarming if you're resting
+		if(SEND_SIGNAL(user, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
+			randn += 25 //Makes it harder to disarm outside of combat mode
 		if(user.pulling == target)
 			randn -= 20 //If you have the time to get someone in a grab, you should have a greater chance at snatching the thing in their hand. Will be made completely obsolete by the grab rework but i've got a poor track record for releasing big projects on time so w/e i guess
 		if(HAS_TRAIT(user, TRAIT_PUGILIST))
@@ -1979,7 +1972,7 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			if(dex)
 				randn /= dex.get_disarm_mult()
 
-		if(randn <= 35)//CIT CHANGE - changes this back to a 35% chance to accomodate for the above being commented out in favor of right-click pushing
+		if(randn <= 35)
 			var/obj/item/I = null
 			if(target.pulling)
 				target.visible_message("<span class='warning'><b>[user]</b> has broken <b>[target]</b>'s grip on [target.pulling]!</span>", \
@@ -2197,7 +2190,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 						H.visible_message("<span class='danger'><b>[H]</b> has been knocked down!</span>", \
 									"<span class='userdanger'><b>[H]</b> has been knocked down!</span>")
 						H.apply_effect(60, EFFECT_KNOCKDOWN, armor_block)
-					//skyrat edit
 					if(H.w_underwear)
 						H.w_underwear.add_mob_blood(H)
 						H.update_inv_w_underwear()
@@ -2207,7 +2199,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 					if(H.w_shirt)
 						H.w_underwear.add_mob_blood(H)
 						H.update_inv_w_shirt()
-					//
 
 				if(bloody)
 					if(H.wear_suit)
@@ -2299,14 +2290,12 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 		if(target.w_uniform)
 			target.w_uniform.add_fingerprint(user)
-		//skyrat edit
 		else if(target.w_shirt)
 			target.w_shirt.add_fingerprint(user)
 		else if(target.w_socks)
 			target.w_socks.add_fingerprint(user)
 		else if(target.w_underwear)
 			target.w_underwear.add_fingerprint(user)
-		//
 		SEND_SIGNAL(target, COMSIG_HUMAN_DISARM_HIT, user, user.zone_selected)
 
 		if(CHECK_MOBILITY(target, MOBILITY_STAND))
@@ -2539,14 +2528,12 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 		//CHEST//
 		var/obj/item/clothing/chest_clothes = null
-		//skyrat edit
 		if(H.w_underwear && (H.w_underwear.body_parts_covered & CHEST))
 			chest_clothes = H.w_underwear
 		if(H.w_socks && (H.w_socks.body_parts_covered & CHEST))
 			chest_clothes = H.w_socks
 		if(H.w_shirt && (H.w_shirt.body_parts_covered & CHEST))
 			chest_clothes = H.w_shirt
-		//
 		if(H.w_uniform)
 			chest_clothes = H.w_uniform
 		if(H.wear_suit)
@@ -2557,7 +2544,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 		//ARMS & HANDS//
 		var/obj/item/clothing/arm_clothes = null
-		//skyrat edit
 		if(H.wrists)
 			arm_clothes = H.wrists
 		if(H.w_underwear && (H.w_underwear.body_parts_covered & ARMS))
@@ -2566,7 +2552,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 			arm_clothes = H.w_socks
 		if(H.w_shirt && (H.w_shirt.body_parts_covered & ARMS))
 			arm_clothes = H.w_shirt
-		//
 		if(H.gloves)
 			arm_clothes = H.gloves
 		if(H.w_uniform && ((H.w_uniform.body_parts_covered & HANDS) || (H.w_uniform.body_parts_covered & ARMS)))
@@ -2578,14 +2563,12 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 		//LEGS & FEET//
 		var/obj/item/clothing/leg_clothes = null
-		//skyrat edit
 		if(H.w_underwear && (H.w_underwear.body_parts_covered & LEGS))
 			leg_clothes = H.w_underwear
 		if(H.w_socks && (H.w_socks.body_parts_covered & LEGS))
 			leg_clothes = H.w_socks
 		if(H.w_shirt && (H.w_shirt.body_parts_covered & LEGS))
 			leg_clothes = H.w_shirt
-		//
 		if(H.shoes)
 			leg_clothes = H.shoes
 		if(H.w_uniform && ((H.w_uniform.body_parts_covered & FEET) || (H.w_uniform.body_parts_covered & LEGS)))
@@ -2650,7 +2633,6 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 /datum/species/proc/stop_wagging_tail(mob/living/carbon/human/H)
 
-//skyrat edit
 
 /**
   * The human species version of [/mob/living/carbon/proc/get_biological_state]. Depends on the HAS_FLESH and HAS_BONE species traits, having bones lets you have blunt wounds, having flesh lets you have burn, slash, and piercing wounds

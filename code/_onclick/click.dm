@@ -92,7 +92,7 @@
 	if(modifiers["middle"])
 		MiddleClickOn(A, params)
 		return
-	if(modifiers["shift"] && !SEND_SIGNAL(src, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_ACTIVE)) //CIT CHANGE - makes shift-click examine use right click instead of left click in combat mode
+	if(modifiers["shift"] && !SEND_SIGNAL(src, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_ACTIVE))
 		ShiftClickOn(A)
 		return
 	if(modifiers["alt"]) // alt and alt-gr (rightalt)
@@ -102,9 +102,9 @@
 		CtrlClickOn(A)
 		return
 
-	if(modifiers["right"]) //CIT CHANGE - allows right clicking to perform actions
-		RightClickOn(A,params) //CIT CHANGE - ditto
-		return //CIT CHANGE - ditto
+	if(modifiers["right"])
+		RightClickOn(A,params)
+		return
 
 	if(incapacitated(ignore_restraints = 1))
 		return

@@ -14,7 +14,7 @@
 	var/obj/item/restraints/handcuffed //Whether or not the mob is handcuffed
 	var/obj/item/restraints/legcuffed //Same as handcuffs but for legs. Bear traps use this.
 
-	var/list/custom_hallucinations = list() // Skyrat edit
+	var/list/custom_hallucinations = list()
 
 	var/disgust = 0
 

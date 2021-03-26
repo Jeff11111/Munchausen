@@ -25,7 +25,7 @@
 	ship_name = pick(strings(PIRATE_NAMES_FILE, "ship_names"))
 
 /datum/round_event/pirates/announce(fake)
-	priority_announce("A report has been downloaded and printed out at all communications consoles.", "Incoming Classified Message", "commandreport") // CITADEL EDIT metabreak
+	priority_announce("A report has been downloaded and printed out at all communications consoles.", "Incoming Classified Message", "commandreport")
 	if(fake)
 		return
 	threat_message = new
@@ -84,7 +84,7 @@
 			else
 				announce_to_ghosts(spawner)
 
-	priority_announce("A report has been downloaded and printed out at all communications consoles.", "Incoming Classified Message", "commandreport") //CITADEL EDIT also metabreak here too
+	priority_announce("A report has been downloaded and printed out at all communications consoles.", "Incoming Classified Message", "commandreport")
 
 //Shuttle equipment
 

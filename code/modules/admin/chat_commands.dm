@@ -29,7 +29,7 @@
 	last_irc_check = rtod
 	var/server = CONFIG_GET(string/server)
 	return "[GLOB.round_id ? "Round #[GLOB.round_id]: " : ""][GLOB.clients.len] players on [SSmapping.config.map_name]; Round [SSticker.HasRoundStarted() ? (SSticker.IsRoundInProgress() ? "Active" : "Finishing") : "Starting"] -- [server ? server : "[world.internet_address]:[world.port]"]"
-	//CIT CHANGE obfuscates the gamemode for TGS bot commands on discord by removing Mode:[GLOB.master_mode]
+
 /datum/tgs_chat_command/ahelp
 	name = "ahelp"
 	help_text = "<ckey|ticket #> <message|ticket <close|resolve|icissue|reject|reopen <ticket #>|list>>"
@@ -45,7 +45,7 @@
 	if(id != null)
 		var/datum/admin_help/AH = GLOB.ahelp_tickets.TicketByID(id)
 		if(AH)
-			target = AH //Skyrat Change
+			target = AH
 		else
 			return "Ticket #[id] not found!"
 	var/res = IrcPm(target, all_params.Join(" "), sender.friendly_name)

@@ -2,7 +2,7 @@
 	var/speed = 80 //time in deciseconds taken to butcher something
 	var/effectiveness = 100 //percentage effectiveness; numbers above 100 yield extra drops
 	var/bonus_modifier = 0 //percentage increase to bonus item chance
-	var/butcher_sound = 'modular_skyrat/sound/effects/butcher.ogg' //skyrat edit
+	var/butcher_sound = 'modular_skyrat/sound/effects/butcher.ogg'
 	var/butchering_enabled = TRUE
 	var/can_be_blunt = FALSE
 

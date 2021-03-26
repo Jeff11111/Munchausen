@@ -4,8 +4,6 @@
 	layer = MOB_LAYER
 	gender = NEUTER
 	mob_biotypes = MOB_ROBOTIC
-	//light_range = 3 //Skyrat change
-	//light_power = 0.9 //Skyrat change
 	light_color = "#CDDDFF"
 	stop_automated_movement = TRUE
 	wander = FALSE
@@ -261,14 +259,6 @@
 
 	if(!on || client)
 		return
-
-	/*if(!commissioned && can_salute) //Skyrat change - no salutting cause hearers in view is expensive
-		for(var/mob/living/simple_animal/bot/B in get_hearers_in_view(5, get_turf(src)))
-			if(B.commissioned)
-				visible_message("<b>[src]</b> performs an elaborate salute for [B]!")
-				can_salute = FALSE
-				addtimer(VARSET_CALLBACK(src, can_salute, TRUE), salute_delay)
-				break*/
 
 	switch(mode) //High-priority overrides are processed first. Bots can do nothing else while under direct command.
 		if(BOT_RESPONDING)	//Called by the AI.

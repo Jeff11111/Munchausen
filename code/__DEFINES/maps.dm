@@ -38,7 +38,7 @@ require only minor tweaks.
 #define ZTRAIT_VR "Virtual Reality"
 #define ZTRAIT_SPACE_RUINS "Space Ruins"
 #define ZTRAIT_LAVA_RUINS "Lava Ruins"
-#define ZTRAIT_LAVA_JUNGLE_RUINS "Lava Jungle Ruins" //Skyrat change
+#define ZTRAIT_LAVA_JUNGLE_RUINS "Lava Jungle Ruins"
 #define ZTRAIT_ICE_RUINS "Ice Ruins"
 #define ZTRAIT_ICE_RUINS_UNDERGROUND "Ice Ruins Underground"
 #define ZTRAIT_ISOLATED_RUINS "Isolated Ruins" //Placing ruins on z levels with this trait will use turf reservation instead of usual placement.
@@ -75,7 +75,6 @@ require only minor tweaks.
 #define ZTRAITS_CENTCOM list(ZTRAIT_CENTCOM = TRUE)
 #define ZTRAITS_STATION list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_STATION = TRUE)
 #define ZTRAITS_SPACE list(ZTRAIT_LINKAGE = CROSSLINKED, ZTRAIT_SPACE_RUINS = TRUE)
-//SKYRAT CHANGES MORE LAVALAND.
 #define ZTRAITS_LAVALAND list(\
 	ZTRAIT_MINING = TRUE, \
 	ZTRAIT_ASHSTORM = TRUE, \
@@ -83,7 +82,6 @@ require only minor tweaks.
 	ZTRAIT_BOMBCAP_MULTIPLIER = 5, \
 	ZTRAIT_DOWN = -1, \
 	ZTRAIT_BASETURF = /turf/open/lava/smooth/lava_land_surface) //You see Ivan, defines can't be modularized.
-//SKYRAT CHANGES oh a jungle
 #define ZTRAITS_LAVALAND_JUNGLE list(\
 	ZTRAIT_MINING = TRUE, \
 	ZTRAIT_LAVA_JUNGLE_RUINS = TRUE, \

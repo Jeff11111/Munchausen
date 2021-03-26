@@ -69,12 +69,10 @@
 	var/chat_color
 	/// A luminescence-shifted value of the last color calculated for chatmessage overlays
 	var/chat_color_darkened
-	//skyrat vars
 	var/examine_icon
 	var/examine_icon_state
 	///Mobs that are currently do_after'ing this atom, to be cleared from on Destroy()
 	var/list/targeted_by
-	//
 
 /atom/New(loc, ...)
 	//atom creation method that preloads variables at creation
@@ -245,7 +243,7 @@
 				L.transferItemToLoc(M, src)
 			else
 				M.forceMove(src)
-	parts_list.Cut() //Skyrat edit to avoid GC issues
+	parts_list.Cut()
 
 //common name
 /atom/proc/update_multiz(prune_on_fail = FALSE)
@@ -339,10 +337,8 @@
 		. = override.Join("")
 
 ///Generate the full examine string of this atom (including icon for goonchat)
-//skyrat change - custom examine icons
 /atom/proc/get_examine_string(mob/user, thats = FALSE)
 	return "[icon2html(examine_icon ? examine_icon : src, user, examine_icon_state ? examine_icon_state : icon_state)] [thats? "That's ":""][get_examine_name(user)]"
-//end changes (yeah the whole proc was modified)
 
 /atom/proc/examine(mob/user)
 	. = list("[get_examine_string(user, TRUE)].")
@@ -476,10 +472,8 @@
 	var/list/blood_dna = list()
 	if(dna)
 		blood_dna["color"] = dna.species.exotic_blood_color //so when combined, the list grows with the number of colors
-		//skyrat edit - dna blood color
 		if(dna.blood_color)
 			blood_dna["color"] = dna.blood_color
-		//
 		blood_dna[dna.unique_enzymes] = dna.blood_type
 	else
 		blood_dna["color"] = BLOOD_COLOR_HUMAN
@@ -582,7 +576,6 @@
 	else if(w_uniform)
 		w_uniform.add_blood_DNA(blood_dna, diseases)
 		update_inv_w_uniform()
-	//skyrat edit
 	else if(w_underwear)
 		w_underwear.add_blood_DNA(blood_dna, diseases)
 		update_inv_w_underwear()
@@ -595,7 +588,6 @@
 	else if(wrists)
 		wrists.add_blood_DNA(blood_dna, diseases)
 		update_inv_wrists()
-	//
 	if(gloves)
 		var/obj/item/clothing/gloves/G = gloves
 		G.add_blood_DNA(blood_dna, diseases)
@@ -947,8 +939,6 @@
 			log_whisper(log_text)
 		if(LOG_EMOTE)
 			log_emote(log_text)
-		if(LOG_SUBTLER)
-			log_subtler(log_text)
 		if(LOG_DSAY)
 			log_dsay(log_text)
 		if(LOG_PDA)
@@ -1117,7 +1107,6 @@ Proc for attack log creation, because really why not
 			return max_grav
 	return SSmapping.level_trait(T.z, ZTRAIT_GRAVITY)
 
-//skyrat edit section
 /**
   * log_wound() is for when someone is *attacked* and suffers a wound. Note that this only captures wounds from damage, so smites/forced wounds aren't logged, as well as demotions like cuts scabbing over
   *

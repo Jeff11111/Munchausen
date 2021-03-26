@@ -30,7 +30,7 @@
 				/datum/surgery_step/retract_skin,
 				/datum/surgery_step/replace_limb)
 	target_mobtypes = list(/mob/living/carbon/human)
-	possible_locs = ALL_BODYPARTS //skyrat edit
+	possible_locs = ALL_BODYPARTS
 	requires_real_bodypart = TRUE
 	requires_bodypart_type = BODYPART_ORGANIC
 
@@ -43,7 +43,6 @@
 			tool.desc = initial(tool.desc)
 			tool.cut_overlays()
 			tool = tool.contents[1]
-		//skyrat edit
 		if(istype(tool) && user.temporarilyRemoveItemFromInventory(tool))
 			if(tool.body_zone == target_zone)
 				tool.replace_limb(target, TRUE)
@@ -56,7 +55,6 @@
 					BP.replace_limb(target, TRUE)
 				else
 					return FALSE
-		//
 		display_results(user, target, "<span class='notice'>You successfully augment [target]'s [parse_zone(target_zone)].</span>",
 			"[user] successfully augments [target]'s [parse_zone(target_zone)] with [tool]!",
 			"[user] successfully augments [target]'s [parse_zone(target_zone)]!")

@@ -27,13 +27,11 @@
 	time = 24
 
 /datum/surgery_step/pry_off_plating/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	//skyrat edit
 	var/obj/item/bodypart/BP = target.get_bodypart(target_zone)
 	if(istype(BP))
 		var/datum/wound/slash/critical/incision/inch = new()
 		inch.apply_wound(BP, TRUE)
 		BP.generic_bleedstacks += 5
-	//
 	do_sparks(rand(5, 9), FALSE, target.loc)
 	return TRUE
 
@@ -162,14 +160,12 @@
 
 /datum/surgery_step/mechanic_close/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	. = ..()
-	//skyrat edit
 	var/obj/item/bodypart/BP = target.get_bodypart(target_zone)
 	if(istype(BP))
 		for(var/datum/wound/slash/critical/incision/inch in BP.wounds)
 			inch.remove_wound()
 		for(var/datum/wound/mechanical/slash/critical/incision/inch in BP.wounds)
 			inch.remove_wound()
-	//
 
 /datum/surgery_step/mechanic_close/tool_check(mob/user, obj/item/tool, mob/living/carbon/target)
 	if(implement_type == /obj/item && !tool.get_sharpness())

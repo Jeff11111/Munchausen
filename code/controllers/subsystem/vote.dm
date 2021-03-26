@@ -25,7 +25,7 @@ SUBSYSTEM_DEF(vote)
 	var/list/generated_actions = list()
 	var/next_pop = 0
 
-	var/display_votes = SHOW_RESULTS|SHOW_VOTES|SHOW_WINNER|SHOW_ABSTENTION //CIT CHANGE - adds obfuscated/admin-only votes
+	var/display_votes = SHOW_RESULTS|SHOW_VOTES|SHOW_WINNER|SHOW_ABSTENTION //adds obfuscated/admin-only votes
 
 	var/list/stored_gamemode_votes = list() //Basically the last voted gamemode is stored here for end-of-round use.
 
@@ -88,7 +88,7 @@ SUBSYSTEM_DEF(vote)
 	voting.Cut()
 	scores.Cut()
 	cleanup_statclicks()
-	display_votes = initial(display_votes) //CIT CHANGE - obfuscated votes
+	display_votes = initial(display_votes) //obfuscated votes
 	remove_action_buttons()
 
 /datum/controller/subsystem/vote/proc/cleanup_statclicks()
@@ -306,14 +306,14 @@ SUBSYSTEM_DEF(vote)
 				votes = 0
 			if(was_roundtype_vote)
 				stored_gamemode_votes[choices[i]] = votes
-			text += "\n<b>[choices[i]]:</b> [display_votes & SHOW_RESULTS ? votes : "???"]" //CIT CHANGE - adds obfuscated votes
+			text += "\n<b>[choices[i]]:</b> [display_votes & SHOW_RESULTS ? votes : "???"]"
 		if(mode != "custom")
-			if(winners.len > 1 && display_votes & SHOW_WINNER) //CIT CHANGE - adds obfuscated votes
+			if(winners.len > 1 && display_votes & SHOW_WINNER)
 				text = "\n<b>Vote Tied Between:</b>"
 				for(var/option in winners)
 					text += "\n\t[option]"
 			. = pick(winners)
-			text += "\n<b>Vote Result: [display_votes & SHOW_WINNER ? . : "???"]</b>" //CIT CHANGE - adds obfuscated votes
+			text += "\n<b>Vote Result: [display_votes & SHOW_WINNER ? . : "???"]</b>"
 		if(display_votes & SHOW_ABSTENTION)
 			text += "\n<b>Did not vote:</b> [GLOB.clients.len-voted.len]"
 	else if(vote_system == SCORE_VOTING)
@@ -340,7 +340,7 @@ SUBSYSTEM_DEF(vote)
 				if(islist(myvote))
 					for(var/j=1,j<=myvote.len,j++)
 						SSblackbox.record_feedback("nested tally","voting",1,list(vote_title_text,"[j]\th",choices[myvote[j]]))
-	if(!(display_votes & SHOW_RESULTS)) //CIT CHANGE - adds obfuscated votes. this messages admins with the vote's true results
+	if(!(display_votes & SHOW_RESULTS)) //messages admins with the vote's true results
 		var/admintext = "Obfuscated results"
 		if(vote_system != SCORE_VOTING)
 			if(vote_system == SCHULZE_VOTING)
@@ -362,7 +362,7 @@ SUBSYSTEM_DEF(vote)
 	var/restart = 0
 	if(.)
 		switch(mode)
-			if("roundtype") //CIT CHANGE - adds the roundstart extended/secret vote
+			if("roundtype")
 				if(SSticker.current_state > GAME_STATE_PREGAME)//Don't change the mode if the round already started.
 					return message_admins("A vote has tried to change the gamemode, but the game has already started. Aborting.")
 				GLOB.master_mode = .
@@ -480,7 +480,7 @@ SUBSYSTEM_DEF(vote)
 					saved -= usr.ckey
 	return 0
 
-/datum/controller/subsystem/vote/proc/initiate_vote(vote_type, initiator_key, display = display_votes, votesystem = PLURALITY_VOTING, forced = FALSE,vote_time = -1)//CIT CHANGE - adds display argument to votes to allow for obfuscated votes
+/datum/controller/subsystem/vote/proc/initiate_vote(vote_type, initiator_key, display = display_votes, votesystem = PLURALITY_VOTING, forced = FALSE,vote_time = -1)
 	vote_system = votesystem
 	if(!mode)
 		if(started_time)
@@ -500,7 +500,7 @@ SUBSYSTEM_DEF(vote)
 
 		SEND_SOUND(world, sound('sound/misc/notice2.ogg'))
 		reset()
-		display_votes = display //CIT CHANGE - adds obfuscated votes
+		display_votes = display
 		switch(vote_type)
 			if("restart")
 				choices.Add("Restart Round","Continue Playing")
@@ -522,7 +522,7 @@ SUBSYSTEM_DEF(vote)
 					choices |= M
 			if("transfer") // austation begin -- Crew autotranfer vote
 				choices.Add("Initiate Crew Transfer","Continue Playing") // austation end
-			if("roundtype") //CIT CHANGE - adds the roundstart secret/extended vote
+			if("roundtype")
 				choices.Add("secret", "extended")
 			if("mode tiers")
 				var/list/modes_to_add = config.votable_modes
@@ -643,7 +643,7 @@ SUBSYSTEM_DEF(vote)
 							ivotedforthis = ((C.ckey in voted) && (i in voted[C.ckey]))
 					if(!votes)
 						votes = 0
-					. += "<li>[ivotedforthis ? "<b>" : ""]<a href='?src=[REF(src)];vote=[i]'>[choices[i]]</a> ([display_votes & SHOW_VOTES ? votes : (admin ? "??? ([votes])" : "???")] votes)[ivotedforthis ? "</b>" : ""]</li>" // CIT CHANGE - adds obfuscated votes
+					. += "<li>[ivotedforthis ? "<b>" : ""]<a href='?src=[REF(src)];vote=[i]'>[choices[i]]</a> ([display_votes & SHOW_VOTES ? votes : (admin ? "??? ([votes])" : "???")] votes)[ivotedforthis ? "</b>" : ""]</li>"
 					if(choice_descs.len >= i)
 						. += "<li>[choice_descs[i]]</li>"
 				. += "</ul><hr>"

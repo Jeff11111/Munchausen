@@ -265,7 +265,7 @@
 	throwforce = 9
 	throw_speed = 2
 	throw_range = 5
-	custom_materials = list(/datum/material/iron=10000) //skyrat edit
+	custom_materials = list(/datum/material/iron=10000)
 	attack_verb = list("attacked", "slashed", "sawed", "cut")
 	sharpness = SHARP_EDGED
 	tool_behaviour = TOOL_SAW

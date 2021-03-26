@@ -138,7 +138,7 @@
 	. = ..()
 	spread = 0
 	
-/obj/item/gun/ballistic/automatic/wt550/nopin //Skyrat change
+/obj/item/gun/ballistic/automatic/wt550/nopin
 	pin = null
 
 /obj/item/gun/ballistic/automatic/mini_uzi

@@ -14,7 +14,6 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 	var/list/quirk_objects = list()	//A list of all quirk objects in the game, since some may process
 	var/list/quirk_blacklist = list() //A list a list of quirks that can not be used with each other. Format: list(quirk1,quirk2),list(quirk3,quirk4)
 
-	//SKYRAT CHANGE
 	//yes this is terrible, but i'd rather not deal with creating more useless subsystems
 	var/list/all_bloodtypes = list()
 	var/list/associated_bodyparts = list()
@@ -24,8 +23,7 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 /datum/controller/subsystem/processing/quirks/Initialize(timeofday)
 	if(!quirks.len)
 		SetupQuirks()
-		quirk_blacklist = list(list("Blind","Nearsighted"),list("Jolly","Depression","Apathetic"),list("Ageusia","Deviant Tastes"),list("Ananas Affinity","Ananas Aversion"),list("Alcohol Tolerance","Alcohol Intolerance"),list("Alcohol Intolerance","Drunken Resilience"),list("Speech impediment (r as l)","Speech impediment (l as w)","Speech impediment (r as w)", "Speech impediment (r and l as w)"), list("Do Not Clone", "Do Not Revive")) // Skyrat edit
-	//skyrat edit
+		quirk_blacklist = list(list("Blind","Nearsighted"),list("Jolly","Depression","Apathetic"),list("Ageusia","Deviant Tastes"),list("Ananas Affinity","Ananas Aversion"),list("Alcohol Tolerance","Alcohol Intolerance"),list("Alcohol Intolerance","Drunken Resilience"),list("Speech impediment (r as l)","Speech impediment (l as w)","Speech impediment (r as w)", "Speech impediment (r and l as w)"), list("Do Not Clone", "Do Not Revive"))
 	//this is awful but it makes my life easier.
 	if(!all_bloodtypes.len)
 		for(var/datum/species/S in subtypesof(/datum/species))
@@ -81,7 +79,6 @@ PROCESSING_SUBSYSTEM_DEF(quirks)
 		if(Q && (!length(Q.job_whitelist) || (job.title in Q.job_whitelist)))
 			user.add_quirk(Q.type, spawn_effects)
 	
-	//SKYRAT CHANGE
 	//You might be asking... "bobyot y u do dis in quirk soobsistem it make no sense"
 	//i just don't want to create a whole other subsystem, along with a new proc, for doing this one time stuff
 	if(cli.prefs.bloodtype)

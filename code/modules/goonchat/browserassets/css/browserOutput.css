@@ -10,7 +10,7 @@ html, body {
 	color: #000000;
 }
 body {
-	background: #E0E0E0; /*CIT CHANGE - darkens chatbox a lil*/
+	background: #E0E0E0;
     font-family: Verdana, sans-serif;
     font-size: 13px;
     line-height: 1.2;
@@ -410,7 +410,7 @@ h1.alert, h2.alert		{color: #000000;}
 .bobux					{color: #80cf30;	font-size: 150%;}
 .redtext				{color: #FF0000;	font-size: 185%;}
 .clown					{color: #FF69Bf;	font-size: 160%; font-family: "Comic Sans MS", cursive, sans-serif; font-weight: bold;}
-.singing				{font-family: "Trebuchet MS", cursive, sans-serif; font-style: italic;} /* Skyrat edit */
+.singing				{font-family: "Trebuchet MS", cursive, sans-serif; font-style: italic;}
 .his_grace				{color: #15D512;	font-family: "Courier New", cursive, sans-serif; font-style: italic;}
 .spooky					{color: #FF6100;}
 .velvet					{color: #660015; 	font-weight: bold; animation: velvet 5000ms infinite;}

@@ -31,7 +31,6 @@
 	canMouseDown = TRUE
 	can_turret = FALSE
 	can_circuit = FALSE
-	//Cit changes: beam rifle stats.
 	slowdown = 1
 	item_flags = NO_MAT_REDEMPTION | SLOWS_WHILE_IN_HAND | NEEDS_PERMIT
 	pin = null
@@ -199,7 +198,7 @@
 	else
 		P.color = rgb(0, 255, 0)
 	var/turf/curloc = get_turf(src)
-	var/turf/targloc = current_user.client.mouseLocation //Skyrat change
+	var/turf/targloc = current_user.client.mouseLocation
 	if(!istype(targloc))
 		if(!istype(curloc))
 			return
@@ -292,7 +291,7 @@
 	process_aim()
 	if(fire_check() && can_trigger_gun(M))
 		sync_ammo()
-		do_fire(M.client.mouseLocation, M, FALSE, M.client.mouseParams, M.zone_selected) //Skyrat change
+		do_fire(M.client.mouseLocation, M, FALSE, M.client.mouseParams, M.zone_selected)
 	stop_aiming()
 	QDEL_LIST(current_tracers)
 	return ..()
@@ -478,7 +477,7 @@
 	if(istype(target, /obj/structure/window))
 		return 0.5
 	if(istype(target, /obj/structure/blob))
-		return 0.65			//CIT CHANGE.
+		return 0.65
 	return 1
 
 /obj/item/projectile/beam/beam_rifle/proc/handle_impact(atom/target)

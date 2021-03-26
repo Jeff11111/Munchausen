@@ -100,7 +100,7 @@
 		restore_offsets(user)
 	. = ..()
 
-/obj/item/clothing/shoes/update_clothes_damaged_state() //skyrat edit
+/obj/item/clothing/shoes/update_clothes_damaged_state()
 	. = ..()
 	if(ismob(loc))
 		var/mob/M = loc

@@ -117,7 +117,7 @@
 
 	var/air_tight = FALSE	//TRUE means density will be set as soon as the door begins to close
 	var/prying_so_hard = FALSE
-	var/pried_so_hard = FALSE // Skyrat change
+	var/pried_so_hard = FALSE
 
 	rad_flags = RAD_PROTECT_CONTENTS | RAD_NO_CONTAMINATE
 	rad_insulation = RAD_MEDIUM_INSULATION
@@ -134,7 +134,7 @@
 
 /obj/machinery/door/airlock/Initialize(mapload)
 	. = ..()
-	wires = new wiretypepath(src) //CIT CHANGE - makes it possible for airlocks to have different wire datums
+	wires = new wiretypepath(src) //makes it possible for airlocks to have different wire datums
 	if(frequency)
 		set_frequency(frequency)
 	if(closeOtherId != null)
@@ -846,7 +846,7 @@
 		. += "<span class='warning'>The maintenance panel seems haphazardly fastened.</span>"
 	if(charge && panel_open)
 		. += "<span class='warning'>Something is wired up to the airlock's electronics!</span>"
-	if(pried_so_hard) // Skyrat change
+	if(pried_so_hard)
 		. += "<span class='warning'>There are signs of forced entry where the halves meet, dents and scratches in the airlock's metal.</span>"
 	if(note)
 		if(!in_range(user, src))
@@ -971,7 +971,7 @@
 				H.visible_message("<span class='danger'>[user] headbutts the airlock.</span>", \
 									"<span class='userdanger'>I headbutt the airlock!</span>")
 				H.DefaultCombatKnockdown(100)
-				H.apply_damage(2, BRUTE, BODY_ZONE_HEAD) // Skyrat edit -- made headbanging on doors a lot less harmful, 10 -> 2
+				H.apply_damage(2, BRUTE, BODY_ZONE_HEAD)
 			else
 				visible_message("<span class='danger'>[user] headbutts the airlock. Good thing [user.p_theyre()] wearing a helmet.</span>")
 
@@ -1212,7 +1212,7 @@
 								"<span class='italics'>I hear welding.</span>")
 				if(W.use_tool(src, user, 40, volume=50, extra_checks = CALLBACK(src, .proc/weld_checks, W, user)))
 					obj_integrity = max_integrity
-					pried_so_hard = FALSE // Skyrat
+					pried_so_hard = FALSE
 					stat &= ~BROKEN
 					user.visible_message("[user.name] has repaired [src].", \
 										"<span class='notice'>I finish repairing the airlock.</span>")
@@ -1286,8 +1286,8 @@
 			prying_so_hard = FALSE
 			if(result)
 				open(2)
-				take_damage(25, BRUTE, 0, 0) // Skyrat change
-				pried_so_hard = TRUE // Skyrat change
+				take_damage(25, BRUTE, 0, 0)
+				pried_so_hard = TRUE
 				if(density && !open(2))
 					to_chat(user, "<span class='warning'>Despite my attempts, [src] refuses to open.</span>")
 

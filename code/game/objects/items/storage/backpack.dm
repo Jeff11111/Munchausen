@@ -25,14 +25,12 @@
 
 /obj/item/storage/backpack/ComponentInitialize()
 	. = ..()
-	// SKYRAT EDIT: Remove Volumetric Storage
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.storage_flags = STORAGE_FLAGS_LEGACY_DEFAULT
 	if(!equip_access)
 		STR.storage_flags |= STORAGE_NO_EQUIPPED_ACCESS
 	if(!worn_access)
 		STR.storage_flags |= STORAGE_NO_WORN_ACCESS
-	//STR.max_volume = STORAGE_VOLUME_BACKPACK
 	STR.max_w_class = MAX_WEIGHT_CLASS_BACKPACK
 	STR.max_combined_w_class = 21
 	STR.max_items = 21
@@ -78,11 +76,9 @@
 
 /obj/item/storage/backpack/holding/ComponentInitialize()
 	. = ..()
-	// SKYRAT EDIT: Remove Volumetric Storage
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.max_w_class = MAX_WEIGHT_CLASS_BAG_OF_HOLDING
 	STR.storage_flags = STORAGE_FLAGS_LEGACY_DEFAULT
-	//STR.max_volume = STORAGE_VOLUME_BAG_OF_HOLDING
 	STR.max_combined_w_class = 36
 	STR.allow_big_nesting = TRUE
 
@@ -369,9 +365,7 @@
 
 /obj/item/storage/backpack/duffelbag/ComponentInitialize()
 	. = ..()
-	// SKYRAT EDIT: Remove Volumetric Storage
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	//STR.max_volume = STORAGE_VOLUME_DUFFLEBAG
 	STR.max_combined_w_class = 32
 
 /obj/item/storage/backpack/duffelbag/captain
@@ -389,19 +383,7 @@
 /obj/item/storage/backpack/duffelbag/med/surgery
 	name = "surgical duffel bag"
 	desc = "A large duffel bag for holding extra medical supplies - this one seems to be designed for holding surgical tools."
-/* moved to modular_skyrat
-/obj/item/storage/backpack/duffelbag/med/surgery/PopulateContents()
-	new /obj/item/scalpel(src)
-	new /obj/item/hemostat(src)
-	new /obj/item/retractor(src)
-	new /obj/item/circular_saw(src)
-	new /obj/item/surgicaldrill(src)
-	new /obj/item/cautery(src)
-	new /obj/item/surgical_drapes(src)
-	new /obj/item/clothing/mask/surgical(src)
-	new /obj/item/reagent_containers/medspray/sterilizine(src)
-	new /obj/item/razor(src)
-*/
+
 /obj/item/storage/backpack/duffelbag/sec
 	name = "security duffel bag"
 	desc = "A large duffel bag for holding extra security supplies and ammunition."
@@ -411,18 +393,7 @@
 /obj/item/storage/backpack/duffelbag/sec/surgery
 	name = "surgical duffel bag"
 	desc = "A large duffel bag for holding extra supplies - this one has a material inlay with space for various sharp-looking tools."
-/* moved to modular_skyrat
-/obj/item/storage/backpack/duffelbag/sec/surgery/PopulateContents()
-	new /obj/item/scalpel(src)
-	new /obj/item/hemostat(src)
-	new /obj/item/retractor(src)
-	new /obj/item/circular_saw(src)
-	new /obj/item/surgicaldrill(src)
-	new /obj/item/cautery(src)
-	new /obj/item/surgical_drapes(src)
-	new /obj/item/clothing/mask/surgical(src)
-	new /obj/item/reagent_containers/medspray/sterilizine(src)
-*/
+
 /obj/item/storage/backpack/duffelbag/engineering
 	name = "industrial duffel bag"
 	desc = "A large duffel bag for holding extra tools and supplies."
@@ -505,38 +476,11 @@
 	desc = "A suspicious looking duffel bag for holding surgery tools."
 	icon_state = "duffel-syndiemed"
 	item_state = "duffel-syndiemed"
-/* moved to modular_skyrat
-/obj/item/storage/backpack/duffelbag/syndie/surgery/PopulateContents()
-	new /obj/item/scalpel(src)
-	new /obj/item/hemostat(src)
-	new /obj/item/retractor(src)
-	new /obj/item/circular_saw(src)
-	new /obj/item/surgicaldrill(src)
-	new /obj/item/cautery(src)
-	new /obj/item/surgical_drapes(src)
-	new /obj/item/clothing/suit/straight_jacket(src)
-	new /obj/item/clothing/mask/muzzle(src)
-	new /obj/item/mmi/syndie(src)
-	new /obj/item/implantcase(src)
-	new /obj/item/implanter(src)
-	new /obj/item/reagent_containers/medspray/sterilizine(src)
-*/
+
 /obj/item/storage/backpack/duffelbag/syndie/surgery_adv
 	name = "advanced surgery duffel bag"
 	desc = "A large duffel bag for holding surgical tools. Bears the logo of an advanced med-tech firm."
-/* moved to modular_skyrat
-/obj/item/storage/backpack/duffelbag/syndie/surgery_adv/PopulateContents()
-	new /obj/item/scalpel/advanced(src)
-	new /obj/item/retractor/advanced(src)
-	new /obj/item/surgicaldrill/advanced(src)
-	new /obj/item/surgical_drapes(src)
-	new /obj/item/clothing/suit/straight_jacket(src)
-	new /obj/item/clothing/mask/muzzle(src)
-	new /obj/item/mmi/syndie(src)
-	new /obj/item/implantcase(src)
-	new /obj/item/implanter(src)
-	new /obj/item/reagent_containers/medspray/sterilizine(src)
-*/
+
 /obj/item/storage/backpack/duffelbag/syndie/ammo
 	name = "ammunition duffel bag"
 	desc = "A large duffel bag for holding extra weapons ammunition and supplies."

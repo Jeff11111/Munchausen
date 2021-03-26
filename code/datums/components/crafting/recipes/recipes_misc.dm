@@ -277,7 +277,6 @@
 	subcategory = CAT_TOOL
 	category = CAT_MISC
 
-//Skyrat change start
 /datum/crafting_recipe/glassblower
 	name = "Glass working blow rod"
 	result = /obj/item/glasswork/blowing_rod
@@ -297,7 +296,6 @@
 	time = 80
 	subcategory = CAT_TOOL
 	category = CAT_MISC
-//Skyrat change stop
 
 ////////////
 //Vehicles//

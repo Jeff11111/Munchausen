@@ -82,7 +82,7 @@
 
 /datum/supply_pack/service/buildabar
 	name = "Build a Bar Crate"
-	desc = "Looking to set up your own little safe haven? Maintenance bar too much of a bummer to work on? Maybe you just want to set up shop right in front of the bartender. Whatever your reasons, get a jump-start on it with this handy kit. Contains circuitboards for bar equipment, some parts, and some basic bartending supplies. (Batteries not included)" //Skyrat change, fixed grammatical error and capitalization error
+	desc = "Looking to set up your own little safe haven? Maintenance bar too much of a bummer to work on? Maybe you just want to set up shop right in front of the bartender. Whatever your reasons, get a jump-start on it with this handy kit. Contains circuitboards for bar equipment, some parts, and some basic bartending supplies. (Batteries not included)"
 	cost = 3750
 	contains = list(/obj/item/storage/box/drinkingglasses,
 					/obj/item/storage/box/drinkingglasses,
@@ -120,7 +120,7 @@
 
 /datum/supply_pack/service/icecream_cart
 	name = "Ice Cream Cart Crate"
-	desc = "Plasma fire too hot for you? Want a nice treat after a hard day's work? Well now we have the cart for you! This Ice Cream Vat has everthing you need to make you and your friends some ice cream treats! This cart comes stocked with some ingredients for each type of scoopable icecream." //Skyrat change, fixes grammatical errors and missing letters
+	desc = "Plasma fire too hot for you? Want a nice treat after a hard day's work? Well now we have the cart for you! This Ice Cream Vat has everthing you need to make you and your friends some ice cream treats! This cart comes stocked with some ingredients for each type of scoopable icecream."
 	cost = 2750 //Comes prestocked with basic ingredients
 	contains = list(/obj/machinery/icecream_vat)
 	crate_name = "ice cream vat crate"
@@ -128,7 +128,7 @@
 
 /datum/supply_pack/service/grill
 	name = "Grilling Starter Kit"
-	desc = "Hey Dad I'm Hungry. Hi Hungry I'm THE NEW GRILLING STARTER KIT ONLY 5000 BUX GET NOW! Contains a cooking grill and five fuel coal sheets." //Skyrat change, fixed capitalization. god you're unfunny
+	desc = "Hey Dad I'm Hungry. Hi Hungry I'm THE NEW GRILLING STARTER KIT ONLY 5000 BUX GET NOW! Contains a cooking grill and five fuel coal sheets."
 	cost = 3000
 	contains = list(/obj/item/stack/sheet/mineral/coal/five,
 					/obj/machinery/grill/unwrenched)
@@ -172,7 +172,7 @@
 /datum/supply_pack/service/replacementdb
 	name = "Replacement Defensive Bar Shotgun"
 	desc = "Someone stole the Bartender's twin-barreled possession? Give them another one at a significant markup. Comes with one unused double-barrel shotgun, shells not included. Requires bartender access to open."
-	cost = 4000 //Skyrat change, who made it so cheap? This is a lethal weapon sold at such a cheap price. Anyway i am changing it now
+	cost = 4000
 	access = ACCESS_BAR
 	contraband = TRUE
 	contains = list(/obj/item/gun/ballistic/revolver/doublebarrel)
@@ -185,7 +185,7 @@
 
 /datum/supply_pack/service/advlighting
 	name = "Advanced Lighting crate"
-	desc = "Thanks to advanced lighting tech, we here at the Lamp Factory have been able to produce more lamps and lamp items! This crate has three lamps, a box of lights and a state of the art rapid-light-device!" //Skyrat change, fixes punctuation error and missing letters
+	desc = "Thanks to advanced lighting tech, we here at the Lamp Factory have been able to produce more lamps and lamp items! This crate has three lamps, a box of lights and a state of the art rapid-light-device!"
 	cost = 2750
 	contains = list(/obj/item/construction/rld,
 					/obj/item/flashlight/lamp,
@@ -197,7 +197,7 @@
 
 /datum/supply_pack/service/lightbulbs
 	name = "Replacement Lights" //Subgrouping this with Advanced Lighting Crate, they're both lighting related.
-	desc = "May the light of Aether shine upon this station! Or at least, the light of forty-two light tubes and twenty-one light bulbs as well as a light replacer." //Skyrat change, added lines to the numbers
+	desc = "May the light of Aether shine upon this station! Or at least, the light of forty-two light tubes and twenty-one light bulbs as well as a light replacer."
 	cost = 1200
 	contains = list(/obj/item/storage/box/lights/mixed,
 					/obj/item/storage/box/lights/mixed,
@@ -240,7 +240,7 @@
 
 /datum/supply_pack/service/janitor/janpremium
 	name = "Janitor Supplies (Premium)"
-	desc = "The custodial union is in a tizzy, so we've gathered up some better supplies for you. In this crate you can get a brand new chem, Drying Agent. This stuff is the work of slimes or magic! This crate also contains a rag to test out the Drying Agent magic, several cleaning grenades, some spare bottles of ammonia, and an MCE (or Massive Cleaning Explosive)." //Skyrat change, fixed typo
+	desc = "The custodial union is in a tizzy, so we've gathered up some better supplies for you. In this crate you can get a brand new chem, Drying Agent. This stuff is the work of slimes or magic! This crate also contains a rag to test out the Drying Agent magic, several cleaning grenades, some spare bottles of ammonia, and an MCE (or Massive Cleaning Explosive)."
 	cost = 2700
 	contains = list(/obj/item/grenade/clusterbuster/cleaner,
 					/obj/item/grenade/chem_grenade/cleaner,
@@ -255,7 +255,7 @@
 
 /datum/supply_pack/service/janitor/starter
 	name = "Janitorial Supplies (Standard)"
-	desc = "Fight back against dirt and grime with Nanotrasen's Janitorial Essentials(tm)! Contains three buckets, caution signs, and cleaner grenades. Also has a single mop, spray cleaner, rag, NT soap and a trash bag." //Skyrat change, fixes punctuation error
+	desc = "Fight back against dirt and grime with Nanotrasen's Janitorial Essentials(tm)! Contains three buckets, caution signs, and cleaner grenades. Also has a single mop, spray cleaner, rag, NT soap and a trash bag."
 	cost = 1300
 	contains = list(/obj/item/reagent_containers/glass/bucket,
 					/obj/item/reagent_containers/glass/bucket,

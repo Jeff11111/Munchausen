@@ -88,7 +88,6 @@
 	icon_state = "scrubspurple"
 	can_adjust = FALSE
 
-//Skyrat changes start    // All WIP aaaa
 /obj/item/clothing/under/rank/medical/psychologist
 	name = "psychologist's suit"
 	desc = "A profesional looking suit, fitting of a psychologist, it seems oddly famliar."			//New sprite plz
@@ -104,4 +103,3 @@
 	body_parts_covered = CHEST|GROIN|ARMS
 	fitted = FEMALE_UNIFORM_TOP
 	mutantrace_variation = STYLE_DIGITIGRADE|STYLE_NO_ANTHRO_ICON
-//Skyrat changes stop

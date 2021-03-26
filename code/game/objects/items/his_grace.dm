@@ -22,7 +22,7 @@
 	var/prev_bloodthirst = HIS_GRACE_SATIATED
 	var/force_bonus = 0
 	var/ascended = FALSE
-	var/victims_needed = 10 //Citadel change from 25 to 10
+	var/victims_needed = 10
 	var/ascend_bonus = 15
 
 /obj/item/his_grace/Initialize()

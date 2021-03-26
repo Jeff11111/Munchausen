@@ -57,7 +57,7 @@
 
 	M.visible_message("<span class='warning'>[user] is trying to crush [M]\s [target_limb.name] with \the [src]!</span>")
 
-	var/crush_time = max(0, 400 - user.mind.action_skill_mod(/datum/skill/numerical/surgery, min(10, target_limb.brute_dam * 2), THRESHOLD_UNTRAINED, FALSE)) //skyrat edit
+	var/crush_time = max(0, 400 - user.mind.action_skill_mod(/datum/skill/numerical/surgery, min(10, target_limb.brute_dam * 2), THRESHOLD_UNTRAINED, FALSE))
 	if(do_mob(user, M, crush_time))
 		if(get_location_accessible(M, target_zone)) //Yes, two checks, before and after the timer. What if someone puts a helmet on the guy while you're crushing his head?
 			if(target_limb)//If he still has the head. In case you queue up a lot of these up at once or the guy loses the head while you're removing it.

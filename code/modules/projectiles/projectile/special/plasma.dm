@@ -13,25 +13,7 @@
 	muzzle_type = /obj/effect/projectile/muzzle/plasma_cutter
 	impact_type = /obj/effect/projectile/impact/plasma_cutter
 	wound_bonus = 15
-/* moved to modular skyrat
-/obj/item/projectile/plasma/Initialize()
-	. = ..()
-	if(!lavaland_equipment_pressure_check(get_turf(src)))
-		name = "weakened [name]"
-		damage = damage * pressure_decrease
-		pressure_decrease_active = TRUE
 
-/obj/item/projectile/plasma/on_hit(atom/target)
-	. = ..()
-	if(ismineralturf(target))
-		var/turf/closed/mineral/M = target
-		M.gets_drilled(firer)
-		if(mine_range)
-			mine_range--
-			range++
-		if(range > 0)
-			return BULLET_ACT_FORCE_PIERCE
-*/
 /obj/item/projectile/plasma/adv
 	damage = 28
 	range = 5

@@ -9,7 +9,6 @@
 	recommended_enemies = 4
 	reroll_friendly = 1
 	enemy_minimum_age = 0
-	// SKYRAT EDIT: Credits
 	title_icon = "devil"
 
 	var/traitors_possible = 4 //hard limit on devils if scaling is turned off

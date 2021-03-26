@@ -190,13 +190,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["buttons_locked"]		>> buttons_locked
 	S["windowflash"]		>> windowflashing
 	S["be_special"] 		>> be_special
-
-	//SKYRAT CHANGES BEGIN
 	S["see_chat_emotes"] 	>> see_chat_emotes
 	S["event_participation"] >> event_participation
 	S["event_prefs"] >> event_prefs
 	S["appear_in_round_end_report"]	>> appear_in_round_end_report
-	//SKYRAT CHANGES END
 
 
 	S["default_slot"]		>> default_slot
@@ -222,10 +219,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["tip_delay"]			>> tip_delay
 	S["pda_style"]			>> pda_style
 	S["pda_color"]			>> pda_color
-	// SKYRAT EDIT START
 	S["show_credits"] 		>> show_credits
 	S["bobux_amount"]		>> bobux_amount
-	// SKYRAT EDIT END
 
 	// Custom hotkeys
 	S["key_bindings"]		>> key_bindings
@@ -258,7 +253,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	default_slot	= sanitize_integer(default_slot, 1, max_save_slots, initial(default_slot))
 	toggles			= sanitize_integer(toggles, 0, 16777215, initial(toggles))
 	clientfps		= sanitize_integer(clientfps, 0, 1000, 0)
-	if (clientfps == 0) clientfps = world.fps*2 // Skyrat edit
+	if (clientfps == 0) clientfps = world.fps*2
 	parallax		= sanitize_integer(parallax, PARALLAX_INSANE, PARALLAX_DISABLE, null)
 	ambientocclusion	= sanitize_integer(ambientocclusion, 0, TRUE, initial(ambientocclusion))
 	auto_fit_viewport	= sanitize_integer(auto_fit_viewport, 0, TRUE, initial(auto_fit_viewport))
@@ -272,7 +267,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	be_special		= SANITIZE_LIST(be_special)
 	pda_style		= sanitize_inlist(pda_style, GLOB.pda_styles, initial(pda_style))
 	pda_color		= sanitize_hexcolor(pda_color, 6, TRUE, initial(pda_color))
-	// SKYRAT EDIT: Credits
+
 	show_credits		= sanitize_integer(show_credits, 0, 1, initial(show_credits))
 	widescreenpref		= sanitize_integer(widescreenpref, 0, 1, initial(widescreenpref))
 	fullscreenpref		= sanitize_integer(fullscreenpref, 0, 1, initial(fullscreenpref))
@@ -282,12 +277,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	key_bindings 			= sanitize_islist(key_bindings, list())
 	modless_key_bindings 	= sanitize_islist(modless_key_bindings, list())
 
-	//SKYRAT CHANGES BEGIN
 	see_chat_emotes	= sanitize_integer(see_chat_emotes, 0, 1, initial(see_chat_emotes))
 	event_participation = sanitize_integer(event_participation, 0, 1, initial(event_participation))
 	event_prefs = sanitize_text(event_prefs)
 	appear_in_round_end_report	= sanitize_integer(appear_in_round_end_report, 0, 1, initial(appear_in_round_end_report))
-	//SKYRAT CHANGES END
 
 	verify_keybindings_valid()		// one of these days this will runtime and you'll be glad that i put it in a different proc so no one gets their saves wiped
 
@@ -361,11 +354,9 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["tip_delay"], tip_delay)
 	WRITE_FILE(S["pda_style"], pda_style)
 	WRITE_FILE(S["pda_color"], pda_color)
-	WRITE_FILE(S["show_credits"], show_credits) // SKYRAT EDIT: Credits
+	WRITE_FILE(S["show_credits"], show_credits)
 	WRITE_FILE(S["key_bindings"], key_bindings)
 	WRITE_FILE(S["modless_key_bindings"], modless_key_bindings)
-
-	//citadel code
 	WRITE_FILE(S["arousable"], arousable)
 	WRITE_FILE(S["widescreenpref"], widescreenpref)
 	WRITE_FILE(S["fullscreenpref"], fullscreenpref)
@@ -373,14 +364,11 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["preferred_chaos"], preferred_chaos)
 	WRITE_FILE(S["auto_ooc"], auto_ooc)
 	WRITE_FILE(S["no_tetris_storage"], no_tetris_storage)
-
-	//SKYRAT CHANGES BEGIN
 	WRITE_FILE(S["see_chat_emotes"], see_chat_emotes)
 	WRITE_FILE(S["event_participation"], event_participation)
 	WRITE_FILE(S["event_prefs"], event_prefs)
 	WRITE_FILE(S["appear_in_round_end_report"], appear_in_round_end_report)
 	WRITE_FILE(S["bobux_amount"], bobux_amount)
-	//SKYRAT CHANGES END
 
 	return 1
 
@@ -456,7 +444,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["feature_insect_markings"]		>> features["insect_markings"]
 	S["feature_horns_color"]			>> features["horns_color"]
 	S["feature_wings_color"]			>> features["wings_color"]
-	//SKYRAT CHANGES
 	S["bloodtype"]						>> bloodtype
 	S["bloodreagent"]					>> bloodreagent
 	S["bloodcolor"]						>> bloodcolor
@@ -464,7 +451,6 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["bloodreagent"]		>> bloodreagent
 	S["bloodtype"]			>> bloodtype
 	S["bloodcolor"]			>> bloodcolor
-	//
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -477,12 +463,11 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["joblessrole"]		>> joblessrole
 	//Load prefs
 	S["job_preferences"]	>> job_preferences
-	job_preferences	= SANITIZE_LIST(job_preferences) //Skyrat edit - lack of this could cause game-mode failure
+	job_preferences	= SANITIZE_LIST(job_preferences)
 
 	//Quirks
 	S["special_char"]			>> special_char
 
-	//SKYRAT EDIT
 	S["language"]			>> language
 	S["body_descriptors"]	>> body_descriptors
 	body_descriptors = SANITIZE_LIST(body_descriptors)
@@ -570,7 +555,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		if(!custom_names[custom_name_id])
 			custom_names[custom_name_id] = get_default_name(custom_name_id)
 
-	auto_hiss		= sanitize_integer(auto_hiss, 0, 1, initial(auto_hiss)) //SKYRAT CHANGE
+	auto_hiss		= sanitize_integer(auto_hiss, 0, 1, initial(auto_hiss))
 
 	nameless		= sanitize_integer(nameless, 0, 1, initial(nameless))
 	be_random_name	= sanitize_integer(be_random_name, 0, 1, initial(be_random_name))
@@ -779,10 +764,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	//Quirks
 	WRITE_FILE(S["special_char"]		, special_char)
-	//SKYRAT ADDITION - additional language
 	WRITE_FILE(S["language"]			, language)
 	WRITE_FILE(S["body_descriptors"]	, body_descriptors)
-	//
 
 	//gear loadout
 	if(chosen_gear.len)

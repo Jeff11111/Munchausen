@@ -179,7 +179,7 @@
 	BuyPower(new /datum/action/bloodsucker/feed)
 	BuyPower(new /datum/action/bloodsucker/masquerade)
 	BuyPower(new /datum/action/bloodsucker/veil)
-	BuyPower(new /datum/action/bloodsucker/levelup)//SKYRAT EDIT
+	BuyPower(new /datum/action/bloodsucker/levelup)
 	// Traits
 	for(var/T in defaultTraits)
 		ADD_TRAIT(owner.current, T, BLOODSUCKER_TRAIT)
@@ -253,7 +253,7 @@
 		owner.hasSoul = TRUE
 //owner.current.hellbound = FALSE
 
-/datum/antagonist/bloodsucker/proc/ForcedRankUp() //Big ol SKYRAT EDIT
+/datum/antagonist/bloodsucker/proc/ForcedRankUp()
 	set waitfor = FALSE
 	if(!owner || !owner.current)
 		return

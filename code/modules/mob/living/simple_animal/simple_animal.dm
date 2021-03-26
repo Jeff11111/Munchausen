@@ -136,8 +136,7 @@
 
 	///What kind of footstep this mob should have. Null if it shouldn't have any.
 	var/footstep_type
-
-	//skyrat edit
+	
 	///How much wounding power it has
 	var/wound_bonus = CANT_WOUND
 	///How much bare wounding power it has

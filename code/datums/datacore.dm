@@ -118,34 +118,34 @@
 	for(var/datum/data/record/t in GLOB.data_core.general)
 		var/name = t.fields["name"]
 		var/rank = t.fields["rank"]
-		var/shown_rank = t.fields["shown_rank"] //Skyrat change
+		var/shown_rank = t.fields["shown_rank"]
 		var/department = 0
 		if(rank in GLOB.command_positions)
-			heads[name] = shown_rank //Skyrat change
+			heads[name] = shown_rank
 			department = 1
 		if(rank in GLOB.security_positions)
-			sec[name] = shown_rank //Skyrat change
+			sec[name] = shown_rank
 			department = 1
 		if(rank in GLOB.engineering_positions)
-			eng[name] = shown_rank //Skyrat change
+			eng[name] = shown_rank
 			department = 1
 		if(rank in GLOB.medical_positions)
-			med[name] = shown_rank //Skyrat change
+			med[name] = shown_rank
 			department = 1
 		if(rank in GLOB.science_positions)
-			sci[name] = shown_rank //Skyrat change
+			sci[name] = shown_rank
 			department = 1
 		if(rank in GLOB.supply_positions)
-			sup[name] = shown_rank //Skyrat change
+			sup[name] = shown_rank
 			department = 1
 		if(rank in GLOB.civilian_positions)
-			civ[name] = shown_rank //Skyrat change
+			civ[name] = shown_rank
 			department = 1
 		if(rank in GLOB.nonhuman_positions)
-			bot[name] = shown_rank //Skyrat change
+			bot[name] = shown_rank
 			department = 1
 		if(!department && !(name in heads))
-			misc[name] = shown_rank //Skyrat change
+			misc[name] = shown_rank
 	if(heads.len > 0)
 		dat += "<tr><th colspan=3>Heads</th></tr>"
 		for(var/name in heads)
@@ -211,11 +211,9 @@
 			assignment = H.job
 		else
 			assignment = "Unassigned"
-		//Skyrat changes
 		var/shown_assignment = assignment
 		if(C && C.prefs && C.prefs.alt_titles_preferences[assignment])
 			shown_assignment = C.prefs.alt_titles_preferences[assignment]
-		//End of skyrat changes
 
 		var/static/record_id_num = 1001
 		var/id = num2hex(record_id_num++,6)
@@ -239,7 +237,7 @@
 		G.fields["id"]			= id
 		G.fields["name"]		= H.real_name
 		G.fields["rank"]		= assignment
-		G.fields["shown_rank"]		= shown_assignment //Skyrat change
+		G.fields["shown_rank"]		= shown_assignment
 		G.fields["age"]			= H.age
 		G.fields["species"]	= H.dna.species.name
 		G.fields["fingerprint"]	= md5(H.dna.uni_identity)
@@ -253,7 +251,6 @@
 			G.fields["gender"]  = "Other"
 		G.fields["photo_front"]	= photo_front
 		G.fields["photo_side"]	= photo_side
-		//Skyrat edit - rp records
 		if(C)
 			if(C.prefs.flavor_faction)
 				G.fields["faction"]  = C.prefs.flavor_faction
@@ -262,7 +259,6 @@
 			G.fields["past_records"] = C.prefs.general_records
 		else
 			G.fields["past_records"] = ""
-		//End of skyrat edit
 		general += G
 
 		//Medical Record
@@ -280,7 +276,6 @@
 		M.fields["cdi"]			= "None"
 		M.fields["cdi_d"]		= "No diseases have been diagnosed at the moment."
 		M.fields["notes"]		= H.get_trait_string(medical)
-		//Skyrat edit
 		if(C)
 			M.fields["past_records"] = C.prefs.medical_records
 		else
@@ -288,7 +283,6 @@
 		//Feature records. Used by the limbgrower at the moment.
 		if(C)
 			M.fields["features"] = C.prefs.features.Copy()
-		//End of skyrat edit
 		medical += M
 
 		//Security Record
@@ -299,7 +293,6 @@
 		S.fields["mi_crim"]		= list()
 		S.fields["ma_crim"]		= list()
 		S.fields["notes"]		= "No notes."
-		//Skyrat edit - rp records
 		if(C)
 			if(C.prefs.flavor_faction)
 				S.fields["faction"]  = C.prefs.flavor_faction
@@ -308,7 +301,6 @@
 			S.fields["past_records"] = C.prefs.security_records
 		else
 			S.fields["past_records"] = ""
-		//End of skyrat edit
 		security += S
 
 		//Locked Record
@@ -330,12 +322,10 @@
 		L.fields["features"]	= H.dna.features
 		L.fields["image"]		= image
 		L.fields["mindref"]		= H.mind
-		//Skyrat edit - faction
 		if(C.prefs.flavor_faction)
 			L.fields["faction"] = C.prefs.flavor_faction
 		else
 			L.fields["faction"] = "UNSET"
-		//End of skyrat edit
 		locked += L
 	return
 

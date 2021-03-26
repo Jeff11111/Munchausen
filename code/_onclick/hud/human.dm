@@ -46,7 +46,6 @@
 		usr.client.screen += targetmob.hud_used.extra_inventory
 
 	targetmob.hud_used.extra_inventory_update(usr)
-//
 
 /obj/screen/human/equip
 	name = "equip"
@@ -615,7 +614,6 @@
 			screenmob.client.screen -= H.w_shirt
 		if(H.wrists)
 			screenmob.client.screen -= H.wrists
-//
 
 
 /datum/hud/human/persistent_inventory_update(mob/viewer)

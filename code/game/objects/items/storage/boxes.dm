@@ -105,13 +105,11 @@
 /obj/item/storage/box/survival/PopulateContents()
 	new /obj/item/clothing/mask/breath(src)
 	new /obj/item/reagent_containers/hypospray/medipen(src)
-
-	// Skyrat change: check for different race first, else give oxy internals
 	if(isplasmaman(loc))
 		new /obj/item/tank/internals/plasmaman/belt(src)
 		return
 		
-	if(isvox(loc)) // Skyrat change: Nitrogen internals for Vox
+	if(isvox(loc))
 		new /obj/item/tank/internals/nitrogen/belt(src)
 		return
 
@@ -126,12 +124,11 @@
 	new /obj/item/crowbar/red(src)
 	new /obj/item/reagent_containers/hypospray/medipen(src)
 
-	// Skyrat change: check for different race first, else give oxy internals
 	if(isplasmaman(loc))
 		new /obj/item/tank/internals/plasmaman/belt(src)
 		return
 		
-	if(isvox(loc)) // Skyrat change: Nitrogen internals for Vox
+	if(isvox(loc))
 		new /obj/item/tank/internals/nitrogen/belt(src)
 		return
 
@@ -142,12 +139,11 @@
 	new /obj/item/clothing/mask/breath(src)
 	new /obj/item/reagent_containers/hypospray/medipen(src)
 
-	// Skyrat change: check for different race first, else give oxy internals
 	if(isplasmaman(loc))
 		new /obj/item/tank/internals/plasmaman/belt(src)
 		return
 		
-	if(isvox(loc)) // Skyrat change: Nitrogen internals for Vox
+	if(isvox(loc))
 		new /obj/item/tank/internals/nitrogen/belt(src)
 		return
 
@@ -161,12 +157,11 @@
 /obj/item/storage/box/syndie/PopulateContents()
 	new /obj/item/clothing/mask/gas/syndicate(src)
 
-	// Skyrat change: check for different race first, else give oxy internals
 	if(isplasmaman(loc))
 		new /obj/item/tank/internals/plasmaman/belt(src)
 		return
 		
-	if(isvox(loc)) // Skyrat change: Nitrogen internals for Vox
+	if(isvox(loc))
 		new /obj/item/tank/internals/nitrogen/belt(src)
 		return
 
@@ -177,12 +172,11 @@
 	new /obj/item/clothing/mask/gas/sechailer(src)
 	new /obj/item/reagent_containers/hypospray/medipen(src)
 
-	// Skyrat change: check for different race first, else give oxy internals
 	if(isplasmaman(loc))
 		new /obj/item/tank/internals/plasmaman/belt(src)
 		return
 		
-	if(isvox(loc)) // Skyrat change: Nitrogen internals for Vox
+	if(isvox(loc))
 		new /obj/item/tank/internals/nitrogen/belt(src)
 		return
 
@@ -794,12 +788,11 @@ obj/item/storage/box/stingbangs
 	new /obj/item/clothing/mask/breath(src)
 	new /obj/item/reagent_containers/hypospray/medipen(src)
 
-	// Skyrat change: check for different race first, else give oxy internals
 	if(isplasmaman(loc))
 		new /obj/item/tank/internals/plasmaman/belt(src)
 		return
 		
-	if(isvox(loc)) // Skyrat change: Nitrogen internals for Vox
+	if(isvox(loc))
 		new /obj/item/tank/internals/nitrogen/belt(src)
 		return
 
@@ -1440,7 +1433,7 @@ obj/item/storage/box/stingbangs
 		/obj/item/storage/box/beakers/variety=1,\
 		/obj/item/storage/box/material=1,\
 		/obj/item/storage/belt/medical/surgery_belt_adv=1,\
-		/obj/item/storage/box/handcuffs=1 // Skyrat change
+		/obj/item/storage/box/handcuffs=1
 		)
 	generate_items_inside(items_inside, src)
 
@@ -1461,7 +1454,6 @@ obj/item/storage/box/stingbangs
 	for(var/i in 1 to 5)
 		new /obj/item/seeds/random(src)
 
-//skyrat edit
 /obj/item/storage/box/stingbangs
 	name = "box of stingbangs (WARNING)"
 	desc = "<B>WARNING: These devices are extremely dangerous and can cause severe injuries or death in repeated use.</B>"
@@ -1471,4 +1463,3 @@ obj/item/storage/box/stingbangs
 /obj/item/storage/box/stingbangs/PopulateContents()
 	for(var/i in 1 to 5)
 		new /obj/item/grenade/stingbang(src)
-//

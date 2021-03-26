@@ -5,6 +5,6 @@
 				/datum/surgery_step/mechanic_unwrench,
 				/datum/surgery_step/replace_limb)
 	target_mobtypes = list(/mob/living/carbon/human)
-	possible_locs = ALL_BODYPARTS //skyrat edit
+	possible_locs = ALL_BODYPARTS
 	requires_real_bodypart = TRUE
 	requires_bodypart_type = BODYPART_ROBOTIC

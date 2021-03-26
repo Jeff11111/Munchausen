@@ -24,7 +24,7 @@ GLOBAL_LIST_EMPTY(cursed_minds)
 		return
 	GLOB.cursed_minds[L.mind] = TRUE
 	RegisterSignal(L.mind, COMSIG_PARENT_QDELETING, .proc/remove_from_cursed)
-	L = wabbajack(L, "animal") // Appearance randomization removed so citadel players don't get randomized into some ungodly ugly creature and complain
+	L = wabbajack(L, "animal")
 	var/turf/T = find_safe_turf()
 	L.forceMove(T)
 	to_chat(L, "<span class='notice'>You blink and find yourself in [get_area_name(T)].</span>")

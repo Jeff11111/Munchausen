@@ -599,10 +599,9 @@ world
 
 	amount<0 or amount>1 are allowed
  */
-/proc/BlendRGB(rgb1 = BLOOD_COLOR_HUMAN, rgb2 = BLOOD_COLOR_HUMAN, amount = 0.5) //skyrat edit makes my fucking life easier
+/proc/BlendRGB(rgb1 = BLOOD_COLOR_HUMAN, rgb2 = BLOOD_COLOR_HUMAN, amount = 0.5)
 	var/list/RGB1 = ReadRGB(rgb1)
 	var/list/RGB2 = ReadRGB(rgb2)
-	//skyrat edit
 	if(!length(RGB1))
 		if(length(RGB2))
 			return RGB2
@@ -613,7 +612,6 @@ world
 			return RGB1
 		else
 			return FALSE
-	//
 
 	// add missing alpha if needed
 	if(length(RGB1) < length(RGB2))

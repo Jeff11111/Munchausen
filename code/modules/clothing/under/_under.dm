@@ -15,10 +15,8 @@
 	var/adjusted = NORMAL_STYLE
 	var/alt_covers_chest = FALSE // for adjusted/rolled-down jumpsuits, FALSE = exposes chest and arms, TRUE = exposes arms only
 	var/dummy_thick = FALSE // is able to hold accessories on its item
-	//SKYRAT EDIT - Removed the old attached accessory system. We use a list of accessories instead.
 	var/list/obj/item/clothing/accessory/attached_accessories = list()
 	var/max_accessories = 3
-	//SKYRAT EDIT END
 	var/mutable_appearance/accessory_overlay
 
 /obj/item/clothing/under/worn_overlays(isinhands = FALSE, icon_file, used_state, style_flags = NONE)
@@ -42,7 +40,7 @@
 	if(!attach_accessory(I, user))
 		return ..()
 
-/obj/item/clothing/under/update_clothes_damaged_state() //skyrat edit
+/obj/item/clothing/under/update_clothes_damaged_state()
 	. = ..()
 	if(ismob(loc))
 		var/mob/M = loc
@@ -82,24 +80,20 @@
 				body_parts_covered |= HAND_LEFT
 			if(initial(body_parts_covered) & HAND_RIGHT)
 				body_parts_covered |= HAND_RIGHT
-	//SKYRAT EDIT
 	for(var/obj/item/clothing/accessory/attached_accessory in attached_accessories)
 		if(attached_accessory && slot != SLOT_HANDS && ishuman(user))
 			var/mob/living/carbon/human/H = user
 			attached_accessory.on_uniform_equip(src, user)
 			if(attached_accessory.above_suit)
 				H.update_inv_wear_suit()
-	//SKYRAT EDIT END
 
 /obj/item/clothing/under/dropped(mob/user)
-	//SKYRAT EDIT
 	for(var/obj/item/clothing/accessory/attached_accessory in attached_accessories)
 		attached_accessory.on_uniform_dropped(src, user)
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
 			if(attached_accessory.above_suit)
 				H.update_inv_wear_suit()
-	//SKYRAT EDIT END
 	..()
 
 /obj/item/clothing/under/proc/attach_accessory(obj/item/I, mob/user, notifyAttach = 1)
@@ -125,14 +119,12 @@
 
 			if((flags_inv & HIDEACCESSORY) || (A.flags_inv & HIDEACCESSORY))
 				return TRUE
-			//SKYRAT EDIT
 			accessory_overlay = mutable_appearance('icons/mob/clothing/accessories.dmi', "blank")
 			for(var/obj/item/clothing/accessory/attached_accessory in attached_accessories)
 				var/mutable_appearance/Y = mutable_appearance(attached_accessory.mob_overlay_icon, attached_accessory.icon_state, ABOVE_HUD_LAYER)
 				Y.alpha = attached_accessory.alpha
 				Y.color = attached_accessory.color
 				accessory_overlay.add_overlay(Y)
-			//SKYRAT EDIT END
 
 			if(ishuman(loc))
 				var/mob/living/carbon/human/H = loc
@@ -146,10 +138,8 @@
 		return
 	if(!can_use(user))
 		return
-	//SKYRAT EDIT
 	if(length(attached_accessories))
 		var/obj/item/clothing/accessory/A = attached_accessories[length(attached_accessories)]
-	//SKYRAT EDIT END
 		A.detach(src, user)
 		if(user.put_in_hands(A))
 			to_chat(user, "<span class='notice'>You detach [A] from [src].</span>")
@@ -181,11 +171,9 @@
 				. += "Its vital tracker appears to be enabled."
 			if(SENSOR_COORDS)
 				. += "Its vital tracker and tracking beacon appear to be enabled."
-	//SKYRAT EDIT
 	if(length(attached_accessories))
 		for(var/obj/item/clothing/accessory/attached_accessory in attached_accessories)
 			. += "\A [attached_accessory] is attached to it."
-	//SKYRAT EDIT END
 
 /obj/item/clothing/under/verb/toggle()
 	set name = "Adjust Suit Sensors"
@@ -262,7 +250,7 @@
 	. = ..()
 	if(!istype(user) || !user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
 		return
-	if(length(attached_accessories)) //SKYRAT EDIT
+	if(length(attached_accessories))
 		remove_accessory(user)
 	else
 		rolldown()

@@ -136,11 +136,11 @@ GLOBAL_VAR_INIT(dynamic_forced_storyteller, null)
 	/// Antags rolled by rules so far, to keep track of and discourage scaling past a certain ratio of crew/antags especially on lowpop.
 	var/antags_rolled = 0
 	// Arbitrary threat addition, for fudging purposes.
-	var/added_threat = 5 //Skyrat change 50 -> 5
+	var/added_threat = 5
 
 /datum/game_mode/dynamic/New() // i have NO IDEA if this is the proper way to do this.
 	..()
-	added_threat = CONFIG_GET(number/added_threat) // Skyrat change
+	added_threat = CONFIG_GET(number/added_threat)
 	pop_per_requirement = CONFIG_GET(number/dynamic_pop_per_requirement)
 	second_rule_req = CONFIG_GET(number_list/dynamic_second_rule_requirements)
 	third_rule_req = CONFIG_GET(number_list/dynamic_third_rule_requirements)
@@ -628,7 +628,7 @@ GLOBAL_VAR_INIT(dynamic_forced_storyteller, null)
 					return FALSE
 
 	update_playercounts()
-	if ((forced || (new_rule.acceptable(current_players[CURRENT_LIVING_PLAYERS].len, threat_level - threat)))) // Skyrat change
+	if ((forced || (new_rule.acceptable(current_players[CURRENT_LIVING_PLAYERS].len, threat_level - threat))))
 		new_rule.trim_candidates()
 		if (new_rule.ready(forced))
 			log_threat("[new_rule.ruletype] - <b>[new_rule.name]</b> [new_rule.cost] threat", verbose = TRUE)
@@ -670,7 +670,7 @@ GLOBAL_VAR_INIT(dynamic_forced_storyteller, null)
 	return FALSE
 
 /datum/game_mode/dynamic/process()
-	if (pop_last_updated < world.time - (60 SECONDS)) // Skyrat change
+	if (pop_last_updated < world.time - (60 SECONDS))
 		pop_last_updated = world.time
 		update_playercounts()
 
@@ -807,8 +807,8 @@ GLOBAL_VAR_INIT(dynamic_forced_storyteller, null)
 
 /// Decrease the threat level.
 /datum/game_mode/dynamic/proc/remove_threat(loss)
-	if (loss < 0) // Skyrat change BEGIN
-		loss *= -1 // Skyrat change END
+	if (loss < 0)
+		loss *= -1
 	
 	threat_level -= loss
 	SSblackbox.record_feedback("tally","dynamic_threat",loss,"Removed threat level")

@@ -36,10 +36,8 @@
 	throwforce = 25
 	armour_penetration = 35
 	actions_types = list(/datum/action/item_action/cult_dagger)
-	//skyrat edit
 	wound_bonus = -30
 	bare_wound_bonus = 30
-	//
 
 /obj/item/melee/cultblade/dagger/Initialize()
 	. = ..()
@@ -61,10 +59,8 @@
 	throwforce = 10
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "rended")
-	//skyrat edit
 	wound_bonus = -80
 	bare_wound_bonus = 30
-	//
 
 /obj/item/melee/cultblade/Initialize()
 	. = ..()
@@ -559,12 +555,10 @@
 				set_coefficient = 2
 			if(SEC_LEVEL_BLUE)
 				set_coefficient = 1.2
-			//Skyrat change start
 			if(SEC_LEVEL_VIOLET)
 				set_coefficient = 0.8
 			if(SEC_LEVEL_ORANGE)
 				set_coefficient = 0.8
-			//Skyrat change stop
 			if(SEC_LEVEL_AMBER)
 				set_coefficient = 0.8
 			else

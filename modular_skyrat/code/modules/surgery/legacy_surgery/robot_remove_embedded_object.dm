@@ -6,7 +6,7 @@
 				/datum/surgery_step/mechanic_remove_object,
 				/datum/surgery_step/mechanic_wrench,
 				/datum/surgery_step/mechanic_close)
-	possible_locs = ALL_BODYPARTS //skyrat edit
+	possible_locs = ALL_BODYPARTS
 	requires_bodypart_type = BODYPART_ROBOTIC
 
 /datum/surgery_step/mechanic_remove_object

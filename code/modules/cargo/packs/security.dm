@@ -88,7 +88,7 @@
 
 /datum/supply_pack/security/russianclothing
 	name = "Russian Surplus Clothing"
-	desc = "An old russian crate full of surplus armor that they used to use! Has two sets of bulletproof armor, a few union suits and some warm hats!" //Skyrat change, fixed typos
+	desc = "An old russian crate full of surplus armor that they used to use! Has two sets of bulletproof armor, a few union suits and some warm hats!"
 	contraband = TRUE
 	cost = 5750 // Its basically sec suits, good boots/gloves
 	contains = list(/obj/item/clothing/suit/armor/navyblue/russian,
@@ -192,25 +192,7 @@
 					/obj/item/clothing/mask/gas/sechailer)
 	crate_name = "security clothing crate"
 	can_private_buy = TRUE
-/* No.
-/datum/supply_pack/security/baton
-	name = "Stun Batons Crate"
-	desc = "Arm the Civil Protection Forces with three stun batons fully charged and ready to go! Requires Security access to open." //Skyrat change, fixes typo and changes line to sound cooler
-	cost = 1200
-	contains = list(/obj/item/melee/baton/loaded,
-					/obj/item/melee/baton/loaded,
-					/obj/item/melee/baton/loaded)
-	crate_name = "stun baton crate"
 
-/datum/supply_pack/security/taser
-	name = "Taser Crate"
-	desc = "From the depths of stunbased combat, this order rises above, supreme. Contains three hybrid tasers, capable of firing both electrodes and disabling shots. Requires Security access to open."
-	cost = 3500
-	contains = list(/obj/item/gun/energy/e_gun/advtaser,
-					/obj/item/gun/energy/e_gun/advtaser,
-					/obj/item/gun/energy/e_gun/advtaser)
-	crate_name = "taser crate"
-*/
 /datum/supply_pack/security/wall_flash
 	name = "Wall-Mounted Flash Crate"
 	desc = "Contains four wall-mounted flashes. Requires Security access to open."
@@ -235,7 +217,7 @@
 					/obj/item/gun/ballistic/shotgun/lethal)
 	access = ACCESS_ARMORY
 	crate_name = "sporting crate"
-	crate_type = /obj/structure/closet/crate/secure // Would have liked a wooden crate but access >:(
+	crate_type = /obj/structure/closet/crate/secure
 
 /datum/supply_pack/security/dumdum
 	name = ".38 DumDum Speedloader"

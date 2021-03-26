@@ -31,7 +31,7 @@
 	var/max_stamina_damage = 0
 	var/incoming_stam_mult = 1 //Multiplier for incoming staminaloss, decreases when taking staminaloss when the limb is disabled, resets back to 1 when limb is no longer disabled.
 	var/max_damage = 0
-	var/stam_heal_tick = 0		//per Life(). Defaults to 0 due to citadel changes
+	var/stam_heal_tick = 0		//per Life(). Defaults to 0
 
 	var/brute_reduction = 0 //Subtracted to brute damage taken
 	var/burn_reduction = 0	//Subtracted to burn damage taken
@@ -2180,8 +2180,6 @@
 				marking = image(body_markings_icon, "[body_markings]_[digitigrade_type]_[use_digitigrade]_[body_zone]", -MARKING_LAYER, image_dir)
 
 			. += marking
-
-		// Citadel End
 
 		if(aux_icons)
 			for(var/I in aux_icons)

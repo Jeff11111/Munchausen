@@ -1,7 +1,6 @@
 /datum/job/warden
 	title = "Lieutenant"
 	flag = WARDEN
-//	auto_deadmin_role_flags = DEADMIN_POSITION_SECURITY
 	department_head = list("Chief Enforcer")
 	department_flag = ENGSEC
 	faction = "Station"
@@ -10,7 +9,7 @@
 	supervisors = "the Chief Enforcer"
 	selection_color = "#c02f2f"
 	minimal_player_age = 7
-	exp_requirements = 120 //SKYRAT CHANGE - lowers security exp requirement
+	exp_requirements = 120
 	exp_type = EXP_TYPE_CREW
 
 	outfit = /datum/outfit/job/warden

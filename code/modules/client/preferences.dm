@@ -27,7 +27,7 @@ GLOBAL_LIST_INIT(food, list(
 	var/path
 	var/vr_path
 	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
-	var/max_save_slots = 30 //skyrat-edit
+	var/max_save_slots = 30
 
 	//non-preference stuff
 	var/muted = 0
@@ -98,7 +98,7 @@ GLOBAL_LIST_INIT(food, list(
 	//character preferences
 	var/real_name						//our character's name
 	var/nameless = FALSE				//whether or not our character is nameless
-	var/auto_hiss = FALSE				//if our character hisses SKYRAT CHANGE
+	var/auto_hiss = FALSE				//if our character hisses
 	var/be_random_name = 0				//whether we'll have a random name every round
 	var/be_random_body = 0				//whether we'll have a random body every round
 	var/gender = MALE					//gender of character (well duh)
@@ -132,7 +132,6 @@ GLOBAL_LIST_INIT(food, list(
 
 	var/list/alt_titles_preferences = list()
 
-	//END OF SKYRAT CHANGES
 	var/backbag = DBACKPACK				//backpack type
 	var/hair_style = "Bald"				//Hair type
 	var/hair_color = "#FFFFFF"				//Hair color
@@ -267,7 +266,7 @@ GLOBAL_LIST_INIT(food, list(
 
 /datum/preferences/New(client/C)
 	parent = C
-	clientfps = world.fps*2 // Skyrat-edit
+	clientfps = world.fps*2
 	for(var/custom_name_id in GLOB.preferences_custom_names)
 		custom_names[custom_name_id] = get_default_name(custom_name_id)
 
@@ -276,7 +275,7 @@ GLOBAL_LIST_INIT(food, list(
 			load_path(C.ckey)
 			unlock_content = C.IsByondMember()
 			if(unlock_content)
-				max_save_slots = 30 //skyrat-edit
+				max_save_slots = 30
 	var/loaded_preferences_successfully = load_preferences()
 	if(loaded_preferences_successfully)
 		if(load_character())
@@ -724,7 +723,7 @@ GLOBAL_LIST_INIT(food, list(
 				mutant_category++
 				if(mutant_category >= MAX_MUTANT_ROWS)
 					dat += "</td>"
-					mutant_category = 0 //skyrat edit
+					mutant_category = 0
 
 			if(pref_species.mutant_bodyparts["mam_ears"])
 				if(!mutant_category)
@@ -896,7 +895,6 @@ GLOBAL_LIST_INIT(food, list(
 					dat += "</td>"
 					mutant_category = 0
 
-			//Skyrat changes
 			if(pref_species.mutant_bodyparts["ipc_chassis"])
 				if(!mutant_category)
 					dat += APPEARANCE_CATEGORY_COLUMN
@@ -909,8 +907,6 @@ GLOBAL_LIST_INIT(food, list(
 				if(mutant_category >= MAX_MUTANT_ROWS)
 					dat += "</td>"
 					mutant_category = 0
-
-			//End of skyrat changes
 
 			if(mutant_category)
 				dat += "</td>"
@@ -990,9 +986,7 @@ GLOBAL_LIST_INIT(food, list(
 			dat += "<b>Show Runechat Chat Bubbles:</b> <a href='?_src_=prefs;preference=chat_on_map'>[chat_on_map ? "Enabled" : "Disabled"]</a><br>"
 			dat += "<b>Runechat message char limit:</b> <a href='?_src_=prefs;preference=max_chat_length;task=input'>[max_chat_length]</a><br>"
 			dat += "<b>See Runechat for non-mobs:</b> <a href='?_src_=prefs;preference=see_chat_non_mob'>[see_chat_non_mob ? "Enabled" : "Disabled"]</a><br>"
-			//SKYRAT CHANGES BEGIN
 			dat += "<b>See Runechat for emotes:</b> <a href='?_src_=prefs;preference=see_chat_emotes'>[see_chat_emotes ? "Enabled" : "Disabled"]</a><br>"
-			//SKYRAT CHANGES END
 			dat += "<br>"
 			dat += "<b>Action Buttons:</b> <a href='?_src_=prefs;preference=action_buttons'>[(buttons_locked) ? "Locked In Place" : "Unlocked"]</a><br>"
 			dat += "<br>"
@@ -1006,9 +1000,7 @@ GLOBAL_LIST_INIT(food, list(
 			dat += "<b>Ghost PDA:</b> <a href='?_src_=prefs;preference=ghost_pda'>[(chat_toggles & CHAT_GHOSTPDA) ? "All Messages" : "Nearest Creatures"]</a><br>"
 			dat += "<b>Window Flashing:</b> <a href='?_src_=prefs;preference=winflash'>[(windowflashing) ? "Enabled":"Disabled"]</a><br>"
 			dat += "<br>"
-			//SKYRAT CHANGES BEGIN
 			dat += "<b>Play Megafauna Music:</b> <a href='?_src_=prefs;preference=hear_megafauna'>[(toggles & SOUND_MEGAFAUNA) ? "Enabled":"Disabled"]</a><br>"
-			//SKYRAT CHANGES END
 			dat += "<b>Play Admin MIDIs:</b> <a href='?_src_=prefs;preference=hear_midis'>[(toggles & SOUND_MIDI) ? "Enabled":"Disabled"]</a><br>"
 			dat += "<b>Play Lobby Music:</b> <a href='?_src_=prefs;preference=lobby_music'>[(toggles & SOUND_LOBBY) ? "Enabled":"Disabled"]</a><br>"
 			dat += "<b>See Pull Requests:</b> <a href='?_src_=prefs;preference=pull_requests'>[(chat_toggles & CHAT_PULLR) ? "Enabled":"Disabled"]</a><br>"
@@ -1179,13 +1171,11 @@ GLOBAL_LIST_INIT(food, list(
 					class_link = "style='white-space:normal;background:#ebc42e;' href='?_src_=prefs;preference=gear;toggle_gear_path=[html_encode(j)];toggle_gear=1'"
 				else
 					class_link = "style='white-space:normal;' href='?_src_=prefs;preference=gear;toggle_gear_path=[html_encode(j)];toggle_gear=1'"
-				//skyrat edit
 				if(gear.has_colors && (gear.name in color_gear))
 					var/colore = "<a href='?_src_=prefs;preference=gear;toggle_gear_path=[html_encode(j)];toggle_gear=color'>Color</a><span style='border: 1px solid #161616; background-color: [color_gear[gear.name]];'>&nbsp;&nbsp;&nbsp;</span>"
 					dat += "<tr style='vertical-align:top;'><td width=15%><a [class_link]>[j]</a>[colore]</td>"
 				else
 					dat += "<tr style='vertical-align:top;'><td width=15%><a [class_link]>[j]</a></td>"
-				//
 				dat += "<td width = 5% style='vertical-align:top'>[gear.cost]</td><td>"
 				if(islist(gear.restricted_roles))
 					if(gear.restricted_roles.len)
@@ -1380,7 +1370,6 @@ GLOBAL_LIST_INIT(food, list(
 			if((job_preferences["[SSjob.overflow_role]"] == JP_LOW) && (rank != SSjob.overflow_role) && !jobban_isbanned(user, SSjob.overflow_role))
 				HTML += "<font color=orange>[rank]</font></td><td></td></tr>"
 				continue
-			//Skyrat changes
 			var/rank_title_line = "[displayed_rank]"
 			if((rank in GLOB.command_positions) || (rank == "AI"))//Bold head jobs
 				rank_title_line = "<b>[rank_title_line]</b>"
@@ -1389,7 +1378,6 @@ GLOBAL_LIST_INIT(food, list(
 			else
 				rank_title_line = "<span class='dark'>[rank_title_line]</span>" //Make it dark if we're not adding a button for alt titles
 			HTML += rank_title_line
-			//End of skyrat changes
 
 			HTML += "</td><td width='40%'>"
 
@@ -1505,7 +1493,6 @@ GLOBAL_LIST_INIT(food, list(
 /datum/preferences/proc/ResetJobs()
 	job_preferences = list()
 
-//SKYRAT EDIT - extra language
 /datum/preferences/proc/SetLanguage(mob/user)
 	var/list/dat = list()
 	dat += "<center><b>Choose an Additional Language</b></center><br>"
@@ -1539,9 +1526,7 @@ GLOBAL_LIST_INIT(food, list(
 	popup.set_window_options("can_close=0")
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
-//
 
-//Skyrat edit - food prefs
 /datum/preferences/proc/SetFood(mob/user)
 	var/list/dat = list()
 	dat += "<center><b>Choose food setup</b></center><br>"
@@ -1582,9 +1567,7 @@ GLOBAL_LIST_INIT(food, list(
 	popup.set_window_options("can_close=0")
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
-//
 
-//SKYRAT EDIT - species menu cool
 /datum/preferences/proc/SetSpecies(mob/user)
 	var/list/dat = list()
 	dat += "<center><h2>Choose a species</h2></center>"
@@ -1611,7 +1594,6 @@ GLOBAL_LIST_INIT(food, list(
 	popup.set_window_options("can_close=0")
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
-//
 
 /datum/preferences/Topic(href, href_list, hsrc)			//yeah, gotta do this I guess..
 	. = ..()
@@ -1681,7 +1663,6 @@ GLOBAL_LIST_INIT(food, list(
 				SetChoices(user)
 			if("setJobLevel")
 				UpdateJobPreference(user, href_list["text"], text2num(href_list["level"]))
-			//SKYRAT CHANGES
 			if("alt_title")
 				var/job_title = href_list["job_title"]
 				var/titles_list = list(job_title)
@@ -1697,11 +1678,10 @@ GLOBAL_LIST_INIT(food, list(
 					else
 						alt_titles_preferences[job_title] = chosen_title
 				SetChoices(user)
-			//END OF SKYRAT CHANGES
 			else
 				SetChoices(user)
 		return 1
-	//skyrat edit - made species have a proper menu because thats kinda epic
+
 	else if(href_list["preference"] == "species")
 		switch(href_list["task"])
 			if("close")
@@ -2071,7 +2051,6 @@ GLOBAL_LIST_INIT(food, list(
 						if(features["mcolor3"] == "#000" || (!(MUTCOLORS_PARTSONLY in pref_species.species_traits)))
 							features["mcolor3"] = pref_species.default_color
 
-						//skyrat edit - avoids picking species restricted stuff
 						language = initial(language)
 						bloodtype = initial(bloodtype)
 						body_descriptors = list()
@@ -2127,14 +2106,11 @@ GLOBAL_LIST_INIT(food, list(
 					if(new_ipc_antenna)
 						features["ipc_antenna"] = new_ipc_antenna
 
-				//Skyrat changes
 				if("ipc_chassis")
 					var/new_ipc_chassis
 					new_ipc_chassis = input(user, "Choose your character's chassis:", "Character Preference") as null|anything in GLOB.ipc_chassis_list
 					if(new_ipc_chassis)
 						features["ipc_chassis"] = new_ipc_chassis
-
-				//End of skyrat changes
 
 				if("tail_lizard")
 					var/new_tail
@@ -2522,8 +2498,6 @@ GLOBAL_LIST_INIT(food, list(
 					var/desiredlength = input(user, "Choose the max character length of shown Runechat messages. Valid range is 1 to [CHAT_MESSAGE_MAX_LENGTH] (default: [initial(max_chat_length)]))", "Character Preference", max_chat_length)  as null|num
 					if (!isnull(desiredlength))
 						max_chat_length = clamp(desiredlength, 1, CHAT_MESSAGE_MAX_LENGTH)
-
-				//Skyrat changes begin
 				if("personal_chat_color")
 					var/new_chat_color = input(user, "Choose your character's runechat color:", "Character Preference", personal_chat_color) as color|null
 					if(new_chat_color)
@@ -2559,7 +2533,6 @@ GLOBAL_LIST_INIT(food, list(
 							features["body_size"] = new_body_size
 		else
 			switch(href_list["preference"])
-				//CITADEL PREFERENCES EDIT - I can't figure out how to modularize these, so they have to go here. :c -Pooj
 				if("genital_colour")
 					features["genitals_use_skintone"] = !features["genitals_use_skintone"]
 					if(pref_species.use_skintones)
@@ -2614,7 +2587,6 @@ GLOBAL_LIST_INIT(food, list(
 					nameless = !nameless
 				if("auto_hiss")
 					auto_hiss = !auto_hiss
-				//END CITADEL EDIT
 				if("publicity")
 					if(unlock_content)
 						toggles ^= MEMBER_PUBLIC
@@ -2703,7 +2675,6 @@ GLOBAL_LIST_INIT(food, list(
 					chat_on_map = !chat_on_map
 				if("see_chat_non_mob")
 					see_chat_non_mob = !see_chat_non_mob
-				//Skyrat changes begin
 				if("see_chat_emotes")
 					see_chat_emotes = !see_chat_emotes
 				if("enable_personal_chat_color")
@@ -2711,7 +2682,6 @@ GLOBAL_LIST_INIT(food, list(
 				if("appear_in_round_end_report")
 					appear_in_round_end_report = !appear_in_round_end_report
 					user.mind?.appear_in_round_end_report = appear_in_round_end_report
-				//End of skyrat changes
 				if("action_buttons")
 					buttons_locked = !buttons_locked
 				if("tgui_fancy")
@@ -2743,10 +2713,8 @@ GLOBAL_LIST_INIT(food, list(
 				if("hear_midis")
 					toggles ^= SOUND_MIDI
 
-				//SKYRAT CHANGES BEGIN - Megafauna music
 				if("hear_megafauna")
 					toggles ^= SOUND_MEGAFAUNA
-				//SKYRAT CHANGES END
 
 				if("lobby_music")
 					toggles ^= SOUND_LOBBY
@@ -2839,7 +2807,6 @@ GLOBAL_LIST_INIT(food, list(
 			var/datum/gear/G = GLOB.loadout_items[gear_tab][html_decode(href_list["toggle_gear_path"])]
 			if(!G)
 				return
-			//skyrat edit
 			if(href_list["toggle_gear"] != "color")
 				var/toggle = text2num(href_list["toggle_gear"])
 				if(!toggle && (G.type in chosen_gear))//toggling off and the item effectively is in chosen gear)
@@ -2864,7 +2831,6 @@ GLOBAL_LIST_INIT(food, list(
 					if(!color_gear)
 						color_gear = list()
 					color_gear[G.name] = choice
-			//
 
 	ShowChoices(user)
 	return 1

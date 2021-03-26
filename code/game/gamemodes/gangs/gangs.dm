@@ -12,7 +12,6 @@ GLOBAL_LIST_EMPTY(gangs)
 	required_enemies = 0
 	recommended_enemies = 2
 	enemy_minimum_age = 14
-	// SKYRAT EDIT: Credits
 	title_icon = "gang"
 
 	announce_span = "danger"
@@ -66,7 +65,7 @@ GLOBAL_LIST_EMPTY(gangs)
 		var/datum/antagonist/gang/boss/B = new()
 		M.add_antag_datum(B)
 		B.equip_gang()
-// SKYRAT EDIT: Credits
+
 /datum/game_mode/gang/generate_credit_text()
 	var/list/round_credits = list()
 	var/len_before_addition

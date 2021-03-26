@@ -334,7 +334,7 @@
 	SSvis_overlays.remove_vis_overlay(src, managed_vis_overlays)
 	if(on && status == LIGHT_OK)
 		var/overlay_alpha = clamp(light_power*250, 30, 200)
-		SSvis_overlays.add_vis_overlay(src, overlayicon, base_state, ABOVE_LIGHTING_LAYER, ABOVE_LIGHTING_PLANE, dir, overlay_alpha) //SKYRAT CHANGE reverts emissive
+		SSvis_overlays.add_vis_overlay(src, overlayicon, base_state, ABOVE_LIGHTING_LAYER, ABOVE_LIGHTING_PLANE, dir, overlay_alpha)
 		var/mutable_appearance/M = mutable_appearance(overlayicon, base_state)
 		M.alpha = overlay_alpha
 		. += M

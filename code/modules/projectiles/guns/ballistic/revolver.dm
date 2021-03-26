@@ -19,19 +19,7 @@
 /obj/item/gun/ballistic/revolver/shoot_with_empty_chamber(mob/living/user as mob|obj, no_message = TRUE)
 	..()
 	chamber_round(1)
-/*modular
-/obj/item/gun/ballistic/revolver/attackby(obj/item/A, mob/user, params)
-	. = ..()
-	if(.)
-		return
-	var/num_loaded = magazine.attackby(A, user, params, 1)
-	if(num_loaded)
-		to_chat(user, "<span class='notice'>You load [num_loaded] shell\s into \the [src].</span>")
-		var/loadsound = pick('modular_skyrat/sound/weapons/revolver_load1.ogg', 'modular_skyrat/sound/weapons/revolver_load2.ogg')
-		playsound(src, loadsound, 60, 1)
-		A.update_icon()
-		chamber_round(0)
-*/
+
 /obj/item/gun/ballistic/revolver/attack_self(mob/living/user)
 	var/num_unloaded = 0
 	chambered = null
@@ -268,7 +256,7 @@
 	name = "double-barreled shotgun"
 	desc = "A true classic."
 	icon_state = "dshotgun"
-	lefthand_file = 'icons/mob/inhands/weapons/64x_guns_left.dmi'  //Skyrat edit start
+	lefthand_file = 'icons/mob/inhands/weapons/64x_guns_left.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/64x_guns_right.dmi'
 	item_state = "shotgun_db"
 	inhand_x_dimension = 64
@@ -290,62 +278,6 @@
 		var/obj/item/melee/transforming/energy/W = A
 		if(W.active)
 			sawoff(user)
-
-/////////////////////////////
-//   IMPROVISED SHOTGUN    //
-/////////////////////////////
-/*
-/obj/item/gun/ballistic/revolver/doublebarrel/improvised
-	name = "improvised shotgun"
-	desc = "A shoddy break-action breechloaded shotgun. Its lacklustre construction will probably result in it hurting people less than a normal shotgun."
-	icon_state = "ishotgun"
-	item_state = "shotgun"
-	w_class = WEIGHT_CLASS_BULKY
-	weapon_weight = WEAPON_MEDIUM
-	force = 10
-	slot_flags = null
-	mag_type = /obj/item/ammo_box/magazine/internal/shot/improvised
-	sawn_desc = "I'm just here for the gasoline."
-	unique_reskin = null
-	projectile_damage_multiplier = 0.9
-	var/slung = FALSE
-	weapon_weight = WEAPON_HEAVY
-
-/obj/item/gun/ballistic/revolver/doublebarrel/improvised/attackby(obj/item/A, mob/user, params)
-	..()
-	if(istype(A, /obj/item/stack/cable_coil) && !sawn_off)
-		if(A.use_tool(src, user, 0, 10, max_level = JOB_SKILL_BASIC))
-			slot_flags = ITEM_SLOT_BACK
-			to_chat(user, "<span class='notice'>You tie the lengths of cable to the shotgun, making a sling.</span>")
-			slung = TRUE
-			update_icon()
-		else
-			to_chat(user, "<span class='warning'>You need at least ten lengths of cable if you want to make a sling!</span>")
-
-/obj/item/gun/ballistic/revolver/doublebarrel/improvised/update_icon()
-	..()
-	if(slung)
-		icon_state += "sling"
-
-/obj/item/gun/ballistic/revolver/doublebarrel/improvised/sawoff(mob/user)
-	. = ..()
-	if(. && slung) //sawing off the gun removes the sling
-		new /obj/item/stack/cable_coil(get_turf(src), 10)
-		slung = 0
-		update_icon()
-
-/obj/item/gun/ballistic/revolver/doublebarrel/improvised/sawn
-	name = "sawn-off improvised shotgun"
-	desc = "The barrel and stock have been sawn and filed down; it can fit in backpacks. You still need two hands to fire this, if you value unbroken wrists."
-	icon_state = "ishotgun"
-	item_state = "gun"
-	w_class = WEIGHT_CLASS_NORMAL
-	sawn_off = TRUE
-	slot_flags = ITEM_SLOT_BELT
-
-// This is now modular. It is no longer a revolver and now a shotgun.
-// This was done to mawke the shotgun break-action, instead of a giant 12G revolver.
-*/
 
 /obj/item/gun/ballistic/revolver/reverse //Fires directly at its user... unless the user is a clown, of course.
 	clumsy_check = 0

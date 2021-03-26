@@ -43,17 +43,7 @@
 	desc = "First generation lasergun, developed by Nanotrasen. Suffers from ammo issues but its unique ability to recharge its ammo without the need of a magazine helps compensate. You really hope someone has developed a better lasergun while you were in cryo."
 	ammo_type = list(/obj/item/ammo_casing/energy/lasergun/old)
 	ammo_x_offset = 3
-/* Moved to moddular skyrat
-/obj/item/gun/energy/laser/captain
-	name = "antique laser gun"
-	icon_state = "caplaser"
-	item_state = "caplaser"
-	desc = "This is an antique laser gun. All craftsmanship is of the highest quality. It is decorated with assistant leather and chrome. The object menaces with spikes of energy. On the item is an image of Space Station 13. The station is exploding."
-	force = 10
-	ammo_x_offset = 3
-	selfcharge = EGUN_SELFCHARGE
-	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
-*/
+
 /obj/item/gun/energy/laser/carbine
 	name = "laser carbine"
 	desc = "A ruggedized laser carbine featuring much higher capacity and improved handling when compared to a normal laser gun."
@@ -241,7 +231,6 @@
 
 	process_fire(target, user, TRUE, params)
 
-//skyrat edit
 /obj/item/gun/energy/laser/hellgun
 	name ="hellfire laser gun"
 	desc = "A relic of a weapon, built before NT began installing regulators on its laser weaponry. This pattern of laser gun became infamous for the gruesome burn wounds it caused, and was quietly discontinued once it began to affect NT's reputation."
@@ -250,7 +239,7 @@
 	ammo_type = list(/obj/item/ammo_casing/energy/laser/hellfire)
 
 ////////////////
-// IMPROVISED // This is a Skyrat Edit
+// IMPROVISED //
 ////////////////
 
 /obj/item/gun/energy/e_gun/old/improvised

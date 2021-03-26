@@ -40,7 +40,6 @@
 
 	var/announce_span = "warning" //The gamemode's name will be in this span during announcement.
 	var/announce_text = "This gamemode forgot to set a descriptive text! Uh oh!" //Used to describe a gamemode when it's announced.
-	// SKYRAT EDIT: Credits
 	// title_icon and title_icon_state are used for the credits that roll at the end
 	var/title_icon
 
@@ -53,7 +52,7 @@
 
 	var/gamemode_ready = FALSE //Is the gamemode all set up and ready to start checking for ending conditions.
 	var/setup_error		//What stopepd setting up the mode.
-	var/flipseclevel = FALSE //CIT CHANGE - adds a 10% chance for the alert level to be the opposite of what the gamemode is supposed to have
+	var/flipseclevel = FALSE //adds a 10% chance for the alert level to be the opposite of what the gamemode is supposed to have
 
 /datum/game_mode/proc/announce() //Shows the gamemode's name and a fast description.
 	to_chat(world, "<b>The gamemode is: <span class='[announce_span]'>[name]</span>!</b>")
@@ -88,7 +87,7 @@
 		report = !CONFIG_GET(flag/no_intercept_report)
 	addtimer(CALLBACK(GLOBAL_PROC, .proc/display_roundstart_logout_report), ROUNDSTART_LOGOUT_REPORT_TIME)
 
-	if(prob(35)) //SKYRAT CHANGE - 35% instead of 20% for the alert to be wrong
+	if(prob(35))
 		flipseclevel = TRUE
 	if(SSdbcore.Connect())
 		var/sql
@@ -259,7 +258,7 @@
 	return 0
 
 /datum/game_mode/proc/send_intercept()
-	if(flipseclevel && !(config_tag == "extended"))//CIT CHANGE - lets the security level be flipped roundstart
+	if(flipseclevel && !(config_tag == "extended"))
 		priority_announce("Thanks to the tireless efforts of our security and intelligence divisions, there are currently no credible threats to [station_name()]. All station construction projects have been authorized. Have a secure shift!", "Security Report", "commandreport")
 		return
 	var/intercepttext = "<b><i>Central Command Status Summary</i></b><hr>"
@@ -408,7 +407,7 @@
 	for(var/mob/dead/new_player/player in players)
 		if(player.client && player.ready == PLAYER_READY_TO_PLAY)
 			if(role in player.client.prefs.be_special)
-				if(!jobban_isbanned(player, ROLE_SYNDICATE) && !QDELETED(player) && !jobban_isbanned(player, role) && !QDELETED(player) && !jobban_isbanned(player, COLLARBAN)) //Nodrak/Carn: Antag Job-bans //Skyrat edit - pacifybans
+				if(!jobban_isbanned(player, ROLE_SYNDICATE) && !QDELETED(player) && !jobban_isbanned(player, role) && !QDELETED(player) && !jobban_isbanned(player, COLLARBAN))
 					if(age_check(player.client)) //Must be older than the minimum age
 						candidates += player.mind				// Get a list of all the people who want to be the antagonist for this round
 
@@ -429,7 +428,7 @@
 		for(var/mob/dead/new_player/player in players)
 			if(player.client && player.ready == PLAYER_READY_TO_PLAY)
 				if(!(role in player.client.prefs.be_special)) // We don't have enough people who want to be antagonist, make a separate list of people who don't want to be one
-					if(!jobban_isbanned(player, ROLE_SYNDICATE) && !QDELETED(player)  && !jobban_isbanned(player, role) && !QDELETED(player) && !jobban_isbanned(player, COLLARBAN)) //Nodrak/Carn: Antag Job-bans //Skyrat edit - collarbans
+					if(!jobban_isbanned(player, ROLE_SYNDICATE) && !QDELETED(player)  && !jobban_isbanned(player, role) && !QDELETED(player) && !jobban_isbanned(player, COLLARBAN))
 						drafted += player.mind
 
 	if(restricted_jobs)
@@ -479,7 +478,6 @@
 	for(var/mob/dead/new_player/P in GLOB.player_list)
 		if(P.client && P.ready == PLAYER_READY_TO_PLAY)
 			. ++
-// SKYRAT EDIT: Credits
 ////////////////////////////
 //Keeps track of all heads//
 ////////////////////////////
@@ -603,7 +601,7 @@
 		rev.remove_revolutionary(TRUE)
 
 /datum/game_mode/proc/generate_station_goals()
-	if(flipseclevel && !(config_tag == "extended")) //CIT CHANGE - allows the sec level to be flipped roundstart
+	if(flipseclevel && !(config_tag == "extended"))
 		for(var/T in subtypesof(/datum/station_goal))
 			var/datum/station_goal/G = new T
 			station_goals += G
@@ -615,18 +613,11 @@
 		if(config_tag in initial(G.gamemode_blacklist))
 			continue
 		possible += T
-	
-	// Skyrat change: All station goals, all the time.
 
 	station_goals = possible
 	for(var/I in station_goals)
 		station_goals -= I
 		station_goals += new I()
-	/*var/goal_weights = 0
-	while(possible.len && goal_weights < STATION_GOAL_BUDGET)
-		var/datum/station_goal/picked = pick_n_take(possible)
-		goal_weights += initial(picked.weight)
-		station_goals += new picked*/
 
 /datum/game_mode/proc/generate_report() //Generates a small text blurb for the gamemode in centcom report
 	return "Gamemode report for [name] not set.  Contact a coder."
@@ -658,7 +649,7 @@
 /// Mode specific info for ghost game_info
 /datum/game_mode/proc/ghost_info()
 	return
-// SKYRAT EDIT: Credits
+	
 /datum/game_mode/proc/generate_credit_text()
 	var/list/round_credits = list()
 	var/len_before_addition

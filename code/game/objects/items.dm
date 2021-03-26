@@ -184,12 +184,10 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 			hitsound = 'sound/items/welder.ogg'
 		if(damtype == "brute")
 			hitsound = "swing_hit"
-	//skyrat change
 	if(use_standard_equip_delay && !equip_delay_self)
 		equip_delay_self = self_equip_mod * equip_delay_other
 	if(use_standard_strip_self_delay && !strip_self_delay && equip_delay_self)
 		strip_self_delay = strip_self_delay_mod * equip_delay_self
-	//
 
 /obj/item/Destroy()
 	item_flags &= ~DROPDEL	//prevent reqdels
@@ -564,9 +562,9 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 		to_chat(user, "<span class='danger'>You cannot locate any organic eyes on this brain!</span>")
 		return
 
-	if(IS_STAMCRIT(user))//CIT CHANGE - makes eyestabbing impossible if you're in stamina softcrit
-		to_chat(user, "<span class='danger'>You're too exhausted for that.</span>")//CIT CHANGE - ditto
-		return //CIT CHANGE - ditto
+	if(IS_STAMCRIT(user))//makes eyestabbing impossible if you're in stamina softcrit
+		to_chat(user, "<span class='danger'>You're too exhausted for that.</span>")
+		return
 
 	src.add_fingerprint(user)
 
@@ -574,7 +572,7 @@ GLOBAL_VAR_INIT(embedpocalypse, FALSE) // if true, all items will be able to emb
 
 	user.do_attack_animation(M)
 
-	user.adjustStaminaLossBuffered(10)//CIT CHANGE - makes eyestabbing cost stamina
+	user.adjustStaminaLossBuffered(10)//makes eyestabbing cost stamina
 
 	if(M != user)
 		M.visible_message("<span class='danger'>[user] has stabbed [M] in the eye with [src]!</span>", \

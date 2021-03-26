@@ -177,11 +177,9 @@
 	surplus = 0
 	cant_discount = TRUE
 
-//skyrat edit
 /datum/uplink_item/race_restricted
 	category = "Species-Restricted"
 	surplus = 0
-//
 
 /datum/uplink_item/badass
 	category = "(Pointless) Badassery"

@@ -1,5 +1,3 @@
-//guess what whole file is skyrat edit
-
 // The shattered remnants of your broken limbs fill you with determination!
 /obj/screen/alert/status_effect/determined
 	name = "Determined"

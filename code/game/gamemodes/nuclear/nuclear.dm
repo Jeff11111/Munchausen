@@ -1,4 +1,3 @@
-// SKYRAT EDIT: Credits
 #define FLUKEOPS_TIME_DELAY 12000 // 20 minutes, how long before the credits stop calling the nukies flukeops
 
 /datum/game_mode/nuclear
@@ -10,7 +9,6 @@
 	recommended_enemies = 5
 	antag_flag = ROLE_OPERATIVE
 	enemy_minimum_age = 7
-	// SKYRAT EDIT: Credits
 	title_icon = "nukeops"
 
 	announce_span = "danger"
@@ -201,7 +199,7 @@
 	/obj/item/kitchen/knife/combat/survival)
 
 	tc = 40
-// SKYRAT EDIT: Credits
+
 /datum/game_mode/nuclear/generate_credit_text()
 	var/list/round_credits = list()
 	var/len_before_addition

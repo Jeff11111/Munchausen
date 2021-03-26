@@ -407,10 +407,10 @@
 		if(SLOT_BACK, SLOT_WEAR_SUIT, SLOT_W_UNIFORM, SLOT_BELT, SLOT_WEAR_ID)
 			return BODY_ZONE_CHEST
 
-		if(SLOT_GLOVES, SLOT_HANDS, SLOT_HANDCUFFED, SLOT_WRISTS) //SKYRAT EDIT
+		if(SLOT_GLOVES, SLOT_HANDS, SLOT_HANDCUFFED, SLOT_WRISTS)
 			return pick(BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND)
 
-		if(SLOT_HEAD, SLOT_NECK, SLOT_NECK, SLOT_EARS_LEFT, SLOT_EARS_RIGHT) //skyrat edit
+		if(SLOT_HEAD, SLOT_NECK, SLOT_NECK, SLOT_EARS_LEFT, SLOT_EARS_RIGHT)
 			return BODY_ZONE_HEAD
 
 		if(SLOT_WEAR_MASK)
@@ -648,7 +648,6 @@
 			return "Hands"
 		if(SLOT_BELT)
 			return "Belt"
-		//skyrat edit
 		if(SLOT_EARS_LEFT)
 			return "Left ear"
 		if(SLOT_EARS_RIGHT)
@@ -661,7 +660,6 @@
 			return "Shirt"
 		if(SLOT_WRISTS)
 			return "Wrist"
-		//
 		if(SLOT_GLASSES)
 			return "Glasses"
 		if(SLOT_GLOVES)
@@ -679,7 +677,6 @@
 		if(SLOT_IN_BACKPACK)
 			return "In backpack"
 
-//skyrat stuff
 /// For finding out what body parts a body zone covers, the inverse of the below basically
 /proc/zone2body_parts_covered(def_zone)
 	switch(def_zone)

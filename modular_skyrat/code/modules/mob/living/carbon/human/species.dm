@@ -372,14 +372,12 @@
 		var/kickedstam = target.getStaminaLoss()
 		var/kickedbrute = target.getBruteLoss()
 
-		//CITADEL CHANGES - makes resting and disabled combat mode reduce punch damage, makes being out of combat mode result in you taking more damage
 		if(SEND_SIGNAL(target, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
 			damage *= 1.1
 		if(!CHECK_MOBILITY(user, MOBILITY_STAND))
 			damage *= 0.5 //Kicking while down? Not very effective.
 		if(SEND_SIGNAL(user, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
 			damage *= 0.9
-		//END OF CITADEL CHANGES
 
 		//If the user has bad st, sometimes... the attack gets really shit
 		var/pitiful = FALSE
@@ -589,14 +587,12 @@
 				if(CI_WEAK)
 					damage *= 0.25
 
-		//CITADEL CHANGES - makes resting and disabled combat mode reduce punch damage, makes being out of combat mode result in you taking more damage
 		if(SEND_SIGNAL(target, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
 			damage *= 1.1
 		if(!CHECK_MOBILITY(user, MOBILITY_STAND))
 			damage *= 0.5 //Kicking while down? Not very effective.
 		if(SEND_SIGNAL(user, COMSIG_COMBAT_MODE_CHECK, COMBAT_MODE_INACTIVE))
 			damage *= 0.9
-		//END OF CITADEL CHANGES
 
 		//If the user has bad st, sometimes... the attack gets really shit
 		var/pitiful = FALSE

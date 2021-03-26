@@ -176,16 +176,7 @@
 
 /obj/item/gun/energy/kinetic_accelerator/emp_act(severity)
 	return
-/* moved to modular_skyrat
-/obj/item/gun/energy/kinetic_accelerator/proc/reload()
-	cell.give(cell.maxcharge)
-	if(!suppressed)
-		playsound(src.loc, 'sound/weapons/kenetic_reload.ogg', 60, 1)
-	else
-		to_chat(loc, "<span class='warning'>[src] silently charges up.</span>")
-	update_icon()
-	overheat = FALSE
-*/
+
 /obj/item/gun/energy/kinetic_accelerator/update_icon()
 	..()
 	if(!can_shoot())
@@ -504,7 +495,7 @@
 		if(L.stat == DEAD)
 			return
 		L = K.firer
-		L.heal_ordered_damage(modifier/(KA?.chambered?.pellets ? KA.chambered.pellets : 1), damage_heal_order) //skyrat edit - healing is divided by pellets to prevent shotgun mod memes
+		L.heal_ordered_damage(modifier/(KA?.chambered?.pellets ? KA.chambered.pellets : 1), damage_heal_order)
 
 /obj/item/borg/upgrade/modkit/resonator_blasts
 	name = "resonator blast"

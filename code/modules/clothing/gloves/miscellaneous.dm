@@ -49,8 +49,8 @@
 	REMOVE_TRAIT(user, secondary_trait, GLOVE_TRAIT)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		H.dna.species.punchdamagehigh -= enhancement //skyrat edit
-		H.dna.species.punchdamagelow -= enhancement //skyrat edit
+		H.dna.species.punchdamagehigh -= enhancement
+		H.dna.species.punchdamagelow -= enhancement
 	return ..()
 
 /obj/item/clothing/gloves/fingerless/pugilist/chaplain
@@ -193,9 +193,7 @@
 	desc = "Gloves made with completely frictionless, insulated cloth, easier to steal from people with."
 	icon_state = "thief"
 	item_state = "blackgloves"
-	//skyrat change - custom examine icons
 	examine_icon_state = "black"
-	//
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	strip_delay = 80

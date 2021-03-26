@@ -1,5 +1,4 @@
 /mob/living/silicon/robot/examine(mob/user)
-	//Skyrat changes - fixes chameleon borgs examine
 	var/module_name
 	var/obj/item/borg_chameleon/BC = locate() in src
 	if(BC && BC.active)
@@ -7,7 +6,6 @@
 	else
 		module_name = src.module.name
 	. = list("<span class='info'>*---------*\nThis is [icon2html(src, user)] \a <EM>[src]</EM>, [prefix_a_or_an(module_name)] [module_name] unit!")
-	//End of skyrat changes
 	if(desc)
 		. += "[desc]"
 
@@ -51,7 +49,7 @@
 			if(shell)
 				. += "It appears to be an [deployed ? "active" : "empty"] AI shell."
 			else if(!client)
-				. += "<span class='warning'>It appears to be in stand-by mode and has been completely unresponsive to anything for [round(((world.time - lastclienttime) / (1 MINUTES)),1)] minutes. It may boot up soon.</span>" //SKYRAT CHANGE - ssd indicator
+				. += "<span class='warning'>It appears to be in stand-by mode and has been completely unresponsive to anything for [round(((world.time - lastclienttime) / (1 MINUTES)),1)] minutes. It may boot up soon.</span>"
 		if(UNCONSCIOUS)
 			. += "<span class='warning'>It doesn't seem to be responding.</span>"
 		if(DEAD)

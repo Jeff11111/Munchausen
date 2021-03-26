@@ -114,7 +114,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 /obj/item/pda/Initialize()
 	. = ..()
-	AddComponent(/datum/component/overlay_lighting, f_col, f_lum, f_pow, FALSE) //Skyrat change
+	AddComponent(/datum/component/overlay_lighting, f_col, f_lum, f_pow, FALSE)
 	if(fon)
 		var/datum/component/overlay_lighting/OL = GetComponent(/datum/component/overlay_lighting)
 		OL.turn_on()

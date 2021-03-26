@@ -59,7 +59,7 @@
 
 /obj/item/spear/suicide_act(mob/living/carbon/user)
 	user.visible_message("<span class='suicide'>[user] begins to sword-swallow \the [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")
-	if(explosive) //Citadel Edit removes qdel and explosive.forcemove(AM)
+	if(explosive)
 		user.say("[war_cry]", forced="spear warcry")
 		explosive.prime()
 		user.gib()
@@ -78,11 +78,11 @@
 		return
 	if(isopenturf(AM)) //So you can actually melee with it
 		return
-	if(explosive && wielded) //Citadel edit removes qdel and explosive.forcemove(AM)
+	if(explosive && wielded)
 		user.say("[war_cry]", forced="spear warcry")
 		explosive.prime()
 
-/obj/item/spear/grenade_prime_react(obj/item/grenade/nade) //Citadel edit, removes throw_impact because memes
+/obj/item/spear/grenade_prime_react(obj/item/grenade/nade)
 	nade.forceMove(get_turf(src))
 	qdel(src)
 

@@ -80,10 +80,10 @@
 	switch(animation)
 		if("opening")
 			flick("opening", src)
-			playsound(src, opensound, 30, 1) //SKYRAT CHANGE - Various poddoor sounds
+			playsound(src, opensound, 30, 1)
 		if("closing")
 			flick("closing", src)
-			playsound(src, closesound, 30, 1) //SKYRAT CHANGE - Various poddoor sounds
+			playsound(src, closesound, 30, 1)
 
 /obj/machinery/door/poddoor/update_icon()
 	update_dir()

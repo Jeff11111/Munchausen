@@ -630,7 +630,6 @@
 			if("No")
 				return
 
-	// SKYRAT ADDITION -- BEGIN
 	else if(href_list["collarban"])
 		var/mob/M = locate(href_list["collarban"])
 		if(!ismob(M))
@@ -717,7 +716,6 @@
 				log_admin_private("[key_name(usr)] permanently pacification banned [key_name(M)]. Reason: [reason]")
 				to_chat(M, "<span class='boldannounce'><BIG>You have been permanently pacification banned by [usr.client.key].</BIG></span>")
 				to_chat(M, "<span class='boldannounce'>The reason is: [reason]</span>")
-	// SKYRAT ADDITION -- END
 
 	else if(href_list["jobban2"])
 		if(!check_rights(R_BAN))
@@ -1401,13 +1399,12 @@
 				var/msg = "<span class='adminnotice'>[key_name_admin(usr)] has banned [key_name_admin(M)].\nReason: [reason]\nThis will be removed in [mins] minutes.</span>"
 				message_admins(msg)
 				
-				// Skyrat change START
 				if (M.client)
 					for(var/ticket in M.client.tickets)
 						var/datum/admin_help/AH = ticket
 						if(AH)
 							AH.Resolve()
-				// Skyrat change END
+
 
 				qdel(M.client)
 			if("No")
@@ -1436,14 +1433,12 @@
 				var/msg = "<span class='adminnotice'>[key_name_admin(usr)] has banned [key_name_admin(M)].\nReason: [reason]\nThis is a permanent ban.</span>"
 				message_admins(msg)
 				
-				// Skyrat change START
 				if (M.client)
 					for(var/ticket in M.client.tickets)
 						var/datum/admin_help/AH = ticket
 						if(AH)
 							AH.Resolve()
 					M.client << link(CONFIG_GET(string/bannedurl))
-				// Skyrat change END
 
 				qdel(M.client)
 			if("Cancel")
@@ -2103,7 +2098,7 @@
 		show_player_panel(M)
 
 	else if(href_list["adminplayerobservefollow"])
-		if(!isobserver(usr) && !check_rights(0)) //Skyrat change
+		if(!isobserver(usr) && !check_rights(0))
 			return
 
 		var/atom/movable/AM = locate(href_list["adminplayerobservefollow"])
@@ -2124,7 +2119,7 @@
 		AM.forceMove(get_turf(usr))
 
 	else if(href_list["adminplayerobservecoodjump"])
-		if(!isobserver(usr) && !check_rights(0)) //Skyrat change
+		if(!isobserver(usr) && !check_rights(0))
 			return
 
 		var/x = text2num(href_list["X"])
@@ -2339,7 +2334,6 @@
 		var/mob/M = locate(href_list["HeadsetMessage"])
 		usr.client.admin_headset_message(M)
 
-//SKYRAT CHANGES BEGIN
 	else if(href_list["ObjectiveRequest"])
 		if(!check_rights(R_ADMIN))
 			return
@@ -2349,7 +2343,6 @@
 			return
 		requesting_mind.do_edit_objectives_ambitions()
 		return
-//SKYRAT CHANGES END
 
 	else if(href_list["reject_custom_name"])
 		if(!check_rights(R_ADMIN))
@@ -2358,7 +2351,7 @@
 		if(istype(charter))
 			charter.reject_proposed(usr)
 	else if(href_list["jumpto"])
-		if(!isobserver(usr) && !check_rights(0)) //Skyrat change
+		if(!isobserver(usr) && !check_rights(0))
 			return
 
 		var/mob/M = locate(href_list["jumpto"])
@@ -2403,7 +2396,7 @@
 			to_chat(usr, "This can only be used on instances of type /mob.")
 			return
 
-		SSlogging.update_logs() //SKYRAT CHANGE
+		SSlogging.update_logs()
 		show_individual_logging_panel(M, href_list["log_src"], href_list["log_type"])
 	else if(href_list["languagemenu"])
 		if(!check_rights(R_ADMIN))
@@ -3018,7 +3011,7 @@
 /datum/admins/proc/makeMentor(ckey)
 	if(!usr.client)
 		return
-	if (!check_rights(R_PERMISSIONS)) //Skyrat change
+	if (!check_rights(R_PERMISSIONS))
 		return
 	if(!ckey)
 		return
@@ -3048,7 +3041,7 @@
 /datum/admins/proc/removeMentor(ckey)
 	if(!usr.client)
 		return
-	if (!check_rights(R_PERMISSIONS)) // Skyrat change
+	if (!check_rights(R_PERMISSIONS))
 		return
 	if(!ckey)
 		return

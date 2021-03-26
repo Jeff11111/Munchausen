@@ -38,9 +38,7 @@ RLD
 	var/ammo_sections = 10	//amount of divisions in the ammo indicator overlay/number of ammo indicator states
 	var/custom_range = 7
 	var/upgrade = FALSE
-	//skyrat edit - low walls
 	var/lowwalltype = /obj/structure/table/low_wall/metal
-	//
 
 /obj/item/construction/Initialize()
 	. = ..()
@@ -61,17 +59,17 @@ RLD
 	. = ..()
 
 /obj/item/construction/attackby(obj/item/W, mob/user, params)
-	if(!rcd_item_insertion(W, user)) // Skyrat change: moved all logic to this proc
+	if(!rcd_item_insertion(W, user))
 		return ..()
 	update_icon()	//ensures that ammo counters (if present) get updated
 
-/obj/item/construction/pre_attack(atom/A, mob/living/user, params) // Skyrat change
+/obj/item/construction/pre_attack(atom/A, mob/living/user, params)
 	if(rcd_item_insertion(A, user))
 		update_icon()
 		return
 	return ..()
 
-/obj/item/construction/proc/rcd_item_insertion(obj/item/W, mob/user) // Skyrat change: Moved logic to own proc, to prevent duplicate code
+/obj/item/construction/proc/rcd_item_insertion(obj/item/W, mob/user)
 	if(iscyborg(user))
 		return FALSE
 	var/loaded = 0
@@ -492,9 +490,7 @@ RLD
 		"Airlock" = image(icon = 'icons/mob/radial.dmi', icon_state = "airlock"),
 		"Grilles & Windows" = image(icon = 'icons/mob/radial.dmi', icon_state = "grillewindow"),
 		"Floors & Walls" = image(icon = 'icons/mob/radial.dmi', icon_state = "wallfloor"),
-		//skyrat edit - low walls
 		"Low Walls" = image(icon = 'modular_skyrat/icons/mob/radial.dmi', icon_state = "lowwall"),
-		//skyrat edit end
 	)
 	if(upgrade & RCD_UPGRADE_FRAMES)
 		choices += list(
@@ -511,12 +507,10 @@ RLD
 		choices += list(
 			"Change Window Type" = image(icon = 'icons/mob/radial.dmi', icon_state = "windowtype")
 		)
-	//Skyrat edit - low walls
 	else if(mode == RCD_WINDOWGRILLE)
 		choices += list(
 			"Change Low Wall Type" = image(icon = 'modular_skyrat/icons/mob/radial.dmi', icon_state = "lowwalltype")
 		)
-	//
 	var/choice = show_radial_menu(user,src,choices, custom_check = CALLBACK(src,.proc/check_menu,user))
 	if(!check_menu(user))
 		return
@@ -529,7 +523,6 @@ RLD
 			mode = RCD_DECONSTRUCT
 		if("Grilles & Windows")
 			mode = RCD_WINDOWGRILLE
-		//skyrat edit - low walls
 		if("Low Walls")
 			mode = RCD_LOWWALL
 		if("Change Low Wall Type")
@@ -538,7 +531,6 @@ RLD
 			else
 				lowwalltype = /obj/structure/table/low_wall/metal
 			to_chat(user, "<span class='notice'>You switch \the [src]'s low wall type to [lowwalltype == /obj/structure/table/low_wall/metal ? "normal low walls" : "reinforced low walls"].</span>")
-		//skyrat edit end
 		if("Machine Frames")
 			mode = RCD_MACHINE
 		if("Computer Frames")
@@ -560,7 +552,7 @@ RLD
 	to_chat(user, "<span class='notice'>You change RCD's mode to '[choice]'.</span>")
 
 /obj/item/construction/rcd/proc/target_check(atom/A, mob/user) // only returns true for stuff the device can actually work with
-	if((isturf(A) && !A.density && mode==RCD_LOWWALL) || (isturf(A) && A.density && mode==RCD_DECONSTRUCT) || (isturf(A) && !A.density) || (istype(A, /obj/machinery/door/airlock) && mode==RCD_DECONSTRUCT) || istype(A, /obj/structure/grille) || (istype(A, /obj/structure/window) && mode==RCD_DECONSTRUCT) || istype(A, /obj/structure/girder)) //skyrat edit - low walls
+	if((isturf(A) && !A.density && mode==RCD_LOWWALL) || (isturf(A) && A.density && mode==RCD_DECONSTRUCT) || (isturf(A) && !A.density) || (istype(A, /obj/machinery/door/airlock) && mode==RCD_DECONSTRUCT) || istype(A, /obj/structure/grille) || (istype(A, /obj/structure/window) && mode==RCD_DECONSTRUCT) || istype(A, /obj/structure/girder))
 		return TRUE
 	else
 		return FALSE
