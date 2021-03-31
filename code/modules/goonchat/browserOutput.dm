@@ -85,11 +85,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 			data = setMusicVolume(arglist(params))
 
 		if("colorPresetPost") //User just swapped color presets in their goonchat preferences. Do we do anything else?
-			switch(href_list["preset"])
-				if("light")
-					owner.force_white_theme()
-				if("dark" || "normal")
-					owner.force_dark_theme()
+			owner.force_dark_theme()
 
 
 	if(data)
