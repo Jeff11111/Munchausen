@@ -46,7 +46,7 @@
 #define MOB_BUG 		(1 << 5)
 #define MOB_BEAST		(1 << 6)
 #define MOB_EPIC		(1 << 7) //megafauna
-#define MOB_REPTILE		(1 << 8)
+#define MOB_REPTILE		(1 << 8) //Test
 #define MOB_SPIRIT		(1 << 9)
 
 #define DEFAULT_BODYPART_ICON 'modular_skyrat/icons/mob/human_parts.dmi'
