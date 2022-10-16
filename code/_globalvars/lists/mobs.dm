@@ -102,7 +102,7 @@ GLOBAL_LIST_INIT(all_types_bloods,list(
 		))
 
 GLOBAL_LIST_INIT(soyjaks,list(
-	NuclearAbsolut,
+	Lordkang45,
 	FargothUr,
 	Vulpes_Is_Hot
 ))
