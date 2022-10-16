@@ -7,7 +7,7 @@
 	say_mod = "shrieks"
 	default_color = "00FF00"
 	species_traits = list(MUTCOLORS,EYECOLOR,HAIR,FACEHAIR,LIPS,EYECOLOR,CAN_SCAR,HAS_FLESH,HAS_BONE)
-	inherent_traits = list(TRAIT_RESISTCOLD,TRAIT_NOSHITTING,TRAIT_NOPISSING)
+	inherent_traits = list(TRAIT_RESISTCOLD)
 	inherent_biotypes = MOB_ORGANIC|MOB_HUMANOID
 	mutantlungs = /obj/item/organ/lungs/vox
 	dangerous_existence = 1
