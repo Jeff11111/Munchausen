@@ -101,6 +101,12 @@ GLOBAL_LIST_INIT(all_types_bloods,list(
 		"BUG"
 		))
 
+GLOBAL_LIST_INIT(soyjaks,list(
+	NuclearAbsolut,
+	FargothUr,
+	Vulpes_Is_Hot
+))
+
 GLOBAL_LIST_INIT(blood_reagent_types, list(
 		/datum/reagent/blood,
 		/datum/reagent/blood/jellyblood
