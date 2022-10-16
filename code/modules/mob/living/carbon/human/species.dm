@@ -1485,42 +1485,10 @@ GLOBAL_LIST_EMPTY(roundstart_race_datums)
 
 //cursed.
 /datum/species/proc/handle_defecation(mob/living/carbon/H)
-	if(HAS_TRAIT(H, TRAIT_NOSHITTING))
-		H.defecation = 0
-		return //girls don't shit
-	switch(H.defecation)
-		if(DEFECATION_LEVEL_POOPY to DEFECATION_LEVEL_VERY_POOPY)
-			if(prob(4))
-				to_chat(H, "<span class='danger'>I need to shit.</span>")
-		if(DEFECATION_LEVEL_VERY_POOPY to DEFECATION_LEVEL_POOPENFARDEN)
-			if(prob(6))
-				to_chat(H, "<span class='danger'>I <b>really</b> need to shit.</span>")
-		if(DEFECATION_LEVEL_POOPENFARDEN to DEFECATION_LEVEL_SHITPANTS)
-			if(prob(10))
-				H.defecate()
-			else if(prob(15))
-				to_chat(H, "<span class='danger'>I'm gonna <b>SHIT MYSELF</b>!</span>")
-		if(DEFECATION_LEVEL_SHITPANTS to INFINITY)
-			H.defecate()
+	H.defecation = 0
 
 /datum/species/proc/handle_urination(mob/living/carbon/H)
-	if(HAS_TRAIT(H, TRAIT_NOPISSING))
-		H.urination = 0
-		return //girls dont piss
-	switch(H.urination)
-		if(URINATION_LEVEL_PISSY to URINATION_LEVEL_VERY_PISSY)
-			if(prob(4))
-				to_chat(H, "<span class='danger'>I need to piss.</span>")
-		if(URINATION_LEVEL_VERY_PISSY to URINATION_LEVEL_PISSENCUMMEN)
-			if(prob(6))
-				to_chat(H, "<span class='danger'>I <b>really</b> need to piss.</span>")
-		if(URINATION_LEVEL_PISSENCUMMEN to URINATION_LEVEL_PISSPANTS)
-			if(prob(10))
-				H.urinate()
-			else if(prob(15))
-				to_chat(H, "<span class='danger'>I'm gonna <b>PISS MYSELF</b>!</span>")
-		if(URINATION_LEVEL_PISSPANTS to INFINITY)
-			H.urinate()
+	H.urination = 0
 
 /datum/species/proc/update_health_hud(mob/living/carbon/human/H)
 	return 0
