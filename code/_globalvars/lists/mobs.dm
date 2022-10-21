@@ -101,12 +101,15 @@ GLOBAL_LIST_INIT(all_types_bloods,list(
 		"BUG"
 		))
 
+<<<<<<< HEAD
 GLOBAL_LIST_INIT(soyjaks,list(
 	Lordkang45,
 	FargothUr,
 	Vulpes_Is_Hot
 ))
 
+=======
+>>>>>>> parent of 3ec57ee06f (crazy goofy ahh)
 GLOBAL_LIST_INIT(blood_reagent_types, list(
 		/datum/reagent/blood,
 		/datum/reagent/blood/jellyblood

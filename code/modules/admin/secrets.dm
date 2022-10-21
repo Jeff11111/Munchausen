@@ -66,7 +66,6 @@
 			<A href='?src=[REF(src)];[HrefToken()];secrets=ancap'>Anarcho-Capitalist Station Mode</A><BR>
 			<A href='?src=[REF(src)];[HrefToken()];secrets=blackout'>Break all lights</A><BR>
 			<A href='?src=[REF(src)];[HrefToken()];secrets=whiteout'>Fix all lights</A><BR>
-			<A href='?src=[REF(src)];[HrefToken()];secrets=anti-lordkang'>Genocide all Soyjaks!</A><BR>
 			<A href='?src=[REF(src)];[HrefToken()];secrets=floorlava'>The floor is lava! (DANGEROUS: extremely lame)</A><BR>
 			<A href='?src=[REF(src)];[HrefToken()];secrets=customportal'>Spawn a custom portal storm</A><BR>
 			<BR>
@@ -422,17 +421,6 @@
 			message_admins("[key_name_admin(usr)] fixed all lights")
 			for(var/obj/machinery/light/L in GLOB.machines)
 				L.fix()
-
-		if("anti-lordkang")
-			if(!check_rights(R_FUN))
-				return
-			SSblackbox.record_feedback("nested tally", "admin_secrets_fun_used", 1, list("Genocide all Soyjaks!"))
-			message_admins("[key_name_admin(usr)] killed all soyjaks.")
-			for(var/mob/living/carbon/human/H in GLOB.carbon_list)
-				if(H.ckey == GLOB.soyjaks)
-					var/obj/item/bodypart/head/goofy_ahh_brainholder = user.get_bodypart(BODY_ZONE_HEAD)
-					if(!isnull(goofy_ahh_brainholder))
-						goofy_ahh_brainholder.dismember()
 
 		if("floorlava")
 			SSweather.run_weather(/datum/weather/floor_is_lava)
